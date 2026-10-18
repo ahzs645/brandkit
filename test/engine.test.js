@@ -104,3 +104,12 @@ test('the kit plan covers every family, layout and colour, and the guide', () =>
   assert.ok(paths.includes('web/DdcNorthLogo.tsx'))
   assert.equal(new Set(paths).size, paths.length, 'no path twice')
 })
+
+test('a paragraph field wraps to its width and keeps typed line breaks', () => {
+  const template = { id: 'p', width: 100, height: 50, unit: 'mm', elements: [{ type: 'paragraph', id: 'ministry', text: 'Ministry of\nForests, Lands and Natural Resource Operations', x: 10, y: 10, width: 30, size: '10pt', leading: '4.25mm', maxLines: 3 }] }
+  const { svg } = renderTemplate({ brand }, template)
+  const lines = [...svg.matchAll(/<text id="ministry-(\d)"[^>]*>([^<]*)</g)].map((match) => match[2])
+  assert.equal(lines[0], 'Ministry of')
+  assert.equal(lines.length, 3, 'capped at maxLines')
+  assert.ok(templateFields(template)[0].multiline)
+})

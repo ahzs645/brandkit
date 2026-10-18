@@ -99,7 +99,9 @@ A template is a canvas and a list of elements. Coordinates are in `unit` (`px` b
 Every `text` element with an `id` is a **field**: the app's template studio shows a box for it,
 and the value replaces the placeholder. Fields are shared by id across templates, so a name typed
 once fills the card, the letterhead and the envelope. A `lines` element is a block of fields with
-fixed leading that closes up around empty lines (an address with an optional second line).
+fixed leading that closes up around empty lines (an address with an optional second line). A
+`paragraph` is one field wrapped to a width, at the words and at any line break typed into it, up to
+`maxLines` (a ministry name on a letterhead, which breaks differently in each template's column).
 
 ## Guide
 

@@ -19,6 +19,8 @@
 //   symbol      { x, y, height, colour, id? }                         the symbol at a set height
 //   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor? }
 //   lines       { x, y, leading, size, colour, font?, lines: [{ id, text, font?, style?, size? }] }
+//   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
+//               one field, wrapped to `width` (and at any line break typed into it)
 //   printGuides { colour, trim: {...}, safe: {...} }                  hidden trim and safe areas
 //
 // Every text element with an `id` is a field: `values[id]` replaces its text. Text is live by
@@ -63,13 +65,33 @@ const textValue = (ctx, element) => {
   return value != null ? String(value) : fill(ctx.brand, element.text ?? '')
 }
 
+/** Width of a line: measured by the font provider where it can, estimated where it cannot. */
+const measure = (ctx, text, key, size, tracking = 0) => ctx.fonts?.width?.(text, key, size, tracking) || Array.from(text).length * size * (0.55 + tracking)
+
+/** Breaks text at typed line breaks, then between words to fit `width`. */
+export const wrapLines = (text, width, measureLine) => {
+  const lines = []
+  for (const block of String(text).split('\n')) {
+    let current = ''
+    for (const word of block.split(/\s+/).filter(Boolean)) {
+      const trial = current ? `${current} ${word}` : word
+      if (current && measureLine(trial) > width) {
+        lines.push(current)
+        current = word
+      } else current = trial
+    }
+    lines.push(current)
+  }
+  return lines
+}
+
 /** One line of text: live <text>, or outlined when asked and the face is loaded. */
 const textElement = (ctx, element, unit) => {
   const { brand, fonts } = ctx
   const key = element.font ?? 'body'
   const face = faceOf(brand, key)
   const size = toUnits(element.size, unit)
-  const content = textValue(ctx, element)
+  const content = element.literal != null ? element.literal : textValue(ctx, element)
   const colourValue = resolveColour(brand, element.colour ?? 'ink')
   const tracking = toUnits(element.tracking ?? 0, unit)
   const transformed = element.caps ? content.toUpperCase() : content
@@ -159,6 +181,17 @@ const renderElement = (ctx, element, template) => {
       }
       return out.filter(Boolean).join('\n')
     }
+    case 'paragraph': {
+      const size = u(element.size)
+      const leading = u(element.leading ?? size * 1.2)
+      const key = element.font ?? 'body'
+      const tracking = u(element.tracking ?? 0) / size
+      const value = textValue(ctx, element)
+      const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(ctx, line, key, size, tracking))
+        .slice(0, element.maxLines ?? Infinity)
+      return lines.map((line, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0) }, unit) : ''))
+        .filter(Boolean).join('\n')
+    }
     case 'printGuides': {
       const rectFor = (box, extra = '') => `<rect id="${escape(box.id)}" x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}"${extra}/>`
       return `<g id="print-guides" display="${ctx.showGuides ? 'inline' : 'none'}" fill="none" stroke="${resolveColour(brand, element.colour ?? 'muted')}" stroke-width="1">`
@@ -200,6 +233,7 @@ export const templateFields = (template) => {
   const fields = []
   const visit = (element) => {
     if (element.type === 'text' && element.id && !element.locked) fields.push({ id: element.id, label: element.label ?? humanize(element.id), placeholder: element.text ?? '', multiline: false })
+    if (element.type === 'paragraph' && element.id && !element.locked) fields.push({ id: element.id, label: element.label ?? humanize(element.id), placeholder: element.text ?? '', multiline: true })
     if (element.type === 'lines') element.lines.forEach((line) => visit({ type: 'text', ...line }))
   }
   template.elements.forEach(visit)

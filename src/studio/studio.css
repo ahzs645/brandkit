@@ -55,7 +55,7 @@
 .studio__fields { display: grid; gap: 12px; position: sticky; top: 12px; }
 .studio .field { display: grid; gap: 5px; }
 .studio .field__label { font-size: 12.5px; font-weight: 600; color: var(--ink-muted, #5b5f66); }
-.studio input[type='text'], .studio select {
+.studio input[type='text'], .studio select, .studio textarea {
   width: 100%;
   min-height: 36px;
   padding: 7px 10px;
@@ -66,7 +66,8 @@
   font: inherit;
   font-size: 14px;
 }
-.studio input[type='text']:focus, .studio select:focus { outline: 2px solid var(--focus, #2f6fde); outline-offset: 1px; }
+.studio textarea { resize: vertical; line-height: 1.4; }
+.studio input[type='text']:focus, .studio select:focus, .studio textarea:focus { outline: 2px solid var(--focus, #2f6fde); outline-offset: 1px; }
 
 .studio .button {
   display: inline-flex;

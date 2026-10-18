@@ -148,7 +148,9 @@ export const TemplateStudio = ({
         {fields.map((field) => (
           <label key={field.id} className="field">
             <span className="field__label">{field.label}</span>
-            <input type="text" value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />
+            {field.multiline
+              ? <textarea rows={3} value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />
+              : <input type="text" value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />}
           </label>
         ))}
         <p className="studio__note">{filled} of {everyField.length} fields filled across {templates.length} templates. Fields with the same name are shared.</p>
