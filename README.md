@@ -21,7 +21,7 @@ brandkit draws the whole kit from it:
 Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf) and the zip
 (fflate) are all made in the page.
 
-**[Open brandkit](https://ahzs645.github.io/brandkit/)**
+**[Open brandkit](https://projects.ahmadjalil.com/brandkit/)**
 
 ## Brands
 

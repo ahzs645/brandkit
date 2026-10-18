@@ -16,6 +16,7 @@
   --radius-sm: 9px;
   --gap: 16px;
   --line: color-mix(in srgb, var(--ink) 12%, transparent);
+  --studio-top: 116px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
