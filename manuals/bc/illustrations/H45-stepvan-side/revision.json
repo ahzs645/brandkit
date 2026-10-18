@@ -1,0 +1,68 @@
+{
+  "vb": [
+    63.5,
+    278.5,
+    502,
+    220
+  ],
+  "notes": [
+    "Refit the source front wheel opening and the full roof/nose/sill outline, rather than retaining a generic wedge at the front.",
+    "Restored door/window framing, roof cap, service panels and double waist trim.",
+    "Replaced invented closed hubs with the source open inner wheel contours."
+  ],
+  "limits": [],
+  "orientation": "Front at left.",
+  "id": "H45-stepvan-side",
+  "title": "Stepvan Side \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 45,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    54.333333333333336,
+    269.3333333333333,
+    520.3333333333334,
+    238.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "side-signature",
+      "label": "Side Signature",
+      "box": [
+        368,
+        326,
+        111,
+        20
+      ],
+      "quad": [
+        [
+          368,
+          326
+        ],
+        [
+          479,
+          326
+        ],
+        [
+          479,
+          346
+        ],
+        [
+          368,
+          346
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "80e9b4b62e4fa1a9facb100a5bf62281f58635e41eefebcdc0ba46e43353ff1e",
+  "revised_blank_sha256": "7eb9a25d7cb21716dd77710bbca6d08eadbd082b09c0aebadc14108a1d2571c9",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

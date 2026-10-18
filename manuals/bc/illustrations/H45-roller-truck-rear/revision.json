@@ -1,0 +1,67 @@
+{
+  "vb": [
+    383.5,
+    511.5,
+    159,
+    219
+  ],
+  "notes": [
+    "Restored the roller-door slat spacing and independent inner/outer frame.",
+    "Reconstructed the stepped central underbody opening and paired open tyre contours, replacing the earlier simplified block profile."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "H45-roller-truck-rear",
+  "title": "Roller Truck Rear \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 45,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    374.3333333333333,
+    502.3333333333333,
+    177.33333333333334,
+    235.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        397,
+        549,
+        54,
+        12
+      ],
+      "quad": [
+        [
+          397,
+          549
+        ],
+        [
+          451,
+          549
+        ],
+        [
+          451,
+          561
+        ],
+        [
+          397,
+          561
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "715ed0b2b8c5dbab29c1e4365e32fab7a9ad11d4d0b56b363257902e7dd0bcb9",
+  "revised_blank_sha256": "895c1e79e4f28266cccc6722169464d83c4ec072ffbfa2ba89a29ba22e1133b6",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

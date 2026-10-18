@@ -1,0 +1,100 @@
+{
+  "vb": [
+    99,
+    92,
+    318,
+    341
+  ],
+  "notes": [
+    "Restored the separate exterior roof, waist and lower trim rails; corrected straight door perimeters and side taper.",
+    "Refit window seals, lamp insets, plate recess and bumper.",
+    "Redrew rounded tyre ends. Reflective striping is in a separate optional applied-markings SVG."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V11-van-rear",
+  "title": "Van \u2014 rear elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 11,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    83.0,
+    76.33333333333333,
+    349.6666666666667,
+    372.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "left-door-signature",
+      "label": "Left Door Signature",
+      "box": [
+        160,
+        230,
+        43,
+        43
+      ],
+      "quad": [
+        [
+          160,
+          230
+        ],
+        [
+          203,
+          230
+        ],
+        [
+          203,
+          273
+        ],
+        [
+          160,
+          273
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "right-door-unit",
+      "label": "Right Door Unit",
+      "box": [
+        288,
+        231,
+        74,
+        18
+      ],
+      "quad": [
+        [
+          288,
+          231
+        ],
+        [
+          362,
+          231
+        ],
+        [
+          362,
+          249
+        ],
+        [
+          288,
+          249
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "1acc35a4bbfb3af97309f0e29be662565988bf4c4b2da8e2431f37b60965e5a9",
+  "revised_blank_sha256": "19a475bf0831418392af20efbbf29b17224f5d0687c8adcbf4057c979b032d73",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

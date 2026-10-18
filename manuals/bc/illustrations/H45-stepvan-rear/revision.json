@@ -1,0 +1,67 @@
+{
+  "vb": [
+    72.5,
+    511.5,
+    164,
+    218
+  ],
+  "notes": [
+    "Rebuilt roof lip, straight folding-door boundaries and six lower door divisions.",
+    "Corrected the window positions and handle. Replaced solid or closed tyre blocks with the source paired open U-contours."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "H45-stepvan-rear",
+  "title": "Stepvan Rear \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 45,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    63.333333333333336,
+    502.3333333333333,
+    182.33333333333334,
+    236.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        115,
+        597,
+        37,
+        7
+      ],
+      "quad": [
+        [
+          115,
+          597
+        ],
+        [
+          152,
+          597
+        ],
+        [
+          152,
+          604
+        ],
+        [
+          115,
+          604
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "03a5ea4dee09ae1aa475430a46585f1cd5db9f713fdde7bfa0869c428d989aae",
+  "revised_blank_sha256": "d9dfcad3bc0996bda4f1f36d64c3421950e9c667283f7b041c5afea52c3119e1",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

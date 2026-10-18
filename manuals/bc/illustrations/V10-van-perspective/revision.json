@@ -1,0 +1,196 @@
+{
+  "vb": [
+    72,
+    481,
+    890,
+    507
+  ],
+  "notes": [
+    "Replaced generic wheel ellipses with source depth silhouettes; far tyre is plain black and the near rear rim has its actual lip and separate sidewall arc.",
+    "Refit roof/gutter, door/glazing proportions and gaskets, double body/sill lines, rear door divisions and layered bumper.",
+    "Restored double rear lamp contours, actual handle shapes and plate context. Reflective appliques are separate from physical lamps and the blank body."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V10-van-perspective",
+  "title": "Van \u2014 rear three-quarter",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 10,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    56.273148148148145,
+    465.0208333333333,
+    921.3449074074073,
+    538.6875
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-door-signature",
+      "label": "Cab Door Signature",
+      "box": [
+        177,
+        675,
+        50,
+        84
+      ],
+      "quad": [
+        [
+          177,
+          675
+        ],
+        [
+          227,
+          681
+        ],
+        [
+          227,
+          754
+        ],
+        [
+          177,
+          744
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "side-cargo-signature",
+      "label": "Side Cargo Signature",
+      "box": [
+        548,
+        548,
+        74,
+        72
+      ],
+      "quad": [
+        [
+          548,
+          548
+        ],
+        [
+          622,
+          548
+        ],
+        [
+          622,
+          620
+        ],
+        [
+          548,
+          620
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "rear-door-signature",
+      "label": "Rear Door Signature",
+      "box": [
+        708,
+        669,
+        41,
+        52
+      ],
+      "quad": [
+        [
+          708,
+          673
+        ],
+        [
+          747,
+          669
+        ],
+        [
+          751,
+          710
+        ],
+        [
+          709,
+          719
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        116,
+        651,
+        38,
+        13
+      ],
+      "quad": [
+        [
+          116,
+          651
+        ],
+        [
+          154,
+          651
+        ],
+        [
+          154,
+          664
+        ],
+        [
+          116,
+          664
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        865,
+        661,
+        51,
+        16
+      ],
+      "quad": [
+        [
+          865,
+          661
+        ],
+        [
+          916,
+          661
+        ],
+        [
+          916,
+          677
+        ],
+        [
+          865,
+          677
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "294530a6017357d7d32e3a291246b5da45a084f47b07b95136495cde51941aed",
+  "revised_blank_sha256": "5467e2f645dbb53c2df0abcd4fc64cbce35151d9c69112ac6893414adf5d47af",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

@@ -1,0 +1,70 @@
+{
+  "vb": [
+    59.5,
+    269.5,
+    479,
+    168
+  ],
+  "notes": [
+    "Rebuilt both bogies with distinct open outer wheel arcs, shaped bolster ends/notches, central suspension boxes, attachments and partial hub contours.",
+    "Restored the broad underframe tank recess and separate four-tread end stair/platform assemblies.",
+    "Reconstructed the actual cab windows and sliding dividers, roof lip, engine body and individual lower/upper access panels, and the two tapered roof vents."
+  ],
+  "limits": [
+    "The source is a simplified identity-manual elevation, not a complete locomotive mechanical drawing. Hidden bogie components are not invented."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "H48-locomotive",
+  "title": "Locomotive \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 48,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    50.333333333333336,
+    260.3333333333333,
+    497.3333333333333,
+    180.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-rail-signature",
+      "label": "Cab Rail Signature",
+      "box": [
+        113,
+        315,
+        70,
+        14
+      ],
+      "quad": [
+        [
+          113,
+          315
+        ],
+        [
+          183,
+          315
+        ],
+        [
+          183,
+          329
+        ],
+        [
+          113,
+          329
+        ]
+      ],
+      "kind": "hydro-rail",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "51b4ad5dd42db371e5d44999946af27ff75f6e067f8908f528e4fb2ee6857a8f",
+  "revised_blank_sha256": "308e44850993ca9a5cb6206db6d102773421c896bc000c404be0ba302e6d8b78",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

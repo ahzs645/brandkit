@@ -1,0 +1,100 @@
+{
+  "vb": [
+    102,
+    124,
+    317,
+    275
+  ],
+  "notes": [
+    "Replaced the entire incorrect cab, not just its transform.",
+    "Rebuilt left-side windshield, three-part side glazing, rear-quarter pane, door, fender arch, bumper, steps and triangulated mirror stays.",
+    "Moved both branding zones onto the actual source door and rear cab panel."
+  ],
+  "limits": [],
+  "orientation": "Front at left in enlarged source detail; this is the opposite-facing detail to the V13 full side elevation.",
+  "id": "V13-cab-door",
+  "title": "Box truck \u2014 enlarged cab door",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 13,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    84.33333333333333,
+    112.0,
+    352.0,
+    301.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        171,
+        278,
+        60,
+        60
+      ],
+      "quad": [
+        [
+          171,
+          278
+        ],
+        [
+          231,
+          278
+        ],
+        [
+          231,
+          338
+        ],
+        [
+          171,
+          338
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "unit",
+      "label": "Unit",
+      "box": [
+        322,
+        248,
+        70,
+        20
+      ],
+      "quad": [
+        [
+          322,
+          248
+        ],
+        [
+          392,
+          248
+        ],
+        [
+          392,
+          268
+        ],
+        [
+          322,
+          268
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1604-2103",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "1d469691613172dc91b67a31594c91a599e1b994dedbb234987fa09974000946",
+  "revised_blank_sha256": "8fec1fca5f4e3cc378a72f5719bdb551fb0780d5533324e4441dafea2ab46b51",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

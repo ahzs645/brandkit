@@ -1,0 +1,99 @@
+{
+  "vb": [
+    265,
+    544,
+    597,
+    106
+  ],
+  "notes": [
+    "Refit both wheel centres and rims, the high rear deck steps and the curved front neck.",
+    "Rebuilt the dark underdeck, rear mudflap and landing stem/caster; removed non-source repeated deck divisions."
+  ],
+  "limits": [],
+  "orientation": "Tow/landing end at left.",
+  "id": "V15-flatbed-side",
+  "title": "Flat-deck trailer \u2014 side",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    249.27855555555558,
+    528.5822592592593,
+    628.782462962963,
+    137.55707407407408
+  ],
+  "branding_zones": [
+    {
+      "id": "deck-signature",
+      "label": "Deck Signature",
+      "box": [
+        399,
+        559,
+        43,
+        25
+      ],
+      "quad": [
+        [
+          399,
+          559
+        ],
+        [
+          442,
+          559
+        ],
+        [
+          442,
+          584
+        ],
+        [
+          399,
+          584
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Province of British Columbia",
+      "historical_placement": true
+    },
+    {
+      "id": "deck-unit",
+      "label": "Deck Unit",
+      "box": [
+        591,
+        563,
+        94,
+        18
+      ],
+      "quad": [
+        [
+          591,
+          563
+        ],
+        [
+          685,
+          563
+        ],
+        [
+          685,
+          581
+        ],
+        [
+          591,
+          581
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "6654eacca2a44638909878bc0f97dc90998c82d4dcde36f2dc7c69633d4883ec",
+  "revised_blank_sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

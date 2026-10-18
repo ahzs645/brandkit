@@ -1,0 +1,164 @@
+{
+  "vb": [
+    387.5,
+    27.5,
+    357.0,
+    183.0
+  ],
+  "notes": [
+    "Replaced the General Manual pickup with the corrected common source illustration and an explicit page placement matrix.",
+    "Restored the depth-shaped wheels and rim lip, source bed/cab planes, mirror, double side trim, double lamp contour and stepped bumper.",
+    "Preserved the General source without the Vehicle Manual reflector array."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G17-pickup",
+  "title": "Pickup \u2014 General Manual",
+  "book": "General Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    378.3333333333333,
+    18.333333333333332,
+    375.3333333333333,
+    201.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        427.2083086,
+        96.13555850000002,
+        13.27516700000001,
+        22.724496999999985
+      ],
+      "quad": [
+        [
+          427.2083086,
+          96.13555850000002
+        ],
+        [
+          439.8445864,
+          98.945192
+        ],
+        [
+          440.4834756,
+          118.8600555
+        ],
+        [
+          428.132567,
+          114.61760650000001
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "tailgate-signature",
+      "label": "Tailgate Signature",
+      "box": [
+        646.1495294,
+        88.4857425,
+        17.678160400000024,
+        25.70212300000003
+      ],
+      "quad": [
+        [
+          646.1495294,
+          90.72988150000002
+        ],
+        [
+          661.0322304,
+          88.4857425
+        ],
+        [
+          663.8276898,
+          108.68931299999998
+        ],
+        [
+          647.3226266,
+          114.18786550000003
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        389.94229240000004,
+        79.14312349999999,
+        13.865643599999942,
+        5.97509100000002
+      ],
+      "quad": [
+        [
+          389.94229240000004,
+          79.14312349999999
+        ],
+        [
+          403.59464560000004,
+          80.85312650000002
+        ],
+        [
+          403.807936,
+          85.11821450000001
+        ],
+        [
+          390.1555828,
+          83.40821150000001
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        701.1341644,
+        84.78494900000003,
+        22.100892000000044,
+        11.341009499999956
+      ],
+      "quad": [
+        [
+          701.1341644,
+          90.79459849999999
+        ],
+        [
+          722.6119774,
+          84.78494900000003
+        ],
+        [
+          723.2350564000001,
+          90.10518950000001
+        ],
+        [
+          701.4007774,
+          96.12595849999998
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "96c2a8d4a7a4dbab46ccc142dfd60f28dc455af748ea0d476b5b8c9979805f18",
+  "revised_blank_sha256": "ac88a8375af0581aa74839601527273a5af1df9b2d6ed9a6657fb1ca3c9bb744",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

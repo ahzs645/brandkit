@@ -1,0 +1,68 @@
+{
+  "vb": [
+    60.5,
+    328.0,
+    478.0,
+    186.5
+  ],
+  "notes": [
+    "Rebuilt the shared van outline against the Hydro drawing, retaining its different plain side-panel treatment.",
+    "Removed the sliding-door outline and side markers absent from this source.",
+    "Restored source-style white tyre outlines and open rim strokes, mirror supports and window subdivision."
+  ],
+  "limits": [],
+  "orientation": "Front at right.",
+  "id": "H44-van-side",
+  "title": "Van Side \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 44,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    51.333333333333336,
+    319.0,
+    496.3333333333333,
+    204.66666666666666
+  ],
+  "branding_zones": [
+    {
+      "id": "side-signature",
+      "label": "Side Signature",
+      "box": [
+        105,
+        345,
+        111,
+        36
+      ],
+      "quad": [
+        [
+          105,
+          345
+        ],
+        [
+          216,
+          345
+        ],
+        [
+          216,
+          381
+        ],
+        [
+          105,
+          381
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "f434db3525108fd2953c4781e785ebb1b111acec7a476259239f57a4e5796b76",
+  "revised_blank_sha256": "b86e1db2febf354128b62be668fcd73341ad2df8692b71a043c779b10dd90631",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

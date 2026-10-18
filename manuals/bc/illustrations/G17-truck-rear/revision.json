@@ -1,0 +1,99 @@
+{
+  "vb": [
+    61.0,
+    351.0,
+    165.0,
+    222.5
+  ],
+  "notes": [
+    "Rebuilt the shared truck rear chassis and paired tyres against the General Manual source.",
+    "Retained the plain door treatment in this source; neither fold lines nor reflective striping from V13 were copied."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G17-truck-rear",
+  "title": "Truck Rear \u2014 General Manual",
+  "book": "General Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    52.0,
+    342.0,
+    183.0,
+    240.66666666666666
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        84.279,
+        367.12050000000005,
+        41.105999999999995,
+        33.2475
+      ],
+      "quad": [
+        [
+          84.279,
+          367.12050000000005
+        ],
+        [
+          125.38499999999999,
+          367.12050000000005
+        ],
+        [
+          125.38499999999999,
+          400.36800000000005
+        ],
+        [
+          84.279,
+          400.36800000000005
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#222222",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit",
+      "label": "Unit",
+      "box": [
+        166.491,
+        367.725,
+        42.315,
+        9.672000000000025
+      ],
+      "quad": [
+        [
+          166.491,
+          367.725
+        ],
+        [
+          208.806,
+          367.725
+        ],
+        [
+          208.806,
+          377.39700000000005
+        ],
+        [
+          166.491,
+          377.39700000000005
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#222222",
+      "default": "1604-2103",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "f388892d32bee382768e46baf9eab29aa09ef88f9750da0759c13b04c1acce27",
+  "revised_blank_sha256": "21717844bbc0b55a8c1441874e089dcb542938e0bce1cebeb982a88763d07b7a",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,70 @@
+{
+  "vb": [
+    526,
+    316.5,
+    226,
+    268
+  ],
+  "notes": [
+    "Rebuilt the large curved peel sheet and its bowed lower fold, both hands/thumbs/fingers, squeegee bands and sleeve cuffs.",
+    "Kept the physical sheet and hands separate from exposed applied-identity artwork and removable direction arrows.",
+    "Omitted the external page frame and retained only source-cropped application context."
+  ],
+  "limits": [
+    "The transfer sheet is opaque in the clean blank template; historical identity is intentionally absent. Branding beneath a peeled sheet needs an explicit layer placement."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "V18-installation-4",
+  "title": "Decal installation \u2014 panel 4",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 18,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    522.3333333333334,
+    310.3333333333333,
+    245.33333333333334,
+    289.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "exposed-identity",
+      "label": "Exposed Identity",
+      "box": [
+        624,
+        391,
+        78,
+        66
+      ],
+      "quad": [
+        [
+          624,
+          391
+        ],
+        [
+          702,
+          391
+        ],
+        [
+          702,
+          457
+        ],
+        [
+          624,
+          457
+        ]
+      ],
+      "kind": "applied-identity",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "e3cb9ae60d1e350277be0e44a72f36fa3bcca43e40b136295175669be4d82d2c",
+  "revised_blank_sha256": "d85b4104d95e896e950a7c0d1848e8445a353495251d0aebb63e6ad359b45d96",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

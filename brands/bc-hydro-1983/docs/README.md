@@ -23,6 +23,10 @@ its rules into data.
 - **Publications** (pp. 23–29): report, illustrated and display covers, and two mastheads.
 - **Advertising** (pp. 31–33), an **audio-visual** title frame (p. 34), **signs** (pp. 37–40) and
   **vehicles** (pp. 41–43).
+- **Drawn applications**: 15 of ManualKit’s source-registered drawings, each a template with the
+  signature in its branding zones (pp. 43–47). They show light vehicles, heavy trucks, tractor
+  trailers, equipment and rolling stock. Gas Operations’ signature goes on the light vehicles,
+  as the manual shows, and B.C.Hydro Rail’s on the locomotive and boxcar.
 - **A guide**, generated from the same definition, including the backgrounds-and-value rules,
   every incorrect usage, and the minimum-size table.
 

@@ -10,6 +10,7 @@
 import { readFileSync } from 'node:fs'
 import { box, cite, g, inch, line, locked, pt, readJson, round, shelf, text, writeBrand } from './common.mjs'
 import { loadBrandFonts } from '../../src/fonts/provider.js'
+import { illustrated } from './illustrations.mjs'
 
 const folder = new URL('../../brands/bc-hydro-1983/', import.meta.url)
 const art = readJson(new URL('artwork.json', folder))
@@ -474,6 +475,12 @@ brand.guide = {
   ]
 }
 
+// The drawings of vans, trucks, equipment and rolling stock (ManualKit's source-registered
+// illustrations), each a template with the signature in its branding zones.
+const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'])
+brand.illustrations = drawn.drawings
+brand.templates.push(...drawn.templates)
+
 // The manual pages each piece is built from (page ids in manuals/bc: H<printed page + 1>).
 const SET_PAGES = { standard: ['H16'], gas: ['H17'], rail: ['H18'] }
 cite(brand, {
@@ -493,7 +500,8 @@ cite(brand, {
     'sign-danger': ['H41', 'H38'],
     'sign-guide': ['H40', 'H38'],
     'vehicle-van-black': ['H44', 'H43', 'H42'],
-    'vehicle-van-white': ['H44', 'H43', 'H42']
+    'vehicle-van-white': ['H44', 'H43', 'H42'],
+    ...drawn.sources
   },
   signatures: {
     standard: ['H04', 'H03', 'H05', 'H13'],

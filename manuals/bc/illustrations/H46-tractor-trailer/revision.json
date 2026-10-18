@@ -1,0 +1,68 @@
+{
+  "vb": [
+    58.5,
+    336.5,
+    486,
+    184
+  ],
+  "notes": [
+    "Reconstructed all five wheels and the source open rim convention at the actual axle positions.",
+    "Restored stepped trailer/tractor rails, angled mudguard, separate tank and straps, cap and tall exhaust.",
+    "Redrew the source cab, door, narrow front pane, fender moulding, vents and front fittings; omitted the nonphysical diagonal annotation leader."
+  ],
+  "limits": [],
+  "orientation": "Cab/front at right.",
+  "id": "H46-tractor-trailer",
+  "title": "Tractor Trailer \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 46,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    49.333333333333336,
+    327.3333333333333,
+    504.3333333333333,
+    202.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "trailer-signature",
+      "label": "Trailer Signature",
+      "box": [
+        89,
+        360,
+        83,
+        15
+      ],
+      "quad": [
+        [
+          89,
+          360
+        ],
+        [
+          172,
+          360
+        ],
+        [
+          172,
+          375
+        ],
+        [
+          89,
+          375
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "b6609d48f5db3168367b74567cd076b27671e782d90a2ddc2f6bc53d20b89274",
+  "revised_blank_sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

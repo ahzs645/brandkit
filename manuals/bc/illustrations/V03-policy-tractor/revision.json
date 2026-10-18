@@ -1,0 +1,228 @@
+{
+  "vb": [
+    119,
+    249,
+    644,
+    332
+  ],
+  "notes": [
+    "Replaced the policy illustration with the corrected shared source vehicle, including full top and front-wheel context clipped by the earlier crop.",
+    "This source is the reversed published view: the tractor/front is at LEFT. Only physical geometry is mirrored; branding zones are separately editable and do not contain mirrored lettering.",
+    "Restored both trailer planes, formed ribs, rear tyre clusters, cab details, tank/cap, stack, frame and steps."
+  ],
+  "limits": [],
+  "orientation": "Tractor/front at left; source-specific mirror of the right-facing V14 published view.",
+  "id": "V03-policy-tractor",
+  "title": "Tractor and trailer \u2014 opposite-side policy view",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 3,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    96.47467839506172,
+    248.62249135802466,
+    686.7624339506172,
+    355.01156358024684
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-signature",
+      "label": "Cab Signature",
+      "box": [
+        158.55827421522497,
+        448.87630265245485,
+        24.869787538959372,
+        35.6224244579239
+      ],
+      "quad": [
+        [
+          183.42806175418434,
+          449.1205165765088
+        ],
+        [
+          158.87073682946675,
+          448.87630265245485
+        ],
+        [
+          158.55827421522497,
+          484.2545131863248
+        ],
+        [
+          183.11559913994256,
+          484.49872711037875
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "cab-unit",
+      "label": "Cab Unit",
+      "box": [
+        202.287847505189,
+        468.3602664117456,
+        32.815206656756004,
+        8.489820996298363
+      ],
+      "quad": [
+        [
+          235.103054161945,
+          468.6858849771509
+        ],
+        [
+          202.3599542623217,
+          468.3602664117456
+        ],
+        [
+          202.287847505189,
+          476.52446884263867
+        ],
+        [
+          235.0309474048123,
+          476.850087408044
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "2265-2008",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-side-signature",
+      "label": "Trailer Side Signature",
+      "box": [
+        713.5680177932218,
+        312.19149104584034,
+        27.718557125815664,
+        53.33866460530942
+      ],
+      "quad": [
+        [
+          741.2865749190374,
+          315.86459086321685
+        ],
+        [
+          714.0307028181567,
+          312.19149104584034
+        ],
+        [
+          713.5680177932218,
+          364.57845664407085
+        ],
+        [
+          740.8479254798134,
+          365.53015565114976
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-front-signature",
+      "label": "Trailer Front Signature",
+      "box": [
+        342.75596149983255,
+        273.0938236989465,
+        65.99094709917568,
+        56.498179885440834
+      ],
+      "quad": [
+        [
+          408.74690859900824,
+          273.0938236989465
+        ],
+        [
+          343.1164952854961,
+          288.770991429922
+        ],
+        [
+          342.75596149983255,
+          329.5920035843873
+        ],
+        [
+          408.3863748133447,
+          313.91483585341183
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-side-unit",
+      "label": "Trailer Side Unit",
+      "box": [
+        431.8077419731648,
+        279.44762200594505,
+        38.23633659479361,
+        13.986892377794618
+      ],
+      "quad": [
+        [
+          470.0440785679584,
+          284.5899617502722
+        ],
+        [
+          431.8858576267252,
+          279.44762200594505
+        ],
+        [
+          431.8077419731648,
+          288.29217463941256
+        ],
+        [
+          469.965962914398,
+          293.43451438373967
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "2280-2008",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-front-unit",
+      "label": "Trailer Front Unit",
+      "box": [
+        307.46453683473896,
+        292.81239032469284,
+        31.523017584737886,
+        16.016353736606106
+      ],
+      "quad": [
+        [
+          338.98755441947685,
+          292.81239032469284
+        ],
+        [
+          307.5366435918718,
+          300.6645416304059
+        ],
+        [
+          307.46453683473896,
+          308.82874406129895
+        ],
+        [
+          338.91544766234415,
+          300.97659275558595
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "fd7d9bf71c3a7d67bd1e7c3b16f2882632ff569fac898bac28398a397d448caa",
+  "revised_blank_sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,165 @@
+{
+  "vb": [
+    249,
+    351,
+    1019,
+    528
+  ],
+  "notes": [
+    "Replaced both generic wheel ellipses with actual source tyre-depth silhouettes, rim positions, near rim lip and separate sidewall arc.",
+    "Refit cab/door edges, divided glazing, mirror context and double upper/lower bed trim.",
+    "Rebuilt the stepped three-plane rear bumper and number-plate recess geometry, plus double rear lamp surrounds.",
+    "Reflectors are supplied separately as removable applied markings."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V08-pickup-perspective",
+  "title": "Pickup \u2014 rear three-quarter",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 8,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    232.79058150744402,
+    334.891713747551,
+    1050.7665095110442,
+    560.0976397171585
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        372,
+        542,
+        35,
+        61
+      ],
+      "quad": [
+        [
+          373,
+          543
+        ],
+        [
+          408,
+          552
+        ],
+        [
+          407,
+          608
+        ],
+        [
+          373,
+          595
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "tailgate-signature",
+      "label": "Tailgate Signature",
+      "box": [
+        986,
+        541,
+        49,
+        73
+      ],
+      "quad": [
+        [
+          987,
+          547
+        ],
+        [
+          1029,
+          542
+        ],
+        [
+          1034,
+          599
+        ],
+        [
+          987,
+          613
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        271,
+        492,
+        39,
+        19
+      ],
+      "quad": [
+        [
+          271,
+          492
+        ],
+        [
+          309,
+          498
+        ],
+        [
+          309,
+          510
+        ],
+        [
+          271,
+          504
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        1141,
+        539,
+        62,
+        31
+      ],
+      "quad": [
+        [
+          1141,
+          552
+        ],
+        [
+          1202,
+          537
+        ],
+        [
+          1203,
+          552
+        ],
+        [
+          1141,
+          567
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "c2173edd57bcd5dc7b97509218421c7eb0395aaddbc24fcb74ec86b785e87766",
+  "revised_blank_sha256": "d905f3ec4e4c4ebffe6657a68bf2df75b0607f368e8db4c282ccde1d4d24d6db",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

@@ -1,0 +1,99 @@
+{
+  "vb": [
+    57,
+    632,
+    218,
+    212
+  ],
+  "notes": [
+    "Refit the separate title-tab arcs, intervening gap and lower carrier corner radii.",
+    "Retained clean construction curves rather than the uneven printed border."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G15-job-patch",
+  "title": "Job-function patch and tab",
+  "book": "General Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    41.333333333333336,
+    616.3333333333334,
+    249.66666666666666,
+    243.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "function-title",
+      "label": "Function Title",
+      "box": [
+        84,
+        645,
+        160,
+        50
+      ],
+      "quad": [
+        [
+          84,
+          645
+        ],
+        [
+          244,
+          645
+        ],
+        [
+          244,
+          695
+        ],
+        [
+          84,
+          695
+        ]
+      ],
+      "kind": "curved-name",
+      "colour": "#252823",
+      "default": "Job Function",
+      "historical_placement": true
+    },
+    {
+      "id": "patch-identity",
+      "label": "Patch Identity",
+      "box": [
+        110,
+        694,
+        112,
+        130
+      ],
+      "quad": [
+        [
+          110,
+          694
+        ],
+        [
+          222,
+          694
+        ],
+        [
+          222,
+          824
+        ],
+        [
+          110,
+          824
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#70573f",
+      "default": "Forests",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "d5cbd5dfb62fba975ce2f4d8a4e8a36b98a63ea89ee92ed54bb8b369ddf20ae8",
+  "revised_blank_sha256": "b8bb349fdd4bbbb14126c22b5f28693afbd50802f41c6e7cc857db4a567d6d69",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

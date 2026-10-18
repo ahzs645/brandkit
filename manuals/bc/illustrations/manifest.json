@@ -1,0 +1,6286 @@
+{
+  "release": "ManualKit source-based update 2026-10-18",
+  "package": "All_59_SVGs_Only",
+  "view_count": 59,
+  "assets": [
+    {
+      "vb": [
+        461,
+        519,
+        392,
+        455
+      ],
+      "notes": [
+        "Rebuilt tie knot/blade, shirt collar and exposed neck contours from the source.",
+        "Refit lapel notches, rounded breast pocket, sleeve seam and the lower-right open slit."
+      ],
+      "limits": [
+        "Cropped head, torso and sleeve retained; no unseen garment extension invented."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-blazer",
+      "title": "Blazer \u2014 chest pocket view",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        445.3333333333333,
+        503.0,
+        423.6666666666667,
+        486.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "pocket-crest",
+          "label": "Pocket Crest",
+          "box": [
+            634,
+            833,
+            83,
+            112
+          ],
+          "quad": [
+            [
+              634,
+              833
+            ],
+            [
+              717,
+              833
+            ],
+            [
+              717,
+              945
+            ],
+            [
+              634,
+              945
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "73e24f6e739ae0ea732a65e25e6eff6513952f21b6d92ebe0b93f05f634b9c07",
+      "revised_blank_sha256": "1249bf9e101970dbb33be90b9894f9b6e12b2a54b0670c6b2f55bc01505e319f",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        869,
+        78,
+        365,
+        425
+      ],
+      "notes": [
+        "Restored both lapel stitch lines, the full sloping inner sleeve edge and layered pocket occlusion.",
+        "Refit pocket seams/pleats, zipper pull, elbow junction and double stitching.",
+        "Separated curved title tab and lower patch carrier to follow the sleeve curvature."
+      ],
+      "limits": [
+        "Torso and sleeve are cropped at the original illustration boundaries."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-field-jacket",
+      "title": "Field jacket \u2014 shoulder view",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        853.3333333333334,
+        62.333333333333336,
+        396.3333333333333,
+        456.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "sleeve-title",
+          "label": "Sleeve Title",
+          "box": [
+            1130,
+            215,
+            80,
+            30
+          ],
+          "quad": [
+            [
+              1136,
+              214
+            ],
+            [
+              1206,
+              225
+            ],
+            [
+              1215,
+              254
+            ],
+            [
+              1127,
+              243
+            ]
+          ],
+          "kind": "nameplate",
+          "colour": "#70573f",
+          "default": "Job Function",
+          "historical_placement": true
+        },
+        {
+          "id": "sleeve-patch",
+          "label": "Sleeve Patch",
+          "box": [
+            1115,
+            244,
+            96,
+            93
+          ],
+          "quad": [
+            [
+              1123,
+              244
+            ],
+            [
+              1205,
+              254
+            ],
+            [
+              1185,
+              335
+            ],
+            [
+              1116,
+              323
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#70573f",
+          "default": "Forests",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "c53c2aa446cc95cb28542d06df815ae2eeff049fd05b38bfda867c57e38836d9",
+      "revised_blank_sha256": "3738d6f55d502e242078bb6fccd3593ed2fec0fdfc1f6f48b423ac1d1af9393c",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        912,
+        780,
+        345,
+        178
+      ],
+      "notes": [
+        "Rebuilt the lower brim with the correct rise through its centre and dip towards the left end.",
+        "Refit the crown outline, sloping left junction, inner crown arc and both reinforcement slots.",
+        "Excluded the jacket behind the helmet rather than masking it with the previous wrong silhouette."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-hard-hat",
+      "title": "Hard hat \u2014 separated from jacket",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        896.3333333333334,
+        766.6666666666666,
+        376.6666666666667,
+        208.0
+      ],
+      "branding_zones": [
+        {
+          "id": "front-crest",
+          "label": "Front Crest",
+          "box": [
+            1077,
+            856,
+            70,
+            76
+          ],
+          "quad": [
+            [
+              1077,
+              856
+            ],
+            [
+              1147,
+              856
+            ],
+            [
+              1147,
+              932
+            ],
+            [
+              1077,
+              932
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#70573f",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "3e5f37e87d9b1e015b6e93f43433082b75d6e0cacb612c54c5c32854d378cb6e",
+      "revised_blank_sha256": "3a0e191dc8a05973278928e5af273c702d5ddb477ca5bf52a95139c317f164bf",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        869,
+        518,
+        391,
+        292
+      ],
+      "notes": [
+        "Adjusted shoulder arcs, armhole seams, sleeve ends, collar join and waistband position.",
+        "Kept the centre-back seam continuous in the unbranded template."
+      ],
+      "limits": [
+        "The lower-right waistband is covered by the helmet in the PDF; its smooth continuation and ribbing are explicitly inferred.",
+        "The top of the collar and both sleeve ends are source-cropped."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-jacket-back",
+      "title": "Jacket \u2014 upper back",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        853.3333333333334,
+        502.3333333333333,
+        422.3333333333333,
+        323.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "back-signature",
+          "label": "Back Signature",
+          "box": [
+            1001,
+            609,
+            95,
+            103
+          ],
+          "quad": [
+            [
+              1001,
+              609
+            ],
+            [
+              1096,
+              609
+            ],
+            [
+              1096,
+              712
+            ],
+            [
+              1001,
+              712
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "77f8a13554863c4467d955aea53d1b66afcf03e4c6d72da7708cee55bd4de46e",
+      "revised_blank_sha256": "60baeee5059a08c1c2e78c200eb32988c7664c680a4b457a52601737cc8a30aa",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        57,
+        632,
+        218,
+        212
+      ],
+      "notes": [
+        "Refit the separate title-tab arcs, intervening gap and lower carrier corner radii.",
+        "Retained clean construction curves rather than the uneven printed border."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-job-patch",
+      "title": "Job-function patch and tab",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        41.333333333333336,
+        616.3333333333334,
+        249.66666666666666,
+        243.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "function-title",
+          "label": "Function Title",
+          "box": [
+            84,
+            645,
+            160,
+            50
+          ],
+          "quad": [
+            [
+              84,
+              645
+            ],
+            [
+              244,
+              645
+            ],
+            [
+              244,
+              695
+            ],
+            [
+              84,
+              695
+            ]
+          ],
+          "kind": "curved-name",
+          "colour": "#252823",
+          "default": "Job Function",
+          "historical_placement": true
+        },
+        {
+          "id": "patch-identity",
+          "label": "Patch Identity",
+          "box": [
+            110,
+            694,
+            112,
+            130
+          ],
+          "quad": [
+            [
+              110,
+              694
+            ],
+            [
+              222,
+              694
+            ],
+            [
+              222,
+              824
+            ],
+            [
+              110,
+              824
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#70573f",
+          "default": "Forests",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "d5cbd5dfb62fba975ce2f4d8a4e8a36b98a63ea89ee92ed54bb8b369ddf20ae8",
+      "revised_blank_sha256": "b8bb349fdd4bbbb14126c22b5f28693afbd50802f41c6e7cc857db4a567d6d69",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        461,
+        52,
+        391,
+        452
+      ],
+      "notes": [
+        "Refit collar/lapels, rounded buttons, pocket flap curves/pleats, armhole and cropped torso edge.",
+        "Rebuilt the shared cap crown rim, curved band/visor and rounded strap fittings."
+      ],
+      "limits": [
+        "Crown top meets the source frame. The view is cropped and is not a complete cap model."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-officer-front",
+      "title": "Security uniform \u2014 cropped upper front",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        445.3333333333333,
+        34.333333333333336,
+        422.3333333333333,
+        485.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "chest-nameplate",
+          "label": "Chest Nameplate",
+          "box": [
+            626,
+            323,
+            96,
+            23
+          ],
+          "quad": [
+            [
+              626,
+              323
+            ],
+            [
+              722,
+              323
+            ],
+            [
+              722,
+              346
+            ],
+            [
+              626,
+              346
+            ]
+          ],
+          "kind": "nameplate",
+          "colour": "#ffffff",
+          "default": "Security",
+          "historical_placement": true
+        },
+        {
+          "id": "shoulder-flash",
+          "label": "Shoulder Flash",
+          "box": [
+            748,
+            211,
+            72,
+            44
+          ],
+          "quad": [
+            [
+              750,
+              211
+            ],
+            [
+              820,
+              221
+            ],
+            [
+              817,
+              254
+            ],
+            [
+              744,
+              245
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Security",
+          "historical_placement": true
+        },
+        {
+          "id": "cap-badge",
+          "label": "Cap Badge",
+          "box": [
+            548,
+            80,
+            40,
+            35
+          ],
+          "quad": [
+            [
+              548,
+              80
+            ],
+            [
+              588,
+              80
+            ],
+            [
+              588,
+              115
+            ],
+            [
+              548,
+              115
+            ]
+          ],
+          "kind": "patch",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "da5dfac19019519c239bb8c7afb1ab76f7686797daca9ddb50e3f782dd57115d",
+      "revised_blank_sha256": "eae44bc80fa104218a1abd28f58f32e5d2e992e13f3a74fe4c0ddf99b5e97ac5",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        466,
+        52,
+        214,
+        146
+      ],
+      "notes": [
+        "Same corrected visible cap geometry as the officer illustration: completed visible right rim, refit strap and rounded buckle hardware."
+      ],
+      "limits": [
+        "The top is cut by the original frame; no unseen crown cap was invented."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-peaked-cap",
+      "title": "Peaked cap \u2014 standalone detail",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        450.3333333333333,
+        32.0,
+        245.0,
+        180.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "cap-badge",
+          "label": "Cap Badge",
+          "box": [
+            548,
+            80,
+            40,
+            35
+          ],
+          "quad": [
+            [
+              548,
+              80
+            ],
+            [
+              588,
+              80
+            ],
+            [
+              588,
+              115
+            ],
+            [
+              548,
+              115
+            ]
+          ],
+          "kind": "patch",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "9b5cdfa0b58738d0f06463a19582f024bc10fff4ddb23c7815ace08dc5d1a9d2",
+      "revised_blank_sha256": "03f4dc9c83450e8394fc972fda167f035888ca5f5126f4b646231fc1f9afc66f",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        264,
+        767,
+        184,
+        211
+      ],
+      "notes": [
+        "Refit lower corner radii and shallow pointed base.",
+        "Separated the title tab and lower carrier, preserving the visible white gap rather than joining the two."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G15-security-patch",
+      "title": "Security patch",
+      "book": "General Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        248.0,
+        751.3333333333334,
+        215.66666666666666,
+        242.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "function-title",
+          "label": "Function Title",
+          "box": [
+            276,
+            776,
+            158,
+            34
+          ],
+          "quad": [
+            [
+              276,
+              776
+            ],
+            [
+              434,
+              776
+            ],
+            [
+              434,
+              810
+            ],
+            [
+              276,
+              810
+            ]
+          ],
+          "kind": "nameplate",
+          "colour": "#ffffff",
+          "default": "Security",
+          "historical_placement": true
+        },
+        {
+          "id": "patch-identity",
+          "label": "Patch Identity",
+          "box": [
+            297,
+            829,
+            116,
+            126
+          ],
+          "quad": [
+            [
+              297,
+              829
+            ],
+            [
+              413,
+              829
+            ],
+            [
+              413,
+              955
+            ],
+            [
+              297,
+              955
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "d6838b33d6dab92d96b7224a88194bad00ed89a7da872c828a463e4da78495bf",
+      "revised_blank_sha256": "d5b86daabe4614a54b381f68e85cff9a53d98964e852993e84c8e56cb881ee1b",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        37,
+        137,
+        456,
+        242
+      ],
+      "notes": [
+        "Replaced the earlier misregistered tractor-trailer with the corrected shared published illustration placed by original-source landmarks.",
+        "Preserved the General source plain trailer panels, brown cab/tank/stack and its independent facing direction.",
+        "Restored trailer wheel clusters, stepped chassis, source cab fittings and actual trailer-plane perspective."
+      ],
+      "limits": [],
+      "orientation": "Tractor/front at right.",
+      "id": "G16-tractor",
+      "title": "Tractor \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 16,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        29.333333333333332,
+        129.33333333333334,
+        473.3333333333333,
+        254.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-signature",
+          "label": "Cab Signature",
+          "box": [
+            448.21689391517333,
+            281.54633427808574,
+            17.754164415642947,
+            25.07663940045518
+          ],
+          "quad": [
+            [
+              448.45917352917536,
+              281.54633427808574
+            ],
+            [
+              465.9710583308163,
+              281.6755600243064
+            ],
+            [
+              465.72877871681425,
+              306.6229736785409
+            ],
+            [
+              448.21689391517333,
+              306.4937479323204
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            411.30327001408574,
+            294.7067471062934,
+            23.405090415675488,
+            5.929396453630261
+          ],
+          "quad": [
+            [
+              411.35918069424,
+              294.7067471062934
+            ],
+            [
+              434.7083604297612,
+              294.87904810125417
+            ],
+            [
+              434.65244974960694,
+              300.63614355992365
+            ],
+            [
+              411.30327001408574,
+              300.4638425649629
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "2265-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-signature",
+          "label": "Trailer Side Signature",
+          "box": [
+            52.13347628366594,
+            178.49138895439248,
+            19.821069200604015,
+            37.27753631888453
+          ],
+          "quad": [
+            [
+              52.47359958793799,
+              180.74659456637076
+            ],
+            [
+              71.95454548426996,
+              178.49138895439248
+            ],
+            [
+              71.59578528661314,
+              215.43275148085522
+            ],
+            [
+              52.13347628366594,
+              215.768925273277
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-signature",
+          "label": "Trailer Front Signature",
+          "box": [
+            289.8476084523779,
+            154.67235996490265,
+            46.86609151150532,
+            40.64427020060822
+          ],
+          "quad": [
+            [
+              290.12716185314946,
+              154.67235996490265
+            ],
+            [
+              336.71369996388324,
+              166.5311528721633
+            ],
+            [
+              336.4341465631117,
+              195.31663016551087
+            ],
+            [
+              289.8476084523779,
+              183.4578372582503
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-unit",
+          "label": "Trailer Side Unit",
+          "box": [
+            246.2123323720076,
+            158.8681350208076,
+            27.333894158365297,
+            9.394141270328248
+          ],
+          "quad": [
+            [
+              246.2729022755081,
+              162.0254228775772
+            ],
+            [
+              273.5462265303729,
+              158.8681350208076
+            ],
+            [
+              273.48565662687236,
+              165.10498843436628
+            ],
+            [
+              246.2123323720076,
+              168.26227629113586
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-unit",
+          "label": "Trailer Front Unit",
+          "box": [
+            339.54848141059193,
+            169.4312382258681,
+            22.376297246541185,
+            11.679312704176425
+          ],
+          "quad": [
+            [
+              339.6043920907463,
+              169.4312382258681
+            ],
+            [
+              361.9247786571331,
+              175.35345547137504
+            ],
+            [
+              361.86886797697883,
+              181.11055093004452
+            ],
+            [
+              339.54848141059193,
+              175.18833368453764
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "2ce5ab478dd58a0d1989c16aab44d2dd62510b6b8d47cfd22dc162521e4fa2b9",
+      "revised_blank_sha256": "8baf17adab0e839a7bf2f215844ede96d02edc9b14312317b177155668229fb7",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        67.5,
+        387.5,
+        176.5,
+        183.5
+      ],
+      "notes": [
+        "Refit the General Manual rear van using the corrected common shell, rails, doors, lamp insets and rounded tyre ends.",
+        "Kept the source plain: Vehicle Manual reflectors are not part of this blank."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G16-van-rear",
+      "title": "Van Rear \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 16,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        58.333333333333336,
+        378.3333333333333,
+        194.66666666666666,
+        201.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "left-door-signature",
+          "label": "Left Door Signature",
+          "box": [
+            102.72000000000001,
+            462.58000000000004,
+            23.521,
+            23.477999999999952
+          ],
+          "quad": [
+            [
+              102.72000000000001,
+              462.58000000000004
+            ],
+            [
+              126.24100000000001,
+              462.58000000000004
+            ],
+            [
+              126.24100000000001,
+              486.058
+            ],
+            [
+              102.72000000000001,
+              486.058
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "right-door-unit",
+          "label": "Right Door Unit",
+          "box": [
+            172.736,
+            463.126,
+            40.47800000000001,
+            9.828000000000031
+          ],
+          "quad": [
+            [
+              172.736,
+              463.126
+            ],
+            [
+              213.214,
+              463.126
+            ],
+            [
+              213.214,
+              472.954
+            ],
+            [
+              172.736,
+              472.954
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "c57998785bbe9a1ab4ab4625c701160e2fd190e32e9bb3be5ad1687e61f7f0c8",
+      "revised_blank_sha256": "d8413024f8192048d1b6f2a7e52158a38c7234bb8f76ab21230fabcf33faac40",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        275.5,
+        384.5,
+        475.5,
+        188.0
+      ],
+      "notes": [
+        "Rebuilt the shared side-elevation van geometry and registered it against the General Manual source.",
+        "Restored twin wheel-arch trim, correct black wheelhouse infill, mirror A-support, sliding-door outline and side markers."
+      ],
+      "limits": [],
+      "orientation": "Front at right.",
+      "id": "G16-van-side",
+      "title": "Van Side \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 16,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        266.3333333333333,
+        375.3333333333333,
+        493.6666666666667,
+        206.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "side-panel-signature",
+          "label": "Side Panel Signature",
+          "box": [
+            315.923,
+            411.6218,
+            34.79399999999998,
+            32.86099999999999
+          ],
+          "quad": [
+            [
+              315.923,
+              411.6218
+            ],
+            [
+              350.717,
+              411.6218
+            ],
+            [
+              350.717,
+              444.4828
+            ],
+            [
+              315.923,
+              444.4828
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            596.2080000000001,
+            478.11699999999996,
+            31.70119999999997,
+            35.56720000000007
+          ],
+          "quad": [
+            [
+              596.2080000000001,
+              478.11699999999996
+            ],
+            [
+              627.9092,
+              478.11699999999996
+            ],
+            [
+              627.9092,
+              513.6842
+            ],
+            [
+              596.2080000000001,
+              513.6842
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Abcdefghijk",
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            665.0228,
+            463.81280000000004,
+            38.27340000000004,
+            9.664999999999964
+          ],
+          "quad": [
+            [
+              665.0228,
+              463.81280000000004
+            ],
+            [
+              703.2962,
+              463.81280000000004
+            ],
+            [
+              703.2962,
+              473.4778
+            ],
+            [
+              665.0228,
+              473.4778
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "32f1d7ee7dc7c85f7e6c45600771e1472ba5e93131ab7d6f97510201976410be",
+      "revised_blank_sha256": "05914660aafe47e26805ca6e6eb5c0dafe70304d34222aaef1f24f7c9cb80f07",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        37.5,
+        135.0,
+        504.5,
+        210.5
+      ],
+      "notes": [
+        "Replaced the earlier General Manual car with the corrected shared authored illustration, using an explicit source-page placement matrix, not an overlay-fitted deformation.",
+        "Added the source mirror, full side/trunk panel linework, depth-shaped tyres/rim lip, double lamp surrounds and bumper profile.",
+        "The General Manual source has additional lamp divisions; these are separate lines on its own page.",
+        "After the overlay, replaced roof/pillar/glass components again directly in General Manual coordinates instead of retaining the V06-derived window positions."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G17-car",
+      "title": "Car \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        28.333333333333332,
+        126.0,
+        522.6666666666666,
+        228.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "front-door-signature",
+          "label": "Front Door Signature",
+          "box": [
+            115.25438600000003,
+            218.74514200000002,
+            21.82356800000001,
+            33.296108000000004
+          ],
+          "quad": [
+            [
+              115.25722800000001,
+              218.74514200000002
+            ],
+            [
+              137.037401,
+              224.192329
+            ],
+            [
+              137.07795400000003,
+              252.04125000000002
+            ],
+            [
+              115.25438600000003,
+              245.30896200000004
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            415.351437,
+            254.24250399999997,
+            19.355992000000015,
+            24.072141000000016
+          ],
+          "quad": [
+            [
+              415.351437,
+              258.614829
+            ],
+            [
+              430.951047,
+              254.24250399999997
+            ],
+            [
+              434.707429,
+              272.216187
+            ],
+            [
+              416.916499,
+              278.314645
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            53.22609700000001,
+            193.815977,
+            16.91876699999999,
+            8.045252000000005
+          ],
+          "quad": [
+            [
+              53.22609700000001,
+              193.815977
+            ],
+            [
+              69.98574900000001,
+              197.14919200000003
+            ],
+            [
+              70.144864,
+              201.861229
+            ],
+            [
+              53.38521200000001,
+              198.528014
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            493.00090600000004,
+            230.62435,
+            24.175424000000078,
+            14.698726999999991
+          ],
+          "quad": [
+            [
+              493.00090600000004,
+              239.754306
+            ],
+            [
+              516.5384490000001,
+              230.62435
+            ],
+            [
+              517.1763300000001,
+              236.190588
+            ],
+            [
+              493.18895100000003,
+              245.32307699999998
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "6ddc2fe3d0219fb61709d086aa6daa8852bb81385d9387c12e1cc06494af809e",
+      "revised_blank_sha256": "87c3def18518c4412247d60291b92fa68118fb4938d9940099068eaf5167abd1",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        387.5,
+        27.5,
+        357.0,
+        183.0
+      ],
+      "notes": [
+        "Replaced the General Manual pickup with the corrected common source illustration and an explicit page placement matrix.",
+        "Restored the depth-shaped wheels and rim lip, source bed/cab planes, mirror, double side trim, double lamp contour and stepped bumper.",
+        "Preserved the General source without the Vehicle Manual reflector array."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G17-pickup",
+      "title": "Pickup \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        378.3333333333333,
+        18.333333333333332,
+        375.3333333333333,
+        201.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            427.2083086,
+            96.13555850000002,
+            13.27516700000001,
+            22.724496999999985
+          ],
+          "quad": [
+            [
+              427.2083086,
+              96.13555850000002
+            ],
+            [
+              439.8445864,
+              98.945192
+            ],
+            [
+              440.4834756,
+              118.8600555
+            ],
+            [
+              428.132567,
+              114.61760650000001
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "tailgate-signature",
+          "label": "Tailgate Signature",
+          "box": [
+            646.1495294,
+            88.4857425,
+            17.678160400000024,
+            25.70212300000003
+          ],
+          "quad": [
+            [
+              646.1495294,
+              90.72988150000002
+            ],
+            [
+              661.0322304,
+              88.4857425
+            ],
+            [
+              663.8276898,
+              108.68931299999998
+            ],
+            [
+              647.3226266,
+              114.18786550000003
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            389.94229240000004,
+            79.14312349999999,
+            13.865643599999942,
+            5.97509100000002
+          ],
+          "quad": [
+            [
+              389.94229240000004,
+              79.14312349999999
+            ],
+            [
+              403.59464560000004,
+              80.85312650000002
+            ],
+            [
+              403.807936,
+              85.11821450000001
+            ],
+            [
+              390.1555828,
+              83.40821150000001
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            701.1341644,
+            84.78494900000003,
+            22.100892000000044,
+            11.341009499999956
+          ],
+          "quad": [
+            [
+              701.1341644,
+              90.79459849999999
+            ],
+            [
+              722.6119774,
+              84.78494900000003
+            ],
+            [
+              723.2350564000001,
+              90.10518950000001
+            ],
+            [
+              701.4007774,
+              96.12595849999998
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "96c2a8d4a7a4dbab46ccc142dfd60f28dc455af748ea0d476b5b8c9979805f18",
+      "revised_blank_sha256": "ac88a8375af0581aa74839601527273a5af1df9b2d6ed9a6657fb1ca3c9bb744",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        61.0,
+        351.0,
+        165.0,
+        222.5
+      ],
+      "notes": [
+        "Rebuilt the shared truck rear chassis and paired tyres against the General Manual source.",
+        "Retained the plain door treatment in this source; neither fold lines nor reflective striping from V13 were copied."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "G17-truck-rear",
+      "title": "Truck Rear \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        52.0,
+        342.0,
+        183.0,
+        240.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            84.279,
+            367.12050000000005,
+            41.105999999999995,
+            33.2475
+          ],
+          "quad": [
+            [
+              84.279,
+              367.12050000000005
+            ],
+            [
+              125.38499999999999,
+              367.12050000000005
+            ],
+            [
+              125.38499999999999,
+              400.36800000000005
+            ],
+            [
+              84.279,
+              400.36800000000005
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#222222",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit",
+          "label": "Unit",
+          "box": [
+            166.491,
+            367.725,
+            42.315,
+            9.672000000000025
+          ],
+          "quad": [
+            [
+              166.491,
+              367.725
+            ],
+            [
+              208.806,
+              367.725
+            ],
+            [
+              208.806,
+              377.39700000000005
+            ],
+            [
+              166.491,
+              377.39700000000005
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#222222",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "f388892d32bee382768e46baf9eab29aa09ef88f9750da0759c13b04c1acce27",
+      "revised_blank_sha256": "21717844bbc0b55a8c1441874e089dcb542938e0bce1cebeb982a88763d07b7a",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        259.0,
+        351.0,
+        489.5,
+        222.5
+      ],
+      "notes": [
+        "Rebuilt with the corrected common truck illustration; verified its separate General Manual source registration.",
+        "Restored the multi-pane cab, fender/wheelhouse, mirror, tyre groups, full-width tank/straps and chassis detail.",
+        "No ribbed-panel demonstration is carried into this General Manual blank."
+      ],
+      "limits": [],
+      "orientation": "Front at right.",
+      "id": "G17-truck-side",
+      "title": "Truck Side \u2014 General Manual",
+      "book": "General Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "Visual Identity Program General Manual.pdf",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        250.0,
+        342.0,
+        507.6666666666667,
+        240.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "box-signature",
+          "label": "Box Signature",
+          "box": [
+            282.23999999999995,
+            366.29999999999995,
+            48.32000000000005,
+            48.31999999999999
+          ],
+          "quad": [
+            [
+              282.23999999999995,
+              366.29999999999995
+            ],
+            [
+              330.56,
+              366.29999999999995
+            ],
+            [
+              330.56,
+              414.61999999999995
+            ],
+            [
+              282.23999999999995,
+              414.61999999999995
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#222222",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "box-unit",
+          "label": "Box Unit",
+          "box": [
+            535.9200000000001,
+            364.488,
+            48.319999999999936,
+            11.475999999999999
+          ],
+          "quad": [
+            [
+              535.9200000000001,
+              364.488
+            ],
+            [
+              584.24,
+              364.488
+            ],
+            [
+              584.24,
+              375.964
+            ],
+            [
+              535.9200000000001,
+              375.964
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#222222",
+          "default": "1604-2103",
+          "historical_placement": true
+        },
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            697.188,
+            485.892,
+            21.744000000000028,
+            26.57600000000008
+          ],
+          "quad": [
+            [
+              697.188,
+              485.892
+            ],
+            [
+              718.932,
+              485.892
+            ],
+            [
+              718.932,
+              512.4680000000001
+            ],
+            [
+              697.188,
+              512.4680000000001
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            616.2520000000001,
+            470.792,
+            31.4079999999999,
+            9.663999999999987
+          ],
+          "quad": [
+            [
+              616.2520000000001,
+              470.792
+            ],
+            [
+              647.66,
+              470.792
+            ],
+            [
+              647.66,
+              480.45599999999996
+            ],
+            [
+              616.2520000000001,
+              480.45599999999996
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "e049f071ab53b1ed932852fdb0343042f661bfb9f78ed99b330f699517cbacd7",
+      "revised_blank_sha256": "6afdc8cc19574a89c93036ce98b4845060a1e3b9eb017c548c6af7f9c630ca13",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        337.5,
+        524.5,
+        169,
+        203
+      ],
+      "notes": [
+        "Reconstructed the source-specific left-facing door, its large rear pane and narrow triangular quarter-light.",
+        "Restored the curved mirror head, separate support/base, short handle and paired upper/lower trim lines."
+      ],
+      "limits": [],
+      "orientation": "Front-side sloping pillar at left; not mirrored to match the full side elevation.",
+      "id": "H44-van-door",
+      "title": "Van Door \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 44,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        328.3333333333333,
+        515.3333333333334,
+        187.33333333333334,
+        221.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            372,
+            647,
+            102,
+            32
+          ],
+          "quad": [
+            [
+              372,
+              647
+            ],
+            [
+              474,
+              647
+            ],
+            [
+              474,
+              679
+            ],
+            [
+              372,
+              679
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "a0b45c1455d10afc8e341d5040c64d205b1478edcf7a9633095c408d49104b46",
+      "revised_blank_sha256": "39da898597cfa84510e0937136a1e649c6e45f534688927c6a8e61ac75e43c4d",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        62.5,
+        539.5,
+        175,
+        187
+      ],
+      "notes": [
+        "Redrew the Hydro rear shell, unfilled rounded tyres, plain windows and straight door divisions in its own page coordinates.",
+        "Restored three external trim rails, the curved bumper and its tyre overlap.",
+        "Did not introduce the lamps, plate recess or reflectors absent from this source."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "H44-van-rear",
+      "title": "Van Rear \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 44,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        53.333333333333336,
+        530.3333333333334,
+        193.33333333333334,
+        205.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            92,
+            615,
+            53,
+            20
+          ],
+          "quad": [
+            [
+              92,
+              615
+            ],
+            [
+              145,
+              615
+            ],
+            [
+              145,
+              635
+            ],
+            [
+              92,
+              635
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "7044d52617a62105bcfb89197e60b9e4764b3ae3872f320ddd197b01633e60fc",
+      "revised_blank_sha256": "d664497b4edbf8d3a297c405d2535e921e604367eea6994e6a39d0d99649e348",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        60.5,
+        328.0,
+        478.0,
+        186.5
+      ],
+      "notes": [
+        "Rebuilt the shared van outline against the Hydro drawing, retaining its different plain side-panel treatment.",
+        "Removed the sliding-door outline and side markers absent from this source.",
+        "Restored source-style white tyre outlines and open rim strokes, mirror supports and window subdivision."
+      ],
+      "limits": [],
+      "orientation": "Front at right.",
+      "id": "H44-van-side",
+      "title": "Van Side \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 44,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        51.333333333333336,
+        319.0,
+        496.3333333333333,
+        204.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "side-signature",
+          "label": "Side Signature",
+          "box": [
+            105,
+            345,
+            111,
+            36
+          ],
+          "quad": [
+            [
+              105,
+              345
+            ],
+            [
+              216,
+              345
+            ],
+            [
+              216,
+              381
+            ],
+            [
+              105,
+              381
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "f434db3525108fd2953c4781e785ebb1b111acec7a476259239f57a4e5796b76",
+      "revised_blank_sha256": "b86e1db2febf354128b62be668fcd73341ad2df8692b71a043c779b10dd90631",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        383.5,
+        511.5,
+        159,
+        219
+      ],
+      "notes": [
+        "Restored the roller-door slat spacing and independent inner/outer frame.",
+        "Reconstructed the stepped central underbody opening and paired open tyre contours, replacing the earlier simplified block profile."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "H45-roller-truck-rear",
+      "title": "Roller Truck Rear \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 45,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        374.3333333333333,
+        502.3333333333333,
+        177.33333333333334,
+        235.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            397,
+            549,
+            54,
+            12
+          ],
+          "quad": [
+            [
+              397,
+              549
+            ],
+            [
+              451,
+              549
+            ],
+            [
+              451,
+              561
+            ],
+            [
+              397,
+              561
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "715ed0b2b8c5dbab29c1e4365e32fab7a9ad11d4d0b56b363257902e7dd0bcb9",
+      "revised_blank_sha256": "895c1e79e4f28266cccc6722169464d83c4ec072ffbfa2ba89a29ba22e1133b6",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        72.5,
+        511.5,
+        164,
+        218
+      ],
+      "notes": [
+        "Rebuilt roof lip, straight folding-door boundaries and six lower door divisions.",
+        "Corrected the window positions and handle. Replaced solid or closed tyre blocks with the source paired open U-contours."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "H45-stepvan-rear",
+      "title": "Stepvan Rear \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 45,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        63.333333333333336,
+        502.3333333333333,
+        182.33333333333334,
+        236.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            115,
+            597,
+            37,
+            7
+          ],
+          "quad": [
+            [
+              115,
+              597
+            ],
+            [
+              152,
+              597
+            ],
+            [
+              152,
+              604
+            ],
+            [
+              115,
+              604
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "03a5ea4dee09ae1aa475430a46585f1cd5db9f713fdde7bfa0869c428d989aae",
+      "revised_blank_sha256": "d9dfcad3bc0996bda4f1f36d64c3421950e9c667283f7b041c5afea52c3119e1",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        63.5,
+        278.5,
+        502,
+        220
+      ],
+      "notes": [
+        "Refit the source front wheel opening and the full roof/nose/sill outline, rather than retaining a generic wedge at the front.",
+        "Restored door/window framing, roof cap, service panels and double waist trim.",
+        "Replaced invented closed hubs with the source open inner wheel contours."
+      ],
+      "limits": [],
+      "orientation": "Front at left.",
+      "id": "H45-stepvan-side",
+      "title": "Stepvan Side \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 45,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        54.333333333333336,
+        269.3333333333333,
+        520.3333333333334,
+        238.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "side-signature",
+          "label": "Side Signature",
+          "box": [
+            368,
+            326,
+            111,
+            20
+          ],
+          "quad": [
+            [
+              368,
+              326
+            ],
+            [
+              479,
+              326
+            ],
+            [
+              479,
+              346
+            ],
+            [
+              368,
+              346
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "80e9b4b62e4fa1a9facb100a5bf62281f58635e41eefebcdc0ba46e43353ff1e",
+      "revised_blank_sha256": "7eb9a25d7cb21716dd77710bbca6d08eadbd082b09c0aebadc14108a1d2571c9",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        439.5,
+        538.5,
+        82,
+        125
+      ],
+      "notes": [
+        "Rebuilt the continuous straight rear door edge, rounded lower corners and correct sloped front window.",
+        "Removed the invented lower door kink and refit the handle and lower fitting."
+      ],
+      "limits": [],
+      "orientation": "Sloping front pillar at right in this source detail.",
+      "id": "H46-cab-door",
+      "title": "Cab Door \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 46,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        430.3333333333333,
+        529.3333333333334,
+        100.33333333333333,
+        141.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            449.5,
+            601,
+            63,
+            13
+          ],
+          "quad": [
+            [
+              449.5,
+              601
+            ],
+            [
+              512.5,
+              601
+            ],
+            [
+              512.5,
+              614
+            ],
+            [
+              449.5,
+              614
+            ]
+          ],
+          "kind": "hydro-gas",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "b35cda42ab3c00829a7c2030a06a07cf6c15ede9eaaa5d02eec287cdf25f7faa",
+      "revised_blank_sha256": "b6a250bad134ec0874cc48e96b48e06840f48f4e1d0230f499c8cbfb8f66abb9",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        59.5,
+        663.5,
+        353,
+        62
+      ],
+      "notes": [
+        "Rebuilt the deck steps, curved neck and dual axle centres.",
+        "Restored open wheel-rim arcs, hanging rear mudflap and fork/caster linework rather than a filled landing wheel."
+      ],
+      "limits": [],
+      "orientation": "Tow/landing end at right; preserve the opposite orientation to the Vehicle Manual flat-deck example.",
+      "id": "H46-flatbed",
+      "title": "Flatbed \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 46,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        50.333333333333336,
+        654.3333333333334,
+        371.3333333333333,
+        78.33333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "deck-signature",
+          "label": "Deck Signature",
+          "box": [
+            176,
+            674.5,
+            54,
+            10
+          ],
+          "quad": [
+            [
+              176,
+              674.5
+            ],
+            [
+              230,
+              674.5
+            ],
+            [
+              230,
+              684.5
+            ],
+            [
+              176,
+              684.5
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "e277e00720515eeb4e1a07d2c2200e1ab54bdce9cb3adee806cbfb7be1e9c56c",
+      "revised_blank_sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        58.5,
+        336.5,
+        486,
+        184
+      ],
+      "notes": [
+        "Reconstructed all five wheels and the source open rim convention at the actual axle positions.",
+        "Restored stepped trailer/tractor rails, angled mudguard, separate tank and straps, cap and tall exhaust.",
+        "Redrew the source cab, door, narrow front pane, fender moulding, vents and front fittings; omitted the nonphysical diagonal annotation leader."
+      ],
+      "limits": [],
+      "orientation": "Cab/front at right.",
+      "id": "H46-tractor-trailer",
+      "title": "Tractor Trailer \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 46,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        49.333333333333336,
+        327.3333333333333,
+        504.3333333333333,
+        202.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "trailer-signature",
+          "label": "Trailer Signature",
+          "box": [
+            89,
+            360,
+            83,
+            15
+          ],
+          "quad": [
+            [
+              89,
+              360
+            ],
+            [
+              172,
+              360
+            ],
+            [
+              172,
+              375
+            ],
+            [
+              89,
+              375
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "b6609d48f5db3168367b74567cd076b27671e782d90a2ddc2f6bc53d20b89274",
+      "revised_blank_sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        378.5,
+        245.5,
+        163,
+        190
+      ],
+      "notes": [
+        "Rebuilt paired tread joints and the angled lower central opening in source coordinates.",
+        "Restored separate front panel, wraparound handrails, top rail and white exhaust/cap.",
+        "Kept the Hydro source grille as a plain rectangle: Vehicle Manual grille bars are not imported."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "H47-crawler-front",
+      "title": "Crawler Front \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 47,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        369.3333333333333,
+        236.33333333333334,
+        181.33333333333334,
+        208.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "front-signature",
+          "label": "Front Signature",
+          "box": [
+            432,
+            302,
+            55,
+            11
+          ],
+          "quad": [
+            [
+              432,
+              302
+            ],
+            [
+              487,
+              302
+            ],
+            [
+              487,
+              313
+            ],
+            [
+              432,
+              313
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "15a4ad48398c760e6a0f63270dc5f2cb2bbfe8e4ac5e8d56b6368ecb45c4f301",
+      "revised_blank_sha256": "cb8e9b0ab9541ef7092415e7c1a588aa1057bfd391f81747e7a671bfc4ff625a",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        62.5,
+        245.5,
+        309,
+        189
+      ],
+      "notes": [
+        "Rebuilt this left-facing Hydro variant directly rather than mirroring the Vehicle Manual drawing wholesale.",
+        "Refit the engine/chassis, plain white track shape, end circles and two inner rails.",
+        "Restored the source white cushion/backrest and simple exhaust. No extra rollers, controls or vertical tread lines absent from this source were added."
+      ],
+      "limits": [],
+      "orientation": "Engine/front at left; opposite the Vehicle Manual side view.",
+      "id": "H47-crawler-side",
+      "title": "Crawler Side \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 47,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        53.333333333333336,
+        236.33333333333334,
+        327.3333333333333,
+        207.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "seat-signature",
+          "label": "Seat Signature",
+          "box": [
+            280,
+            320,
+            24,
+            10
+          ],
+          "quad": [
+            [
+              280,
+              320
+            ],
+            [
+              304,
+              320
+            ],
+            [
+              304,
+              330
+            ],
+            [
+              280,
+              330
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "04fd6dc495585401f4e94b73f286f80a4f13b246430132295aa60d9926d3356a",
+      "revised_blank_sha256": "881514037c3a5bf7b2c99bb7e44de1565a023d0764947687d970a42042068283",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        68.5,
+        449,
+        269,
+        278.5
+      ],
+      "notes": [
+        "Rebuilt the casing and shallow wheel arch, paired upper seams and keyhole-shaped intake.",
+        "Restored the separate rear hose loops, tie, stack/cap and small support step.",
+        "Reconstructed the drawbar, curved caster fork, open wheel-rim arcs and rear step.",
+        "Source lettering, including the safety warning, is kept out of the blank and assigned to separate branding/caption zones."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "H47-generator",
+      "title": "Generator \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 47,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        59.333333333333336,
+        440.0,
+        287.3333333333333,
+        296.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "side-signature",
+          "label": "Side Signature",
+          "box": [
+            213,
+            571,
+            78,
+            15
+          ],
+          "quad": [
+            [
+              213,
+              571
+            ],
+            [
+              291,
+              571
+            ],
+            [
+              291,
+              586
+            ],
+            [
+              213,
+              586
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "safety-caption",
+          "label": "Safety Caption",
+          "box": [
+            211,
+            600,
+            86,
+            30
+          ],
+          "quad": [
+            [
+              211,
+              600
+            ],
+            [
+              297,
+              600
+            ],
+            [
+              297,
+              630
+            ],
+            [
+              211,
+              630
+            ]
+          ],
+          "kind": "caption",
+          "colour": "#000000",
+          "default": "Danger\nHigh Voltage",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "1971608318ec9fc6cb4c98e60aaed4b648d92565474a66121b32363f86c49519",
+      "revised_blank_sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        429.5,
+        447.5,
+        112,
+        101
+      ],
+      "notes": [
+        "Rebuilt the carrier trapezoid and its sloping right edge, plus the cushion curvature above it.",
+        "Retained the two open-ended source seat strokes rather than inventing a closed complete seat."
+      ],
+      "limits": [
+        "This is an enlarged open-ended source fragment; the complete seat is not shown or inferred."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "H47-seat-panel",
+      "title": "Seat Panel \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 47,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        420.3333333333333,
+        438.3333333333333,
+        130.33333333333334,
+        119.33333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "seat-panel-signature",
+          "label": "Seat Panel Signature",
+          "box": [
+            437,
+            501,
+            79,
+            16
+          ],
+          "quad": [
+            [
+              437,
+              501
+            ],
+            [
+              516,
+              501
+            ],
+            [
+              516,
+              517
+            ],
+            [
+              437,
+              517
+            ]
+          ],
+          "kind": "hydro",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "53a4132d670f4269dc0bff8aac8c719751bc3cb3e920e8de04b5c2b47ff0f760",
+      "revised_blank_sha256": "38335849eb486b030c54c5272cdff3722bd57742a05878d35b70ca8f770272b3",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        59.5,
+        547.5,
+        478,
+        190
+      ],
+      "notes": [
+        "Rebuilt the actual two four-wheel bogie views, including paired rim contours, triangular bolster apertures/spoke arcs, centre openings and layered axle-box spring blocks.",
+        "Reconstructed the source roof/lower sill and all twelve recessed panels with their independent structural dividers.",
+        "Kept wheels and suspension in separate editable assemblies, not a generic undercarriage silhouette."
+      ],
+      "limits": [
+        "The source itself is schematic; unshown mechanical details are not added."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "H48-boxcar",
+      "title": "Boxcar \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 48,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        50.333333333333336,
+        539.3333333333334,
+        492.3333333333333,
+        208.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "rail-signature",
+          "label": "Rail Signature",
+          "box": [
+            87,
+            568,
+            94,
+            15
+          ],
+          "quad": [
+            [
+              87,
+              568
+            ],
+            [
+              181,
+              568
+            ],
+            [
+              181,
+              583
+            ],
+            [
+              87,
+              583
+            ]
+          ],
+          "kind": "hydro-rail",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "6dd5df75e40ddb3ed4046f0a89733e05e127e39f485e83cc356af0092c71875a",
+      "revised_blank_sha256": "81882fe33ec83952601d132fdae08b46282c6ca58e147f3c7dc1e6c9af419e98",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        59.5,
+        269.5,
+        479,
+        168
+      ],
+      "notes": [
+        "Rebuilt both bogies with distinct open outer wheel arcs, shaped bolster ends/notches, central suspension boxes, attachments and partial hub contours.",
+        "Restored the broad underframe tank recess and separate four-tread end stair/platform assemblies.",
+        "Reconstructed the actual cab windows and sliding dividers, roof lip, engine body and individual lower/upper access panels, and the two tapered roof vents."
+      ],
+      "limits": [
+        "The source is a simplified identity-manual elevation, not a complete locomotive mechanical drawing. Hidden bogie components are not invented."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "H48-locomotive",
+      "title": "Locomotive \u2014 Hydro",
+      "book": "BC Hydro 1983",
+      "pdf_page_1based": 48,
+      "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        50.333333333333336,
+        260.3333333333333,
+        497.3333333333333,
+        180.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-rail-signature",
+          "label": "Cab Rail Signature",
+          "box": [
+            113,
+            315,
+            70,
+            14
+          ],
+          "quad": [
+            [
+              113,
+              315
+            ],
+            [
+              183,
+              315
+            ],
+            [
+              183,
+              329
+            ],
+            [
+              113,
+              329
+            ]
+          ],
+          "kind": "hydro-rail",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "51b4ad5dd42db371e5d44999946af27ff75f6e067f8908f528e4fb2ee6857a8f",
+      "revised_blank_sha256": "308e44850993ca9a5cb6206db6d102773421c896bc000c404be0ba302e6d8b78",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        119,
+        249,
+        644,
+        332
+      ],
+      "notes": [
+        "Replaced the policy illustration with the corrected shared source vehicle, including full top and front-wheel context clipped by the earlier crop.",
+        "This source is the reversed published view: the tractor/front is at LEFT. Only physical geometry is mirrored; branding zones are separately editable and do not contain mirrored lettering.",
+        "Restored both trailer planes, formed ribs, rear tyre clusters, cab details, tank/cap, stack, frame and steps."
+      ],
+      "limits": [],
+      "orientation": "Tractor/front at left; source-specific mirror of the right-facing V14 published view.",
+      "id": "V03-policy-tractor",
+      "title": "Tractor and trailer \u2014 opposite-side policy view",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 3,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        96.47467839506172,
+        248.62249135802466,
+        686.7624339506172,
+        355.01156358024684
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-signature",
+          "label": "Cab Signature",
+          "box": [
+            158.55827421522497,
+            448.87630265245485,
+            24.869787538959372,
+            35.6224244579239
+          ],
+          "quad": [
+            [
+              183.42806175418434,
+              449.1205165765088
+            ],
+            [
+              158.87073682946675,
+              448.87630265245485
+            ],
+            [
+              158.55827421522497,
+              484.2545131863248
+            ],
+            [
+              183.11559913994256,
+              484.49872711037875
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            202.287847505189,
+            468.3602664117456,
+            32.815206656756004,
+            8.489820996298363
+          ],
+          "quad": [
+            [
+              235.103054161945,
+              468.6858849771509
+            ],
+            [
+              202.3599542623217,
+              468.3602664117456
+            ],
+            [
+              202.287847505189,
+              476.52446884263867
+            ],
+            [
+              235.0309474048123,
+              476.850087408044
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "2265-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-signature",
+          "label": "Trailer Side Signature",
+          "box": [
+            713.5680177932218,
+            312.19149104584034,
+            27.718557125815664,
+            53.33866460530942
+          ],
+          "quad": [
+            [
+              741.2865749190374,
+              315.86459086321685
+            ],
+            [
+              714.0307028181567,
+              312.19149104584034
+            ],
+            [
+              713.5680177932218,
+              364.57845664407085
+            ],
+            [
+              740.8479254798134,
+              365.53015565114976
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-signature",
+          "label": "Trailer Front Signature",
+          "box": [
+            342.75596149983255,
+            273.0938236989465,
+            65.99094709917568,
+            56.498179885440834
+          ],
+          "quad": [
+            [
+              408.74690859900824,
+              273.0938236989465
+            ],
+            [
+              343.1164952854961,
+              288.770991429922
+            ],
+            [
+              342.75596149983255,
+              329.5920035843873
+            ],
+            [
+              408.3863748133447,
+              313.91483585341183
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-unit",
+          "label": "Trailer Side Unit",
+          "box": [
+            431.8077419731648,
+            279.44762200594505,
+            38.23633659479361,
+            13.986892377794618
+          ],
+          "quad": [
+            [
+              470.0440785679584,
+              284.5899617502722
+            ],
+            [
+              431.8858576267252,
+              279.44762200594505
+            ],
+            [
+              431.8077419731648,
+              288.29217463941256
+            ],
+            [
+              469.965962914398,
+              293.43451438373967
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-unit",
+          "label": "Trailer Front Unit",
+          "box": [
+            307.46453683473896,
+            292.81239032469284,
+            31.523017584737886,
+            16.016353736606106
+          ],
+          "quad": [
+            [
+              338.98755441947685,
+              292.81239032469284
+            ],
+            [
+              307.5366435918718,
+              300.6645416304059
+            ],
+            [
+              307.46453683473896,
+              308.82874406129895
+            ],
+            [
+              338.91544766234415,
+              300.97659275558595
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "fd7d9bf71c3a7d67bd1e7c3b16f2882632ff569fac898bac28398a397d448caa",
+      "revised_blank_sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        204,
+        364,
+        1114,
+        480
+      ],
+      "notes": [
+        "Replaced both generic ellipse tyres with source-specific depth silhouettes, actual rim centres and a separate near-side wall arc and rim lip.",
+        "Refit the wheel arches, roof/C-pillar, glazing dividers, doors, mirror and trunk seam.",
+        "Reconstructed double lamp surrounds, plate/side-marker insets and the three visible bumper lines; removed generic lamp-flute repetitions."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V06-car-perspective",
+      "title": "Passenger car \u2014 rear three-quarter",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 6,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        187.69144034824134,
+        348.0244673575865,
+        1145.8721493802802,
+        512.1749473909637
+      ],
+      "branding_zones": [
+        {
+          "id": "front-door-signature",
+          "label": "Front Door Signature",
+          "box": [
+            376,
+            548,
+            49,
+            78
+          ],
+          "quad": [
+            [
+              378,
+              548
+            ],
+            [
+              426,
+              561
+            ],
+            [
+              424,
+              626
+            ],
+            [
+              376,
+              610
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            1041,
+            638,
+            45,
+            55
+          ],
+          "quad": [
+            [
+              1042,
+              645
+            ],
+            [
+              1077,
+              635
+            ],
+            [
+              1084,
+              677
+            ],
+            [
+              1044,
+              691
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            242,
+            490,
+            36,
+            18
+          ],
+          "quad": [
+            [
+              242,
+              489
+            ],
+            [
+              279,
+              497
+            ],
+            [
+              279,
+              508
+            ],
+            [
+              242,
+              500
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            1216,
+            585,
+            56,
+            30
+          ],
+          "quad": [
+            [
+              1216,
+              602
+            ],
+            [
+              1269,
+              581
+            ],
+            [
+              1270,
+              594
+            ],
+            [
+              1216,
+              615
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "765efb14797be66aea59ce53c15b0d1b7866d72065c8aa362b61b34514494d44",
+      "revised_blank_sha256": "ed8760435d2ac914ea7ddce9eb492f97e5ff13ed8a33d6e29341caa43a093e6c",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        101,
+        132,
+        349,
+        225
+      ],
+      "notes": [
+        "Refit the roof/corner slopes, curved rear glass and boot seam.",
+        "Rebuilt segmented rear lamps, boot lock, plate recess, corner fittings and two-plane bumper.",
+        "Corrected the independent tyre ends; surrounding dimension leaders are excluded."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V07-car-rear",
+      "title": "Passenger car \u2014 rear elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 7,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        85.33333333333333,
+        116.0,
+        380.6666666666667,
+        256.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            155,
+            218,
+            35,
+            24
+          ],
+          "quad": [
+            [
+              155,
+              218
+            ],
+            [
+              190,
+              218
+            ],
+            [
+              190,
+              242
+            ],
+            [
+              155,
+              242
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            336,
+            232,
+            57,
+            13
+          ],
+          "quad": [
+            [
+              336,
+              232
+            ],
+            [
+              393,
+              232
+            ],
+            [
+              393,
+              245
+            ],
+            [
+              336,
+              245
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "31ebb045f7dc521a3e0a45e590754915b1d4a2f0e3065dc1f5e41863934ee38e",
+      "revised_blank_sha256": "bfdf9a625e6b2b99dd00250aded95fff340cf611bd3c1bf5bbd96467d25d2f91",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        8,
+        259,
+        741,
+        341
+      ],
+      "notes": [
+        "Rebuilt the cropped side view in its own PDF coordinates, including the extended roof context that the earlier viewBox cut too tightly.",
+        "Removed the doubled invented wheel/hub assembly; refit the single tyre, rim and dark wheelhouse.",
+        "Corrected all three side glass areas, windscreen, door divisions, mirror/stay, headlamp and bumper."
+      ],
+      "limits": [
+        "The rear of this car is genuinely outside this source view; it is deliberately not completed."
+      ],
+      "orientation": "Front at right; rear is source-cropped at left.",
+      "id": "V07-side-car",
+      "title": "Car \u2014 cropped front side elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 7,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        0.0,
+        258.90999999999997,
+        761.5,
+        352.8283333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            260,
+            433,
+            58,
+            62
+          ],
+          "quad": [
+            [
+              260,
+              433
+            ],
+            [
+              318,
+              433
+            ],
+            [
+              318,
+              495
+            ],
+            [
+              260,
+              495
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Province of British Columbia",
+          "historical_placement": true
+        },
+        {
+          "id": "unit",
+          "label": "Unit",
+          "box": [
+            628,
+            399,
+            68,
+            16
+          ],
+          "quad": [
+            [
+              628,
+              399
+            ],
+            [
+              696,
+              399
+            ],
+            [
+              696,
+              415
+            ],
+            [
+              628,
+              415
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8860-2105",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "368de17e3ccb6ade4dd908f58f78ee2f6c6ef0636929665baeb9a4d3b3722332",
+      "revised_blank_sha256": "ca2e6bfcf6db43ad59dd4cc52bc4611b6ddc30f9ccc35631bec71cae4e160a38",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        249,
+        351,
+        1019,
+        528
+      ],
+      "notes": [
+        "Replaced both generic wheel ellipses with actual source tyre-depth silhouettes, rim positions, near rim lip and separate sidewall arc.",
+        "Refit cab/door edges, divided glazing, mirror context and double upper/lower bed trim.",
+        "Rebuilt the stepped three-plane rear bumper and number-plate recess geometry, plus double rear lamp surrounds.",
+        "Reflectors are supplied separately as removable applied markings."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V08-pickup-perspective",
+      "title": "Pickup \u2014 rear three-quarter",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 8,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        232.79058150744402,
+        334.891713747551,
+        1050.7665095110442,
+        560.0976397171585
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            372,
+            542,
+            35,
+            61
+          ],
+          "quad": [
+            [
+              373,
+              543
+            ],
+            [
+              408,
+              552
+            ],
+            [
+              407,
+              608
+            ],
+            [
+              373,
+              595
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "tailgate-signature",
+          "label": "Tailgate Signature",
+          "box": [
+            986,
+            541,
+            49,
+            73
+          ],
+          "quad": [
+            [
+              987,
+              547
+            ],
+            [
+              1029,
+              542
+            ],
+            [
+              1034,
+              599
+            ],
+            [
+              987,
+              613
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            271,
+            492,
+            39,
+            19
+          ],
+          "quad": [
+            [
+              271,
+              492
+            ],
+            [
+              309,
+              498
+            ],
+            [
+              309,
+              510
+            ],
+            [
+              271,
+              504
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            1141,
+            539,
+            62,
+            31
+          ],
+          "quad": [
+            [
+              1141,
+              552
+            ],
+            [
+              1202,
+              537
+            ],
+            [
+              1203,
+              552
+            ],
+            [
+              1141,
+              567
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "c2173edd57bcd5dc7b97509218421c7eb0395aaddbc24fcb74ec86b785e87766",
+      "revised_blank_sha256": "d905f3ec4e4c4ebffe6657a68bf2df75b0607f368e8db4c282ccde1d4d24d6db",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        92,
+        90,
+        366,
+        305
+      ],
+      "notes": [
+        "Extended the stored viewBox to include the full source roof rather than clipping its top.",
+        "Rebuilt curved cab/glass, four sliding-window panes, tailgate recess and handle, double lamp frames, lower rails and bumper.",
+        "Refit rounded tyre ends. Eight reflectors are separate applied markings, not body geometry."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V09-pickup-rear",
+      "title": "Pickup \u2014 rear elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 9,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        76.33333333333333,
+        84.33333333333333,
+        397.6666666666667,
+        326.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "tailgate-signature",
+          "label": "Tailgate Signature",
+          "box": [
+            150,
+            193,
+            33,
+            27
+          ],
+          "quad": [
+            [
+              150,
+              193
+            ],
+            [
+              183,
+              193
+            ],
+            [
+              183,
+              220
+            ],
+            [
+              150,
+              220
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "tailgate-unit",
+          "label": "Tailgate Unit",
+          "box": [
+            322,
+            204,
+            78,
+            16
+          ],
+          "quad": [
+            [
+              322,
+              204
+            ],
+            [
+              400,
+              204
+            ],
+            [
+              400,
+              220
+            ],
+            [
+              322,
+              220
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "04b1f8a432f71b76838302bbf8d6bb06b789edcca50b3d38dc2db2dcc49b9b33",
+      "revised_blank_sha256": "dbc24ce931f8de7fcbe34e9170b70b69bf8c9cc15fa5845da7b43a081e58df80",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        64,
+        463,
+        1274,
+        534
+      ],
+      "notes": [
+        "Rebuilt the front and rear wheelhouses, corrected axle/rim placement and restored the stepped silhouette and sill.",
+        "Reconstructed the cab/door curve, divided side glazing, angled mirror/support, curved door handle and nested front-panel/marker linework.",
+        "Kept the rear bed ending at the original source crop rather than inventing a complete rear corner."
+      ],
+      "limits": [
+        "The far rear end is outside the source illustration; continuation beyond the crop is not asserted."
+      ],
+      "orientation": "Front at left; far rear is source-cropped at right.",
+      "id": "V09-pickup-side",
+      "title": "Pickup \u2014 side elevation, right edge cropped",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 9,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        50.377416395132634,
+        449.0786832937538,
+        1296.1389561090555,
+        562.7877088713389
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            602,
+            732,
+            92,
+            85
+          ],
+          "quad": [
+            [
+              602,
+              732
+            ],
+            [
+              694,
+              732
+            ],
+            [
+              694,
+              817
+            ],
+            [
+              602,
+              817
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            132,
+            665,
+            132,
+            27
+          ],
+          "quad": [
+            [
+              132,
+              665
+            ],
+            [
+              264,
+              665
+            ],
+            [
+              264,
+              692
+            ],
+            [
+              132,
+              692
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1660-1213",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "7465537f1e9becdff7c48e7dafac1807e96a7f4121393e8b94690311c660b4b8",
+      "revised_blank_sha256": "46c5de6992e6bac2f63c688cb7f4fa6d4d4e3e33dd2931ab545e66fa02d3025d",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        72,
+        481,
+        890,
+        507
+      ],
+      "notes": [
+        "Replaced generic wheel ellipses with source depth silhouettes; far tyre is plain black and the near rear rim has its actual lip and separate sidewall arc.",
+        "Refit roof/gutter, door/glazing proportions and gaskets, double body/sill lines, rear door divisions and layered bumper.",
+        "Restored double rear lamp contours, actual handle shapes and plate context. Reflective appliques are separate from physical lamps and the blank body."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V10-van-perspective",
+      "title": "Van \u2014 rear three-quarter",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 10,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        56.273148148148145,
+        465.0208333333333,
+        921.3449074074073,
+        538.6875
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-door-signature",
+          "label": "Cab Door Signature",
+          "box": [
+            177,
+            675,
+            50,
+            84
+          ],
+          "quad": [
+            [
+              177,
+              675
+            ],
+            [
+              227,
+              681
+            ],
+            [
+              227,
+              754
+            ],
+            [
+              177,
+              744
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "side-cargo-signature",
+          "label": "Side Cargo Signature",
+          "box": [
+            548,
+            548,
+            74,
+            72
+          ],
+          "quad": [
+            [
+              548,
+              548
+            ],
+            [
+              622,
+              548
+            ],
+            [
+              622,
+              620
+            ],
+            [
+              548,
+              620
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "rear-door-signature",
+          "label": "Rear Door Signature",
+          "box": [
+            708,
+            669,
+            41,
+            52
+          ],
+          "quad": [
+            [
+              708,
+              673
+            ],
+            [
+              747,
+              669
+            ],
+            [
+              751,
+              710
+            ],
+            [
+              709,
+              719
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            116,
+            651,
+            38,
+            13
+          ],
+          "quad": [
+            [
+              116,
+              651
+            ],
+            [
+              154,
+              651
+            ],
+            [
+              154,
+              664
+            ],
+            [
+              116,
+              664
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            865,
+            661,
+            51,
+            16
+          ],
+          "quad": [
+            [
+              865,
+              661
+            ],
+            [
+              916,
+              661
+            ],
+            [
+              916,
+              677
+            ],
+            [
+              865,
+              677
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "294530a6017357d7d32e3a291246b5da45a084f47b07b95136495cde51941aed",
+      "revised_blank_sha256": "5467e2f645dbb53c2df0abcd4fc64cbce35151d9c69112ac6893414adf5d47af",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        99,
+        92,
+        318,
+        341
+      ],
+      "notes": [
+        "Restored the separate exterior roof, waist and lower trim rails; corrected straight door perimeters and side taper.",
+        "Refit window seals, lamp insets, plate recess and bumper.",
+        "Redrew rounded tyre ends. Reflective striping is in a separate optional applied-markings SVG."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V11-van-rear",
+      "title": "Van \u2014 rear elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 11,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        83.0,
+        76.33333333333333,
+        349.6666666666667,
+        372.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "left-door-signature",
+          "label": "Left Door Signature",
+          "box": [
+            160,
+            230,
+            43,
+            43
+          ],
+          "quad": [
+            [
+              160,
+              230
+            ],
+            [
+              203,
+              230
+            ],
+            [
+              203,
+              273
+            ],
+            [
+              160,
+              273
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "right-door-unit",
+          "label": "Right Door Unit",
+          "box": [
+            288,
+            231,
+            74,
+            18
+          ],
+          "quad": [
+            [
+              288,
+              231
+            ],
+            [
+              362,
+              231
+            ],
+            [
+              362,
+              249
+            ],
+            [
+              288,
+              249
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "1acc35a4bbfb3af97309f0e29be662565988bf4c4b2da8e2431f37b60965e5a9",
+      "revised_blank_sha256": "19a475bf0831418392af20efbbf29b17224f5d0687c8adcbf4057c979b032d73",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        56,
+        510,
+        1222,
+        486
+      ],
+      "notes": [
+        "Rebuilt the wheelhouse infills, smooth tyre/rim geometry and paired arch mouldings instead of generic circular cutouts.",
+        "Refit roof/gutter, hood and windscreen, sliding/front-door outlines, window seal, marker insets and both bumpers.",
+        "Reconstructed the tall mirror head and its separate upper/lower support arms.",
+        "Excluded the optional window-frame and number-zone instructional callouts from the physical blank."
+      ],
+      "limits": [],
+      "orientation": "Front at right.",
+      "id": "V11-van-side",
+      "title": "Van \u2014 full side elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 11,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        39.68770339592315,
+        493.65932820543014,
+        1253.9921722115369,
+        518.7252461396973
+      ],
+      "branding_zones": [
+        {
+          "id": "side-panel-signature",
+          "label": "Side Panel Signature",
+          "box": [
+            155,
+            573,
+            90,
+            85
+          ],
+          "quad": [
+            [
+              155,
+              573
+            ],
+            [
+              245,
+              573
+            ],
+            [
+              245,
+              658
+            ],
+            [
+              155,
+              658
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            880,
+            745,
+            82,
+            92
+          ],
+          "quad": [
+            [
+              880,
+              745
+            ],
+            [
+              962,
+              745
+            ],
+            [
+              962,
+              837
+            ],
+            [
+              880,
+              837
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Abcdefghijk",
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            1058,
+            708,
+            99,
+            25
+          ],
+          "quad": [
+            [
+              1058,
+              708
+            ],
+            [
+              1157,
+              708
+            ],
+            [
+              1157,
+              733
+            ],
+            [
+              1058,
+              733
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "8861-2102",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "4f894c9a6c59951cf1613939c367f56ab88d4d2c9cb4b92b769396825b71311f",
+      "revised_blank_sha256": "945691c9635e34cdca1c2d4b82834dc2ee4834b40c802f16d1d367b4a4a6837a",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        45,
+        457,
+        854,
+        548
+      ],
+      "notes": [
+        "Replaced the cab with divided side panes, rear pane, double gaskets and triangulated mirror construction from this particular source.",
+        "Rebuilt the five visible tyre/depth groups, actual near rims, mudflaps and light edges, stepped chassis and open U-shaped rear step.",
+        "Refit cargo side/rear corner perspective, double rear-door centre joint, formed metal ribs and the two-plane loading platform.",
+        "Reflective appliques remain separate from the blank cargo geometry."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V12-truck-perspective",
+      "title": "Box truck \u2014 rear three-quarter",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 12,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        29.012703703703696,
+        441.09144444444433,
+        885.625074074074,
+        579.7623333333332
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-signature",
+          "label": "Cab Signature",
+          "box": [
+            76,
+            755,
+            21,
+            34
+          ],
+          "quad": [
+            [
+              76,
+              755
+            ],
+            [
+              97,
+              755
+            ],
+            [
+              97,
+              789
+            ],
+            [
+              76,
+              789
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "side-box-signature",
+          "label": "Side Box Signature",
+          "box": [
+            618,
+            515,
+            70,
+            60
+          ],
+          "quad": [
+            [
+              618,
+              523
+            ],
+            [
+              684,
+              511
+            ],
+            [
+              684,
+              569
+            ],
+            [
+              618,
+              579
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "rear-box-signature",
+          "label": "Rear Box Signature",
+          "box": [
+            739,
+            526,
+            43,
+            63
+          ],
+          "quad": [
+            [
+              740,
+              527
+            ],
+            [
+              779,
+              544
+            ],
+            [
+              779,
+              590
+            ],
+            [
+              739,
+              578
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "side-unit",
+          "label": "Side Unit",
+          "box": [
+            167,
+            586,
+            57,
+            16
+          ],
+          "quad": [
+            [
+              166,
+              590
+            ],
+            [
+              220,
+              581
+            ],
+            [
+              220,
+              593
+            ],
+            [
+              166,
+              601
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "1604-2103",
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            821,
+            556,
+            30,
+            19
+          ],
+          "quad": [
+            [
+              821,
+              556
+            ],
+            [
+              850,
+              567
+            ],
+            [
+              850,
+              578
+            ],
+            [
+              821,
+              568
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "cbc62e1b11cbd5974ccebe6948433da8ff5adad6254fc0b28e3a04f58852d2e5",
+      "revised_blank_sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        102,
+        124,
+        317,
+        275
+      ],
+      "notes": [
+        "Replaced the entire incorrect cab, not just its transform.",
+        "Rebuilt left-side windshield, three-part side glazing, rear-quarter pane, door, fender arch, bumper, steps and triangulated mirror stays.",
+        "Moved both branding zones onto the actual source door and rear cab panel."
+      ],
+      "limits": [],
+      "orientation": "Front at left in enlarged source detail; this is the opposite-facing detail to the V13 full side elevation.",
+      "id": "V13-cab-door",
+      "title": "Box truck \u2014 enlarged cab door",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 13,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        84.33333333333333,
+        112.0,
+        352.0,
+        301.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            171,
+            278,
+            60,
+            60
+          ],
+          "quad": [
+            [
+              171,
+              278
+            ],
+            [
+              231,
+              278
+            ],
+            [
+              231,
+              338
+            ],
+            [
+              171,
+              338
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "unit",
+          "label": "Unit",
+          "box": [
+            322,
+            248,
+            70,
+            20
+          ],
+          "quad": [
+            [
+              322,
+              248
+            ],
+            [
+              392,
+              248
+            ],
+            [
+              392,
+              268
+            ],
+            [
+              322,
+              268
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "1d469691613172dc91b67a31594c91a599e1b994dedbb234987fa09974000946",
+      "revised_blank_sha256": "8fec1fca5f4e3cc378a72f5719bdb551fb0780d5533324e4441dafea2ab46b51",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        125,
+        623,
+        271,
+        368
+      ],
+      "notes": [
+        "Rebuilt the stepped chassis opening, central U-shaped hanger and four rounded, separated tyre ends.",
+        "Removed invented locking bars. Corrected the narrow central divider and horizontal fold lines.",
+        "Moved the fourteen reflective strips out of the blank body into a separate applied-markings layer."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V13-truck-rear",
+      "title": "Box truck \u2014 rear elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 13,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        108.0,
+        608.3333333333334,
+        304.6666666666667,
+        399.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            162,
+            649,
+            68,
+            55
+          ],
+          "quad": [
+            [
+              162,
+              649
+            ],
+            [
+              230,
+              649
+            ],
+            [
+              230,
+              704
+            ],
+            [
+              162,
+              704
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#222222",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit",
+          "label": "Unit",
+          "box": [
+            298,
+            650,
+            70,
+            16
+          ],
+          "quad": [
+            [
+              298,
+              650
+            ],
+            [
+              368,
+              650
+            ],
+            [
+              368,
+              666
+            ],
+            [
+              298,
+              666
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#222222",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "c6fd96a7cbfa0c40c53810e87ee0aa3de5ad030ccfe745a94c0c37f92686011f",
+      "revised_blank_sha256": "0671dab3c6e85eaaa72cd296d1d078688119d2c6dad4f334fd17fca35f859fa4",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        471,
+        625,
+        815,
+        367
+      ],
+      "notes": [
+        "Replaced the cab with the multi-pane, right-facing source arrangement; added source-specific mirror, headlamp and bumper profiles.",
+        "Rebuilt fender/wheelhouse, tyres, fuel tank, tank straps, mudflaps and stepped chassis.",
+        "Removed invented full-box ribs. The printed flat-panel/ribbed comparison and dimension callouts are not part of the physical blank."
+      ],
+      "limits": [],
+      "orientation": "Front at right, matching the full side elevation (not the left-facing enlarged detail).",
+      "id": "V13-truck-side",
+      "title": "Box truck \u2014 side elevation",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 13,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        457.20177777777775,
+        608.5093333333333,
+        843.6684444444444,
+        400.52
+      ],
+      "branding_zones": [
+        {
+          "id": "box-signature",
+          "label": "Box Signature",
+          "box": [
+            510,
+            650,
+            80,
+            80
+          ],
+          "quad": [
+            [
+              510,
+              650
+            ],
+            [
+              590,
+              650
+            ],
+            [
+              590,
+              730
+            ],
+            [
+              510,
+              730
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#222222",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "box-unit",
+          "label": "Box Unit",
+          "box": [
+            930,
+            647,
+            80,
+            19
+          ],
+          "quad": [
+            [
+              930,
+              647
+            ],
+            [
+              1010,
+              647
+            ],
+            [
+              1010,
+              666
+            ],
+            [
+              930,
+              666
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#222222",
+          "default": "1604-2103",
+          "historical_placement": true
+        },
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "box": [
+            1197,
+            848,
+            36,
+            44
+          ],
+          "quad": [
+            [
+              1197,
+              848
+            ],
+            [
+              1233,
+              848
+            ],
+            [
+              1233,
+              892
+            ],
+            [
+              1197,
+              892
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            1063,
+            823,
+            52,
+            16
+          ],
+          "quad": [
+            [
+              1063,
+              823
+            ],
+            [
+              1115,
+              823
+            ],
+            [
+              1115,
+              839
+            ],
+            [
+              1063,
+              839
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "1604-2103",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "6aef81643f253d8f65ce7f555ea250e8843ad0944650adef4832fec5add15547",
+      "revised_blank_sha256": "8d582db1c3d3bcb8ad7e57513d6039bedc42429a79fe4620e718b137dc43b3e6",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        40,
+        323,
+        471,
+        248
+      ],
+      "notes": [
+        "Replaced the trailer planes and corner with source-specific perspective; expanded the right edge to include the cab and bumper omitted by the old crop.",
+        "Rebuilt the multi-depth trailer wheel clusters, frame and fifth wheel, three tractor wheels, tank straps/cap, mudflaps, exhaust, cab windows, door panels and steps.",
+        "Preserved body ribs as a removable physical group; identity and numbers are separate zones."
+      ],
+      "limits": [],
+      "orientation": "Tractor/front at right.",
+      "id": "V14-tractor-trailer",
+      "title": "Tractor and box trailer \u2014 perspective",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 14,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        8.0,
+        288.0,
+        523.6666666666666,
+        320.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-signature",
+          "label": "Cab Signature",
+          "box": [
+            464,
+            473,
+            18,
+            26
+          ],
+          "quad": [
+            [
+              464,
+              473
+            ],
+            [
+              482,
+              473
+            ],
+            [
+              482,
+              499
+            ],
+            [
+              464,
+              499
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            426,
+            487,
+            24,
+            6
+          ],
+          "quad": [
+            [
+              426,
+              487
+            ],
+            [
+              450,
+              487
+            ],
+            [
+              450,
+              493
+            ],
+            [
+              426,
+              493
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "2265-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-signature",
+          "label": "Trailer Side Signature",
+          "box": [
+            56,
+            371,
+            20,
+            36
+          ],
+          "quad": [
+            [
+              56,
+              371
+            ],
+            [
+              76,
+              368.5
+            ],
+            [
+              76,
+              407
+            ],
+            [
+              56,
+              407.5
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": "Agriculture",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-signature",
+          "label": "Trailer Front Signature",
+          "box": [
+            300,
+            343,
+            48,
+            37
+          ],
+          "quad": [
+            [
+              300,
+              342
+            ],
+            [
+              348,
+              354
+            ],
+            [
+              348,
+              384
+            ],
+            [
+              300,
+              372
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-side-unit",
+          "label": "Trailer Side Unit",
+          "box": [
+            255,
+            348,
+            28,
+            7
+          ],
+          "quad": [
+            [
+              255,
+              350
+            ],
+            [
+              283,
+              346.5
+            ],
+            [
+              283,
+              353
+            ],
+            [
+              255,
+              356.5
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        },
+        {
+          "id": "trailer-front-unit",
+          "label": "Trailer Front Unit",
+          "box": [
+            351,
+            359,
+            23,
+            8
+          ],
+          "quad": [
+            [
+              351,
+              357
+            ],
+            [
+              374,
+              363
+            ],
+            [
+              374,
+              369
+            ],
+            [
+              351,
+              363
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "698b2bfb53081f17b5f4c2ad2342abe7439e030fc185c13e23e855d1a8fea3d7",
+      "revised_blank_sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        67,
+        541,
+        196,
+        106
+      ],
+      "notes": [
+        "Rebuilt the centre stepped opening and four individual tyre ends with the source spacing.",
+        "Refit the fascia, top rail, four round lamps and rounded plate recess; omitted invented fascia divisions."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V15-flatbed-rear",
+      "title": "Flat-deck trailer \u2014 rear",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        51.333333333333336,
+        525.0,
+        227.66666666666666,
+        137.66666666666666
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            186,
+            553,
+            57,
+            20
+          ],
+          "quad": [
+            [
+              186,
+              553
+            ],
+            [
+              243,
+              553
+            ],
+            [
+              243,
+              573
+            ],
+            [
+              186,
+              573
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "fbe2f81213ca9d0af6d3bad0eaceb45ea833e41687edac793c184958257b70d8",
+      "revised_blank_sha256": "9902ac56566c996df2ce2f54cbc90b4eb5876b8c29160e78d697479e1856a9a9",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        265,
+        544,
+        597,
+        106
+      ],
+      "notes": [
+        "Refit both wheel centres and rims, the high rear deck steps and the curved front neck.",
+        "Rebuilt the dark underdeck, rear mudflap and landing stem/caster; removed non-source repeated deck divisions."
+      ],
+      "limits": [],
+      "orientation": "Tow/landing end at left.",
+      "id": "V15-flatbed-side",
+      "title": "Flat-deck trailer \u2014 side",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        249.27855555555558,
+        528.5822592592593,
+        628.782462962963,
+        137.55707407407408
+      ],
+      "branding_zones": [
+        {
+          "id": "deck-signature",
+          "label": "Deck Signature",
+          "box": [
+            399,
+            559,
+            43,
+            25
+          ],
+          "quad": [
+            [
+              399,
+              559
+            ],
+            [
+              442,
+              559
+            ],
+            [
+              442,
+              584
+            ],
+            [
+              399,
+              584
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#ffffff",
+          "default": "Province of British Columbia",
+          "historical_placement": true
+        },
+        {
+          "id": "deck-unit",
+          "label": "Deck Unit",
+          "box": [
+            591,
+            563,
+            94,
+            18
+          ],
+          "quad": [
+            [
+              591,
+              563
+            ],
+            [
+              685,
+              563
+            ],
+            [
+              685,
+              581
+            ],
+            [
+              591,
+              581
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#ffffff",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "6654eacca2a44638909878bc0f97dc90998c82d4dcde36f2dc7c69633d4883ec",
+      "revised_blank_sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        411,
+        681,
+        197,
+        312
+      ],
+      "notes": [
+        "Refit the box and nested frame offsets.",
+        "Rebuilt the paired legs, diagonal braces, single low crossbar and independently rounded feet to preserve the open structure."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V15-trailer-front",
+      "title": "Box trailer \u2014 front",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        395.3333333333333,
+        665.0,
+        228.0,
+        343.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "front-signature",
+          "label": "Front Signature",
+          "box": [
+            441,
+            702,
+            63,
+            49
+          ],
+          "quad": [
+            [
+              441,
+              702
+            ],
+            [
+              504,
+              702
+            ],
+            [
+              504,
+              751
+            ],
+            [
+              441,
+              751
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "box": [
+            517,
+            703,
+            68,
+            15
+          ],
+          "quad": [
+            [
+              517,
+              703
+            ],
+            [
+              585,
+              703
+            ],
+            [
+              585,
+              718
+            ],
+            [
+              517,
+              718
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#000000",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "e9edea177f18daddaeea95b9e045204357dfd6feeba297ccd62783f617cb6964",
+      "revised_blank_sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        67,
+        681,
+        194,
+        310
+      ],
+      "notes": [
+        "Refit all nested frames and the narrow three-line centre divider.",
+        "Rebuilt the stepped central underbody opening and four separate tyre ends.",
+        "The ten reflective strips are preserved only in the separate optional applied-markings version."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V15-trailer-rear",
+      "title": "Box trailer \u2014 rear",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        51.333333333333336,
+        665.0,
+        225.33333333333334,
+        341.6666666666667
+      ],
+      "branding_zones": [
+        {
+          "id": "rear-signature",
+          "label": "Rear Signature",
+          "box": [
+            88,
+            702,
+            62,
+            48
+          ],
+          "quad": [
+            [
+              88,
+              702
+            ],
+            [
+              150,
+              702
+            ],
+            [
+              150,
+              750
+            ],
+            [
+              88,
+              750
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "box": [
+            174,
+            703,
+            66,
+            17
+          ],
+          "quad": [
+            [
+              174,
+              703
+            ],
+            [
+              240,
+              703
+            ],
+            [
+              240,
+              720
+            ],
+            [
+              174,
+              720
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#000000",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "bbaa9b0e0a2c6999e6bf1f88da9d68a4af4e8decd76118784ea91d7727550334",
+      "revised_blank_sha256": "32860654cb3ef79c71269ac3cac3b59111b1e6790c38e0b4532844c2d903c417",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        703,
+        682,
+        573,
+        314
+      ],
+      "notes": [
+        "Replaced the filled landing-gear wedge with an actual open triangular brace, separate stem and caster.",
+        "Refit wheel spacing/overlap, rims, rear chassis steps and thin hanging mudflap.",
+        "Reconstructed nested box frames. Blank is the flat-panel variant: the source partial rib comparison and its explanatory text are not physical full-width panel ribs."
+      ],
+      "limits": [],
+      "orientation": "Landing/tow end at left.",
+      "id": "V15-trailer-side",
+      "title": "Box trailer \u2014 side",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 15,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        687.2936296296295,
+        666.1512962962962,
+        604.4022592592592,
+        345.66037037037034
+      ],
+      "branding_zones": [
+        {
+          "id": "side-signature",
+          "label": "Side Signature",
+          "box": [
+            1156,
+            705,
+            86,
+            78
+          ],
+          "quad": [
+            [
+              1156,
+              705
+            ],
+            [
+              1242,
+              705
+            ],
+            [
+              1242,
+              783
+            ],
+            [
+              1156,
+              783
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#000000",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "side-unit",
+          "label": "Side Unit",
+          "box": [
+            724,
+            706,
+            96,
+            19
+          ],
+          "quad": [
+            [
+              724,
+              706
+            ],
+            [
+              820,
+              706
+            ],
+            [
+              820,
+              725
+            ],
+            [
+              724,
+              725
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#000000",
+          "default": "2280-2008",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "b86d09f0304e45efe7ad1fcb3fbc9cfe16c449bf8f4c0df65c316ab3c2db1532",
+      "revised_blank_sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        140,
+        399,
+        1089,
+        574
+      ],
+      "notes": [
+        "Rebuilt the loader as separate upper/lower members, far and near upright links, rocker, exposed piston rod, gland, cylinder body and pinned eye in the source order.",
+        "Replaced all generic tyre/rim groups with the actual near/far silhouettes, overlaps, yellow rim-depth lip and broken sidewall arcs.",
+        "Refit cab glass/gaskets, door sill and engine seams; restored exhaust top details.",
+        "Rebuilt forward bucket floor/cutting-edge lines and the rear boom profile, lug and toothed rear bucket with its curved inner bowl seam."
+      ],
+      "limits": [
+        "Fine low-resolution joints and partially occluded internal components are interpreted from visible source strokes, not engineering drawings."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V16-backhoe",
+      "title": "Backhoe / front-end loader",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 16,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        123.84676243297552,
+        382.74250701648214,
+        1120.8443172954217,
+        606.1645558277295
+      ],
+      "branding_zones": [
+        {
+          "id": "cab-door-signature",
+          "label": "Cab Door Signature",
+          "box": [
+            792,
+            706,
+            45,
+            42
+          ],
+          "quad": [
+            [
+              792,
+              706
+            ],
+            [
+              837,
+              706
+            ],
+            [
+              837,
+              748
+            ],
+            [
+              792,
+              748
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "cab-unit",
+          "label": "Cab Unit",
+          "box": [
+            914,
+            697,
+            50,
+            15
+          ],
+          "quad": [
+            [
+              914,
+              697
+            ],
+            [
+              964,
+              697
+            ],
+            [
+              964,
+              712
+            ],
+            [
+              914,
+              712
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "7620-2108",
+          "historical_placement": true
+        },
+        {
+          "id": "boom-signature",
+          "label": "Boom Signature",
+          "box": [
+            1052,
+            694,
+            18,
+            22
+          ],
+          "quad": [
+            [
+              1052,
+              694
+            ],
+            [
+              1070,
+              694
+            ],
+            [
+              1070,
+              716
+            ],
+            [
+              1052,
+              716
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "1ec7d38349b7f72aa52062bf596e73983ae2ac6f52a602a53b1158049da2540e",
+      "revised_blank_sha256": "0711fce3c44bf6cfe3d6613dea84142f01c10ac9f2be251a2046247adb613983",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        72,
+        279,
+        458,
+        190
+      ],
+      "notes": [
+        "Refit the enclosure silhouette, split roof seams and lower side panels.",
+        "Reconstructed the tow-coupler steps, curved drawbar throat, caster fork and small wheel.",
+        "Replaced duplicate generic wheel/rim geometry with one source wheel and one painted rim, then refit the overlapping fender."
+      ],
+      "limits": [],
+      "orientation": "Tow/caster end at left.",
+      "id": "V17-compressor",
+      "title": "Towable compressor",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        56.666666666666664,
+        263.3333333333333,
+        489.3333333333333,
+        221.33333333333334
+      ],
+      "branding_zones": [
+        {
+          "id": "side-signature",
+          "label": "Side Signature",
+          "box": [
+            329,
+            305,
+            76,
+            49
+          ],
+          "quad": [
+            [
+              329,
+              305
+            ],
+            [
+              405,
+              305
+            ],
+            [
+              405,
+              354
+            ],
+            [
+              329,
+              354
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit-number",
+          "label": "Unit Number",
+          "box": [
+            341,
+            341,
+            58,
+            12
+          ],
+          "quad": [
+            [
+              341,
+              341
+            ],
+            [
+              399,
+              341
+            ],
+            [
+              399,
+              353
+            ],
+            [
+              341,
+              353
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "7620-2071",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "854b22865a9596894f8cbe4da25d11524792381bcfcd007e1652fbb1e3b6f94f",
+      "revised_blank_sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        877,
+        671,
+        282,
+        324
+      ],
+      "notes": [
+        "Rebuilt the lower central chassis opening, access-panel contour, separate wraparound handrails and exhaust cap.",
+        "Replaced the single/irregular generic track joints with the paired source tread lines.",
+        "Restored the 34 visible grille bars as an editable regularized primitive array, not scan contours."
+      ],
+      "limits": [],
+      "orientation": "preserved from this source illustration",
+      "id": "V17-crawler-front",
+      "title": "Tracked crawler \u2014 front",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        861.3333333333334,
+        655.3333333333334,
+        313.6666666666667,
+        355.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "front-signature",
+          "label": "Front Signature",
+          "box": [
+            993,
+            766,
+            45,
+            35
+          ],
+          "quad": [
+            [
+              993,
+              766
+            ],
+            [
+              1038,
+              766
+            ],
+            [
+              1038,
+              801
+            ],
+            [
+              993,
+              801
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit-number",
+          "label": "Unit Number",
+          "box": [
+            991,
+            807,
+            54,
+            15
+          ],
+          "quad": [
+            [
+              991,
+              807
+            ],
+            [
+              1045,
+              807
+            ],
+            [
+              1045,
+              822
+            ],
+            [
+              991,
+              822
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "7620-2108",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "1de231130d9408332cfd16d56d7b01c2d34f5fe83d339f8de29f4c1672a19b44",
+      "revised_blank_sha256": "2ab0445843fc7f13c8597bdfe2889255cf640769b982f3e608283a4594ef76e9",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        68,
+        660,
+        568,
+        330
+      ],
+      "notes": [
+        "Removed the repeated vertical track lines that are not present in the source.",
+        "Refit the belt contour, end wheel centres, rails and five lower/two upper open roller arcs.",
+        "Rebuilt the operator levers and grips, stepped seat cover, intake bands and exhaust cap/pipe."
+      ],
+      "limits": [],
+      "orientation": "Engine/front at right; unlike the Hydro side view.",
+      "id": "V17-crawler-side",
+      "title": "Tracked crawler \u2014 side",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        52.666666666666664,
+        644.0,
+        599.0,
+        362.0
+      ],
+      "branding_zones": [
+        {
+          "id": "seat-signature",
+          "label": "Seat Signature",
+          "box": [
+            220,
+            785,
+            33,
+            32
+          ],
+          "quad": [
+            [
+              220,
+              785
+            ],
+            [
+              253,
+              785
+            ],
+            [
+              253,
+              817
+            ],
+            [
+              220,
+              817
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit-number",
+          "label": "Unit Number",
+          "box": [
+            378,
+            752,
+            60,
+            15
+          ],
+          "quad": [
+            [
+              378,
+              752
+            ],
+            [
+              438,
+              752
+            ],
+            [
+              438,
+              767
+            ],
+            [
+              378,
+              767
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "7620-2176",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "4dc3448346e6a0a4963cdede7dd232c1e516c92451bb5edb37787509b8ccdcda",
+      "revised_blank_sha256": "2fe68f965c46003060a3a0bdd8b4d9b109c1b856f41c8109694db2b91d426366",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        616,
+        142,
+        665,
+        331
+      ],
+      "notes": [
+        "Refit the tandem wheel centres and removed duplicate generic rims; restored the source stepped axle bridge.",
+        "Refined the hood/floor seams, upright and diagonal braces, lever foot and cropped front support.",
+        "Rebuilt the curved blade end, separate blade-edge line and blade attachment loop."
+      ],
+      "limits": [
+        "The right-hand continuation of the grader is source-cropped; unseen front assembly is not invented."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V17-grader",
+      "title": "Grader \u2014 cropped operating section",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 17,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1.7,
+      "review_viewbox": [
+        600.3782962962963,
+        126.0291851851852,
+        696.2532592592593,
+        362.6238518518519
+      ],
+      "branding_zones": [
+        {
+          "id": "engine-signature",
+          "label": "Engine Signature",
+          "box": [
+            869,
+            235,
+            54,
+            43
+          ],
+          "quad": [
+            [
+              869,
+              235
+            ],
+            [
+              923,
+              235
+            ],
+            [
+              923,
+              278
+            ],
+            [
+              869,
+              278
+            ]
+          ],
+          "kind": "signature",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        },
+        {
+          "id": "unit-number",
+          "label": "Unit Number",
+          "box": [
+            659,
+            225,
+            67,
+            13
+          ],
+          "quad": [
+            [
+              659,
+              225
+            ],
+            [
+              726,
+              225
+            ],
+            [
+              726,
+              238
+            ],
+            [
+              659,
+              238
+            ]
+          ],
+          "kind": "unit",
+          "colour": "#252823",
+          "default": "7620-2321",
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "d646a0cdea9fe8e6b1fa595cbc6d2177aee8571cc9d864573975ba266c989aa6",
+      "revised_blank_sha256": "eb3c1a6afa8aeab4b1d28e91a461f62321068427376de681f03af25224c57e93",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        279.5,
+        36.5,
+        239,
+        227
+      ],
+      "notes": [
+        "Rebuilt the cropped door/window/mirror context, wet oval and curved spray lance/nozzle.",
+        "Reconstructed both hands, finger separations, lance grip and cuff from the source rather than generic polygon hands.",
+        "Kept white spray strokes as a separately named process-illustration group. The surrounding page frame and instructions are not object geometry."
+      ],
+      "limits": [
+        "Auxiliary installation illustration; cropped hands/door are not completed beyond the source."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V18-installation-1",
+      "title": "Decal installation \u2014 panel 1",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 18,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        270.3333333333333,
+        27.333333333333332,
+        257.3333333333333,
+        288.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "application-area",
+          "label": "Application Area",
+          "box": [
+            345,
+            169,
+            59,
+            37
+          ],
+          "quad": [
+            [
+              345,
+              169
+            ],
+            [
+              404,
+              169
+            ],
+            [
+              404,
+              206
+            ],
+            [
+              345,
+              206
+            ]
+          ],
+          "kind": "process-surface",
+          "colour": "#252823",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "da7f91ae683008885de13087e16b641e87b2a9efbd5ce8f577ac355ff1f94069",
+      "revised_blank_sha256": "52d2b5cbdddf5870fdbb31850db29ab2f697f35823239fcfb0b391a10c8da6f1",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        526,
+        36.5,
+        226,
+        268
+      ],
+      "notes": [
+        "Rebuilt the cropped installer as separate coat, legs, sleeve, head/collar and gripping-finger components.",
+        "Reconstructed the hanging carrier sheet and curled lower edge, top roll, registration ticks, door/window context and physical mirror.",
+        "Historical carrier artwork is omitted and its application zone remains editable."
+      ],
+      "limits": [
+        "Head/body are intentionally source-cropped. Fine hand/face strokes are illustrative, not anatomical or production artwork."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V18-installation-2",
+      "title": "Decal installation \u2014 panel 2",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 18,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        522.3333333333334,
+        27.333333333333332,
+        245.33333333333334,
+        288.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "carrier-branding",
+          "label": "Carrier Branding",
+          "box": [
+            597,
+            160,
+            58,
+            61
+          ],
+          "quad": [
+            [
+              597,
+              160
+            ],
+            [
+              655,
+              160
+            ],
+            [
+              655,
+              221
+            ],
+            [
+              597,
+              221
+            ]
+          ],
+          "kind": "transfer-sheet",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "27adaff3651d6dc921e44cae6c5fa79cefa0f24b5c266cd6d4616899ecf6df47",
+      "revised_blank_sha256": "5c55278041a44d8127a33c83fc03539658f1b0cd79f5d6de4ca20951563f59d9",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": false
+    },
+    {
+      "vb": [
+        279.5,
+        316.5,
+        239,
+        268
+      ],
+      "notes": [
+        "Rebuilt the bowed peel liner as separate front/underside faces and clipped regularized hatch strokes, not a flat triangular approximation.",
+        "Restored the fixed carrier/top roll, both source hands, finger/knuckle separations, squeegee bands and cuff shadow.",
+        "Direction arrows are separate removable process annotations; historical transfer lettering is not flattened into the object."
+      ],
+      "limits": [
+        "Hand curves and liner hatching are clean illustrative reconstructions. Hatching is intentionally regularized, not scan texture."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V18-installation-3",
+      "title": "Decal installation \u2014 panel 3",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 18,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        270.3333333333333,
+        310.3333333333333,
+        257.3333333333333,
+        289.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "fixed-sheet-branding",
+          "label": "Fixed Sheet Branding",
+          "box": [
+            365,
+            386,
+            75,
+            68
+          ],
+          "quad": [
+            [
+              365,
+              386
+            ],
+            [
+              440,
+              386
+            ],
+            [
+              440,
+              454
+            ],
+            [
+              365,
+              454
+            ]
+          ],
+          "kind": "transfer-sheet",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "2165a790544af7d8ef1c25eed6f1b51e85e0ad864dc2ddbc58abb6b6fe3398de",
+      "revised_blank_sha256": "b265a75a8fdde70347fe16af19a487b301cdfc47a09597cffc558cc8a5a3c012",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    },
+    {
+      "vb": [
+        526,
+        316.5,
+        226,
+        268
+      ],
+      "notes": [
+        "Rebuilt the large curved peel sheet and its bowed lower fold, both hands/thumbs/fingers, squeegee bands and sleeve cuffs.",
+        "Kept the physical sheet and hands separate from exposed applied-identity artwork and removable direction arrows.",
+        "Omitted the external page frame and retained only source-cropped application context."
+      ],
+      "limits": [
+        "The transfer sheet is opaque in the clean blank template; historical identity is intentionally absent. Branding beneath a peeled sheet needs an explicit layer placement."
+      ],
+      "orientation": "preserved from this source illustration",
+      "id": "V18-installation-4",
+      "title": "Decal installation \u2014 panel 4",
+      "book": "Vehicle Manual",
+      "pdf_page_1based": 18,
+      "source_filename": "vehicle_manual.pdf",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "svg_units_per_pdf_point": 1,
+      "review_viewbox": [
+        522.3333333333334,
+        310.3333333333333,
+        245.33333333333334,
+        289.3333333333333
+      ],
+      "branding_zones": [
+        {
+          "id": "exposed-identity",
+          "label": "Exposed Identity",
+          "box": [
+            624,
+            391,
+            78,
+            66
+          ],
+          "quad": [
+            [
+              624,
+              391
+            ],
+            [
+              702,
+              391
+            ],
+            [
+              702,
+              457
+            ],
+            [
+              624,
+              457
+            ]
+          ],
+          "kind": "applied-identity",
+          "colour": "#ffffff",
+          "default": null,
+          "historical_placement": true
+        }
+      ],
+      "previous_blank_sha256": "e3cb9ae60d1e350277be0e44a72f36fa3bcca43e40b136295175669be4d82d2c",
+      "revised_blank_sha256": "d85b4104d95e896e950a7c0d1848e8445a353495251d0aebb63e6ad359b45d96",
+      "auto_trace_used": false,
+      "embedded_raster": false,
+      "review_status": "visual source-overlay review completed; reconstruction limits apply",
+      "optional_markings": true
+    }
+  ],
+  "global_limits": [
+    "These are clean, editable illustrative reconstructions, not recovered original production artwork or engineering drawings.",
+    "Source-cropped views remain cropped. Geometry hidden by another source object is not verified; any interpretation is recorded per asset.",
+    "Historical logos, vehicle numbers, instruction lettering, dimensions, page frames and scan noise are deliberately excluded from the blank objects.",
+    "Fine strokes, hand curves, curved surfaces and hatch spacing are regularized. Visual review does not guarantee exact reproduction of every printed stroke.",
+    "Body geometry and placement guides have been revised. Authentic historical typography, exact colours and brand artwork are not certified by this release."
+  ]
+}

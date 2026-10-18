@@ -1,0 +1,68 @@
+{
+  "vb": [
+    62.5,
+    539.5,
+    175,
+    187
+  ],
+  "notes": [
+    "Redrew the Hydro rear shell, unfilled rounded tyres, plain windows and straight door divisions in its own page coordinates.",
+    "Restored three external trim rails, the curved bumper and its tyre overlap.",
+    "Did not introduce the lamps, plate recess or reflectors absent from this source."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "H44-van-rear",
+  "title": "Van Rear \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 44,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    53.333333333333336,
+    530.3333333333334,
+    193.33333333333334,
+    205.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        92,
+        615,
+        53,
+        20
+      ],
+      "quad": [
+        [
+          92,
+          615
+        ],
+        [
+          145,
+          615
+        ],
+        [
+          145,
+          635
+        ],
+        [
+          92,
+          635
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "7044d52617a62105bcfb89197e60b9e4764b3ae3872f320ddd197b01633e60fc",
+  "revised_blank_sha256": "d664497b4edbf8d3a297c405d2535e921e604367eea6994e6a39d0d99649e348",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -38,6 +38,7 @@
 // paths for raster and PDF output.
 
 import { lockup, mark } from './artwork.js'
+import { illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
 
@@ -253,6 +254,8 @@ const renderElement = (ctx, element, template) => {
       }
       return out.filter(Boolean).join('\n')
     }
+    case 'illustration':
+      return placeIllustration(ctx, element, u)
     case 'printGuides': {
       const rectFor = (box, extra = '') => `<rect id="${escape(box.id)}" x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}"${extra}/>`
       return `<g id="print-guides" display="${ctx.showGuides ? 'inline' : 'none'}" fill="none" stroke="${resolveColour(brand, element.colour ?? 'muted')}" stroke-width="1">`
@@ -306,6 +309,11 @@ export const templateFields = (template, brand) => {
     if (element.type === 'paragraph' && element.id) add(element.id, element, true)
     if (element.type === 'lines') element.lines.forEach((line) => visit({ type: 'text', ...line }))
     if (element.type === 'flow') element.items.forEach((item) => { if (item.id && !item.locked) add(item.id, item, true) })
+    if (element.type === 'illustration') {
+      // Fields the signatures in its zones take (a ministry), then its text zones (a unit number).
+      for (const id of element.fields ?? []) add(id, null, false)
+      for (const field of illustrationFields(element)) add(field.id, field, false)
+    }
   }
   template.elements.forEach(visit)
   return fields

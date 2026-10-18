@@ -40,6 +40,10 @@ comes from [PofBC](https://github.com/ahzs645/PofBC) (`npm run import:pofbc -- /
 and their definitions are written by `npm run make:bc`, from scripts that keep each manual
 measurement next to the page it comes from.
 
+Both carry ManualKit's drawings of the vehicles, uniforms and equipment the manuals show (59 views,
+in `manuals/bc/illustrations`): each is a template with the signature, ministry and unit number set
+into its branding zones, and each is in its manual page in place of the earlier draft.
+
 Every template, signature and guide page in them cites the manual pages it is built from. In the
 app, those pages show as thumbnails under it that open the page in the manual library; and a page
 in the library lists what is built from it, linking back.

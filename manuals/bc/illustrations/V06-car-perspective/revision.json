@@ -1,0 +1,164 @@
+{
+  "vb": [
+    204,
+    364,
+    1114,
+    480
+  ],
+  "notes": [
+    "Replaced both generic ellipse tyres with source-specific depth silhouettes, actual rim centres and a separate near-side wall arc and rim lip.",
+    "Refit the wheel arches, roof/C-pillar, glazing dividers, doors, mirror and trunk seam.",
+    "Reconstructed double lamp surrounds, plate/side-marker insets and the three visible bumper lines; removed generic lamp-flute repetitions."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V06-car-perspective",
+  "title": "Passenger car \u2014 rear three-quarter",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 6,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    187.69144034824134,
+    348.0244673575865,
+    1145.8721493802802,
+    512.1749473909637
+  ],
+  "branding_zones": [
+    {
+      "id": "front-door-signature",
+      "label": "Front Door Signature",
+      "box": [
+        376,
+        548,
+        49,
+        78
+      ],
+      "quad": [
+        [
+          378,
+          548
+        ],
+        [
+          426,
+          561
+        ],
+        [
+          424,
+          626
+        ],
+        [
+          376,
+          610
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        1041,
+        638,
+        45,
+        55
+      ],
+      "quad": [
+        [
+          1042,
+          645
+        ],
+        [
+          1077,
+          635
+        ],
+        [
+          1084,
+          677
+        ],
+        [
+          1044,
+          691
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        242,
+        490,
+        36,
+        18
+      ],
+      "quad": [
+        [
+          242,
+          489
+        ],
+        [
+          279,
+          497
+        ],
+        [
+          279,
+          508
+        ],
+        [
+          242,
+          500
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        1216,
+        585,
+        56,
+        30
+      ],
+      "quad": [
+        [
+          1216,
+          602
+        ],
+        [
+          1269,
+          581
+        ],
+        [
+          1270,
+          594
+        ],
+        [
+          1216,
+          615
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "765efb14797be66aea59ce53c15b0d1b7866d72065c8aa362b61b34514494d44",
+  "revised_blank_sha256": "ed8760435d2ac914ea7ddce9eb492f97e5ff13ed8a33d6e29341caa43a093e6c",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,99 @@
+{
+  "vb": [
+    67.5,
+    387.5,
+    176.5,
+    183.5
+  ],
+  "notes": [
+    "Refit the General Manual rear van using the corrected common shell, rails, doors, lamp insets and rounded tyre ends.",
+    "Kept the source plain: Vehicle Manual reflectors are not part of this blank."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G16-van-rear",
+  "title": "Van Rear \u2014 General Manual",
+  "book": "General Manual",
+  "pdf_page_1based": 16,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    58.333333333333336,
+    378.3333333333333,
+    194.66666666666666,
+    201.66666666666666
+  ],
+  "branding_zones": [
+    {
+      "id": "left-door-signature",
+      "label": "Left Door Signature",
+      "box": [
+        102.72000000000001,
+        462.58000000000004,
+        23.521,
+        23.477999999999952
+      ],
+      "quad": [
+        [
+          102.72000000000001,
+          462.58000000000004
+        ],
+        [
+          126.24100000000001,
+          462.58000000000004
+        ],
+        [
+          126.24100000000001,
+          486.058
+        ],
+        [
+          102.72000000000001,
+          486.058
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "right-door-unit",
+      "label": "Right Door Unit",
+      "box": [
+        172.736,
+        463.126,
+        40.47800000000001,
+        9.828000000000031
+      ],
+      "quad": [
+        [
+          172.736,
+          463.126
+        ],
+        [
+          213.214,
+          463.126
+        ],
+        [
+          213.214,
+          472.954
+        ],
+        [
+          172.736,
+          472.954
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "c57998785bbe9a1ab4ab4625c701160e2fd190e32e9bb3be5ad1687e61f7f0c8",
+  "revised_blank_sha256": "d8413024f8192048d1b6f2a7e52158a38c7234bb8f76ab21230fabcf33faac40",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

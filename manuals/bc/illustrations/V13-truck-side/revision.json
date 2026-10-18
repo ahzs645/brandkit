@@ -1,0 +1,164 @@
+{
+  "vb": [
+    471,
+    625,
+    815,
+    367
+  ],
+  "notes": [
+    "Replaced the cab with the multi-pane, right-facing source arrangement; added source-specific mirror, headlamp and bumper profiles.",
+    "Rebuilt fender/wheelhouse, tyres, fuel tank, tank straps, mudflaps and stepped chassis.",
+    "Removed invented full-box ribs. The printed flat-panel/ribbed comparison and dimension callouts are not part of the physical blank."
+  ],
+  "limits": [],
+  "orientation": "Front at right, matching the full side elevation (not the left-facing enlarged detail).",
+  "id": "V13-truck-side",
+  "title": "Box truck \u2014 side elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 13,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    457.20177777777775,
+    608.5093333333333,
+    843.6684444444444,
+    400.52
+  ],
+  "branding_zones": [
+    {
+      "id": "box-signature",
+      "label": "Box Signature",
+      "box": [
+        510,
+        650,
+        80,
+        80
+      ],
+      "quad": [
+        [
+          510,
+          650
+        ],
+        [
+          590,
+          650
+        ],
+        [
+          590,
+          730
+        ],
+        [
+          510,
+          730
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#222222",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "box-unit",
+      "label": "Box Unit",
+      "box": [
+        930,
+        647,
+        80,
+        19
+      ],
+      "quad": [
+        [
+          930,
+          647
+        ],
+        [
+          1010,
+          647
+        ],
+        [
+          1010,
+          666
+        ],
+        [
+          930,
+          666
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#222222",
+      "default": "1604-2103",
+      "historical_placement": true
+    },
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        1197,
+        848,
+        36,
+        44
+      ],
+      "quad": [
+        [
+          1197,
+          848
+        ],
+        [
+          1233,
+          848
+        ],
+        [
+          1233,
+          892
+        ],
+        [
+          1197,
+          892
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "cab-unit",
+      "label": "Cab Unit",
+      "box": [
+        1063,
+        823,
+        52,
+        16
+      ],
+      "quad": [
+        [
+          1063,
+          823
+        ],
+        [
+          1115,
+          823
+        ],
+        [
+          1115,
+          839
+        ],
+        [
+          1063,
+          839
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1604-2103",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "6aef81643f253d8f65ce7f555ea250e8843ad0944650adef4832fec5add15547",
+  "revised_blank_sha256": "8d582db1c3d3bcb8ad7e57513d6039bedc42429a79fe4620e718b137dc43b3e6",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

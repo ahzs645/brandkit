@@ -1,0 +1,68 @@
+{
+  "vb": [
+    912,
+    780,
+    345,
+    178
+  ],
+  "notes": [
+    "Rebuilt the lower brim with the correct rise through its centre and dip towards the left end.",
+    "Refit the crown outline, sloping left junction, inner crown arc and both reinforcement slots.",
+    "Excluded the jacket behind the helmet rather than masking it with the previous wrong silhouette."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G15-hard-hat",
+  "title": "Hard hat \u2014 separated from jacket",
+  "book": "General Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    896.3333333333334,
+    766.6666666666666,
+    376.6666666666667,
+    208.0
+  ],
+  "branding_zones": [
+    {
+      "id": "front-crest",
+      "label": "Front Crest",
+      "box": [
+        1077,
+        856,
+        70,
+        76
+      ],
+      "quad": [
+        [
+          1077,
+          856
+        ],
+        [
+          1147,
+          856
+        ],
+        [
+          1147,
+          932
+        ],
+        [
+          1077,
+          932
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#70573f",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "3e5f37e87d9b1e015b6e93f43433082b75d6e0cacb612c54c5c32854d378cb6e",
+  "revised_blank_sha256": "3a0e191dc8a05973278928e5af273c702d5ddb477ca5bf52a95139c317f164bf",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,102 @@
+{
+  "vb": [
+    869,
+    78,
+    365,
+    425
+  ],
+  "notes": [
+    "Restored both lapel stitch lines, the full sloping inner sleeve edge and layered pocket occlusion.",
+    "Refit pocket seams/pleats, zipper pull, elbow junction and double stitching.",
+    "Separated curved title tab and lower patch carrier to follow the sleeve curvature."
+  ],
+  "limits": [
+    "Torso and sleeve are cropped at the original illustration boundaries."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "G15-field-jacket",
+  "title": "Field jacket \u2014 shoulder view",
+  "book": "General Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    853.3333333333334,
+    62.333333333333336,
+    396.3333333333333,
+    456.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "sleeve-title",
+      "label": "Sleeve Title",
+      "box": [
+        1130,
+        215,
+        80,
+        30
+      ],
+      "quad": [
+        [
+          1136,
+          214
+        ],
+        [
+          1206,
+          225
+        ],
+        [
+          1215,
+          254
+        ],
+        [
+          1127,
+          243
+        ]
+      ],
+      "kind": "nameplate",
+      "colour": "#70573f",
+      "default": "Job Function",
+      "historical_placement": true
+    },
+    {
+      "id": "sleeve-patch",
+      "label": "Sleeve Patch",
+      "box": [
+        1115,
+        244,
+        96,
+        93
+      ],
+      "quad": [
+        [
+          1123,
+          244
+        ],
+        [
+          1205,
+          254
+        ],
+        [
+          1185,
+          335
+        ],
+        [
+          1116,
+          323
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#70573f",
+      "default": "Forests",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "c53c2aa446cc95cb28542d06df815ae2eeff049fd05b38bfda867c57e38836d9",
+  "revised_blank_sha256": "3738d6f55d502e242078bb6fccd3593ed2fec0fdfc1f6f48b423ac1d1af9393c",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,69 @@
+{
+  "vb": [
+    429.5,
+    447.5,
+    112,
+    101
+  ],
+  "notes": [
+    "Rebuilt the carrier trapezoid and its sloping right edge, plus the cushion curvature above it.",
+    "Retained the two open-ended source seat strokes rather than inventing a closed complete seat."
+  ],
+  "limits": [
+    "This is an enlarged open-ended source fragment; the complete seat is not shown or inferred."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "H47-seat-panel",
+  "title": "Seat Panel \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 47,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    420.3333333333333,
+    438.3333333333333,
+    130.33333333333334,
+    119.33333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "seat-panel-signature",
+      "label": "Seat Panel Signature",
+      "box": [
+        437,
+        501,
+        79,
+        16
+      ],
+      "quad": [
+        [
+          437,
+          501
+        ],
+        [
+          516,
+          501
+        ],
+        [
+          516,
+          517
+        ],
+        [
+          437,
+          517
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "53a4132d670f4269dc0bff8aac8c719751bc3cb3e920e8de04b5c2b47ff0f760",
+  "revised_blank_sha256": "38335849eb486b030c54c5272cdff3722bd57742a05878d35b70ca8f770272b3",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

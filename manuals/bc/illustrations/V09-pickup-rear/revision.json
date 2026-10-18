@@ -1,0 +1,100 @@
+{
+  "vb": [
+    92,
+    90,
+    366,
+    305
+  ],
+  "notes": [
+    "Extended the stored viewBox to include the full source roof rather than clipping its top.",
+    "Rebuilt curved cab/glass, four sliding-window panes, tailgate recess and handle, double lamp frames, lower rails and bumper.",
+    "Refit rounded tyre ends. Eight reflectors are separate applied markings, not body geometry."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V09-pickup-rear",
+  "title": "Pickup \u2014 rear elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 9,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    76.33333333333333,
+    84.33333333333333,
+    397.6666666666667,
+    326.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "tailgate-signature",
+      "label": "Tailgate Signature",
+      "box": [
+        150,
+        193,
+        33,
+        27
+      ],
+      "quad": [
+        [
+          150,
+          193
+        ],
+        [
+          183,
+          193
+        ],
+        [
+          183,
+          220
+        ],
+        [
+          150,
+          220
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "tailgate-unit",
+      "label": "Tailgate Unit",
+      "box": [
+        322,
+        204,
+        78,
+        16
+      ],
+      "quad": [
+        [
+          322,
+          204
+        ],
+        [
+          400,
+          204
+        ],
+        [
+          400,
+          220
+        ],
+        [
+          322,
+          220
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "04b1f8a432f71b76838302bbf8d6bb06b789edcca50b3d38dc2db2dcc49b9b33",
+  "revised_blank_sha256": "dbc24ce931f8de7fcbe34e9170b70b69bf8c9cc15fa5845da7b43a081e58df80",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

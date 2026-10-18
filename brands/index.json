@@ -363,6 +363,21 @@
           "template",
           "vehicle-van-white",
           "Vehicle: panel van, dark body"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
         ]
       ],
       "hydro/H43": [
@@ -375,6 +390,81 @@
           "template",
           "vehicle-van-white",
           "Vehicle: panel van, dark body"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-side",
+          "Stepvan Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-cab-door",
+          "Cab Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-tractor-trailer",
+          "Tractor Trailer, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-boxcar",
+          "Boxcar, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-locomotive",
+          "Locomotive, Hydro"
         ]
       ],
       "hydro/H42": [
@@ -392,6 +482,74 @@
           "guide",
           "guide-09",
           "Applications"
+        ]
+      ],
+      "hydro/H45": [
+        [
+          "template",
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-side",
+          "Stepvan Side, Hydro"
+        ]
+      ],
+      "hydro/H46": [
+        [
+          "template",
+          "illustrated-h46-cab-door",
+          "Cab Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-tractor-trailer",
+          "Tractor Trailer, Hydro"
+        ]
+      ],
+      "hydro/H47": [
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ]
+      ],
+      "hydro/H48": [
+        [
+          "template",
+          "illustrated-h48-boxcar",
+          "Boxcar, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-locomotive",
+          "Locomotive, Hydro"
         ]
       ],
       "hydro/H04": [
@@ -898,6 +1056,51 @@
           "template",
           "uniform-security",
           "Shoulder flash: security"
+        ],
+        [
+          "template",
+          "illustrated-g15-blazer",
+          "Blazer, chest pocket view"
+        ],
+        [
+          "template",
+          "illustrated-g15-field-jacket",
+          "Field jacket, shoulder view"
+        ],
+        [
+          "template",
+          "illustrated-g15-hard-hat",
+          "Hard hat, separated from jacket"
+        ],
+        [
+          "template",
+          "illustrated-g15-jacket-back",
+          "Jacket, upper back"
+        ],
+        [
+          "template",
+          "illustrated-g15-job-patch",
+          "Job-function patch and tab"
+        ],
+        [
+          "template",
+          "illustrated-g15-officer-front",
+          "Security uniform, cropped upper front"
+        ],
+        [
+          "template",
+          "illustrated-g15-peaked-cap",
+          "Peaked cap, standalone detail"
+        ],
+        [
+          "template",
+          "illustrated-g15-security-patch",
+          "Security patch"
+        ],
+        [
+          "signature",
+          "insignia",
+          "Uniform insignia"
         ]
       ],
       "vehicle/V05": [
@@ -910,6 +1113,131 @@
           "template",
           "vehicle-van-truck",
           "Van truck, box side"
+        ],
+        [
+          "template",
+          "illustrated-v03-policy-tractor",
+          "Tractor and trailer, opposite-side policy view"
+        ],
+        [
+          "template",
+          "illustrated-v06-car-perspective",
+          "Passenger car, rear three-quarter"
+        ],
+        [
+          "template",
+          "illustrated-v07-car-rear",
+          "Passenger car, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v07-side-car",
+          "Car, cropped front side elevation"
+        ],
+        [
+          "template",
+          "illustrated-v08-pickup-perspective",
+          "Pickup, rear three-quarter"
+        ],
+        [
+          "template",
+          "illustrated-v09-pickup-rear",
+          "Pickup, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v09-pickup-side",
+          "Pickup, side elevation, right edge cropped"
+        ],
+        [
+          "template",
+          "illustrated-v10-van-perspective",
+          "Van, rear three-quarter"
+        ],
+        [
+          "template",
+          "illustrated-v11-van-rear",
+          "Van, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v11-van-side",
+          "Van, full side elevation"
+        ],
+        [
+          "template",
+          "illustrated-v12-truck-perspective",
+          "Box truck, rear three-quarter"
+        ],
+        [
+          "template",
+          "illustrated-v13-cab-door",
+          "Box truck, enlarged cab door"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-rear",
+          "Box truck, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-side",
+          "Box truck, side elevation"
+        ],
+        [
+          "template",
+          "illustrated-v14-tractor-trailer",
+          "Tractor and box trailer, perspective"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-rear",
+          "Flat-deck trailer, rear"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-side",
+          "Flat-deck trailer, side"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-front",
+          "Box trailer, front"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-rear",
+          "Box trailer, rear"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-side",
+          "Box trailer, side"
+        ],
+        [
+          "template",
+          "illustrated-v16-backhoe",
+          "Backhoe / front-end loader"
+        ],
+        [
+          "template",
+          "illustrated-v17-compressor",
+          "Towable compressor"
+        ],
+        [
+          "template",
+          "illustrated-v17-crawler-front",
+          "Tracked crawler, front"
+        ],
+        [
+          "template",
+          "illustrated-v17-crawler-side",
+          "Tracked crawler, side"
+        ],
+        [
+          "template",
+          "illustrated-v17-grader",
+          "Grader, cropped operating section"
         ],
         [
           "signature",
@@ -927,6 +1255,11 @@
           "template",
           "vehicle-door",
           "Vehicle door marking"
+        ],
+        [
+          "template",
+          "illustrated-v06-car-perspective",
+          "Passenger car, rear three-quarter"
         ]
       ],
       "vehicle/V07": [
@@ -934,6 +1267,16 @@
           "template",
           "vehicle-door",
           "Vehicle door marking"
+        ],
+        [
+          "template",
+          "illustrated-v07-car-rear",
+          "Passenger car, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v07-side-car",
+          "Car, cropped front side elevation"
         ]
       ],
       "general/G17": [
@@ -953,6 +1296,26 @@
           "Van truck, rear doors"
         ],
         [
+          "template",
+          "illustrated-g17-car",
+          "Car, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g17-pickup",
+          "Pickup, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g17-truck-rear",
+          "Truck Rear, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g17-truck-side",
+          "Truck Side, General Manual"
+        ],
+        [
           "guide",
           "guide-08",
           "Vehicles"
@@ -968,6 +1331,11 @@
           "template",
           "vehicle-van-truck-rear",
           "Van truck, rear doors"
+        ],
+        [
+          "template",
+          "illustrated-v12-truck-perspective",
+          "Box truck, rear three-quarter"
         ]
       ],
       "vehicle/V13": [
@@ -980,6 +1348,21 @@
           "template",
           "vehicle-van-truck-rear",
           "Van truck, rear doors"
+        ],
+        [
+          "template",
+          "illustrated-v13-cab-door",
+          "Box truck, enlarged cab door"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-rear",
+          "Box truck, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-side",
+          "Box truck, side elevation"
         ]
       ],
       "sign/S12": [
@@ -1178,6 +1561,158 @@
           "template",
           "sign-regulatory",
           "Sign: regulatory, 2 × 4 ft"
+        ]
+      ],
+      "general/G16": [
+        [
+          "template",
+          "illustrated-g16-tractor",
+          "Tractor, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g16-van-rear",
+          "Van Rear, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g16-van-side",
+          "Van Side, General Manual"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Vehicles"
+        ]
+      ],
+      "vehicle/V03": [
+        [
+          "template",
+          "illustrated-v03-policy-tractor",
+          "Tractor and trailer, opposite-side policy view"
+        ]
+      ],
+      "vehicle/V08": [
+        [
+          "template",
+          "illustrated-v08-pickup-perspective",
+          "Pickup, rear three-quarter"
+        ]
+      ],
+      "vehicle/V09": [
+        [
+          "template",
+          "illustrated-v09-pickup-rear",
+          "Pickup, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v09-pickup-side",
+          "Pickup, side elevation, right edge cropped"
+        ]
+      ],
+      "vehicle/V10": [
+        [
+          "template",
+          "illustrated-v10-van-perspective",
+          "Van, rear three-quarter"
+        ]
+      ],
+      "vehicle/V11": [
+        [
+          "template",
+          "illustrated-v11-van-rear",
+          "Van, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v11-van-side",
+          "Van, full side elevation"
+        ]
+      ],
+      "vehicle/V14": [
+        [
+          "template",
+          "illustrated-v14-tractor-trailer",
+          "Tractor and box trailer, perspective"
+        ]
+      ],
+      "vehicle/V15": [
+        [
+          "template",
+          "illustrated-v15-flatbed-rear",
+          "Flat-deck trailer, rear"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-side",
+          "Flat-deck trailer, side"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-front",
+          "Box trailer, front"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-rear",
+          "Box trailer, rear"
+        ],
+        [
+          "template",
+          "illustrated-v15-trailer-side",
+          "Box trailer, side"
+        ]
+      ],
+      "vehicle/V16": [
+        [
+          "template",
+          "illustrated-v16-backhoe",
+          "Backhoe / front-end loader"
+        ]
+      ],
+      "vehicle/V17": [
+        [
+          "template",
+          "illustrated-v17-compressor",
+          "Towable compressor"
+        ],
+        [
+          "template",
+          "illustrated-v17-crawler-front",
+          "Tracked crawler, front"
+        ],
+        [
+          "template",
+          "illustrated-v17-crawler-side",
+          "Tracked crawler, side"
+        ],
+        [
+          "template",
+          "illustrated-v17-grader",
+          "Grader, cropped operating section"
+        ]
+      ],
+      "vehicle/V18": [
+        [
+          "template",
+          "illustrated-v18-installation-1",
+          "Decal installation, panel 1"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-2",
+          "Decal installation, panel 2"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-3",
+          "Decal installation, panel 3"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-4",
+          "Decal installation, panel 4"
         ]
       ],
       "general/G05": [
@@ -1457,13 +1992,6 @@
           "guide",
           "guide-06",
           "Stationery"
-        ]
-      ],
-      "general/G16": [
-        [
-          "guide",
-          "guide-08",
-          "Vehicles"
         ]
       ]
     }

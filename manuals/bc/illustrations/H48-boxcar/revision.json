@@ -1,0 +1,70 @@
+{
+  "vb": [
+    59.5,
+    547.5,
+    478,
+    190
+  ],
+  "notes": [
+    "Rebuilt the actual two four-wheel bogie views, including paired rim contours, triangular bolster apertures/spoke arcs, centre openings and layered axle-box spring blocks.",
+    "Reconstructed the source roof/lower sill and all twelve recessed panels with their independent structural dividers.",
+    "Kept wheels and suspension in separate editable assemblies, not a generic undercarriage silhouette."
+  ],
+  "limits": [
+    "The source itself is schematic; unshown mechanical details are not added."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "H48-boxcar",
+  "title": "Boxcar \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 48,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    50.333333333333336,
+    539.3333333333334,
+    492.3333333333333,
+    208.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "rail-signature",
+      "label": "Rail Signature",
+      "box": [
+        87,
+        568,
+        94,
+        15
+      ],
+      "quad": [
+        [
+          87,
+          568
+        ],
+        [
+          181,
+          568
+        ],
+        [
+          181,
+          583
+        ],
+        [
+          87,
+          583
+        ]
+      ],
+      "kind": "hydro-rail",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "6dd5df75e40ddb3ed4046f0a89733e05e127e39f485e83cc356af0092c71875a",
+  "revised_blank_sha256": "81882fe33ec83952601d132fdae08b46282c6ca58e147f3c7dc1e6c9af419e98",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

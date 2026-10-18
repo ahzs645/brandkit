@@ -1,0 +1,100 @@
+{
+  "vb": [
+    68,
+    660,
+    568,
+    330
+  ],
+  "notes": [
+    "Removed the repeated vertical track lines that are not present in the source.",
+    "Refit the belt contour, end wheel centres, rails and five lower/two upper open roller arcs.",
+    "Rebuilt the operator levers and grips, stepped seat cover, intake bands and exhaust cap/pipe."
+  ],
+  "limits": [],
+  "orientation": "Engine/front at right; unlike the Hydro side view.",
+  "id": "V17-crawler-side",
+  "title": "Tracked crawler \u2014 side",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    52.666666666666664,
+    644.0,
+    599.0,
+    362.0
+  ],
+  "branding_zones": [
+    {
+      "id": "seat-signature",
+      "label": "Seat Signature",
+      "box": [
+        220,
+        785,
+        33,
+        32
+      ],
+      "quad": [
+        [
+          220,
+          785
+        ],
+        [
+          253,
+          785
+        ],
+        [
+          253,
+          817
+        ],
+        [
+          220,
+          817
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit-number",
+      "label": "Unit Number",
+      "box": [
+        378,
+        752,
+        60,
+        15
+      ],
+      "quad": [
+        [
+          378,
+          752
+        ],
+        [
+          438,
+          752
+        ],
+        [
+          438,
+          767
+        ],
+        [
+          378,
+          767
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "7620-2176",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "4dc3448346e6a0a4963cdede7dd232c1e516c92451bb5edb37787509b8ccdcda",
+  "revised_blank_sha256": "2fe68f965c46003060a3a0bdd8b4d9b109c1b856f41c8109694db2b91d426366",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

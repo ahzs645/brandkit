@@ -1,0 +1,102 @@
+{
+  "vb": [
+    616,
+    142,
+    665,
+    331
+  ],
+  "notes": [
+    "Refit the tandem wheel centres and removed duplicate generic rims; restored the source stepped axle bridge.",
+    "Refined the hood/floor seams, upright and diagonal braces, lever foot and cropped front support.",
+    "Rebuilt the curved blade end, separate blade-edge line and blade attachment loop."
+  ],
+  "limits": [
+    "The right-hand continuation of the grader is source-cropped; unseen front assembly is not invented."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "V17-grader",
+  "title": "Grader \u2014 cropped operating section",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    600.3782962962963,
+    126.0291851851852,
+    696.2532592592593,
+    362.6238518518519
+  ],
+  "branding_zones": [
+    {
+      "id": "engine-signature",
+      "label": "Engine Signature",
+      "box": [
+        869,
+        235,
+        54,
+        43
+      ],
+      "quad": [
+        [
+          869,
+          235
+        ],
+        [
+          923,
+          235
+        ],
+        [
+          923,
+          278
+        ],
+        [
+          869,
+          278
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit-number",
+      "label": "Unit Number",
+      "box": [
+        659,
+        225,
+        67,
+        13
+      ],
+      "quad": [
+        [
+          659,
+          225
+        ],
+        [
+          726,
+          225
+        ],
+        [
+          726,
+          238
+        ],
+        [
+          659,
+          238
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "7620-2321",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "d646a0cdea9fe8e6b1fa595cbc6d2177aee8571cc9d864573975ba266c989aa6",
+  "revised_blank_sha256": "eb3c1a6afa8aeab4b1d28e91a461f62321068427376de681f03af25224c57e93",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

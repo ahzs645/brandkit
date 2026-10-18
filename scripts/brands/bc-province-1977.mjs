@@ -11,6 +11,7 @@
 
 import { box, cite, HEROS_CAP, hung, locked, pt, readJson, round, writeBrand } from './common.mjs'
 import { applications, guide } from './bc-province-1977-applications.mjs'
+import { illustrated } from './illustrations.mjs'
 
 const folder = new URL('../../brands/bc-province-1977/', import.meta.url)
 const art = readJson(new URL('artwork.json', folder))
@@ -110,6 +111,16 @@ const SIGNATURES = [
       { type: 'stack', x: 1220, y: 410, items: province(round(210 / CAPR), 310) },
       // The ministry follows "British Columbia" (8.001 em of the bold at a 210 cap) by 0.13 h.
       { type: 'stack', x: round(1220 + 8.001 * 210 / CAPR + 130), y: 720, items: [ministry({ join: true, wrap: undefined, size: round(350 / CAPR) })] }
+    ]
+  },
+  {
+    // The insignia on uniforms (General Manual p. 13): the job patch's symbol, the logotype on two
+    // lines, and the ministry beneath in a larger regular. Measured from the patch.
+    id: 'insignia', label: 'Uniform insignia', departmental: true, use: 'Patches, crests and badges on uniforms (General Manual p. 13): the symbol over the logotype on two lines, the ministry beneath.',
+    metrics: metrics(1250, 0),
+    elements: [
+      { type: 'symbol', x: -500, y: 0, height: 1000 },
+      { type: 'stack', x: 0, y: 1250, anchor: 'middle', items: [...province(round(130 / CAPR), 175), ministry({ size: round(150 / CAPR), leading: 190, wrap: 1700, gapBefore: 60 })] }
     ]
   },
   {
@@ -373,7 +384,12 @@ const stationery = [
 brand.roles.symbol = 'brown'
 brand.roles.type = 'black'
 
-brand.templates = [...stationery, ...applications(brand)]
+// The drawings of uniforms and vehicles (ManualKit's source-registered illustrations), each a
+// template with the identity in its branding zones.
+const drawn = illustrated('province', ['G15', 'G16', 'G17', 'V03', 'V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18'])
+brand.illustrations = drawn.drawings
+
+brand.templates = [...stationery, ...applications(brand), ...drawn.templates]
 brand.guide = guide(brand)
 
 // The manual pages each piece is built from (page ids in manuals/bc). General Manual G12 is
@@ -405,14 +421,16 @@ cite(brand, {
     'sign-secondary-identification': ['S14', 'S15', ...SIGNS],
     'sign-directional': ['S19', 'S20', ...SIGNS],
     'sign-warning': ['S23', 'S24', 'S10', ...SIGNS],
-    'sign-regulatory': ['S23', 'S24', 'S10', ...SIGNS]
+    'sign-regulatory': ['S23', 'S24', 'S10', ...SIGNS],
+    ...Object.fromEntries(Object.entries(drawn.sources).map(([id, pages]) => [id, [...pages, ...(pages[0].startsWith('V') && pages[0] !== 'V18' ? ['V05'] : [])]]))
   },
   signatures: {
     provincial: ['G05', 'G06', 'G07', 'R31', 'R32'],
     ...Object.fromEntries(['horizontal', 'vertical', 'stacked', 'centred', 'one-line'].map((id) => [id, ['R13', 'R16', 'R17', 'R11', 'G08']])),
     'sign-centred': ['S10', 'R18'],
     'sign-horizontal': ['S10', 'R18'],
-    vehicle: ['V05', 'V04']
+    vehicle: ['V05', 'V04'],
+    insignia: ['G15']
   },
   guide: [
     ['G05', 'G06', 'G07', 'R32'],

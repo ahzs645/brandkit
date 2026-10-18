@@ -1,0 +1,67 @@
+{
+  "vb": [
+    337.5,
+    524.5,
+    169,
+    203
+  ],
+  "notes": [
+    "Reconstructed the source-specific left-facing door, its large rear pane and narrow triangular quarter-light.",
+    "Restored the curved mirror head, separate support/base, short handle and paired upper/lower trim lines."
+  ],
+  "limits": [],
+  "orientation": "Front-side sloping pillar at left; not mirrored to match the full side elevation.",
+  "id": "H44-van-door",
+  "title": "Van Door \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 44,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    328.3333333333333,
+    515.3333333333334,
+    187.33333333333334,
+    221.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        372,
+        647,
+        102,
+        32
+      ],
+      "quad": [
+        [
+          372,
+          647
+        ],
+        [
+          474,
+          647
+        ],
+        [
+          474,
+          679
+        ],
+        [
+          372,
+          679
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "a0b45c1455d10afc8e341d5040c64d205b1478edcf7a9633095c408d49104b46",
+  "revised_blank_sha256": "39da898597cfa84510e0937136a1e649c6e45f534688927c6a8e61ac75e43c4d",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

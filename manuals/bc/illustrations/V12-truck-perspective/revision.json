@@ -1,0 +1,197 @@
+{
+  "vb": [
+    45,
+    457,
+    854,
+    548
+  ],
+  "notes": [
+    "Replaced the cab with divided side panes, rear pane, double gaskets and triangulated mirror construction from this particular source.",
+    "Rebuilt the five visible tyre/depth groups, actual near rims, mudflaps and light edges, stepped chassis and open U-shaped rear step.",
+    "Refit cargo side/rear corner perspective, double rear-door centre joint, formed metal ribs and the two-plane loading platform.",
+    "Reflective appliques remain separate from the blank cargo geometry."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V12-truck-perspective",
+  "title": "Box truck \u2014 rear three-quarter",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 12,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    29.012703703703696,
+    441.09144444444433,
+    885.625074074074,
+    579.7623333333332
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-signature",
+      "label": "Cab Signature",
+      "box": [
+        76,
+        755,
+        21,
+        34
+      ],
+      "quad": [
+        [
+          76,
+          755
+        ],
+        [
+          97,
+          755
+        ],
+        [
+          97,
+          789
+        ],
+        [
+          76,
+          789
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "side-box-signature",
+      "label": "Side Box Signature",
+      "box": [
+        618,
+        515,
+        70,
+        60
+      ],
+      "quad": [
+        [
+          618,
+          523
+        ],
+        [
+          684,
+          511
+        ],
+        [
+          684,
+          569
+        ],
+        [
+          618,
+          579
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "rear-box-signature",
+      "label": "Rear Box Signature",
+      "box": [
+        739,
+        526,
+        43,
+        63
+      ],
+      "quad": [
+        [
+          740,
+          527
+        ],
+        [
+          779,
+          544
+        ],
+        [
+          779,
+          590
+        ],
+        [
+          739,
+          578
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "side-unit",
+      "label": "Side Unit",
+      "box": [
+        167,
+        586,
+        57,
+        16
+      ],
+      "quad": [
+        [
+          166,
+          590
+        ],
+        [
+          220,
+          581
+        ],
+        [
+          220,
+          593
+        ],
+        [
+          166,
+          601
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "1604-2103",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        821,
+        556,
+        30,
+        19
+      ],
+      "quad": [
+        [
+          821,
+          556
+        ],
+        [
+          850,
+          567
+        ],
+        [
+          850,
+          578
+        ],
+        [
+          821,
+          568
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "1604-2103",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "cbc62e1b11cbd5974ccebe6948433da8ff5adad6254fc0b28e3a04f58852d2e5",
+  "revised_blank_sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

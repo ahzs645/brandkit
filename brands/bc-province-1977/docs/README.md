@@ -33,6 +33,12 @@ Reproduction, Sign and Vehicle manuals. They are rebuilt page by page in brandki
 - **Memorandum and news release** (General Manual p. 12).
 - **Publications** (p. 8), **advertising** (p. 9) and **uniform insignia** (p. 13).
 - **Vehicle markings**: door, box side, rear with striping (Vehicle Manual).
+- **Drawn applications**: 44 of ManualKit’s source-registered drawings, each a template with
+  the identity set into its branding zones. They cover the uniforms on General Manual p. 13, the
+  vehicles on pp. 14–15, and every vehicle and piece of equipment in the Vehicle Manual, through
+  to the installation sequence. A uniform takes the insignia signature, the symbol over a
+  two-line logotype. A vehicle takes the door signature. The ministry and the unit number are
+  fields.
 - **Signs**: primary and secondary identification, standard information, directional, warning,
   regulatory. They are laid out on the Sign Manual’s grid, where one square is 1/12 of the
   longest side.

@@ -1,0 +1,68 @@
+{
+  "vb": [
+    378.5,
+    245.5,
+    163,
+    190
+  ],
+  "notes": [
+    "Rebuilt paired tread joints and the angled lower central opening in source coordinates.",
+    "Restored separate front panel, wraparound handrails, top rail and white exhaust/cap.",
+    "Kept the Hydro source grille as a plain rectangle: Vehicle Manual grille bars are not imported."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "H47-crawler-front",
+  "title": "Crawler Front \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 47,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    369.3333333333333,
+    236.33333333333334,
+    181.33333333333334,
+    208.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "front-signature",
+      "label": "Front Signature",
+      "box": [
+        432,
+        302,
+        55,
+        11
+      ],
+      "quad": [
+        [
+          432,
+          302
+        ],
+        [
+          487,
+          302
+        ],
+        [
+          487,
+          313
+        ],
+        [
+          432,
+          313
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "15a4ad48398c760e6a0f63270dc5f2cb2bbfe8e4ac5e8d56b6368ecb45c4f301",
+  "revised_blank_sha256": "cb8e9b0ab9541ef7092415e7c1a588aa1057bfd391f81747e7a671bfc4ff625a",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

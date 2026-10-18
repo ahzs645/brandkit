@@ -1,0 +1,70 @@
+{
+  "vb": [
+    279.5,
+    36.5,
+    239,
+    227
+  ],
+  "notes": [
+    "Rebuilt the cropped door/window/mirror context, wet oval and curved spray lance/nozzle.",
+    "Reconstructed both hands, finger separations, lance grip and cuff from the source rather than generic polygon hands.",
+    "Kept white spray strokes as a separately named process-illustration group. The surrounding page frame and instructions are not object geometry."
+  ],
+  "limits": [
+    "Auxiliary installation illustration; cropped hands/door are not completed beyond the source."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "V18-installation-1",
+  "title": "Decal installation \u2014 panel 1",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 18,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    270.3333333333333,
+    27.333333333333332,
+    257.3333333333333,
+    288.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "application-area",
+      "label": "Application Area",
+      "box": [
+        345,
+        169,
+        59,
+        37
+      ],
+      "quad": [
+        [
+          345,
+          169
+        ],
+        [
+          404,
+          169
+        ],
+        [
+          404,
+          206
+        ],
+        [
+          345,
+          206
+        ]
+      ],
+      "kind": "process-surface",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "da7f91ae683008885de13087e16b641e87b2a9efbd5ce8f577ac355ff1f94069",
+  "revised_blank_sha256": "52d2b5cbdddf5870fdbb31850db29ab2f697f35823239fcfb0b391a10c8da6f1",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

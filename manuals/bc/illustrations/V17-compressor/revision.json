@@ -1,0 +1,100 @@
+{
+  "vb": [
+    72,
+    279,
+    458,
+    190
+  ],
+  "notes": [
+    "Refit the enclosure silhouette, split roof seams and lower side panels.",
+    "Reconstructed the tow-coupler steps, curved drawbar throat, caster fork and small wheel.",
+    "Replaced duplicate generic wheel/rim geometry with one source wheel and one painted rim, then refit the overlapping fender."
+  ],
+  "limits": [],
+  "orientation": "Tow/caster end at left.",
+  "id": "V17-compressor",
+  "title": "Towable compressor",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    56.666666666666664,
+    263.3333333333333,
+    489.3333333333333,
+    221.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "side-signature",
+      "label": "Side Signature",
+      "box": [
+        329,
+        305,
+        76,
+        49
+      ],
+      "quad": [
+        [
+          329,
+          305
+        ],
+        [
+          405,
+          305
+        ],
+        [
+          405,
+          354
+        ],
+        [
+          329,
+          354
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit-number",
+      "label": "Unit Number",
+      "box": [
+        341,
+        341,
+        58,
+        12
+      ],
+      "quad": [
+        [
+          341,
+          341
+        ],
+        [
+          399,
+          341
+        ],
+        [
+          399,
+          353
+        ],
+        [
+          341,
+          353
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "7620-2071",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "854b22865a9596894f8cbe4da25d11524792381bcfcd007e1652fbb1e3b6f94f",
+  "revised_blank_sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

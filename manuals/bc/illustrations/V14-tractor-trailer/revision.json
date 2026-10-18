@@ -1,0 +1,228 @@
+{
+  "vb": [
+    40,
+    323,
+    471,
+    248
+  ],
+  "notes": [
+    "Replaced the trailer planes and corner with source-specific perspective; expanded the right edge to include the cab and bumper omitted by the old crop.",
+    "Rebuilt the multi-depth trailer wheel clusters, frame and fifth wheel, three tractor wheels, tank straps/cap, mudflaps, exhaust, cab windows, door panels and steps.",
+    "Preserved body ribs as a removable physical group; identity and numbers are separate zones."
+  ],
+  "limits": [],
+  "orientation": "Tractor/front at right.",
+  "id": "V14-tractor-trailer",
+  "title": "Tractor and box trailer \u2014 perspective",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 14,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    8.0,
+    288.0,
+    523.6666666666666,
+    320.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-signature",
+      "label": "Cab Signature",
+      "box": [
+        464,
+        473,
+        18,
+        26
+      ],
+      "quad": [
+        [
+          464,
+          473
+        ],
+        [
+          482,
+          473
+        ],
+        [
+          482,
+          499
+        ],
+        [
+          464,
+          499
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "cab-unit",
+      "label": "Cab Unit",
+      "box": [
+        426,
+        487,
+        24,
+        6
+      ],
+      "quad": [
+        [
+          426,
+          487
+        ],
+        [
+          450,
+          487
+        ],
+        [
+          450,
+          493
+        ],
+        [
+          426,
+          493
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "2265-2008",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-side-signature",
+      "label": "Trailer Side Signature",
+      "box": [
+        56,
+        371,
+        20,
+        36
+      ],
+      "quad": [
+        [
+          56,
+          371
+        ],
+        [
+          76,
+          368.5
+        ],
+        [
+          76,
+          407
+        ],
+        [
+          56,
+          407.5
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-front-signature",
+      "label": "Trailer Front Signature",
+      "box": [
+        300,
+        343,
+        48,
+        37
+      ],
+      "quad": [
+        [
+          300,
+          342
+        ],
+        [
+          348,
+          354
+        ],
+        [
+          348,
+          384
+        ],
+        [
+          300,
+          372
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-side-unit",
+      "label": "Trailer Side Unit",
+      "box": [
+        255,
+        348,
+        28,
+        7
+      ],
+      "quad": [
+        [
+          255,
+          350
+        ],
+        [
+          283,
+          346.5
+        ],
+        [
+          283,
+          353
+        ],
+        [
+          255,
+          356.5
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "2280-2008",
+      "historical_placement": true
+    },
+    {
+      "id": "trailer-front-unit",
+      "label": "Trailer Front Unit",
+      "box": [
+        351,
+        359,
+        23,
+        8
+      ],
+      "quad": [
+        [
+          351,
+          357
+        ],
+        [
+          374,
+          363
+        ],
+        [
+          374,
+          369
+        ],
+        [
+          351,
+          363
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "698b2bfb53081f17b5f4c2ad2342abe7439e030fc185c13e23e855d1a8fea3d7",
+  "revised_blank_sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

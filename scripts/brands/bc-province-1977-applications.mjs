@@ -367,7 +367,11 @@ const signatureRow = (items, y, height, colourway = 'positive') => {
   })
 }
 
-export const guide = () => ({
+export const guide = (brand) => {
+  // A drawn template's proportions, for fitting it on a shelf.
+  const ratio = (id) => { const template = brand.templates.find((entry) => entry.id === id); return template.width / template.height }
+  const drawn = (id, label) => ({ src: `templates/illustrated-${id}`, ratio: ratio(`illustrated-${id}`), label })
+  return {
   title: '{name}: Visual Identity Program',
   pdfTitle: 'Province of British Columbia / Visual Identity Program, 1977 (reconstruction)',
   sheetsPdfTitle: 'Province of British Columbia / signature sheets, 1977',
@@ -440,7 +444,7 @@ export const guide = () => ({
     {
       title: 'Vehicles.', name: 'Vehicles', subtitle: 'Every vehicle carries the ministerial signature on its doors, the provincial signature on its rear, and a unit number. White markings, or black on white bodies.',
       elements: [
-        ...shelf([{ src: 'templates/vehicle-door', ratio: 40 / 30, label: '5 IN SYMBOL, DOORS' }, { src: 'templates/vehicle-van-truck', ratio: 2, label: '16 IN SYMBOL, BOX SIDE', frame: true }, { src: 'templates/vehicle-van-truck-rear', ratio: 96 / 84, label: 'REAR, WITH STRIPING', frame: true }], { y: 250, height: 330 }),
+        ...shelf([drawn('v13-cab-door', 'CAB DOOR: MINISTERIAL SIGNATURE'), drawn('v13-truck-side', 'BOX: 16 IN SIGNATURE, UNIT NUMBER'), drawn('v11-van-rear', 'REAR: SIGNATURE, STRIPING')], { y: 250, height: 330 }),
         { type: 'specTable', x: 64, right: 1376, y: 720, step: 40, rows: [['Doors: ministerial signature', '5 in symbol, ½ in logotype, 1 in ministry'], ['Rear of cars, pickups, vans', '4 in provincial signature'], ['Truck boxes and trailers', '16 in signature, 16 in from the edge, 8 in down'], ['Unit numbers', '2 in on cars and cabs, 4 in on boxes and trailers']] }
       ]
     },
@@ -462,4 +466,5 @@ export const guide = () => ({
       ]
     }
   ]
-})
+  }
+}

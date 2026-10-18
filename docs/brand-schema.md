@@ -202,6 +202,30 @@ symbols, a `README.md` with the rationale, its own `brand.json`, and any guide s
 `symbol` elements take `"revision": "<id>"` to draw a proposal's artwork for such a sheet.
 Approving a revision means moving its `changes` into the definition and removing the entry.
 
+## Illustrations
+
+Drawings of what the identity goes on (a van, a cab door, a blazer, a locomotive), each with
+branding zones, the places the identity goes:
+
+```json
+"illustrations": { "V13-cab-door": { "title": "…", "viewBox": [x, y, w, h], "object": "<g>…</g>", "markings": "…",
+  "zones": [{ "id": "door-signature", "kind": "signature", "box": [x, y, w, h], "quad": [[x, y], …], "colour": "#ffffff", "default": "Agriculture" }] } }
+```
+
+A zone's `quad` is its corners, top left first, so a zone on a surface seen at an angle is a
+parallelogram. A template places an illustration and fills its zones:
+
+```json
+{ "type": "illustration", "illustration": "V13-cab-door", "x": 0, "y": 0, "width": 1600, "fields": ["ministry"],
+  "zones": { "door-signature": { "signature": "vehicle", "defaults": { "ministry": "Ministry of\nAgriculture" } },
+             "unit": { "id": "unit-number", "text": "1604-2103", "font": "regular" } } }
+```
+
+A zone takes a signature (with fixed `values`, or `defaults` that give way to the template's
+fields), a `symbol`, or text (an `id` makes it a field; `curve` sets it on an arc). It is drawn in
+the zone's colour unless it names one, fitted inside the zone, and turned and skewed with it. The
+BC brands' illustrations come from `manuals/bc/illustrations`.
+
 ## Sources
 
 A brand rebuilt from a manual can say where each piece comes from. Templates, signatures and guide

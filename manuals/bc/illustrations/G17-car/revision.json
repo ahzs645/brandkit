@@ -1,0 +1,165 @@
+{
+  "vb": [
+    37.5,
+    135.0,
+    504.5,
+    210.5
+  ],
+  "notes": [
+    "Replaced the earlier General Manual car with the corrected shared authored illustration, using an explicit source-page placement matrix, not an overlay-fitted deformation.",
+    "Added the source mirror, full side/trunk panel linework, depth-shaped tyres/rim lip, double lamp surrounds and bumper profile.",
+    "The General Manual source has additional lamp divisions; these are separate lines on its own page.",
+    "After the overlay, replaced roof/pillar/glass components again directly in General Manual coordinates instead of retaining the V06-derived window positions."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "G17-car",
+  "title": "Car \u2014 General Manual",
+  "book": "General Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    28.333333333333332,
+    126.0,
+    522.6666666666666,
+    228.66666666666666
+  ],
+  "branding_zones": [
+    {
+      "id": "front-door-signature",
+      "label": "Front Door Signature",
+      "box": [
+        115.25438600000003,
+        218.74514200000002,
+        21.82356800000001,
+        33.296108000000004
+      ],
+      "quad": [
+        [
+          115.25722800000001,
+          218.74514200000002
+        ],
+        [
+          137.037401,
+          224.192329
+        ],
+        [
+          137.07795400000003,
+          252.04125000000002
+        ],
+        [
+          115.25438600000003,
+          245.30896200000004
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Agriculture",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        415.351437,
+        254.24250399999997,
+        19.355992000000015,
+        24.072141000000016
+      ],
+      "quad": [
+        [
+          415.351437,
+          258.614829
+        ],
+        [
+          430.951047,
+          254.24250399999997
+        ],
+        [
+          434.707429,
+          272.216187
+        ],
+        [
+          416.916499,
+          278.314645
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        53.22609700000001,
+        193.815977,
+        16.91876699999999,
+        8.045252000000005
+      ],
+      "quad": [
+        [
+          53.22609700000001,
+          193.815977
+        ],
+        [
+          69.98574900000001,
+          197.14919200000003
+        ],
+        [
+          70.144864,
+          201.861229
+        ],
+        [
+          53.38521200000001,
+          198.528014
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        493.00090600000004,
+        230.62435,
+        24.175424000000078,
+        14.698726999999991
+      ],
+      "quad": [
+        [
+          493.00090600000004,
+          239.754306
+        ],
+        [
+          516.5384490000001,
+          230.62435
+        ],
+        [
+          517.1763300000001,
+          236.190588
+        ],
+        [
+          493.18895100000003,
+          245.32307699999998
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "6ddc2fe3d0219fb61709d086aa6daa8852bb81385d9387c12e1cc06494af809e",
+  "revised_blank_sha256": "87c3def18518c4412247d60291b92fa68118fb4938d9940099068eaf5167abd1",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

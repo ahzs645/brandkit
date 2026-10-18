@@ -1,0 +1,102 @@
+{
+  "vb": [
+    64,
+    463,
+    1274,
+    534
+  ],
+  "notes": [
+    "Rebuilt the front and rear wheelhouses, corrected axle/rim placement and restored the stepped silhouette and sill.",
+    "Reconstructed the cab/door curve, divided side glazing, angled mirror/support, curved door handle and nested front-panel/marker linework.",
+    "Kept the rear bed ending at the original source crop rather than inventing a complete rear corner."
+  ],
+  "limits": [
+    "The far rear end is outside the source illustration; continuation beyond the crop is not asserted."
+  ],
+  "orientation": "Front at left; far rear is source-cropped at right.",
+  "id": "V09-pickup-side",
+  "title": "Pickup \u2014 side elevation, right edge cropped",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 9,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    50.377416395132634,
+    449.0786832937538,
+    1296.1389561090555,
+    562.7877088713389
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        602,
+        732,
+        92,
+        85
+      ],
+      "quad": [
+        [
+          602,
+          732
+        ],
+        [
+          694,
+          732
+        ],
+        [
+          694,
+          817
+        ],
+        [
+          602,
+          817
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        132,
+        665,
+        132,
+        27
+      ],
+      "quad": [
+        [
+          132,
+          665
+        ],
+        [
+          264,
+          665
+        ],
+        [
+          264,
+          692
+        ],
+        [
+          132,
+          692
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "1660-1213",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "7465537f1e9becdff7c48e7dafac1807e96a7f4121393e8b94690311c660b4b8",
+  "revised_blank_sha256": "46c5de6992e6bac2f63c688cb7f4fa6d4d4e3e33dd2931ab545e66fa02d3025d",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

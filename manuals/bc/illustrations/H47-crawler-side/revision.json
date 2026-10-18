@@ -1,0 +1,68 @@
+{
+  "vb": [
+    62.5,
+    245.5,
+    309,
+    189
+  ],
+  "notes": [
+    "Rebuilt this left-facing Hydro variant directly rather than mirroring the Vehicle Manual drawing wholesale.",
+    "Refit the engine/chassis, plain white track shape, end circles and two inner rails.",
+    "Restored the source white cushion/backrest and simple exhaust. No extra rollers, controls or vertical tread lines absent from this source were added."
+  ],
+  "limits": [],
+  "orientation": "Engine/front at left; opposite the Vehicle Manual side view.",
+  "id": "H47-crawler-side",
+  "title": "Crawler Side \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 47,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    53.333333333333336,
+    236.33333333333334,
+    327.3333333333333,
+    207.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "seat-signature",
+      "label": "Seat Signature",
+      "box": [
+        280,
+        320,
+        24,
+        10
+      ],
+      "quad": [
+        [
+          280,
+          320
+        ],
+        [
+          304,
+          320
+        ],
+        [
+          304,
+          330
+        ],
+        [
+          280,
+          330
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "04fd6dc495585401f4e94b73f286f80a4f13b246430132295aa60d9926d3356a",
+  "revised_blank_sha256": "881514037c3a5bf7b2c99bb7e44de1565a023d0764947687d970a42042068283",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

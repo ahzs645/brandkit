@@ -1,0 +1,67 @@
+{
+  "vb": [
+    439.5,
+    538.5,
+    82,
+    125
+  ],
+  "notes": [
+    "Rebuilt the continuous straight rear door edge, rounded lower corners and correct sloped front window.",
+    "Removed the invented lower door kink and refit the handle and lower fitting."
+  ],
+  "limits": [],
+  "orientation": "Sloping front pillar at right in this source detail.",
+  "id": "H46-cab-door",
+  "title": "Cab Door \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 46,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    430.3333333333333,
+    529.3333333333334,
+    100.33333333333333,
+    141.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        449.5,
+        601,
+        63,
+        13
+      ],
+      "quad": [
+        [
+          449.5,
+          601
+        ],
+        [
+          512.5,
+          601
+        ],
+        [
+          512.5,
+          614
+        ],
+        [
+          449.5,
+          614
+        ]
+      ],
+      "kind": "hydro-gas",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "b35cda42ab3c00829a7c2030a06a07cf6c15ede9eaaa5d02eec287cdf25f7faa",
+  "revised_blank_sha256": "b6a250bad134ec0874cc48e96b48e06840f48f4e1d0230f499c8cbfb8f66abb9",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

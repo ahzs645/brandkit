@@ -1,0 +1,99 @@
+{
+  "vb": [
+    411,
+    681,
+    197,
+    312
+  ],
+  "notes": [
+    "Refit the box and nested frame offsets.",
+    "Rebuilt the paired legs, diagonal braces, single low crossbar and independently rounded feet to preserve the open structure."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V15-trailer-front",
+  "title": "Box trailer \u2014 front",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    395.3333333333333,
+    665.0,
+    228.0,
+    343.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "front-signature",
+      "label": "Front Signature",
+      "box": [
+        441,
+        702,
+        63,
+        49
+      ],
+      "quad": [
+        [
+          441,
+          702
+        ],
+        [
+          504,
+          702
+        ],
+        [
+          504,
+          751
+        ],
+        [
+          441,
+          751
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        517,
+        703,
+        68,
+        15
+      ],
+      "quad": [
+        [
+          517,
+          703
+        ],
+        [
+          585,
+          703
+        ],
+        [
+          585,
+          718
+        ],
+        [
+          517,
+          718
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#000000",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "e9edea177f18daddaeea95b9e045204357dfd6feeba297ccd62783f617cb6964",
+  "revised_blank_sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,133 @@
+{
+  "vb": [
+    56,
+    510,
+    1222,
+    486
+  ],
+  "notes": [
+    "Rebuilt the wheelhouse infills, smooth tyre/rim geometry and paired arch mouldings instead of generic circular cutouts.",
+    "Refit roof/gutter, hood and windscreen, sliding/front-door outlines, window seal, marker insets and both bumpers.",
+    "Reconstructed the tall mirror head and its separate upper/lower support arms.",
+    "Excluded the optional window-frame and number-zone instructional callouts from the physical blank."
+  ],
+  "limits": [],
+  "orientation": "Front at right.",
+  "id": "V11-van-side",
+  "title": "Van \u2014 full side elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 11,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    39.68770339592315,
+    493.65932820543014,
+    1253.9921722115369,
+    518.7252461396973
+  ],
+  "branding_zones": [
+    {
+      "id": "side-panel-signature",
+      "label": "Side Panel Signature",
+      "box": [
+        155,
+        573,
+        90,
+        85
+      ],
+      "quad": [
+        [
+          155,
+          573
+        ],
+        [
+          245,
+          573
+        ],
+        [
+          245,
+          658
+        ],
+        [
+          155,
+          658
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        880,
+        745,
+        82,
+        92
+      ],
+      "quad": [
+        [
+          880,
+          745
+        ],
+        [
+          962,
+          745
+        ],
+        [
+          962,
+          837
+        ],
+        [
+          880,
+          837
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Abcdefghijk",
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        1058,
+        708,
+        99,
+        25
+      ],
+      "quad": [
+        [
+          1058,
+          708
+        ],
+        [
+          1157,
+          708
+        ],
+        [
+          1157,
+          733
+        ],
+        [
+          1058,
+          733
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "4f894c9a6c59951cf1613939c367f56ab88d4d2c9cb4b92b769396825b71311f",
+  "revised_blank_sha256": "945691c9635e34cdca1c2d4b82834dc2ee4834b40c802f16d1d367b4a4a6837a",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,70 @@
+{
+  "vb": [
+    526,
+    36.5,
+    226,
+    268
+  ],
+  "notes": [
+    "Rebuilt the cropped installer as separate coat, legs, sleeve, head/collar and gripping-finger components.",
+    "Reconstructed the hanging carrier sheet and curled lower edge, top roll, registration ticks, door/window context and physical mirror.",
+    "Historical carrier artwork is omitted and its application zone remains editable."
+  ],
+  "limits": [
+    "Head/body are intentionally source-cropped. Fine hand/face strokes are illustrative, not anatomical or production artwork."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "V18-installation-2",
+  "title": "Decal installation \u2014 panel 2",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 18,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    522.3333333333334,
+    27.333333333333332,
+    245.33333333333334,
+    288.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "carrier-branding",
+      "label": "Carrier Branding",
+      "box": [
+        597,
+        160,
+        58,
+        61
+      ],
+      "quad": [
+        [
+          597,
+          160
+        ],
+        [
+          655,
+          160
+        ],
+        [
+          655,
+          221
+        ],
+        [
+          597,
+          221
+        ]
+      ],
+      "kind": "transfer-sheet",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "27adaff3651d6dc921e44cae6c5fa79cefa0f24b5c266cd6d4616899ecf6df47",
+  "revised_blank_sha256": "5c55278041a44d8127a33c83fc03539658f1b0cd79f5d6de4ca20951563f59d9",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,67 @@
+{
+  "vb": [
+    59.5,
+    663.5,
+    353,
+    62
+  ],
+  "notes": [
+    "Rebuilt the deck steps, curved neck and dual axle centres.",
+    "Restored open wheel-rim arcs, hanging rear mudflap and fork/caster linework rather than a filled landing wheel."
+  ],
+  "limits": [],
+  "orientation": "Tow/landing end at right; preserve the opposite orientation to the Vehicle Manual flat-deck example.",
+  "id": "H46-flatbed",
+  "title": "Flatbed \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 46,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    50.333333333333336,
+    654.3333333333334,
+    371.3333333333333,
+    78.33333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "deck-signature",
+      "label": "Deck Signature",
+      "box": [
+        176,
+        674.5,
+        54,
+        10
+      ],
+      "quad": [
+        [
+          176,
+          674.5
+        ],
+        [
+          230,
+          674.5
+        ],
+        [
+          230,
+          684.5
+        ],
+        [
+          176,
+          684.5
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "e277e00720515eeb4e1a07d2c2200e1ab54bdce9cb3adee806cbfb7be1e9c56c",
+  "revised_blank_sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

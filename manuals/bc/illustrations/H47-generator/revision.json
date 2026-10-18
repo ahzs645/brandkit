@@ -1,0 +1,101 @@
+{
+  "vb": [
+    68.5,
+    449,
+    269,
+    278.5
+  ],
+  "notes": [
+    "Rebuilt the casing and shallow wheel arch, paired upper seams and keyhole-shaped intake.",
+    "Restored the separate rear hose loops, tie, stack/cap and small support step.",
+    "Reconstructed the drawbar, curved caster fork, open wheel-rim arcs and rear step.",
+    "Source lettering, including the safety warning, is kept out of the blank and assigned to separate branding/caption zones."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "H47-generator",
+  "title": "Generator \u2014 Hydro",
+  "book": "BC Hydro 1983",
+  "pdf_page_1based": 47,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    59.333333333333336,
+    440.0,
+    287.3333333333333,
+    296.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "side-signature",
+      "label": "Side Signature",
+      "box": [
+        213,
+        571,
+        78,
+        15
+      ],
+      "quad": [
+        [
+          213,
+          571
+        ],
+        [
+          291,
+          571
+        ],
+        [
+          291,
+          586
+        ],
+        [
+          213,
+          586
+        ]
+      ],
+      "kind": "hydro",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "safety-caption",
+      "label": "Safety Caption",
+      "box": [
+        211,
+        600,
+        86,
+        30
+      ],
+      "quad": [
+        [
+          211,
+          600
+        ],
+        [
+          297,
+          600
+        ],
+        [
+          297,
+          630
+        ],
+        [
+          211,
+          630
+        ]
+      ],
+      "kind": "caption",
+      "colour": "#000000",
+      "default": "Danger\nHigh Voltage",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "1971608318ec9fc6cb4c98e60aaed4b648d92565474a66121b32363f86c49519",
+  "revised_blank_sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

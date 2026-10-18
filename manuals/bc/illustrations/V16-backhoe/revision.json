@@ -1,0 +1,135 @@
+{
+  "vb": [
+    140,
+    399,
+    1089,
+    574
+  ],
+  "notes": [
+    "Rebuilt the loader as separate upper/lower members, far and near upright links, rocker, exposed piston rod, gland, cylinder body and pinned eye in the source order.",
+    "Replaced all generic tyre/rim groups with the actual near/far silhouettes, overlaps, yellow rim-depth lip and broken sidewall arcs.",
+    "Refit cab glass/gaskets, door sill and engine seams; restored exhaust top details.",
+    "Rebuilt forward bucket floor/cutting-edge lines and the rear boom profile, lug and toothed rear bucket with its curved inner bowl seam."
+  ],
+  "limits": [
+    "Fine low-resolution joints and partially occluded internal components are interpreted from visible source strokes, not engineering drawings."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "V16-backhoe",
+  "title": "Backhoe / front-end loader",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 16,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    123.84676243297552,
+    382.74250701648214,
+    1120.8443172954217,
+    606.1645558277295
+  ],
+  "branding_zones": [
+    {
+      "id": "cab-door-signature",
+      "label": "Cab Door Signature",
+      "box": [
+        792,
+        706,
+        45,
+        42
+      ],
+      "quad": [
+        [
+          792,
+          706
+        ],
+        [
+          837,
+          706
+        ],
+        [
+          837,
+          748
+        ],
+        [
+          792,
+          748
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "cab-unit",
+      "label": "Cab Unit",
+      "box": [
+        914,
+        697,
+        50,
+        15
+      ],
+      "quad": [
+        [
+          914,
+          697
+        ],
+        [
+          964,
+          697
+        ],
+        [
+          964,
+          712
+        ],
+        [
+          914,
+          712
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "7620-2108",
+      "historical_placement": true
+    },
+    {
+      "id": "boom-signature",
+      "label": "Boom Signature",
+      "box": [
+        1052,
+        694,
+        18,
+        22
+      ],
+      "quad": [
+        [
+          1052,
+          694
+        ],
+        [
+          1070,
+          694
+        ],
+        [
+          1070,
+          716
+        ],
+        [
+          1052,
+          716
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "1ec7d38349b7f72aa52062bf596e73983ae2ac6f52a602a53b1158049da2540e",
+  "revised_blank_sha256": "0711fce3c44bf6cfe3d6613dea84142f01c10ac9f2be251a2046247adb613983",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

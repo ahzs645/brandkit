@@ -1,0 +1,131 @@
+{
+  "vb": [
+    275.5,
+    384.5,
+    475.5,
+    188.0
+  ],
+  "notes": [
+    "Rebuilt the shared side-elevation van geometry and registered it against the General Manual source.",
+    "Restored twin wheel-arch trim, correct black wheelhouse infill, mirror A-support, sliding-door outline and side markers."
+  ],
+  "limits": [],
+  "orientation": "Front at right.",
+  "id": "G16-van-side",
+  "title": "Van Side \u2014 General Manual",
+  "book": "General Manual",
+  "pdf_page_1based": 16,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    266.3333333333333,
+    375.3333333333333,
+    493.6666666666667,
+    206.33333333333334
+  ],
+  "branding_zones": [
+    {
+      "id": "side-panel-signature",
+      "label": "Side Panel Signature",
+      "box": [
+        315.923,
+        411.6218,
+        34.79399999999998,
+        32.86099999999999
+      ],
+      "quad": [
+        [
+          315.923,
+          411.6218
+        ],
+        [
+          350.717,
+          411.6218
+        ],
+        [
+          350.717,
+          444.4828
+        ],
+        [
+          315.923,
+          444.4828
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        596.2080000000001,
+        478.11699999999996,
+        31.70119999999997,
+        35.56720000000007
+      ],
+      "quad": [
+        [
+          596.2080000000001,
+          478.11699999999996
+        ],
+        [
+          627.9092,
+          478.11699999999996
+        ],
+        [
+          627.9092,
+          513.6842
+        ],
+        [
+          596.2080000000001,
+          513.6842
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Abcdefghijk",
+      "historical_placement": true
+    },
+    {
+      "id": "front-unit",
+      "label": "Front Unit",
+      "box": [
+        665.0228,
+        463.81280000000004,
+        38.27340000000004,
+        9.664999999999964
+      ],
+      "quad": [
+        [
+          665.0228,
+          463.81280000000004
+        ],
+        [
+          703.2962,
+          463.81280000000004
+        ],
+        [
+          703.2962,
+          473.4778
+        ],
+        [
+          665.0228,
+          473.4778
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8861-2102",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "32f1d7ee7dc7c85f7e6c45600771e1472ba5e93131ab7d6f97510201976410be",
+  "revised_blank_sha256": "05914660aafe47e26805ca6e6eb5c0dafe70304d34222aaef1f24f7c9cb80f07",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

@@ -1,0 +1,102 @@
+{
+  "vb": [
+    8,
+    259,
+    741,
+    341
+  ],
+  "notes": [
+    "Rebuilt the cropped side view in its own PDF coordinates, including the extended roof context that the earlier viewBox cut too tightly.",
+    "Removed the doubled invented wheel/hub assembly; refit the single tyre, rim and dark wheelhouse.",
+    "Corrected all three side glass areas, windscreen, door divisions, mirror/stay, headlamp and bumper."
+  ],
+  "limits": [
+    "The rear of this car is genuinely outside this source view; it is deliberately not completed."
+  ],
+  "orientation": "Front at right; rear is source-cropped at left.",
+  "id": "V07-side-car",
+  "title": "Car \u2014 cropped front side elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 7,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1,
+  "review_viewbox": [
+    0.0,
+    258.90999999999997,
+    761.5,
+    352.8283333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "door-signature",
+      "label": "Door Signature",
+      "box": [
+        260,
+        433,
+        58,
+        62
+      ],
+      "quad": [
+        [
+          260,
+          433
+        ],
+        [
+          318,
+          433
+        ],
+        [
+          318,
+          495
+        ],
+        [
+          260,
+          495
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": "Province of British Columbia",
+      "historical_placement": true
+    },
+    {
+      "id": "unit",
+      "label": "Unit",
+      "box": [
+        628,
+        399,
+        68,
+        16
+      ],
+      "quad": [
+        [
+          628,
+          399
+        ],
+        [
+          696,
+          399
+        ],
+        [
+          696,
+          415
+        ],
+        [
+          628,
+          415
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "368de17e3ccb6ade4dd908f58f78ee2f6c6ef0636929665baeb9a4d3b3722332",
+  "revised_blank_sha256": "ca2e6bfcf6db43ad59dd4cc52bc4611b6ddc30f9ccc35631bec71cae4e160a38",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

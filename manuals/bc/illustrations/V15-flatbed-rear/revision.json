@@ -1,0 +1,67 @@
+{
+  "vb": [
+    67,
+    541,
+    196,
+    106
+  ],
+  "notes": [
+    "Rebuilt the centre stepped opening and four individual tyre ends with the source spacing.",
+    "Refit the fascia, top rail, four round lamps and rounded plate recess; omitted invented fascia divisions."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V15-flatbed-rear",
+  "title": "Flat-deck trailer \u2014 rear",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    51.333333333333336,
+    525.0,
+    227.66666666666666,
+    137.66666666666666
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        186,
+        553,
+        57,
+        20
+      ],
+      "quad": [
+        [
+          186,
+          553
+        ],
+        [
+          243,
+          553
+        ],
+        [
+          243,
+          573
+        ],
+        [
+          186,
+          573
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "fbe2f81213ca9d0af6d3bad0eaceb45ea833e41687edac793c184958257b70d8",
+  "revised_blank_sha256": "9902ac56566c996df2ce2f54cbc90b4eb5876b8c29160e78d697479e1856a9a9",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

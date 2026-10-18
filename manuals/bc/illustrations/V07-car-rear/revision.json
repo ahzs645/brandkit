@@ -1,0 +1,100 @@
+{
+  "vb": [
+    101,
+    132,
+    349,
+    225
+  ],
+  "notes": [
+    "Refit the roof/corner slopes, curved rear glass and boot seam.",
+    "Rebuilt segmented rear lamps, boot lock, plate recess, corner fittings and two-plane bumper.",
+    "Corrected the independent tyre ends; surrounding dimension leaders are excluded."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V07-car-rear",
+  "title": "Passenger car \u2014 rear elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 7,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    85.33333333333333,
+    116.0,
+    380.6666666666667,
+    256.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        155,
+        218,
+        35,
+        24
+      ],
+      "quad": [
+        [
+          155,
+          218
+        ],
+        [
+          190,
+          218
+        ],
+        [
+          190,
+          242
+        ],
+        [
+          155,
+          242
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "rear-unit",
+      "label": "Rear Unit",
+      "box": [
+        336,
+        232,
+        57,
+        13
+      ],
+      "quad": [
+        [
+          336,
+          232
+        ],
+        [
+          393,
+          232
+        ],
+        [
+          393,
+          245
+        ],
+        [
+          336,
+          245
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#ffffff",
+      "default": "8860-2105",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "31ebb045f7dc521a3e0a45e590754915b1d4a2f0e3065dc1f5e41863934ee38e",
+  "revised_blank_sha256": "bfdf9a625e6b2b99dd00250aded95fff340cf611bd3c1bf5bbd96467d25d2f91",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

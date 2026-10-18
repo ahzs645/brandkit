@@ -1,0 +1,100 @@
+{
+  "vb": [
+    703,
+    682,
+    573,
+    314
+  ],
+  "notes": [
+    "Replaced the filled landing-gear wedge with an actual open triangular brace, separate stem and caster.",
+    "Refit wheel spacing/overlap, rims, rear chassis steps and thin hanging mudflap.",
+    "Reconstructed nested box frames. Blank is the flat-panel variant: the source partial rib comparison and its explanatory text are not physical full-width panel ribs."
+  ],
+  "limits": [],
+  "orientation": "Landing/tow end at left.",
+  "id": "V15-trailer-side",
+  "title": "Box trailer \u2014 side",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    687.2936296296295,
+    666.1512962962962,
+    604.4022592592592,
+    345.66037037037034
+  ],
+  "branding_zones": [
+    {
+      "id": "side-signature",
+      "label": "Side Signature",
+      "box": [
+        1156,
+        705,
+        86,
+        78
+      ],
+      "quad": [
+        [
+          1156,
+          705
+        ],
+        [
+          1242,
+          705
+        ],
+        [
+          1242,
+          783
+        ],
+        [
+          1156,
+          783
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#000000",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "side-unit",
+      "label": "Side Unit",
+      "box": [
+        724,
+        706,
+        96,
+        19
+      ],
+      "quad": [
+        [
+          724,
+          706
+        ],
+        [
+          820,
+          706
+        ],
+        [
+          820,
+          725
+        ],
+        [
+          724,
+          725
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#000000",
+      "default": "2280-2008",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "b86d09f0304e45efe7ad1fcb3fbc9cfe16c449bf8f4c0df65c316ab3c2db1532",
+  "revised_blank_sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

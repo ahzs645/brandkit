@@ -1,0 +1,69 @@
+{
+  "vb": [
+    461,
+    519,
+    392,
+    455
+  ],
+  "notes": [
+    "Rebuilt tie knot/blade, shirt collar and exposed neck contours from the source.",
+    "Refit lapel notches, rounded breast pocket, sleeve seam and the lower-right open slit."
+  ],
+  "limits": [
+    "Cropped head, torso and sleeve retained; no unseen garment extension invented."
+  ],
+  "orientation": "preserved from this source illustration",
+  "id": "G15-blazer",
+  "title": "Blazer \u2014 chest pocket view",
+  "book": "General Manual",
+  "pdf_page_1based": 15,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    445.3333333333333,
+    503.0,
+    423.6666666666667,
+    486.6666666666667
+  ],
+  "branding_zones": [
+    {
+      "id": "pocket-crest",
+      "label": "Pocket Crest",
+      "box": [
+        634,
+        833,
+        83,
+        112
+      ],
+      "quad": [
+        [
+          634,
+          833
+        ],
+        [
+          717,
+          833
+        ],
+        [
+          717,
+          945
+        ],
+        [
+          634,
+          945
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#ffffff",
+      "default": null,
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "73e24f6e739ae0ea732a65e25e6eff6513952f21b6d92ebe0b93f05f634b9c07",
+  "revised_blank_sha256": "1249bf9e101970dbb33be90b9894f9b6e12b2a54b0670c6b2f55bc01505e319f",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}

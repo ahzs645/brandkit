@@ -7,6 +7,7 @@ export { LAYOUTS, mark, words, lockup, svgDocument, pattern, icon, logoDocument,
 export { paintFor, paintMarkup, signatureOf, layoutSignature, signatureLockup, colourwaysOf } from './signatures.js'
 export { toUnits, scopeIds, wrapLines, placeLogo, motifInBox, renderTemplate, templateFields, allFields, physicalSize } from './templates.js'
 export { createGuideKit, guidePages, guideSheets } from './guide.js'
+export { illustrationArt, illustrationIdentity, placeIllustration } from './illustrations.js'
 export { appIconSvg, faviconSvg, brandCss, tokens, reactComponent, landingHtml, indexHtml, coloursJson, gimpPalette, formatBytes } from './web.js'
 export { GROUPS, groupOf, planKit, buildKit } from './kit.js'
 export { STARTER_FONTS, STARTER_DEFAULTS, bakeWordmark, createStarterBrand } from './starter.js'

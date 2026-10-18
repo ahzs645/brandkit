@@ -1,0 +1,100 @@
+{
+  "vb": [
+    125,
+    623,
+    271,
+    368
+  ],
+  "notes": [
+    "Rebuilt the stepped chassis opening, central U-shaped hanger and four rounded, separated tyre ends.",
+    "Removed invented locking bars. Corrected the narrow central divider and horizontal fold lines.",
+    "Moved the fourteen reflective strips out of the blank body into a separate applied-markings layer."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V13-truck-rear",
+  "title": "Box truck \u2014 rear elevation",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 13,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    108.0,
+    608.3333333333334,
+    304.6666666666667,
+    399.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "rear-signature",
+      "label": "Rear Signature",
+      "box": [
+        162,
+        649,
+        68,
+        55
+      ],
+      "quad": [
+        [
+          162,
+          649
+        ],
+        [
+          230,
+          649
+        ],
+        [
+          230,
+          704
+        ],
+        [
+          162,
+          704
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#222222",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit",
+      "label": "Unit",
+      "box": [
+        298,
+        650,
+        70,
+        16
+      ],
+      "quad": [
+        [
+          298,
+          650
+        ],
+        [
+          368,
+          650
+        ],
+        [
+          368,
+          666
+        ],
+        [
+          298,
+          666
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#222222",
+      "default": "1604-2103",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "c6fd96a7cbfa0c40c53810e87ee0aa3de5ad030ccfe745a94c0c37f92686011f",
+  "revised_blank_sha256": "0671dab3c6e85eaaa72cd296d1d078688119d2c6dad4f334fd17fca35f859fa4",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": true
+}

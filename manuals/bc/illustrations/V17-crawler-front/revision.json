@@ -1,0 +1,100 @@
+{
+  "vb": [
+    877,
+    671,
+    282,
+    324
+  ],
+  "notes": [
+    "Rebuilt the lower central chassis opening, access-panel contour, separate wraparound handrails and exhaust cap.",
+    "Replaced the single/irregular generic track joints with the paired source tread lines.",
+    "Restored the 34 visible grille bars as an editable regularized primitive array, not scan contours."
+  ],
+  "limits": [],
+  "orientation": "preserved from this source illustration",
+  "id": "V17-crawler-front",
+  "title": "Tracked crawler \u2014 front",
+  "book": "Vehicle Manual",
+  "pdf_page_1based": 17,
+  "source_filename": "vehicle_manual.pdf",
+  "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+  "svg_units_per_pdf_point": 1.7,
+  "review_viewbox": [
+    861.3333333333334,
+    655.3333333333334,
+    313.6666666666667,
+    355.3333333333333
+  ],
+  "branding_zones": [
+    {
+      "id": "front-signature",
+      "label": "Front Signature",
+      "box": [
+        993,
+        766,
+        45,
+        35
+      ],
+      "quad": [
+        [
+          993,
+          766
+        ],
+        [
+          1038,
+          766
+        ],
+        [
+          1038,
+          801
+        ],
+        [
+          993,
+          801
+        ]
+      ],
+      "kind": "signature",
+      "colour": "#252823",
+      "default": null,
+      "historical_placement": true
+    },
+    {
+      "id": "unit-number",
+      "label": "Unit Number",
+      "box": [
+        991,
+        807,
+        54,
+        15
+      ],
+      "quad": [
+        [
+          991,
+          807
+        ],
+        [
+          1045,
+          807
+        ],
+        [
+          1045,
+          822
+        ],
+        [
+          991,
+          822
+        ]
+      ],
+      "kind": "unit",
+      "colour": "#252823",
+      "default": "7620-2108",
+      "historical_placement": true
+    }
+  ],
+  "previous_blank_sha256": "1de231130d9408332cfd16d56d7b01c2d34f5fe83d339f8de29f4c1672a19b44",
+  "revised_blank_sha256": "2ab0445843fc7f13c8597bdfe2889255cf640769b982f3e608283a4594ef76e9",
+  "auto_trace_used": false,
+  "embedded_raster": false,
+  "review_status": "visual source-overlay review completed; reconstruction limits apply",
+  "optional_markings": false
+}
