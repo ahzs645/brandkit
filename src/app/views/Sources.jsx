@@ -17,8 +17,7 @@ export const ManualSources = ({ brand, sources, openManual, heading }) => {
   const base = PACKS[brand.manuals?.pack]
   return (
     <div className="sources">
-      {/* A brand rebuilt from a manual is "from" it; one that borrows its system is "modelled on" it. */}
-      <h4 className="sources__heading">{brand.manuals?.relation ?? heading ?? 'From the manual'}</h4>
+      <h4 className="sources__heading">{heading ?? 'From the manual'}</h4>
       <ul className="sources__list">
         {sources.map((source) => {
           const content = (
@@ -51,10 +50,10 @@ export const BuiltFrom = ({ book, page, openBuilt }) => {
   if (!brands.length) return null
   return (
     <div className="sources sources--built">
-      <h4 className="sources__heading">This page in brandkit</h4>
+      <h4 className="sources__heading">Built from this page in brandkit</h4>
       {brands.map((entry) => (
         <div key={entry.id} className="sources__brand">
-          <span className="sources__meta">{entry.name}{entry.relation ? `, ${entry.relation.toLowerCase()} this page` : ', built from this page'}</span>
+          <span className="sources__meta">{entry.name}</span>
           <ul className="sources__chips">
             {entry.pages[key].map(([kind, id, label]) => (
               <li key={`${kind}-${id}`}>

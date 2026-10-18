@@ -215,3 +215,37 @@ test('every ManualKit drawing is a template with its zones filled, and sits in i
     assert.ok(page.includes(`data-illustration="${asset.id}"`), `${asset.id} is not on its page`)
   }
 })
+
+test('sets and documents name real templates, and every document makes its Office file', async () => {
+  const { officeFile } = await import('../src/export/office.js')
+  const { unzipSync, strFromU8 } = await import('fflate')
+  // A one-pixel PNG stands in for the browser's renderer.
+  const png = async () => Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64'))
+  for (const id of ['ddcnorth', 'bc-province-1977', 'bc-hydro-1983']) {
+    const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
+    assert.deepEqual(validateBrand(definition), [], id)
+    assert.ok(definition.sets?.length && definition.documents?.length, `${id} has sets and documents`)
+    for (const document of definition.documents) {
+      const file = await officeFile({ brand: definition, values: {} }, document, { png })
+      if (document.format === 'html') {
+        assert.match(strFromU8(file.bytes), /<table[\s\S]*<img[\s\S]*<\/table>/, `${id}/${document.id}`)
+        continue
+      }
+      const parts = unzipSync(file.bytes)
+      if (document.format === 'docx') {
+        const xml = strFromU8(parts['word/document.xml'])
+        assert.ok(parts['word/header1.xml'] && Object.keys(parts).some((name) => name.startsWith('word/media/')), `${id}/${document.id} has its artwork in a header`)
+        assert.match(xml, /<w:pgSz /, `${id}/${document.id}`)
+      } else {
+        const layouts = Object.keys(parts).filter((name) => /slideLayouts\/slideLayout\d+\.xml$/.test(name))
+        assert.ok(layouts.length >= document.layouts.length, `${id}/${document.id}: ${layouts.length} layouts`)
+        assert.ok(Object.keys(parts).some((name) => /ppt\/slides\/slide\d+\.xml$/.test(name)))
+      }
+    }
+  }
+})
+
+test('the business card is one set: its fronts and back', () => {
+  const card = brand.sets.find((set) => set.id === 'business-card')
+  assert.deepEqual(card.variants.map((variant) => variant.template), ['business-card-front', 'business-card-front-light', 'business-card-back'])
+})

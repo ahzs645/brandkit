@@ -165,7 +165,9 @@ for (const { name: raw, from, to } of art.ministries) {
 ministries.push({ id: 'public-service-commission', name: 'Public Service Commission', years: '1976–', values: { ministry: 'Public Service\nCommission', 'ministry-split': '' } })
 
 // ---------------------------------------------------------------------------------------------
-const FONT = (file, label, extra = {}) => ({ family: 'TeX Gyre Heros', stack: '"TeX Gyre Heros", Helvetica, Arial, sans-serif', weight: 400, capHeight: CAPR, file: `fonts/${file}`, web: `fonts/${file}`, label, ...extra })
+// `office`: the face Word should ask for. The manuals specify Helvetica; TeX Gyre Heros stands in
+// for it here, but a Word document names Helvetica and lets the system supply it.
+const FONT = (file, label, extra = {}) => ({ family: 'TeX Gyre Heros', office: 'Helvetica', stack: '"TeX Gyre Heros", Helvetica, Arial, sans-serif', weight: 400, capHeight: CAPR, file: `fonts/${file}`, web: `fonts/${file}`, label, ...extra })
 
 export const brand = {
   schema: 'brandkit/1',
@@ -194,7 +196,7 @@ export const brand = {
     medium: FONT('texgyreheros-bold.otf', 'Helvetica Medium (TeX Gyre Heros Bold)', { weight: 700 }),
     italic: FONT('texgyreheros-italic.otf', 'Helvetica Regular Italic (TeX Gyre Heros Italic)', { style: 'italic' }),
     light: FONT('texgyreheros-regular.otf', 'Helvetica Ultra Light (set in Regular: no open Ultra Light)'),
-    typewriter: { family: 'TeX Gyre Cursor', stack: '"TeX Gyre Cursor", "Courier New", Courier, monospace', weight: 400, capHeight: 0.563, file: 'fonts/texgyrecursor-regular.otf', web: 'fonts/texgyrecursor-regular.otf', label: 'Courier (TeX Gyre Cursor)' },
+    typewriter: { family: 'TeX Gyre Cursor', office: 'Courier', stack: '"TeX Gyre Cursor", "Courier New", Courier, monospace', weight: 400, capHeight: 0.563, file: 'fonts/texgyrecursor-regular.otf', web: 'fonts/texgyrecursor-regular.otf', label: 'Courier (TeX Gyre Cursor)' },
     body: FONT('texgyreheros-regular.otf', 'Helvetica Regular'),
     bold: FONT('texgyreheros-bold.otf', 'Helvetica Medium', { weight: 700 }),
     display: FONT('texgyreheros-bold.otf', 'Helvetica Medium', { weight: 700 }),
@@ -386,11 +388,37 @@ brand.roles.type = 'black'
 
 // The drawings of uniforms and vehicles (ManualKit's source-registered illustrations), each a
 // template with the identity in its branding zones.
-const drawn = illustrated('province', ['G15', 'G16', 'G17', 'V03', 'V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18'])
+const drawn = illustrated('province', ['G15', 'G16', 'G17', 'V03', 'V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18'], [], 'Uniforms and vehicles, drawn')
 brand.illustrations = drawn.drawings
 
 brand.templates = [...stationery, ...applications(brand), ...drawn.templates]
 brand.guide = guide(brand)
+
+// Variants of one thing are one item in the studio: a letterhead in each rank, a sign in each
+// category, a vehicle in each view.
+const RANKS = [['gu', 'General Use'], ['minister', 'Minister'], ['deputy', 'Deputy Minister'], ['board', 'Board or Commission'], ['premier', 'Premier'], ['special', 'Special Use']]
+const set = (id, label, variants, group) => ({ id, label, ...(group ? { group } : {}), variants: variants.map(([template, name]) => ({ template, label: name })) })
+brand.sets = [
+  set('letterhead', 'Letterhead', RANKS.map(([rank, name]) => [`${rank}-letterhead`, name]), 'Stationery'),
+  set('envelope', 'Envelope', [...RANKS.map(([rank, name]) => [`${rank}-envelope`, name]), ['gu-envelope-kraft', 'Catalogue (kraft)']], 'Stationery'),
+  set('calling-card', 'Calling card', RANKS.map(([rank, name]) => [`${rank}-card`, name]), 'Stationery'),
+  set('publication', 'Publication', [['publication-title-page', 'Title page'], ['publication-cover-reverse', 'Cover, reversed'], ['publication-annual-report', 'Annual report'], ['publication-statement-page', 'Statement page']]),
+  set('advertisement', 'Advertisement', [['advert-tender', 'Tender'], ['advert-announcement', 'Announcement']]),
+  set('shoulder-flash', 'Shoulder flash', [['uniform-flash', 'Job function'], ['uniform-security', 'Security']]),
+  set('vehicle-markings', 'Vehicle markings', [['vehicle-door', 'Door'], ['vehicle-van-truck', 'Van truck, side'], ['vehicle-van-truck-rear', 'Van truck, rear']]),
+  set('sign', 'Sign', [['sign-primary-identification', 'Primary identification'], ['sign-secondary-identification', 'Secondary identification'], ['sign-standard-information', 'Standard information'], ['sign-directional', 'Directional'], ['sign-warning', 'Warning'], ['sign-regulatory', 'Regulatory']]),
+  ...drawn.sets
+]
+
+// Word templates for what was typed: each rank's letterhead and envelope, the memorandum and news
+// release, and a publication's title and statement pages.
+brand.documents = [
+  ...RANKS.map(([rank, name]) => ({ id: `${rank}-letterhead`, label: `Letterhead, ${name}`, format: 'docx', pages: [`${rank}-letterhead`] })),
+  ...RANKS.map(([rank, name]) => ({ id: `${rank}-envelope`, label: `Envelope, ${name}`, format: 'docx', pages: [`${rank}-envelope`] })),
+  { id: 'memorandum', label: 'Memorandum', format: 'docx', pages: ['memorandum'] },
+  { id: 'news-release', label: 'News release', format: 'docx', pages: ['news-release'] },
+  { id: 'publication', label: 'Publication title and statement pages', format: 'docx', pages: ['publication-title-page', 'publication-statement-page'], continue: true }
+]
 
 // The manual pages each piece is built from (page ids in manuals/bc). General Manual G12 is
 // Format A (the component's address printed), G13 Format B (typed); R03 explains the spec sheets.

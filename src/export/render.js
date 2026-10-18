@@ -123,7 +123,7 @@ export const unzip = async (bytes) => {
   return new Map(Object.entries(data).filter(([path]) => !path.endsWith('/') && !path.includes('__MACOSX')))
 }
 
-export const MIME = { svg: 'image/svg+xml', png: 'image/png', pdf: 'application/pdf', zip: 'application/zip', json: 'application/json', css: 'text/css', html: 'text/html', tsx: 'text/plain', ico: 'image/x-icon', md: 'text/markdown', txt: 'text/plain' }
+export const MIME = { svg: 'image/svg+xml', png: 'image/png', pdf: 'application/pdf', zip: 'application/zip', json: 'application/json', css: 'text/css', html: 'text/html', tsx: 'text/plain', ico: 'image/x-icon', md: 'text/markdown', txt: 'text/plain', docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' }
 
 /** Hands a file to the browser as a download. */
 export const download = (content, name, type) => {

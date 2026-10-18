@@ -165,6 +165,46 @@ A `text` with `compose` (`"Phone: {telephone}"`) builds one line from other fiel
 out when any of them has been cleared. `brand.fields` (`{ "telephone": { "label": "Telephone",
 "placeholder": "(604) 000-0000" } }`) names fields and gives composed lines their defaults.
 
+### Sets
+
+`sets` make variants of one thing one item in the studio, with a switcher between them and a PDF
+of them all:
+
+```json
+"sets": [{ "id": "business-card", "label": "Business card", "group": "Business cards",
+  "variants": [{ "template": "business-card-front", "label": "Front" }, { "template": "business-card-back", "label": "Back" }] }]
+```
+
+The templates stay templates (the kit still writes each one's files); the set only groups them.
+
+### Office documents
+
+`documents` are the Office files made from templates:
+
+```json
+"documents": [
+  { "id": "letterhead-a4", "label": "Letterhead, A4", "format": "docx", "pages": ["letterhead-a4", "letterhead-continuation"] },
+  { "id": "report", "label": "Report", "format": "docx", "pages": ["report-cover", "report-page"], "continue": true },
+  { "id": "presentation", "label": "Presentation", "format": "pptx", "layouts": ["presentation-cover", "presentation-section"] },
+  { "id": "email-signature", "label": "Email signature", "format": "html", "template": "email-signature" }
+]
+```
+
+A Word document takes its first page from the first template and later pages' header and footer
+from the second (with `continue`, the second's body text follows on a new page, as a report's
+first page of text follows its cover). Each page's artwork (everything but its text) is drawn
+behind it. Text with a field becomes real text: in the header (above the lowest rule in the top
+quarter, or a masthead band), in the body, or in the footer (below the lowest rule in the last
+quarter); in the body, labels beside the fields come too, lines sharing a baseline go on tab
+stops, and rules become borders. A PowerPoint template gets a slide layout per template, its
+fields as placeholders (the largest worded one the title), and a sample slide of each. An email
+signature is a table: the drawing left of the text as an image, then the text, line by line,
+with mail, phone and web links.
+
+A face's `office` name is the font a document asks for, where it differs from the face itself:
+the Province's TeX Gyre Heros stands in for Helvetica, so its documents name Helvetica. Faces with
+no `office` name are embedded in Word files when they are TrueType.
+
 ## Guide
 
 ```json
@@ -238,9 +278,7 @@ pages take `sources`, the manual pages they are built from:
 ```
 
 `book` and `page` are ids in a manual pack, which `manuals: { "pack": "bc" }` names; the rest is
-there so the citation reads on its own. A brand that borrows a manual's system rather than
-rebuilding it says so: ddcnorth's `manuals` has `"relation": "Modelled on"`, and the app labels
-its citations that way.
+there so the citation reads on its own.
 
 Templates and guide pages may carry an `extension` name: ddcnorth's application system is
 `"extension": "applications"`, so its script can replace it without touching the original kit's

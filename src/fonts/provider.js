@@ -117,8 +117,10 @@ export const loadBrandFonts = async (brand, read) => {
   await Promise.all(Object.entries(brand.fonts ?? {}).map(async ([key, spec]) => {
     if (!spec.file) return
     try {
-      if (!cache.has(spec.file)) cache.set(spec.file, Promise.resolve(read(spec.file)).then((buffer) => parse(buffer)))
-      faces[key] = { font: await cache.get(spec.file), slant: spec.slant ?? 0 }
+      if (!cache.has(spec.file)) cache.set(spec.file, Promise.resolve(read(spec.file)).then((buffer) => ({ font: parse(buffer), bytes: new Uint8Array(buffer) })))
+      // The file's bytes stay with the face, for documents that embed it (a Word template).
+      const loaded = await cache.get(spec.file)
+      faces[key] = { font: loaded.font, bytes: loaded.bytes, slant: spec.slant ?? 0 }
     } catch (error) {
       failures.push({ key, file: spec.file, error })
     }

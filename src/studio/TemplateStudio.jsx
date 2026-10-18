@@ -7,6 +7,11 @@
 //
 //   <TemplateStudio brand={brand} fonts={fonts} storageKey="my-brand" />
 //
+// A brand's `sets` make variants of one thing one item (a card's fronts and back; a letterhead in
+// A4 and US Letter): the list shows the set once, and the stage switches between its variants. Its
+// `documents` add Office downloads to the templates they are made from: a Word template, a
+// PowerPoint template, an HTML email signature (with a button to copy it for a mail program).
+//
 // `values` / `onValuesChange` make the fields controlled, for a host that sets some of them from
 // its own controls (PofBC sets the ministry lines from its ministry picker). `children` render
 // above the fields, for those controls.
@@ -14,6 +19,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { allFields, renderTemplate, templateFields } from '../engine/templates.js'
 import { download, pdf, rasterise, zip } from '../export/render.js'
+import { documentsFor, FORMAT_LABELS, officeFile } from '../export/office.js'
 import { physicalSize } from '../engine/templates.js'
 import './studio.css'
 
@@ -40,12 +46,20 @@ const readStored = (key) => {
   try { return JSON.parse(localStorage.getItem(`brandkit:fields:${key}`) ?? '{}') } catch { return {} }
 }
 
-const groupsOf = (templates) => {
+/** The list's entries: one per template, or one per set of variants, in their groups. */
+const entriesOf = (templates, sets) => {
   const groups = new Map()
+  const seen = new Set()
   for (const template of templates) {
-    const group = template.group ?? 'Templates'
+    const set = sets.find((entry) => entry.variants.some((variant) => variant.template === template.id))
+    if (set && seen.has(set.id)) continue
+    if (set) seen.add(set.id)
+    const variants = set ? set.variants.filter((variant) => templates.some((entry) => entry.id === variant.template)) : null
+    const first = variants ? templates.find((entry) => entry.id === variants[0].template) : template
+    const group = (set && variants.length > 1 ? set.group : null) ?? first.group ?? 'Templates'
     if (!groups.has(group)) groups.set(group, [])
-    groups.get(group).push(template)
+    const several = set && variants.length > 1
+    groups.get(group).push({ key: set?.id ?? template.id, label: several ? set.label : first.label ?? first.id, template: first, set: several ? { ...set, variants } : null })
   }
   return [...groups]
 }
@@ -73,9 +87,15 @@ export const TemplateStudio = ({
 
   const template = templates.find((entry) => entry.id === selected) ?? templates[0]
   const ready = Boolean(fonts)
+  const entries = useMemo(() => entriesOf(templates, brand.sets ?? []), [templates, brand.sets])
+  const currentSet = entries.flatMap(([, list]) => list).find((entry) => entry.set?.variants.some((variant) => variant.template === template?.id))?.set ?? null
+  const documents = template ? documentsFor(brand, template.id) : []
   const ctx = (outline, extra = {}) => ({ brand, fonts, values, outline: outline && ready, ...extra })
   const preview = template ? renderTemplate(ctx(true, { showGuides: guides }), template).svg : null
-  const fields = template ? templateFields(template, brand) : []
+  // A set's fields are all its variants' (a card's name is on its back while its front is shown).
+  const fields = !template ? [] : currentSet
+    ? allFields(currentSet.variants.map((variant) => templates.find((entry) => entry.id === variant.template)).filter(Boolean), brand)
+    : templateFields(template, brand)
   const everyField = useMemo(() => allFields(templates, brand), [templates, brand])
   const filled = everyField.filter((field) => values[field.id]?.trim()).length
 
@@ -85,6 +105,20 @@ export const TemplateStudio = ({
     try { await task() } catch (problem) { setError(problem.message) } finally { setBusy(null) }
   }
   const name = (entry) => fileName(entry, values)
+  const office = (document) => run(document.id, async () => {
+    const file = await officeFile({ brand, fonts, values }, document, { png: rasterise })
+    download(file.bytes, file.name, file.type)
+  })
+  const copySignature = (document) => run(`${document.id}-copy`, async () => {
+    const file = await officeFile({ brand, fonts, values }, document, { png: rasterise })
+    const plain = file.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+    await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([file.html], { type: 'text/html' }), 'text/plain': new Blob([plain], { type: 'text/plain' }) })])
+    setCopied(document.id)
+  })
+  const [copied, setCopied] = useState(null)
+  useEffect(() => { if (!copied) return undefined; const timer = setTimeout(() => setCopied(null), 2400); return () => clearTimeout(timer) }, [copied])
+  // Two documents in one format from one template (a continuation sheet serves several) are told apart by name.
+  const officeLabel = (document) => (documents.filter((other) => other.format === document.format).length > 1 ? `${FORMAT_LABELS[document.format]}: ${document.label}` : FORMAT_LABELS[document.format])
   const files = async (entry) => {
     const outlined = renderTemplate(ctx(true), entry)
     return {
@@ -99,22 +133,30 @@ export const TemplateStudio = ({
   return (
     <div className="studio">
       <nav className="studio__list" aria-label="Templates">
-        {groupsOf(templates).map(([group, entries]) => (
+        {entries.map(([group, list]) => (
           <div key={group} className="studio__group">
             <h3>{group}</h3>
-            {entries.map((entry) => (
-              <button key={entry.id} type="button" className="studio__item" aria-pressed={entry.id === template.id} onClick={() => setSelected(entry.id)}>
-                <span className="studio__thumb" style={{ aspectRatio: `${entry.width} / ${entry.height}` }}>
-                  <Preview svg={renderTemplate(ctx(true), entry).svg} alt="" />
-                </span>
-                <span>{entry.label ?? entry.id}</span>
-              </button>
-            ))}
+            {list.map((entry) => {
+              const pressed = entry.set ? entry.set.variants.some((variant) => variant.template === template.id) : entry.template.id === template.id
+              return (
+                <button key={entry.key} type="button" className="studio__item" aria-pressed={pressed} onClick={() => { if (!pressed) setSelected(entry.template.id) }}>
+                  <span className="studio__thumb" style={{ aspectRatio: `${entry.template.width} / ${entry.template.height}` }}>
+                    <Preview svg={renderTemplate(ctx(true), entry.template).svg} alt="" />
+                  </span>
+                  <span>{entry.label}{entry.set && <span className="studio__count">{entry.set.variants.length} variants</span>}</span>
+                </button>
+              )
+            })}
           </div>
         ))}
       </nav>
 
       <div className="studio__stage">
+        {currentSet && (
+          <div className="studio__variants" role="group" aria-label={`${currentSet.label} variants`}>
+            {currentSet.variants.map((variant) => <button key={variant.template} type="button" aria-pressed={variant.template === template.id} onClick={() => setSelected(variant.template)}>{variant.label}</button>)}
+          </div>
+        )}
         <div className="studio__canvas">
           <Preview className="studio__preview" svg={preview} alt={`${template.label ?? template.id} preview`} />
         </div>
@@ -127,6 +169,12 @@ export const TemplateStudio = ({
             <button type="button" className="button button--quiet" disabled={Boolean(busy)} title="Text stays live and editable" onClick={() => run('svg', async () => download(renderTemplate(ctx(false), template).svg, `${name(template)}.svg`))}>↓ SVG</button>
             <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => run('png', async () => download((await files(template)).png, `${name(template)}.png`))}>{busy === 'png' ? '…' : '↓'} PNG</button>
             <button type="button" className="button" disabled={Boolean(busy) || !ready} onClick={() => run('pdf', async () => download((await files(template)).pdf, `${name(template)}.pdf`))}>{busy === 'pdf' ? '…' : '↓'} PDF</button>
+            {currentSet && (
+              <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} title={`Every variant of the ${currentSet.label.toLowerCase()}, one to a page`} onClick={() => run('set', async () => {
+                const pages = currentSet.variants.map((variant) => { const outlined = renderTemplate(ctx(true), templates.find((entry) => entry.id === variant.template)); return { svg: outlined.svg, ...physicalSize(outlined) } })
+                download(await pdf(pages, { title: `${brand.name} ${currentSet.label}`, author: brand.name }), `${brand.id}-${currentSet.id}.pdf`)
+              })}>{busy === 'set' ? '…' : '↓'} PDF, all variants</button>
+            )}
             <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} title="Every template, as SVG, PNG and PDF" onClick={() => run('all', async () => {
               const out = new Map()
               for (const entry of templates) {
@@ -137,6 +185,17 @@ export const TemplateStudio = ({
             })}>{busy === 'all' ? 'Making…' : '↓ All, zipped'}</button>
           </div>
         </div>
+        {documents.length > 0 && (
+          <div className="studio__office">
+            <span className="studio__office-label">Office</span>
+            {documents.map((document) => (
+              <span key={document.id} className="studio__office-item">
+                <button type="button" className="button" disabled={Boolean(busy) || !ready} title={`${document.label}: ${{ docx: 'a Word template', pptx: 'a PowerPoint template with a slide layout for each', html: 'an HTML signature to paste into a mail program' }[document.format]}`} onClick={() => office(document)}>{busy === document.id ? 'Making…' : `↓ ${officeLabel(document)}`}</button>
+                {document.format === 'html' && <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => copySignature(document)}>{copied === document.id ? 'Copied' : 'Copy signature'}</button>}
+              </span>
+            ))}
+          </div>
+        )}
         {error && <p className="studio__error" role="alert">{error}</p>}
         {!ready && <p className="studio__note">Loading the brand’s fonts. Previews use stand-in type until they arrive.</p>}
         {note && <p className="studio__note">{note}</p>}
@@ -157,7 +216,7 @@ export const TemplateStudio = ({
             </select>
           </label>
         )}
-        <h3>{template.label ?? template.id}</h3>
+        <h3>{currentSet?.label ?? template.label ?? template.id}</h3>
         {fields.length === 0 && <p className="studio__note">Nothing to fill in on this one.</p>}
         {fields.map((field) => (
           <label key={field.id} className="field">

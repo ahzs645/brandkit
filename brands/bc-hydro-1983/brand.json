@@ -93,6 +93,7 @@
  "fonts": {
   "body": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 400,
    "capHeight": 0.662,
@@ -102,6 +103,7 @@
   },
   "italic": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 400,
    "capHeight": 0.653,
@@ -112,6 +114,7 @@
   },
   "bold": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 700,
    "capHeight": 0.676,
@@ -121,6 +124,7 @@
   },
   "boldItalic": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 700,
    "capHeight": 0.669,
@@ -131,6 +135,7 @@
   },
   "display": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 400,
    "capHeight": 0.662,
@@ -140,6 +145,7 @@
   },
   "displayRegular": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 400,
    "capHeight": 0.662,
@@ -149,6 +155,7 @@
   },
   "extra": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 700,
    "capHeight": 0.662,
@@ -158,6 +165,7 @@
   },
   "label": {
    "family": "TeX Gyre Termes",
+   "office": "Times New Roman",
    "stack": "\"TeX Gyre Termes\", \"Times New Roman\", Times, serif",
    "weight": 400,
    "capHeight": 0.662,
@@ -2797,7 +2805,7 @@
   {
    "id": "illustrated-h44-van-door",
    "label": "Van Door, Hydro",
-   "group": "Graphic Standards: Light vehicles",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 1922,
    "raster": 1600,
@@ -2843,7 +2851,7 @@
   {
    "id": "illustrated-h44-van-rear",
    "label": "Van Rear, Hydro",
-   "group": "Graphic Standards: Light vehicles",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 1710,
    "raster": 1600,
@@ -2889,7 +2897,7 @@
   {
    "id": "illustrated-h44-van-side",
    "label": "Van Side, Hydro",
-   "group": "Graphic Standards: Light vehicles",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 624,
    "raster": 1600,
@@ -2935,7 +2943,7 @@
   {
    "id": "illustrated-h45-roller-truck-rear",
    "label": "Roller Truck Rear, Hydro",
-   "group": "Graphic Standards: Heavy trucks",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 2204,
    "raster": 1600,
@@ -2981,7 +2989,7 @@
   {
    "id": "illustrated-h45-stepvan-rear",
    "label": "Stepvan Rear, Hydro",
-   "group": "Graphic Standards: Heavy trucks",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 2127,
    "raster": 1600,
@@ -3027,7 +3035,7 @@
   {
    "id": "illustrated-h45-stepvan-side",
    "label": "Stepvan Side, Hydro",
-   "group": "Graphic Standards: Heavy trucks",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 701,
    "raster": 1600,
@@ -3073,7 +3081,7 @@
   {
    "id": "illustrated-h46-cab-door",
    "label": "Cab Door, Hydro",
-   "group": "Graphic Standards: Tractor trailers",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 2439,
    "raster": 1600,
@@ -3119,7 +3127,7 @@
   {
    "id": "illustrated-h46-flatbed",
    "label": "Flatbed, Hydro",
-   "group": "Graphic Standards: Tractor trailers",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 281,
    "raster": 1600,
@@ -3165,7 +3173,7 @@
   {
    "id": "illustrated-h46-tractor-trailer",
    "label": "Tractor Trailer, Hydro",
-   "group": "Graphic Standards: Tractor trailers",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 606,
    "raster": 1600,
@@ -3211,7 +3219,7 @@
   {
    "id": "illustrated-h47-crawler-front",
    "label": "Crawler Front, Hydro",
-   "group": "Graphic Standards: Equipment",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 1865,
    "raster": 1600,
@@ -3257,7 +3265,7 @@
   {
    "id": "illustrated-h47-crawler-side",
    "label": "Crawler Side, Hydro",
-   "group": "Graphic Standards: Equipment",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 979,
    "raster": 1600,
@@ -3303,7 +3311,7 @@
   {
    "id": "illustrated-h47-generator",
    "label": "Generator, Hydro",
-   "group": "Graphic Standards: Equipment",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 1657,
    "raster": 1600,
@@ -3355,7 +3363,7 @@
   {
    "id": "illustrated-h47-seat-panel",
    "label": "Seat Panel, Hydro",
-   "group": "Graphic Standards: Equipment",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 1443,
    "raster": 1600,
@@ -3401,7 +3409,7 @@
   {
    "id": "illustrated-h48-boxcar",
    "label": "Boxcar, Hydro",
-   "group": "Graphic Standards: Railway",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 636,
    "raster": 1600,
@@ -3447,7 +3455,7 @@
   {
    "id": "illustrated-h48-locomotive",
    "label": "Locomotive, Hydro",
-   "group": "Graphic Standards: Railway",
+   "group": "Vehicles and equipment, drawn",
    "width": 1600,
    "height": 561,
    "raster": 1600,
@@ -5400,6 +5408,327 @@
    ]
   }
  },
+ "sets": [
+  {
+   "id": "letterhead",
+   "label": "Letterhead",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "letterhead-standard",
+     "label": "Corporate"
+    },
+    {
+     "template": "letterhead-gas",
+     "label": "Gas Operations"
+    },
+    {
+     "template": "letterhead-rail",
+     "label": "B.C.Hydro Rail"
+    }
+   ]
+  },
+  {
+   "id": "envelope",
+   "label": "Envelope",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "envelope-standard",
+     "label": "Corporate"
+    },
+    {
+     "template": "envelope-gas",
+     "label": "Gas Operations"
+    },
+    {
+     "template": "envelope-rail",
+     "label": "B.C.Hydro Rail"
+    }
+   ]
+  },
+  {
+   "id": "business-card",
+   "label": "Business card",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "card-standard",
+     "label": "Corporate"
+    },
+    {
+     "template": "card-gas",
+     "label": "Gas Operations"
+    },
+    {
+     "template": "card-rail",
+     "label": "B.C.Hydro Rail"
+    }
+   ]
+  },
+  {
+   "id": "cover",
+   "label": "Publication cover",
+   "variants": [
+    {
+     "template": "cover-report",
+     "label": "Report"
+    },
+    {
+     "template": "cover-illustrated",
+     "label": "Illustrated"
+    },
+    {
+     "template": "cover-display",
+     "label": "Display"
+    }
+   ]
+  },
+  {
+   "id": "masthead",
+   "label": "Masthead",
+   "variants": [
+    {
+     "template": "masthead-band",
+     "label": "Band"
+    },
+    {
+     "template": "masthead-rule",
+     "label": "Rule"
+    }
+   ]
+  },
+  {
+   "id": "advertisement",
+   "label": "Advertisement",
+   "variants": [
+    {
+     "template": "advert-display",
+     "label": "Display"
+    },
+    {
+     "template": "advert-classified",
+     "label": "Classified"
+    }
+   ]
+  },
+  {
+   "id": "sign",
+   "label": "Sign",
+   "variants": [
+    {
+     "template": "sign-office-identification",
+     "label": "Office identification"
+    },
+    {
+     "template": "sign-gas-identification",
+     "label": "Gas identification"
+    },
+    {
+     "template": "sign-horizontal-facility",
+     "label": "Facility, horizontal"
+    },
+    {
+     "template": "sign-vertical-facility",
+     "label": "Facility, vertical"
+    },
+    {
+     "template": "sign-danger",
+     "label": "Danger"
+    },
+    {
+     "template": "sign-guide",
+     "label": "Guide"
+    }
+   ]
+  },
+  {
+   "id": "panel-van",
+   "label": "Panel van",
+   "variants": [
+    {
+     "template": "vehicle-van-black",
+     "label": "Black signature"
+    },
+    {
+     "template": "vehicle-van-white",
+     "label": "White signature"
+    }
+   ]
+  },
+  {
+   "id": "drawn-light-vehicles",
+   "label": "Light vehicles",
+   "variants": [
+    {
+     "template": "illustrated-h44-van-door",
+     "label": "Van Door, Hydro"
+    },
+    {
+     "template": "illustrated-h44-van-rear",
+     "label": "Van Rear, Hydro"
+    },
+    {
+     "template": "illustrated-h44-van-side",
+     "label": "Van Side, Hydro"
+    }
+   ]
+  },
+  {
+   "id": "drawn-heavy-trucks",
+   "label": "Heavy trucks",
+   "variants": [
+    {
+     "template": "illustrated-h45-roller-truck-rear",
+     "label": "Roller Truck Rear, Hydro"
+    },
+    {
+     "template": "illustrated-h45-stepvan-rear",
+     "label": "Stepvan Rear, Hydro"
+    },
+    {
+     "template": "illustrated-h45-stepvan-side",
+     "label": "Stepvan Side, Hydro"
+    }
+   ]
+  },
+  {
+   "id": "drawn-tractor-trailers",
+   "label": "Tractor trailers",
+   "variants": [
+    {
+     "template": "illustrated-h46-cab-door",
+     "label": "Cab Door, Hydro"
+    },
+    {
+     "template": "illustrated-h46-flatbed",
+     "label": "Flatbed, Hydro"
+    },
+    {
+     "template": "illustrated-h46-tractor-trailer",
+     "label": "Tractor Trailer, Hydro"
+    }
+   ]
+  },
+  {
+   "id": "drawn-equipment",
+   "label": "Equipment",
+   "variants": [
+    {
+     "template": "illustrated-h47-crawler-front",
+     "label": "Crawler Front, Hydro"
+    },
+    {
+     "template": "illustrated-h47-crawler-side",
+     "label": "Crawler Side, Hydro"
+    },
+    {
+     "template": "illustrated-h47-generator",
+     "label": "Generator, Hydro"
+    },
+    {
+     "template": "illustrated-h47-seat-panel",
+     "label": "Seat Panel, Hydro"
+    }
+   ]
+  },
+  {
+   "id": "drawn-railway",
+   "label": "Railway",
+   "variants": [
+    {
+     "template": "illustrated-h48-boxcar",
+     "label": "Boxcar, Hydro"
+    },
+    {
+     "template": "illustrated-h48-locomotive",
+     "label": "Locomotive, Hydro"
+    }
+   ]
+  }
+ ],
+ "documents": [
+  {
+   "id": "letterhead-standard",
+   "label": "Letterhead, Corporate",
+   "format": "docx",
+   "pages": [
+    "letterhead-standard"
+   ]
+  },
+  {
+   "id": "letterhead-gas",
+   "label": "Letterhead, Gas Operations",
+   "format": "docx",
+   "pages": [
+    "letterhead-gas"
+   ]
+  },
+  {
+   "id": "letterhead-rail",
+   "label": "Letterhead, B.C.Hydro Rail",
+   "format": "docx",
+   "pages": [
+    "letterhead-rail"
+   ]
+  },
+  {
+   "id": "envelope-standard",
+   "label": "Envelope, Corporate",
+   "format": "docx",
+   "pages": [
+    "envelope-standard"
+   ]
+  },
+  {
+   "id": "envelope-gas",
+   "label": "Envelope, Gas Operations",
+   "format": "docx",
+   "pages": [
+    "envelope-gas"
+   ]
+  },
+  {
+   "id": "envelope-rail",
+   "label": "Envelope, B.C.Hydro Rail",
+   "format": "docx",
+   "pages": [
+    "envelope-rail"
+   ]
+  },
+  {
+   "id": "bulletin",
+   "label": "Bulletin form",
+   "format": "docx",
+   "pages": [
+    "form-bulletin"
+   ]
+  },
+  {
+   "id": "masthead-band",
+   "label": "Newsletter, band masthead",
+   "format": "docx",
+   "pages": [
+    "masthead-band"
+   ]
+  },
+  {
+   "id": "masthead-rule",
+   "label": "Newsletter, ruled masthead",
+   "format": "docx",
+   "pages": [
+    "masthead-rule"
+   ]
+  },
+  {
+   "id": "presentation",
+   "label": "Presentation",
+   "format": "pptx",
+   "layouts": [
+    "av-title"
+   ]
+  }
+ ],
  "manuals": {
   "pack": "bc",
   "books": [

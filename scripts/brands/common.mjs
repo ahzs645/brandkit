@@ -20,7 +20,7 @@ export const readJson = (url) => JSON.parse(readFileSync(url, 'utf8'))
 export const updateManifest = (brand) => {
   const manifestUrl = new URL('../../brands/index.json', import.meta.url)
   const manifest = JSON.parse(readFileSync(manifestUrl, 'utf8')).filter((entry) => entry.id !== brand.id)
-  manifest.push({ id: brand.id, name: brand.name, ...(brand.manuals?.relation ? { relation: brand.manuals.relation } : {}), ...(brand.manuals ? { pages: pageIndex(brand) } : {}) })
+  manifest.push({ id: brand.id, name: brand.name, ...(brand.manuals ? { pages: pageIndex(brand) } : {}) })
   manifest.sort((a, b) => a.id.localeCompare(b.id))
   writeFileSync(manifestUrl, `${JSON.stringify(manifest, null, 2)}\n`)
 }

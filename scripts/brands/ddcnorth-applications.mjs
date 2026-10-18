@@ -4,16 +4,20 @@
 // (cards, an A4 letterhead, two social formats and a slide): a stationery set, memoranda and
 // releases, forms, publication covers and mastheads, advertising, audio-visual, signs, vehicles
 // and uniforms, and the guide pages on backgrounds and incorrect usage. This script adds that
-// system to brands/ddcnorth/brand.json, each piece citing the manual pages it is modelled on.
+// system to brands/ddcnorth/brand.json: the templates; the sets that make variants of one thing (a
+// card's fronts and back) one item; and the Office documents made from them (Word templates, a
+// PowerPoint template, an HTML email signature).
 //
 // The original kit's templates and guide pages are left exactly as they are (the parity test
 // holds them to the Python kit byte for byte); everything added carries `extension:
-// 'applications'`, so running this again replaces it.
+// 'applications'`, so running this again replaces it. Each piece follows a precedent in the BC
+// manuals (the page ids beside it), but ddcnorth is not a reconstruction, so nothing is cited in
+// its brand.json.
 //
 //   npm run make:ddcnorth
 
 import { readFileSync, writeFileSync } from 'node:fs'
-import { shelf, source, updateManifest } from './common.mjs'
+import { shelf, updateManifest } from './common.mjs'
 import { illustration } from './illustrations.mjs'
 
 const file = new URL('../../brands/ddcnorth/brand.json', import.meta.url)
@@ -27,13 +31,13 @@ const MM = 96 / 25.4
 const px = (mm) => Math.round(mm * MM)
 const print = (widthMm, heightMm) => ({ physical: [`${widthMm}mm`, `${heightMm}mm`] })
 
-const template = (id, label, group, width, height, elements, { description, sources = [], raster, ...extra } = {}) => ({
+// `precedent` names the manual pages a piece follows, for whoever edits this script.
+const template = (id, label, group, width, height, elements, { description, sources: precedent, raster, ...extra } = {}) => ({
   id, label, group, width, height, ...extra,
   raster: raster ?? Math.min(2400, Math.max(1080, width * 2)),
   title: `{name} / ${label.toLowerCase()}`,
   description: description ?? `${label}: part of the ddcnorth application system, modelled on the BC identity manuals. Text is live and editable.`,
   extension: EXTENSION,
-  sources: sources.map(source),
   elements
 })
 
@@ -103,16 +107,16 @@ const stationery = [
     text('footer-contact', '[Contact details]', 62, 322, 12, { colour: 'muted' }),
     motif(560, 150, 300, 260, 'light')
   ], { ...print(210, 99), raster: 1588, sources: ['R09'], description: 'A third of A4: the logo, “With compliments”, and the contact line.' }),
-  template('email-signature', 'Email signature', 'Stationery', 640, 200, [
+  template('email-signature', 'Email signature', 'Stationery', 520, 150, [
     { type: 'background', fill: 'reverse' },
-    logo(28, 40, 116, 'ink', { layout: 'stacked' }),
-    { type: 'line', x1: 172, y1: 36, x2: 172, y2: 164, stroke: 'line', strokeWidth: 1 },
-    text('contact-name', '[Name]', 196, 66, 20, { font: 'bold' }),
-    text('contact-role', '[Role]', 196, 92, 14, { colour: 'muted' }),
-    text('contact-email', '[Email]', 196, 128, 13),
-    text('contact-phone', '[Phone]', 196, 148, 13),
-    text('contact-website', '[Website]', 196, 168, 13, { colour: 'primary' })
-  ], { raster: 1280, sources: ['R08'], description: 'An email signature at 640 × 200 px (use it at half size): the stacked logo and the card’s contact fields.' }),
+    logo(20, 26, 92, 'ink', { layout: 'stacked' }),
+    { type: 'line', x1: 136, y1: 22, x2: 136, y2: 128, stroke: 'line', strokeWidth: 1 },
+    text('contact-name', '[Name]', 156, 50, 16, { font: 'bold' }),
+    text('contact-role', '[Role]', 156, 70, 12, { colour: 'muted' }),
+    text('contact-email', '[Email]', 156, 98, 12),
+    text('contact-phone', '[Phone]', 156, 115, 12),
+    text('contact-website', '[Website]', 156, 132, 12, { colour: 'primary' })
+  ], { raster: 1040, sources: ['R08'], description: 'An email signature at its size in mail (520 × 150 px): the stacked logo, a rule, and the card’s contact fields. Download it as HTML to paste into a mail program.' }),
   template('business-card-front-light', 'Business card, front (light)', 'Business cards', 960, 560, [
     { type: 'background', fill: 'paper' },
     logo(140, 205, 680, 'primary'),
@@ -492,7 +496,7 @@ const guidePages = [
       ...shelf([item('drawn-g15-jacket-back', 'JACKET'), item('drawn-g15-field-jacket', 'SLEEVE'), item('drawn-g15-blazer', 'BLAZER'), item('drawn-g15-hard-hat', 'HARD HAT')], { y: 600, height: 260 })
     ]
   }
-].map((page) => ({ ...page, extension: EXTENSION, sources: page.sources.map(source) }))
+].map(({ sources: precedent, ...page }) => ({ ...page, extension: EXTENSION }))
 
 // --- Write: replace any earlier extension, keep everything else as it was.
 
@@ -509,7 +513,35 @@ brand.fields = {
   'fleet-number': { label: 'Fleet number', placeholder: 'DDC 01' },
   'team-name': { label: 'Team', placeholder: 'FIELD TEAM' }
 }
-brand.manuals = { pack: 'bc', relation: 'Modelled on' }
+delete brand.manuals
+
+// Variants of one thing are one item: the studio shows one card, with its fronts and back.
+brand.sets = [
+  { id: 'business-card', label: 'Business card', variants: [['business-card-front', 'Front'], ['business-card-front-light', 'Front, light'], ['business-card-back', 'Back']] },
+  { id: 'letterhead', label: 'Letterhead', variants: [['letterhead-a4', 'A4'], ['letterhead-letter', 'US Letter'], ['letterhead-continuation', 'Continuation sheet']] },
+  { id: 'report', label: 'Report', variants: [['report-cover', 'Cover'], ['report-cover-reverse', 'Cover, reversed'], ['report-page', 'Interior page']] },
+  { id: 'web-banner', label: 'Web banner', variants: [['web-banner-mpu', '300 × 250'], ['web-banner-leaderboard', '728 × 90']] },
+  { id: 'presentation', label: 'Presentation', variants: [['presentation-cover', 'Cover'], ['presentation-section', 'Section'], ['presentation-content', 'Content'], ['presentation-closing', 'Closing']] },
+  { id: 'video', label: 'Video graphics', variants: [['video-lower-third', 'Lower third'], ['video-end-card', 'End card'], ['virtual-background', 'Virtual background']] },
+  { id: 'van', label: 'Van', variants: [['drawn-v10-van-perspective', 'Three-quarter'], ['drawn-v11-van-side', 'Side'], ['drawn-v11-van-rear', 'Rear'], ['drawn-h44-van-door', 'Door']] },
+  { id: 'jacket', label: 'Jacket', variants: [['drawn-g15-jacket-back', 'Back'], ['drawn-g15-field-jacket', 'Sleeve']] }
+].map(({ variants, ...set }) => ({ ...set, variants: variants.map(([template, label]) => ({ template, label })) }))
+
+// The Office files: Word templates for the documents people type, a PowerPoint template for the
+// slides, an HTML signature for mail.
+brand.documents = [
+  { id: 'letterhead-a4', label: 'Letterhead, A4', format: 'docx', pages: ['letterhead-a4', 'letterhead-continuation'] },
+  { id: 'letterhead-letter', label: 'Letterhead, US Letter', format: 'docx', pages: ['letterhead-letter'] },
+  { id: 'memorandum', label: 'Memorandum', format: 'docx', pages: ['memorandum', 'letterhead-continuation'] },
+  { id: 'media-release', label: 'Media release', format: 'docx', pages: ['media-release', 'letterhead-continuation'] },
+  { id: 'invoice', label: 'Invoice', format: 'docx', pages: ['invoice'] },
+  { id: 'report', label: 'Report', format: 'docx', pages: ['report-cover', 'report-page'], continue: true },
+  { id: 'newsletter', label: 'Newsletter', format: 'docx', pages: ['newsletter', 'report-page'], continue: false },
+  { id: 'compliments-slip', label: 'Compliments slip', format: 'docx', pages: ['compliments-slip'] },
+  { id: 'envelope-dl', label: 'DL envelope', format: 'docx', pages: ['envelope-dl'] },
+  { id: 'presentation', label: 'Presentation', format: 'pptx', layouts: ['presentation-cover', 'presentation-section', 'presentation-content', 'presentation-closing'] },
+  { id: 'email-signature', label: 'Email signature', format: 'html', template: 'email-signature' }
+]
 
 writeFileSync(file, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)

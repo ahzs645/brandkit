@@ -124,6 +124,14 @@ export const validateBrand = (brand) => {
   for (const template of brand.templates ?? []) {
     need(template.id && template.width > 0 && template.height > 0, `Template \`${template.id ?? '?'}\` needs an id, width and height.`)
   }
+  const templateIds = new Set((brand.templates ?? []).map((template) => template.id))
+  for (const set of brand.sets ?? []) {
+    for (const variant of set.variants ?? []) need(templateIds.has(variant.template), `Set \`${set.id}\` names template \`${variant.template}\`, which is not defined.`)
+  }
+  for (const document of brand.documents ?? []) {
+    need(['docx', 'pptx', 'html'].includes(document.format), `Document \`${document.id}\` has format \`${document.format}\`; use docx, pptx or html.`)
+    for (const id of [...(document.pages ?? []), ...(document.layouts ?? []), ...(document.template ? [document.template] : [])]) need(templateIds.has(id), `Document \`${document.id}\` names template \`${id}\`, which is not defined.`)
+  }
   return problems
 }
 

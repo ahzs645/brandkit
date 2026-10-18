@@ -12,12 +12,19 @@ brandkit draws the whole kit from it:
   division) it defines.
 - **Templates**: business cards (front and back, with trim and safe area), letterhead, envelopes,
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
-  still editable), PNG or PDF, or all of them zipped.
+  still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's
+  fronts and back, a letterhead in each size or rank, with a PDF of every variant.
+- **Office documents**: the documents people type, as Word templates (letterheads with their
+  continuation sheet, memoranda, releases, invoices, reports, envelopes), the slides as a
+  PowerPoint template with a layout for each slide type, and the email signature as HTML ready to
+  paste into a mail program. They are made from the same templates: the artwork drawn behind,
+  the fields as real text in the brand's faces (embedded in the Word files where their licence
+  allows), lines that share a baseline on tab stops.
 - **The brand guide**: eight framed pages, logo reference sheets and a one-page overview, as SVG
   and as one PDF, read in the same viewer as the manual library.
 - **Web files**: CSS variables, design tokens, a typed React component, a landing-page starter,
   favicon (SVG and multi-size `.ico`) and app icons.
-- **The kit itself**: around 190 files in a zip with an offline `index.html` to browse them,
+- **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 
 Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf) and the zip

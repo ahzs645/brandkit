@@ -103,3 +103,11 @@
   .studio__canvas { min-height: 220px; padding: 12px; }
   .studio__downloads { margin-left: 0; }
 }
+
+.studio__count { display: block; font-size: 11.5px; font-weight: 400; color: var(--ink-faint, #80858d); }
+.studio__variants { display: flex; flex-wrap: wrap; gap: 2px; margin-bottom: 12px; padding: 3px; border-radius: 999px; background: var(--track, #e8eaed); width: fit-content; }
+.studio__variants button { padding: 6px 14px; border: 0; border-radius: 999px; background: none; color: var(--ink-muted, #5b5f66); font: inherit; font-size: 13px; cursor: pointer; }
+.studio__variants button[aria-pressed='true'] { background: var(--surface, #fff); color: var(--ink, #16181c); font-weight: 600; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); }
+.studio__office { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line, #e3e5e8); }
+.studio__office-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint, #80858d); margin-right: 4px; }
+.studio__office-item { display: inline-flex; gap: 6px; }

@@ -285,7 +285,8 @@ const vehicles = [van('#DBECEE', 'black', 'gas'), van('#00AF00', 'white', 'stand
 
 const templates = [...stationery, bulletin, ...publications, masthead('band'), masthead('rule'), advert, classified, slide, ...signs, ...vehicles]
 
-const FONT = (file, label, extra = {}) => ({ family: 'TeX Gyre Termes', stack: '"TeX Gyre Termes", "Times New Roman", Times, serif', weight: 400, capHeight: CAP, file: `fonts/${file}`, web: `fonts/${file}`, label, ...extra })
+// `office`: the face Word and PowerPoint should ask for (the manual's Times Roman).
+const FONT = (file, label, extra = {}) => ({ family: 'TeX Gyre Termes', office: 'Times New Roman', stack: '"TeX Gyre Termes", "Times New Roman", Times, serif', weight: 400, capHeight: CAP, file: `fonts/${file}`, web: `fonts/${file}`, label, ...extra })
 
 const brand = {
   schema: 'brandkit/1',
@@ -477,9 +478,36 @@ brand.guide = {
 
 // The drawings of vans, trucks, equipment and rolling stock (ManualKit's source-registered
 // illustrations), each a template with the signature in its branding zones.
-const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'])
+const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'], 'Vehicles and equipment, drawn')
 brand.illustrations = drawn.drawings
 brand.templates.push(...drawn.templates)
+
+// Variants of one thing are one item in the studio: a stationery piece in each division, a cover
+// in each format, a sign in each kind.
+const DIVISIONS = [['standard', 'Corporate'], ['gas', 'Gas Operations'], ['rail', 'B.C.Hydro Rail']]
+const set = (id, label, variants, group) => ({ id, label, ...(group ? { group } : {}), variants: variants.map(([template, name]) => ({ template, label: name })) })
+brand.sets = [
+  set('letterhead', 'Letterhead', DIVISIONS.map(([division, name]) => [`letterhead-${division}`, name]), 'Stationery'),
+  set('envelope', 'Envelope', DIVISIONS.map(([division, name]) => [`envelope-${division}`, name]), 'Stationery'),
+  set('business-card', 'Business card', DIVISIONS.map(([division, name]) => [`card-${division}`, name]), 'Stationery'),
+  set('cover', 'Publication cover', [['cover-report', 'Report'], ['cover-illustrated', 'Illustrated'], ['cover-display', 'Display']]),
+  set('masthead', 'Masthead', [['masthead-band', 'Band'], ['masthead-rule', 'Rule']]),
+  set('advertisement', 'Advertisement', [['advert-display', 'Display'], ['advert-classified', 'Classified']]),
+  set('sign', 'Sign', [['sign-office-identification', 'Office identification'], ['sign-gas-identification', 'Gas identification'], ['sign-horizontal-facility', 'Facility, horizontal'], ['sign-vertical-facility', 'Facility, vertical'], ['sign-danger', 'Danger'], ['sign-guide', 'Guide']]),
+  set('panel-van', 'Panel van', [['vehicle-van-black', 'Black signature'], ['vehicle-van-white', 'White signature']]),
+  ...drawn.sets
+]
+
+// Word templates for each division's letterhead and envelope, the bulletin form and the
+// mastheads; the audio-visual title frame as a PowerPoint template.
+brand.documents = [
+  ...DIVISIONS.map(([division, name]) => ({ id: `letterhead-${division}`, label: `Letterhead, ${name}`, format: 'docx', pages: [`letterhead-${division}`] })),
+  ...DIVISIONS.map(([division, name]) => ({ id: `envelope-${division}`, label: `Envelope, ${name}`, format: 'docx', pages: [`envelope-${division}`] })),
+  { id: 'bulletin', label: 'Bulletin form', format: 'docx', pages: ['form-bulletin'] },
+  { id: 'masthead-band', label: 'Newsletter, band masthead', format: 'docx', pages: ['masthead-band'] },
+  { id: 'masthead-rule', label: 'Newsletter, ruled masthead', format: 'docx', pages: ['masthead-rule'] },
+  { id: 'presentation', label: 'Presentation', format: 'pptx', layouts: ['av-title'] }
+]
 
 // The manual pages each piece is built from (page ids in manuals/bc: H<printed page + 1>).
 const SET_PAGES = { standard: ['H16'], gas: ['H17'], rail: ['H18'] }

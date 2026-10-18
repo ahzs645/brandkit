@@ -124,17 +124,32 @@ export const illustrationTemplate = (brand, id, drawing, { group, sources, width
 
 const PAGE_TITLES = new Map(GUIDE_BOOKS.flatMap((book) => book.pages.map((page) => [page.id, { book: book.title, title: page.title }])))
 
-/** A drawing's template group: its manual and the page's subject, placement pages with their pair. */
+/**
+ * A drawing's subject: its manual and the page's subject. A placement page belongs with the page
+ * before it (Vehicle Manual p. 13, "Tractor cabs and trailers: placement", with p. 12).
+ */
 export const groupFor = (id) => {
-  const page = PAGE_TITLES.get(id.split('-')[0])
+  const pageId = id.split('-')[0]
+  let page = PAGE_TITLES.get(pageId)
+  if (/:\s*placement$/i.test(page.title)) page = PAGE_TITLES.get(`${pageId[0]}${String(Number(pageId.slice(1)) - 1).padStart(2, '0')}`) ?? page
   return `${page.book.replace(' Manual', '')}: ${page.title.replace(/:\s*placement$/i, '').replace(/;.*$/, '')}`
 }
 
-/** Illustrations and their templates for every drawing on the given pages. */
-export const illustrated = (brand, pages, extraSources = []) => {
+/**
+ * Illustrations and their templates for every drawing on the given pages, all in one template
+ * group, and sets that make each subject's views one item (a van truck's cab door, side and rear).
+ */
+export const illustrated = (brand, pages, extraSources = [], group = 'Drawn applications') => {
   const ids = illustrationsFor(pages)
   const drawings = Object.fromEntries(ids.map((id) => [id, illustration(id)]))
-  const templates = ids.map((id) => illustrationTemplate(brand, id, drawings[id], { group: groupFor(id) }))
+  const templates = ids.map((id) => illustrationTemplate(brand, id, drawings[id], { group }))
   const sources = Object.fromEntries(ids.map((id) => [`illustrated-${id.toLowerCase()}`, [id.split('-')[0], ...extraSources]]))
-  return { drawings, templates, sources }
+  const subjects = new Map()
+  for (const template of templates) {
+    const subject = groupFor(template.id.replace(/^illustrated-/, '').toUpperCase()).replace(/^[^:]+:\s*/, '')
+    if (!subjects.has(subject)) subjects.set(subject, [])
+    subjects.get(subject).push({ template: template.id, label: template.label })
+  }
+  const sets = [...subjects].map(([label, variants]) => ({ id: `drawn-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`, label, variants }))
+  return { drawings, templates, sources, sets }
 }

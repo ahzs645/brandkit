@@ -4,18 +4,21 @@
 // will contain before doing the work. buildKit() makes the files. Vector and text files are made
 // by the engine alone; images and PDFs need a `renderer` (src/export/render.js in a browser), and
 // supplied files (fonts, licences, documentation) need `readAsset`. Without either, those entries
-// are skipped and the rest of the kit is still built: that is how the Node CLI runs.
+// are skipped and the rest of the kit is still built: that is how the Node CLI runs. Office
+// documents (Word, PowerPoint, an HTML signature) draw their artwork as images, so they need the
+// renderer too.
 
 import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
 import { fill, logoOptions, paintOptions } from './brand.js'
 import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
 import { findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
+import { officeFile } from '../export/office.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
-export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
+export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
 
-const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References', revisions: 'Revisions' }
+const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', documents: 'Office documents', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References', revisions: 'Revisions' }
 export const groupOf = (path) => (path.includes('/') ? GROUP_BY_FOLDER[path.split('/')[0]] ?? 'Package files' : 'Package files')
 
 const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
@@ -120,6 +123,22 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     if (pdfs) add({ path: `templates/pdf/${template.id}.pdf`, kind: 'pdf', pages: (ctx) => { const rendered = outlined(ctx); return [{ svg: rendered.svg, ...physicalSize(rendered) }] } })
   }
 
+  // Sets: every variant of one thing in one PDF, a page each (a card's fronts and back).
+  if (pdfs) {
+    for (const set of brand.sets ?? []) {
+      const members = set.variants.map((variant) => (brand.templates ?? []).find((template) => template.id === variant.template)).filter(Boolean)
+      if (members.length > 1) add({ path: `templates/pdf/sets/${set.id}.pdf`, kind: 'pdf', title: `{name} ${set.label}`, pages: (ctx) => members.map((template) => { const rendered = renderTemplate({ ...ctx, outline: true }, template); return { svg: rendered.svg, ...physicalSize(rendered) } }) })
+    }
+  }
+
+  // Office documents: Word and PowerPoint templates, an HTML email signature with its image.
+  if (rasters) {
+    for (const document of brand.documents ?? []) {
+      const path = `documents/${id}-${document.id}.${document.format}`
+      add({ path, kind: 'office', document })
+    }
+  }
+
   // Guide pages, sheets and their PDFs.
   const pages = (ctx) => guidePages(ctx)
   const sheets = (ctx) => guideSheets(ctx)
@@ -218,6 +237,12 @@ export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, .
         case 'pdf': files.set(entry.path, await renderer.pdf(entry.pages(ctx), { title: fill(ctx.brand, entry.title ?? entry.path.split('/').pop()), author: ctx.brand.name })); break
         case 'ico': files.set(entry.path, await renderer.ico(entry.sizes.map((path) => files.get(path)).filter(Boolean), entry.sizes.map((path) => Number(/-(\d+)\.png$/.exec(path)[1])))); break
         case 'asset': files.set(entry.path, new Uint8Array(await readAsset(entry.src))); break
+        case 'office': {
+          const file = await officeFile(ctx, entry.document, { png: renderer.png })
+          files.set(entry.path, file.bytes)
+          if (file.png) files.set(entry.path.replace(/\.html$/, '.png'), file.png)
+          break
+        }
         default: break
       }
     } catch (error) {

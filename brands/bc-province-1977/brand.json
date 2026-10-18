@@ -88,6 +88,7 @@
  "fonts": {
   "regular": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -97,6 +98,7 @@
   },
   "medium": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 700,
    "capHeight": 0.729,
@@ -106,6 +108,7 @@
   },
   "italic": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -116,6 +119,7 @@
   },
   "light": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -125,6 +129,7 @@
   },
   "typewriter": {
    "family": "TeX Gyre Cursor",
+   "office": "Courier",
    "stack": "\"TeX Gyre Cursor\", \"Courier New\", Courier, monospace",
    "weight": 400,
    "capHeight": 0.563,
@@ -134,6 +139,7 @@
   },
   "body": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -143,6 +149,7 @@
   },
   "bold": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 700,
    "capHeight": 0.729,
@@ -152,6 +159,7 @@
   },
   "display": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 700,
    "capHeight": 0.729,
@@ -161,6 +169,7 @@
   },
   "displayRegular": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -170,6 +179,7 @@
   },
   "extra": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 700,
    "capHeight": 0.729,
@@ -179,6 +189,7 @@
   },
   "label": {
    "family": "TeX Gyre Heros",
+   "office": "Helvetica",
    "stack": "\"TeX Gyre Heros\", Helvetica, Arial, sans-serif",
    "weight": 400,
    "capHeight": 0.729,
@@ -5936,7 +5947,7 @@
   {
    "id": "illustrated-g15-blazer",
    "label": "Blazer, chest pocket view",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1857,
    "raster": 1600,
@@ -5979,7 +5990,7 @@
   {
    "id": "illustrated-g15-field-jacket",
    "label": "Field jacket, shoulder view",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1863,
    "raster": 1600,
@@ -6031,7 +6042,7 @@
   {
    "id": "illustrated-g15-hard-hat",
    "label": "Hard hat, separated from jacket",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 826,
    "raster": 1600,
@@ -6074,7 +6085,7 @@
   {
    "id": "illustrated-g15-jacket-back",
    "label": "Jacket, upper back",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1195,
    "raster": 1600,
@@ -6117,7 +6128,7 @@
   {
    "id": "illustrated-g15-job-patch",
    "label": "Job-function patch and tab",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1556,
    "raster": 1600,
@@ -6170,7 +6181,7 @@
   {
    "id": "illustrated-g15-officer-front",
    "label": "Security uniform, cropped upper front",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1850,
    "raster": 1600,
@@ -6226,7 +6237,7 @@
   {
    "id": "illustrated-g15-peaked-cap",
    "label": "Peaked cap, standalone detail",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1092,
    "raster": 1600,
@@ -6269,7 +6280,7 @@
   {
    "id": "illustrated-g15-security-patch",
    "label": "Security patch",
-   "group": "General: Uniform Ensignia",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1835,
    "raster": 1600,
@@ -6318,7 +6329,7 @@
   {
    "id": "illustrated-g16-tractor",
    "label": "Tractor, General Manual",
-   "group": "General: Vehicle Markings: truck, trailer, van",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 849,
    "raster": 1600,
@@ -6396,7 +6407,7 @@
   {
    "id": "illustrated-g16-van-rear",
    "label": "Van Rear, General Manual",
-   "group": "General: Vehicle Markings: truck, trailer, van",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1663,
    "raster": 1600,
@@ -6445,7 +6456,7 @@
   {
    "id": "illustrated-g16-van-side",
    "label": "Van Side, General Manual",
-   "group": "General: Vehicle Markings: truck, trailer, van",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 633,
    "raster": 1600,
@@ -6504,7 +6515,7 @@
   {
    "id": "illustrated-g17-car",
    "label": "Car, General Manual",
-   "group": "General: Vehicle Markings: pickup, sedan, box truck",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 668,
    "raster": 1600,
@@ -6569,7 +6580,7 @@
   {
    "id": "illustrated-g17-pickup",
    "label": "Pickup, General Manual",
-   "group": "General: Vehicle Markings: pickup, sedan, box truck",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 820,
    "raster": 1600,
@@ -6634,7 +6645,7 @@
   {
    "id": "illustrated-g17-truck-rear",
    "label": "Truck Rear, General Manual",
-   "group": "General: Vehicle Markings: pickup, sedan, box truck",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 2158,
    "raster": 1600,
@@ -6683,7 +6694,7 @@
   {
    "id": "illustrated-g17-truck-side",
    "label": "Truck Side, General Manual",
-   "group": "General: Vehicle Markings: pickup, sedan, box truck",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 727,
    "raster": 1600,
@@ -6748,7 +6759,7 @@
   {
    "id": "illustrated-v03-policy-tractor",
    "label": "Tractor and trailer, opposite-side policy view",
-   "group": "Vehicle: Policy",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 825,
    "raster": 1600,
@@ -6833,7 +6844,7 @@
   {
    "id": "illustrated-v06-car-perspective",
    "label": "Passenger car, rear three-quarter",
-   "group": "Vehicle: Passenger cars",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 689,
    "raster": 1600,
@@ -6905,7 +6916,7 @@
   {
    "id": "illustrated-v07-car-rear",
    "label": "Passenger car, rear elevation",
-   "group": "Vehicle: Passenger cars",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1032,
    "raster": 1600,
@@ -6961,7 +6972,7 @@
   {
    "id": "illustrated-v07-side-car",
    "label": "Car, cropped front side elevation",
-   "group": "Vehicle: Passenger cars",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 736,
    "raster": 1600,
@@ -7017,7 +7028,7 @@
   {
    "id": "illustrated-v08-pickup-perspective",
    "label": "Pickup, rear three-quarter",
-   "group": "Vehicle: Pickups and wagons",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 829,
    "raster": 1600,
@@ -7089,7 +7100,7 @@
   {
    "id": "illustrated-v09-pickup-rear",
    "label": "Pickup, rear elevation",
-   "group": "Vehicle: Pickups and wagons",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1333,
    "raster": 1600,
@@ -7145,7 +7156,7 @@
   {
    "id": "illustrated-v09-pickup-side",
    "label": "Pickup, side elevation, right edge cropped",
-   "group": "Vehicle: Pickups and wagons",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 671,
    "raster": 1600,
@@ -7201,7 +7212,7 @@
   {
    "id": "illustrated-v10-van-perspective",
    "label": "Van, rear three-quarter",
-   "group": "Vehicle: Vans",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 911,
    "raster": 1600,
@@ -7280,7 +7291,7 @@
   {
    "id": "illustrated-v11-van-rear",
    "label": "Van, rear elevation",
-   "group": "Vehicle: Vans",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1716,
    "raster": 1600,
@@ -7336,7 +7347,7 @@
   {
    "id": "illustrated-v11-van-side",
    "label": "Van, full side elevation",
-   "group": "Vehicle: Vans",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 636,
    "raster": 1600,
@@ -7402,7 +7413,7 @@
   {
    "id": "illustrated-v12-truck-perspective",
    "label": "Box truck, rear three-quarter",
-   "group": "Vehicle: Van trucks",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1027,
    "raster": 1600,
@@ -7481,7 +7492,7 @@
   {
    "id": "illustrated-v13-cab-door",
    "label": "Box truck, enlarged cab door",
-   "group": "Vehicle: Van trucks",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1388,
    "raster": 1600,
@@ -7540,7 +7551,7 @@
   {
    "id": "illustrated-v13-truck-rear",
    "label": "Box truck, rear elevation",
-   "group": "Vehicle: Van trucks",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 2173,
    "raster": 1600,
@@ -7596,7 +7607,7 @@
   {
    "id": "illustrated-v13-truck-side",
    "label": "Box truck, side elevation",
-   "group": "Vehicle: Van trucks",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 720,
    "raster": 1600,
@@ -7668,7 +7679,7 @@
   {
    "id": "illustrated-v14-tractor-trailer",
    "label": "Tractor and box trailer, perspective",
-   "group": "Vehicle: Tractor cabs and highway trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 842,
    "raster": 1600,
@@ -7753,7 +7764,7 @@
   {
    "id": "illustrated-v15-flatbed-rear",
    "label": "Flat-deck trailer, rear",
-   "group": "Vehicle: Tractor cabs and trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 865,
    "raster": 1600,
@@ -7802,7 +7813,7 @@
   {
    "id": "illustrated-v15-flatbed-side",
    "label": "Flat-deck trailer, side",
-   "group": "Vehicle: Tractor cabs and trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 284,
    "raster": 1600,
@@ -7858,7 +7869,7 @@
   {
    "id": "illustrated-v15-trailer-front",
    "label": "Box trailer, front",
-   "group": "Vehicle: Tractor cabs and trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 2534,
    "raster": 1600,
@@ -7914,7 +7925,7 @@
   {
    "id": "illustrated-v15-trailer-rear",
    "label": "Box trailer, rear",
-   "group": "Vehicle: Tractor cabs and trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 2557,
    "raster": 1600,
@@ -7970,7 +7981,7 @@
   {
    "id": "illustrated-v15-trailer-side",
    "label": "Box trailer, side",
-   "group": "Vehicle: Tractor cabs and trailers",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 877,
    "raster": 1600,
@@ -8026,7 +8037,7 @@
   {
    "id": "illustrated-v16-backhoe",
    "label": "Backhoe / front-end loader",
-   "group": "Vehicle: Equipment",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 843,
    "raster": 1600,
@@ -8089,7 +8100,7 @@
   {
    "id": "illustrated-v17-compressor",
    "label": "Towable compressor",
-   "group": "Vehicle: Equipment",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 664,
    "raster": 1600,
@@ -8146,7 +8157,7 @@
   {
    "id": "illustrated-v17-crawler-front",
    "label": "Tracked crawler, front",
-   "group": "Vehicle: Equipment",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1838,
    "raster": 1600,
@@ -8202,7 +8213,7 @@
   {
    "id": "illustrated-v17-crawler-side",
    "label": "Tracked crawler, side",
-   "group": "Vehicle: Equipment",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 930,
    "raster": 1600,
@@ -8258,7 +8269,7 @@
   {
    "id": "illustrated-v17-grader",
    "label": "Grader, cropped operating section",
-   "group": "Vehicle: Equipment",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 796,
    "raster": 1600,
@@ -8314,7 +8325,7 @@
   {
    "id": "illustrated-v18-installation-1",
    "label": "Decal installation, panel 1",
-   "group": "Vehicle: Installation: applying markings",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1520,
    "raster": 1600,
@@ -8349,7 +8360,7 @@
   {
    "id": "illustrated-v18-installation-2",
    "label": "Decal installation, panel 2",
-   "group": "Vehicle: Installation: applying markings",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1897,
    "raster": 1600,
@@ -8396,7 +8407,7 @@
   {
    "id": "illustrated-v18-installation-3",
    "label": "Decal installation, panel 3",
-   "group": "Vehicle: Installation: applying markings",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1794,
    "raster": 1600,
@@ -8443,7 +8454,7 @@
   {
    "id": "illustrated-v18-installation-4",
    "label": "Decal installation, panel 4",
-   "group": "Vehicle: Installation: applying markings",
+   "group": "Uniforms and vehicles, drawn",
    "width": 1600,
    "height": 1897,
    "raster": 1600,
@@ -14003,6 +14014,569 @@
    }
   ]
  },
+ "sets": [
+  {
+   "id": "letterhead",
+   "label": "Letterhead",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "gu-letterhead",
+     "label": "General Use"
+    },
+    {
+     "template": "minister-letterhead",
+     "label": "Minister"
+    },
+    {
+     "template": "deputy-letterhead",
+     "label": "Deputy Minister"
+    },
+    {
+     "template": "board-letterhead",
+     "label": "Board or Commission"
+    },
+    {
+     "template": "premier-letterhead",
+     "label": "Premier"
+    },
+    {
+     "template": "special-letterhead",
+     "label": "Special Use"
+    }
+   ]
+  },
+  {
+   "id": "envelope",
+   "label": "Envelope",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "gu-envelope",
+     "label": "General Use"
+    },
+    {
+     "template": "minister-envelope",
+     "label": "Minister"
+    },
+    {
+     "template": "deputy-envelope",
+     "label": "Deputy Minister"
+    },
+    {
+     "template": "board-envelope",
+     "label": "Board or Commission"
+    },
+    {
+     "template": "premier-envelope",
+     "label": "Premier"
+    },
+    {
+     "template": "special-envelope",
+     "label": "Special Use"
+    },
+    {
+     "template": "gu-envelope-kraft",
+     "label": "Catalogue (kraft)"
+    }
+   ]
+  },
+  {
+   "id": "calling-card",
+   "label": "Calling card",
+   "group": "Stationery",
+   "variants": [
+    {
+     "template": "gu-card",
+     "label": "General Use"
+    },
+    {
+     "template": "minister-card",
+     "label": "Minister"
+    },
+    {
+     "template": "deputy-card",
+     "label": "Deputy Minister"
+    },
+    {
+     "template": "board-card",
+     "label": "Board or Commission"
+    },
+    {
+     "template": "premier-card",
+     "label": "Premier"
+    },
+    {
+     "template": "special-card",
+     "label": "Special Use"
+    }
+   ]
+  },
+  {
+   "id": "publication",
+   "label": "Publication",
+   "variants": [
+    {
+     "template": "publication-title-page",
+     "label": "Title page"
+    },
+    {
+     "template": "publication-cover-reverse",
+     "label": "Cover, reversed"
+    },
+    {
+     "template": "publication-annual-report",
+     "label": "Annual report"
+    },
+    {
+     "template": "publication-statement-page",
+     "label": "Statement page"
+    }
+   ]
+  },
+  {
+   "id": "advertisement",
+   "label": "Advertisement",
+   "variants": [
+    {
+     "template": "advert-tender",
+     "label": "Tender"
+    },
+    {
+     "template": "advert-announcement",
+     "label": "Announcement"
+    }
+   ]
+  },
+  {
+   "id": "shoulder-flash",
+   "label": "Shoulder flash",
+   "variants": [
+    {
+     "template": "uniform-flash",
+     "label": "Job function"
+    },
+    {
+     "template": "uniform-security",
+     "label": "Security"
+    }
+   ]
+  },
+  {
+   "id": "vehicle-markings",
+   "label": "Vehicle markings",
+   "variants": [
+    {
+     "template": "vehicle-door",
+     "label": "Door"
+    },
+    {
+     "template": "vehicle-van-truck",
+     "label": "Van truck, side"
+    },
+    {
+     "template": "vehicle-van-truck-rear",
+     "label": "Van truck, rear"
+    }
+   ]
+  },
+  {
+   "id": "sign",
+   "label": "Sign",
+   "variants": [
+    {
+     "template": "sign-primary-identification",
+     "label": "Primary identification"
+    },
+    {
+     "template": "sign-secondary-identification",
+     "label": "Secondary identification"
+    },
+    {
+     "template": "sign-standard-information",
+     "label": "Standard information"
+    },
+    {
+     "template": "sign-directional",
+     "label": "Directional"
+    },
+    {
+     "template": "sign-warning",
+     "label": "Warning"
+    },
+    {
+     "template": "sign-regulatory",
+     "label": "Regulatory"
+    }
+   ]
+  },
+  {
+   "id": "drawn-uniform-ensignia",
+   "label": "Uniform Ensignia",
+   "variants": [
+    {
+     "template": "illustrated-g15-blazer",
+     "label": "Blazer, chest pocket view"
+    },
+    {
+     "template": "illustrated-g15-field-jacket",
+     "label": "Field jacket, shoulder view"
+    },
+    {
+     "template": "illustrated-g15-hard-hat",
+     "label": "Hard hat, separated from jacket"
+    },
+    {
+     "template": "illustrated-g15-jacket-back",
+     "label": "Jacket, upper back"
+    },
+    {
+     "template": "illustrated-g15-job-patch",
+     "label": "Job-function patch and tab"
+    },
+    {
+     "template": "illustrated-g15-officer-front",
+     "label": "Security uniform, cropped upper front"
+    },
+    {
+     "template": "illustrated-g15-peaked-cap",
+     "label": "Peaked cap, standalone detail"
+    },
+    {
+     "template": "illustrated-g15-security-patch",
+     "label": "Security patch"
+    }
+   ]
+  },
+  {
+   "id": "drawn-vehicle-markings-truck-trailer-van",
+   "label": "Vehicle Markings: truck, trailer, van",
+   "variants": [
+    {
+     "template": "illustrated-g16-tractor",
+     "label": "Tractor, General Manual"
+    },
+    {
+     "template": "illustrated-g16-van-rear",
+     "label": "Van Rear, General Manual"
+    },
+    {
+     "template": "illustrated-g16-van-side",
+     "label": "Van Side, General Manual"
+    }
+   ]
+  },
+  {
+   "id": "drawn-vehicle-markings-pickup-sedan-box-truck",
+   "label": "Vehicle Markings: pickup, sedan, box truck",
+   "variants": [
+    {
+     "template": "illustrated-g17-car",
+     "label": "Car, General Manual"
+    },
+    {
+     "template": "illustrated-g17-pickup",
+     "label": "Pickup, General Manual"
+    },
+    {
+     "template": "illustrated-g17-truck-rear",
+     "label": "Truck Rear, General Manual"
+    },
+    {
+     "template": "illustrated-g17-truck-side",
+     "label": "Truck Side, General Manual"
+    }
+   ]
+  },
+  {
+   "id": "drawn-policy",
+   "label": "Policy",
+   "variants": [
+    {
+     "template": "illustrated-v03-policy-tractor",
+     "label": "Tractor and trailer, opposite-side policy view"
+    }
+   ]
+  },
+  {
+   "id": "drawn-passenger-cars",
+   "label": "Passenger cars",
+   "variants": [
+    {
+     "template": "illustrated-v06-car-perspective",
+     "label": "Passenger car, rear three-quarter"
+    },
+    {
+     "template": "illustrated-v07-car-rear",
+     "label": "Passenger car, rear elevation"
+    },
+    {
+     "template": "illustrated-v07-side-car",
+     "label": "Car, cropped front side elevation"
+    }
+   ]
+  },
+  {
+   "id": "drawn-pickups-and-wagons",
+   "label": "Pickups and wagons",
+   "variants": [
+    {
+     "template": "illustrated-v08-pickup-perspective",
+     "label": "Pickup, rear three-quarter"
+    },
+    {
+     "template": "illustrated-v09-pickup-rear",
+     "label": "Pickup, rear elevation"
+    },
+    {
+     "template": "illustrated-v09-pickup-side",
+     "label": "Pickup, side elevation, right edge cropped"
+    }
+   ]
+  },
+  {
+   "id": "drawn-vans",
+   "label": "Vans",
+   "variants": [
+    {
+     "template": "illustrated-v10-van-perspective",
+     "label": "Van, rear three-quarter"
+    },
+    {
+     "template": "illustrated-v11-van-rear",
+     "label": "Van, rear elevation"
+    },
+    {
+     "template": "illustrated-v11-van-side",
+     "label": "Van, full side elevation"
+    }
+   ]
+  },
+  {
+   "id": "drawn-van-trucks",
+   "label": "Van trucks",
+   "variants": [
+    {
+     "template": "illustrated-v12-truck-perspective",
+     "label": "Box truck, rear three-quarter"
+    },
+    {
+     "template": "illustrated-v13-cab-door",
+     "label": "Box truck, enlarged cab door"
+    },
+    {
+     "template": "illustrated-v13-truck-rear",
+     "label": "Box truck, rear elevation"
+    },
+    {
+     "template": "illustrated-v13-truck-side",
+     "label": "Box truck, side elevation"
+    }
+   ]
+  },
+  {
+   "id": "drawn-tractor-cabs-and-highway-trailers",
+   "label": "Tractor cabs and highway trailers",
+   "variants": [
+    {
+     "template": "illustrated-v14-tractor-trailer",
+     "label": "Tractor and box trailer, perspective"
+    },
+    {
+     "template": "illustrated-v15-flatbed-rear",
+     "label": "Flat-deck trailer, rear"
+    },
+    {
+     "template": "illustrated-v15-flatbed-side",
+     "label": "Flat-deck trailer, side"
+    },
+    {
+     "template": "illustrated-v15-trailer-front",
+     "label": "Box trailer, front"
+    },
+    {
+     "template": "illustrated-v15-trailer-rear",
+     "label": "Box trailer, rear"
+    },
+    {
+     "template": "illustrated-v15-trailer-side",
+     "label": "Box trailer, side"
+    }
+   ]
+  },
+  {
+   "id": "drawn-equipment",
+   "label": "Equipment",
+   "variants": [
+    {
+     "template": "illustrated-v16-backhoe",
+     "label": "Backhoe / front-end loader"
+    },
+    {
+     "template": "illustrated-v17-compressor",
+     "label": "Towable compressor"
+    },
+    {
+     "template": "illustrated-v17-crawler-front",
+     "label": "Tracked crawler, front"
+    },
+    {
+     "template": "illustrated-v17-crawler-side",
+     "label": "Tracked crawler, side"
+    },
+    {
+     "template": "illustrated-v17-grader",
+     "label": "Grader, cropped operating section"
+    }
+   ]
+  },
+  {
+   "id": "drawn-installation-applying-markings",
+   "label": "Installation: applying markings",
+   "variants": [
+    {
+     "template": "illustrated-v18-installation-1",
+     "label": "Decal installation, panel 1"
+    },
+    {
+     "template": "illustrated-v18-installation-2",
+     "label": "Decal installation, panel 2"
+    },
+    {
+     "template": "illustrated-v18-installation-3",
+     "label": "Decal installation, panel 3"
+    },
+    {
+     "template": "illustrated-v18-installation-4",
+     "label": "Decal installation, panel 4"
+    }
+   ]
+  }
+ ],
+ "documents": [
+  {
+   "id": "gu-letterhead",
+   "label": "Letterhead, General Use",
+   "format": "docx",
+   "pages": [
+    "gu-letterhead"
+   ]
+  },
+  {
+   "id": "minister-letterhead",
+   "label": "Letterhead, Minister",
+   "format": "docx",
+   "pages": [
+    "minister-letterhead"
+   ]
+  },
+  {
+   "id": "deputy-letterhead",
+   "label": "Letterhead, Deputy Minister",
+   "format": "docx",
+   "pages": [
+    "deputy-letterhead"
+   ]
+  },
+  {
+   "id": "board-letterhead",
+   "label": "Letterhead, Board or Commission",
+   "format": "docx",
+   "pages": [
+    "board-letterhead"
+   ]
+  },
+  {
+   "id": "premier-letterhead",
+   "label": "Letterhead, Premier",
+   "format": "docx",
+   "pages": [
+    "premier-letterhead"
+   ]
+  },
+  {
+   "id": "special-letterhead",
+   "label": "Letterhead, Special Use",
+   "format": "docx",
+   "pages": [
+    "special-letterhead"
+   ]
+  },
+  {
+   "id": "gu-envelope",
+   "label": "Envelope, General Use",
+   "format": "docx",
+   "pages": [
+    "gu-envelope"
+   ]
+  },
+  {
+   "id": "minister-envelope",
+   "label": "Envelope, Minister",
+   "format": "docx",
+   "pages": [
+    "minister-envelope"
+   ]
+  },
+  {
+   "id": "deputy-envelope",
+   "label": "Envelope, Deputy Minister",
+   "format": "docx",
+   "pages": [
+    "deputy-envelope"
+   ]
+  },
+  {
+   "id": "board-envelope",
+   "label": "Envelope, Board or Commission",
+   "format": "docx",
+   "pages": [
+    "board-envelope"
+   ]
+  },
+  {
+   "id": "premier-envelope",
+   "label": "Envelope, Premier",
+   "format": "docx",
+   "pages": [
+    "premier-envelope"
+   ]
+  },
+  {
+   "id": "special-envelope",
+   "label": "Envelope, Special Use",
+   "format": "docx",
+   "pages": [
+    "special-envelope"
+   ]
+  },
+  {
+   "id": "memorandum",
+   "label": "Memorandum",
+   "format": "docx",
+   "pages": [
+    "memorandum"
+   ]
+  },
+  {
+   "id": "news-release",
+   "label": "News release",
+   "format": "docx",
+   "pages": [
+    "news-release"
+   ]
+  },
+  {
+   "id": "publication",
+   "label": "Publication title and statement pages",
+   "format": "docx",
+   "pages": [
+    "publication-title-page",
+    "publication-statement-page"
+   ],
+   "continue": true
+  }
+ ],
  "manuals": {
   "pack": "bc",
   "books": [

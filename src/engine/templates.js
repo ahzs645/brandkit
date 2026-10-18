@@ -77,7 +77,8 @@ const FIELD_REFERENCE = /\{([\w-]+)\}/g
 /** A field's default: the brand's placeholder for it, or what the template first wrote there. */
 const fieldDefault = (ctx, id) => ctx.brand.fields?.[id]?.placeholder
 
-const textValue = (ctx, element) => {
+/** What a text element says: the field's value, or its placeholder; a composed line with its fields filled. */
+export const textValue = (ctx, element) => {
   if (element.compose) {
     const ids = [...element.compose.matchAll(FIELD_REFERENCE)].map((match) => match[1])
     // A composed line goes when a field it names has been deliberately cleared: "Phone: " alone

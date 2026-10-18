@@ -884,22 +884,6 @@
       "title": "{name} / us letter letterhead",
       "description": "The A4 letterhead’s layout on US Letter, for correspondence to the United States: the same logo, rules and fields.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "reproduction",
-          "page": "R08",
-          "manual": "Reproduction Manual",
-          "title": "General Use stationery",
-          "printed": "7"
-        },
-        {
-          "book": "general",
-          "page": "G12",
-          "manual": "General Manual",
-          "title": "Stationery: Format A; envelopes; calling cards",
-          "printed": "10"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -996,22 +980,6 @@
       "title": "{name} / a4 continuation sheet",
       "description": "Second and later sheets of a letter: the symbol alone, the recipient and page number, and the letterhead’s footer.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G13",
-          "manual": "General Manual",
-          "title": "Stationery: Format B",
-          "printed": "11"
-        },
-        {
-          "book": "reproduction",
-          "page": "R03",
-          "manual": "Reproduction Manual",
-          "title": "Stationery Specifications; explanatory diagrams",
-          "printed": "2"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1079,22 +1047,6 @@
       "title": "{name} / dl envelope",
       "description": "DL envelope (220 × 110 mm): the logo and return address top left, the window clear, the motif cropped at the corner.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G12",
-          "manual": "General Manual",
-          "title": "Stationery: Format A; envelopes; calling cards",
-          "printed": "10"
-        },
-        {
-          "book": "reproduction",
-          "page": "R08",
-          "manual": "Reproduction Manual",
-          "title": "General Use stationery",
-          "printed": "7"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1167,15 +1119,6 @@
       "title": "{name} / compliments slip",
       "description": "A third of A4: the logo, “With compliments”, and the contact line.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "reproduction",
-          "page": "R09",
-          "manual": "Reproduction Manual",
-          "title": "Special Use stationery",
-          "printed": "8"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1223,21 +1166,12 @@
       "id": "email-signature",
       "label": "Email signature",
       "group": "Stationery",
-      "width": 640,
-      "height": 200,
-      "raster": 1280,
+      "width": 520,
+      "height": 150,
+      "raster": 1040,
       "title": "{name} / email signature",
-      "description": "An email signature at 640 × 200 px (use it at half size): the stacked logo and the card’s contact fields.",
+      "description": "An email signature at its size in mail (520 × 150 px): the stacked logo, a rule, and the card’s contact fields. Download it as HTML to paste into a mail program.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "reproduction",
-          "page": "R08",
-          "manual": "Reproduction Manual",
-          "title": "General Use stationery",
-          "printed": "7"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1245,18 +1179,18 @@
         },
         {
           "type": "logo",
-          "x": 28,
-          "y": 40,
-          "width": 116,
+          "x": 20,
+          "y": 26,
+          "width": 92,
           "colour": "ink",
           "layout": "stacked"
         },
         {
           "type": "line",
-          "x1": 172,
-          "y1": 36,
-          "x2": 172,
-          "y2": 164,
+          "x1": 136,
+          "y1": 22,
+          "x2": 136,
+          "y2": 128,
           "stroke": "line",
           "strokeWidth": 1
         },
@@ -1264,9 +1198,9 @@
           "type": "text",
           "id": "contact-name",
           "text": "[Name]",
-          "x": 196,
-          "y": 66,
-          "size": 20,
+          "x": 156,
+          "y": 50,
+          "size": 16,
           "colour": "ink",
           "font": "bold"
         },
@@ -1274,36 +1208,36 @@
           "type": "text",
           "id": "contact-role",
           "text": "[Role]",
-          "x": 196,
-          "y": 92,
-          "size": 14,
+          "x": 156,
+          "y": 70,
+          "size": 12,
           "colour": "muted"
         },
         {
           "type": "text",
           "id": "contact-email",
           "text": "[Email]",
-          "x": 196,
-          "y": 128,
-          "size": 13,
+          "x": 156,
+          "y": 98,
+          "size": 12,
           "colour": "ink"
         },
         {
           "type": "text",
           "id": "contact-phone",
           "text": "[Phone]",
-          "x": 196,
-          "y": 148,
-          "size": 13,
+          "x": 156,
+          "y": 115,
+          "size": 12,
           "colour": "ink"
         },
         {
           "type": "text",
           "id": "contact-website",
           "text": "[Website]",
-          "x": 196,
-          "y": 168,
-          "size": 13,
+          "x": 156,
+          "y": 132,
+          "size": 12,
           "colour": "primary"
         }
       ]
@@ -1330,22 +1264,6 @@
       "title": "{name} / business card, front (light)",
       "description": "The card front on the paper colour, for printers or stock where the midnight flood is not wanted.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "reproduction",
-          "page": "R08",
-          "manual": "Reproduction Manual",
-          "title": "General Use stationery",
-          "printed": "7"
-        },
-        {
-          "book": "hydro",
-          "page": "H16",
-          "manual": "Graphic Standards Manual",
-          "title": "Corporate stationery",
-          "printed": "15"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1403,22 +1321,6 @@
       "title": "{name} / memorandum",
       "description": "Internal memorandum: the logo and the word MEMORANDUM, To / From / Date / Subject on one column, then the body.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G14",
-          "manual": "General Manual",
-          "title": "Standard Memorandum; Standard News Release",
-          "printed": "12"
-        },
-        {
-          "book": "reproduction",
-          "page": "R14",
-          "manual": "Reproduction Manual",
-          "title": "Publications; Advertising; News Release; Memorandum",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1580,22 +1482,6 @@
       "title": "{name} / media release",
       "description": "Media release: the headline, dateline and body as one flow, the end mark, and the media contact above the footer.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G14",
-          "manual": "General Manual",
-          "title": "Standard Memorandum; Standard News Release",
-          "printed": "12"
-        },
-        {
-          "book": "reproduction",
-          "page": "R14",
-          "manual": "Reproduction Manual",
-          "title": "Publications; Advertising; News Release; Memorandum",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -1750,22 +1636,6 @@
       "title": "{name} / invoice",
       "description": "Invoice on the forms grid: number, date and due date across the top, four line items, the total, and payment terms.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H19",
-          "manual": "Graphic Standards Manual",
-          "title": "Forms",
-          "printed": "18"
-        },
-        {
-          "book": "hydro",
-          "page": "H21",
-          "manual": "Graphic Standards Manual",
-          "title": "Tender Form",
-          "printed": "20"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2085,29 +1955,6 @@
       "title": "{name} / report cover",
       "description": "Report cover: the logo top left; the kind of report, title and subtitle as one unit a quarter of the way down; the motif cropped at the foot.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H25",
-          "manual": "Graphic Standards Manual",
-          "title": "Covers",
-          "printed": "24"
-        },
-        {
-          "book": "hydro",
-          "page": "H26",
-          "manual": "Graphic Standards Manual",
-          "title": "Report cover",
-          "printed": "25"
-        },
-        {
-          "book": "general",
-          "page": "G10",
-          "manual": "General Manual",
-          "title": "Publications",
-          "printed": "8"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2193,29 +2040,6 @@
       "title": "{name} / report cover, reversed",
       "description": "Report cover, reversed: the logo top left; the kind of report, title and subtitle as one unit a quarter of the way down; the motif cropped at the foot.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H25",
-          "manual": "Graphic Standards Manual",
-          "title": "Covers",
-          "printed": "24"
-        },
-        {
-          "book": "hydro",
-          "page": "H26",
-          "manual": "Graphic Standards Manual",
-          "title": "Report cover",
-          "printed": "25"
-        },
-        {
-          "book": "general",
-          "page": "G10",
-          "manual": "General Manual",
-          "title": "Publications",
-          "printed": "8"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2301,22 +2125,6 @@
       "title": "{name} / report page",
       "description": "An interior page: the symbol and the report’s title as a running head, the page number, then the section’s kicker, title and text as one flow.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H31",
-          "manual": "Graphic Standards Manual",
-          "title": "Contents",
-          "printed": "30"
-        },
-        {
-          "book": "general",
-          "page": "G10",
-          "manual": "General Manual",
-          "title": "Publications",
-          "printed": "8"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2425,15 +2233,6 @@
       "title": "{name} / newsletter",
       "description": "A newsletter’s first page: a masthead band with the logo, the newsletter’s name and issue line, then the lead article.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H30",
-          "manual": "Graphic Standards Manual",
-          "title": "Mastheads",
-          "printed": "29"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2543,22 +2342,6 @@
       "title": "{name} / print advertisement, a5",
       "description": "A display advertisement: heavy rules at head and foot, the headline, a 3:2 picture, the copy, and the logo as the final element.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H33",
-          "manual": "Graphic Standards Manual",
-          "title": "Print advertising",
-          "printed": "32"
-        },
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2660,22 +2443,6 @@
       "title": "{name} / job posting",
       "description": "A recruitment post (4:5): the classified advertisement’s order of kicker, title, details and response line.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H34",
-          "manual": "Graphic Standards Manual",
-          "title": "Print advertising",
-          "printed": "33"
-        },
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2754,22 +2521,6 @@
       "title": "{name} / event announcement",
       "description": "An announcement (4:5) on the ice ground: kicker, title, and date, time and place.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        },
-        {
-          "book": "hydro",
-          "page": "H37",
-          "manual": "Graphic Standards Manual",
-          "title": "Other advertising",
-          "printed": "36"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2854,15 +2605,6 @@
       "title": "{name} / social story",
       "description": "A 9:16 story: the logo high, the headline and message as one flow, the call to action at the foot.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -2935,15 +2677,6 @@
       "title": "{name} / web banner, 300 × 250",
       "description": "The medium rectangle: logo, a two-line headline, and a button.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3011,15 +2744,6 @@
       "title": "{name} / web banner, 728 × 90",
       "description": "The leaderboard: logo, headline and button on one line.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G11",
-          "manual": "General Manual",
-          "title": "Advertising",
-          "printed": "9"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3075,15 +2799,6 @@
       "title": "{name} / presentation section",
       "description": "A section divider: the number large in ice, the title reversed, the logo at the foot.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3146,15 +2861,6 @@
       "title": "{name} / presentation content",
       "description": "A content slide: kicker, title and body as one flow; the symbol and slide number at the foot.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3227,15 +2933,6 @@
       "title": "{name} / presentation closing",
       "description": "The closing slide: the logo, a closing line, and the presenter’s contact details.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3302,15 +2999,6 @@
       "title": "{name} / video lower third",
       "description": "A lower third on a transparent 1920 × 1080 frame: the symbol and the speaker’s name and role on a midnight bar.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "rect",
@@ -3359,15 +3047,6 @@
       "title": "{name} / video end card",
       "description": "The last frame of a video: the logo centred, the tagline and the website.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3414,15 +3093,6 @@
       "title": "{name} / virtual background",
       "description": "A video-call background: the logo top left, the motif cropped bottom right, the middle left clear for the speaker.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H35",
-          "manual": "Graphic Standards Manual",
-          "title": "Audio-visual",
-          "printed": "34"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3460,29 +3130,6 @@
       "title": "{name} / exterior identification sign",
       "description": "Primary identification, 2400 × 1200 mm, on a grid of 200 mm (a twelfth of the length): the logo seven squares wide, two squares in from the left.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "sign",
-          "page": "S12",
-          "manual": "Sign Manual",
-          "title": "Primary identification signs",
-          "printed": "10"
-        },
-        {
-          "book": "sign",
-          "page": "S07",
-          "manual": "Sign Manual",
-          "title": "Grid system",
-          "printed": "5"
-        },
-        {
-          "book": "hydro",
-          "page": "H39",
-          "manual": "Graphic Standards Manual",
-          "title": "Identification signs",
-          "printed": "38"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3540,22 +3187,6 @@
       "title": "{name} / door sign",
       "description": "Secondary identification, 300 × 150 mm: the symbol, the room’s name and number, a midnight base.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "sign",
-          "page": "S14",
-          "manual": "Sign Manual",
-          "title": "Secondary identification signs",
-          "printed": "12"
-        },
-        {
-          "book": "sign",
-          "page": "S16",
-          "manual": "Sign Manual",
-          "title": "Standard information signs",
-          "printed": "14"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3614,29 +3245,6 @@
       "title": "{name} / directional sign",
       "description": "Three directional blades, 1800 × 450 mm each: one destination to a blade, the arrow first, a keyline between.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "sign",
-          "page": "S19",
-          "manual": "Sign Manual",
-          "title": "Secondary directional signs",
-          "printed": "16"
-        },
-        {
-          "book": "sign",
-          "page": "S20",
-          "manual": "Sign Manual",
-          "title": "Directional signs: sizing charts",
-          "printed": "17"
-        },
-        {
-          "book": "hydro",
-          "page": "H40",
-          "manual": "Graphic Standards Manual",
-          "title": "Guide signs",
-          "printed": "39"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3724,15 +3332,6 @@
       "title": "{name} / pull-up banner",
       "description": "A pull-up banner, 850 × 2000 mm: the logo at eye height and above, headline and message, the motif at the foot where stands hide it least.",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H36",
-          "manual": "Graphic Standards Manual",
-          "title": "Display and three-dimensional signature",
-          "printed": "35"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3804,22 +3403,6 @@
       "title": "{name} / van",
       "description": "Van: ManualKit’s drawing from page V10, in ddcnorth’s colours, with the identity in the branding zones the manual marked (cab door signature, side cargo signature, rear door signature, front unit, rear unit).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "vehicle",
-          "page": "V10",
-          "manual": "Vehicle Manual",
-          "title": "Vans",
-          "printed": "8"
-        },
-        {
-          "book": "vehicle",
-          "page": "V05",
-          "manual": "Vehicle Manual",
-          "title": "Signature, numeral and striping sizes",
-          "printed": "3"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3877,22 +3460,6 @@
       "title": "{name} / van, side",
       "description": "Van, side: ManualKit’s drawing from page V11, in ddcnorth’s colours, with the identity in the branding zones the manual marked (side panel signature, door signature, front unit).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "vehicle",
-          "page": "V11",
-          "manual": "Vehicle Manual",
-          "title": "Vans: placement",
-          "printed": "9"
-        },
-        {
-          "book": "vehicle",
-          "page": "V05",
-          "manual": "Vehicle Manual",
-          "title": "Signature, numeral and striping sizes",
-          "printed": "3"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3939,22 +3506,6 @@
       "title": "{name} / van, rear",
       "description": "Van, rear: ManualKit’s drawing from page V11, in ddcnorth’s colours, with the identity in the branding zones the manual marked (left door signature, right door unit).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "vehicle",
-          "page": "V11",
-          "manual": "Vehicle Manual",
-          "title": "Vans: placement",
-          "printed": "9"
-        },
-        {
-          "book": "vehicle",
-          "page": "V05",
-          "manual": "Vehicle Manual",
-          "title": "Signature, numeral and striping sizes",
-          "printed": "3"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -3997,22 +3548,6 @@
       "title": "{name} / pickup",
       "description": "Pickup: ManualKit’s drawing from page V08, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature, tailgate signature, front unit, rear unit).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "vehicle",
-          "page": "V08",
-          "manual": "Vehicle Manual",
-          "title": "Pickups and wagons",
-          "printed": "6"
-        },
-        {
-          "book": "vehicle",
-          "page": "V05",
-          "manual": "Vehicle Manual",
-          "title": "Signature, numeral and striping sizes",
-          "printed": "3"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4066,22 +3601,6 @@
       "title": "{name} / car, side",
       "description": "Car, side: ManualKit’s drawing from page V07, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature, unit).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "vehicle",
-          "page": "V07",
-          "manual": "Vehicle Manual",
-          "title": "Passenger cars: placement",
-          "printed": "5"
-        },
-        {
-          "book": "vehicle",
-          "page": "V05",
-          "manual": "Vehicle Manual",
-          "title": "Signature, numeral and striping sizes",
-          "printed": "3"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4124,22 +3643,6 @@
       "title": "{name} / van door",
       "description": "Van door: ManualKit’s drawing from page H44, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "hydro",
-          "page": "H44",
-          "manual": "Graphic Standards Manual",
-          "title": "Light vehicles",
-          "printed": "43"
-        },
-        {
-          "book": "hydro",
-          "page": "H43",
-          "manual": "Graphic Standards Manual",
-          "title": "Vehicle signatures",
-          "printed": "42"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4175,15 +3678,6 @@
       "title": "{name} / jacket, back",
       "description": "Jacket, back: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (back signature).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G15",
-          "manual": "General Manual",
-          "title": "Uniform Ensignia",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4219,15 +3713,6 @@
       "title": "{name} / field jacket, sleeve",
       "description": "Field jacket, sleeve: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (sleeve title, sleeve patch).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G15",
-          "manual": "General Manual",
-          "title": "Uniform Ensignia",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4270,15 +3755,6 @@
       "title": "{name} / blazer, pocket",
       "description": "Blazer, pocket: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (pocket crest).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G15",
-          "manual": "General Manual",
-          "title": "Uniform Ensignia",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -4314,15 +3790,6 @@
       "title": "{name} / hard hat",
       "description": "Hard hat: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (front crest).",
       "extension": "applications",
-      "sources": [
-        {
-          "book": "general",
-          "page": "G15",
-          "manual": "General Manual",
-          "title": "Uniform Ensignia",
-          "printed": "13"
-        }
-      ],
       "elements": [
         {
           "type": "background",
@@ -5044,29 +4511,6 @@
         "title": "Backgrounds and contrast.",
         "name": "Backgrounds",
         "subtitle": "One colour for the whole logo, chosen for the ground: black or midnight on light grounds, white on dark ones.",
-        "sources": [
-          {
-            "book": "hydro",
-            "page": "H07",
-            "manual": "Graphic Standards Manual",
-            "title": "Backgrounds",
-            "printed": "6"
-          },
-          {
-            "book": "hydro",
-            "page": "H08",
-            "manual": "Graphic Standards Manual",
-            "title": "Backgrounds and value",
-            "printed": "7"
-          },
-          {
-            "book": "general",
-            "page": "G07",
-            "manual": "General Manual",
-            "title": "Provincial Signature: Colour; positive/reverse",
-            "printed": "5"
-          }
-        ],
         "elements": [
           {
             "type": "rect",
@@ -5262,36 +4706,6 @@
         "title": "Keep the logo intact.",
         "name": "Incorrect usage",
         "subtitle": "The logo is supplied artwork. These are the mistakes it most often meets; each is a rule.",
-        "sources": [
-          {
-            "book": "hydro",
-            "page": "H09",
-            "manual": "Graphic Standards Manual",
-            "title": "Incorrect usage",
-            "printed": "8"
-          },
-          {
-            "book": "hydro",
-            "page": "H10",
-            "manual": "Graphic Standards Manual",
-            "title": "Incorrect usage",
-            "printed": "9"
-          },
-          {
-            "book": "hydro",
-            "page": "H11",
-            "manual": "Graphic Standards Manual",
-            "title": "Incorrect usage",
-            "printed": "10"
-          },
-          {
-            "book": "general",
-            "page": "G09",
-            "manual": "General Manual",
-            "title": "Proper And Improper Usage",
-            "printed": "7"
-          }
-        ],
         "elements": [
           {
             "type": "rect",
@@ -5520,36 +4934,6 @@
         "title": "Stationery and documents.",
         "name": "Stationery and documents",
         "subtitle": "Letters on A4 or US Letter, with a continuation sheet; envelopes, slips and signatures; memoranda, releases and invoices on the same margins.",
-        "sources": [
-          {
-            "book": "reproduction",
-            "page": "R03",
-            "manual": "Reproduction Manual",
-            "title": "Stationery Specifications; explanatory diagrams",
-            "printed": "2"
-          },
-          {
-            "book": "reproduction",
-            "page": "R08",
-            "manual": "Reproduction Manual",
-            "title": "General Use stationery",
-            "printed": "7"
-          },
-          {
-            "book": "general",
-            "page": "G12",
-            "manual": "General Manual",
-            "title": "Stationery: Format A; envelopes; calling cards",
-            "printed": "10"
-          },
-          {
-            "book": "general",
-            "page": "G14",
-            "manual": "General Manual",
-            "title": "Standard Memorandum; Standard News Release",
-            "printed": "12"
-          }
-        ],
         "elements": [
           {
             "type": "rect",
@@ -5716,7 +5100,7 @@
             "type": "rect",
             "x": 787.2945290004113,
             "y": 700,
-            "width": 512,
+            "width": 554.6666666666667,
             "height": 160,
             "fill": "reverse",
             "stroke": "line"
@@ -5726,7 +5110,7 @@
             "src": "templates/email-signature",
             "x": 787.3,
             "y": 700,
-            "width": 512,
+            "width": 554.7,
             "height": 160
           },
           {
@@ -5742,43 +5126,6 @@
         "title": "Publications and advertising.",
         "name": "Publications and advertising",
         "subtitle": "Covers carry the logo top left and the title a quarter of the way down. In every advertisement the logo comes last.",
-        "sources": [
-          {
-            "book": "hydro",
-            "page": "H25",
-            "manual": "Graphic Standards Manual",
-            "title": "Covers",
-            "printed": "24"
-          },
-          {
-            "book": "hydro",
-            "page": "H30",
-            "manual": "Graphic Standards Manual",
-            "title": "Mastheads",
-            "printed": "29"
-          },
-          {
-            "book": "hydro",
-            "page": "H33",
-            "manual": "Graphic Standards Manual",
-            "title": "Print advertising",
-            "printed": "32"
-          },
-          {
-            "book": "general",
-            "page": "G08",
-            "manual": "General Manual",
-            "title": "Typography; stationery, vehicle and sign arrangements",
-            "printed": "6"
-          },
-          {
-            "book": "general",
-            "page": "G11",
-            "manual": "General Manual",
-            "title": "Advertising",
-            "printed": "9"
-          }
-        ],
         "elements": [
           {
             "type": "rect",
@@ -5963,36 +5310,6 @@
         "title": "Screens, signs and spaces.",
         "name": "Screens and signs",
         "subtitle": "Slides and video frames share the cover’s layout. Signs are set on a grid of one twelfth of their longest side.",
-        "sources": [
-          {
-            "book": "hydro",
-            "page": "H35",
-            "manual": "Graphic Standards Manual",
-            "title": "Audio-visual",
-            "printed": "34"
-          },
-          {
-            "book": "sign",
-            "page": "S07",
-            "manual": "Sign Manual",
-            "title": "Grid system",
-            "printed": "5"
-          },
-          {
-            "book": "sign",
-            "page": "S12",
-            "manual": "Sign Manual",
-            "title": "Primary identification signs",
-            "printed": "10"
-          },
-          {
-            "book": "sign",
-            "page": "S19",
-            "manual": "Sign Manual",
-            "title": "Secondary directional signs",
-            "printed": "16"
-          }
-        ],
         "elements": [
           {
             "type": "nested",
@@ -6140,36 +5457,6 @@
         "title": "Vehicles and apparel.",
         "name": "Vehicles and apparel",
         "subtitle": "One colour of logo on one colour of body: white on midnight, midnight on white or ice. The logo goes where the manuals placed the signature; a fleet number where they placed the unit number.",
-        "sources": [
-          {
-            "book": "vehicle",
-            "page": "V04",
-            "manual": "Vehicle Manual",
-            "title": "Components",
-            "printed": "2"
-          },
-          {
-            "book": "vehicle",
-            "page": "V05",
-            "manual": "Vehicle Manual",
-            "title": "Signature, numeral and striping sizes",
-            "printed": "3"
-          },
-          {
-            "book": "hydro",
-            "page": "H43",
-            "manual": "Graphic Standards Manual",
-            "title": "Vehicle signatures",
-            "printed": "42"
-          },
-          {
-            "book": "general",
-            "page": "G15",
-            "manual": "General Manual",
-            "title": "Uniform Ensignia",
-            "printed": "13"
-          }
-        ],
         "elements": [
           {
             "type": "nested",
@@ -8032,8 +7319,248 @@
       "placeholder": "FIELD TEAM"
     }
   },
-  "manuals": {
-    "pack": "bc",
-    "relation": "Modelled on"
-  }
+  "sets": [
+    {
+      "id": "business-card",
+      "label": "Business card",
+      "variants": [
+        {
+          "template": "business-card-front",
+          "label": "Front"
+        },
+        {
+          "template": "business-card-front-light",
+          "label": "Front, light"
+        },
+        {
+          "template": "business-card-back",
+          "label": "Back"
+        }
+      ]
+    },
+    {
+      "id": "letterhead",
+      "label": "Letterhead",
+      "variants": [
+        {
+          "template": "letterhead-a4",
+          "label": "A4"
+        },
+        {
+          "template": "letterhead-letter",
+          "label": "US Letter"
+        },
+        {
+          "template": "letterhead-continuation",
+          "label": "Continuation sheet"
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "variants": [
+        {
+          "template": "report-cover",
+          "label": "Cover"
+        },
+        {
+          "template": "report-cover-reverse",
+          "label": "Cover, reversed"
+        },
+        {
+          "template": "report-page",
+          "label": "Interior page"
+        }
+      ]
+    },
+    {
+      "id": "web-banner",
+      "label": "Web banner",
+      "variants": [
+        {
+          "template": "web-banner-mpu",
+          "label": "300 × 250"
+        },
+        {
+          "template": "web-banner-leaderboard",
+          "label": "728 × 90"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "variants": [
+        {
+          "template": "presentation-cover",
+          "label": "Cover"
+        },
+        {
+          "template": "presentation-section",
+          "label": "Section"
+        },
+        {
+          "template": "presentation-content",
+          "label": "Content"
+        },
+        {
+          "template": "presentation-closing",
+          "label": "Closing"
+        }
+      ]
+    },
+    {
+      "id": "video",
+      "label": "Video graphics",
+      "variants": [
+        {
+          "template": "video-lower-third",
+          "label": "Lower third"
+        },
+        {
+          "template": "video-end-card",
+          "label": "End card"
+        },
+        {
+          "template": "virtual-background",
+          "label": "Virtual background"
+        }
+      ]
+    },
+    {
+      "id": "van",
+      "label": "Van",
+      "variants": [
+        {
+          "template": "drawn-v10-van-perspective",
+          "label": "Three-quarter"
+        },
+        {
+          "template": "drawn-v11-van-side",
+          "label": "Side"
+        },
+        {
+          "template": "drawn-v11-van-rear",
+          "label": "Rear"
+        },
+        {
+          "template": "drawn-h44-van-door",
+          "label": "Door"
+        }
+      ]
+    },
+    {
+      "id": "jacket",
+      "label": "Jacket",
+      "variants": [
+        {
+          "template": "drawn-g15-jacket-back",
+          "label": "Back"
+        },
+        {
+          "template": "drawn-g15-field-jacket",
+          "label": "Sleeve"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "letterhead-a4",
+      "label": "Letterhead, A4",
+      "format": "docx",
+      "pages": [
+        "letterhead-a4",
+        "letterhead-continuation"
+      ]
+    },
+    {
+      "id": "letterhead-letter",
+      "label": "Letterhead, US Letter",
+      "format": "docx",
+      "pages": [
+        "letterhead-letter"
+      ]
+    },
+    {
+      "id": "memorandum",
+      "label": "Memorandum",
+      "format": "docx",
+      "pages": [
+        "memorandum",
+        "letterhead-continuation"
+      ]
+    },
+    {
+      "id": "media-release",
+      "label": "Media release",
+      "format": "docx",
+      "pages": [
+        "media-release",
+        "letterhead-continuation"
+      ]
+    },
+    {
+      "id": "invoice",
+      "label": "Invoice",
+      "format": "docx",
+      "pages": [
+        "invoice"
+      ]
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "format": "docx",
+      "pages": [
+        "report-cover",
+        "report-page"
+      ],
+      "continue": true
+    },
+    {
+      "id": "newsletter",
+      "label": "Newsletter",
+      "format": "docx",
+      "pages": [
+        "newsletter",
+        "report-page"
+      ],
+      "continue": false
+    },
+    {
+      "id": "compliments-slip",
+      "label": "Compliments slip",
+      "format": "docx",
+      "pages": [
+        "compliments-slip"
+      ]
+    },
+    {
+      "id": "envelope-dl",
+      "label": "DL envelope",
+      "format": "docx",
+      "pages": [
+        "envelope-dl"
+      ]
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "format": "pptx",
+      "layouts": [
+        "presentation-cover",
+        "presentation-section",
+        "presentation-content",
+        "presentation-closing"
+      ]
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "format": "html",
+      "template": "email-signature"
+    }
+  ]
 }
