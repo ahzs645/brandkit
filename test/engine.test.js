@@ -113,3 +113,12 @@ test('a paragraph field wraps to its width and keeps typed line breaks', () => {
   assert.equal(lines.length, 3, 'capped at maxLines')
   assert.ok(templateFields(template)[0].multiline)
 })
+
+test('a composed line fills from shared fields, and goes when one is cleared', () => {
+  const owner = { ...brand, fields: { telephone: { label: 'Telephone', placeholder: '(604) 000-0000' } } }
+  const template = { id: 'c', width: 100, height: 50, elements: [{ type: 'text', id: 'phone-line', compose: 'Phone: {telephone}', x: 0, y: 10, size: 10 }] }
+  assert.match(renderTemplate({ brand: owner }, template).svg, />Phone: \(604\) 000-0000</)
+  assert.match(renderTemplate({ brand: owner, values: { telephone: '250 555 0100' } }, template).svg, />Phone: 250 555 0100</)
+  assert.doesNotMatch(renderTemplate({ brand: owner, values: { telephone: '' } }, template).svg, /Phone/)
+  assert.deepEqual(templateFields(template, owner).map(({ id, label }) => [id, label]), [['telephone', 'Telephone']])
+})

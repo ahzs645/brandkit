@@ -74,8 +74,8 @@ export const TemplateStudio = ({
   const ready = Boolean(fonts)
   const ctx = (outline, extra = {}) => ({ brand, fonts, values, outline: outline && ready, ...extra })
   const preview = template ? renderTemplate(ctx(true, { showGuides: guides }), template).svg : null
-  const fields = template ? templateFields(template) : []
-  const everyField = useMemo(() => allFields(templates), [templates])
+  const fields = template ? templateFields(template, brand) : []
+  const everyField = useMemo(() => allFields(templates, brand), [templates, brand])
   const filled = everyField.filter((field) => values[field.id]?.trim()).length
 
   const run = async (label, task) => {

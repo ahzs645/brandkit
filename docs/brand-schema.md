@@ -102,6 +102,9 @@ once fills the card, the letterhead and the envelope. A `lines` element is a blo
 fixed leading that closes up around empty lines (an address with an optional second line). A
 `paragraph` is one field wrapped to a width, at the words and at any line break typed into it, up to
 `maxLines` (a ministry name on a letterhead, which breaks differently in each template's column).
+A `text` with `compose` (`"Phone: {telephone}"`) builds one line from other fields, and is left
+out when any of them has been cleared. `brand.fields` (`{ "telephone": { "label": "Telephone",
+"placeholder": "(604) 000-0000" } }`) names fields and gives composed lines their defaults.
 
 ## Guide
 

@@ -18,13 +18,17 @@
 //   motif       { x, y, width, height, colour, align?, id? }          the symbol fitted in a box
 //   symbol      { x, y, height, colour, id? }                         the symbol at a set height
 //   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor? }
+//               or { compose: 'Phone: {telephone}', … }: a line built from other fields; it is left
+//               out when any field it names has been cleared
 //   lines       { x, y, leading, size, colour, font?, lines: [{ id, text, font?, style?, size? }] }
 //   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
 //               one field, wrapped to `width` (and at any line break typed into it)
 //   printGuides { colour, trim: {...}, safe: {...} }                  hidden trim and safe areas
 //
-// Every text element with an `id` is a field: `values[id]` replaces its text. Text is live by
-// default, so the SVG stays editable; `outline: true` sets it as paths for raster and PDF output.
+// Every text element with an `id` is a field: `values[id]` replaces its text. A brand may list its
+// fields in `brand.fields` ({ id: { label, placeholder } }) to name them and give composed lines
+// their defaults. Text is live by default, so the SVG stays editable; `outline: true` sets it as
+// paths for raster and PDF output.
 
 import { lockup, mark } from './artwork.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
@@ -60,9 +64,21 @@ export const scopeIds = (fragment, prefix) => {
   return scoped
 }
 
+const FIELD_REFERENCE = /\{([\w-]+)\}/g
+
+/** A field's default: the brand's placeholder for it, or what the template first wrote there. */
+const fieldDefault = (ctx, id) => ctx.brand.fields?.[id]?.placeholder
+
 const textValue = (ctx, element) => {
+  if (element.compose) {
+    const ids = [...element.compose.matchAll(FIELD_REFERENCE)].map((match) => match[1])
+    // A composed line goes when a field it names has been deliberately cleared: "Phone: " alone
+    // is worse than no line.
+    if (ids.some((id) => ctx.values?.[id] === '')) return ''
+    return element.compose.replace(FIELD_REFERENCE, (match, id) => ctx.values?.[id] ?? fieldDefault(ctx, id) ?? match)
+  }
   const value = element.id != null ? ctx.values?.[element.id] : undefined
-  return value != null ? String(value) : fill(ctx.brand, element.text ?? '')
+  return value != null ? String(value) : fill(ctx.brand, element.text ?? fieldDefault(ctx, element.id) ?? '')
 }
 
 /** Width of a line: measured by the font provider where it can, estimated where it cannot. */
@@ -228,12 +244,21 @@ export const renderTemplate = (ctx, template) => {
   return { svg, width: template.width, height: template.height, unit, physical }
 }
 
-/** The editable fields a template exposes, in the order they appear. */
-export const templateFields = (template) => {
+/** The editable fields a template exposes, in the order they appear. Pass the brand for its labels. */
+export const templateFields = (template, brand) => {
   const fields = []
+  const seen = new Set()
+  const add = (id, element, multiline) => {
+    if (seen.has(id)) return
+    seen.add(id)
+    const declared = brand?.fields?.[id] ?? {}
+    fields.push({ id, label: element?.label ?? declared.label ?? humanize(id), placeholder: element?.text ?? declared.placeholder ?? '', multiline: multiline || Boolean(declared.multiline) })
+  }
   const visit = (element) => {
-    if (element.type === 'text' && element.id && !element.locked) fields.push({ id: element.id, label: element.label ?? humanize(element.id), placeholder: element.text ?? '', multiline: false })
-    if (element.type === 'paragraph' && element.id && !element.locked) fields.push({ id: element.id, label: element.label ?? humanize(element.id), placeholder: element.text ?? '', multiline: true })
+    if (element.locked) return
+    if (element.type === 'text' && element.compose) for (const [, id] of element.compose.matchAll(FIELD_REFERENCE)) add(id, null, false)
+    else if (element.type === 'text' && element.id) add(element.id, element, false)
+    if (element.type === 'paragraph' && element.id) add(element.id, element, true)
     if (element.type === 'lines') element.lines.forEach((line) => visit({ type: 'text', ...line }))
   }
   template.elements.forEach(visit)
@@ -241,10 +266,10 @@ export const templateFields = (template) => {
 }
 
 /** Every template's fields merged, for a form that fills a whole stationery set at once. */
-export const allFields = (templates) => {
+export const allFields = (templates, brand) => {
   const seen = new Map()
   for (const template of templates) {
-    for (const field of templateFields(template)) {
+    for (const field of templateFields(template, brand)) {
       if (!seen.has(field.id)) seen.set(field.id, { ...field, templates: [] })
       seen.get(field.id).templates.push(template.id)
     }
