@@ -19,6 +19,8 @@
 //   a signature  { signature, colourway? | colour?, values?, defaults?, bottom? }   fitted inside the
 //                zone (or its top `bottom` share); `values` are fixed for it, `defaults` give way
 //                to the template's fields
+//   a logo       { logo: true | { family?, layout? } }   a fixed lockup; horizontal in a wide zone,
+//                stacked in a squarer one, unless it says
 //   a symbol     { symbol: true | id, colour? }
 //   text         { id?, text, font, lines?, curve?, colour?, caps? }        fitted inside the zone;
 //                `id` makes it a field; `curve` sets it on an arc rising by that share of the zone
@@ -27,7 +29,7 @@
 
 import { colour as resolveColour } from './brand.js'
 import { escape, n6 } from './format.js'
-import { mark } from './artwork.js'
+import { lockup, mark } from './artwork.js'
 import { signatureLockup } from './signatures.js'
 
 /** The affine transform taking a w × h box at the origin onto the zone's quad. */
@@ -112,12 +114,30 @@ const zoneArt = (ctx, spec, zone, w, h) => {
     const master = signatureLockup({ ...ctx, values }, { signature: spec.signature, colourway: spec.colourway, colour: spec.colourway ? undefined : fill })
     return fitInside(master.art, master.width, master.height, w, h, spec.inset ?? 0.04)
   }
+  if (spec.logo) {
+    const layout = spec.logo.layout ?? (w / h > 2.4 ? 'horizontal' : 'stacked')
+    const master = lockup(ctx, { family: spec.logo.family, layout, colour: fill })
+    const pad = master.origin ? 0 : brand.lockup?.canvasPadding ?? 0
+    return fitInside(`<g transform="translate(${-pad} ${-pad})">${master.art}</g>`, master.width - 2 * pad, master.height - 2 * pad, w, h, spec.inset ?? 0.04)
+  }
   if (spec.symbol) {
     const [, , sw, sh] = brand.symbol.viewBox
     return fitInside(mark(ctx, fill, false, spec.symbol === true ? undefined : spec.symbol), sw, sh, w, h, spec.inset ?? 0.04)
   }
   if (spec.text != null || spec.id) return zoneText(ctx, spec, zone, w, h, fill)
   return ''
+}
+
+/**
+ * Repaints a drawing by material: `{ paint: 'primary', fabric: 'midnight' }` gives every part made
+ * of that material (a van's body, a jacket's cloth) the brand's colour.
+ */
+const recolour = (ctx, markup, materials) => {
+  if (!materials) return markup
+  return markup.replace(/<[^>]*data-material="([^"]+)"[^>]*>/g, (tag, material) => {
+    const colour = materials[material]
+    return colour ? tag.replace(/ fill="(?!none")[^"]*"/, ` fill="${resolveColour(ctx.brand, colour)}"`) : tag
+  })
 }
 
 /** The identity set into an illustration's zones, in the illustration's coordinates. */
@@ -133,8 +153,8 @@ export const illustrationIdentity = (ctx, illustration, zones = {}) => illustrat
   }).join('')
 
 /** The whole drawing, identity included, in the illustration's coordinates. */
-export const illustrationArt = (ctx, illustration, { zones, markings = true } = {}) =>
-  `<g data-layer="object">${illustration.object}</g>${markings && illustration.markings ? `<g data-layer="markings">${illustration.markings}</g>` : ''}<g data-layer="identity">${illustrationIdentity(ctx, illustration, zones)}</g>`
+export const illustrationArt = (ctx, illustration, { zones, markings = true, materials } = {}) =>
+  `<g data-layer="object">${recolour(ctx, illustration.object, materials)}</g>${markings && illustration.markings ? `<g data-layer="markings">${illustration.markings}</g>` : ''}<g data-layer="identity">${illustrationIdentity(ctx, illustration, zones)}</g>`
 
 /** The template element: the illustration fitted to `width` (and `height`, if given) at x, y. */
 export const placeIllustration = (ctx, element, u) => {

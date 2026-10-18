@@ -17,8 +17,11 @@ const ctx = { brand }
 // Files the engine reproduces byte for byte.
 const EXACT = /^(logos\/outlined|logos\/editable-text|symbol|patterns|icons|templates)\/[^/]+\.svg$|^web\/(app-icon|favicon)\.svg$/
 
+// Templates added since (the application system, `extension: 'applications'`) are not in it.
+const added = new Set((brand.templates ?? []).filter((template) => template.extension).map((template) => `templates/${template.id}.svg`))
+
 test('vector artwork matches the original kit byte for byte', { skip }, () => {
-  const entries = planKit(brand, { rasters: false, pdfs: false, assets: false }).filter((entry) => EXACT.test(entry.path))
+  const entries = planKit(brand, { rasters: false, pdfs: false, assets: false }).filter((entry) => EXACT.test(entry.path) && !added.has(entry.path))
   assert.ok(entries.length === 48, `${entries.length} files compared`)
   const differ = []
   for (const entry of entries) {

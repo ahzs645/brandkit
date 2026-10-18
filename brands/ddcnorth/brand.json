@@ -869,6 +869,3482 @@
           "colour": "muted"
         }
       ]
+    },
+    {
+      "id": "letterhead-letter",
+      "label": "US Letter letterhead",
+      "group": "Stationery",
+      "width": 816,
+      "height": 1056,
+      "physical": [
+        "8.5in",
+        "11in"
+      ],
+      "raster": 1632,
+      "title": "{name} / us letter letterhead",
+      "description": "The A4 letterhead’s layout on US Letter, for correspondence to the United States: the same logo, rules and fields.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "reproduction",
+          "page": "R08",
+          "manual": "Reproduction Manual",
+          "title": "General Use stationery",
+          "printed": "7"
+        },
+        {
+          "book": "general",
+          "page": "G12",
+          "manual": "General Manual",
+          "title": "Stationery: Format A; envelopes; calling cards",
+          "printed": "10"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 285,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "d": "M62 184H754",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 62,
+          "y": 238,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "recipient-name",
+          "text": "[Recipient]",
+          "x": 62,
+          "y": 287,
+          "size": 16,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "recipient-address",
+          "text": "[Address]",
+          "x": 62,
+          "y": 313,
+          "size": 14,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 62,
+          "y": 404,
+          "size": 30,
+          "colour": "ink",
+          "weight": 500
+        },
+        {
+          "type": "text",
+          "id": "letter-content",
+          "text": "[Letter content]",
+          "x": 62,
+          "y": 453,
+          "size": 16,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "d": "M62 948H754",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 989,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-continuation",
+      "label": "A4 continuation sheet",
+      "group": "Stationery",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / a4 continuation sheet",
+      "description": "Second and later sheets of a letter: the symbol alone, the recipient and page number, and the letterhead’s footer.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G13",
+          "manual": "General Manual",
+          "title": "Stationery: Format B",
+          "printed": "11"
+        },
+        {
+          "book": "reproduction",
+          "page": "R03",
+          "manual": "Reproduction Manual",
+          "title": "Stationery Specifications; explanatory diagrams",
+          "printed": "2"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "symbol",
+          "x": 62,
+          "y": 56,
+          "height": 40,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "compose": "{recipient-name} · Page {page-number}",
+          "x": 732,
+          "y": 84,
+          "size": 12,
+          "colour": "muted",
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 120H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "letter-content-continued",
+          "text": "[Letter content, continued]",
+          "x": 62,
+          "y": 180,
+          "size": 16,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "envelope-dl",
+      "label": "DL envelope",
+      "group": "Stationery",
+      "width": 831,
+      "height": 416,
+      "physical": [
+        "220mm",
+        "110mm"
+      ],
+      "raster": 1664,
+      "title": "{name} / dl envelope",
+      "description": "DL envelope (220 × 110 mm): the logo and return address top left, the window clear, the motif cropped at the corner.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G12",
+          "manual": "General Manual",
+          "title": "Stationery: Format A; envelopes; calling cards",
+          "printed": "10"
+        },
+        {
+          "book": "reproduction",
+          "page": "R08",
+          "manual": "Reproduction Manual",
+          "title": "General Use stationery",
+          "printed": "7"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 38,
+          "y": 36,
+          "width": 200,
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "return-address",
+          "text": "[Return address]",
+          "x": 40,
+          "y": 124,
+          "width": 300,
+          "size": 11,
+          "leading": 15,
+          "colour": "muted",
+          "font": "body",
+          "maxLines": 4
+        },
+        {
+          "type": "rect",
+          "x": 76,
+          "y": 189,
+          "width": 340,
+          "height": 170,
+          "fill": "none",
+          "id": "address-window",
+          "stroke": "line",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "ADDRESS WINDOW / NOT PRINTED",
+          "x": 86,
+          "y": 207,
+          "size": 9,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.1
+        },
+        {
+          "type": "motif",
+          "x": 600,
+          "y": 236,
+          "width": 260,
+          "height": 220,
+          "colour": "light",
+          "align": "right"
+        }
+      ]
+    },
+    {
+      "id": "compliments-slip",
+      "label": "Compliments slip",
+      "group": "Stationery",
+      "width": 794,
+      "height": 374,
+      "physical": [
+        "210mm",
+        "99mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / compliments slip",
+      "description": "A third of A4: the logo, “With compliments”, and the contact line.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "reproduction",
+          "page": "R09",
+          "manual": "Reproduction Manual",
+          "title": "Special Use stationery",
+          "printed": "8"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 48,
+          "width": 240,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "With compliments",
+          "x": 62,
+          "y": 214,
+          "size": 44,
+          "colour": "primary",
+          "font": "display",
+          "tracking": -1.76
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 322,
+          "size": 12,
+          "colour": "muted"
+        },
+        {
+          "type": "motif",
+          "x": 560,
+          "y": 150,
+          "width": 300,
+          "height": 260,
+          "colour": "light",
+          "align": "right"
+        }
+      ]
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "group": "Stationery",
+      "width": 640,
+      "height": 200,
+      "raster": 1280,
+      "title": "{name} / email signature",
+      "description": "An email signature at 640 × 200 px (use it at half size): the stacked logo and the card’s contact fields.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "reproduction",
+          "page": "R08",
+          "manual": "Reproduction Manual",
+          "title": "General Use stationery",
+          "printed": "7"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 28,
+          "y": 40,
+          "width": 116,
+          "colour": "ink",
+          "layout": "stacked"
+        },
+        {
+          "type": "line",
+          "x1": 172,
+          "y1": 36,
+          "x2": 172,
+          "y2": 164,
+          "stroke": "line",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Name]",
+          "x": 196,
+          "y": 66,
+          "size": 20,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[Role]",
+          "x": 196,
+          "y": 92,
+          "size": 14,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "contact-email",
+          "text": "[Email]",
+          "x": 196,
+          "y": 128,
+          "size": 13,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-phone",
+          "text": "[Phone]",
+          "x": 196,
+          "y": 148,
+          "size": 13,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 196,
+          "y": 168,
+          "size": 13,
+          "colour": "primary"
+        }
+      ]
+    },
+    {
+      "id": "business-card-front-light",
+      "label": "Business card, front (light)",
+      "group": "Business cards",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "raster": 1920,
+      "title": "{name} / business card, front (light)",
+      "description": "The card front on the paper colour, for printers or stock where the midnight flood is not wanted.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "reproduction",
+          "page": "R08",
+          "manual": "Reproduction Manual",
+          "title": "General Use stationery",
+          "printed": "7"
+        },
+        {
+          "book": "hydro",
+          "page": "H16",
+          "manual": "Graphic Standards Manual",
+          "title": "Corporate stationery",
+          "printed": "15"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "logo",
+          "x": 140,
+          "y": 205,
+          "width": 680,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "brand-tagline",
+          "text": "BUILT FOR WHAT’S NEXT.",
+          "x": 150,
+          "y": 430,
+          "size": 22,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 3
+        },
+        {
+          "type": "printGuides",
+          "colour": "graphite",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "memorandum",
+      "label": "Memorandum",
+      "group": "Documents",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / memorandum",
+      "description": "Internal memorandum: the logo and the word MEMORANDUM, To / From / Date / Subject on one column, then the body.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G14",
+          "manual": "General Manual",
+          "title": "Standard Memorandum; Standard News Release",
+          "printed": "12"
+        },
+        {
+          "book": "reproduction",
+          "page": "R14",
+          "manual": "Reproduction Manual",
+          "title": "Publications; Advertising; News Release; Memorandum",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 200,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "MEMORANDUM",
+          "x": 732,
+          "y": 92,
+          "size": 13,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.6,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 150H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "TO",
+          "x": 62,
+          "y": 205,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "memo-to",
+          "text": "[Recipient]",
+          "x": 180,
+          "y": 205,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "FROM",
+          "x": 62,
+          "y": 240,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "memo-from",
+          "text": "[Name]",
+          "x": 180,
+          "y": 240,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "DATE",
+          "x": 62,
+          "y": 275,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 180,
+          "y": 275,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "SUBJECT",
+          "x": 62,
+          "y": 310,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 180,
+          "y": 310,
+          "size": 15,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "path",
+          "d": "M62 345H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "paragraph",
+          "id": "memo-body",
+          "text": "[Memo content]",
+          "x": 62,
+          "y": 400,
+          "width": 670,
+          "size": 15,
+          "leading": 24,
+          "colour": "ink",
+          "font": "body",
+          "maxLines": 24
+        },
+        {
+          "type": "path",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "media-release",
+      "label": "Media release",
+      "group": "Documents",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / media release",
+      "description": "Media release: the headline, dateline and body as one flow, the end mark, and the media contact above the footer.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G14",
+          "manual": "General Manual",
+          "title": "Standard Memorandum; Standard News Release",
+          "printed": "12"
+        },
+        {
+          "book": "reproduction",
+          "page": "R14",
+          "manual": "Reproduction Manual",
+          "title": "Publications; Advertising; News Release; Memorandum",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 200,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "MEDIA RELEASE",
+          "x": 732,
+          "y": 92,
+          "size": 13,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.6,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 150H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "FOR IMMEDIATE RELEASE",
+          "x": 62,
+          "y": 205,
+          "size": 12,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.4
+        },
+        {
+          "type": "flow",
+          "x": 62,
+          "y": 275,
+          "items": [
+            {
+              "id": "release-headline",
+              "text": "[Headline]",
+              "size": 40,
+              "font": "display",
+              "tracking": -1.6,
+              "leading": 46,
+              "wrap": 670,
+              "maxLines": 3
+            },
+            {
+              "id": "release-dateline",
+              "text": "[City], [Date] —",
+              "size": 15,
+              "font": "bold",
+              "gap": 70
+            },
+            {
+              "id": "release-body",
+              "text": "[Release content]",
+              "size": 15,
+              "leading": 24,
+              "wrap": 670,
+              "maxLines": 14,
+              "gap": 32
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "###",
+          "x": 397,
+          "y": 860,
+          "size": 15,
+          "colour": "muted",
+          "anchor": "middle"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "MEDIA CONTACT",
+          "x": 62,
+          "y": 905,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Name]",
+          "x": 62,
+          "y": 932,
+          "size": 15,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "contact-email",
+          "text": "[Email]",
+          "x": 62,
+          "y": 955,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-phone",
+          "text": "[Phone]",
+          "x": 62,
+          "y": 977,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "invoice",
+      "label": "Invoice",
+      "group": "Documents",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / invoice",
+      "description": "Invoice on the forms grid: number, date and due date across the top, four line items, the total, and payment terms.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H19",
+          "manual": "Graphic Standards Manual",
+          "title": "Forms",
+          "printed": "18"
+        },
+        {
+          "book": "hydro",
+          "page": "H21",
+          "manual": "Graphic Standards Manual",
+          "title": "Tender Form",
+          "printed": "20"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 200,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "INVOICE",
+          "x": 732,
+          "y": 92,
+          "size": 13,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.6,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 150H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "NUMBER",
+          "x": 62,
+          "y": 205,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "invoice-number",
+          "text": "[Invoice no.]",
+          "x": 62,
+          "y": 232,
+          "size": 15,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "DATE",
+          "x": 290,
+          "y": 205,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 290,
+          "y": 232,
+          "size": 15,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "DUE",
+          "x": 518,
+          "y": 205,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "id": "invoice-due",
+          "text": "[Due date]",
+          "x": 518,
+          "y": 232,
+          "size": 15,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "BILL TO",
+          "x": 62,
+          "y": 300,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "paragraph",
+          "id": "bill-to",
+          "text": "[Client name and address]",
+          "x": 62,
+          "y": 326,
+          "width": 320,
+          "size": 14,
+          "leading": 20,
+          "colour": "ink",
+          "font": "body",
+          "maxLines": 4
+        },
+        {
+          "type": "path",
+          "d": "M62 450H732",
+          "stroke": "ink",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "DESCRIPTION",
+          "x": 62,
+          "y": 478,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "AMOUNT",
+          "x": 732,
+          "y": 478,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3,
+          "anchor": "end"
+        },
+        {
+          "type": "text",
+          "id": "item-1",
+          "text": "[Item 1]",
+          "x": 62,
+          "y": 522,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "item-1-amount",
+          "text": "[0.00]",
+          "x": 732,
+          "y": 522,
+          "size": 15,
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 538H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "item-2",
+          "text": "[Item 2]",
+          "x": 62,
+          "y": 566,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "item-2-amount",
+          "text": "[0.00]",
+          "x": 732,
+          "y": 566,
+          "size": 15,
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 582H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "item-3",
+          "text": "[Item 3]",
+          "x": 62,
+          "y": 610,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "item-3-amount",
+          "text": "[0.00]",
+          "x": 732,
+          "y": 610,
+          "size": 15,
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 626H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "item-4",
+          "text": "[Item 4]",
+          "x": 62,
+          "y": 654,
+          "size": 15,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "item-4-amount",
+          "text": "[0.00]",
+          "x": 732,
+          "y": 654,
+          "size": 15,
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 670H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "TOTAL",
+          "x": 62,
+          "y": 720,
+          "size": 13,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.6
+        },
+        {
+          "type": "text",
+          "id": "invoice-total",
+          "text": "[0.00]",
+          "x": 732,
+          "y": 724,
+          "size": 30,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -1.2,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 746H732",
+          "stroke": "ink",
+          "strokeWidth": 1
+        },
+        {
+          "type": "paragraph",
+          "id": "invoice-terms",
+          "text": "[Payment terms and remittance details]",
+          "x": 62,
+          "y": 800,
+          "width": 670,
+          "size": 13,
+          "leading": 20,
+          "colour": "muted",
+          "font": "body",
+          "maxLines": 5
+        },
+        {
+          "type": "path",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "report-cover",
+      "label": "Report cover",
+      "group": "Publications",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / report cover",
+      "description": "Report cover: the logo top left; the kind of report, title and subtitle as one unit a quarter of the way down; the motif cropped at the foot.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H25",
+          "manual": "Graphic Standards Manual",
+          "title": "Covers",
+          "printed": "24"
+        },
+        {
+          "book": "hydro",
+          "page": "H26",
+          "manual": "Graphic Standards Manual",
+          "title": "Report cover",
+          "printed": "25"
+        },
+        {
+          "book": "general",
+          "page": "G10",
+          "manual": "General Manual",
+          "title": "Publications",
+          "printed": "8"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "motif",
+          "x": 330,
+          "y": 640,
+          "width": 620,
+          "height": 540,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 62,
+          "width": 240,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "report-type",
+          "text": "REPORT",
+          "x": 62,
+          "y": 330,
+          "size": 13,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.6
+        },
+        {
+          "type": "flow",
+          "x": 62,
+          "y": 400,
+          "items": [
+            {
+              "id": "report-title",
+              "text": "[Report title]",
+              "size": 54,
+              "font": "display",
+              "tracking": -2.2,
+              "leading": 58,
+              "wrap": 620,
+              "maxLines": 3,
+              "colour": "ink"
+            },
+            {
+              "id": "report-subtitle",
+              "text": "[Subtitle]",
+              "size": 20,
+              "leading": 28,
+              "wrap": 560,
+              "maxLines": 3,
+              "gap": 56,
+              "colour": "muted"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "report-date",
+          "text": "[Month Year]",
+          "x": 62,
+          "y": 1060,
+          "size": 14,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "report-cover-reverse",
+      "label": "Report cover, reversed",
+      "group": "Publications",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / report cover, reversed",
+      "description": "Report cover, reversed: the logo top left; the kind of report, title and subtitle as one unit a quarter of the way down; the motif cropped at the foot.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H25",
+          "manual": "Graphic Standards Manual",
+          "title": "Covers",
+          "printed": "24"
+        },
+        {
+          "book": "hydro",
+          "page": "H26",
+          "manual": "Graphic Standards Manual",
+          "title": "Report cover",
+          "printed": "25"
+        },
+        {
+          "book": "general",
+          "page": "G10",
+          "manual": "General Manual",
+          "title": "Publications",
+          "printed": "8"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 330,
+          "y": 640,
+          "width": 620,
+          "height": 540,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 62,
+          "width": 240,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "report-type",
+          "text": "REPORT",
+          "x": 62,
+          "y": 330,
+          "size": 13,
+          "colour": "light",
+          "font": "label",
+          "tracking": 1.6
+        },
+        {
+          "type": "flow",
+          "x": 62,
+          "y": 400,
+          "items": [
+            {
+              "id": "report-title",
+              "text": "[Report title]",
+              "size": 54,
+              "font": "display",
+              "tracking": -2.2,
+              "leading": 58,
+              "wrap": 620,
+              "maxLines": 3,
+              "colour": "reverse"
+            },
+            {
+              "id": "report-subtitle",
+              "text": "[Subtitle]",
+              "size": 20,
+              "leading": 28,
+              "wrap": 560,
+              "maxLines": 3,
+              "gap": 56,
+              "colour": "light"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "report-date",
+          "text": "[Month Year]",
+          "x": 62,
+          "y": 1060,
+          "size": 14,
+          "colour": "light"
+        }
+      ]
+    },
+    {
+      "id": "report-page",
+      "label": "Report page",
+      "group": "Publications",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / report page",
+      "description": "An interior page: the symbol and the report’s title as a running head, the page number, then the section’s kicker, title and text as one flow.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H31",
+          "manual": "Graphic Standards Manual",
+          "title": "Contents",
+          "printed": "30"
+        },
+        {
+          "book": "general",
+          "page": "G10",
+          "manual": "General Manual",
+          "title": "Publications",
+          "printed": "8"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "symbol",
+          "x": 62,
+          "y": 46,
+          "height": 22,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "report-title",
+          "text": "[Report title]",
+          "x": 98,
+          "y": 63,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3,
+          "caps": true
+        },
+        {
+          "type": "text",
+          "id": "page-number",
+          "text": "2",
+          "x": 732,
+          "y": 63,
+          "size": 11,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 1.3,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "d": "M62 90H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "flow",
+          "x": 62,
+          "y": 170,
+          "items": [
+            {
+              "id": "section-kicker",
+              "text": "[01]",
+              "size": 12,
+              "font": "label",
+              "tracking": 1.4,
+              "colour": "primary"
+            },
+            {
+              "id": "section-title",
+              "text": "[Section title]",
+              "size": 34,
+              "font": "display",
+              "tracking": -1.4,
+              "leading": 40,
+              "wrap": 670,
+              "maxLines": 2,
+              "gap": 52
+            },
+            {
+              "id": "section-body",
+              "text": "[Section content]",
+              "size": 15,
+              "leading": 24,
+              "wrap": 670,
+              "maxLines": 30,
+              "gap": 46
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "d": "M62 1070H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1098,
+          "size": 11,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "newsletter",
+      "label": "Newsletter",
+      "group": "Publications",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "title": "{name} / newsletter",
+      "description": "A newsletter’s first page: a masthead band with the logo, the newsletter’s name and issue line, then the lead article.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H30",
+          "manual": "Graphic Standards Manual",
+          "title": "Mastheads",
+          "printed": "29"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 794,
+          "height": 250,
+          "fill": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 50,
+          "width": 210,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "newsletter-name",
+          "text": "North Notes",
+          "x": 62,
+          "y": 198,
+          "size": 64,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -2.56
+        },
+        {
+          "type": "text",
+          "id": "newsletter-issue",
+          "text": "[ISSUE 01] · [MONTH YEAR]",
+          "x": 732,
+          "y": 198,
+          "size": 12,
+          "colour": "light",
+          "font": "label",
+          "tracking": 1.4,
+          "anchor": "end"
+        },
+        {
+          "type": "flow",
+          "x": 62,
+          "y": 320,
+          "items": [
+            {
+              "id": "article-kicker",
+              "text": "[TOPIC]",
+              "size": 12,
+              "font": "label",
+              "tracking": 1.4,
+              "colour": "primary"
+            },
+            {
+              "id": "article-title",
+              "text": "[Article title]",
+              "size": 34,
+              "font": "display",
+              "tracking": -1.4,
+              "leading": 40,
+              "wrap": 670,
+              "maxLines": 2,
+              "gap": 48
+            },
+            {
+              "id": "article-body",
+              "text": "[Article content]",
+              "size": 15,
+              "leading": 24,
+              "wrap": 670,
+              "maxLines": 24,
+              "gap": 44
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "d": "M62 1070H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1098,
+          "size": 11,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "print-ad",
+      "label": "Print advertisement, A5",
+      "group": "Advertising",
+      "width": 559,
+      "height": 794,
+      "physical": [
+        "148mm",
+        "210mm"
+      ],
+      "raster": 1118,
+      "title": "{name} / print advertisement, a5",
+      "description": "A display advertisement: heavy rules at head and foot, the headline, a 3:2 picture, the copy, and the logo as the final element.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H33",
+          "manual": "Graphic Standards Manual",
+          "title": "Print advertising",
+          "printed": "32"
+        },
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 559,
+          "height": 10,
+          "fill": "primary"
+        },
+        {
+          "type": "flow",
+          "x": 40,
+          "y": 92,
+          "items": [
+            {
+              "id": "ad-headline",
+              "text": "[Headline]",
+              "size": 40,
+              "font": "display",
+              "tracking": -1.6,
+              "leading": 44,
+              "wrap": 479,
+              "maxLines": 3
+            }
+          ]
+        },
+        {
+          "type": "rect",
+          "x": 40,
+          "y": 270,
+          "width": 479,
+          "height": 300,
+          "fill": "light",
+          "id": "image-area"
+        },
+        {
+          "type": "text",
+          "locked": true,
+          "text": "IMAGE / 3:2",
+          "x": 279,
+          "y": 425,
+          "size": 11,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.3,
+          "anchor": "middle"
+        },
+        {
+          "type": "paragraph",
+          "id": "ad-copy",
+          "text": "[Advertisement copy]",
+          "x": 40,
+          "y": 612,
+          "width": 479,
+          "size": 13,
+          "leading": 19,
+          "colour": "ink",
+          "font": "body",
+          "maxLines": 4
+        },
+        {
+          "type": "logo",
+          "x": 40,
+          "y": 708,
+          "width": 190,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 519,
+          "y": 738,
+          "size": 13,
+          "colour": "primary",
+          "anchor": "end"
+        },
+        {
+          "type": "rect",
+          "x": 0,
+          "y": 784,
+          "width": 559,
+          "height": 10,
+          "fill": "primary"
+        }
+      ]
+    },
+    {
+      "id": "job-posting",
+      "label": "Job posting",
+      "group": "Advertising",
+      "width": 1080,
+      "height": 1350,
+      "raster": 1080,
+      "title": "{name} / job posting",
+      "description": "A recruitment post (4:5): the classified advertisement’s order of kicker, title, details and response line.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H34",
+          "manual": "Graphic Standards Manual",
+          "title": "Print advertising",
+          "printed": "33"
+        },
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "motif",
+          "x": 640,
+          "y": 940,
+          "width": 520,
+          "height": 450,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 76,
+          "width": 330,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "job-kicker",
+          "text": "WE’RE HIRING",
+          "x": 80,
+          "y": 380,
+          "size": 24,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 2.9
+        },
+        {
+          "type": "flow",
+          "x": 80,
+          "y": 500,
+          "items": [
+            {
+              "id": "job-title",
+              "text": "[Role title]",
+              "size": 96,
+              "font": "display",
+              "tracking": -3.8,
+              "leading": 100,
+              "wrap": 900,
+              "maxLines": 3
+            },
+            {
+              "id": "job-details",
+              "text": "[Location] · [Full time]",
+              "size": 32,
+              "gap": 90,
+              "colour": "muted"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "job-cta",
+          "text": "Apply at [Website]",
+          "x": 80,
+          "y": 1250,
+          "size": 30,
+          "colour": "ink",
+          "font": "bold"
+        }
+      ]
+    },
+    {
+      "id": "event-announcement",
+      "label": "Event announcement",
+      "group": "Advertising",
+      "width": 1080,
+      "height": 1350,
+      "raster": 1080,
+      "title": "{name} / event announcement",
+      "description": "An announcement (4:5) on the ice ground: kicker, title, and date, time and place.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        },
+        {
+          "book": "hydro",
+          "page": "H37",
+          "manual": "Graphic Standards Manual",
+          "title": "Other advertising",
+          "printed": "36"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light"
+        },
+        {
+          "type": "motif",
+          "x": 700,
+          "y": 1010,
+          "width": 460,
+          "height": 400,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 76,
+          "width": 330,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "event-kicker",
+          "text": "[EVENT]",
+          "x": 80,
+          "y": 380,
+          "size": 24,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 2.9
+        },
+        {
+          "type": "flow",
+          "x": 80,
+          "y": 500,
+          "items": [
+            {
+              "id": "event-title",
+              "text": "[Event title]",
+              "size": 96,
+              "font": "display",
+              "tracking": -3.8,
+              "leading": 100,
+              "wrap": 900,
+              "maxLines": 3,
+              "colour": "primary"
+            }
+          ]
+        },
+        {
+          "type": "lines",
+          "x": 80,
+          "y": 1010,
+          "size": 32,
+          "leading": 46,
+          "colour": "primary",
+          "lines": [
+            {
+              "id": "event-date",
+              "text": "[Date]"
+            },
+            {
+              "id": "event-time",
+              "text": "[Time]"
+            },
+            {
+              "id": "event-place",
+              "text": "[Place]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "social-story",
+      "label": "Social story",
+      "group": "Advertising",
+      "width": 1080,
+      "height": 1920,
+      "raster": 1080,
+      "title": "{name} / social story",
+      "description": "A 9:16 story: the logo high, the headline and message as one flow, the call to action at the foot.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 560,
+          "y": -60,
+          "width": 600,
+          "height": 520,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 140,
+          "width": 380,
+          "colour": "reverse"
+        },
+        {
+          "type": "flow",
+          "x": 80,
+          "y": 860,
+          "items": [
+            {
+              "id": "story-headline",
+              "text": "From insight to impact.",
+              "size": 120,
+              "font": "display",
+              "tracking": -4.8,
+              "leading": 120,
+              "wrap": 920,
+              "maxLines": 4,
+              "colour": "reverse"
+            },
+            {
+              "id": "story-message",
+              "text": "[Your message here]",
+              "size": 36,
+              "leading": 48,
+              "wrap": 900,
+              "maxLines": 4,
+              "gap": 110,
+              "colour": "light"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "story-cta",
+          "text": "[CALL TO ACTION]",
+          "x": 80,
+          "y": 1780,
+          "size": 26,
+          "colour": "light",
+          "font": "label",
+          "tracking": 3.1
+        }
+      ]
+    },
+    {
+      "id": "web-banner-mpu",
+      "label": "Web banner, 300 × 250",
+      "group": "Advertising",
+      "width": 300,
+      "height": 250,
+      "raster": 600,
+      "title": "{name} / web banner, 300 × 250",
+      "description": "The medium rectangle: logo, a two-line headline, and a button.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 196,
+          "y": 150,
+          "width": 130,
+          "height": 112,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 22,
+          "width": 150,
+          "colour": "reverse"
+        },
+        {
+          "type": "paragraph",
+          "id": "banner-headline",
+          "text": "Intelligence in motion.",
+          "x": 20,
+          "y": 112,
+          "width": 250,
+          "size": 26,
+          "leading": 29,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -1,
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "x": 20,
+          "y": 186,
+          "width": 128,
+          "height": 40,
+          "fill": "light"
+        },
+        {
+          "type": "text",
+          "id": "banner-cta",
+          "text": "LEARN MORE",
+          "x": 84,
+          "y": 211,
+          "size": 12,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.4,
+          "anchor": "middle"
+        }
+      ]
+    },
+    {
+      "id": "web-banner-leaderboard",
+      "label": "Web banner, 728 × 90",
+      "group": "Advertising",
+      "width": 728,
+      "height": 90,
+      "raster": 1456,
+      "title": "{name} / web banner, 728 × 90",
+      "description": "The leaderboard: logo, headline and button on one line.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G11",
+          "manual": "General Manual",
+          "title": "Advertising",
+          "printed": "9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 28,
+          "width": 150,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "banner-headline",
+          "text": "Intelligence in motion.",
+          "x": 196,
+          "y": 56,
+          "size": 24,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -0.96
+        },
+        {
+          "type": "rect",
+          "x": 590,
+          "y": 25,
+          "width": 118,
+          "height": 40,
+          "fill": "light"
+        },
+        {
+          "type": "text",
+          "id": "banner-cta",
+          "text": "LEARN MORE",
+          "x": 649,
+          "y": 50,
+          "size": 12,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 1.4,
+          "anchor": "middle"
+        }
+      ]
+    },
+    {
+      "id": "presentation-section",
+      "label": "Presentation section",
+      "group": "Presentations",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / presentation section",
+      "description": "A section divider: the number large in ice, the title reversed, the logo at the foot.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 1400,
+          "y": 600,
+          "width": 580,
+          "height": 500,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "text",
+          "id": "section-number",
+          "text": "01",
+          "x": 136,
+          "y": 470,
+          "size": 240,
+          "colour": "light",
+          "font": "display",
+          "tracking": -9.6
+        },
+        {
+          "type": "flow",
+          "x": 136,
+          "y": 650,
+          "items": [
+            {
+              "id": "section-title",
+              "text": "[Section title]",
+              "size": 96,
+              "font": "display",
+              "tracking": -3.8,
+              "leading": 100,
+              "wrap": 1180,
+              "maxLines": 2,
+              "colour": "reverse"
+            }
+          ]
+        },
+        {
+          "type": "logo",
+          "x": 136,
+          "y": 950,
+          "width": 240,
+          "colour": "reverse"
+        }
+      ]
+    },
+    {
+      "id": "presentation-content",
+      "label": "Presentation content",
+      "group": "Presentations",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / presentation content",
+      "description": "A content slide: kicker, title and body as one flow; the symbol and slide number at the foot.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "text",
+          "id": "slide-kicker",
+          "text": "[TOPIC]",
+          "x": 136,
+          "y": 150,
+          "size": 22,
+          "colour": "primary",
+          "font": "label",
+          "tracking": 2.6
+        },
+        {
+          "type": "flow",
+          "x": 136,
+          "y": 250,
+          "items": [
+            {
+              "id": "slide-title",
+              "text": "[Slide title]",
+              "size": 72,
+              "font": "display",
+              "tracking": -2.9,
+              "leading": 78,
+              "wrap": 1500,
+              "maxLines": 2
+            },
+            {
+              "id": "slide-body",
+              "text": "[Slide content]",
+              "size": 32,
+              "leading": 46,
+              "wrap": 1200,
+              "maxLines": 10,
+              "gap": 90
+            }
+          ]
+        },
+        {
+          "type": "symbol",
+          "x": 1736,
+          "y": 944,
+          "height": 48,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "slide-number",
+          "text": "02",
+          "x": 136,
+          "y": 990,
+          "size": 18,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 2.2
+        }
+      ]
+    },
+    {
+      "id": "presentation-closing",
+      "label": "Presentation closing",
+      "group": "Presentations",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / presentation closing",
+      "description": "The closing slide: the logo, a closing line, and the presenter’s contact details.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 1200,
+          "y": 325,
+          "width": 650,
+          "height": 560,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 136,
+          "y": 95,
+          "width": 445,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "closing-line",
+          "text": "Thank you.",
+          "x": 136,
+          "y": 560,
+          "size": 132,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -5.28
+        },
+        {
+          "type": "lines",
+          "x": 140,
+          "y": 720,
+          "size": 32,
+          "leading": 48,
+          "colour": "light",
+          "lines": [
+            {
+              "id": "contact-name",
+              "text": "[Name]"
+            },
+            {
+              "id": "contact-email",
+              "text": "[Email]"
+            },
+            {
+              "id": "contact-website",
+              "text": "[Website]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "video-lower-third",
+      "label": "Video lower third",
+      "group": "Video",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / video lower third",
+      "description": "A lower third on a transparent 1920 × 1080 frame: the symbol and the speaker’s name and role on a midnight bar.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "rect",
+          "x": 96,
+          "y": 816,
+          "width": 900,
+          "height": 150,
+          "fill": "primary"
+        },
+        {
+          "type": "symbol",
+          "x": 126,
+          "y": 846,
+          "height": 90,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Name]",
+          "x": 262,
+          "y": 885,
+          "size": 46,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -1.84
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[Role]",
+          "x": 264,
+          "y": 935,
+          "size": 26,
+          "colour": "light"
+        }
+      ]
+    },
+    {
+      "id": "video-end-card",
+      "label": "Video end card",
+      "group": "Video",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / video end card",
+      "description": "The last frame of a video: the logo centred, the tagline and the website.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 560,
+          "y": 380,
+          "width": 800,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "end-tagline",
+          "text": "BUILT FOR WHAT’S NEXT.",
+          "x": 960,
+          "y": 700,
+          "size": 26,
+          "colour": "light",
+          "font": "label",
+          "tracking": 3.1,
+          "anchor": "middle"
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 960,
+          "y": 780,
+          "size": 34,
+          "colour": "reverse",
+          "anchor": "middle"
+        }
+      ]
+    },
+    {
+      "id": "virtual-background",
+      "label": "Virtual background",
+      "group": "Video",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "title": "{name} / virtual background",
+      "description": "A video-call background: the logo top left, the motif cropped bottom right, the middle left clear for the speaker.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H35",
+          "manual": "Graphic Standards Manual",
+          "title": "Audio-visual",
+          "printed": "34"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "motif",
+          "x": 1150,
+          "y": 520,
+          "width": 900,
+          "height": 760,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 96,
+          "y": 80,
+          "width": 300,
+          "colour": "ink"
+        }
+      ]
+    },
+    {
+      "id": "sign-exterior",
+      "label": "Exterior identification sign",
+      "group": "Signs",
+      "width": 2400,
+      "height": 1200,
+      "physical": [
+        "2400mm",
+        "1200mm"
+      ],
+      "raster": 2400,
+      "title": "{name} / exterior identification sign",
+      "description": "Primary identification, 2400 × 1200 mm, on a grid of 200 mm (a twelfth of the length): the logo seven squares wide, two squares in from the left.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "sign",
+          "page": "S12",
+          "manual": "Sign Manual",
+          "title": "Primary identification signs",
+          "printed": "10"
+        },
+        {
+          "book": "sign",
+          "page": "S07",
+          "manual": "Sign Manual",
+          "title": "Grid system",
+          "printed": "5"
+        },
+        {
+          "book": "hydro",
+          "page": "H39",
+          "manual": "Graphic Standards Manual",
+          "title": "Identification signs",
+          "printed": "38"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 1700,
+          "y": 600,
+          "width": 800,
+          "height": 680,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 200,
+          "y": 260,
+          "width": 1400,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "sign-occupant",
+          "text": "[Suite 100 · Main entrance]",
+          "x": 200,
+          "y": 820,
+          "size": 80,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -3.2
+        },
+        {
+          "type": "text",
+          "id": "sign-address",
+          "text": "[Street address]",
+          "x": 200,
+          "y": 940,
+          "size": 60,
+          "colour": "light"
+        }
+      ]
+    },
+    {
+      "id": "sign-door",
+      "label": "Door sign",
+      "group": "Signs",
+      "width": 1200,
+      "height": 600,
+      "physical": [
+        "300mm",
+        "150mm"
+      ],
+      "raster": 1200,
+      "title": "{name} / door sign",
+      "description": "Secondary identification, 300 × 150 mm: the symbol, the room’s name and number, a midnight base.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "sign",
+          "page": "S14",
+          "manual": "Sign Manual",
+          "title": "Secondary identification signs",
+          "printed": "12"
+        },
+        {
+          "book": "sign",
+          "page": "S16",
+          "manual": "Sign Manual",
+          "title": "Standard information signs",
+          "printed": "14"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "symbol",
+          "x": 72,
+          "y": 72,
+          "height": 72,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "room-name",
+          "text": "[Room name]",
+          "x": 72,
+          "y": 360,
+          "size": 110,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -4.4
+        },
+        {
+          "type": "text",
+          "id": "room-number",
+          "text": "[000]",
+          "x": 72,
+          "y": 470,
+          "size": 48,
+          "colour": "muted",
+          "font": "label",
+          "tracking": 5.8
+        },
+        {
+          "type": "rect",
+          "x": 0,
+          "y": 570,
+          "width": 1200,
+          "height": 30,
+          "fill": "primary"
+        }
+      ]
+    },
+    {
+      "id": "sign-directional",
+      "label": "Directional sign",
+      "group": "Signs",
+      "width": 1800,
+      "height": 1350,
+      "physical": [
+        "1800mm",
+        "1350mm"
+      ],
+      "raster": 1800,
+      "title": "{name} / directional sign",
+      "description": "Three directional blades, 1800 × 450 mm each: one destination to a blade, the arrow first, a keyline between.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "sign",
+          "page": "S19",
+          "manual": "Sign Manual",
+          "title": "Secondary directional signs",
+          "printed": "16"
+        },
+        {
+          "book": "sign",
+          "page": "S20",
+          "manual": "Sign Manual",
+          "title": "Directional signs: sizing charts",
+          "printed": "17"
+        },
+        {
+          "book": "hydro",
+          "page": "H40",
+          "manual": "Graphic Standards Manual",
+          "title": "Guide signs",
+          "printed": "39"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "path",
+          "d": "M100 195L245 195L245 125L350 225L245 325L245 255L100 255Z",
+          "fill": "light"
+        },
+        {
+          "type": "text",
+          "id": "direction-1",
+          "text": "[Destination]",
+          "x": 420,
+          "y": 268,
+          "size": 120,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -4.8
+        },
+        {
+          "type": "path",
+          "d": "M350 645L205 645L205 575L100 675L205 775L205 705L350 705Z",
+          "fill": "light"
+        },
+        {
+          "type": "text",
+          "id": "direction-2",
+          "text": "[Destination]",
+          "x": 420,
+          "y": 718,
+          "size": 120,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -4.8
+        },
+        {
+          "type": "line",
+          "x1": 0,
+          "y1": 450,
+          "x2": 1800,
+          "y2": 450,
+          "stroke": "light",
+          "strokeWidth": 6
+        },
+        {
+          "type": "path",
+          "d": "M195 1250L195 1105L125 1105L225 1000L325 1105L255 1105L255 1250Z",
+          "fill": "light"
+        },
+        {
+          "type": "text",
+          "id": "direction-3",
+          "text": "[Destination]",
+          "x": 420,
+          "y": 1168,
+          "size": 120,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -4.8
+        },
+        {
+          "type": "line",
+          "x1": 0,
+          "y1": 900,
+          "x2": 1800,
+          "y2": 900,
+          "stroke": "light",
+          "strokeWidth": 6
+        }
+      ]
+    },
+    {
+      "id": "pull-up-banner",
+      "label": "Pull-up banner",
+      "group": "Signs",
+      "width": 850,
+      "height": 2000,
+      "physical": [
+        "850mm",
+        "2000mm"
+      ],
+      "raster": 1700,
+      "title": "{name} / pull-up banner",
+      "description": "A pull-up banner, 850 × 2000 mm: the logo at eye height and above, headline and message, the motif at the foot where stands hide it least.",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H36",
+          "manual": "Graphic Standards Manual",
+          "title": "Display and three-dimensional signature",
+          "printed": "35"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "x": 250,
+          "y": 1450,
+          "width": 700,
+          "height": 600,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 100,
+          "y": 150,
+          "width": 650,
+          "colour": "reverse"
+        },
+        {
+          "type": "flow",
+          "x": 100,
+          "y": 780,
+          "items": [
+            {
+              "id": "pullup-headline",
+              "text": "Intelligence in motion.",
+              "size": 110,
+              "font": "display",
+              "tracking": -4.4,
+              "leading": 110,
+              "wrap": 660,
+              "maxLines": 4,
+              "colour": "reverse"
+            },
+            {
+              "id": "pullup-message",
+              "text": "[Your message here]",
+              "size": 36,
+              "leading": 48,
+              "wrap": 650,
+              "maxLines": 3,
+              "gap": 110,
+              "colour": "light"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 100,
+          "y": 1380,
+          "size": 40,
+          "colour": "reverse",
+          "font": "bold"
+        }
+      ]
+    },
+    {
+      "id": "drawn-v10-van-perspective",
+      "label": "Van",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 911,
+      "raster": 1600,
+      "title": "{name} / van",
+      "description": "Van: ManualKit’s drawing from page V10, in ddcnorth’s colours, with the identity in the branding zones the manual marked (cab door signature, side cargo signature, rear door signature, front unit, rear unit).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "vehicle",
+          "page": "V10",
+          "manual": "Vehicle Manual",
+          "title": "Vans",
+          "printed": "8"
+        },
+        {
+          "book": "vehicle",
+          "page": "V05",
+          "manual": "Vehicle Manual",
+          "title": "Signature, numeral and striping sizes",
+          "printed": "3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "V10-van-perspective",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 911,
+          "markings": false,
+          "materials": {
+            "paint": "primary"
+          },
+          "zones": {
+            "cab-door-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "side-cargo-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "rear-door-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "front-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "reverse",
+              "fill": 0.8
+            },
+            "rear-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "reverse",
+              "fill": 0.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-v11-van-side",
+      "label": "Van, side",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 636,
+      "raster": 1600,
+      "title": "{name} / van, side",
+      "description": "Van, side: ManualKit’s drawing from page V11, in ddcnorth’s colours, with the identity in the branding zones the manual marked (side panel signature, door signature, front unit).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "vehicle",
+          "page": "V11",
+          "manual": "Vehicle Manual",
+          "title": "Vans: placement",
+          "printed": "9"
+        },
+        {
+          "book": "vehicle",
+          "page": "V05",
+          "manual": "Vehicle Manual",
+          "title": "Signature, numeral and striping sizes",
+          "printed": "3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "V11-van-side",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 636,
+          "markings": false,
+          "materials": {
+            "paint": "primary"
+          },
+          "zones": {
+            "side-panel-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "door-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "front-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "reverse",
+              "fill": 0.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-v11-van-rear",
+      "label": "Van, rear",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 1716,
+      "raster": 1600,
+      "title": "{name} / van, rear",
+      "description": "Van, rear: ManualKit’s drawing from page V11, in ddcnorth’s colours, with the identity in the branding zones the manual marked (left door signature, right door unit).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "vehicle",
+          "page": "V11",
+          "manual": "Vehicle Manual",
+          "title": "Vans: placement",
+          "printed": "9"
+        },
+        {
+          "book": "vehicle",
+          "page": "V05",
+          "manual": "Vehicle Manual",
+          "title": "Signature, numeral and striping sizes",
+          "printed": "3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "V11-van-rear",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 1716,
+          "markings": false,
+          "materials": {
+            "paint": "primary"
+          },
+          "zones": {
+            "left-door-signature": {
+              "logo": true,
+              "colour": "reverse"
+            },
+            "right-door-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "reverse",
+              "fill": 0.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-v08-pickup-perspective",
+      "label": "Pickup",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 829,
+      "raster": 1600,
+      "title": "{name} / pickup",
+      "description": "Pickup: ManualKit’s drawing from page V08, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature, tailgate signature, front unit, rear unit).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "vehicle",
+          "page": "V08",
+          "manual": "Vehicle Manual",
+          "title": "Pickups and wagons",
+          "printed": "6"
+        },
+        {
+          "book": "vehicle",
+          "page": "V05",
+          "manual": "Vehicle Manual",
+          "title": "Signature, numeral and striping sizes",
+          "printed": "3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "V08-pickup-perspective",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 829,
+          "markings": false,
+          "materials": {
+            "paint": "reverse"
+          },
+          "zones": {
+            "door-signature": {
+              "logo": true,
+              "colour": "primary"
+            },
+            "tailgate-signature": {
+              "logo": true,
+              "colour": "primary"
+            },
+            "front-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "primary",
+              "fill": 0.8
+            },
+            "rear-unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "primary",
+              "fill": 0.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-v07-side-car",
+      "label": "Car, side",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 736,
+      "raster": 1600,
+      "title": "{name} / car, side",
+      "description": "Car, side: ManualKit’s drawing from page V07, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature, unit).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "vehicle",
+          "page": "V07",
+          "manual": "Vehicle Manual",
+          "title": "Passenger cars: placement",
+          "printed": "5"
+        },
+        {
+          "book": "vehicle",
+          "page": "V05",
+          "manual": "Vehicle Manual",
+          "title": "Signature, numeral and striping sizes",
+          "printed": "3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "V07-side-car",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 736,
+          "markings": false,
+          "materials": {
+            "paint": "light"
+          },
+          "zones": {
+            "door-signature": {
+              "logo": true,
+              "colour": "primary"
+            },
+            "unit": {
+              "id": "fleet-number",
+              "text": "DDC 01",
+              "font": "label",
+              "colour": "primary",
+              "fill": 0.8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-h44-van-door",
+      "label": "Van door",
+      "group": "Vehicles",
+      "width": 1600,
+      "height": 1922,
+      "raster": 1600,
+      "title": "{name} / van door",
+      "description": "Van door: ManualKit’s drawing from page H44, in ddcnorth’s colours, with the identity in the branding zones the manual marked (door signature).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "hydro",
+          "page": "H44",
+          "manual": "Graphic Standards Manual",
+          "title": "Light vehicles",
+          "printed": "43"
+        },
+        {
+          "book": "hydro",
+          "page": "H43",
+          "manual": "Graphic Standards Manual",
+          "title": "Vehicle signatures",
+          "printed": "42"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "H44-van-door",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 1922,
+          "markings": false,
+          "materials": {
+            "paint": "primary"
+          },
+          "zones": {
+            "door-signature": {
+              "logo": true,
+              "colour": "reverse"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-g15-jacket-back",
+      "label": "Jacket, back",
+      "group": "Apparel",
+      "width": 1600,
+      "height": 1195,
+      "raster": 1600,
+      "title": "{name} / jacket, back",
+      "description": "Jacket, back: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (back signature).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G15",
+          "manual": "General Manual",
+          "title": "Uniform Ensignia",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "G15-jacket-back",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 1195,
+          "markings": false,
+          "materials": {
+            "fabric": "primary"
+          },
+          "zones": {
+            "back-signature": {
+              "logo": true,
+              "colour": "reverse"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-g15-field-jacket",
+      "label": "Field jacket, sleeve",
+      "group": "Apparel",
+      "width": 1600,
+      "height": 1863,
+      "raster": 1600,
+      "title": "{name} / field jacket, sleeve",
+      "description": "Field jacket, sleeve: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (sleeve title, sleeve patch).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G15",
+          "manual": "General Manual",
+          "title": "Uniform Ensignia",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "G15-field-jacket",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 1863,
+          "markings": false,
+          "materials": {
+            "fabric": "graphite"
+          },
+          "zones": {
+            "sleeve-title": {
+              "id": "team-name",
+              "text": "FIELD TEAM",
+              "font": "label",
+              "colour": "primary",
+              "fill": 0.6
+            },
+            "sleeve-patch": {
+              "logo": true,
+              "colour": "primary"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-g15-blazer",
+      "label": "Blazer, pocket",
+      "group": "Apparel",
+      "width": 1600,
+      "height": 1857,
+      "raster": 1600,
+      "title": "{name} / blazer, pocket",
+      "description": "Blazer, pocket: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (pocket crest).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G15",
+          "manual": "General Manual",
+          "title": "Uniform Ensignia",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "G15-blazer",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 1857,
+          "markings": false,
+          "materials": {
+            "fabric": "graphite"
+          },
+          "zones": {
+            "pocket-crest": {
+              "logo": true,
+              "colour": "reverse"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "drawn-g15-hard-hat",
+      "label": "Hard hat",
+      "group": "Apparel",
+      "width": 1600,
+      "height": 826,
+      "raster": 1600,
+      "title": "{name} / hard hat",
+      "description": "Hard hat: ManualKit’s drawing from page G15, in ddcnorth’s colours, with the identity in the branding zones the manual marked (front crest).",
+      "extension": "applications",
+      "sources": [
+        {
+          "book": "general",
+          "page": "G15",
+          "manual": "General Manual",
+          "title": "Uniform Ensignia",
+          "printed": "13"
+        }
+      ],
+      "elements": [
+        {
+          "type": "background",
+          "fill": "#ffffff"
+        },
+        {
+          "type": "illustration",
+          "illustration": "G15-hard-hat",
+          "x": 0,
+          "y": 0,
+          "width": 1600,
+          "height": 826,
+          "markings": false,
+          "materials": {},
+          "zones": {
+            "front-crest": {
+              "logo": true,
+              "colour": "primary"
+            }
+          }
+        }
+      ]
     }
   ],
   "guide": {
@@ -1563,6 +5039,1238 @@
             "size": 18
           }
         ]
+      },
+      {
+        "title": "Backgrounds and contrast.",
+        "name": "Backgrounds",
+        "subtitle": "One colour for the whole logo, chosen for the ground: black or midnight on light grounds, white on dark ones.",
+        "sources": [
+          {
+            "book": "hydro",
+            "page": "H07",
+            "manual": "Graphic Standards Manual",
+            "title": "Backgrounds",
+            "printed": "6"
+          },
+          {
+            "book": "hydro",
+            "page": "H08",
+            "manual": "Graphic Standards Manual",
+            "title": "Backgrounds and value",
+            "printed": "7"
+          },
+          {
+            "book": "general",
+            "page": "G07",
+            "manual": "General Manual",
+            "title": "Provincial Signature: Colour; positive/reverse",
+            "printed": "5"
+          }
+        ],
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 250,
+            "width": 302,
+            "height": 220,
+            "fill": "paper",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 90,
+            "y": 334,
+            "width": 250,
+            "colour": "ink"
+          },
+          {
+            "type": "label",
+            "text": "USE / BLACK ON PAPER",
+            "x": 64,
+            "y": 506,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 398,
+            "y": 250,
+            "width": 302,
+            "height": 220,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 424,
+            "y": 334,
+            "width": 250,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "USE / MIDNIGHT ON WHITE",
+            "x": 398,
+            "y": 506,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 732,
+            "y": 250,
+            "width": 302,
+            "height": 220,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 758,
+            "y": 334,
+            "width": 250,
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "USE / WHITE ON MIDNIGHT",
+            "x": 732,
+            "y": 506,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 1066,
+            "y": 250,
+            "width": 302,
+            "height": 220,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 1092,
+            "y": 334,
+            "width": 250,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "USE / MIDNIGHT ON ICE",
+            "x": 1066,
+            "y": 506,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 600,
+            "width": 302,
+            "height": 220,
+            "fill": "graphite"
+          },
+          {
+            "type": "logo",
+            "x": 90,
+            "y": 684,
+            "width": 250,
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "USE / WHITE ON GRAPHITE",
+            "x": 64,
+            "y": 856,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 398,
+            "y": 600,
+            "width": 302,
+            "height": 220,
+            "fill": "ink"
+          },
+          {
+            "type": "logo",
+            "x": 424,
+            "y": 684,
+            "width": 250,
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "USE / WHITE ON BLACK",
+            "x": 398,
+            "y": 856,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 732,
+            "y": 600,
+            "width": 302,
+            "height": 220,
+            "fill": "paper",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 758,
+            "y": 684,
+            "width": 250,
+            "colour": "light"
+          },
+          {
+            "type": "label",
+            "text": "AVOID / ICE ON PAPER",
+            "x": 732,
+            "y": 856,
+            "colour": "muted"
+          },
+          {
+            "type": "rect",
+            "x": 1066,
+            "y": 600,
+            "width": 302,
+            "height": 220,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 1092,
+            "y": 684,
+            "width": 250,
+            "colour": "ink"
+          },
+          {
+            "type": "label",
+            "text": "AVOID / BLACK ON MIDNIGHT",
+            "x": 1066,
+            "y": 856,
+            "colour": "muted"
+          },
+          {
+            "type": "para",
+            "text": "Over a photograph, place the logo where the picture is plainest, or on a flat panel of the palette. Never a two-colour logo; never the logo in ice on a light ground.",
+            "x": 64,
+            "y": 920,
+            "width": 1312,
+            "size": 18
+          }
+        ],
+        "extension": "applications"
+      },
+      {
+        "title": "Keep the logo intact.",
+        "name": "Incorrect usage",
+        "subtitle": "The logo is supplied artwork. These are the mistakes it most often meets; each is a rule.",
+        "sources": [
+          {
+            "book": "hydro",
+            "page": "H09",
+            "manual": "Graphic Standards Manual",
+            "title": "Incorrect usage",
+            "printed": "8"
+          },
+          {
+            "book": "hydro",
+            "page": "H10",
+            "manual": "Graphic Standards Manual",
+            "title": "Incorrect usage",
+            "printed": "9"
+          },
+          {
+            "book": "hydro",
+            "page": "H11",
+            "manual": "Graphic Standards Manual",
+            "title": "Incorrect usage",
+            "printed": "10"
+          },
+          {
+            "book": "general",
+            "page": "G09",
+            "manual": "General Manual",
+            "title": "Proper And Improper Usage",
+            "printed": "7"
+          }
+        ],
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 250,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 100,
+            "y": 342,
+            "width": 230,
+            "transform": "translate(215 365) scale(1.18 0.62) translate(-215 -365)"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT STRETCH OR SQUASH",
+            "x": 64,
+            "y": 516,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 398,
+            "y": 250,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 434,
+            "y": 342,
+            "width": 230,
+            "transform": "rotate(-14 549 365)"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT TURN IT",
+            "x": 398,
+            "y": 516,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 732,
+            "y": 250,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 768,
+            "y": 342,
+            "width": 230,
+            "transform": "translate(883 365) skewX(-18) translate(-883 -365)"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT SLANT IT",
+            "x": 732,
+            "y": 516,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 1066,
+            "y": 250,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 1102,
+            "y": 342,
+            "height": 50,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 1162,
+            "y": 344,
+            "width": 170,
+            "layout": "wordmark",
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT USE TWO COLOURS",
+            "x": 1066,
+            "y": 516,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 590,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 94,
+            "y": 686,
+            "width": 172,
+            "layout": "wordmark"
+          },
+          {
+            "type": "symbol",
+            "x": 280,
+            "y": 682,
+            "height": 50
+          },
+          {
+            "type": "label",
+            "text": "DO NOT REARRANGE IT",
+            "x": 64,
+            "y": 856,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 398,
+            "y": 590,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 434,
+            "y": 682,
+            "height": 50
+          },
+          {
+            "type": "text",
+            "text": "DDC North",
+            "x": 496,
+            "y": 722,
+            "size": 36,
+            "font": "bold"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT RETYPE THE NAME",
+            "x": 398,
+            "y": 856,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 732,
+            "y": 590,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 768,
+            "y": 682,
+            "width": 230,
+            "opacity": 0.35
+          },
+          {
+            "type": "label",
+            "text": "DO NOT FADE IT",
+            "x": 732,
+            "y": 856,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 1066,
+            "y": 590,
+            "width": 302,
+            "height": 230,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 1102,
+            "y": 682,
+            "width": 230
+          },
+          {
+            "type": "text",
+            "text": "Our new service",
+            "x": 1106,
+            "y": 750,
+            "size": 22,
+            "font": "bold"
+          },
+          {
+            "type": "label",
+            "text": "DO NOT CROWD IT",
+            "x": 1066,
+            "y": 856,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use the supplied files. Leave at least one dot diameter clear on every side, and never set the logo smaller than the minimum sizes on page 14.",
+            "x": 64,
+            "y": 940,
+            "width": 1312,
+            "size": 18
+          }
+        ],
+        "extension": "applications"
+      },
+      {
+        "title": "Stationery and documents.",
+        "name": "Stationery and documents",
+        "subtitle": "Letters on A4 or US Letter, with a continuation sheet; envelopes, slips and signatures; memoranda, releases and invoices on the same margins.",
+        "sources": [
+          {
+            "book": "reproduction",
+            "page": "R03",
+            "manual": "Reproduction Manual",
+            "title": "Stationery Specifications; explanatory diagrams",
+            "printed": "2"
+          },
+          {
+            "book": "reproduction",
+            "page": "R08",
+            "manual": "Reproduction Manual",
+            "title": "General Use stationery",
+            "printed": "7"
+          },
+          {
+            "book": "general",
+            "page": "G12",
+            "manual": "General Manual",
+            "title": "Stationery: Format A; envelopes; calling cards",
+            "printed": "10"
+          },
+          {
+            "book": "general",
+            "page": "G14",
+            "manual": "General Manual",
+            "title": "Standard Memorandum; Standard News Release",
+            "printed": "12"
+          }
+        ],
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 250,
+            "width": 254.08028056607807,
+            "height": 328.8097748502187,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/letterhead-letter",
+            "x": 64,
+            "y": 250,
+            "width": 254.1,
+            "height": 328.8
+          },
+          {
+            "type": "label",
+            "text": "US LETTER",
+            "x": 64,
+            "y": 604.8
+          },
+          {
+            "type": "rect",
+            "x": 350.08028056607805,
+            "y": 250,
+            "width": 232.47992985848052,
+            "height": 328.8097748502187,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/letterhead-continuation",
+            "x": 350.1,
+            "y": 250,
+            "width": 232.5,
+            "height": 328.8
+          },
+          {
+            "type": "label",
+            "text": "CONTINUATION",
+            "x": 350.1,
+            "y": 604.8
+          },
+          {
+            "type": "rect",
+            "x": 614.5602104245586,
+            "y": 250,
+            "width": 232.47992985848052,
+            "height": 328.8097748502187,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/memorandum",
+            "x": 614.6,
+            "y": 250,
+            "width": 232.5,
+            "height": 328.8
+          },
+          {
+            "type": "label",
+            "text": "MEMORANDUM",
+            "x": 614.6,
+            "y": 604.8
+          },
+          {
+            "type": "rect",
+            "x": 879.0401402830391,
+            "y": 250,
+            "width": 232.47992985848052,
+            "height": 328.8097748502187,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/media-release",
+            "x": 879,
+            "y": 250,
+            "width": 232.5,
+            "height": 328.8
+          },
+          {
+            "type": "label",
+            "text": "MEDIA RELEASE",
+            "x": 879,
+            "y": 604.8
+          },
+          {
+            "type": "rect",
+            "x": 1143.5200701415197,
+            "y": 250,
+            "width": 232.47992985848052,
+            "height": 328.8097748502187,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/invoice",
+            "x": 1143.5,
+            "y": 250,
+            "width": 232.5,
+            "height": 328.8
+          },
+          {
+            "type": "label",
+            "text": "INVOICE",
+            "x": 1143.5,
+            "y": 604.8
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 700,
+            "width": 319.6153846153846,
+            "height": 160,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/envelope-dl",
+            "x": 64,
+            "y": 700,
+            "width": 319.6,
+            "height": 160
+          },
+          {
+            "type": "label",
+            "text": "DL ENVELOPE",
+            "x": 64,
+            "y": 886
+          },
+          {
+            "type": "rect",
+            "x": 415.6153846153846,
+            "y": 700,
+            "width": 339.67914438502675,
+            "height": 160,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/compliments-slip",
+            "x": 415.6,
+            "y": 700,
+            "width": 339.7,
+            "height": 160
+          },
+          {
+            "type": "label",
+            "text": "COMPLIMENTS SLIP",
+            "x": 415.6,
+            "y": 886
+          },
+          {
+            "type": "rect",
+            "x": 787.2945290004113,
+            "y": 700,
+            "width": 512,
+            "height": 160,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/email-signature",
+            "x": 787.3,
+            "y": 700,
+            "width": 512,
+            "height": 160
+          },
+          {
+            "type": "label",
+            "text": "EMAIL SIGNATURE",
+            "x": 787.3,
+            "y": 886
+          }
+        ],
+        "extension": "applications"
+      },
+      {
+        "title": "Publications and advertising.",
+        "name": "Publications and advertising",
+        "subtitle": "Covers carry the logo top left and the title a quarter of the way down. In every advertisement the logo comes last.",
+        "sources": [
+          {
+            "book": "hydro",
+            "page": "H25",
+            "manual": "Graphic Standards Manual",
+            "title": "Covers",
+            "printed": "24"
+          },
+          {
+            "book": "hydro",
+            "page": "H30",
+            "manual": "Graphic Standards Manual",
+            "title": "Mastheads",
+            "printed": "29"
+          },
+          {
+            "book": "hydro",
+            "page": "H33",
+            "manual": "Graphic Standards Manual",
+            "title": "Print advertising",
+            "printed": "32"
+          },
+          {
+            "book": "general",
+            "page": "G08",
+            "manual": "General Manual",
+            "title": "Typography; stationery, vehicle and sign arrangements",
+            "printed": "6"
+          },
+          {
+            "book": "general",
+            "page": "G11",
+            "manual": "General Manual",
+            "title": "Advertising",
+            "printed": "9"
+          }
+        ],
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 250,
+            "width": 237.0014246701303,
+            "height": 335.2047857740004,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/report-cover",
+            "x": 64,
+            "y": 250,
+            "width": 237,
+            "height": 335.2
+          },
+          {
+            "type": "label",
+            "text": "REPORT COVER",
+            "x": 64,
+            "y": 611.2
+          },
+          {
+            "type": "nested",
+            "src": "templates/report-cover-reverse",
+            "x": 333,
+            "y": 250,
+            "width": 237,
+            "height": 335.2
+          },
+          {
+            "type": "label",
+            "text": "REVERSED",
+            "x": 333,
+            "y": 611.2
+          },
+          {
+            "type": "rect",
+            "x": 602.0028493402606,
+            "y": 250,
+            "width": 237.0014246701303,
+            "height": 335.2047857740004,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/report-page",
+            "x": 602,
+            "y": 250,
+            "width": 237,
+            "height": 335.2
+          },
+          {
+            "type": "label",
+            "text": "INTERIOR",
+            "x": 602,
+            "y": 611.2
+          },
+          {
+            "type": "rect",
+            "x": 871.0042740103909,
+            "y": 250,
+            "width": 237.0014246701303,
+            "height": 335.2047857740004,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/newsletter",
+            "x": 871,
+            "y": 250,
+            "width": 237,
+            "height": 335.2
+          },
+          {
+            "type": "label",
+            "text": "NEWSLETTER",
+            "x": 871,
+            "y": 611.2
+          },
+          {
+            "type": "rect",
+            "x": 1140.0056986805212,
+            "y": 250,
+            "width": 235.99430131947886,
+            "height": 335.2047857740004,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/print-ad",
+            "x": 1140,
+            "y": 250,
+            "width": 236,
+            "height": 335.2
+          },
+          {
+            "type": "label",
+            "text": "A5 ADVERTISEMENT",
+            "x": 1140,
+            "y": 611.2
+          },
+          {
+            "type": "nested",
+            "src": "templates/job-posting",
+            "x": 64,
+            "y": 690,
+            "width": 129.4,
+            "height": 161.8
+          },
+          {
+            "type": "label",
+            "text": "JOB POSTING",
+            "x": 64,
+            "y": 877.8
+          },
+          {
+            "type": "nested",
+            "src": "templates/event-announcement",
+            "x": 225.4,
+            "y": 690,
+            "width": 129.4,
+            "height": 161.8
+          },
+          {
+            "type": "label",
+            "text": "ANNOUNCEMENT",
+            "x": 225.4,
+            "y": 877.8
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-story",
+            "x": 386.9,
+            "y": 690,
+            "width": 91,
+            "height": 161.8
+          },
+          {
+            "type": "label",
+            "text": "STORY",
+            "x": 386.9,
+            "y": 877.8
+          },
+          {
+            "type": "nested",
+            "src": "templates/web-banner-mpu",
+            "x": 509.9,
+            "y": 690,
+            "width": 194.1,
+            "height": 161.8
+          },
+          {
+            "type": "label",
+            "text": "300 × 250",
+            "x": 509.9,
+            "y": 877.8
+          },
+          {
+            "type": "nested",
+            "src": "templates/web-banner-leaderboard",
+            "x": 760,
+            "y": 690,
+            "width": 614.8,
+            "height": 76
+          },
+          {
+            "type": "label",
+            "text": "728 × 90",
+            "x": 760,
+            "y": 792
+          }
+        ],
+        "extension": "applications"
+      },
+      {
+        "title": "Screens, signs and spaces.",
+        "name": "Screens and signs",
+        "subtitle": "Slides and video frames share the cover’s layout. Signs are set on a grid of one twelfth of their longest side.",
+        "sources": [
+          {
+            "book": "hydro",
+            "page": "H35",
+            "manual": "Graphic Standards Manual",
+            "title": "Audio-visual",
+            "printed": "34"
+          },
+          {
+            "book": "sign",
+            "page": "S07",
+            "manual": "Sign Manual",
+            "title": "Grid system",
+            "printed": "5"
+          },
+          {
+            "book": "sign",
+            "page": "S12",
+            "manual": "Sign Manual",
+            "title": "Primary identification signs",
+            "printed": "10"
+          },
+          {
+            "book": "sign",
+            "page": "S19",
+            "manual": "Sign Manual",
+            "title": "Secondary directional signs",
+            "printed": "16"
+          }
+        ],
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/presentation-section",
+            "x": 64,
+            "y": 250,
+            "width": 304,
+            "height": 171
+          },
+          {
+            "type": "label",
+            "text": "SECTION",
+            "x": 64,
+            "y": 447
+          },
+          {
+            "type": "rect",
+            "x": 400,
+            "y": 250,
+            "width": 304,
+            "height": 171,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-content",
+            "x": 400,
+            "y": 250,
+            "width": 304,
+            "height": 171
+          },
+          {
+            "type": "label",
+            "text": "CONTENT",
+            "x": 400,
+            "y": 447
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-closing",
+            "x": 736,
+            "y": 250,
+            "width": 304,
+            "height": 171
+          },
+          {
+            "type": "label",
+            "text": "CLOSING",
+            "x": 736,
+            "y": 447
+          },
+          {
+            "type": "rect",
+            "x": 1072,
+            "y": 250,
+            "width": 304,
+            "height": 171,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/video-lower-third",
+            "x": 1072,
+            "y": 250,
+            "width": 304,
+            "height": 171
+          },
+          {
+            "type": "label",
+            "text": "LOWER THIRD",
+            "x": 1072,
+            "y": 447
+          },
+          {
+            "type": "nested",
+            "src": "templates/sign-exterior",
+            "x": 64,
+            "y": 540,
+            "width": 422.3,
+            "height": 211.2
+          },
+          {
+            "type": "label",
+            "text": "EXTERIOR SIGN",
+            "x": 64,
+            "y": 777.2
+          },
+          {
+            "type": "rect",
+            "x": 518.3444283646888,
+            "y": 540,
+            "width": 422.3444283646889,
+            "height": 211.17221418234445,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/sign-door",
+            "x": 518.3,
+            "y": 540,
+            "width": 422.3,
+            "height": 211.2
+          },
+          {
+            "type": "label",
+            "text": "DOOR SIGN",
+            "x": 518.3,
+            "y": 777.2
+          },
+          {
+            "type": "nested",
+            "src": "templates/sign-directional",
+            "x": 972.7,
+            "y": 540,
+            "width": 281.6,
+            "height": 211.2
+          },
+          {
+            "type": "label",
+            "text": "DIRECTIONAL",
+            "x": 972.7,
+            "y": 777.2
+          },
+          {
+            "type": "nested",
+            "src": "templates/pull-up-banner",
+            "x": 1286.3,
+            "y": 540,
+            "width": 89.7,
+            "height": 211.2
+          },
+          {
+            "type": "label",
+            "text": "PULL-UP",
+            "x": 1286.3,
+            "y": 777.2
+          }
+        ],
+        "extension": "applications"
+      },
+      {
+        "title": "Vehicles and apparel.",
+        "name": "Vehicles and apparel",
+        "subtitle": "One colour of logo on one colour of body: white on midnight, midnight on white or ice. The logo goes where the manuals placed the signature; a fleet number where they placed the unit number.",
+        "sources": [
+          {
+            "book": "vehicle",
+            "page": "V04",
+            "manual": "Vehicle Manual",
+            "title": "Components",
+            "printed": "2"
+          },
+          {
+            "book": "vehicle",
+            "page": "V05",
+            "manual": "Vehicle Manual",
+            "title": "Signature, numeral and striping sizes",
+            "printed": "3"
+          },
+          {
+            "book": "hydro",
+            "page": "H43",
+            "manual": "Graphic Standards Manual",
+            "title": "Vehicle signatures",
+            "printed": "42"
+          },
+          {
+            "book": "general",
+            "page": "G15",
+            "manual": "General Manual",
+            "title": "Uniform Ensignia",
+            "printed": "13"
+          }
+        ],
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/drawn-v10-van-perspective",
+            "x": 64,
+            "y": 250,
+            "width": 456.6,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "VAN",
+            "x": 64,
+            "y": 536
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-v08-pickup-perspective",
+            "x": 552.6,
+            "y": 250,
+            "width": 501.8,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "PICKUP",
+            "x": 552.6,
+            "y": 536
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-h44-van-door",
+            "x": 1086.5,
+            "y": 250,
+            "width": 216.4,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "DOOR",
+            "x": 1086.5,
+            "y": 536
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-g15-jacket-back",
+            "x": 64,
+            "y": 600,
+            "width": 325.9,
+            "height": 243.4
+          },
+          {
+            "type": "label",
+            "text": "JACKET",
+            "x": 64,
+            "y": 869.4
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-g15-field-jacket",
+            "x": 421.9,
+            "y": 600,
+            "width": 209,
+            "height": 243.4
+          },
+          {
+            "type": "label",
+            "text": "SLEEVE",
+            "x": 421.9,
+            "y": 869.4
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-g15-blazer",
+            "x": 662.9,
+            "y": 600,
+            "width": 209.7,
+            "height": 243.4
+          },
+          {
+            "type": "label",
+            "text": "BLAZER",
+            "x": 662.9,
+            "y": 869.4
+          },
+          {
+            "type": "nested",
+            "src": "templates/drawn-g15-hard-hat",
+            "x": 904.6,
+            "y": 600,
+            "width": 471.4,
+            "height": 243.4
+          },
+          {
+            "type": "label",
+            "text": "HARD HAT",
+            "x": 904.6,
+            "y": 869.4
+          }
+        ],
+        "extension": "applications"
       },
       {
         "title": "Use the right file for the job.",
@@ -2458,5 +7166,874 @@
         }
       }
     }
-  ]
+  ],
+  "illustrations": {
+    "V10-van-perspective": {
+      "title": "Van — rear three-quarter",
+      "source": {
+        "page": "V10",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        72,
+        481,
+        890,
+        507
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g><path data-part=\"wheelhouse-shadow\" d=\"M436 841 L436 798 Q438 767 472 767 Q516 764 545 799 L566 845 L553 850 L448 847 Z\" fill=\"#252823\" stroke=\"none\" stroke-width=\"0\" data-material=\"tyre\" /></g><g><g data-part=\"far-rear-wheel\"><path data-part=\"far-tyre\" d=\"M737 851 L852 843 C854 880 839 919 808 925 L787 927 C758 925 743 904 737 881 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.6\" data-material=\"tyre\" /></g><g data-part=\"front-wheel\"><path data-part=\"depth-silhouette\" d=\"M92 753 C93 733 99 718 114 717 Q134 716 149 725 C165 739 173 768 176 792 L202 810 L200 840 Q198 864 181 868 L145 870 C113 872 95 843 91 812 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.8\" data-material=\"tyre\" /><ellipse data-part=\"rim\" cx=\"130\" cy=\"798\" rx=\"22\" ry=\"42.5\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"2.1\" transform=\"rotate(-3 130 798)\" /></g><g data-part=\"rear-wheel\"><path data-part=\"depth-silhouette\" d=\"M451 844 C447 814 448 784 470 775 C489 766 518 771 536 779 Q554 790 566 821 L577 858 L598 870 L598 907 C595 951 584 966 566 971 L521 978 C480 987 452 947 451 894 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.85\" data-material=\"tyre\" /><path data-part=\"rim-face\" d=\"M487 828 C517 817 536 888 526 922 C520 943 503 943 491 922 C477 899 476 848 487 828 Z\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"3.6\" /><path data-part=\"rim-inner-lip\" d=\"M490 832 C479 849 482 884 486 891 L494 891 L491 911 L499 919 L502 927 L511 936 C498 936 482 913 481 887 Q477 849 490 832 Z\" fill=\"#d8ddd8\" stroke=\"none\" stroke-width=\"0\" data-material=\"metal\" /><path data-part=\"sidewall-open-arc\" d=\"M560 862 C565 900 556 939 544 962\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"1.95\" /></g></g><g data-part=\"body-shell\"><path data-part=\"van-shell\" d=\"M86 738 L84 677 Q86 650 99 641 Q119 633 147 629 L216 522 Q216 514 227 511 C433 480 735 487 884 505 Q898 507 901 520 L938 645 L939 649 L942 651 L943 802 L936 813 L645 877 L573 864 Q564 863 559 848 L546 809 C535 780 518 773 491 771 Q465 768 451 779 Q440 794 446 829 L449 847 L180 802 L158 766 Q151 723 135 720 L115 716 Q97 716 91 741 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"2.4\" data-material=\"paint\" /><path data-part=\"rear-face\" d=\"M647 514 L886 513 Q897 514 900 527 L938 646 L943 655 L941 801 L934 812 L658 840 L649 836 L647 658 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.4\" data-material=\"paint\" /><path data-part=\"roof-gutter\" d=\"M220 514 C415 484 741 491 889 510 M219 517 C432 516 670 516 893 515\" fill=\"none\" stroke=\"#252823\" stroke-width=\"2\" sw=\"1.3\" /><path data-part=\"belt-line\" d=\"M92 642 L248 646 L650 663 L942 650 M156 640 L651 657 L938 646\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.4\" sw=\"1.05\" /><path data-part=\"sill\" d=\"M159 760 L435 798 Q440 766 467 763 C498 758 531 767 541 778 Q554 791 563 816 L651 829 L658 828 L940 804 M163 765 L438 803 Q441 775 467 769 Q512 765 536 781 Q551 794 559 820 L650 834 L940 810\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.2\" sw=\"1.1\" /><path data-part=\"cab-door\" d=\"M218 526 L267 526 L246 638 L245 740 L251 803 Q252 809 244 807 L179 796 L160 762 L155 650 M165 622 L212 538\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" sw=\"1.25\" /><path data-part=\"cargo-panel-seam\" d=\"M642 516 L648 658 L657 840\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.2\" sw=\"1.1\" /><path data-part=\"rear-door-seams\" d=\"M666 516 L685 657 L690 825 M786 516 L807 654 L814 816 M891 516 L911 650 L914 805\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.4\" sw=\"1.1\" /></g><g data-part=\"windows\"><path data-part=\"side-window\" d=\"M221 537 L250 537 Q255 537 254 543 L238 618 Q237 624 231 624 L195 624 L211 548 Q215 538 221 537 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"glass\" /><path data-part=\"windscreen-sliver\" d=\"M215 539 L195 623 L181 623 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"glass\" /><path data-part=\"rear-left-window\" d=\"M694 531 L763 531 Q767 531 768 536 L782 637 Q783 641 778 642 L706 646 Q700 646 700 641 L688 537 Q687 532 694 531 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"glass\" sw=\"1.15\" /><path data-part=\"rear-right-window\" d=\"M813 531 L881 531 Q885 531 886 537 L897 637 Q898 641 892 642 L825 645 Q820 645 820 640 L806 537 Q805 531 813 531 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"glass\" sw=\"1.15\" /><path data-part=\"left-window-gasket\" d=\"M692 527 L765 527 Q771 527 772 535 L786 639 Q787 646 780 647 L705 650 Q698 650 697 643 L685 535 Q684 528 692 527 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" sw=\"1.1\" /><path data-part=\"right-window-gasket\" d=\"M810 527 L881 527 Q889 527 890 535 L901 639 Q902 645 895 646 L824 649 Q817 649 817 643 L803 535 Q802 528 810 527 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" sw=\"1.1\" /></g><g data-part=\"trim\"><path data-part=\"front-bumper\" d=\"M92 741 L79 742 L78 754 Q79 771 89 771 L92 770 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.6\" data-material=\"metal\" /><path data-part=\"rear-bumper\" d=\"M643 842 L941 812 L949 812 L950 828 Q949 840 940 848 L677 880 Q655 883 645 878 Q642 877 640 869 L636 852 Q635 844 643 842 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"2.2\" data-material=\"metal\" sw=\"2\" /><rect data-part=\"mirror\" x=\"155\" y=\"598\" width=\"26\" height=\"46\" rx=\"4\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.3\" data-material=\"metal\" /><rect data-part=\"mirror-glass\" x=\"160\" y=\"602\" width=\"16\" height=\"37\" rx=\"2\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"glass\" /><path data-part=\"mirror-stalk\" d=\"M165 645 L169 658 L188 669 L185 673 L166 669 L155 646 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"metal\" /><path data-part=\"front-handle\" d=\"M208 650 L230 651 Q231 655 228 658 Q225 659 224 656 L209 655 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"rear-handle\" d=\"M827 668 L853 667 Q859 667 858 671 Q857 674 848 675 L830 677 Q825 677 826 673 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"side-marker\" d=\"M98 668 L117 669 L117 677 L98 675 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"fuel-filler\" d=\"M587 705 L628 708 L628 721 L587 718 Z M591 708 L624 711 L624 717 L591 715 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"left-rear-lamp\" d=\"M662 716 Q662 703 674 703 Q685 703 685 715 L687 761 Q687 775 676 776 Q664 776 664 765 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"paint\" /><path data-part=\"right-rear-lamp\" d=\"M927 702 Q927 690 936 690 Q944 690 944 702 L943 739 Q942 752 934 752 Q926 752 926 741 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"paint\" /><path data-part=\"number-plate\" d=\"M708 761 L765 758 L765 803 L708 807 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /></g><g data-part=\"reflective-strips\"><polygon data-part=\"plate-light\" points=\"713,753 726,752 726,758 713,759\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.7\" data-material=\"white\" /><polygon data-part=\"plate-light\" points=\"743,753 756,752 756,758 743,759\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.7\" data-material=\"white\" /></g><g data-part=\"cab-window-surround\"><path data-part=\"side-window-gasket\" d=\"M216 534 L250 534 Q257 534 257 540 L242 621 Q241 626 234 627 L195 626 M194 623 L207 548 Q211 538 216 537\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.45\" /></g><g data-part=\"bumper-upper-edge\"><path data-part=\"rear-bumper-top-seam\" d=\"M941 812 L947 814 L947 827 Q946 839 938 845\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1\" /></g><g data-part=\"lamp-inner-contours\"><path data-part=\"left-rear-lamp-inner\" d=\"M665 716 Q665 707 674 706 Q682 706 682 716 L684 762 Q684 772 676 773 Q668 773 667 764 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.85\" /><path data-part=\"right-rear-lamp-inner\" d=\"M930 702 Q930 694 936 693 Q941 693 941 702 L940 740 Q939 748 934 749 Q929 749 929 741 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.85\" /></g><g data-part=\"mirror-loop-stay\"><path data-part=\"rear-mirror-loop\" d=\"M153 623 Q143 627 148 640 L156 649 L159 647 L152 638 Q148 632 154 628 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.0\" data-material=\"metal\" /></g></g></g>",
+      "markings": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><polygon data-part=\"rear-reflector-0\" points=\"767,748 778,747.5 778,799 767,800\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"rear-reflector-1\" points=\"791,746.8 802,746.3 802,797.8 791,798.8\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"rear-reflector-2\" points=\"833,744.7 844,744.2 844,795.7 833,796.7\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"rear-reflector-3\" points=\"855,743.6 866,743.1 866,794.6 855,795.6\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"rear-reflector-4\" points=\"877,742.5 888,742 888,793.5 877,794.5\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"rear-reflector-5\" points=\"899,741.4 910,740.9 910,792.4 899,793.4\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /></g></g>",
+      "zones": [
+        {
+          "id": "cab-door-signature",
+          "label": "Cab Door Signature",
+          "kind": "signature",
+          "box": [
+            177,
+            675,
+            50,
+            84
+          ],
+          "quad": [
+            [
+              177,
+              675
+            ],
+            [
+              227,
+              681
+            ],
+            [
+              227,
+              754
+            ],
+            [
+              177,
+              744
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "Agriculture"
+        },
+        {
+          "id": "side-cargo-signature",
+          "label": "Side Cargo Signature",
+          "kind": "signature",
+          "box": [
+            548,
+            548,
+            74,
+            72
+          ],
+          "quad": [
+            [
+              548,
+              548
+            ],
+            [
+              622,
+              548
+            ],
+            [
+              622,
+              620
+            ],
+            [
+              548,
+              620
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        },
+        {
+          "id": "rear-door-signature",
+          "label": "Rear Door Signature",
+          "kind": "signature",
+          "box": [
+            708,
+            669,
+            41,
+            52
+          ],
+          "quad": [
+            [
+              708,
+              673
+            ],
+            [
+              747,
+              669
+            ],
+            [
+              751,
+              710
+            ],
+            [
+              709,
+              719
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "kind": "unit",
+          "box": [
+            116,
+            651,
+            38,
+            13
+          ],
+          "quad": [
+            [
+              116,
+              651
+            ],
+            [
+              154,
+              651
+            ],
+            [
+              154,
+              664
+            ],
+            [
+              116,
+              664
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "8861-2102"
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "kind": "unit",
+          "box": [
+            865,
+            661,
+            51,
+            16
+          ],
+          "quad": [
+            [
+              865,
+              661
+            ],
+            [
+              916,
+              661
+            ],
+            [
+              916,
+              677
+            ],
+            [
+              865,
+              677
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "8861-2102"
+        }
+      ]
+    },
+    "V11-van-side": {
+      "title": "Van — full side elevation",
+      "source": {
+        "page": "V11",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        56,
+        510,
+        1222,
+        486
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"running-gear-and-wheelhouses\"><path data-part=\"rear-wheelhouse\" d=\"M206 879 C210 817 250 791 302 791 C363 790 395 813 402 858 L405 893 L396 890 L221 890 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"tyre\" /><path data-part=\"front-wheelhouse\" d=\"M1019 894 C1039 816 1072 789 1132 790 C1192 791 1223 814 1236 852 L1256 853 L1256 888 L1215 888 L1047 895 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"tyre\" /><ellipse data-part=\"rear-tyre\" cx=\"307.5\" cy=\"893.5\" rx=\"86.5\" ry=\"86.5\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"tyre\" /><ellipse data-part=\"front-tyre\" cx=\"1131\" cy=\"896\" rx=\"86.5\" ry=\"87\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"tyre\" /><ellipse data-part=\"rear-rim\" cx=\"307.5\" cy=\"893.5\" rx=\"48.5\" ry=\"48.5\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"3.2\" /><ellipse data-part=\"front-rim\" cx=\"1131\" cy=\"896\" rx=\"48.5\" ry=\"49.5\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"3.2\" /></g><g data-part=\"van-shell\"><path data-part=\"shell\" d=\"M80 874 L80 705 L83 686 L118 550 L119 538 C130 519 431 515 632 518 C785 518 924 519 950 530 L965 540 L959 545 L1097 668 L1196 692 Q1237 705 1257 739 L1257 827 L1247 838 L1237 850 C1227 813 1187 796 1132 797 C1079 796 1046 813 1033 849 L1018 894 L405 893 Q400 893 400 883 L395 837 C389 808 352 796 307 797 C266 797 225 807 218 837 L207 882 Q205 888 199 888 Q128 891 80 874 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"2.5\" data-material=\"paint\" /><path data-part=\"roof-gutter\" d=\"M120 537 C429 538 759 540 947 541 Q958 541 965 540 M119 548 L951 551 Q955 551 959 547\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.4\" /><path data-part=\"upper-side-moulding\" d=\"M83 683 L1049 689 L1199 705 Q1204 707 1205 712 L80 694 M80 694 L80 686 Q80 683 83 683\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.2\" /><path data-part=\"wheel-arch-upper-trim\" d=\"M75 832 L201 832 Q205 831 210 822 C223 796 262 786 307 786 C352 786 390 795 402 820 Q405 833 411 834 L1017 839 Q1021 838 1027 827 C1045 792 1089 784 1133 785 C1186 786 1228 801 1235 842\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.4\" /><path data-part=\"wheel-arch-lower-trim\" d=\"M75 840 L204 840 Q211 839 216 827 C228 804 264 795 307 795 C351 795 385 804 394 828 Q398 842 408 843 L1017 848 Q1029 847 1035 832 C1047 806 1087 795 1133 795 C1183 795 1225 811 1234 851\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.05\" /><path data-part=\"rear-trim-end\" d=\"M75 832 L75 840 L81 841 M84 695 L84 831\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.1\" /></g><g data-part=\"door-outlines\"><path data-part=\"sliding-door-outline\" d=\"M493 548 L803 552 L803 889 L491 887 Q486 887 486 883 L486 554 Q486 548 493 548 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.15\" /><path data-part=\"cab-door-outline\" d=\"M820 553 L945 553 L1048 682 Q1056 692 1055 711 L1050 798 L1010 887 L816 887 Q811 887 811 881 L811 560 Q811 553 820 553 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /></g><g data-part=\"glazing\"><path data-part=\"window-gasket\" d=\"M835 563 L929 563 Q943 563 950 576 L1013 661 Q1022 680 1004 683 L835 682 Q825 681 825 671 L825 573 Q825 563 835 563 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"paint\" /><path data-part=\"cab-window\" d=\"M836 568 L928 568 Q939 568 945 578 L1008 662 Q1015 677 1004 678 L836 677 Q830 677 830 669 L830 576 Q830 568 836 568 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.1\" data-material=\"glass\" /><path data-part=\"windscreen\" d=\"M960 546 L1097 668 Q1083 678 1068 678 Q1056 678 1049 672 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"glass\" /></g><g data-part=\"lamps-bumpers-handles\"><path data-part=\"rear-bumper\" d=\"M79 853 Q68 850 62 857 L70 879 Q74 886 89 887 L88 874 L84 855 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"2.1\" data-material=\"metal\" /><path data-part=\"front-bumper\" d=\"M1234 851 Q1252 846 1264 851 Q1270 855 1264 863 L1260 869 L1258 884 Q1253 896 1236 891 Q1227 891 1230 877 L1229 858 Q1229 853 1234 851 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.8\" data-material=\"metal\" /><path data-part=\"front-lamp-surround\" d=\"M1256 740 Q1263 739 1263 745 L1262 824 L1256 826 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.1\" data-material=\"metal\" /><path data-part=\"sliding-handle\" d=\"M752 716 L786 716 Q791 717 788 722 L785 725 L784 721 L758 721 Q752 721 752 716 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.05\" data-material=\"paint\" /><path data-part=\"front-handle\" d=\"M826 716 L860 716 Q865 717 862 722 L859 725 L858 721 L832 721 Q826 721 826 716 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.05\" data-material=\"paint\" /><rect data-part=\"rear-marker\" x=\"101\" y=\"740\" width=\"38\" height=\"11\" rx=\"0\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"rear-marker-inner\" x=\"104\" y=\"743\" width=\"31\" height=\"5\" rx=\"0\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.65\" /><rect data-part=\"front-marker\" x=\"1189\" y=\"748\" width=\"38\" height=\"11\" rx=\"0\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"front-marker-inner\" x=\"1192\" y=\"751\" width=\"31\" height=\"5\" rx=\"0\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.65\" /></g><g data-part=\"mirror-assembly\"><path data-part=\"mirror-head\" d=\"M924 628 L932 628 L939 658 Q941 668 945 673 L945 688 L938 677 L934 677 L931 702 L922 702 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.3\" data-material=\"metal\" /><path data-part=\"upper-stay\" d=\"M941 672 L958 687 L967 687 L967 691 L955 690 L939 677 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"metal\" /><path data-part=\"lower-stay\" d=\"M939 676 L964 729 L979 729 L980 735 L951 735 L951 729 L958 729 L933 680 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"metal\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "side-panel-signature",
+          "label": "Side Panel Signature",
+          "kind": "signature",
+          "box": [
+            155,
+            573,
+            90,
+            85
+          ],
+          "quad": [
+            [
+              155,
+              573
+            ],
+            [
+              245,
+              573
+            ],
+            [
+              245,
+              658
+            ],
+            [
+              155,
+              658
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        },
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "kind": "signature",
+          "box": [
+            880,
+            745,
+            82,
+            92
+          ],
+          "quad": [
+            [
+              880,
+              745
+            ],
+            [
+              962,
+              745
+            ],
+            [
+              962,
+              837
+            ],
+            [
+              880,
+              837
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "Abcdefghijk"
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "kind": "unit",
+          "box": [
+            1058,
+            708,
+            99,
+            25
+          ],
+          "quad": [
+            [
+              1058,
+              708
+            ],
+            [
+              1157,
+              708
+            ],
+            [
+              1157,
+              733
+            ],
+            [
+              1058,
+              733
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "8861-2102"
+        }
+      ]
+    },
+    "V11-van-rear": {
+      "title": "Van — rear elevation",
+      "source": {
+        "page": "V11",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        99,
+        92,
+        318,
+        341
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"rear-tyres\"><path data-part=\"left-tyre\" d=\"M126 351 L163 351 L163 411 Q162 419 157 425 L133 425 Q126 420 126 410 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.3\" data-material=\"tyre\" /><path data-part=\"right-tyre\" d=\"M357 351 L394 351 L393 412 Q392 421 387 426 L363 426 Q357 420 357 410 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.3\" data-material=\"tyre\" /></g><g data-part=\"rear-shell\"><path data-part=\"shell\" d=\"M116 335 L114 323 L115 220 L134 119 C138 105 146 101 164 100 C234 96 301 97 358 102 Q382 103 388 119 L401 220 L402 322 L397 338 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"2.6\" data-material=\"paint\" /><path data-part=\"door-perimeters\" d=\"M149 123 L148 320 M262 123 L261 321 M369 123 L369 320\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /></g><g data-part=\"window-seals-and-glass\"><rect data-part=\"left-seal\" x=\"168\" y=\"135\" width=\"73\" height=\"71\" rx=\"9\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"left-glass\" x=\"171\" y=\"138\" width=\"67\" height=\"65\" rx=\"7\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.25\" data-material=\"glass\" /><rect data-part=\"right-seal\" x=\"281\" y=\"136\" width=\"72\" height=\"71\" rx=\"9\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"right-glass\" x=\"284\" y=\"139\" width=\"66\" height=\"65\" rx=\"7\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.25\" data-material=\"glass\" /></g><g data-part=\"exterior-trim-rails\"><path data-part=\"roof-gutter\" d=\"M132 116 L389 119 L390 120 L390 125 L132 122 Q130 122 131 118 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.4\" data-material=\"paint\" /><path data-part=\"waist-trim\" d=\"M115 215 L401 218 L405 219 L405 223 L401 225 L115 222 L113 220 L113 217 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"paint\" /><path data-part=\"lower-trim\" d=\"M115 319 L402 321 Q406 321 404 325 L400 327 L115 324 Q110 324 113 321 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.1\" data-material=\"paint\" /></g><g data-part=\"lamps-and-fittings\"><rect data-part=\"left-lamp-seal\" x=\"122.5\" y=\"238\" width=\"18\" height=\"51\" rx=\"4.5\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"left-lamp\" x=\"124\" y=\"240\" width=\"15\" height=\"47\" rx=\"3.5\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"paint\" /><rect data-part=\"right-lamp-seal\" x=\"378.5\" y=\"239\" width=\"18\" height=\"51\" rx=\"4.5\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><rect data-part=\"right-lamp\" x=\"380\" y=\"241\" width=\"15\" height=\"47\" rx=\"3.5\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"paint\" /><rect data-part=\"number-plate-recess\" x=\"165\" y=\"284\" width=\"50\" height=\"25\" rx=\"0\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"handle\" d=\"M272 235 L283 235 Q287 235 286 238 L282 240 L273 240 Q270 240 271 237 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"rear-bumper\" d=\"M109 335 L402 338 Q411 338 410 347 Q409 359 403 362 L110 361 Q105 357 104 347 Q102 335 109 335 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"2.2\" data-material=\"metal\" /></g></g></g>",
+      "markings": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><rect data-part=\"reflector\" x=\"218\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /><rect data-part=\"reflector\" x=\"244\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /><rect data-part=\"reflector\" x=\"270\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /><rect data-part=\"reflector\" x=\"296\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /><rect data-part=\"reflector\" x=\"322\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /><rect data-part=\"reflector\" x=\"348\" y=\"281\" width=\"12\" height=\"30\" rx=\"0\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"white\" /></g></g>",
+      "zones": [
+        {
+          "id": "left-door-signature",
+          "label": "Left Door Signature",
+          "kind": "signature",
+          "box": [
+            160,
+            230,
+            43,
+            43
+          ],
+          "quad": [
+            [
+              160,
+              230
+            ],
+            [
+              203,
+              230
+            ],
+            [
+              203,
+              273
+            ],
+            [
+              160,
+              273
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        },
+        {
+          "id": "right-door-unit",
+          "label": "Right Door Unit",
+          "kind": "unit",
+          "box": [
+            288,
+            231,
+            74,
+            18
+          ],
+          "quad": [
+            [
+              288,
+              231
+            ],
+            [
+              362,
+              231
+            ],
+            [
+              362,
+              249
+            ],
+            [
+              288,
+              249
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "8861-2102"
+        }
+      ]
+    },
+    "V08-pickup-perspective": {
+      "title": "Pickup — rear three-quarter",
+      "source": {
+        "page": "V08",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        249,
+        351,
+        1019,
+        528
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g><g data-part=\"front-wheel-depth\"><path data-part=\"front-tyre\" d=\"M280 582 C273 551 278 536 288 536 C309 536 317 549 323 579 L330 608 L365 636 Q365 662 352 674 L321 678 Q290 681 283 646 Q279 628 280 609 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.3\" data-material=\"tyre\" /><ellipse data-part=\"front-rim\" cx=\"310\" cy=\"615\" rx=\"13\" ry=\"31.5\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"2.2\" transform=\"rotate(-3 310 615)\" /></g><g data-part=\"rear-wheel-depth\"><path data-part=\"rear-tyre\" d=\"M577 703 C569 650 572 620 599 621 C635 625 674 635 697 656 Q718 676 726 715 L735 746 L783 767 C782 807 778 837 754 846 L704 862 Q682 870 668 868 C631 865 607 828 606 770 L608 706 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"1.25\" data-material=\"tyre\" /><ellipse data-part=\"rear-rim\" cx=\"659\" cy=\"764\" rx=\"24.7\" ry=\"58.5\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"2.6\" transform=\"rotate(-4 659 764)\" /><path data-part=\"rim-lip\" d=\"M645 715 C634 730 634 778 647 805 L652 805 Q642 791 644 782 L640 781 L637 769 L642 769 L641 757 L637 756 Q636 730 645 715 Z\" fill=\"#d8ddd8\" stroke=\"#d8ddd8\" stroke-width=\"0.6\" data-material=\"metal\" /><path data-part=\"outer-sidewall-arc\" d=\"M724 762 Q729 817 708 845\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"2.3\" /></g></g><g data-part=\"body-shell\"><path data-part=\"pickup-cab-and-bed\" d=\"M267 483 Q276 478 356 478 L405 386 Q409 378 425 374 C511 351 625 362 704 377 Q724 381 731 403 L755 482 L1213 507 Q1221 508 1221 527 L1223 551 L1232 574 L1229 669 L950 809 L754 760 Q744 757 739 741 L723 695 Q716 668 698 654 C672 638 630 626 600 621 Q576 617 575 642 L577 703 L569 706 L350 629 Q334 623 327 608 L319 565 Q315 540 293 539 L276 540 L275 584 L265 578 L263 519 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"2.5\" data-material=\"paint\" /><path data-part=\"tailgate-face\" d=\"M950 530 L1214 510 L1219 551 L1230 575 L1225 669 M950 530 L952 576 Q952 597 966 613 Q974 625 974 643 L973 709 M951 643 Q967 648 975 642\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"paint\" /><path data-part=\"side-belt\" d=\"M264 513 L337 527 L950 634 Q964 639 975 634 L1232 575 M264 519 L338 533 L950 641 Q963 646 975 641 L1232 582\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /><path data-part=\"side-sill\" d=\"M329 605 L439 643 M453 648 L576 689 M733 703 L944 739 Q962 744 976 737 L1228 646 M736 709 L944 745 Q963 750 980 742 L1228 654\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /><path data-part=\"cab-door\" d=\"M408 384 L360 480 Q344 512 337 524 L338 596 L351 618 L441 650 L426 548 L425 533 Q427 527 430 521 L447 469 L463 384 Q469 375 479 368\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" /><path data-part=\"cab-back\" d=\"M486 367 L459 482 Q450 489 449 510 L439 540 L458 659\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.4\" /><path data-part=\"bed-top\" d=\"M463 488 L954 530 L1215 509 M463 488 L752 483\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /></g><g data-part=\"windows\"><path data-part=\"side-window\" d=\"M414 385 L454 379 Q458 379 456 386 L436 467 Q434 474 425 474 L382 471 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"glass\" /><path data-part=\"rear-cab-glazing\" d=\"M510 387 C570 385 645 392 708 398 Q718 400 721 411 L735 450 L490 448 L502 397 Q504 388 510 387 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"1.5\" data-material=\"glass\" /><polygon data-part=\"left-slider\" points=\"570,386 575,452 580,452 576,386\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"0.9\" data-material=\"paint\" /><polygon data-part=\"right-slider\" points=\"616,388 622,452 628,452 621,388\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"0.9\" data-material=\"paint\" /><polygon data-part=\"right-frame\" points=\"659,391 664,454 670,454 665,392\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"0.9\" data-material=\"paint\" /><path data-part=\"window-trim\" d=\"M407 382 L461 375 Q466 376 464 382 L439 474 Q437 479 424 479 L372 476 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.2\" /></g><g data-part=\"trim\"><path data-part=\"front-bumper\" d=\"M264 553 L258 557 L257 570 L261 577 L273 583 L274 575 L270 572 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.6\" data-material=\"metal\" /><path data-part=\"rear-bumper\" d=\"M934 791 L959 780 Q964 778 960 775 L957 772 L1219 670 L1249 678 Q1255 682 1254 689 L1254 728 L1194 762 L1186 761 L1186 768 L1113 807 Q1109 810 1105 805 L1000 860 Q982 867 939 848 Q934 845 934 839 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"2.2\" data-material=\"metal\" /><path data-part=\"bumper-profile\" d=\"M935 794 C965 805 988 809 1001 802 L1107 754 Q1113 750 1102 738 L1096 734 L1147 711 Q1181 717 1200 713 L1254 689 M1107 754 L1107 804 M1147 711 L1147 757 M1107 776 L1147 757 Q1171 761 1186 760\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.2\" /><rect data-part=\"mirror\" x=\"336\" y=\"441\" width=\"27\" height=\"38\" rx=\"4\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"metal\" /><rect data-part=\"mirror-glass\" x=\"341\" y=\"445\" width=\"18\" height=\"29\" rx=\"2\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"glass\" /><path data-part=\"mirror-stalk\" d=\"M352 478 L355 488 L375 493 L379 488 L363 485 L359 477 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"metal\" /><polygon data-part=\"door-handle\" points=\"412,489 434,492 432,498 415,496\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"near-lamp\" d=\"M895 637 Q934 650 974 644 L972 711 Q934 724 895 712 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"paint\" /><path data-part=\"tailgate-latch\" d=\"M1113 607 L1138 600 L1138 618 L1114 635 Z M1115 610 L1135 604 L1131 615 L1116 620\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1\" /></g><g data-part=\"additional-lamp-and-door-detail\"><path data-part=\"near-lamp-inner\" d=\"M899 643 Q935 655 969 649 L968 706 Q935 717 899 707 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.95\" /><path data-part=\"door-lower-double-seam\" d=\"M349 617 L438 646 M361 480 L337 521 L338 593\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1\" /><path data-part=\"far-tailgate-corner\" d=\"M1213 508 L1213 545 Q1214 556 1221 568 L1221 644\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.9\" /><path data-part=\"tailgate-handle-inset\" d=\"M1117 612 L1133 606 L1133 612 L1117 619\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /></g><g><path data-part=\"rear-cab-window-outer-gasket\" d=\"M483 455 L494 391 Q498 380 510 380 C570 379 649 386 710 393 Q724 395 726 408 L742 456 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /></g></g></g>",
+      "markings": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g data-part=\"reflective-strips\"><polygon data-part=\"reflector-0\" points=\"995,640 1011,636 1011,694 995,699\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-1\" points=\"1030,630 1046,626 1046,682 1030,687\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-2\" points=\"1060,621 1076,617 1076,673 1060,678\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-3\" points=\"1091,613 1107,609 1107,662 1091,667\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-4\" points=\"1146,600 1162,596 1162,649 1146,654\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-5\" points=\"1168,594 1184,590 1184,642 1168,647\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-6\" points=\"1189,588 1205,584 1205,634 1189,639\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /><polygon data-part=\"reflector-7\" points=\"1206,584 1222,580 1222,629 1206,634\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"white\" /></g></g>",
+      "zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "kind": "signature",
+          "box": [
+            372,
+            542,
+            35,
+            61
+          ],
+          "quad": [
+            [
+              373,
+              543
+            ],
+            [
+              408,
+              552
+            ],
+            [
+              407,
+              608
+            ],
+            [
+              373,
+              595
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "Agriculture"
+        },
+        {
+          "id": "tailgate-signature",
+          "label": "Tailgate Signature",
+          "kind": "signature",
+          "box": [
+            986,
+            541,
+            49,
+            73
+          ],
+          "quad": [
+            [
+              987,
+              547
+            ],
+            [
+              1029,
+              542
+            ],
+            [
+              1034,
+              599
+            ],
+            [
+              987,
+              613
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        },
+        {
+          "id": "front-unit",
+          "label": "Front Unit",
+          "kind": "unit",
+          "box": [
+            271,
+            492,
+            39,
+            19
+          ],
+          "quad": [
+            [
+              271,
+              492
+            ],
+            [
+              309,
+              498
+            ],
+            [
+              309,
+              510
+            ],
+            [
+              271,
+              504
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "1660-1213"
+        },
+        {
+          "id": "rear-unit",
+          "label": "Rear Unit",
+          "kind": "unit",
+          "box": [
+            1141,
+            539,
+            62,
+            31
+          ],
+          "quad": [
+            [
+              1141,
+              552
+            ],
+            [
+              1202,
+              537
+            ],
+            [
+              1203,
+              552
+            ],
+            [
+              1141,
+              567
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "1660-1213"
+        }
+      ]
+    },
+    "V07-side-car": {
+      "title": "Car — cropped front side elevation",
+      "source": {
+        "page": "V07",
+        "unitsPerPoint": 1
+      },
+      "viewBox": [
+        8,
+        259,
+        741,
+        341
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"front-wheel-and-wheelhouse\"><path data-part=\"wheelhouse\" d=\"M431 534 C453 489 482 448 522 445 C570 438 607 476 625 534 L597 527 L482 527 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"tyre\" /><ellipse data-part=\"front-tyre\" cx=\"539\" cy=\"520\" rx=\"69.8\" ry=\"69\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"tyre\" /><ellipse data-part=\"open-centre-rim\" cx=\"539\" cy=\"518.5\" rx=\"38\" ry=\"38\" fill=\"none\" stroke=\"#d8ddd8\" stroke-width=\"1.2\" /></g><g data-part=\"body-shell\"><path data-part=\"body\" d=\"M8 279 Q27 272 64 273 L307 282 L316 283 L394 362 L415 360 L723 379 Q730 380 734 395 L734 501 L711 525 Q689 536 625 533 L623 533 C604 474 576 444 540 445 C503 443 480 455 458 491 L433 521 L425 533 L8 530 Z\" fill=\"#ce222c\" stroke=\"#252823\" stroke-width=\"1.65\" data-material=\"paint\" /><path data-part=\"roof-vinyl\" d=\"M8 267 C70 260 198 257 307 271 L321 273 Q320 282 311 284 C212 271 110 271 29 278 Q23 278 19 285 L8 302 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"tyre\" /><path data-part=\"roof-gutter\" d=\"M8 312 L22 286 Q25 281 34 281 C121 276 224 277 309 288 L374 374 Q379 381 366 383 L172 383 M8 379 L172 381\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.75\" /></g><g data-part=\"glazing\"><path data-part=\"cropped-rear-quarter\" d=\"M8 302 L22 286 Q24 282 31 282 L39 282 L39 380 L8 380 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"glass\" /><path data-part=\"rear-door-window\" d=\"M45 282 L172 279 L172 381 L45 380 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.65\" data-material=\"glass\" /><path data-part=\"front-door-window\" d=\"M188 279 Q250 280 308 289 L367 375 Q371 380 365 383 L188 381 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.65\" data-material=\"glass\" /><path data-part=\"windscreen\" d=\"M320 279 L413 360 L398 373 L390 375 L312 287 Q318 285 320 279 Z\" fill=\"#e0e5e0\" stroke=\"#252823\" stroke-width=\"0.65\" data-material=\"glass\" /></g><g data-part=\"doors-and-panel-lines\"><path data-part=\"front-door\" d=\"M175 278 L175 382 Q174 386 177 390 L406 391 L406 522 L175 522 L175 389\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /><path data-part=\"cropped-rear-door\" d=\"M8 381 L175 382 L175 522 L17 514 L8 477\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /><path data-part=\"side-belt-line\" d=\"M8 394 L726 396 Q730 396 730 401 L730 499 M8 419 L715 421 Q719 421 718 424 L406 422\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.65\" /><path data-part=\"sill\" d=\"M8 524 L432 528\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.65\" /><path data-part=\"front-headlamp-outline\" d=\"M698 437 L726 437 L726 475 L698 475 Z M726 420 L731 422 L731 478 L727 481\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /><path data-part=\"front-handle\" d=\"M203 398 L236 398 Q236 402 232 402 L210 402 Q203 402 203 398 M205 402 Q207 410 213 405\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.55\" /><path data-part=\"cropped-rear-handle\" d=\"M8 396 L20 396 L20 401 L8 401\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.5\" /></g><g data-part=\"mirror-and-bumper\"><path data-part=\"mirror-stay\" d=\"M349 373 L369 392 L385 392 L385 397 L367 397 L350 382 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"metal\" /><rect data-part=\"mirror-head\" x=\"344.5\" y=\"363.5\" width=\"5\" height=\"28\" rx=\"0\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"0.65\" data-material=\"metal\" /><path data-part=\"front-bumper\" d=\"M697 499 L747 500 L747 532 Q747 536 742 536 L700 535 Q697 534 697 531 Z\" fill=\"#d8ddd8\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"metal\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "kind": "signature",
+          "box": [
+            260,
+            433,
+            58,
+            62
+          ],
+          "quad": [
+            [
+              260,
+              433
+            ],
+            [
+              318,
+              433
+            ],
+            [
+              318,
+              495
+            ],
+            [
+              260,
+              495
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "Province of British Columbia"
+        },
+        {
+          "id": "unit",
+          "label": "Unit",
+          "kind": "unit",
+          "box": [
+            628,
+            399,
+            68,
+            16
+          ],
+          "quad": [
+            [
+              628,
+              399
+            ],
+            [
+              696,
+              399
+            ],
+            [
+              696,
+              415
+            ],
+            [
+              628,
+              415
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": "8860-2105"
+        }
+      ]
+    },
+    "H44-van-door": {
+      "title": "Van Door — Hydro",
+      "source": {
+        "page": "H44",
+        "unitsPerPoint": 1
+      },
+      "viewBox": [
+        337.5,
+        524.5,
+        169,
+        203
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"door-shell\"><path data-part=\"outline\" d=\"M351 724 Q347 724 346 716 L341 668 L342 613 Q342 607 347 601 L396 537 Q402 527 410 527 L495 527 Q504 527 504 539 L504 724 Z\" fill=\"#c7dab7\" stroke=\"#252823\" stroke-width=\"1\" data-material=\"paint\" /><path data-part=\"main-window\" d=\"M414 537.5 L486 537.5 Q492 537.5 492 544 L492 600 Q492 605 486 605 L409 605 L409 544 Q409 538 414 537.5 Z\" fill=\"#ffffff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"glass\" /><path data-part=\"quarter-window\" d=\"M402 541 L404 541 L404 605 L368 605 Q362 605 364 599 L396 548 Q399 542 402 541 Z\" fill=\"#ffffff\" stroke=\"#252823\" stroke-width=\"0.8\" data-material=\"glass\" /><path data-part=\"upper-trim\" d=\"M342 637.5 L504 637.5 M342 642.3 L504 642.3\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /><path data-part=\"lower-trim\" d=\"M345 703 L504 703 M345 707.5 L504 707.5\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /></g><g data-part=\"mirror-and-handle\"><path data-part=\"mirror-base\" d=\"M383 617 L404 617 L404 620.5 L383 620.5 Z\" fill=\"#ffffff\" stroke=\"#252823\" stroke-width=\"0.6\" data-material=\"metal\" /><path data-part=\"mirror-arm\" d=\"M390 618 L386 600 Q384 594 387 591 L389 591 L389 597 L392 610 L393 617 Z\" fill=\"#ffffff\" stroke=\"#252823\" stroke-width=\"0.75\" data-material=\"metal\" /><path data-part=\"mirror-head\" d=\"M393 586 Q393 581 395 581 L396 583 L396 609 L393 609 Q392 604 389 600 L389 592 Q390 588 393 586 Z\" fill=\"#ffffff\" stroke=\"#252823\" stroke-width=\"0.65\" data-material=\"metal\" /><path data-part=\"handle\" d=\"M465 623 L491.5 623 Q491 628.5 487 628 Q485 628 484.5 626.5 L468 626.5 Q465.5 626.5 465 623 Z\" fill=\"#c7dab7\" stroke=\"#252823\" stroke-width=\"0.7\" data-material=\"paint\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "door-signature",
+          "label": "Door Signature",
+          "kind": "hydro-gas",
+          "box": [
+            372,
+            647,
+            102,
+            32
+          ],
+          "quad": [
+            [
+              372,
+              647
+            ],
+            [
+              474,
+              647
+            ],
+            [
+              474,
+              679
+            ],
+            [
+              372,
+              679
+            ]
+          ],
+          "colour": "#000000",
+          "default": null
+        }
+      ]
+    },
+    "G15-jacket-back": {
+      "title": "Jacket — upper back",
+      "source": {
+        "page": "G15",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        869,
+        518,
+        391,
+        292
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"upper-back-and-sleeves\"><path data-part=\"visible-shell\" d=\"M871 607 L931 568 Q966 543 996 536 L1002 519 L1088 519 L1095 536 Q1140 546 1161 563 L1257 624 L1257 747 L1191 704 L1171 771 L1171 806 L923 806 L923 771 L904 705 L871 726 Z\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"3\" data-material=\"fabric\" /><path data-part=\"collar-seam\" d=\"M996 536 C1027 532 1065 532 1095 536\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /><path data-part=\"left-armhole\" d=\"M932 568 C947 614 939 662 904 705\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /><path data-part=\"right-armhole\" d=\"M1164 567 C1151 607 1157 661 1191 704\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /><line data-part=\"centre-back-seam\" x1=\"1047\" y1=\"535\" x2=\"1047\" y2=\"770\" stroke=\"#252823\" stroke-width=\"1.2\" /></g><g data-part=\"waistband\"><rect data-part=\"band\" x=\"923\" y=\"771\" width=\"248\" height=\"35\" rx=\"0\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"1.2\" data-material=\"fabric\" /><line data-part=\"elastic-rib\" x1=\"927\" y1=\"772\" x2=\"927\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"932\" y1=\"772\" x2=\"932\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"936\" y1=\"772\" x2=\"936\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"941\" y1=\"772\" x2=\"941\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"946\" y1=\"772\" x2=\"946\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"950\" y1=\"772\" x2=\"950\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"955\" y1=\"772\" x2=\"955\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"961\" y1=\"772\" x2=\"961\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1134\" y1=\"772\" x2=\"1134\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1139\" y1=\"772\" x2=\"1139\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1143\" y1=\"772\" x2=\"1143\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1148\" y1=\"772\" x2=\"1148\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1153\" y1=\"772\" x2=\"1153\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1158\" y1=\"772\" x2=\"1158\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1163\" y1=\"772\" x2=\"1163\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /><line data-part=\"elastic-rib\" x1=\"1167\" y1=\"772\" x2=\"1167\" y2=\"805\" stroke=\"#252823\" stroke-width=\"1\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "back-signature",
+          "label": "Back Signature",
+          "kind": "signature",
+          "box": [
+            1001,
+            609,
+            95,
+            103
+          ],
+          "quad": [
+            [
+              1001,
+              609
+            ],
+            [
+              1096,
+              609
+            ],
+            [
+              1096,
+              712
+            ],
+            [
+              1001,
+              712
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        }
+      ]
+    },
+    "G15-field-jacket": {
+      "title": "Field jacket — shoulder view",
+      "source": {
+        "page": "G15",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        869,
+        78,
+        365,
+        425
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><defs><clipPath id=\"G15-sleeve-carrier-clip\"><path data-part=\"visible-sleeve\" d=\"M1151 158 Q1183 163 1198 203 C1222 263 1236 372 1230 435 Q1228 473 1220 500 L1056 500 L1056 406 L1149 185\" fill=\"#b4aa97\" stroke=\"none\" stroke-width=\"1.65\" data-material=\"fabric\" /></clipPath></defs><g data-part=\"jacket-body\"><path data-part=\"visible-torso\" d=\"M869 94 L878 84 C919 78 969 80 1003 83 L1049 127 L1155 158 Q1186 166 1201 211 C1221 265 1233 359 1230 423 Q1229 467 1220 500 L871 500 Z\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"3\" data-material=\"fabric\" /><path data-part=\"collar-opening\" d=\"M881 91 Q876 95 885 116 L942 257 L999 110 Q1006 89 998 86 M888 120 Q945 116 993 119\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" /><path data-part=\"outer-lapel-seam\" d=\"M870 201 L941 257 L1046 178 L1021 155 L1054 139 L1004 85\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.6\" /><path data-part=\"inner-lapel-stitch\" d=\"M870 206 L939 259 L1040 177 L1014 155 L1048 136 L1001 86\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /><path data-part=\"zipper-opening\" d=\"M938 261 L938 500 M944 282 L944 500 M952 264 L952 500\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1\" /><ellipse data-part=\"zipper-pull\" cx=\"942\" cy=\"270\" rx=\"5.7\" ry=\"11.2\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.3\" /></g><g data-part=\"pockets\"><path data-part=\"left-pocket\" d=\"M872 359 L872 448 L892 448 L909 438 L909 359 M872 454 L893 454 L915 441 L915 359 M877 359 L877 448\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.25\" /><path data-part=\"right-pocket\" d=\"M976 358 L976 440 L998 454 L1061 454 L1075 442 L1075 358 M981 359 L981 438 L1000 448 L1062 448 M1012 359 L1012 448 M1040 359 L1040 448\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.25\" /><rect data-part=\"left-flap\" x=\"870\" y=\"305\" width=\"45\" height=\"56\" rx=\"0\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"1.6\" data-material=\"fabric\" /><path data-part=\"left-flap-stitch\" d=\"M871 311 L910 311 L910 354 L871 354\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /><rect data-part=\"right-flap\" x=\"974\" y=\"305\" width=\"104\" height=\"56\" rx=\"0\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"1.6\" data-material=\"fabric\" /><rect data-part=\"right-flap-stitch\" x=\"980\" y=\"311\" width=\"92\" height=\"43\" rx=\"0\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /><ellipse data-part=\"pocket-button\" cx=\"1026\" cy=\"340\" rx=\"4.5\" ry=\"4.8\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.1\" /></g><g data-part=\"sleeve\"><path data-part=\"visible-sleeve\" d=\"M1151 158 Q1183 163 1198 203 C1222 263 1236 372 1230 435 Q1228 473 1220 500 L1056 500 L1056 406 L1149 185\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"1.65\" data-material=\"fabric\" /><path data-part=\"armhole-double-seam\" d=\"M1150 159 C1118 188 1101 242 1092 304 L1089 324 M1145 160 C1114 190 1096 251 1087 313\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /><path data-part=\"upper-sleeve-crease\" d=\"M1169 175 Q1173 196 1173 214 M1175 185 Q1178 203 1178 215\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.8\" /><path data-part=\"elbow-outer-seam\" d=\"M1159 337 L1137 408 L1206 463 L1188 500 M1137 408 L1078 449 L1077 500\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.1\" /><path data-part=\"elbow-inner-stitch\" d=\"M1153 337 L1132 405 L1200 465 L1183 500 M1132 405 L1073 447 L1072 500\" fill=\"none\" stroke=\"#252823\" stroke-width=\"0.7\" /></g><g data-part=\"sleeve-patch-carriers\" clip-path=\"url(#G15-sleeve-carrier-clip)\"><path data-part=\"curved-title-tab\" d=\"M1136 214 C1154 213 1183 216 1206 225 L1215 254 C1187 241 1154 238 1127 243 Z\" fill=\"#ffffff\" stroke=\"none\" stroke-width=\"0\" data-material=\"patch\" /><path data-part=\"lower-identity-carrier\" d=\"M1123 244 C1150 239 1184 246 1205 254 Q1210 256 1212 271 L1213 282 L1193 326 Q1187 338 1179 337 L1121 327 Q1116 326 1115 321 L1113 270 Z\" fill=\"#ffffff\" stroke=\"none\" stroke-width=\"0\" data-material=\"patch\" /></g><g data-part=\"visible-sleeve-outline-above-patch\"><path data-part=\"outer-sleeve\" d=\"M1151 158 Q1183 163 1198 203 C1222 263 1236 372 1230 435 Q1228 473 1220 500\" fill=\"none\" stroke=\"#252823\" stroke-width=\"2.4\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "sleeve-title",
+          "label": "Sleeve Title",
+          "kind": "nameplate",
+          "box": [
+            1130,
+            215,
+            80,
+            30
+          ],
+          "quad": [
+            [
+              1136,
+              214
+            ],
+            [
+              1206,
+              225
+            ],
+            [
+              1215,
+              254
+            ],
+            [
+              1127,
+              243
+            ]
+          ],
+          "colour": "#70573f",
+          "default": "Job Function"
+        },
+        {
+          "id": "sleeve-patch",
+          "label": "Sleeve Patch",
+          "kind": "signature",
+          "box": [
+            1115,
+            244,
+            96,
+            93
+          ],
+          "quad": [
+            [
+              1123,
+              244
+            ],
+            [
+              1205,
+              254
+            ],
+            [
+              1185,
+              335
+            ],
+            [
+              1116,
+              323
+            ]
+          ],
+          "colour": "#70573f",
+          "default": "Forests"
+        }
+      ]
+    },
+    "G15-blazer": {
+      "title": "Blazer — chest pocket view",
+      "source": {
+        "page": "G15",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        461,
+        519,
+        392,
+        455
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"garment-shell\"><path data-part=\"torso\" d=\"M464 679 L516 638 L541 605 L684 547 L827 619 Q841 618 850 624 L850 968 L840 968 L826 922 L826 968 L464 970 Z\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"2\" data-material=\"fabric\" /><path data-part=\"shirt-opening\" d=\"M515 641 L550 612 L682 546 L484 896 L494 729 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.4\" data-material=\"white\" /></g><g data-part=\"cropped-head-and-collar\"><path data-part=\"visible-head-neck\" d=\"M471 520 L681 520 L683 545 L555 613 L530 611 Q522 608 519 585 C491 584 484 579 481 560 Q478 539 471 520 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.7\" data-material=\"white\" /><path data-part=\"chin-and-jaw-shadow\" d=\"M518 583 Q535 575 557 568 Q549 572 535 576 Q529 579 527 588 L524 599 Q526 608 535 611 L551 614 L531 612 L520 617 L524 610 L519 589 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.5\" data-material=\"tyre\" /><path data-part=\"mouth\" d=\"M490 526 Q502 530 515 526 Q519 527 516 532 Q501 538 491 533 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.5\" data-material=\"tyre\" /><path data-part=\"upper-neck-shadow\" d=\"M651 520 L681 520 L682 539 L676 531 Q672 534 668 530 Q659 531 651 525 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.5\" data-material=\"tyre\" /><path data-part=\"right-shirt-collar\" d=\"M553 613 L675 531 L684 548 L605 691 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.1\" data-material=\"white\" /><path data-part=\"left-shirt-collar\" d=\"M519 622 L548 613 L527 679 L494 729 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.1\" data-material=\"white\" /><path data-part=\"tie-knot\" d=\"M530 612 L554 614 L578 651 L555 684 L526 680 L518 639 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.25\" data-material=\"white\" /><path data-part=\"tie-blade\" d=\"M526 680 L555 684 L562 761 L484 896 L494 729 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"1.25\" data-material=\"white\" /></g><g data-part=\"lapels-and-sleeve\"><path data-part=\"right-lapel\" d=\"M684 548 L722 567 L723 642 L652 672 L763 666 L464 937 L464 931 Z\" fill=\"#b4aa97\" stroke=\"#252823\" stroke-width=\"1.4\" data-material=\"fabric\" /><path data-part=\"left-lapel-notch\" d=\"M515 641 L476 673 L497 680 L465 680\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.1\" /><path data-part=\"sleeve-seam\" d=\"M828 619 C797 648 776 685 775 737 C772 798 788 834 807 878 L826 922 L840 968\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.6\" /><path data-part=\"lower-sleeve-slit\" d=\"M826 922 L826 968 L830 968 L831 945 L838 968 L840 968 Z\" fill=\"#252823\" stroke=\"#252823\" stroke-width=\"0.5\" data-material=\"tyre\" /></g><g data-part=\"breast-pocket\"><path data-part=\"pocket\" d=\"M613 815 L737 815 L737 928 Q737 949 716 949 L635 949 Q613 949 613 928 Z\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "pocket-crest",
+          "label": "Pocket Crest",
+          "kind": "signature",
+          "box": [
+            634,
+            833,
+            83,
+            112
+          ],
+          "quad": [
+            [
+              634,
+              833
+            ],
+            [
+              717,
+              833
+            ],
+            [
+              717,
+              945
+            ],
+            [
+              634,
+              945
+            ]
+          ],
+          "colour": "#ffffff",
+          "default": null
+        }
+      ]
+    },
+    "G15-hard-hat": {
+      "title": "Hard hat — separated from jacket",
+      "source": {
+        "page": "G15",
+        "unitsPerPoint": 1.7
+      },
+      "viewBox": [
+        912,
+        780,
+        345,
+        178
+      ],
+      "object": "<g stroke-linejoin=\"round\" stroke-linecap=\"round\"><g><g data-part=\"helmet-shell\"><path data-part=\"shell-and-brim\" d=\"M918 937 L979 910 L1008 798 C1067 784 1129 776 1161 787 C1214 801 1242 848 1242 922 L1250 922 L1250 938 C1208 952 1165 949 1122 945 C1044 939 983 938 918 954 Z\" fill=\"#fff\" stroke=\"#252823\" stroke-width=\"3.1\" data-material=\"white\" /><path data-part=\"crown-front-junction\" d=\"M1000 829 C1061 795 1102 789 1149 797 C1200 806 1230 839 1238 880\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.5\" /></g><g data-part=\"brim-reinforcements\"><path data-part=\"front-left-slot\" d=\"M988 912 L998 914 L1002 888 L1021 881 L1018 917 Q1035 920 1054 921\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.6\" /><path data-part=\"front-right-slot\" d=\"M1168 926 L1196 924 L1196 892 Q1207 901 1219 905 L1219 923 L1242 923\" fill=\"none\" stroke=\"#252823\" stroke-width=\"1.6\" /></g></g></g>",
+      "zones": [
+        {
+          "id": "front-crest",
+          "label": "Front Crest",
+          "kind": "signature",
+          "box": [
+            1077,
+            856,
+            70,
+            76
+          ],
+          "quad": [
+            [
+              1077,
+              856
+            ],
+            [
+              1147,
+              856
+            ],
+            [
+              1147,
+              932
+            ],
+            [
+              1077,
+              932
+            ]
+          ],
+          "colour": "#70573f",
+          "default": null
+        }
+      ]
+    }
+  },
+  "fields": {
+    "recipient-name": {
+      "label": "Recipient",
+      "placeholder": "[Recipient]"
+    },
+    "page-number": {
+      "label": "Page number",
+      "placeholder": "2"
+    },
+    "fleet-number": {
+      "label": "Fleet number",
+      "placeholder": "DDC 01"
+    },
+    "team-name": {
+      "label": "Team",
+      "placeholder": "FIELD TEAM"
+    }
+  },
+  "manuals": {
+    "pack": "bc",
+    "relation": "Modelled on"
+  }
 }

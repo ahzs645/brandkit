@@ -13354,8 +13354,8 @@
       "type": "rect",
       "x": 64,
       "y": 250,
-      "width": 204.32394018947141,
-      "height": 264.4192167157865,
+      "width": 199.8412857372736,
+      "height": 258.61813448353047,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -13364,51 +13364,51 @@
       "src": "templates/gu-letterhead",
       "x": 64,
       "y": 250,
-      "width": 204.3,
-      "height": 264.4
+      "width": 199.8,
+      "height": 258.6
      },
      {
       "type": "label",
       "text": "LETTERHEAD, GENERAL USE",
       "x": 64,
-      "y": 540.4
+      "y": 534.6
      },
      {
       "type": "nested",
       "src": "templates/gu-envelope",
-      "x": 300.3,
+      "x": 295.8,
       "y": 250,
-      "width": 608.9,
-      "height": 264.4
+      "width": 595.6,
+      "height": 258.6
      },
      {
       "type": "label",
       "text": "ENVELOPE NO. 10",
-      "x": 300.3,
-      "y": 540.4
+      "x": 295.8,
+      "y": 534.6
      },
      {
       "type": "rect",
-      "x": 941.2603497477771,
+      "x": 923.4182646538216,
       "y": 250,
-      "width": 462.73362925262643,
-      "height": 264.4192167157865,
+      "width": 452.58173534617845,
+      "height": 258.61813448353047,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/gu-card",
-      "x": 941.3,
+      "x": 923.4,
       "y": 250,
-      "width": 462.7,
-      "height": 264.4
+      "width": 452.6,
+      "height": 258.6
      },
      {
       "type": "label",
       "text": "CALLING CARD",
-      "x": 941.3,
-      "y": 540.4
+      "x": 923.4,
+      "y": 534.6
      },
      {
       "type": "para",
@@ -13459,8 +13459,8 @@
       "type": "rect",
       "x": 64,
       "y": 260,
-      "width": 248.2426666246792,
-      "height": 321.25521563193774,
+      "width": 238.39250707906777,
+      "height": 308.50795033761705,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -13469,88 +13469,88 @@
       "src": "templates/memorandum",
       "x": 64,
       "y": 260,
-      "width": 248.2,
-      "height": 321.3
+      "width": 238.4,
+      "height": 308.5
      },
      {
       "type": "label",
       "text": "MEMORANDUM",
       "x": 64,
-      "y": 607.3
+      "y": 594.5
      },
      {
       "type": "rect",
-      "x": 344.2426666246792,
+      "x": 334.39250707906774,
       "y": 260,
-      "width": 214.17014375462514,
-      "height": 321.25521563193774,
+      "width": 205.6719668917447,
+      "height": 308.50795033761705,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/publication-title-page",
-      "x": 344.2,
+      "x": 334.4,
       "y": 260,
-      "width": 214.2,
-      "height": 321.3
+      "width": 205.7,
+      "height": 308.5
      },
      {
       "type": "label",
       "text": "TITLE PAGE",
-      "x": 344.2,
-      "y": 607.3
+      "x": 334.4,
+      "y": 594.5
      },
      {
       "type": "nested",
       "src": "templates/publication-annual-report",
-      "x": 590.4,
+      "x": 572.1,
       "y": 260,
-      "width": 248.2,
-      "height": 321.3
+      "width": 238.4,
+      "height": 308.5
      },
      {
       "type": "label",
       "text": "ANNUAL REPORT",
-      "x": 590.4,
-      "y": 607.3
+      "x": 572.1,
+      "y": 594.5
      },
      {
       "type": "rect",
-      "x": 870.6554770039836,
+      "x": 842.4569810498801,
       "y": 260,
-      "width": 245.32216466438885,
-      "height": 321.25521563193774,
+      "width": 235.58788934872578,
+      "height": 308.50795033761705,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/advert-tender",
-      "x": 870.7,
+      "x": 842.5,
       "y": 260,
-      "width": 245.3,
-      "height": 321.3
+      "width": 235.6,
+      "height": 308.5
      },
      {
       "type": "label",
       "text": "TENDER",
-      "x": 870.7,
-      "y": 607.3
+      "x": 842.5,
+      "y": 594.5
      },
      {
       "type": "nested",
       "src": "templates/uniform-flash",
-      "x": 1148,
+      "x": 1110,
       "y": 260,
-      "width": 276.9,
-      "height": 321.3
+      "width": 266,
+      "height": 308.5
      },
      {
       "type": "label",
       "text": "SHOULDER FLASH",
-      "x": 1148,
-      "y": 607.3
+      "x": 1110,
+      "y": 594.5
      }
     ],
     "sources": [
@@ -13594,42 +13594,42 @@
       "src": "templates/illustrated-v13-cab-door",
       "x": 64,
       "y": 250,
-      "width": 336,
-      "height": 291.5
+      "width": 334,
+      "height": 289.7
      },
      {
       "type": "label",
       "text": "CAB DOOR: MINISTERIAL SIGNATURE",
       "x": 64,
-      "y": 567.5
+      "y": 565.7
      },
      {
       "type": "nested",
       "src": "templates/illustrated-v13-truck-side",
-      "x": 432,
+      "x": 430,
       "y": 250,
-      "width": 647.7,
-      "height": 291.5
+      "width": 643.9,
+      "height": 289.7
      },
      {
       "type": "label",
       "text": "BOX: 16 IN SIGNATURE, UNIT NUMBER",
-      "x": 432,
-      "y": 567.5
+      "x": 430,
+      "y": 565.7
      },
      {
       "type": "nested",
       "src": "templates/illustrated-v11-van-rear",
-      "x": 1111.7,
+      "x": 1105.8,
       "y": 250,
-      "width": 271.8,
-      "height": 291.5
+      "width": 270.2,
+      "height": 289.7
      },
      {
       "type": "label",
       "text": "REAR: SIGNATURE, STRIPING",
-      "x": 1111.7,
-      "y": 567.5
+      "x": 1105.8,
+      "y": 565.7
      },
      {
       "type": "specTable",
@@ -13691,65 +13691,65 @@
       "src": "templates/sign-primary-identification",
       "x": 64,
       "y": 280,
-      "width": 502.9,
-      "height": 251.4
+      "width": 486.4,
+      "height": 243.2
      },
      {
       "type": "label",
       "text": "PRIMARY IDENTIFICATION",
       "x": 64,
-      "y": 557.4
+      "y": 549.2
      },
      {
       "type": "nested",
       "src": "templates/sign-standard-information",
-      "x": 598.9,
+      "x": 582.4,
       "y": 280,
-      "width": 502.9,
-      "height": 251.4
+      "width": 486.4,
+      "height": 243.2
      },
      {
       "type": "label",
       "text": "STANDARD INFORMATION",
-      "x": 598.9,
-      "y": 557.4
+      "x": 582.4,
+      "y": 549.2
      },
      {
       "type": "nested",
       "src": "templates/sign-warning",
-      "x": 1133.7,
+      "x": 1100.8,
       "y": 280,
-      "width": 125.7,
-      "height": 251.4
+      "width": 121.6,
+      "height": 243.2
      },
      {
       "type": "label",
       "text": "WARNING",
-      "x": 1133.7,
-      "y": 557.4
+      "x": 1100.8,
+      "y": 549.2
      },
      {
       "type": "rect",
-      "x": 1291.4285714285716,
+      "x": 1254.3999999999999,
       "y": 280,
-      "width": 125.71428571428571,
-      "height": 251.42857142857142,
+      "width": 121.6,
+      "height": 243.2,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/sign-regulatory",
-      "x": 1291.4,
+      "x": 1254.4,
       "y": 280,
-      "width": 125.7,
-      "height": 251.4
+      "width": 121.6,
+      "height": 243.2
      },
      {
       "type": "label",
       "text": "REGULATORY",
-      "x": 1291.4,
-      "y": 557.4
+      "x": 1254.4,
+      "y": 549.2
      }
     ],
     "sources": [

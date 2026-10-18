@@ -221,8 +221,10 @@ parallelogram. A template places an illustration and fills its zones:
              "unit": { "id": "unit-number", "text": "1604-2103", "font": "regular" } } }
 ```
 
-A zone takes a signature (with fixed `values`, or `defaults` that give way to the template's
-fields), a `symbol`, or text (an `id` makes it a field; `curve` sets it on an arc). It is drawn in
+The element's `materials` repaint the drawing by material (`{ "paint": "primary", "fabric":
+"graphite" }`), so one drawing serves any brand's colours. A zone takes a signature (with fixed
+`values`, or `defaults` that give way to the template's fields), a fixed `logo` (horizontal in a
+long zone, stacked in a squarer one), a `symbol`, or text (an `id` makes it a field; `curve` sets it on an arc). It is drawn in
 the zone's colour unless it names one, fitted inside the zone, and turned and skewed with it. The
 BC brands' illustrations come from `manuals/bc/illustrations`.
 
@@ -236,7 +238,13 @@ pages take `sources`, the manual pages they are built from:
 ```
 
 `book` and `page` are ids in a manual pack, which `manuals: { "pack": "bc" }` names; the rest is
-there so the citation reads on its own. The app shows sources as links into its manual library,
+there so the citation reads on its own. A brand that borrows a manual's system rather than
+rebuilding it says so: ddcnorth's `manuals` has `"relation": "Modelled on"`, and the app labels
+its citations that way.
+
+Templates and guide pages may carry an `extension` name: ddcnorth's application system is
+`"extension": "applications"`, so its script can replace it without touching the original kit's
+templates, and the parity test can leave it out. The app shows sources as links into its manual library,
 and the library lists, under each page, what the built-in brands build from it (indexed in
 `brands/index.json` by `scripts/brands/common.mjs`, whose `cite()` also refuses to write a brand
 with anything uncited).

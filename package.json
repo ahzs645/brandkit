@@ -41,6 +41,7 @@
     "build:kit": "node bin/brandkit.mjs build",
     "make:example": "node scripts/make-example-brand.mjs",
     "import:pofbc": "node scripts/import-pofbc.mjs",
+    "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs"
   },
   "peerDependencies": {

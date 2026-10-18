@@ -79,8 +79,10 @@ test('with fonts loaded, the guide and outlined templates set their text as path
   const fonts = await loadBrandFontsFromDisk(brand, BRAND_DIR)
   assert.deepEqual(fonts.failures, [])
   const pages = guidePages({ brand, fonts })
-  assert.equal(pages.length, 8)
+  // The original guide's eight pages, and the application system's six before the last.
+  assert.equal(pages.length, 14)
   for (const page of [...pages, ...guideSheets({ brand, fonts })]) assert.ok(!/<text\b/.test(page.render()), `${page.id} has live text`)
+  for (const template of brand.templates) assert.ok(!/<text\b/.test(renderTemplate({ brand, fonts, outline: true }, template).svg), `${template.id} has live text`)
   const post = renderTemplate({ brand, fonts, outline: true }, brand.templates.find((template) => template.id === 'social-post')).svg
   assert.ok(!/<text\b/.test(post))
   assert.match(post, /aria-label="From insight"/)

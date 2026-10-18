@@ -4078,8 +4078,8 @@
       "type": "rect",
       "x": 64,
       "y": 260,
-      "width": 174.58010504463832,
-      "height": 225.92719476364957,
+      "width": 167.83761840324766,
+      "height": 217.2016238159675,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -4088,83 +4088,83 @@
       "src": "templates/letterhead-standard",
       "x": 64,
       "y": 260,
-      "width": 174.6,
-      "height": 225.9
+      "width": 167.8,
+      "height": 217.2
      },
      {
       "type": "label",
       "text": "LETTERHEAD",
       "x": 64,
-      "y": 511.9
+      "y": 503.2
      },
      {
       "type": "rect",
-      "x": 270.58010504463834,
+      "x": 263.8376184032477,
       "y": 260,
-      "width": 520.3171758193142,
-      "height": 225.92719476364957,
+      "width": 500.22192151556163,
+      "height": 217.2016238159675,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/envelope-gas",
-      "x": 270.6,
+      "x": 263.8,
       "y": 260,
-      "width": 520.3,
-      "height": 225.9
+      "width": 500.2,
+      "height": 217.2
      },
      {
       "type": "label",
       "text": "ENVELOPE, GAS",
-      "x": 270.6,
-      "y": 511.9
+      "x": 263.8,
+      "y": 503.2
      },
      {
       "type": "rect",
-      "x": 822.8972808639526,
+      "x": 796.0595399188094,
       "y": 260,
-      "width": 395.37259083638673,
-      "height": 225.92719476364957,
+      "width": 380.10284167794316,
+      "height": 217.2016238159675,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/card-rail",
-      "x": 822.9,
+      "x": 796.1,
       "y": 260,
-      "width": 395.4,
-      "height": 225.9
+      "width": 380.1,
+      "height": 217.2
      },
      {
       "type": "label",
       "text": "CARD, RAIL",
-      "x": 822.9,
-      "y": 511.9
+      "x": 796.1,
+      "y": 503.2
      },
      {
       "type": "rect",
-      "x": 1250.2698717003393,
+      "x": 1208.1623815967525,
       "y": 260,
-      "width": 174.58010504463832,
-      "height": 225.92719476364957,
+      "width": 167.83761840324766,
+      "height": 217.2016238159675,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/form-bulletin",
-      "x": 1250.3,
+      "x": 1208.2,
       "y": 260,
-      "width": 174.6,
-      "height": 225.9
+      "width": 167.8,
+      "height": 217.2
      },
      {
       "type": "label",
       "text": "BULLETIN FORM",
-      "x": 1250.3,
-      "y": 511.9
+      "x": 1208.2,
+      "y": 503.2
      }
     ],
     "sources": [
@@ -4207,8 +4207,8 @@
       "type": "rect",
       "x": 64,
       "y": 260,
-      "width": 343.98882180801985,
-      "height": 445.1620046927315,
+      "width": 340.12431444241315,
+      "height": 440.16087751371106,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -4217,83 +4217,83 @@
       "src": "templates/cover-report",
       "x": 64,
       "y": 260,
-      "width": 344,
-      "height": 445.2
+      "width": 340.1,
+      "height": 440.2
      },
      {
       "type": "label",
       "text": "REPORT COVER",
       "x": 64,
-      "y": 731.2
+      "y": 726.2
      },
      {
       "type": "rect",
-      "x": 439.98882180801985,
+      "x": 436.12431444241315,
       "y": 260,
-      "width": 343.98882180801985,
-      "height": 445.1620046927315,
+      "width": 340.12431444241315,
+      "height": 440.16087751371106,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/cover-illustrated",
-      "x": 440,
+      "x": 436.1,
       "y": 260,
-      "width": 344,
-      "height": 445.2
+      "width": 340.1,
+      "height": 440.2
      },
      {
       "type": "label",
       "text": "ILLUSTRATED",
-      "x": 440,
-      "y": 731.2
+      "x": 436.1,
+      "y": 726.2
      },
      {
       "type": "rect",
-      "x": 815.9776436160397,
+      "x": 808.2486288848263,
       "y": 260,
-      "width": 197.8497798634362,
-      "height": 445.1620046927315,
+      "width": 195.62705667276046,
+      "height": 440.16087751371106,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/cover-display",
-      "x": 816,
+      "x": 808.2,
       "y": 260,
-      "width": 197.8,
-      "height": 445.2
+      "width": 195.6,
+      "height": 440.2
      },
      {
       "type": "label",
       "text": "DISPLAY, 4 × 9",
-      "x": 816,
-      "y": 731.2
+      "x": 808.2,
+      "y": 726.2
      },
      {
       "type": "rect",
-      "x": 1045.8274234794758,
+      "x": 1035.8756855575868,
       "y": 260,
-      "width": 343.98882180801985,
-      "height": 445.1620046927315,
+      "width": 340.12431444241315,
+      "height": 440.16087751371106,
       "fill": "reverse",
       "stroke": "line"
      },
      {
       "type": "nested",
       "src": "templates/masthead-band",
-      "x": 1045.8,
+      "x": 1035.9,
       "y": 260,
-      "width": 344,
-      "height": 445.2
+      "width": 340.1,
+      "height": 440.2
      },
      {
       "type": "label",
       "text": "MASTHEAD",
-      "x": 1045.8,
-      "y": 731.2
+      "x": 1035.9,
+      "y": 726.2
      }
     ],
     "sources": [
@@ -4329,8 +4329,8 @@
       "type": "rect",
       "x": 64,
       "y": 300,
-      "width": 125.11428192124899,
-      "height": 173.4841869562524,
+      "width": 120.19787735523067,
+      "height": 166.6670719491859,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -4339,56 +4339,56 @@
       "src": "templates/advert-display",
       "x": 64,
       "y": 300,
-      "width": 125.1,
-      "height": 173.5
+      "width": 120.2,
+      "height": 166.7
      },
      {
       "type": "label",
       "text": "DISPLAY AD",
       "x": 64,
-      "y": 499.5
+      "y": 492.7
      },
      {
       "type": "nested",
       "src": "templates/av-title",
-      "x": 221.1,
+      "x": 216.2,
       "y": 300,
-      "width": 231.3,
-      "height": 173.5
+      "width": 222.2,
+      "height": 166.7
      },
      {
       "type": "label",
       "text": "AUDIO-VISUAL",
-      "x": 221.1,
-      "y": 499.5
+      "x": 216.2,
+      "y": 492.7
      },
      {
       "type": "nested",
       "src": "templates/sign-horizontal-facility",
-      "x": 484.4,
+      "x": 470.4,
       "y": 300,
-      "width": 503.1,
-      "height": 173.5
+      "width": 483.3,
+      "height": 166.7
      },
      {
       "type": "label",
       "text": "IDENTIFICATION SIGN",
-      "x": 484.4,
-      "y": 499.5
+      "x": 470.4,
+      "y": 492.7
      },
      {
       "type": "nested",
       "src": "templates/vehicle-van-black",
-      "x": 1019.5,
+      "x": 985.8,
       "y": 300,
-      "width": 406.2,
-      "height": 173.5
+      "width": 390.2,
+      "height": 166.7
      },
      {
       "type": "label",
       "text": "PANEL VAN",
-      "x": 1019.5,
-      "y": 499.5
+      "x": 985.8,
+      "y": 492.7
      }
     ],
     "sources": [

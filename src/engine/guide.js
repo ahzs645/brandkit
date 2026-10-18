@@ -144,7 +144,15 @@ export const createGuideKit = (ctx) => {
     }).join('')
   }
 
+  // Any element may carry a `transform` (an incorrect-usage page stretches, turns and skews the
+  // logo to show what not to do) and an `opacity`.
   const element = (e, pageWidth) => {
+    const art = drawElement(e, pageWidth)
+    if (!e.transform && e.opacity == null) return art
+    return `<g${e.transform ? ` transform="${e.transform}"` : ''}${e.opacity != null ? ` opacity="${e.opacity}"` : ''}>${art}</g>`
+  }
+
+  const drawElement = (e, pageWidth) => {
     switch (e.type) {
       case 'label': return label(e.text, e.x, e.y, e.colour, e.size)
       case 'text': return text(e.text, e.x, e.y, e.size, e.font ?? 'body', e.colour ?? ROLE.ink, e.tracking ?? 0, e.anchor ?? 'start')

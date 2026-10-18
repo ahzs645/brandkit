@@ -16,14 +16,18 @@ export const pt = (value) => Math.round(value * MM_PER_PT * 1000) / 1000
 export const round = (value, places = 3) => Math.round(value * 10 ** places) / 10 ** places
 
 export const readJson = (url) => JSON.parse(readFileSync(url, 'utf8'))
-export const writeBrand = (url, brand) => {
-  writeFileSync(url, `${JSON.stringify(brand, null, 1)}\n`)
-  // Keep the app's brand menu (brands/index.json) in step.
+/** Keeps the app's brand menu and page index (brands/index.json) in step with a brand. */
+export const updateManifest = (brand) => {
   const manifestUrl = new URL('../../brands/index.json', import.meta.url)
   const manifest = JSON.parse(readFileSync(manifestUrl, 'utf8')).filter((entry) => entry.id !== brand.id)
-  manifest.push({ id: brand.id, name: brand.name, ...(brand.manuals ? { pages: pageIndex(brand) } : {}) })
+  manifest.push({ id: brand.id, name: brand.name, ...(brand.manuals?.relation ? { relation: brand.manuals.relation } : {}), ...(brand.manuals ? { pages: pageIndex(brand) } : {}) })
   manifest.sort((a, b) => a.id.localeCompare(b.id))
   writeFileSync(manifestUrl, `${JSON.stringify(manifest, null, 2)}\n`)
+}
+
+export const writeBrand = (url, brand) => {
+  writeFileSync(url, `${JSON.stringify(brand, null, 1)}\n`)
+  updateManifest(brand)
   console.log(`${new URL(url).pathname.split('/brands/')[1]}: ${brand.templates.length} templates, ${brand.signatures.length} signatures, ${brand.guide.pages.length} guide pages`)
 }
 
@@ -32,7 +36,7 @@ export const writeBrand = (url, brand) => {
 const PAGES = new Map(GUIDE_BOOKS.flatMap((book) => book.pages.map((page) => [page.id, { book, page }])))
 
 /** `R08` → `{ book: 'reproduction', page: 'R08', manual: 'Reproduction Manual', title: 'General Use stationery', printed: '7' }`. */
-const source = (id) => {
+export const source = (id) => {
   const found = PAGES.get(id)
   if (!found) throw new Error(`No manual page ${id}`)
   return { book: found.book.id, page: id, manual: found.book.title, title: found.page.title, ...(found.page.printed ? { printed: found.page.printed } : {}) }
@@ -95,8 +99,9 @@ export const g = {
  * aligning them along a common top edge.
  */
 export const shelf = (items, { x = 64, y, width = 1312, height, gap = 32, labelGap = 26 }) => {
-  const total = items.reduce((sum, item) => sum + item.ratio * height, 0) + gap * (items.length - 1)
-  const scale = Math.min(1, width / total)
+  // The gaps keep their size; only the pieces shrink to fit the row.
+  const gaps = gap * (items.length - 1)
+  const scale = Math.min(1, (width - gaps) / items.reduce((sum, item) => sum + item.ratio * height, 0))
   let cursor = x
   return items.flatMap((item) => {
     const w = item.ratio * height * scale
