@@ -2,7 +2,7 @@
   "name": "brandkit",
   "version": "0.1.0",
   "private": true,
-  "description": "Brand kits from one brand.json: logos, symbols, business cards, letterhead, social graphics, a brand guide and web files, generated in the browser. Plus a viewer for identity manuals.",
+  "description": "Brand kits from one brand.json: logos and signatures, stationery, publications, signs, vehicles, a brand guide and web files, generated in the browser. With the 1977 Province of British Columbia and 1983 BC Hydro identities as worked examples, and a viewer for identity manuals.",
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
@@ -39,7 +39,9 @@
     "preview": "vite preview",
     "test": "node --test \"test/*.test.js\"",
     "build:kit": "node bin/brandkit.mjs build",
-    "make:example": "node scripts/make-example-brand.mjs"
+    "make:example": "node scripts/make-example-brand.mjs",
+    "import:pofbc": "node scripts/import-pofbc.mjs",
+    "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

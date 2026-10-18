@@ -7,7 +7,7 @@
 // are skipped and the rest of the kit is still built: that is how the Node CLI runs.
 
 import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
-import { fill } from './brand.js'
+import { fill, logoOptions, paintOptions } from './brand.js'
 import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
 import { findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
@@ -55,27 +55,43 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
   const svgEntry = (path, make) => add({ path, kind: 'text', make })
   const id = brand.id
   const colourKey = (key) => (key === 'currentColor' ? 'currentcolor' : key)
-  const rasterColours = brand.rasterColours ?? brand.logoColours.filter((key) => key !== 'currentColor')
+  const logoColours = brand.logoColours ?? ['black']
+  const rasterColours = brand.rasterColours ?? logoColours.filter((key) => key !== 'currentColor')
 
-  // Logos.
-  for (const entry of brand.families) {
-    for (const layout of LAYOUTS) {
-      for (const key of brand.logoColours) {
-        const stem = `${entry.id}-${layout}-${colourKey(key)}`
-        const make = (ctx) => logoDocument(ctx, { family: entry.id, layout, colourKey: key, colour: key === 'currentColor' ? 'currentColor' : undefined })
-        svgEntry(`logos/outlined/${stem}.svg`, make)
-        if (key === 'currentColor') continue
-        if (rasters) for (const width of layout === 'horizontal' ? [1024, 2048] : [1024]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
-        if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+  // Logos: every family in every layout and colour, or every signature in every colourway.
+  for (const logo of logoOptions(brand)) {
+    for (const paint of paintOptions(brand)) {
+      const stem = `${logo.key}-${paint.id}`
+      const make = (ctx) => logoDocument(ctx, { ...logo, colourKey: paint.colour, colour: paint.colour === 'currentColor' || logo.signature ? paint.colour : undefined, colourway: paint.colourway })
+      svgEntry(`logos/outlined/${stem}.svg`, make)
+      if (!paint.raster) continue
+      if (rasters) for (const width of logo.layout === 'stacked' || logo.layout === 'wordmark' ? [1024] : [1024, 2048]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
+      if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+    }
+  }
+  // Departmental signatures: each ministry or division set in each departmental signature.
+  if (brand.departments?.items?.length) {
+    const departmental = (brand.signatures ?? []).filter((entry) => entry.departmental)
+    const ways = brand.departments.colourways ?? [Object.keys(brand.colourways ?? {})[0]]
+    for (const item of brand.departments.items) {
+      for (const signature of departmental) {
+        for (const colourway of ways) {
+          svgEntry(`logos/${brand.departments.folder ?? 'departments'}/${item.id}/${signature.id}-${colourway}.svg`, (ctx) => logoDocument(ctx, { signature: signature.id, colourway, values: { ...item.values } }))
+        }
       }
     }
   }
-  for (const [mode, spec] of Object.entries(brand.wordmark.editable ?? {})) {
+  for (const [mode, spec] of Object.entries(brand.wordmark?.editable ?? {})) {
     svgEntry(`logos/editable-text/${spec.family ?? brand.families[0].id}-${mode}.svg`, (ctx) => logoDocument(ctx, { family: spec.family ?? brand.families[0].id, layout: 'horizontal', mode, colourKey: brand.rasterColours?.[0] ?? 'black' }))
   }
 
-  // Symbol.
-  for (const key of brand.logoColours) svgEntry(`symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { colourKey: key }))
+  // Symbol, and any further symbols (BC Hydro's Gas Operations flame).
+  for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { colourKey: key }))
+  for (const symbolId of Object.keys(brand.symbols ?? {})) {
+    for (const paint of paintOptions(brand).filter((entry) => entry.colourway)) {
+      svgEntry(`symbol/${id}-symbol-${symbolId}-${paint.id}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourway: paint.colourway }))
+    }
+  }
   svgEntry(`symbol/${id}-symbol-master.svg`, (ctx) => symbolDocument(ctx, { master: true }))
   if (brand.symbol.microRadius != null || brand.symbol.microPaths || brand.symbol.microMarkup) svgEntry(`symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(ctx, { micro: true }))
   for (const key of rasterColours) {
@@ -147,16 +163,14 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     for (const revision of revisionsOf(brand)) {
       const folder = `revisions/${revision.id}`
       const revised = (ctx) => ({ ...ctx, brand: withRevision(ctx.brand, revision.id) })
-      for (const entry of brand.families) {
-        for (const layout of LAYOUTS) {
-          for (const key of brand.logoColours) {
-            const make = (ctx) => logoDocument(revised(ctx), { family: entry.id, layout, colourKey: key, colour: key === 'currentColor' ? 'currentColor' : undefined })
-            svgEntry(`${folder}/logos/${entry.id}-${layout}-${colourKey(key)}.svg`, make)
-            if (rasters && layout === 'horizontal' && key !== 'currentColor') add({ path: `${folder}/logos/png/${entry.id}-${layout}-${key}-2048.png`, kind: 'png', width: 2048, svg: make })
-          }
+      for (const logo of logoOptions(brand)) {
+        for (const paint of paintOptions(brand)) {
+          const make = (ctx) => logoDocument(revised(ctx), { ...logo, colourKey: paint.colour, colour: paint.colour === 'currentColor' || logo.signature ? paint.colour : undefined, colourway: paint.colourway })
+          svgEntry(`${folder}/logos/${logo.key}-${paint.id}.svg`, make)
+          if (rasters && logo.layout !== 'stacked' && logo.layout !== 'wordmark' && paint.raster) add({ path: `${folder}/logos/png/${logo.key}-${paint.id}-2048.png`, kind: 'png', width: 2048, svg: make })
         }
       }
-      for (const key of brand.logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
+      for (const key of logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
       if (brand.symbol.microRadius != null || brand.symbol.microPaths) svgEntry(`${folder}/symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(revised(ctx), { micro: true }))
       add({ path: `${folder}/brand.json`, kind: 'text', make: (ctx) => json(withRevision(ctx.brand, revision.id)) })
       add({ path: `${folder}/README.md`, kind: 'text', make: (ctx) => revisionReadme(ctx.brand, findRevision(ctx.brand, revision.id)) })

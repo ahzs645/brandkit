@@ -1,6 +1,7 @@
 import { icon, logoDocument, pattern, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, isDark } from '../../engine/brand.js'
 import { Downloads, SvgImage } from '../ui.jsx'
+import { SignatureLogos } from './Signatures.jsx'
 
 const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
 
@@ -19,7 +20,8 @@ const Card = ({ title, make, name, ground, width = 2048, wide }) => (
   </figure>
 )
 
-export const Logos = ({ brand }) => {
+export const Logos = ({ brand, fonts }) => {
+  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} />
   const ctx = { brand }
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   return (

@@ -7,7 +7,9 @@ outlines, lockup proportions, typefaces, and every template and guide page as a 
 brandkit draws the whole kit from it:
 
 - **Logos**: every family in horizontal, stacked, wordmark and symbol layouts, in each colour, as
-  SVG, PNG and PDF, plus editable-text alternatives.
+  SVG, PNG and PDF, plus editable-text alternatives. Or, for an identity that composes its
+  signatures, every signature in every colourway, set for every department (a ministry, a
+  division) it defines.
 - **Templates**: business cards (front and back, with trim and safe area), letterhead, envelopes,
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped.
@@ -29,6 +31,14 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | --- | --- |
 | [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.1. The engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its guide page for page. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
+| [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
+| [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the Corporate, Gas Operations, Rail and Formal signatures in their colourways; Corporate, Gas and Rail stationery; forms; publication covers and mastheads; advertising; audio-visual; signs; vehicles; and a guide with the background-value rules, incorrect usage and minimum sizes. |
+
+The two BC brands are historical reconstructions for reference, not current guidance. Helvetica,
+Times and Courier are set in TeX Gyre Heros, Termes and Cursor (GUST Font License). Their artwork
+comes from [PofBC](https://github.com/ahzs645/PofBC) (`npm run import:pofbc -- /path/to/PofBC`),
+and their definitions are written by `npm run make:bc`, from scripts that keep each manual
+measurement next to the page it comes from.
 
 **Revisions** keep a proposed change beside the approved identity: ddcnorth carries one, the
 *rising symbol* (the six dots flipped so they climb to the right). Choosing it in the header shows

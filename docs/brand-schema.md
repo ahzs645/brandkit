@@ -9,6 +9,11 @@ are in this repository:
   byte (`test/parity.test.js`).
 - [`brands/northwind/brand.json`](../brands/northwind/brand.json): made by the starter
   (`npm run make:example`), which is also what the app's **New brand** does.
+- [`brands/bc-province-1977/brand.json`](../brands/bc-province-1977/brand.json) and
+  [`brands/bc-hydro-1983/brand.json`](../brands/bc-hydro-1983/brand.json): two historical identity
+  programs, written by `npm run make:bc` from scripts that carry each manual measurement with its
+  source. They exercise composed signatures, colourways, departments, and templates in
+  millimetres.
 
 Paths to files (`fonts.*.file`, `files`) are relative to the folder holding brand.json. A path the
 brand does not carry itself is looked up in the built-in brands' folders, which is how a starter
@@ -68,6 +73,50 @@ from a face at render time; the starter outlines typed text once and stores the 
 the sturdier choice for a production logo. `editable` alternatives keep some lettering as live
 `<text>` for people who need to edit it in a design tool.
 
+## Signatures, colourways and departments
+
+A brand whose logo is composed rather than fixed defines `signatures` instead of `families`. The
+Province's 1977 ministerial signature sets any ministry's name on one cap-height grid; BC Hydro's
+four signatures are fixed artwork in up to three colours. Both are described the same way:
+
+```json
+"signatures": [{
+  "id": "horizontal", "label": "Flush-left, horizontal", "departmental": true, "use": "Stationery and advertising.",
+  "metrics": { "font": "medium", "capHeight": 100, "baseline": 100, "logotypeX": 590 },
+  "elements": [
+    { "type": "symbol", "x": 0, "y": 0, "height": 390 },
+    { "type": "stack", "id": "province", "x": 590, "y": 100, "items": [{ "text": "Province of", "size": 137.17, "font": "medium", "leading": 145 }, …] },
+    { "type": "stack", "id": "ministry", "x": 1890, "y": 100, "items": [{ "field": "ministry", "size": 137.17, "font": "regular", "leading": 145, "wrap": 1300 }, …] },
+    { "type": "rule", "x1": 590, "x2": "auto", "y1": "after:ministry,province+95", "width": 11.4, "when": "address" }
+  ]
+}]
+```
+
+Signature elements, in any units (the canvas is fitted to what is drawn):
+
+| Type | What it is |
+| --- | --- |
+| `symbol` | A brand symbol (`brand.symbol`, or one of `brand.symbols` by `symbol`) at a height. |
+| `art` | Fixed artwork with `bounds`; `{role}` placeholders in its markup take the colourway's colours. |
+| `text` | A line: `text`, or a `field` filled from the values (a ministry, a branch). |
+| `stack` | Lines one under another, each item with its own size, face and `leading`, `gapBefore`, `wrap`, `caps`, `join` (set a multi-line field on one line), `when` (only if a field is filled). |
+| `run` | One line in several faces: "**Province of British Columbia** Ministry of …". |
+| `rule` | A rule; `y` may be `after:<stack>+gap`, `x2` may be `auto` (to the artwork's edge), `when` a field. |
+
+`metrics` (the logotype's cap height, baseline and left edge, in signature units) let a template
+place a signature the way manuals measure it: as "a 36 point signature" hanging from its cap line,
+or with the left of its logotype on a column.
+
+`colourways` say what each colour role is painted in: `{ "positive": { "label": …, "roles": {
+"symbol": "brown", "type": "black" } }, "black": { "all": "black" }, … }`. `defaultColourway`
+picks the one used when none is named; a colourway's `ground` is the background it is shown on.
+
+`departments` are the units a signature is set for: `{ "label": "Ministry", "field": "ministry",
+"items": [{ "id": "forests", "name": "Ministry of Forests", "years": "1976–1986", "values": {
+"ministry": "Ministry of\nForests" } }] }`. The kit sets every `departmental` signature for every
+item (`logos/<folder>/<id>/`); the app's logos view and template studio fill their fields from the
+chosen one.
+
 ## Families and lockups
 
 ```json
@@ -95,6 +144,16 @@ A template is a canvas and a list of elements. Coordinates are in `unit` (`px` b
     { "type": "printGuides", "colour": "muted", "trim": { … }, "safe": { … } }
   ] }
 ```
+
+Templates in `mm` may also use:
+
+- `symbol` (`{ x, y, height, colour }`), and `logo` with a `signature`, a `colourway`, `values`
+  overriding the fields for that signature alone, and `points` / `anchorX: 'logotype'` /
+  `anchorY: 'baseline' | 'cap'` to size and hang it as a manual specifies.
+- `flow`: fields stacked down the page, each item's first baseline `gap` below the last baseline
+  of the one before, so a longer title pushes what follows it down.
+- `lines` with `align: 'bottom'` (y is the last baseline, as on a card whose address is set from
+  its foot) and `anchor`.
 
 Every `text` element with an `id` is a **field**: the app's template studio shows a box for it,
 and the value replaces the placeholder. Fields are shared by id across templates, so a name typed

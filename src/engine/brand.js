@@ -104,7 +104,14 @@ export const validateBrand = (brand) => {
   const symbol = brand.symbol
   need(symbol && Array.isArray(symbol.viewBox) && symbol.viewBox.length === 4, '`symbol.viewBox` must be four numbers.')
   need(symbol && (symbol.centres || symbol.paths || symbol.markup), '`symbol` needs `centres`, `paths` or `markup`.')
-  need(Array.isArray(brand.families) && brand.families.length > 0, '`families` needs at least one entry.')
+  need((Array.isArray(brand.families) && brand.families.length > 0) || (Array.isArray(brand.signatures) && brand.signatures.length > 0), 'The brand needs `families` (fixed wordmarks) or `signatures` (composed lockups).')
+  for (const signature of brand.signatures ?? []) {
+    need(signature.id && Array.isArray(signature.elements), `Signature \`${signature.id ?? '?'}\` needs an id and elements.`)
+    for (const element of signature.elements ?? []) {
+      if (element.type === 'symbol' && element.symbol) need(brand.symbols?.[element.symbol], `Signature \`${signature.id}\` uses symbol \`${element.symbol}\`, which is not in \`symbols\`.`)
+    }
+  }
+  if (brand.signatures?.length) need(brand.colourways && Object.keys(brand.colourways).length, 'A brand with signatures needs `colourways`.')
   for (const entry of brand.families ?? []) {
     need(brand.wordmark?.variants?.[entry.wordmark], `Family \`${entry.id}\` names wordmark \`${entry.wordmark}\`, which is not defined.`)
   }
@@ -119,3 +126,19 @@ export const validateBrand = (brand) => {
   }
   return problems
 }
+
+/**
+ * The brand's logos, however it defines them: each fixed family in each layout, or each composed
+ * signature. `{ key, label, family?, layout?, signature? }`, in order, primary first.
+ */
+export const logoOptions = (brand) => (brand.families?.length
+  ? brand.families.flatMap((entry) => ['horizontal', 'stacked', 'wordmark'].map((layout) => ({ key: `${entry.id}-${layout}`, label: `${entry.label ?? entry.id}, ${layout}`, family: entry.id, layout })))
+  : (brand.signatures ?? []).map((entry) => ({ key: entry.id, label: entry.label ?? entry.id, signature: entry.id })))
+
+/**
+ * What a logo can be painted in: palette colours for a fixed family (`logoColours`), or the
+ * signature brand's colourways. `{ id, label, colour?, colourway?, raster }`.
+ */
+export const paintOptions = (brand) => (brand.families?.length
+  ? (brand.logoColours ?? ['black']).map((key) => ({ id: key === 'currentColor' ? 'currentcolor' : key, label: key === 'currentColor' ? 'Inherited colour' : colourName(brand, key), colour: key, raster: key !== 'currentColor' }))
+  : [...Object.entries(brand.colourways ?? {}).map(([id, spec]) => ({ id, label: spec.label ?? id, colourway: id, raster: true, ground: spec.ground })), { id: 'currentcolor', label: 'Inherited colour', colour: 'currentColor', raster: false }])

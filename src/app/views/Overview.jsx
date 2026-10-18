@@ -4,13 +4,15 @@ import { colour, colourName, fill, isDark, rgb } from '../../engine/brand.js'
 import { guideSheets } from '../../engine/guide.js'
 import { revisionsOf, withRevision } from '../../engine/revisions.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
+import { SignatureStage } from './Signatures.jsx'
 
 /** Each proposed change to the logo, beside the approved one, with why and a way to try it. */
 const Revisions = ({ base, fonts, active, onRevision }) => {
   const revisions = revisionsOf(base)
   if (!revisions.length) return null
   const ink = base.rasterColours?.[0] ?? 'black'
-  const family = base.families[0].id
+  const family = base.families?.[0]?.id
+  const logo = family ? { family, layout: 'horizontal', colourKey: ink } : { signature: base.signatures[0].id, colourway: base.defaultColourway }
   return (
     <section className="panel">
       <div className="panel__head">
@@ -28,8 +30,8 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
               <span className="muted">v{base.displayVersion ?? base.version} → v{revision.displayVersion ?? revision.version}{revision.date ? ` · ${revision.date}` : ''}</span>
             </div>
             <div className="revision__pair">
-              <figure><div><SvgImage svg={logoDocument({ brand: base }, { family, layout: 'horizontal', colourKey: ink })} alt="Approved logo" /></div><figcaption>Approved</figcaption></figure>
-              <figure><div><SvgImage svg={logoDocument({ brand: revised }, { family, layout: 'horizontal', colourKey: ink })} alt={`${revision.title}, proposed`} /></div><figcaption>{revision.title}</figcaption></figure>
+              <figure><div><SvgImage svg={logoDocument({ brand: base, fonts }, logo)} alt="Approved logo" /></div><figcaption>Approved</figcaption></figure>
+              <figure><div><SvgImage svg={logoDocument({ brand: revised, fonts }, logo)} alt={`${revision.title}, proposed`} /></div><figcaption>{revision.title}</figcaption></figure>
             </div>
             {revision.summary && <p className="muted" style={{ margin: 0 }}>{revision.summary}</p>}
             {revision.rationale?.length > 0 && <ul>{revision.rationale.map((line) => <li key={line}>{line}</li>)}</ul>}
@@ -47,7 +49,7 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
 const BACKGROUNDS = ['reverse', 'paper', 'light', 'primary', 'ink']
 
 export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision }) => {
-  const [familyId, setFamily] = useState(brand.families[0].id)
+  const [familyId, setFamily] = useState(brand.families?.[0]?.id)
   const [layout, setLayout] = useState('horizontal')
   const [background, setBackground] = useState('reverse')
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
@@ -64,7 +66,7 @@ export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision 
   }
   const ctx = { brand }
   const make = () => (layout === 'symbol' ? symbolDocument(ctx, { colourKey: logoColour }) : logoDocument(ctx, { family: familyId, layout, colourKey: logoColour }))
-  const svg = make()
+  const svg = brand.families?.length ? make() : null
   const name = layout === 'symbol' ? `${brand.id}-symbol-${logoColour}` : `${familyId}-${layout}-${logoColour}`
 
   return (
@@ -82,12 +84,13 @@ export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision 
         </div>
       </section>
 
+      {!brand.families?.length ? <SignatureStage brand={brand} fonts={fonts} /> : (
       <section className="panel stage-panel" aria-label="Logo preview">
         <div className="stage" style={{ background: backgroundHex }}>
           <SvgImage svg={svg} alt={`${brand.name} ${layout} logo`} className={`stage__art stage__art--${layout}`} />
         </div>
         <div className="toolbar">
-          {brand.families.length > 1 && (
+          {brand.families?.length > 1 && (
             <Field label="Name">
               <Segmented label="Family" value={familyId} options={brand.families.map((entry) => ({ value: entry.id, label: entry.id }))} onChange={setFamily} />
             </Field>
@@ -109,6 +112,7 @@ export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision 
         </div>
         <p className="caption">The ground is a preview. Downloaded logos are transparent.</p>
       </section>
+      )}
 
       <Revisions base={base} fonts={fonts} active={revision} onRevision={onRevision} />
 

@@ -14,13 +14,20 @@
 //   rect        { x, y, width, height, fill, stroke?, strokeWidth?, dash?, id? }
 //   path        { d, stroke?, strokeWidth?, fill?, id? }
 //   line        { x1, y1, x2, y2, stroke?, strokeWidth?, id? }
-//   logo        { x, y, width, colour, family?, layout?, id? }        placed by its visible artwork
+//   logo        { x, y, width, height?, colour?, family?, layout?, signature?, colourway?, id? }
+//               placed by its visible artwork; a signature takes the template's field values.
+//               A signature can instead be sized in `points` (its logotype's cap height matches
+//               that size of type) and anchored with anchorX 'logotype' / anchorY 'baseline' | 'cap'
+//   flow        { x, y, items: [{ id, text, size, font, leading, gap, wrap?, maxLines? }] }
+//               fields stacked down the page: each item's first baseline is `gap` below the last
+//               baseline of the one before (y is the first item's first baseline), so a longer
+//               title pushes what follows it down
 //   motif       { x, y, width, height, colour, align?, id? }          the symbol fitted in a box
 //   symbol      { x, y, height, colour, id? }                         the symbol at a set height
 //   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor? }
 //               or { compose: 'Phone: {telephone}', … }: a line built from other fields; it is left
 //               out when any field it names has been cleared
-//   lines       { x, y, leading, size, colour, font?, lines: [{ id, text, font?, style?, size? }] }
+//   lines       { x, y, leading, size, colour, font?, align?, anchor?, lines: [{ id, text, font?, style?, size? }] }
 //   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
 //               one field, wrapped to `width` (and at any line break typed into it)
 //   printGuides { colour, trim: {...}, safe: {...} }                  hidden trim and safe areas
@@ -126,13 +133,30 @@ const textElement = (ctx, element, unit) => {
 }
 
 /** The complete horizontal lockup, scaled so its visible artwork is `width` wide at (x, y). */
-export const placeLogo = (ctx, { x, y, width, colour, family, layout = 'horizontal', id = 'brand-logo' }) => {
+export const placeLogo = (ctx, { x, y, width, height, points, anchorX, anchorY, rotate, colour, family, layout = 'horizontal', signature, colourway, values, id = 'brand-logo', align = 'start' }) => {
   const { brand } = ctx
-  const master = lockup(ctx, { family, layout, colour: resolveColour(brand, colour) })
-  const padding = brand.lockup.canvasPadding ?? 0
-  const scale = width / (master.width - 2 * padding)
+  // `values` override the template's fields for this signature alone (a cover's signature
+  // without its ministry, say).
+  const master = lockup(values ? { ...ctx, values: { ...ctx.values, ...values } } : ctx, { family, layout, signature, colourway, colour: colour == null ? undefined : resolveColour(brand, colour) })
+  const padding = master.origin ? 0 : brand.lockup?.canvasPadding ?? 0
+  const metrics = master.metrics
+  // A signature named by point size, as manuals do ("a 36 point signature"): its logotype's
+  // capitals are as tall as 36 point capitals in the brand's face. Otherwise scaled to `width`,
+  // or fitted inside `width` × `height`.
+  const scale = points != null && metrics?.capHeight
+    ? points * (brand.fonts?.[metrics.font ?? 'body']?.capHeight ?? 0.7) / metrics.capHeight
+    : height == null ? width / (master.width - 2 * padding) : Math.min(width / (master.width - 2 * padding), height / (master.height - 2 * padding))
+  const offset = height == null || align === 'start' ? 0 : align === 'end' ? width - (master.width - 2 * padding) * scale : (width - (master.width - 2 * padding) * scale) / 2
+  // Anchors: x at the left of the logotype rather than the symbol; y at the baseline or the cap
+  // line rather than the top of the artwork.
+  const dx = anchorX === 'logotype' && metrics ? -(master.origin.x + metrics.logotypeX) * scale : anchorX === 'end' ? -(master.width - padding) * scale : -padding * scale
+  const dy = anchorY === 'baseline' && metrics ? -(master.origin.y + metrics.baseline) * scale
+    : anchorY === 'cap' && metrics ? -(master.origin.y + metrics.baseline - metrics.capHeight) * scale : -padding * scale
   const label = fill(brand, brand.copy?.logoLabel ?? '{name} logo')
-  return `<g id="${escape(id)}" aria-label="${escape(label)}" transform="translate(${n6(x - padding * scale)} ${n6(y - padding * scale)}) scale(${n6(scale)})">${scopeIds(master.art, id)}</g>`
+  const transform = rotate
+    ? `translate(${n6(x)} ${n6(y)}) rotate(${rotate}) translate(${n6(offset + dx)} ${n6(dy)}) scale(${n6(scale)})`
+    : `translate(${n6(x + offset + dx)} ${n6(y + dy)}) scale(${n6(scale)})`
+  return `<g id="${escape(id)}" aria-label="${escape(label)}" transform="${transform}">${scopeIds(master.art, id)}</g>`
 }
 
 const placeMotif = (ctx, x, y, width, colour, id) => {
@@ -174,7 +198,7 @@ const renderElement = (ctx, element, template) => {
     case 'line':
       return `<path${idAttr(element)} d="M${n6(u(element.x1))} ${n6(u(element.y1))}L${n6(u(element.x2))} ${n6(u(element.y2))}"${stroke(ctx, { stroke: 'ink', ...element }, unit)}/>`
     case 'logo':
-      return placeLogo(ctx, { ...element, x: u(element.x), y: u(element.y), width: u(element.width) })
+      return placeLogo(ctx, { ...element, x: u(element.x), y: u(element.y), width: element.width == null ? undefined : u(element.width), height: element.height == null ? undefined : u(element.height), points: element.points == null ? undefined : u(`${element.points}pt`) })
     case 'motif':
       return motifInBox(ctx, { ...element, x: u(element.x), y: u(element.y), width: u(element.width), height: u(element.height) })
     case 'symbol': {
@@ -186,10 +210,14 @@ const renderElement = (ctx, element, template) => {
       return textElement(ctx, element, unit)
     case 'lines': {
       const leading = u(element.leading ?? element.size)
+      // With align 'bottom', y is the last line's baseline and the block grows upward, as an
+      // address block set from the foot of a card does.
+      const visible = element.lines.filter((line) => element.collapse === false || textValue(ctx, { ...element, ...line }).trim())
+      const top = element.align === 'bottom' ? u(element.y) - (visible.length - 1) * leading : u(element.y)
       let row = 0
       const out = []
       for (const line of element.lines) {
-        const merged = { font: element.font, colour: element.colour, size: element.size, ...line, x: line.x ?? element.x, y: u(element.y) + row * leading }
+        const merged = { font: element.font, colour: element.colour, size: element.size, anchor: element.anchor, ...line, x: line.x ?? element.x, y: top + row * leading }
         const text = textValue(ctx, merged)
         if (!text.trim() && element.collapse !== false) continue
         out.push(textElement(ctx, merged, unit))
@@ -207,6 +235,23 @@ const renderElement = (ctx, element, template) => {
         .slice(0, element.maxLines ?? Infinity)
       return lines.map((line, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0) }, unit) : ''))
         .filter(Boolean).join('\n')
+    }
+    case 'flow': {
+      let baseline = null
+      const out = []
+      for (const item of element.items) {
+        const size = u(item.size)
+        const key = item.font ?? element.font ?? 'body'
+        const value = textValue(ctx, item)
+        const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(ctx, line, key, size)).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
+        if (!lines.length) continue
+        baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
+        lines.forEach((line, index) => {
+          if (index > 0) baseline += u(item.leading ?? item.size)
+          out.push(textElement(ctx, { ...element, ...item, font: key, id: lines.length > 1 ? `${item.id}-${index + 1}` : item.id, literal: line, x: u(item.x ?? element.x), y: baseline, size, tracking: u(item.tracking ?? 0) }, unit))
+        })
+      }
+      return out.filter(Boolean).join('\n')
     }
     case 'printGuides': {
       const rectFor = (box, extra = '') => `<rect id="${escape(box.id)}" x="${box.x}" y="${box.y}" width="${box.width}" height="${box.height}"${extra}/>`
@@ -260,6 +305,7 @@ export const templateFields = (template, brand) => {
     else if (element.type === 'text' && element.id) add(element.id, element, false)
     if (element.type === 'paragraph' && element.id) add(element.id, element, true)
     if (element.type === 'lines') element.lines.forEach((line) => visit({ type: 'text', ...line }))
+    if (element.type === 'flow') element.items.forEach((item) => { if (item.id && !item.locked) add(item.id, item, true) })
   }
   template.elements.forEach(visit)
   return fields

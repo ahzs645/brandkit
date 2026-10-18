@@ -2,7 +2,7 @@
 // landing-page starter, the favicon and app icon, and the kit's own offline index.html.
 
 import { lockup, mark } from './artwork.js'
-import { colour as resolveColour, colourName, fill } from './brand.js'
+import { colour as resolveColour, colourName, fill, logoOptions, paintOptions } from './brand.js'
 import { escape, n6 } from './format.js'
 
 const webSvg = ({ brand }, width, height, art, title) => `<svg xmlns="http://www.w3.org/2000/svg" width="${n6(width)}" height="${n6(height)}" viewBox="0 0 ${n6(width)} ${n6(height)}" role="img" aria-label="${escape(title)}"><title>${escape(title)}</title>`
@@ -103,13 +103,16 @@ export const reactComponent = (ctx) => {
   const { brand } = ctx
   const name = brand.web?.componentName ?? 'BrandLogo'
   const symbolName = brand.web?.symbolComponentName ?? 'BrandSymbol'
-  const families = brand.families.map((entry) => entry.id)
-  const layouts = ['horizontal', 'stacked', 'wordmark']
+  // A fixed-wordmark brand has families in three layouts; a signature brand has one "family" whose
+  // layouts are its signatures, all drawn in currentColor.
+  const signed = !brand.families?.length
+  const families = signed ? ['signature'] : brand.families.map((entry) => entry.id)
+  const layouts = signed ? brand.signatures.map((entry) => entry.id) : ['horizontal', 'stacked', 'wordmark']
   const union = (values) => values.map((value) => `'${value}'`).join(' | ')
   const entries = families.map((familyId) => {
     const rows = layouts.map((layout) => {
-      const { width, height, art } = lockup(ctx, { family: familyId, layout, colour: 'currentColor' })
-      return `    ${layout}: { viewBox: '0 0 ${n6(width)} ${n6(height)}', label: '${familyId}', defaultWidth: 240, shape: (<g>${jsx(art)}</g>) },`
+      const { width, height, art } = signed ? lockup(ctx, { signature: layout, colour: 'currentColor' }) : lockup(ctx, { family: familyId, layout, colour: 'currentColor' })
+      return `    '${layout}': { viewBox: '0 0 ${n6(width)} ${n6(height)}', label: '${signed ? brand.name : familyId}', defaultWidth: 240, shape: (<g>${jsx(art)}</g>) },`
     })
     return `  '${familyId}': {\n${rows.join('\n')}\n  },`
   })
@@ -160,7 +163,7 @@ function SvgArtwork({
   );
 }
 
-export function ${name}({ family = '${families[0]}', layout = 'horizontal', ...props }: ${name}Props) {
+export function ${name}({ family = '${families[0]}', layout = '${layouts[0]}', ...props }: ${name}Props) {
   return <SvgArtwork {...props} artwork={ARTWORK[family][layout]} />;
 }
 
@@ -178,14 +181,14 @@ const lines = (text) => escape(text).split('\n').join('<br>')
 export const landingHtml = ({ brand }) => {
   const p = prefix(brand)
   const copy = brand.web?.landing ?? {}
-  const primaryFamily = brand.families[0].id
+  const primary = `${logoOptions(brand)[0].key}-${paintOptions(brand)[0].id}`
   return `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="application-version" content="${escape(brand.version ?? '')}"><title>${escape(brand.name)} — landing template</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="brand.css">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--${p}-${brand.roles?.paper ?? 'paper'});color:var(--${p}-${brand.roles?.ink ?? 'ink'});font-family:var(--${p}-font-body);line-height:1.6}a{color:inherit;text-underline-offset:.25em}.wrap{max-width:1360px;margin:0 auto;padding:0 56px}header{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:30px;border-bottom:1px solid #b9bdbf}header img{width:236px;height:auto}header a{font-size:.9rem}main{padding:90px 0 0}.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.hero h1{margin:22px 0 26px;font-size:clamp(3.2rem,6.4vw,6rem);line-height:1.01;font-weight:500;letter-spacing:-.05em;font-family:var(--${p}-font-display)}.hero p{max-width:530px}.hero-art{min-height:510px;background:var(--${p}-${brand.roles?.light ?? 'light'});display:flex;align-items:center;justify-content:center;padding:65px}.hero-art img{display:block;width:100%;height:auto}.button{display:inline-block;background:var(--${p}-${brand.roles?.ink ?? 'ink'});color:white;text-decoration:none;padding:13px 22px;margin-top:24px}.contact{padding:70px 0 76px;margin-top:90px;border-top:1px solid #b9bdbf}.contact h2{font-family:var(--${p}-font-display);font-size:clamp(2rem,4vw,3rem);line-height:1.1;font-weight:500;letter-spacing:-.04em;margin:16px 0 24px}footer{padding:24px 0 44px;border-top:1px solid #b9bdbf;font-size:.8rem}@media(max-width:700px){.wrap{padding:0 24px}.hero{grid-template-columns:1fr;gap:36px}.hero h1{font-size:3.7rem}.hero-art{min-height:330px;padding:54px}}
 </style></head>
-<body><div class="wrap"><header><img src="../logos/outlined/${primaryFamily}-horizontal-${brand.roles?.ink ?? 'black'}.svg" alt="${escape(brand.name)}"><a href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></header><main><section class="hero"><div><p class="${p}-label">${escape(copy.eyebrow ?? '')}</p><h1>${lines(copy.headline ?? brand.name)}</h1><p>${escape(copy.body ?? '')}</p><a class="button" href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></div><div class="hero-art" aria-hidden="true"><img src="../symbol/${brand.id}-symbol-${brand.roles?.primary ?? 'black'}.svg" alt=""></div></section><section id="contact" class="contact"><p class="${p}-label">${escape(copy.contactEyebrow ?? '')}</p><h2>${escape(copy.cta ?? 'Get in touch')}</h2><p>${escape(copy.contactBody ?? '')}</p></section></main><footer>${escape(copy.footer ?? brand.name)}</footer></div></body></html>
+<body><div class="wrap"><header><img src="../logos/outlined/${primary}.svg" alt="${escape(brand.name)}"><a href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></header><main><section class="hero"><div><p class="${p}-label">${escape(copy.eyebrow ?? '')}</p><h1>${lines(copy.headline ?? brand.name)}</h1><p>${escape(copy.body ?? '')}</p><a class="button" href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></div><div class="hero-art" aria-hidden="true"><img src="../symbol/${brand.id}-symbol-${brand.roles?.primary ?? 'black'}.svg" alt=""></div></section><section id="contact" class="contact"><p class="${p}-label">${escape(copy.contactEyebrow ?? '')}</p><h2>${escape(copy.cta ?? 'Get in touch')}</h2><p>${escape(copy.contactBody ?? '')}</p></section></main><footer>${escape(copy.footer ?? brand.name)}</footer></div></body></html>
 `
 }
 
@@ -200,17 +203,16 @@ export const indexHtml = ({ brand }, records) => {
   const p = prefix(brand)
   const intro = brand.web?.intro ?? {}
   const has = new Set(records.map((record) => record.path))
-  const families = brand.families
+  const logos = logoOptions(brand)
+  const paints = paintOptions(brand).filter((paint) => paint.raster)
+  const ink = paints[0]?.id ?? 'black'
+  const reverse = paints.find((paint) => paint.id === 'white' || paint.id === 'reverse' || paint.id === (brand.roles?.reverse ?? 'white'))?.id ?? 'white'
+  const families = brand.families?.length ? brand.families : [{ id: logos[0].key }]
   const first = families[0].id
-  const ink = brand.rasterColours?.[0] ?? 'black'
-  const reverse = brand.roles?.reverse && brand.colours[brand.roles.reverse] ? brand.roles.reverse : 'white'
   const gallery = [
-    ['Primary horizontal', `logos/outlined/${first}-horizontal-${ink}.svg`, ''],
-    ['Stacked', `logos/outlined/${first}-stacked-${ink}.svg`, 'compact'],
-    ['Wordmark', `logos/outlined/${first}-wordmark-${ink}.svg`, ''],
-    ['Symbol', `symbol/${brand.id}-symbol-${ink}.svg`, 'symbol-card'],
-    ...families.slice(1).map((entry) => [entry.label ?? entry.id, `logos/outlined/${entry.id}-horizontal-${ink}.svg`, '']),
-    ['Reversed', `logos/outlined/${first}-horizontal-${reverse}.svg`, 'reverse']
+    ...logos.slice(0, 6).map((logo, index) => [index === 0 ? `Primary ${logo.label}` : logo.label, `logos/outlined/${logo.key}-${ink}.svg`, logo.layout === 'stacked' ? 'compact' : '']),
+    ['Symbol', `symbol/${brand.id}-symbol-${brand.rasterColours?.[0] ?? brand.logoColours?.[0] ?? 'black'}.svg`, 'symbol-card'],
+    ['Reversed', `logos/outlined/${logos[0].key}-${reverse}.svg`, 'reverse']
   ].filter(([, path]) => has.has(path))
     .map(([label, path, classes]) => `<a class="logo-card ${classes}" href="${path}" download><div class="logo-card-art"><img src="${path}" alt="${escape(label)}" loading="lazy"></div><div class="card-label">${escape(label)}<span>SVG ↓</span></div></a>`).join('')
   const applications = (brand.templates ?? []).slice(0, 6).filter((template) => has.has(`templates/${template.id}.svg`)).map((template) => {
@@ -243,13 +245,13 @@ export const indexHtml = ({ brand }, records) => {
 </style>
 </head>
 <body><div class="wrap">
-<header class="topbar"><img src="logos/outlined/${first}-wordmark-${ink}.svg" alt="${escape(brand.name)}"><span class="${p}-label">${escape(fill(brand, intro.edition ?? 'v{displayVersion}'))}</span><nav><a href="#logos">Logos</a><a href="#catalog">All assets</a></nav></header>
+<header class="topbar"><img src="logos/outlined/${brand.families?.length ? `${first}-wordmark` : logos[0].key}-${ink}.svg" alt="${escape(brand.name)}"><span class="${p}-label">${escape(fill(brand, intro.edition ?? 'v{displayVersion}'))}</span><nav><a href="#logos">Logos</a><a href="#catalog">All assets</a></nav></header>
 <main>
 <section class="intro"><div><p class="${p}-label">${escape(intro.eyebrow ?? 'Brand identity')}</p><h1>${lines(intro.headline ?? `${brand.name}\nBrand assets.`)}</h1></div><div class="intro-copy"><p>${escape(intro.body ?? '')}</p><div class="resources">${resources}</div></div></section>
 <section aria-label="Logo preview"><div class="preview"><div class="stage" id="stage"><img id="preview" alt=""></div><div class="toolbar">
-<label class="field"><span>Name</span><select id="family">${options(families.map((entry) => entry.id))}</select></label>
-<label class="field"><span>Layout</span><select id="layout">${options(['horizontal', 'stacked', 'wordmark', 'symbol'])}</select></label>
-<label class="field"><span>Colour</span><select id="colour">${colours}</select></label>
+<label class="field"${brand.families?.length ? '' : ' hidden'}><span>Name</span><select id="family">${options(families.map((entry) => entry.id))}</select></label>
+<label class="field"><span>Layout</span><select id="layout">${brand.families?.length ? options(['horizontal', 'stacked', 'wordmark', 'symbol']) : logos.map((logo) => `<option value="${logo.key}">${escape(logo.label)}</option>`).join('') + '<option value="symbol">Symbol</option>'}</select></label>
+<label class="field"><span>Colour</span><select id="colour">${brand.families?.length ? colours : paints.map((paint) => `<option value="${paint.id}">${escape(paint.label)}</option>`).join('')}</select></label>
 <label class="field"><span>Background</span><select id="background">${backgrounds.map((value) => `<option>${value}</option>`).join('')}</select></label>
 <a class="text-link" id="download" download>Download SVG ↓</a></div></div></section>
 <section id="logos" class="section"><h2>The logo system</h2><div class="logo-grid">${gallery}</div></section>
@@ -264,7 +266,7 @@ ${applications ? `<section class="section"><h2>Applications</h2><div class="appl
   const $ = (id) => document.getElementById(id)
   const update = () => {
     const symbol = $('layout').value === 'symbol'
-    const file = symbol ? 'symbol/${brand.id}-symbol-' + $('colour').value + '.svg' : 'logos/outlined/' + $('family').value + '-' + $('layout').value + '-' + $('colour').value + '.svg'
+    const file = symbol ? 'symbol/${brand.id}-symbol-' + ${brand.families?.length ? "$('colour').value" : `'${brand.rasterColours?.[0] ?? brand.logoColours?.[0] ?? 'black'}'`} + '.svg' : 'logos/outlined/' + ${brand.families?.length ? "$('family').value + '-' + " : ''}$('layout').value + '-' + $('colour').value + '.svg'
     $('preview').src = file; $('download').href = file; $('stage').style.background = $('background').value
   }
   ;['family', 'layout', 'colour', 'background'].forEach((id) => $(id).addEventListener('change', update)); update()

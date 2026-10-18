@@ -6,6 +6,7 @@
 
 import { colour as resolveColour, family as findFamily, fill } from './brand.js'
 import { attrs, escape, n } from './format.js'
+import { paintFor, paintMarkup, signatureLockup } from './signatures.js'
 
 const symbolViewBox = (brand) => {
   const [, , width, height] = brand.symbol.viewBox
@@ -19,9 +20,13 @@ const symbolViewBox = (brand) => {
  * of supplied markup (for a mark that is artwork rather than geometry). `micro` asks for the
  * optical small-size variant where the brand defines one.
  */
-export const mark = ({ brand }, colour = 'currentColor', micro = false) => {
-  const symbol = brand.symbol
+export const mark = ({ brand }, colour = 'currentColor', micro = false, symbolId) => {
+  const symbol = (symbolId && brand.symbols?.[symbolId]) || brand.symbol
   const size = micro ? 'micro' : 'standard'
+  // A colourway's paint function colours a layered symbol part by part ({upper}, {lower}…);
+  // a plain colour paints all of it.
+  const paint = typeof colour === 'function' ? colour : () => colour
+  const groupFill = typeof colour === 'function' ? colour('symbol') : colour
   let inner
   if (symbol.centres) {
     const radius = micro ? (symbol.microRadius ?? symbol.radius) : symbol.radius
@@ -32,9 +37,9 @@ export const mark = ({ brand }, colour = 'currentColor', micro = false) => {
       ? `<path d="${path}"/>`
       : `<path d="${path.d}"${path.fillRule ? ` fill-rule="${path.fillRule}"` : ''}${path.fill ? ` fill="${resolveColour(brand, path.fill)}"` : ''}/>`)).join('')
   } else {
-    inner = (micro && symbol.microMarkup) || symbol.markup
+    inner = paintMarkup((micro && symbol.microMarkup) || symbol.markup, paint)
   }
-  return `<g data-brand-symbol="${escape(symbol.name ?? 'symbol')}" data-size="${size}" fill="${colour}">${inner}</g>`
+  return `<g data-brand-symbol="${escape(symbol.name ?? 'symbol')}" data-size="${size}" fill="${groupFill}">${inner}</g>`
 }
 
 const wordmarkPart = ({ brand, fonts }, part, colour) => {
@@ -84,8 +89,17 @@ export const LAYOUTS = ['horizontal', 'stacked', 'wordmark', 'symbol']
  * A complete lockup: `{ width, height, art }`, where `art` is drawn in a canvas of that size with
  * the brand's `lockup.canvasPadding` on every side.
  */
-export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'outlined', colour = 'currentColor' } = {}) => {
+export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'outlined', colour: given, signature, colourway } = {}) => {
   const { brand } = ctx
+  // A brand whose logo is composed (brand.signatures) rather than a fixed wordmark: the layout
+  // names the signature, and a colourway, or else a single colour, paints it. With neither, the
+  // brand's default colourway does.
+  if (signature || (!brand.families?.length && brand.signatures?.length)) {
+    // A signature is named explicitly; a fixed-wordmark layout name ('horizontal') is not one.
+    const id = signature ?? brand.signatures[0].id
+    return signatureLockup(ctx, { signature: id, colourway, colour: colourway ? undefined : given })
+  }
+  const colour = given ?? 'currentColor'
   const wordmark = brand.wordmark
   const settings = brand.lockup
   const entry = findFamily(brand, familyId)
@@ -166,9 +180,22 @@ export const icon = (ctx, item) => {
   return svgDocument(ctx, size, size, `<g${attrs(icons.attrs ?? {})}>${item.content}</g>`, title)
 }
 
-/** A whole logo file: lockup on a transparent canvas. */
-export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, colourKey }) => {
+/** A signature file: one signature, in one colourway, filled with `values` (a ministry…). */
+export const signatureDocument = (ctx, { signature, colourway, values, title }) => {
   const { brand } = ctx
+  const { width, height, art } = signatureLockup({ ...ctx, values: values ?? ctx.values }, { signature, colourway })
+  const entry = brand.signatures.find((item) => item.id === signature) ?? brand.signatures[0]
+  return svgDocument(ctx, width, height, art, title ?? `${brand.name} / ${entry.label ?? entry.id} / ${colourway}`)
+}
+
+/** A whole logo file: lockup on a transparent canvas. */
+export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, colourKey, signature, colourway, values }) => {
+  const { brand } = ctx
+  if (signature) {
+    const entry = brand.signatures.find((item) => item.id === signature)
+    const { width, height, art } = lockup({ ...ctx, values: values ?? ctx.values }, { signature, colourway, colour })
+    return svgDocument(ctx, width, height, art, `${brand.name} / ${entry?.label ?? signature} / ${colourway ?? (colour === 'currentColor' ? 'currentcolor' : colour)}`)
+  }
   const resolved = colour ?? resolveColour(brand, colourKey)
   const { width, height, art } = lockup(ctx, { family, layout, mode, colour: resolved })
   const key = colourKey === 'currentColor' ? 'currentcolor' : colourKey
@@ -180,8 +207,14 @@ export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, c
 
 const COUNT_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve']
 
-export const symbolDocument = (ctx,{ colourKey, micro = false, master = false }) => {
+export const symbolDocument = (ctx, { colourKey, micro = false, master = false, symbolId, colourway }) => {
   const { brand } = ctx
+  if (symbolId) {
+    const other = brand.symbols[symbolId]
+    const [x, y, w, h] = other.viewBox
+    const art = `<g transform="translate(${n(-x)} ${n(-y)})">${mark(ctx, paintFor(brand, colourway), false, symbolId)}</g>`
+    return svgDocument(ctx, w, h, art, `${brand.name} / ${other.title ?? `${symbolId} symbol`} / ${colourway}`)
+  }
   const symbol = brand.symbol
   const { width, height } = symbolViewBox(brand)
   const art = mark(ctx, colourKey ? (colourKey === 'currentColor' ? 'currentColor' : resolveColour(brand, colourKey)) : 'currentColor', micro)

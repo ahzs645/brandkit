@@ -12,6 +12,10 @@ const FILES = import.meta.glob('../../brands/**/*', { query: '?url', import: 'de
 const DEFINITIONS = import.meta.glob('../../brands/*/brand.json', { import: 'default' })
 
 const idOf = (path) => path.split('/').at(-2)
+// The brand menu's names come from a small manifest (brands/index.json, checked by the tests), so
+// no definition is bundled until it is chosen.
+import MANIFEST from '../../brands/index.json'
+export const builtInName = (id) => MANIFEST.find((entry) => entry.id === id)?.name ?? id
 export const BUILT_IN = Object.keys(DEFINITIONS).map(idOf).sort((a, b) => (a === 'ddcnorth' ? -1 : b === 'ddcnorth' ? 1 : a.localeCompare(b)))
 
 const libraryUrl = (relative) => {

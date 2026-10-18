@@ -70,8 +70,10 @@ export const createGuideKit = (ctx) => {
   // horizontally unless `align` is 'start'), so a lockup of any proportions stays in its panel.
   // `revision` draws a proposed revision's artwork instead of the approved one, for comparisons.
   const revised = (revision) => (revision ? { ...ctx, brand: withRevision(brand, revision) } : ctx)
-  const logo = (x, y, w, { family, layout = 'horizontal', colour: colourValue = ROLE.ink, height, align = 'center', revision } = {}) => {
-    const art = lockup(revised(revision), { family, layout, colour: c(colourValue) })
+  const logo = (x, y, w, { family, layout = 'horizontal', colour: colourValue, height, align = 'center', revision, signature, colourway, values } = {}) => {
+    // A signature brand's logo is painted by a colourway; a fixed wordmark by one colour (ink).
+    const base = revised(revision)
+    const art = lockup(values ? { ...base, values: { ...base.values, ...values } } : base, { family, layout, signature, colourway, colour: colourway ? undefined : c(colourValue ?? (signature || !brand.families?.length ? undefined : ROLE.ink)) })
     if (height == null) return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(w / art.width)})">${art.art}</g>`
     const scale = Math.min(w / art.width, height / art.height)
     const left = align === 'start' ? x : x + (w - art.width * scale) / 2
@@ -163,7 +165,7 @@ export const createGuideKit = (ctx) => {
     const f = brand.guide.frame ?? {}
     const right = pageWidth - 64
     let art = rect(0, 0, pageWidth, pageHeight, f.background ?? ROLE.paper)
-    if (f.logo) art += logo(f.logo.x, f.logo.y, f.logo.width)
+    if (f.logo) art += logo(f.logo.x, f.logo.y, f.logo.width, f.logo)
     if (f.header) art += text(f.header, right, 49, 11, 'label', ROLE.muted, 0.08, 'end')
     art += rule(88, 64, right) + text(page.title, 64, 162, 52, 'display', ROLE.ink, -0.04)
     if (page.subtitle) art += para(page.subtitle, 66, 203, pageWidth - 140, 20)

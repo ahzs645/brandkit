@@ -139,3 +139,42 @@ test('a revision patches the definition, and the kit carries it beside the appro
   const proposed = planKit(brand).find((entry) => entry.path === 'revisions/rising/logos/ddcnorth-horizontal-black.svg').make({ brand })
   assert.notEqual(approved, proposed)
 })
+
+test('the BC example brands validate, and draw every template, signature and guide page', async () => {
+  for (const id of ['bc-province-1977', 'bc-hydro-1983']) {
+    const folder = new URL(`../brands/${id}/`, import.meta.url).pathname
+    const bc = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
+    assert.deepEqual(validateBrand(bc), [], id)
+    const fonts = await loadBrandFontsFromDisk(bc, folder)
+    assert.deepEqual(fonts.failures, [], `${id} fonts`)
+    for (const template of bc.templates) {
+      const { svg } = renderTemplate({ brand: bc, fonts, outline: true }, template)
+      assert.ok(svg.includes('</svg>') && !svg.includes('NaN') && !svg.includes('undefined'), `${id}/${template.id}`)
+    }
+    for (const page of [...guidePages({ brand: bc, fonts }), ...guideSheets({ brand: bc, fonts })]) assert.ok(!/NaN|undefined/.test(page.render()), `${id}/${page.id}`)
+    const plan = planKit(bc).map((entry) => entry.path)
+    assert.equal(new Set(plan).size, plan.length, `${id}: no path twice`)
+  }
+})
+
+test('a ministry sets into every departmental Province signature, and an empty field drops its line', async () => {
+  const { logoDocument } = await import('../src/engine/artwork.js')
+  const bc = JSON.parse(readFileSync(new URL('../brands/bc-province-1977/brand.json', import.meta.url), 'utf8'))
+  const forests = bc.departments.items.find((item) => item.id === 'forests')
+  assert.equal(forests.values.ministry, 'Ministry of\nForests')
+  const svg = logoDocument({ brand: bc, values: forests.values }, { signature: 'horizontal', colourway: 'positive' })
+  assert.match(svg, />Forests</)
+  assert.match(svg, /fill="#5C462B"/, 'the symbol in brown')
+  assert.doesNotMatch(svg, /stroke-width/, 'no rule without an address')
+  const split = bc.departments.items.find((item) => item.values['ministry-split'] === 'PUBLIC WORKS')
+  assert.match(logoDocument({ brand: bc, values: split.values }, { signature: 'vertical', colourway: 'black' }), />PUBLIC WORKS</)
+  assert.ok(planKit(bc).some((entry) => entry.path === 'logos/ministries/forests/horizontal-positive.svg'))
+})
+
+test('brands/index.json lists every built-in brand by its name', async () => {
+  const { readdirSync, existsSync } = await import('node:fs')
+  const manifest = JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8'))
+  const folders = readdirSync(new URL('../brands/', import.meta.url)).filter((id) => existsSync(new URL(`../brands/${id}/brand.json`, import.meta.url)))
+  assert.deepEqual(manifest.map(({ id }) => id).sort(), folders.sort())
+  for (const { id, name } of manifest) assert.equal(name, JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8')).name, id)
+})

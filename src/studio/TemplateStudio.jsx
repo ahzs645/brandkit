@@ -55,7 +55,7 @@ const slug = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g,
 export const TemplateStudio = ({
   brand, fonts, templates = brand.templates ?? [], storageKey = brand.id, values: controlled, onValuesChange,
   children, fileName = (template, fieldValues) => [brand.id, template.id, slug(fieldValues['contact-name'] ?? fieldValues.name)].filter(Boolean).join('-'),
-  note
+  note, departments = true
 }) => {
   const [selected, setSelected] = useState(templates[0]?.id)
   const [own, setOwn] = useState(() => readStored(storageKey))
@@ -143,6 +143,18 @@ export const TemplateStudio = ({
 
       <form className="studio__fields" onSubmit={(event) => event.preventDefault()}>
         {children}
+        {departments && brand.departments?.items?.length > 0 && (
+          <label className="field">
+            <span className="field__label">{brand.departments.label ?? 'Department'}</span>
+            <select value={brand.departments.items.find((item) => Object.entries(item.values ?? {}).every(([key, value]) => (values[key] ?? '') === value))?.id ?? ''} onChange={(event) => {
+              const item = brand.departments.items.find((entry) => entry.id === event.target.value)
+              setValues({ ...values, ...(item?.values ?? {}) })
+            }}>
+              <option value="">Choose to fill the fields…</option>
+              {brand.departments.items.map((item) => <option key={item.id} value={item.id}>{item.name}{item.years ? ` (${item.years})` : ''}</option>)}
+            </select>
+          </label>
+        )}
         <h3>{template.label ?? template.id}</h3>
         {fields.length === 0 && <p className="studio__note">Nothing to fill in on this one.</p>}
         {fields.map((field) => (

@@ -3,7 +3,8 @@
 
 export { n, n6, escape, interpolate, humanize, slugify } from './format.js'
 export { COLOUR_ROLES, colour, colourName, rgb, luminance, isDark, derive, copyContext, fill, family, face, validateBrand } from './brand.js'
-export { LAYOUTS, mark, words, lockup, svgDocument, pattern, icon, logoDocument, symbolDocument } from './artwork.js'
+export { LAYOUTS, mark, words, lockup, svgDocument, pattern, icon, logoDocument, symbolDocument, signatureDocument } from './artwork.js'
+export { paintFor, paintMarkup, signatureOf, layoutSignature, signatureLockup, colourwaysOf } from './signatures.js'
 export { toUnits, scopeIds, wrapLines, placeLogo, motifInBox, renderTemplate, templateFields, allFields, physicalSize } from './templates.js'
 export { createGuideKit, guidePages, guideSheets } from './guide.js'
 export { appIconSvg, faviconSvg, brandCss, tokens, reactComponent, landingHtml, indexHtml, coloursJson, gimpPalette, formatBytes } from './web.js'

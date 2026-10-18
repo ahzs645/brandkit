@@ -7,7 +7,7 @@ import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
 import { revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
-import { BUILT_IN, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
+import { BUILT_IN, builtInName, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
@@ -171,7 +171,7 @@ export const App = () => {
           <label className="brand-picker">
             <span className="visually-hidden">Brand</span>
             <select value={brand?.id ?? ''} onChange={(event) => select(event.target.value)}>
-              {brandIds.map((id) => <option key={id} value={id}>{id}{saved[id] && !BUILT_IN.includes(id) ? ' (saved)' : opened[id] ? ' (opened)' : ''}</option>)}
+              {brandIds.map((id) => <option key={id} value={id}>{BUILT_IN.includes(id) ? builtInName(id) : saved[id]?.name ?? opened[id]?.brand?.name ?? id}{saved[id] && !BUILT_IN.includes(id) ? ' (saved)' : opened[id] ? ' (opened)' : ''}</option>)}
             </select>
           </label>
           {revisions.length > 0 && (
@@ -203,7 +203,7 @@ export const App = () => {
         {!brand ? <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} />}
-            {view === 'logos' && <Logos brand={brand} />}
+            {view === 'logos' && <Logos brand={brand} fonts={fonts} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} /></div>}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
