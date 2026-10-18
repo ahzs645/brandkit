@@ -10,11 +10,12 @@ import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
 import { fill } from './brand.js'
 import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
+import { findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
-export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Fonts', 'Build sources', 'References', 'Package files']
+export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
 
-const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References' }
+const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References', revisions: 'Revisions' }
 export const groupOf = (path) => (path.includes('/') ? GROUP_BY_FOLDER[path.split('/')[0]] ?? 'Package files' : 'Package files')
 
 const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
@@ -112,8 +113,9 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
   }
   for (const sheet of guideSheets({ brand })) {
     const make = (ctx) => sheets(ctx).find((entry) => entry.id === sheet.id).render()
-    svgEntry(`guidelines/${sheet.id}.svg`, make)
-    if (rasters) add({ path: sheet.group === 'overview' ? `guidelines/${sheet.id}.png` : `guidelines/png/${sheet.id}.png`, kind: 'png', width: sheet.width, svg: make })
+    // A sheet may say where it goes (a revision's comparison lives with the revision).
+    svgEntry(`${sheet.path ?? `guidelines/${sheet.id}`}.svg`, make)
+    if (rasters) add({ path: sheet.path ? `${sheet.path}.png` : sheet.group === 'overview' ? `guidelines/${sheet.id}.png` : `guidelines/png/${sheet.id}.png`, kind: 'png', width: sheet.width, svg: make })
   }
   if (pdfs && brand.guide?.pages?.length) {
     add({ path: `guidelines/${id}-brand-guide.pdf`, kind: 'pdf', title: brand.guide.pdfTitle ?? '{name} brand guide', pages: (ctx) => pages(ctx).map((page) => pageOf(page.render())) })
@@ -137,6 +139,28 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     add({ path: 'web/apple-touch-icon.png', kind: 'png', width: 180, svg: appIconSvg })
     for (const size of FAVICON_SIZES) add({ path: `web/favicon-${size}.png`, kind: 'png', width: size, svg: faviconSvg })
     add({ path: 'web/favicon.ico', kind: 'ico', sizes: FAVICON_SIZES.map((size) => `web/favicon-${size}.png`) })
+  }
+
+  // Revisions: each proposal's artwork beside the approved files, and its definition, so it can
+  // be opened and built as a kit of its own. A revised brand does not nest its siblings again.
+  if (!brand.revision) {
+    for (const revision of revisionsOf(brand)) {
+      const folder = `revisions/${revision.id}`
+      const revised = (ctx) => ({ ...ctx, brand: withRevision(ctx.brand, revision.id) })
+      for (const entry of brand.families) {
+        for (const layout of LAYOUTS) {
+          for (const key of brand.logoColours) {
+            const make = (ctx) => logoDocument(revised(ctx), { family: entry.id, layout, colourKey: key, colour: key === 'currentColor' ? 'currentColor' : undefined })
+            svgEntry(`${folder}/logos/${entry.id}-${layout}-${colourKey(key)}.svg`, make)
+            if (rasters && layout === 'horizontal' && key !== 'currentColor') add({ path: `${folder}/logos/png/${entry.id}-${layout}-${key}-2048.png`, kind: 'png', width: 2048, svg: make })
+          }
+        }
+      }
+      for (const key of brand.logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
+      if (brand.symbol.microRadius != null || brand.symbol.microPaths) svgEntry(`${folder}/symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(revised(ctx), { micro: true }))
+      add({ path: `${folder}/brand.json`, kind: 'text', make: (ctx) => json(withRevision(ctx.brand, revision.id)) })
+      add({ path: `${folder}/README.md`, kind: 'text', make: (ctx) => revisionReadme(ctx.brand, findRevision(ctx.brand, revision.id)) })
+    }
   }
 
   // Supplied files, the definition itself, and the front page.

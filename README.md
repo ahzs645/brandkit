@@ -30,6 +30,11 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.1. The engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its guide page for page. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 
+**Revisions** keep a proposed change beside the approved identity: ddcnorth carries one, the
+*rising symbol* (the six dots flipped so they climb to the right). Choosing it in the header shows
+every page, and builds every file, as it would make them; the approved kit includes it, with a
+side-by-side comparison, in `revisions/rising/`.
+
 **New brand** in the app makes a starting point from a name, a palette, a symbol drawn on a grid
 and a typed wordmark (outlined, so the logo needs no font). **Open…** takes a `brand.json`, a
 brand folder zipped, or a whole kit's zip. **Edit brand** changes colours, roles and copy by form

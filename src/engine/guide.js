@@ -10,8 +10,8 @@
 //   text        { text, x, y, size, font?, colour?, tracking?, anchor? }
 //   para        { text, x, y, width, size, colour?, line?, font? }   wrapped to `width`
 //   rule        { y, x1?, x2? }
-//   logo        { x, y, width, height?, align?, family?, layout?, colour? }   scaled to `width`, or fitted in a box
-//   symbol      { x, y, height, colour?, micro? }
+//   logo        { x, y, width, height?, align?, family?, layout?, colour?, revision? }   scaled to `width`, or fitted in a box
+//   symbol      { x, y, height, colour?, micro?, revision? }   (`revision` draws a proposal's artwork)
 //   nested      { src, x, y, width, height }   another kit file, e.g. "templates/social-post"
 //   symbolConstruction, specTable, swatches, swatchStrip, list   composite blocks (see below)
 
@@ -19,6 +19,7 @@ import { icon, lockup, mark, pattern, svgDocument } from './artwork.js'
 import { colour as resolveColour, colourName, face as faceOf, fill, isDark, luminance, rgb } from './brand.js'
 import { escape, n } from './format.js'
 import { renderTemplate, scopeIds } from './templates.js'
+import { withRevision } from './revisions.js'
 
 const ROLE = { ink: 'ink', paper: 'paper', muted: 'muted', primary: 'primary', light: 'light', reverse: 'reverse', line: 'line' }
 
@@ -67,15 +68,17 @@ export const createGuideKit = (ctx) => {
 
   // Scaled to `w` wide; or, given a `height` too, fitted inside that box (centred vertically, and
   // horizontally unless `align` is 'start'), so a lockup of any proportions stays in its panel.
-  const logo = (x, y, w, { family, layout = 'horizontal', colour: colourValue = ROLE.ink, height, align = 'center' } = {}) => {
-    const art = lockup(ctx, { family, layout, colour: c(colourValue) })
+  // `revision` draws a proposed revision's artwork instead of the approved one, for comparisons.
+  const revised = (revision) => (revision ? { ...ctx, brand: withRevision(brand, revision) } : ctx)
+  const logo = (x, y, w, { family, layout = 'horizontal', colour: colourValue = ROLE.ink, height, align = 'center', revision } = {}) => {
+    const art = lockup(revised(revision), { family, layout, colour: c(colourValue) })
     if (height == null) return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(w / art.width)})">${art.art}</g>`
     const scale = Math.min(w / art.width, height / art.height)
     const left = align === 'start' ? x : x + (w - art.width * scale) / 2
     return `<g transform="translate(${n(left)} ${n(y + (height - art.height * scale) / 2)}) scale(${n(scale)})">${art.art}</g>`
   }
 
-  const symbol = (x, y, height, colourValue = ROLE.ink, micro = false) => `<g transform="translate(${n(x)} ${n(y)}) scale(${n(height / brand.symbol.viewBox[3])})">${mark(ctx, c(colourValue), micro)}</g>`
+  const symbol = (x, y, height, colourValue = ROLE.ink, micro = false, revision) => `<g transform="translate(${n(x)} ${n(y)}) scale(${n(height / brand.symbol.viewBox[3])})">${mark(revised(revision), c(colourValue), micro)}</g>`
 
   /** Renders another file of the kit, for nesting. Templates have their text outlined. */
   const source = (src) => {
@@ -148,7 +151,7 @@ export const createGuideKit = (ctx) => {
       case 'path': return `<path d="${e.d}"${e.fill ? ` fill="${c(e.fill)}"` : ' fill="none"'}${e.stroke ? ` stroke="${c(e.stroke)}"` : ''}${e.dash ? ` stroke-dasharray="${e.dash}"` : ''}/>`
       case 'rule': return rule(e.y, e.x1 ?? 64, e.x2 ?? pageWidth - 64)
       case 'logo': return logo(e.x, e.y, e.width, e)
-      case 'symbol': return symbol(e.x, e.y, e.height, e.colour ?? ROLE.ink, e.micro)
+      case 'symbol': return symbol(e.x, e.y, e.height, e.colour ?? ROLE.ink, e.micro, e.revision)
       case 'nested': return nested(e.src, e.x, e.y, e.width, e.height)
       default:
         if (blocks[e.type]) return blocks[e.type](e)
@@ -197,6 +200,7 @@ export const guidePages = (ctx) => {
 export const guideSheets = (ctx) => (ctx.brand.guide?.sheets ?? []).map((sheet) => ({
   id: sheet.id,
   group: sheet.group,
+  path: sheet.path,
   title: fill(ctx.brand, sheet.title ?? sheet.id),
   width: sheet.width,
   height: sheet.height,

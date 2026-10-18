@@ -1,5 +1,13 @@
 # Change log
 
+## Proposed: 2.2 - rising symbol (18 October 2026)
+
+Not yet approved. The files in `revisions/rising/` show it; the identity remains v2.1 until it is.
+
+- Flips the six-dot symbol top to bottom: rows of 1, 2 and 3 dots, rising to the right.
+- Changes only the symbol's centres. Dot size, equal spacing, wordmark, colours and lockups are unchanged.
+- `revisions/rising/comparison.svg` shows both side by side, down to favicon sizes; `revisions/rising/brand.json` builds a complete kit with it applied.
+
 ## 2.1 - 10 October 2026
 
 - Matched horizontal and vertical dot spacing: 88-unit centre pitch and 8-unit edge gap in both directions.

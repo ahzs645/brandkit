@@ -25,8 +25,9 @@ export const Kit = ({ brand, fonts, source }) => {
       onProgress: (done, total, path) => setProgress({ done, total, path })
     })
     setProgress({ done: plan.length, total: plan.length, path: 'Zipping…' })
-    const archive = await zip(files, `${brand.id}-brand-kit`)
-    download(archive, `${brand.id}-brand-kit.zip`)
+    const name = brand.revision ? `${brand.id}-${brand.revision.id}-brand-kit` : `${brand.id}-brand-kit`
+    const archive = await zip(files, name)
+    download(archive, `${name}.zip`)
     setResult({ count: files.size, bytes: archive.length, skipped, seconds: (performance.now() - started) / 1000 })
     setProgress(null)
   }
@@ -36,7 +37,7 @@ export const Kit = ({ brand, fonts, source }) => {
     <div className="view">
       <section className="panel kit-head">
         <div>
-          <h2>The {brand.name} kit</h2>
+          <h2>The {brand.name} kit{brand.revision ? `, with the ${brand.revision.title.toLowerCase()} (${brand.revision.status})` : ''}</h2>
           <p className="muted">{plan.length} files: {Object.entries(kinds).map(([kind, count]) => `${count} ${KIND_LABEL[kind] ?? kind}`).join(', ')}. Every one is made in this browser from brand.json; nothing is uploaded.</p>
           <div className="checks">
             <label><input type="checkbox" checked={options.rasters} onChange={() => toggle('rasters')} /> Images (PNG, favicon.ico)</label>

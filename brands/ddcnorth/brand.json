@@ -2078,6 +2078,254 @@
             "y": 1237
           }
         ]
+      },
+      {
+        "id": "logo-revision-rising",
+        "group": "revisions",
+        "path": "revisions/rising/comparison",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo revision / rising symbol / proposed",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo revision: the rising symbol",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "PROPOSED V2.2 / NOT YET APPROVED / 18 OCTOBER 2026",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "APPROVED / V2.1 / ROWS 3-2-1",
+            "x": 64,
+            "y": 200
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 216,
+            "width": 624,
+            "height": 190,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 96,
+            "y": 246,
+            "width": 560,
+            "height": 130
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 426,
+            "width": 624,
+            "height": 170,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 96,
+            "y": 451,
+            "width": 560,
+            "height": 120,
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 616,
+            "width": 300,
+            "height": 252,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 88,
+            "y": 636,
+            "width": 252,
+            "height": 212,
+            "layout": "stacked",
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 388,
+            "y": 616,
+            "width": 300,
+            "height": 252,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 412,
+            "y": 666,
+            "height": 152
+          },
+          {
+            "type": "symbol",
+            "x": 612,
+            "y": 666,
+            "height": 32,
+            "micro": true
+          },
+          {
+            "type": "symbol",
+            "x": 612,
+            "y": 716,
+            "height": 24,
+            "micro": true
+          },
+          {
+            "type": "symbol",
+            "x": 612,
+            "y": 758,
+            "height": 16,
+            "micro": true
+          },
+          {
+            "type": "label",
+            "text": "32 / 24 / 16",
+            "x": 570,
+            "y": 846
+          },
+          {
+            "type": "label",
+            "text": "PROPOSED / V2.2 / ROWS 1-2-3",
+            "x": 752,
+            "y": 200
+          },
+          {
+            "type": "rect",
+            "x": 752,
+            "y": 216,
+            "width": 624,
+            "height": 190,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 784,
+            "y": 246,
+            "width": 560,
+            "height": 130,
+            "revision": "rising"
+          },
+          {
+            "type": "rect",
+            "x": 752,
+            "y": 426,
+            "width": 624,
+            "height": 170,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 784,
+            "y": 451,
+            "width": 560,
+            "height": 120,
+            "colour": "reverse",
+            "revision": "rising"
+          },
+          {
+            "type": "rect",
+            "x": 752,
+            "y": 616,
+            "width": 300,
+            "height": 252,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 776,
+            "y": 636,
+            "width": 252,
+            "height": 212,
+            "layout": "stacked",
+            "colour": "primary",
+            "revision": "rising"
+          },
+          {
+            "type": "rect",
+            "x": 1076,
+            "y": 616,
+            "width": 300,
+            "height": 252,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 1100,
+            "y": 666,
+            "height": 152,
+            "revision": "rising"
+          },
+          {
+            "type": "symbol",
+            "x": 1300,
+            "y": 666,
+            "height": 32,
+            "micro": true,
+            "revision": "rising"
+          },
+          {
+            "type": "symbol",
+            "x": 1300,
+            "y": 716,
+            "height": 24,
+            "micro": true,
+            "revision": "rising"
+          },
+          {
+            "type": "symbol",
+            "x": 1300,
+            "y": 758,
+            "height": 16,
+            "micro": true,
+            "revision": "rising"
+          },
+          {
+            "type": "label",
+            "text": "32 / 24 / 16",
+            "x": 1258,
+            "y": 846
+          },
+          {
+            "type": "para",
+            "text": "The same six circles, flipped top to bottom. The dots now climb to the right, toward north; the full row sits on the baseline with the lettering and the single dot rises to the ascender of the first d. Nothing else changes.",
+            "x": 64,
+            "y": 912,
+            "width": 1312,
+            "size": 18
+          },
+          {
+            "type": "label",
+            "text": "{upperName} / LOGO REVISIONS / ONLY THE APPROVED FILES ARE THE IDENTITY UNTIL THIS IS ACCEPTED",
+            "x": 64,
+            "y": 984
+          }
+        ]
       }
     ]
   },
@@ -2152,5 +2400,63 @@
     "reference/PROVENANCE.json",
     "reference/README.md",
     "reference/six-dot-reference.png"
+  ],
+  "revisions": [
+    {
+      "id": "rising",
+      "title": "Rising symbol",
+      "version": "2.2-rising",
+      "displayVersion": "2.2",
+      "status": "proposed",
+      "date": "2026-10-18",
+      "summary": "The six-dot symbol flipped top to bottom: its rows now hold one, two and three dots, so the mark climbs to the right instead of stepping down.",
+      "rationale": [
+        "Read left to right, the dots rise. For a name that ends in north, the mark points the way the name does; the approved 3-2-1 arrangement steps down and to the right.",
+        "The heaviest row now sits on the baseline with the lettering, and the single dot rises to the height of the first d’s ascender, so the symbol leads into the wordmark instead of hanging beside it.",
+        "Nothing else changes: the same six circles, radius, equal spacing, wordmark, colours and lockup proportions. Every logo, template, pattern and icon follows from the one change to the symbol’s centres.",
+        "The approved files stay as they are until this is accepted. The v2.1 guide records the 3-2-1 orientation as deliberate, so this is a proposal to decide on, not a correction."
+      ],
+      "changes": {
+        "symbol": {
+          "centres": [
+            [
+              216,
+              40
+            ],
+            [
+              128,
+              128
+            ],
+            [
+              216,
+              128
+            ],
+            [
+              40,
+              216
+            ],
+            [
+              128,
+              216
+            ],
+            [
+              216,
+              216
+            ]
+          ],
+          "rows": [
+            1,
+            2,
+            3
+          ],
+          "orientation": "One top-right dot; two right-aligned middle dots; three bottom dots. The rows rise to the right."
+        },
+        "guide": {
+          "frame": {
+            "footer": "SIX-DOT IDENTITY / RISING REVISION / PROPOSED 18 OCTOBER 2026"
+          }
+        }
+      }
+    }
   ]
 }

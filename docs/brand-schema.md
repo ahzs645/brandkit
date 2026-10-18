@@ -122,6 +122,27 @@ Guide elements: `label`, `text`, `para` (wrapped), `rect`, `rule`, `path`, `logo
 `"templates/social-post"`), and the composite blocks `symbolConstruction`, `specTable`,
 `swatches`, `swatchStrip` and `list`. Text on guide pages is set as outlines.
 
+## Revisions
+
+Proposed changes are kept beside the approved identity instead of replacing it:
+
+```json
+"revisions": [{
+  "id": "rising", "title": "Rising symbol", "version": "2.2-rising", "displayVersion": "2.2",
+  "status": "proposed", "date": "2026-10-18",
+  "summary": "…", "rationale": ["…"],
+  "changes": { "symbol": { "centres": [[216, 40], …], "rows": [1, 2, 3] } }
+}]
+```
+
+`changes` is merged into the definition (objects key by key; arrays and other values replace;
+`null` removes). The app's revision switcher shows every page, and builds the whole kit, as the
+revision would make it. The approved kit carries each revision in `revisions/<id>/`: its logos and
+symbols, a `README.md` with the rationale, its own `brand.json`, and any guide sheet with
+`"group": "revisions"` and a `path` there, such as a side-by-side comparison. Guide `logo` and
+`symbol` elements take `"revision": "<id>"` to draw a proposal's artwork for such a sheet.
+Approving a revision means moving its `changes` into the definition and removing the entry.
+
 ## Web, patterns, icons, files
 
 - `patterns`: the symbol repeated (`repeat: { x: [from, to, step], y: […], scale, colour }`) or

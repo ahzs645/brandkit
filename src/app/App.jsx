@@ -5,6 +5,7 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } fro
 import { loadBrandFonts } from '../fonts/provider.js'
 import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
+import { revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
 import { Overview } from './views/Overview.jsx'
@@ -32,7 +33,7 @@ const params = () => new URLSearchParams(globalThis.location?.search ?? '')
 
 const writeUrl = (changes, { keep = [] } = {}) => {
   const url = new URL(globalThis.location.href)
-  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', ...keep].includes(key)) url.searchParams.delete(key)
+  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', 'revision', ...keep].includes(key)) url.searchParams.delete(key)
   for (const [key, value] of Object.entries(changes)) {
     if (value) url.searchParams.set(key, value)
     else url.searchParams.delete(key)
@@ -62,6 +63,8 @@ const useWebFonts = (brand, source) => {
 
 export const App = () => {
   const [view, setView] = useState(() => (ALL_VIEWS.includes(params().get('view')) ? params().get('view') : 'overview'))
+  // A proposed revision, shown everywhere in place of the approved identity while it is chosen.
+  const [revisionId, setRevisionId] = useState(() => params().get('revision'))
   const [opened, setOpened] = useState({})
   const [saved, setSaved] = useState(savedBrands)
   const [current, setCurrent] = useState(null)
@@ -74,6 +77,7 @@ export const App = () => {
 
   const select = useCallback(async (id, { keepView = false } = {}) => {
     setError(null)
+    if (!keepView) setRevisionId(null)
     try {
       let next
       if (opened[id]) next = { ...opened[id], brand: structuredClone(opened[id].brand) }
@@ -95,7 +99,14 @@ export const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const brand = current?.brand
+  const base = current?.brand
+  const revisions = revisionsOf(base)
+  const activeRevision = revisions.some((entry) => entry.id === revisionId) ? revisionId : null
+  const brand = useMemo(() => (base && activeRevision ? withRevision(base, activeRevision) : base), [base, activeRevision])
+  const chooseRevision = (id) => {
+    setRevisionId(id || null)
+    writeUrl({ revision: id || null }, { keep: ['view'] })
+  }
   const source = current?.source
   const fontKey = brand ? JSON.stringify(brand.fonts) : ''
   useEffect(() => {
@@ -136,7 +147,7 @@ export const App = () => {
 
   const update = (next) => setCurrent((state) => ({ ...state, brand: next }))
   const save = () => {
-    saveBrand(brand)
+    saveBrand(base)
     setSaved(savedBrands())
     setCurrent((state) => ({ ...state, original: structuredClone(state.brand) }))
   }
@@ -147,7 +158,7 @@ export const App = () => {
     writeUrl({ brand: made.id })
     go('overview')
   }
-  const changed = useMemo(() => brand && current?.original && JSON.stringify(brand) !== JSON.stringify(current.original), [brand, current?.original])
+  const changed = useMemo(() => base && current?.original && JSON.stringify(base) !== JSON.stringify(current.original), [base, current?.original])
 
   return (
     <div className="app">
@@ -163,6 +174,16 @@ export const App = () => {
               {brandIds.map((id) => <option key={id} value={id}>{id}{saved[id] && !BUILT_IN.includes(id) ? ' (saved)' : opened[id] ? ' (opened)' : ''}</option>)}
             </select>
           </label>
+          {revisions.length > 0 && (
+            <label className="brand-picker">
+              <span className="visually-hidden">Revision</span>
+              <select value={activeRevision ?? ''} onChange={(event) => chooseRevision(event.target.value)}>
+                <option value="">Approved v{base.displayVersion ?? base.version}</option>
+                {revisions.map((entry) => <option key={entry.id} value={entry.id}>{entry.title} · {entry.status ?? 'proposed'} v{entry.displayVersion ?? entry.version}</option>)}
+              </select>
+            </label>
+          )}
+          {activeRevision && <span className="badge badge--revision" title="Every view is showing this revision instead of the approved identity">{brand.revision.status} revision</span>}
           {changed && <span className="badge" title="Edited since it was loaded">edited</span>}
           <div className="masthead__actions">
             <button type="button" className="button button--quiet" onClick={() => fileInput.current?.click()}>Open…</button>
@@ -181,12 +202,12 @@ export const App = () => {
       <main className="main">
         {!brand ? <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
-            {view === 'overview' && <Overview brand={brand} go={go} />}
+            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} />}
             {view === 'logos' && <Logos brand={brand} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} /></div>}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
-            {view === 'brand' && <BrandEditor brand={brand} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
+            {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}
             {view === 'new' && <NewBrand fonts={libraryFonts} existing={brandIds} onCreate={create} />}
             {view === 'manuals' && <Manuals />}
