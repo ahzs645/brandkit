@@ -1,0 +1,101 @@
+/* The template studio. Scoped under .studio so it can sit inside any host page; colours, radii and
+   spacing come from the host's custom properties where it defines them. */
+.studio {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 300px;
+  gap: var(--gap, 16px);
+  align-items: start;
+}
+.studio__list, .studio__fields, .studio__stage {
+  background: var(--surface, #fff);
+  border-radius: var(--radius, 14px);
+  padding: 16px;
+}
+.studio__list { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; }
+.studio__group + .studio__group { margin-top: 14px; }
+.studio h3 { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint, #80858d); }
+.studio__item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px;
+  border: 0;
+  border-radius: var(--radius-sm, 8px);
+  background: none;
+  color: var(--ink, #16181c);
+  font: inherit;
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+}
+.studio__item:hover { background: var(--hover, #eef0f2); }
+.studio__item[aria-pressed='true'] { background: var(--track, #e8eaed); font-weight: 600; }
+.studio__thumb { display: block; width: 64px; max-height: 64px; overflow: hidden; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08); background: #fff; }
+.studio__thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.studio__canvas {
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding: 28px;
+  border-radius: var(--radius-sm, 8px);
+  background: color-mix(in srgb, var(--ink, #16181c) 10%, var(--page, #f4f5f7));
+}
+.studio__preview { display: block; max-width: 100%; max-height: 62vh; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); background: #fff; }
+.studio__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
+.studio__size { font-size: 13px; color: var(--ink-faint, #80858d); }
+.studio__toggle { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-muted, #5b5f66); }
+.studio__downloads { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.studio__note { margin: 10px 0 0; font-size: 12.5px; color: var(--ink-faint, #80858d); }
+.studio__error { margin: 10px 0 0; font-size: 13px; color: #b42318; }
+.studio__empty { color: var(--ink-muted, #5b5f66); }
+
+.studio__fields { display: grid; gap: 12px; position: sticky; top: 12px; }
+.studio .field { display: grid; gap: 5px; }
+.studio .field__label { font-size: 12.5px; font-weight: 600; color: var(--ink-muted, #5b5f66); }
+.studio input[type='text'], .studio select {
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--ink, #16181c) 18%, transparent);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--page, #f4f5f7);
+  color: var(--ink, #16181c);
+  font: inherit;
+  font-size: 14px;
+}
+.studio input[type='text']:focus, .studio select:focus { outline: 2px solid var(--focus, #2f6fde); outline-offset: 1px; }
+
+.studio .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink, #16181c);
+  color: var(--page, #fff);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.studio .button--quiet { background: var(--track, #e8eaed); color: var(--ink, #16181c); }
+.studio .button:disabled { opacity: 0.45; cursor: default; }
+.studio .button:not(:disabled):hover { filter: brightness(0.94); }
+
+@media (max-width: 1100px) {
+  .studio { grid-template-columns: minmax(0, 1fr) 280px; }
+  .studio__list { grid-column: 1 / -1; position: static; max-height: none; display: flex; gap: 14px; overflow-x: auto; }
+  .studio__group + .studio__group { margin-top: 0; }
+  .studio__group { min-width: 200px; }
+}
+@media (max-width: 760px) {
+  .studio { grid-template-columns: minmax(0, 1fr); }
+  .studio__fields { position: static; }
+  .studio__canvas { min-height: 220px; padding: 12px; }
+  .studio__downloads { margin-left: 0; }
+}

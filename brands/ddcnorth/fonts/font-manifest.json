@@ -1,0 +1,86 @@
+{
+  "downloadedUTC": "2026-10-10T23:13:23Z",
+  "fonts": [
+    {
+      "file": "desktop/Inter-Regular.ttf",
+      "sourceFile": "web/Inter-Regular.woff2",
+      "family": "Inter",
+      "style": "Regular",
+      "version": "Version 4.001;git-9221beed3",
+      "glyphCount": 2937,
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-Regular.woff2",
+      "sourceSHA256": "e06f6b1bc553aaea4e4668023ed0ab0a147129c3107f511bc7d03d361b0ae085",
+      "desktopSHA256": "ed89da588a18b0108d89ed5f649f4e9963e3b60f702db6257e8e1f3d87a7b518",
+      "outlineAndMetricsTablesUnchanged": true
+    },
+    {
+      "file": "desktop/Inter-SemiBold.ttf",
+      "sourceFile": "web/Inter-SemiBold.woff2",
+      "family": "Inter SemiBold",
+      "style": "Regular",
+      "version": "Version 4.001;git-9221beed3",
+      "glyphCount": 2937,
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/Inter-SemiBold.woff2",
+      "sourceSHA256": "5cb7103e4e605989afebc03d989c79201e54b21b5183db33981f70db9178a301",
+      "desktopSHA256": "e6fc3b6a01a86c9d9314864725b1d11d3c1fe2ae14e9962562c0639430044c78",
+      "outlineAndMetricsTablesUnchanged": true
+    },
+    {
+      "file": "desktop/InterDisplay-Regular.ttf",
+      "sourceFile": "web/InterDisplay-Regular.woff2",
+      "family": "Inter Display",
+      "style": "Regular",
+      "version": "Version 4.001;git-9221beed3",
+      "glyphCount": 2937,
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterDisplay-Regular.woff2",
+      "sourceSHA256": "3a9463a58c3e7ba1e3cd65b5dbff91a35c508ff78a104cd1121feff83efeb787",
+      "desktopSHA256": "7eeb3af7daef7b93ddf69c8ded7bc0376567aff8d7265a3273180007e0f13fbd",
+      "outlineAndMetricsTablesUnchanged": true
+    },
+    {
+      "file": "desktop/InterDisplay-Medium.ttf",
+      "sourceFile": "web/InterDisplay-Medium.woff2",
+      "family": "Inter Display Medium",
+      "style": "Regular",
+      "version": "Version 4.001;git-9221beed3",
+      "glyphCount": 2937,
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterDisplay-Medium.woff2",
+      "sourceSHA256": "f1227907684853882ad00d7f97ce9f64bc17b89a2a291a7d4ec84fccfa442934",
+      "desktopSHA256": "6bb27b89328ef49652f23445a2b84643abbb4d58e6e3cdb09a00a7ece9e2b613",
+      "outlineAndMetricsTablesUnchanged": true
+    },
+    {
+      "file": "desktop/InterDisplay-ExtraBold.ttf",
+      "sourceFile": "web/InterDisplay-ExtraBold.woff2",
+      "family": "Inter Display ExtraBold",
+      "style": "Regular",
+      "version": "Version 4.001;git-9221beed3",
+      "glyphCount": 2937,
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterDisplay-ExtraBold.woff2",
+      "sourceSHA256": "97eeee5a6f4f22fef1f607cf8836104d65968f03e59bc068a7586bf18364a8a7",
+      "desktopSHA256": "f5e9f36e66695e2238ac4b945863bc6f2860615337563aef90b50a729d512c9f",
+      "outlineAndMetricsTablesUnchanged": true
+    },
+    {
+      "file": "SpaceMono-Regular.ttf",
+      "family": "Space Mono",
+      "style": "Regular",
+      "version": "Version 1.003; ttfautohint (v1.8.4.7-5d5b)",
+      "glyphCount": 765,
+      "sourceURL": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacemono/SpaceMono-Regular.ttf",
+      "sourceSHA256": "95837e182baeeada83368f7748db28357f0a1b75c6b84ff7065b5edf933c8e18"
+    }
+  ],
+  "licences": [
+    {
+      "file": "Inter-OFL.txt",
+      "sourceURL": "https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt",
+      "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a"
+    },
+    {
+      "file": "SpaceMono-OFL.txt",
+      "sourceURL": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacemono/OFL.txt",
+      "sha256": "8e4ee42b2553e1e01504e61cb0d46d148cd8c9e5eacaa3622a7df2d4f2955b9f"
+    }
+  ]
+}

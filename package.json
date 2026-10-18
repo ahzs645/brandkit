@@ -1,0 +1,68 @@
+{
+  "name": "brandkit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brand kits from one brand.json: logos, symbols, business cards, letterhead, social graphics, a brand guide and web files, generated in the browser. Plus a viewer for identity manuals.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "bin": {
+    "brandkit": "./bin/brandkit.mjs"
+  },
+  "exports": {
+    ".": "./src/engine/index.js",
+    "./engine": "./src/engine/index.js",
+    "./fonts": "./src/fonts/provider.js",
+    "./fonts/node": "./src/fonts/node.js",
+    "./export": "./src/export/render.js",
+    "./manuals": "./src/manuals/index.js",
+    "./manuals/bc": "./manuals/bc/index.js",
+    "./studio": "./src/studio/TemplateStudio.jsx",
+    "./vite": "./src/vite.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "brands",
+    "manuals",
+    "docs"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test \"test/*.test.js\"",
+    "build:kit": "node bin/brandkit.mjs build",
+    "make:example": "node scripts/make-example-brand.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "jspdf": "^3.0.4",
+    "opentype.js": "^2.0.0",
+    "svg2pdf.js": "^2.8.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^8.3.4"
+  }
+}

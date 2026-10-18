@@ -1,0 +1,196 @@
+// The complete brand kit, as a list of files and how to make each one.
+//
+// planKit() describes the kit without drawing anything, so an interface can show what a download
+// will contain before doing the work. buildKit() makes the files. Vector and text files are made
+// by the engine alone; images and PDFs need a `renderer` (src/export/render.js in a browser), and
+// supplied files (fonts, licences, documentation) need `readAsset`. Without either, those entries
+// are skipped and the rest of the kit is still built: that is how the Node CLI runs.
+
+import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
+import { fill } from './brand.js'
+import { guidePages, guideSheets } from './guide.js'
+import { physicalSize, renderTemplate } from './templates.js'
+import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
+
+export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Fonts', 'Build sources', 'References', 'Package files']
+
+const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References' }
+export const groupOf = (path) => (path.includes('/') ? GROUP_BY_FOLDER[path.split('/')[0]] ?? 'Package files' : 'Package files')
+
+const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
+const FAVICON_SIZES = [16, 24, 32, 48, 64, 128, 256]
+
+const json = (value) => `${JSON.stringify(value, null, 2)}\n`
+
+const SOURCE_README = (brand) => `# Rebuilding this kit
+
+\`brand.json\` is the whole identity: colours, the symbol's geometry, the wordmark outlines, lockup
+proportions, typography, every template and every guide page. Every other file in this kit is
+generated from it by [brandkit](https://github.com/ahzs645/brandkit).
+
+To change the identity, edit \`brand.json\` and regenerate:
+
+- **In a browser:** open brandkit, choose *Open brand…*, and select this \`brand.json\` (with this
+  kit's \`fonts/\` folder, or the whole kit as a zip). *Download kit* rebuilds every file, images
+  and PDFs included.
+- **From a terminal:** \`npx brandkit build path/to/brand.json --out ${brand.id}-kit\` writes the
+  vector and text files (images and PDFs are made in the browser).
+
+Keep a copy of an approved identity before changing it.
+`
+
+/**
+ * Every file in the kit. Each entry is `{ path, group, kind, ... }`:
+ *   kind 'text'   make(ctx) returns a string
+ *   kind 'png'    svg(ctx) returns the SVG to rasterise at `width` pixels
+ *   kind 'pdf'    pages(ctx) returns [{ svg, width, height, unit }], `title` for the metadata
+ *   kind 'ico'    sizes: the favicon PNGs to pack
+ *   kind 'asset'  src: a path in the brand's folder, copied as is
+ *   kind 'index'  index.html and the asset catalog, made last from the finished list
+ */
+export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = {}) => {
+  const entries = []
+  const add = (entry) => entries.push({ group: groupOf(entry.path), ...entry })
+  const svgEntry = (path, make) => add({ path, kind: 'text', make })
+  const id = brand.id
+  const colourKey = (key) => (key === 'currentColor' ? 'currentcolor' : key)
+  const rasterColours = brand.rasterColours ?? brand.logoColours.filter((key) => key !== 'currentColor')
+
+  // Logos.
+  for (const entry of brand.families) {
+    for (const layout of LAYOUTS) {
+      for (const key of brand.logoColours) {
+        const stem = `${entry.id}-${layout}-${colourKey(key)}`
+        const make = (ctx) => logoDocument(ctx, { family: entry.id, layout, colourKey: key, colour: key === 'currentColor' ? 'currentColor' : undefined })
+        svgEntry(`logos/outlined/${stem}.svg`, make)
+        if (key === 'currentColor') continue
+        if (rasters) for (const width of layout === 'horizontal' ? [1024, 2048] : [1024]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
+        if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+      }
+    }
+  }
+  for (const [mode, spec] of Object.entries(brand.wordmark.editable ?? {})) {
+    svgEntry(`logos/editable-text/${spec.family ?? brand.families[0].id}-${mode}.svg`, (ctx) => logoDocument(ctx, { family: spec.family ?? brand.families[0].id, layout: 'horizontal', mode, colourKey: brand.rasterColours?.[0] ?? 'black' }))
+  }
+
+  // Symbol.
+  for (const key of brand.logoColours) svgEntry(`symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { colourKey: key }))
+  svgEntry(`symbol/${id}-symbol-master.svg`, (ctx) => symbolDocument(ctx, { master: true }))
+  if (brand.symbol.microRadius != null || brand.symbol.microPaths || brand.symbol.microMarkup) svgEntry(`symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(ctx, { micro: true }))
+  for (const key of rasterColours) {
+    const make = (ctx) => symbolDocument(ctx, { colourKey: key })
+    if (rasters) for (const width of [256, 512, 1024]) add({ path: `symbol/${id}-symbol-${key}-${width}.png`, kind: 'png', width, svg: make })
+    if (pdfs) add({ path: `symbol/pdf/${id}-symbol-${key}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+  }
+
+  // Patterns and icons.
+  for (const spec of brand.patterns ?? []) {
+    const make = (ctx) => pattern(ctx, spec)
+    svgEntry(`patterns/${spec.id}.svg`, make)
+    if (rasters) add({ path: `patterns/png/${spec.id}.png`, kind: 'png', width: spec.width, svg: make })
+  }
+  for (const item of brand.icons?.items ?? []) {
+    const make = (ctx) => icon(ctx, item)
+    svgEntry(`icons/${item.id}.svg`, make)
+    if (rasters) add({ path: `icons/png/${item.id}.png`, kind: 'png', width: 128, svg: make })
+  }
+
+  // Templates: the SVGs keep live text; their images and PDFs are outlined.
+  for (const template of brand.templates ?? []) {
+    svgEntry(`templates/${template.id}.svg`, (ctx) => renderTemplate(ctx, template).svg)
+    const outlined = (ctx) => renderTemplate({ ...ctx, outline: true }, template)
+    if (rasters) add({ path: `templates/png/${template.id}.png`, kind: 'png', width: template.raster ?? Math.min(2400, template.width), svg: (ctx) => outlined(ctx).svg })
+    if (pdfs) add({ path: `templates/pdf/${template.id}.pdf`, kind: 'pdf', pages: (ctx) => { const rendered = outlined(ctx); return [{ svg: rendered.svg, ...physicalSize(rendered) }] } })
+  }
+
+  // Guide pages, sheets and their PDFs.
+  const pages = (ctx) => guidePages(ctx)
+  const sheets = (ctx) => guideSheets(ctx)
+  for (const page of guidePages({ brand })) {
+    svgEntry(`guidelines/${page.id}.svg`, (ctx) => pages(ctx).find((entry) => entry.id === page.id).render())
+    if (rasters) add({ path: `guidelines/png/${page.id}.png`, kind: 'png', width: page.width, svg: (ctx) => pages(ctx).find((entry) => entry.id === page.id).render() })
+  }
+  for (const sheet of guideSheets({ brand })) {
+    const make = (ctx) => sheets(ctx).find((entry) => entry.id === sheet.id).render()
+    svgEntry(`guidelines/${sheet.id}.svg`, make)
+    if (rasters) add({ path: sheet.group === 'overview' ? `guidelines/${sheet.id}.png` : `guidelines/png/${sheet.id}.png`, kind: 'png', width: sheet.width, svg: make })
+  }
+  if (pdfs && brand.guide?.pages?.length) {
+    add({ path: `guidelines/${id}-brand-guide.pdf`, kind: 'pdf', title: brand.guide.pdfTitle ?? '{name} brand guide', pages: (ctx) => pages(ctx).map((page) => pageOf(page.render())) })
+  }
+  const logoSheets = (brand.guide?.sheets ?? []).filter((sheet) => sheet.group === 'logo-sheets')
+  if (pdfs && logoSheets.length) {
+    add({ path: `logos/${id}-logo-sheets.pdf`, kind: 'pdf', title: brand.guide.sheetsPdfTitle ?? '{name} logo sheets', pages: (ctx) => sheets(ctx).filter((sheet) => sheet.group === 'logo-sheets').map((sheet) => pageOf(sheet.render())) })
+  }
+  add({ path: 'guidelines/COLOURS.json', kind: 'text', make: (ctx) => json(coloursJson(ctx)) })
+  add({ path: `guidelines/${id}-palette.gpl`, kind: 'text', make: gimpPalette })
+
+  // Web.
+  svgEntry('web/app-icon.svg', appIconSvg)
+  svgEntry('web/favicon.svg', faviconSvg)
+  add({ path: 'web/brand.css', kind: 'text', make: brandCss })
+  add({ path: 'web/tokens.json', kind: 'text', make: (ctx) => json(tokens(ctx)) })
+  add({ path: `web/${brand.web?.componentName ?? 'BrandLogo'}.tsx`, kind: 'text', make: reactComponent })
+  add({ path: 'web/landing-template.html', kind: 'text', make: landingHtml })
+  if (rasters) {
+    for (const size of [512, 1024]) add({ path: `web/app-icon-${size}.png`, kind: 'png', width: size, svg: appIconSvg })
+    add({ path: 'web/apple-touch-icon.png', kind: 'png', width: 180, svg: appIconSvg })
+    for (const size of FAVICON_SIZES) add({ path: `web/favicon-${size}.png`, kind: 'png', width: size, svg: faviconSvg })
+    add({ path: 'web/favicon.ico', kind: 'ico', sizes: FAVICON_SIZES.map((size) => `web/favicon-${size}.png`) })
+  }
+
+  // Supplied files, the definition itself, and the front page.
+  if (assets) for (const file of brand.files ?? []) add({ path: file.to ?? file, kind: 'asset', src: file.from ?? file })
+  add({ path: 'source/brand.json', kind: 'text', make: (ctx) => json(ctx.brand) })
+  add({ path: 'source/README.md', kind: 'text', make: (ctx) => SOURCE_README(ctx.brand) })
+  add({ path: 'web/asset-catalog.json', kind: 'index' })
+  add({ path: 'index.html', kind: 'index' })
+  return entries
+}
+
+const pageOf = (svg) => {
+  const match = /viewBox="0 0 ([\d.]+) ([\d.]+)"/.exec(svg)
+  return { svg, width: Number(match[1]) * 0.75, height: Number(match[2]) * 0.75, unit: 'pt' }
+}
+
+const encoder = new TextEncoder()
+
+/**
+ * Makes the kit. Returns a Map of path → Uint8Array.
+ *
+ * @param {object} ctx  `{ brand, fonts }`
+ * @param {object} options
+ * @param {object} [options.renderer]   `{ png(svg, width), pdf(pages, meta), ico(pngs) }`
+ * @param {(src: string) => Promise<ArrayBuffer|Uint8Array>} [options.readAsset]
+ * @param {(done: number, total: number, path: string) => void} [options.onProgress]
+ * @param {(entry) => boolean} [options.filter]
+ */
+export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, ...planOptions } = {}) => {
+  const plan = planKit(ctx.brand, { rasters: Boolean(renderer), pdfs: Boolean(renderer), assets: Boolean(readAsset), ...planOptions })
+    .filter((entry) => !filter || entry.kind === 'index' || filter(entry))
+  const files = new Map()
+  const skipped = []
+  let done = 0
+  for (const entry of plan) {
+    onProgress?.(done, plan.length, entry.path)
+    try {
+      switch (entry.kind) {
+        case 'text': files.set(entry.path, encoder.encode(entry.make(ctx))); break
+        case 'png': files.set(entry.path, await renderer.png(entry.svg(ctx), entry.width)); break
+        case 'pdf': files.set(entry.path, await renderer.pdf(entry.pages(ctx), { title: fill(ctx.brand, entry.title ?? entry.path.split('/').pop()), author: ctx.brand.name })); break
+        case 'ico': files.set(entry.path, await renderer.ico(entry.sizes.map((path) => files.get(path)).filter(Boolean), entry.sizes.map((path) => Number(/-(\d+)\.png$/.exec(path)[1])))); break
+        case 'asset': files.set(entry.path, new Uint8Array(await readAsset(entry.src))); break
+        default: break
+      }
+    } catch (error) {
+      skipped.push({ path: entry.path, error })
+    }
+    done += 1
+  }
+  const records = [...files].map(([path, bytes]) => ({ path, group: groupOf(path), bytes: bytes.length }))
+    .sort((a, b) => GROUPS.indexOf(a.group) - GROUPS.indexOf(b.group) || a.path.localeCompare(b.path))
+  files.set('web/asset-catalog.json', encoder.encode(json({ brand: ctx.brand.name, version: ctx.brand.version, pathBase: 'Package root, one folder above this catalog', assetCount: records.length, assets: records })))
+  files.set('index.html', encoder.encode(indexHtml(ctx, records)))
+  onProgress?.(plan.length, plan.length, '')
+  return { files, skipped }
+}

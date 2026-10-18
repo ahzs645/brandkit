@@ -1,0 +1,125 @@
+/* The manual library. Colours, radii and spacing come from the host page's custom properties
+   (--surface, --ink, --radius…) where it defines them, with neutral fallbacks where it does not.
+   A page sits on a grey ground so its white paper reads as paper in either theme. */
+.guides__intro {
+  background: var(--surface, #ffffff);
+  border-radius: var(--radius, 14px);
+  padding: 20px;
+  margin-bottom: var(--gap, 16px);
+}
+.guides__intro h2 { margin: 0 0 6px; font-size: 22px; }
+.guides__intro h2:focus { outline: none; }
+.guides__intro p { margin: 0; color: var(--ink-muted, #5b5f66); }
+.guides__back {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin-bottom: 12px;
+  color: var(--ink-muted, #5b5f66);
+  font: inherit;
+  cursor: pointer;
+}
+.guides__back:hover { color: var(--ink, #16181c); }
+
+.guides__family { background: var(--surface, #ffffff); border-radius: var(--radius, 14px); padding: 20px; margin-bottom: var(--gap, 16px); }
+.guides__family-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 14px; }
+.guides__family-head h3 { margin: 0; font-size: 18px; }
+.guides__family-head p { margin: 0; font-size: 13px; color: var(--ink-faint, #80858d); }
+.guides__books { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--gap, 16px); }
+.guides__pages { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--gap, 16px); background: var(--surface, #ffffff); border-radius: var(--radius, 14px); padding: 20px; }
+
+.guides__book, .guides__thumb {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink, #16181c);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+/* Every thumbnail is the same box, whatever the shape of its page — upright covers and landscape
+   ones side by side — so a row's titles line up. The page is fitted inside it, on a light ground. */
+.guides__thumb-page {
+  display: block;
+  aspect-ratio: 1;
+  margin-bottom: 6px;
+  padding: 10px;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--hover, #eef0f2);
+  transition: transform 150ms, background-color 150ms;
+}
+.guides__thumb-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0.5px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.08));
+}
+.guides__book:hover .guides__thumb-page, .guides__thumb:hover .guides__thumb-page { transform: translateY(-2px); background: var(--mid, #e2e5e9); }
+.guides__book:focus-visible, .guides__thumb:focus-visible { outline: 2px solid var(--focus, #2f6fde); outline-offset: 4px; border-radius: var(--radius-sm, 8px); }
+.guides__book-title { font-weight: 650; font-size: 15px; }
+.guides__thumb-title { font-size: 13px; line-height: 1.35; }
+.guides__thumb-meta { font-size: 12px; color: var(--ink-faint, #80858d); }
+
+.guides__links { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; }
+.guides__links a { color: var(--ink, #16181c); text-decoration: none; font-weight: 550; }
+.guides__links a:hover { text-decoration: underline; }
+.guides__footnote { margin: 4px 4px var(--gap, 16px); color: var(--ink-faint, #80858d); font-size: 12.5px; }
+
+.guides__page-head { position: sticky; top: 8px; z-index: 2; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); }
+.guides__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; }
+.guides__step, .guides__zoom { display: inline-flex; padding: 3px; gap: 2px; background: var(--track, #e8eaed); border-radius: 999px; }
+.guides__step button, .guides__zoom button {
+  border: 0;
+  background: none;
+  color: var(--ink-muted, #5b5f66);
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.guides__step button:disabled { opacity: 0.35; cursor: default; }
+.guides__step button:not(:disabled):hover, .guides__zoom button:hover { color: var(--ink, #16181c); }
+.guides__zoom button[aria-pressed='true'] { background: var(--segment, #ffffff); color: var(--ink, #16181c); box-shadow: var(--segment-shadow, 0 1px 2px rgba(0, 0, 0, 0.12)); font-weight: 600; }
+.guides__download { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--ink, #16181c); }
+
+.guides__viewer {
+  overflow: auto;
+  max-height: calc(100vh - 290px);
+  padding: 24px;
+  border-radius: var(--radius, 14px);
+  background: color-mix(in srgb, var(--ink, #16181c) 14%, var(--page, #f4f5f7));
+  text-align: center;
+}
+.guides__viewer[data-zoom='fit'] { overflow-x: hidden; }
+.guides__page {
+  display: inline-block;
+  max-width: none;
+  height: auto;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+  transition: opacity 200ms;
+  vertical-align: top;
+}
+.guides__viewer[data-zoom='fit'] .guides__page { width: auto !important; max-width: 100%; max-height: calc(100vh - 340px); }
+
+.guides__notes { margin: var(--gap, 16px) 0; padding: 14px 20px; background: var(--surface, #ffffff); border-radius: var(--radius, 14px); color: var(--ink-muted, #5b5f66); font-size: 13.5px; }
+.guides__notes summary { cursor: pointer; color: var(--ink, #16181c); font-weight: 600; }
+.guides__notes ul { margin: 10px 0 0; padding-left: 18px; }
+.guides__notes li { margin: 4px 0; }
+
+@media (max-width: 600px) {
+  .guides__intro, .guides__family, .guides__pages { padding: 16px; }
+  .guides__books { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .guides__pages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .guides__viewer { padding: 10px; max-height: none; }
+  .guides__viewer[data-zoom='fit'] .guides__page { max-height: none; width: 100% !important; }
+  .guides__toolbar { gap: 8px; }
+  /* "↓ SVG", so it stays on the row with the arrows and the zoom. */
+  .guides__download-word { display: none; }
+  .guides__page-head { position: static; }
+}

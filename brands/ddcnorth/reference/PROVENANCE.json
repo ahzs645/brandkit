@@ -1,0 +1,83 @@
+{
+  "version": "2.1-equal-spacing",
+  "updated": "2026-10-10",
+  "inputs": {
+    "brandKit": {
+      "filename": "ddcnorth-brand-kit-v1(1).zip",
+      "sha256": "6039254a0e52204c014a3ab36a2be5609c93c980901bf81a6795ab368b18aa4e"
+    },
+    "icon": {
+      "filename": "821C26A6-54F1-4F8F-A398-53B50F396BF0.png",
+      "sha256": "8ea5ae9aa8e10f3f7c8833a66c8ed5350e9d589c611659248eb680731e7f4ba1",
+      "width": 2172,
+      "height": 724
+    }
+  },
+  "symbolConstruction": {
+    "name": "six-dot",
+    "viewBox": [
+      0,
+      0,
+      256,
+      256
+    ],
+    "radius": 40,
+    "microRadius": 36,
+    "centres": [
+      [
+        40,
+        40
+      ],
+      [
+        128,
+        40
+      ],
+      [
+        216,
+        40
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        216,
+        128
+      ],
+      [
+        216,
+        216
+      ]
+    ],
+    "columns": [
+      1,
+      2,
+      3
+    ],
+    "rows": [
+      3,
+      2,
+      1
+    ],
+    "orientation": "Three top dots; two right-aligned middle dots; one bottom-right dot.",
+    "horizontalPitch": 88,
+    "verticalPitch": 88,
+    "horizontalGap": 8,
+    "verticalGap": 8
+  },
+  "wordmark": {
+    "retainedCompleteV1Object": true,
+    "canonicalObjectSha256": "352eab40bac7b3f001109bcbcfe856838b5ec5a4f082cba91f1d91dd4c598aca",
+    "policy": "Preserve original d/c/north outlines and every wordmark metric. Do not use reference image lettering."
+  },
+  "typographyUnchanged": true,
+  "paletteUnchanged": true,
+  "history": "Former symbol references are preserved only under reference/legacy-v1.",
+  "spacingUpdate": {
+    "requested": "Equal horizontal and vertical spacing between dots.",
+    "method": "Retain diameter80 and verticalpitch88; reduce horizontalpitch from110 to88.",
+    "standardEdgeGap": 8,
+    "microEdgeGap": 16,
+    "date": "2026-10-10"
+  }
+}

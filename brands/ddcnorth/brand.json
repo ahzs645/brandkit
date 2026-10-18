@@ -1,0 +1,2156 @@
+{
+  "schema": "brandkit/1",
+  "id": "ddcnorth",
+  "name": "ddcnorth",
+  "version": "2.1-equal-spacing",
+  "displayVersion": "2.1",
+  "source": "User-supplied six-dot icon reference, 2026-10-10; original v1 wordmark geometry retained.",
+  "status": "Equal horizontal and vertical dot spacing; original v1 wordmark and typography retained.",
+  "colours": {
+    "black": "#000000",
+    "off-white": "#F7F6F3",
+    "graphite": "#4B4F56",
+    "midnight": "#0B2B4A",
+    "ice": "#C8D7E8",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "ink": "black",
+    "paper": "off-white",
+    "muted": "graphite",
+    "primary": "midnight",
+    "light": "ice",
+    "reverse": "white",
+    "line": "#D9DCDF",
+    "rule": "#CFD2D4"
+  },
+  "logoColours": [
+    "black",
+    "white",
+    "midnight",
+    "currentColor"
+  ],
+  "rasterColours": [
+    "black",
+    "white",
+    "midnight"
+  ],
+  "fonts": {
+    "body": {
+      "family": "Inter",
+      "stack": "Inter, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/desktop/Inter-Regular.ttf",
+      "web": "fonts/web/Inter-Regular.woff2",
+      "label": "Inter Regular 400"
+    },
+    "bold": {
+      "family": "Inter",
+      "stack": "Inter, Arial, sans-serif",
+      "weight": 600,
+      "file": "fonts/desktop/Inter-SemiBold.ttf",
+      "web": "fonts/web/Inter-SemiBold.woff2",
+      "label": "Inter SemiBold 600"
+    },
+    "display": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 500,
+      "file": "fonts/desktop/InterDisplay-Medium.ttf",
+      "web": "fonts/web/InterDisplay-Medium.woff2",
+      "label": "Inter Display Medium 500"
+    },
+    "displayRegular": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 400,
+      "file": "fonts/desktop/InterDisplay-Regular.ttf",
+      "web": "fonts/web/InterDisplay-Regular.woff2",
+      "label": "Inter Display Regular 400"
+    },
+    "extra": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 800,
+      "file": "fonts/desktop/InterDisplay-ExtraBold.ttf",
+      "web": "fonts/web/InterDisplay-ExtraBold.woff2",
+      "label": "Inter Display ExtraBold 800"
+    },
+    "label": {
+      "family": "Space Mono",
+      "stack": "Space Mono, monospace",
+      "weight": 400,
+      "file": "fonts/SpaceMono-Regular.ttf",
+      "web": "fonts/SpaceMono-Regular.ttf",
+      "label": "Space Mono Regular 400"
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Inter Display",
+      "weight": 500,
+      "trackingEm": -0.04
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    },
+    "labels": {
+      "family": "Space Mono",
+      "weight": 400,
+      "trackingEm": 0.12
+    },
+    "note": "Inter / Space Mono are labelled in source panel 09, with \"or similar\" qualifiers. The original wordmark typeface is unverified. ddc is a custom-drawn logo, not a font."
+  },
+  "symbol": {
+    "name": "six-dot",
+    "viewBox": [
+      0,
+      0,
+      256,
+      256
+    ],
+    "radius": 40,
+    "microRadius": 36,
+    "centres": [
+      [
+        40,
+        40
+      ],
+      [
+        128,
+        40
+      ],
+      [
+        216,
+        40
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        216,
+        128
+      ],
+      [
+        216,
+        216
+      ]
+    ],
+    "columns": [
+      1,
+      2,
+      3
+    ],
+    "rows": [
+      3,
+      2,
+      1
+    ],
+    "orientation": "Three top dots; two right-aligned middle dots; one bottom-right dot.",
+    "horizontalPitch": 88,
+    "verticalPitch": 88,
+    "horizontalGap": 8,
+    "verticalGap": 8,
+    "title": "six-dot symbol",
+    "masterTitle": "six-dot geometric master",
+    "microDescription": "Optical micro variant: same six centres, radius 36. For favicons and symbols below 32 pixels in height only."
+  },
+  "wordmark": {
+    "height": 82.5,
+    "left": -0.5,
+    "glyphs": {
+      "d": "M66.5 0H48V31.7C42.5 25 36 21.8 27 21.8C10.8 21.8 -0.5 34.3 -0.5 52.5C-0.5 71 10.5 82.5 26.5 82.5C35.6 82.5 42.6 79.2 48 71V81.3H66.5ZM32.5 35.3C23.2 35.3 17.6 41.8 17.6 52C17.6 62.3 23.2 68 32.6 68C42.1 68 48.1 61.8 48.1 52C48.1 41.8 42.1 35.3 32.5 35.3Z",
+      "c": "M62.5 45H44.7C43.1 37.5 38.7 34.8 32.6 34.8C23.5 34.8 17.8 41.4 17.8 52.5C17.8 63.5 23.6 69.4 32.6 69.4C38.8 69.4 43.4 65.9 44.7 59H62.5C60.8 74.3 49.5 82.5 32 82.5C11.7 82.5 -0.4 71.2 -0.4 52.4C-0.4 33.7 11.7 21.5 32.5 21.5C50.9 21.5 61.1 29.5 62.5 45Z",
+      "north": "M9.26354029062087 47.51651254953764C9.26354029062087 35.90984147952443 16.020475561426686 31.060105680317037 24.41215323645971 31.060105680317037C33.02179656538969 31.060105680317037 38.03500660501981 36.12780713342139 38.03500660501981 46.09973579920739V81.19220607661822H47.29854689564068V45.445838837516504C47.29854689564068 30.133751651254947 37.76254953764861 22.55944517833553 26.1558784676354 22.55944517833553C18.854029062087186 22.55944517833553 13.02344782034346 25.556472919418752 9.04557463672391 32.0954425363276V23.649273447820335H0.0V81.19220607661822H9.26354029062087ZM83.00306472919418 82.49999999999999C98.96904887714663 82.49999999999999 109.70385733157198 70.07595772787317 109.70385733157198 52.52972258916776C109.70385733157198 34.874504623513864 98.96904887714663 22.34147952443857 83.00306472919418 22.34147952443857C67.03708058124174 22.34147952443857 56.302272126816376 34.874504623513864 56.302272126816376 52.52972258916776C56.302272126816376 70.07595772787317 67.03708058124174 82.49999999999999 83.00306472919418 82.49999999999999ZM83.00306472919418 74.10832232496696C72.1047820343461 74.10832232496696 65.67479524438573 65.60766182298546 65.67479524438573 52.52972258916776C65.67479524438573 39.342800528401575 72.15927344782034 30.73315719947159 83.00306472919418 30.73315719947159C93.84685601056802 30.73315719947159 100.33133421400262 39.39729194187582 100.33133421400262 52.52972258916776C100.33133421400262 65.55317040951122 93.90134742404226 74.10832232496696 83.00306472919418 74.10832232496696ZM118.70758256274767 81.19220607661822H127.97112285336854V45.77278731836195C127.97112285336854 36.018824306472915 133.47475561426683 31.71400264200792 139.85025099075295 31.71400264200792C142.52033025099075 31.71400264200792 144.7544782034346 32.14993394980184 145.51735799207398 32.3678996036988V23.10435931307793C144.7544782034346 22.99537648612945 143.28321003963012 22.77741083223249 141.59397622192864 22.77741083223249C134.4011096433289 22.77741083223249 129.87832232496697 26.75528401585204 127.75315719947159 32.69484808454425H127.53519154557463V23.649273447820335H118.70758256274767ZM178.00688243064727 23.649273447820335H166.34571994715984V7.955746367239101H157.08217965653895V23.649273447820335H146.83779392338175V31.605019815059435H157.08217965653895V68.223249669749C157.08217965653895 76.88738441215322 161.93191545574635 81.19220607661822 171.79486129458388 81.19220607661822H178.00688243064727V73.23645970937912H172.6667239101717C167.9259709379128 73.23645970937912 166.34571994715984 71.71070013210038 166.34571994715984 67.24240422721267V31.605019815059435H178.00688243064727ZM195.07533685601055 47.51651254953764C195.07533685601055 35.90984147952443 201.83227212681638 31.060105680317037 210.2239498018494 31.060105680317037C218.83359313077938 31.060105680317037 223.8468031704095 36.12780713342139 223.8468031704095 46.09973579920739V81.19220607661822H233.11034346103037V45.445838837516504C233.11034346103037 30.133751651254947 223.5743461030383 22.55944517833553 211.9676750330251 22.55944517833553C204.8292998678996 22.55944517833553 199.0532100396301 25.447490092470268 195.07533685601055 31.71400264200792V0.0H185.8117965653897V81.19220607661822H195.07533685601055Z"
+    },
+    "variants": {
+      "ddcnorth": {
+        "width": 438.910343,
+        "parts": [
+          {
+            "glyph": "d",
+            "x": 0,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "d",
+            "x": 70,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "c",
+            "x": 140,
+            "attrs": {
+              "data-letter": "c"
+            }
+          },
+          {
+            "glyph": "north",
+            "x": 205.8,
+            "attrs": {
+              "data-word": "north"
+            }
+          }
+        ]
+      },
+      "ddc": {
+        "width": 203,
+        "parts": [
+          {
+            "glyph": "d",
+            "x": 0,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "d",
+            "x": 70,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "c",
+            "x": 140,
+            "attrs": {
+              "data-letter": "c"
+            }
+          }
+        ]
+      }
+    },
+    "editable": {
+      "hybrid": {
+        "family": "ddcnorth",
+        "wrap": true,
+        "title": "{name} / hybrid / font-dependent approximation",
+        "parts": [
+          {
+            "glyph": "d",
+            "x": 0,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "d",
+            "x": 70,
+            "attrs": {
+              "data-letter": "d"
+            },
+            "fillRule": "evenodd"
+          },
+          {
+            "glyph": "c",
+            "x": 140,
+            "attrs": {
+              "data-letter": "c"
+            }
+          },
+          {
+            "element": "text",
+            "attrs": {
+              "x": 198.934082,
+              "y": 81.192206,
+              "font-family": "Inter Display, Inter, sans-serif",
+              "font-size": 111.598415,
+              "font-weight": "400",
+              "letter-spacing": -1.78557464
+            },
+            "content": "north"
+          }
+        ]
+      },
+      "text": {
+        "family": "ddcnorth",
+        "wrap": false,
+        "title": "{name} / text / font-dependent approximation",
+        "parts": [
+          {
+            "element": "text",
+            "attrs": {
+              "fill": "{colour}",
+              "x": "0",
+              "y": 81.192206,
+              "font-family": "Inter Display, Inter, sans-serif",
+              "font-size": 111.598415,
+              "letter-spacing": "-3.5",
+              "font-weight": "800"
+            },
+            "content": "ddc"
+          },
+          {
+            "element": "text",
+            "attrs": {
+              "fill": "{colour}",
+              "x": 198.934082,
+              "y": 81.192206,
+              "font-family": "Inter Display, Inter, sans-serif",
+              "font-size": 111.598415,
+              "font-weight": "400",
+              "letter-spacing": -1.78557464
+            },
+            "content": "north"
+          }
+        ]
+      }
+    },
+    "provenance": {
+      "north": {
+        "font": "Inter Display Regular",
+        "version": "4.001;git-9221beed3",
+        "fontSize": 111.598415,
+        "textX": 198.934082,
+        "baseline": 81.192206,
+        "trackingEm": -0.016
+      },
+      "liveDDCWeight": 800,
+      "liveApproximationOnly": true
+    }
+  },
+  "families": [
+    {
+      "id": "ddcnorth",
+      "wordmark": "ddcnorth",
+      "typeHeight": 120,
+      "label": "ddcnorth"
+    },
+    {
+      "id": "ddc",
+      "wordmark": "ddc",
+      "typeHeight": 120,
+      "label": "Parent ddc"
+    }
+  ],
+  "lockup": {
+    "iconHeight": 120,
+    "iconGap": 8,
+    "stackedIconHeight": 128,
+    "stackedTypeHeight": 88,
+    "stackedGap": 28,
+    "canvasPadding": 16,
+    "wordmarkHeight": 120,
+    "clearspaceRecommendation": "At least one dot diameter around the visible artwork.",
+    "minimumSymbolHeightPx": 32,
+    "minimumHorizontalWidthPx": 220,
+    "minimumSymbolHeightMm": 8,
+    "minimumHorizontalWidthMm": 55
+  },
+  "copy": {
+    "svgDescription": "ddcnorth v2.1 six-dot identity with equal horizontal and vertical dot spacing. Original v1 wordmark outlines retained. Self-contained vector artwork.",
+    "templateDescription": "Updated ddcnorth application using the six-dot symbol and the original outlined wordmark. Application text is live and editable. No embedded raster image, external asset, or font binary.",
+    "logoLabel": "ddcnorth outlined logo",
+    "motifLabel": "Six-dot brand motif",
+    "tagline": "Built for what’s next."
+  },
+  "patterns": [
+    {
+      "id": "dot-repeat",
+      "title": "{name} / repeating six-dot pattern",
+      "width": 960,
+      "height": 600,
+      "background": "off-white",
+      "repeat": {
+        "x": [
+          -60,
+          1000,
+          280
+        ],
+        "y": [
+          -80,
+          700,
+          240
+        ],
+        "scale": 0.6,
+        "colour": "ice"
+      }
+    },
+    {
+      "id": "dot-crop",
+      "title": "{name} / large six-dot crop",
+      "width": 960,
+      "height": 600,
+      "background": "midnight",
+      "place": [
+        {
+          "x": 265,
+          "y": -100,
+          "scale": 3.1,
+          "colour": "ice"
+        }
+      ]
+    },
+    {
+      "id": "dot-ice",
+      "title": "{name} / six-dot ice field",
+      "width": 960,
+      "height": 600,
+      "background": "ice",
+      "place": [
+        {
+          "x": 400,
+          "y": 82,
+          "scale": 1.75,
+          "colour": "midnight"
+        }
+      ]
+    }
+  ],
+  "icons": {
+    "size": 64,
+    "attrs": {
+      "stroke": "currentColor",
+      "stroke-width": "2",
+      "fill": "none",
+      "stroke-linecap": "butt",
+      "stroke-linejoin": "miter"
+    },
+    "title": "{name} / supporting {icon} icon",
+    "items": [
+      {
+        "id": "signal",
+        "content": "<path d=\"M10 52V42M24 52V32M38 52V22M52 52V12\"/><circle cx=\"10\" cy=\"42\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"24\" cy=\"32\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"38\" cy=\"22\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"52\" cy=\"12\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/>"
+      },
+      {
+        "id": "direction",
+        "content": "<path d=\"M8 32H50M36 18L50 32L36 46\"/><circle cx=\"12\" cy=\"16\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"48\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/>"
+      },
+      {
+        "id": "network",
+        "content": "<path d=\"M12 16H32L52 32L32 48H12M32 16V48M12 16L12 48\"/><circle cx=\"12\" cy=\"16\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"32\" cy=\"16\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"52\" cy=\"32\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"48\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"32\" cy=\"48\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/>"
+      },
+      {
+        "id": "cycle",
+        "content": "<path d=\"M14 25A20 20 0 0 1 48 17M50 39A20 20 0 0 1 16 47M38 16H49V5M26 48H15V59\"/><circle cx=\"12\" cy=\"33\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"52\" cy=\"31\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/>"
+      },
+      {
+        "id": "clarity",
+        "content": "<path d=\"M7 22V8H21M43 8H57V22M57 42V56H43M21 56H7V42\"/><circle cx=\"23\" cy=\"24\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"39\" cy=\"24\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"39\" cy=\"40\" r=\"4\" fill=\"currentColor\" stroke=\"none\"/>"
+      }
+    ]
+  },
+  "templates": [
+    {
+      "id": "business-card-front",
+      "label": "Business card, front",
+      "group": "Business cards",
+      "title": "{name} / business-card front / 90 × 50 mm trim + 3 mm bleed",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 140,
+          "y": 205,
+          "width": 680,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "brand-tagline",
+          "text": "BUILT FOR WHAT’S NEXT.",
+          "x": 150,
+          "y": 430,
+          "size": 22,
+          "colour": "reverse",
+          "font": "label",
+          "tracking": 3
+        },
+        {
+          "type": "printGuides",
+          "colour": "graphite",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "business-card-back",
+      "label": "Business card, back",
+      "group": "Business cards",
+      "title": "{name} / editable business-card back / replace placeholders",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Name]",
+          "x": 90,
+          "y": 140,
+          "size": 44,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[Role]",
+          "x": 90,
+          "y": 187,
+          "size": 25,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "contact-email",
+          "text": "[Email]",
+          "x": 90,
+          "y": 350,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-phone",
+          "text": "[Phone]",
+          "x": 90,
+          "y": 391,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 90,
+          "y": 432,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "motif",
+          "id": "card-symbol",
+          "x": 725,
+          "y": 327,
+          "width": 150,
+          "height": 128,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "printGuides",
+          "colour": "graphite",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "group": "Stationery",
+      "title": "{name} / editable A4 letterhead / replace placeholders",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 285,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "header-rule",
+          "d": "M62 184H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 62,
+          "y": 238,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "recipient-name",
+          "text": "[Recipient]",
+          "x": 62,
+          "y": 287,
+          "size": 16,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "recipient-address",
+          "text": "[Address]",
+          "x": 62,
+          "y": 313,
+          "size": 14,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 62,
+          "y": 404,
+          "size": 30,
+          "colour": "ink",
+          "weight": 500
+        },
+        {
+          "type": "text",
+          "id": "letter-content",
+          "text": "[Letter content]",
+          "x": 62,
+          "y": 453,
+          "size": 16,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "footer-rule",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "social-post",
+      "label": "Social post",
+      "group": "Social",
+      "title": "{name} / editable square social post",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "id": "post-corner-motif",
+          "x": 625,
+          "y": 684,
+          "width": 565,
+          "height": 480,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 76,
+          "width": 390,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "headline-line-1",
+          "text": "From insight",
+          "x": 80,
+          "y": 455,
+          "size": 108,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "headline-line-2",
+          "text": "to impact.",
+          "x": 80,
+          "y": 570,
+          "size": 108,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "post-message",
+          "text": "[Your message here]",
+          "x": 80,
+          "y": 958,
+          "size": 29,
+          "colour": "reverse"
+        }
+      ]
+    },
+    {
+      "id": "social-banner",
+      "label": "Social banner",
+      "group": "Social",
+      "title": "{name} / editable social banner",
+      "width": 1584,
+      "height": 396,
+      "raster": 1584,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light"
+        },
+        {
+          "type": "motif",
+          "id": "banner-corner-motif",
+          "x": 1118,
+          "y": 30,
+          "width": 470,
+          "height": 400,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 88,
+          "y": 66,
+          "width": 510,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "banner-headline",
+          "text": "Intelligence in motion.",
+          "x": 88,
+          "y": 288,
+          "size": 62,
+          "colour": "primary",
+          "font": "display",
+          "tracking": -2
+        }
+      ]
+    },
+    {
+      "id": "presentation-cover",
+      "label": "Presentation cover",
+      "group": "Presentations",
+      "title": "{name} / editable 16:9 presentation cover",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "motif",
+          "id": "presentation-motif",
+          "x": 1200,
+          "y": 325,
+          "width": 650,
+          "height": 560,
+          "colour": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 136,
+          "y": 95,
+          "width": 445,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "headline-line-1",
+          "text": "From insight",
+          "x": 136,
+          "y": 506,
+          "size": 132,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "headline-line-2",
+          "text": "to impact.",
+          "x": 136,
+          "y": 644,
+          "size": 132,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "presentation-details",
+          "text": "[Presentation title] · [Date]",
+          "x": 140,
+          "y": 944,
+          "size": 30,
+          "colour": "muted"
+        }
+      ]
+    }
+  ],
+  "guide": {
+    "title": "{name} brand guide",
+    "pdfTitle": "{name} brand guide / equal-spacing six-dot identity / v{displayVersion}",
+    "sheetsPdfTitle": "{name} logo reference sheets / v{displayVersion}",
+    "pageTitle": "{name} brand guide / v2 / {page}",
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "paper",
+      "logo": {
+        "x": 62,
+        "y": 30,
+        "width": 165
+      },
+      "header": "{upperName} / IDENTITY GUIDE / V{displayVersion}",
+      "footer": "SIX-DOT IDENTITY / EQUAL SPACING / 10 OCTOBER 2026"
+    },
+    "pages": [
+      {
+        "title": "Intelligence in motion.",
+        "subtitle": "The six-dot symbol joins the original ddcnorth lettering and the established palette.",
+        "name": "Primary lockup",
+        "elements": [
+          {
+            "type": "label",
+            "text": "PRIMARY HORIZONTAL LOCKUP",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 308,
+            "width": 1312
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 608,
+            "width": 836,
+            "height": 224,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 102,
+            "y": 663,
+            "width": 760,
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "THE UPDATED IDENTITY",
+            "x": 952,
+            "y": 644
+          },
+          {
+            "type": "para",
+            "text": "Six equal dots.\nThree rows, aligned right.\nThe original wordmark.",
+            "x": 952,
+            "y": 686,
+            "width": 412,
+            "size": 25,
+            "colour": "ink",
+            "line": 1.7
+          },
+          {
+            "type": "para",
+            "text": "The reference supplies the symbol. The supplied brand kit supplies the lettering, type system and colours.",
+            "x": 64,
+            "y": 888,
+            "width": 1310,
+            "size": 20
+          }
+        ]
+      },
+      {
+        "title": "A consistent six-dot mark.",
+        "subtitle": "Six equal circles on a square grid, with matching horizontal and vertical gaps.",
+        "name": "Construction and clearspace",
+        "elements": [
+          {
+            "type": "symbolConstruction",
+            "x": 64,
+            "y": 256,
+            "width": 500,
+            "height": 368,
+            "top": 278,
+            "size": 307.2,
+            "lines": {
+              "top": 281,
+              "bottom": 595,
+              "left": 100,
+              "right": 527
+            }
+          },
+          {
+            "type": "label",
+            "text": "STANDARD GEOMETRY",
+            "x": 620,
+            "y": 277
+          },
+          {
+            "type": "specTable",
+            "x": 620,
+            "right": 1376,
+            "y": 320,
+            "step": 52,
+            "rows": [
+              [
+                "Canvas",
+                "{symbol.viewBox.2} x {symbol.viewBox.3} units"
+              ],
+              [
+                "Circle diameter",
+                "{derived.diameter} units"
+              ],
+              [
+                "Horizontal centre spacing",
+                "{symbol.horizontalPitch} units"
+              ],
+              [
+                "Vertical centre spacing",
+                "{symbol.verticalPitch} units"
+              ],
+              [
+                "Equal edge-to-edge gap",
+                "{derived.gap} units"
+              ],
+              [
+                "Dot count",
+                "{derived.dotCount}; rows {derived.rows}"
+              ]
+            ]
+          },
+          {
+            "type": "label",
+            "text": "LOCKUP & CLEARSPACE",
+            "x": 64,
+            "y": 675
+          },
+          {
+            "type": "logo",
+            "x": 98,
+            "y": 744,
+            "width": 825
+          },
+          {
+            "type": "rect",
+            "x": 76,
+            "y": 721,
+            "width": 870,
+            "height": 200,
+            "fill": "none",
+            "stroke": "muted",
+            "dash": "7 5"
+          },
+          {
+            "type": "para",
+            "text": "Symbol and lettering share a {lockup.iconHeight}-unit visible height. The internal gap is {lockup.iconGap} units.",
+            "x": 990,
+            "y": 738,
+            "width": 376,
+            "size": 20
+          },
+          {
+            "type": "para",
+            "text": "Leave at least one dot diameter outside the visible logo. The SVG canvas padding is not the full clearspace.",
+            "x": 990,
+            "y": 832,
+            "width": 376,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "One identity, several formats.",
+        "subtitle": "Choose the arrangement that fits the space. Use one colour for the complete logo.",
+        "name": "Lockup family",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 255,
+            "width": 828,
+            "height": 214,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "DDCNORTH / PRIMARY",
+            "x": 86,
+            "y": 284
+          },
+          {
+            "type": "logo",
+            "x": 82,
+            "y": 304,
+            "width": 790
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 255,
+            "width": 452,
+            "height": 214,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "PARENT / DDC",
+            "x": 946,
+            "y": 284,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 955,
+            "y": 315,
+            "width": 390,
+            "family": "ddc",
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 496,
+            "width": 550,
+            "height": 364,
+            "fill": "light"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 88,
+            "y": 530,
+            "colour": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 107,
+            "y": 560,
+            "width": 464,
+            "layout": "stacked",
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 642,
+            "y": 496,
+            "width": 378,
+            "height": 364,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "SYMBOL ONLY",
+            "x": 666,
+            "y": 530
+          },
+          {
+            "type": "symbol",
+            "x": 730,
+            "y": 582,
+            "height": 190
+          },
+          {
+            "type": "rect",
+            "x": 1048,
+            "y": 496,
+            "width": 328,
+            "height": 364,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "PARENT / STACKED",
+            "x": 1072,
+            "y": 530,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 1112,
+            "y": 564,
+            "width": 200,
+            "family": "ddc",
+            "layout": "stacked",
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK-ONLY FILES REMAIN AVAILABLE FOR SECONDARY PLACEMENTS.",
+            "x": 64,
+            "y": 907
+          }
+        ]
+      },
+      {
+        "title": "The original colour system.",
+        "subtitle": "Flat colour gives the symbol a clear silhouette on paper, screen and signage.",
+        "name": "Colour",
+        "elements": [
+          {
+            "type": "swatches",
+            "x": 64,
+            "y": 267,
+            "step": 264,
+            "width": 246,
+            "height": 275,
+            "colours": [
+              "black",
+              "off-white",
+              "graphite",
+              "midnight",
+              "ice"
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 712,
+            "width": 632,
+            "height": 174,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 96,
+            "y": 754,
+            "width": 565,
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 724,
+            "y": 712,
+            "width": 652,
+            "height": 174,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 762,
+            "y": 754,
+            "width": 576,
+            "colour": "primary"
+          },
+          {
+            "type": "para",
+            "text": "White #FFFFFF is the reversal colour. Use the supplied RGB values for screen work; proof print conversion with the supplier.",
+            "x": 64,
+            "y": 921,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "The same typography.",
+        "subtitle": "The replacement icon does not change the letterforms, word spacing or font families in the kit.",
+        "name": "Typography",
+        "elements": [
+          {
+            "type": "label",
+            "text": "DISPLAY / INTER DISPLAY MEDIUM 500 / -0.04 EM",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "text",
+            "text": "Built for what comes next.",
+            "x": 62,
+            "y": 366,
+            "size": 70,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "rule",
+            "y": 415
+          },
+          {
+            "type": "label",
+            "text": "BODY / INTER REGULAR 400",
+            "x": 64,
+            "y": 464
+          },
+          {
+            "type": "para",
+            "text": "Clear thinking. Useful systems. Thoughtful design.\nUse Inter for body copy, interface text and everyday communication.",
+            "x": 64,
+            "y": 516,
+            "width": 1230,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.65
+          },
+          {
+            "type": "rule",
+            "y": 618
+          },
+          {
+            "type": "label",
+            "text": "LABELS / SPACE MONO REGULAR 400 / +0.12 EM",
+            "x": 64,
+            "y": 664
+          },
+          {
+            "type": "text",
+            "text": "DATA / DESIGN / CONNECTION",
+            "x": 64,
+            "y": 722,
+            "size": 28,
+            "font": "label",
+            "tracking": 0.12
+          },
+          {
+            "type": "rule",
+            "y": 767
+          },
+          {
+            "type": "label",
+            "text": "PRODUCTION WORDMARK",
+            "x": 64,
+            "y": 812
+          },
+          {
+            "type": "logo",
+            "x": 58,
+            "y": 827,
+            "width": 460,
+            "layout": "wordmark"
+          },
+          {
+            "type": "para",
+            "text": "Custom ddc outlines + outlined Inter Display Regular north. The complete v1 wordmark geometry is retained.",
+            "x": 752,
+            "y": 817,
+            "width": 606,
+            "size": 22
+          },
+          {
+            "type": "para",
+            "text": "Exact font files are included. The live-text logo remains an editable approximation.",
+            "x": 752,
+            "y": 895,
+            "width": 605,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "A system built from the dots.",
+        "subtitle": "Repeat or crop the six-dot motif for supporting graphics. Keep the logo itself complete.",
+        "name": "Patterns and icons",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "patterns/dot-repeat",
+            "x": 64,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "REPEAT",
+            "x": 64,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/dot-crop",
+            "x": 512,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "CROP",
+            "x": 512,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/dot-ice",
+            "x": 960,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "ICE FIELD",
+            "x": 960,
+            "y": 561
+          },
+          {
+            "type": "rule",
+            "y": 610
+          },
+          {
+            "type": "label",
+            "text": "SUPPORTING ICONS",
+            "x": 64,
+            "y": 660
+          },
+          {
+            "type": "nested",
+            "src": "icons/signal",
+            "x": 96,
+            "y": 698,
+            "width": 110,
+            "height": 110
+          },
+          {
+            "type": "label",
+            "text": "signal",
+            "x": 96,
+            "y": 850
+          },
+          {
+            "type": "nested",
+            "src": "icons/direction",
+            "x": 359,
+            "y": 698,
+            "width": 110,
+            "height": 110
+          },
+          {
+            "type": "label",
+            "text": "direction",
+            "x": 359,
+            "y": 850
+          },
+          {
+            "type": "nested",
+            "src": "icons/network",
+            "x": 622,
+            "y": 698,
+            "width": 110,
+            "height": 110
+          },
+          {
+            "type": "label",
+            "text": "network",
+            "x": 622,
+            "y": 850
+          },
+          {
+            "type": "nested",
+            "src": "icons/cycle",
+            "x": 885,
+            "y": 698,
+            "width": 110,
+            "height": 110
+          },
+          {
+            "type": "label",
+            "text": "cycle",
+            "x": 885,
+            "y": 850
+          },
+          {
+            "type": "nested",
+            "src": "icons/clarity",
+            "x": 1148,
+            "y": 698,
+            "width": 110,
+            "height": 110
+          },
+          {
+            "type": "label",
+            "text": "clarity",
+            "x": 1148,
+            "y": 850
+          },
+          {
+            "type": "para",
+            "text": "These icons are functional graphics. Use the six-dot symbol as the brand identifier; keep supporting graphics secondary.",
+            "x": 64,
+            "y": 910,
+            "width": 1312,
+            "size": 20
+          }
+        ]
+      },
+      {
+        "title": "Ready for everyday use.",
+        "subtitle": "Editable layouts retain the original dimensions, placeholders, palette and font families.",
+        "name": "Applications",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/business-card-front",
+            "x": 64,
+            "y": 263,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "nested",
+            "src": "templates/business-card-back",
+            "x": 64,
+            "y": 520,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "90 x 50 MM CARDS / 3 MM BLEED",
+            "x": 64,
+            "y": 791
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-post",
+            "x": 499,
+            "y": 263,
+            "width": 315,
+            "height": 315
+          },
+          {
+            "type": "label",
+            "text": "1080 x 1080 POST",
+            "x": 499,
+            "y": 611
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-cover",
+            "x": 499,
+            "y": 649,
+            "width": 315,
+            "height": 177.2
+          },
+          {
+            "type": "label",
+            "text": "1920 x 1080 COVER",
+            "x": 499,
+            "y": 861
+          },
+          {
+            "type": "rect",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/letterhead-a4",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350
+          },
+          {
+            "type": "label",
+            "text": "A4 LETTERHEAD",
+            "x": 846,
+            "y": 647
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-banner",
+            "x": 846,
+            "y": 696,
+            "width": 530,
+            "height": 132.5
+          },
+          {
+            "type": "label",
+            "text": "1584 x 396 BANNER",
+            "x": 846,
+            "y": 865
+          },
+          {
+            "type": "para",
+            "text": "Replace bracketed fields in SVG files. The included template PDFs are layout proofs with placeholder content.",
+            "x": 64,
+            "y": 920,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "Use the right file for the job.",
+        "subtitle": "The same geometry drives the vectors, images, templates and website components.",
+        "name": "Files and minimum sizes",
+        "elements": [
+          {
+            "type": "label",
+            "text": "SCREEN & PRINT",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "list",
+            "x": 64,
+            "detailX": 267,
+            "right": 818,
+            "y": 322,
+            "step": 63,
+            "rows": [
+              [
+                "SVG",
+                "Scale-independent logos and symbols."
+              ],
+              [
+                "PNG",
+                "Transparent artwork for slides and documents."
+              ],
+              [
+                "PDF",
+                "Vector handoff and layout proof files."
+              ],
+              [
+                "REACT / CSS",
+                "Inline colour inheritance and local fonts."
+              ],
+              [
+                "BRAND.JSON",
+                "One source for the complete identity system."
+              ]
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 883,
+            "y": 263,
+            "width": 493,
+            "height": 342,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "MINIMUM SIZES",
+            "x": 913,
+            "y": 307,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumHorizontalWidthPx} px / {lockup.minimumHorizontalWidthMm} mm",
+            "x": 913,
+            "y": 366,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Primary horizontal logo, including the supplied canvas.",
+            "x": 913,
+            "y": 407,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumSymbolHeightPx} px / {lockup.minimumSymbolHeightMm} mm",
+            "x": 913,
+            "y": 494,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Standard symbol height. Use the micro variant for smaller screen icons.",
+            "x": 913,
+            "y": 535,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "label",
+            "text": "SMALL SCREEN ICONS",
+            "x": 64,
+            "y": 670
+          },
+          {
+            "type": "symbol",
+            "x": 66,
+            "y": 704,
+            "height": 136
+          },
+          {
+            "type": "symbol",
+            "x": 262,
+            "y": 704,
+            "height": 136,
+            "micro": true
+          },
+          {
+            "type": "label",
+            "text": "STANDARD",
+            "x": 64,
+            "y": 882
+          },
+          {
+            "type": "label",
+            "text": "MICRO",
+            "x": 264,
+            "y": 882
+          },
+          {
+            "type": "para",
+            "text": "The favicon uses a small optical adjustment: identical dot centres with a slightly smaller radius, so the rows stay separate.",
+            "x": 493,
+            "y": 706,
+            "width": 380,
+            "size": 23,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Open index.html to browse the kit. Install desktop fonts before editing live text. Keep production logo outlines intact.",
+            "x": 944,
+            "y": 706,
+            "width": 432,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      }
+    ],
+    "sheets": [
+      {
+        "id": "logo-sheet-01",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 1",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheets",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "ddcnorth / SHEET 1 OF 3",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 247,
+            "width": 1130,
+            "family": "ddcnorth"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 540,
+            "width": 700,
+            "family": "ddcnorth",
+            "layout": "wordmark"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 987,
+            "y": 561,
+            "width": 355,
+            "family": "ddcnorth",
+            "layout": "stacked"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / SIX-DOT IDENTITY / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      },
+      {
+        "id": "logo-sheet-02",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 2",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheets",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "ddcnorth / SHEET 2 OF 3",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 195,
+            "width": 1312,
+            "height": 294,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 121,
+            "y": 239,
+            "width": 1198,
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 525,
+            "width": 700,
+            "height": 395,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 150,
+            "y": 552,
+            "width": 520,
+            "layout": "stacked",
+            "colour": "primary"
+          },
+          {
+            "type": "symbol",
+            "x": 967,
+            "y": 581,
+            "height": 280,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / SIX-DOT IDENTITY / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      },
+      {
+        "id": "logo-sheet-03",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 3",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheets",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "ddc / SHEET 3 OF 3",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 247,
+            "width": 815,
+            "family": "ddc"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 540,
+            "width": 500,
+            "family": "ddc",
+            "layout": "wordmark"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 987,
+            "y": 561,
+            "width": 355,
+            "family": "ddc",
+            "layout": "stacked"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / SIX-DOT IDENTITY / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      },
+      {
+        "id": "brand-overview",
+        "group": "overview",
+        "width": 1600,
+        "height": 1300,
+        "title": "{name} / complete brand overview",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1600,
+            "height": 1300,
+            "fill": "paper"
+          },
+          {
+            "type": "label",
+            "text": "{upperName} / BRAND KIT V{displayVersion}",
+            "x": 64,
+            "y": 54
+          },
+          {
+            "type": "text",
+            "text": "Six dots. Same ddcnorth.",
+            "x": 64,
+            "y": 130,
+            "size": 56,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 190,
+            "width": 1488
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 513,
+            "width": 907,
+            "height": 225,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 92,
+            "y": 565,
+            "width": 850,
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 997,
+            "y": 513,
+            "width": 255,
+            "height": 225,
+            "fill": "light"
+          },
+          {
+            "type": "symbol",
+            "x": 1049,
+            "y": 554,
+            "height": 145,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 1278,
+            "y": 513,
+            "width": 258,
+            "height": 225,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 1328,
+            "y": 554,
+            "height": 145
+          },
+          {
+            "type": "swatchStrip",
+            "x": 64,
+            "y": 766,
+            "step": 184,
+            "width": 160,
+            "height": 34,
+            "colours": [
+              "black",
+              "off-white",
+              "graphite",
+              "midnight",
+              "ice"
+            ]
+          },
+          {
+            "type": "label",
+            "text": "INTER / INTER DISPLAY / SPACE MONO",
+            "x": 64,
+            "y": 838
+          },
+          {
+            "type": "nested",
+            "src": "templates/business-card-front",
+            "x": 64,
+            "y": 886,
+            "width": 462,
+            "height": 269.5
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-post",
+            "x": 554,
+            "y": 886,
+            "width": 270,
+            "height": 270
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-cover",
+            "x": 852,
+            "y": 886,
+            "width": 480,
+            "height": 270
+          },
+          {
+            "type": "label",
+            "text": "VECTORS / IMAGES / TEMPLATES / WEB / GUIDE / SOURCE",
+            "x": 64,
+            "y": 1237
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "DdcNorthLogo",
+    "symbolComponentName": "DdcNorthSymbol",
+    "cssPrefix": "ddc",
+    "svgDescription": "ddcnorth six-dot identity. Six circular vector primitives; the original kit wordmark and typography are preserved.",
+    "appIcon": {
+      "background": "primary",
+      "colour": "reverse",
+      "size": 760
+    },
+    "favicon": {
+      "light": "#000000",
+      "dark": "#FFFFFF",
+      "size": 56,
+      "micro": true,
+      "title": "{name} favicon / micro-size variant"
+    },
+    "wordmarkConstruction": "Custom ddc outlines and original kit north outline",
+    "intro": {
+      "eyebrow": "Brand identity / 2026",
+      "headline": "ddcnorth\nBrand assets.",
+      "body": "The new six-dot symbol, paired with the original kit lettering, Inter, Inter Display and Space Mono. A complete set of logos, templates and implementation files.",
+      "edition": "Six-dot edition / v{displayVersion}",
+      "typeSample": "From insight\nto impact.",
+      "footer": "ddcnorth — built for what’s next.\nSix-dot symbol update · Original kit lettering, typography and colours."
+    },
+    "landing": {
+      "eyebrow": "Data / Design / Systems",
+      "headline": "From data\nto a brighter\ntomorrow.",
+      "body": "[Replace with a concise statement about the people you help, the work you do and the difference it makes.]",
+      "cta": "Start a conversation",
+      "contactEyebrow": "Built for what’s next.",
+      "contactBody": "[Add a verified contact address or contact form here.]",
+      "footer": "ddcnorth — Built for what’s next."
+    }
+  },
+  "files": [
+    {
+      "to": "README.md",
+      "from": "docs/README.md"
+    },
+    {
+      "to": "CHANGELOG.md",
+      "from": "docs/CHANGELOG.md"
+    },
+    {
+      "to": "guidelines/FONTS.md",
+      "from": "docs/FONTS.md"
+    },
+    {
+      "to": "templates/README.md",
+      "from": "docs/templates-README.md"
+    },
+    "fonts/Inter-OFL.txt",
+    "fonts/README.md",
+    "fonts/SpaceMono-OFL.txt",
+    "fonts/SpaceMono-Regular.ttf",
+    "fonts/font-manifest.json",
+    "fonts/desktop/Inter-Regular.ttf",
+    "fonts/web/Inter-Regular.woff2",
+    "fonts/desktop/Inter-SemiBold.ttf",
+    "fonts/web/Inter-SemiBold.woff2",
+    "fonts/desktop/InterDisplay-ExtraBold.ttf",
+    "fonts/web/InterDisplay-ExtraBold.woff2",
+    "fonts/desktop/InterDisplay-Medium.ttf",
+    "fonts/web/InterDisplay-Medium.woff2",
+    "fonts/desktop/InterDisplay-Regular.ttf",
+    "fonts/web/InterDisplay-Regular.woff2",
+    "reference/PROVENANCE.json",
+    "reference/README.md",
+    "reference/six-dot-reference.png"
+  ]
+}

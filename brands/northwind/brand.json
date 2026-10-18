@@ -1,0 +1,1715 @@
+{
+  "schema": "brandkit/1",
+  "id": "northwind",
+  "name": "northwind",
+  "version": "1.0",
+  "displayVersion": "1.0",
+  "source": "Created with the brandkit starter.",
+  "colours": {
+    "ink": "#14171A",
+    "paper": "#F5F3EE",
+    "muted": "#565B61",
+    "primary": "#1F4E46",
+    "light": "#CFE4DC",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "ink": "ink",
+    "paper": "paper",
+    "muted": "muted",
+    "primary": "primary",
+    "light": "light",
+    "reverse": "white",
+    "line": "#D9DCDF",
+    "rule": "#CFD2D4"
+  },
+  "logoColours": [
+    "ink",
+    "white",
+    "primary",
+    "currentColor"
+  ],
+  "rasterColours": [
+    "ink",
+    "white",
+    "primary"
+  ],
+  "fonts": {
+    "body": {
+      "family": "Inter",
+      "stack": "Inter, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/desktop/Inter-Regular.ttf",
+      "web": "fonts/web/Inter-Regular.woff2",
+      "label": "Inter Regular 400"
+    },
+    "bold": {
+      "family": "Inter",
+      "stack": "Inter, Arial, sans-serif",
+      "weight": 600,
+      "file": "fonts/desktop/Inter-SemiBold.ttf",
+      "web": "fonts/web/Inter-SemiBold.woff2",
+      "label": "Inter SemiBold 600"
+    },
+    "display": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 500,
+      "file": "fonts/desktop/InterDisplay-Medium.ttf",
+      "web": "fonts/web/InterDisplay-Medium.woff2",
+      "label": "Inter Display Medium 500"
+    },
+    "displayRegular": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 400,
+      "file": "fonts/desktop/InterDisplay-Regular.ttf",
+      "web": "fonts/web/InterDisplay-Regular.woff2",
+      "label": "Inter Display Regular 400"
+    },
+    "extra": {
+      "family": "Inter Display",
+      "stack": "Inter Display, Inter, sans-serif",
+      "weight": 800,
+      "file": "fonts/desktop/InterDisplay-ExtraBold.ttf",
+      "web": "fonts/web/InterDisplay-ExtraBold.woff2",
+      "label": "Inter Display ExtraBold 800"
+    },
+    "label": {
+      "family": "Space Mono",
+      "stack": "Space Mono, monospace",
+      "weight": 400,
+      "file": "fonts/SpaceMono-Regular.ttf",
+      "web": "fonts/SpaceMono-Regular.ttf",
+      "label": "Space Mono Regular 400"
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Inter Display",
+      "weight": 500,
+      "trackingEm": -0.04
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    },
+    "labels": {
+      "family": "Space Mono",
+      "weight": 400,
+      "trackingEm": 0.12
+    }
+  },
+  "symbol": {
+    "name": "northwind-symbol",
+    "viewBox": [
+      0,
+      0,
+      256,
+      256
+    ],
+    "radius": 40,
+    "microRadius": 36,
+    "centres": [
+      [
+        40,
+        40
+      ],
+      [
+        128,
+        40
+      ],
+      [
+        40,
+        128
+      ],
+      [
+        128,
+        128
+      ],
+      [
+        216,
+        128
+      ],
+      [
+        128,
+        216
+      ],
+      [
+        216,
+        216
+      ]
+    ],
+    "rows": [
+      2,
+      3,
+      2
+    ],
+    "columns": [
+      2,
+      3,
+      2
+    ],
+    "horizontalPitch": 88,
+    "verticalPitch": 88,
+    "horizontalGap": 8,
+    "verticalGap": 8,
+    "title": "symbol",
+    "masterTitle": "symbol master",
+    "microDescription": "Optical micro variant: the same centres with slightly smaller elements, for favicons and symbols below 32 pixels."
+  },
+  "wordmark": {
+    "height": 74.267578125,
+    "left": 5.810546875,
+    "glyphs": {
+      "northwind": "M16.11 43.41L16.11 43.41L16.11 73.1L5.81 73.1L5.81 21.53L15.92 21.53L15.92 29.3Q21.19 20.51 31.49 20.51L31.49 20.51Q36.82 20.51 41.04 22.83Q45.26 25.15 47.71 29.69Q50.15 34.23 50.15 40.97L50.15 40.97L50.15 73.1L39.84 73.1L39.84 42.24Q39.84 36.04 36.87 32.89Q33.89 29.74 28.56 29.74L28.56 29.74Q23.29 29.74 19.7 32.98Q16.11 36.23 16.11 43.41M81.94 74.27L81.94 74.27Q74.56 74.27 69 70.85Q63.43 67.43 60.33 61.38Q57.23 55.32 57.23 47.41L57.23 47.41Q57.23 39.4 60.33 33.33Q63.43 27.25 69 23.8Q74.56 20.36 81.94 20.36L81.94 20.36Q89.31 20.36 94.85 23.8Q100.39 27.25 103.49 33.33Q106.59 39.4 106.59 47.41L106.59 47.41Q106.59 55.32 103.49 61.38Q100.39 67.43 94.85 70.85Q89.31 74.27 81.94 74.27M81.94 65.38L81.94 65.38Q88.58 65.38 92.38 60.5Q96.19 55.62 96.19 47.41L96.19 47.41Q96.19 39.11 92.36 34.18Q88.53 29.25 81.94 29.25L81.94 29.25Q75.34 29.25 71.51 34.16Q67.68 39.06 67.68 47.41L67.68 47.41Q67.68 55.66 71.49 60.52Q75.29 65.38 81.94 65.38M124.03 73.1L113.72 73.1L113.72 21.53L123.59 21.53L123.59 29.88L123.78 29.88Q125.2 25.63 128.25 23.27Q131.3 20.9 136.23 20.9L136.23 20.9Q137.41 20.9 138.38 21Q139.36 21.09 139.99 21.14L139.99 21.14L139.99 30.76Q139.41 30.62 137.89 30.44Q136.38 30.27 134.57 30.27L134.57 30.27Q130.23 30.27 127.13 33.3Q124.03 36.33 124.03 42.63L124.03 42.63L124.03 73.1M160.06 21.53L170.51 21.53L170.51 30.03L160.06 30.03L160.06 59.47Q160.06 62.35 161.24 63.48Q162.41 64.6 165.48 64.6L165.48 64.6L170.51 64.6L170.51 73.1L164.02 73.1Q149.71 73.1 149.71 60.79L149.71 60.79L149.71 30.03L140.63 30.03L140.63 21.53L149.71 21.53L149.71 7.47L160.06 7.47L160.06 21.53M186.97 43.41L186.97 43.41L186.97 73.1L176.67 73.1L176.67 0.34L186.97 0.34L186.97 28.96Q192.29 20.51 202.35 20.51L202.35 20.51Q207.67 20.51 211.9 22.83Q216.12 25.15 218.56 29.69Q221 34.23 221 40.97L221 40.97L221 73.1L210.7 73.1L210.7 42.24Q210.7 36.04 207.72 32.89Q204.74 29.74 199.42 29.74L199.42 29.74Q194.15 29.74 190.56 32.98Q186.97 36.23 186.97 43.41M252.55 73.1L241.95 73.1L225.99 21.53L236.78 21.53L242.69 42.63Q244 47.31 245.2 52.2Q246.4 57.08 247.57 61.87L247.57 61.87Q248.84 57.08 250.08 52.2Q251.33 47.31 252.6 42.63L252.6 42.63L258.6 21.53L268.42 21.53L274.33 42.63Q275.64 47.27 276.87 52.1Q278.09 56.93 279.31 61.67L279.31 61.67Q280.48 56.93 281.67 52.1Q282.87 47.27 284.19 42.63L284.19 42.63L290.15 21.53L301.04 21.53L285.07 73.1L274.33 73.1L267.78 50.63Q266.66 46.73 265.61 42.63Q264.56 38.53 263.54 34.47L263.54 34.47Q262.46 38.53 261.41 42.63Q260.36 46.73 259.19 50.63L259.19 50.63L252.55 73.1M316.32 73.1L306.02 73.1L306.02 21.53L316.32 21.53L316.32 73.1M311.14 12.65L311.14 12.65Q308.41 12.65 306.53 10.82Q304.65 8.98 304.65 6.35L304.65 6.35Q304.65 3.66 306.53 1.83Q308.41 0 311.14 0L311.14 0Q313.88 0 315.78 1.83Q317.69 3.66 317.69 6.35L317.69 6.35Q317.69 8.98 315.78 10.82Q313.88 12.65 311.14 12.65M336.24 43.41L336.24 43.41L336.24 73.1L325.94 73.1L325.94 21.53L336.05 21.53L336.05 29.3Q341.32 20.51 351.63 20.51L351.63 20.51Q356.95 20.51 361.17 22.83Q365.39 25.15 367.84 29.69Q370.28 34.23 370.28 40.97L370.28 40.97L370.28 73.1L359.97 73.1L359.97 42.24Q359.97 36.04 357 32.89Q354.02 29.74 348.7 29.74L348.7 29.74Q343.42 29.74 339.83 32.98Q336.24 36.23 336.24 43.41M399.72 74.12L399.72 74.12Q392.98 74.12 387.96 70.73Q382.93 67.33 380.14 61.3Q377.36 55.27 377.36 47.31L377.36 47.31Q377.36 39.36 380.17 33.33Q382.97 27.29 388 23.9Q393.03 20.51 399.67 20.51L399.67 20.51Q404.7 20.51 408.85 22.61Q413 24.71 415.49 29L415.49 29L415.59 29L415.59 0.34L425.89 0.34L425.89 73.1L415.79 73.1L415.79 65.23L415.69 65.23Q413.1 69.73 408.93 71.92Q404.75 74.12 399.72 74.12M401.82 65.23L401.82 65.23Q408.41 65.23 412.34 60.33Q416.28 55.42 416.28 47.31L416.28 47.31Q416.28 39.16 412.34 34.25Q408.41 29.35 401.82 29.35L401.82 29.35Q395.57 29.35 391.69 33.96Q387.81 38.57 387.81 47.31L387.81 47.31Q387.81 56.05 391.69 60.64Q395.57 65.23 401.82 65.23",
+      "nw": "M16.11 22.9L16.11 22.9L16.11 52.59L5.81 52.59L5.81 1.03L15.92 1.03L15.92 8.79Q21.19 0 31.49 0L31.49 0Q36.82 0 41.04 2.32Q45.26 4.64 47.71 9.18Q50.15 13.72 50.15 20.46L50.15 20.46L50.15 52.59L39.84 52.59L39.84 21.73Q39.84 15.53 36.87 12.38Q33.89 9.23 28.56 9.23L28.56 9.23Q23.29 9.23 19.7 12.48Q16.11 15.72 16.11 22.9M81.69 52.59L71.1 52.59L55.13 1.03L65.92 1.03L71.83 22.12Q73.15 26.81 74.34 31.69Q75.54 36.57 76.71 41.36L76.71 41.36Q77.98 36.57 79.23 31.69Q80.47 26.81 81.74 22.12L81.74 22.12L87.75 1.03L97.56 1.03L103.47 22.12Q104.79 26.76 106.01 31.59Q107.23 36.43 108.45 41.16L108.45 41.16Q109.62 36.43 110.82 31.59Q112.01 26.76 113.33 22.12L113.33 22.12L119.29 1.03L130.18 1.03L114.21 52.59L103.47 52.59L96.93 30.13Q95.8 26.22 94.75 22.12Q93.7 18.02 92.68 13.96L92.68 13.96Q91.6 18.02 90.55 22.12Q89.5 26.22 88.33 30.13L88.33 30.13L81.69 52.59"
+    },
+    "variants": {
+      "northwind": {
+        "width": 425.89453125,
+        "parts": [
+          {
+            "glyph": "northwind",
+            "x": 0,
+            "y": 0,
+            "attrs": {
+              "data-word": "northwind"
+            }
+          }
+        ]
+      },
+      "nw": {
+        "width": 130.177734375,
+        "parts": [
+          {
+            "glyph": "nw",
+            "x": 0,
+            "y": 20.5078125,
+            "attrs": {
+              "data-word": "nw"
+            }
+          }
+        ]
+      }
+    },
+    "editable": {
+      "text": {
+        "family": "northwind",
+        "wrap": false,
+        "title": "{name} / text / font-dependent approximation",
+        "parts": [
+          {
+            "element": "text",
+            "attrs": {
+              "fill": "{colour}",
+              "x": "0",
+              "y": 73.095703125,
+              "font-family": "Inter Display, Inter, sans-serif",
+              "font-size": 100,
+              "font-weight": "500",
+              "letter-spacing": -2
+            },
+            "content": "northwind"
+          }
+        ]
+      }
+    }
+  },
+  "families": [
+    {
+      "id": "northwind",
+      "wordmark": "northwind",
+      "typeHeight": 72,
+      "label": "northwind"
+    },
+    {
+      "id": "nw",
+      "wordmark": "nw",
+      "typeHeight": 72,
+      "label": "Parent nw"
+    }
+  ],
+  "lockup": {
+    "iconHeight": 120,
+    "iconGap": 28,
+    "stackedIconHeight": 128,
+    "stackedTypeHeight": 56,
+    "stackedGap": 28,
+    "canvasPadding": 16,
+    "wordmarkHeight": 72,
+    "clearspaceRecommendation": "At least one symbol element around the visible artwork.",
+    "minimumSymbolHeightPx": 32,
+    "minimumHorizontalWidthPx": 200,
+    "minimumSymbolHeightMm": 8,
+    "minimumHorizontalWidthMm": 50
+  },
+  "copy": {
+    "svgDescription": "{name} identity artwork. Self-contained vector artwork generated by brandkit.",
+    "templateDescription": "{name} application. Logo outlined; text live and editable.",
+    "logoLabel": "{name} logo",
+    "motifLabel": "{name} symbol",
+    "tagline": "Steady progress, clearly made."
+  },
+  "patterns": [
+    {
+      "id": "repeat",
+      "title": "{name} / repeating pattern",
+      "width": 960,
+      "height": 600,
+      "background": "paper",
+      "repeat": {
+        "x": [
+          -60,
+          1000,
+          280
+        ],
+        "y": [
+          -80,
+          700,
+          240
+        ],
+        "scale": 0.6,
+        "colour": "light"
+      }
+    },
+    {
+      "id": "crop",
+      "title": "{name} / large crop",
+      "width": 960,
+      "height": 600,
+      "background": "primary",
+      "place": [
+        {
+          "x": 265,
+          "y": -100,
+          "scale": 3.1,
+          "colour": "light"
+        }
+      ]
+    },
+    {
+      "id": "field",
+      "title": "{name} / colour field",
+      "width": 960,
+      "height": 600,
+      "background": "light",
+      "place": [
+        {
+          "x": 400,
+          "y": 82,
+          "scale": 1.75,
+          "colour": "primary"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "business-card-front",
+      "label": "Business card, front",
+      "title": "{name} / business-card front / 90 × 50 mm trim + 3 mm bleed",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 140,
+          "y": 215,
+          "width": 600,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "brand-tagline",
+          "text": "STEADY PROGRESS, CLEARLY MADE.",
+          "x": 150,
+          "y": 430,
+          "size": 22,
+          "colour": "reverse",
+          "font": "label",
+          "tracking": 3
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "business-card-back",
+      "label": "Business card, back",
+      "title": "{name} / business-card back / replace placeholders",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Name]",
+          "x": 90,
+          "y": 140,
+          "size": 44,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[Role]",
+          "x": 90,
+          "y": 187,
+          "size": 25,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "contact-email",
+          "text": "[Email]",
+          "x": 90,
+          "y": 350,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-phone",
+          "text": "[Phone]",
+          "x": 90,
+          "y": 391,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-website",
+          "text": "[Website]",
+          "x": 90,
+          "y": 432,
+          "size": 25,
+          "colour": "ink"
+        },
+        {
+          "type": "motif",
+          "id": "card-symbol",
+          "x": 725,
+          "y": 327,
+          "width": 150,
+          "height": 128,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "group": "Stationery",
+      "title": "{name} / A4 letterhead / replace placeholders",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "reverse"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 240,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "header-rule",
+          "d": "M62 184H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 62,
+          "y": 238,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "recipient-name",
+          "text": "[Recipient]",
+          "x": 62,
+          "y": 287,
+          "size": 16,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "recipient-address",
+          "text": "[Address]",
+          "x": 62,
+          "y": 313,
+          "size": 14,
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 62,
+          "y": 404,
+          "size": 30,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "letter-content",
+          "text": "[Letter content]",
+          "x": 62,
+          "y": 453,
+          "size": 16,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "footer-rule",
+          "d": "M62 1015H732",
+          "stroke": "rule",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details]",
+          "x": 62,
+          "y": 1056,
+          "size": 12,
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "social-post",
+      "label": "Social post",
+      "group": "Social",
+      "title": "{name} / square social post",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "primary"
+        },
+        {
+          "type": "motif",
+          "id": "post-corner-motif",
+          "x": 625,
+          "y": 684,
+          "width": 565,
+          "height": 480,
+          "colour": "light",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 76,
+          "width": 360,
+          "colour": "reverse"
+        },
+        {
+          "type": "text",
+          "id": "headline-line-1",
+          "text": "Say it",
+          "x": 80,
+          "y": 455,
+          "size": 108,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "headline-line-2",
+          "text": "simply.",
+          "x": 80,
+          "y": 570,
+          "size": 108,
+          "colour": "reverse",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "post-message",
+          "text": "[Your message here]",
+          "x": 80,
+          "y": 958,
+          "size": 29,
+          "colour": "reverse"
+        }
+      ]
+    },
+    {
+      "id": "social-banner",
+      "label": "Social banner",
+      "group": "Social",
+      "title": "{name} / social banner",
+      "width": 1584,
+      "height": 396,
+      "raster": 1584,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light"
+        },
+        {
+          "type": "motif",
+          "id": "banner-corner-motif",
+          "x": 1118,
+          "y": 30,
+          "width": 470,
+          "height": 400,
+          "colour": "primary",
+          "align": "right"
+        },
+        {
+          "type": "logo",
+          "x": 88,
+          "y": 76,
+          "width": 460,
+          "colour": "primary"
+        },
+        {
+          "type": "text",
+          "id": "banner-headline",
+          "text": "Steady progress, clearly made.",
+          "x": 88,
+          "y": 288,
+          "size": 56,
+          "colour": "primary",
+          "font": "display",
+          "tracking": -2
+        }
+      ]
+    },
+    {
+      "id": "presentation-cover",
+      "label": "Presentation cover",
+      "group": "Presentations",
+      "title": "{name} / 16:9 presentation cover",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "motif",
+          "id": "presentation-motif",
+          "x": 1200,
+          "y": 325,
+          "width": 650,
+          "height": 560,
+          "colour": "primary"
+        },
+        {
+          "type": "logo",
+          "x": 136,
+          "y": 95,
+          "width": 420,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "headline-line-1",
+          "text": "Say it",
+          "x": 136,
+          "y": 506,
+          "size": 132,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "headline-line-2",
+          "text": "simply.",
+          "x": 136,
+          "y": 644,
+          "size": 132,
+          "colour": "ink",
+          "font": "display",
+          "tracking": -5
+        },
+        {
+          "type": "text",
+          "id": "presentation-details",
+          "text": "[Presentation title] · [Date]",
+          "x": 140,
+          "y": 944,
+          "size": 30,
+          "colour": "muted"
+        }
+      ]
+    }
+  ],
+  "guide": {
+    "title": "{name} brand guide",
+    "pdfTitle": "{name} brand guide / v{displayVersion}",
+    "sheetsPdfTitle": "{name} logo reference sheets / v{displayVersion}",
+    "pageTitle": "{name} brand guide / {page}",
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "paper",
+      "logo": {
+        "x": 62,
+        "y": 30,
+        "width": 165
+      },
+      "header": "{upperName} / IDENTITY GUIDE / V{displayVersion}",
+      "footer": "{upperName} / BRAND GUIDE"
+    },
+    "pages": [
+      {
+        "title": "{copy.tagline}",
+        "subtitle": "The {name} identity: a symbol, a wordmark and a palette, used the same way everywhere.",
+        "name": "Primary lockup",
+        "elements": [
+          {
+            "type": "label",
+            "text": "PRIMARY HORIZONTAL LOCKUP",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 300,
+            "width": 1320,
+            "height": 270,
+            "align": "start"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 608,
+            "width": 836,
+            "height": 224,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 104,
+            "y": 648,
+            "width": 756,
+            "height": 144,
+            "align": "start",
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "THE IDENTITY",
+            "x": 952,
+            "y": 644
+          },
+          {
+            "type": "para",
+            "text": "One symbol.\nOne wordmark.\nOne palette.",
+            "x": 952,
+            "y": 686,
+            "width": 412,
+            "size": 25,
+            "colour": "ink",
+            "line": 1.7
+          },
+          {
+            "type": "para",
+            "text": "Every file in this kit is generated from one brand.json, so the logo, templates and guide always agree.",
+            "x": 64,
+            "y": 888,
+            "width": 1310,
+            "size": 20
+          }
+        ]
+      },
+      {
+        "title": "How the symbol is built.",
+        "subtitle": "{derived.dotCount} equal shapes on a square grid, with matching horizontal and vertical gaps.",
+        "name": "Construction and clearspace",
+        "elements": [
+          {
+            "type": "symbolConstruction",
+            "x": 64,
+            "y": 256,
+            "width": 500,
+            "height": 368,
+            "top": 278,
+            "size": 307.2,
+            "lines": {
+              "top": 281,
+              "bottom": 595,
+              "left": 100,
+              "right": 527
+            }
+          },
+          {
+            "type": "label",
+            "text": "STANDARD GEOMETRY",
+            "x": 620,
+            "y": 277
+          },
+          {
+            "type": "specTable",
+            "x": 620,
+            "right": 1376,
+            "y": 320,
+            "step": 52,
+            "rows": [
+              [
+                "Canvas",
+                "{symbol.viewBox.2} x {symbol.viewBox.3} units"
+              ],
+              [
+                "Element size",
+                "{derived.diameter} units"
+              ],
+              [
+                "Centre spacing",
+                "{symbol.horizontalPitch} units"
+              ],
+              [
+                "Edge-to-edge gap",
+                "{derived.gap} units"
+              ],
+              [
+                "Element count",
+                "{derived.dotCount}"
+              ],
+              [
+                "Rows",
+                "{derived.rows}"
+              ]
+            ]
+          },
+          {
+            "type": "label",
+            "text": "LOCKUP & CLEARSPACE",
+            "x": 64,
+            "y": 675
+          },
+          {
+            "type": "logo",
+            "x": 100,
+            "y": 745,
+            "width": 820,
+            "height": 152
+          },
+          {
+            "type": "rect",
+            "x": 76,
+            "y": 721,
+            "width": 870,
+            "height": 200,
+            "fill": "none",
+            "stroke": "muted",
+            "dash": "7 5"
+          },
+          {
+            "type": "para",
+            "text": "The symbol is {lockup.iconHeight} units tall in the lockup; the gap to the wordmark is {lockup.iconGap} units.",
+            "x": 990,
+            "y": 738,
+            "width": 376,
+            "size": 20
+          },
+          {
+            "type": "para",
+            "text": "Leave at least one element’s width clear around the visible logo.",
+            "x": 990,
+            "y": 832,
+            "width": 376,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "One identity, several formats.",
+        "subtitle": "Choose the arrangement that fits the space. Use one colour for the complete logo.",
+        "name": "Lockup family",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 255,
+            "width": 828,
+            "height": 214,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "PRIMARY",
+            "x": 86,
+            "y": 284
+          },
+          {
+            "type": "logo",
+            "x": 86,
+            "y": 300,
+            "width": 780,
+            "height": 150
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 255,
+            "width": 452,
+            "height": 214,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "PARENT",
+            "x": 946,
+            "y": 284,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 946,
+            "y": 300,
+            "width": 408,
+            "height": 150,
+            "family": "nw",
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 496,
+            "width": 550,
+            "height": 364,
+            "fill": "light"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 88,
+            "y": 530,
+            "colour": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 88,
+            "y": 550,
+            "width": 502,
+            "height": 286,
+            "layout": "stacked",
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 642,
+            "y": 496,
+            "width": 378,
+            "height": 364,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "SYMBOL ONLY",
+            "x": 666,
+            "y": 530
+          },
+          {
+            "type": "symbol",
+            "x": 736,
+            "y": 582,
+            "height": 190
+          },
+          {
+            "type": "rect",
+            "x": 1048,
+            "y": 496,
+            "width": 328,
+            "height": 364,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 1072,
+            "y": 530,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 1072,
+            "y": 560,
+            "width": 280,
+            "height": 280,
+            "layout": "wordmark",
+            "colour": "reverse"
+          }
+        ]
+      },
+      {
+        "title": "The colour system.",
+        "subtitle": "Flat colour, used with plenty of the paper tone around it.",
+        "name": "Colour",
+        "elements": [
+          {
+            "type": "swatches",
+            "x": 64,
+            "y": 267,
+            "step": 264,
+            "width": 246,
+            "height": 275,
+            "colours": [
+              "ink",
+              "paper",
+              "muted",
+              "primary",
+              "light"
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 712,
+            "width": 632,
+            "height": 174,
+            "fill": "primary"
+          },
+          {
+            "type": "logo",
+            "x": 96,
+            "y": 732,
+            "width": 568,
+            "height": 134,
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 724,
+            "y": 712,
+            "width": 652,
+            "height": 174,
+            "fill": "light"
+          },
+          {
+            "type": "logo",
+            "x": 756,
+            "y": 732,
+            "width": 588,
+            "height": 134,
+            "colour": "primary"
+          },
+          {
+            "type": "para",
+            "text": "White is the reversal colour. Use the hex values for screen work; proof print conversion with the supplier.",
+            "x": 64,
+            "y": 921,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "Typography.",
+        "subtitle": "Three faces, each with one job.",
+        "name": "Typography",
+        "elements": [
+          {
+            "type": "label",
+            "text": "DISPLAY / {fonts.display.label}",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "text",
+            "text": "{copy.tagline}",
+            "x": 62,
+            "y": 366,
+            "size": 70,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "rule",
+            "y": 415
+          },
+          {
+            "type": "label",
+            "text": "BODY / {fonts.body.label}",
+            "x": 64,
+            "y": 464
+          },
+          {
+            "type": "para",
+            "text": "Clear, plain sentences. Use the body face for paragraphs, interface text and everyday communication.",
+            "x": 64,
+            "y": 516,
+            "width": 1230,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.65
+          },
+          {
+            "type": "rule",
+            "y": 618
+          },
+          {
+            "type": "label",
+            "text": "LABELS / {fonts.label.label}",
+            "x": 64,
+            "y": 664
+          },
+          {
+            "type": "text",
+            "text": "{upperName} / LABELS / CAPTIONS",
+            "x": 64,
+            "y": 722,
+            "size": 28,
+            "font": "label",
+            "tracking": 0.12
+          },
+          {
+            "type": "rule",
+            "y": 767
+          },
+          {
+            "type": "label",
+            "text": "PRODUCTION WORDMARK",
+            "x": 64,
+            "y": 812
+          },
+          {
+            "type": "logo",
+            "x": 58,
+            "y": 826,
+            "width": 640,
+            "height": 96,
+            "align": "start",
+            "layout": "wordmark"
+          },
+          {
+            "type": "para",
+            "text": "The wordmark is outlined artwork, not live type: it looks the same everywhere and needs no font installed.",
+            "x": 752,
+            "y": 817,
+            "width": 606,
+            "size": 22
+          }
+        ]
+      },
+      {
+        "title": "Supporting graphics.",
+        "subtitle": "Repeat or crop the symbol for backgrounds. Keep the logo itself complete.",
+        "name": "Patterns",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "patterns/repeat",
+            "x": 64,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "REPEAT",
+            "x": 64,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/crop",
+            "x": 512,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "CROP",
+            "x": 512,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/field",
+            "x": 960,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "FIELD",
+            "x": 960,
+            "y": 561
+          },
+          {
+            "type": "rule",
+            "y": 610
+          },
+          {
+            "type": "para",
+            "text": "Patterns are supporting graphics. The logo remains the brand identifier; never crop or recolour it in parts.",
+            "x": 64,
+            "y": 680,
+            "width": 1312,
+            "size": 24,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "title": "Ready for everyday use.",
+        "subtitle": "Business cards, letterhead, social graphics and a presentation cover, with editable text.",
+        "name": "Applications",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/business-card-front",
+            "x": 64,
+            "y": 263,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "nested",
+            "src": "templates/business-card-back",
+            "x": 64,
+            "y": 520,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "90 x 50 MM CARDS / 3 MM BLEED",
+            "x": 64,
+            "y": 791
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-post",
+            "x": 499,
+            "y": 263,
+            "width": 315,
+            "height": 315
+          },
+          {
+            "type": "label",
+            "text": "1080 x 1080 POST",
+            "x": 499,
+            "y": 611
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-cover",
+            "x": 499,
+            "y": 649,
+            "width": 315,
+            "height": 177.2
+          },
+          {
+            "type": "label",
+            "text": "1920 x 1080 COVER",
+            "x": 499,
+            "y": 861
+          },
+          {
+            "type": "rect",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/letterhead-a4",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350
+          },
+          {
+            "type": "label",
+            "text": "A4 LETTERHEAD",
+            "x": 846,
+            "y": 647
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-banner",
+            "x": 846,
+            "y": 696,
+            "width": 530,
+            "height": 132.5
+          },
+          {
+            "type": "label",
+            "text": "1584 x 396 BANNER",
+            "x": 846,
+            "y": 865
+          },
+          {
+            "type": "para",
+            "text": "Replace bracketed fields in the SVG files, or fill them in brandkit and download the result.",
+            "x": 64,
+            "y": 920,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "Use the right file for the job.",
+        "subtitle": "The same geometry drives the vectors, images, templates and website components.",
+        "name": "Files",
+        "elements": [
+          {
+            "type": "label",
+            "text": "SCREEN & PRINT",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "list",
+            "x": 64,
+            "detailX": 267,
+            "right": 818,
+            "y": 322,
+            "step": 63,
+            "rows": [
+              [
+                "SVG",
+                "Scale-independent logos and symbols."
+              ],
+              [
+                "PNG",
+                "Transparent artwork for slides and documents."
+              ],
+              [
+                "PDF",
+                "Vector handoff and layout proof files."
+              ],
+              [
+                "REACT / CSS",
+                "Inline colour inheritance and local fonts."
+              ],
+              [
+                "BRAND.JSON",
+                "One source for the complete identity system."
+              ]
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 883,
+            "y": 263,
+            "width": 493,
+            "height": 342,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "MINIMUM SIZES",
+            "x": 913,
+            "y": 307,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumHorizontalWidthPx} px / {lockup.minimumHorizontalWidthMm} mm",
+            "x": 913,
+            "y": 366,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Primary horizontal logo, including its canvas.",
+            "x": 913,
+            "y": 407,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumSymbolHeightPx} px / {lockup.minimumSymbolHeightMm} mm",
+            "x": 913,
+            "y": 494,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Symbol height, below which use the favicon.",
+            "x": 913,
+            "y": 535,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "label",
+            "text": "SMALL SCREEN ICONS",
+            "x": 64,
+            "y": 670
+          },
+          {
+            "type": "symbol",
+            "x": 66,
+            "y": 704,
+            "height": 136
+          },
+          {
+            "type": "symbol",
+            "x": 262,
+            "y": 704,
+            "height": 136,
+            "micro": true
+          },
+          {
+            "type": "label",
+            "text": "STANDARD",
+            "x": 64,
+            "y": 882
+          },
+          {
+            "type": "label",
+            "text": "MICRO",
+            "x": 264,
+            "y": 882
+          },
+          {
+            "type": "para",
+            "text": "Open index.html in the kit to browse every file. Edit brand.json and rebuild to change any of them.",
+            "x": 493,
+            "y": 706,
+            "width": 800,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      }
+    ],
+    "sheets": [
+      {
+        "id": "logo-sheet-01",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 1",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheets",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "northwind / SHEET 1 OF 2",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 240,
+            "width": 1000,
+            "height": 230,
+            "align": "start",
+            "family": "northwind"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 540,
+            "width": 760,
+            "height": 150,
+            "align": "start",
+            "family": "northwind",
+            "layout": "wordmark"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 972,
+            "y": 540,
+            "width": 404,
+            "height": 380,
+            "align": "start",
+            "family": "northwind",
+            "layout": "stacked"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      },
+      {
+        "id": "logo-sheet-02",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 2",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheets",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.04
+          },
+          {
+            "type": "label",
+            "text": "nw / SHEET 2 OF 2",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 240,
+            "width": 1000,
+            "height": 230,
+            "align": "start",
+            "family": "nw"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 540,
+            "width": 760,
+            "height": 150,
+            "align": "start",
+            "family": "nw",
+            "layout": "wordmark"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 972,
+            "y": 540,
+            "width": 404,
+            "height": 380,
+            "align": "start",
+            "family": "nw",
+            "layout": "stacked"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "NorthwindLogo",
+    "symbolComponentName": "NorthwindSymbol",
+    "cssPrefix": "northwin",
+    "appIcon": {
+      "background": "primary",
+      "colour": "reverse",
+      "size": 700
+    },
+    "favicon": {
+      "light": "#14171A",
+      "dark": "#FFFFFF",
+      "size": 56,
+      "micro": true,
+      "title": "{name} favicon"
+    },
+    "intro": {
+      "eyebrow": "Brand identity",
+      "headline": "northwind\nBrand assets.",
+      "body": "Steady progress, clearly made.",
+      "edition": "v{displayVersion}",
+      "footer": "northwind — Steady progress, clearly made."
+    },
+    "landing": {
+      "eyebrow": "northwind",
+      "headline": "Steady progress, clearly made.",
+      "body": "[Replace with a short statement about who you help and how.]",
+      "cta": "Get in touch",
+      "contactEyebrow": "Steady progress, clearly made.",
+      "contactBody": "[Add a contact address or form here.]",
+      "footer": "northwind"
+    }
+  },
+  "files": [
+    {
+      "to": "fonts/README.md",
+      "from": "fonts/README.md"
+    },
+    "fonts/Inter-OFL.txt",
+    "fonts/SpaceMono-OFL.txt",
+    "fonts/SpaceMono-Regular.ttf",
+    "fonts/desktop/Inter-Regular.ttf",
+    "fonts/web/Inter-Regular.woff2",
+    "fonts/desktop/Inter-SemiBold.ttf",
+    "fonts/web/Inter-SemiBold.woff2",
+    "fonts/desktop/InterDisplay-ExtraBold.ttf",
+    "fonts/web/InterDisplay-ExtraBold.woff2",
+    "fonts/desktop/InterDisplay-Medium.ttf",
+    "fonts/web/InterDisplay-Medium.woff2",
+    "fonts/desktop/InterDisplay-Regular.ttf",
+    "fonts/web/InterDisplay-Regular.woff2"
+  ]
+}
