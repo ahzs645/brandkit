@@ -1,11 +1,12 @@
 // For brands whose logos are composed signatures (brand.signatures): pick a signature, a
 // colourway and, where the brand has them, a department (a ministry, a division) to set it for.
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { logoDocument } from '../../engine/artwork.js'
 import { colour } from '../../engine/brand.js'
 import { download, zip } from '../../export/render.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
+import { ManualSources } from './Sources.jsx'
 
 /** "One colour: brown" → "Brown"; "Reverse, white" → "Reverse, white". Short enough for a button. */
 const shortLabel = (label) => {
@@ -33,7 +34,7 @@ export const DepartmentSelect = ({ brand, value, onChange }) => {
 export const departmentValues = (brand, id) => brand.departments?.items?.find((item) => item.id === id)?.values
 
 /** The overview's stage: one signature, large, with its controls. */
-export const SignatureStage = ({ brand, fonts }) => {
+export const SignatureStage = ({ brand, fonts, openManual }) => {
   const colourways = Object.entries(brand.colourways ?? {})
   const [signatureId, setSignature] = useState(brand.signatures[0].id)
   const [colourway, setColourway] = useState(brand.defaultColourway ?? colourways[0]?.[0])
@@ -59,13 +60,19 @@ export const SignatureStage = ({ brand, fonts }) => {
         <Downloads make={make} name={[brand.id, signature.id, department, colourway].filter(Boolean).join('-')} width={2400} />
       </div>
       {signature.use && <p className="caption">{signature.use}</p>}
+      {signature.sources && <div className="stage-sources"><ManualSources brand={brand} sources={signature.sources} openManual={openManual} /></div>}
     </section>
   )
 }
 
 /** The logos view: every signature in every colourway, and every department's set as one zip. */
-export const SignatureLogos = ({ brand, fonts }) => {
+export const SignatureLogos = ({ brand, fonts, openManual }) => {
   const [department, setDepartment] = useState('')
+  // Arriving from a manual page (?signature=…), bring that signature into view.
+  useEffect(() => {
+    const id = new URLSearchParams(globalThis.location?.search ?? '').get('signature')
+    if (id) document.getElementById(`signature-${id}`)?.scrollIntoView({ block: 'start' })
+  }, [])
   const [busy, setBusy] = useState(false)
   const values = departmentValues(brand, department)
   const colourways = Object.entries(brand.colourways ?? {})
@@ -96,7 +103,7 @@ export const SignatureLogos = ({ brand, fonts }) => {
         </section>
       )}
       {brand.signatures.map((signature) => (
-        <section key={signature.id} className="panel">
+        <section key={signature.id} id={`signature-${signature.id}`} className="panel panel--anchor">
           <h2>{signature.label}</h2>
           {signature.use && <p className="muted" style={{ marginTop: -6 }}>{signature.use}</p>}
           <div className="asset-grid">
@@ -110,6 +117,7 @@ export const SignatureLogos = ({ brand, fonts }) => {
               )
             })}
           </div>
+          <ManualSources brand={brand} sources={signature.sources} openManual={openManual} />
         </section>
       ))}
     </div>

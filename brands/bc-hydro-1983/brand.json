@@ -231,6 +231,36 @@
       233.0077100734611
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H04",
+     "manual": "Graphic Standards Manual",
+     "title": "Official signatures",
+     "printed": "3"
+    },
+    {
+     "book": "hydro",
+     "page": "H03",
+     "manual": "Graphic Standards Manual",
+     "title": "Main elements",
+     "printed": "2"
+    },
+    {
+     "book": "hydro",
+     "page": "H05",
+     "manual": "Graphic Standards Manual",
+     "title": "Corporate colours",
+     "printed": "4"
+    },
+    {
+     "book": "hydro",
+     "page": "H13",
+     "manual": "Graphic Standards Manual",
+     "title": "Minimum sizes for signatures",
+     "printed": "12"
+    }
    ]
   },
   {
@@ -253,6 +283,29 @@
       1114.361392577054,
       233.0077100734611
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H04",
+     "manual": "Graphic Standards Manual",
+     "title": "Official signatures",
+     "printed": "3"
+    },
+    {
+     "book": "hydro",
+     "page": "H06",
+     "manual": "Graphic Standards Manual",
+     "title": "Gas Operations colours",
+     "printed": "5"
+    },
+    {
+     "book": "hydro",
+     "page": "H13",
+     "manual": "Graphic Standards Manual",
+     "title": "Minimum sizes for signatures",
+     "printed": "12"
     }
    ]
   },
@@ -277,6 +330,22 @@
       233.0077100734611
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H04",
+     "manual": "Graphic Standards Manual",
+     "title": "Official signatures",
+     "printed": "3"
+    },
+    {
+     "book": "hydro",
+     "page": "H13",
+     "manual": "Graphic Standards Manual",
+     "title": "Minimum sizes for signatures",
+     "printed": "12"
+    }
    ]
   },
   {
@@ -299,6 +368,22 @@
       1261.47344,
       226.17600000000002
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H04",
+     "manual": "Graphic Standards Manual",
+     "title": "Official signatures",
+     "printed": "3"
+    },
+    {
+     "book": "hydro",
+     "page": "H03",
+     "manual": "Graphic Standards Manual",
+     "title": "Main elements",
+     "printed": "2"
     }
    ]
   }
@@ -505,6 +590,29 @@
       }
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H16",
+     "manual": "Graphic Standards Manual",
+     "title": "Corporate stationery",
+     "printed": "15"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -554,6 +662,29 @@
      "y": 19.05,
      "width": 38.1,
      "anchorY": "baseline"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H16",
+     "manual": "Graphic Standards Manual",
+     "title": "Corporate stationery",
+     "printed": "15"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -628,6 +759,29 @@
       }
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H16",
+     "manual": "Graphic Standards Manual",
+     "title": "Corporate stationery",
+     "printed": "15"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -674,6 +828,29 @@
        "compose": "Telephone {telephone}"
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H17",
+     "manual": "Graphic Standards Manual",
+     "title": "Gas Operations stationery",
+     "printed": "16"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -734,6 +911,29 @@
      "size": "10pt",
      "font": "body",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H17",
+     "manual": "Graphic Standards Manual",
+     "title": "Gas Operations stationery",
+     "printed": "16"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -818,6 +1018,29 @@
       }
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H17",
+     "manual": "Graphic Standards Manual",
+     "title": "Gas Operations stationery",
+     "printed": "16"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -864,6 +1087,29 @@
        "compose": "Telex {telex}  Telephone {telephone}"
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H18",
+     "manual": "Graphic Standards Manual",
+     "title": "B.C.Hydro Rail stationery",
+     "printed": "17"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -924,6 +1170,29 @@
      "size": "10pt",
      "font": "body",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H18",
+     "manual": "Graphic Standards Manual",
+     "title": "B.C.Hydro Rail stationery",
+     "printed": "17"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -987,6 +1256,29 @@
        "compose": "{telephone}  Telex {telex}"
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H18",
+     "manual": "Graphic Standards Manual",
+     "title": "B.C.Hydro Rail stationery",
+     "printed": "17"
+    },
+    {
+     "book": "hydro",
+     "page": "H15",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery",
+     "printed": "14"
+    },
+    {
+     "book": "hydro",
+     "page": "H14",
+     "manual": "Graphic Standards Manual",
+     "title": "Stationery and forms",
+     "printed": "13"
     }
    ]
   },
@@ -1227,6 +1519,22 @@
      "colour": "ink",
      "anchor": "end"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H20",
+     "manual": "Graphic Standards Manual",
+     "title": "Bulletin",
+     "printed": "19"
+    },
+    {
+     "book": "hydro",
+     "page": "H19",
+     "manual": "Graphic Standards Manual",
+     "title": "Forms",
+     "printed": "18"
+    }
    ]
   },
   {
@@ -1286,6 +1594,22 @@
        "gap": 12.611
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H26",
+     "manual": "Graphic Standards Manual",
+     "title": "Report cover",
+     "printed": "25"
+    },
+    {
+     "book": "hydro",
+     "page": "H25",
+     "manual": "Graphic Standards Manual",
+     "title": "Covers",
+     "printed": "24"
     }
    ]
   },
@@ -1349,6 +1673,22 @@
      "height": 78.232,
      "fill": "light"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H27",
+     "manual": "Graphic Standards Manual",
+     "title": "Illustrated cover",
+     "printed": "26"
+    },
+    {
+     "book": "hydro",
+     "page": "H25",
+     "manual": "Graphic Standards Manual",
+     "title": "Covers",
+     "printed": "24"
+    }
    ]
   },
   {
@@ -1410,6 +1750,22 @@
      "width": 60.113,
      "height": 88.9,
      "fill": "light"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H28",
+     "manual": "Graphic Standards Manual",
+     "title": "Display format",
+     "printed": "27"
+    },
+    {
+     "book": "hydro",
+     "page": "H25",
+     "manual": "Graphic Standards Manual",
+     "title": "Covers",
+     "printed": "24"
     }
    ]
   },
@@ -1515,6 +1871,15 @@
      "font": "body",
      "colour": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H30",
+     "manual": "Graphic Standards Manual",
+     "title": "Mastheads",
+     "printed": "29"
+    }
    ]
   },
   {
@@ -1619,6 +1984,15 @@
      "maxLines": 40,
      "font": "body",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H30",
+     "manual": "Graphic Standards Manual",
+     "title": "Mastheads",
+     "printed": "29"
     }
    ]
   },
@@ -1730,6 +2104,22 @@
      "anchorX": "end",
      "anchorY": "baseline"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H33",
+     "manual": "Graphic Standards Manual",
+     "title": "Print advertising",
+     "printed": "32"
+    },
+    {
+     "book": "hydro",
+     "page": "H32",
+     "manual": "Graphic Standards Manual",
+     "title": "Advertising, audio-visual, display",
+     "printed": "31"
+    }
    ]
   },
   {
@@ -1805,6 +2195,22 @@
      "width": 29.972,
      "anchorY": "baseline"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H34",
+     "manual": "Graphic Standards Manual",
+     "title": "Print advertising",
+     "printed": "33"
+    },
+    {
+     "book": "hydro",
+     "page": "H32",
+     "manual": "Graphic Standards Manual",
+     "title": "Advertising, audio-visual, display",
+     "printed": "31"
+    }
    ]
   },
   {
@@ -1839,6 +2245,15 @@
      "font": "body",
      "colour": "reverse",
      "anchor": "middle"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H35",
+     "manual": "Graphic Standards Manual",
+     "title": "Audio-visual",
+     "printed": "34"
     }
    ]
   },
@@ -1876,6 +2291,22 @@
      "anchorY": "cap",
      "points": 171.28
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H39",
+     "manual": "Graphic Standards Manual",
+     "title": "Identification signs",
+     "printed": "38"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
+    }
    ]
   },
   {
@@ -1911,6 +2342,22 @@
      "y": 40,
      "anchorY": "cap",
      "points": 171.28
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H39",
+     "manual": "Graphic Standards Manual",
+     "title": "Identification signs",
+     "printed": "38"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
     }
    ]
   },
@@ -1961,6 +2408,22 @@
      "font": "body",
      "colour": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H39",
+     "manual": "Graphic Standards Manual",
+     "title": "Identification signs",
+     "printed": "38"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
+    }
    ]
   },
   {
@@ -2009,6 +2472,22 @@
      "maxLines": 3,
      "font": "body",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H39",
+     "manual": "Graphic Standards Manual",
+     "title": "Identification signs",
+     "printed": "38"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
     }
    ]
   },
@@ -2068,6 +2547,22 @@
      "maxLines": 4,
      "font": "body",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H41",
+     "manual": "Graphic Standards Manual",
+     "title": "Control signs",
+     "printed": "40"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
     }
    ]
   },
@@ -2139,6 +2634,22 @@
      "font": "body",
      "colour": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H40",
+     "manual": "Graphic Standards Manual",
+     "title": "Guide signs",
+     "printed": "39"
+    },
+    {
+     "book": "hydro",
+     "page": "H38",
+     "manual": "Graphic Standards Manual",
+     "title": "Signs",
+     "printed": "37"
+    }
    ]
   },
   {
@@ -2187,6 +2698,29 @@
      "y": 230,
      "width": 1008
     }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H44",
+     "manual": "Graphic Standards Manual",
+     "title": "Light vehicles",
+     "printed": "43"
+    },
+    {
+     "book": "hydro",
+     "page": "H43",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicle signatures",
+     "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
+    }
    ]
   },
   {
@@ -2234,6 +2768,29 @@
      "x": 432,
      "y": 230,
      "width": 1008
+    }
+   ],
+   "sources": [
+    {
+     "book": "hydro",
+     "page": "H44",
+     "manual": "Graphic Standards Manual",
+     "title": "Light vehicles",
+     "printed": "43"
+    },
+    {
+     "book": "hydro",
+     "page": "H43",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicle signatures",
+     "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ]
   }
@@ -2411,6 +2968,22 @@
       "size": 22,
       "colour": "ink"
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H03",
+      "manual": "Graphic Standards Manual",
+      "title": "Main elements",
+      "printed": "2"
+     },
+     {
+      "book": "hydro",
+      "page": "H04",
+      "manual": "Graphic Standards Manual",
+      "title": "Official signatures",
+      "printed": "3"
+     }
     ]
    },
    {
@@ -2455,6 +3028,22 @@
         "the flame and the H both in corporate blue; never two blues"
        ]
       ]
+     }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H05",
+      "manual": "Graphic Standards Manual",
+      "title": "Corporate colours",
+      "printed": "4"
+     },
+     {
+      "book": "hydro",
+      "page": "H06",
+      "manual": "Graphic Standards Manual",
+      "title": "Gas Operations colours",
+      "printed": "5"
      }
     ]
    },
@@ -2580,6 +3169,22 @@
       "x": 512,
       "y": 780
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H07",
+      "manual": "Graphic Standards Manual",
+      "title": "Backgrounds",
+      "printed": "6"
+     },
+     {
+      "book": "hydro",
+      "page": "H08",
+      "manual": "Graphic Standards Manual",
+      "title": "Backgrounds and value",
+      "printed": "7"
+     }
     ]
    },
    {
@@ -2637,6 +3242,29 @@
        ]
       ]
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H09",
+      "manual": "Graphic Standards Manual",
+      "title": "Incorrect usage",
+      "printed": "8"
+     },
+     {
+      "book": "hydro",
+      "page": "H10",
+      "manual": "Graphic Standards Manual",
+      "title": "Incorrect usage",
+      "printed": "9"
+     },
+     {
+      "book": "hydro",
+      "page": "H11",
+      "manual": "Graphic Standards Manual",
+      "title": "Incorrect usage",
+      "printed": "10"
+     }
     ]
    },
    {
@@ -2685,6 +3313,15 @@
       "size": 22,
       "colour": "ink"
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H12",
+      "manual": "Graphic Standards Manual",
+      "title": "Corporate typeface",
+      "printed": "11"
+     }
     ]
    },
    {
@@ -2724,6 +3361,15 @@
       "y": 520,
       "width": 1312,
       "size": 18
+     }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H13",
+      "manual": "Graphic Standards Manual",
+      "title": "Minimum sizes for signatures",
+      "printed": "12"
      }
     ]
    },
@@ -2824,6 +3470,36 @@
       "x": 1250.3,
       "y": 511.9
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H14",
+      "manual": "Graphic Standards Manual",
+      "title": "Stationery and forms",
+      "printed": "13"
+     },
+     {
+      "book": "hydro",
+      "page": "H15",
+      "manual": "Graphic Standards Manual",
+      "title": "Stationery",
+      "printed": "14"
+     },
+     {
+      "book": "hydro",
+      "page": "H16",
+      "manual": "Graphic Standards Manual",
+      "title": "Corporate stationery",
+      "printed": "15"
+     },
+     {
+      "book": "hydro",
+      "page": "H19",
+      "manual": "Graphic Standards Manual",
+      "title": "Forms",
+      "printed": "18"
+     }
     ]
    },
    {
@@ -2923,6 +3599,29 @@
       "x": 1045.8,
       "y": 731.2
      }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H24",
+      "manual": "Graphic Standards Manual",
+      "title": "Publications",
+      "printed": "23"
+     },
+     {
+      "book": "hydro",
+      "page": "H25",
+      "manual": "Graphic Standards Manual",
+      "title": "Covers",
+      "printed": "24"
+     },
+     {
+      "book": "hydro",
+      "page": "H30",
+      "manual": "Graphic Standards Manual",
+      "title": "Mastheads",
+      "printed": "29"
+     }
     ]
    },
    {
@@ -2994,6 +3693,29 @@
       "text": "PANEL VAN",
       "x": 1019.5,
       "y": 499.5
+     }
+    ],
+    "sources": [
+     {
+      "book": "hydro",
+      "page": "H32",
+      "manual": "Graphic Standards Manual",
+      "title": "Advertising, audio-visual, display",
+      "printed": "31"
+     },
+     {
+      "book": "hydro",
+      "page": "H38",
+      "manual": "Graphic Standards Manual",
+      "title": "Signs",
+      "printed": "37"
+     },
+     {
+      "book": "hydro",
+      "page": "H42",
+      "manual": "Graphic Standards Manual",
+      "title": "Vehicles",
+      "printed": "41"
      }
     ]
    }
@@ -3242,6 +3964,12 @@
      }
     ]
    }
+  ]
+ },
+ "manuals": {
+  "pack": "bc",
+  "books": [
+   "hydro"
   ]
  }
 }

@@ -104,7 +104,7 @@ const Book = ({ book, family, thumbOf, open, focusPage, showBack, backLabel, act
   )
 }
 
-const Page = ({ book, page, srcOf, open }) => {
+const Page = ({ book, page, srcOf, open, aside }) => {
   const index = book.pages.findIndex((entry) => entry.id === page.id)
   const previous = book.pages[index - 1]
   const next = book.pages[index + 1]
@@ -157,6 +157,7 @@ const Page = ({ book, page, srcOf, open }) => {
           onLoad={() => setLoaded(true)}
         />
       </div>
+      {aside}
       {page.notes?.length > 0 && (
         <details className="guides__notes">
           <summary>{page.notesTitle ?? 'Reconstruction notes'}</summary>
@@ -198,10 +199,11 @@ export const pageUrlFrom = (base) => (book, page, ext = 'svg') => `${base}${book
  * @param {Function} [props.renderLink]    renders a family link (a host's router link, say)
  * @param {string} [props.initialBook]     open on this book instead of the families
  * @param {(book) => React.ReactNode} [props.bookActions]   extra controls on a book's page
+ * @param {(book, page) => React.ReactNode} [props.pageAside]   shown under a page (what it links to, say)
  */
 export const ManualLibrary = ({
   books, families, pageUrl, urlState = DEFAULT_URL_STATE, renderLink, heading = 'Manuals', intro, footnote,
-  initialBook = null, bookActions, label = 'Manuals'
+  initialBook = null, bookActions, pageAside, label = 'Manuals'
 }) => {
   const findBook = useCallback((id) => books.find((book) => book.id === id) ?? null, [books])
   const groups = useMemo(() => families ?? books.map((book) => ({ id: book.id, title: book.title, books: [book.id] })), [families, books])
@@ -228,7 +230,7 @@ export const ManualLibrary = ({
 
   return (
     <section className="guides" aria-label={label}>
-      {page ? <Page book={book} page={page} srcOf={srcOf} open={open} />
+      {page ? <Page book={book} page={page} srcOf={srcOf} open={open} aside={pageAside?.(book, page)} />
         : book ? <Book book={book} family={familyOf(book.id)} thumbOf={thumbOf} open={open} focusPage={focusPage} showBack={!single} backLabel={heading} actions={bookActions?.(book)} />
           : <Families families={groups} findBook={findBook} thumbOf={thumbOf} open={open} heading={heading} intro={intro} footnote={footnote} Link={Link} />}
     </section>

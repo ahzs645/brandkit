@@ -178,3 +178,22 @@ test('brands/index.json lists every built-in brand by its name', async () => {
   assert.deepEqual(manifest.map(({ id }) => id).sort(), folders.sort())
   for (const { id, name } of manifest) assert.equal(name, JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8')).name, id)
 })
+
+test('every BC template, signature and guide page cites manual pages that exist, and the manifest indexes them back', async () => {
+  const { GUIDE_BOOKS } = await import('../manuals/bc/books.js')
+  const pages = new Set(GUIDE_BOOKS.flatMap((book) => book.pages.map((page) => `${book.id}/${page.id}`)))
+  const manifest = JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8'))
+  for (const id of ['bc-province-1977', 'bc-hydro-1983']) {
+    const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
+    assert.equal(definition.manuals.pack, 'bc')
+    const items = [...definition.templates, ...definition.signatures, ...definition.guide.pages]
+    for (const item of items) {
+      assert.ok(item.sources?.length, `${id}: ${item.id ?? item.title} has no sources`)
+      for (const source of item.sources) assert.ok(pages.has(`${source.book}/${source.page}`), `${id}: ${source.book}/${source.page}`)
+    }
+    const index = manifest.find((entry) => entry.id === id).pages
+    const indexed = Object.values(index).flat().length
+    assert.equal(indexed, items.reduce((sum, item) => sum + item.sources.length, 0), id)
+    for (const key of Object.keys(index)) assert.ok(pages.has(key), key)
+  }
+})

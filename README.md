@@ -40,6 +40,10 @@ comes from [PofBC](https://github.com/ahzs645/PofBC) (`npm run import:pofbc -- /
 and their definitions are written by `npm run make:bc`, from scripts that keep each manual
 measurement next to the page it comes from.
 
+Every template, signature and guide page in them cites the manual pages it is built from. In the
+app, those pages show as thumbnails under it that open the page in the manual library; and a page
+in the library lists what is built from it, linking back.
+
 **Revisions** keep a proposed change beside the approved identity: ddcnorth carries one, the
 *rising symbol* (the six dots flipped so they climb to the right). Choosing it in the header shows
 every page, and builds every file, as it would make them; the approved kit includes it, with a

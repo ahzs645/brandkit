@@ -245,6 +245,43 @@
      "anchor": "middle",
      "role": "type"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G05",
+     "manual": "General Manual",
+     "title": "Floral Emblem; Fragmentation; V.I.P. Symbol",
+     "printed": "3"
+    },
+    {
+     "book": "general",
+     "page": "G06",
+     "manual": "General Manual",
+     "title": "Provincial Signature: Applications; Alignment",
+     "printed": "4"
+    },
+    {
+     "book": "general",
+     "page": "G07",
+     "manual": "General Manual",
+     "title": "Provincial Signature: Colour; positive/reverse",
+     "printed": "5"
+    },
+    {
+     "book": "reproduction",
+     "page": "R31",
+     "manual": "Reproduction Manual",
+     "title": "Provincial Logotype: Positive Form",
+     "printed": "24"
+    },
+    {
+     "book": "reproduction",
+     "page": "R32",
+     "manual": "Reproduction Manual",
+     "title": "Provincial Signature: Grid Layout: Positive Form",
+     "printed": "25"
+    }
    ]
   },
   {
@@ -332,7 +369,44 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R13",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Composition and Uses",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R16",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Positive Form; sheet 15B",
+     "printed": "15"
+    },
+    {
+     "book": "reproduction",
+     "page": "R17",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Reverse Form; sheet 15BR",
+     "printed": "16"
+    },
+    {
+     "book": "reproduction",
+     "page": "R11",
+     "manual": "Reproduction Manual",
+     "title": "Symbol and Signature Format Use; repro-sheet guide",
+     "printed": "10"
+    },
+    {
+     "book": "general",
+     "page": "G08",
+     "manual": "General Manual",
+     "title": "Typography; stationery, vehicle and sign arrangements",
+     "printed": "6"
+    }
+   ]
   },
   {
    "id": "vertical",
@@ -412,7 +486,44 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R13",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Composition and Uses",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R16",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Positive Form; sheet 15B",
+     "printed": "15"
+    },
+    {
+     "book": "reproduction",
+     "page": "R17",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Reverse Form; sheet 15BR",
+     "printed": "16"
+    },
+    {
+     "book": "reproduction",
+     "page": "R11",
+     "manual": "Reproduction Manual",
+     "title": "Symbol and Signature Format Use; repro-sheet guide",
+     "printed": "10"
+    },
+    {
+     "book": "general",
+     "page": "G08",
+     "manual": "General Manual",
+     "title": "Typography; stationery, vehicle and sign arrangements",
+     "printed": "6"
+    }
+   ]
   },
   {
    "id": "stacked",
@@ -494,7 +605,44 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R13",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Composition and Uses",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R16",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Positive Form; sheet 15B",
+     "printed": "15"
+    },
+    {
+     "book": "reproduction",
+     "page": "R17",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Reverse Form; sheet 15BR",
+     "printed": "16"
+    },
+    {
+     "book": "reproduction",
+     "page": "R11",
+     "manual": "Reproduction Manual",
+     "title": "Symbol and Signature Format Use; repro-sheet guide",
+     "printed": "10"
+    },
+    {
+     "book": "general",
+     "page": "G08",
+     "manual": "General Manual",
+     "title": "Typography; stationery, vehicle and sign arrangements",
+     "printed": "6"
+    }
+   ]
   },
   {
    "id": "centred",
@@ -569,7 +717,44 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R13",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Composition and Uses",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R16",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Positive Form; sheet 15B",
+     "printed": "15"
+    },
+    {
+     "book": "reproduction",
+     "page": "R17",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Reverse Form; sheet 15BR",
+     "printed": "16"
+    },
+    {
+     "book": "reproduction",
+     "page": "R11",
+     "manual": "Reproduction Manual",
+     "title": "Symbol and Signature Format Use; repro-sheet guide",
+     "printed": "10"
+    },
+    {
+     "book": "general",
+     "page": "G08",
+     "manual": "General Manual",
+     "title": "Typography; stationery, vehicle and sign arrangements",
+     "printed": "6"
+    }
+   ]
   },
   {
    "id": "one-line",
@@ -646,7 +831,44 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R13",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Composition and Uses",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R16",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Positive Form; sheet 15B",
+     "printed": "15"
+    },
+    {
+     "book": "reproduction",
+     "page": "R17",
+     "manual": "Reproduction Manual",
+     "title": "Ministerial Signature: Reverse Form; sheet 15BR",
+     "printed": "16"
+    },
+    {
+     "book": "reproduction",
+     "page": "R11",
+     "manual": "Reproduction Manual",
+     "title": "Symbol and Signature Format Use; repro-sheet guide",
+     "printed": "10"
+    },
+    {
+     "book": "general",
+     "page": "G08",
+     "manual": "General Manual",
+     "title": "Typography; stationery, vehicle and sign arrangements",
+     "printed": "6"
+    }
+   ]
   },
   {
    "id": "sign-centred",
@@ -690,7 +912,23 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R18",
+     "manual": "Reproduction Manual",
+     "title": "Sign Repro: Positive Form; Grid System; charts",
+     "printed": "17"
+    }
+   ]
   },
   {
    "id": "sign-horizontal",
@@ -743,7 +981,23 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R18",
+     "manual": "Reproduction Manual",
+     "title": "Sign Repro: Positive Form; Grid System; charts",
+     "printed": "17"
+    }
+   ]
   },
   {
    "id": "vehicle",
@@ -795,7 +1049,23 @@
      ]
     }
    ],
-   "departmental": true
+   "departmental": true,
+   "sources": [
+    {
+     "book": "vehicle",
+     "page": "V05",
+     "manual": "Vehicle Manual",
+     "title": "Signature, numeral and striping sizes",
+     "printed": "3"
+    },
+    {
+     "book": "vehicle",
+     "page": "V04",
+     "manual": "Vehicle Manual",
+     "title": "Components",
+     "printed": "2"
+    }
+   ]
   }
  ],
  "lockup": {
@@ -1518,6 +1788,29 @@
      "stroke": "type",
      "strokeWidth": "0.5pt"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R08",
+     "manual": "Reproduction Manual",
+     "title": "General Use stationery",
+     "printed": "7"
+    },
+    {
+     "book": "general",
+     "page": "G12",
+     "manual": "General Manual",
+     "title": "Stationery: Format A; envelopes; calling cards",
+     "printed": "10"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -1620,6 +1913,29 @@
      "font": "regular",
      "colour": "type"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R08",
+     "manual": "Reproduction Manual",
+     "title": "General Use stationery",
+     "printed": "7"
+    },
+    {
+     "book": "general",
+     "page": "G12",
+     "manual": "General Manual",
+     "title": "Stationery: Format A; envelopes; calling cards",
+     "printed": "10"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -1721,6 +2037,29 @@
      "size": "8pt",
      "font": "regular",
      "colour": "symbol"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R08",
+     "manual": "Reproduction Manual",
+     "title": "General Use stationery",
+     "printed": "7"
+    },
+    {
+     "book": "general",
+     "page": "G12",
+     "manual": "General Manual",
+     "title": "Stationery: Format A; envelopes; calling cards",
+     "printed": "10"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -1874,6 +2213,29 @@
       }
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R08",
+     "manual": "Reproduction Manual",
+     "title": "General Use stationery",
+     "printed": "7"
+    },
+    {
+     "book": "general",
+     "page": "G12",
+     "manual": "General Manual",
+     "title": "Stationery: Format A; envelopes; calling cards",
+     "printed": "10"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -1995,6 +2357,22 @@
        "locked": true
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R05",
+     "manual": "Reproduction Manual",
+     "title": "Ministers stationery",
+     "printed": "4"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -2128,6 +2506,22 @@
      "strokeWidth": "0.25pt",
      "id": "postage-area"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R05",
+     "manual": "Reproduction Manual",
+     "title": "Ministers stationery",
+     "printed": "4"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -2208,6 +2602,22 @@
      "font": "regular",
      "anchor": "middle",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R05",
+     "manual": "Reproduction Manual",
+     "title": "Ministers stationery",
+     "printed": "4"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -2333,6 +2743,22 @@
        "locked": true
       }
      ]
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R06",
+     "manual": "Reproduction Manual",
+     "title": "Deputy Ministers stationery",
+     "printed": "5"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -2466,6 +2892,22 @@
      "strokeWidth": "0.25pt",
      "id": "postage-area"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R06",
+     "manual": "Reproduction Manual",
+     "title": "Deputy Ministers stationery",
+     "printed": "5"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -2545,6 +2987,22 @@
      "font": "regular",
      "anchor": "middle",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R06",
+     "manual": "Reproduction Manual",
+     "title": "Deputy Ministers stationery",
+     "printed": "5"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -2642,6 +3100,22 @@
      "stroke": "type",
      "strokeWidth": "0.5pt"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R07",
+     "manual": "Reproduction Manual",
+     "title": "Boards and Commissions stationery",
+     "printed": "6"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -2733,6 +3207,22 @@
      "size": "8pt",
      "font": "regular",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R07",
+     "manual": "Reproduction Manual",
+     "title": "Boards and Commissions stationery",
+     "printed": "6"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -2876,6 +3366,22 @@
       }
      ]
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R07",
+     "manual": "Reproduction Manual",
+     "title": "Boards and Commissions stationery",
+     "printed": "6"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -2938,6 +3444,22 @@
      "anchor": "middle",
      "colour": "type"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R04",
+     "manual": "Reproduction Manual",
+     "title": "Premier stationery",
+     "printed": "3"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -2986,6 +3508,22 @@
      "locked": true,
      "font": "light",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R04",
+     "manual": "Reproduction Manual",
+     "title": "Premier stationery",
+     "printed": "3"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -3048,6 +3586,22 @@
      "font": "light",
      "anchor": "middle",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R04",
+     "manual": "Reproduction Manual",
+     "title": "Premier stationery",
+     "printed": "3"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -3119,6 +3673,22 @@
      "font": "regular",
      "anchor": "middle",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R09",
+     "manual": "Reproduction Manual",
+     "title": "Special Use stationery",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -3212,6 +3782,22 @@
      "font": "regular",
      "colour": "type"
     }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R09",
+     "manual": "Reproduction Manual",
+     "title": "Special Use stationery",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
+    }
    ]
   },
   {
@@ -3292,6 +3878,22 @@
      "font": "regular",
      "anchor": "middle",
      "colour": "type"
+    }
+   ],
+   "sources": [
+    {
+     "book": "reproduction",
+     "page": "R09",
+     "manual": "Reproduction Manual",
+     "title": "Special Use stationery",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R03",
+     "manual": "Reproduction Manual",
+     "title": "Stationery Specifications; explanatory diagrams",
+     "printed": "2"
     }
    ]
   },
@@ -3452,6 +4054,22 @@
      "maxLines": 50,
      "font": "typewriter",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G14",
+     "manual": "General Manual",
+     "title": "Standard Memorandum; Standard News Release",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
     }
    ]
   },
@@ -3633,6 +4251,22 @@
      "font": "typewriter",
      "colour": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G14",
+     "manual": "General Manual",
+     "title": "Standard Memorandum; Standard News Release",
+     "printed": "12"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -3684,6 +4318,22 @@
      "font": "regular",
      "colour": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G10",
+     "manual": "General Manual",
+     "title": "Publications",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -3730,6 +4380,22 @@
      "x": 8.941,
      "y": 174.193,
      "points": 15.94
+    }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G10",
+     "manual": "General Manual",
+     "title": "Publications",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
     }
    ]
   },
@@ -3813,6 +4479,22 @@
      "font": "regular",
      "colour": "reverse"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G10",
+     "manual": "General Manual",
+     "title": "Publications",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -3865,6 +4547,22 @@
      "y": 160.02,
      "anchorX": "logotype",
      "points": 17.63
+    }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G10",
+     "manual": "General Manual",
+     "title": "Publications",
+     "printed": "8"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
     }
    ]
   },
@@ -3951,6 +4649,22 @@
      "width": 92.812,
      "height": 21.653
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G11",
+     "manual": "General Manual",
+     "title": "Advertising",
+     "printed": "9"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -4016,6 +4730,22 @@
      "strokeWidth": "0.4pt",
      "stroke": "ink"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G11",
+     "manual": "General Manual",
+     "title": "Advertising",
+     "printed": "9"
+    },
+    {
+     "book": "reproduction",
+     "page": "R14",
+     "manual": "Reproduction Manual",
+     "title": "Publications; Advertising; News Release; Memorandum",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -4079,6 +4809,15 @@
      "height": 66,
      "align": "center"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G15",
+     "manual": "General Manual",
+     "title": "Uniform Ensignia",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -4130,6 +4869,15 @@
      "height": 66,
      "align": "center"
     }
+   ],
+   "sources": [
+    {
+     "book": "general",
+     "page": "G15",
+     "manual": "General Manual",
+     "title": "Uniform Ensignia",
+     "printed": "13"
+    }
    ]
   },
   {
@@ -4176,6 +4924,36 @@
      "y": 254,
      "anchorX": "logotype",
      "points": 49.38
+    }
+   ],
+   "sources": [
+    {
+     "book": "vehicle",
+     "page": "V05",
+     "manual": "Vehicle Manual",
+     "title": "Signature, numeral and striping sizes",
+     "printed": "3"
+    },
+    {
+     "book": "vehicle",
+     "page": "V06",
+     "manual": "Vehicle Manual",
+     "title": "Passenger cars",
+     "printed": "4"
+    },
+    {
+     "book": "vehicle",
+     "page": "V07",
+     "manual": "Vehicle Manual",
+     "title": "Passenger cars: placement",
+     "printed": "5"
+    },
+    {
+     "book": "general",
+     "page": "G17",
+     "manual": "General Manual",
+     "title": "Vehicle Markings: pickup, sedan, box truck",
+     "printed": "15"
     }
    ]
   },
@@ -4226,6 +5004,36 @@
      "font": "regular",
      "anchor": "end",
      "colour": "ink"
+    }
+   ],
+   "sources": [
+    {
+     "book": "vehicle",
+     "page": "V12",
+     "manual": "Vehicle Manual",
+     "title": "Van trucks",
+     "printed": "10"
+    },
+    {
+     "book": "vehicle",
+     "page": "V13",
+     "manual": "Vehicle Manual",
+     "title": "Van trucks: placement",
+     "printed": "11"
+    },
+    {
+     "book": "vehicle",
+     "page": "V05",
+     "manual": "Vehicle Manual",
+     "title": "Signature, numeral and striping sizes",
+     "printed": "3"
+    },
+    {
+     "book": "general",
+     "page": "G17",
+     "manual": "General Manual",
+     "title": "Vehicle Markings: pickup, sedan, box truck",
+     "printed": "15"
     }
    ]
   },
@@ -4407,6 +5215,29 @@
      "stroke": "grey",
      "strokeWidth": 2
     }
+   ],
+   "sources": [
+    {
+     "book": "vehicle",
+     "page": "V12",
+     "manual": "Vehicle Manual",
+     "title": "Van trucks",
+     "printed": "10"
+    },
+    {
+     "book": "vehicle",
+     "page": "V13",
+     "manual": "Vehicle Manual",
+     "title": "Van trucks: placement",
+     "printed": "11"
+    },
+    {
+     "book": "general",
+     "page": "G17",
+     "manual": "General Manual",
+     "title": "Vehicle Markings: pickup, sedan, box truck",
+     "printed": "15"
+    }
    ]
   },
   {
@@ -4460,6 +5291,50 @@
      "anchor": "middle",
      "font": "medium",
      "colour": "reverse"
+    }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S12",
+     "manual": "Sign Manual",
+     "title": "Primary identification signs",
+     "printed": "10"
+    },
+    {
+     "book": "sign",
+     "page": "S13",
+     "manual": "Sign Manual",
+     "title": "Primary identification: sizing charts",
+     "printed": "11"
+    },
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
+    },
+    {
+     "book": "general",
+     "page": "G18",
+     "manual": "General Manual",
+     "title": "Signs: nine application figures",
+     "printed": "16"
     }
    ]
   },
@@ -4523,6 +5398,43 @@
      "width": 2133.6000000000004,
      "height": 142.24
     }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S16",
+     "manual": "Sign Manual",
+     "title": "Standard information signs",
+     "printed": "14"
+    },
+    {
+     "book": "sign",
+     "page": "S18",
+     "manual": "Sign Manual",
+     "title": "Information signs: message dimensions and body-copy chart",
+     "printed": "15"
+    },
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
+    }
    ]
   },
   {
@@ -4553,6 +5465,36 @@
      "size": "592.6pt",
      "font": "medium",
      "colour": "reverse"
+    }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S14",
+     "manual": "Sign Manual",
+     "title": "Secondary identification signs",
+     "printed": "12"
+    },
+    {
+     "book": "sign",
+     "page": "S15",
+     "manual": "Sign Manual",
+     "title": "Secondary identification: sizing charts",
+     "printed": "13"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
     }
    ]
   },
@@ -4672,6 +5614,36 @@
      "colour": "reverse",
      "anchor": "end"
     }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S19",
+     "manual": "Sign Manual",
+     "title": "Secondary directional signs",
+     "printed": "16"
+    },
+    {
+     "book": "sign",
+     "page": "S20",
+     "manual": "Sign Manual",
+     "title": "Directional signs: sizing charts",
+     "printed": "17"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
+    }
    ]
   },
   {
@@ -4736,6 +5708,43 @@
      "y": 1132.8400000000001,
      "width": 508.00000000000006,
      "height": 71.12
+    }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S23",
+     "manual": "Sign Manual",
+     "title": "Control signs",
+     "printed": "20"
+    },
+    {
+     "book": "sign",
+     "page": "S24",
+     "manual": "Sign Manual",
+     "title": "Control signs: warning and regulatory charts",
+     "printed": "21"
+    },
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
     }
    ]
   },
@@ -4827,6 +5836,43 @@
      "y": 1132.8400000000001,
      "width": 508.00000000000006,
      "height": 71.12
+    }
+   ],
+   "sources": [
+    {
+     "book": "sign",
+     "page": "S23",
+     "manual": "Sign Manual",
+     "title": "Control signs",
+     "printed": "20"
+    },
+    {
+     "book": "sign",
+     "page": "S24",
+     "manual": "Sign Manual",
+     "title": "Control signs: warning and regulatory charts",
+     "printed": "21"
+    },
+    {
+     "book": "sign",
+     "page": "S10",
+     "manual": "Sign Manual",
+     "title": "Signature formats",
+     "printed": "8"
+    },
+    {
+     "book": "sign",
+     "page": "S07",
+     "manual": "Sign Manual",
+     "title": "Grid system",
+     "printed": "5"
+    },
+    {
+     "book": "sign",
+     "page": "S08",
+     "manual": "Sign Manual",
+     "title": "Standard elements and measurements",
+     "printed": "6"
     }
    ]
   }
@@ -4980,6 +6026,36 @@
       "width": 680,
       "size": 20
      }
+    ],
+    "sources": [
+     {
+      "book": "general",
+      "page": "G05",
+      "manual": "General Manual",
+      "title": "Floral Emblem; Fragmentation; V.I.P. Symbol",
+      "printed": "3"
+     },
+     {
+      "book": "general",
+      "page": "G06",
+      "manual": "General Manual",
+      "title": "Provincial Signature: Applications; Alignment",
+      "printed": "4"
+     },
+     {
+      "book": "general",
+      "page": "G07",
+      "manual": "General Manual",
+      "title": "Provincial Signature: Colour; positive/reverse",
+      "printed": "5"
+     },
+     {
+      "book": "reproduction",
+      "page": "R32",
+      "manual": "Reproduction Manual",
+      "title": "Provincial Signature: Grid Layout: Positive Form",
+      "printed": "25"
+     }
     ]
    },
    {
@@ -5115,6 +6191,29 @@
       "width": 1312,
       "size": 19
      }
+    ],
+    "sources": [
+     {
+      "book": "reproduction",
+      "page": "R13",
+      "manual": "Reproduction Manual",
+      "title": "Ministerial Signature: Composition and Uses",
+      "printed": "12"
+     },
+     {
+      "book": "reproduction",
+      "page": "R15",
+      "manual": "Reproduction Manual",
+      "title": "Ministerial Repro Sheet Numbers",
+      "printed": "14"
+     },
+     {
+      "book": "reproduction",
+      "page": "R16",
+      "manual": "Reproduction Manual",
+      "title": "Ministerial Signature: Positive Form; sheet 15B",
+      "printed": "15"
+     }
     ]
    },
    {
@@ -5172,6 +6271,29 @@
         "flush with the logotype"
        ]
       ]
+     }
+    ],
+    "sources": [
+     {
+      "book": "reproduction",
+      "page": "R32",
+      "manual": "Reproduction Manual",
+      "title": "Provincial Signature: Grid Layout: Positive Form",
+      "printed": "25"
+     },
+     {
+      "book": "reproduction",
+      "page": "R13",
+      "manual": "Reproduction Manual",
+      "title": "Ministerial Signature: Composition and Uses",
+      "printed": "12"
+     },
+     {
+      "book": "general",
+      "page": "G08",
+      "manual": "General Manual",
+      "title": "Typography; stationery, vehicle and sign arrangements",
+      "printed": "6"
      }
     ]
    },
@@ -5297,6 +6419,29 @@
       "width": 1312,
       "size": 17
      }
+    ],
+    "sources": [
+     {
+      "book": "general",
+      "page": "G07",
+      "manual": "General Manual",
+      "title": "Provincial Signature: Colour; positive/reverse",
+      "printed": "5"
+     },
+     {
+      "book": "reproduction",
+      "page": "R34",
+      "manual": "Reproduction Manual",
+      "title": "Provincial Signature: Colour",
+      "printed": "27"
+     },
+     {
+      "book": "reproduction",
+      "page": "R35",
+      "manual": "Reproduction Manual",
+      "title": "Colour Specifications and Materials",
+      "printed": "28"
+     }
     ]
    },
    {
@@ -5353,6 +6498,22 @@
       "y": 760,
       "width": 1312,
       "size": 20
+     }
+    ],
+    "sources": [
+     {
+      "book": "reproduction",
+      "page": "R10",
+      "manual": "Reproduction Manual",
+      "title": "Official Letterforms; Letterform Comparisons",
+      "printed": "9"
+     },
+     {
+      "book": "general",
+      "page": "G08",
+      "manual": "General Manual",
+      "title": "Typography; stationery, vehicle and sign arrangements",
+      "printed": "6"
      }
     ]
    },
@@ -5428,6 +6589,36 @@
       "y": 840,
       "width": 1312,
       "size": 19
+     }
+    ],
+    "sources": [
+     {
+      "book": "reproduction",
+      "page": "R03",
+      "manual": "Reproduction Manual",
+      "title": "Stationery Specifications; explanatory diagrams",
+      "printed": "2"
+     },
+     {
+      "book": "reproduction",
+      "page": "R08",
+      "manual": "Reproduction Manual",
+      "title": "General Use stationery",
+      "printed": "7"
+     },
+     {
+      "book": "general",
+      "page": "G12",
+      "manual": "General Manual",
+      "title": "Stationery: Format A; envelopes; calling cards",
+      "printed": "10"
+     },
+     {
+      "book": "general",
+      "page": "G13",
+      "manual": "General Manual",
+      "title": "Stationery: Format B",
+      "printed": "11"
      }
     ]
    },
@@ -5533,6 +6724,36 @@
       "x": 1148,
       "y": 607.3
      }
+    ],
+    "sources": [
+     {
+      "book": "general",
+      "page": "G14",
+      "manual": "General Manual",
+      "title": "Standard Memorandum; Standard News Release",
+      "printed": "12"
+     },
+     {
+      "book": "general",
+      "page": "G10",
+      "manual": "General Manual",
+      "title": "Publications",
+      "printed": "8"
+     },
+     {
+      "book": "general",
+      "page": "G11",
+      "manual": "General Manual",
+      "title": "Advertising",
+      "printed": "9"
+     },
+     {
+      "book": "reproduction",
+      "page": "R14",
+      "manual": "Reproduction Manual",
+      "title": "Publications; Advertising; News Release; Memorandum",
+      "printed": "13"
+     }
     ]
    },
    {
@@ -5625,6 +6846,29 @@
        ]
       ]
      }
+    ],
+    "sources": [
+     {
+      "book": "vehicle",
+      "page": "V05",
+      "manual": "Vehicle Manual",
+      "title": "Signature, numeral and striping sizes",
+      "printed": "3"
+     },
+     {
+      "book": "general",
+      "page": "G16",
+      "manual": "General Manual",
+      "title": "Vehicle Markings: truck, trailer, van",
+      "printed": "14"
+     },
+     {
+      "book": "general",
+      "page": "G17",
+      "manual": "General Manual",
+      "title": "Vehicle Markings: pickup, sedan, box truck",
+      "printed": "15"
+     }
     ]
    },
    {
@@ -5696,6 +6940,29 @@
       "text": "REGULATORY",
       "x": 1291.4,
       "y": 557.4
+     }
+    ],
+    "sources": [
+     {
+      "book": "sign",
+      "page": "S07",
+      "manual": "Sign Manual",
+      "title": "Grid system",
+      "printed": "5"
+     },
+     {
+      "book": "sign",
+      "page": "S10",
+      "manual": "Sign Manual",
+      "title": "Signature formats",
+      "printed": "8"
+     },
+     {
+      "book": "general",
+      "page": "G18",
+      "manual": "General Manual",
+      "title": "Signs: nine application figures",
+      "printed": "16"
      }
     ]
    }
@@ -5924,6 +7191,15 @@
      }
     ]
    }
+  ]
+ },
+ "manuals": {
+  "pack": "bc",
+  "books": [
+   "reproduction",
+   "general",
+   "vehicle",
+   "sign"
   ]
  }
 }

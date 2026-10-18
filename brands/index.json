@@ -1,11 +1,1472 @@
 [
   {
     "id": "bc-hydro-1983",
-    "name": "B.C.Hydro"
+    "name": "B.C.Hydro",
+    "pages": {
+      "hydro/H16": [
+        [
+          "template",
+          "letterhead-standard",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-standard",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-standard",
+          "Business card"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Stationery and forms"
+        ]
+      ],
+      "hydro/H15": [
+        [
+          "template",
+          "letterhead-standard",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-standard",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-standard",
+          "Business card"
+        ],
+        [
+          "template",
+          "letterhead-gas",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-gas",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-gas",
+          "Business card"
+        ],
+        [
+          "template",
+          "letterhead-rail",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-rail",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-rail",
+          "Business card"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Stationery and forms"
+        ]
+      ],
+      "hydro/H14": [
+        [
+          "template",
+          "letterhead-standard",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-standard",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-standard",
+          "Business card"
+        ],
+        [
+          "template",
+          "letterhead-gas",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-gas",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-gas",
+          "Business card"
+        ],
+        [
+          "template",
+          "letterhead-rail",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-rail",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-rail",
+          "Business card"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Stationery and forms"
+        ]
+      ],
+      "hydro/H17": [
+        [
+          "template",
+          "letterhead-gas",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-gas",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-gas",
+          "Business card"
+        ]
+      ],
+      "hydro/H18": [
+        [
+          "template",
+          "letterhead-rail",
+          "Letterhead"
+        ],
+        [
+          "template",
+          "envelope-rail",
+          "Envelope, No. 10"
+        ],
+        [
+          "template",
+          "card-rail",
+          "Business card"
+        ]
+      ],
+      "hydro/H20": [
+        [
+          "template",
+          "form-bulletin",
+          "Form: Bulletin"
+        ]
+      ],
+      "hydro/H19": [
+        [
+          "template",
+          "form-bulletin",
+          "Form: Bulletin"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Stationery and forms"
+        ]
+      ],
+      "hydro/H26": [
+        [
+          "template",
+          "cover-report",
+          "Report cover"
+        ]
+      ],
+      "hydro/H25": [
+        [
+          "template",
+          "cover-report",
+          "Report cover"
+        ],
+        [
+          "template",
+          "cover-illustrated",
+          "Illustrated cover"
+        ],
+        [
+          "template",
+          "cover-display",
+          "Display cover, 4 × 9"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Publications"
+        ]
+      ],
+      "hydro/H27": [
+        [
+          "template",
+          "cover-illustrated",
+          "Illustrated cover"
+        ]
+      ],
+      "hydro/H28": [
+        [
+          "template",
+          "cover-display",
+          "Display cover, 4 × 9"
+        ]
+      ],
+      "hydro/H30": [
+        [
+          "template",
+          "masthead-band",
+          "Newsletter masthead, colour band"
+        ],
+        [
+          "template",
+          "masthead-rule",
+          "Newsletter masthead, rule"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Publications"
+        ]
+      ],
+      "hydro/H33": [
+        [
+          "template",
+          "advert-display",
+          "Advertisement, display"
+        ]
+      ],
+      "hydro/H32": [
+        [
+          "template",
+          "advert-display",
+          "Advertisement, display"
+        ],
+        [
+          "template",
+          "advert-classified",
+          "Advertisement, classified"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Applications"
+        ]
+      ],
+      "hydro/H34": [
+        [
+          "template",
+          "advert-classified",
+          "Advertisement, classified"
+        ]
+      ],
+      "hydro/H35": [
+        [
+          "template",
+          "av-title",
+          "Audio-visual title"
+        ]
+      ],
+      "hydro/H39": [
+        [
+          "template",
+          "sign-office-identification",
+          "Sign: office identification"
+        ],
+        [
+          "template",
+          "sign-gas-identification",
+          "Sign: gas identification"
+        ],
+        [
+          "template",
+          "sign-horizontal-facility",
+          "Sign: horizontal facility"
+        ],
+        [
+          "template",
+          "sign-vertical-facility",
+          "Sign: vertical facility"
+        ]
+      ],
+      "hydro/H38": [
+        [
+          "template",
+          "sign-office-identification",
+          "Sign: office identification"
+        ],
+        [
+          "template",
+          "sign-gas-identification",
+          "Sign: gas identification"
+        ],
+        [
+          "template",
+          "sign-horizontal-facility",
+          "Sign: horizontal facility"
+        ],
+        [
+          "template",
+          "sign-vertical-facility",
+          "Sign: vertical facility"
+        ],
+        [
+          "template",
+          "sign-danger",
+          "Sign: danger"
+        ],
+        [
+          "template",
+          "sign-guide",
+          "Sign: guide, directional"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Applications"
+        ]
+      ],
+      "hydro/H41": [
+        [
+          "template",
+          "sign-danger",
+          "Sign: danger"
+        ]
+      ],
+      "hydro/H40": [
+        [
+          "template",
+          "sign-guide",
+          "Sign: guide, directional"
+        ]
+      ],
+      "hydro/H44": [
+        [
+          "template",
+          "vehicle-van-black",
+          "Vehicle: panel van, light body"
+        ],
+        [
+          "template",
+          "vehicle-van-white",
+          "Vehicle: panel van, dark body"
+        ]
+      ],
+      "hydro/H43": [
+        [
+          "template",
+          "vehicle-van-black",
+          "Vehicle: panel van, light body"
+        ],
+        [
+          "template",
+          "vehicle-van-white",
+          "Vehicle: panel van, dark body"
+        ]
+      ],
+      "hydro/H42": [
+        [
+          "template",
+          "vehicle-van-black",
+          "Vehicle: panel van, light body"
+        ],
+        [
+          "template",
+          "vehicle-van-white",
+          "Vehicle: panel van, dark body"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Applications"
+        ]
+      ],
+      "hydro/H04": [
+        [
+          "signature",
+          "standard",
+          "Corporate"
+        ],
+        [
+          "signature",
+          "gas",
+          "Gas Operations"
+        ],
+        [
+          "signature",
+          "rail",
+          "B.C.Hydro Rail"
+        ],
+        [
+          "signature",
+          "formal",
+          "Formal"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "Main elements"
+        ]
+      ],
+      "hydro/H03": [
+        [
+          "signature",
+          "standard",
+          "Corporate"
+        ],
+        [
+          "signature",
+          "formal",
+          "Formal"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "Main elements"
+        ]
+      ],
+      "hydro/H05": [
+        [
+          "signature",
+          "standard",
+          "Corporate"
+        ],
+        [
+          "guide",
+          "guide-02",
+          "Corporate colours"
+        ]
+      ],
+      "hydro/H13": [
+        [
+          "signature",
+          "standard",
+          "Corporate"
+        ],
+        [
+          "signature",
+          "gas",
+          "Gas Operations"
+        ],
+        [
+          "signature",
+          "rail",
+          "B.C.Hydro Rail"
+        ],
+        [
+          "guide",
+          "guide-06",
+          "Minimum sizes"
+        ]
+      ],
+      "hydro/H06": [
+        [
+          "signature",
+          "gas",
+          "Gas Operations"
+        ],
+        [
+          "guide",
+          "guide-02",
+          "Corporate colours"
+        ]
+      ],
+      "hydro/H07": [
+        [
+          "guide",
+          "guide-03",
+          "Backgrounds"
+        ]
+      ],
+      "hydro/H08": [
+        [
+          "guide",
+          "guide-03",
+          "Backgrounds"
+        ]
+      ],
+      "hydro/H09": [
+        [
+          "guide",
+          "guide-04",
+          "Incorrect usage"
+        ]
+      ],
+      "hydro/H10": [
+        [
+          "guide",
+          "guide-04",
+          "Incorrect usage"
+        ]
+      ],
+      "hydro/H11": [
+        [
+          "guide",
+          "guide-04",
+          "Incorrect usage"
+        ]
+      ],
+      "hydro/H12": [
+        [
+          "guide",
+          "guide-05",
+          "Corporate typeface"
+        ]
+      ],
+      "hydro/H24": [
+        [
+          "guide",
+          "guide-08",
+          "Publications"
+        ]
+      ]
+    }
   },
   {
     "id": "bc-province-1977",
-    "name": "Province of British Columbia"
+    "name": "Province of British Columbia",
+    "pages": {
+      "reproduction/R08": [
+        [
+          "template",
+          "gu-letterhead",
+          "Letterhead, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope",
+          "Envelope No. 10, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope-kraft",
+          "Catalogue envelope (kraft), General Use"
+        ],
+        [
+          "template",
+          "gu-card",
+          "Calling card, General Use"
+        ],
+        [
+          "guide",
+          "guide-06",
+          "Stationery"
+        ]
+      ],
+      "general/G12": [
+        [
+          "template",
+          "gu-letterhead",
+          "Letterhead, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope",
+          "Envelope No. 10, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope-kraft",
+          "Catalogue envelope (kraft), General Use"
+        ],
+        [
+          "template",
+          "gu-card",
+          "Calling card, General Use"
+        ],
+        [
+          "guide",
+          "guide-06",
+          "Stationery"
+        ]
+      ],
+      "reproduction/R03": [
+        [
+          "template",
+          "gu-letterhead",
+          "Letterhead, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope",
+          "Envelope No. 10, General Use"
+        ],
+        [
+          "template",
+          "gu-envelope-kraft",
+          "Catalogue envelope (kraft), General Use"
+        ],
+        [
+          "template",
+          "gu-card",
+          "Calling card, General Use"
+        ],
+        [
+          "template",
+          "minister-letterhead",
+          "Letterhead, Minister"
+        ],
+        [
+          "template",
+          "minister-envelope",
+          "Envelope No. 10, Minister"
+        ],
+        [
+          "template",
+          "minister-card",
+          "Calling card, Minister"
+        ],
+        [
+          "template",
+          "deputy-letterhead",
+          "Letterhead, Deputy Minister"
+        ],
+        [
+          "template",
+          "deputy-envelope",
+          "Envelope No. 10, Deputy Minister"
+        ],
+        [
+          "template",
+          "deputy-card",
+          "Calling card, Deputy Minister"
+        ],
+        [
+          "template",
+          "board-letterhead",
+          "Letterhead, Board or Commission"
+        ],
+        [
+          "template",
+          "board-envelope",
+          "Envelope No. 10, Board or Commission"
+        ],
+        [
+          "template",
+          "board-card",
+          "Calling card, Board or Commission"
+        ],
+        [
+          "template",
+          "premier-letterhead",
+          "Letterhead, Premier"
+        ],
+        [
+          "template",
+          "premier-envelope",
+          "Envelope No. 10, Premier"
+        ],
+        [
+          "template",
+          "premier-card",
+          "Calling card, Premier"
+        ],
+        [
+          "template",
+          "special-letterhead",
+          "Letterhead, Special Use"
+        ],
+        [
+          "template",
+          "special-envelope",
+          "Envelope No. 10, Special Use"
+        ],
+        [
+          "template",
+          "special-card",
+          "Calling card, Special Use"
+        ],
+        [
+          "guide",
+          "guide-06",
+          "Stationery"
+        ]
+      ],
+      "reproduction/R05": [
+        [
+          "template",
+          "minister-letterhead",
+          "Letterhead, Minister"
+        ],
+        [
+          "template",
+          "minister-envelope",
+          "Envelope No. 10, Minister"
+        ],
+        [
+          "template",
+          "minister-card",
+          "Calling card, Minister"
+        ]
+      ],
+      "reproduction/R06": [
+        [
+          "template",
+          "deputy-letterhead",
+          "Letterhead, Deputy Minister"
+        ],
+        [
+          "template",
+          "deputy-envelope",
+          "Envelope No. 10, Deputy Minister"
+        ],
+        [
+          "template",
+          "deputy-card",
+          "Calling card, Deputy Minister"
+        ]
+      ],
+      "reproduction/R07": [
+        [
+          "template",
+          "board-letterhead",
+          "Letterhead, Board or Commission"
+        ],
+        [
+          "template",
+          "board-envelope",
+          "Envelope No. 10, Board or Commission"
+        ],
+        [
+          "template",
+          "board-card",
+          "Calling card, Board or Commission"
+        ]
+      ],
+      "reproduction/R04": [
+        [
+          "template",
+          "premier-letterhead",
+          "Letterhead, Premier"
+        ],
+        [
+          "template",
+          "premier-envelope",
+          "Envelope No. 10, Premier"
+        ],
+        [
+          "template",
+          "premier-card",
+          "Calling card, Premier"
+        ]
+      ],
+      "reproduction/R09": [
+        [
+          "template",
+          "special-letterhead",
+          "Letterhead, Special Use"
+        ],
+        [
+          "template",
+          "special-envelope",
+          "Envelope No. 10, Special Use"
+        ],
+        [
+          "template",
+          "special-card",
+          "Calling card, Special Use"
+        ]
+      ],
+      "general/G14": [
+        [
+          "template",
+          "memorandum",
+          "Memorandum"
+        ],
+        [
+          "template",
+          "news-release",
+          "News release"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Documents"
+        ]
+      ],
+      "reproduction/R14": [
+        [
+          "template",
+          "memorandum",
+          "Memorandum"
+        ],
+        [
+          "template",
+          "news-release",
+          "News release"
+        ],
+        [
+          "template",
+          "publication-title-page",
+          "Title page, vertical signature"
+        ],
+        [
+          "template",
+          "publication-cover-reverse",
+          "Cover, reverse"
+        ],
+        [
+          "template",
+          "publication-annual-report",
+          "Annual report cover"
+        ],
+        [
+          "template",
+          "publication-statement-page",
+          "Title page, publication statement"
+        ],
+        [
+          "template",
+          "advert-tender",
+          "Advertisement: tender"
+        ],
+        [
+          "template",
+          "advert-announcement",
+          "Advertisement: one-column announcement"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Documents"
+        ]
+      ],
+      "general/G10": [
+        [
+          "template",
+          "publication-title-page",
+          "Title page, vertical signature"
+        ],
+        [
+          "template",
+          "publication-cover-reverse",
+          "Cover, reverse"
+        ],
+        [
+          "template",
+          "publication-annual-report",
+          "Annual report cover"
+        ],
+        [
+          "template",
+          "publication-statement-page",
+          "Title page, publication statement"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Documents"
+        ]
+      ],
+      "general/G11": [
+        [
+          "template",
+          "advert-tender",
+          "Advertisement: tender"
+        ],
+        [
+          "template",
+          "advert-announcement",
+          "Advertisement: one-column announcement"
+        ],
+        [
+          "guide",
+          "guide-07",
+          "Documents"
+        ]
+      ],
+      "general/G15": [
+        [
+          "template",
+          "uniform-flash",
+          "Shoulder flash: job function"
+        ],
+        [
+          "template",
+          "uniform-security",
+          "Shoulder flash: security"
+        ]
+      ],
+      "vehicle/V05": [
+        [
+          "template",
+          "vehicle-door",
+          "Vehicle door marking"
+        ],
+        [
+          "template",
+          "vehicle-van-truck",
+          "Van truck, box side"
+        ],
+        [
+          "signature",
+          "vehicle",
+          "Vehicles: door marking"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Vehicles"
+        ]
+      ],
+      "vehicle/V06": [
+        [
+          "template",
+          "vehicle-door",
+          "Vehicle door marking"
+        ]
+      ],
+      "vehicle/V07": [
+        [
+          "template",
+          "vehicle-door",
+          "Vehicle door marking"
+        ]
+      ],
+      "general/G17": [
+        [
+          "template",
+          "vehicle-door",
+          "Vehicle door marking"
+        ],
+        [
+          "template",
+          "vehicle-van-truck",
+          "Van truck, box side"
+        ],
+        [
+          "template",
+          "vehicle-van-truck-rear",
+          "Van truck, rear doors"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Vehicles"
+        ]
+      ],
+      "vehicle/V12": [
+        [
+          "template",
+          "vehicle-van-truck",
+          "Van truck, box side"
+        ],
+        [
+          "template",
+          "vehicle-van-truck-rear",
+          "Van truck, rear doors"
+        ]
+      ],
+      "vehicle/V13": [
+        [
+          "template",
+          "vehicle-van-truck",
+          "Van truck, box side"
+        ],
+        [
+          "template",
+          "vehicle-van-truck-rear",
+          "Van truck, rear doors"
+        ]
+      ],
+      "sign/S12": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ]
+      ],
+      "sign/S13": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ]
+      ],
+      "sign/S10": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-standard-information",
+          "Sign: standard information, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-warning",
+          "Sign: warning, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "sign-regulatory",
+          "Sign: regulatory, 2 × 4 ft"
+        ],
+        [
+          "signature",
+          "sign-centred",
+          "Signs: centred"
+        ],
+        [
+          "signature",
+          "sign-horizontal",
+          "Signs: horizontal"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Signs"
+        ]
+      ],
+      "sign/S07": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-standard-information",
+          "Sign: standard information, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-secondary-identification",
+          "Sign: secondary identification blade"
+        ],
+        [
+          "template",
+          "sign-directional",
+          "Sign: secondary directional, four blades"
+        ],
+        [
+          "template",
+          "sign-warning",
+          "Sign: warning, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "sign-regulatory",
+          "Sign: regulatory, 2 × 4 ft"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Signs"
+        ]
+      ],
+      "sign/S08": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-standard-information",
+          "Sign: standard information, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "sign-secondary-identification",
+          "Sign: secondary identification blade"
+        ],
+        [
+          "template",
+          "sign-directional",
+          "Sign: secondary directional, four blades"
+        ],
+        [
+          "template",
+          "sign-warning",
+          "Sign: warning, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "sign-regulatory",
+          "Sign: regulatory, 2 × 4 ft"
+        ]
+      ],
+      "general/G18": [
+        [
+          "template",
+          "sign-primary-identification",
+          "Sign: primary identification, 4 × 8 ft"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Signs"
+        ]
+      ],
+      "sign/S16": [
+        [
+          "template",
+          "sign-standard-information",
+          "Sign: standard information, 4 × 8 ft"
+        ]
+      ],
+      "sign/S18": [
+        [
+          "template",
+          "sign-standard-information",
+          "Sign: standard information, 4 × 8 ft"
+        ]
+      ],
+      "sign/S14": [
+        [
+          "template",
+          "sign-secondary-identification",
+          "Sign: secondary identification blade"
+        ]
+      ],
+      "sign/S15": [
+        [
+          "template",
+          "sign-secondary-identification",
+          "Sign: secondary identification blade"
+        ]
+      ],
+      "sign/S19": [
+        [
+          "template",
+          "sign-directional",
+          "Sign: secondary directional, four blades"
+        ]
+      ],
+      "sign/S20": [
+        [
+          "template",
+          "sign-directional",
+          "Sign: secondary directional, four blades"
+        ]
+      ],
+      "sign/S23": [
+        [
+          "template",
+          "sign-warning",
+          "Sign: warning, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "sign-regulatory",
+          "Sign: regulatory, 2 × 4 ft"
+        ]
+      ],
+      "sign/S24": [
+        [
+          "template",
+          "sign-warning",
+          "Sign: warning, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "sign-regulatory",
+          "Sign: regulatory, 2 × 4 ft"
+        ]
+      ],
+      "general/G05": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "The provincial signature"
+        ]
+      ],
+      "general/G06": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "The provincial signature"
+        ]
+      ],
+      "general/G07": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "The provincial signature"
+        ],
+        [
+          "guide",
+          "guide-04",
+          "Colour"
+        ]
+      ],
+      "reproduction/R31": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
+        ]
+      ],
+      "reproduction/R32": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "The provincial signature"
+        ],
+        [
+          "guide",
+          "guide-03",
+          "Line spacing"
+        ]
+      ],
+      "reproduction/R13": [
+        [
+          "signature",
+          "horizontal",
+          "Flush-left, horizontal"
+        ],
+        [
+          "signature",
+          "vertical",
+          "Flush-left, vertical"
+        ],
+        [
+          "signature",
+          "stacked",
+          "Stacked, centred"
+        ],
+        [
+          "signature",
+          "centred",
+          "Centred"
+        ],
+        [
+          "signature",
+          "one-line",
+          "One line"
+        ],
+        [
+          "guide",
+          "guide-02",
+          "Ministerial signature formats"
+        ],
+        [
+          "guide",
+          "guide-03",
+          "Line spacing"
+        ]
+      ],
+      "reproduction/R16": [
+        [
+          "signature",
+          "horizontal",
+          "Flush-left, horizontal"
+        ],
+        [
+          "signature",
+          "vertical",
+          "Flush-left, vertical"
+        ],
+        [
+          "signature",
+          "stacked",
+          "Stacked, centred"
+        ],
+        [
+          "signature",
+          "centred",
+          "Centred"
+        ],
+        [
+          "signature",
+          "one-line",
+          "One line"
+        ],
+        [
+          "guide",
+          "guide-02",
+          "Ministerial signature formats"
+        ]
+      ],
+      "reproduction/R17": [
+        [
+          "signature",
+          "horizontal",
+          "Flush-left, horizontal"
+        ],
+        [
+          "signature",
+          "vertical",
+          "Flush-left, vertical"
+        ],
+        [
+          "signature",
+          "stacked",
+          "Stacked, centred"
+        ],
+        [
+          "signature",
+          "centred",
+          "Centred"
+        ],
+        [
+          "signature",
+          "one-line",
+          "One line"
+        ]
+      ],
+      "reproduction/R11": [
+        [
+          "signature",
+          "horizontal",
+          "Flush-left, horizontal"
+        ],
+        [
+          "signature",
+          "vertical",
+          "Flush-left, vertical"
+        ],
+        [
+          "signature",
+          "stacked",
+          "Stacked, centred"
+        ],
+        [
+          "signature",
+          "centred",
+          "Centred"
+        ],
+        [
+          "signature",
+          "one-line",
+          "One line"
+        ]
+      ],
+      "general/G08": [
+        [
+          "signature",
+          "horizontal",
+          "Flush-left, horizontal"
+        ],
+        [
+          "signature",
+          "vertical",
+          "Flush-left, vertical"
+        ],
+        [
+          "signature",
+          "stacked",
+          "Stacked, centred"
+        ],
+        [
+          "signature",
+          "centred",
+          "Centred"
+        ],
+        [
+          "signature",
+          "one-line",
+          "One line"
+        ],
+        [
+          "guide",
+          "guide-03",
+          "Line spacing"
+        ],
+        [
+          "guide",
+          "guide-05",
+          "Typography"
+        ]
+      ],
+      "reproduction/R18": [
+        [
+          "signature",
+          "sign-centred",
+          "Signs: centred"
+        ],
+        [
+          "signature",
+          "sign-horizontal",
+          "Signs: horizontal"
+        ]
+      ],
+      "vehicle/V04": [
+        [
+          "signature",
+          "vehicle",
+          "Vehicles: door marking"
+        ]
+      ],
+      "reproduction/R15": [
+        [
+          "guide",
+          "guide-02",
+          "Ministerial signature formats"
+        ]
+      ],
+      "reproduction/R34": [
+        [
+          "guide",
+          "guide-04",
+          "Colour"
+        ]
+      ],
+      "reproduction/R35": [
+        [
+          "guide",
+          "guide-04",
+          "Colour"
+        ]
+      ],
+      "reproduction/R10": [
+        [
+          "guide",
+          "guide-05",
+          "Typography"
+        ]
+      ],
+      "general/G13": [
+        [
+          "guide",
+          "guide-06",
+          "Stationery"
+        ]
+      ],
+      "general/G16": [
+        [
+          "guide",
+          "guide-08",
+          "Vehicles"
+        ]
+      ]
+    }
   },
   {
     "id": "ddcnorth",

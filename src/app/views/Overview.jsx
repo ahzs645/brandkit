@@ -48,7 +48,7 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
 
 const BACKGROUNDS = ['reverse', 'paper', 'light', 'primary', 'ink']
 
-export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision }) => {
+export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision, openManual }) => {
   const [familyId, setFamily] = useState(brand.families?.[0]?.id)
   const [layout, setLayout] = useState('horizontal')
   const [background, setBackground] = useState('reverse')
@@ -84,7 +84,7 @@ export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision 
         </div>
       </section>
 
-      {!brand.families?.length ? <SignatureStage brand={brand} fonts={fonts} /> : (
+      {!brand.families?.length ? <SignatureStage brand={brand} fonts={fonts} openManual={openManual} /> : (
       <section className="panel stage-panel" aria-label="Logo preview">
         <div className="stage" style={{ background: backgroundHex }}>
           <SvgImage svg={svg} alt={`${brand.name} ${layout} logo`} className={`stage__art stage__art--${layout}`} />

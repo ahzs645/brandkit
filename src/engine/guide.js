@@ -188,6 +188,7 @@ export const guidePages = (ctx) => {
     number: index + 1,
     title: page.title,
     name: page.name ?? page.title,
+    sources: page.sources,
     width,
     height,
     render: () => {

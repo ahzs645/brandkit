@@ -9,7 +9,7 @@
 //
 //   node scripts/brands/bc-province-1977.mjs
 
-import { box, HEROS_CAP, hung, locked, pt, readJson, round, writeBrand } from './common.mjs'
+import { box, cite, HEROS_CAP, hung, locked, pt, readJson, round, writeBrand } from './common.mjs'
 import { applications, guide } from './bc-province-1977-applications.mjs'
 
 const folder = new URL('../../brands/bc-province-1977/', import.meta.url)
@@ -375,5 +375,56 @@ brand.roles.type = 'black'
 
 brand.templates = [...stationery, ...applications(brand)]
 brand.guide = guide(brand)
+
+// The manual pages each piece is built from (page ids in manuals/bc). General Manual G12 is
+// Format A (the component's address printed), G13 Format B (typed); R03 explains the spec sheets.
+const STATIONERY_SHEET = { 'gu': 'R08', minister: 'R05', deputy: 'R06', board: 'R07', premier: 'R04', special: 'R09' }
+const SIGNS = ['S07', 'S08']
+cite(brand, {
+  pack: 'bc',
+  templates: {
+    ...Object.fromEntries(stationery.map((template) => {
+      const rank = template.id.split('-')[0]
+      return [template.id, [STATIONERY_SHEET[rank], ...(rank === 'gu' ? ['G12'] : []), 'R03']]
+    })),
+    memorandum: ['G14', 'R14'],
+    'news-release': ['G14', 'R14'],
+    'publication-title-page': ['G10', 'R14'],
+    'publication-cover-reverse': ['G10', 'R14'],
+    'publication-annual-report': ['G10', 'R14'],
+    'publication-statement-page': ['G10', 'R14'],
+    'advert-tender': ['G11', 'R14'],
+    'advert-announcement': ['G11', 'R14'],
+    'uniform-flash': ['G15'],
+    'uniform-security': ['G15'],
+    'vehicle-door': ['V05', 'V06', 'V07', 'G17'],
+    'vehicle-van-truck': ['V12', 'V13', 'V05', 'G17'],
+    'vehicle-van-truck-rear': ['V12', 'V13', 'G17'],
+    'sign-primary-identification': ['S12', 'S13', 'S10', ...SIGNS, 'G18'],
+    'sign-standard-information': ['S16', 'S18', 'S10', ...SIGNS],
+    'sign-secondary-identification': ['S14', 'S15', ...SIGNS],
+    'sign-directional': ['S19', 'S20', ...SIGNS],
+    'sign-warning': ['S23', 'S24', 'S10', ...SIGNS],
+    'sign-regulatory': ['S23', 'S24', 'S10', ...SIGNS]
+  },
+  signatures: {
+    provincial: ['G05', 'G06', 'G07', 'R31', 'R32'],
+    ...Object.fromEntries(['horizontal', 'vertical', 'stacked', 'centred', 'one-line'].map((id) => [id, ['R13', 'R16', 'R17', 'R11', 'G08']])),
+    'sign-centred': ['S10', 'R18'],
+    'sign-horizontal': ['S10', 'R18'],
+    vehicle: ['V05', 'V04']
+  },
+  guide: [
+    ['G05', 'G06', 'G07', 'R32'],
+    ['R13', 'R15', 'R16'],
+    ['R32', 'R13', 'G08'],
+    ['G07', 'R34', 'R35'],
+    ['R10', 'G08'],
+    ['R03', 'R08', 'G12', 'G13'],
+    ['G14', 'G10', 'G11', 'R14'],
+    ['V05', 'G16', 'G17'],
+    ['S07', 'S10', 'G18']
+  ]
+})
 
 writeBrand(new URL('brand.json', folder), brand)

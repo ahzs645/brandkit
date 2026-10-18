@@ -8,7 +8,7 @@
 //   node scripts/brands/bc-hydro-1983.mjs
 
 import { readFileSync } from 'node:fs'
-import { box, g, inch, line, locked, pt, readJson, round, shelf, text, writeBrand } from './common.mjs'
+import { box, cite, g, inch, line, locked, pt, readJson, round, shelf, text, writeBrand } from './common.mjs'
 import { loadBrandFonts } from '../../src/fonts/provider.js'
 
 const folder = new URL('../../brands/bc-hydro-1983/', import.meta.url)
@@ -473,5 +473,45 @@ brand.guide = {
     }
   ]
 }
+
+// The manual pages each piece is built from (page ids in manuals/bc: H<printed page + 1>).
+const SET_PAGES = { standard: ['H16'], gas: ['H17'], rail: ['H18'] }
+cite(brand, {
+  pack: 'bc',
+  templates: {
+    ...Object.fromEntries(Object.entries(SET_PAGES).flatMap(([set, pages]) => ['letterhead', 'envelope', 'card'].map((kind) => [`${kind}-${set}`, [...pages, 'H15', 'H14']]))),
+    'form-bulletin': ['H20', 'H19'],
+    'cover-report': ['H26', 'H25'],
+    'cover-illustrated': ['H27', 'H25'],
+    'cover-display': ['H28', 'H25'],
+    'masthead-band': ['H30'],
+    'masthead-rule': ['H30'],
+    'advert-display': ['H33', 'H32'],
+    'advert-classified': ['H34', 'H32'],
+    'av-title': ['H35'],
+    ...Object.fromEntries(['sign-office-identification', 'sign-gas-identification', 'sign-horizontal-facility', 'sign-vertical-facility'].map((id) => [id, ['H39', 'H38']])),
+    'sign-danger': ['H41', 'H38'],
+    'sign-guide': ['H40', 'H38'],
+    'vehicle-van-black': ['H44', 'H43', 'H42'],
+    'vehicle-van-white': ['H44', 'H43', 'H42']
+  },
+  signatures: {
+    standard: ['H04', 'H03', 'H05', 'H13'],
+    gas: ['H04', 'H06', 'H13'],
+    rail: ['H04', 'H13'],
+    formal: ['H04', 'H03']
+  },
+  guide: [
+    ['H03', 'H04'],
+    ['H05', 'H06'],
+    ['H07', 'H08'],
+    ['H09', 'H10', 'H11'],
+    ['H12'],
+    ['H13'],
+    ['H14', 'H15', 'H16', 'H19'],
+    ['H24', 'H25', 'H30'],
+    ['H32', 'H38', 'H42']
+  ]
+})
 
 writeBrand(new URL('brand.json', folder), brand)

@@ -55,9 +55,10 @@ const slug = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g,
 export const TemplateStudio = ({
   brand, fonts, templates = brand.templates ?? [], storageKey = brand.id, values: controlled, onValuesChange,
   children, fileName = (template, fieldValues) => [brand.id, template.id, slug(fieldValues['contact-name'] ?? fieldValues.name)].filter(Boolean).join('-'),
-  note, departments = true
+  note, departments = true, initialTemplate, onSelect, aside
 }) => {
-  const [selected, setSelected] = useState(templates[0]?.id)
+  const [selected, setSelectedState] = useState(() => (templates.some((entry) => entry.id === initialTemplate) ? initialTemplate : templates[0]?.id))
+  const setSelected = (id) => { setSelectedState(id); onSelect?.(id) }
   const [own, setOwn] = useState(() => readStored(storageKey))
   const [guides, setGuides] = useState(false)
   const [busy, setBusy] = useState(null)
@@ -68,7 +69,7 @@ export const TemplateStudio = ({
     else setOwn(next)
   }
   useEffect(() => { if (!controlled && storageKey) try { localStorage.setItem(`brandkit:fields:${storageKey}`, JSON.stringify(own)) } catch { /* not persisted */ } }, [own, controlled, storageKey])
-  useEffect(() => { if (!templates.some((template) => template.id === selected)) setSelected(templates[0]?.id) }, [templates, selected])
+  useEffect(() => { if (!templates.some((template) => template.id === selected)) setSelectedState(templates[0]?.id) }, [templates, selected])
 
   const template = templates.find((entry) => entry.id === selected) ?? templates[0]
   const ready = Boolean(fonts)
@@ -139,6 +140,7 @@ export const TemplateStudio = ({
         {error && <p className="studio__error" role="alert">{error}</p>}
         {!ready && <p className="studio__note">Loading the brand’s fonts. Previews use stand-in type until they arrive.</p>}
         {note && <p className="studio__note">{note}</p>}
+        {aside?.(template)}
       </div>
 
       <form className="studio__fields" onSubmit={(event) => event.preventDefault()}>

@@ -5,6 +5,7 @@
 // signature's baseline". Keeping the arithmetic here keeps each figure's source next to it.
 
 import { readFileSync, writeFileSync } from 'node:fs'
+import { GUIDE_BOOKS } from '../../manuals/bc/books.js'
 
 export const MM_PER_IN = 25.4
 export const MM_PER_PT = 25.4 / 72
@@ -20,10 +21,56 @@ export const writeBrand = (url, brand) => {
   // Keep the app's brand menu (brands/index.json) in step.
   const manifestUrl = new URL('../../brands/index.json', import.meta.url)
   const manifest = JSON.parse(readFileSync(manifestUrl, 'utf8')).filter((entry) => entry.id !== brand.id)
-  manifest.push({ id: brand.id, name: brand.name })
+  manifest.push({ id: brand.id, name: brand.name, ...(brand.manuals ? { pages: pageIndex(brand) } : {}) })
   manifest.sort((a, b) => a.id.localeCompare(b.id))
   writeFileSync(manifestUrl, `${JSON.stringify(manifest, null, 2)}\n`)
   console.log(`${new URL(url).pathname.split('/brands/')[1]}: ${brand.templates.length} templates, ${brand.signatures.length} signatures, ${brand.guide.pages.length} guide pages`)
+}
+
+// --- Sources: which manual pages each template, signature and guide page is built from.
+
+const PAGES = new Map(GUIDE_BOOKS.flatMap((book) => book.pages.map((page) => [page.id, { book, page }])))
+
+/** `R08` → `{ book: 'reproduction', page: 'R08', manual: 'Reproduction Manual', title: 'General Use stationery', printed: '7' }`. */
+const source = (id) => {
+  const found = PAGES.get(id)
+  if (!found) throw new Error(`No manual page ${id}`)
+  return { book: found.book.id, page: id, manual: found.book.title, title: found.page.title, ...(found.page.printed ? { printed: found.page.printed } : {}) }
+}
+
+/**
+ * Gives every template, signature and guide page its `sources`, from page ids:
+ * `{ templates: { id: ['R08', 'G12'] }, signatures: { id: [...] }, guide: [[...], ...] }`.
+ * Throws when anything is left without a source or a source names something that is not there,
+ * so the citations cannot fall behind the brand.
+ */
+export const cite = (brand, { pack, templates, signatures, guide }) => {
+  const missing = []
+  const apply = (items, map, kind) => {
+    for (const item of items) {
+      if (!map[item.id]) missing.push(`${kind} ${item.id}`)
+      else item.sources = map[item.id].map(source)
+    }
+    for (const id of Object.keys(map)) if (!items.some((item) => item.id === id)) missing.push(`${kind} ${id} (cited, but there is no such ${kind})`)
+  }
+  apply(brand.templates, templates, 'template')
+  apply(brand.signatures, signatures, 'signature')
+  if (guide.length !== brand.guide.pages.length) missing.push(`guide: ${guide.length} entries for ${brand.guide.pages.length} pages`)
+  brand.guide.pages.forEach((page, index) => { if (guide[index]) page.sources = guide[index].map(source) })
+  if (missing.length) throw new Error(`Sources: ${missing.join('; ')}`)
+  brand.manuals = { pack, books: [...new Set([...brand.templates, ...brand.signatures, ...brand.guide.pages].flatMap((item) => item.sources.map((entry) => entry.book)))] }
+}
+
+/** The manifest's reverse index: for each manual page, what in this brand is built from it. */
+const pageIndex = (brand) => {
+  const index = {}
+  const add = (kind, id, label, sources) => {
+    for (const entry of sources ?? []) (index[`${entry.book}/${entry.page}`] ??= []).push([kind, id, label])
+  }
+  for (const template of brand.templates) add('template', template.id, template.label, template.sources)
+  for (const signature of brand.signatures ?? []) add('signature', signature.id, signature.label, signature.sources)
+  brand.guide?.pages?.forEach((page, index) => add('guide', `guide-${String(index + 1).padStart(2, '0')}`, page.name ?? page.title, page.sources))
+  return index
 }
 
 /** A text element in a template. */

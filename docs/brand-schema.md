@@ -202,6 +202,21 @@ symbols, a `README.md` with the rationale, its own `brand.json`, and any guide s
 `symbol` elements take `"revision": "<id>"` to draw a proposal's artwork for such a sheet.
 Approving a revision means moving its `changes` into the definition and removing the entry.
 
+## Sources
+
+A brand rebuilt from a manual can say where each piece comes from. Templates, signatures and guide
+pages take `sources`, the manual pages they are built from:
+
+```json
+"sources": [{ "book": "reproduction", "page": "R08", "manual": "Reproduction Manual", "title": "General Use stationery", "printed": "7" }]
+```
+
+`book` and `page` are ids in a manual pack, which `manuals: { "pack": "bc" }` names; the rest is
+there so the citation reads on its own. The app shows sources as links into its manual library,
+and the library lists, under each page, what the built-in brands build from it (indexed in
+`brands/index.json` by `scripts/brands/common.mjs`, whose `cite()` also refuses to write a brand
+with anything uncited).
+
 ## Web, patterns, icons, files
 
 - `patterns`: the symbol repeated (`repeat: { x: [from, to, step], y: […], scale, colour }`) or

@@ -3,11 +3,12 @@ import { fill } from '../../engine/brand.js'
 import { guidePages, guideSheets } from '../../engine/guide.js'
 import { download, pdf, zip } from '../../export/render.js'
 import { ManualLibrary } from '../../manuals/ManualLibrary.jsx'
+import { ManualSources } from './Sources.jsx'
 
 const pdfPage = (svg, page) => ({ svg, width: page.width * 0.75, height: page.height * 0.75, unit: 'pt' })
 
 /** The brand's own guide, generated now, read in the same viewer as the historical manuals. */
-export const Guide = ({ brand, fonts }) => {
+export const Guide = ({ brand, fonts, openManual }) => {
   const ctx = useMemo(() => ({ brand, fonts }), [brand, fonts])
   const rendered = useMemo(() => {
     const pages = guidePages(ctx).map((page) => ({ ...page, svg: page.render() }))
@@ -23,7 +24,7 @@ export const Guide = ({ brand, fonts }) => {
     const toPage = (page, printed) => {
       const src = URL.createObjectURL(new Blob([page.svg], { type: 'image/svg+xml' }))
       urls.push(src)
-      return { id: page.id, title: page.name ?? page.title, printed, width: page.width, height: page.height, src }
+      return { id: page.id, title: page.name ?? page.title, printed, width: page.width, height: page.height, src, sources: page.sources }
     }
     const out = []
     if (rendered.pages.length) out.push({ id: 'guide', title: fill(brand, brand.guide?.title ?? '{name} brand guide'), edition: `v${brand.displayVersion ?? brand.version}`, pages: rendered.pages.map((page) => toPage(page, String(page.number))) })
@@ -50,7 +51,8 @@ export const Guide = ({ brand, fonts }) => {
       {!fonts && <p className="notice">Loading the brand’s fonts: until they arrive, the pages use stand-in type.</p>}
       <ManualLibrary key={`${brand.id}-${Boolean(fonts)}`} books={books} families={[{ id: 'brand', title: brand.name, kind: 'Generated from brand.json', books: books.map((book) => book.id) }]}
         heading="Brand guide" intro="Every page is drawn from this brand’s definition, with its text set as outlines." urlState={{ set: { view: 'guide' }, book: 'book', page: 'page' }}
-        initialBook="guide" bookActions={actions} label="Brand guide" />
+        initialBook="guide" bookActions={actions} label="Brand guide"
+        pageAside={(book, page) => <ManualSources brand={brand} sources={page.sources} openManual={openManual} heading="This page sums up" />} />
     </div>
   )
 }

@@ -13,6 +13,7 @@ import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
+import { ManualSources } from './views/Sources.jsx'
 
 // The guide pulls in the manual viewer; the manual library pulls in 156 pages' worth of data.
 const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default: module.Guide })))
@@ -85,7 +86,7 @@ export const App = () => {
       else next = await loadBuiltIn(BUILT_IN.includes(id) ? id : BUILT_IN[0])
       setCurrent({ ...next, original: structuredClone(next.brand) })
       // On arrival the address may point into a guide or manual; a later switch of brand starts fresh.
-      writeUrl({ brand: next.brand.id }, { keep: keepView ? ['book', 'page', 'guide'] : [] })
+      writeUrl({ brand: next.brand.id }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature'] : [] })
       try { localStorage.setItem('brandkit:last', next.brand.id) } catch { /* fine */ }
     } catch (problem) {
       setError(problem.message)
@@ -128,6 +129,20 @@ export const App = () => {
     setView(next)
     writeUrl({ view: next === 'overview' ? null : next })
     globalThis.scrollTo?.({ top: 0 })
+  }
+
+  // Between a brand and its manuals: a template's source page, and back from a page to a template.
+  const openManual = (book, page) => {
+    writeUrl({ view: 'manuals', guide: book, page })
+    setView('manuals')
+    globalThis.scrollTo?.({ top: 0 })
+  }
+  const openBuilt = (brandId, kind, id) => {
+    const place = kind === 'template' ? { view: 'templates', template: id } : kind === 'signature' ? { view: 'logos', signature: id } : { view: 'guide', book: 'guide', page: id }
+    writeUrl({ brand: brandId, ...place })
+    setView(place.view)
+    globalThis.scrollTo?.({ top: 0 })
+    if (brandId !== base?.id) select(brandId, { keepView: true })
   }
 
   const open = async (file) => {
@@ -202,15 +217,21 @@ export const App = () => {
       <main className="main">
         {!brand ? <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
-            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} />}
-            {view === 'logos' && <Logos brand={brand} fonts={fonts} />}
-            {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} /></div>}
-            {view === 'guide' && <Guide brand={brand} fonts={fonts} />}
+            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
+            {view === 'logos' && <Logos brand={brand} fonts={fonts} openManual={openManual} />}
+            {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
+              aside={(template) => (template.description || template.sources) && (
+                <div className="template-about">
+                  {template.description && <p>{template.description}</p>}
+                  <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
+                </div>
+              )} /></div>}
+            {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
             {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}
             {view === 'new' && <NewBrand fonts={libraryFonts} existing={brandIds} onCreate={create} />}
-            {view === 'manuals' && <Manuals />}
+            {view === 'manuals' && <Manuals openBuilt={openBuilt} />}
           </Suspense>
         )}
         {view === 'brand' && saved[brand?.id] && !BUILT_IN.includes(brand?.id) && (
