@@ -64,7 +64,7 @@ side-by-side comparison, in `revisions/rising/`.
 **Share** in the header gives a link for the people who use a brand rather than make it
 (`?brand=ddcnorth&share=1`, optionally with `&view=templates` and so on). It opens the brand as its
 own brand centre: the approved identity's overview, logos, templates, guide and kit, under the
-brand's symbol and name, without revisions, editing, other brands, the manual library or the
+brand's own logo, without revisions, editing, other brands, the manual library or the
 manual pages templates cite. It is a presentation, not access control: the full app is the same
 address without `share`.
 

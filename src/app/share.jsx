@@ -7,8 +7,7 @@
 // app is the same address without `share`.
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
-import { symbolDocument } from '../engine/artwork.js'
-import { Field, Segmented, SvgImage } from './ui.jsx'
+import { BrandLogo, Field, Segmented } from './ui.jsx'
 
 export const isSharedView = () => new URLSearchParams(globalThis.location?.search ?? '').has('share')
 
@@ -28,11 +27,10 @@ export const shareUrl = (brandId, view = 'overview') => {
   return url.href
 }
 
-/** The shared view's masthead mark: the brand's own symbol and name, where brandkit's would be. */
+/** The shared view's masthead mark: the brand's own logo, and what this is. */
 export const SharedMark = ({ brand }) => (
   <a className="shared-mark" href={shareUrl(brand.id)} aria-label={`${brand.name} brand centre`}>
-    <SvgImage svg={symbolDocument({ brand }, { colourKey: brand.rasterColours?.[0] ?? brand.logoColours?.find((key) => key !== 'currentColor') })} className="shared-mark__symbol" />
-    <span className="shared-mark__name">{brand.name}</span>
+    <BrandLogo brand={brand} />
     <span className="shared-mark__label">Brand centre</span>
   </a>
 )

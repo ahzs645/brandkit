@@ -5,7 +5,6 @@ import { guideSheets } from '../../engine/guide.js'
 import { revisionsOf, withRevision } from '../../engine/revisions.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
-import { useShared } from '../share.jsx'
 
 /** Each proposed change to the logo, beside the approved one, with why and a way to try it. */
 const Revisions = ({ base, fonts, active, onRevision }) => {
@@ -49,39 +48,7 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
 
 const BACKGROUNDS = ['reverse', 'paper', 'light', 'primary', 'ink']
 
-/** CSS for setting text in one of the brand's faces (loaded as web fonts by the app). */
-const faceStyle = (face, tracking) => face && { fontFamily: face.stack, fontWeight: face.weight, fontStyle: face.style, letterSpacing: tracking != null ? `${tracking}em` : undefined }
-
-/**
- * The page's opening, in the brand's own type. A shared view speaks to the people using the brand
- * (`web.intro.shared`, or a line naming what is here) rather than describing how the kit was made.
- */
-const Hero = ({ brand, go }) => {
-  const shared = useShared()
-  const intro = brand.web?.intro ?? {}
-  const version = `v${brand.displayVersion ?? brand.version}`
-  const eyebrow = shared ? `Brand centre · ${version}` : `${fill(brand, intro.eyebrow ?? 'Brand identity')} · ${version}`
-  const lede = shared
-    ? fill(brand, intro.shared ?? `Everything for using the {name} brand: the logo in every form, templates for cards, letterhead and documents, the brand guide, and the whole kit to download.`)
-    : fill(brand, intro.body ?? brand.copy?.tagline ?? '')
-  const { fonts = {}, typography = {} } = brand
-  return (
-    <section className="hero">
-      <div>
-        <p className="eyebrow" style={faceStyle(fonts.label, typography.labels?.trackingEm)}>{eyebrow}</p>
-        <h1 style={faceStyle(fonts.display, typography.headlines?.trackingEm)}>{brand.name}</h1>
-        <p className="hero__lede" style={faceStyle(fonts.body)}>{lede}</p>
-        <div className="hero__actions">
-          <button type="button" className="button" onClick={() => go('kit')}>Download the whole kit</button>
-          <button type="button" className="button button--quiet" onClick={() => go('guide')}>Read the brand guide</button>
-          <button type="button" className="button button--quiet" onClick={() => go('templates')}>Make a business card</button>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision, openManual }) => {
+export const Overview = ({ brand, base = brand, fonts, revision, onRevision, openManual }) => {
   const [familyId, setFamily] = useState(brand.families?.[0]?.id)
   const [layout, setLayout] = useState('horizontal')
   const [background, setBackground] = useState('reverse')
@@ -104,8 +71,6 @@ export const Overview = ({ brand, base = brand, fonts, go, revision, onRevision,
 
   return (
     <div className="view overview">
-      <Hero brand={brand} go={go} />
-
       {!brand.families?.length ? <SignatureStage brand={brand} fonts={fonts} openManual={openManual} /> : (
       <section className="panel stage-panel" aria-label="Logo preview">
         <div className="stage" style={{ background: backgroundHex }}>

@@ -1,8 +1,9 @@
 // Small pieces the views share.
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { download, pdf, rasterise } from '../export/render.js'
 import { physicalSize } from '../engine/templates.js'
+import { logoDocument, symbolDocument } from '../engine/artwork.js'
 
 /** An object URL for an SVG string, revoked when the string changes or the component goes. */
 export const useSvgUrl = (svg) => {
@@ -21,6 +22,38 @@ export const useSvgUrl = (svg) => {
 export const SvgImage = ({ svg, alt = '', ...props }) => {
   const url = useSvgUrl(svg)
   return url ? <img src={url} alt={alt} draggable={false} {...props} /> : null
+}
+
+const aspectOf = (svg) => {
+  const [, , width, height] = svg?.match(/viewBox="([^"]+)"/)?.[1].split(/[\s,]+/).map(Number) ?? []
+  return width && height ? width / height : null
+}
+
+/**
+ * The art for a masthead: the horizontal logo; for a brand of signatures, the first that is not
+ * set for a department and is wide enough to read 26 px tall; failing both, the symbol, with the
+ * name beside it.
+ */
+const mastheadArt = (brand) => {
+  if (brand.families?.length) return { svg: logoDocument({ brand }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
+  for (const signature of brand.signatures ?? []) {
+    if (signature.departmental) continue
+    const svg = logoDocument({ brand }, { signature: signature.id, colour: 'currentColor' })
+    if (aspectOf(svg) >= 2.5) return { svg }
+  }
+  return { svg: brand.symbol ? symbolDocument({ brand }, { colourKey: 'currentColor' }) : null, named: true }
+}
+
+/** The brand's logo in the masthead, drawn inline in currentColor to take the ink of light and dark alike. */
+export const BrandLogo = ({ brand }) => {
+  const art = useMemo(() => { try { return mastheadArt(brand) } catch { return { named: true } } }, [brand])
+  const aspect = aspectOf(art.svg)
+  return (
+    <span className="brand-logo" role="img" aria-label={brand.name}>
+      {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
+      {(art.named || !aspect) && <span className="brand-logo__name" aria-hidden="true">{brand.name}</span>}
+    </span>
+  )
 }
 
 export const Segmented = ({ label, value, options, onChange }) => (

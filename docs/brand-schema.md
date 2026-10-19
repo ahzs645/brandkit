@@ -299,8 +299,6 @@ with anything uncited).
   placed (`place: [{ x, y, scale, colour }]`) on a background.
 - `icons`: `{ size, attrs, items: [{ id, content }] }`, drawn in `currentColor`.
 - `web`: React component names, CSS variable prefix, app icon and favicon settings, and the copy
-  for the kit's index.html and landing template. `web.intro.shared` is the opening line of the
-  app's shared view (a share link), for the people using the brand; without it, a line naming
-  what is there.
+  for the kit's index.html and landing template.
 - `files`: supplied files copied into the kit as they are (fonts, licences, documents).
   `{ "to": "README.md", "from": "docs/README.md" }` or a bare path.

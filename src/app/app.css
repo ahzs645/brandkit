@@ -62,7 +62,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .masthead { position: sticky; top: 0; z-index: 10; margin: 0 -20px 20px; padding: 12px 20px 0; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .wordmark { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-.wordmark svg { width: 26px; height: 26px; fill: var(--ink); }
+.brand-logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+.brand-logo__art { display: block; height: 26px; max-width: min(240px, 52vw); }
+.brand-logo__art svg { display: block; width: 100%; height: 100%; }
+.brand-logo__name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; white-space: nowrap; }
 .brand-picker select { min-height: 34px; padding: 4px 30px 4px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-weight: 600; }
 .badge { font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #fff1c2; color: #6b4e00; }
 .badge--revision { background: #dbe8ff; color: #123b7a; }
@@ -107,11 +110,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap); }
 
 /* Overview */
-.hero { padding: 28px 4px 8px; }
 .eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-.hero h1 { margin: 8px 0 10px; font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.045em; }
-.hero__lede { margin: 0; max-width: 640px; font-size: 18px; color: var(--ink-muted); }
-.hero__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
 .stage-panel { padding: 0; overflow: hidden; }
 .stage { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: clamp(200px, 32vw, 340px); padding: 40px; transition: background-color 150ms; }
 .stage--compact { height: 200px; border-radius: var(--radius-sm); background: var(--page); }
@@ -254,8 +253,6 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .app--shared .masthead { padding-top: 14px; }
 .app--shared .tabs { margin-top: 12px; }
 .shared-mark { display: inline-flex; align-items: center; gap: 11px; min-height: 34px; color: var(--ink); text-decoration: none; }
-.shared-mark__symbol { width: 32px; height: 32px; object-fit: contain; padding: 4px; border-radius: 9px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
-.shared-mark__name { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
 .shared-mark__label { padding-left: 11px; border-left: 1px solid var(--line); color: var(--ink-muted); font-size: 14px; font-weight: 550; }
 .badge--approved { background: #d9f2df; color: #145c2a; }
 

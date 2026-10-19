@@ -14,6 +14,7 @@ import { Kit } from './views/Kit.jsx'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
+import { BrandLogo } from './ui.jsx'
 import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './share.jsx'
 
 // The guide pulls in the manual viewer; the manual library pulls in 156 pages' worth of data.
@@ -199,9 +200,9 @@ export const App = () => {
           </div>
         ) : (
         <div className="masthead__row">
-          <a className="wordmark" href={import.meta.env.BASE_URL} aria-label="brandkit home">
-            <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" /><g fill="var(--page)"><circle cx="22" cy="22" r="8" /><circle cx="42" cy="22" r="8" /><circle cx="22" cy="42" r="8" /><rect x="34" y="34" width="16" height="16" rx="3" /></g></svg>
-            brandkit
+          {/* The brand being looked at stands where the app's name would. */}
+          <a className="wordmark" href={import.meta.env.BASE_URL} title="brandkit home">
+            {brand ? <BrandLogo brand={brand} /> : <span className="brand-logo" />}
           </a>
           <label className="brand-picker">
             <span className="visually-hidden">Brand</span>
@@ -240,7 +241,7 @@ export const App = () => {
       <main className="main">
         {!brand ? !error && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
-            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
+            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
