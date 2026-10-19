@@ -479,8 +479,11 @@ brand.guide = {
 // The drawings of vans, trucks, equipment and rolling stock (ManualKit's source-registered
 // illustrations), each a template with the signature in its branding zones.
 const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'], 'Vehicles and equipment, drawn')
-brand.illustrations = drawn.drawings
-brand.templates.push(...drawn.templates)
+// Its signs, drawn: identification, guide and control, each line of wording a field.
+const DRAWN_SIGN_KINDS = { H39: 'Identification signs', H40: 'Guide signs', H41: 'Control signs' }
+const drawnSigns = illustrated('hydro', ['H39', 'H40', 'H41'], ['H38'], 'Signs, drawn', (asset) => DRAWN_SIGN_KINDS[asset.split('-')[0]])
+brand.illustrations = { ...drawn.drawings, ...drawnSigns.drawings }
+brand.templates.push(...drawn.templates, ...drawnSigns.templates)
 
 // Variants of one thing are one item in the studio: a stationery piece in each division, a cover
 // in each format, a sign in each kind.
@@ -495,7 +498,8 @@ brand.sets = [
   set('advertisement', 'Advertisement', [['advert-display', 'Display'], ['advert-classified', 'Classified']]),
   set('sign', 'Sign', [['sign-office-identification', 'Office identification'], ['sign-gas-identification', 'Gas identification'], ['sign-horizontal-facility', 'Facility, horizontal'], ['sign-vertical-facility', 'Facility, vertical'], ['sign-danger', 'Danger'], ['sign-guide', 'Guide']]),
   set('panel-van', 'Panel van', [['vehicle-van-black', 'Black signature'], ['vehicle-van-white', 'White signature']]),
-  ...drawn.sets
+  ...drawn.sets,
+  ...drawnSigns.sets.map((entry) => ({ ...entry, id: entry.id.replace(/^drawn-/, 'drawn-sign-') }))
 ]
 
 // Word templates for each division's letterhead and envelope, the bulletin form and the
@@ -529,7 +533,8 @@ cite(brand, {
     'sign-guide': ['H40', 'H38'],
     'vehicle-van-black': ['H44', 'H43', 'H42'],
     'vehicle-van-white': ['H44', 'H43', 'H42'],
-    ...drawn.sources
+    ...drawn.sources,
+    ...drawnSigns.sources
   },
   signatures: {
     standard: ['H04', 'H03', 'H05', 'H13'],

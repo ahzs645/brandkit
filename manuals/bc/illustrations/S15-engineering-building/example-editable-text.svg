@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="304 289 444 283" width="444" height="283" version="1.1" data-asset="S15-engineering-building" data-revision="signs-r1">
+  <ns0:title>Engineering Building | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S15-engineering-building-post-1-1" data-part="post-1" x="310" y="344" width="18" height="222" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="S15-engineering-building-post-2-2" data-part="post-2" x="724" y="344" width="18" height="222" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S15-engineering-building-sign-board-3" data-part="sign-board" x="310" y="295" width="432" height="49" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules"/>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:text id="S15-engineering-building-editable-copy-4" data-part="editable-copy" x="330" y="330.5" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="34" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="297" lengthAdjust="spacingAndGlyphs">Engineering Building</ns0:text>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

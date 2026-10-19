@@ -1,0 +1,100 @@
+asset_id,title,book,PDF_page,status,source_sha256,default_SVG
+G17-pickup,Pickup — General Manual,General Manual,17,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-field-jacket,Field jacket — shoulder view,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-hard-hat,Hard hat — separated from jacket,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G16-van-rear,Van Rear — General Manual,General Manual,16,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-peaked-cap,Peaked cap — standalone detail,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G16-tractor,Tractor — General Manual,General Manual,16,geometry refined,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,unbranded.svg
+G17-truck-rear,Truck Rear — General Manual,General Manual,17,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G16-van-side,Van Side — General Manual,General Manual,16,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-security-patch,Security patch,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-job-patch,Job-function patch and tab,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-officer-front,Security uniform — cropped upper front,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-jacket-back,Jacket — upper back,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G17-car,Car — General Manual,General Manual,17,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G15-blazer,Blazer — chest pocket view,General Manual,15,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+G17-truck-side,Truck Side — General Manual,General Manual,17,carried forward; outside this pass,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,blank.svg
+V12-truck-perspective,Box truck — rear three-quarter,Vehicle Manual,12,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V06-car-perspective,Passenger car — rear three-quarter,Vehicle Manual,6,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V09-pickup-rear,Pickup — rear elevation,Vehicle Manual,9,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V07-car-rear,Passenger car — rear elevation,Vehicle Manual,7,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V13-truck-rear,Box truck — rear elevation,Vehicle Manual,13,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V10-van-perspective,Van — rear three-quarter,Vehicle Manual,10,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V13-truck-side,Box truck — side elevation,Vehicle Manual,13,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V11-van-rear,Van — rear elevation,Vehicle Manual,11,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V11-van-side,Van — full side elevation,Vehicle Manual,11,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V09-pickup-side,"Pickup — side elevation, right edge cropped",Vehicle Manual,9,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V07-side-car,Car — cropped front side elevation,Vehicle Manual,7,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V03-policy-tractor,Tractor and trailer — opposite-side policy view,Vehicle Manual,3,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V13-cab-door,Box truck — enlarged cab door,Vehicle Manual,13,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V08-pickup-perspective,Pickup — rear three-quarter,Vehicle Manual,8,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V17-crawler-side,Tracked crawler — side,Vehicle Manual,17,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V18-installation-3,Decal installation — panel 3,Vehicle Manual,18,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V15-trailer-front,Box trailer — front,Vehicle Manual,15,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V15-trailer-rear,Box trailer — rear,Vehicle Manual,15,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V15-trailer-side,Box trailer — side,Vehicle Manual,15,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V18-installation-2,Decal installation — panel 2,Vehicle Manual,18,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V17-grader,Grader — cropped operating section,Vehicle Manual,17,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V15-flatbed-side,Flat-deck trailer — side,Vehicle Manual,15,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V18-installation-4,Decal installation — panel 4,Vehicle Manual,18,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V17-compressor,Towable compressor,Vehicle Manual,17,reviewed; retained,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V17-crawler-front,Tracked crawler — front,Vehicle Manual,17,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V15-flatbed-rear,Flat-deck trailer — rear,Vehicle Manual,15,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+V18-installation-1,Decal installation — panel 1,Vehicle Manual,18,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V16-backhoe,Backhoe / front-end loader,Vehicle Manual,16,carried forward; outside this pass,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,blank.svg
+V14-tractor-trailer,Tractor and box trailer — perspective,Vehicle Manual,14,geometry refined,aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802,unbranded.svg
+H48-boxcar,Boxcar — Hydro,BC Hydro 1983,48,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H47-generator,Generator — Hydro,BC Hydro 1983,47,reviewed; retained,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,unbranded.svg
+H47-crawler-side,Crawler Side — Hydro,BC Hydro 1983,47,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H48-locomotive,Locomotive — Hydro,BC Hydro 1983,48,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H47-crawler-front,Crawler Front — Hydro,BC Hydro 1983,47,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H44-van-side,Van Side — Hydro,BC Hydro 1983,44,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H45-stepvan-rear,Stepvan Rear — Hydro,BC Hydro 1983,45,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H44-van-rear,Van Rear — Hydro,BC Hydro 1983,44,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H44-van-door,Van Door — Hydro,BC Hydro 1983,44,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H47-seat-panel,Seat Panel — Hydro,BC Hydro 1983,47,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H46-flatbed,Flatbed — Hydro,BC Hydro 1983,46,geometry refined,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,unbranded.svg
+H45-stepvan-side,Stepvan Side — Hydro,BC Hydro 1983,45,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H46-cab-door,Cab Door — Hydro,BC Hydro 1983,46,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H45-roller-truck-rear,Roller Truck Rear — Hydro,BC Hydro 1983,45,carried forward; outside this pass,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,blank.svg
+H46-tractor-trailer,Tractor Trailer — Hydro,BC Hydro 1983,46,geometry refined,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,unbranded.svg
+G18-ranger-station,Ranger Station,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-telephone,Telephone,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-fire-equipment,Fire Equipment,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-directional,Two-blade directional,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-bull-river,Bull River,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-camping-direction,Camping / right arrow,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-park-distance,Provincial Park / 31 km,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-poison-baits,Poison Baits — white,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+G18-game-check,Game Check — black stop,General Manual,18,new sign template,70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b,example-editable-text.svg
+S03-no-entry,No entry,Sign Manual,3,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S03-washrooms,Washrooms,Sign Manual,3,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S03-information-symbol,Information symbol,Sign Manual,3,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S04-picnic,Picnicking,Sign Manual,4,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S04-camping,Camping,Sign Manual,4,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S04-no-parking,No parking,Sign Manual,4,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S04-sanidrop,Sanitary dump,Sign Manual,4,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S05-telephone,Telephone,Sign Manual,5,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S05-fire-equipment,Fire Equipment,Sign Manual,5,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S05-poison-baits,Poison Baits — yellow,Sign Manual,5,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S13-ranger-station,Ranger Station — primary identification,Sign Manual,13,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S15-storage-directory,Four-blade storage directory,Sign Manual,15,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S15-engineering-building,Engineering Building,Sign Manual,15,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S18-bull-river,Bull River — interpretive sign,Sign Manual,18,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S20-directional-directory,Four-blade directional sign,Sign Manual,20,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S22-park-distance,Provincial Park / 31 km / left arrow,Sign Manual,22,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S22-picnic,Picnic symbol,Sign Manual,22,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S22-camping-direction,Camping / right arrow,Sign Manual,22,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S24-warning,Warning — forest fire control,Sign Manual,24,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+S24-game-check,Game Check — red stop,Sign Manual,24,new sign template,3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e,example-editable-text.svg
+H39-office,Office identification,BC Hydro,39,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H39-gas,Gas operations identification,BC Hydro,39,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H39-freight,Huntingdon Freight Office,BC Hydro,39,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H39-plant,Liquefied Natural Gas Plant,BC Hydro,39,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H40-advisory,Advisory information,BC Hydro,40,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H40-customer-service,Customer Service,BC Hydro,40,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H40-shipping,Shipping & Receiving,BC Hydro,40,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H40-directional,Visitor Parking / Electric Shop,BC Hydro,40,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H41-danger,Danger / Keep away,BC Hydro,41,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H41-authorized-vehicles,Authorized vehicles only,BC Hydro,41,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg
+H41-employees-only,Employees only,BC Hydro,41,new sign template,ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18,example-editable-text.svg

@@ -26,6 +26,15 @@
 //                `id` makes it a field; `curve` sets it on an arc rising by that share of the zone
 // and drawn in the zone's own colour unless it says otherwise. A zone the template does not name
 // stays empty.
+//
+// An illustration may also carry `lettering`, the words drawn on it (a sign's wording), each line
+// `{ text, x, y, size, bold, family: 'sans' | 'serif', anchor, fill, width? }`. A template makes them
+// fields and sets them in its brand's faces:
+//
+//   lettering: { prefix: 's13-ranger-station', fonts: { sans: { regular: 'regular', bold: 'medium' } } }
+//
+// gives fields s13-ranger-station-1, -2…; a line longer than the source's set `width` is narrowed
+// to fit it.
 
 import { colour as resolveColour } from './brand.js'
 import { escape, n6 } from './format.js'
@@ -152,9 +161,30 @@ export const illustrationIdentity = (ctx, illustration, zones = {}) => illustrat
     return art ? `<g data-zone="${escape(zone.id)}" transform="${transform}"${spec.opacity != null ? ` opacity="${spec.opacity}"` : ''}>${art}</g>` : ''
   }).join('')
 
-/** The whole drawing, identity included, in the illustration's coordinates. */
-export const illustrationArt = (ctx, illustration, { zones, markings = true, materials } = {}) =>
-  `<g data-layer="object">${recolour(ctx, illustration.object, materials)}</g>${markings && illustration.markings ? `<g data-layer="markings">${illustration.markings}</g>` : ''}<g data-layer="identity">${illustrationIdentity(ctx, illustration, zones)}</g>`
+const letteringId = (spec, index) => `${spec.prefix}-${index + 1}`
+const letteringFont = (spec, line) => {
+  const faces = spec.fonts?.[line.family] ?? spec.fonts?.sans ?? spec.fonts?.serif ?? {}
+  return (line.bold ? faces.bold : faces.regular) ?? faces.regular ?? 'body'
+}
+
+/** The words on an illustration, each line a field, in the brand's faces. */
+export const illustrationLettering = (ctx, illustration, spec) => (illustration.lettering ?? []).map((line, index) => {
+  const { fonts, brand } = ctx
+  const given = spec ? ctx.values?.[letteringId(spec, index)] : undefined
+  const text = given != null && given !== '' ? String(given) : line.text
+  if (!text.trim()) return ''
+  const key = spec ? letteringFont(spec, line) : 'body'
+  const natural = fonts?.has(key) ? fonts.width(text, key, line.size) : Array.from(text).length * line.size * 0.55
+  const size = line.width && natural > line.width ? line.size * (line.width / natural) : line.size
+  if (ctx.outline && fonts?.has(key)) return `<path fill="${escape(line.fill)}" aria-label="${escape(text)}" d="${fonts.path(text, key, size, line.x, line.y, 0, line.anchor)}"/>`
+  const face = brand.fonts?.[key] ?? {}
+  return `<text x="${n6(line.x)}" y="${n6(line.y)}" text-anchor="${line.anchor}" font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}" fill="${escape(line.fill)}">${escape(text)}</text>`
+}).join('')
+
+/** The whole drawing, identity and lettering included, in the illustration's coordinates. */
+export const illustrationArt = (ctx, illustration, { zones, markings = true, materials, lettering } = {}) =>
+  `<g data-layer="object">${recolour(ctx, illustration.object, materials)}</g>${markings && illustration.markings ? `<g data-layer="markings">${illustration.markings}</g>` : ''}`
+  + `${illustration.lettering?.length ? `<g data-layer="lettering">${illustrationLettering(ctx, illustration, lettering)}</g>` : ''}<g data-layer="identity">${illustrationIdentity(ctx, illustration, zones)}</g>`
 
 /** The template element: the illustration fitted to `width` (and `height`, if given) at x, y. */
 export const placeIllustration = (ctx, element, u) => {
@@ -168,5 +198,12 @@ export const placeIllustration = (ctx, element, u) => {
   return `<g${element.id ? ` id="${escape(element.id)}"` : ''} transform="translate(${n6(u(element.x) + dx)} ${n6(u(element.y) + dy)}) scale(${n6(scale)}) translate(${n6(-vx)} ${n6(-vy)})">${illustrationArt(ctx, illustration, element)}</g>`
 }
 
-/** The fields an illustration element exposes: its text zones with ids. */
-export const illustrationFields = (element) => Object.values(element.zones ?? {}).filter((spec) => spec.id && !spec.locked).map((spec) => ({ id: spec.id, text: spec.text, label: spec.label }))
+/**
+ * The fields an illustration element exposes: its text zones with ids, then its lettering, line by
+ * line. Lettering is `local`: it belongs to this drawing alone (a sign's wording), so a set of
+ * signs does not list every sign's lines at once.
+ */
+export const illustrationFields = (element, brand) => [
+  ...Object.values(element.zones ?? {}).filter((spec) => spec.id && !spec.locked).map((spec) => ({ id: spec.id, text: spec.text, label: spec.label })),
+  ...(element.lettering ? (brand?.illustrations?.[element.illustration]?.lettering ?? []).map((line, index) => ({ id: letteringId(element.lettering, index), text: line.text, label: `Line ${index + 1}`, local: true })) : [])
+]

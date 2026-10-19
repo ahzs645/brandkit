@@ -1,0 +1,87 @@
+{
+  "id": "H39-plant",
+  "title": "Liquefied Natural Gas Plant",
+  "book": "BC Hydro",
+  "pdf_page_1based": 39,
+  "source_filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+  "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+  "review_viewbox": [
+    77,
+    537,
+    214,
+    194
+  ],
+  "svg_units_per_pdf_point": 1,
+  "face_bounds": [
+    83,
+    543,
+    202,
+    182
+  ],
+  "branding_zones": [
+    {
+      "id": "face",
+      "bbox": [
+        87,
+        547,
+        194,
+        174
+      ],
+      "label": "Full printed face"
+    }
+  ],
+  "status": "new-semantic-sign-template",
+  "geometry_changed": true,
+  "changes": [
+    "Reconstructed the visible sign face, support arrangement and separable printed layout from this source specimen.",
+    "New native rectangles, clean curves, controlled pictograms and editable text. No auto-contour trace or embedded raster.",
+    "Provided blank physical geometry, face-only export, editable example text, stable outlined example and separate branding guides.",
+    "Example Hydro signature is reused from the supplied editable project artwork, independently separated from the new panel and optional example copy."
+  ],
+  "limits": [
+    "Clean template coordinates regularize scan skew, ink spread and small wobbles; not recovered original production artwork.",
+    "Example lettering uses metric-compatible Arimo/Tinos substitutes. Exact historical typesetting is not authenticated. No font files are distributed.",
+    "Pictograms are authored illustrative reconstructions, not certified contemporary traffic or safety symbols.",
+    "Provincial/Hydro example identity, where present, reuses supplied project vector artwork; it is replaceable and is not newly authenticated by this pass.",
+    "Dimension leaders, page captions, backgrounds, grass and unrelated overlapping objects are excluded from the object. Source proofs stay unmasked."
+  ],
+  "included_files": [
+    "blank.svg",
+    "face-only.svg",
+    "branding-zones.svg",
+    "example-editable-text.svg",
+    "example-outlined.svg",
+    "display.svg"
+  ],
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      76.8,
+      536.8,
+      214.4,
+      194.4
+    ],
+    "PDF_pixel_origin": [
+      192,
+      1342
+    ],
+    "pixel_dimensions": [
+      536,
+      486
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "example-editable-text.svg",
+  "auto_trace_used": false,
+  "export_files": [
+    "branding-zones.svg",
+    "unbranded.svg",
+    "example-outlined.svg",
+    "blank.svg",
+    "face-only.svg",
+    "example-editable-text.svg",
+    "display.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
+}

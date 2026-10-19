@@ -1,894 +1,3118 @@
 {
-  "revision": "2026-10-18 source-based revision",
-  "errors": [],
-  "limits": "Structural checks establish valid editable outputs and changed geometry, not pixel-perfect or engineering fidelity.",
-  "asset_count": 59,
-  "changed_geometry_count": 59,
-  "checks": [
-    {
-      "id": "G15-blazer",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 34,
-      "revised_primitive_count": 15,
-      "previous_geometry_sha256": "c6c66c9a153946a95835f72c471a9b43072bd50f467409cf6fe6f87a93bd9911",
-      "revised_geometry_sha256": "de05087b310b5983da6761f77193940623e25aa73d58b3a491fa5b7129f449fc",
-      "previous_file_sha256": "73e24f6e739ae0ea732a65e25e6eff6513952f21b6d92ebe0b93f05f634b9c07",
-      "revised_file_sha256": "1249bf9e101970dbb33be90b9894f9b6e12b2a54b0670c6b2f55bc01505e319f",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-field-jacket",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 41,
-      "revised_primitive_count": 22,
-      "previous_geometry_sha256": "0853cf771ffe59330caf5105b6366c9573ba5ce9b50cae49af8ccb7f999107b2",
-      "revised_geometry_sha256": "0f21c5cbf7e70fa1121672d091a1edb448fd043e6bebe2c0b4f40e4201da2f0b",
-      "previous_file_sha256": "c53c2aa446cc95cb28542d06df815ae2eeff049fd05b38bfda867c57e38836d9",
-      "revised_file_sha256": "3738d6f55d502e242078bb6fccd3593ed2fec0fdfc1f6f48b423ac1d1af9393c",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-hard-hat",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 31,
-      "revised_primitive_count": 4,
-      "previous_geometry_sha256": "237401e8a018cc2f83da2c18533c7044b8e2ad5ef9194082f5b4534997a8db4d",
-      "revised_geometry_sha256": "be5d4ec6b0b8809f799fa8d6a26626167a5fda839b4aff2122b8a7f42b6fd949",
-      "previous_file_sha256": "3e5f37e87d9b1e015b6e93f43433082b75d6e0cacb612c54c5c32854d378cb6e",
-      "revised_file_sha256": "3a0e191dc8a05973278928e5af273c702d5ddb477ca5bf52a95139c317f164bf",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-jacket-back",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 46,
-      "revised_primitive_count": 22,
-      "previous_geometry_sha256": "9021cad6a5bc4e8ddf33ab995b9ee2d93cf79cccb0ddab05403e3f49cb86c244",
-      "revised_geometry_sha256": "c767f4c57ab111a9484a9ecccc0bcd2dfada9df99d6420d543e3e5db5b0b28d4",
-      "previous_file_sha256": "77f8a13554863c4467d955aea53d1b66afcf03e4c6d72da7708cee55bd4de46e",
-      "revised_file_sha256": "60baeee5059a08c1c2e78c200eb32988c7664c680a4b457a52601737cc8a30aa",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-job-patch",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 32,
-      "revised_primitive_count": 2,
-      "previous_geometry_sha256": "8ec8c740794a2ab333d61d56cb1a671297090f665a3ba4a25220d107c8a52943",
-      "revised_geometry_sha256": "8049959c0a917ef589a4df688674d29d04f62762ffdea74f108b2b216512701b",
-      "previous_file_sha256": "d5cbd5dfb62fba975ce2f4d8a4e8a36b98a63ea89ee92ed54bb8b369ddf20ae8",
-      "revised_file_sha256": "b8bb349fdd4bbbb14126c22b5f28693afbd50802f41c6e7cc857db4a567d6d69",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-officer-front",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 75,
-      "revised_primitive_count": 24,
-      "previous_geometry_sha256": "9cbf3de4f00df5cffc0130f024710f4c22a9cb739459fe05547e6a906e8f4379",
-      "revised_geometry_sha256": "c51264d6760f8be708dbe936b3776def4817c7cc5dd7b4e2b272a9bec8548aba",
-      "previous_file_sha256": "da5dfac19019519c239bb8c7afb1ab76f7686797daca9ddb50e3f782dd57115d",
-      "revised_file_sha256": "eae44bc80fa104218a1abd28f58f32e5d2e992e13f3a74fe4c0ddf99b5e97ac5",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-peaked-cap",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 32,
-      "revised_primitive_count": 9,
-      "previous_geometry_sha256": "98a4accf066813ea6d6273aaa3d7f7a29129d1f1cb8eded5e9a68baa2c898265",
-      "revised_geometry_sha256": "345b80293d9dedbd5204e990727cc6738831c3706f77a57dec78b90db8e929e3",
-      "previous_file_sha256": "9b5cdfa0b58738d0f06463a19582f024bc10fff4ddb23c7815ace08dc5d1a9d2",
-      "revised_file_sha256": "03f4dc9c83450e8394fc972fda167f035888ca5f5126f4b646231fc1f9afc66f",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G15-security-patch",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 31,
-      "revised_primitive_count": 2,
-      "previous_geometry_sha256": "d4dbcf27b085ad98f2aac4e8ff9172fc771474dfabae13cd2d7326a00ffd2e61",
-      "revised_geometry_sha256": "945acf4b196bc8d53970599a9ef0d98ffb5dbae47a28855f60339e3741175e2c",
-      "previous_file_sha256": "d6838b33d6dab92d96b7224a88194bad00ed89a7da872c828a463e4da78495bf",
-      "revised_file_sha256": "d5b86daabe4614a54b381f68e85cff9a53d98964e852993e84c8e56cb881ee1b",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
+  "release": "trailers-signs-r2",
+  "review_scope": {
+    "trailer_views_refined": 10,
+    "box_truck_refined": 1,
+    "additional_towables_reviewed_retained": 2,
+    "new_sign_specimens": 40,
+    "prior_59_not_re_reviewed_in_this_pass": 46,
+    "consolidated_view_count": 99
+  },
+  "changed_object_count": 11,
+  "technical_SVG_count": 362,
+  "PDF_excerpt_render_identical": true,
+  "vehicle_changes": [
     {
       "id": "G16-tractor",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 124,
-      "revised_primitive_count": 48,
-      "previous_geometry_sha256": "5f8d275667018cdc8fdf40f4c5ae31abd8ce0c3f18547c4869eca2286fdadf09",
-      "revised_geometry_sha256": "1ca04d11b93bc1e484c97c0d9ef62396bcaa0ad6ae3a61c6ecd1e94357f0759f",
-      "previous_file_sha256": "2ce5ab478dd58a0d1989c16aab44d2dd62510b6b8d47cfd22dc162521e4fa2b9",
-      "revised_file_sha256": "8baf17adab0e839a7bf2f215844ede96d02edc9b14312317b177155668229fb7",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G16-van-rear",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 41,
-      "revised_primitive_count": 18,
-      "previous_geometry_sha256": "58729123f910d9042482971e12ce703b1b5c79619869ab283eb6aa9244dbefd9",
-      "revised_geometry_sha256": "8ca1a1b11dff95591b19448b5911ec0647586229bd7514e306bbfeba04ab5b7a",
-      "previous_file_sha256": "c57998785bbe9a1ab4ab4625c701160e2fd190e32e9bb3be5ad1687e61f7f0c8",
-      "revised_file_sha256": "d8413024f8192048d1b6f2a7e52158a38c7234bb8f76ab21230fabcf33faac40",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G16-van-side",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 72,
-      "revised_primitive_count": 29,
-      "previous_geometry_sha256": "32ee7093dbdddc2eabad85af1ec187aa56884ac55767fd2e22c21d1cefca42bd",
-      "revised_geometry_sha256": "1bd090857731ba2d07008dbbf67cebe299c10313732f93bfd4ebbff4376f2411",
-      "previous_file_sha256": "32f1d7ee7dc7c85f7e6c45600771e1472ba5e93131ab7d6f97510201976410be",
-      "revised_file_sha256": "05914660aafe47e26805ca6e6eb5c0dafe70304d34222aaef1f24f7c9cb80f07",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G17-car",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 81,
-      "revised_primitive_count": 43,
-      "previous_geometry_sha256": "bd447c096463d4143a697296e64ce08929731506602558ddee0b03da4b496dc9",
-      "revised_geometry_sha256": "5bbc4d01974b3b69df6be35683dbee3ee71bb1c3a525c2d7582d093f295be76c",
-      "previous_file_sha256": "6ddc2fe3d0219fb61709d086aa6daa8852bb81385d9387c12e1cc06494af809e",
-      "revised_file_sha256": "87c3def18518c4412247d60291b92fa68118fb4938d9940099068eaf5167abd1",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G17-pickup",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 77,
-      "revised_primitive_count": 33,
-      "previous_geometry_sha256": "e1f4ded3c8e53035cf45931948a907170002b1779011d42bcd425818247e4ebb",
-      "revised_geometry_sha256": "329870d4e6740b59c3c84ca79890369df58a067650394ca5d990ce47592889ff",
-      "previous_file_sha256": "96c2a8d4a7a4dbab46ccc142dfd60f28dc455af748ea0d476b5b8c9979805f18",
-      "revised_file_sha256": "ac88a8375af0581aa74839601527273a5af1df9b2d6ed9a6657fb1ca3c9bb744",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G17-truck-rear",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 34,
-      "revised_primitive_count": 9,
-      "previous_geometry_sha256": "dc77c55978b26406de5fe84f01a4e21639b9fe16c3b57b67d3c98b49cd35ed4b",
-      "revised_geometry_sha256": "19cdd41d880f7f473a0dec862185f7c0c681fd49d25f26f4e0c10b2e84d2c799",
-      "previous_file_sha256": "f388892d32bee382768e46baf9eab29aa09ef88f9750da0759c13b04c1acce27",
-      "revised_file_sha256": "21717844bbc0b55a8c1441874e089dcb542938e0bce1cebeb982a88763d07b7a",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "G17-truck-side",
-      "book": "General Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 81,
-      "revised_primitive_count": 35,
-      "previous_geometry_sha256": "ad042b3ee5c64c823a77b606d286f6dc1c8d31110970b8c4d7937fb239c966e3",
-      "revised_geometry_sha256": "c59728f4fb8c4e198bdafa60c67a357d4ba294119ec4e8158296ed9560775bb5",
-      "previous_file_sha256": "e049f071ab53b1ed932852fdb0343042f661bfb9f78ed99b330f699517cbacd7",
-      "revised_file_sha256": "6afdc8cc19574a89c93036ce98b4845060a1e3b9eb017c548c6af7f9c630ca13",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H44-van-door",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 23,
-      "revised_primitive_count": 9,
-      "previous_geometry_sha256": "68525484ef5084bedef97f976bea54e6622a22c92929b4a50e9d50147f144148",
-      "revised_geometry_sha256": "2f28b9338fdf0b26d309e2a3fd5c3a869b647d020ee71e16dcf329d7fccb65f1",
-      "previous_file_sha256": "a0b45c1455d10afc8e341d5040c64d205b1478edcf7a9633095c408d49104b46",
-      "revised_file_sha256": "39da898597cfa84510e0937136a1e649c6e45f534688927c6a8e61ac75e43c4d",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H44-van-rear",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 25,
-      "revised_primitive_count": 11,
-      "previous_geometry_sha256": "3f9071bd0b928d987f61de7bc24c498f21b2386a751de49eaa25d34a8cd8e3d6",
-      "revised_geometry_sha256": "acb4211faebd458ddb15ec8b3326250abd0efa94e17bb27ab0d4aa82b952a0fe",
-      "previous_file_sha256": "7044d52617a62105bcfb89197e60b9e4764b3ae3872f320ddd197b01633e60fc",
-      "revised_file_sha256": "d664497b4edbf8d3a297c405d2535e921e604367eea6994e6a39d0d99649e348",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H44-van-side",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 27,
-      "revised_primitive_count": 26,
-      "previous_geometry_sha256": "35a592b96e36ba316e8b3ceb04f5adb6fab4653fe4aeeb515b4a7f4cf80ce23f",
-      "revised_geometry_sha256": "7a4ebc9670431637d4d1b926df30eabfab3e8a6d701b49f816d7a3bd1ece8783",
-      "previous_file_sha256": "f434db3525108fd2953c4781e785ebb1b111acec7a476259239f57a4e5796b76",
-      "revised_file_sha256": "b86e1db2febf354128b62be668fcd73341ad2df8692b71a043c779b10dd90631",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H45-roller-truck-rear",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 28,
-      "revised_primitive_count": 16,
-      "previous_geometry_sha256": "f889368274f5696273dbe7716ddf799b01fd7b24006381da1d157107cbd7362c",
-      "revised_geometry_sha256": "6eadffcb2be70ed95184a60f534b9694cb13b6b2c36159c75c10ae1e133a6fee",
-      "previous_file_sha256": "715ed0b2b8c5dbab29c1e4365e32fab7a9ad11d4d0b56b363257902e7dd0bcb9",
-      "revised_file_sha256": "895c1e79e4f28266cccc6722169464d83c4ec072ffbfa2ba89a29ba22e1133b6",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H45-stepvan-rear",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 25,
-      "revised_primitive_count": 11,
-      "previous_geometry_sha256": "71982bd0c402cdd8fe6713fd93f61ddad77e9f22e5b19a2e6f081afccbe73d22",
-      "revised_geometry_sha256": "050f7e10300a3ae6738041c89b5c84c8be44f46eceadc09d2d84014df7788704",
-      "previous_file_sha256": "03a5ea4dee09ae1aa475430a46585f1cd5db9f713fdde7bfa0869c428d989aae",
-      "revised_file_sha256": "d9dfcad3bc0996bda4f1f36d64c3421950e9c667283f7b041c5afea52c3119e1",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H45-stepvan-side",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 31,
-      "revised_primitive_count": 14,
-      "previous_geometry_sha256": "1ea97cf778e7bee66f185881605f52628758d434f6749f19245891cf6888ab1f",
-      "revised_geometry_sha256": "a689d7b10e7a2a2463a7e41081d077196b3dab07542dd5867c32bd6c614f1d76",
-      "previous_file_sha256": "80e9b4b62e4fa1a9facb100a5bf62281f58635e41eefebcdc0ba46e43353ff1e",
-      "revised_file_sha256": "7eb9a25d7cb21716dd77710bbca6d08eadbd082b09c0aebadc14108a1d2571c9",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H46-cab-door",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 18,
-      "revised_primitive_count": 4,
-      "previous_geometry_sha256": "9cc9fa2c4fca11ced9bb9a21419685991716e0be8f853c1548a865eadc3d474d",
-      "revised_geometry_sha256": "5afee15c22d101d24e80210be4aa7bae586002cb8f16d60329549a802403a07a",
-      "previous_file_sha256": "b35cda42ab3c00829a7c2030a06a07cf6c15ede9eaaa5d02eec287cdf25f7faa",
-      "revised_file_sha256": "b6a250bad134ec0874cc48e96b48e06840f48f4e1d0230f499c8cbfb8f66abb9",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H46-flatbed",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 22,
-      "revised_primitive_count": 9,
-      "previous_geometry_sha256": "fef4003fa4e5e55e2b30d8c143ebc66345d47aa1efd5d4de8ec23886d36db9a1",
-      "revised_geometry_sha256": "689aa26504e59cfff3d4677f645a683cac65a521c5c54c02437b8046098ffdb9",
-      "previous_file_sha256": "e277e00720515eeb4e1a07d2c2200e1ab54bdce9cb3adee806cbfb7be1e9c56c",
-      "revised_file_sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H46-tractor-trailer",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 38,
-      "revised_primitive_count": 37,
-      "previous_geometry_sha256": "5e4dac56d2e84e786ecf239e0267091409d1baafd036c485d901cbe6391c0537",
-      "revised_geometry_sha256": "e00b5bb25e0f7494597a71a6708bebfa3d51604e8b47b5b1b41fcb7e1ca18487",
-      "previous_file_sha256": "b6609d48f5db3168367b74567cd076b27671e782d90a2ddc2f6bc53d20b89274",
-      "revised_file_sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H47-crawler-front",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 34,
-      "revised_primitive_count": 35,
-      "previous_geometry_sha256": "6082db6bcdb20ecc7254c9ded17762e2daa693f5b52875e344d853e216192820",
-      "revised_geometry_sha256": "2ec7dabe15a7a3f5c81bace155a0fb93d916b3b79f5a5c73024ddb80442a7a11",
-      "previous_file_sha256": "15a4ad48398c760e6a0f63270dc5f2cb2bbfe8e4ac5e8d56b6368ecb45c4f301",
-      "revised_file_sha256": "cb8e9b0ab9541ef7092415e7c1a588aa1057bfd391f81747e7a671bfc4ff625a",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H47-crawler-side",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 25,
-      "revised_primitive_count": 12,
-      "previous_geometry_sha256": "4dc31da378d972f145d37407903eeb7f9f17167d82d851373024e0e763a11683",
-      "revised_geometry_sha256": "4b13089bb0fd28123715538fe1f5ad2c1648b275c3332b7da527269b2581c3d1",
-      "previous_file_sha256": "04fd6dc495585401f4e94b73f286f80a4f13b246430132295aa60d9926d3356a",
-      "revised_file_sha256": "881514037c3a5bf7b2c99bb7e44de1565a023d0764947687d970a42042068283",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H47-generator",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 35,
-      "revised_primitive_count": 23,
-      "previous_geometry_sha256": "274b990ce6380a264a40a4b5d7bd33c35eac7250889b72f6b1c0a221ca1baf54",
-      "revised_geometry_sha256": "ded2f98996d1edf969dd58a2368e08cf7096e4b552ab84e7379803baf5874230",
-      "previous_file_sha256": "1971608318ec9fc6cb4c98e60aaed4b648d92565474a66121b32363f86c49519",
-      "revised_file_sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H47-seat-panel",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 16,
-      "revised_primitive_count": 2,
-      "previous_geometry_sha256": "4f451b2fc57858250ed09e323bff2d653e233a5d551bc5d8c628925cf697e7c8",
-      "revised_geometry_sha256": "ddf3354f5e041db08894e5d54683b7b732ed53319845a525c22f7bfd4b8d299d",
-      "previous_file_sha256": "53a4132d670f4269dc0bff8aac8c719751bc3cb3e920e8de04b5c2b47ff0f760",
-      "revised_file_sha256": "38335849eb486b030c54c5272cdff3722bd57742a05878d35b70ca8f770272b3",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H48-boxcar",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 60,
-      "revised_primitive_count": 48,
-      "previous_geometry_sha256": "5b426e80ded10bd0fe6b245cac1bba9770385e6d1b7f6474c2ff088c44df0c37",
-      "revised_geometry_sha256": "7d9126c2c2dc4494cd4b0aff4088fd5f764282fed71d4f32d79a0d103c7ba0c5",
-      "previous_file_sha256": "6dd5df75e40ddb3ed4046f0a89733e05e127e39f485e83cc356af0092c71875a",
-      "revised_file_sha256": "81882fe33ec83952601d132fdae08b46282c6ca58e147f3c7dc1e6c9af419e98",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "H48-locomotive",
-      "book": "BC Hydro 1983",
-      "geometry_changed": true,
-      "previous_primitive_count": 82,
-      "revised_primitive_count": 49,
-      "previous_geometry_sha256": "0d8d737248f06174300be69ada516faf6689930ae88e7b8bf452d7404481c7cc",
-      "revised_geometry_sha256": "4af2e2f478467c985fab0d162af2662df7d3a30f0d8810cb6b9aa230ffddda80",
-      "previous_file_sha256": "51b4ad5dd42db371e5d44999946af27ff75f6e067f8908f528e4fb2ee6857a8f",
-      "revised_file_sha256": "308e44850993ca9a5cb6206db6d102773421c896bc000c404be0ba302e6d8b78",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "80bd1fbaf91921675bf85c1d5f2a5afe74b3afe7871367c770c983e10a6eb4ab",
+      "current_object_fingerprint": "3f506b7acfbe6f31bddc458d315b4a30a70c78170a5147999459adbdab1bf34f",
+      "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+      "visible_reflectors": 0
     },
     {
       "id": "V03-policy-tractor",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 151,
-      "revised_primitive_count": 69,
-      "previous_geometry_sha256": "81c5d9a943d9838edafc8459a8203792564cd4b5853e0400ca9e80e9bfe11483",
-      "revised_geometry_sha256": "7844f9e3b4a4055069db36bfa3096483e24f27e6a9384899f5ebb9730f9500a4",
-      "previous_file_sha256": "fd7d9bf71c3a7d67bd1e7c3b16f2882632ff569fac898bac28398a397d448caa",
-      "revised_file_sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V06-car-perspective",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 99,
-      "revised_primitive_count": 39,
-      "previous_geometry_sha256": "fb4f7f87305648927e694d206941840687a543245958b0a403a384dbf08425b8",
-      "revised_geometry_sha256": "a3256b652948cd3268d2ab677a3f9dd42cab11ccf5dea789547caf5ee06f9f1f",
-      "previous_file_sha256": "765efb14797be66aea59ce53c15b0d1b7866d72065c8aa362b61b34514494d44",
-      "revised_file_sha256": "ed8760435d2ac914ea7ddce9eb492f97e5ff13ed8a33d6e29341caa43a093e6c",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V07-car-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 45,
-      "revised_primitive_count": 20,
-      "previous_geometry_sha256": "0db58eee6b5fede0999b95b77f66a86f102dec32849c8cc396914464e01af168",
-      "revised_geometry_sha256": "438f3b6c2c2d3d79b7f3a1d9b6b42331f37c677501f500af16e5db3ed4364745",
-      "previous_file_sha256": "31ebb045f7dc521a3e0a45e590754915b1d4a2f0e3065dc1f5e41863934ee38e",
-      "revised_file_sha256": "bfdf9a625e6b2b99dd00250aded95fff340cf611bd3c1bf5bbd96467d25d2f91",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V07-side-car",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 50,
-      "revised_primitive_count": 20,
-      "previous_geometry_sha256": "d9522495e808c057666387867f9bfc019f0e48f9a18c60de315ec7895f6accc1",
-      "revised_geometry_sha256": "bc73ea58afb91c30302672f918611562316f3fa23f07673f522db41eb990a6ae",
-      "previous_file_sha256": "368de17e3ccb6ade4dd908f58f78ee2f6c6ef0636929665baeb9a4d3b3722332",
-      "revised_file_sha256": "ca2e6bfcf6db43ad59dd4cc52bc4611b6ddc30f9ccc35631bec71cae4e160a38",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V08-pickup-perspective",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 95,
-      "revised_primitive_count": 33,
-      "previous_geometry_sha256": "5bbf8f53f9bc5e8a39bbb6da99b7f04d7a84d6f68a2d4e3ff3fbc385082c21e6",
-      "revised_geometry_sha256": "487d9043adec1b884affe2680a53b6efd62aebcf8e4266b9a5052f22cfc5e134",
-      "previous_file_sha256": "c2173edd57bcd5dc7b97509218421c7eb0395aaddbc24fcb74ec86b785e87766",
-      "revised_file_sha256": "d905f3ec4e4c4ebffe6657a68bf2df75b0607f368e8db4c282ccde1d4d24d6db",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V09-pickup-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 54,
-      "revised_primitive_count": 17,
-      "previous_geometry_sha256": "2cb469f185d3b476f7f62ffeaf12cef826272cb46f13699e5ac75ba4f738bbec",
-      "revised_geometry_sha256": "ce85e348ce20889a55610c499539cdeb3dfac8760c5b70c0fdd8d9f28e41a2d4",
-      "previous_file_sha256": "04b1f8a432f71b76838302bbf8d6bb06b789edcca50b3d38dc2db2dcc49b9b33",
-      "revised_file_sha256": "dbc24ce931f8de7fcbe34e9170b70b69bf8c9cc15fa5845da7b43a081e58df80",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V09-pickup-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 49,
-      "revised_primitive_count": 23,
-      "previous_geometry_sha256": "6d3d3e7344814696bf9e19d7842ea0399cb44dfec72adfa44ac36a4eb8fd9e89",
-      "revised_geometry_sha256": "ecaac670ff9062690214060335b530d460f60d90f47652514ffb86f3fc32beef",
-      "previous_file_sha256": "7465537f1e9becdff7c48e7dafac1807e96a7f4121393e8b94690311c660b4b8",
-      "revised_file_sha256": "46c5de6992e6bac2f63c688cb7f4fa6d4d4e3e33dd2931ab545e66fa02d3025d",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V10-van-perspective",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 129,
-      "revised_primitive_count": 41,
-      "previous_geometry_sha256": "ba36f579a8c5a47bdd687a0b20b5c90b9b6c8726725f3c53ba0ae070e3ae8a75",
-      "revised_geometry_sha256": "143a7ed00d0c7c2fe7c788109a0d0d3c873270aaf1a6dc1d3e6bb2455a97ec4e",
-      "previous_file_sha256": "294530a6017357d7d32e3a291246b5da45a084f47b07b95136495cde51941aed",
-      "revised_file_sha256": "5467e2f645dbb53c2df0abcd4fc64cbce35151d9c69112ac6893414adf5d47af",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V11-van-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 51,
-      "revised_primitive_count": 18,
-      "previous_geometry_sha256": "c17e371809792b5b323da47600841a7add408dfbac884394f53ed8209c4d2fcb",
-      "revised_geometry_sha256": "a9974e33af2ec6daf93243df195e1b5970c74ae020cda66346c902eabdbd6378",
-      "previous_file_sha256": "1acc35a4bbfb3af97309f0e29be662565988bf4c4b2da8e2431f37b60965e5a9",
-      "revised_file_sha256": "19a475bf0831418392af20efbbf29b17224f5d0687c8adcbf4057c979b032d73",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V11-van-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 82,
-      "revised_primitive_count": 29,
-      "previous_geometry_sha256": "62fb46221d5b3a972779572c01ec7e84ab92da1151264305d8e55631da20b778",
-      "revised_geometry_sha256": "73a9a2d29a4f6901a7a2d6f860033a168101eaf8f3eea237922d850f5b505555",
-      "previous_file_sha256": "4f894c9a6c59951cf1613939c367f56ab88d4d2c9cb4b92b769396825b71311f",
-      "revised_file_sha256": "945691c9635e34cdca1c2d4b82834dc2ee4834b40c802f16d1d367b4a4a6837a",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V12-truck-perspective",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 147,
-      "revised_primitive_count": 59,
-      "previous_geometry_sha256": "2085f6aafabe565a57e8f3a671db028f95a0da6e1e77fdc05f57be9d39416b10",
-      "revised_geometry_sha256": "14643c48d70852a772d31f3dbd7e3da54a5c3d028a0c0ce391b703fd0d842133",
-      "previous_file_sha256": "cbc62e1b11cbd5974ccebe6948433da8ff5adad6254fc0b28e3a04f58852d2e5",
-      "revised_file_sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V13-cab-door",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 37,
-      "revised_primitive_count": 25,
-      "previous_geometry_sha256": "74689a54379983522ab8c82687da384b9d2feff314d5a3d7e2f98794f132412d",
-      "revised_geometry_sha256": "ad47d34373c80d1b95bf2d05abc54893c28c2cdfab87185b2f3245da689ad1dc",
-      "previous_file_sha256": "1d469691613172dc91b67a31594c91a599e1b994dedbb234987fa09974000946",
-      "revised_file_sha256": "8fec1fca5f4e3cc378a72f5719bdb551fb0780d5533324e4441dafea2ab46b51",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V13-truck-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 60,
-      "revised_primitive_count": 27,
-      "previous_geometry_sha256": "d71ff341ba43a8f8825be7c5c6203ad0dca7103776029c7c134b764df7197b88",
-      "revised_geometry_sha256": "255a4a87844d6cbe64d207e98aed11fd7ed4e8d698c20ea1f047a5353efc90d0",
-      "previous_file_sha256": "c6fd96a7cbfa0c40c53810e87ee0aa3de5ad030ccfe745a94c0c37f92686011f",
-      "revised_file_sha256": "0671dab3c6e85eaaa72cd296d1d078688119d2c6dad4f334fd17fca35f859fa4",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V13-truck-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 91,
-      "revised_primitive_count": 35,
-      "previous_geometry_sha256": "85ce28ab3b4a1f57e52a136019db4b9e876761ef7547f60fc0cf7f5b9b1f66ae",
-      "revised_geometry_sha256": "de47792d13fd1baa4f718e570b43c155e227769a428481f027aca309b7c54dbd",
-      "previous_file_sha256": "6aef81643f253d8f65ce7f555ea250e8843ad0944650adef4832fec5add15547",
-      "revised_file_sha256": "8d582db1c3d3bcb8ad7e57513d6039bedc42429a79fe4620e718b137dc43b3e6",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "b7a872ac2cd9e91c7f3e55896f7d3e68e7cd18fface2781510b67868cccd8651",
+      "current_object_fingerprint": "a8e574701dd44b2003f5cc7887a05f536efdaa923852ad101ca8b1e221f5c3ce",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
     },
     {
       "id": "V14-tractor-trailer",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 151,
-      "revised_primitive_count": 90,
-      "previous_geometry_sha256": "cec1a2c46d1429f3a6f544147dd690b2c00d6dfe642e503d883eea1f79a8854e",
-      "revised_geometry_sha256": "71ff107fb84667ddb9d605db8edc3f2bfbfbe8020bb052ba4a8b660ab59eef3f",
-      "previous_file_sha256": "698b2bfb53081f17b5f4c2ad2342abe7439e030fc185c13e23e855d1a8fea3d7",
-      "revised_file_sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "28da4174f1c1740511deea3b36d084d4bd90c4868af9ed4003188170c088b385",
+      "current_object_fingerprint": "0115e6746e29cc4810aba5e89e509a3c24f56d7b88e1679fa63fe253dc4787e5",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
+    },
+    {
+      "id": "H46-tractor-trailer",
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "dc316b7e7054a365bd8eff6cb8a132ce8c93bd3012ad67bf849ae13fcb80b000",
+      "current_object_fingerprint": "8b4960e3a53015c5d77f36ffbc9f22e3b9b3d79887f42b6b22f0e4f3a5a7a1ad",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "visible_reflectors": 0
     },
     {
       "id": "V15-flatbed-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 43,
-      "revised_primitive_count": 12,
-      "previous_geometry_sha256": "5c5bf156b8681833eb131aa3b4675d111013ef8dc3e9fa7120ba18ff993ccbed",
-      "revised_geometry_sha256": "c3b4db7b59dc71245f3d3cc40e7d9aa0434b2e8f9f2087891376263571611f1e",
-      "previous_file_sha256": "fbe2f81213ca9d0af6d3bad0eaceb45ea833e41687edac793c184958257b70d8",
-      "revised_file_sha256": "9902ac56566c996df2ce2f54cbc90b4eb5876b8c29160e78d697479e1856a9a9",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "56efe76aa592da65237d28083e083093474b83deb9938e0432ea6841bbcc1952",
+      "current_object_fingerprint": "d4573ac132810ee7403cb30fb4df62969531f721d9cc3f6298c0d4c03083998d",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
     },
     {
       "id": "V15-flatbed-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 42,
-      "revised_primitive_count": 9,
-      "previous_geometry_sha256": "088850f307694efc561f5c5f564d4592251393a371add31246035881b850edab",
-      "revised_geometry_sha256": "5cd9f4434ac6302e54ec80a103bf72855c20ec97a8039a7508bbc361e36453c3",
-      "previous_file_sha256": "6654eacca2a44638909878bc0f97dc90998c82d4dcde36f2dc7c69633d4883ec",
-      "revised_file_sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "8171075c18fab1a0b1dee1926b332060ac19df7870f26769e33c79e53e2cb679",
+      "current_object_fingerprint": "d8c47c3e5c356bff77636baa30305f4e60c8acd187adf3a07f2c2f3084cea379",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
+    },
+    {
+      "id": "H46-flatbed",
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "8bc733b21a8955a993987fb306a0f182e110690d2f15ca63c0d689f0a29d8ece",
+      "current_object_fingerprint": "326e49e221c936a0d66a86cf67600171369c8f767d678fbc3af2e064f4d82270",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "visible_reflectors": 0
     },
     {
       "id": "V15-trailer-front",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 34,
-      "revised_primitive_count": 11,
-      "previous_geometry_sha256": "0c651689800e8454666b10b681992b0bac0a43ea86f78226869e8058d65d5cf5",
-      "revised_geometry_sha256": "6bde2dfb598215006fb90a7ca178cfc3338e1b2bffe7e876b8de34a6279612d7",
-      "previous_file_sha256": "e9edea177f18daddaeea95b9e045204357dfd6feeba297ccd62783f617cb6964",
-      "revised_file_sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "08aa03ee1d3611567e7e960077208ab2fa0eeb83b4dd61923e3df2ea247fb81f",
+      "current_object_fingerprint": "86409ec6fd83052e0045d5afd028e33516d83aaafbdf1f6077c2cec3572ae930",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
     },
     {
       "id": "V15-trailer-rear",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 51,
-      "revised_primitive_count": 8,
-      "previous_geometry_sha256": "aae8fd1e230723e89fae7ef4ecdce6daf19ede2518939175a81a8da470dc4afc",
-      "revised_geometry_sha256": "db9d182e77497b8979936a138a034b48624083d159be754e3bc0dbdf2e57ec41",
-      "previous_file_sha256": "bbaa9b0e0a2c6999e6bf1f88da9d68a4af4e8decd76118784ea91d7727550334",
-      "revised_file_sha256": "32860654cb3ef79c71269ac3cac3b59111b1e6790c38e0b4532844c2d903c417",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "9fc072dd744c56c03861deb525956450e3ea62c51a1cb21101e5d83026088e5f",
+      "current_object_fingerprint": "f7a6f3495d35e04e0ed7abedbb45f433bf3aeb04cbf646708aaa841f0e32416e",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 10
     },
     {
       "id": "V15-trailer-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 57,
-      "revised_primitive_count": 11,
-      "previous_geometry_sha256": "40709664c0b0dd6bb68bf016c36464951a5f084698d7b403ec4189d43fb1f307",
-      "revised_geometry_sha256": "b07f99d57c2486b6794a6d3630068ff0d34a65d9be1590441a92251ac647c7bd",
-      "previous_file_sha256": "b86d09f0304e45efe7ad1fcb3fbc9cfe16c449bf8f4c0df65c316ab3c2db1532",
-      "revised_file_sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "f1e673141d9dc0e36f7b22862e0f236d6229275fa0d17e6ee5e559d3b5eddffd",
+      "current_object_fingerprint": "f189c4cc983f1a94a182e1d83a1be584798a2b29f592adf0c463fcb58a474996",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
     },
     {
-      "id": "V16-backhoe",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 102,
-      "revised_primitive_count": 52,
-      "previous_geometry_sha256": "a2aded206dc70e82610202c8bfa2a5dc1138b132139c154af189a8bd053a980a",
-      "revised_geometry_sha256": "4389399bd0a6e80003119ce4ae578cf4feb1c8d5b7915dd19b9f11465f0fe116",
-      "previous_file_sha256": "1ec7d38349b7f72aa52062bf596e73983ae2ac6f52a602a53b1158049da2540e",
-      "revised_file_sha256": "0711fce3c44bf6cfe3d6613dea84142f01c10ac9f2be251a2046247adb613983",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "id": "V12-truck-perspective",
+      "object_geometry_changed": true,
+      "previous_object_fingerprint": "0f53bc22b5701924f87ffed25057aaa8d974d3da060896c0e69ea322aa231026",
+      "current_object_fingerprint": "540a802e3c61a3f38b7bb66baedd8126b967d28e89c92987ee8c698a24c15a21",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 8
     },
     {
       "id": "V17-compressor",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 43,
-      "revised_primitive_count": 14,
-      "previous_geometry_sha256": "7bec5078bc11598e225461e2ff3e6d8a36e1d214d002a64255895a29aab099ec",
-      "revised_geometry_sha256": "8a142cce40347b13f07daf426ba968bd78300b1eeb26f77248ec4a094983c0d0",
-      "previous_file_sha256": "854b22865a9596894f8cbe4da25d11524792381bcfcd007e1652fbb1e3b6f94f",
-      "revised_file_sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "object_geometry_changed": false,
+      "previous_object_fingerprint": "28deb78b447c6505e1c2c0bde6a867c8a4069288e4d14d380a5eb18fde702eb1",
+      "current_object_fingerprint": "28deb78b447c6505e1c2c0bde6a867c8a4069288e4d14d380a5eb18fde702eb1",
+      "source_sha256": "aa5c43656e9911ea85b444ce237f543c4af107044c3b21d863632d88be53c802",
+      "visible_reflectors": 0
     },
     {
-      "id": "V17-crawler-front",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 91,
-      "revised_primitive_count": 71,
-      "previous_geometry_sha256": "d17177487be1d6e91bce602f21703687055aab1255ed0737f6317eab9ac83225",
-      "revised_geometry_sha256": "d61a4d67d50408c4293d918e3222ae2f138b843df16ddc5e3a71a101cce3b275",
-      "previous_file_sha256": "1de231130d9408332cfd16d56d7b01c2d34f5fe83d339f8de29f4c1672a19b44",
-      "revised_file_sha256": "2ab0445843fc7f13c8597bdfe2889255cf640769b982f3e608283a4594ef76e9",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V17-crawler-side",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 84,
-      "revised_primitive_count": 30,
-      "previous_geometry_sha256": "3273fabbd3335e0fce78c8b262f7bc2e496fa65465b34c3fff5278207beaafd4",
-      "revised_geometry_sha256": "55e4efdbffcd6dfda878170aed058370500250bc7976b1cf8922cee2be058569",
-      "previous_file_sha256": "4dc3448346e6a0a4963cdede7dd232c1e516c92451bb5edb37787509b8ccdcda",
-      "revised_file_sha256": "2fe68f965c46003060a3a0bdd8b4d9b109c1b856f41c8109694db2b91d426366",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V17-grader",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 53,
-      "revised_primitive_count": 26,
-      "previous_geometry_sha256": "a9b572fbd6ca41bb8d9872184cff23d71501e6174771b9501ee5ccb4c3c8f624",
-      "revised_geometry_sha256": "d834105fa57f966c239fde48f8ff2c363313439e74d776ca558dedb4f71fe79e",
-      "previous_file_sha256": "d646a0cdea9fe8e6b1fa595cbc6d2177aee8571cc9d864573975ba266c989aa6",
-      "revised_file_sha256": "eb3c1a6afa8aeab4b1d28e91a461f62321068427376de681f03af25224c57e93",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V18-installation-1",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 45,
-      "revised_primitive_count": 16,
-      "previous_geometry_sha256": "58c83991feccb4d200ad6dd346cb8a08676d82e65e5a26c28ede4d224254a973",
-      "revised_geometry_sha256": "f900308eb86f1897069ffe45d45256fca19c9a3939120e0963f8f7b354f493f1",
-      "previous_file_sha256": "da7f91ae683008885de13087e16b641e87b2a9efbd5ce8f577ac355ff1f94069",
-      "revised_file_sha256": "52d2b5cbdddf5870fdbb31850db29ab2f697f35823239fcfb0b391a10c8da6f1",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V18-installation-2",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 48,
-      "revised_primitive_count": 21,
-      "previous_geometry_sha256": "61ab3133f9c56d392ffa6d070bc7ea0bcbc829089811d60e97106f918a744cfb",
-      "revised_geometry_sha256": "e6fb66b5b7cb33a6d0a1c9680adaee8c68ac5ef3d7f0b73a7d15defa8140475a",
-      "previous_file_sha256": "27adaff3651d6dc921e44cae6c5fa79cefa0f24b5c266cd6d4616899ecf6df47",
-      "revised_file_sha256": "5c55278041a44d8127a33c83fc03539658f1b0cd79f5d6de4ca20951563f59d9",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V18-installation-3",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 55,
-      "revised_primitive_count": 70,
-      "previous_geometry_sha256": "c33f9c7e9395dfacdeb55bb4ac926181cd0cb2b42e01866ea6488c1440076f9c",
-      "revised_geometry_sha256": "583f9400b55d23638428cedf46541969e74a8e564f2c2d6ac15a7a6b184bfc2d",
-      "previous_file_sha256": "2165a790544af7d8ef1c25eed6f1b51e85e0ad864dc2ddbc58abb6b6fe3398de",
-      "revised_file_sha256": "b265a75a8fdde70347fe16af19a487b301cdfc47a09597cffc558cc8a5a3c012",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
-    },
-    {
-      "id": "V18-installation-4",
-      "book": "Vehicle Manual",
-      "geometry_changed": true,
-      "previous_primitive_count": 40,
-      "revised_primitive_count": 12,
-      "previous_geometry_sha256": "8dad00f9ac3d333cb5139af4c3963b87c4ec72388426bdf2546826d9eb7d0433",
-      "revised_geometry_sha256": "962dbf1d6086ad11e35de94d5601d9c3e3217ef28aa4dd651d82b79e525aa120",
-      "previous_file_sha256": "e3cb9ae60d1e350277be0e44a72f36fa3bcca43e40b136295175669be4d82d2c",
-      "revised_file_sha256": "d85b4104d95e896e950a7c0d1848e8445a353495251d0aebb63e6ad359b45d96",
-      "unique_ids": true,
-      "embedded_raster_count": 0,
-      "dangling_local_references": [],
-      "rendered_exports": true
+      "id": "H47-generator",
+      "object_geometry_changed": false,
+      "previous_object_fingerprint": "c7b61a0864ee5e34095e4ed2e7f07d5d8d0ea0efef0f9ccf81f62b3fe82fa15e",
+      "current_object_fingerprint": "c7b61a0864ee5e34095e4ed2e7f07d5d8d0ea0efef0f9ccf81f62b3fe82fa15e",
+      "source_sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "visible_reflectors": 0
     }
-  ]
+  ],
+  "aperture_and_marking_sample_checks": [
+    {
+      "asset": "V15-flatbed-rear",
+      "name": "central-underframe-opening",
+      "point": [
+        166,
+        613
+      ],
+      "expected": "transparent",
+      "RGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "asset": "V15-trailer-front",
+      "name": "landing-gear-central-opening",
+      "point": [
+        510,
+        925
+      ],
+      "expected": "transparent",
+      "RGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "asset": "V15-trailer-rear",
+      "name": "central-underframe-open-space",
+      "point": [
+        162,
+        958
+      ],
+      "expected": "transparent",
+      "RGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "asset": "V15-trailer-side",
+      "name": "landing-gear-opening",
+      "point": [
+        866,
+        926
+      ],
+      "expected": "transparent",
+      "RGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "asset": "V12-truck-perspective",
+      "name": "rear-step-opening",
+      "point": [
+        801,
+        917
+      ],
+      "expected": "transparent",
+      "RGBA": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "asset": "V12-truck-perspective",
+      "name": "left-rear-reflector",
+      "point": [
+        739,
+        806
+      ],
+      "expected": "opaque marking",
+      "RGBA": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "pass": true
+    }
+  ],
+  "svg_checks": [
+    {
+      "file": "release/assets/S03-no-entry/branding-zones.svg",
+      "sha256": "a95d0445bea553499e305a5755f0c7ea2fc5ddc617771bd36691a5e756b3fcce",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/unbranded.svg",
+      "sha256": "12aa02e672de31510570ffceefb899e607ef8f82ea7125596032c20129c7be44",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/example-outlined.svg",
+      "sha256": "8472b462758a6c97323b2eac7867d49498eefbe4ccf8794cc58b269948ab1920",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/blank.svg",
+      "sha256": "edc864204423d321953435a721330298ef11e79b5bf34c56011dd7bf10d7fb9d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/face-only.svg",
+      "sha256": "bcbc7094961f49cf589a2e0dcea680c3fb8b8d4d876e628f89ff48897d89be64",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/example-editable-text.svg",
+      "sha256": "8472b462758a6c97323b2eac7867d49498eefbe4ccf8794cc58b269948ab1920",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-no-entry/display.svg",
+      "sha256": "8472b462758a6c97323b2eac7867d49498eefbe4ccf8794cc58b269948ab1920",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/branding-zones.svg",
+      "sha256": "11d384bd85e6f74b1ae7ae3317c62e88ee8ad3e3a73fccaa1720d4c9c01c2a15",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/previous-blank.svg",
+      "sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/unbranded.svg",
+      "sha256": "6ca595ee323954729c1a10015e6ec6445af010208bd14c91f71ff8929ec093f5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/with-markings.svg",
+      "sha256": "6ca595ee323954729c1a10015e6ec6445af010208bd14c91f71ff8929ec093f5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/markings-only.svg",
+      "sha256": "9c33f513aa80b43a885dd7bb2160aec47de042e0ed6e06c898e976e9a2ccf303",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/blank.svg",
+      "sha256": "1d1c8cab6ef4d691cf8f78ef8a74bf5aa5da39d3bb12d2dc88e63889fa5c763f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/display.svg",
+      "sha256": "6ca595ee323954729c1a10015e6ec6445af010208bd14c91f71ff8929ec093f5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V12-truck-perspective/geometry-only.svg",
+      "sha256": "1d1c8cab6ef4d691cf8f78ef8a74bf5aa5da39d3bb12d2dc88e63889fa5c763f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/branding-zones.svg",
+      "sha256": "0f934731a6132196489f3d4f5cd74c0c6e504d95476125fc26308b5331ad79ba",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/unbranded.svg",
+      "sha256": "0e7238eb9dfd0c3eb51591f6ca1d9349d58180d23c8e75f474b3222cc87b625a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/example-outlined.svg",
+      "sha256": "2cff9358ce7af661262be859e78b4cedab6a61ae0b950b936b27b82d6e98444a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/blank.svg",
+      "sha256": "e06ac95f0775317ae4b7ed24a6448378c10bdd9b0501c27a580abfef5ab9d995",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/face-only.svg",
+      "sha256": "dece56d050253a5a420a0008f8a84ea525d9e5707b38141021ca303e440535c9",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/example-editable-text.svg",
+      "sha256": "df76d08412ef3eeb9d98cc12124e99fc84380306bf42bd8a540718f3a5cc3b0d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-directional/display.svg",
+      "sha256": "2cff9358ce7af661262be859e78b4cedab6a61ae0b950b936b27b82d6e98444a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/branding-zones.svg",
+      "sha256": "42eb59d8214347e528775eca513ddb4178625041947c774a2caa575e534136a5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/unbranded.svg",
+      "sha256": "1bfb799aa1e60788aa0eb775b5ba2c46838e2683c74042f5a29bf3b1194318c4",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/example-outlined.svg",
+      "sha256": "2a37e89d21189acbf16018438b88bb968db0b29d913dbae04fc281d577a35e15",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/blank.svg",
+      "sha256": "de24d08061a9e949c2421669fb4b4c577db796b19ac0d85ca5fabd61f6778eb3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/face-only.svg",
+      "sha256": "ce74d4dd00e781cdfd569f826c56a2a6c5e4636ff97ff26dc5737ec86012ad68",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/example-editable-text.svg",
+      "sha256": "7cd7a960e99d028808bbb2e25a64e482f19927ff6fcbc1171e83faf538a0eaa3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S13-ranger-station/display.svg",
+      "sha256": "2a37e89d21189acbf16018438b88bb968db0b29d913dbae04fc281d577a35e15",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/branding-zones.svg",
+      "sha256": "ae532a688adad976c728ffce9a0d248831e1219bfb0edfffd1d6d93f6961fe4f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/previous-blank.svg",
+      "sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/unbranded.svg",
+      "sha256": "2ee514b317307bca7f322dfbc5b1f31d260b6dadc070436d88a92a2a4430136b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/blank.svg",
+      "sha256": "2ee514b317307bca7f322dfbc5b1f31d260b6dadc070436d88a92a2a4430136b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/display.svg",
+      "sha256": "2ee514b317307bca7f322dfbc5b1f31d260b6dadc070436d88a92a2a4430136b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H47-generator/geometry-only.svg",
+      "sha256": "2ee514b317307bca7f322dfbc5b1f31d260b6dadc070436d88a92a2a4430136b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/branding-zones.svg",
+      "sha256": "7027ed103560a0f568c09d99d977ce51e247b566efb2b7bbdb2a5876be820f12",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/unbranded.svg",
+      "sha256": "3c12e5b7396140ebe0c9b67fa84754f507c1f99a25c56a47c9ec46137af0ea66",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/example-outlined.svg",
+      "sha256": "fa7fb3e182e0adb4f12c2b7d063c5ab4b7cf4dfdc2b6fcc479ee9b7cd2546691",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/blank.svg",
+      "sha256": "4a662a871e0fcfe0372d3684771a2a27ce0f40f3d6d9e63305ea431f3ba791cc",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/face-only.svg",
+      "sha256": "91cdfa91eaf9cc83b65e33f16bdc164efbdd2d2341637d24bbe7c13ced61c968",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/example-editable-text.svg",
+      "sha256": "c325298747841773017294bf0f65850494c3e86e07d13916af1082af5ed11c43",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-employees-only/display.svg",
+      "sha256": "fa7fb3e182e0adb4f12c2b7d063c5ab4b7cf4dfdc2b6fcc479ee9b7cd2546691",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/branding-zones.svg",
+      "sha256": "272d5b6f7be124317689304f7d2ffd220e653636cff9a8cf2ec461868dbef35f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/unbranded.svg",
+      "sha256": "46813f8cff699c058545a76f9302a02029cc815850631c0a81497f0f5b0eba5d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/example-outlined.svg",
+      "sha256": "643146423b764031921dda2ed9488da9c6634e9e67eed240614827a26b642ced",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/blank.svg",
+      "sha256": "35ad41b0a1f3ed627329a8b8fe6219791c1968abec69cd612b46ca295d100826",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/face-only.svg",
+      "sha256": "f9110c09b405c2c37b74750b4281e661db153b710f316604c97861e4fb27678a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/example-editable-text.svg",
+      "sha256": "fd9161a0f66d51646f2a16cd2186703699160f551ab672ec2892c542e66aa26a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-game-check/display.svg",
+      "sha256": "643146423b764031921dda2ed9488da9c6634e9e67eed240614827a26b642ced",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/branding-zones.svg",
+      "sha256": "c7bd5cf11b1f3233acb15c9af81d521e50b6c5f5d71e297cb54f94f91ab4d4c0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/unbranded.svg",
+      "sha256": "d648e2a01dfb08dd5c7fa5e4357f201d76edb17e79247f04d642ed7511249941",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/example-outlined.svg",
+      "sha256": "a8b63fe0578374c7c59b17a073c7e96d364389c8033c189cb05ef8df5385fad6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/blank.svg",
+      "sha256": "9092471df33b85db9bf4b92b267b42c0cc9ed863e50dd3f904b57933c9648b69",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/face-only.svg",
+      "sha256": "f6713bc8bd20a8951c675ce416032e0cd361b8312195b0d9fc06787bbfb24aea",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/example-editable-text.svg",
+      "sha256": "20c9f6f5854ea4d4ee0f2b9ab7e81e5e7258a517f6e2f3e21aaa7998cdbfbbbc",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-engineering-building/display.svg",
+      "sha256": "a8b63fe0578374c7c59b17a073c7e96d364389c8033c189cb05ef8df5385fad6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/branding-zones.svg",
+      "sha256": "b6f2f744d9dce630f66473d580b1c73f166fbaa0506bb54c08bbf153cb421754",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/unbranded.svg",
+      "sha256": "b36fac15d44cbc0981074fed6e9ff99b2b1e17261bd859b88ba35427bbab128d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/example-outlined.svg",
+      "sha256": "1f7760ac84e8288d45bf0fa0c9d8c896795b712bf4c3f5095710d4fe1a55b404",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/blank.svg",
+      "sha256": "f17730d125982b5bc4707c8bb9836d33214eaa610d0dfdcd4b0d97f9300ecd9a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/face-only.svg",
+      "sha256": "9a4f8350aa3b5230e68ae2d75cb3bc662709c41575424dfee7883f1a58792388",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/example-editable-text.svg",
+      "sha256": "1f7760ac84e8288d45bf0fa0c9d8c896795b712bf4c3f5095710d4fe1a55b404",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-telephone/display.svg",
+      "sha256": "1f7760ac84e8288d45bf0fa0c9d8c896795b712bf4c3f5095710d4fe1a55b404",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/branding-zones.svg",
+      "sha256": "bc2ce737b5a5cd955a13cdcc25d17a606217facddc403ded71a4048432e91447",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/unbranded.svg",
+      "sha256": "9cc2c2277eae518518101be4a53c2c13c31bec59d596a40c7cf03b8223a78c96",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/example-outlined.svg",
+      "sha256": "3fb66783ae3fef28ec1fece08c3aec076e3414830df17136bc6064c66b767fca",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/blank.svg",
+      "sha256": "c507876d1ae085917dd8c0af832f1e697ec2a74af9c3018f41360fa240451def",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/face-only.svg",
+      "sha256": "708592a5ca9403ebe1e9e992c3153b90afdd2482f797cd6ab51bae1d405f48b0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/example-editable-text.svg",
+      "sha256": "3fb66783ae3fef28ec1fece08c3aec076e3414830df17136bc6064c66b767fca",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-camping-direction/display.svg",
+      "sha256": "3fb66783ae3fef28ec1fece08c3aec076e3414830df17136bc6064c66b767fca",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/branding-zones.svg",
+      "sha256": "f258f74345ca0daa9fa424f8258496243e260fb5856c1d5b0ac700167ab737b3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/previous-blank.svg",
+      "sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/unbranded.svg",
+      "sha256": "333eca3bb2161bc37f3fe06e5645ba079d6d34ef88dddb5609a2684af5c53d2b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/blank.svg",
+      "sha256": "333eca3bb2161bc37f3fe06e5645ba079d6d34ef88dddb5609a2684af5c53d2b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/display.svg",
+      "sha256": "333eca3bb2161bc37f3fe06e5645ba079d6d34ef88dddb5609a2684af5c53d2b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-front/geometry-only.svg",
+      "sha256": "333eca3bb2161bc37f3fe06e5645ba079d6d34ef88dddb5609a2684af5c53d2b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/branding-zones.svg",
+      "sha256": "a8a95a51ba9e9895242cbdadb77ae041ecf0ca88bfd509866a4807e425c80285",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/unbranded.svg",
+      "sha256": "53ce9653263b457e776766c836597fa6a52e55e85e89716fd729ae1477c0d58c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/example-outlined.svg",
+      "sha256": "b696cfd1063bc8987920e5b1b8faf03598922a224a80996420d8d4cec816cff2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/blank.svg",
+      "sha256": "4f530c5b46e7d22234c3fe3440f34a7b9e43975d34d6950c4e296f66ad47de04",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/face-only.svg",
+      "sha256": "404fbb0a1913d95352af60b0125a77140ac768cfab2040c95f0b12dfae384297",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/example-editable-text.svg",
+      "sha256": "6ab2d5b745b4848846fd888fc9f84bb62e6106ef5fb1bbb4cae86524a2917eb4",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S15-storage-directory/display.svg",
+      "sha256": "b696cfd1063bc8987920e5b1b8faf03598922a224a80996420d8d4cec816cff2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/branding-zones.svg",
+      "sha256": "67843e32320e8863badb438ed03164b9d1c1ef6e6def56a58a0990309b3b8bcb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/unbranded.svg",
+      "sha256": "80d5368cd1e96a5c1826ec6d658709aa66c6b086627a22cd716ab5a9db17b0d6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/example-outlined.svg",
+      "sha256": "6f4c83e475ff2d4bd2537a8c49cce6de12c6a1e28b10fd37c03a6114d08835a3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/blank.svg",
+      "sha256": "573d6f886537a0c3f696a4849d4aa228246dd288f7f7ef215182c4991f707995",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/face-only.svg",
+      "sha256": "acd451f0a9ec2fa696467cec805800cddd6069e14ffe4f74234990db20d39763",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/example-editable-text.svg",
+      "sha256": "bb31b16873c5e11b06d4b789e0730ef3c07744f8a38c714845d66f85cf541fa2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-fire-equipment/display.svg",
+      "sha256": "6f4c83e475ff2d4bd2537a8c49cce6de12c6a1e28b10fd37c03a6114d08835a3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/branding-zones.svg",
+      "sha256": "8bf01eb36106692e48c68967f4120479c936c6b10de7919522c36a292fe93466",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/unbranded.svg",
+      "sha256": "87eb69d4abf21022210a1e766eb2c878b82d7be465e56023b99e5dbc9c179e9e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/example-outlined.svg",
+      "sha256": "1039362067594672ea2d542eef80512dce3bcd9ee44ef5374654980532803bd6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/blank.svg",
+      "sha256": "714453663c4a5e56aabd9b2c5e1f508ae6c11a6ac12307d3e95093dbfd09b22b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/face-only.svg",
+      "sha256": "ab792214471c43c01c4b66cbe35b6116ada405e5077fc08265f6eb64dcdfbcd6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/example-editable-text.svg",
+      "sha256": "6be1707a57722843ec0cb0a5ee9f7df3f100097906325f222d7676c557bf1458",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-poison-baits/display.svg",
+      "sha256": "1039362067594672ea2d542eef80512dce3bcd9ee44ef5374654980532803bd6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/branding-zones.svg",
+      "sha256": "4b5e64cc49df84f6c3089b1ad9db7d49f54fb6ce43696ebea51f348dcbce56f3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/unbranded.svg",
+      "sha256": "cebad12e449e65e0844e14f021654d489498179ed4660db3347d74a1f7d396b6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/example-outlined.svg",
+      "sha256": "e3de419ae9c31c1f990c687c3f6e857d5adb5979aba21fe4b8a25e30fd9f7f92",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/blank.svg",
+      "sha256": "3486bde8e139c854926efa7b8461db68e559464afcd1976883e4a5a10e3298c6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/face-only.svg",
+      "sha256": "97a011c4d13788b888e9e588265e77de15407bd20547e3591a9f4822c8a9504c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/example-editable-text.svg",
+      "sha256": "e3de419ae9c31c1f990c687c3f6e857d5adb5979aba21fe4b8a25e30fd9f7f92",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-sanidrop/display.svg",
+      "sha256": "e3de419ae9c31c1f990c687c3f6e857d5adb5979aba21fe4b8a25e30fd9f7f92",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/branding-zones.svg",
+      "sha256": "10bc43286d5da74b26d6c9896573d41667c9f2805e574a9b8874ca1f148d7660",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/unbranded.svg",
+      "sha256": "2fb12bed97e5451d44fefb46283cb6c9c38c8e4c220e9ffca1b74b9034807872",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/example-outlined.svg",
+      "sha256": "dae4d493f96678b8e7426f0b435abcb3b815f664e03e1a68ffd1d4cb4cc94974",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/blank.svg",
+      "sha256": "dd19d500b5293fbc1ac639f9727970bc258c1e3fff2eb5f9d6a79db28fba54fd",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/face-only.svg",
+      "sha256": "6cb03adb7679e6c50d9cdc2b4384f053bdc21d489cb9f5f2d1f4565c9d3ce92e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/example-editable-text.svg",
+      "sha256": "8e9769803d9a34f2d250f075dc64e6065c5f3e8f6a376d20973fca344f05ad53",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-information-symbol/display.svg",
+      "sha256": "dae4d493f96678b8e7426f0b435abcb3b815f664e03e1a68ffd1d4cb4cc94974",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/branding-zones.svg",
+      "sha256": "3c3454366fee5aacfe9b930ff511901ad283aac2acbff512a25abf576a2c1afb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/unbranded.svg",
+      "sha256": "f09ca44208a95ed52b8961862d81e618e496fe90733ed7342444f21e5c0a87e0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/example-outlined.svg",
+      "sha256": "95e6df638e8ca36a941e08cb1d2dfcb35dce461b5b9c46573faeb9d51b7d6c2f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/blank.svg",
+      "sha256": "244965d0173c254ad3f0a79dc69e0932ae09fe9fee004494ebb4e6646985409b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/face-only.svg",
+      "sha256": "2da58811e71a5ba5094056ef780a5b1ce205580cafc589001350ceddd938b13b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/example-editable-text.svg",
+      "sha256": "35d21d27dc9757f30864287f45fcb883592c28c884767a24250ef6c609619485",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-warning/display.svg",
+      "sha256": "95e6df638e8ca36a941e08cb1d2dfcb35dce461b5b9c46573faeb9d51b7d6c2f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/branding-zones.svg",
+      "sha256": "77e67b17672200ac636f464022a92b09ca434c45284e304b2f4c82d7226e3394",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/previous-blank.svg",
+      "sha256": "32860654cb3ef79c71269ac3cac3b59111b1e6790c38e0b4532844c2d903c417",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/unbranded.svg",
+      "sha256": "377d8ee9faffd64aec0df8624de3bcd0fdf094a401963de310552059da02c88e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/with-markings.svg",
+      "sha256": "377d8ee9faffd64aec0df8624de3bcd0fdf094a401963de310552059da02c88e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/markings-only.svg",
+      "sha256": "906f3998ec4286409533df9b1502c007a3a0418a2b84d5529690ac8410b8b452",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/blank.svg",
+      "sha256": "a740863255621d077b46ce6bb08882e255b58f37a43f5bf7eb9ca20690f6fe7e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/display.svg",
+      "sha256": "377d8ee9faffd64aec0df8624de3bcd0fdf094a401963de310552059da02c88e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-rear/geometry-only.svg",
+      "sha256": "a740863255621d077b46ce6bb08882e255b58f37a43f5bf7eb9ca20690f6fe7e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/branding-zones.svg",
+      "sha256": "a072d67227b1ed21d45bbec53ba6ade7593515935efdfdb1cf643aaac9fbd983",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/previous-blank.svg",
+      "sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/unbranded.svg",
+      "sha256": "9ddcecc742b63ef743bcc8ee1f46168a7f9e6d117db932f075cbd4b94626a990",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/blank.svg",
+      "sha256": "9ddcecc742b63ef743bcc8ee1f46168a7f9e6d117db932f075cbd4b94626a990",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/display.svg",
+      "sha256": "9ddcecc742b63ef743bcc8ee1f46168a7f9e6d117db932f075cbd4b94626a990",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-trailer-side/geometry-only.svg",
+      "sha256": "9ddcecc742b63ef743bcc8ee1f46168a7f9e6d117db932f075cbd4b94626a990",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/branding-zones.svg",
+      "sha256": "eb646be0c77e78d62de43661cbc92fdb4ee123af446ed42199be3e2b91fea288",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/unbranded.svg",
+      "sha256": "656594e769be970653666f3a211e7ed083ec81b9945e50106346e20b19509437",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/example-outlined.svg",
+      "sha256": "8e047ee53a98a19d0a1d7546c4892ed4c5cad8c272809aaf4a610a7401ee63d5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/blank.svg",
+      "sha256": "6e12d8d3e095c1b6a6ce8a55eebb1a25b85818515fc3306fcce9ad436dd6906a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/face-only.svg",
+      "sha256": "1ad013c6881c1f09dd1d48741665169b2734e2032fbcc0f2b5a24318e935f9de",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/example-editable-text.svg",
+      "sha256": "1a875e760c0ca180744ae260e05a96dd1868f69306ad7146418741bff0795664",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-plant/display.svg",
+      "sha256": "8e047ee53a98a19d0a1d7546c4892ed4c5cad8c272809aaf4a610a7401ee63d5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/branding-zones.svg",
+      "sha256": "7395de644be4b78ae1facc2e265c63a9fb1ae19bac589245323af1988dd57c15",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/unbranded.svg",
+      "sha256": "0e12ff513d2b426da8a1d9bad8da4df64adea972ec300ac7a4f137cb7267726c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/example-outlined.svg",
+      "sha256": "44e573930cd71f5026b82c3e65ee08c3adfd05a62ee8a88fc2bae7546929e1e0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/blank.svg",
+      "sha256": "99f58a8f2c0743475a4636d598d2470d49ebb5427a2383b5af1c5347d3fb104e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/face-only.svg",
+      "sha256": "5706e36c027fb9564b059bc61c4753cd7ad091c2328c43ade142dde17b44c8f3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/example-editable-text.svg",
+      "sha256": "a04fd0818781fa46414a8bff45b4eb69e1d6339511604cca0f36009f5eeb2387",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-park-distance/display.svg",
+      "sha256": "44e573930cd71f5026b82c3e65ee08c3adfd05a62ee8a88fc2bae7546929e1e0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/branding-zones.svg",
+      "sha256": "9fb1f123583631faa040fb4f342cc15b191273e4ce69343620302b06df6d5730",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/previous-blank.svg",
+      "sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/unbranded.svg",
+      "sha256": "26291a63bb94ffb46ea60eb161ed2669858cb9c64096e05bd9e0b2f4b5032c90",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/blank.svg",
+      "sha256": "26291a63bb94ffb46ea60eb161ed2669858cb9c64096e05bd9e0b2f4b5032c90",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/display.svg",
+      "sha256": "26291a63bb94ffb46ea60eb161ed2669858cb9c64096e05bd9e0b2f4b5032c90",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-side/geometry-only.svg",
+      "sha256": "26291a63bb94ffb46ea60eb161ed2669858cb9c64096e05bd9e0b2f4b5032c90",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/branding-zones.svg",
+      "sha256": "9ba51a0a12bab9d002dc9afacdf230f1f5ff731529145670ee36c22423fa33b6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/unbranded.svg",
+      "sha256": "ea3ecc67924510559c0ded14dd0698ca980180447ba9e80e9bb05ebae521be36",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/example-outlined.svg",
+      "sha256": "1e52dbf932502188dc4e87eb26d206e31b157ef04ddd6446601a54324e9c23d4",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/blank.svg",
+      "sha256": "9079e90bea62661464b30357a7792b81cccc93da26a9e944b3f7e0a2d1f98c95",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/face-only.svg",
+      "sha256": "cad0586a8c35601a096d42291d4ce0bfaea75d048dd27c5742ffe71de33c9f77",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/example-editable-text.svg",
+      "sha256": "e113637c0d8857d3934e6db43677a58164a4975d3802efc5673eabb577f1f7c1",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S20-directional-directory/display.svg",
+      "sha256": "1e52dbf932502188dc4e87eb26d206e31b157ef04ddd6446601a54324e9c23d4",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/branding-zones.svg",
+      "sha256": "499aa724afb2fa271a41a05ed02d65e47c1f8301c13b9fb7b5389ce3dd41af16",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/unbranded.svg",
+      "sha256": "9135ab513d548920d803ce7400ddf2f23eb925eeffcdea6bf2342d669092c915",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/example-outlined.svg",
+      "sha256": "6031b5e0905b7253252fc2bb9c52c0c3595968b1fb732c649b426b38351bdafe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/blank.svg",
+      "sha256": "f761252e1cc17eda16e13fbc837df5bc1dde1ef84dbe013c6777befe65b8c66f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/face-only.svg",
+      "sha256": "3858fb22c9106acf9fe9a8695e000a4544b9380882ce74a312ceae3797c1aba9",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/example-editable-text.svg",
+      "sha256": "3b084356b32e9463e62467adbf771786047f6861422abb78eb65a0737a7fbc82",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-freight/display.svg",
+      "sha256": "6031b5e0905b7253252fc2bb9c52c0c3595968b1fb732c649b426b38351bdafe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/branding-zones.svg",
+      "sha256": "ee775fe1967629191adf938654032dfea5cc38857bf741c9d168e076fe14098b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/unbranded.svg",
+      "sha256": "95cc08c14bd786724b759aa0da2692c0e88079e9d0510a1ed141d9e14739ffa9",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/example-outlined.svg",
+      "sha256": "a9a9528fe6e30aaa8a6d832799e0ba77b819a8bfffedb6691462bed14592835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/blank.svg",
+      "sha256": "466e6c574df8a840148575100d5f504c98cc619646dd157a3df8b7c8ce42ca3a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/face-only.svg",
+      "sha256": "d1c8ddf6f7e8d90d442ec3b5fe7ea9ebb771ca8258b52eafabcc816d8e17b078",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/example-editable-text.svg",
+      "sha256": "a9a9528fe6e30aaa8a6d832799e0ba77b819a8bfffedb6691462bed14592835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-no-parking/display.svg",
+      "sha256": "a9a9528fe6e30aaa8a6d832799e0ba77b819a8bfffedb6691462bed14592835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/branding-zones.svg",
+      "sha256": "2a0bdbfcd03109e7f4ed11fcde9e5910f291d175fc8a4da8eda1213d5d76315a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/unbranded.svg",
+      "sha256": "29f271f66553e0a4d1ee8624e6f52dd6f554a326a34b603a883c0778e754c807",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/example-outlined.svg",
+      "sha256": "174b86d56652ad7fd76ea4ca546941669936a97a1c1da4f0f11ef4db8a003403",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/blank.svg",
+      "sha256": "c8f1b069687b2243fc1979188c3f9382d45e3c10a690b43c3abe7fa1dd0876bb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/face-only.svg",
+      "sha256": "e29d23b5afee8173ecb8372d8f7996985ec6ade4c76969ebdba101f94f398496",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/example-editable-text.svg",
+      "sha256": "174b86d56652ad7fd76ea4ca546941669936a97a1c1da4f0f11ef4db8a003403",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-camping-direction/display.svg",
+      "sha256": "174b86d56652ad7fd76ea4ca546941669936a97a1c1da4f0f11ef4db8a003403",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/branding-zones.svg",
+      "sha256": "746f0a8c35e3b4797f2906b9a47d0a583e73b8fc912d9bcfebbe95dc1fcc03fe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/unbranded.svg",
+      "sha256": "a7398e57412236223f5c2444b87c0fb439c9507950dd56ed6a603a4bee8e4e9e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/example-outlined.svg",
+      "sha256": "43150b16a64d4bed0935d0c04c6db7561290b57de153efa30e96ef125f64e01c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/blank.svg",
+      "sha256": "16ba922be012b2e3b8223111ea10dddffe75f7c0457e609a9dfdbb0e673480fe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/face-only.svg",
+      "sha256": "36be2353f962d6bf6d6ab1bcc409eb0017002b148ee6182a0d04806ed7f2ebb8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/example-editable-text.svg",
+      "sha256": "bbf233f919eb8974df31eb8bc644cb002cb8540e396f7f49d12aa2cc1b30279a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-bull-river/display.svg",
+      "sha256": "43150b16a64d4bed0935d0c04c6db7561290b57de153efa30e96ef125f64e01c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/branding-zones.svg",
+      "sha256": "79f51903a1364edaf53208a6e714569de53efee0426fc82974f7a7c5291cea1f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/unbranded.svg",
+      "sha256": "57b004f2d725128fe4f309bc8a48d3fab2f8909c8c4eb6fea7eae7ed5ab26641",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/example-outlined.svg",
+      "sha256": "665b3c7332d40f902004d2259b1d0ebe8c324db51e6bbf85f10ab30d8b1e295e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/blank.svg",
+      "sha256": "80665d2877287ee200502a6a2da278690e395cf3edbd871bf3d56a798df295b0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/face-only.svg",
+      "sha256": "c91baff1743b994887532c58eaa73f2813940eddbfb0597408ab77da83d189c2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/example-editable-text.svg",
+      "sha256": "ed030f4ba4a7b95e2a12b31820e71a5423372d26a84184056964aa529603e7be",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-ranger-station/display.svg",
+      "sha256": "665b3c7332d40f902004d2259b1d0ebe8c324db51e6bbf85f10ab30d8b1e295e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/branding-zones.svg",
+      "sha256": "dc0b422a04d7115c12edd6015f318f5891ecd12a9fb02b09085ed6612018e1d0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/previous-blank.svg",
+      "sha256": "8baf17adab0e839a7bf2f215844ede96d02edc9b14312317b177155668229fb7",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/unbranded.svg",
+      "sha256": "5a96609dd22c5d56852777fab2c8cda9cca5e88407b874fac0aa2a4c96968fe8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/blank.svg",
+      "sha256": "5a96609dd22c5d56852777fab2c8cda9cca5e88407b874fac0aa2a4c96968fe8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/display.svg",
+      "sha256": "5a96609dd22c5d56852777fab2c8cda9cca5e88407b874fac0aa2a4c96968fe8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G16-tractor/geometry-only.svg",
+      "sha256": "5a96609dd22c5d56852777fab2c8cda9cca5e88407b874fac0aa2a4c96968fe8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/branding-zones.svg",
+      "sha256": "d3f604a0cb205ee510349288786ac34eddfbb01cc0e64aa7416aac8988db2c9e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/unbranded.svg",
+      "sha256": "f8dd4ecdad225e4f080645ad2369fa2df7d498c3ee82cb5d89060b54df4da56d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/example-outlined.svg",
+      "sha256": "f749ec8cc431b51f5abfd2c52a20be39a0c5c35e4610af6e9d47a8b35fa3d398",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/blank.svg",
+      "sha256": "cdd4d79f112b484fb60cee2fa63a722f4bc426d85dc43b535add5f7ccf03b7e5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/face-only.svg",
+      "sha256": "534d8faa5653e5374da02795edf1ce5596c26016244a0e674e448a0a853d85a2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/example-editable-text.svg",
+      "sha256": "2de66b638f9af1b3ffce83f7a8f12c129997a2e02dcc0d59f0e1f4bc4571affb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S18-bull-river/display.svg",
+      "sha256": "f749ec8cc431b51f5abfd2c52a20be39a0c5c35e4610af6e9d47a8b35fa3d398",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/branding-zones.svg",
+      "sha256": "1a3ff797d54acf868880b29c2b38485c52b343cbcd0a3768fc3310b8b3df26db",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/unbranded.svg",
+      "sha256": "b72b34448b0807febef1960a5a1eb56d81940ce876609b84d7f3cc52d7a5776c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/example-outlined.svg",
+      "sha256": "2a522588a57eac32038035c8aa5d770c5f8c51aac4e2e94e2852d9afbbbed822",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/blank.svg",
+      "sha256": "ad3edea206f9c54c21faaaabcbf141f429a1285ba0ec0f7ef3467e437e2763e0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/face-only.svg",
+      "sha256": "7e440234b1b13e33ab1064c5370447cc2d7d6eb0c371c3377ec12fa8d7340511",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/example-editable-text.svg",
+      "sha256": "2a522588a57eac32038035c8aa5d770c5f8c51aac4e2e94e2852d9afbbbed822",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-camping/display.svg",
+      "sha256": "2a522588a57eac32038035c8aa5d770c5f8c51aac4e2e94e2852d9afbbbed822",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/branding-zones.svg",
+      "sha256": "6f1070422e61417d4076c967440a06c7314c3c95994a5356e33b623f05aae5fd",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/unbranded.svg",
+      "sha256": "581548ccc120a131345482a4580c1db28c1a6862ff7ad65055fa7a84fc1daf98",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/example-outlined.svg",
+      "sha256": "bfae936c6b331ab4a05d4e40eb242f0520a93dd958333a5a905eb9f8dc86c3c1",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/blank.svg",
+      "sha256": "22e3d748f443abba8875be03fae30bb0270153bd6ee5558fd7a61a08ba7dc78b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/face-only.svg",
+      "sha256": "06d2c53c2e801f82ee66d5f4734b36d7fee92ec14a40a9f16a8c61d4e5b55125",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/example-editable-text.svg",
+      "sha256": "bcbc5949d5e5e35792f09d420c7a4c93491a6bb350847dfd42a6af676c44988c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-customer-service/display.svg",
+      "sha256": "bfae936c6b331ab4a05d4e40eb242f0520a93dd958333a5a905eb9f8dc86c3c1",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/branding-zones.svg",
+      "sha256": "0fdf54eb62fe88b2647b285998010f303eb54be9e0585ea13a9add757abc806e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/unbranded.svg",
+      "sha256": "507157f4b77628280cd487ddc80d58526fc8947820335984be859f84eeb08f95",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/example-outlined.svg",
+      "sha256": "f821dd2cd91378af3fd0ff04984e3a147e084a076312fd8abbce716ed2c4fba2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/blank.svg",
+      "sha256": "7167e7b3f2786c037950f252aec8238f2a4e5cfe9fb5ac796b25c5b38467e7ff",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/face-only.svg",
+      "sha256": "2fadeb87b8ddcd7b25b36674f32bcf548c3b31ea0cb8c350a1ac829397377e6a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/example-editable-text.svg",
+      "sha256": "f821dd2cd91378af3fd0ff04984e3a147e084a076312fd8abbce716ed2c4fba2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S22-picnic/display.svg",
+      "sha256": "f821dd2cd91378af3fd0ff04984e3a147e084a076312fd8abbce716ed2c4fba2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/branding-zones.svg",
+      "sha256": "2f75d98d2cde09f11d9df4d387f42bb6c25a3ed2335d2b3cb0e516844baa955d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/previous-blank.svg",
+      "sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/unbranded.svg",
+      "sha256": "2ba8dd98319ca6ea1a91be7e93a7ab3eed98107f4711fabb056f8a9154713bbe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/blank.svg",
+      "sha256": "2ba8dd98319ca6ea1a91be7e93a7ab3eed98107f4711fabb056f8a9154713bbe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/display.svg",
+      "sha256": "2ba8dd98319ca6ea1a91be7e93a7ab3eed98107f4711fabb056f8a9154713bbe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V17-compressor/geometry-only.svg",
+      "sha256": "2ba8dd98319ca6ea1a91be7e93a7ab3eed98107f4711fabb056f8a9154713bbe",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/branding-zones.svg",
+      "sha256": "2d6c8b60e41f1f3e155a7cb11aa285f2b3ceaac762e769e5ece4cb8be7df2c0f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/previous-blank.svg",
+      "sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/unbranded.svg",
+      "sha256": "dfc60c733997a9c9d9e0de8c412f02e2fa781279c0436c2ada8dcf4482303ce8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/blank.svg",
+      "sha256": "dfc60c733997a9c9d9e0de8c412f02e2fa781279c0436c2ada8dcf4482303ce8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/display.svg",
+      "sha256": "dfc60c733997a9c9d9e0de8c412f02e2fa781279c0436c2ada8dcf4482303ce8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-flatbed/geometry-only.svg",
+      "sha256": "dfc60c733997a9c9d9e0de8c412f02e2fa781279c0436c2ada8dcf4482303ce8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/branding-zones.svg",
+      "sha256": "a7272be0c5ec77089872a21a75362afd8cec8536111fd68b4abdcdc2cdee13d0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/unbranded.svg",
+      "sha256": "5d570b024e577de81d1d557697a5f5f274f9d657634c970871c126c9dd66c43d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/example-outlined.svg",
+      "sha256": "765bda3608de5a63b2f40459293030a529c88f10f2e72746b009d70c16c4d0da",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/blank.svg",
+      "sha256": "2b497300825ea68613f87c058affc8dfb91b685780941ab7df544e39758c1e16",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/face-only.svg",
+      "sha256": "d3d7440ceecd52ee8c4f39bb11e92a25c2d8b06a122d52deb87ce6cbaf961623",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/example-editable-text.svg",
+      "sha256": "9ef14d4fa07512e30f98b4738d484f5d43646a1588a83ef52d97f2fa2b6402c0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-authorized-vehicles/display.svg",
+      "sha256": "765bda3608de5a63b2f40459293030a529c88f10f2e72746b009d70c16c4d0da",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/branding-zones.svg",
+      "sha256": "98775a23591af98ea75173c7cd3eaf2996bf2bb88bd4e24d101114b4b6b81842",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/unbranded.svg",
+      "sha256": "6ae0c715665c98b91101363c430dc20584daa9a766eec5d0d72657dca8690e0d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/example-outlined.svg",
+      "sha256": "123933a3f8ecfb13a18480aa695ef131243abe784935c6af7d77df13b9a55439",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/blank.svg",
+      "sha256": "394b2a01fb4be5e973b0bb28b2a75f77337fe416fd44c73dc634c5aaeee198dc",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/face-only.svg",
+      "sha256": "a37bce24248a24ada8a5e2745739f9caa3f7c2f6aae8fb059135456ed41d3253",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/example-editable-text.svg",
+      "sha256": "123933a3f8ecfb13a18480aa695ef131243abe784935c6af7d77df13b9a55439",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S03-washrooms/display.svg",
+      "sha256": "123933a3f8ecfb13a18480aa695ef131243abe784935c6af7d77df13b9a55439",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/branding-zones.svg",
+      "sha256": "70e8d0071b85d83a763690d9ffe15bf229334cf170ba716cd59c489585bbaa22",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/previous-blank.svg",
+      "sha256": "9902ac56566c996df2ce2f54cbc90b4eb5876b8c29160e78d697479e1856a9a9",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/unbranded.svg",
+      "sha256": "18bb4ab880b423d19b67e67dbcb8b7ed847057fef6df6e6d702a4f6da8db835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/blank.svg",
+      "sha256": "18bb4ab880b423d19b67e67dbcb8b7ed847057fef6df6e6d702a4f6da8db835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/display.svg",
+      "sha256": "18bb4ab880b423d19b67e67dbcb8b7ed847057fef6df6e6d702a4f6da8db835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V15-flatbed-rear/geometry-only.svg",
+      "sha256": "18bb4ab880b423d19b67e67dbcb8b7ed847057fef6df6e6d702a4f6da8db835d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/branding-zones.svg",
+      "sha256": "b7c73fdafb3442ad69f758c2b7dc08d2bddac47e95af67499d85d0e85f425b42",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/unbranded.svg",
+      "sha256": "ee20524b2b851467a52539db620cb305d1231f4b87a9719a4eef7cbfa0485252",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/example-outlined.svg",
+      "sha256": "95c3262fe19bd92b982f3b4131e73f7fc0f5f909b01f71dc8cfc1199f429f90b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/blank.svg",
+      "sha256": "f11d5cc0b436be1d3b8e74398fb173f56945b15fb9b49d69847e4ec061c9c712",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/face-only.svg",
+      "sha256": "1f0a2bfdb5b67fd278ec0df10eb63ef894dd0f91eebfbb123fb50bf8a6fdf20f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/example-editable-text.svg",
+      "sha256": "4ef8e192dfbac7bd3915f47d94447939260e17e3e9db2acc7d3a5a25d5ba145d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H41-danger/display.svg",
+      "sha256": "95c3262fe19bd92b982f3b4131e73f7fc0f5f909b01f71dc8cfc1199f429f90b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/branding-zones.svg",
+      "sha256": "386a25bd063fdea057624d91061c2f3a5692f01867ca8c0aad3a8abce0c15e5a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/previous-blank.svg",
+      "sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/unbranded.svg",
+      "sha256": "7d68fe5a58182e86c9206a21a98465141a606bcb0df54c17fa646e207136182e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/blank.svg",
+      "sha256": "7d68fe5a58182e86c9206a21a98465141a606bcb0df54c17fa646e207136182e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/display.svg",
+      "sha256": "7d68fe5a58182e86c9206a21a98465141a606bcb0df54c17fa646e207136182e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V03-policy-tractor/geometry-only.svg",
+      "sha256": "7d68fe5a58182e86c9206a21a98465141a606bcb0df54c17fa646e207136182e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/branding-zones.svg",
+      "sha256": "1d2b00fd57fbbd2caeeda2fc83c3390a3cdeb560586216a76034a3d8be58c5d5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/unbranded.svg",
+      "sha256": "7f9e33b5c7b05af9da7ef359d4b3caea826a8f981ed3d8c1b6ba294c0c74d1b2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/example-outlined.svg",
+      "sha256": "4e238a957298c810ff8ef02bca656ffab9ab1ccfe23251299130f71645daf6f8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/blank.svg",
+      "sha256": "e71d502cc0da64ec1d5d99df0aa38ab81fd8cdd4e54b77a9b683892786154c50",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/face-only.svg",
+      "sha256": "93bc6816faf915a3bd9d1b9282b5917f7a73193e60a9d116036373394de237cf",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/example-editable-text.svg",
+      "sha256": "9b9101fb3ffaf1deaa569af2ed947358d6cab530d5eae268b2742833b18feabb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-park-distance/display.svg",
+      "sha256": "4e238a957298c810ff8ef02bca656ffab9ab1ccfe23251299130f71645daf6f8",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/branding-zones.svg",
+      "sha256": "54354a8ad37f225e206aed0122ba6ec76c3d3d2e488574468340ac96861da1d0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/unbranded.svg",
+      "sha256": "f2375023ba16d1107f2cd930dd5b3a2232fede77064c6777805c5e094b9ba42d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/example-outlined.svg",
+      "sha256": "0b462e7cd69db2bb022f9fc12060421d017db33a922124ff30dd81b9a3118396",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/blank.svg",
+      "sha256": "26f4f0e86a725ec7f26c467064d51cc009fd9bd105b0f8d01b50e0d5d7f84a8d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/face-only.svg",
+      "sha256": "6964368870bda1239691500706e33c8c6c16afdc4be7b2ecddf1e97ccf9872ff",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/example-editable-text.svg",
+      "sha256": "bb0c5a0534b4708dc4aaab99b04ef349f11c5ee0d86ebeeb78b8ba7469b38a1f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-fire-equipment/display.svg",
+      "sha256": "0b462e7cd69db2bb022f9fc12060421d017db33a922124ff30dd81b9a3118396",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/branding-zones.svg",
+      "sha256": "213f02e211d061b16a8875fea36fcd412404f702ed6b47d08f1c2c7910a28a38",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/unbranded.svg",
+      "sha256": "b1bf510f68097c727e6acd6fae1fe9c2961c2a50aabd63c322215440d722cf2f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/example-outlined.svg",
+      "sha256": "e37a4bd5adf1024050b36b4cc462cbb49d0c3e4b777296d016d8ee3d4c9c6a38",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/blank.svg",
+      "sha256": "d5a4367fe16b77c23acf3cd1fb287b15568faeb1c0219b417183d91c060c11f5",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/face-only.svg",
+      "sha256": "e361539ee1222fb0841bed4799f5cd3116dd36a7954b5ff1c2d96faf4269ed88",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/example-editable-text.svg",
+      "sha256": "e37a4bd5adf1024050b36b4cc462cbb49d0c3e4b777296d016d8ee3d4c9c6a38",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-office/display.svg",
+      "sha256": "e37a4bd5adf1024050b36b4cc462cbb49d0c3e4b777296d016d8ee3d4c9c6a38",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/branding-zones.svg",
+      "sha256": "f64f8f4b2c03e713f34be133875d198176a486a160a63c187fa9ccea81584d49",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/unbranded.svg",
+      "sha256": "eff68f7b28067ed5074c389dfb071bc6d8372756423db918d0ab5290d23b7034",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/example-outlined.svg",
+      "sha256": "9b99870a7c8e8d7d384f36e49b1a85ca19fc4e84cd2fb05f1e128a83c1f29b4c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/blank.svg",
+      "sha256": "8e2cdf88426491eaaa8a9a63764031783803dc4d61f804413b1e1081c81b6bb0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/face-only.svg",
+      "sha256": "68f4b1155883e0084cd8a2f183ecd9ffc15da74d9a39f67556481c704bbaec36",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/example-editable-text.svg",
+      "sha256": "5242eb978ce7b4fc962e66d100d46dc4d2c89697f58613d29751f350cffa7d93",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S24-game-check/display.svg",
+      "sha256": "9b99870a7c8e8d7d384f36e49b1a85ca19fc4e84cd2fb05f1e128a83c1f29b4c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/branding-zones.svg",
+      "sha256": "d88be3489dfad129b04c283212a5f76f6427bfeb816839029915ac54889e78f0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/unbranded.svg",
+      "sha256": "2e6b044de0b6e812433157c13eea8b88e9805a014f976c652f9f1df45fe639c1",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/example-outlined.svg",
+      "sha256": "cf25e38092e3c667f4d424cf79bb368f0236b77b165a0dd904e915d0a037fb16",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/blank.svg",
+      "sha256": "74735ddb603d0912c999532876fd29499442c94a7cb009b2711ca22bb97eec46",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/face-only.svg",
+      "sha256": "208fd9ee56403677c5ac4a61b80cf0178f97143a7d6d3b0872c80ba4a09b1261",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/example-editable-text.svg",
+      "sha256": "b2b4e901ee5a77ddcf3c6fa5275cd41f505bc8a09e007c5b7b5740c0db381894",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-directional/display.svg",
+      "sha256": "cf25e38092e3c667f4d424cf79bb368f0236b77b165a0dd904e915d0a037fb16",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/branding-zones.svg",
+      "sha256": "df335c21b338dc931121a1866ccf0ee083208e45eadc411f08aafe35c4216247",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/unbranded.svg",
+      "sha256": "c6a790f6819b72642a1787ed61ec9eef63d14032294ff904e27257cf6eaa419d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/example-outlined.svg",
+      "sha256": "1f85dff08638f2e851a391ae68d3bd5e747d713974d4c6b364a38f7286aa6ebd",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/blank.svg",
+      "sha256": "b34a6b0fa46fce49dd9c70501b3691e9901c2a9d3fc3f60555f408ebf2fa0279",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/face-only.svg",
+      "sha256": "0b9e2ebda28e24933326c61643a9384ddfd48c83e8f606ff5a9f7a01071ff824",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/example-editable-text.svg",
+      "sha256": "1f85dff08638f2e851a391ae68d3bd5e747d713974d4c6b364a38f7286aa6ebd",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H39-gas/display.svg",
+      "sha256": "1f85dff08638f2e851a391ae68d3bd5e747d713974d4c6b364a38f7286aa6ebd",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/branding-zones.svg",
+      "sha256": "b87bd45bb53c7bb461036cc854e923d393995e4b12b44dee15a1baccb975e1e0",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/unbranded.svg",
+      "sha256": "605b789e049cb1985c0e980c24317adc58de73e1a544265881d6cc3c3bc9514b",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/example-outlined.svg",
+      "sha256": "3933de6250231af3a41b0a90b1fc487018c1b776b409c4163d5977f5957a3902",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/blank.svg",
+      "sha256": "65bd5be567a9a94789a72b8a1fa8c31bfa42c009a15ada56c69caf26703981a3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/face-only.svg",
+      "sha256": "8aaee224d7b909829d9a9797faf847da77fb0bb7f87c204181e328b0e10dd6ac",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/example-editable-text.svg",
+      "sha256": "11ee84b1c6f9c68803610552d6a050e66c5b670979ef68e393bf736899c02f16",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/G18-poison-baits/display.svg",
+      "sha256": "3933de6250231af3a41b0a90b1fc487018c1b776b409c4163d5977f5957a3902",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/branding-zones.svg",
+      "sha256": "2ff2efdc23257badf05367bfcfc0d0707aed6b0de0cc3e93e5ae74f307702b5f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/unbranded.svg",
+      "sha256": "9172d072c330faefdb42a06e433df9d0ce4d9c622e4b7c64edf49bb4660ad3e3",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/example-outlined.svg",
+      "sha256": "e8564249604a4718bd71de8fb897c766e8ecd663f144c8c036a9976d78f5ed52",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/blank.svg",
+      "sha256": "c05a99067b1c10eabed84aa876b1de474e9fcb9803a660a14e91132344dcd955",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/face-only.svg",
+      "sha256": "c33525c4011358f0e659cd71c308b5e390aa993fbb507328023ec2414105699e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/example-editable-text.svg",
+      "sha256": "cacb204dfa6462fbcb96481c68974c8853f75ab60d704044f404f7b6290e15c7",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-shipping/display.svg",
+      "sha256": "e8564249604a4718bd71de8fb897c766e8ecd663f144c8c036a9976d78f5ed52",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/branding-zones.svg",
+      "sha256": "f99e26a7089a0377bd488dfab49cf2c588295595c1cf08b094148ea0f41c56f6",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/unbranded.svg",
+      "sha256": "d3bd1cdd873891ec5dd40623d7caa891d4843e4b95be1ed753243039a9cbea1d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/example-outlined.svg",
+      "sha256": "8c0d2a3681b806416ac111d113e29933ef08a22c0b4da217ccf1a8c7df84b16f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/blank.svg",
+      "sha256": "fd2d1e4e84ad03c83614f8b8c9836e31fb590ccdc91bf1dbc352262caeb37dfa",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/face-only.svg",
+      "sha256": "39172297648d71ada669301f00f956af15f517808808d6993ef02b323debdc93",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/example-editable-text.svg",
+      "sha256": "8c0d2a3681b806416ac111d113e29933ef08a22c0b4da217ccf1a8c7df84b16f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S05-telephone/display.svg",
+      "sha256": "8c0d2a3681b806416ac111d113e29933ef08a22c0b4da217ccf1a8c7df84b16f",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/branding-zones.svg",
+      "sha256": "443e35ff83a99c356bf05d6c7b92aa974512f88b2c43495d8a5c86d872f642cb",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/unbranded.svg",
+      "sha256": "9e574474c7ac82d6da4929e9b33765da5a05fd82da2be7aceed0146a8b2e5984",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/example-outlined.svg",
+      "sha256": "9ed11798362f20a440b3488098b57f826cab11caeebb69168924dbffeaee22d2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/blank.svg",
+      "sha256": "931dfada2aa6593f815d268d5228cb326af45b7940e481d80a2759902ca69699",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/face-only.svg",
+      "sha256": "09d8a933bb76dc18a36c3f23fc9222b8de3f6616df5fb5e89a68c68c5707b957",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/example-editable-text.svg",
+      "sha256": "4d990d46c05dd58b603836da044c8a1a47b0074d71f6ca3204565d8fa3cac6f9",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H40-advisory/display.svg",
+      "sha256": "9ed11798362f20a440b3488098b57f826cab11caeebb69168924dbffeaee22d2",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/branding-zones.svg",
+      "sha256": "83f8840576ddb4593e5da15a713e555d46ae7c657f1b6de615839b7b9ee19b5a",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/previous-blank.svg",
+      "sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/unbranded.svg",
+      "sha256": "2f977391991bc24595210e7e92f4aaa22597bf147f6530792b2af8d71c8bc532",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/blank.svg",
+      "sha256": "2f977391991bc24595210e7e92f4aaa22597bf147f6530792b2af8d71c8bc532",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/display.svg",
+      "sha256": "2f977391991bc24595210e7e92f4aaa22597bf147f6530792b2af8d71c8bc532",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/H46-tractor-trailer/geometry-only.svg",
+      "sha256": "2f977391991bc24595210e7e92f4aaa22597bf147f6530792b2af8d71c8bc532",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/branding-zones.svg",
+      "sha256": "3478e86f1295c2207de3db55129eff221221de0c83bf45636a85482e032c294d",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/unbranded.svg",
+      "sha256": "4324abb86284f32194051357c150778ba1512df81af9ea1fda42765c66b91e7e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/example-outlined.svg",
+      "sha256": "a3dbb2087a557dfa3ce00dec44a13a30252ca27b67493e3d80458e2b2d9f518e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/blank.svg",
+      "sha256": "a4bd4f8b4707d9471f5b74bb67799088156c71762fc7643d6c2acb81cd530a8c",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/face-only.svg",
+      "sha256": "3a84bfd71bfec0d3242eabe24353bd7fdec5268c5a726e30b1ac32b3c0b69931",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/example-editable-text.svg",
+      "sha256": "a3dbb2087a557dfa3ce00dec44a13a30252ca27b67493e3d80458e2b2d9f518e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/S04-picnic/display.svg",
+      "sha256": "a3dbb2087a557dfa3ce00dec44a13a30252ca27b67493e3d80458e2b2d9f518e",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/branding-zones.svg",
+      "sha256": "b3c0863ad1642178234ccb3adab2bcd6a326d0ded042d4e703e6857fbe1347ea",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/previous-blank.svg",
+      "sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/unbranded.svg",
+      "sha256": "bacd184c822ad55824fedf65290e9b64ebeec5b7ed4ffa5da0604066c8164290",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/blank.svg",
+      "sha256": "bacd184c822ad55824fedf65290e9b64ebeec5b7ed4ffa5da0604066c8164290",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/display.svg",
+      "sha256": "bacd184c822ad55824fedf65290e9b64ebeec5b7ed4ffa5da0604066c8164290",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    },
+    {
+      "file": "release/assets/V14-tractor-trailer/geometry-only.svg",
+      "sha256": "bacd184c822ad55824fedf65290e9b64ebeec5b7ed4ffa5da0604066c8164290",
+      "duplicate_ids": [],
+      "unresolved_local_refs": [],
+      "external_or_raster": [],
+      "rendered": true
+    }
+  ],
+  "errors": [],
+  "limits": "Technical structural and selected topology checks, NOT a numerical source-fidelity or complete geometry-acceptance score. Unmasked source overlays and human source review remain necessary."
 }

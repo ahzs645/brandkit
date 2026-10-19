@@ -389,9 +389,20 @@ brand.roles.type = 'black'
 // The drawings of uniforms and vehicles (ManualKit's source-registered illustrations), each a
 // template with the identity in its branding zones.
 const drawn = illustrated('province', ['G15', 'G16', 'G17', 'V03', 'V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18'], [], 'Uniforms and vehicles, drawn')
-brand.illustrations = drawn.drawings
+// The signs of the General and Sign Manuals, drawn: each sign's wording a field for each line,
+// its identity the sign signature. Grouped by kind of sign, not by page.
+const SIGN_KINDS = [
+  ['Primary identification', /RANGER-STATION/],
+  ['Secondary identification', /ENGINEERING-BUILDING|STORAGE-DIRECTORY/],
+  ['Information', /BULL-RIVER|FIRE-EQUIPMENT/],
+  ['Directional', /DIRECTION|PARK-DISTANCE/],
+  ['Control', /POISON-BAITS|GAME-CHECK|WARNING|NO-ENTRY|NO-PARKING/],
+  ['Symbol signs', /./]
+]
+const signs = illustrated('province', ['G18', 'S03', 'S04', 'S05', 'S13', 'S15', 'S18', 'S20', 'S22', 'S24'], ['S07'], 'Signs, drawn', (asset) => SIGN_KINDS.find(([, pattern]) => pattern.test(asset))[0])
+brand.illustrations = { ...drawn.drawings, ...signs.drawings }
 
-brand.templates = [...stationery, ...applications(brand), ...drawn.templates]
+brand.templates = [...stationery, ...applications(brand), ...drawn.templates, ...signs.templates]
 brand.guide = guide(brand)
 
 // Variants of one thing are one item in the studio: a letterhead in each rank, a sign in each
@@ -407,7 +418,8 @@ brand.sets = [
   set('shoulder-flash', 'Shoulder flash', [['uniform-flash', 'Job function'], ['uniform-security', 'Security']]),
   set('vehicle-markings', 'Vehicle markings', [['vehicle-door', 'Door'], ['vehicle-van-truck', 'Van truck, side'], ['vehicle-van-truck-rear', 'Van truck, rear']]),
   set('sign', 'Sign', [['sign-primary-identification', 'Primary identification'], ['sign-secondary-identification', 'Secondary identification'], ['sign-standard-information', 'Standard information'], ['sign-directional', 'Directional'], ['sign-warning', 'Warning'], ['sign-regulatory', 'Regulatory']]),
-  ...drawn.sets
+  ...drawn.sets,
+  ...signs.sets.map((entry) => ({ ...entry, id: entry.id.replace(/^drawn-/, 'drawn-sign-') }))
 ]
 
 // Word templates for what was typed: each rank's letterhead and envelope, the memorandum and news
@@ -450,7 +462,8 @@ cite(brand, {
     'sign-directional': ['S19', 'S20', ...SIGNS],
     'sign-warning': ['S23', 'S24', 'S10', ...SIGNS],
     'sign-regulatory': ['S23', 'S24', 'S10', ...SIGNS],
-    ...Object.fromEntries(Object.entries(drawn.sources).map(([id, pages]) => [id, [...pages, ...(pages[0].startsWith('V') && pages[0] !== 'V18' ? ['V05'] : [])]]))
+    ...Object.fromEntries(Object.entries(drawn.sources).map(([id, pages]) => [id, [...pages, ...(pages[0].startsWith('V') && pages[0] !== 'V18' ? ['V05'] : [])]])),
+    ...signs.sources
   },
   signatures: {
     provincial: ['G05', 'G06', 'G07', 'R31', 'R32'],

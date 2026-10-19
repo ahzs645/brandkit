@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="57.5 85 251.5 291" width="251.5" height="291" version="1.1" data-asset="H41-danger" data-revision="signs-r1">
+  <ns0:title>Danger / Keep away | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports"/>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="H41-danger-sign-board-1" data-part="sign-board" x="63.5" y="91" width="239.5" height="279" fill="#fff06a" stroke="none" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules"/>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:text id="H41-danger-editable-copy-6" data-part="editable-copy" x="80.5" y="187" font-family="Tinos, Times New Roman, serif" font-size="54" font-weight="700" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="true" textLength="208" lengthAdjust="spacing">Danger</ns0:text>
+    <ns0:text id="H41-danger-editable-copy-7" data-part="editable-copy" x="80.5" y="233" font-family="Tinos, Times New Roman, serif" font-size="52" font-weight="700" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="true" textLength="209" lengthAdjust="spacingAndGlyphs">Keep away</ns0:text>
+    <ns0:text id="H41-danger-editable-copy-8" data-part="editable-copy" x="80.5" y="273.5" font-family="Tinos, Times New Roman, serif" font-size="27.5" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="209" lengthAdjust="spacingAndGlyphs">Dangerous undertow</ns0:text>
+    <ns0:text id="H41-danger-editable-copy-9" data-part="editable-copy" x="80.5" y="295.0" font-family="Tinos, Times New Roman, serif" font-size="27.5" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="163" lengthAdjust="spacingAndGlyphs">and current from</ns0:text>
+    <ns0:text id="H41-danger-editable-copy-10" data-part="editable-copy" x="80.5" y="316.5" font-family="Tinos, Times New Roman, serif" font-size="27.5" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="209" lengthAdjust="spacingAndGlyphs">power plant operation</ns0:text>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity">
+    <ns0:g id="H41-danger-hydro-example-symbol-2" transform="translate(81 106.25) scale(0.25)">
+      <ns0:circle cx="43" cy="43" r="39" fill="none" stroke="#20221d" stroke-width="3"/>
+      <ns0:path id="H41-danger-emblem-star-3" data-part="emblem-star" d="M30 8 C33 35 35 39 47 43 C35 47 33 51 30 78 C27 51 25 47 13 43 C25 39 27 35 30 8 Z" fill="#20221d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="H41-danger-emblem-star-4" data-part="emblem-star" d="M55 8 C58 35 60 39 72 43 C60 47 58 51 55 78 C52 51 50 47 38 43 C50 39 52 35 55 8 Z" fill="#20221d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:text id="H41-danger-editable-copy-5" data-part="editable-copy" x="103.5" y="126" font-family="Tinos, Times New Roman, serif" font-size="25" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="92.5" lengthAdjust="spacingAndGlyphs">B.C.Hydro</ns0:text>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

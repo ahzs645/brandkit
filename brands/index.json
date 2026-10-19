@@ -300,6 +300,26 @@
           "template",
           "sign-vertical-facility",
           "Sign: vertical facility"
+        ],
+        [
+          "template",
+          "illustrated-h39-office",
+          "Office identification"
+        ],
+        [
+          "template",
+          "illustrated-h39-gas",
+          "Gas operations identification"
+        ],
+        [
+          "template",
+          "illustrated-h39-freight",
+          "Huntingdon Freight Office"
+        ],
+        [
+          "template",
+          "illustrated-h39-plant",
+          "Liquefied Natural Gas Plant"
         ]
       ],
       "hydro/H38": [
@@ -334,6 +354,61 @@
           "Sign: guide, directional"
         ],
         [
+          "template",
+          "illustrated-h39-office",
+          "Office identification"
+        ],
+        [
+          "template",
+          "illustrated-h39-gas",
+          "Gas operations identification"
+        ],
+        [
+          "template",
+          "illustrated-h39-freight",
+          "Huntingdon Freight Office"
+        ],
+        [
+          "template",
+          "illustrated-h39-plant",
+          "Liquefied Natural Gas Plant"
+        ],
+        [
+          "template",
+          "illustrated-h40-advisory",
+          "Advisory information"
+        ],
+        [
+          "template",
+          "illustrated-h40-customer-service",
+          "Customer Service"
+        ],
+        [
+          "template",
+          "illustrated-h40-shipping",
+          "Shipping & Receiving"
+        ],
+        [
+          "template",
+          "illustrated-h40-directional",
+          "Visitor Parking / Electric Shop"
+        ],
+        [
+          "template",
+          "illustrated-h41-danger",
+          "Danger / Keep away"
+        ],
+        [
+          "template",
+          "illustrated-h41-authorized-vehicles",
+          "Authorized vehicles only"
+        ],
+        [
+          "template",
+          "illustrated-h41-employees-only",
+          "Employees only"
+        ],
+        [
           "guide",
           "guide-09",
           "Applications"
@@ -344,6 +419,21 @@
           "template",
           "sign-danger",
           "Sign: danger"
+        ],
+        [
+          "template",
+          "illustrated-h41-danger",
+          "Danger / Keep away"
+        ],
+        [
+          "template",
+          "illustrated-h41-authorized-vehicles",
+          "Authorized vehicles only"
+        ],
+        [
+          "template",
+          "illustrated-h41-employees-only",
+          "Employees only"
         ]
       ],
       "hydro/H40": [
@@ -351,6 +441,26 @@
           "template",
           "sign-guide",
           "Sign: guide, directional"
+        ],
+        [
+          "template",
+          "illustrated-h40-advisory",
+          "Advisory information"
+        ],
+        [
+          "template",
+          "illustrated-h40-customer-service",
+          "Customer Service"
+        ],
+        [
+          "template",
+          "illustrated-h40-shipping",
+          "Shipping & Receiving"
+        ],
+        [
+          "template",
+          "illustrated-h40-directional",
+          "Visitor Parking / Electric Shop"
         ]
       ],
       "hydro/H44": [
@@ -366,8 +476,8 @@
         ],
         [
           "template",
-          "illustrated-h44-van-door",
-          "Van Door, Hydro"
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
         ],
         [
           "template",
@@ -376,8 +486,8 @@
         ],
         [
           "template",
-          "illustrated-h44-van-side",
-          "Van Side, Hydro"
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
         ]
       ],
       "hydro/H43": [
@@ -393,13 +503,28 @@
         ],
         [
           "template",
-          "illustrated-h44-van-door",
-          "Van Door, Hydro"
+          "illustrated-h48-boxcar",
+          "Boxcar, Hydro"
         ],
         [
           "template",
-          "illustrated-h44-van-rear",
-          "Van Rear, Hydro"
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-locomotive",
+          "Locomotive, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
         ],
         [
           "template",
@@ -408,13 +533,28 @@
         ],
         [
           "template",
-          "illustrated-h45-roller-truck-rear",
-          "Roller Truck Rear, Hydro"
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
         ],
         [
           "template",
-          "illustrated-h45-stepvan-rear",
-          "Stepvan Rear, Hydro"
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
         ],
         [
           "template",
@@ -428,43 +568,13 @@
         ],
         [
           "template",
-          "illustrated-h46-flatbed",
-          "Flatbed, Hydro"
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
         ],
         [
           "template",
           "illustrated-h46-tractor-trailer",
           "Tractor Trailer, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-crawler-front",
-          "Crawler Front, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-crawler-side",
-          "Crawler Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-generator",
-          "Generator, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-seat-panel",
-          "Seat Panel, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h48-boxcar",
-          "Boxcar, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h48-locomotive",
-          "Locomotive, Hydro"
         ]
       ],
       "hydro/H42": [
@@ -484,62 +594,6 @@
           "Applications"
         ]
       ],
-      "hydro/H45": [
-        [
-          "template",
-          "illustrated-h45-roller-truck-rear",
-          "Roller Truck Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h45-stepvan-rear",
-          "Stepvan Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h45-stepvan-side",
-          "Stepvan Side, Hydro"
-        ]
-      ],
-      "hydro/H46": [
-        [
-          "template",
-          "illustrated-h46-cab-door",
-          "Cab Door, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h46-flatbed",
-          "Flatbed, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h46-tractor-trailer",
-          "Tractor Trailer, Hydro"
-        ]
-      ],
-      "hydro/H47": [
-        [
-          "template",
-          "illustrated-h47-crawler-front",
-          "Crawler Front, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-crawler-side",
-          "Crawler Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-generator",
-          "Generator, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-seat-panel",
-          "Seat Panel, Hydro"
-        ]
-      ],
       "hydro/H48": [
         [
           "template",
@@ -550,6 +604,62 @@
           "template",
           "illustrated-h48-locomotive",
           "Locomotive, Hydro"
+        ]
+      ],
+      "hydro/H47": [
+        [
+          "template",
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ]
+      ],
+      "hydro/H45": [
+        [
+          "template",
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-side",
+          "Stepvan Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
+        ]
+      ],
+      "hydro/H46": [
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-cab-door",
+          "Cab Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-tractor-trailer",
+          "Tractor Trailer, Hydro"
         ]
       ],
       "hydro/H04": [
@@ -1059,11 +1169,6 @@
         ],
         [
           "template",
-          "illustrated-g15-blazer",
-          "Blazer, chest pocket view"
-        ],
-        [
-          "template",
           "illustrated-g15-field-jacket",
           "Field jacket, shoulder view"
         ],
@@ -1074,8 +1179,13 @@
         ],
         [
           "template",
-          "illustrated-g15-jacket-back",
-          "Jacket, upper back"
+          "illustrated-g15-peaked-cap",
+          "Peaked cap, standalone detail"
+        ],
+        [
+          "template",
+          "illustrated-g15-security-patch",
+          "Security patch"
         ],
         [
           "template",
@@ -1089,13 +1199,13 @@
         ],
         [
           "template",
-          "illustrated-g15-peaked-cap",
-          "Peaked cap, standalone detail"
+          "illustrated-g15-jacket-back",
+          "Jacket, upper back"
         ],
         [
           "template",
-          "illustrated-g15-security-patch",
-          "Security patch"
+          "illustrated-g15-blazer",
+          "Blazer, chest pocket view"
         ],
         [
           "signature",
@@ -1116,8 +1226,8 @@
         ],
         [
           "template",
-          "illustrated-v03-policy-tractor",
-          "Tractor and trailer, opposite-side policy view"
+          "illustrated-v12-truck-perspective",
+          "Box truck, rear three-quarter"
         ],
         [
           "template",
@@ -1126,33 +1236,28 @@
         ],
         [
           "template",
-          "illustrated-v07-car-rear",
-          "Passenger car, rear elevation"
-        ],
-        [
-          "template",
-          "illustrated-v07-side-car",
-          "Car, cropped front side elevation"
-        ],
-        [
-          "template",
-          "illustrated-v08-pickup-perspective",
-          "Pickup, rear three-quarter"
-        ],
-        [
-          "template",
           "illustrated-v09-pickup-rear",
           "Pickup, rear elevation"
         ],
         [
           "template",
-          "illustrated-v09-pickup-side",
-          "Pickup, side elevation, right edge cropped"
+          "illustrated-v07-car-rear",
+          "Passenger car, rear elevation"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-rear",
+          "Box truck, rear elevation"
         ],
         [
           "template",
           "illustrated-v10-van-perspective",
           "Van, rear three-quarter"
+        ],
+        [
+          "template",
+          "illustrated-v13-truck-side",
+          "Box truck, side elevation"
         ],
         [
           "template",
@@ -1166,8 +1271,18 @@
         ],
         [
           "template",
-          "illustrated-v12-truck-perspective",
-          "Box truck, rear three-quarter"
+          "illustrated-v09-pickup-side",
+          "Pickup, side elevation, right edge cropped"
+        ],
+        [
+          "template",
+          "illustrated-v07-side-car",
+          "Car, cropped front side elevation"
+        ],
+        [
+          "template",
+          "illustrated-v03-policy-tractor",
+          "Tractor and trailer, opposite-side policy view"
         ],
         [
           "template",
@@ -1176,28 +1291,13 @@
         ],
         [
           "template",
-          "illustrated-v13-truck-rear",
-          "Box truck, rear elevation"
+          "illustrated-v08-pickup-perspective",
+          "Pickup, rear three-quarter"
         ],
         [
           "template",
-          "illustrated-v13-truck-side",
-          "Box truck, side elevation"
-        ],
-        [
-          "template",
-          "illustrated-v14-tractor-trailer",
-          "Tractor and box trailer, perspective"
-        ],
-        [
-          "template",
-          "illustrated-v15-flatbed-rear",
-          "Flat-deck trailer, rear"
-        ],
-        [
-          "template",
-          "illustrated-v15-flatbed-side",
-          "Flat-deck trailer, side"
+          "illustrated-v17-crawler-side",
+          "Tracked crawler, side"
         ],
         [
           "template",
@@ -1216,8 +1316,13 @@
         ],
         [
           "template",
-          "illustrated-v16-backhoe",
-          "Backhoe / front-end loader"
+          "illustrated-v17-grader",
+          "Grader, cropped operating section"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-side",
+          "Flat-deck trailer, side"
         ],
         [
           "template",
@@ -1231,13 +1336,18 @@
         ],
         [
           "template",
-          "illustrated-v17-crawler-side",
-          "Tracked crawler, side"
+          "illustrated-v15-flatbed-rear",
+          "Flat-deck trailer, rear"
         ],
         [
           "template",
-          "illustrated-v17-grader",
-          "Grader, cropped operating section"
+          "illustrated-v16-backhoe",
+          "Backhoe / front-end loader"
+        ],
+        [
+          "template",
+          "illustrated-v14-tractor-trailer",
+          "Tractor and box trailer, perspective"
         ],
         [
           "signature",
@@ -1297,11 +1407,6 @@
         ],
         [
           "template",
-          "illustrated-g17-car",
-          "Car, General Manual"
-        ],
-        [
-          "template",
           "illustrated-g17-pickup",
           "Pickup, General Manual"
         ],
@@ -1309,6 +1414,11 @@
           "template",
           "illustrated-g17-truck-rear",
           "Truck Rear, General Manual"
+        ],
+        [
+          "template",
+          "illustrated-g17-car",
+          "Car, General Manual"
         ],
         [
           "template",
@@ -1351,11 +1461,6 @@
         ],
         [
           "template",
-          "illustrated-v13-cab-door",
-          "Box truck, enlarged cab door"
-        ],
-        [
-          "template",
           "illustrated-v13-truck-rear",
           "Box truck, rear elevation"
         ],
@@ -1363,6 +1468,11 @@
           "template",
           "illustrated-v13-truck-side",
           "Box truck, side elevation"
+        ],
+        [
+          "template",
+          "illustrated-v13-cab-door",
+          "Box truck, enlarged cab door"
         ]
       ],
       "sign/S12": [
@@ -1377,6 +1487,11 @@
           "template",
           "sign-primary-identification",
           "Sign: primary identification, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "illustrated-s13-ranger-station",
+          "Ranger Station, primary identification"
         ]
       ],
       "sign/S10": [
@@ -1448,6 +1563,151 @@
           "Sign: regulatory, 2 × 4 ft"
         ],
         [
+          "template",
+          "illustrated-g18-ranger-station",
+          "Ranger Station"
+        ],
+        [
+          "template",
+          "illustrated-g18-telephone",
+          "Telephone"
+        ],
+        [
+          "template",
+          "illustrated-g18-fire-equipment",
+          "Fire Equipment"
+        ],
+        [
+          "template",
+          "illustrated-g18-directional",
+          "Two-blade directional"
+        ],
+        [
+          "template",
+          "illustrated-g18-bull-river",
+          "Bull River"
+        ],
+        [
+          "template",
+          "illustrated-g18-camping-direction",
+          "Camping / right arrow"
+        ],
+        [
+          "template",
+          "illustrated-g18-park-distance",
+          "Provincial Park / 31 km"
+        ],
+        [
+          "template",
+          "illustrated-g18-poison-baits",
+          "Poison Baits, white"
+        ],
+        [
+          "template",
+          "illustrated-g18-game-check",
+          "Game Check, black stop"
+        ],
+        [
+          "template",
+          "illustrated-s03-no-entry",
+          "No entry"
+        ],
+        [
+          "template",
+          "illustrated-s03-washrooms",
+          "Washrooms"
+        ],
+        [
+          "template",
+          "illustrated-s03-information-symbol",
+          "Information symbol"
+        ],
+        [
+          "template",
+          "illustrated-s04-picnic",
+          "Picnicking"
+        ],
+        [
+          "template",
+          "illustrated-s04-camping",
+          "Camping"
+        ],
+        [
+          "template",
+          "illustrated-s04-no-parking",
+          "No parking"
+        ],
+        [
+          "template",
+          "illustrated-s04-sanidrop",
+          "Sanitary dump"
+        ],
+        [
+          "template",
+          "illustrated-s05-telephone",
+          "Telephone"
+        ],
+        [
+          "template",
+          "illustrated-s05-fire-equipment",
+          "Fire Equipment"
+        ],
+        [
+          "template",
+          "illustrated-s05-poison-baits",
+          "Poison Baits, yellow"
+        ],
+        [
+          "template",
+          "illustrated-s13-ranger-station",
+          "Ranger Station, primary identification"
+        ],
+        [
+          "template",
+          "illustrated-s15-storage-directory",
+          "Four-blade storage directory"
+        ],
+        [
+          "template",
+          "illustrated-s15-engineering-building",
+          "Engineering Building"
+        ],
+        [
+          "template",
+          "illustrated-s18-bull-river",
+          "Bull River, interpretive sign"
+        ],
+        [
+          "template",
+          "illustrated-s20-directional-directory",
+          "Four-blade directional sign"
+        ],
+        [
+          "template",
+          "illustrated-s22-park-distance",
+          "Provincial Park / 31 km / left arrow"
+        ],
+        [
+          "template",
+          "illustrated-s22-picnic",
+          "Picnic symbol"
+        ],
+        [
+          "template",
+          "illustrated-s22-camping-direction",
+          "Camping / right arrow"
+        ],
+        [
+          "template",
+          "illustrated-s24-warning",
+          "Warning, forest fire control"
+        ],
+        [
+          "template",
+          "illustrated-s24-game-check",
+          "Game Check, red stop"
+        ],
+        [
           "guide",
           "guide-09",
           "Signs"
@@ -1492,6 +1752,51 @@
           "Sign: primary identification, 4 × 8 ft"
         ],
         [
+          "template",
+          "illustrated-g18-ranger-station",
+          "Ranger Station"
+        ],
+        [
+          "template",
+          "illustrated-g18-telephone",
+          "Telephone"
+        ],
+        [
+          "template",
+          "illustrated-g18-fire-equipment",
+          "Fire Equipment"
+        ],
+        [
+          "template",
+          "illustrated-g18-directional",
+          "Two-blade directional"
+        ],
+        [
+          "template",
+          "illustrated-g18-bull-river",
+          "Bull River"
+        ],
+        [
+          "template",
+          "illustrated-g18-camping-direction",
+          "Camping / right arrow"
+        ],
+        [
+          "template",
+          "illustrated-g18-park-distance",
+          "Provincial Park / 31 km"
+        ],
+        [
+          "template",
+          "illustrated-g18-poison-baits",
+          "Poison Baits, white"
+        ],
+        [
+          "template",
+          "illustrated-g18-game-check",
+          "Game Check, black stop"
+        ],
+        [
           "guide",
           "guide-09",
           "Signs"
@@ -1509,6 +1814,11 @@
           "template",
           "sign-standard-information",
           "Sign: standard information, 4 × 8 ft"
+        ],
+        [
+          "template",
+          "illustrated-s18-bull-river",
+          "Bull River, interpretive sign"
         ]
       ],
       "sign/S14": [
@@ -1523,6 +1833,16 @@
           "template",
           "sign-secondary-identification",
           "Sign: secondary identification blade"
+        ],
+        [
+          "template",
+          "illustrated-s15-storage-directory",
+          "Four-blade storage directory"
+        ],
+        [
+          "template",
+          "illustrated-s15-engineering-building",
+          "Engineering Building"
         ]
       ],
       "sign/S19": [
@@ -1537,6 +1857,11 @@
           "template",
           "sign-directional",
           "Sign: secondary directional, four blades"
+        ],
+        [
+          "template",
+          "illustrated-s20-directional-directory",
+          "Four-blade directional sign"
         ]
       ],
       "sign/S23": [
@@ -1561,18 +1886,28 @@
           "template",
           "sign-regulatory",
           "Sign: regulatory, 2 × 4 ft"
+        ],
+        [
+          "template",
+          "illustrated-s24-warning",
+          "Warning, forest fire control"
+        ],
+        [
+          "template",
+          "illustrated-s24-game-check",
+          "Game Check, red stop"
         ]
       ],
       "general/G16": [
         [
           "template",
-          "illustrated-g16-tractor",
-          "Tractor, General Manual"
+          "illustrated-g16-van-rear",
+          "Van Rear, General Manual"
         ],
         [
           "template",
-          "illustrated-g16-van-rear",
-          "Van Rear, General Manual"
+          "illustrated-g16-tractor",
+          "Tractor, General Manual"
         ],
         [
           "template",
@@ -1583,20 +1918,6 @@
           "guide",
           "guide-08",
           "Vehicles"
-        ]
-      ],
-      "vehicle/V03": [
-        [
-          "template",
-          "illustrated-v03-policy-tractor",
-          "Tractor and trailer, opposite-side policy view"
-        ]
-      ],
-      "vehicle/V08": [
-        [
-          "template",
-          "illustrated-v08-pickup-perspective",
-          "Pickup, rear three-quarter"
         ]
       ],
       "vehicle/V09": [
@@ -1630,24 +1951,65 @@
           "Van, full side elevation"
         ]
       ],
-      "vehicle/V14": [
+      "vehicle/V03": [
         [
           "template",
-          "illustrated-v14-tractor-trailer",
-          "Tractor and box trailer, perspective"
+          "illustrated-v03-policy-tractor",
+          "Tractor and trailer, opposite-side policy view"
+        ]
+      ],
+      "vehicle/V08": [
+        [
+          "template",
+          "illustrated-v08-pickup-perspective",
+          "Pickup, rear three-quarter"
+        ]
+      ],
+      "vehicle/V17": [
+        [
+          "template",
+          "illustrated-v17-crawler-side",
+          "Tracked crawler, side"
+        ],
+        [
+          "template",
+          "illustrated-v17-grader",
+          "Grader, cropped operating section"
+        ],
+        [
+          "template",
+          "illustrated-v17-compressor",
+          "Towable compressor"
+        ],
+        [
+          "template",
+          "illustrated-v17-crawler-front",
+          "Tracked crawler, front"
+        ]
+      ],
+      "vehicle/V18": [
+        [
+          "template",
+          "illustrated-v18-installation-3",
+          "Decal installation, panel 3"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-2",
+          "Decal installation, panel 2"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-4",
+          "Decal installation, panel 4"
+        ],
+        [
+          "template",
+          "illustrated-v18-installation-1",
+          "Decal installation, panel 1"
         ]
       ],
       "vehicle/V15": [
-        [
-          "template",
-          "illustrated-v15-flatbed-rear",
-          "Flat-deck trailer, rear"
-        ],
-        [
-          "template",
-          "illustrated-v15-flatbed-side",
-          "Flat-deck trailer, side"
-        ],
         [
           "template",
           "illustrated-v15-trailer-front",
@@ -1662,6 +2024,16 @@
           "template",
           "illustrated-v15-trailer-side",
           "Box trailer, side"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-side",
+          "Flat-deck trailer, side"
+        ],
+        [
+          "template",
+          "illustrated-v15-flatbed-rear",
+          "Flat-deck trailer, rear"
         ]
       ],
       "vehicle/V16": [
@@ -1671,48 +2043,84 @@
           "Backhoe / front-end loader"
         ]
       ],
-      "vehicle/V17": [
+      "vehicle/V14": [
         [
           "template",
-          "illustrated-v17-compressor",
-          "Towable compressor"
-        ],
-        [
-          "template",
-          "illustrated-v17-crawler-front",
-          "Tracked crawler, front"
-        ],
-        [
-          "template",
-          "illustrated-v17-crawler-side",
-          "Tracked crawler, side"
-        ],
-        [
-          "template",
-          "illustrated-v17-grader",
-          "Grader, cropped operating section"
+          "illustrated-v14-tractor-trailer",
+          "Tractor and box trailer, perspective"
         ]
       ],
-      "vehicle/V18": [
+      "sign/S03": [
         [
           "template",
-          "illustrated-v18-installation-1",
-          "Decal installation, panel 1"
+          "illustrated-s03-no-entry",
+          "No entry"
         ],
         [
           "template",
-          "illustrated-v18-installation-2",
-          "Decal installation, panel 2"
+          "illustrated-s03-washrooms",
+          "Washrooms"
         ],
         [
           "template",
-          "illustrated-v18-installation-3",
-          "Decal installation, panel 3"
+          "illustrated-s03-information-symbol",
+          "Information symbol"
+        ]
+      ],
+      "sign/S04": [
+        [
+          "template",
+          "illustrated-s04-picnic",
+          "Picnicking"
         ],
         [
           "template",
-          "illustrated-v18-installation-4",
-          "Decal installation, panel 4"
+          "illustrated-s04-camping",
+          "Camping"
+        ],
+        [
+          "template",
+          "illustrated-s04-no-parking",
+          "No parking"
+        ],
+        [
+          "template",
+          "illustrated-s04-sanidrop",
+          "Sanitary dump"
+        ]
+      ],
+      "sign/S05": [
+        [
+          "template",
+          "illustrated-s05-telephone",
+          "Telephone"
+        ],
+        [
+          "template",
+          "illustrated-s05-fire-equipment",
+          "Fire Equipment"
+        ],
+        [
+          "template",
+          "illustrated-s05-poison-baits",
+          "Poison Baits, yellow"
+        ]
+      ],
+      "sign/S22": [
+        [
+          "template",
+          "illustrated-s22-park-distance",
+          "Provincial Park / 31 km / left arrow"
+        ],
+        [
+          "template",
+          "illustrated-s22-picnic",
+          "Picnic symbol"
+        ],
+        [
+          "template",
+          "illustrated-s22-camping-direction",
+          "Camping / right arrow"
         ]
       ],
       "general/G05": [

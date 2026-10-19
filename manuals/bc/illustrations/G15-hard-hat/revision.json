@@ -63,6 +63,9 @@
   "revised_blank_sha256": "3a0e191dc8a05973278928e5af273c702d5ddb477ca5bf52a95139c317f164bf",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "carried forward / outside this pass",
+  "optional_markings": false,
+  "this_release_scope": "Carried forward from the last UPDATED delivery; not re-reviewed in this trailer/sign pass.",
+  "object_geometry_changed_this_pass": false,
+  "default_download": "blank.svg"
 }

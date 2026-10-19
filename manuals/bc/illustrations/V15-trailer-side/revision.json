@@ -6,11 +6,16 @@
     314
   ],
   "notes": [
-    "Replaced the filled landing-gear wedge with an actual open triangular brace, separate stem and caster.",
-    "Refit wheel spacing/overlap, rims, rear chassis steps and thin hanging mudflap.",
-    "Reconstructed nested box frames. Blank is the flat-panel variant: the source partial rib comparison and its explanatory text are not physical full-width panel ribs."
+    "Refined the two rim radii and the landing-gear diagonal against the side-elevation source.",
+    "Corrected the bottom edge of the inset side panel and retained the rear corner extension separately from the underside silhouette.",
+    "The localized rib/flat-aluminium-panel teaching detail is not expanded into invented full-length corrugations. Branding-zone guides retain its source placement."
   ],
-  "limits": [],
+  "limits": [
+    "Landing/tow end at left.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings.",
+    "The page contains a localized surface-treatment demonstration and explanatory callouts. Those explanatory strokes are not treated as holes or full-length body ribs."
+  ],
   "orientation": "Landing/tow end at left.",
   "id": "V15-trailer-side",
   "title": "Box trailer \u2014 side",
@@ -92,9 +97,55 @@
     }
   ],
   "previous_blank_sha256": "b86d09f0304e45efe7ad1fcb3fbc9cfe16c449bf8f4c0df65c316ab3c2db1532",
-  "revised_blank_sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
+  "revised_blank_sha256": "9ddcecc742b63ef743bcc8ee1f46168a7f9e6d117db932f075cbd4b94626a990",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "6c38477d84ff95ceb13b75856262e4ccdcb136d07612a589c24d3c935af67cf5",
+  "default_display": "display.svg",
+  "topology_checks": [
+    {
+      "name": "landing-gear-opening",
+      "point": [
+        866,
+        926
+      ],
+      "expected": "transparent"
+    }
+  ],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      687.2,
+      666.0,
+      604.8,
+      346.0
+    ],
+    "PDF_pixel_origin": [
+      1718,
+      1665
+    ],
+    "pixel_dimensions": [
+      1512,
+      865
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

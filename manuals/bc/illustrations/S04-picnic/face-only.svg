@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="47 301 106 107" width="106" height="107" version="1.1" data-asset="S04-picnic" data-revision="signs-r1">
+  <ns0:title>Picnicking | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S04-picnic-sign-board-2" data-part="sign-board" x="50" y="304" width="100" height="101" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

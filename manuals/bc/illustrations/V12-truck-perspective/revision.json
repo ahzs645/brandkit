@@ -6,12 +6,15 @@
     548
   ],
   "notes": [
-    "Replaced the cab with divided side panes, rear pane, double gaskets and triangulated mirror construction from this particular source.",
-    "Rebuilt the five visible tyre/depth groups, actual near rims, mudflaps and light edges, stepped chassis and open U-shaped rear step.",
-    "Refit cargo side/rear corner perspective, double rear-door centre joint, formed metal ribs and the two-plane loading platform.",
-    "Reflective appliques remain separate from the blank cargo geometry."
+    "Restored all eight visible rear-door reflector strips to the normal unbranded display (four per door), with independent source-measured perspective rather than equal-height rectangles.",
+    "Kept the strips in a separate applied-markings layer. The source explicitly calls them reflectorized striping: they are not holes through the cargo doors.",
+    "Made the actual open rear U-step explicit with even-odd fill and retained its transparent opening; restored the step side-depth edge."
   ],
-  "limits": [],
+  "limits": [
+    "preserved from this source illustration",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "preserved from this source illustration",
   "id": "V12-truck-perspective",
   "title": "Box truck \u2014 rear three-quarter",
@@ -189,9 +192,65 @@
     }
   ],
   "previous_blank_sha256": "cbc62e1b11cbd5974ccebe6948433da8ff5adad6254fc0b28e3a04f58852d2e5",
-  "revised_blank_sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
+  "revised_blank_sha256": "1d1c8cab6ef4d691cf8f78ef8a74bf5aa5da39d3bb12d2dc88e63889fa5c763f",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": true
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": true,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 8,
+  "previous_delivered_blank_sha256": "bf9d9a40610a5c9d5d02292ceab5116fcfa2d17ae58fea295b119e9005266b91",
+  "default_display": "display.svg",
+  "topology_checks": [
+    {
+      "name": "rear-step-opening",
+      "point": [
+        801,
+        917
+      ],
+      "expected": "transparent"
+    },
+    {
+      "name": "left-rear-reflector",
+      "point": [
+        739,
+        806
+      ],
+      "expected": "opaque marking"
+    }
+  ],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      28.8,
+      440.8,
+      886.0,
+      580.4
+    ],
+    "PDF_pixel_origin": [
+      72,
+      1102
+    ],
+    "pixel_dimensions": [
+      2215,
+      1451
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "with-markings.svg",
+    "markings-only.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

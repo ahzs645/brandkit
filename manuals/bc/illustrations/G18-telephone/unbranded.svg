@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="135 260 97.5 108.0" width="97.5" height="108.0" version="1.1" data-asset="G18-telephone" data-revision="signs-r1">
+  <ns0:title>Telephone | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="G18-telephone-post-1-1" data-part="post-1" x="178.25" y="350.5" width="11" height="11.5" fill="#735e44" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="G18-telephone-sign-board-2" data-part="sign-board" x="141" y="266" width="85.5" height="84.5" fill="#735e44" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="G18-telephone-symbol-frame-3" data-part="symbol-frame" x="145" y="270" width="77.5" height="76.5" fill="none" stroke="white" stroke-width="0.6" rx="7"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="G18-telephone-telephone-symbol-4" data-part="telephone-symbol" transform="translate(155.193 280.7875) scale(0.9986399999999999 1.000260162601626) translate(-155.2 -280.8)">
+      <ns0:path id="G18-telephone-receiver-arc-5" data-part="receiver-arc" d="M194.6 282 C188.1 279.7 177.4 285.0 169.5 296 C163.5 304.8 160.3 314.1 161.2 321.8 L161.7 325.8 Q159.2 325.9 159.0 327.4 L162.7 331.0 L165.7 330.2 L172.9 318.3 Q170.8 317.6 171.1 315.1 C172.7 309.5 176.9 302.0 182.9 296.2 L187.4 296.2 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="G18-telephone-upper-receiver-cap-6" data-part="upper-receiver-cap" d="M196.1 282.8 Q197.2 284.1 198.5 283.0 Q200.3 282.3 201.6 284.1 L203.5 285.7 Q204.8 287 204.1 288.8 L199.0 297.4 Q198.1 299.6 196.6 299.0 L189.5 296.3 Q188.4 295.7 189.4 294.2 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="G18-telephone-lower-receiver-cap-7" data-part="lower-receiver-cap" d="M173.8 318.4 L177.4 320.3 Q179.1 321.1 177.8 323.6 L171.7 332.3 Q170.8 334.0 169.2 333.0 L166.3 331.4 Q165.3 330.7 166.4 329.1 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="G18-telephone-curled-cord-8" data-part="curled-cord" d="M160.4 328.2 L162.8 331.1 L157.8 330.4 Q156.9 330.5 157.9 332.2 L160.0 334 L156.5 333.9 Q155.3 334.0 157.1 336.1 L158.1 337.1 L154.9 336.8 Q153.9 337.0 155.4 339.1 L156.8 340.8 L154.8 340.6" fill="none" stroke="white" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

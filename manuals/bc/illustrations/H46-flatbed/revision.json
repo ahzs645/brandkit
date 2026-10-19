@@ -6,10 +6,15 @@
     62
   ],
   "notes": [
-    "Rebuilt the deck steps, curved neck and dual axle centres.",
-    "Restored open wheel-rim arcs, hanging rear mudflap and fork/caster linework rather than a filled landing wheel."
+    "Rechecked the Hydro-specific reversed flatbed side illustration; it is not a mirrored V15 red flatbed.",
+    "Refined the single neck-transition curve and retained the source open landing-foot arc; no unsupported second seam is added.",
+    "Outline wheel/rim treatment, open wheelhouse and thin deck lip are preserved as Hydro-specific geometry."
   ],
-  "limits": [],
+  "limits": [
+    "Tow/landing end at right; preserve the opposite orientation to the Vehicle Manual flat-deck example.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "Tow/landing end at right; preserve the opposite orientation to the Vehicle Manual flat-deck example.",
   "id": "H46-flatbed",
   "title": "Flatbed \u2014 Hydro",
@@ -59,9 +64,46 @@
     }
   ],
   "previous_blank_sha256": "e277e00720515eeb4e1a07d2c2200e1ab54bdce9cb3adee806cbfb7be1e9c56c",
-  "revised_blank_sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
+  "revised_blank_sha256": "dfc60c733997a9c9d9e0de8c412f02e2fa781279c0436c2ada8dcf4482303ce8",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "3688d3f46beac9129f94c6c48085cee346c6d470cda800ca8608dd7f293d2454",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      50.0,
+      654.0,
+      372.0,
+      78.8
+    ],
+    "PDF_pixel_origin": [
+      125,
+      1635
+    ],
+    "pixel_dimensions": [
+      930,
+      197
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

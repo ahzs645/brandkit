@@ -6,11 +6,19 @@
     332
   ],
   "notes": [
-    "Replaced the policy illustration with the corrected shared source vehicle, including full top and front-wheel context clipped by the earlier crop.",
-    "This source is the reversed published view: the tractor/front is at LEFT. Only physical geometry is mirrored; branding zones are separately editable and do not contain mirrored lettering.",
-    "Restored both trailer planes, formed ribs, rear tyre clusters, cab details, tank/cap, stack, frame and steps."
+    "Rebuilt the non-convex trailer side: the extended rear corner post no longer incorrectly sets the sloping lower body edge. The previous silver wedge covering the underframe is removed.",
+    "Rebuilt near and far dual-tyre contours, separate rims, depth seams and the genuinely open chassis aperture between the trailer wheel groups.",
+    "Removed the erroneous solid tractor-chassis block below the trailer; restored the stepped rail and curved coupling silhouette.",
+    "Restored the source dark front wheelhouse and secondary cab-door gasket.",
+    "Independently restored the 23-band V03 side pattern, rather than mirroring V14\u2019s 18 bands. The end face stays plain and lettering is not mirrored."
   ],
-  "limits": [],
+  "limits": [
+    "Tractor/front at left; source-specific mirror of the right-facing V14 published view.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings.",
+    "The shared published tractor drawing is constructed in the existing authored local coordinate frame. Each view is then checked independently against its own PDF; source registration of the proof is not fitted.",
+    "Small print/scan waviness is regularized; mechanical detail hidden by the body is not invented."
+  ],
   "orientation": "Tractor/front at left; source-specific mirror of the right-facing V14 published view.",
   "id": "V03-policy-tractor",
   "title": "Tractor and trailer \u2014 opposite-side policy view",
@@ -220,9 +228,46 @@
     }
   ],
   "previous_blank_sha256": "fd7d9bf71c3a7d67bd1e7c3b16f2882632ff569fac898bac28398a397d448caa",
-  "revised_blank_sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
+  "revised_blank_sha256": "7d68fe5a58182e86c9206a21a98465141a606bcb0df54c17fa646e207136182e",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "197096a470205d0c6fbf8ed4d70555a176f923854c691653a720db6d67a702f8",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      96.4,
+      248.4,
+      687.2,
+      355.6
+    ],
+    "PDF_pixel_origin": [
+      241,
+      621
+    ],
+    "pixel_dimensions": [
+      1718,
+      889
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

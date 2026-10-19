@@ -6,10 +6,15 @@
     312
   ],
   "notes": [
-    "Refit the box and nested frame offsets.",
-    "Rebuilt the paired legs, diagonal braces, single low crossbar and independently rounded feet to preserve the open structure."
+    "Narrowed the diagonal landing-gear braces to the source-width members; retained all three open support spaces.",
+    "Restored the closed returns of the doubled front lower sill; face and supports remain separate editable objects.",
+    "Checked front orientation, foot spacing, outer frame and source-visible linework; no reflector strips are invented on the front."
   ],
-  "limits": [],
+  "limits": [
+    "preserved from this source illustration",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "preserved from this source illustration",
   "id": "V15-trailer-front",
   "title": "Box trailer \u2014 front",
@@ -91,9 +96,55 @@
     }
   ],
   "previous_blank_sha256": "e9edea177f18daddaeea95b9e045204357dfd6feeba297ccd62783f617cb6964",
-  "revised_blank_sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
+  "revised_blank_sha256": "333eca3bb2161bc37f3fe06e5645ba079d6d34ef88dddb5609a2684af5c53d2b",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "fcbf8b7182f6440069e5a8f0a46b47973057041e41db530df21d82188d7106c4",
+  "default_display": "display.svg",
+  "topology_checks": [
+    {
+      "name": "landing-gear-central-opening",
+      "point": [
+        510,
+        925
+      ],
+      "expected": "transparent"
+    }
+  ],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      395.2,
+      664.8,
+      228.4,
+      344.0
+    ],
+    "PDF_pixel_origin": [
+      988,
+      1662
+    ],
+    "pixel_dimensions": [
+      571,
+      860
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

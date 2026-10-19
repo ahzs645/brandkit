@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="263 126 445 447" width="445" height="447" version="1.1" data-asset="S20-directional-directory" data-revision="signs-r1">
+  <ns0:title>Four-blade directional sign | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S20-directional-directory-post-1-1" data-part="post-1" x="269" y="324" width="19" height="243" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="S20-directional-directory-post-2-2" data-part="post-2" x="683" y="324" width="19" height="243" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S20-directional-directory-sign-board-3" data-part="sign-board" x="269" y="132" width="433" height="192" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:path id="S20-directional-directory-separator-rule-7" data-part="separator-rule" d="M269 180 L702 180" fill="none" stroke="white" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    <ns0:path id="S20-directional-directory-separator-rule-11" data-part="separator-rule" d="M269 228 L702 228" fill="none" stroke="white" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    <ns0:path id="S20-directional-directory-separator-rule-15" data-part="separator-rule" d="M269 276 L702 276" fill="none" stroke="white" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S20-directional-directory-direction-arrow-4" data-part="direction-arrow" transform="translate(286 145) scale(0.22 0.22) rotate(-90 50 50)">
+      <ns0:path id="S20-directional-directory-arrow-shape-5" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:text id="S20-directional-directory-editable-copy-6" data-part="editable-copy" x="323" y="166" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="32" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="178" lengthAdjust="spacingAndGlyphs">Information</ns0:text>
+    <ns0:g id="S20-directional-directory-direction-arrow-8" data-part="direction-arrow" transform="translate(286 193) scale(0.22 0.22) rotate(-135 50 50)">
+      <ns0:path id="S20-directional-directory-arrow-shape-9" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:text id="S20-directional-directory-editable-copy-10" data-part="editable-copy" x="323" y="214" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="32" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="182" lengthAdjust="spacingAndGlyphs">Washrooms</ns0:text>
+    <ns0:text id="S20-directional-directory-editable-copy-12" data-part="editable-copy" x="444" y="262" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="32" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="212" lengthAdjust="spacingAndGlyphs">Administration</ns0:text>
+    <ns0:g id="S20-directional-directory-direction-arrow-13" data-part="direction-arrow" transform="translate(669 241) scale(0.21 0.21) rotate(-45 50 50)">
+      <ns0:path id="S20-directional-directory-arrow-shape-14" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:text id="S20-directional-directory-editable-copy-16" data-part="editable-copy" x="505" y="310" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="32" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="155" lengthAdjust="spacingAndGlyphs">Inventory</ns0:text>
+    <ns0:g id="S20-directional-directory-direction-arrow-17" data-part="direction-arrow" transform="translate(669 289) scale(0.21 0.21) rotate(0 50 50)">
+      <ns0:path id="S20-directional-directory-arrow-shape-18" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

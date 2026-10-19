@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="290.5 203.5 246 108" width="246" height="108" version="1.1" data-asset="H40-advisory" data-revision="signs-r1">
+  <ns0:title>Advisory information | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="H40-advisory-sign-board-1" data-part="sign-board" x="293.5" y="206.5" width="240" height="102" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="506 446 113 147" width="113" height="147" version="1.1" data-asset="S03-information-symbol" data-revision="signs-r1">
+  <ns0:title>Information symbol | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S03-information-symbol-open-post-fill-1" data-part="open-post-fill" x="553.0" y="553" width="19" height="34" fill="#fff" stroke="none" stroke-width="0.65"/>
+      <ns0:path id="S03-information-symbol-open-post-edges-2" data-part="open-post-edges" d="M553.0 587 V553 M572.0 553 V587" fill="none" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S03-information-symbol-sign-board-3" data-part="sign-board" x="512" y="452" width="101" height="101" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S03-information-symbol-symbol-frame-4" data-part="symbol-frame" x="519" y="459" width="87" height="87" fill="none" stroke="white" stroke-width="0.35" rx="13"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:circle id="S03-information-symbol-information-ring-5" cx="562.5" cy="502.5" r="28.5" fill="none" stroke="white" stroke-width="7"/>
+    <ns0:g id="S03-information-symbol-editable-copy-6" data-part="editable-copy" aria-label="?" data-source-text="?" fill="white">
+      <ns0:path d="M575.4816147082335 492.4404296875Q575.4816147082335 495.32958984375 574.3689048760991 497.623046875Q573.2561950439648 499.91650390625 570.2122302158274 502.4482421875L568.2681854516387 504.08642578125Q566.5287769784172 505.5458984375 565.671862509992 507.03515625Q564.8149480415667 508.5244140625 564.738209432454 510.3115234375H557.9084732214228Q558.0619504396483 507.2734375 559.3792965627498 504.890625Q560.6966426858513 502.5078125 563.2545963229417 500.4228515625Q565.9916067146283 498.21875 567.117106314948 496.535888671875Q568.2426059152677 494.85302734375 568.2426059152677 492.7978515625Q568.2426059152677 490.1767578125 566.7717825739408 488.65771484375Q565.3009592326139 487.138671875 562.5895283772982 487.138671875Q560.005995203837 487.138671875 558.25379696243 488.89599609375Q556.5015987210231 490.6533203125 556.1946442845723 493.54248046875L548.9044764188649 493.18505859375Q549.5951239008793 487.138671875 553.1762589928057 483.77294921875Q556.7573940847323 480.4072265625 562.4872102318145 480.4072265625Q568.5495603517186 480.4072265625 572.0155875299761 483.609130859375Q575.4816147082335 486.81103515625 575.4816147082335 492.4404296875ZM557.7038369304556 523.0V514.9580078125H565.0963229416467V523.0Z"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

@@ -301,7 +301,7 @@ export const templateFields = (template, brand) => {
     if (seen.has(id)) return
     seen.add(id)
     const declared = brand?.fields?.[id] ?? {}
-    fields.push({ id, label: element?.label ?? declared.label ?? humanize(id), placeholder: element?.text ?? declared.placeholder ?? '', multiline: multiline || Boolean(declared.multiline) })
+    fields.push({ id, label: element?.label ?? declared.label ?? humanize(id), placeholder: element?.text ?? declared.placeholder ?? '', multiline: multiline || Boolean(declared.multiline), ...(element?.local ? { local: true } : {}) })
   }
   const visit = (element) => {
     if (element.locked) return
@@ -313,7 +313,7 @@ export const templateFields = (template, brand) => {
     if (element.type === 'illustration') {
       // Fields the signatures in its zones take (a ministry), then its text zones (a unit number).
       for (const id of element.fields ?? []) add(id, null, false)
-      for (const field of illustrationFields(element)) add(field.id, field, false)
+      for (const field of illustrationFields(element, brand)) add(field.id, field, false)
     }
   }
   template.elements.forEach(visit)

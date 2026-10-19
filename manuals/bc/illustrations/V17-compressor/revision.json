@@ -6,11 +6,15 @@
     190
   ],
   "notes": [
-    "Refit the enclosure silhouette, split roof seams and lower side panels.",
-    "Reconstructed the tow-coupler steps, curved drawbar throat, caster fork and small wheel.",
-    "Replaced duplicate generic wheel/rim geometry with one source wheel and one painted rim, then refit the overlapping fender."
+    "Reviewed the towable equipment alongside the trailers: towing direction, body/cabinet, tyres and exposed frame remain as in the last delivered geometry.",
+    "No new mechanical contour change was justified by this review at the available source resolution. This asset is retained, not claimed as newly redrawn."
   ],
-  "limits": [],
+  "limits": [
+    "Tow/caster end at left.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings.",
+    "Retained geometry is an illustrative source reconstruction, not a fabrication drawing."
+  ],
   "orientation": "Tow/caster end at left.",
   "id": "V17-compressor",
   "title": "Towable compressor",
@@ -92,9 +96,46 @@
     }
   ],
   "previous_blank_sha256": "854b22865a9596894f8cbe4da25d11524792381bcfcd007e1652fbb1e3b6f94f",
-  "revised_blank_sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
+  "revised_blank_sha256": "2ba8dd98319ca6ea1a91be7e93a7ab3eed98107f4711fabb056f8a9154713bbe",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": false,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "e36b1a5a1a2b0c4531f92c493316ef2072a1ee638edc90d9465821cffcce1a2f",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      56.4,
+      263.2,
+      489.6,
+      221.6
+    ],
+    "PDF_pixel_origin": [
+      141,
+      658
+    ],
+    "pixel_dimensions": [
+      1224,
+      554
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="135 260 97.5 108.0" width="97.5" height="108.0" version="1.1" data-asset="G18-telephone" data-revision="signs-r1">
+  <ns0:title>Telephone | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="G18-telephone-post-1-1" data-part="post-1" x="178.25" y="350.5" width="11" height="11.5" fill="#735e44" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="G18-telephone-sign-board-2" data-part="sign-board" x="141" y="266" width="85.5" height="84.5" fill="#735e44" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+  <ns0:g id="branding-zone-guides" data-layer="guides" fill="none" stroke="#dd007c" stroke-width=".6">
+    <ns0:rect id="guide-face" x="145" y="270" width="77.5" height="76.5" stroke-dasharray="3 2"/>
+  </ns0:g>
+</ns0:svg>

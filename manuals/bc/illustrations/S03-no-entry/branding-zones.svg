@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="506 319 113 133" width="113" height="133" version="1.1" data-asset="S03-no-entry" data-revision="signs-r1">
+  <ns0:title>No entry | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S03-no-entry-open-post-fill-1" data-part="open-post-fill" x="553.0" y="426" width="19" height="20" fill="#fff" stroke="none" stroke-width="0.65"/>
+      <ns0:path id="S03-no-entry-open-post-edges-2" data-part="open-post-edges" d="M553.0 446 V426 M572.0 426 V446" fill="none" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S03-no-entry-sign-board-3" data-part="sign-board" x="512" y="325" width="101" height="101" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+  <ns0:g id="branding-zone-guides" data-layer="guides" fill="none" stroke="#dd007c" stroke-width=".6">
+    <ns0:rect id="guide-face" x="516" y="329" width="93" height="93" stroke-dasharray="3 2"/>
+  </ns0:g>
+</ns0:svg>

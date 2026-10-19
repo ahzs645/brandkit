@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="854" height="548" viewBox="45 457 854 548" version="1.1" data-asset="V12-truck-perspective" data-revision="trailers-signs-r2">
+  <title>Box truck — rear three-quarter | revised source-specific geometry</title>
+  <desc>Editable object geometry. Historical identity, dimension callouts and scan noise intentionally omitted. See revision.json for source registration and limits.</desc>
+  <g id="applied-markings" data-layer="applied-markings">
+    <polygon id="V12-truck-perspective-rear-reflector-01" points="734.1,785.4 743.3,785.8 743.0,837.6 733.7,838.1" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-02" points="748.7,786.0 756.4,786.5 756.5,837.2 748.2,837.2" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-03" points="761.6,786.7 769.7,786.8 769.4,836.5 761.6,837.0" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-04" points="774.0,787.0 781.8,787.4 781.4,835.8 773.3,836.0" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-05" points="800.7,788.0 809.4,788.5 808.9,834.8 800.4,835.1" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-06" points="814.5,788.7 822.9,789.2 822.5,834.2 814.5,834.5" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-07" points="828.1,789.5 836.4,790.0 835.8,833.5 828.2,833.7" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <polygon id="V12-truck-perspective-rear-reflector-08" points="841.4,790.4 848.8,791.0 848.1,832.7 841.0,833.0" fill="#ffffff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="269" height="278.5" viewBox="68.5 449 269 278.5" version="1.1" data-asset="H47-generator" data-revision="trailers-signs-r2">
+  <title>Generator — Hydro | revised source-specific geometry</title>
+  <desc>Editable object geometry. Historical identity, dimension callouts and scan noise intentionally omitted. See revision.json for source registration and limits.</desc>
+  <g id="object" data-layer="object">
+    <g id="H47-generator-towbar-and-running-gear" data-part="towbar-and-running-gear">
+      <rect id="H47-generator-drawbar-1" data-part="drawbar" stroke-linejoin="round" stroke-linecap="round" x="72" y="653" width="105" height="8" rx="0" fill="#e7f0ee" stroke="#252823" stroke-width="0.85" data-material="paint"/>
+      <rect id="H47-generator-upper-drawbar-2" data-part="upper-drawbar" stroke-linejoin="round" stroke-linecap="round" x="121.5" y="650.5" width="56" height="10.5" rx="0" fill="#e7f0ee" stroke="#252823" stroke-width="0.75" data-material="paint"/>
+      <path id="H47-generator-fork-support-3" data-part="fork-support" stroke-linejoin="round" stroke-linecap="round" d="M123 661 L123 687 Q128 687 132.5 682 Q133 680 133 675 L133 662" fill="none" stroke="#252823" stroke-width="0.85"/>
+      <ellipse id="H47-generator-caster-wheel-4" data-part="caster-wheel" stroke-linejoin="round" stroke-linecap="round" cx="121.5" cy="709" rx="13.5" ry="13.5" fill="#fff" stroke="#252823" stroke-width="0.9" data-material="white"/>
+      <path id="H47-generator-caster-inner-rim-5" data-part="caster-inner-rim" stroke-linejoin="round" stroke-linecap="round" d="M120 703 C111 700 113 718 122 716 Q128 715 129 711" fill="none" stroke="#252823" stroke-width="0.8"/>
+      <path id="H47-generator-caster-fork-6" data-part="caster-fork" stroke-linejoin="round" stroke-linecap="round" d="M124 687 L129 687 L129 693 L130 693 Q131 705 123 710 Q119 714 117 710 Q116 708 119 705 Q123 701 123 693 L124 693 Z" fill="#fff" stroke="#252823" stroke-width="0.8" data-material="white"/>
+      <ellipse id="H47-generator-road-wheel-7" data-part="road-wheel" stroke-linejoin="round" stroke-linecap="round" cx="253" cy="689.5" rx="34" ry="33.8" fill="#fff" stroke="#252823" stroke-width="1" data-material="white"/>
+      <path id="H47-generator-open-road-rim-8" data-part="open-road-rim" stroke-linejoin="round" stroke-linecap="round" d="M259 673 C237 664 226 694 243 704 Q258 711 268 695 M264 676 Q269 680 270 687" fill="none" stroke="#252823" stroke-width="0.8"/>
+      <line id="H47-generator-axle-rail-9" data-part="axle-rail" stroke-linejoin="round" stroke-linecap="round" x1="209" y1="657" x2="301" y2="657" stroke="#252823" stroke-width="0.8"/>
+      <rect id="H47-generator-rear-small-step-10" data-part="rear-small-step" stroke-linejoin="round" stroke-linecap="round" x="329" y="653" width="5.5" height="8" rx="0" fill="#e7f0ee" stroke="#252823" stroke-width="0.7" data-material="paint"/>
+    </g>
+    <g id="H47-generator-rear-hoses-stack-and-support" data-part="rear-hoses-stack-and-support">
+      <path id="H47-generator-lower-cable-loop-11" data-part="lower-cable-loop" stroke-linejoin="round" stroke-linecap="round" d="M175 556 C166 552 168 573 167 592 C167 616 167 636 173 637 L177 637 M173 557 C171 580 171 611 172 631 Q173 636 177 637" fill="none" stroke="#252823" stroke-width="0.8"/>
+      <path id="H47-generator-upper-cable-outer-12" data-part="upper-cable-outer" stroke-linejoin="round" stroke-linecap="round" d="M177 461 C164 459 166 479 168 493 C171 519 170 540 173 556 L169 558 C164 543 163 521 166 501 C171 480 166 466 179 463" fill="none" stroke="#252823" stroke-width="0.8"/>
+      <path id="H47-generator-upper-cable-inner-13" data-part="upper-cable-inner" stroke-linejoin="round" stroke-linecap="round" d="M179 465 C169 463 174 486 168 507 C166 523 170 544 169 558 M171 493 Q177 524 176 556" fill="none" stroke="#252823" stroke-width="0.75"/>
+      <path id="H47-generator-tie-loop-14" data-part="tie-loop" stroke-linejoin="round" stroke-linecap="round" d="M168 560 Q166 557 165 560 Q165 564 168 564" fill="none" stroke="#252823" stroke-width="0.75"/>
+      <path id="H47-generator-stack-support-15" data-part="stack-support" stroke-linejoin="round" stroke-linecap="round" d="M170 650 L170 642 L173 642 L173 637 L177 637 L177 650 Z" fill="#fff" stroke="#252823" stroke-width="0.8" data-material="white"/>
+      <rect id="H47-generator-stack-cylinder-16" data-part="stack-cylinder" stroke-linejoin="round" stroke-linecap="round" x="183" y="487.5" width="8.3" height="38" rx="0" fill="#e7f0ee" stroke="#252823" stroke-width="0.8" data-material="paint"/>
+      <rect id="H47-generator-stack-pipe-17" data-part="stack-pipe" stroke-linejoin="round" stroke-linecap="round" x="184" y="466" width="5.3" height="21.5" rx="0" fill="#fff" stroke="#252823" stroke-width="0.7" data-material="white"/>
+      <path id="H47-generator-cap-dome-18" data-part="cap-dome" stroke-linejoin="round" stroke-linecap="round" d="M174 457 Q179 453 184 455 Q191 456 192 462 Q193 464 191 466 L179 466 Z" fill="#e7f0ee" stroke="#252823" stroke-width="0.85" data-material="paint"/>
+      <line id="H47-generator-cap-lower-rim-19" data-part="cap-lower-rim" stroke-linejoin="round" stroke-linecap="round" x1="180" y1="467" x2="191" y2="467" stroke="#252823" stroke-width="0.6"/>
+    </g>
+    <g id="H47-generator-generator-housing" data-part="generator-housing">
+      <path id="H47-generator-shell-20" data-part="shell" stroke-linejoin="round" stroke-linecap="round" d="M177 661 L177 535 Q177 525 186 525 L320 525 Q329 526 329 536 L329 661 L304 661 Q301 661 297 657 C281 640 274 637 259 637 L248 637 C232 637 222 644 210 656 Q204 661 201 661 Z" fill="#e7f0ee" stroke="#252823" stroke-width="1" data-material="paint"/>
+      <path id="H47-generator-upper-double-seam-21" data-part="upper-double-seam" stroke-linejoin="round" stroke-linecap="round" d="M178 536 L329 536 M178 541 L329 541" fill="none" stroke="#252823" stroke-width="0.65"/>
+      <path id="H47-generator-front-intake-cap-22" data-part="front-intake-cap" stroke-linejoin="round" stroke-linecap="round" d="M246 547 Q241 541 247 538 Q252 536 256 540 Q258 544 255 547 Z" fill="#fff" stroke="#252823" stroke-width="0.8" data-material="white"/>
+      <path id="H47-generator-front-intake-stem-23" data-part="front-intake-stem" stroke-linejoin="round" stroke-linecap="round" d="M246 547 L255 547 L255 562 L246 562 Z M246 564 L255 564" fill="#fff" stroke="#252823" stroke-width="0.7" data-material="white"/>
+    </g>
+  </g>
+  <g id="branding" data-layer="branding" aria-label="Insert replacement identity artwork here"/>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="194" height="310" viewBox="67 681 194 310" version="1.1" data-asset="V15-trailer-rear" data-revision="trailers-signs-r2">
+  <title>Box trailer — rear | revised source-specific geometry</title>
+  <desc>Editable object geometry. Historical identity, dimension callouts and scan noise intentionally omitted. See revision.json for source registration and limits.</desc>
+  <g id="applied-markings" data-layer="applied-markings">
+    <rect id="V15-trailer-rear-rear-reflector-01" x="85" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-02" x="101.0" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-03" x="116.4" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-04" x="132.4" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-05" x="148.7" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-06" x="177.1" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-07" x="192.9" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-08" x="208.6" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-09" x="224.0" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+    <rect id="V15-trailer-rear-rear-reflector-10" x="240.1" y="831.3" width="7.8" height="38.7" fill="#fff" stroke="#252823" stroke-width="0.75" data-part="rear-door-reflector" data-role="applied-reflector-not-aperture" data-material="reflector"/>
+  </g>
+</svg>

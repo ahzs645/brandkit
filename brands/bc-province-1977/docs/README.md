@@ -39,6 +39,11 @@ Reproduction, Sign and Vehicle manuals. They are rebuilt page by page in brandki
   to the installation sequence. A uniform takes the insignia signature, the symbol over a
   two-line logotype. A vehicle takes the door signature. The ministry and the unit number are
   fields.
+- **Drawn signs**: 29 of ManualKit's sign specimens from General Manual p. 16 and the Sign Manual,
+  grouped by kind (primary and secondary identification, information, directional, control,
+  symbol signs). Each line of a sign's wording is a field set in Helvetica, and the identity is the
+  sign signature: centred where it heads a primary identification sign, horizontal along the foot
+  of the others.
 - **Signs**: primary and secondary identification, standard information, directional, warning,
   regulatory. They are laid out on the Sign Manual’s grid, where one square is 1/12 of the
   longest side.

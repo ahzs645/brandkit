@@ -261,6 +261,12 @@ parallelogram. A template places an illustration and fills its zones:
              "unit": { "id": "unit-number", "text": "1604-2103", "font": "regular" } } }
 ```
 
+An illustration may carry `lettering`, the words drawn on it (a sign's wording), each line `{ text,
+x, y, size, bold, family, anchor, fill, width? }`. The template element's `lettering: { prefix,
+fonts: { sans: { regular, bold }, serif: { … } } }` makes each line a field (`<prefix>-1`, …) set in
+the brand's faces, narrowed to the source's set `width` if it runs longer. Those fields are local to
+their drawing: a set of signs shows only the shown sign's lines.
+
 The element's `materials` repaint the drawing by material (`{ "paint": "primary", "fabric":
 "graphite" }`), so one drawing serves any brand's colours. A zone takes a signature (with fixed
 `values`, or `defaults` that give way to the template's fields), a fixed `logo` (horizontal in a

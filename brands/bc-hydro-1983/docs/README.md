@@ -27,6 +27,9 @@ its rules into data.
   signature in its branding zones (pp. 43–47). They show light vehicles, heavy trucks, tractor
   trailers, equipment and rolling stock. Gas Operations’ signature goes on the light vehicles,
   as the manual shows, and B.C.Hydro Rail’s on the locomotive and boxcar.
+- **Drawn signs**: 11 of ManualKit's specimens of identification, guide and control signs (pp.
+  38–40), each line of wording a field set in Times Roman; the control signs take the Corporate
+  signature.
 - **A guide**, generated from the same definition, including the backgrounds-and-value rules,
   every incorrect usage, and the minimum-size table.
 

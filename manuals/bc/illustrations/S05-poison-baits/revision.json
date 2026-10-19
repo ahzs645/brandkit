@@ -1,0 +1,97 @@
+{
+  "id": "S05-poison-baits",
+  "title": "Poison Baits \u2014 yellow",
+  "book": "Sign Manual",
+  "pdf_page_1based": 5,
+  "source_filename": "sign_manual.pdf",
+  "source_sha256": "3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e",
+  "review_viewbox": [
+    530,
+    244,
+    120,
+    348
+  ],
+  "svg_units_per_pdf_point": 1,
+  "face_bounds": [
+    536,
+    250,
+    108,
+    218
+  ],
+  "branding_zones": [
+    {
+      "id": "face",
+      "bbox": [
+        540,
+        254,
+        100,
+        210
+      ],
+      "label": "Full printed face"
+    },
+    {
+      "id": "identity",
+      "bbox": [
+        545.18,
+        453.83000000000004,
+        90.72,
+        12.208
+      ],
+      "label": "Replaceable provincial identity"
+    }
+  ],
+  "status": "new-semantic-sign-template",
+  "geometry_changed": true,
+  "changes": [
+    "Reconstructed the visible sign face, support arrangement and separable printed layout from this source specimen.",
+    "New native rectangles, clean curves, controlled pictograms and editable text. No auto-contour trace or embedded raster.",
+    "Provided blank physical geometry, face-only export, editable example text, stable outlined example and separate branding guides."
+  ],
+  "limits": [
+    "Clean template coordinates regularize scan skew, ink spread and small wobbles; not recovered original production artwork.",
+    "Example lettering uses metric-compatible Arimo/Tinos substitutes. Exact historical typesetting is not authenticated. No font files are distributed.",
+    "Pictograms are authored illustrative reconstructions, not certified contemporary traffic or safety symbols.",
+    "Provincial/Hydro example identity, where present, reuses supplied project vector artwork; it is replaceable and is not newly authenticated by this pass.",
+    "Dimension leaders, page captions, backgrounds, grass and unrelated overlapping objects are excluded from the object. Source proofs stay unmasked.",
+    "Neighbouring sign specimens partly obscure posts or panel context in this composite source page; overlapped continuation is regularized and not source-verified."
+  ],
+  "included_files": [
+    "blank.svg",
+    "face-only.svg",
+    "branding-zones.svg",
+    "example-editable-text.svg",
+    "example-outlined.svg",
+    "display.svg"
+  ],
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      530.0,
+      244.0,
+      120.0,
+      348.0
+    ],
+    "PDF_pixel_origin": [
+      1325,
+      610
+    ],
+    "pixel_dimensions": [
+      300,
+      870
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "example-editable-text.svg",
+  "auto_trace_used": false,
+  "export_files": [
+    "branding-zones.svg",
+    "unbranded.svg",
+    "example-outlined.svg",
+    "blank.svg",
+    "face-only.svg",
+    "example-editable-text.svg",
+    "display.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
+}

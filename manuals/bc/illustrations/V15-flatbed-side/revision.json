@@ -6,10 +6,15 @@
     106
   ],
   "notes": [
-    "Refit both wheel centres and rims, the high rear deck steps and the curved front neck.",
-    "Rebuilt the dark underdeck, rear mudflap and landing stem/caster; removed non-source repeated deck divisions."
+    "Checked the gooseneck profile, two wheels, landing stem and rear overhang against the source side view.",
+    "Separated the thin top deck lip as editable linework instead of leaving it implicit in the filled red silhouette.",
+    "Kept the neck and landing-gear open spaces transparent; no full lower rectangle is added."
   ],
-  "limits": [],
+  "limits": [
+    "Tow/landing end at left.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "Tow/landing end at left.",
   "id": "V15-flatbed-side",
   "title": "Flat-deck trailer \u2014 side",
@@ -91,9 +96,46 @@
     }
   ],
   "previous_blank_sha256": "6654eacca2a44638909878bc0f97dc90998c82d4dcde36f2dc7c69633d4883ec",
-  "revised_blank_sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
+  "revised_blank_sha256": "26291a63bb94ffb46ea60eb161ed2669858cb9c64096e05bd9e0b2f4b5032c90",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "a17dbc846569972460f48cf7538226255aa974970aecf4edfdd16520e079a20e",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      249.2,
+      528.4,
+      629.2,
+      138.0
+    ],
+    "PDF_pixel_origin": [
+      623,
+      1321
+    ],
+    "pixel_dimensions": [
+      1573,
+      345
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

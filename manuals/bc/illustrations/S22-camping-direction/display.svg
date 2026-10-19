@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="628 199 120 374" width="120" height="374" version="1.1" data-asset="S22-camping-direction" data-revision="signs-r1">
+  <ns0:title>Camping / right arrow | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S22-camping-direction-post-1-1" data-part="post-1" x="634" y="422" width="8.5" height="145" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="S22-camping-direction-post-2-2" data-part="post-2" x="733.5" y="422" width="8.5" height="145" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S22-camping-direction-sign-board-3" data-part="sign-board" x="634" y="205" width="108" height="217" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S22-camping-direction-symbol-frame-4" data-part="symbol-frame" x="638" y="209" width="100" height="98.33" fill="none" stroke="white" stroke-width="0.65" rx="9"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S22-camping-direction-camping-symbol-5" data-part="camping-symbol" transform="translate(649.12 225.615) scale(0.7992 0.66185)">
+      <ns0:path id="S22-camping-direction-tent-6" data-part="tent" d="M4 94 L47 3 L94 94 L99 87 L100 90 L95 98 L60 98 L47 51 L36 98 L3 98 L0 90 L1 87 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="S22-camping-direction-direction-arrow-7" data-part="direction-arrow" transform="translate(643.5769230769231 335.0330188679245) scale(0.8104395604395604 0.695754716981132) rotate(0 50 50)">
+      <ns0:path id="S22-camping-direction-arrow-shape-8" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

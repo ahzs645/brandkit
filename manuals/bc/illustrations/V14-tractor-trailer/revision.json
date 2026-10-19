@@ -6,11 +6,19 @@
     248
   ],
   "notes": [
-    "Replaced the trailer planes and corner with source-specific perspective; expanded the right edge to include the cab and bumper omitted by the old crop.",
-    "Rebuilt the multi-depth trailer wheel clusters, frame and fifth wheel, three tractor wheels, tank straps/cap, mudflaps, exhaust, cab windows, door panels and steps.",
-    "Preserved body ribs as a removable physical group; identity and numbers are separate zones."
+    "Rebuilt the non-convex trailer side: the extended rear corner post no longer incorrectly sets the sloping lower body edge. The previous silver wedge covering the underframe is removed.",
+    "Rebuilt near and far dual-tyre contours, separate rims, depth seams and the genuinely open chassis aperture between the trailer wheel groups.",
+    "Removed the erroneous solid tractor-chassis block below the trailer; restored the stepped rail and curved coupling silhouette.",
+    "Restored the source dark front wheelhouse and secondary cab-door gasket.",
+    "Replaced the repeated rib interpolation with 18 measured source bands on both trailer planes."
   ],
-  "limits": [],
+  "limits": [
+    "Tractor/front at right.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings.",
+    "The shared published tractor drawing is constructed in the existing authored local coordinate frame. Each view is then checked independently against its own PDF; source registration of the proof is not fitted.",
+    "Small print/scan waviness is regularized; mechanical detail hidden by the body is not invented."
+  ],
   "orientation": "Tractor/front at right.",
   "id": "V14-tractor-trailer",
   "title": "Tractor and box trailer \u2014 perspective",
@@ -220,9 +228,46 @@
     }
   ],
   "previous_blank_sha256": "698b2bfb53081f17b5f4c2ad2342abe7439e030fc185c13e23e855d1a8fea3d7",
-  "revised_blank_sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
+  "revised_blank_sha256": "bacd184c822ad55824fedf65290e9b64ebeec5b7ed4ffa5da0604066c8164290",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "5fcee73d57738dce553cbea0b73c385681d613e3b8d7ac8ca086950713cbf578",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      8.0,
+      288.0,
+      524.0,
+      320.8
+    ],
+    "PDF_pixel_origin": [
+      20,
+      720
+    ],
+    "pixel_dimensions": [
+      1310,
+      802
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

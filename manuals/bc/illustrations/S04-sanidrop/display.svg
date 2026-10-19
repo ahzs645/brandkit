@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="171 433 112 148" width="112" height="148" version="1.1" data-asset="S04-sanidrop" data-revision="signs-r1">
+  <ns0:title>Sanitary dump | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:path id="S04-sanidrop-post-1-1" data-part="post-1" d="M218.25 540 h17.5 v35 l-17.5 -8 Z" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S04-sanidrop-sign-board-2" data-part="sign-board" x="177" y="439" width="100" height="101" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S04-sanidrop-symbol-frame-3" data-part="symbol-frame" x="181" y="443" width="92" height="93" fill="none" stroke="white" stroke-width="0.6" rx="7"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S04-sanidrop-sanitary-dump-symbol-4" data-part="sanitary-dump-symbol" transform="translate(187 451) scale(0.78 0.7)">
+      <ns0:path id="S04-sanidrop-caravan-body-5" data-part="caravan-body" d="M13 4 H93 Q98 4 98 10 V57 H13 Z M20 15 V33 H43 V15 Z M53 15 V33 H89 V15 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd"/>
+      <ns0:rect id="S04-sanidrop-drawbar-6" data-part="drawbar" x="3" y="54" width="92" height="5" fill="white" stroke="none" stroke-width="0.65"/>
+      <ns0:circle id="S04-sanidrop-caravan-wheel-7" cx="57" cy="63" r="13" fill="white" stroke="#6b5b3d" stroke-width="3"/>
+      <ns0:path id="S04-sanidrop-drain-receptacle-8" data-part="drain-receptacle" d="M50 78 H72 M87 78 H98 V98 H49 V78" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S04-sanidrop-drain-arrow-9" data-part="drain-arrow" d="M83 65 V91 M74 82 L83 91 L91 82" fill="none" stroke="white" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

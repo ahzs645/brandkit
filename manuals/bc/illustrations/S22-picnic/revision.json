@@ -1,0 +1,86 @@
+{
+  "id": "S22-picnic",
+  "title": "Picnic symbol",
+  "book": "Sign Manual",
+  "pdf_page_1based": 22,
+  "source_filename": "sign_manual.pdf",
+  "source_sha256": "3473aa4a0dad5542cb42c6ad1508e9253342db7ac0fd3cb63051044618816a4e",
+  "review_viewbox": [
+    468,
+    306,
+    120,
+    144
+  ],
+  "svg_units_per_pdf_point": 1,
+  "face_bounds": [
+    474,
+    312,
+    108,
+    110
+  ],
+  "branding_zones": [
+    {
+      "id": "face",
+      "bbox": [
+        478,
+        316,
+        100,
+        102
+      ],
+      "label": "Full printed face"
+    }
+  ],
+  "status": "new-semantic-sign-template",
+  "geometry_changed": true,
+  "changes": [
+    "Reconstructed the visible sign face, support arrangement and separable printed layout from this source specimen.",
+    "New native rectangles, clean curves, controlled pictograms and editable text. No auto-contour trace or embedded raster.",
+    "Provided blank physical geometry, face-only export, editable example text, stable outlined example and separate branding guides."
+  ],
+  "limits": [
+    "Clean template coordinates regularize scan skew, ink spread and small wobbles; not recovered original production artwork.",
+    "Example lettering uses metric-compatible Arimo/Tinos substitutes. Exact historical typesetting is not authenticated. No font files are distributed.",
+    "Pictograms are authored illustrative reconstructions, not certified contemporary traffic or safety symbols.",
+    "Provincial/Hydro example identity, where present, reuses supplied project vector artwork; it is replaceable and is not newly authenticated by this pass.",
+    "Dimension leaders, page captions, backgrounds, grass and unrelated overlapping objects are excluded from the object. Source proofs stay unmasked."
+  ],
+  "included_files": [
+    "blank.svg",
+    "face-only.svg",
+    "branding-zones.svg",
+    "example-editable-text.svg",
+    "example-outlined.svg",
+    "display.svg"
+  ],
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      468.0,
+      306.0,
+      120.0,
+      144.0
+    ],
+    "PDF_pixel_origin": [
+      1170,
+      765
+    ],
+    "pixel_dimensions": [
+      300,
+      360
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "example-editable-text.svg",
+  "auto_trace_used": false,
+  "export_files": [
+    "branding-zones.svg",
+    "unbranded.svg",
+    "example-outlined.svg",
+    "blank.svg",
+    "face-only.svg",
+    "example-editable-text.svg",
+    "display.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
+}

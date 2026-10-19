@@ -92,9 +92,11 @@ export const TemplateStudio = ({
   const documents = template ? documentsFor(brand, template.id) : []
   const ctx = (outline, extra = {}) => ({ brand, fonts, values, outline: outline && ready, ...extra })
   const preview = template ? renderTemplate(ctx(true, { showGuides: guides }), template).svg : null
-  // A set's fields are all its variants' (a card's name is on its back while its front is shown).
+  // A set's fields are all its variants' (a card's name is on its back while its front is shown),
+  // except fields local to another variant (a different sign's wording).
   const fields = !template ? [] : currentSet
     ? allFields(currentSet.variants.map((variant) => templates.find((entry) => entry.id === variant.template)).filter(Boolean), brand)
+      .filter((field) => !field.local || field.templates.includes(template.id))
     : templateFields(template, brand)
   const everyField = useMemo(() => allFields(templates, brand), [templates, brand])
   const filled = everyField.filter((field) => values[field.id]?.trim()).length

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="44 433 112 149" width="112" height="149" version="1.1" data-asset="S04-no-parking" data-revision="signs-r1">
+  <ns0:title>No parking | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S04-no-parking-open-post-fill-1" data-part="open-post-fill" x="91.25" y="540" width="17.5" height="36" fill="#fff" stroke="none" stroke-width="0.65"/>
+      <ns0:path id="S04-no-parking-open-post-edges-2" data-part="open-post-edges" d="M91.25 576 V540 M108.75 540 V576" fill="none" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S04-no-parking-sign-board-3" data-part="sign-board" x="50" y="439" width="100" height="101" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S04-no-parking-symbol-frame-4" data-part="symbol-frame" x="54" y="443" width="92" height="93" fill="none" stroke="#20221d" stroke-width="0.6" rx="9"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S04-no-parking-no-parking-symbol-5" data-part="no-parking-symbol" transform="translate(66 452) scale(0.68 0.68)">
+      <ns0:path id="S04-no-parking-P-6" data-part="P" d="M33 91 V22 H59 C85 22 85 58 60 61 H47 V91 Z M47 34 V49 H59 C68 49 68 34 59 34 Z" fill="#20221d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd"/>
+      <ns0:circle id="S04-no-parking-red-ring-7" cx="50" cy="50" r="44" stroke="#eb5036" stroke-width="10" fill="none"/>
+      <ns0:path id="S04-no-parking-prohibition-slash-8" data-part="prohibition-slash" d="M17 24 L24 17 L83 76 L76 83 Z" fill="#eb5036" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

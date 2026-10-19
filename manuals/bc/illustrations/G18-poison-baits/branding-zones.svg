@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="529 226 122 344" width="122" height="344" version="1.1" data-asset="G18-poison-baits" data-revision="signs-r1">
+  <ns0:title>Poison Baits — white | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="G18-poison-baits-post-1-1" data-part="post-1" x="535" y="448" width="11" height="116" fill="#fff" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="G18-poison-baits-post-2-2" data-part="post-2" x="634" y="448" width="11" height="116" fill="#fff" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="G18-poison-baits-sign-board-3" data-part="sign-board" x="535" y="232" width="110" height="216" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+  <ns0:g id="branding-zone-guides" data-layer="guides" fill="none" stroke="#dd007c" stroke-width=".6">
+    <ns0:rect id="guide-face" x="539" y="236" width="102" height="208" stroke-dasharray="3 2"/>
+    <ns0:rect id="guide-identity" x="544.35" y="433.96000000000004" width="92.39999999999999" height="12.096" stroke-dasharray="3 2"/>
+  </ns0:g>
+</ns0:svg>

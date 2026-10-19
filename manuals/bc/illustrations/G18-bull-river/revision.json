@@ -1,0 +1,97 @@
+{
+  "id": "G18-bull-river",
+  "title": "Bull River",
+  "book": "General Manual",
+  "pdf_page_1based": 18,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "review_viewbox": [
+    272,
+    169,
+    230,
+    216
+  ],
+  "svg_units_per_pdf_point": 1,
+  "face_bounds": [
+    278,
+    175,
+    218,
+    110
+  ],
+  "branding_zones": [
+    {
+      "id": "face",
+      "bbox": [
+        282,
+        179,
+        210,
+        102
+      ],
+      "label": "Full printed face"
+    },
+    {
+      "id": "identity",
+      "bbox": [
+        288.9,
+        270.26,
+        196.20000000000002,
+        12.65
+      ],
+      "label": "Replaceable provincial identity"
+    }
+  ],
+  "status": "new-semantic-sign-template",
+  "geometry_changed": true,
+  "changes": [
+    "Reconstructed the visible sign face, support arrangement and separable printed layout from this source specimen.",
+    "New native rectangles, clean curves, controlled pictograms and editable text. No auto-contour trace or embedded raster.",
+    "Provided blank physical geometry, face-only export, editable example text, stable outlined example and separate branding guides."
+  ],
+  "limits": [
+    "Clean template coordinates regularize scan skew, ink spread and small wobbles; not recovered original production artwork.",
+    "Example lettering uses metric-compatible Arimo/Tinos substitutes. Exact historical typesetting is not authenticated. No font files are distributed.",
+    "Pictograms are authored illustrative reconstructions, not certified contemporary traffic or safety symbols.",
+    "Provincial/Hydro example identity, where present, reuses supplied project vector artwork; it is replaceable and is not newly authenticated by this pass.",
+    "Dimension leaders, page captions, backgrounds, grass and unrelated overlapping objects are excluded from the object. Source proofs stay unmasked.",
+    "Parts of a support or adjacent source context overlap another specimen on this page; hidden support continuation is a regularized template, not source-verified linework."
+  ],
+  "included_files": [
+    "blank.svg",
+    "face-only.svg",
+    "branding-zones.svg",
+    "example-editable-text.svg",
+    "example-outlined.svg",
+    "display.svg"
+  ],
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      272.0,
+      168.8,
+      230.0,
+      216.4
+    ],
+    "PDF_pixel_origin": [
+      680,
+      422
+    ],
+    "pixel_dimensions": [
+      575,
+      541
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "example-editable-text.svg",
+  "auto_trace_used": false,
+  "export_files": [
+    "branding-zones.svg",
+    "unbranded.svg",
+    "example-outlined.svg",
+    "blank.svg",
+    "face-only.svg",
+    "example-editable-text.svg",
+    "display.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
+}

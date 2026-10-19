@@ -1,0 +1,87 @@
+{
+  "id": "G18-camping-direction",
+  "title": "Camping / right arrow",
+  "book": "General Manual",
+  "pdf_page_1based": 18,
+  "source_filename": "Visual Identity Program General Manual.pdf",
+  "source_sha256": "70aacdc433e2b27e71b99699663d92d4798d52e3783eb15ead84f1567f9b247b",
+  "review_viewbox": [
+    288,
+    295,
+    98,
+    275
+  ],
+  "svg_units_per_pdf_point": 1,
+  "face_bounds": [
+    294,
+    301,
+    86,
+    169
+  ],
+  "branding_zones": [
+    {
+      "id": "face",
+      "bbox": [
+        298,
+        305,
+        78,
+        161
+      ],
+      "label": "Full printed face"
+    }
+  ],
+  "status": "new-semantic-sign-template",
+  "geometry_changed": true,
+  "changes": [
+    "Reconstructed the visible sign face, support arrangement and separable printed layout from this source specimen.",
+    "New native rectangles, clean curves, controlled pictograms and editable text. No auto-contour trace or embedded raster.",
+    "Provided blank physical geometry, face-only export, editable example text, stable outlined example and separate branding guides.",
+    "Arrow extents were independently checked on this source specimen; General and Sign Manual arrow placement/direction are not interchangeable."
+  ],
+  "limits": [
+    "Clean template coordinates regularize scan skew, ink spread and small wobbles; not recovered original production artwork.",
+    "Example lettering uses metric-compatible Arimo/Tinos substitutes. Exact historical typesetting is not authenticated. No font files are distributed.",
+    "Pictograms are authored illustrative reconstructions, not certified contemporary traffic or safety symbols.",
+    "Provincial/Hydro example identity, where present, reuses supplied project vector artwork; it is replaceable and is not newly authenticated by this pass.",
+    "Dimension leaders, page captions, backgrounds, grass and unrelated overlapping objects are excluded from the object. Source proofs stay unmasked."
+  ],
+  "included_files": [
+    "blank.svg",
+    "face-only.svg",
+    "branding-zones.svg",
+    "example-editable-text.svg",
+    "example-outlined.svg",
+    "display.svg"
+  ],
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      288.0,
+      294.8,
+      98.0,
+      275.2
+    ],
+    "PDF_pixel_origin": [
+      720,
+      737
+    ],
+    "pixel_dimensions": [
+      245,
+      688
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "example-editable-text.svg",
+  "auto_trace_used": false,
+  "export_files": [
+    "branding-zones.svg",
+    "unbranded.svg",
+    "example-outlined.svg",
+    "blank.svg",
+    "face-only.svg",
+    "example-editable-text.svg",
+    "display.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
+}

@@ -6,11 +6,15 @@
     310
   ],
   "notes": [
-    "Refit all nested frames and the narrow three-line centre divider.",
-    "Rebuilt the stepped central underbody opening and four separate tyre ends.",
-    "The ten reflective strips are preserved only in the separate optional applied-markings version."
+    "Restored ten visible rear-door reflector strips (five per door) in a separate visible-by-default applied-markings layer.",
+    "Refined four tyre corners from clipped polygons to the rounded source contours; retained the stepped, transparent central underbody opening.",
+    "Double door-stile and lower-frame layout checked independently against V15, not substituted from the V12 truck."
   ],
-  "limits": [],
+  "limits": [
+    "preserved from this source illustration",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "preserved from this source illustration",
   "id": "V15-trailer-rear",
   "title": "Box trailer \u2014 rear",
@@ -92,9 +96,57 @@
     }
   ],
   "previous_blank_sha256": "bbaa9b0e0a2c6999e6bf1f88da9d68a4af4e8decd76118784ea91d7727550334",
-  "revised_blank_sha256": "32860654cb3ef79c71269ac3cac3b59111b1e6790c38e0b4532844c2d903c417",
+  "revised_blank_sha256": "a740863255621d077b46ce6bb08882e255b58f37a43f5bf7eb9ca20690f6fe7e",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": true
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": true,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 10,
+  "previous_delivered_blank_sha256": "32860654cb3ef79c71269ac3cac3b59111b1e6790c38e0b4532844c2d903c417",
+  "default_display": "display.svg",
+  "topology_checks": [
+    {
+      "name": "central-underframe-open-space",
+      "point": [
+        162,
+        958
+      ],
+      "expected": "transparent"
+    }
+  ],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      51.2,
+      664.8,
+      225.6,
+      342.0
+    ],
+    "PDF_pixel_origin": [
+      128,
+      1662
+    ],
+    "pixel_dimensions": [
+      564,
+      855
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "with-markings.svg",
+    "markings-only.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

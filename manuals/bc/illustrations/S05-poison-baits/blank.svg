@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="530 244 120 348" width="120" height="348" version="1.1" data-asset="S05-poison-baits" data-revision="signs-r1">
+  <ns0:title>Poison Baits — yellow | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S05-poison-baits-post-1-1" data-part="post-1" x="536" y="468" width="13.5" height="118" fill="#fff000" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="S05-poison-baits-post-2-2" data-part="post-2" x="630.5" y="468" width="13.5" height="118" fill="#fff000" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S05-poison-baits-sign-board-3" data-part="sign-board" x="536" y="250" width="108" height="218" fill="#fff000" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

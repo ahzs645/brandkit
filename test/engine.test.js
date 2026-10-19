@@ -202,7 +202,7 @@ test('every BC template, signature and guide page cites manual pages that exist,
 
 test('every ManualKit drawing is a template with its zones filled, and sits in its manual page', async () => {
   const manifest = JSON.parse(readFileSync(new URL('../manuals/bc/illustrations/manifest.json', import.meta.url), 'utf8'))
-  const books = { G: 'general', V: 'vehicle', H: 'hydro' }
+  const books = { G: 'general', V: 'vehicle', H: 'hydro', S: 'sign' }
   for (const asset of manifest.assets) {
     const id = asset.id.startsWith('H') ? 'bc-hydro-1983' : 'bc-province-1977'
     const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
@@ -210,7 +210,13 @@ test('every ManualKit drawing is a template with its zones filled, and sits in i
     assert.ok(template, asset.id)
     const { svg } = renderTemplate({ brand: definition }, template)
     const filled = (svg.match(/data-zone="/g) ?? []).length
-    assert.ok(filled >= asset.branding_zones.filter((zone) => zone.kind !== 'process-surface').length, `${asset.id}: ${filled} zones filled`)
+    // A sign fills its identity zone (its face is the whole sign) and sets each line of its wording.
+    const zones = asset.vb ? asset.branding_zones.filter((zone) => zone.kind !== 'process-surface').length : asset.branding_zones.filter((zone) => zone.id === 'identity').length
+    assert.ok(filled >= zones, `${asset.id}: ${filled} of ${zones} zones filled`)
+    if (!asset.vb) {
+      const lines = definition.illustrations[asset.id].lettering.length
+      assert.equal(templateFields(template, definition).filter((field) => field.id.startsWith(asset.id.toLowerCase())).length, lines, `${asset.id}: a field for each line`)
+    }
     const page = readFileSync(new URL(`../manuals/bc/pages/${books[asset.id[0]]}/${asset.id.split('-')[0]}.svg`, import.meta.url), 'utf8')
     assert.ok(page.includes(`data-illustration="${asset.id}"`), `${asset.id} is not on its page`)
   }

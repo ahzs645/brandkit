@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="635 319 113 133" width="113" height="133" version="1.1" data-asset="S03-washrooms" data-revision="signs-r1">
+  <ns0:title>Washrooms | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S03-washrooms-open-post-fill-1" data-part="open-post-fill" x="682.0" y="426" width="19" height="20" fill="#fff" stroke="none" stroke-width="0.65"/>
+      <ns0:path id="S03-washrooms-open-post-edges-2" data-part="open-post-edges" d="M682.0 446 V426 M701.0 426 V446" fill="none" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S03-washrooms-sign-board-3" data-part="sign-board" x="641" y="325" width="101" height="101" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S03-washrooms-symbol-frame-4" data-part="symbol-frame" x="648" y="332" width="87" height="87" fill="none" stroke="white" stroke-width="0.35" rx="13"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S03-washrooms-washrooms-symbol-5" data-part="washrooms-symbol" transform="translate(659 345) scale(0.65 0.6)">
+      <ns0:circle id="S03-washrooms-woman-head-6" cx="24" cy="12" r="7" fill="white"/>
+      <ns0:circle id="S03-washrooms-man-head-7" cx="78" cy="12" r="7" fill="white"/>
+      <ns0:path id="S03-washrooms-woman-body-8" data-part="woman-body" d="M17 24 Q24 19 31 24 L42 52 Q44 59 39 60 L33 38 L37 69 H29 V96 H23 V69 H19 V96 H13 V69 H8 L16 39 L10 59 Q4 59 6 53 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S03-washrooms-man-body-9" data-part="man-body" d="M69 24 Q78 20 87 24 Q93 25 93 34 V60 Q90 64 87 60 V36 H84 V95 Q80 99 77 95 V64 H75 V95 Q71 99 68 95 V36 H65 V60 Q62 64 59 60 V34 Q59 25 69 24 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:rect id="S03-washrooms-central-separator-10" data-part="central-separator" x="49" y="3" width="6" height="95" fill="white" stroke="none" stroke-width="0.65"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

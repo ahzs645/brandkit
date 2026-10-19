@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="306 199 121 251" width="121" height="251" version="1.1" data-asset="S22-park-distance" data-revision="signs-r1">
+  <ns0:title>Provincial Park / 31 km / left arrow | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S22-park-distance-post-1-1" data-part="post-1" x="312" y="421" width="8.5" height="23" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+      <ns0:rect id="S22-park-distance-post-2-2" data-part="post-2" x="412.5" y="421" width="8.5" height="23" fill="#6b5b3d" stroke="#20221d" stroke-width="0.8"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S22-park-distance-sign-board-3" data-part="sign-board" x="312" y="205" width="109" height="216" fill="#6b5b3d" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:path id="S22-park-distance-separator-rule-6" data-part="separator-rule" d="M320.72 271.528 L411.19 271.528" fill="none" stroke="white" stroke-width="0.7" stroke-linejoin="round" stroke-linecap="round"/>
+    <ns0:rect id="S22-park-distance-amenity-frame-8" data-part="amenity-frame" x="322.9" y="323.8" width="36.515" height="37.583999999999996" fill="none" stroke="white" stroke-width="0.35" rx="3"/>
+    <ns0:rect id="S22-park-distance-amenity-frame-9" data-part="amenity-frame" x="374.13" y="323.8" width="36.515" height="37.583999999999996" fill="none" stroke="white" stroke-width="0.35" rx="3"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:text id="S22-park-distance-editable-copy-4" data-part="editable-copy" x="322.355" y="228.76" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="20.274" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="90.47" lengthAdjust="spacingAndGlyphs">Provincial</ns0:text>
+    <ns0:text id="S22-park-distance-editable-copy-5" data-part="editable-copy" x="322.355" y="255.76" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="20.274" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="49.595" lengthAdjust="spacingAndGlyphs">Park</ns0:text>
+    <ns0:text id="S22-park-distance-editable-copy-7" data-part="editable-copy" x="321.81" y="308.68" font-family="Arimo, Arial, Helvetica, sans-serif" font-size="30.520000000000003" font-weight="700" text-anchor="start" fill="white" data-font-family="sans" data-bold="true" textLength="82.84" lengthAdjust="spacingAndGlyphs">31 km</ns0:text>
+    <ns0:g id="S22-park-distance-picnic-symbol-10" data-part="picnic-symbol" transform="translate(325.625 329.2) scale(0.31065 0.2808)">
+      <ns0:path id="S22-park-distance-table-member-11" data-part="table-member" d="M16 16 H84 V27 H68 L79 88 H68 L63 63 H37 L32 88 H21 L32 27 H16 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S22-park-distance-table-member-12" data-part="table-member" d="M3 50 H97 V56 H3 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S22-park-distance-table-member-13" data-part="table-member" d="M3 43 H14 V47 H3 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S22-park-distance-table-member-14" data-part="table-member" d="M85 43 H97 V47 H85 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+      <ns0:path id="S22-park-distance-table-clear-space-15" data-part="table-clear-space" d="M42 27 H58 L62 51 H38 Z" fill="#6b5b3d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="S22-park-distance-camping-symbol-16" data-part="camping-symbol" transform="translate(377.4 329.2) scale(0.3052 0.2808)">
+      <ns0:path id="S22-park-distance-tent-17" data-part="tent" d="M4 94 L47 3 L94 94 L99 87 L100 90 L95 98 L60 98 L47 51 L36 98 L3 98 L0 90 L1 87 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="S22-park-distance-direction-arrow-18" data-part="direction-arrow" transform="translate(324.0467032967033 374.35849056603774) scale(0.3516483516483516 0.30424528301886794) rotate(180 50 50)">
+      <ns0:path id="S22-park-distance-arrow-shape-19" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="white" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

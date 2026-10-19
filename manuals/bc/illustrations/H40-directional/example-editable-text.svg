@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="287.5 633.5 251 97" width="251" height="97" version="1.1" data-asset="H40-directional" data-revision="signs-r1">
+  <ns0:title>Visitor Parking / Electric Shop | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports"/>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="H40-directional-sign-board-1" data-part="sign-board" x="293.5" y="639.5" width="239" height="85" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:path id="H40-directional-separator-rule-2" data-part="separator-rule" d="M293.5 682 L532.5 682" fill="none" stroke="#20221d" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="H40-directional-direction-arrow-3" data-part="direction-arrow" transform="translate(305 653) scale(0.2 0.19) rotate(-90 50 50)">
+      <ns0:path id="H40-directional-arrow-shape-4" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="#20221d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="H40-directional-direction-arrow-5" data-part="direction-arrow" transform="translate(305 695) scale(0.2 0.19) rotate(0 50 50)">
+      <ns0:path id="H40-directional-arrow-shape-6" data-part="arrow-shape" d="M7 42 L69 42 L34 7 L45 -4 L98 49 L45 102 L34 91 L69 57 L7 57 Z" fill="#20221d" stroke="none" stroke-width="0.65" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:text id="H40-directional-editable-copy-7" data-part="editable-copy" x="348" y="672" font-family="Tinos, Times New Roman, serif" font-size="29" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="176" lengthAdjust="spacingAndGlyphs">Visitor Parking</ns0:text>
+    <ns0:text id="H40-directional-editable-copy-8" data-part="editable-copy" x="348" y="714" font-family="Tinos, Times New Roman, serif" font-size="29" font-weight="400" text-anchor="start" fill="#20221d" data-font-family="serif" data-bold="false" textLength="159" lengthAdjust="spacingAndGlyphs">Electric Shop</ns0:text>
+  </ns0:g>
+  <ns0:g id="example-identity" data-layer="replaceable-example-identity"/>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

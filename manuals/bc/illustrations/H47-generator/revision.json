@@ -6,12 +6,15 @@
     278.5
   ],
   "notes": [
-    "Rebuilt the casing and shallow wheel arch, paired upper seams and keyhole-shaped intake.",
-    "Restored the separate rear hose loops, tie, stack/cap and small support step.",
-    "Reconstructed the drawbar, curved caster fork, open wheel-rim arcs and rear step.",
-    "Source lettering, including the safety warning, is kept out of the blank and assigned to separate branding/caption zones."
+    "Reviewed the towable equipment alongside the trailers: towing direction, body/cabinet, tyres and exposed frame remain as in the last delivered geometry.",
+    "No new mechanical contour change was justified by this review at the available source resolution. This asset is retained, not claimed as newly redrawn."
   ],
-  "limits": [],
+  "limits": [
+    "preserved from this source illustration",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings.",
+    "Retained geometry is an illustrative source reconstruction, not a fabrication drawing."
+  ],
   "orientation": "preserved from this source illustration",
   "id": "H47-generator",
   "title": "Generator \u2014 Hydro",
@@ -93,9 +96,46 @@
     }
   ],
   "previous_blank_sha256": "1971608318ec9fc6cb4c98e60aaed4b648d92565474a66121b32363f86c49519",
-  "revised_blank_sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
+  "revised_blank_sha256": "2ee514b317307bca7f322dfbc5b1f31d260b6dadc070436d88a92a2a4430136b",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": false,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "bd1459485c33c08e229e3c4cfbf7de741f1678679140ba68310934c393c1a521",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      59.2,
+      440.0,
+      287.6,
+      296.8
+    ],
+    "PDF_pixel_origin": [
+      148,
+      1100
+    ],
+    "pixel_dimensions": [
+      719,
+      742
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }

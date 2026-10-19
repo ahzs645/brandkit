@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="506 319 113 133" width="113" height="133" version="1.1" data-asset="S03-no-entry" data-revision="signs-r1">
+  <ns0:title>No entry | editable source-based sign</ns0:title>
+  <ns0:desc>Source-derived sign face, supports and separately editable example graphics. Not a current safety-standard or fabrication specification.</ns0:desc>
+  <ns0:g id="object" data-layer="object">
+    <ns0:g id="posts" data-part="supports">
+      <ns0:rect id="S03-no-entry-open-post-fill-1" data-part="open-post-fill" x="553.0" y="426" width="19" height="20" fill="#fff" stroke="none" stroke-width="0.65"/>
+      <ns0:path id="S03-no-entry-open-post-edges-2" data-part="open-post-edges" d="M553.0 446 V426 M572.0 426 V446" fill="none" stroke="#20221d" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </ns0:g>
+    <ns0:g id="face" data-part="panel">
+      <ns0:rect id="S03-no-entry-sign-board-3" data-part="sign-board" x="512" y="325" width="101" height="101" fill="#fff" stroke="#20221d" stroke-width="0.85"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="rules" data-layer="printed-rules">
+    <ns0:rect id="S03-no-entry-symbol-frame-4" data-part="symbol-frame" x="519" y="332" width="87" height="87" fill="none" stroke="#20221d" stroke-width="0.35" rx="13"/>
+  </ns0:g>
+  <ns0:g id="example-content" data-layer="replaceable-example-content">
+    <ns0:g id="S03-no-entry-no-entry-symbol-5" data-part="no-entry-symbol" transform="translate(528 343) scale(0.66 0.66)">
+      <ns0:circle id="S03-no-entry-red-disc-6" data-part="prohibition-disc" cx="50" cy="50" r="48" fill="#ed593c"/>
+      <ns0:rect id="S03-no-entry-white-bar-7" data-part="white-bar" x="10" y="41" width="80" height="18" fill="white" stroke="none" stroke-width="0.65"/>
+    </ns0:g>
+  </ns0:g>
+  <ns0:g id="branding" data-layer="branding" aria-label="Insert your identity artwork here"/>
+</ns0:svg>

@@ -6,11 +6,15 @@
     184
   ],
   "notes": [
-    "Reconstructed all five wheels and the source open rim convention at the actual axle positions.",
-    "Restored stepped trailer/tractor rails, angled mudguard, separate tank and straps, cap and tall exhaust.",
-    "Redrew the source cab, door, narrow front pane, fender moulding, vents and front fittings; omitted the nonphysical diagonal annotation leader."
+    "Rechecked the independently drawn Hydro side elevation, including five wheels, trailer underframe, coupling rail and source cab.",
+    "Restored the lower trailer-frame return and the separated filler-neck linework.",
+    "Plain trailer panels and unfilled outline tyre interiors remain source-specific; no V14 rib pattern or perspective gear is imposed."
   ],
-  "limits": [],
+  "limits": [
+    "Cab/front at right.",
+    "Clean illustrative reconstruction, not recovered production artwork or an engineering drawing.",
+    "Colours, tiny scan details and hidden geometry are not authenticated. Source annotations and identity are excluded from mechanical-line findings."
+  ],
   "orientation": "Cab/front at right.",
   "id": "H46-tractor-trailer",
   "title": "Tractor Trailer \u2014 Hydro",
@@ -60,9 +64,46 @@
     }
   ],
   "previous_blank_sha256": "b6609d48f5db3168367b74567cd076b27671e782d90a2ddc2f6bc53d20b89274",
-  "revised_blank_sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
+  "revised_blank_sha256": "2f977391991bc24595210e7e92f4aaa22597bf147f6530792b2af8d71c8bc532",
   "auto_trace_used": false,
   "embedded_raster": false,
-  "review_status": "visual source-overlay review completed; reconstruction limits apply",
-  "optional_markings": false
+  "review_status": "source comparison reviewed; explicit limits apply",
+  "optional_markings": false,
+  "revision": "trailers-signs-r2",
+  "review_scope": "specific vehicle/trailer recheck",
+  "object_geometry_changed_this_pass": true,
+  "visible_markings": 0,
+  "previous_delivered_blank_sha256": "cadde00bce80d9051ba5dda20b0902ac54d58100a0c98e27973af1cc3f6d5281",
+  "default_display": "display.svg",
+  "topology_checks": [],
+  "source_units": "PDF coordinate registration; SVG units-per-PDF-point retained",
+  "proof_registration": {
+    "render_scale_px_per_svg_unit": 2.5,
+    "actual_raster_viewbox": [
+      49.2,
+      327.2,
+      504.8,
+      202.8
+    ],
+    "PDF_pixel_origin": [
+      123,
+      818
+    ],
+    "pixel_dimensions": [
+      1262,
+      507
+    ],
+    "fitted_alignment": false,
+    "source_masked": false
+  },
+  "default_download": "unbranded.svg",
+  "export_files": [
+    "branding-zones.svg",
+    "previous-blank.svg",
+    "unbranded.svg",
+    "blank.svg",
+    "display.svg",
+    "geometry-only.svg"
+  ],
+  "geometry_pass_scope": "This asset was inspected in the trailer/sign pass; this is not a claim that every source pixel has been reproduced."
 }
