@@ -45,6 +45,19 @@ export const withRevision = (brand, id) => {
   return revised
 }
 
+/**
+ * The approved identity alone: no revisions to choose from, and none of the sheets that compare
+ * one with it. For showing a brand to the people who use it rather than the people deciding it.
+ */
+export const approvedOnly = (brand) => {
+  if (!brand || (!brand.revisions?.length && !brand.revision)) return brand
+  const approved = structuredClone(brand)
+  delete approved.revisions
+  delete approved.revision
+  if (approved.guide?.sheets) approved.guide.sheets = approved.guide.sheets.filter((sheet) => sheet.group !== 'revisions')
+  return approved
+}
+
 /** A revision's README: what it changes and why, for the kit's revisions/<id>/ folder. */
 export const revisionReadme = (brand, revision) => `# ${brand.name}: ${revision.title}
 

@@ -5,7 +5,7 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } fro
 import { loadBrandFonts } from '../fonts/provider.js'
 import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
-import { revisionsOf, withRevision } from '../engine/revisions.js'
+import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, builtInName, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
 import { Overview } from './views/Overview.jsx'
@@ -14,6 +14,7 @@ import { Kit } from './views/Kit.jsx'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
+import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './share.jsx'
 
 // The guide pulls in the manual viewer; the manual library pulls in 156 pages' worth of data.
 const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default: module.Guide })))
@@ -30,11 +31,16 @@ const VIEWS = [
 const OTHER_VIEWS = [{ id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
 const ALL_VIEWS = [...VIEWS, ...OTHER_VIEWS].map((view) => view.id)
 
+// A shared link (see ./share.jsx) is read once, on arrival, and kept in the address from then on.
+const SHARED = isSharedView()
+const TABS = SHARED ? VIEWS.filter((view) => SHARED_VIEWS.includes(view.id)) : VIEWS
+const OPEN_VIEWS = SHARED ? SHARED_VIEWS : ALL_VIEWS
+
 const params = () => new URLSearchParams(globalThis.location?.search ?? '')
 
 const writeUrl = (changes, { keep = [] } = {}) => {
   const url = new URL(globalThis.location.href)
-  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', 'revision', ...keep].includes(key)) url.searchParams.delete(key)
+  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', 'revision', 'share', ...keep].includes(key)) url.searchParams.delete(key)
   for (const [key, value] of Object.entries(changes)) {
     if (value) url.searchParams.set(key, value)
     else url.searchParams.delete(key)
@@ -63,15 +69,16 @@ const useWebFonts = (brand, source) => {
 }
 
 export const App = () => {
-  const [view, setView] = useState(() => (ALL_VIEWS.includes(params().get('view')) ? params().get('view') : 'overview'))
+  const [view, setView] = useState(() => (OPEN_VIEWS.includes(params().get('view')) ? params().get('view') : 'overview'))
   // A proposed revision, shown everywhere in place of the approved identity while it is chosen.
-  const [revisionId, setRevisionId] = useState(() => params().get('revision'))
+  const [revisionId, setRevisionId] = useState(() => (SHARED ? null : params().get('revision')))
   const [opened, setOpened] = useState({})
   const [saved, setSaved] = useState(savedBrands)
   const [current, setCurrent] = useState(null)
   const [fonts, setFonts] = useState(null)
   const [libraryFonts, setLibraryFonts] = useState(null)
   const [error, setError] = useState(null)
+  const [sharing, setSharing] = useState(false)
   const fileInput = useRef(null)
 
   const brandIds = [...new Set([...BUILT_IN, ...Object.keys(saved), ...Object.keys(opened)])]
@@ -86,21 +93,27 @@ export const App = () => {
       else next = await loadBuiltIn(BUILT_IN.includes(id) ? id : BUILT_IN[0])
       setCurrent({ ...next, original: structuredClone(next.brand) })
       // On arrival the address may point into a guide or manual; a later switch of brand starts fresh.
-      writeUrl({ brand: next.brand.id }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature'] : [] })
-      try { localStorage.setItem('brandkit:last', next.brand.id) } catch { /* fine */ }
+      // A shared link drops anything it does not offer (a revision, a view of the workshop).
+      writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature'] : [] })
+      if (!SHARED) try { localStorage.setItem('brandkit:last', next.brand.id) } catch { /* fine */ }
     } catch (problem) {
       setError(problem.message)
     }
+    // `view` only matters on arrival, for a shared link.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opened, saved])
 
   useEffect(() => {
     const wanted = params().get('brand') ?? (() => { try { return localStorage.getItem('brandkit:last') } catch { return null } })()
+    // A shared link names a brand built into the site; one kept in somebody's browser is not there.
+    if (SHARED && !BUILT_IN.includes(wanted)) { setError(`This link is for a brand that isn’t on this site${wanted ? ` (${wanted})` : ''}. Ask whoever sent it for a new one.`); return }
     select(wanted && (BUILT_IN.includes(wanted) || savedBrands()[wanted]) ? wanted : BUILT_IN[0], { keepView: true })
     // Once, on arrival.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const base = current?.brand
+  // A shared view only ever has the approved identity, so nothing downstream can offer a revision.
+  const base = useMemo(() => (SHARED ? approvedOnly(current?.brand) : current?.brand), [current?.brand])
   const revisions = revisionsOf(base)
   const activeRevision = revisions.some((entry) => entry.id === revisionId) ? revisionId : null
   const brand = useMemo(() => (base && activeRevision ? withRevision(base, activeRevision) : base), [base, activeRevision])
@@ -176,8 +189,15 @@ export const App = () => {
   const changed = useMemo(() => base && current?.original && JSON.stringify(base) !== JSON.stringify(current.original), [base, current?.original])
 
   return (
-    <div className="app">
+    <Shared.Provider value={SHARED}>
+    <div className={`app${SHARED ? ' app--shared' : ''}`}>
       <header className="masthead">
+        {SHARED ? (
+          <div className="masthead__row">
+            {brand ? <SharedMark brand={brand} /> : <span className="shared-mark" />}
+            {brand && <span className="badge badge--approved" title="The approved identity">v{brand.displayVersion ?? brand.version}</span>}
+          </div>
+        ) : (
         <div className="masthead__row">
           <a className="wordmark" href={import.meta.env.BASE_URL} aria-label="brandkit home">
             <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" /><g fill="var(--page)"><circle cx="22" cy="22" r="8" /><circle cx="42" cy="22" r="8" /><circle cx="22" cy="42" r="8" /><rect x="34" y="34" width="16" height="16" rx="3" /></g></svg>
@@ -201,26 +221,29 @@ export const App = () => {
           {activeRevision && <span className="badge badge--revision" title="Every view is showing this revision instead of the approved identity">{brand.revision.status} revision</span>}
           {changed && <span className="badge" title="Edited since it was loaded">edited</span>}
           <div className="masthead__actions">
+            <button type="button" className="button" disabled={!base} onClick={() => setSharing(true)}>Share</button>
             <button type="button" className="button button--quiet" onClick={() => fileInput.current?.click()}>Open…</button>
             <input ref={fileInput} type="file" accept=".json,.zip,application/json,application/zip" hidden onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ''; if (file) open(file) }} />
             {OTHER_VIEWS.map((entry) => <button key={entry.id} type="button" className="button button--quiet" aria-pressed={view === entry.id} onClick={() => go(entry.id)}>{entry.label}</button>)}
             <a className="button button--quiet" href="https://github.com/ahzs645/brandkit">GitHub</a>
           </div>
         </div>
-        <nav className="tabs" aria-label="Sections">
-          {VIEWS.map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
-        </nav>
+        )}
+        {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
+          {TABS.map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
+        </nav>}
       </header>
+      {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
 
       {error && <p className="notice notice--error" role="alert">{error}</p>}
 
       <main className="main">
-        {!brand ? <p className="muted">Loading…</p> : (
+        {!brand ? !error && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} go={go} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
-              aside={(template) => (template.description || template.sources) && (
+              aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">
                   {template.description && <p>{template.description}</p>}
                   <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
@@ -239,8 +262,11 @@ export const App = () => {
         )}
       </main>
       <footer className="footer muted">
-        brandkit makes every file in your browser; nothing is uploaded. The ddcnorth kit is reproduced byte for byte from its brand.json.
+        {SHARED
+          ? `${brand?.name ?? 'This'} brand centre. Every file is made in your browser from the approved identity; nothing is uploaded.`
+          : 'brandkit makes every file in your browser; nothing is uploaded. The ddcnorth kit is reproduced byte for byte from its brand.json.'}
       </footer>
     </div>
+    </Shared.Provider>
   )
 }

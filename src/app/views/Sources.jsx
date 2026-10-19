@@ -3,6 +3,7 @@
 // page in the library lists what the built-in brands build from it (brands/index.json).
 
 import MANIFEST from '../../../brands/index.json'
+import { useShared } from '../share.jsx'
 
 // The packs the app serves (see vite.config.js); a source in any other pack is shown as text.
 const PACKS = { bc: `${import.meta.env.BASE_URL}manuals/bc/` }
@@ -13,7 +14,9 @@ const pageLabel = (source) => [source.manual, source.printed && (/^\d/.test(sour
 
 /** The manual pages a template, signature or guide page is built from, as thumbnails that open them. */
 export const ManualSources = ({ brand, sources, openManual, heading }) => {
-  if (!sources?.length) return null
+  // Which manual page a template follows is for the people making the brand, not using it.
+  const shared = useShared()
+  if (shared || !sources?.length) return null
   const base = PACKS[brand.manuals?.pack]
   return (
     <div className="sources">

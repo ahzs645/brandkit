@@ -142,6 +142,15 @@ test('a revision patches the definition, and the kit carries it beside the appro
   assert.notEqual(approved, proposed)
 })
 
+test('the approved identity alone carries no revisions, in the guide or the kit', async () => {
+  const { approvedOnly, revisionsOf } = await import('../src/engine/revisions.js')
+  const shared = approvedOnly(brand)
+  assert.deepEqual(revisionsOf(shared), [])
+  assert.ok(!shared.guide.sheets.some((sheet) => sheet.group === 'revisions'))
+  assert.ok(!planKit(shared).some((entry) => entry.path.startsWith('revisions/')))
+  assert.ok(revisionsOf(brand).length, 'the definition it was made from keeps its revisions')
+})
+
 test('the BC example brands validate, and draw every template, signature and guide page', async () => {
   for (const id of ['bc-province-1977', 'bc-hydro-1983']) {
     const folder = new URL(`../brands/${id}/`, import.meta.url).pathname

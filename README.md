@@ -61,6 +61,13 @@ in the library lists what is built from it, linking back.
 every page, and builds every file, as it would make them; the approved kit includes it, with a
 side-by-side comparison, in `revisions/rising/`.
 
+**Share** in the header gives a link for the people who use a brand rather than make it
+(`?brand=ddcnorth&share=1`, optionally with `&view=templates` and so on). It opens the brand as its
+own brand centre: the approved identity's overview, logos, templates, guide and kit, under the
+brand's symbol and name, without revisions, editing, other brands, the manual library or the
+manual pages templates cite. It is a presentation, not access control: the full app is the same
+address without `share`.
+
 **New brand** in the app makes a starting point from a name, a palette, a symbol drawn on a grid
 and a typed wordmark (outlined, so the logo needs no font). **Open…** takes a `brand.json`, a
 brand folder zipped, or a whole kit's zip. **Edit brand** changes colours, roles and copy by form
