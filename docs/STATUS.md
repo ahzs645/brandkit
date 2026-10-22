@@ -85,3 +85,114 @@ Implementation evidence (working tree on `ddcnorth-v2.3` over `a2eeb09`, uncommi
    - After the fixes: `npm test` 56 tests, 54 passed, 2 skipped, 0 failed. `npm run test:browser` 20/20. `DDC_BROKEN=1` run exits 1 at 18/20 (both marks checks). `git diff --check` clean. Two first-run browser failures were test timing: Count starts its first animation at 350 ms (now within the same 500 ms window), and "All" is one Shift+Tab from "Fields".
 8. M1 completion re-audit: PASS. BK-001 to BK-012, BK-007a and PROCESS-001 are VERIFIED. Nothing is committed or pushed. A milestone-completion commit needs the user's approval and a Plan Guardian pre-commit gate; it must stage only the M1 paths, leaving the untracked `sites/` out.
 9. On 2026-10-22 the user approved committing the v2.3 work to `ddcnorth-v2.3` in brandkit, leaving `sites/` out and not pushing. A Plan Guardian pre-commit gate runs on the staged changes first.
+
+## M2: Over the Edge, "Forest press" (branch `overtheedge-brand`, from `ddcnorth-v2.3` at `3a7cd38`)
+
+Started 2026-10-22. The user chose a new brand in brandkit built like First Form, the "Forest press" direction, and a stand-in auditor (no `plan_guardian` agent exists in this session): a general-purpose agent briefed with the Plan Guardian role and the AGENTS.md protocol. See docs/PLANS.md M2 and M3.
+
+Baseline at `3a7cd38` before any change: `npm test` 56 tests, 54 passed, 2 skipped (parity, needs `DDCNORTH_KIT`), 0 failed. The untracked `sites/` is still present and left untouched.
+
+### Independent audit record (M2 and M3)
+
+1. M2 readiness audit: FAIL. Findings:
+   - A1 (blocking): the plan said seven font files where it downloads six TTFs, and never listed `files`. The kit would have shipped `@font-face` rules for files it lacks and Inter without its licence. "Every path in files exists" would fail for the shared Inter files if checked inside the brand folder.
+   - A2 (blocking): "other brands byte-identical" had no test for First Form or northwind. `test/regression.test.js` covers ddcnorth only.
+   - A3 (blocking): the 288 px logo minimum had no unit for templates in millimetres, and did not cover guide pages, sheets or the guide frame logo.
+   - A4 (blocking): the invented-facts scan's scope was inconsistent. "Digits only in brackets" clashed with template titles' dimensions, folios, the version, measured ratios and sizes. It missed guide copy, `copy.*`, `web.intro` and `web.landing`, which were not specified.
+   - A5 (blocking): the print covers in `reference/` would be published, because the app build bundles every brand file (`src/app/brands.js:11`) and GitHub Pages deploys it.
+   - Non-blocking A6 to A15: the source SVG's groups are positional, with the apostrophe outside `#Subtext` and a random id; `wordmark.left` is global; duplicate stacked files are intended; Anton-uppercase, one-hand-note, logo-contrast and `lockupSymbol`-boolean checks should be added; the icon check was circular; the missing-input mechanism was undefined; the omitted editable wordmark and micro symbol were unrecorded; the app header draws the full logo small; two M3 items; process compliant.
+   Amendments to docs/PLANS.md and docs/TRACEABILITY.md for A1 to A5:
+   - A1: six TTFs; `files` listed in full, including the shared Inter files and `fonts/Inter-OFL.txt`; checked with `findAsset`; every face has a `web` path.
+   - A2: a First Form and northwind golden manifest made from an export of `3a7cd38` before any engine change, with `test/brands-regression.test.js`.
+   - A3: minimums in a screen column (px) and a print column (mm), with the conversion through `physical`. Guide pages and sheets are covered, and the frame logo is `words` at 150 px. The press pass uses `words`, and the app header is a recorded exception.
+   - A4: `copy` and `web` specified. The scan covers every human-readable string, with exempt categories and an allowlist of sourced facts. Page numbers are bracketed.
+   - A5: the covers are not vendored. PROVENANCE.json records their URLs, hashes, size and sampled pixels.
+
+   Non-blocking items adopted:
+   - positional groups, the apostrophe glyph and the logo normalisations;
+   - every variant starts at x = 0;
+   - duplicate stacked files recorded as intended;
+   - Anton-capitals, one-hand-note, logo-contrast and `lockupSymbol`-boolean checks;
+   - a vendored `site-icons.json` with its hash;
+   - the missing-input procedure;
+   - the omitted editable wordmark and micro symbol recorded;
+   - the app header exception;
+   - M3 pages embed their fonts (no network), and the site path is `brands/overtheedge/site/`.
+2. M2 readiness re-audit: PASS. A1 to A5 resolved. Non-blocking items adopted into docs/PLANS.md:
+   - the apostrophe is its own glyph, checked in OTE-002;
+   - OTE-005 points to the full copy scan;
+   - nested guide thumbnails are exempt from the screen minimum (templates are checked at full size);
+   - the brands golden manifest hashes vector and text entries only;
+   - the missing-input procedure removes `reference/logo-site.svg` in a working-tree copy;
+   - the press pass label is documented as a label.
+
+   Implementation of M2 begins.
+
+### Implementation (M2)
+
+Implementation evidence (working tree on `overtheedge-brand` over `3a7cd38`, uncommitted):
+- The First Form and northwind golden manifest was made **before** any engine change, from `git archive 3a7cd38` in the scratchpad: `node scripts/golden-base.mjs --brands firstform,northwind <export>`. Two runs were identical (SHA-256 c26bc7da3376c771e345d8f7712561bdd0bf2dec7bbd2f84f4fd2149e7658cfd). It holds 58 First Form and 60 northwind renders.
+- `npm test`: 70 tests, 68 passed, 2 skipped (parity, needs `DDCNORTH_KIT`), 0 failed. This includes `test/overtheedge.test.js` (13), `test/brands-regression.test.js` (1) and the unchanged ddcnorth regression and First Form tests.
+- `npm test` in a copy of the working tree without `.git` (`node_modules` linked): 68 passed, 2 skipped, 0 failed.
+- `npm run make:overtheedge` twice: the hashes of every file under `brands/overtheedge/` and of `brands/index.json` are unchanged by the second run. These files are untracked, so this hash comparison stands in for `git diff --exit-code`.
+- `git diff --exit-code -- brands/ddcnorth brands/firstform`: clean.
+- `node bin/brandkit.mjs check brands/overtheedge/brand.json`: "no problems found", exit 0.
+- `node bin/brandkit.mjs build brands/overtheedge/brand.json --out <scratch>`: 104 files.
+- `git diff --check`: clean.
+- `npm run build`: succeeds. `dist` is 42,072 KB at `3a7cd38` and 43,316 KB on the branch (+1.2 MB, mostly the six font files).
+- Missing input (OTE-009 procedure): in the working-tree copy, with `reference/logo-site.svg` moved aside, `node scripts/brands/overtheedge.mjs` printed "Missing input: brands/overtheedge/reference/logo-site.svg" and exited 1.
+- Visual review: every template, guide page and the sheet were rendered outlined and screenshotted in Chromium (scratchpad, not committed). Fixes from that review:
+  - the story post's section, headline and deck became a `flow`, so the deck follows the headline;
+  - the Applications page became two aligned rows, with light-ground templates framed;
+  - the Logo family page's full logo is drawn in Forest.
+
+Plan amendments found during implementation (also in docs/PLANS.md):
+- The copy scan exempts numbered-list markers in the docs, and two names that contain a digit: the typeface "Source Serif 4" and the paper size "A4".
+- The logo sheet has no number ("{name} logo reference sheet", label "OVER THE EDGE / LOGO REFERENCE"), because the kit has one sheet.
+- Logos placed on a panel carry a `ground` key (press pass, issue cover, title slide), like text on a panel, so the logo-contrast check measures against the panel.
+
+Manual review of every added sentence (OTE-005):
+- Template text is bracketed placeholders, the sourced lines, or the locked labels (IN THIS ISSUE, PRESS, CALENDAR, WHERE, WHEN, HOST, the domain lines, UNBC'S STUDENT NEWSPAPER, the descriptor).
+- No name, figure, date, email, distribution claim or quotation is invented.
+- Guide sentences state the brand's own rules or the measured values. The one sourced headline ("Bears Don’t Really Hibernate… Or Do They?") and the cover dateline ("VOLUME 32 · ISSUE 2 · OCTOBER 16, 2025") are the paper's own.
+
+3. M2 completion audit: FAIL. Checked independently and passing:
+   - the golden manifest, regenerated byte for byte; a 0.1% change to `variantHeight` fails both regression tests;
+   - the tests and the build, the CLI and the kit;
+   - the script runs twice cleanly, and reads only repository inputs;
+   - the logo paths match the live site, and the font hashes match upstream;
+   - the icons, provenance, contrast and logo minimums.
+
+   OTE-001, 002, 003, 004, 006, 007, 009, 010 and 011 may be VERIFIED.
+
+   Findings:
+   - B1 (blocking, OTE-008): the Colour page stated 6 of the plan's 11 measured pairs, and gave bark on newsprint as 4.5 rather than 4.53. The test asserted only those 6.
+   - B2 (blocking, copy scan): the test's `EXEMPT` also stripped any parenthesised number, any decimal, any date, "April|October YYYY" and "RGB …". The plan did not record these, and they would let invented figures through.
+   - Non-blocking:
+     - B3: the sourced hero line is an excerpt with a full stop added. Record it.
+     - B4: the contrast test's 24 px threshold compares template units, not CSS px, in print templates; the logo-minimum check ignores a `height` box.
+     - B5 and B6: records agree.
+   Fixes for B1 to B4:
+   - B1: the Colour page states all eleven measured pairs, plus the two for text 24 px and up, each as "N : 1", with bark on newsprint at 4.53. The test recomputes every stated value from the palette to its stated precision.
+   - B2: `EXEMPT` narrowed to exactly the categories now listed in docs/PLANS.md:
+     - date patterns became an allowlist of three dates;
+     - decimals are allowed only as sizes, "N : 1" ratios, logo units or "vN.N" versions;
+     - the parenthesised-number and RGB patterns were removed.
+
+     A negative test shows invented figures are still caught.
+   - B3: the hero line is recorded as an excerpt in docs/PLANS.md and the script.
+   - B4: the contrast test converts print-template sizes to CSS px through `physical`, and the logo-minimum check accounts for a `height` box.
+
+   After the fixes:
+   - `npm test`: 71 tests, 69 passed, 2 skipped, 0 failed;
+   - `make:overtheedge` is still idempotent;
+   - `check` exits 0, and `git diff --check` is clean;
+   - ddcnorth and firstform are unchanged.
+4. M2 completion re-audit: PASS.
+   - B1 and B2 are resolved with no new contradictions.
+   - The auditor's own mutation (an invented "3.5 million students" in a guide subtitle) made the copy test fail, as it should.
+   - OTE-005, OTE-008 and PROCESS-002 are VERIFIED, and M2 is complete in these records.
+
+   Nothing is committed or pushed. The milestone commit needs the user's approval, then a Plan Guardian pre-commit gate on the staged changes. Only M2 paths are staged; `sites/` stays out, and nothing is pushed.
+5. On 2026-10-22 the user approved the M2 commit: "Yes, commit the first milestone (M2) to the overtheedge-brand branch. Leave sites/ out and don't push. Run the pre-commit audit first, then continue with M3." A Plan Guardian pre-commit gate runs on the staged changes first.
+   Pre-commit finding (mine, while staging): `git diff --cached --check` flagged the Anton, IBM Plex Mono and Gochi Hand licence texts. They are upstream byte copies with CRLF line endings and trailing spaces, and their SHA-256 is recorded and tested. A new `.gitattributes` marks `brands/overtheedge/fonts/*-OFL.txt` as `-whitespace -text`, so they stay byte-exact and the check is clean. The earlier "clean" result in the evidence above was taken while these files were untracked.

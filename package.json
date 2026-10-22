@@ -43,6 +43,7 @@
     "import:pofbc": "node scripts/import-pofbc.mjs",
     "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs",
     "make:firstform": "node scripts/brands/firstform.mjs",
+    "make:overtheedge": "node scripts/brands/overtheedge.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
     "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs",
     "test:browser": "node test/browser/ddcnorth-motion.check.mjs"

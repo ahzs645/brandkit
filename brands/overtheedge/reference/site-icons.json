@@ -1,0 +1,36 @@
+{
+  "read": "2026-10-22",
+  "note": "Each icon exactly as the site serves it. brands/overtheedge icons must match each one's geometry (element names and d, cx, cy, r, x, y, width, height, rx); presentation attributes differ by design.",
+  "icons": [
+    {
+      "id": "search",
+      "source": "https://overtheedge.unbc.ca/",
+      "element": "header search button (button.search-toggle > span.search-toggle__icon)",
+      "markup": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n            <circle cx=\"11\" cy=\"11\" r=\"7\"/>\n            <path d=\"M21 21l-4.35-4.35\"/>\n        </svg>"
+    },
+    {
+      "id": "sun",
+      "source": "https://overtheedge.unbc.ca/",
+      "element": "header theme toggle (button.ote-theme-toggle.theme-toggle, span.theme-toggle__icon--sun)",
+      "markup": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n            <circle cx=\"12\" cy=\"12\" r=\"4\"></circle><path d=\"M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41\"></path>\n        </svg>"
+    },
+    {
+      "id": "moon",
+      "source": "https://overtheedge.unbc.ca/",
+      "element": "header theme toggle (span.theme-toggle__icon--moon)",
+      "markup": "<svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n            <path d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\"></path>\n        </svg>"
+    },
+    {
+      "id": "close",
+      "source": "https://overtheedge.unbc.ca/",
+      "element": "search overlay close (button.search-sheet__close)",
+      "markup": "<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n                        <path d=\"M18 6L6 18M6 6l12 12\"></path>\n                    </svg>"
+    },
+    {
+      "id": "arrow-right",
+      "source": "https://overtheedge.unbc.ca/wp-content/themes/twentytwentyfive-ote-child/assets/css/button-animations.css",
+      "element": "first data: URI (the arrow after primary button labels), percent-decoded",
+      "markup": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='#000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M5 12h14M12 5l7 7-7 7'/></svg>"
+    }
+  ]
+}

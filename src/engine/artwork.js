@@ -107,23 +107,40 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
   const pad = settings.canvasPadding ?? 0
   const left = wordmark.left ?? 0
   const baseWidth = variant.width - left
+  // A variant may be its own height (a wordmark without its subtext line, a stacked one).
+  const variantHeight = variant.height ?? wordmark.height
   const { width: sw, height: sh } = symbolViewBox(brand)
 
   if (layout === 'symbol') {
     return { width: sw + 2 * pad, height: sh + 2 * pad, art: `<g transform="translate(${pad} ${pad})">${mark(ctx, colour)}</g>` }
   }
+  /** A wordmark variant alone, `height` tall. */
+  const wordmarkOnly = (wordmarkId, height) => {
+    const chosen = wordmark.variants[wordmarkId]
+    const scale = height / (chosen.height ?? wordmark.height)
+    const art = `<g transform="translate(${n(pad - left * scale)} ${pad}) scale(${n(scale)})">${words(ctx, wordmarkId, mode, colour)}</g>`
+    return { width: (chosen.width - left) * scale + 2 * pad, height: height + 2 * pad, art }
+  }
   if (layout === 'wordmark') {
     const height = settings.wordmarkHeight
-    const scale = height / wordmark.height
+    const scale = height / variantHeight
     const art = `<g transform="translate(${n(pad - left * scale)} ${pad}) scale(${n(scale)})">${words(ctx, entry.wordmark, mode, colour)}</g>`
     return { width: baseWidth * scale + 2 * pad, height: height + 2 * pad, art }
+  }
+  // A family whose logo is its lettering alone (`lockupSymbol: false`) draws no symbol beside or
+  // above it: horizontal is its wordmark at `typeHeight`, stacked is `stackedWordmark` (or its own).
+  if (entry.lockupSymbol === false && layout === 'stacked') {
+    return wordmarkOnly(entry.stackedWordmark ?? entry.wordmark, entry.stackedTypeHeight ?? settings.stackedTypeHeight)
+  }
+  if (entry.lockupSymbol === false && layout === 'horizontal') {
+    return wordmarkOnly(entry.wordmark, entry.typeHeight ?? settings.typeHeight ?? settings.iconHeight)
   }
   if (layout === 'stacked') {
     const iconHeight = settings.stackedIconHeight
     const iconScale = iconHeight / sh
     const iconWidth = sw * iconScale
     const typeHeight = entry.stackedTypeHeight ?? settings.stackedTypeHeight
-    const scale = typeHeight / wordmark.height
+    const scale = typeHeight / variantHeight
     const typeWidth = baseWidth * scale
     const width = Math.max(iconWidth, typeWidth)
     let art = `<g transform="translate(${n(pad + (width - iconWidth) / 2)} ${pad}) scale(${n(iconScale)})">${mark(ctx, colour)}</g>`
@@ -132,7 +149,7 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
   }
   if (layout !== 'horizontal') throw new Error(`Unknown layout: ${layout}`)
   const typeHeight = entry.typeHeight ?? settings.typeHeight ?? settings.iconHeight
-  const scale = typeHeight / wordmark.height
+  const scale = typeHeight / variantHeight
   const iconHeight = settings.iconHeight
   const iconScale = iconHeight / sh
   const iconWidth = sw * iconScale

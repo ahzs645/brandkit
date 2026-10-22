@@ -6,6 +6,12 @@
 //   git archive a2eeb09 | tar -x -C /tmp/brandkit-base
 //   node scripts/golden-base.mjs /tmp/brandkit-base > test/fixtures/base-a2eeb09.json
 //
+// With --brands, it hashes other brands' vector and text renders instead (no asset files: a brand
+// may name files that live in another brand's folder), for test/brands-regression.test.js:
+//
+//   git archive 3a7cd38 | tar -x -C /tmp/brandkit-3a7cd38
+//   node scripts/golden-base.mjs --brands firstform,northwind /tmp/brandkit-3a7cd38 > test/fixtures/base-3a7cd38-brands.json
+//
 // The checkout path decides which engine and which brand.json are used, so the same function
 // serves both sides of the comparison.
 
@@ -48,6 +54,22 @@ export const computeManifest = async (root) => {
   }
 }
 
+/** Each named brand's vector and text renders, from the checkout at `root`: `{ id: { path: sha } }`. */
+export const computeBrandRenders = async (root, ids) => {
+  const base = resolve(root)
+  const engine = await import(pathToFileURL(join(base, 'src/engine/index.js')).href)
+  const out = {}
+  for (const id of ids) {
+    const brand = JSON.parse(readFileSync(join(base, 'brands', id, 'brand.json'), 'utf8'))
+    const renders = {}
+    for (const entry of engine.planKit(brand, { rasters: false, pdfs: false, assets: false })) {
+      if (entry.kind === 'text') renders[entry.path] = sha(entry.make({ brand }))
+    }
+    out[id] = sorted(renders)
+  }
+  return out
+}
+
 /** The differences between two render maps: changed, missing and added paths. */
 export const compareRenders = (expected, actual) => ({
   changed: Object.keys(expected).filter((path) => path in actual && actual[path] !== expected[path]),
@@ -56,10 +78,13 @@ export const compareRenders = (expected, actual) => ({
 })
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const root = process.argv[2]
-  if (!root) {
-    console.error('Usage: node scripts/golden-base.mjs <checkout of the base commit>')
+  const args = process.argv.slice(2)
+  const brands = args[0] === '--brands' ? args[1]?.split(',').filter(Boolean) : null
+  const root = brands ? args[2] : args[0]
+  if (!root || (brands && !brands.length)) {
+    console.error('Usage: node scripts/golden-base.mjs [--brands id,id] <checkout of the base commit>')
     process.exit(1)
   }
-  process.stdout.write(`${JSON.stringify(await computeManifest(root), null, 1)}\n`)
+  const manifest = brands ? await computeBrandRenders(root, brands) : await computeManifest(root)
+  process.stdout.write(`${JSON.stringify(manifest, null, 1)}\n`)
 }

@@ -115,8 +115,11 @@ export const validateBrand = (brand) => {
   if (brand.signatures?.length) need(brand.colourways && Object.keys(brand.colourways).length, 'A brand with signatures needs `colourways`.')
   for (const entry of brand.families ?? []) {
     need(brand.wordmark?.variants?.[entry.wordmark], `Family \`${entry.id}\` names wordmark \`${entry.wordmark}\`, which is not defined.`)
+    if (entry.stackedWordmark != null) need(brand.wordmark?.variants?.[entry.stackedWordmark], `Family \`${entry.id}\` names stacked wordmark \`${entry.stackedWordmark}\`, which is not defined.`)
+    if (entry.lockupSymbol != null) need(typeof entry.lockupSymbol === 'boolean', `Family \`${entry.id}\`: \`lockupSymbol\` must be true or false.`)
   }
   for (const [id, variant] of Object.entries(brand.wordmark?.variants ?? {})) {
+    if (variant.height != null) need(typeof variant.height === 'number' && variant.height > 0, `Wordmark \`${id}\`: \`height\` must be a positive number.`)
     for (const part of variant.parts ?? []) {
       if (part.glyph) need(brand.wordmark.glyphs?.[part.glyph], `Wordmark \`${id}\` uses glyph \`${part.glyph}\`, which is not defined.`)
       if (part.text) need(brand.fonts?.[part.font ?? 'display'], `Wordmark \`${id}\` sets text in font \`${part.font ?? 'display'}\`, which is not defined.`)

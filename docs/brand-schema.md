@@ -130,6 +130,14 @@ chosen one.
 
 Each family is drawn in four layouts: `horizontal`, `stacked`, `wordmark`, `symbol`.
 
+A variant may carry its own `height` (wordmark units), used in place of `wordmark.height` when that
+variant is scaled: a wordmark without its subtext line, or one stacked on several lines, is a
+different height from the rest. A family whose logo is its lettering alone sets `lockupSymbol:
+false`: its `horizontal` layout is its wordmark at `typeHeight` with no symbol beside it, and its
+`stacked` layout is the variant named by `stackedWordmark` (or its own) at `stackedTypeHeight`, with
+no symbol above it. The `wordmark` and `symbol` layouts are unchanged. Over the Edge uses both
+([`brands/overtheedge/brand.json`](../brands/overtheedge/brand.json)).
+
 ## Templates
 
 A template is a canvas and a list of elements. Coordinates are in `unit` (`px` by default, or
@@ -157,6 +165,9 @@ Templates in `mm` may also use:
   of the one before, so a longer title pushes what follows it down.
 - `lines` with `align: 'bottom'` (y is the last baseline, as on a card whose address is set from
   its foot) and `anchor`.
+
+In any unit, a stroked `rect`, `path` or `line` may take `dash` (an SVG `stroke-dasharray`, such as
+`"6 5"`): Over the Edge's issue index is ruled with dashed `path`s.
 
 Every `text` element with an `id` is a **field**: the app's template studio shows a box for it,
 and the value replaces the placeholder. Fields are shared by id across templates, so a name typed

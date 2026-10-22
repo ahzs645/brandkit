@@ -12,8 +12,8 @@
 // Element types:
 //   background  { fill }
 //   rect        { x, y, width, height, fill, stroke?, strokeWidth?, dash?, id? }
-//   path        { d, stroke?, strokeWidth?, fill?, id? }
-//   line        { x1, y1, x2, y2, stroke?, strokeWidth?, id? }
+//   path        { d, stroke?, strokeWidth?, dash?, fill?, id? }
+//   line        { x1, y1, x2, y2, stroke?, strokeWidth?, dash?, id? }
 //   logo        { x, y, width, height?, colour?, family?, layout?, signature?, colourway?, id? }
 //               placed by its visible artwork; a signature takes the template's field values.
 //               A signature can instead be sized in `points` (its logotype's cap height matches

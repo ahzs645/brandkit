@@ -1,0 +1,2806 @@
+{
+  "schema": "brandkit/1",
+  "id": "overtheedge",
+  "name": "Over the Edge",
+  "version": "1.0",
+  "displayVersion": "1.0",
+  "source": "The logo from the SVG overtheedge.unbc.ca serves (reference/logo-site.svg); colours from the site's theme and the 2025 print covers; written by scripts/brands/overtheedge.mjs.",
+  "colours": {
+    "forest": "#155329",
+    "pine": "#0C3B1C",
+    "newsprint": "#F5F1E6",
+    "ink": "#262626",
+    "lichen": "#E3EFCF",
+    "sage": "#6AA380",
+    "moss": "#466855",
+    "kraft": "#D4C8AA",
+    "pulp": "#DBD0BA",
+    "bark": "#7D6B56",
+    "proof": "#B54A35",
+    "white": "#FFFFFF"
+  },
+  "roles": {
+    "ink": "ink",
+    "paper": "newsprint",
+    "muted": "bark",
+    "primary": "forest",
+    "light": "lichen",
+    "reverse": "white",
+    "line": "pulp",
+    "rule": "kraft"
+  },
+  "logoColours": [
+    "forest",
+    "ink",
+    "white",
+    "lichen",
+    "currentColor"
+  ],
+  "rasterColours": [
+    "forest",
+    "ink",
+    "white",
+    "lichen"
+  ],
+  "fonts": {
+    "body": {
+      "family": "Inter",
+      "stack": "Inter, system-ui, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/desktop/Inter-Regular.ttf",
+      "web": "fonts/web/Inter-Regular.woff2",
+      "label": "Inter Regular 400"
+    },
+    "bold": {
+      "family": "Inter",
+      "stack": "Inter, system-ui, Arial, sans-serif",
+      "weight": 600,
+      "file": "fonts/desktop/Inter-SemiBold.ttf",
+      "web": "fonts/web/Inter-SemiBold.woff2",
+      "label": "Inter SemiBold 600"
+    },
+    "display": {
+      "family": "Source Serif 4",
+      "stack": "\"Source Serif 4\", Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "file": "fonts/SourceSerif4-Bold.ttf",
+      "web": "fonts/SourceSerif4-Bold.ttf",
+      "label": "Source Serif 4 Bold 700"
+    },
+    "displayRegular": {
+      "family": "Source Serif 4",
+      "stack": "\"Source Serif 4\", Georgia, \"Times New Roman\", serif",
+      "weight": 400,
+      "file": "fonts/SourceSerif4-Regular.ttf",
+      "web": "fonts/SourceSerif4-Regular.ttf",
+      "label": "Source Serif 4 Regular 400"
+    },
+    "deck": {
+      "family": "Source Serif 4",
+      "stack": "\"Source Serif 4\", Georgia, \"Times New Roman\", serif",
+      "weight": 400,
+      "file": "fonts/SourceSerif4-It.ttf",
+      "web": "fonts/SourceSerif4-It.ttf",
+      "label": "Source Serif 4 Italic 400",
+      "style": "italic"
+    },
+    "extra": {
+      "family": "Anton",
+      "stack": "Anton, \"Arial Narrow\", Impact, sans-serif",
+      "weight": 400,
+      "file": "fonts/Anton-Regular.ttf",
+      "web": "fonts/Anton-Regular.ttf",
+      "label": "Anton Regular 400"
+    },
+    "label": {
+      "family": "IBM Plex Mono",
+      "stack": "\"IBM Plex Mono\", ui-monospace, Menlo, monospace",
+      "weight": 500,
+      "file": "fonts/IBMPlexMono-Medium.ttf",
+      "web": "fonts/IBMPlexMono-Medium.ttf",
+      "label": "IBM Plex Mono Medium 500"
+    },
+    "hand": {
+      "family": "Gochi Hand",
+      "stack": "\"Gochi Hand\", \"Comic Neue\", cursive",
+      "weight": 400,
+      "file": "fonts/GochiHand-Regular.ttf",
+      "web": "fonts/GochiHand-Regular.ttf",
+      "label": "Gochi Hand Regular 400"
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Source Serif 4",
+      "weight": 700,
+      "trackingEm": -0.01
+    },
+    "body": {
+      "family": "Inter",
+      "weight": 400
+    },
+    "labels": {
+      "family": "IBM Plex Mono",
+      "weight": 500,
+      "trackingEm": 0.08
+    }
+  },
+  "symbol": {
+    "name": "o",
+    "viewBox": [
+      0,
+      0,
+      59.42,
+      85.53
+    ],
+    "paths": [
+      "M29.03.09c-.15,0-.31,0-.46,0-.28,0-.55,0-.83,0C11.53.69,15.59,14.94,15.59,14.94,15.59,14.94.87,8.66.03,39.79c0,.51-.02,1.05-.03,1.58v1.44c0,30.93,8.98,42.72,29.03,42.72s30.39-11.79,30.39-42.72S49.97.09,29.03.09ZM29.76,65.67c-4.59,0-6.68-4.09-6.68-22.86s2.09-23.47,6.68-23.47,6.58,4.34,6.58,23.47-2.09,22.86-6.58,22.86Z"
+    ],
+    "title": "O",
+    "masterTitle": "O master",
+    "construction": {
+      "source": "The first path of OVER in reference/logo-site.svg, unedited."
+    }
+  },
+  "wordmark": {
+    "height": 118.59,
+    "left": 0,
+    "glyphs": {
+      "over": "M29.03.09c-.15,0-.31,0-.46,0-.28,0-.55,0-.83,0C11.53.69,15.59,14.94,15.59,14.94,15.59,14.94.87,8.66.03,39.79c0,.51-.02,1.05-.03,1.58v1.44c0,30.93,8.98,42.72,29.03,42.72s30.39-11.79,30.39-42.72S49.97.09,29.03.09ZM29.76,65.67c-4.59,0-6.68-4.09-6.68-22.86s2.09-23.47,6.68-23.47,6.58,4.34,6.58,23.47-2.09,22.86-6.58,22.86ZM58.97,1.1h24.32l7.59,49.22h1.82L99,1.1h24.06l-16.68,83.47h-30.72L58.97,1.1ZM125.89,1.1h44.02v19.59h-20.58v12.21h18.56v19.59h-18.56v12.37h20.58v19.7h-44.02V1.1ZM217.08,84.68l-9.77-27.7h-5.35v27.6h-23.34V1.1h28.79c16.94,0,27.08,11.28,27.08,27.96,0,9.09-3.38,16.27-8.89,21.1l15.07,34.51h-23.6ZM205.12,40.44c4.11,0,6.5-5.09,6.5-11.54s-2.65-9.88-6.65-9.88h-3.01v21.41h3.17Z",
+      "the": "M273.67,20.69h-14.29V1.1h52.13v19.59h-14.5v63.88h-23.34V20.69ZM315.42,1.1h22.97v31.81h14.66V1.1h22.97v83.47h-22.97v-32.07h-14.66v32.07h-22.97V1.1ZM386.34,1.1h44.02v19.59h-20.58v12.21h18.56v19.59h-18.56v12.37h20.58v19.7h-44.02V1.1Z",
+      "edge": "M455.84,1.1h44.02v19.59h-20.58v12.21h18.56v19.59h-18.56v12.37h20.58v19.7h-44.02V1.1ZM508.56,1.1h24.69c25.62,0,37.63,16.22,37.63,41.48,0,26.77-12.47,42-37.79,42h-24.53V1.1ZM531.9,66.07c10.65,0,15.96-8.37,15.96-23.49s-4.68-22.82-14.87-22.82h-2.18v46.31h1.09ZM646.7,1.1h44.02v19.59h-20.58v12.21h18.56v19.59h-18.56v12.37h20.58v19.7h-44.02V1.1ZM637.91,35.39v48.99h-17.75l-.05-8.18h-.31c-.24,1.58-2.81,9.37-16.55,9.37-18.78,0-27.57-18.62-27.57-43.2S584.11,0,607.95,0c19.97,0,29.48,12.68,29.48,27.87h-19.29c-.04-1.17-.09-1.26-.25-2.25-.86-5.2-3.51-7.82-8.85-7.82-10.24,0-10.5,12.26-10.5,25.04s.88,23.38,9.67,23.38c6,0,8.02-4.86,8.02-9.88v-4.97h-9.47v-15.99h31.14Z",
+      "subtext": "M274.78,112.52c0,2.06-.49,3.58-1.48,4.55-.99.98-2.53,1.46-4.63,1.46s-3.69-.49-4.69-1.48c-1-.99-1.5-2.51-1.5-4.57v-8.6h3.15v8.6c0,1.17.22,2.04.67,2.6.44.57,1.25.85,2.42.85s1.9-.28,2.31-.85c.41-.57.62-1.43.62-2.6v-8.6h3.15v8.64ZM282.65,103.88h3.21l5.91,9.63v-9.63h3.03v14.37h-3.15l-5.95-9.65v9.65h-3.05v-14.37ZM309.53,103.88c1.34,0,2.45.3,3.3.9.85.6,1.28,1.5,1.28,2.71,0,.67-.17,1.27-.52,1.79-.35.52-.83.91-1.43,1.18,1.75.5,2.62,1.67,2.62,3.51,0,1.36-.46,2.41-1.37,3.16-.92.75-2.08,1.12-3.49,1.12h-7.18v-14.37h6.8ZM305.79,109.7h2.87c1.59,0,2.38-.56,2.38-1.68,0-.66-.22-1.11-.65-1.34s-1.01-.35-1.74-.35h-2.87v3.37ZM305.79,115.75h3.17c.82,0,1.47-.13,1.95-.4.48-.27.72-.79.72-1.55s-.25-1.3-.76-1.56c-.5-.26-1.19-.39-2.07-.39h-3.01v3.91ZM333.04,117c-1.1,1.06-2.62,1.59-4.54,1.59-2.08,0-3.76-.69-5.03-2.07-1.27-1.38-1.91-3.21-1.91-5.48,0-2.15.64-3.94,1.93-5.37,1.28-1.43,3-2.14,5.14-2.14,1.71,0,3.14.48,4.3,1.45,1.16.97,1.8,2.2,1.92,3.69h-3.09c-.16-.79-.52-1.41-1.08-1.85-.56-.44-1.26-.66-2.11-.66s-1.61.25-2.21.74c-.6.49-1.02,1.09-1.26,1.81-.24.71-.36,1.49-.36,2.34,0,1.48.34,2.66,1.03,3.54s1.61,1.32,2.76,1.32c1.92,0,3.02-1.08,3.29-3.23h3.13c-.16,1.8-.79,3.24-1.9,4.3ZM360.6,108.16c-.12-1.43-1.03-2.14-2.72-2.14-.73,0-1.29.14-1.71.43s-.62.69-.62,1.2c0,.17.03.33.08.46.05.13.15.26.3.37.15.11.3.21.44.28.15.07.37.15.66.24.29.09.55.16.79.23.24.07.57.15,1,.26.43.11.81.21,1.13.3,1.41.4,2.47.91,3.16,1.51.69.61,1.04,1.47,1.04,2.6,0,.82-.17,1.54-.5,2.15-.34.61-.79,1.1-1.36,1.45-.57.36-1.2.62-1.88.79-.68.17-1.4.25-2.17.25-1.95,0-3.47-.45-4.57-1.34-1.1-.89-1.65-2.16-1.66-3.78h3.13c.05,1.8,1.14,2.71,3.25,2.71.82,0,1.47-.17,1.95-.52.48-.34.72-.81.72-1.4,0-.5-.22-.86-.66-1.09-.44-.23-1.36-.55-2.75-.95-.08-.01-.14-.03-.18-.04-.04-.01-.09-.03-.16-.05-.07-.02-.13-.04-.18-.05-.48-.13-.82-.23-1.01-.29s-.49-.16-.9-.31c-.41-.15-.71-.28-.9-.4-.19-.12-.42-.29-.7-.5s-.48-.44-.6-.68-.23-.52-.33-.87c-.1-.34-.15-.72-.15-1.12,0-1.31.5-2.35,1.51-3.13,1.01-.78,2.35-1.17,4.02-1.17s2.93.38,3.96,1.14c1.02.76,1.55,1.91,1.57,3.44h-2.99ZM389.6,108.16c-.12-1.43-1.03-2.14-2.72-2.14-.73,0-1.29.14-1.71.43s-.62.69-.62,1.2c0,.17.03.33.08.46.05.13.15.26.3.37.15.11.3.21.44.28.15.07.37.15.66.24.29.09.55.16.79.23.24.07.57.15,1,.26.43.11.81.21,1.13.3,1.41.4,2.47.91,3.16,1.51.69.61,1.04,1.47,1.04,2.6,0,.82-.17,1.54-.5,2.15-.34.61-.79,1.1-1.36,1.45-.57.36-1.2.62-1.88.79-.68.17-1.4.25-2.17.25-1.95,0-3.47-.45-4.57-1.34-1.1-.89-1.65-2.16-1.66-3.78h3.13c.05,1.8,1.14,2.71,3.25,2.71.82,0,1.47-.17,1.95-.52.48-.34.72-.81.72-1.4,0-.5-.22-.86-.66-1.09-.44-.23-1.36-.55-2.75-.95-.08-.01-.14-.03-.18-.04-.04-.01-.09-.03-.16-.05-.07-.02-.13-.04-.18-.05-.48-.13-.82-.23-1.01-.29s-.49-.16-.9-.31c-.41-.15-.71-.28-.9-.4-.19-.12-.42-.29-.7-.5s-.48-.44-.6-.68-.23-.52-.33-.87c-.1-.34-.15-.72-.15-1.12,0-1.31.5-2.35,1.51-3.13,1.01-.78,2.35-1.17,4.02-1.17s2.93.38,3.96,1.14c1.02.76,1.55,1.91,1.57,3.44h-2.99ZM410.87,106.57h-4.32v11.68h-3.17v-11.68h-4.32v-2.68h11.81v2.68ZM429.9,112.52c0,2.06-.49,3.58-1.48,4.55-.99.98-2.53,1.46-4.63,1.46s-3.69-.49-4.69-1.48c-1-.99-1.5-2.51-1.5-4.57v-8.6h3.15v8.6c0,1.17.22,2.04.67,2.6s1.25.85,2.42.85,1.9-.28,2.31-.85.62-1.43.62-2.6v-8.6h3.15v8.64ZM468.65,106.47h-7.65v3.13h7.02v2.48h-7.02v3.53h7.79v2.64h-10.92v-14.37h10.78v2.58ZM476.09,103.88h3.21l5.91,9.63v-9.63h3.03v14.37h-3.15l-5.95-9.65v9.65h-3.05v-14.37ZM506.87,106.57h-4.32v11.68h-3.17v-11.68h-4.32v-2.68h11.81v2.68ZM524.42,103.88h3.21l5.91,9.63v-9.63h3.03v14.37h-3.15l-5.95-9.65v9.65h-3.05v-14.37ZM555.3,106.47h-7.65v3.13h7.02v2.48h-7.02v3.53h7.79v2.64h-10.92v-14.37h10.78v2.58ZM564.58,103.88l2.3,9.77,2.52-9.77h2.97l2.48,9.89,2.38-9.89h3.11l-3.87,14.37h-3.15l-2.46-9.81-2.42,9.81h-3.21l-3.81-14.37h3.17ZM594.59,108.16c-.12-1.43-1.03-2.14-2.72-2.14-.73,0-1.29.14-1.71.43s-.62.69-.62,1.2c0,.17.03.33.08.46.05.13.15.26.3.37.15.11.3.21.44.28.15.07.37.15.66.24.29.09.55.16.79.23.24.07.57.15,1,.26.43.11.81.21,1.13.3,1.41.4,2.47.91,3.16,1.51.69.61,1.04,1.47,1.04,2.6,0,.82-.17,1.54-.5,2.15-.34.61-.79,1.1-1.36,1.45-.57.36-1.2.62-1.88.79-.68.17-1.4.25-2.17.25-1.95,0-3.47-.45-4.57-1.34-1.1-.89-1.65-2.16-1.66-3.78h3.13c.05,1.8,1.14,2.71,3.25,2.71.82,0,1.47-.17,1.95-.52.48-.34.72-.81.72-1.4,0-.5-.22-.86-.66-1.09-.44-.23-1.36-.55-2.75-.95-.08-.01-.14-.03-.18-.04-.04-.01-.09-.03-.16-.05-.07-.02-.13-.04-.18-.05-.48-.13-.82-.23-1.01-.29s-.49-.16-.9-.31c-.41-.15-.71-.28-.9-.4-.19-.12-.42-.29-.7-.5s-.48-.44-.6-.68-.23-.52-.33-.87c-.1-.34-.15-.72-.15-1.12,0-1.31.5-2.35,1.51-3.13,1.01-.78,2.35-1.17,4.02-1.17s2.93.38,3.96,1.14c1.02.76,1.55,1.91,1.57,3.44h-2.99ZM611.4,103.88c1.61,0,2.9.39,3.84,1.16.95.77,1.42,1.93,1.42,3.46s-.47,2.65-1.41,3.42c-.94.77-2.17,1.16-3.69,1.16h-3.23v5.17h-3.13v-14.37h6.2ZM608.33,110.6h2.8c1.64,0,2.46-.69,2.46-2.06s-.81-2.08-2.44-2.08h-2.82v4.14ZM634.91,118.25h-3.31l-1.13-3.21h-5.35l-1.17,3.21h-3.23l5.47-14.39h3.25l5.47,14.39ZM627.81,107.4l-1.92,5.35h3.81l-1.9-5.35ZM647.48,103.88c1.61,0,2.9.39,3.84,1.16.95.77,1.42,1.93,1.42,3.46s-.47,2.65-1.41,3.42c-.94.77-2.17,1.16-3.69,1.16h-3.23v5.17h-3.13v-14.37h6.2ZM644.41,110.6h2.8c1.64,0,2.46-.69,2.46-2.06s-.81-2.08-2.44-2.08h-2.82v4.14ZM670.65,106.47h-7.65v3.13h7.02v2.48h-7.02v3.53h7.79v2.64h-10.92v-14.37h10.78v2.58ZM685.36,103.88c1.43,0,2.59.34,3.49,1.01s1.35,1.7,1.35,3.07c0,.83-.2,1.56-.61,2.19-.4.63-.96,1.07-1.68,1.34,1.24.26,1.94,1.37,2.12,3.35,0,.07.01.28.04.62.03.35.05.63.08.84.03.21.06.46.1.76s.1.55.18.75.17.35.28.44h-3.27c-.11-.22-.19-.49-.24-.82-.05-.33-.1-.75-.14-1.27-.04-.52-.06-.8-.06-.86-.11-1.01-.36-1.71-.76-2.1-.4-.39-1.1-.59-2.11-.59h-2.81v5.63h-3.13v-14.37h7.14ZM681.34,110.34h2.99c.87,0,1.56-.14,2.05-.41.49-.28.74-.82.74-1.62,0-.75-.24-1.26-.72-1.53-.48-.27-1.12-.4-1.93-.4h-3.13v3.98ZM437.79,104.02h5.81c2.23,0,3.95.62,5.16,1.86,1.2,1.24,1.81,3.01,1.81,5.33s-.6,4.09-1.81,5.33c-1.2,1.24-2.92,1.86-5.16,1.86h-5.81v-14.37ZM443.22,115.77c2.78,0,4.18-1.52,4.18-4.56,0-1.47-.35-2.59-1.04-3.38s-1.74-1.18-3.14-1.18h-2.3v9.12h2.3Z",
+      "apostrophe": "M344.49,106.86c-.48.67-1.3,1.1-2.47,1.29v-1.41c.92-.26,1.39-.9,1.43-1.94h-1.43v-3.15h3.19v2.46c0,1.16-.24,2.07-.72,2.75Z"
+    },
+    "variants": {
+      "full": {
+        "width": 690.72,
+        "parts": [
+          {
+            "glyph": "over",
+            "attrs": {
+              "data-word": "OVER"
+            }
+          },
+          {
+            "glyph": "the",
+            "attrs": {
+              "data-word": "THE"
+            }
+          },
+          {
+            "glyph": "edge",
+            "attrs": {
+              "data-word": "EDGE"
+            }
+          },
+          {
+            "glyph": "subtext",
+            "attrs": {
+              "data-line": "subtext"
+            }
+          },
+          {
+            "glyph": "apostrophe",
+            "attrs": {
+              "data-line": "subtext"
+            }
+          }
+        ]
+      },
+      "words": {
+        "width": 690.72,
+        "height": 85.57,
+        "parts": [
+          {
+            "glyph": "over",
+            "attrs": {
+              "data-word": "OVER"
+            }
+          },
+          {
+            "glyph": "the",
+            "attrs": {
+              "data-word": "THE"
+            }
+          },
+          {
+            "glyph": "edge",
+            "attrs": {
+              "data-word": "EDGE"
+            }
+          }
+        ]
+      },
+      "stacked": {
+        "width": 240.67,
+        "height": 285.57,
+        "parts": [
+          {
+            "glyph": "over",
+            "x": 0,
+            "y": 0,
+            "attrs": {
+              "data-word": "OVER"
+            }
+          },
+          {
+            "glyph": "the",
+            "x": -259.38,
+            "y": 100,
+            "attrs": {
+              "data-word": "THE"
+            }
+          },
+          {
+            "glyph": "edge",
+            "x": -455.84,
+            "y": 200,
+            "attrs": {
+              "data-word": "EDGE"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "families": [
+    {
+      "id": "overtheedge",
+      "wordmark": "full",
+      "typeHeight": 118.59,
+      "stackedTypeHeight": 280,
+      "lockupSymbol": false,
+      "stackedWordmark": "stacked",
+      "label": "Over the Edge"
+    },
+    {
+      "id": "words",
+      "wordmark": "words",
+      "typeHeight": 85.57,
+      "stackedTypeHeight": 280,
+      "lockupSymbol": false,
+      "stackedWordmark": "stacked",
+      "label": "Over the Edge, without subtext"
+    }
+  ],
+  "lockup": {
+    "iconHeight": 85.57,
+    "iconGap": 0,
+    "stackedIconHeight": 85.57,
+    "stackedTypeHeight": 280,
+    "stackedGap": 0,
+    "canvasPadding": 16,
+    "wordmarkHeight": 118.59,
+    "clearspaceRecommendation": "Half the height of the O, clear on every side.",
+    "minimumHorizontalWidthPx": 288,
+    "minimumSymbolHeightPx": 16,
+    "minimumHorizontalWidthMm": 58,
+    "minimumSymbolHeightMm": 5
+  },
+  "copy": {
+    "svgDescription": "Over the Edge identity artwork: the paper's own lettering. Self-contained vector artwork generated by brandkit.",
+    "templateDescription": "Over the Edge application. Logo outlined; text live and editable.",
+    "logoLabel": "Over the Edge logo",
+    "motifLabel": "Over the Edge O",
+    "tagline": "UNBC's Independent Student Newspaper",
+    "descriptor": "News · Clubs · Events · Calendar"
+  },
+  "patterns": [
+    {
+      "id": "o-repeat",
+      "title": "{name} / repeating O",
+      "width": 960,
+      "height": 600,
+      "background": "newsprint",
+      "repeat": {
+        "x": [
+          -20,
+          1000,
+          120
+        ],
+        "y": [
+          -40,
+          680,
+          150
+        ],
+        "scale": 1.2,
+        "colour": "pulp"
+      }
+    },
+    {
+      "id": "o-crop",
+      "title": "{name} / large O crop",
+      "width": 960,
+      "height": 600,
+      "background": "forest",
+      "place": [
+        {
+          "x": 380,
+          "y": -160,
+          "scale": 9,
+          "colour": "pine"
+        }
+      ]
+    },
+    {
+      "id": "o-field",
+      "title": "{name} / the O on lichen",
+      "width": 960,
+      "height": 600,
+      "background": "lichen",
+      "place": [
+        {
+          "x": 391,
+          "y": 172,
+          "scale": 3,
+          "colour": "forest"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "business-card-front",
+      "label": "Business card, front",
+      "title": "{name} / business-card front / 90 × 50 mm trim + 3 mm bleed",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 180,
+          "y": 196,
+          "width": 600,
+          "colour": "white"
+        },
+        {
+          "type": "path",
+          "id": "card-rule",
+          "d": "M180 344H780",
+          "stroke": "lichen",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "card-site",
+          "text": "OVERTHEEDGE.UNBC.CA",
+          "x": 480,
+          "y": 392,
+          "size": 20,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 1.6,
+          "anchor": "middle"
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "business-card-back",
+      "label": "Business card, back",
+      "title": "{name} / business-card back / replace placeholders",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "symbol",
+          "x": 96,
+          "y": 92,
+          "height": 120,
+          "colour": "forest"
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Full Name]",
+          "x": 96,
+          "y": 318,
+          "size": 44,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[ROLE] · OVER THE EDGE",
+          "x": 96,
+          "y": 360,
+          "size": 18,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "path",
+          "id": "card-rule",
+          "d": "M96 396H864",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "contact-email",
+          "text": "[Email]",
+          "x": 96,
+          "y": 444,
+          "size": 24,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "contact-site",
+          "text": "OVERTHEEDGE.UNBC.CA",
+          "x": 96,
+          "y": 482,
+          "size": 18,
+          "colour": "forest",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "press-pass",
+      "label": "Press pass",
+      "group": "Credentials",
+      "title": "{name} / press pass / 54 × 86 mm",
+      "width": 540,
+      "height": 860,
+      "physical": [
+        "54mm",
+        "86mm"
+      ],
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "rect",
+          "id": "pass-band",
+          "x": 0,
+          "y": 0,
+          "width": 540,
+          "height": 200,
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 70,
+          "y": 58,
+          "width": 400,
+          "colour": "white",
+          "family": "words",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "pass-subtext",
+          "text": "UNBC'S STUDENT NEWSPAPER",
+          "x": 270,
+          "y": 150,
+          "size": 16,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 1.28,
+          "anchor": "middle",
+          "ground": "forest"
+        },
+        {
+          "type": "rect",
+          "id": "photo-well",
+          "x": 150,
+          "y": 240,
+          "width": 240,
+          "height": 290,
+          "fill": "kraft",
+          "stroke": "forest",
+          "strokeWidth": 2
+        },
+        {
+          "type": "text",
+          "id": "photo-note",
+          "text": "[Photo]",
+          "x": 270,
+          "y": 395,
+          "size": 20,
+          "colour": "ink",
+          "anchor": "middle",
+          "ground": "kraft"
+        },
+        {
+          "type": "text",
+          "id": "pass-name",
+          "text": "[Full Name]",
+          "x": 270,
+          "y": 598,
+          "size": 34,
+          "colour": "ink",
+          "font": "display",
+          "anchor": "middle"
+        },
+        {
+          "type": "text",
+          "id": "pass-role",
+          "text": "[ROLE]",
+          "x": 270,
+          "y": 634,
+          "size": 16,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.28,
+          "anchor": "middle"
+        },
+        {
+          "type": "text",
+          "id": "pass-press",
+          "text": "PRESS",
+          "x": 270,
+          "y": 752,
+          "size": 96,
+          "colour": "forest",
+          "font": "extra",
+          "anchor": "middle"
+        },
+        {
+          "type": "text",
+          "id": "pass-term",
+          "text": "VOLUME [00] · [YEAR]",
+          "x": 270,
+          "y": 816,
+          "size": 16,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.28,
+          "anchor": "middle"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "group": "Stationery",
+      "title": "{name} / A4 letterhead / replace placeholders",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 56,
+          "width": 300,
+          "colour": "forest"
+        },
+        {
+          "type": "text",
+          "id": "header-site",
+          "text": "OVERTHEEDGE.UNBC.CA",
+          "x": 732,
+          "y": 92,
+          "size": 11,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 0.88,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "id": "header-rule",
+          "d": "M62 150H732",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 62,
+          "y": 214,
+          "size": 14,
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "recipient-name",
+          "text": "[Recipient]",
+          "x": 62,
+          "y": 262,
+          "size": 16,
+          "colour": "ink",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "recipient-address",
+          "text": "[Address]",
+          "x": 62,
+          "y": 288,
+          "size": 14,
+          "colour": "bark"
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 62,
+          "y": 380,
+          "size": 28,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-content",
+          "text": "[Letter content]",
+          "x": 62,
+          "y": 430,
+          "width": 670,
+          "size": 14,
+          "leading": 22,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "footer-rule",
+          "d": "M62 1015H732",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details] · overtheedge.unbc.ca",
+          "x": 62,
+          "y": 1056,
+          "size": 11,
+          "colour": "bark"
+        }
+      ]
+    },
+    {
+      "id": "issue-cover",
+      "label": "Issue cover",
+      "group": "Print and social",
+      "title": "{name} / issue cover / 1080 × 1350",
+      "width": 1080,
+      "height": 1350,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "rect",
+          "id": "masthead",
+          "x": 40,
+          "y": 40,
+          "width": 700,
+          "height": 170,
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 72,
+          "width": 620,
+          "colour": "white",
+          "ground": "forest"
+        },
+        {
+          "type": "rect",
+          "id": "date-box",
+          "x": 760,
+          "y": 40,
+          "width": 280,
+          "height": 170,
+          "fill": "forest"
+        },
+        {
+          "type": "text",
+          "id": "issue-volume",
+          "text": "VOLUME [00] | ISSUE [0]",
+          "x": 900,
+          "y": 78,
+          "size": 15,
+          "colour": "white",
+          "font": "label",
+          "tracking": 1.2,
+          "anchor": "middle",
+          "ground": "forest"
+        },
+        {
+          "type": "path",
+          "id": "date-rule",
+          "d": "M784 94H1016",
+          "stroke": "white",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "issue-day",
+          "text": "[DD]",
+          "x": 784,
+          "y": 184,
+          "size": 64,
+          "colour": "white",
+          "font": "extra",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "issue-month",
+          "text": "[MONTH]",
+          "x": 916,
+          "y": 130,
+          "size": 24,
+          "colour": "white",
+          "font": "extra",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "issue-year",
+          "text": "[YYYY]",
+          "x": 916,
+          "y": 158,
+          "size": 24,
+          "colour": "white",
+          "font": "extra",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "issue-weekday",
+          "text": "[WEEKDAY]",
+          "x": 916,
+          "y": 186,
+          "size": 24,
+          "colour": "lichen",
+          "font": "extra",
+          "ground": "forest"
+        },
+        {
+          "type": "rect",
+          "id": "photo-frame",
+          "x": 40,
+          "y": 240,
+          "width": 1000,
+          "height": 700,
+          "fill": "forest"
+        },
+        {
+          "type": "rect",
+          "id": "photo-well",
+          "x": 64,
+          "y": 264,
+          "width": 952,
+          "height": 580,
+          "fill": "moss",
+          "stroke": "white",
+          "strokeWidth": 4
+        },
+        {
+          "type": "text",
+          "id": "photo-note",
+          "text": "[Cover photo]",
+          "x": 540,
+          "y": 564,
+          "size": 28,
+          "colour": "white",
+          "anchor": "middle",
+          "ground": "moss"
+        },
+        {
+          "type": "text",
+          "id": "cover-note",
+          "text": "Over the Edge is here!",
+          "x": 540,
+          "y": 904,
+          "size": 44,
+          "colour": "lichen",
+          "font": "hand",
+          "anchor": "middle",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "index-label",
+          "text": "IN THIS ISSUE",
+          "x": 40,
+          "y": 996,
+          "size": 16,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.28,
+          "ground": "newsprint"
+        },
+        {
+          "type": "path",
+          "id": "index-rule-0",
+          "d": "M40 1018H1040",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "index-page-1",
+          "text": "[03]",
+          "x": 40,
+          "y": 1079.72,
+          "size": 52,
+          "colour": "forest",
+          "font": "extra",
+          "ground": "newsprint"
+        },
+        {
+          "type": "paragraph",
+          "id": "index-title-1",
+          "text": "[Headline]",
+          "x": 164.8,
+          "y": 1071.2,
+          "width": 875.2,
+          "size": 30,
+          "leading": 36,
+          "maxLines": 1,
+          "colour": "ink",
+          "font": "display",
+          "ground": "newsprint"
+        },
+        {
+          "type": "path",
+          "id": "index-rule-1",
+          "d": "M40 1104H1040",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "index-page-2",
+          "text": "[05]",
+          "x": 40,
+          "y": 1165.72,
+          "size": 52,
+          "colour": "forest",
+          "font": "extra",
+          "ground": "newsprint"
+        },
+        {
+          "type": "paragraph",
+          "id": "index-title-2",
+          "text": "[Headline]",
+          "x": 164.8,
+          "y": 1157.2,
+          "width": 875.2,
+          "size": 30,
+          "leading": 36,
+          "maxLines": 1,
+          "colour": "ink",
+          "font": "display",
+          "ground": "newsprint"
+        },
+        {
+          "type": "path",
+          "id": "index-rule-2",
+          "d": "M40 1190H1040",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "index-page-3",
+          "text": "[10]",
+          "x": 40,
+          "y": 1251.72,
+          "size": 52,
+          "colour": "forest",
+          "font": "extra",
+          "ground": "newsprint"
+        },
+        {
+          "type": "paragraph",
+          "id": "index-title-3",
+          "text": "[Headline]",
+          "x": 164.8,
+          "y": 1243.2,
+          "width": 875.2,
+          "size": 30,
+          "leading": 36,
+          "maxLines": 1,
+          "colour": "ink",
+          "font": "display",
+          "ground": "newsprint"
+        },
+        {
+          "type": "path",
+          "id": "index-rule-3",
+          "d": "M40 1276H1040",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        }
+      ]
+    },
+    {
+      "id": "story-post",
+      "label": "Story post",
+      "group": "Print and social",
+      "title": "{name} / story post / 1080 × 1350",
+      "width": 1080,
+      "height": 1350,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "symbol",
+          "x": 744,
+          "y": 64,
+          "height": 400,
+          "colour": "lichen"
+        },
+        {
+          "type": "logo",
+          "x": 64,
+          "y": 72,
+          "width": 300,
+          "colour": "forest",
+          "family": "words"
+        },
+        {
+          "type": "path",
+          "id": "top-rule",
+          "d": "M64 168H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "flow",
+          "x": 64,
+          "y": 600,
+          "items": [
+            {
+              "id": "story-section",
+              "text": "[SECTION] · [DATE]",
+              "size": 22,
+              "font": "label",
+              "tracking": 1.76,
+              "colour": "forest"
+            },
+            {
+              "id": "story-headline",
+              "text": "[Headline]",
+              "size": 84,
+              "leading": 92,
+              "gap": 104,
+              "wrap": 952,
+              "maxLines": 4,
+              "font": "display",
+              "colour": "ink"
+            },
+            {
+              "id": "story-deck",
+              "text": "[One-sentence deck]",
+              "size": 32,
+              "leading": 44,
+              "gap": 76,
+              "wrap": 900,
+              "maxLines": 2,
+              "font": "deck",
+              "colour": "ink"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "bottom-rule",
+          "d": "M64 1210H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "story-site",
+          "text": "READ AT OVERTHEEDGE.UNBC.CA",
+          "x": 64,
+          "y": 1270,
+          "size": 20,
+          "colour": "forest",
+          "font": "label",
+          "tracking": 1.6
+        }
+      ]
+    },
+    {
+      "id": "issue-out",
+      "label": "Issue out",
+      "group": "Print and social",
+      "title": "{name} / new issue post / 1080 × 1080",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "forest"
+        },
+        {
+          "type": "symbol",
+          "x": 600,
+          "y": -60,
+          "height": 1200,
+          "colour": "pine"
+        },
+        {
+          "type": "text",
+          "id": "issue-note",
+          "text": "Over the Edge is here!",
+          "x": 80,
+          "y": 250,
+          "size": 64,
+          "colour": "lichen",
+          "font": "hand"
+        },
+        {
+          "type": "text",
+          "id": "issue-number",
+          "text": "ISSUE [0]",
+          "x": 80,
+          "y": 520,
+          "size": 180,
+          "colour": "white",
+          "font": "extra"
+        },
+        {
+          "type": "text",
+          "id": "issue-volume",
+          "text": "VOLUME [00]",
+          "x": 80,
+          "y": 690,
+          "size": 120,
+          "colour": "sage",
+          "font": "extra"
+        },
+        {
+          "type": "path",
+          "id": "issue-rule",
+          "d": "M80 790H1000",
+          "stroke": "lichen",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "issue-site",
+          "text": "READ IT AT OVERTHEEDGE.UNBC.CA",
+          "x": 80,
+          "y": 850,
+          "size": 22,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 1.76
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 930,
+          "width": 320,
+          "colour": "white",
+          "family": "words"
+        }
+      ]
+    },
+    {
+      "id": "event-post",
+      "label": "Event post",
+      "group": "Print and social",
+      "title": "{name} / calendar event post / 1080 × 1080",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "rect",
+          "id": "date-block",
+          "x": 64,
+          "y": 64,
+          "width": 300,
+          "height": 300,
+          "fill": "forest"
+        },
+        {
+          "type": "text",
+          "id": "event-day",
+          "text": "[DD]",
+          "x": 214,
+          "y": 248,
+          "size": 140,
+          "colour": "white",
+          "font": "extra",
+          "anchor": "middle",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "event-month",
+          "text": "[MON]",
+          "x": 214,
+          "y": 322,
+          "size": 48,
+          "colour": "lichen",
+          "font": "extra",
+          "anchor": "middle",
+          "ground": "forest"
+        },
+        {
+          "type": "text",
+          "id": "event-kicker",
+          "text": "CALENDAR",
+          "x": 420,
+          "y": 104,
+          "size": 20,
+          "colour": "forest",
+          "font": "label",
+          "tracking": 1.6
+        },
+        {
+          "type": "paragraph",
+          "id": "event-name",
+          "text": "[Event name]",
+          "x": 420,
+          "y": 196,
+          "width": 600,
+          "size": 64,
+          "leading": 70,
+          "maxLines": 3,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "path",
+          "id": "event-rule-0",
+          "d": "M64 480H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "where-label",
+          "text": "WHERE",
+          "x": 64,
+          "y": 548,
+          "size": 18,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "event-place",
+          "text": "[Place]",
+          "x": 260,
+          "y": 550,
+          "size": 32,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "event-rule-1",
+          "d": "M64 600H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "when-label",
+          "text": "WHEN",
+          "x": 64,
+          "y": 668,
+          "size": 18,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "event-time",
+          "text": "[Time]",
+          "x": 260,
+          "y": 670,
+          "size": 32,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "event-rule-2",
+          "d": "M64 720H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "host-label",
+          "text": "HOST",
+          "x": 64,
+          "y": 788,
+          "size": 18,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "event-host",
+          "text": "[Club or host]",
+          "x": 260,
+          "y": 790,
+          "size": 32,
+          "colour": "ink"
+        },
+        {
+          "type": "path",
+          "id": "event-rule-3",
+          "d": "M64 840H1016",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "logo",
+          "x": 64,
+          "y": 940,
+          "width": 280,
+          "colour": "forest",
+          "family": "words"
+        },
+        {
+          "type": "text",
+          "id": "event-site",
+          "text": "OVERTHEEDGE.UNBC.CA/CALENDAR",
+          "x": 1016,
+          "y": 974,
+          "size": 18,
+          "colour": "forest",
+          "font": "label",
+          "tracking": 1.44,
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "story-vertical",
+      "label": "Story, vertical",
+      "group": "Print and social",
+      "title": "{name} / vertical story / 1080 × 1920",
+      "width": 1080,
+      "height": 1920,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "forest"
+        },
+        {
+          "type": "symbol",
+          "x": 560,
+          "y": 1180,
+          "height": 900,
+          "colour": "pine"
+        },
+        {
+          "type": "logo",
+          "x": 96,
+          "y": 120,
+          "width": 400,
+          "colour": "white"
+        },
+        {
+          "type": "text",
+          "id": "vertical-section",
+          "text": "[SECTION]",
+          "x": 96,
+          "y": 700,
+          "size": 26,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 2.08
+        },
+        {
+          "type": "paragraph",
+          "id": "vertical-headline",
+          "text": "[Headline]",
+          "x": 96,
+          "y": 820,
+          "width": 888,
+          "size": 96,
+          "leading": 104,
+          "maxLines": 5,
+          "colour": "white",
+          "font": "display"
+        },
+        {
+          "type": "path",
+          "id": "vertical-rule",
+          "d": "M96 1680H984",
+          "stroke": "lichen",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "vertical-site",
+          "text": "READ AT OVERTHEEDGE.UNBC.CA",
+          "x": 96,
+          "y": 1760,
+          "size": 26,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 2.08
+        }
+      ]
+    },
+    {
+      "id": "share-image",
+      "label": "Link preview image",
+      "group": "Web",
+      "title": "{name} / link preview / 1200 × 630",
+      "width": 1200,
+      "height": 630,
+      "raster": 1200,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "rect",
+          "id": "o-panel",
+          "x": 840,
+          "y": 0,
+          "width": 360,
+          "height": 630,
+          "fill": "forest"
+        },
+        {
+          "type": "symbol",
+          "x": 895,
+          "y": 136,
+          "height": 358,
+          "colour": "lichen"
+        },
+        {
+          "type": "logo",
+          "x": 72,
+          "y": 66,
+          "width": 300,
+          "colour": "forest",
+          "family": "words"
+        },
+        {
+          "type": "paragraph",
+          "id": "page-title",
+          "text": "[Page title goes here]",
+          "x": 72,
+          "y": 330,
+          "width": 700,
+          "size": 60,
+          "leading": 66,
+          "maxLines": 3,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "site",
+          "text": "OVERTHEEDGE.UNBC.CA",
+          "x": 72,
+          "y": 570,
+          "size": 18,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 1.44
+        }
+      ]
+    },
+    {
+      "id": "social-banner",
+      "label": "Social banner",
+      "group": "Web",
+      "title": "{name} / social banner / 1584 × 396",
+      "width": 1584,
+      "height": 396,
+      "raster": 1584,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 96,
+          "y": 143,
+          "width": 640,
+          "colour": "white"
+        },
+        {
+          "type": "text",
+          "id": "banner-descriptor",
+          "text": "NEWS · CLUBS · EVENTS · CALENDAR",
+          "x": 1488,
+          "y": 210,
+          "size": 18,
+          "colour": "lichen",
+          "font": "label",
+          "tracking": 1.44,
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "slide-title",
+      "label": "Slide, title",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / title",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "rect",
+          "id": "masthead",
+          "x": 96,
+          "y": 96,
+          "width": 760,
+          "height": 180,
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 146,
+          "y": 129,
+          "width": 660,
+          "colour": "white",
+          "ground": "forest"
+        },
+        {
+          "type": "path",
+          "id": "title-rule",
+          "d": "M96 640H1824",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "paragraph",
+          "id": "deck-title",
+          "text": "[Deck title]",
+          "x": 96,
+          "y": 790,
+          "width": 1600,
+          "size": 120,
+          "leading": 124,
+          "maxLines": 2,
+          "colour": "ink",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "deck-details",
+          "text": "[EVENT OR GROUP] · [MONTH YEAR]",
+          "x": 100,
+          "y": 960,
+          "size": 28,
+          "colour": "bark",
+          "font": "label",
+          "tracking": 2.24
+        }
+      ]
+    },
+    {
+      "id": "slide-section",
+      "label": "Slide, section",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / section",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "forest"
+        },
+        {
+          "type": "logo",
+          "x": 1584,
+          "y": 96,
+          "width": 240,
+          "colour": "lichen",
+          "family": "words"
+        },
+        {
+          "type": "text",
+          "id": "section-number",
+          "text": "[01]",
+          "x": 96,
+          "y": 600,
+          "size": 360,
+          "colour": "lichen",
+          "font": "extra"
+        },
+        {
+          "type": "paragraph",
+          "id": "section-title",
+          "text": "[Section title]",
+          "x": 96,
+          "y": 820,
+          "width": 1600,
+          "size": 120,
+          "leading": 124,
+          "maxLines": 1,
+          "colour": "white",
+          "font": "display"
+        },
+        {
+          "type": "path",
+          "id": "section-rule",
+          "d": "M96 900H1824",
+          "stroke": "lichen",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        }
+      ]
+    },
+    {
+      "id": "slide-close",
+      "label": "Slide, close",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / close",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "newsprint"
+        },
+        {
+          "type": "logo",
+          "x": 510,
+          "y": 400,
+          "width": 900,
+          "colour": "forest"
+        },
+        {
+          "type": "path",
+          "id": "close-rule",
+          "d": "M510 660H1410",
+          "stroke": "bark",
+          "strokeWidth": 1.5,
+          "dash": "6 5"
+        },
+        {
+          "type": "text",
+          "id": "close-site",
+          "text": "OVERTHEEDGE.UNBC.CA",
+          "x": 960,
+          "y": 730,
+          "size": 28,
+          "colour": "forest",
+          "font": "label",
+          "tracking": 2.24,
+          "anchor": "middle"
+        }
+      ]
+    }
+  ],
+  "guide": {
+    "title": "{name} brand guide",
+    "pdfTitle": "{name} brand guide / v{displayVersion}",
+    "sheetsPdfTitle": "{name} logo reference sheets / v{displayVersion}",
+    "pageTitle": "{name} brand guide / {page}",
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "paper",
+      "logo": {
+        "x": 62,
+        "y": 34,
+        "width": 150,
+        "family": "words",
+        "colour": "primary"
+      },
+      "header": "{upperName} / BRAND GUIDE / V{displayVersion}",
+      "footer": "{upperName} / UNBC'S INDEPENDENT STUDENT NEWSPAPER"
+    },
+    "pages": [
+      {
+        "name": "Primary logo",
+        "title": "The paper’s own lettering.",
+        "subtitle": "OVER THE EDGE over the line UNBC’S STUDENT NEWSPAPER, exactly as the website draws it. It is never redrawn or reset in a font.",
+        "elements": [
+          {
+            "type": "label",
+            "text": "PRIMARY · FOREST ON NEWSPRINT",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 300,
+            "width": 836,
+            "height": 300,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "logo",
+            "x": 120,
+            "y": 330,
+            "width": 724,
+            "height": 240,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 300,
+            "width": 452,
+            "height": 300,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "REVERSED · WHITE ON FOREST",
+            "x": 948,
+            "y": 334,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 966,
+            "y": 370,
+            "width": 368,
+            "height": 190,
+            "colour": "reverse"
+          },
+          {
+            "type": "label",
+            "text": "WHAT OVER THE EDGE IS",
+            "x": 64,
+            "y": 664
+          },
+          {
+            "type": "para",
+            "text": "UNBC’s independent student newspaper, in print and at overtheedge.unbc.ca. Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.",
+            "x": 64,
+            "y": 706,
+            "width": 836,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "label",
+            "text": "DESCRIPTOR",
+            "x": 952,
+            "y": 664
+          },
+          {
+            "type": "para",
+            "text": "{copy.descriptor}",
+            "x": 952,
+            "y": 706,
+            "width": 424,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "The site’s header sets the subtext in ink (#262626) under forest words. That two-colour original is in logos/source/. Every other logo in this kit is one colour.",
+            "x": 64,
+            "y": 900,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "name": "Logo family",
+        "title": "Four ways to sign.",
+        "subtitle": "Choose the one that fits the space. Keep it in one colour, and keep the O whole.",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 255,
+            "width": 828,
+            "height": 214,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "FULL",
+            "x": 86,
+            "y": 284
+          },
+          {
+            "type": "logo",
+            "x": 86,
+            "y": 310,
+            "width": 780,
+            "height": 140,
+            "align": "start",
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 255,
+            "width": 452,
+            "height": 214,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "WITHOUT SUBTEXT",
+            "x": 946,
+            "y": 284,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 946,
+            "y": 320,
+            "width": 408,
+            "height": 120,
+            "family": "words",
+            "colour": "reverse"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 496,
+            "width": 550,
+            "height": 364,
+            "fill": "light"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 88,
+            "y": 530
+          },
+          {
+            "type": "logo",
+            "x": 88,
+            "y": 556,
+            "width": 502,
+            "height": 280,
+            "layout": "stacked",
+            "align": "start",
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 642,
+            "y": 496,
+            "width": 378,
+            "height": 364,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "THE O",
+            "x": 666,
+            "y": 530
+          },
+          {
+            "type": "symbol",
+            "x": 760,
+            "y": 570,
+            "height": 240,
+            "colour": "primary"
+          },
+          {
+            "type": "rect",
+            "x": 1048,
+            "y": 496,
+            "width": 328,
+            "height": 364,
+            "fill": "ink"
+          },
+          {
+            "type": "label",
+            "text": "SMALL SPACES",
+            "x": 1072,
+            "y": 530,
+            "colour": "light"
+          },
+          {
+            "type": "logo",
+            "x": 1072,
+            "y": 600,
+            "width": 280,
+            "height": 200,
+            "family": "words",
+            "layout": "wordmark",
+            "colour": "reverse"
+          },
+          {
+            "type": "para",
+            "text": "The O is the logo’s own first letter. Use it alone only where the name cannot be read: favicons, app icons, avatars, patterns.",
+            "x": 64,
+            "y": 920,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "name": "Clear space and sizes",
+        "title": "Room to breathe.",
+        "subtitle": "Half the height of the O, clear on every side. Below 288 px wide, drop the subtext.",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 260,
+            "width": 840,
+            "height": 330,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "rect",
+            "x": 124,
+            "y": 330,
+            "width": 720,
+            "height": 190,
+            "fill": "none",
+            "stroke": "line",
+            "dash": "6 5"
+          },
+          {
+            "type": "logo",
+            "x": 163.6949711459192,
+            "y": 369.8256525784808,
+            "width": 640.6100577081615,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "CLEAR SPACE · HALF THE O",
+            "x": 64,
+            "y": 630
+          },
+          {
+            "type": "specTable",
+            "x": 960,
+            "right": 1376,
+            "y": 300,
+            "step": 54,
+            "rows": [
+              [
+                "Clear space",
+                "42.8 logo units"
+              ],
+              [
+                "Full logo, screen",
+                "288 px wide"
+              ],
+              [
+                "Full logo, print",
+                "58 mm wide"
+              ],
+              [
+                "Without subtext",
+                "96 px / 20 mm wide"
+              ],
+              [
+                "The O",
+                "16 px / 5 mm tall"
+              ]
+            ]
+          },
+          {
+            "type": "para",
+            "text": "The subtext’s capitals are 6 px tall at 288 px wide on screen, and 1.2 mm tall at 58 mm in print. Below either, use the logo without subtext; below that, the O.",
+            "x": 64,
+            "y": 690,
+            "width": 840,
+            "size": 22,
+            "colour": "ink",
+            "line": 1.5
+          }
+        ]
+      },
+      {
+        "name": "Colour",
+        "title": "Forest on newsprint.",
+        "subtitle": "One green, one paper, one ink. The rest supports them, and red is only ever an editor’s mark.",
+        "elements": [
+          {
+            "type": "swatches",
+            "x": 64,
+            "y": 267,
+            "step": 330,
+            "width": 300,
+            "height": 275,
+            "colours": [
+              "forest",
+              "pine",
+              "newsprint",
+              "ink"
+            ]
+          },
+          {
+            "type": "label",
+            "text": "SUPPORT",
+            "x": 64,
+            "y": 728
+          },
+          {
+            "type": "swatchStrip",
+            "x": 64,
+            "y": 748,
+            "step": 164,
+            "width": 150,
+            "height": 64,
+            "colours": [
+              "lichen",
+              "sage",
+              "moss",
+              "kraft",
+              "pulp",
+              "bark",
+              "proof",
+              "white"
+            ]
+          },
+          {
+            "type": "para",
+            "text": "Lichen #E3EFCF · Sage #6AA380 · Moss #466855 · Kraft #D4C8AA · Pulp #DBD0BA · Bark #7D6B56 · Proof #B54A35 · White #FFFFFF.",
+            "x": 64,
+            "y": 840,
+            "width": 1312,
+            "size": 15
+          },
+          {
+            "type": "para",
+            "text": "Text pairs, measured: ink on newsprint 13.4 : 1 · forest on newsprint 8.1 : 1 · white on forest 9.1 : 1 · lichen on forest 7.6 : 1 · white on pine 12.7 : 1 · lichen on pine 10.6 : 1 · white on moss 6.2 : 1 · ink on sage 5.2 : 1 · bark on newsprint 4.53 : 1 · proof on newsprint 4.7 : 1 · white on proof 5.3 : 1. At 24 px and up only: sage on pine 4.3 : 1 · sage on forest 3.1 : 1. Proof is for Breaking and Correction only.",
+            "x": 64,
+            "y": 868,
+            "width": 1312,
+            "size": 15
+          }
+        ]
+      },
+      {
+        "name": "Typography",
+        "title": "Five voices, five jobs.",
+        "subtitle": "Serif for the news, Anton for the front page, Inter for the interface, Plex Mono for the dateline, one hand-written note.",
+        "elements": [
+          {
+            "type": "label",
+            "text": "HEADLINES / {fonts.display.label}",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "text",
+            "text": "Bears Don’t Really Hibernate… Or Do They?",
+            "x": 62,
+            "y": 352,
+            "size": 56,
+            "font": "display",
+            "tracking": -0.01
+          },
+          {
+            "type": "rule",
+            "y": 392
+          },
+          {
+            "type": "label",
+            "text": "FRONT PAGE / {fonts.extra.label}, CAPITALS",
+            "x": 64,
+            "y": 436
+          },
+          {
+            "type": "text",
+            "text": "OCTOBER 16TH · IN THIS ISSUE",
+            "x": 62,
+            "y": 510,
+            "size": 64,
+            "font": "extra"
+          },
+          {
+            "type": "rule",
+            "y": 550
+          },
+          {
+            "type": "label",
+            "text": "INTERFACE / {fonts.body.label}",
+            "x": 64,
+            "y": 594
+          },
+          {
+            "type": "para",
+            "text": "Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.",
+            "x": 64,
+            "y": 640,
+            "width": 860,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "label",
+            "text": "DECK / {fonts.deck.label}",
+            "x": 964,
+            "y": 594
+          },
+          {
+            "type": "para",
+            "text": "One sentence under the headline.",
+            "x": 964,
+            "y": 640,
+            "width": 412,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5,
+            "font": "deck"
+          },
+          {
+            "type": "rule",
+            "y": 724
+          },
+          {
+            "type": "label",
+            "text": "DATELINE / {fonts.label.label}",
+            "x": 64,
+            "y": 768
+          },
+          {
+            "type": "text",
+            "text": "VOLUME 32 · ISSUE 2 · OCTOBER 16, 2025",
+            "x": 64,
+            "y": 818,
+            "size": 26,
+            "font": "label",
+            "tracking": 0.08
+          },
+          {
+            "type": "label",
+            "text": "ONE NOTE / {fonts.hand.label}",
+            "x": 964,
+            "y": 768
+          },
+          {
+            "type": "text",
+            "text": "Over the Edge is here!",
+            "x": 962,
+            "y": 822,
+            "size": 40,
+            "font": "hand",
+            "colour": "primary"
+          },
+          {
+            "type": "para",
+            "text": "Anton and Gochi Hand stand in for the print covers’ faces, which are not known. Replace them if the print team has the originals.",
+            "x": 64,
+            "y": 900,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "name": "Print devices",
+        "title": "Borrowed from the front page.",
+        "subtitle": "The dashed index, page numbers, the masthead block and the keyline frame come from the printed issue.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/issue-cover",
+            "x": 64,
+            "y": 262,
+            "width": 488,
+            "height": 610
+          },
+          {
+            "type": "label",
+            "text": "ISSUE COVER · 1080 × 1350",
+            "x": 64,
+            "y": 900
+          },
+          {
+            "type": "nested",
+            "src": "patterns/o-repeat",
+            "x": 600,
+            "y": 262,
+            "width": 360,
+            "height": 225
+          },
+          {
+            "type": "label",
+            "text": "O REPEAT",
+            "x": 600,
+            "y": 515
+          },
+          {
+            "type": "nested",
+            "src": "patterns/o-crop",
+            "x": 1000,
+            "y": 262,
+            "width": 376,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "O CROP",
+            "x": 1000,
+            "y": 525
+          },
+          {
+            "type": "nested",
+            "src": "patterns/o-field",
+            "x": 600,
+            "y": 560,
+            "width": 360,
+            "height": 225
+          },
+          {
+            "type": "label",
+            "text": "O FIELD",
+            "x": 600,
+            "y": 813
+          },
+          {
+            "type": "list",
+            "x": 1000,
+            "detailX": 1130,
+            "right": 1376,
+            "y": 590,
+            "step": 52,
+            "rows": [
+              [
+                "INDEX",
+                "Dashed rules, bark."
+              ],
+              [
+                "PAGES",
+                "Two digits, Anton."
+              ],
+              [
+                "MASTHEAD",
+                "Forest block."
+              ],
+              [
+                "FRAME",
+                "White keyline."
+              ],
+              [
+                "NOTE",
+                "One, by hand."
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Applications",
+        "title": "Ready for the newsroom.",
+        "subtitle": "Cards, a press pass, social posts and slides, with editable text. Letterhead, banner and link preview are in the kit.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/business-card-front",
+            "x": 64,
+            "y": 263,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "90 × 50 MM CARD, FRONT",
+            "x": 64,
+            "y": 528
+          },
+          {
+            "type": "rect",
+            "x": 491,
+            "y": 263,
+            "width": 403,
+            "height": 235,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/business-card-back",
+            "x": 491,
+            "y": 263,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "BACK",
+            "x": 491,
+            "y": 528
+          },
+          {
+            "type": "rect",
+            "x": 918,
+            "y": 263,
+            "width": 418,
+            "height": 235,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/slide-title",
+            "x": 918,
+            "y": 263,
+            "width": 418,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "1920 × 1080 SLIDE",
+            "x": 918,
+            "y": 528
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 568,
+            "width": 188,
+            "height": 300,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/press-pass",
+            "x": 64,
+            "y": 568,
+            "width": 188,
+            "height": 300
+          },
+          {
+            "type": "label",
+            "text": "PRESS PASS",
+            "x": 64,
+            "y": 898
+          },
+          {
+            "type": "rect",
+            "x": 276,
+            "y": 568,
+            "width": 240,
+            "height": 300,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/story-post",
+            "x": 276,
+            "y": 568,
+            "width": 240,
+            "height": 300
+          },
+          {
+            "type": "label",
+            "text": "STORY POST",
+            "x": 276,
+            "y": 898
+          },
+          {
+            "type": "rect",
+            "x": 540,
+            "y": 568,
+            "width": 300,
+            "height": 300,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/event-post",
+            "x": 540,
+            "y": 568,
+            "width": 300,
+            "height": 300
+          },
+          {
+            "type": "label",
+            "text": "EVENT POST",
+            "x": 540,
+            "y": 898
+          },
+          {
+            "type": "nested",
+            "src": "templates/story-vertical",
+            "x": 864,
+            "y": 568,
+            "width": 169,
+            "height": 300
+          },
+          {
+            "type": "label",
+            "text": "VERTICAL",
+            "x": 864,
+            "y": 898
+          },
+          {
+            "type": "nested",
+            "src": "templates/issue-out",
+            "x": 1057,
+            "y": 568,
+            "width": 300,
+            "height": 300
+          },
+          {
+            "type": "label",
+            "text": "NEW ISSUE",
+            "x": 1057,
+            "y": 898
+          }
+        ]
+      },
+      {
+        "name": "Files",
+        "title": "Use the right file for the job.",
+        "subtitle": "The same artwork drives the vectors, images, templates and web components.",
+        "elements": [
+          {
+            "type": "label",
+            "text": "SCREEN & PRINT",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "list",
+            "x": 64,
+            "detailX": 267,
+            "right": 818,
+            "y": 322,
+            "step": 63,
+            "rows": [
+              [
+                "SVG",
+                "Scale-independent logos and the O."
+              ],
+              [
+                "PNG",
+                "Transparent artwork for slides and documents."
+              ],
+              [
+                "PDF",
+                "Vector handoff and print proofs."
+              ],
+              [
+                "REACT / CSS",
+                "Inline colour inheritance and local fonts."
+              ],
+              [
+                "BRAND.JSON",
+                "One source for the whole identity."
+              ]
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 883,
+            "y": 263,
+            "width": 493,
+            "height": 342,
+            "fill": "primary"
+          },
+          {
+            "type": "label",
+            "text": "MINIMUM SIZES",
+            "x": 913,
+            "y": 307,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumHorizontalWidthPx} px / {lockup.minimumHorizontalWidthMm} mm",
+            "x": 913,
+            "y": 366,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse"
+          },
+          {
+            "type": "para",
+            "text": "Full logo width, screen and print. Without subtext: 96 px / 20 mm.",
+            "x": 913,
+            "y": 407,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumSymbolHeightPx} px / {lockup.minimumSymbolHeightMm} mm",
+            "x": 913,
+            "y": 494,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse"
+          },
+          {
+            "type": "para",
+            "text": "Height of the O on its own.",
+            "x": 913,
+            "y": 535,
+            "width": 429,
+            "size": 19,
+            "colour": "light"
+          },
+          {
+            "type": "label",
+            "text": "SMALL SCREEN ICONS",
+            "x": 64,
+            "y": 670
+          },
+          {
+            "type": "symbol",
+            "x": 66,
+            "y": 704,
+            "height": 136,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "THE O",
+            "x": 64,
+            "y": 882
+          },
+          {
+            "type": "para",
+            "text": "Open index.html in the kit to browse every file. Edit brand.json, or this brand’s script, and rebuild to change any of them.",
+            "x": 493,
+            "y": 706,
+            "width": 800,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      }
+    ],
+    "sheets": [
+      {
+        "id": "logo-sheet-01",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheet",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display"
+          },
+          {
+            "type": "label",
+            "text": "OVER THE EDGE / LOGO REFERENCE",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "FULL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 240,
+            "width": 1000,
+            "height": 200,
+            "align": "start",
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "WITHOUT SUBTEXT",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 64,
+            "y": 540,
+            "width": 760,
+            "height": 120,
+            "align": "start",
+            "family": "words",
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 980,
+            "y": 540,
+            "width": 396,
+            "height": 380,
+            "align": "start",
+            "layout": "stacked",
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "THE O",
+            "x": 64,
+            "y": 718
+          },
+          {
+            "type": "symbol",
+            "x": 64,
+            "y": 740,
+            "height": 180,
+            "colour": "primary"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "OverTheEdgeLogo",
+    "symbolComponentName": "OverTheEdgeO",
+    "cssPrefix": "ote",
+    "appIcon": {
+      "background": "forest",
+      "colour": "white",
+      "size": 640
+    },
+    "favicon": {
+      "light": "#155329",
+      "dark": "#E3EFCF",
+      "size": 56,
+      "title": "{name} favicon / the O"
+    },
+    "intro": {
+      "eyebrow": "News · Clubs · Events · Calendar",
+      "headline": "Over the Edge\nBrand assets.",
+      "body": "The paper’s own lettering, forest on newsprint, Source Serif and Anton: logos, templates and web files from one brand.json.",
+      "edition": "v{displayVersion}",
+      "typeSample": "Over the Edge\nis here!",
+      "footer": "Over the Edge · UNBC's Independent Student Newspaper"
+    },
+    "landing": {
+      "eyebrow": "News · Clubs · Events · Calendar",
+      "headline": "UNBC's Independent\nStudent Newspaper",
+      "body": "Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.",
+      "cta": "Read News",
+      "contactEyebrow": "Get Involved",
+      "contactBody": "[Add a contact address or form here.]",
+      "footer": "Over the Edge"
+    }
+  },
+  "files": [
+    {
+      "to": "README.md",
+      "from": "docs/README.md"
+    },
+    {
+      "to": "CHANGELOG.md",
+      "from": "docs/CHANGELOG.md"
+    },
+    {
+      "to": "logos/source/overtheedge-site-light.svg",
+      "from": "reference/logo-site.svg"
+    },
+    {
+      "to": "logos/source/overtheedge-site-dark.svg",
+      "from": "reference/logo-site-dark.svg"
+    },
+    "fonts/README.md",
+    "fonts/Inter-OFL.txt",
+    "fonts/desktop/Inter-Regular.ttf",
+    "fonts/desktop/Inter-SemiBold.ttf",
+    "fonts/web/Inter-Regular.woff2",
+    "fonts/web/Inter-SemiBold.woff2",
+    "fonts/Anton-OFL.txt",
+    "fonts/IBMPlexMono-OFL.txt",
+    "fonts/GochiHand-OFL.txt",
+    "fonts/SourceSerif-OFL.md",
+    "fonts/Anton-Regular.ttf",
+    "fonts/SourceSerif4-Regular.ttf",
+    "fonts/SourceSerif4-Bold.ttf",
+    "fonts/SourceSerif4-It.ttf",
+    "fonts/IBMPlexMono-Medium.ttf",
+    "fonts/GochiHand-Regular.ttf"
+  ],
+  "status": "\"Forest press\": an evolution of the paper's look. The logo is the site's own artwork, unedited. Anton and Gochi Hand stand in for the print covers' faces.",
+  "icons": {
+    "size": 24,
+    "attrs": {
+      "stroke": "currentColor",
+      "stroke-width": "2",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    },
+    "title": "{name} / {icon} icon",
+    "items": [
+      {
+        "id": "search",
+        "content": "<circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M21 21l-4.35-4.35\"/>"
+      },
+      {
+        "id": "sun",
+        "content": "<circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41\"/>"
+      },
+      {
+        "id": "moon",
+        "content": "<path d=\"M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z\"/>"
+      },
+      {
+        "id": "close",
+        "content": "<path d=\"M18 6L6 18M6 6l12 12\"/>"
+      },
+      {
+        "id": "arrow-right",
+        "content": "<path d=\"M5 12h14M12 5l7 7-7 7\"/>"
+      },
+      {
+        "id": "newspaper",
+        "content": "<path d=\"M4 4h13v16H6a2 2 0 0 1-2-2z\"/><path d=\"M17 8h3v10a2 2 0 0 1-2 2\"/><path d=\"M8 8h5M8 12h5M8 16h3\"/>"
+      },
+      {
+        "id": "calendar",
+        "content": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M3 10h18M8 3v4M16 3v4\"/>"
+      },
+      {
+        "id": "clubs",
+        "content": "<circle cx=\"9\" cy=\"8\" r=\"3.5\"/><path d=\"M2.5 20a6.5 6.5 0 0 1 13 0\"/><circle cx=\"17\" cy=\"9\" r=\"2.5\"/><path d=\"M16 14.2a5 5 0 0 1 5.5 4.8\"/>"
+      },
+      {
+        "id": "pen",
+        "content": "<path d=\"M16.5 3.5l4 4L8 20H4v-4z\"/><path d=\"M14 6l4 4\"/>"
+      },
+      {
+        "id": "archive",
+        "content": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"5\" rx=\"1\"/><path d=\"M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4\"/>"
+      }
+    ]
+  }
+}
