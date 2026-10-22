@@ -8,7 +8,8 @@
 
 import { unzip } from '../export/render.js'
 
-const FILES = import.meta.glob('../../brands/**/*', { query: '?url', import: 'default', eager: true })
+// A brand's history (an earlier definition kept for the record) is not served with the app.
+const FILES = import.meta.glob(['../../brands/**/*', '!../../brands/*/history/**'], { query: '?url', import: 'default', eager: true })
 const DEFINITIONS = import.meta.glob('../../brands/*/brand.json', { import: 'default' })
 
 const idOf = (path) => path.split('/').at(-2)

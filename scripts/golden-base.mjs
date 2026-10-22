@@ -16,7 +16,7 @@
 // serves both sides of the comparison.
 
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
@@ -46,7 +46,10 @@ export const computeManifest = async (root) => {
   const base = resolve(root)
   const engine = await import(pathToFileURL(join(base, 'src/engine/index.js')).href)
   const folder = join(base, 'brands/ddcnorth')
-  const brand = JSON.parse(readFileSync(join(folder, 'brand.json'), 'utf8'))
+  // Since v2.3 was approved, the v2.1 definition (with its proposals) is kept as history; a checkout
+  // from before then has it as brand.json.
+  const v21 = join(folder, 'history/2.1/brand.json')
+  const brand = JSON.parse(readFileSync(existsSync(v21) ? v21 : join(folder, 'brand.json'), 'utf8'))
   return {
     keys: sorted(Object.fromEntries(Object.keys(brand).map((key) => [key, sha(canonical(brand[key]))]))),
     approved: renders(engine, brand, folder),

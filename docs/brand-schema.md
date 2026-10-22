@@ -347,6 +347,12 @@ with anything uncited).
   timing, use and description, ids are unique, and durations are positive numbers of milliseconds.
   `motion.note` is shown above the Motion tab's studies: the BC identities use it to say their
   libraries are brandkit's examples (`scripts/brands/bc-motion.mjs`), since neither manual covers motion.
+- `history`: what became of earlier versions and proposals, newest last, shown on the Overview:
+  `{ version, displayVersion, status: 'superseded', summary, definition }` for a version replaced
+  (`definition` the path of its brand.json, kept in the brand's folder), a revision record with
+  `status: 'archived'` and its `changes` kept (so it can be proposed again), or `status: 'approved'`
+  once merged. A revision is approved by merging it into the definition and recording it here: see
+  `scripts/brands/ddcnorth-accept-v23.mjs`. Revisions still open stay in `revisions`.
 - `print`: `{ pantone: { colourKey: "376" }, cmyk: { colourKey: "C50 Y100" }, note }`, the values a
   manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
   recipe gets one converted from its screen value, marked as converted.

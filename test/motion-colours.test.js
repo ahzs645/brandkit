@@ -7,12 +7,11 @@ import { readFileSync } from 'node:fs'
 import { easingPath, isLogoStudy, motionGroups, stageCss, tokenRows, tokensCss, tokensJson } from '../src/app/motion.js'
 import { cmykLabel, cmykOf, colourEntries, contrast, editableRoles, grade, printValues, rolePairs, tint, tintsOf } from '../src/app/colours.js'
 import { planKit } from '../src/engine/kit.js'
-import { withRevision } from '../src/engine/revisions.js'
 
 const read = (id) => JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
 
 test('motion groups follow the brand’s own groups, or each study’s group', () => {
-  const ddc = withRevision(read('ddcnorth'), 'data-design-connection').motion
+  const ddc = read('ddcnorth').motion
   const groups = motionGroups(ddc)
   assert.deepEqual(groups.map((group) => group.id), ddc.groups.map((group) => group.id))
   assert.equal(groups.flatMap((group) => group.studies).length, ddc.studies.length)

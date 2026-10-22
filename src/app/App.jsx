@@ -283,7 +283,7 @@ export const App = () => {
       <footer className="footer muted">
         {SHARED
           ? `${brand?.name ?? 'This'} brand centre. Every file is made in your browser from the approved identity; nothing is uploaded.`
-          : 'brandkit makes every file in your browser; nothing is uploaded. The ddcnorth kit is reproduced byte for byte from its brand.json.'}
+          : 'brandkit makes every file in your browser; nothing is uploaded. ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.'}
       </footer>
     </div>
     </Shared.Provider>

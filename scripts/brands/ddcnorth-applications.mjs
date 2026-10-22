@@ -4,7 +4,7 @@
 // (cards, an A4 letterhead, two social formats and a slide): a stationery set, memoranda and
 // releases, forms, publication covers and mastheads, advertising, audio-visual, signs, vehicles
 // and uniforms, and the guide pages on backgrounds and incorrect usage. This script adds that
-// system to brands/ddcnorth/brand.json: the templates; the sets that make variants of one thing (a
+// system to the v2.1 definition (brands/ddcnorth/history/2.1/brand.json): the templates; the sets that make variants of one thing (a
 // card's fronts and back) one item; and the Office documents made from them (Word templates, a
 // PowerPoint template, an HTML email signature).
 //
@@ -20,7 +20,9 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { shelf, updateManifest } from './common.mjs'
 import { illustration } from './illustrations.mjs'
 
-const file = new URL('../../brands/ddcnorth/brand.json', import.meta.url)
+// The v2.1 definition, kept as history since v2.3 was approved; scripts/brands/ddcnorth-accept-v23.mjs
+// makes brand.json from it.
+const file = new URL('../../brands/ddcnorth/history/2.1/brand.json', import.meta.url)
 const brand = JSON.parse(readFileSync(file, 'utf8'))
 const EXTENSION = 'applications'
 

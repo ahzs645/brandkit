@@ -1,6 +1,6 @@
-# ddcnorth motion (proposed v2.3)
+# ddcnorth motion (v2.3)
 
-The motion library for the proposed v2.3 identity. Open `index.html` in a browser to play every study;
+The motion library for the v2.3 identity. Open `index.html` in a browser to play every study;
 `motion.css` carries the tokens and the moves CSS can play on its own, and `motion-tokens.json`
 the same tokens as data.
 

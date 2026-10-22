@@ -13,7 +13,9 @@ import { GROUPS, STUDIES, TOKENS, RULES, GUARDRAILS } from '../scripts/brands/dd
 import { colourProblems, grow, markBox, pathCircles, templateIntrusions, templateMarks, textBox } from './brand-rules.js'
 
 const folder = new URL('../brands/ddcnorth/', import.meta.url).pathname
-const brand = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
+// The proposal as it was made, in the v2.1 definition kept as history (test/ddcnorth-accepted.test.js
+// covers the approved v2.3 in brand.json).
+const brand = JSON.parse(readFileSync(`${folder}history/2.1/brand.json`, 'utf8'))
 const ID = 'data-design-connection'
 const revised = withRevision(brand, ID)
 const entry = brand.revisions.find((revision) => revision.id === ID)
@@ -363,11 +365,13 @@ test('the brand-details page is self-contained and on the palette, and the site 
 
 // --- BK-011: documentation.
 
-test('the schema, changelog and README document the proposal', () => {
+test('the schema, changelog and README document v2.3', () => {
   const schema = readFileSync(new URL('../docs/brand-schema.md', import.meta.url), 'utf8')
   for (const phrase of ['$append', '`dots`', '`lines`', '`polyline`', 'motion.guardrails', 'motion.groups']) assert.ok(schema.includes(phrase), phrase)
   const changelog = readFileSync(`${folder}docs/CHANGELOG.md`, 'utf8')
-  assert.match(changelog, /^# Change log\n\n## Proposed: 2\.3 - data, design, connection \(22 October 2026\)/)
+  // Proposed and approved the same day: the change log now records it as approved, and 2.2 as archived.
+  assert.match(changelog, /^# Change log\n\n## 2\.3 - data, design, connection \(approved 22 October 2026\)/)
+  assert.match(changelog, /## Archived: 2\.2 - rising symbol/)
   const readme = readFileSync(new URL('../README.md', import.meta.url), 'utf8')
   for (const phrase of ['v2.3', 'npm run make:ddcnorth-v23', 'npm run test:browser', 'Motion tab']) assert.ok(readme.includes(phrase), phrase)
 })

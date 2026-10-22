@@ -1,6 +1,7 @@
 // ddcnorth v2.3, proposed: data, design, connection.
 //
-// Writes one revision into brands/ddcnorth/brand.json, after the 2.2 rising proposal, and the files
+// Writes one revision into the v2.1 definition (brands/ddcnorth/history/2.1/brand.json), after the 2.2
+// rising proposal, and the files
 // it ships: the motion library (brands/ddcnorth/motion/) and the brand-details page
 // (brands/ddcnorth/docs/brand-details.html). Everything else in brand.json stays as it was.
 //
@@ -20,7 +21,9 @@ import { fillTemplate, motionCss, motionEntry, motionPage, motionReadme, motionT
 
 const root = new URL('../../brands/ddcnorth/', import.meta.url)
 const here = new URL('./ddcnorth-v23/', import.meta.url)
-const file = new URL('brand.json', root)
+// The revision is recorded in the v2.1 definition, as it was proposed; scripts/brands/ddcnorth-accept-v23.mjs
+// merges it into brand.json now that it is approved.
+const file = new URL('history/2.1/brand.json', root)
 const brand = JSON.parse(readInput(file).toString('utf8'))
 const ID = 'data-design-connection'
 const EXTENSION = 'v2.3'
@@ -283,7 +286,7 @@ const motionFiles = {
   'motion/motion-tokens.json': motionTokens(),
   'motion/README.md': motionReadme()
 }
-const details = fillTemplate(readInput(new URL('brand-details.template.html', here)).toString('utf8'), { FONTS, LOGO, LAB_JSON: JSON.stringify({ label: 'Brand details · proposed v2.3' }) })
+const details = fillTemplate(readInput(new URL('brand-details.template.html', here)).toString('utf8'), { FONTS, LOGO, LAB_JSON: JSON.stringify({ label: 'Brand details · v2.3' }) })
 
 // --- The revision.
 

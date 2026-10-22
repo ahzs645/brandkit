@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { logoDocument, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, fill, isDark, rgb } from '../../engine/brand.js'
 import { guideSheets } from '../../engine/guide.js'
-import { revisionsOf, withRevision } from '../../engine/revisions.js'
+import { changesArtwork, mergePatch, revisionsOf, withRevision } from '../../engine/revisions.js'
 import { colourEntries } from '../colours.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
@@ -40,6 +40,41 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
               <button type="button" className="button" onClick={() => onRevision(active === revision.id ? null : revision.id)}>{active === revision.id ? 'Back to the approved identity' : 'Show everything with this revision'}</button>
               {comparison && <Downloads make={() => comparison.render()} name={`${base.id}-${revision.id}-comparison`} width={2880} />}
             </div>
+          </article>
+        )
+      })}
+    </section>
+  )
+}
+
+/** What became of earlier versions and proposals: superseded, archived (with its logo, if it changed one) or approved. */
+const History = ({ brand, fonts, logo }) => {
+  if (!brand.history?.length) return null
+  const entries = [...brand.history].reverse()
+  return (
+    <section className="panel">
+      <div className="panel__head">
+        <h2>History</h2>
+        <p className="muted">How {brand.name} reached v{brand.displayVersion ?? brand.version}: the versions it replaced and the proposals decided along the way.</p>
+      </div>
+      {entries.map((entry) => {
+        const key = entry.id ?? entry.version
+        const archivedArt = entry.status === 'archived' && entry.changes && changesArtwork(entry)
+        return (
+          <article key={key} className="revision">
+            <div className="revision__head">
+              <h3>{entry.title ?? `v${entry.displayVersion ?? entry.version}`}</h3>
+              <span className={`revision__status revision__status--${entry.status}`}>{entry.status}</span>
+              <span className="muted">v{entry.displayVersion ?? entry.version}{entry.date ? ` · ${entry.date}` : ''}{entry.archived ? ` · archived ${entry.archived}` : ''}{entry.approved ? ` · approved ${entry.approved}` : ''}</span>
+            </div>
+            {archivedArt && (
+              <div className="revision__pair">
+                <figure><div><SvgImage svg={logoDocument({ brand, fonts }, logo)} alt="The current logo" /></div><figcaption>Current, v{brand.displayVersion ?? brand.version}</figcaption></figure>
+                <figure><div><SvgImage svg={logoDocument({ brand: mergePatch(brand, entry.changes), fonts }, logo)} alt={`${entry.title}, archived`} /></div><figcaption>{entry.title}, archived</figcaption></figure>
+              </div>
+            )}
+            {entry.summary && <p className="muted" style={{ margin: 0 }}>{entry.summary}</p>}
+            {entry.note && <p className="caption caption--flush" style={{ paddingTop: 0 }}>{entry.note}</p>}
           </article>
         )
       })}
@@ -103,6 +138,7 @@ export const Overview = ({ brand, base = brand, fonts, revision, onRevision, ope
       )}
 
       <Revisions base={base} fonts={fonts} active={revision} onRevision={onRevision} />
+      {!revision && <History brand={brand} fonts={fonts} logo={brand.families?.length ? { family: brand.families[0].id, layout: 'horizontal', colourKey: brand.rasterColours?.[0] ?? 'black' } : { signature: brand.signatures?.[0]?.id, colourway: brand.defaultColourway }} />}
 
       <section className="split">
         <div className="panel">

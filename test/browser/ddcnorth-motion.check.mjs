@@ -1,4 +1,4 @@
-// Browser check for ddcnorth's proposed v2.3 (docs/PLANS.md BK-008 and BK-009): the app's Motion
+// Browser check for ddcnorth v2.3, approved (docs/PLANS.md BK-008 and BK-009): the app's Motion
 // tab and its fallbacks, the motion library page, and the brand-details page, in Chromium at
 // desktop and phone widths. Not part of `npm test`: it needs a browser.
 //
@@ -106,13 +106,11 @@ const open = async (path, { width = 1280, ...options } = {}) => {
 const tabs = (page) => page.$$eval('nav.tabs button', (buttons) => buttons.map((button) => button.textContent.trim()))
 const current = (page) => page.$eval('nav.tabs [aria-current="page"]', (button) => button.textContent.trim())
 const viewParam = (page) => new URL(page.url()).searchParams.get('view')
-/** Chooses from the masthead's brand menu (the logo): a revision by its label, or a brand by its name. */
+/** Chooses a brand from the masthead's brand menu (the logo), by its name. */
 const fromBrandMenu = async (page, name) => {
   await page.locator('.brand-menu__trigger').click()
   await page.locator('.brand-menu [role="menuitemradio"]', { hasText: name }).first().click()
 }
-const REVISION_LABELS = { '': 'Approved', rising: 'Rising symbol', 'data-design-connection': 'Data, design, connection' }
-const revisionSelect = (page) => ({ selectOption: (id) => fromBrandMenu(page, REVISION_LABELS[id]) })
 /** Opens the Motion tab and waits until the stage's frame of the library page has drawn its studies. */
 const openMotionTab = async (page) => {
   await page.locator('nav.tabs button', { hasText: 'Motion' }).click()
@@ -120,34 +118,23 @@ const openMotionTab = async (page) => {
 }
 
 try {
-  // --- The app: where the Motion tab appears, and where it falls back.
+  // --- The app: ddcnorth v2.3 (approved) has its Motion tab; a brand without a library falls back.
   for (const width of [1280, 390]) {
     const tag = `@${width}`
     await check(`app motion tab only with a library ${tag}`, async () => {
       const approved = await open('?brand=ddcnorth', { width })
-      assert.ok(!(await tabs(approved.page)).includes('Motion'), 'v2.1 has no Motion')
-      await revisionSelect(approved.page).selectOption('rising')
-      await approved.page.waitForTimeout(300)
-      assert.ok(!(await tabs(approved.page)).includes('Motion'), 'rising has no Motion')
-      await revisionSelect(approved.page).selectOption('data-design-connection')
-      await approved.page.waitForFunction(() => [...document.querySelectorAll('nav.tabs button')].some((b) => b.textContent.trim() === 'Motion'))
+      assert.ok((await tabs(approved.page)).includes('Motion'), 'v2.3 has Motion')
+      assert.equal(await approved.page.locator('.brand-menu [role="menuitemradio"]').count(), 0, 'the brand menu starts closed')
+      await approved.page.locator('.brand-menu__trigger').click()
+      assert.equal(await approved.page.locator('.brand-menu .menu__heading', { hasText: 'Revision' }).count(), 0, 'no open revisions to choose')
+      await approved.page.keyboard.press('Escape')
       await openMotionTab(approved.page)
       assert.equal(await approved.page.locator('.motion-studio .studio__item').count(), 18, '18 studies in the list')
-      // Switching to v2.1 while on Motion goes to the overview.
-      await revisionSelect(approved.page).selectOption('')
+      // To a brand without a library while on Motion.
+      await fromBrandMenu(approved.page, 'northwind')
       await approved.page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
       assert.equal(viewParam(approved.page), null)
       assert.equal(await approved.page.locator('iframe.motion-stage').count(), 0, 'leaving the tab removes the frame')
-      // Back to v2.3, then to rising, while on Motion.
-      await revisionSelect(approved.page).selectOption('data-design-connection')
-      await openMotionTab(approved.page)
-      await revisionSelect(approved.page).selectOption('rising')
-      await approved.page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
-      // To another brand while on Motion.
-      await revisionSelect(approved.page).selectOption('data-design-connection')
-      await openMotionTab(approved.page)
-      await fromBrandMenu(approved.page, 'northwind')
-      await approved.page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
       assert.ok(!(await tabs(approved.page)).includes('Motion'), 'northwind has no Motion')
       assert.deepEqual(approved.errors, [])
       await approved.page.close()
@@ -156,16 +143,18 @@ try {
       await firstform.page.close()
     })
     await check(`app motion view falls back to the overview ${tag}`, async () => {
-      for (const path of ['?brand=ddcnorth&view=motion', '?brand=ddcnorth&share=1&view=motion']) {
+      for (const path of ['?brand=northwind&view=motion', '?brand=northwind&share=1&view=motion']) {
         const { page, errors } = await open(path, { width })
         await page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
         assert.equal(viewParam(page), null, path)
         assert.deepEqual(errors, [], path)
         await page.close()
       }
-      const { page } = await open('?brand=ddcnorth&revision=data-design-connection&view=motion', { width })
-      assert.equal(await current(page), 'Motion')
-      await page.close()
+      for (const path of ['?brand=ddcnorth&view=motion', '?brand=ddcnorth&share=1&view=motion']) {
+        const { page } = await open(path, { width })
+        await page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Motion')
+        await page.close()
+      }
     })
   }
 
