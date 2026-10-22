@@ -11,7 +11,8 @@ import { BUILT_IN, builtInName, forgetBrand, librarySource, loadBuiltIn, openBra
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
-import { Motion, motionUrl } from './views/Motion.jsx'
+import { Motion } from './views/Motion.jsx'
+import { motionUrl, viewOrOverview } from './motion.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
@@ -146,6 +147,12 @@ export const App = () => {
     writeUrl({ view: next === 'overview' ? null : next })
     globalThis.scrollTo?.({ top: 0 })
   }
+  // Motion only exists for a brand (or a chosen revision) with a motion library: arriving on it, or
+  // switching brand or revision while on it, without one goes to the overview.
+  const motionLink = brand ? motionUrl(brand, source) : undefined
+  useEffect(() => {
+    if (brand && viewOrOverview(view, motionLink) !== view) go('overview')
+  }, [brand, motionLink, view])
 
   // Between a brand and its manuals: a template's source page, and back from a page to a template.
   const openManual = (book, page) => {

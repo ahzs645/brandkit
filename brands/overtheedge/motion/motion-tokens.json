@@ -1,0 +1,22 @@
+{
+  "durations": {
+    "quick": 160,
+    "base": 240,
+    "slow": 480,
+    "draw": 1200,
+    "loop": 1600
+  },
+  "easings": {
+    "settle": "cubic-bezier(.2, .6, .2, 1)",
+    "move": "cubic-bezier(.6, 0, .2, 1)",
+    "linear": "linear"
+  },
+  "stagger": 80,
+  "distance": 16,
+  "rules": [
+    "Print, don’t perform.",
+    "One thing at a time.",
+    "Loops are for waiting.",
+    "Still is a valid frame."
+  ]
+}

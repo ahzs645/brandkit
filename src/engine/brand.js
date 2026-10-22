@@ -5,6 +5,7 @@
 // and every piece of copy comes from the document.
 
 import { interpolate } from './format.js'
+import { withRevision } from './revisions.js'
 
 /** Roles the built-in templates and guide pages ask for. A brand maps each to one of its colours. */
 export const COLOUR_ROLES = ['ink', 'paper', 'muted', 'primary', 'light', 'reverse', 'line', 'rule']
@@ -114,8 +115,11 @@ export const validateBrand = (brand) => {
   if (brand.signatures?.length) need(brand.colourways && Object.keys(brand.colourways).length, 'A brand with signatures needs `colourways`.')
   for (const entry of brand.families ?? []) {
     need(brand.wordmark?.variants?.[entry.wordmark], `Family \`${entry.id}\` names wordmark \`${entry.wordmark}\`, which is not defined.`)
+    if (entry.stackedWordmark != null) need(brand.wordmark?.variants?.[entry.stackedWordmark], `Family \`${entry.id}\` names stacked wordmark \`${entry.stackedWordmark}\`, which is not defined.`)
+    if (entry.lockupSymbol != null) need(typeof entry.lockupSymbol === 'boolean', `Family \`${entry.id}\`: \`lockupSymbol\` must be true or false.`)
   }
   for (const [id, variant] of Object.entries(brand.wordmark?.variants ?? {})) {
+    if (variant.height != null) need(typeof variant.height === 'number' && variant.height > 0, `Wordmark \`${id}\`: \`height\` must be a positive number.`)
     for (const part of variant.parts ?? []) {
       if (part.glyph) need(brand.wordmark.glyphs?.[part.glyph], `Wordmark \`${id}\` uses glyph \`${part.glyph}\`, which is not defined.`)
       if (part.text) need(brand.fonts?.[part.font ?? 'display'], `Wordmark \`${id}\` sets text in font \`${part.font ?? 'display'}\`, which is not defined.`)
@@ -131,6 +135,52 @@ export const validateBrand = (brand) => {
   for (const document of brand.documents ?? []) {
     need(['docx', 'pptx', 'html'].includes(document.format), `Document \`${document.id}\` has format \`${document.format}\`; use docx, pptx or html.`)
     for (const id of [...(document.pages ?? []), ...(document.layouts ?? []), ...(document.template ? [document.template] : [])]) need(templateIds.has(id), `Document \`${document.id}\` names template \`${id}\`, which is not defined.`)
+  }
+  // Dots and lines, in patterns and in templates.
+  const number = (value) => typeof value === 'number' && Number.isFinite(value)
+  for (const spec of brand.patterns ?? []) {
+    for (const dot of spec.dots ?? []) need(number(dot.cx) && number(dot.cy) && number(dot.r) && dot.r >= 0, `Pattern \`${spec.id}\` has a dot without a numeric cx, cy and non-negative r.`)
+    for (const line of spec.lines ?? []) need(Array.isArray(line.points) && line.points.length >= 2, `Pattern \`${spec.id}\` has a line with fewer than two points.`)
+  }
+  for (const template of brand.templates ?? []) {
+    for (const element of template.elements ?? []) {
+      if (element.type === 'dots') need(Array.isArray(element.dots) && element.dots.every((dot) => Array.isArray(dot) && number(dot[0]) && number(dot[1]) && number(dot[2]) && dot[2] >= 0), `Template \`${template.id}\` has a dots element whose dots are not [cx, cy, r] numbers with r of zero or more.`)
+      if (element.type === 'polyline') need(Array.isArray(element.points) && element.points.length >= 2, `Template \`${template.id}\` has a polyline with fewer than two points.`)
+    }
+  }
+  // Motion: a library page and its studies.
+  if (brand.motion) {
+    const studies = brand.motion.studies ?? []
+    need(Array.isArray(studies) && studies.length > 0, '`motion.studies` needs at least one study.')
+    const seen = new Set()
+    for (const study of studies) {
+      need(['id', 'name', 'kind', 'timing', 'use', 'description'].every((key) => typeof study[key] === 'string' && study[key]), `Motion study \`${study.id ?? '?'}\` needs an id, name, kind, timing, use and description.`)
+      need(!seen.has(study.id), `Motion study \`${study.id}\` is listed twice.`)
+      seen.add(study.id)
+    }
+    for (const [key, value] of Object.entries(brand.motion.tokens?.durations ?? {})) need(number(value) && value > 0, `Motion duration \`${key}\` must be a positive number of milliseconds.`)
+  }
+  // `$append` belongs only in a revision's changes.
+  const appendOutside = (value, path) => {
+    if (!value || typeof value !== 'object') return
+    if (!Array.isArray(value) && Object.hasOwn(value, '$append')) problems.push(`\`${path}\` uses $append, which belongs only in a revision's changes.`)
+    for (const [key, child] of Object.entries(value)) if (!(path === '' && key === 'revisions')) appendOutside(child, path ? `${path}.${key}` : key)
+  }
+  appendOutside(brand, '')
+  // Revisions: each named, with a status and changes, once; and each valid once applied.
+  if (!brand.revision) {
+    const ids = new Set()
+    for (const revision of brand.revisions ?? []) {
+      need(typeof revision.id === 'string' && revision.id && typeof revision.status === 'string' && revision.changes && typeof revision.changes === 'object', `Revision \`${revision.id ?? '?'}\` needs an id, a status and changes.`)
+      need(!ids.has(revision.id), `Revision \`${revision.id}\` is listed twice.`)
+      ids.add(revision.id)
+      if (!revision.id || !revision.changes) continue
+      try {
+        for (const problem of validateBrand(withRevision(brand, revision.id))) problems.push(`Revision \`${revision.id}\`: ${problem}`)
+      } catch (error) {
+        problems.push(`Revision \`${revision.id}\`: ${error.message}`)
+      }
+    }
   }
   return problems
 }

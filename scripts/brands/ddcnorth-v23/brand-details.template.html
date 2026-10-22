@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ddcnorth brand details</title>
+<!-- Written by scripts/brands/ddcnorth-v23.mjs from this template; edit the template, then run npm run make:ddcnorth-v23. -->
+<!-- Fonts embedded below: Inter and Inter Display (SIL Open Font License 1.1, fonts/Inter-OFL.txt) and Space Mono (SIL Open Font License 1.1, fonts/SpaceMono-OFL.txt). -->
+<style>
+{{FONTS}}
+/* Layout: a quiet specimen book. Left-hand mono labels, wide plates on the right, brand artwork always in brand colours. */
+:root{
+  --bg:#F7F6F3;--surface:#FFFFFF;--fg:#000000;--muted:#4B4F56;--line:#D9DCDF;--accent:#0B2B4A;--accent-soft:#C8D7E8;--logo:#000000;
+  /* Fixed brand colours for artwork; these never change with theme. */
+  --b-ink:#000000;--b-paper:#F7F6F3;--b-graphite:#4B4F56;--b-midnight:#0B2B4A;--b-ice:#C8D7E8;--b-white:#FFFFFF;
+  --display:'Inter Display',Inter,Arial,sans-serif;--body:Inter,Arial,sans-serif;--mono:'Space Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B2B4A;--surface:#0B2B4A;--fg:#F7F6F3;--muted:#C8D7E8;--line:color-mix(in srgb, #C8D7E8 25%, transparent);--accent:#C8D7E8;--accent-soft:#0B2B4A;--logo:#FFFFFF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B2B4A;--surface:#0B2B4A;--fg:#F7F6F3;--muted:#C8D7E8;--line:color-mix(in srgb, #C8D7E8 25%, transparent);--accent:#C8D7E8;--accent-soft:#0B2B4A;--logo:#FFFFFF;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--body);-webkit-font-smoothing:antialiased;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.04em;text-wrap:balance}
+p{color:var(--muted);max-width:62ch}
+a{color:inherit}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.page{max-width:1240px;margin-inline:auto}
+.label{font:11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mast{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:28px;border-bottom:1px solid var(--line)}
+.mast svg{flex:none;width:220px;max-width:100%;height:auto;color:var(--logo)}
+.intro{padding-block:72px 64px;display:grid;gap:24px}
+.intro h1{font-size:clamp(44px,7vw,96px);line-height:1}
+.intro h1 span{color:var(--accent)}
+.intro p{font-size:18px}
+.toc{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;padding:0;margin-top:8px}
+.toc a{font:12px/1.5 var(--mono);letter-spacing:.12em;text-decoration:none;border-bottom:1px solid var(--line);padding-block:4px}
+.toc a:hover{border-color:var(--fg)}
+section.block{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;padding-block:72px;border-top:1px solid var(--line)}
+.block>header{display:flex;flex-direction:column;gap:10px}
+.block>header h2{font-size:28px;line-height:1.15}
+.block>header p{font-size:14px}
+.stack{display:grid;gap:40px;min-width:0}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.note{font-size:14px}
+.plate{display:grid;gap:12px;min-width:0}
+.plate figcaption{display:flex;justify-content:space-between;gap:12px;font:11px/1.5 var(--mono);letter-spacing:.12em;color:var(--muted);letter-spacing:.12em}
+.art{width:100%;max-width:100%;height:auto;display:block;border:1px solid var(--line)}
+/* Name reading */
+.ddc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ddc div{border-top:1px solid var(--fg);padding-top:18px;display:grid;gap:10px;align-content:start}
+.ddc .letter{font:500 72px/1 var(--display);letter-spacing:-.04em;color:var(--accent)}
+.ddc h3{font-size:22px}
+.ddc p{font-size:14px}
+/* Generator */
+.gen{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
+.gen-out svg{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.controls{display:grid;gap:18px;padding:20px;background:var(--surface);border:1px solid var(--line)}
+.controls label{display:grid;gap:6px;font:11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.controls select,.controls input[type=range]{width:100%}
+.controls select{padding:8px 10px;background:var(--bg);border:1px solid var(--line);border-radius:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font:11px/1.4 var(--mono)}
+.chip[aria-pressed="true"]{border-color:var(--fg)}
+.chip i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px var(--line)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:10px 14px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer;font-size:13px}
+.btn.ghost{background:transparent;color:var(--fg)}
+.status{font:11px/1.5 var(--mono);letter-spacing:.12em;color:var(--muted);min-height:1.5em}
+textarea.copy-fallback{width:100%;height:80px;font:11px var(--mono);background:var(--bg);border:1px solid var(--line)}
+/* Colour + data */
+.swatches{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border:1px solid var(--line)}
+.swatches div{aspect-ratio:1/1.1;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;font:10px/1.4 var(--mono)}
+.ramp{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--line);background:var(--b-paper)}
+.ramp div{height:64px;padding:8px;font:10px/1.3 var(--mono);letter-spacing:.12em;display:flex;align-items:flex-end}
+.dm{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;min-width:0}
+.dm svg{height:48px;width:auto;max-width:100%}
+table.spec{width:100%;border-collapse:collapse;font-size:14px}
+table.spec td,table.spec th{padding:10px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+table.spec th{font:11px/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:400}
+/* Templates (fixed brand colours) */
+.tpl{container-type:inline-size;width:100%;max-width:100%;overflow:hidden;position:relative;font-family:var(--body)}
+.tpl .t-mono{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.sq{aspect-ratio:1/1}.wide{aspect-ratio:16/9}.a4{aspect-ratio:210/297}.og{aspect-ratio:1200/630}.banner{aspect-ratio:4/1}.a3{aspect-ratio:420/297}
+.t-pad{position:absolute;inset:0;padding:7cqw;display:flex;flex-direction:column;justify-content:space-between}
+.t-logo{width:30cqw;height:auto}
+.motion{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.motion .stage{aspect-ratio:4/3;background:var(--b-paper);border:1px solid var(--line);display:grid;place-items:center}
+.motion .stage svg{width:58%;height:auto}
+.m-reveal circle{transform-box:fill-box;transform-origin:center;animation:arrive .6s both}
+.m-think circle{transform-box:fill-box;transform-origin:center;animation:think 1.2s infinite ease-in-out}
+.m-connect .path{stroke-dasharray:700;animation:draw 1.8s ease-out both}
+@keyframes arrive{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+@keyframes think{0%,100%{opacity:.25}30%{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:700}to{stroke-dashoffset:0}}
+.icons{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.icons div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 12px;display:grid;justify-items:center;gap:10px;font:10px/1.4 var(--mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.icons svg{width:40px;height:40px;fill:none;stroke:var(--fg);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.icons .new{color:var(--accent)}
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.voice ul{list-style:none;padding:0;display:grid;gap:0}
+.voice li{border-top:1px solid var(--line);padding-block:10px;font-size:15px}
+.taglines{display:grid;gap:0}
+.taglines p{font:500 clamp(24px,3vw,36px)/1.2 var(--display);letter-spacing:-.04em;color:var(--fg);border-top:1px solid var(--line);padding-block:14px;max-width:none}
+.taglines p span{font:11px var(--mono);letter-spacing:.12em;color:var(--muted);margin-left:12px;vertical-align:middle}
+footer.end{padding-block:40px 64px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:900px){section.block{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:56px}.gen{grid-template-columns:minmax(0,1fr)}.grid3,.motion{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.voice{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.ddc,.grid3,.grid2,.motion{grid-template-columns:minmax(0,1fr)}.swatches{grid-template-columns:repeat(3,minmax(0,1fr))}.ramp div{font-size:0}.icons{grid-template-columns:repeat(3,minmax(0,1fr))}.intro{padding-block:48px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="mast">{{LOGO}}<span class="label" id="lab-label">Brand details</span></div>
+
+  <div class="intro">
+    <p class="label">For the DDCNorth team</p>
+    <h1>Six dots, <span>many uses.</span></h1>
+    <p>Ideas that grow the brand kit without changing it. Every piece below uses only the kit’s six colours, its three typefaces, and the six-dot symbol at its true proportions. The logo itself stays untouched; these are the supporting graphics around it.</p>
+    <ul class="toc">
+      <li><a href="#name">Reading the name</a></li>
+      <li><a href="#patterns">Pattern generator</a></li>
+      <li><a href="#data">Data language</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#motion">Motion</a></li>
+      <li><a href="#icons">Icons</a></li>
+      <li><a href="#voice">Voice</a></li>
+    </ul>
+  </div>
+
+  <section class="block" id="name">
+    <header><p class="label">01 · Idea</p><h2>Reading the name</h2><p>A proposal for the team, not a rename.</p></header>
+    <div class="stack">
+      <div class="ddc">
+        <div><span class="letter">D</span><h3>Data</h3><p>Organize what exists, find the patterns, show what matters.</p></div>
+        <div><span class="letter">D</span><h3>Design</h3><p>Turn findings into interfaces, tools, and documents people use.</p></div>
+        <div><span class="letter">C</span><h3>Connection</h3><p>Link people, information, and decisions into a next step.</p></div>
+      </div>
+      <p class="note">Your three focus areas happen to spell the wordmark. Used as a quiet secondary line (“Data · Design · Connection”), it explains the company without boxing it in as consultants, and it is what the redesigned site uses as its hero label. The six-dot symbol reads the same way: three dots of data, two of design, one connection.</p>
+    </div>
+  </section>
+
+  <section class="block" id="patterns">
+    <header><p class="label">02 · Pattern</p><h2>Pattern generator</h2><p>Six pattern families, all built on the symbol’s 88-unit grid. Pick one, change the colourway and density, then copy the SVG straight into Figma, Keynote or a web page.</p></header>
+    <div class="stack">
+      <div class="gen">
+        <div class="gen-out" id="gen-out" aria-live="polite"></div>
+        <div class="controls">
+          <label for="gen-type">Pattern
+            <select id="gen-type">
+              <option value="network">Network: a path through the field</option>
+              <option value="field">Field: symbol given room in a grid</option>
+              <option value="ramp">Ramp: dot size as a gradient</option>
+              <option value="signal">Signal: halftone data surface</option>
+              <option value="repeat">Repeat: tiled symbols</option>
+              <option value="crop">Crop: oversized symbol</option>
+            </select>
+          </label>
+          <div><span class="label">Colourway</span><div class="chips" id="gen-colours" role="group" aria-label="Colourway"></div></div>
+          <label for="gen-density">Density<input id="gen-density" type="range" min="1" max="10" value="5"></label>
+          <div class="btns"><button class="btn" id="gen-shuffle" type="button">Shuffle</button><button class="btn ghost" id="gen-copy" type="button">Copy SVG</button></div>
+          <p class="status" id="gen-status" role="status"></p>
+        </div>
+      </div>
+      <div class="grid3" id="pattern-plates"></div>
+      <p class="note">Rules that keep these on-brand: a complete symbol always keeps one dot diameter of empty space around it, so grids and paths stop short of it; only repeated or cropped dots may touch other shapes. Dots are always circles, never squares; the grid spacing always comes from the symbol (dot diameter is 80 of every 88 units); and a pattern never sits behind the full logo lockup. The kit’s own guide already allows repeating and cropping the motif, so these extend that page.</p>
+    </div>
+  </section>
+
+  <section class="block" id="data">
+    <header><p class="label">03 · Data</p><h2>A data language</h2><p>You work with data, so the brand should chart well. This is a colour order, a numeral style and a chart form that only DDCNorth would use.</p></header>
+    <div class="stack">
+      <div class="plate"><div class="swatches" id="swatches"></div><figcaption><span>Kit palette, in chart order</span><span>Series colours pass 3:1 on Paper</span></figcaption></div>
+      <div class="plate"><div class="ramp" id="ramp"></div><figcaption><span>Sequential ramp · Midnight at opacity steps over Paper</span><span>No new colours needed</span></figcaption></div>
+      <div class="grid2">
+        <figure class="plate"><svg class="art" id="unit-chart" viewBox="0 0 560 300" role="img" aria-label="Unit chart, one dot per hour, illustrative data"></svg><figcaption><span>Unit chart · one dot = one unit</span><span>Illustrative data</span></figcaption></figure>
+        <figure class="plate"><svg class="art" id="dot-scatter" viewBox="0 0 560 300" role="img" aria-label="Connected dot plot, illustrative data"></svg><figcaption><span>Connected dot plot · change between two points</span><span>Illustrative data</span></figcaption></figure>
+      </div>
+      <div class="plate"><div class="dm" id="dot-numerals"></div><figcaption><span>Dot-matrix numerals · 3 × 5 grid, unlit dots stay visible</span><span>For stat callouts and slide numbers</span></figcaption></div>
+      <div style="overflow-x:auto"><table class="spec">
+        <thead><tr><th>Use</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>One series</td><td>Midnight marks on Paper. Graphite for axes and labels in Space Mono.</td></tr>
+          <tr><td>Highlight</td><td>Midnight for the point that matters, Ice for everything else.</td></tr>
+          <tr><td>Categories</td><td>Midnight, Graphite, Ink, in that order. Three is the limit; group the rest. Each has at least 3:1 contrast on Paper.</td></tr><tr><td>Ice</td><td>Context only: unlit dots, ranges, backgrounds. Ice marks always carry a Midnight outline, because Ice alone is too faint on Paper.</td></tr>
+          <tr><td>Big numbers</td><td>Inter Display 500 for running copy; dot-matrix numerals only for one hero figure.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="block" id="templates">
+    <header><p class="label">04 · Templates</p><h2>Templates the kit doesn’t have yet</h2><p>The kit covers stationery, signage and vehicles. These cover the work itself: findings, proposals and workshops.</p></header>
+    <div class="stack">
+      <div class="grid2">
+        <figure class="plate"><div class="tpl wide" id="tpl-title"></div><figcaption><span>Slide · title</span><span>16 : 9</span></figcaption></figure>
+        <figure class="plate"><div class="tpl wide" id="tpl-finding"></div><figcaption><span>Slide · one finding</span><span>16 : 9</span></figcaption></figure>
+      </div>
+      <div class="grid3">
+        <figure class="plate"><div class="tpl sq" id="tpl-social"></div><figcaption><span>Social · insight card</span><span>1080 × 1080</span></figcaption></figure>
+        <figure class="plate"><div class="tpl a4" id="tpl-brief"></div><figcaption><span>Document · project brief</span><span>A4</span></figcaption></figure>
+        <figure class="plate"><div class="tpl sq" id="tpl-hiring"></div><figcaption><span>Social · section divider</span><span>1080 × 1080</span></figcaption></figure>
+      </div>
+      <figure class="plate"><div class="tpl a3" id="tpl-workshop"></div><figcaption><span>Workshop canvas · connection map</span><span>A3 landscape, print and fill in</span></figcaption></figure>
+      <div class="grid2">
+        <figure class="plate"><div class="tpl og" id="tpl-og"></div><figcaption><span>Website share image</span><span>1200 × 630</span></figcaption></figure>
+        <figure class="plate"><div class="tpl banner" id="tpl-banner"></div><figcaption><span>LinkedIn banner</span><span>1584 × 396</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="motion">
+    <header><p class="label">05 · Motion</p><h2>Three moves</h2><p>Short, quiet and reusable in video, on the site and in slides. Motion lives in fields, paths and loaders; the logo and the complete symbol never move, fade or pulse. Each one respects reduced-motion settings.</p></header>
+    <div class="stack">
+      <div class="motion">
+        <figure class="plate"><div class="stage" id="m-arrive"></div><figcaption><span>Reveal · 0.6 s, 30 ms stagger</span><span>Pattern fields</span></figcaption></figure>
+        <figure class="plate"><div class="stage" id="m-connect"></div><figcaption><span>Connect · 1.8 s draw</span><span>Transitions, hero</span></figcaption></figure>
+        <figure class="plate"><div class="stage" id="m-think"></div><figcaption><span>Think · 1.2 s loop, three dots</span><span>Loading state</span></figcaption></figure>
+      </div>
+      <div class="btns"><button class="btn ghost" type="button" id="replay">Replay animations</button></div>
+    </div>
+  </section>
+
+  <section class="block" id="icons">
+    <header><p class="label">06 · Icons</p><h2>Extending the icon set</h2><p>The kit has five line icons. Five more in the same 1.5 stroke, round ends and dot terminals.</p></header>
+    <div class="stack">
+      <div class="icons" id="icon-grid"></div>
+      <p class="note"><span class="label">Kit</span> signal, direction, network, cycle, clarity. <span class="label" style="color:var(--accent)">Proposed</span> dataset, layers, link, compass, lens.</p>
+    </div>
+  </section>
+
+  <section class="block" id="voice">
+    <header><p class="label">07 · Voice</p><h2>How it sounds</h2><p>Lines already in the kit and site, plus the words that keep the positioning open.</p></header>
+    <div class="stack">
+      <div class="taglines">
+        <p>Built for what’s next.<span>Primary</span></p>
+        <p>From insight to impact.<span>Social, proposals</span></p>
+        <p>Let’s connect the dots.<span>Calls to action</span></p>
+        <p>Data · Design · Connection<span>Descriptor</span></p>
+      </div>
+      <div class="voice">
+        <div><p class="label">Say</p><ul><li>We work with you on…</li><li>Find the connections</li><li>Make it clear, make it useful</li><li>Teams, partners, the people you serve</li></ul></div>
+        <div><p class="label">Avoid</p><ul><li>Consultants, consultancy, agency</li><li>Leverage, synergy, solutions-driven</li><li>Invented stats or client names</li><li>Exclamation marks</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="end"><span class="label">DDCNorth brand lab</span><span class="label">Kit v2.1 · palette, type and symbol unchanged</span></footer>
+</div>
+
+<script>
+(function(){
+const LAB={{LAB_JSON}};
+document.getElementById('lab-label').textContent=LAB.label;
+const C={ink:'#000000',paper:'#F7F6F3',graphite:'#4B4F56',midnight:'#0B2B4A',ice:'#C8D7E8',white:'#FFFFFF'};
+const CENTRES=[[40,40],[128,40],[216,40],[128,128],[216,128],[216,216]];
+// role "mark": a complete symbol that keeps one dot diameter clear; role "motif": repeated or cropped dots.
+const symbol=(x,y,s,fill,role='mark')=>`<g transform="translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${s.toFixed(5)})" fill="${fill}" data-brand-symbol="six-dot" data-role="${role}">${CENTRES.map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="40"/>`).join('')}</g>`;
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const COLOURWAYS=[
+  {id:'midnight',name:'Midnight',bg:C.midnight,fg:C.ice,hi:C.paper},
+  {id:'paper',name:'Paper',bg:C.paper,fg:C.midnight,hi:C.midnight},
+  {id:'ice',name:'Ice',bg:C.ice,fg:C.midnight,hi:C.midnight},
+  {id:'ink',name:'Ink',bg:C.ink,fg:C.graphite,hi:C.white}
+];
+function pattern(type,w,h,cw,density,seed){
+  const r=rng(seed),sp=Math.round(76-density*5),cols=Math.floor(w/sp),rows=Math.floor(h/sp);
+  const ox=(w-(cols-1)*sp)/2,oy=(h-(rows-1)*sp)/2,pt=(i,j)=>[ox+i*sp,oy+j*sp];
+  let g='';
+  // Clear box of a complete symbol drawn at (x,y) with scale s: artwork plus one dot diameter (80 units).
+  const clearBox=(x,y,s)=>({l:x-80*s,t:y-80*s,r:x+336*s,b:y+336*s});
+  const outside=(cx,cy,rad,c)=>!c||cx+rad<=c.l||cx-rad>=c.r||cy+rad<=c.t||cy-rad>=c.b;
+  const grid=(rad,op,c)=>{let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const[x,y]=pt(i,j);if(outside(x,y,rad,c))s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}"/>`;}return `<g fill="${cw.fg}"${cw.fgOpacity?` fill-opacity="${cw.fgOpacity}"`:''} opacity="${op}">${s}</g>`;};
+  if(type==='repeat'){
+    const s=(sp*2.2)/256,step=256*s+sp*.6;
+    for(let y=-step/2;y<h;y+=step)for(let x=-step/2+((Math.round(y/step)%2)?step/2:0);x<w;x+=step)g+=symbol(x,y,s,cw.fg,'motif');
+  }else if(type==='crop'){
+    const s=h*(1.1+density*.06)/256;g+=symbol(w-176*s-(r()*40),-40*s-(r()*h*.2),s,cw.fg,'motif');
+  }else if(type==='field'){
+    const ci=Math.floor(r()*Math.max(1,cols-2)),cj=Math.floor(r()*Math.max(1,rows-2)),[px,py]=pt(ci,cj),s=sp/88,x=px-40*s,y=py-40*s;
+    g+=grid(Math.max(1.6,sp*.06),.45,clearBox(x,y,s));
+    g+=symbol(x,y,s,cw.hi);
+  }else if(type==='ramp'){
+    let s='';for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const[x,y]=pt(i,j);const t=Math.max(0,(i/(cols-1))*1.25-(j/(rows-1))*.35);const rad=Math.max(1.4,Math.min(1,t)*sp*.4545);s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad.toFixed(2)}"/>`;}
+    g+=`<g fill="${cw.fg}"${cw.fgOpacity?` fill-opacity="${cw.fgOpacity}"`:''}>${s}</g>`;
+  }else if(type==='signal'){
+    const a=r()*6,b=r()*6,f1=.6+r()*.8,f2=.4+r()*.9;let s='';
+    for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const[x,y]=pt(i,j);const u=i/cols,v=j/rows;const n=(Math.sin(u*6*f1+a)+Math.cos(v*5*f2+b)+Math.sin((u+v)*4+a*b))/3;const rad=Math.max(1.2,((n+1)/2)**1.6*sp*.4545);s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad.toFixed(2)}"/>`;}
+    g+=`<g fill="${cw.fg}"${cw.fgOpacity?` fill-opacity="${cw.fgOpacity}"`:''}>${s}</g>`;
+  }else{ // network: a path through the field that ends at the symbol's clear zone, never inside it
+    const s=Math.min(w,h)*.3/256,x=w-256*s-Math.min(w,h)*.08,y=Math.min(w,h)*.08,c=clearBox(x,y,s),nodeR=Math.max(2.4,sp*.09);
+    g+=grid(Math.max(1.6,sp*.06),.45,c);
+    const pts=[];for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const[px,py]=pt(i,j);if(px+nodeR<c.l&&py-nodeR>c.b)pts.push([i,j]);}
+    const start=[0,rows-1];let end=pts.sort((a,b)=>(b[0]-a[0])||(a[1]-b[1]))[0]||start;
+    const path=[pt(...start)];const n=Math.max(1,end[0]-start[0]);const steps=Math.min(n,2+Math.floor(density/3));
+    for(let k=1;k<steps;k++){const i=start[0]+Math.round(k*n/steps);const j=end[1]+Math.floor(r()*(start[1]-end[1]+1));path.push(pt(i,j));}
+    if(end[0]!==start[0]||end[1]!==start[1])path.push(pt(...end));
+    g+=`<path d="M${path.map(p=>p.map(v=>v.toFixed(1)).join(' ')).join(' L')}" fill="none" stroke="${cw.hi}" stroke-width="${Math.max(1.2,sp*.025)}"/>`;
+    g+=`<g fill="${cw.hi}">${path.map(([px,py])=>`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${nodeR.toFixed(2)}"/>`).join('')}</g>`;
+    g+=symbol(x,y,s,cw.hi);
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="${cw.bg}"/>${g}</svg>`;
+}
+// Generator
+const state={type:'network',cw:COLOURWAYS[0],density:5,seed:7};
+const out=document.getElementById('gen-out'),status=document.getElementById('gen-status');
+const chips=document.getElementById('gen-colours');
+COLOURWAYS.forEach(cw=>{const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',String(cw===state.cw));b.innerHTML=`<i style="background:${cw.bg}"></i>${cw.name}`;b.onclick=()=>{state.cw=cw;chips.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b)));draw();};chips.append(b);});
+function draw(){out.innerHTML=pattern(state.type,960,560,state.cw,state.density,state.seed);status.textContent='';}
+document.getElementById('gen-type').onchange=e=>{state.type=e.target.value;draw();};
+document.getElementById('gen-density').oninput=e=>{state.density=+e.target.value;draw();};
+document.getElementById('gen-shuffle').onclick=()=>{state.seed=Math.floor(Math.random()*1e6);draw();};
+document.getElementById('gen-copy').onclick=()=>{
+  const svg=out.innerHTML;
+  const fallback=()=>{let t=out.parentElement.querySelector('.copy-fallback');if(!t){t=document.createElement('textarea');t.className='copy-fallback';t.readOnly=true;t.setAttribute('aria-label','SVG source');document.querySelector('.controls').append(t);}t.value=svg;t.select();status.textContent='Selected below. Press Cmd+C or Ctrl+C.';};
+  try{navigator.clipboard.writeText(svg).then(()=>{status.textContent='SVG copied.';},fallback);}catch(e){fallback();}
+};
+draw();
+// Static plates
+const plates=[['network','midnight',4,11],['field','paper',6,3],['ramp','ice',6,1],['signal','midnight',8,21],['repeat','paper',5,1],['crop','ink',5,2]];
+document.getElementById('pattern-plates').innerHTML=plates.map(([t,c,d,s])=>`<figure class="plate">${pattern(t,400,400,COLOURWAYS.find(x=>x.id===c),d,s).replace('<svg ','<svg class="art" role="img" aria-label="'+t+' pattern" ')}<figcaption><span>${t[0].toUpperCase()+t.slice(1)}</span><span>${COLOURWAYS.find(x=>x.id===c).name}</span></figcaption></figure>`).join('');
+// Swatches + ramp
+const sw=[['Midnight',C.midnight,C.paper,'Series 1'],['Graphite',C.graphite,C.paper,'Series 2'],['Ice',C.ice,C.midnight,'Context only'],['Ink',C.ink,C.paper,'Series 3'],['Paper',C.paper,C.ink,'Ground'],['White',C.white,C.ink,'Reverse']];
+document.getElementById('swatches').innerHTML=sw.map(([n,b,f,u],i)=>`<div${i===0||i===1||i===3?' data-series':''} style="background:${b};color:${f}"><b style="font-weight:400">${n}</b>${b}<br>${u}</div>`).join('');
+const steps=[['FF',100],['D9',85],['B3',70],['8C',55],['66',40],['40',25],['1A',10]];
+document.getElementById('ramp').innerHTML=steps.map(([a,p])=>`<div style="background:color-mix(in srgb, ${C.midnight} ${p}%, transparent);color:${p>=55?C.paper:C.ink}">Midnight ${p}%</div>`).join('');
+// Unit chart
+(function(){const rows=[['Discover',6],['Develop',14],['Deliver',8]];let s='';const sp=20;
+rows.forEach(([l,n],j)=>{const y=70+j*80;s+=`<text x="20" y="${y+5}" font-family="Space Mono, monospace" letter-spacing="1.4" font-size="12" fill="${C.graphite}">${l.toUpperCase()}</text>`;
+for(let i=0;i<20;i++){s+=`<circle cx="${150+i*sp}" cy="${y}" r="${sp*.4545/1.1}" fill="${i<n?C.midnight:'none'}" stroke="${i<n?'none':C.ice}"/>`;}
+s+=`<text x="${150+20*sp-6}" y="${y+28}" text-anchor="end" font-family="Space Mono, monospace" letter-spacing="1.3" font-size="11" fill="${C.graphite}">${n}</text>`;});
+document.getElementById('unit-chart').innerHTML=`<rect width="560" height="300" fill="${C.paper}"/>${s}`;})();
+// Connected dot plot
+(function(){const d=[['A',30,72],['B',44,58],['C',22,81],['D',61,66]];const x=v=>150+v*3.6;let s='';
+[0,25,50,75,100].forEach(v=>{s+=`<line x1="${x(v)}" x2="${x(v)}" y1="40" y2="262" stroke="#D9DCDF"/><text x="${x(v)}" y="284" text-anchor="middle" font-family="Space Mono, monospace" letter-spacing="1.3" font-size="11" fill="${C.graphite}">${v}</text>`;});
+d.forEach(([l,a,b],j)=>{const y=70+j*56;s+=`<text x="20" y="${y+4}" font-family="Space Mono, monospace" letter-spacing="1.4" font-size="12" fill="${C.graphite}">GROUP ${l}</text><line x1="${x(a)}" x2="${x(b)}" y1="${y}" y2="${y}" stroke="${C.midnight}" stroke-width="2"/><circle cx="${x(a)}" cy="${y}" r="7" fill="${C.ice}" stroke="${C.midnight}" stroke-width="1.5"/><circle cx="${x(b)}" cy="${y}" r="9" fill="${C.midnight}"/>`;});
+s+=`<circle cx="170" cy="22" r="6" fill="${C.ice}" stroke="${C.midnight}" stroke-width="1.5"/><text x="182" y="26" font-family="Space Mono, monospace" letter-spacing="1.3" font-size="11" fill="${C.graphite}">BEFORE</text><circle cx="270" cy="22" r="7" fill="${C.midnight}"/><text x="282" y="26" font-family="Space Mono, monospace" letter-spacing="1.3" font-size="11" fill="${C.graphite}">AFTER</text>`;
+document.getElementById('dot-scatter').innerHTML=`<rect width="560" height="300" fill="${C.paper}"/>${s}`;})();
+// Dot-matrix numerals
+const GLYPH={'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001001001001','8':'111101111101111','9':'111101111001111','%':'101001010100101','.':'000000000000010','/':'001001010100100'};
+function dotText(str,on,off,size=88,offOpacity){const w=str.length*4-1;let s='';[...str].forEach((ch,k)=>{const g=GLYPH[ch]||'000000000000000';for(let i=0;i<15;i++){const cx=(k*4+i%3)*size+size/2,cy=Math.floor(i/3)*size+size/2;s+=`<circle cx="${cx}" cy="${cy}" r="40" fill="${g[i]==='1'?on:off}"${g[i]!=='1'&&offOpacity?` fill-opacity="${offOpacity}"`:''}/>`;}});return `<svg viewBox="0 0 ${w*size} ${5*size}" width="${w*size}" height="${5*size}" xmlns="http://www.w3.org/2000/svg">${s}</svg>`;}
+document.getElementById('dot-numerals').innerHTML=['0123456789','03','2026'].map(t=>dotText(t,'var(--accent)','var(--line)')).join('');
+// Templates
+const LOGO=document.querySelector('.mast svg').outerHTML;
+const logo=(color,cls='t-logo')=>LOGO.replace('<svg ',`<svg class="${cls}" style="color:${color}" `);
+const set=(id,bg,html)=>{const el=document.getElementById(id);el.setAttribute('style','background:'+bg);el.innerHTML=html;};
+const big=(px,c)=>`font:500 ${px}cqw/1 'Inter Display',Inter,Arial,sans-serif;letter-spacing:-.04em;color:${c};margin:0`;
+const mono=(px,c)=>`font:${px}cqw/1.4 'Space Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:${c};margin:0`;
+const bgSvg=(svg)=>svg.replace('<svg ','<svg style="position:absolute;inset:0;width:100%;height:100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" ');
+set('tpl-title',C.paper,`${bgSvg(pattern('crop',1600,900,{bg:C.paper,fg:C.midnight},6,4))}<div class="t-pad" style="padding:5cqw">${logo(C.ink,'t-logo')}<div><p style="${mono(1.2,C.graphite)}">Workshop · 21 October 2026</p><p style="${big(6.4,C.ink)};margin-top:2cqw;max-width:52cqw">From insight<br>to impact.</p></div></div>`);
+set('tpl-finding',C.midnight,`<div class="t-pad" style="padding:5cqw"><div style="display:flex;justify-content:space-between"><p style="${mono(1.2,C.ice)}">Finding 02 / 05</p><p style="${mono(1.2,C.ice)}">Discover</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:5cqw;align-items:end"><div style="width:78%">${dotText('03',C.paper,C.ice,88,0.16).replace('<svg ','<svg style="width:100%;height:auto;display:block" ')}</div><div><p style="${big(3.4,C.paper)}">Three teams hold the same data in different places.</p><p style="${mono(1.05,C.ice)};margin-top:2cqw">Sample content · replace with your finding</p></div></div><div style="display:flex;justify-content:space-between;align-items:center;padding-top:3cqw">${logo(C.white,'t-logo').replace('t-logo"','t-logo" ').replace('style="color','style="width:14cqw;color')}<p style="${mono(1,C.ice)}">ddcnorth.com</p></div></div>`);
+set('tpl-social',C.midnight,`<div style="position:absolute;left:0;right:0;bottom:0;height:46%">${bgSvg(pattern('ramp',1080,500,{fg:C.ice,fgOpacity:0.12,bg:C.midnight},5,2))}</div><div class="t-pad">${logo(C.white).replace('style="color','style="width:38cqw;color')}<div><p style="${mono(2.6,C.ice)}">Data · Design · Connection</p><p style="${big(10,C.paper)};margin-top:3cqw">Let’s connect the dots.</p></div></div>`);
+set('tpl-brief',C.white,`<div class="t-pad" style="padding:8cqw">${logo(C.ink).replace('style="color','style="width:44cqw;color')}<div><p style="${mono(2.6,C.graphite)}">Project brief</p><p style="${big(8.5,C.ink)};margin-top:3cqw">The question we are answering</p><div style="margin-top:6cqw;display:grid;gap:0">${['Client','Question','People involved','Information we have','Decision it informs','Date'].map(l=>`<div style="border-top:.3cqw solid ${C.ice};padding:2cqw 0;display:flex;justify-content:space-between"><span style="${mono(2.2,C.graphite)}">${l}</span><span style="${mono(2.2,C.ice)}">________</span></div>`).join('')}</div></div><div style="display:flex;justify-content:space-between;align-items:flex-end"><p style="${mono(2,C.graphite)}">Page 1 / 4</p><svg viewBox="0 0 256 256" style="width:14cqw">${symbol(0,0,1,C.midnight)}</svg></div></div>`);
+set('tpl-hiring',C.ice,`<div class="t-pad"><p style="${mono(2.6,C.midnight)}">Section 02</p><svg viewBox="0 0 256 256" style="width:30cqw;align-self:flex-end">${symbol(0,0,1,C.midnight)}</svg><p style="${big(11,C.midnight)}">Design</p></div>`);
+(function(){const lanes=['People','Information','Decisions'];let s='';const W=1680,H=1188;
+s+=`<rect width="${W}" height="${H}" fill="${C.white}"/>`;
+for(let j=0;j<11;j++)for(let i=0;i<20;i++)s+=`<circle cx="${180+i*72}" cy="${300+j*76}" r="3.2" fill="${C.ice}"/>`;
+lanes.forEach((l,k)=>{const x=180+k*480;s+=`<text x="${x-6}" y="250" font-family="Space Mono, monospace" font-size="22" letter-spacing="2" fill="${C.graphite}">${String(k+1).padStart(2,'0')} / ${l.toUpperCase()}</text>`;if(k)s+=`<line x1="${x-42}" x2="${x-42}" y1="226" y2="1080" stroke="${C.ice}" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>`;});
+s+=`<text x="120" y="150" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="500" letter-spacing="-3" fill="${C.ink}">Connection map</text><text x="120" y="196" font-family="Inter, Arial, sans-serif" font-size="24" fill="${C.graphite}">Place a sticky note on a dot. Draw a line wherever one thing depends on another.</text>`;
+s+=`<g transform="translate(1440 92) scale(.42)" data-brand-symbol="six-dot" data-role="mark">${CENTRES.map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="40" fill="${C.midnight}"/>`).join('')}</g>`;
+s+=`<text x="120" y="1130" font-family="Space Mono, monospace" font-size="18" letter-spacing="2" fill="${C.graphite}">DDCNORTH · WORKSHOP CANVAS · A3</text><text x="1560" y="1130" text-anchor="end" font-family="Space Mono, monospace" font-size="18" letter-spacing="2" fill="${C.graphite}">TEAM ________   DATE ________</text>`;
+set('tpl-workshop',C.white,`<svg viewBox="0 0 ${W} ${H}" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">${s}</svg>`);})();
+set('tpl-og',C.paper,`<div style="position:absolute;top:0;right:0;bottom:0;width:52%">${bgSvg(pattern('network',624,630,{bg:C.paper,fg:C.graphite,hi:C.midnight},6,11))}</div><div class="t-pad" style="padding:6cqw;justify-content:flex-end;width:48%">${logo(C.ink).replace('style="color','style="width:30cqw;color')}<p style="${big(3.4,C.ink)};margin-top:2cqw">Built for what’s next.</p></div>`);
+set('tpl-banner',C.midnight,`<div style="position:absolute;top:0;left:0;bottom:0;width:58%">${bgSvg(pattern('signal',920,396,{bg:C.midnight,fg:C.ice,fgOpacity:0.16},7,21))}</div><div class="t-pad" style="padding:0 5cqw;flex-direction:row;align-items:center"><p style="${big(3.6,C.paper)}">Data · Design · Connection</p>${logo(C.white).replace('style="color','style="width:18cqw;color')}</div>`);
+// Motion
+const pathGrid=(cls)=>{let s='';for(let j=0;j<5;j++)for(let i=0;i<7;i++)s+=`<circle cx="${20+i*40}" cy="${20+j*40}" r="2.4" fill="${C.graphite}" opacity=".35"/>`;return s;};
+function motion(){
+  let f='';for(let j=0;j<5;j++)for(let i=0;i<7;i++)f+=`<circle cx="${30+i*40}" cy="${20+j*40}" r="${4+((i+4-j)>4?8:0)*Math.min(1,(i+1)/7)}" fill="${C.midnight}" style="animation-delay:${((i+j)*.03).toFixed(2)}s"/>`;
+  document.getElementById('m-arrive').innerHTML=`<svg viewBox="0 0 300 200" class="m-reveal">${f}</svg>`;
+  document.getElementById('m-connect').innerHTML=`<svg viewBox="0 0 300 200" class="m-connect">${pathGrid()}<path class="path" d="M20 180 L100 140 L140 60 L220 100 L260 20" fill="none" stroke="${C.midnight}" stroke-width="2"/>${[[20,180],[100,140],[140,60],[220,100],[260,20]].map(([x,y],k)=>`<circle cx="${x}" cy="${y}" r="${k===4?9:5}" fill="${C.midnight}"/>`).join('')}</svg>`;
+  document.getElementById('m-think').innerHTML=`<svg viewBox="0 0 300 120" class="m-think">${[90,150,210].map((x,k)=>`<circle cx="${x}" cy="60" r="22" fill="${C.midnight}" style="animation-delay:${k*.2}s"/>`).join('')}</svg>`;
+}
+motion();document.getElementById('replay').onclick=motion;
+// Icons
+const ICONS=[
+ ['Signal','<path d="M8 32v-4M16 32v-9M24 32v-14M32 32V8"/><circle cx="8" cy="26" r="2"/><circle cx="16" cy="21" r="2"/><circle cx="24" cy="16" r="2"/><circle cx="32" cy="6" r="2"/>'],
+ ['Direction','<circle cx="8" cy="12" r="2"/><circle cx="8" cy="28" r="2"/><path d="M8 20h26M27 13l7 7-7 7"/>'],
+ ['Network','<circle cx="8" cy="8" r="3"/><circle cx="8" cy="32" r="3"/><circle cx="32" cy="20" r="3"/><path d="M8 11v18M10.5 9.5l19 9M10.5 30.5l19-9"/>'],
+ ['Cycle','<path d="M30 14a12 12 0 0 0-21-2M10 26a12 12 0 0 0 21 2"/><path d="M9 6v6h6M31 34v-6h-6"/>'],
+ ['Clarity','<path d="M6 12V6h6M28 6h6v6M34 28v6h-6M12 34H6v-6"/><circle cx="16" cy="17" r="2.2"/><circle cx="24" cy="17" r="2.2"/><circle cx="24" cy="24" r="2.2"/>'],
+ ['Dataset','<ellipse cx="20" cy="9" rx="12" ry="4"/><path d="M8 9v22c0 2.2 5.4 4 12 4s12-1.8 12-4V9M8 20c0 2.2 5.4 4 12 4s12-1.8 12-4"/>',1],
+ ['Layers','<path d="M20 6 34 14 20 22 6 14Z"/><path d="M6 20l14 8 14-8M6 26l14 8 14-8"/>',1],
+ ['Link','<circle cx="10" cy="20" r="4"/><circle cx="30" cy="20" r="4"/><path d="M14 20h12"/><circle cx="20" cy="20" r="1.6"/>',1],
+ ['Compass','<circle cx="20" cy="20" r="14"/><path d="m25 15-3 7-7 3 3-7Z"/><circle cx="20" cy="4" r="1.6"/>',1],
+ ['Lens','<circle cx="17" cy="17" r="11"/><path d="m25 25 9 9"/><circle cx="13" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/><circle cx="21" cy="17" r="1.8"/>',1]];
+document.getElementById('icon-grid').innerHTML=ICONS.map(([n,p,isNew])=>`<div class="${isNew?'new':''}"><svg viewBox="0 0 40 40" aria-hidden="true">${p}</svg>${n}${isNew?' · new':''}</div>`).join('');
+})();
+</script>
+</body>
+</html>

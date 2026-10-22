@@ -11,4 +11,4 @@ export { illustrationArt, illustrationIdentity, placeIllustration } from './illu
 export { appIconSvg, faviconSvg, brandCss, tokens, reactComponent, landingHtml, indexHtml, coloursJson, gimpPalette, formatBytes } from './web.js'
 export { GROUPS, groupOf, planKit, buildKit } from './kit.js'
 export { STARTER_FONTS, STARTER_DEFAULTS, bakeWordmark, createStarterBrand } from './starter.js'
-export { mergePatch, revisionsOf, findRevision, withRevision, approvedOnly, revisionReadme } from './revisions.js'
+export { mergePatch, revisionsOf, findRevision, withRevision, approvedOnly, revisionReadme, additionsOf, changesArtwork } from './revisions.js'
