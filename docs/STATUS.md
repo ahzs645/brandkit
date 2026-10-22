@@ -291,3 +291,14 @@ Manual review of every added sentence (M3): the motion rules and study descripti
    - `sites/` excluded;
    - nothing pushed.
 4. On 2026-10-22 the user approved the M3 commit: "Yes, commit M3 to the overtheedge-brand branch. Leave sites/ out and don't push. Run the pre-commit gate and the final full-project audit first." The Plan Guardian pre-commit gate (AGENTS gate 5) and the final full-project audit (gates 7 and 8) run on the staged index first.
+5. M3 pre-commit gate: PASS. The staged set was exactly the M3 paths. The screenshots were from the clean run (no injected colour, and they reproduce byte for byte). The staged tree passed `npm test`, `check`, idempotency, both browser checks and the build from an index export. No upstream is configured.
+6. Final full-project audit (AGENTS gates 7 and 8): PASS for the Over the Edge work (M2 and M3):
+   - every requirement (OTE-001 to OTE-016, PROCESS-002 and PROCESS-003) is VERIFIED;
+   - every milestone has a PASS report;
+   - validation passes from a clean index export;
+   - no mandatory finding is open;
+   - the implementation, documentation, tests and history agree.
+
+   Committed as the M3 commit on `overtheedge-brand`; not pushed; `sites/` left out.
+
+   The out-of-repository step in docs/PLANS.md was done during M3: the claude.ai design system (https://claude.ai/artifact/43QHw3wkAjSsNicCSbsfxL, version 6) was aligned with the brand kit. It is not evidence for these milestones.
