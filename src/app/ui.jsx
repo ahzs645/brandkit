@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { download, pdf, rasterise } from '../export/render.js'
 import { physicalSize } from '../engine/templates.js'
-import { logoDocument, symbolDocument } from '../engine/artwork.js'
+import { aspectOf, mastheadArt } from './masthead.js'
 
 /** An object URL for an SVG string, revoked when the string changes or the component goes. */
 export const useSvgUrl = (svg) => {
@@ -14,7 +14,9 @@ export const useSvgUrl = (svg) => {
     if (!svg) { setUrl(null); return undefined }
     const next = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }))
     setUrl(next)
-    return () => URL.revokeObjectURL(next)
+    // Revoked a little later: an <img> still fetching the old URL when the art changes (switching
+    // brand or revision) would otherwise fail to load it.
+    return () => setTimeout(() => URL.revokeObjectURL(next), 5000)
   }, [svg])
   return url
 }
@@ -24,24 +26,36 @@ export const SvgImage = ({ svg, alt = '', ...props }) => {
   return url ? <img src={url} alt={alt} draggable={false} {...props} /> : null
 }
 
-const aspectOf = (svg) => {
-  const [, , width, height] = svg?.match(/viewBox="([^"]+)"/)?.[1].split(/[\s,]+/).map(Number) ?? []
-  return width && height ? width / height : null
+const menuLogos = new Map()
+const MenuArt = ({ svg, name }) => {
+  const aspect = aspectOf(svg)
+  return (
+    <span className="menu-logo">
+      {aspect && <span className="menu-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: svg }} />}
+      {(!aspect || aspect < 1.6) && <span className="menu-logo__name">{name}</span>}
+    </span>
+  )
 }
 
 /**
- * The art for a masthead: the horizontal logo; for a brand of signatures, the first that is not
- * set for a department and is wide enough to read 26 px tall; failing both, the symbol, with the
- * name beside it.
+ * A brand in the brand menu, as its logo: a built-in brand's pre-drawn file (`url`), fetched once,
+ * or, for a brand made or opened here, drawn from its definition. A near-square logo (a symbol)
+ * has the name beside it; until the logo arrives, the name stands in.
  */
-const mastheadArt = (brand) => {
-  if (brand.families?.length) return { svg: logoDocument({ brand }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
-  for (const signature of brand.signatures ?? []) {
-    if (signature.departmental) continue
-    const svg = logoDocument({ brand }, { signature: signature.id, colour: 'currentColor' })
-    if (aspectOf(svg) >= 2.5) return { svg }
-  }
-  return { svg: brand.symbol ? symbolDocument({ brand }, { colourKey: 'currentColor' }) : null, named: true }
+export const MenuLogo = ({ url, brand, name }) => {
+  const [svg, setSvg] = useState(() => (url ? menuLogos.get(url) ?? null : null))
+  useEffect(() => {
+    if (!url || menuLogos.has(url)) return undefined
+    let live = true
+    fetch(url).then((response) => (response.ok ? response.text() : null)).then((text) => { if (text) menuLogos.set(url, text); if (live) setSvg(text) }, () => {})
+    return () => { live = false }
+  }, [url])
+  const drawn = useMemo(() => {
+    if (url || !brand) return null
+    try { return mastheadArt(brand).svg?.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) } catch { return null }
+  }, [url, brand])
+  const art = svg ?? drawn
+  return art ? <MenuArt svg={art} name={name} /> : <span className="menu-logo"><span className="menu-logo__name">{name}</span></span>
 }
 
 /** The brand's logo in the masthead, drawn inline in currentColor to take the ink of light and dark alike. */

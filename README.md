@@ -11,9 +11,16 @@ brandkit draws the whole kit from it:
   signatures, every signature in every colourway, set for every department (a ministry, a
   division) it defines. A brand with a motion library also has its logo animations here, playing
   in place, each downloadable as an animated SVG.
+- **Colour**: every colour with hex, RGB, CMYK and Pantone (the manual's recipe where it gives
+  one, otherwise converted and marked so), the role pairs text is set in graded against WCAG 2,
+  every text-on-ground pair, and tints in 20% steps. Edit brand warns as a role change drops a
+  pair below AA.
 - **Motion**: for a brand with a motion library (`motion.page`), its studies in a list like the
   templates', the chosen one playing on a stage with Replay, Pause and repeat, beside its timing
-  and use, then the shared tokens, rules and guardrails.
+  and use, then the shared tokens (copied as CSS or W3C design tokens), rules and guardrails.
+  Studies drawn in SVG export as MP4 or WebM (in four frame shapes) and GIF, made in the browser;
+  a motion pack zips the tokens, rules, animated SVGs and library page. The two BC identities
+  carry example libraries (`scripts/brands/bc-motion.mjs`), made from their own artwork.
 - **Templates**: business cards (front and back, with trim and safe area), letterhead, envelopes,
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's

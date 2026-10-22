@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { colour, colourName, validateBrand } from '../../engine/brand.js'
 import { download } from '../../export/render.js'
-import { colourEntries, editableRoles } from '../colours.js'
+import { colourEntries, editableRoles, ratioLabel, rolePairs } from '../colours.js'
 
 const OWN = '#own'
 
@@ -23,6 +23,7 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
     if (!found.length) onChange(next)
   }
   const roles = editableRoles(brand)
+  const pairs = rolePairs(brand)
   const update = (mutate) => {
     const next = structuredClone(brand)
     mutate(next)
@@ -63,6 +64,16 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
               </span>
             </div>
           ))}
+        </div>
+        <div className="role-checks" aria-live="polite">
+          <span className="field__label">Text on the brand’s grounds</span>
+          {pairs.map((pair) => (
+            <span key={`${pair.text}-${pair.ground}`} className={`role-check${pair.ratio < 4.5 ? ' role-check--low' : ''}`} title={`${pair.use}: ${ratioLabel(pair.ratio)}, ${pair.grade}`}>
+              <span className="role-check__sample" style={{ background: pair.back, color: pair.fore }}>Aa</span>
+              {pair.text} on {pair.ground} <b>{pair.grade}</b>
+            </span>
+          ))}
+          {pairs.some((pair) => pair.ratio < 4.5) && <span className="field__hint">Below AA is fine for large display type only. The Colour tab grades every pair.</span>}
         </div>
       </section>
 

@@ -66,7 +66,8 @@ export const SignatureStage = ({ brand, fonts, openManual }) => {
 }
 
 /** The logos view: every signature in every colourway, and every department's set as one zip. */
-export const SignatureLogos = ({ brand, fonts, openManual }) => {
+/** `before` sits at the top of the view: the Logos tab puts the brand's logo motion there. */
+export const SignatureLogos = ({ brand, fonts, openManual, before }) => {
   const [department, setDepartment] = useState('')
   // Arriving from a manual page (?signature=…), bring that signature into view.
   useEffect(() => {
@@ -95,6 +96,7 @@ export const SignatureLogos = ({ brand, fonts, openManual }) => {
   }
   return (
     <div className="view">
+      {before}
       {brand.departments?.items?.length > 0 && departmental.length > 0 && (
         <section className="panel toolbar toolbar--panel">
           <DepartmentSelect brand={brand} value={department} onChange={setDepartment} />

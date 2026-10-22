@@ -60,3 +60,46 @@ export const tokenRows = (tokens = {}) => {
   }
   return rows
 }
+
+const ms = (value) => `${value}ms`
+const tokenName = (value) => String(value).replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase().replace(/[^a-z0-9]+/g, '-')
+const bezier = (value) => /cubic-bezier\(([^)]+)\)/.exec(String(value))?.[1].split(',').map(Number) ?? (value === 'linear' ? [0, 0, 1, 1] : null)
+
+/**
+ * The tokens as CSS custom properties, for pasting into a stylesheet: durations, easings, then
+ * staggers and distances (a range becomes a -min and a -max).
+ */
+export const tokensCss = (tokens = {}, prefix = 'motion') => {
+  const lines = Object.entries(tokens.durations ?? {}).map(([key, value]) => `  --${prefix}-${tokenName(key)}: ${ms(value)};`)
+  lines.push(...Object.entries(tokens.easings ?? {}).map(([key, value]) => `  --${prefix}-ease-${tokenName(key)}: ${value};`))
+  const unit = (key, value) => (/distance/i.test(key) ? `${value}px` : ms(value))
+  const add = (name, key, value) => {
+    if (Array.isArray(value)) lines.push(`  --${prefix}-${name}-min: ${unit(key, value[0])};`, `  --${prefix}-${name}-max: ${unit(key, value.at(-1))};`)
+    else lines.push(`  --${prefix}-${name}: ${unit(key, value)};`)
+  }
+  for (const [key, value] of Object.entries(tokens)) {
+    if (key === 'durations' || key === 'easings') continue
+    if (value && typeof value === 'object' && !Array.isArray(value)) for (const [inner, entry] of Object.entries(value)) add(`${tokenName(key)}-${tokenName(inner)}`, inner, entry)
+    else add(tokenName(key), key, value)
+  }
+  return `:root {\n${lines.join('\n')}\n}\n`
+}
+
+/**
+ * The tokens in the W3C design tokens format (DTCG), which token tools read: `duration` and
+ * `cubicBezier` types, under `motion`. Staggers and distances are durations and dimensions.
+ */
+export const tokensJson = (tokens = {}) => {
+  const group = (entries, make) => Object.fromEntries(entries.map(([key, value]) => [key, make(key, value)]))
+  const duration = (value) => ({ $type: 'duration', $value: { value, unit: 'ms' } })
+  const other = (key, value) => (/distance/i.test(key) ? { $type: 'dimension', $value: { value, unit: 'px' } } : duration(value))
+  const extra = (key, value) => (Array.isArray(value)
+    ? { min: other(key, value[0]), max: other(key, value.at(-1)) }
+    : value && typeof value === 'object' ? group(Object.entries(value), extra) : other(key, value))
+  const motion = {
+    duration: group(Object.entries(tokens.durations ?? {}), (key, value) => duration(value)),
+    easing: group(Object.entries(tokens.easings ?? {}), (key, value) => ({ $type: 'cubicBezier', $value: bezier(value) ?? value }))
+  }
+  for (const [key, value] of Object.entries(tokens)) if (key !== 'durations' && key !== 'easings') motion[key] = extra(key, value)
+  return `${JSON.stringify({ motion }, null, 2)}\n`
+}

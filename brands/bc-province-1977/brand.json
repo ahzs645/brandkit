@@ -10030,7 +10030,11 @@
   "fonts/texgyreheros-regular.otf",
   "fonts/texgyreheros-bold.otf",
   "fonts/texgyreheros-italic.otf",
-  "fonts/texgyreheros-bolditalic.otf"
+  "fonts/texgyreheros-bolditalic.otf",
+  "motion/index.html",
+  "motion/motion.css",
+  "motion/motion-tokens.json",
+  "motion/README.md"
  ],
  "illustrations": {
   "G17-pickup": {
@@ -17518,6 +17522,92 @@
    "general",
    "vehicle",
    "sign"
+  ]
+ },
+ "motion": {
+  "page": "motion/index.html",
+  "css": "motion/motion.css",
+  "note": "The 1977 Visual Identity Program predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the program’s rules; they are not the Province’s guidance.",
+  "tokens": {
+   "durations": {
+    "quick": 200,
+    "base": 480,
+    "slow": 900,
+    "draw": 1400,
+    "loop": 1800
+   },
+   "easings": {
+    "settle": "cubic-bezier(.2, .6, .2, 1)",
+    "move": "cubic-bezier(.55, 0, .2, 1)",
+    "linear": "linear"
+   },
+   "stagger": 30
+  },
+  "rules": [
+   {
+    "title": "The symbol is never altered.",
+    "text": "It may arrive, but its proportions, its colour and the arms within the band never change. Every logo study ends on the official signature."
+   },
+   {
+    "title": "Ceremony, not effects.",
+    "text": "Measured timings and plain eases, as befits the Province’s seal: no bounces, spins, blurs or glows."
+   },
+   {
+    "title": "Loops are for waiting.",
+    "text": "Only the band loops, never the full signature, and only while something loads."
+   },
+   {
+    "title": "Still is a valid frame.",
+    "text": "With reduced motion, every study shows its final frame. Nothing depends on the animation to be understood."
+   }
+  ],
+  "studies": [
+   {
+    "id": "seal",
+    "name": "Seal",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "slow, then base and slow · settle",
+    "use": "Video openers, ceremonies, official announcements",
+    "description": "The band is pressed into place like a seal, the arms come up inside it, then the Province’s name rises beneath."
+   },
+   {
+    "id": "arms",
+    "name": "Arms",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "base, 30 ms stagger · settle",
+    "use": "Explaining the symbol, longer title sequences",
+    "description": "With the band in place, the arms are assembled part by part, top to bottom: crown, lion, shield, supporters."
+   },
+   {
+    "id": "unveil",
+    "name": "Unveil",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "draw · move",
+    "use": "Openings, new programmes, sign launches",
+    "description": "The signature is uncovered from the top down, the way a sign’s cover comes away."
+   },
+   {
+    "id": "band",
+    "name": "Band",
+    "kind": "loader",
+    "group": "Loading",
+    "timing": "1800 ms loop · move",
+    "use": "Page and app loading, 32 px and up",
+    "description": "The band pulses slowly while the arms hold still. Symbol only; stops when loading ends.",
+    "loop": true
+   },
+   {
+    "id": "sign",
+    "name": "Sign",
+    "kind": "interface",
+    "group": "Interface",
+    "timing": "slow + slow · move, settle",
+    "use": "Video end cards, slide transitions, kiosk screens",
+    "description": "A brown panel rises into the frame like a highway sign, and the signature appears on it in white."
+   }
   ]
  }
 }

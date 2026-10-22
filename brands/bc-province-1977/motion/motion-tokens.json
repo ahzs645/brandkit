@@ -1,0 +1,21 @@
+{
+  "durations": {
+    "quick": 200,
+    "base": 480,
+    "slow": 900,
+    "draw": 1400,
+    "loop": 1800
+  },
+  "easings": {
+    "settle": "cubic-bezier(.2, .6, .2, 1)",
+    "move": "cubic-bezier(.55, 0, .2, 1)",
+    "linear": "linear"
+  },
+  "stagger": 30,
+  "rules": [
+    "The symbol is never altered.",
+    "Ceremony, not effects.",
+    "Loops are for waiting.",
+    "Still is a valid frame."
+  ]
+}

@@ -16,8 +16,8 @@ export const Shared = createContext(false)
 export const useShared = () => useContext(Shared)
 
 // What a shared view offers, and where its link can open.
-export const SHARED_VIEWS = ['overview', 'logos', 'templates', 'guide', 'motion', 'kit']
-const START_LABELS = { overview: 'Overview', logos: 'Logos', templates: 'Templates', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
+export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'templates', 'guide', 'motion', 'kit']
+const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', templates: 'Templates', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
 
 export const shareUrl = (brandId, view = 'overview') => {
   const url = new URL(import.meta.env.BASE_URL, globalThis.location.origin)

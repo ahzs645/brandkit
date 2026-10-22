@@ -4,9 +4,10 @@
 
 import { useEffect, useState } from 'react'
 import { colour, isDark } from '../../engine/brand.js'
-import { download } from '../../export/render.js'
-import { easingPath, motionGroups, motionUrl, tokenRows } from '../motion.js'
+import { download, zip } from '../../export/render.js'
+import { easingPath, motionGroups, motionUrl, tokenRows, tokensCss, tokensJson } from '../motion.js'
 import { animatedSvg, CssStage, StudyStage, useMotionLibrary, useReducedMotion } from '../motion-player.jsx'
+import { MotionExport } from '../MotionExport.jsx'
 
 export { motionUrl }
 
@@ -23,14 +24,27 @@ const Thumb = ({ brand, library, study }) => {
   return <span className="motion-thumb__swatch" style={{ background: ground, color: isDark(ground) ? '#fff' : '#000' }}>{loops(study) ? '↻' : '▸'}</span>
 }
 
-const Tokens = ({ tokens = {}, reduced }) => {
+/** A button that copies text and says so for a moment. */
+const CopyButton = ({ text, children }) => {
+  const [done, setDone] = useState(false)
+  useEffect(() => { if (!done) return undefined; const timer = setTimeout(() => setDone(false), 1800); return () => clearTimeout(timer) }, [done])
+  return <button type="button" className="button button--quiet" onClick={() => navigator.clipboard?.writeText(text).then(() => setDone(true))}>{done ? '✓ Copied' : children}</button>
+}
+
+const Tokens = ({ brand, tokens = {}, reduced }) => {
   const rows = tokenRows(tokens)
   const longest = Math.max(1, ...rows.map(([, , ms]) => ms ?? 0))
   return (
     <section className="panel">
-      <div className="panel__head">
-        <h2>Timing and easing</h2>
-        <p className="muted">Every study runs on these. They are in the library’s CSS as custom properties, for code.</p>
+      <div className="panel__head panel__head--row">
+        <div>
+          <h2>Timing and easing</h2>
+          <p className="muted">Every study runs on these. Copy them as CSS custom properties, or as W3C design tokens for Figma Tokens, Style Dictionary and the like.</p>
+        </div>
+        <div className="downloads">
+          <CopyButton text={tokensCss(tokens, brand.id)}>Copy CSS</CopyButton>
+          <CopyButton text={tokensJson(tokens)}>Copy JSON</CopyButton>
+        </div>
       </div>
       <table className="motion-tokens">
         <tbody>
@@ -82,6 +96,31 @@ const Rules = ({ motion }) => (
   </section>
 )
 
+/** The brand's motion as one zip: tokens for code, the rules and studies in a README, each study that plays without the page as an animated SVG, and the library page itself. */
+const motionPack = async (brand, library, source) => {
+  const { motion } = brand
+  const text = (value) => new TextEncoder().encode(value)
+  const files = [
+    ['tokens.css', text(tokensCss(motion.tokens, brand.id))],
+    ['tokens.json', text(tokensJson(motion.tokens))]
+  ]
+  const lines = [`# ${brand.name} motion`, '', `${motion.studies?.length ?? 0} studies, exported from brandkit. Video and GIF versions of the studies drawn in SVG are on the Motion tab.`, '']
+  if (motion.rules?.length) lines.push('## Rules', '', ...motion.rules.map((rule) => `- **${rule.title}** ${rule.text}`), '')
+  for (const [key, label] of [['do', 'Do'], ['dont', 'Don’t']]) if (motion.guardrails?.[key]?.length) lines.push(`## ${label}`, '', ...motion.guardrails[key].map((line) => `- ${line}`), '')
+  lines.push('## Studies', '', '| Study | Kind | Timing | Use | File |', '| --- | --- | --- | --- | --- |')
+  for (const study of motion.studies ?? []) {
+    const svg = library?.mode === 'css' && library.stages.get(study.id)?.shapesOnly
+    if (svg) files.push([`svg/${study.id}.svg`, text(animatedSvg(library, study.id))])
+    lines.push(`| ${study.name}: ${study.description} | ${study.kind ?? ''} | ${study.timing ?? ''} | ${study.use ?? ''} | ${svg ? `svg/${study.id}.svg` : 'library page'} |`)
+  }
+  lines.push('', '`tokens.css` holds the tokens as CSS custom properties; `tokens.json` in the W3C design tokens format.', '')
+  for (const path of [motion.page, motion.css].filter(Boolean)) {
+    try { files.push([`library/${path.split('/').pop()}`, new Uint8Array(await source.read(path))]) } catch { /* not in this brand's files */ }
+  }
+  files.push(['README.md', text(lines.join('\n'))])
+  download(new Blob([await zip(files, `${brand.id}-motion`)], { type: 'application/zip' }), `${brand.id}-motion.zip`)
+}
+
 export const Motion = ({ brand, source, initialStudy, onSelect }) => {
   const url = motionUrl(brand, source)
   const library = useMotionLibrary(brand, source)
@@ -91,6 +130,7 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
   const [play, setPlay] = useState(1)
   const [paused, setPaused] = useState(false)
   const [loop, setLoop] = useState(false)
+  const [packing, setPacking] = useState(false)
   useEffect(() => { if (!studies.some((study) => study.id === selected)) setSelected(studies[0]?.id) }, [studies, selected])
 
   if (!url) {
@@ -104,6 +144,7 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
 
   return (
     <div className="view motion">
+      {brand.motion.note && <p className="notice">{brand.motion.note}</p>}
       <div className="studio motion-studio">
         <nav className="studio__list" aria-label="Motion studies">
           {groups.map((group) => (
@@ -130,6 +171,7 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
             <button type="button" className="button button--quiet" disabled={reduced || !library} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? '▶ Resume' : 'Ⅱ Pause'}</button>
             <label className="studio__toggle"><input type="checkbox" checked={loop} disabled={reduced} onChange={(event) => setLoop(event.target.checked)} /> Play on repeat</label>
             <span className="studio__downloads">
+              <button type="button" className="button button--quiet" disabled={!library || packing} onClick={() => { setPacking(true); motionPack(brand, library, source).finally(() => setPacking(false)) }}>{packing ? '…' : '↓'} Motion pack</button>
               <a className="button button--quiet" href={url} target="_blank" rel="noreferrer">Open the library page ↗</a>
             </span>
           </div>
@@ -148,18 +190,20 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
               {study.use && <div><dt>Use</dt><dd>{study.use}</dd></div>}
               {study.kind && <div><dt>Kind</dt><dd>{kindLabel(study)}</dd></div>}
             </dl>
+            {library?.mode === 'css' && library.stages.get(study.id)?.vector && <MotionExport key={study.id} brand={brand} library={library} study={study} />}
             {svgReady && (
               <div className="motion-about__downloads">
                 <button type="button" className="button button--quiet" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-motion-${study.id}.svg`)}>↓ Animated SVG</button>
-                <p className="field__hint">Plays once in a browser, then holds its last frame.</p>
+                <p className="field__hint">For a web page: plays once in a browser, then holds its last frame.</p>
               </div>
             )}
+            {library?.mode === 'css' && !library.stages.get(study.id)?.vector && <p className="field__hint">This study is drawn with HTML and text, so it plays here and in the library page but does not export as video.</p>}
           </aside>
         )}
       </div>
 
       <div className="split">
-        <Tokens tokens={brand.motion.tokens} reduced={reduced} />
+        <Tokens brand={brand} tokens={brand.motion.tokens} reduced={reduced} />
         <Rules motion={motion} />
       </div>
     </div>

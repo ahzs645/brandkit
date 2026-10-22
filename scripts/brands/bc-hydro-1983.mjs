@@ -11,6 +11,8 @@ import { readFileSync } from 'node:fs'
 import { box, cite, g, inch, line, locked, pt, readJson, round, shelf, text, writeBrand } from './common.mjs'
 import { loadBrandFonts } from '../../src/fonts/provider.js'
 import { illustrated } from './illustrations.mjs'
+import { hydroLibrary, writeMotion } from './bc-motion.mjs'
+import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 
 const folder = new URL('../../brands/bc-hydro-1983/', import.meta.url)
 const art = readJson(new URL('artwork.json', folder))
@@ -554,5 +556,11 @@ cite(brand, {
     ['H32', 'H38', 'H42']
   ]
 })
+
+// An example motion library from the brand's own artwork (the manual has none): its files in
+// motion/, and the entry that gives the brand a Motion tab.
+const motion = writeMotion(folder, hydroLibrary(brand, await loadBrandFontsFromDisk(brand, folder.pathname)))
+brand.motion = motion.entry
+brand.files.push(...motion.files)
 
 writeBrand(new URL('brand.json', folder), brand)

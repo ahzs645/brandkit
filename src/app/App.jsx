@@ -7,16 +7,18 @@ import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
 import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
-import { BUILT_IN, builtInName, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
+import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
 import { Motion } from './views/Motion.jsx'
+import { Colour } from './views/Colour.jsx'
 import { motionUrl, viewOrOverview } from './motion.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
-import { BrandLogo } from './ui.jsx'
+import { BrandLogo, MenuLogo } from './ui.jsx'
+import { BrandMenu, MoreMenu } from './BrandMenu.jsx'
 import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './share.jsx'
 
 // The guide pulls in the manual viewer; the manual library pulls in 156 pages' worth of data.
@@ -26,6 +28,7 @@ const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ def
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
+  { id: 'colour', label: 'Colour' },
   { id: 'templates', label: 'Templates' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
@@ -209,33 +212,37 @@ export const App = () => {
           </div>
         ) : (
         <div className="masthead__row">
-          {/* The brand being looked at stands where the app's name would. */}
-          <a className="wordmark" href={import.meta.env.BASE_URL} title="brandkit home">
-            {brand ? <BrandLogo brand={brand} /> : <span className="brand-logo" />}
-          </a>
-          <label className="brand-picker">
-            <span className="visually-hidden">Brand</span>
-            <select value={brand?.id ?? ''} onChange={(event) => select(event.target.value)}>
-              {brandIds.map((id) => <option key={id} value={id}>{BUILT_IN.includes(id) ? builtInName(id) : saved[id]?.name ?? opened[id]?.brand?.name ?? id}{saved[id] && !BUILT_IN.includes(id) ? ' (saved)' : opened[id] ? ' (opened)' : ''}</option>)}
-            </select>
-          </label>
-          {revisions.length > 0 && (
-            <label className="brand-picker">
-              <span className="visually-hidden">Revision</span>
-              <select value={activeRevision ?? ''} onChange={(event) => chooseRevision(event.target.value)}>
-                <option value="">Approved v{base.displayVersion ?? base.version}</option>
-                {revisions.map((entry) => <option key={entry.id} value={entry.id}>{entry.title} · {entry.status ?? 'proposed'} v{entry.displayVersion ?? entry.version}</option>)}
-              </select>
-            </label>
-          )}
-          {activeRevision && <span className="badge badge--revision" title="Every view is showing this revision instead of the approved identity">{brand.revision.status} revision</span>}
+          {/* The brand being looked at stands where the app's name would; it opens the brand menu. */}
+          <BrandMenu
+            logo={brand ? <BrandLogo brand={brand} /> : <span className="brand-logo" />}
+            current={brand?.id}
+            brands={brandIds.map((id) => {
+              const name = BUILT_IN.includes(id) ? builtInName(id) : saved[id]?.name ?? opened[id]?.brand?.name ?? id
+              const own = opened[id]?.brand ?? (BUILT_IN.includes(id) ? null : saved[id])
+              return { id, name, note: saved[id] && !BUILT_IN.includes(id) ? 'saved' : opened[id] ? 'opened' : null, logo: <MenuLogo url={own ? null : menuLogoUrl(id)} brand={own} name={name} /> }
+            })}
+            onBrand={(id) => select(id)}
+            revisions={base && revisions.length ? [{ id: '', label: `Approved v${base.displayVersion ?? base.version}`, note: 'approved' }, ...revisions.map((entry) => ({ id: entry.id, label: entry.title, note: `${entry.status ?? 'proposed'} v${entry.displayVersion ?? entry.version}` }))] : []}
+            revision={activeRevision ?? ''}
+            onRevision={chooseRevision}
+            tag={activeRevision ? <span title={`Every view is showing ${brand.revision.title}, a ${brand.revision.status} revision, instead of the approved identity`}><span className="brand-menu__status">{brand.revision.status} </span>v{brand.displayVersion ?? brand.version}</span> : null}
+          />
           {changed && <span className="badge" title="Edited since it was loaded">edited</span>}
           <div className="masthead__actions">
             <button type="button" className="button" disabled={!base} onClick={() => setSharing(true)}>Share</button>
-            <button type="button" className="button button--quiet" onClick={() => fileInput.current?.click()}>Open…</button>
+            <span className="masthead__wide">
+              <button type="button" className="button button--quiet" onClick={() => fileInput.current?.click()}>Open…</button>
+              {OTHER_VIEWS.map((entry) => <button key={entry.id} type="button" className="button button--quiet" aria-pressed={view === entry.id} onClick={() => go(entry.id)}>{entry.label}</button>)}
+              <a className="button button--quiet" href="https://github.com/ahzs645/brandkit">GitHub</a>
+            </span>
+            {/* On a phone the same actions fold into one menu. */}
+            <MoreMenu items={[
+              { label: 'Open a brand…', onSelect: () => fileInput.current?.click() },
+              ...OTHER_VIEWS.map((entry) => ({ label: entry.label, current: view === entry.id, onSelect: () => go(entry.id) })),
+              { label: 'GitHub', href: 'https://github.com/ahzs645/brandkit' },
+              { label: 'brandkit home', href: import.meta.env.BASE_URL }
+            ]} />
             <input ref={fileInput} type="file" accept=".json,.zip,application/json,application/zip" hidden onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ''; if (file) open(file) }} />
-            {OTHER_VIEWS.map((entry) => <button key={entry.id} type="button" className="button button--quiet" aria-pressed={view === entry.id} onClick={() => go(entry.id)}>{entry.label}</button>)}
-            <a className="button button--quiet" href="https://github.com/ahzs645/brandkit">GitHub</a>
           </div>
         </div>
         )}
@@ -251,6 +258,7 @@ export const App = () => {
         {!brand ? !error && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
+            {view === 'colour' && <Colour brand={brand} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (

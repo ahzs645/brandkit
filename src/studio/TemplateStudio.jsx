@@ -31,7 +31,9 @@ const useSvgUrl = (svg) => {
     if (!svg) { setUrl(null); return undefined }
     const next = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }))
     setUrl(next)
-    return () => URL.revokeObjectURL(next)
+    // Revoked a little later: an <img> still fetching the old URL when the art changes (switching
+    // brand or revision) would otherwise fail to load it.
+    return () => setTimeout(() => URL.revokeObjectURL(next), 5000)
   }, [svg])
   return url
 }

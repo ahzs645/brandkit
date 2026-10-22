@@ -345,3 +345,8 @@ with anything uncited).
   `motion.groups` (`[{ id, label, kinds }]`, the library's filters), and a study may say `loop` and
   its `background`. See `scripts/brands/ddcnorth-motion.mjs`. A study needs an id, name, kind,
   timing, use and description, ids are unique, and durations are positive numbers of milliseconds.
+  `motion.note` is shown above the Motion tab's studies: the BC identities use it to say their
+  libraries are brandkit's examples (`scripts/brands/bc-motion.mjs`), since neither manual covers motion.
+- `print`: `{ pantone: { colourKey: "376" }, cmyk: { colourKey: "C50 Y100" }, note }`, the values a
+  manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
+  recipe gets one converted from its screen value, marked as converted.

@@ -4131,7 +4131,11 @@
   "fonts/texgyretermes-regular.otf",
   "fonts/texgyretermes-italic.otf",
   "fonts/texgyretermes-bold.otf",
-  "fonts/texgyretermes-bolditalic.otf"
+  "fonts/texgyretermes-bolditalic.otf",
+  "motion/index.html",
+  "motion/motion.css",
+  "motion/motion-tokens.json",
+  "motion/README.md"
  ],
  "guide": {
   "title": "B.C.Hydro graphic standards",
@@ -6828,6 +6832,112 @@
   "pack": "bc",
   "books": [
    "hydro"
+  ]
+ },
+ "motion": {
+  "page": "motion/index.html",
+  "css": "motion/motion.css",
+  "note": "The 1983 Graphic Standards Manual predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the manual’s rules; they are not BC Hydro guidance.",
+  "tokens": {
+   "durations": {
+    "quick": 200,
+    "base": 400,
+    "slow": 800,
+    "draw": 1000,
+    "loop": 1200
+   },
+   "easings": {
+    "settle": "cubic-bezier(.2, .7, .2, 1)",
+    "move": "cubic-bezier(.6, 0, .2, 1)",
+    "linear": "linear"
+   },
+   "stagger": 40
+  },
+  "rules": [
+   {
+    "title": "The signature arrives whole.",
+    "text": "Symbol and logotype are inseparable in the manual, so every logo study ends on the complete signature, its positions and proportions unchanged."
+   },
+   {
+    "title": "Colour stays in the symbol.",
+    "text": "Green and blue move only inside the ring; the logotype stays black. No other colours, no glows, no gradients."
+   },
+   {
+    "title": "Loops are for waiting.",
+    "text": "Only the symbol loops, never the full signature, and only while something loads."
+   },
+   {
+    "title": "Still is a valid frame.",
+    "text": "With reduced motion, every study shows its final frame. Nothing depends on the animation to be understood."
+   }
+  ],
+  "studies": [
+   {
+    "id": "ring",
+    "name": "Ring",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "draw + slow, 40 ms stagger · move, settle",
+    "use": "Video openers, presentation title slides",
+    "description": "The ring draws round, the two stars set inside it, then B.C.Hydro rises letter by letter."
+   },
+   {
+    "id": "current",
+    "name": "Current",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "slow + draw · move",
+    "use": "Site intro, annual report video",
+    "description": "Blue rises and green falls into the ring and meet; then the logotype is uncovered left to right."
+   },
+   {
+    "id": "typeset",
+    "name": "Typeset",
+    "kind": "logo",
+    "group": "Logo",
+    "timing": "110 ms a letter · steps",
+    "use": "Short openers, social posts",
+    "description": "The symbol is there from the first frame; the logotype sets one letter at a time, as on a 1983 phototypesetter."
+   },
+   {
+    "id": "alternating",
+    "name": "Alternating",
+    "kind": "loader",
+    "group": "Loading",
+    "timing": "1200 ms loop · move",
+    "use": "Page and app loading, 32 px and up",
+    "description": "The two stars take turns, green and blue, like alternating current. Symbol only; stops when loading ends.",
+    "loop": true
+   },
+   {
+    "id": "charge",
+    "name": "Charge",
+    "kind": "loader",
+    "group": "Loading",
+    "timing": "1200 ms loop · linear",
+    "use": "Uploads, syncing, longer waits",
+    "description": "A quarter of the ring runs round it while the stars hold still. At rest the ring is whole.",
+    "loop": true
+   },
+   {
+    "id": "meter",
+    "name": "Meter",
+    "kind": "interface",
+    "group": "Interface",
+    "timing": "2400 ms loop · settle",
+    "use": "Multi-step forms, account set-up",
+    "description": "A bar fills in three steps, corporate green on the light tint, with blue marks at each step.",
+    "loop": true
+   },
+   {
+    "id": "end-card",
+    "name": "End card",
+    "kind": "interface",
+    "group": "Interface",
+    "timing": "slow + slow · move, settle",
+    "use": "Video end cards, slide transitions",
+    "description": "Corporate blue sweeps across the frame, then the symbol sets in white in the middle."
+   }
   ]
  }
 }

@@ -106,7 +106,13 @@ const open = async (path, { width = 1280, ...options } = {}) => {
 const tabs = (page) => page.$$eval('nav.tabs button', (buttons) => buttons.map((button) => button.textContent.trim()))
 const current = (page) => page.$eval('nav.tabs [aria-current="page"]', (button) => button.textContent.trim())
 const viewParam = (page) => new URL(page.url()).searchParams.get('view')
-const revisionSelect = (page) => page.locator('label.brand-picker select').nth(1)
+/** Chooses from the masthead's brand menu (the logo): a revision by its label, or a brand by its name. */
+const fromBrandMenu = async (page, name) => {
+  await page.locator('.brand-menu__trigger').click()
+  await page.locator('.brand-menu [role="menuitemradio"]', { hasText: name }).first().click()
+}
+const REVISION_LABELS = { '': 'Approved', rising: 'Rising symbol', 'data-design-connection': 'Data, design, connection' }
+const revisionSelect = (page) => ({ selectOption: (id) => fromBrandMenu(page, REVISION_LABELS[id]) })
 /** Opens the Motion tab and waits until the stage's frame of the library page has drawn its studies. */
 const openMotionTab = async (page) => {
   await page.locator('nav.tabs button', { hasText: 'Motion' }).click()
@@ -140,7 +146,7 @@ try {
       // To another brand while on Motion.
       await revisionSelect(approved.page).selectOption('data-design-connection')
       await openMotionTab(approved.page)
-      await approved.page.locator('label.brand-picker select').first().selectOption('northwind')
+      await fromBrandMenu(approved.page, 'northwind')
       await approved.page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
       assert.ok(!(await tabs(approved.page)).includes('Motion'), 'northwind has no Motion')
       assert.deepEqual(approved.errors, [])

@@ -4,6 +4,7 @@ import { colour, colourName, isDark } from '../../engine/brand.js'
 import { download } from '../../export/render.js'
 import { isLogoStudy } from '../motion.js'
 import { animatedSvg, CssStage, useMotionLibrary, useReducedMotion } from '../motion-player.jsx'
+import { QuickExport } from '../MotionExport.jsx'
 import { Downloads, SvgImage } from '../ui.jsx'
 import { SignatureLogos } from './Signatures.jsx'
 
@@ -37,7 +38,8 @@ const MotionCard = ({ brand, library, study, reduced }) => {
         <span className="motion-card__name">{study.name}<small>{study.use ?? study.timing}</small></span>
         <span className="downloads">
           <button type="button" className="button button--quiet" disabled={reduced} onClick={replay}>▶ Play</button>
-          {library.stages.get(study.id)?.shapesOnly && <button type="button" className="button button--quiet" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-logo-${study.id}.svg`)}>↓ Animated SVG</button>}
+          {library.stages.get(study.id)?.vector && <QuickExport brand={brand} library={library} study={study} />}
+          {library.stages.get(study.id)?.shapesOnly && <button type="button" className="button button--quiet" title="For a web page: plays once, then holds the logo" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-logo-${study.id}.svg`)}>↓ SVG</button>}
         </span>
       </figcaption>
     </figure>
@@ -56,7 +58,7 @@ const LogoMotion = ({ brand, source }) => {
     <section className="panel">
       <div className="panel__head">
         <h2>Logo in motion</h2>
-        <p className="muted">From the motion library. Hover or press Play to run one again; each ends on the still logo.{reduced ? ' Your device asks for reduced motion, so each shows its final frame.' : ''}</p>
+        <p className="muted">From the motion library. Hover or press Play to run one again; each ends on the still logo. Download one as video or a GIF for slides and social, or as SVG for a web page.{reduced ? ' Your device asks for reduced motion, so each shows its final frame.' : ''}</p>
       </div>
       <div className="asset-grid asset-grid--motion">
         {shown.map((study) => <MotionCard key={study.id} brand={brand} library={library} study={study} reduced={reduced} />)}
@@ -66,7 +68,7 @@ const LogoMotion = ({ brand, source }) => {
 }
 
 export const Logos = ({ brand, fonts, source, openManual }) => {
-  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} />
+  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} />
   const ctx = { brand }
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   return (

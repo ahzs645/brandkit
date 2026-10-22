@@ -16,6 +16,8 @@ const idOf = (path) => path.split('/').at(-2)
 // no definition is bundled until it is chosen.
 import MANIFEST from '../../brands/index.json'
 export const builtInName = (id) => MANIFEST.find((entry) => entry.id === id)?.name ?? id
+/** The built-in brand's logo for the brand menu, pre-drawn by scripts/menu-logos.mjs, or null. */
+export const menuLogoUrl = (id) => FILES[`../../brands/${id}/logo-menu.svg`] ?? null
 export const BUILT_IN = Object.keys(DEFINITIONS).map(idOf).sort((a, b) => (a === 'ddcnorth' ? -1 : b === 'ddcnorth' ? 1 : a.localeCompare(b)))
 
 const libraryUrl = (relative) => {

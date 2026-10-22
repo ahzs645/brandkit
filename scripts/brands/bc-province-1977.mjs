@@ -12,6 +12,8 @@
 import { box, cite, HEROS_CAP, hung, locked, pt, readJson, round, writeBrand } from './common.mjs'
 import { applications, guide } from './bc-province-1977-applications.mjs'
 import { illustrated } from './illustrations.mjs'
+import { provinceLibrary, writeMotion } from './bc-motion.mjs'
+import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 
 const folder = new URL('../../brands/bc-province-1977/', import.meta.url)
 const art = readJson(new URL('artwork.json', folder))
@@ -485,5 +487,11 @@ cite(brand, {
     ['S07', 'S10', 'G18']
   ]
 })
+
+// An example motion library from the brand's own artwork (the manual has none): its files in
+// motion/, and the entry that gives the brand a Motion tab.
+const motion = writeMotion(folder, provinceLibrary(brand, await loadBrandFontsFromDisk(brand, folder.pathname)))
+brand.motion = motion.entry
+brand.files.push(...motion.files)
 
 writeBrand(new URL('brand.json', folder), brand)

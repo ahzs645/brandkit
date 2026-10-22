@@ -33,7 +33,9 @@ const readLibrary = async (brand, source) => {
       markup: element.innerHTML,
       xml: new XMLSerializer().serializeToString(element),
       // Artwork without words plays the same anywhere; words need the brand's fonts.
-      shapesOnly: !element.textContent.trim()
+      shapesOnly: !element.textContent.trim(),
+      // Drawn in SVG, with HTML only as wrappers around it: it can be recorded as video or GIF.
+      vector: !element.textContent.trim() && Boolean(element.querySelector('svg')) && [...element.querySelectorAll('*')].every((node) => node.closest('svg') || node.querySelector('svg'))
     })
   }
   const css = [...doc.querySelectorAll('style')].map((style) => style.textContent).join('\n')
