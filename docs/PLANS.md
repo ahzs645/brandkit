@@ -596,7 +596,7 @@ M2 is the identity and the kit (logo, fonts, palette, templates, icons, patterns
   - `o-repeat`: newsprint ground, pulp O's;
   - `o-crop`: forest ground, pine O cropped large;
   - `o-field`: lichen ground, one forest O.
-- **OTE-008 Guide.** Eight framed pages:
+- **OTE-008 Guide.** (Amended in M3: nine pages, with Motion before Files. See OTE-008 under M3.) Eight framed pages:
   1. Primary logo
   2. Logo family
   3. Clear space and sizes
@@ -652,34 +652,127 @@ M2 is the identity and the kit (logo, fonts, palette, templates, icons, patterns
 
   It uses `assets/motion.css` (the same file as `motion/motion.css`), and an inline header logo and loader between `<!-- ote:logo -->` and `<!-- ote:loader -->` markers that the script rewrites. Story text on the page is bracketed placeholders apart from the sourced lines. Screenshots at 1440 and 390 px are in `site/screenshots/`. The site is not shipped in the kit, as First Form's is not.
 
+### M3 decisions added before its readiness audit (2026-10-22)
+
+These were settled while drafting the three pages in the scratchpad, outside the repository, during the M2 audits. They add to the M3 decisions above, and replace them where they differ.
+
+- **Files.**
+  - New generator modules:
+    - `scripts/brands/overtheedge-motion.mjs`: `TOKENS`, `RULES`, `STUDIES`, `motionCss()`, `motionPage()`, `motionReadme()`, `lockupMarkup()`, `markMarkup()`, `embeddedFonts()`;
+    - `scripts/brands/overtheedge-details.mjs`: `detailsPage()`.
+  - `make:overtheedge` writes:
+    - `brands/overtheedge/motion/{index.html, motion.css, motion-tokens.json, README.md}`;
+    - `brands/overtheedge/docs/brand-details.html`;
+    - `brands/overtheedge/site/assets/motion.css`;
+    - `brands/overtheedge/site/licenses/` (copies of the OFL texts of the faces the site embeds);
+    - the site's marked regions.
+  - `site/index.html` is written by hand once. The script rewrites only what lies between its markers.
+- **Embedded fonts.** No page loads anything from the network.
+
+  | Page | Faces embedded as `data:` URIs |
+  | --- | --- |
+  | Motion page | Source Serif 4 Bold, Inter Regular, IBM Plex Mono Medium, Anton |
+  | Brand details | the motion page's faces, plus Gochi Hand |
+  | Site | the brand details faces, plus Inter SemiBold |
+
+  The site's `licenses/` holds `Anton-OFL.txt`, `IBMPlexMono-OFL.txt`, `GochiHand-OFL.txt`, `SourceSerif-OFL.md` and `Inter-OFL.txt`. They are byte copies, covered by `.gitattributes` as the brand's fonts are.
+- **Site markers**, each rewritten on every run, so the script stays idempotent:
+  - `<!-- ote:fonts -->`: the `@font-face` rules;
+  - `<!-- ote:logo -->`: the header logo, animatable per word;
+  - `<!-- ote:issue-logo -->`: the logo in the latest-issue panel;
+  - `<!-- ote:loader -->`: the O for the first-visit intro.
+- **Site motion.**
+  - On the first visit in a session, the O fills while the page and fonts load (600 ms to 2.5 s); then the intro slides away.
+  - On every load, the header logo plays the Press study and the hero headline rises.
+  - Sections rise in as they come into view.
+  - Story cards tilt on hover, as in Card pick.
+  - Everything rests on its final frame, so the page reads the same without scripts or with reduced motion.
+- **Guide Motion page** (page 8 of 9, before Files): four still frames of Press, from the first word dropping to the still logo, drawn as guide `path` elements. They are the glyphs with an element-level `transform` and `opacity`, which the guide already supports. The page also shows the token table and the four rules.
+- **Copy in the M3 pages.**
+  - No em dashes.
+  - Site story text is bracketed placeholders.
+  - Real headlines appear only from the site or the October 2025 cover. The allowlist:
+    - "Bears Don’t Really Hibernate… Or Do They?" and "The Forgotten Crest";
+    - "Bests of Home Echo at the Prince George Garba Night 2025", "Green So Far" and "So I Accidentally Became Someone’s Boss (And It Was Weird)";
+    - the cover's page numbers 03, 05 and 10;
+    - the site's labels "Top Stories", "View all", "Read News" and "Explore Events", and its navigation names.
+  - A story shown with a real headline gets a bracketed section, because the site files these stories as "Uncategorized".
+  - The visible-text scan (`document.body.innerText`, in the browser check) applies the M2 exempt categories. Measured values may also be in ms, %, and °. The rule against invented figures stands.
+- **Browser check** (`test/browser/overtheedge.check.mjs`, local only, as M1's). It opens the motion page, the brand details page and the site at 1440 and 390 px, and checks:
+  - no horizontal overflow, no console error and no failed request, on each page;
+  - the motion page has 13 tiles with `data-study`;
+  - with `reducedMotion: 'reduce'`, no animation is running in any `.play` element, and the Press tile's words are at rest (identity transform);
+  - the site shows its marked logo, and the visible-text scan passes on all three pages.
+
+  It writes the site's four screenshots (desktop and mobile, first screen and full page, as First Form's `site/screenshots/` are), and a report outside Git. A negative control (`OTE_BROKEN=1`) injects an off-palette colour and a running animation under reduced motion, and must exit 1.
+- **Unit tests** (in `test/overtheedge.test.js`, under an M3 heading):
+  - every study has its fields, ids are unique, and there are 13;
+  - the CSS defines `--ote-<duration>`, `--ote-<easing>` and `--ote-stagger`, and has a `prefers-reduced-motion: reduce` block;
+  - every hex colour in the CSS and the three pages is a palette colour, with transparency as `opacity` or `color-mix` of palette variables (the requirements below govern where this section differs);
+  - no `NaN` or `undefined`;
+  - the page has a `data-study` for every study, and the kit plan lists the four motion files and `guidelines/brand-details.html`;
+  - the site's `assets/motion.css` equals `motion/motion.css`;
+  - each site marker holds inline SVG (or `@font-face` rules);
+  - every local `src` and `href` exists, and the licence files are present;
+  - nine guide pages render.
+
 ### Requirements (M3)
 
-- **OTE-012 Motion library.** Pass when unit tests show:
-  - unique study ids, and every study has `name`, `kind`, `timing`, `use` and `description`;
-  - the page has `data-study="<id>"` for all thirteen;
-  - the CSS defines `--ote-<token>` for every duration, easing and `stagger`, and has a `prefers-reduced-motion: reduce` block;
-  - no `NaN` or `undefined`;
-  - only palette colours, with transparency as `opacity` or `color-mix` of palette colours;
-  - `planKit` includes the four motion files.
+These replace M3's earlier requirement text and fold in every check from "M3 decisions added before its readiness audit" (readiness audit finding C1).
 
-  A Playwright check (`test/browser/overtheedge.check.mjs`, local only, as M1's) loads the page at 1440 and 390 px. It confirms that:
+- **OTE-012 Motion library.** Pass when unit tests show:
+  - thirteen studies with unique ids, each with `name`, `kind`, `timing`, `use` and `description`, and kinds in the order logo ×3, loader ×4, interface ×6;
+  - the page has `data-study="<id>"` for every study;
+  - `motion.css` defines `--ote-<duration>`, `--ote-<easing>`, `--ote-stagger` and `--ote-distance`, and has a `prefers-reduced-motion: reduce` block;
+  - `motion-tokens.json` matches `TOKENS`, and the README lists the rules, tokens and studies;
+  - in the page and the CSS:
+    - no `NaN` or `undefined`;
+    - every hex colour is a palette colour;
+    - transparency is only `opacity` or `color-mix()` of a palette variable (`var(--ote-<colour>)`) with `transparent`;
+    - no `http(s)` URL in any `src`, `href`, `@import` or `url()`. The page is self-contained, because the app shows it through a hashed asset URL;
+  - the page embeds exactly the faces in the M3 table (Source Serif 4 Bold, Inter Regular, IBM Plex Mono Medium, Anton) as `data:` URIs. Inter comes from the shared woff2; the others are the brand's TTFs;
+  - the kit plan lists the four motion files.
+
+  The browser check (`test/browser/overtheedge.check.mjs`) passes at 1440 and 390 px:
   - every study tile is present;
-  - nothing overflows horizontally;
-  - with reduced motion, no animation runs and the logo study shows the still logo.
-- **OTE-013 Guide Motion page.** Nine pages render without `NaN` or `undefined`, and the Motion page's frames use palette colours.
+  - no horizontal overflow, no console error, no failed request and no request off the local server;
+  - every computed colour is a palette colour (alpha allowed);
+  - under `reducedMotion: 'reduce'`, no animation runs in a `.play` element, and the Press tile's words are at rest;
+  - in the app (Vite dev server), `?brand=overtheedge&view=motion` shows the Motion tab's frame with the 13 tiles.
+
+  `OTE_BROKEN=1` (an off-palette colour and an animation that ignores reduced motion) makes the check exit 1. The check writes `test/browser/overtheedge-report.json`, which is git-ignored.
+- **OTE-013 Guide Motion page.** Nine pages render without `NaN` or `undefined`. The Motion page is page 8, before Files, with four Press frames (OVER in each), the token table and the rules, in palette colours only. OTE-008 is amended to nine pages to match (finding C2).
 - **OTE-014 Brand details.** Pass when:
-  - the file is in `files` as `guidelines/brand-details.html`;
-  - it has no `NaN` or `undefined`, and has the inline logo;
-  - its colours are palette only;
-  - the browser check finds no horizontal overflow at 390 px and no console errors.
-- **OTE-015 Site.** Pass when:
+  - `docs/brand-details.html` is in `files` as `guidelines/brand-details.html`;
+  - it has the inline logo, no `NaN` or `undefined`, only palette hex colours, and no em dashes;
+  - it embeds exactly Source Serif 4 Bold, Inter Regular (woff2), IBM Plex Mono Medium, Anton and Gochi Hand as `data:` URIs, and makes no external request.
+
+  The browser check at 1440 and 390 px finds no horizontal overflow, no console error, no failed or external request, palette colours only, and a visible-text scan that passes.
+- **OTE-015 Site.** Pass when unit tests show:
   - `site/assets/motion.css` equals `motion/motion.css`;
-  - the `ote:logo` and `ote:loader` markers hold inline SVG;
+  - the four markers hold their artwork:
+    - `ote:fonts`: `@font-face` rules for Source Serif 4 Bold, Inter Regular and SemiBold (woff2), IBM Plex Mono Medium, Anton and Gochi Hand;
+    - `ote:logo` and `ote:issue-logo`: `svg.ote-lockup`;
+    - `ote:loader`: `svg.ote-o`;
   - every local `src` and `href` exists;
-  - the browser check at 1440 and 390 px shows no horizontal overflow and no console errors;
-  - the screenshots exist, and `site/README.md` describes the page and its motion.
-- **OTE-016 Docs and changelog.** The brand README lists `motion/` and `guidelines/brand-details.html`; CHANGELOG has a "## 1.0 - motion" entry.
-- **PROCESS-003 M3 audits.** Readiness and completion audits PASS, recorded in STATUS.
+  - `site/licenses/` holds `Anton-OFL.txt`, `IBMPlexMono-OFL.txt`, `GochiHand-OFL.txt`, `SourceSerif-OFL.md` and `Inter-OFL.txt`, each with the same SHA-256 as its source: the brand's `fonts/` for the first four, and `brands/ddcnorth/fonts/Inter-OFL.txt` (found by `findAsset`) for Inter's. `.gitattributes` covers `brands/overtheedge/site/licenses/*` as it covers the fonts;
+  - only palette hex colours, and no em dashes;
+  - `site/screenshots/` holds `desktop.jpg`, `desktop-full.jpg`, `mobile.jpg` and `mobile-full.jpg`;
+  - `site/README.md` describes the page, its motion, its markers and the screenshots;
+  - the site is not in the kit's `files`.
+
+  The browser check at 1440 and 390 px shows no overflow, no console error, no failed or external request, palette colours only, a visible-text scan that passes, and the three marked artworks drawn. It writes the four screenshots.
+- **OTE-016 Docs and size.** Pass when:
+  - the brand README lists `motion/index.html` and `guidelines/brand-details.html`;
+  - CHANGELOG has "## 1.0 - motion (22 October 2026)";
+  - STATUS records the three pages' sizes and `npm run build` before and after M3, as OTE-011 did for M2.
+- **OTE-008 (amended, finding C2).** The guide has nine framed pages (Motion is page 8, Files page 9). Its test changes from 8 to 9. OTE-008 returns to IMPLEMENTED and is re-verified in the M3 completion audit.
+- **Copy scan (amended, finding C2).** The exemption list gains one category: durations in milliseconds ("N ms"), measured values like px and mm. They are used in the guide's Motion page and rules.
+  - The negative test still catches "3.5 million readers", "(12)", "10 May 2024", "March 2019", "since 1994", "RGB 1, 2, 3" and "40% of students".
+  - It also catches "12 issues".
+  - The browser visible-text scan uses the same list, plus `%` and `°` for the motion study descriptions, the sourced headlines and page numbers above, bracketed placeholders, and token names and easing values.
+  - "Latest News" is removed from the label allowlist: it is not on the homepage as served (finding C3).
+- **PROCESS-003 M3 audits.** Readiness and completion audits PASS, recorded in STATUS. A pre-commit gate runs before any M3 commit, which needs the user's approval. Nothing is pushed, and `sites/` stays out.
 
 ### Out of the repository
 

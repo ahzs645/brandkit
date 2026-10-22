@@ -4,3 +4,4 @@ dist/
 .DS_Store
 __pycache__/
 test/browser/report.json
+test/browser/overtheedge-report.json

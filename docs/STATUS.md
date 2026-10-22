@@ -196,3 +196,98 @@ Manual review of every added sentence (OTE-005):
    Nothing is committed or pushed. The milestone commit needs the user's approval, then a Plan Guardian pre-commit gate on the staged changes. Only M2 paths are staged; `sites/` stays out, and nothing is pushed.
 5. On 2026-10-22 the user approved the M2 commit: "Yes, commit the first milestone (M2) to the overtheedge-brand branch. Leave sites/ out and don't push. Run the pre-commit audit first, then continue with M3." A Plan Guardian pre-commit gate runs on the staged changes first.
    Pre-commit finding (mine, while staging): `git diff --cached --check` flagged the Anton, IBM Plex Mono and Gochi Hand licence texts. They are upstream byte copies with CRLF line endings and trailing spaces, and their SHA-256 is recorded and tested. A new `.gitattributes` marks `brands/overtheedge/fonts/*-OFL.txt` as `-whitespace -text`, so they stay byte-exact and the check is clean. The earlier "clean" result in the evidence above was taken while these files were untracked.
+6. M2 pre-commit gate: PASS. The staged set was exactly the M2 paths. The staged tree passed `npm test` (69 passed, 2 skipped), `check` and the idempotency check from an index export. `.gitattributes` affects only this brand's licences. No upstream is configured. Committed as `f9fee98` on `overtheedge-brand`; not pushed; `sites/` left out.
+
+## M3: Over the Edge motion, brand details and site (branch `overtheedge-brand`, from `f9fee98`)
+
+Started 2026-10-22, after the user's instruction to "continue with M3". The three pages were drafted in the scratchpad, outside the repository, during the M2 audits. What that taught is added to docs/PLANS.md as "M3 decisions added before its readiness audit". Nothing of M3 is in the repository yet.
+
+### Independent audit record (M3)
+
+1. M3 readiness audit: FAIL. Feasible, and it covers First Form's motion, site and brand details.
+   - C1 (blocking): the checks added in "M3 decisions added before its readiness audit" were missing from the M3 requirements and TRACEABILITY:
+     - licence copies, the four markers, the network checks and the visible-text scan;
+     - the negative control, the screenshots, the embedded faces and the page colours.
+
+     OTE-012 also contradicted the new transparency rule.
+   - C2 (blocking): M3 changed the already-VERIFIED OTE-008 (eight pages, now nine) and needed an "ms" copy-scan exemption that the recorded list did not allow, with no plan to re-verify.
+   - Non-blocking:
+     - C3: "Latest News" is not on the homepage.
+     - C4: embedded fonts add about 4.2 MB and the size was unbounded; Inter should come from the shared woff2.
+     - C5: `.gitattributes` must cover `site/licenses/`.
+     - C6: check the app's Motion tab, and give the report its own git-ignored path.
+     - C7 and C8: compliant.
+
+   Amendments:
+   - C1: the M3 requirements are rewritten with every check as a binary criterion, and the TRACEABILITY rows updated. The transparency rule is settled: `opacity`, or `color-mix()` of a palette variable with `transparent`.
+   - C2: OTE-008 is amended to nine pages and returns to IMPLEMENTED for re-verification in the M3 completion audit. The copy-scan exemptions gain "N ms" only, with "12 issues" added to the negative test.
+   - Non-blocking items adopted:
+     - "Latest News" removed;
+     - Inter embedded from woff2, with page and build sizes recorded (OTE-016);
+     - `.gitattributes` extended to `site/licenses/`;
+     - an app Motion tab check added;
+     - the report written to `test/browser/overtheedge-report.json`, which is git-ignored.
+2. M3 readiness re-audit: PASS. C1 and C2 are resolved. The non-blocking wording fixes are adopted: OTE-008's M2 text points to the M3 amendment; the requirements govern the transparency rule; the source of `Inter-OFL.txt` is named. Implementation of M3 begins.
+
+### Implementation (M3)
+Implementation evidence (working tree on `overtheedge-brand` over `f9fee98`, uncommitted):
+- `npm test`: 76 tests, 74 passed, 2 skipped (parity), 0 failed. This includes five new M3 tests, the OTE-008 test amended to nine pages, and the copy-scan negative test with "160 ms" kept and "12 issues" caught.
+- `node test/browser/overtheedge.check.mjs`: 10/10 checks passed. The report is written to `test/browser/overtheedge-report.json`, which is git-ignored.
+- Negative control: `OTE_BROKEN=1 node test/browser/overtheedge.check.mjs` exited 1, with 7 of 10 failing (six page checks on the off-palette colour, and the reduced-motion check). The clean run was then repeated to regenerate the screenshots, which the broken run had overwritten.
+- `npm run test:browser` (ddcnorth, M1): 20/20 checks passed, with Over the Edge now in the app.
+- `npm run make:overtheedge` twice: every file under `brands/overtheedge/` (screenshots aside, which the browser check writes) and `brands/index.json` hash the same after the second run.
+- `node bin/brandkit.mjs check brands/overtheedge/brand.json`: no problems. The kit build writes 110 files (104 before M3).
+- `git diff --check`: clean. `git diff --exit-code -- brands/ddcnorth brands/firstform`: clean. `git check-attr` sets `-whitespace -text` on `site/licenses/*-OFL.txt` and the brand's fonts only.
+- Sizes (OTE-016):
+
+  | | Size |
+  | --- | --- |
+  | `motion/index.html` | 980,002 bytes |
+  | `docs/brand-details.html` | 1,233,839 bytes |
+  | `site/index.html` | 1,151,318 bytes |
+  | `dist` at `f9fee98` | 43,316 KB |
+  | `dist` with M3 | 47,204 KB (+3.9 MB) |
+
+  Inter is embedded from the shared woff2.
+
+Implementation amendments, recorded for the completion audit:
+- The template rules (dashed index rules and the date rule) gain an explicit `fill: "none"`. They had stroke only, so their exported SVG carried the default black fill on a zero-area line. This changes M2 template output, so OTE-005 returns to IMPLEMENTED for re-verification (gate 6). Its tests pass unchanged.
+- The browser colour check counts only colours actually painted, read at rest under reduced motion:
+  - borders and outlines when drawn;
+  - fill and stroke on drawn SVG shapes outside clip paths;
+  - text colour where there is text.
+
+  The first version read default values that are never painted (a table's undrawn border grey, the default black `fill` of HTML elements) and mid-animation blends. The negative control shows it still fails on a real off-palette colour.
+- The scan patterns run dimensions first ("54 × 86 mm") and match "Source Serif 4" and "v1.0" regardless of case, because CSS capitalises some labels. The guide's token table names the easing ("Ease out, the site’s own curve") instead of writing its numbers.
+- Logo minimums on the site, now checked in the browser at 1440 and 390 px:
+  - the header logo is fixed at 300 px (it was 273 px at 390);
+  - the latest-issue panel uses the logo without its subtext, because the panel is narrower than the full logo's 288 px minimum. `lockupMarkup` gains `{ subtext: false }`.
+- The Turn page study shows "Top Stories" (on the homepage) in place of "Latest News".
+
+Manual review of every added sentence (M3): the motion rules and study descriptions, the motion page intro, the brand details copy, and the site's labels. Rules and descriptions describe the brand's own motion. Sourced lines and headlines are the paper's own: site, homepage labels, October 2025 cover. Story, event and issue content is bracketed placeholders. The details page's "Where it can go next" is labelled "Proposals, not rules". No names, figures, dates or claims about the paper are invented.
+3. M3 completion audit: PASS. The auditor re-ran every check in a scratch copy:
+   - `npm test`: 74 passed, 2 skipped;
+   - `check`: no problems;
+   - `make:overtheedge` twice in a scratch git repo: clean;
+   - the browser check: 10/10, and `OTE_BROKEN=1` exits 1;
+   - `vite build`: 47,204 KB;
+   - the licence copies, compared with `cmp`: byte-identical.
+
+   OTE-005, OTE-008 and OTE-012 to 016 are VERIFIED, and with this record PROCESS-003 is too.
+
+   Non-blocking items adopted after the audit:
+   - D8, D9: `test/overtheedge.test.js` now also asserts:
+     - no colour function other than palette `color-mix` (no `rgb`, `hsl`, `oklch`…) in the four page and CSS sources;
+     - nothing fetched by `url()` or `@import`;
+     - `--ote-distance`;
+     - every token in `motion-tokens.json`;
+     - every study and duration token in the motion README.
+
+     `npm test` after: 76 tests, 74 passed, 2 skipped, 0 failed. The browser colour check still reads painted colours only. The source scan above covers pseudo-elements, shadows and gradients.
+   - D10: the site's interface labels "Can’t-miss events" (from the hero line), "Full calendar" and "Details" are recorded here as labels, not factual claims.
+
+   The M3 commit needs the user's approval and a pre-commit gate on the staged index:
+   - only M3 paths staged, with the screenshots from the clean run;
+   - `sites/` excluded;
+   - nothing pushed.
+4. On 2026-10-22 the user approved the M3 commit: "Yes, commit M3 to the overtheedge-brand branch. Leave sites/ out and don't push. Run the pre-commit gate and the final full-project audit first." The Plan Guardian pre-commit gate (AGENTS gate 5) and the final full-project audit (gates 7 and 8) run on the staged index first.

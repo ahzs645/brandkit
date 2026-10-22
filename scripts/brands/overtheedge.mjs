@@ -9,16 +9,18 @@
 // come from the site's theme and the 2025 print covers; type is Source Serif 4, Anton, Inter,
 // IBM Plex Mono and Gochi Hand. Everything else is drawn from those.
 
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createStarterBrand } from '../../src/engine/starter.js'
-import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
+import { findAsset, loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 import { updateManifest } from './common.mjs'
 import { loadLogo, pathBounds, siteIcons, union, up } from './overtheedge-logo.mjs'
+import { embeddedFonts, lockupMarkup, markMarkup, motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './overtheedge-motion.mjs'
+import { detailsPage } from './overtheedge-details.mjs'
 
 const folder = new URL('../../brands/overtheedge/', import.meta.url).pathname
 mkdirSync(folder, { recursive: true })
 
-const INPUTS = ['reference/logo-site.svg', 'reference/logo-site-dark.svg', 'reference/site-icons.json', 'fonts/Anton-Regular.ttf', 'fonts/SourceSerif4-Regular.ttf', 'fonts/SourceSerif4-Bold.ttf', 'fonts/SourceSerif4-It.ttf', 'fonts/IBMPlexMono-Medium.ttf', 'fonts/GochiHand-Regular.ttf', 'docs/README.md', 'docs/CHANGELOG.md', 'fonts/README.md']
+const INPUTS = ['reference/logo-site.svg', 'reference/logo-site-dark.svg', 'reference/site-icons.json', 'fonts/Anton-Regular.ttf', 'fonts/SourceSerif4-Regular.ttf', 'fonts/SourceSerif4-Bold.ttf', 'fonts/SourceSerif4-It.ttf', 'fonts/IBMPlexMono-Medium.ttf', 'fonts/GochiHand-Regular.ttf', 'docs/README.md', 'docs/CHANGELOG.md', 'fonts/README.md', 'site/index.html']
 for (const input of INPUTS) {
   if (!existsSync(`${folder}${input}`)) {
     console.error(`Missing input: brands/overtheedge/${input}`)
@@ -111,7 +113,7 @@ const anton = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, si
 const hand = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, size, colour, { font: 'hand', ...extra })
 const rect = (id, x, y, width, height, fill, extra = {}) => ({ type: 'rect', id, x, y, width, height, fill, ...extra })
 /** A dashed rule, as in the print issue's index. */
-const dashed = (id, x1, x2, y, colour = 'bark', width = 1.5, dash = '6 5') => ({ type: 'path', id, d: `M${x1} ${y}H${x2}`, stroke: colour, strokeWidth: width, dash })
+const dashed = (id, x1, x2, y, colour = 'bark', width = 1.5, dash = '6 5') => ({ type: 'path', id, d: `M${x1} ${y}H${x2}`, fill: 'none', stroke: colour, strokeWidth: width, dash })
 
 const card = { width: 960, height: 560, physical: ['96mm', '56mm'], raster: 1920, group: 'Business cards', print: { trim: [90, 50], bleed: 3, unit: 'mm' } }
 const cardGuides = { type: 'printGuides', colour: 'muted', trim: { id: 'trim-90x50mm', x: 30, y: 30, width: 900, height: 500 }, safe: { id: 'safe-3mm-inside-trim', x: 60, y: 60, width: 840, height: 440 } }
@@ -195,7 +197,7 @@ const TEMPLATES = [
       { type: 'logo', x: 80, y: 72, width: 620, colour: 'white', ground: 'forest' },
       rect('date-box', 760, 40, 280, 170, 'forest'),
       label('issue-volume', 'VOLUME [00] | ISSUE [0]', 900, 78, 15, 'white', { anchor: 'middle', ground: 'forest' }),
-      { type: 'path', id: 'date-rule', d: 'M784 94H1016', stroke: 'white', strokeWidth: 1 },
+      { type: 'path', id: 'date-rule', d: 'M784 94H1016', fill: 'none', stroke: 'white', strokeWidth: 1 },
       anton('issue-day', '[DD]', 784, 184, 64, 'white', { ground: 'forest' }),
       anton('issue-month', '[MONTH]', 916, 130, 24, 'white', { ground: 'forest' }),
       anton('issue-year', '[YYYY]', 916, 158, 24, 'white', { ground: 'forest' }),
@@ -360,6 +362,31 @@ const shelf = (items, y, height, gap = 24) => {
   })
 }
 
+// The Press study as four still frames: the first word dropping in, the second, the third, the still logo.
+const PRESS_FRAMES = [[0.35, 0, 0, 0], [1, 0.35, 0, 0], [1, 1, 1, 0.35], [1, 1, 1, 1]].flatMap((progress, index) => {
+  const x = 64 + index * 334
+  const y = 266
+  const scale = 270 / wordmark.variants.full.width
+  const glyphFor = ['over', 'the', 'edge', 'subtext']
+  return [
+    g.rect(x, y, 310, 200, index === 3 ? 'light' : 'reverse', index === 3 ? undefined : 'line'),
+    ...progress.flatMap((p, word) => (p === 0 ? [] : [
+      { type: 'path', d: wordmark.glyphs[glyphFor[word]], fill: 'primary', transform: `translate(${x + 20} ${y + 77 + (word === 3 ? 18 : -14) * (1 - p)}) scale(${scale})`, opacity: p },
+      ...(word === 3 ? [{ type: 'path', d: wordmark.glyphs.apostrophe, fill: 'primary', transform: `translate(${x + 20} ${y + 77 + 18 * (1 - p)}) scale(${scale})`, opacity: p }] : [])
+    ])),
+    g.label(['OVER · FIRST', 'THE · SECOND', 'EDGE · THIRD, THEN THE LINE', 'END · THE STILL LOGO'][index], x, y + 230)
+  ]
+})
+const MOTION_PAGE = {
+  name: 'Motion', title: 'Off the press, one word at a time.', subtitle: 'The logo prints in word by word, then holds. Rules roll, pages turn, and the O fills while you wait.',
+  elements: [
+    ...PRESS_FRAMES,
+    { type: 'specTable', x: 64, right: 640, y: 590, step: 44, rows: Object.entries(TOKENS.durations).map(([key, value]) => [key[0].toUpperCase() + key.slice(1), `${value} ms`]).concat([['Stagger', `${TOKENS.stagger} ms`], ['Settle', 'Ease out, the site’s own curve']]) },
+    ...RULES.map((rule, index) => g.para(`${rule.title} ${rule.text}`, 720, 590 + index * 84, 656, 17, { colour: index % 2 ? 'muted' : 'ink', line: 1.45 })),
+    g.para('All the studies, with replay, are in motion/index.html in the kit and in brandkit’s Motion tab.', 64, 920, 1312, 18)
+  ]
+}
+
 const GUIDE = {
   title: '{name} brand guide',
   pdfTitle: '{name} brand guide / v{displayVersion}',
@@ -450,6 +477,7 @@ const GUIDE = {
         ...shelf([['press-pass', 188, 'PRESS PASS', true], ['story-post', 240, 'STORY POST', true], ['event-post', 300, 'EVENT POST', true], ['story-vertical', 169, 'VERTICAL'], ['issue-out', 300, 'NEW ISSUE']], 568, 300)
       ]
     },
+    MOTION_PAGE,
     {
       name: 'Files', title: 'Use the right file for the job.', subtitle: 'The same artwork drives the vectors, images, templates and web components.',
       elements: [
@@ -514,6 +542,7 @@ const brand = {
     { id: 'o-field', title: '{name} / the O on lichen', width: 960, height: 600, background: 'lichen', place: [{ x: 391, y: 172, scale: 3, colour: 'forest' }] }
   ],
   icons: ICONS,
+  motion: { page: 'motion/index.html', css: 'motion/motion.css', tokens: TOKENS, rules: RULES, studies: STUDIES },
   templates: TEMPLATES,
   guide: GUIDE,
   web: {
@@ -529,6 +558,8 @@ const brand = {
   files: [
     { to: 'README.md', from: 'docs/README.md' },
     { to: 'CHANGELOG.md', from: 'docs/CHANGELOG.md' },
+    { to: 'guidelines/brand-details.html', from: 'docs/brand-details.html' },
+    'motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md',
     { to: 'logos/source/overtheedge-site-light.svg', from: 'reference/logo-site.svg' },
     { to: 'logos/source/overtheedge-site-dark.svg', from: 'reference/logo-site-dark.svg' },
     'fonts/README.md', 'fonts/Inter-OFL.txt', 'fonts/desktop/Inter-Regular.ttf', 'fonts/desktop/Inter-SemiBold.ttf', 'fonts/web/Inter-Regular.woff2', 'fonts/web/Inter-SemiBold.woff2', 'fonts/Anton-OFL.txt', 'fonts/IBMPlexMono-OFL.txt', 'fonts/GochiHand-OFL.txt', 'fonts/SourceSerif-OFL.md',
@@ -537,6 +568,43 @@ const brand = {
 }
 delete brand.fields
 
+// --- Motion, brand details and site --------------------------------------------------------------
+// The pages embed the brand's own font files, so they need no network (docs/PLANS.md M3).
+
+const asset = (file) => findAsset(folder, file)
+// Each face's web file: the shared Inter woff2, and the brand's own TTFs.
+const faces = (...keys) => keys.map((key) => ({ family: FONTS[key].family, weight: FONTS[key].weight, style: FONTS[key].style ?? 'normal', file: FONTS[key].web }))
+const geometry = { wordmark, o: O_PATH, oBox: symbol.viewBox.slice(2) }
+
+mkdirSync(`${folder}motion`, { recursive: true })
+writeFileSync(`${folder}motion/index.html`, motionPage(geometry, COLOURS, embeddedFonts(asset, faces('display', 'body', 'label', 'extra'))))
+writeFileSync(`${folder}motion/motion.css`, motionCss(COLOURS))
+writeFileSync(`${folder}motion/motion-tokens.json`, `${JSON.stringify({ ...TOKENS, rules: RULES.map((rule) => rule.title) }, null, 2)}\n`)
+writeFileSync(`${folder}motion/README.md`, motionReadme())
+
+writeFileSync(`${folder}docs/brand-details.html`, detailsPage({ brand, fonts }, { fontFaces: embeddedFonts(asset, faces('display', 'body', 'label', 'extra', 'hand')), contrastPairs: CONTRAST, largeOnly: LARGE_ONLY, studies: STUDIES }))
+
+// The site uses the same CSS, and draws its fonts, header logo, issue logo and loader from the brand:
+// each sits between <!-- ote:name --> markers in site/index.html, replaced on every run.
+mkdirSync(`${folder}site/assets`, { recursive: true })
+mkdirSync(`${folder}site/licenses`, { recursive: true })
+writeFileSync(`${folder}site/assets/motion.css`, motionCss(COLOURS))
+for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'SourceSerif-OFL.md', 'Inter-OFL.txt']) writeFileSync(`${folder}site/licenses/${file}`, readFileSync(asset(`fonts/${file}`)))
+const sitePath = `${folder}site/index.html`
+let site = readFileSync(sitePath, 'utf8')
+for (const [name, markup] of [
+  ['fonts', embeddedFonts(asset, faces('display', 'body', 'bold', 'label', 'extra', 'hand'))],
+  ['logo', lockupMarkup(geometry, 'site-logo', 'Over the Edge')],
+  // The issue panel is narrower than the full logo's 288 px minimum, so it carries the logo without its subtext.
+  ['issue-logo', lockupMarkup(geometry, 'issue-logo', 'Over the Edge', { subtext: false })],
+  ['loader', markMarkup(geometry, 'Loading')]
+]) {
+  const pattern = new RegExp(`(<!-- ote:${name} -->)[\\s\\S]*?(<!-- /ote:${name} -->)`)
+  if (!pattern.test(site)) throw new Error(`site/index.html has no ote:${name} markers`)
+  site = site.replace(pattern, (_, open, close) => open + markup + close)
+}
+writeFileSync(sitePath, site)
+
 writeFileSync(`${folder}brand.json`, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
-console.log(`brands/overtheedge/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons`)
+console.log(`brands/overtheedge/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons, ${brand.motion.studies.length} motion studies`)

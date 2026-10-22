@@ -7,10 +7,12 @@ UNBC's Independent Student Newspaper. News · Clubs · Events · Calendar.
 ## Start here
 
 1. Open `index.html` to browse every file offline.
-2. Read `guidelines/overtheedge-brand-guide.pdf` for the guide.
-3. Use `logos/outlined/overtheedge-horizontal-forest.svg` as the primary logo, on Newsprint (#F5F1E6) or White.
-4. Below 288 px wide on screen, or 58 mm in print, use `logos/outlined/words-horizontal-forest.svg` (without the subtext). Below 96 px or 20 mm, use the O (`symbol/`).
-5. Install the fonts in `fonts/` before editing live text in the templates.
+2. Open `guidelines/brand-details.html` for the full reference: voice, logo, colour with contrast, type, icons, print devices, templates and motion.
+3. Open `motion/index.html` for the motion library: the logo printing in, loaders and interface motion.
+4. Read `guidelines/overtheedge-brand-guide.pdf` for the guide.
+5. Use `logos/outlined/overtheedge-horizontal-forest.svg` as the primary logo, on Newsprint (#F5F1E6) or White.
+6. Below 288 px wide on screen, or 58 mm in print, use `logos/outlined/words-horizontal-forest.svg` (without the subtext). Below 96 px or 20 mm, use the O (`symbol/`).
+7. Install the fonts in `fonts/` before editing live text in the templates.
 
 ## What this kit is built from
 
@@ -37,7 +39,8 @@ UNBC's Independent Student Newspaper. News · Clubs · Events · Calendar.
 | `patterns/` | The O repeated, cropped and placed on Lichen |
 | `icons/` | The site's search, sun, moon, close and arrow, plus newspaper, calendar, clubs, pen and archive, on one 24 px grid and 2 px stroke |
 | `templates/` | Business card, press pass, letterhead, issue cover, story, new-issue and event posts, vertical story, link preview, banner and three slides |
+| `motion/` | The motion library (`index.html`), `motion.css` with every token and keyframe, `motion-tokens.json` and a README |
 | `web/` | React components, CSS, tokens, landing template, app icons and favicons |
 | `fonts/` | Source Serif 4, Anton, Inter, IBM Plex Mono and Gochi Hand, with their licences |
-| `guidelines/` | The guide and the logo reference sheet |
+| `guidelines/` | The guide, the logo reference sheet and the brand details page |
 | `source/` | `brand.json`, from which every file here is generated |

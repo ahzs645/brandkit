@@ -4,7 +4,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { colour, lockup, planKit, renderTemplate, validateBrand } from '../src/engine/index.js'
 import { logoDocument } from '../src/engine/artwork.js'
 import { guidePages, guideSheets } from '../src/engine/guide.js'
@@ -260,9 +260,9 @@ const FACTS = {
 }
 // Exempt categories, as docs/PLANS.md records them: hex codes; measured sizes (px, mm), contrast ratios
 // (": 1") and logo units; canvas dimensions; version numbers; the dates the sources were published or
-// read; and names that contain a digit (the typeface Source Serif 4, the paper size A4).
+// read; durations in ms (amended in M3); and names that contain a digit (Source Serif 4, A4).
 const DATES = ['22 October 2026', 'April 2025', 'October 2025']
-const EXEMPT = [/Source Serif 4/g, /\bA4\b/g, /#[0-9A-F]{6}\b/gi, /\d+(?:\.\d+)? ?(?:px|mm)\b/g, /\d+(?:\.\d+)? : 1\b/g, /\d+ × \d+/g, /\bv\d+\.\d+\b/g, /^## \d+\.\d+ - /g, /\b\d+(?:\.\d+)? logo units\b/g, ...DATES.map((date) => new RegExp(date, 'g'))]
+const EXEMPT = [/\d+ × \d+/g, /\d+ ms\b/g, /Source Serif 4/gi, /\bA4\b/g, /#[0-9A-F]{6}\b/gi, /\d+(?:\.\d+)? ?(?:px|mm)\b/g, /\d+(?:\.\d+)? : 1\b/g, /\bv\d+\.\d+\b/g, /^## \d+\.\d+ - /g, /\b\d+(?:\.\d+)? logo units\b/g, ...DATES.map((date) => new RegExp(date, 'g'))]
 const strip = (text) => EXEMPT.reduce((value, pattern) => value.replace(pattern, ''), text.replace(/\[[^\]]*\]|\{[^}]*\}/g, ''))
 
 const guideStrings = () => [...brand.guide.pages, ...brand.guide.sheets].flatMap((page) => [page.title, page.subtitle, ...(page.elements ?? []).flatMap((e) => [e.text, ...(e.rows ?? []).flat()])]).filter((value) => typeof value === 'string')
@@ -270,8 +270,8 @@ const templateStrings = () => brand.templates.flatMap((t) => t.elements.flatMap(
 const webStrings = () => [...Object.values(brand.copy), ...Object.values(brand.web.intro), ...Object.values(brand.web.landing)].filter((value) => typeof value === 'string')
 
 test('copy scan: the exemptions let measured values through, and not invented figures', () => {
-  for (const kept of ['288 px', '58 mm', '13.4 : 1', '#155329', '1080 × 1350', 'v1.0', '42.8 logo units', '22 October 2026', 'April 2025', 'Source Serif 4', 'A4']) assert.doesNotMatch(strip(kept), /\d/, kept)
-  for (const caught of ['3.5 million readers', '(12)', '10 May 2024', 'March 2019', 'since 1994', 'RGB 1, 2, 3', '40% of students']) assert.match(strip(caught), /\d/, caught)
+  for (const kept of ['160 ms', '288 px', '58 mm', '13.4 : 1', '#155329', '1080 × 1350', 'v1.0', '42.8 logo units', '22 October 2026', 'April 2025', 'Source Serif 4', 'A4']) assert.doesNotMatch(strip(kept), /\d/, kept)
+  for (const caught of ['3.5 million readers', '(12)', '10 May 2024', 'March 2019', 'since 1994', 'RGB 1, 2, 3', '40% of students', '12 issues']) assert.match(strip(caught), /\d/, caught)
 })
 
 test('copy: no em dashes, sourced or bracketed template text, and digits only where exempt', () => {
@@ -318,9 +318,9 @@ test('OTE-007: three patterns of the O in palette colours', () => {
 
 // --- OTE-008 Guide --------------------------------------------------------------------------------
 
-test('OTE-008: eight guide pages and a logo sheet, in palette colours, with readable logos', () => {
+test('OTE-008: nine guide pages (amended in M3) and a logo sheet, in palette colours, with readable logos', () => {
   const pages = guidePages({ brand, fonts })
-  assert.equal(pages.length, 8)
+  assert.equal(pages.length, 9)
   assert.equal(brand.guide.frame.header, '{upperName} / BRAND GUIDE / V{displayVersion}')
   assert.equal(brand.guide.frame.footer, "{upperName} / UNBC'S INDEPENDENT STUDENT NEWSPAPER")
   assert.equal(brand.guide.frame.logo.family, 'words')
@@ -366,4 +366,94 @@ test('OTE-009 and OTE-010: valid, registered, documented', () => {
   for (const cover of provenance.covers) assert.match(cover.sha256, /^[0-9a-f]{64}$/)
   const root_readme = readFileSync(`${root}README.md`, 'utf8')
   assert.ok(root_readme.includes('[`brands/overtheedge`](brands/overtheedge)') && root_readme.includes('npm run make:overtheedge'))
+})
+
+// --- M3: motion, brand details and site ----------------------------------------------------------
+
+
+/** Hex colours written in a stylesheet or page (embedded font data left out), each must be a palette colour. */
+/** The faces a page embeds, as 'family weight style', sorted; every one must be a data: URI. */
+const embedded = (text) => [...text.matchAll(/@font-face \{ font-family: '([^']+)'; font-weight: (\d+); font-style: (\w+);[^}]*src: url\(data:font\/(?:ttf|woff2);base64,/g)].map((m) => `${m[1]} ${m[2]} ${m[3]}`).sort()
+const cssColours = (text) => [...text.replace(/base64,[A-Za-z0-9+/=]+/g, 'base64,').matchAll(/#([0-9a-fA-F]{3,8})\b/g)].map((m) => `#${m[1]}`.toUpperCase())
+
+test('OTE-012: thirteen motion studies, their tokens as CSS variables, palette colours, in the kit', () => {
+  const { motion } = brand
+  const ids = motion.studies.map((study) => study.id)
+  assert.equal(ids.length, 13)
+  assert.equal(new Set(ids).size, ids.length, 'unique study ids')
+  for (const study of motion.studies) assert.ok(study.name && study.kind && study.timing && study.use && study.description, study.id)
+  assert.deepEqual(motion.studies.map((s) => s.kind), ['logo', 'logo', 'logo', 'loader', 'loader', 'loader', 'loader', 'interface', 'interface', 'interface', 'interface', 'interface', 'interface'])
+  const page = read(motion.page)
+  const css = read(motion.css)
+  for (const id of ids) assert.match(page, new RegExp(`data-study="${id}"`), id)
+  for (const key of [...Object.keys(motion.tokens.durations), ...Object.keys(motion.tokens.easings), 'stagger']) assert.match(css, new RegExp(`--ote-${key}:`), key)
+  assert.match(css, /prefers-reduced-motion: reduce/)
+  for (const text of [page, css]) {
+    assert.ok(!/NaN|undefined/.test(text.replace(/base64,[A-Za-z0-9+/=]+/g, '')))
+    for (const hex of cssColours(text)) assert.ok(palette.has(hex), hex)
+    for (const [mix] of text.matchAll(/color-mix\(in srgb, ([^,]+), transparent\)|color-mix\([^)]*\)/g)) assert.match(mix, /^color-mix\(in srgb, var\(--ote-[a-z]+\) \d+%, transparent\)$/, mix)
+    assert.doesNotMatch(text, /https?:\/\/fonts\.(googleapis|gstatic)/, 'no network fonts')
+  }
+  const tokensJson = JSON.parse(read('motion/motion-tokens.json'))
+  for (const key of ['durations', 'easings', 'stagger', 'distance']) assert.deepEqual(tokensJson[key], motion.tokens[key], key)
+  assert.match(css, /--ote-distance:/)
+  // Colours are hex palette values or color-mix of palette variables, never other colour functions.
+  for (const text of [page, css, read('docs/brand-details.html'), read('site/index.html')]) {
+    const source = text.replace(/base64,[A-Za-z0-9+/=]+/g, 'base64,')
+    assert.doesNotMatch(source, /\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/, 'no other colour functions')
+    assert.doesNotMatch(source, /(?:url\(|@import\s)['"]?https?:/, 'nothing fetched from elsewhere')
+  }
+  assert.deepEqual(embedded(page), ['Anton 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Source Serif 4 700 normal'])
+  const plan = planKit(brand).map((entry) => entry.path)
+  for (const file of ['motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md', 'guidelines/brand-details.html']) assert.ok(plan.includes(file), file)
+  const readme = read('motion/README.md')
+  for (const rule of motion.rules) assert.ok(readme.includes(rule.title), rule.title)
+  for (const study of motion.studies) assert.ok(readme.includes(`| ${study.name} |`), study.name)
+  for (const key of Object.keys(motion.tokens.durations)) assert.ok(readme.includes(`--ote-${key}`), key)
+})
+
+test('OTE-013: nine guide pages, the Motion page before Files, in palette colours', () => {
+  const pages = guidePages({ brand, fonts })
+  assert.equal(pages.length, 9)
+  assert.deepEqual(brand.guide.pages.slice(-2).map((page) => page.name), ['Motion', 'Files'])
+  const motion = pages[7].render()
+  assert.ok(!/NaN|undefined/.test(motion))
+  for (const hex of paints(motion)) assert.ok(palette.has(hex), hex)
+  assert.equal(brand.guide.pages[7].elements.filter((e) => e.type === 'path' && e.d === brand.wordmark.glyphs.over).length, 4, 'OVER in each of four frames')
+})
+
+test('OTE-014: the brand details page is self-contained, in palette colours, and shipped', () => {
+  const html = read('docs/brand-details.html')
+  assert.ok(brand.files.some((file) => file.to === 'guidelines/brand-details.html' && file.from === 'docs/brand-details.html'))
+  assert.ok(!/NaN|undefined/.test(html.replace(/base64,[A-Za-z0-9+/=]+/g, '')))
+  assert.match(html, /<svg class="logo"/)
+  assert.deepEqual(embedded(html), ['Anton 400 normal', 'Gochi Hand 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Source Serif 4 700 normal'])
+  for (const hex of cssColours(html)) assert.ok(palette.has(hex), hex)
+  assert.doesNotMatch(html, /(?:src|href)="https?:/, 'nothing loaded from elsewhere')
+  assert.ok(!html.includes('—'))
+})
+
+test('OTE-015: the site uses the kit\'s motion CSS, its marked artwork, and only local files', () => {
+  const site = read('site/index.html')
+  assert.equal(read('site/assets/motion.css'), read(brand.motion.css))
+  assert.match(site, /href="assets\/motion\.css"/)
+  assert.match(site, /<!-- ote:logo --><svg class="ote-lockup"[\s\S]*?<\/svg><!-- \/ote:logo -->/)
+  assert.match(site, /<!-- ote:issue-logo --><svg class="ote-lockup"[\s\S]*?<\/svg><!-- \/ote:issue-logo -->/)
+  assert.match(site, /<!-- ote:loader --><svg class="ote-o"[\s\S]*?<\/svg><!-- \/ote:loader -->/)
+  assert.match(site, /<!-- ote:fonts -->@font-face[\s\S]*?<!-- \/ote:fonts -->/)
+  assert.deepEqual(embedded(site), ['Anton 400 normal', 'Gochi Hand 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Inter 600 normal', 'Source Serif 4 700 normal'])
+  for (const asset of [...site.matchAll(/(?:src|href)="((?:assets|licenses)\/[^"]+)"/g)].map((m) => m[1])) assert.ok(existsSync(`${folder}site/${asset}`), asset)
+  for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'SourceSerif-OFL.md', 'Inter-OFL.txt']) assert.equal(sha(`${folder}site/licenses/${file}`), sha(findAsset(folder, `fonts/${file}`)), file)
+  for (const hex of cssColours(site)) assert.ok(palette.has(hex), hex)
+  assert.ok(!site.includes('—'))
+  for (const shot of ['desktop.jpg', 'mobile.jpg', 'desktop-full.jpg', 'mobile-full.jpg']) assert.ok(existsSync(`${folder}site/screenshots/${shot}`), shot)
+  const readme = read('site/README.md')
+  for (const heading of ['## Motion', 'ote:logo', 'screenshots/']) assert.ok(readme.includes(heading), heading)
+  assert.ok(!brand.files.some((file) => String(file.to ?? file).startsWith('site/')), 'the site is not in the kit')
+})
+
+test('OTE-016: the README and change log describe motion and the brand details page', () => {
+  const readme = read('docs/README.md')
+  assert.ok(readme.includes('motion/index.html') && readme.includes('guidelines/brand-details.html'))
+  assert.match(read('docs/CHANGELOG.md'), /^## 1\.0 - motion \(22 October 2026\)$/m)
 })

@@ -1,3 +1,4 @@
 # Upstream font licences are kept byte for byte (their SHA-256 is recorded in each brand's
 # fonts/README.md and checked by its tests), CRLF line endings and trailing spaces included.
 brands/overtheedge/fonts/*-OFL.txt -whitespace -text
+brands/overtheedge/site/licenses/*-OFL.txt -whitespace -text
