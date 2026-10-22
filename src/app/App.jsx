@@ -98,7 +98,7 @@ export const App = () => {
       setCurrent({ ...next, original: structuredClone(next.brand) })
       // On arrival the address may point into a guide or manual; a later switch of brand starts fresh.
       // A shared link drops anything it does not offer (a revision, a view of the workshop).
-      writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature'] : [] })
+      writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature', 'study'] : [] })
       if (!SHARED) try { localStorage.setItem('brandkit:last', next.brand.id) } catch { /* fine */ }
     } catch (problem) {
       setError(problem.message)
@@ -251,7 +251,7 @@ export const App = () => {
         {!brand ? !error && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
-            {view === 'logos' && <Logos brand={brand} fonts={fonts} openManual={openManual} />}
+            {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
             {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">
@@ -260,7 +260,7 @@ export const App = () => {
                 </div>
               )} /></div>}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
-            {view === 'motion' && <Motion brand={brand} source={source} />}
+            {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
             {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}

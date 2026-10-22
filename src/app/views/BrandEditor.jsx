@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
-import { colourName, validateBrand } from '../../engine/brand.js'
+import { colour, colourName, validateBrand } from '../../engine/brand.js'
 import { download } from '../../export/render.js'
+import { colourEntries, editableRoles } from '../colours.js'
+
+const OWN = '#own'
 
 const COPY_FIELDS = [['tagline', 'Tagline'], ['svgDescription', 'Artwork description'], ['templateDescription', 'Template description']]
 
@@ -19,6 +22,7 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
     setParseError(null)
     if (!found.length) onChange(next)
   }
+  const roles = editableRoles(brand)
   const update = (mutate) => {
     const next = structuredClone(brand)
     mutate(next)
@@ -30,25 +34,34 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
       <section className="panel">
         <div className="panel__head">
           <h2>Colours</h2>
-          <p className="muted">Every logo, template and guide page uses these. Roles say which colour does which job.</p>
+          <p className="muted">Every logo, template and guide page uses these. Each colour lists the roles it fills; choose a role to give it to another colour, or a colour of its own.</p>
         </div>
         <div className="colour-edit">
-          {Object.entries(brand.colours).map(([key, hex]) => (
-            <label key={key} className="colour-edit__item">
-              <input type="color" value={hex} onChange={(event) => update((next) => { next.colours[key] = event.target.value.toUpperCase() })} />
-              <span><strong>{colourName(brand, key)}</strong><code>{hex}</code></span>
-            </label>
-          ))}
-        </div>
-        <div className="role-edit">
-          {Object.entries(brand.roles ?? {}).filter(([, value]) => brand.colours[value] || /^#/.test(value)).map(([role, value]) => (
-            <label key={role} className="field field--inline">
-              <span className="field__label">{role}</span>
-              <select value={brand.colours[value] ? value : ''} onChange={(event) => update((next) => { next.roles[role] = event.target.value })}>
-                {!brand.colours[value] && <option value="">{value}</option>}
-                {Object.keys(brand.colours).map((key) => <option key={key} value={key}>{colourName(brand, key)}</option>)}
-              </select>
-            </label>
+          {colourEntries(brand).map((entry) => (
+            <div key={`${entry.own ? 'role' : 'colour'}-${entry.key}`} className={`colour-edit__item${entry.own ? ' colour-edit__item--own' : ''}`}>
+              <label className="colour-edit__swatch" style={{ background: entry.hex }} title={`Change ${entry.name}`}>
+                <input type="color" value={entry.hex.length === 7 ? entry.hex : '#000000'} aria-label={`${entry.name} colour`}
+                  onChange={(event) => update((next) => { const hex = event.target.value.toUpperCase(); if (entry.own) next.roles[entry.key] = hex; else next.colours[entry.key] = hex })} />
+              </label>
+              <span className="colour-edit__text">
+                <strong>{entry.name}</strong>
+                <code>{entry.hex}</code>
+                {entry.own && <span className="colour-edit__note">its own colour</span>}
+              </span>
+              <span className="colour-edit__roles">
+                {entry.roles.length === 0 && <span className="colour-edit__none">No role</span>}
+                {entry.roles.filter((role) => roles.includes(role)).map((role) => (
+                  <label key={role} className="role-chip" title={`Give ${role} to another colour`}>
+                    <span>{role}</span>
+                    <select value={entry.own ? OWN : entry.key} aria-label={`${role} role`}
+                      onChange={(event) => update((next) => { next.roles[role] = event.target.value === OWN ? colour(brand, role).toUpperCase() : event.target.value })}>
+                      {Object.keys(brand.colours).map((key) => <option key={key} value={key}>{colourName(brand, key)}</option>)}
+                      <option value={OWN}>Its own colour</option>
+                    </select>
+                  </label>
+                ))}
+              </span>
+            </div>
           ))}
         </div>
       </section>

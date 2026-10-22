@@ -9,7 +9,11 @@ brandkit draws the whole kit from it:
 - **Logos**: every family in horizontal, stacked, wordmark and symbol layouts, in each colour, as
   SVG, PNG and PDF, plus editable-text alternatives. Or, for an identity that composes its
   signatures, every signature in every colourway, set for every department (a ministry, a
-  division) it defines.
+  division) it defines. A brand with a motion library also has its logo animations here, playing
+  in place, each downloadable as an animated SVG.
+- **Motion**: for a brand with a motion library (`motion.page`), its studies in a list like the
+  templates', the chosen one playing on a stage with Replay, Pause and repeat, beside its timing
+  and use, then the shared tokens, rules and guardrails.
 - **Templates**: business cards (front and back, with trim and safe area), letterhead, envelopes,
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's

@@ -140,11 +140,14 @@ await check('reduced motion: nothing runs, and the logo rests on its still frame
   }
 })
 
-await check('app: the Motion tab shows the library with every study', async () => {
+await check('app: the Motion tab lists every study and plays them in the app', async () => {
   const { page, errors } = await open('?brand=overtheedge&view=motion', { width: 1440 })
-  const frame = page.frameLocator('iframe')
-  await frame.locator('.stage[data-study]').first().waitFor({ timeout: 15000 })
-  assert.equal(await frame.locator('.stage[data-study]').count(), brand.motion.studies.length)
+  await page.locator('.motion-canvas .motion-stage').waitFor({ timeout: 15000 })
+  assert.equal(await page.locator('.motion-studio .studio__item').count(), brand.motion.studies.length)
+  // Every study's artwork is drawn in the app (a thumbnail each, and the stage), none in a frame.
+  const drawn = await page.$$eval('.motion-stage', (hosts) => hosts.filter((host) => host.shadowRoot?.querySelector('[data-study]')).length)
+  assert.equal(drawn, brand.motion.studies.length + 1)
+  assert.equal(await page.locator('iframe').count(), 0)
   assert.deepEqual(errors.filter((e) => !e.includes('[vite]')), [], 'console errors or requests')
   await page.close()
 })

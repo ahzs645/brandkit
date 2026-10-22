@@ -107,10 +107,10 @@ const tabs = (page) => page.$$eval('nav.tabs button', (buttons) => buttons.map((
 const current = (page) => page.$eval('nav.tabs [aria-current="page"]', (button) => button.textContent.trim())
 const viewParam = (page) => new URL(page.url()).searchParams.get('view')
 const revisionSelect = (page) => page.locator('label.brand-picker select').nth(1)
-/** Opens the Motion tab and waits until its library page has drawn its studies. */
+/** Opens the Motion tab and waits until the stage's frame of the library page has drawn its studies. */
 const openMotionTab = async (page) => {
   await page.locator('nav.tabs button', { hasText: 'Motion' }).click()
-  await page.frameLocator('iframe.motion-frame').locator('.tile').first().waitFor()
+  await page.frameLocator('iframe.motion-stage').locator('.tile').first().waitFor({ state: 'attached' })
 }
 
 try {
@@ -126,12 +126,12 @@ try {
       await revisionSelect(approved.page).selectOption('data-design-connection')
       await approved.page.waitForFunction(() => [...document.querySelectorAll('nav.tabs button')].some((b) => b.textContent.trim() === 'Motion'))
       await openMotionTab(approved.page)
-      assert.match(await approved.page.textContent('.motion-view p'), /18 studies/)
+      assert.equal(await approved.page.locator('.motion-studio .studio__item').count(), 18, '18 studies in the list')
       // Switching to v2.1 while on Motion goes to the overview.
       await revisionSelect(approved.page).selectOption('')
       await approved.page.waitForFunction(() => document.querySelector('nav.tabs [aria-current="page"]')?.textContent.trim() === 'Overview')
       assert.equal(viewParam(approved.page), null)
-      assert.equal(await approved.page.locator('iframe.motion-frame').count(), 0, 'leaving the tab removes the frame')
+      assert.equal(await approved.page.locator('iframe.motion-stage').count(), 0, 'leaving the tab removes the frame')
       // Back to v2.3, then to rising, while on Motion.
       await revisionSelect(approved.page).selectOption('data-design-connection')
       await openMotionTab(approved.page)

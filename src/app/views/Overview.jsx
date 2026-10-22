@@ -3,6 +3,7 @@ import { logoDocument, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, fill, isDark, rgb } from '../../engine/brand.js'
 import { guideSheets } from '../../engine/guide.js'
 import { revisionsOf, withRevision } from '../../engine/revisions.js'
+import { colourEntries } from '../colours.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
 
@@ -107,10 +108,10 @@ export const Overview = ({ brand, base = brand, fonts, revision, onRevision, ope
         <div className="panel">
           <h2>Colour</h2>
           <div className="palette">
-            {Object.entries(brand.colours).map(([key, hex]) => (
-              <button key={key} type="button" className="swatch" onClick={() => navigator.clipboard?.writeText(hex)} title="Copy hex value">
-                <span className="swatch__fill" style={{ background: hex, color: isDark(hex) ? '#fff' : '#000' }}>{Object.entries(brand.roles ?? {}).filter(([, value]) => value === key).map(([role]) => role).join(' · ')}</span>
-                <strong>{colourName(brand, key)}</strong>
+            {colourEntries(brand).map(({ key, name, hex, roles, own }) => (
+              <button key={`${own ? 'role' : 'colour'}-${key}`} type="button" className="swatch" onClick={() => navigator.clipboard?.writeText(hex)} title="Copy hex value">
+                <span className="swatch__fill" style={{ background: hex, color: isDark(hex) ? '#fff' : '#000' }}>{roles.join(' · ')}</span>
+                <strong>{name}</strong>
                 <code>{hex}</code>
                 <code>RGB {(rgb(hex) ?? []).join(', ')}</code>
               </button>
