@@ -1,0 +1,30 @@
+{
+  "updated": "2026-10-22",
+  "inputs": {
+    "brandKit": {
+      "filename": "First Form brand kit.zip",
+      "sha256": "de22945f612d6bd9f6abf31370370fa6a75c6d2e79de458c93b05d96438bb31e",
+      "contents": "First Form Brand Kit.dc.html (V1.0), assets/*.png, uploads/logo and current-site screenshot"
+    }
+  },
+  "files": {
+    "logo-black.png": "c5f73403ac5113e1ec03f1922311a82be59d265440a0dc4e50a16809a9fffd08",
+    "logo-on-ash.png": "d880732c41beb26b2843f0cabb60bf28675542c308be8ff071a162ad63542b76",
+    "logo-white.png": "aad2c651f494bcb46fea88d1fa13e340e1c2b52cf30650f55ed72ef25063f7ed",
+    "mark-black.png": "1ee416d4488f9ca91018273f282e35bf9d2117fc91b601ce9790ba7a2f3348be",
+    "mark-white.png": "19abf2f67bbf5129d1bf285e10a0ada96e1890085e97236d74ab2589af6c6ae0",
+    "wordmark-black.png": "871b288c53d52ed576ae19f9eb7871bb1a05c80a01a3124582559ea9caa79517",
+    "wordmark-white.png": "b2e3001ec29df53e6051f17dc84d1916b49946fa9a2eb91cdb1d452faac838c3",
+    "current-site.jpg": "71b427b43b1eb8206a39790a2c38acfe24d1479524cf2a1f9643acba6beb13b8"
+  },
+  "notRetained": [
+    "First Form Brand Kit.dc.html",
+    "support.js",
+    "image-slot.js"
+  ],
+  "reconstruction": {
+    "mark": "Redrawn by scripts/brands/firstform.mjs from mark-black.png: two identical isometric blocks on a 3:5 slope, 150 x 215 units, the second turned 180 degrees about (75, 107.5); front-face outline 1.6 units.",
+    "wordmark": "FIRST / FORM set in Sora Bold and outlined; cap height to line pitch 50:72 and lockup proportions (mark 214, gap 22, type 122) measured from logo-black.png. An approximation of the original lettering."
+  },
+  "notes": "current-site.jpg is the kit upload screens-1792655600912-62mg.png (2976 x 1526) resized to 1800 px and saved as JPEG."
+}

@@ -42,6 +42,7 @@
     "make:example": "node scripts/make-example-brand.mjs",
     "import:pofbc": "node scripts/import-pofbc.mjs",
     "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs",
+    "make:firstform": "node scripts/brands/firstform.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs"
   },
   "peerDependencies": {

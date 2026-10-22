@@ -22,6 +22,9 @@ brandkit draws the whole kit from it:
   allows), lines that share a baseline on tab stops.
 - **The brand guide**: eight framed pages, logo reference sheets and a one-page overview, as SVG
   and as one PDF, read in the same viewer as the manual library.
+- **Motion**: for a brand that defines it, a motion library (timing tokens, rules and animated
+  studies of the logo, loading states and interface) shown in the app's **Motion** tab and carried
+  in the kit as `motion/`, with a reusable `motion.css`. First Form has one.
 - **Web files**: CSS variables, design tokens, a typed React component, a landing-page starter,
   favicon (SVG and multi-size `.ico`) and app icons.
 - **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
@@ -37,6 +40,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | | |
 | --- | --- |
 | [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.1. The engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its eight guide pages page for page. On top of that, `npm run make:ddcnorth` adds an application system modelled on the BC manuals: 39 templates and 6 guide pages covering stationery, documents, publications, advertising, presentations and video, signs, vehicles and apparel, backgrounds, and incorrect usage. Each one cites the manual pages it follows. |
+| [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds twelve templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 | [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
 | [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the Corporate, Gas Operations, Rail and Formal signatures in their colourways; Corporate, Gas and Rail stationery; forms; publication covers and mastheads; advertising; audio-visual; signs; vehicles; and a guide with the background-value rules, incorrect usage and minimum sizes. |

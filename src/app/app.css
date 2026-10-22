@@ -103,6 +103,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Layout */
 .view { display: grid; gap: var(--gap); }
+/* A brand's motion library page, shown whole. */
+.motion-view p { margin: 0; font-size: 13.5px; }
+.motion-frame { width: 100%; height: calc(100vh - 190px); min-height: 560px; border: 0; border-radius: var(--radius); background: #060606; }
 .panel { background: var(--surface); border-radius: var(--radius); padding: 20px; }
 .panel__head { margin-bottom: 14px; }
 .panel__head h2 { margin-bottom: 4px; }

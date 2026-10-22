@@ -11,6 +11,7 @@ import { BUILT_IN, builtInName, forgetBrand, librarySource, loadBuiltIn, openBra
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
+import { Motion, motionUrl } from './views/Motion.jsx'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
@@ -26,6 +27,7 @@ const VIEWS = [
   { id: 'logos', label: 'Logos' },
   { id: 'templates', label: 'Templates' },
   { id: 'guide', label: 'Guide' },
+  { id: 'motion', label: 'Motion' },
   { id: 'kit', label: 'Download kit' },
   { id: 'brand', label: 'Edit brand' }
 ]
@@ -231,7 +233,7 @@ export const App = () => {
         </div>
         )}
         {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
-          {TABS.map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
+          {TABS.filter((entry) => entry.id !== 'motion' || motionUrl(brand, source)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -251,6 +253,7 @@ export const App = () => {
                 </div>
               )} /></div>}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
+            {view === 'motion' && <Motion brand={brand} source={source} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
             {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}

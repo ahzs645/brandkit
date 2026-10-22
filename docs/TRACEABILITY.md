@@ -1,0 +1,16 @@
+# Traceability
+
+| Requirement ID | Source | Mandatory | Milestone | Acceptance criterion | Implementation evidence | Test evidence | Verification command | Status |
+|---|---|---:|---|---|---|---|---|---|
+| BK-001 | User request 2026-10-22; docs/PLANS.md M1 | Yes | M1 | One proposed revision `data-design-connection` (v2.3); rising and all other keys unchanged; script idempotent; both brands validate | brands/ddcnorth/brand.json; scripts/brands/ddcnorth-v23.mjs | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-002 | docs/PLANS.md M1 | Yes | M1 | `$append` appends or creates arrays, other patches unchanged, non-array target throws; documented | src/engine/revisions.js; docs/brand-schema.md | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-003 | Brand lab; docs/PLANS.md M1 | Yes | M1 | `dots`/`lines` in patterns; four new patterns in the revision kit; palette-only; symbol clear box respected; old patterns identical | src/engine/artwork.js; revision patterns | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-004 | Brand lab; docs/PLANS.md M1 | Yes | M1 | Eight templates and one set render; fields; palette-only; logos ≥220 px with clear box; no invented facts | revision templates | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-005 | Brand lab; docs/PLANS.md M1 | Yes | M1 | Five icons render in currentColor; old icons identical | revision icons | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-006 | Brand lab; website positioning; docs/PLANS.md M1 | Yes | M1 | Descriptor, footer, three guide pages render without em dashes | revision copy and guide | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-007 | Motion library; docs/PLANS.md M1 | Yes | M1 | `motion` tokens, rules, 18 studies; frames render in Node, palette-only; Settle logo ≥220 px native with clear box; kit motion files only in the revision | src/engine/motion.js; src/engine/kit.js; revision motion | test/ddcnorth-v23.test.js | npm test | NOT STARTED |
+| BK-008 | User request ("a section on a tab for motion library"); docs/PLANS.md M1 | Yes | M1 | Motion tab only with motion; 18 studies; replay ≤500 ms; pause; reduced motion; filter; still logo; no errors or overflow; share view rule | src/app/views/Motion.jsx; src/app/motion.js; src/app/App.jsx; src/app/share.jsx | test/browser/app.check.mjs | npm run test:browser | NOT STARTED |
+| BK-009 | docs/PLANS.md M1 | Yes | M1 | Schema, changelog and README document the additions and commands | docs/brand-schema.md; brands/ddcnorth/docs/CHANGELOG.md; README.md | test/ddcnorth-v23.test.js (docs check) | npm test | NOT STARTED |
+| BK-010 | docs/PLANS.md M1 | Yes | M1 | npm test and build pass; approved and rising kit files identical to main; CLI check passes | whole branch | test/ddcnorth-v23.test.js (regression) | npm test; npm run build; node bin/brandkit.mjs check | NOT STARTED |
+| BK-011 | User instructions; AGENTS.md | Yes | M1 | Work on branch, nothing pushed, commits only with approval | git | — | git status; git log; git ls-remote | IN PROGRESS |
+| PROCESS-001 | /Users/amiretminanrad/AGENTS.md | Yes | M1 | Readiness and completion audits PASS, recorded | docs/STATUS.md | Plan Guardian reports | Read docs/STATUS.md | IN PROGRESS |

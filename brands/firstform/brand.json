@@ -1,0 +1,2488 @@
+{
+  "schema": "brandkit/1",
+  "id": "firstform",
+  "name": "First Form",
+  "version": "1.0",
+  "displayVersion": "1.0",
+  "source": "First Form Brand Kit V1.0 (Sora, monochrome palette, two-block mark), rebuilt as vectors by scripts/brands/firstform.mjs.",
+  "colours": {
+    "black": "#000000",
+    "graphite": "#484848",
+    "ash": "#DFDFDF",
+    "white": "#FFFFFF",
+    "night": "#060606",
+    "coal": "#141414",
+    "hairline": "#2A2A2A",
+    "steel": "#A6A6A6",
+    "mist": "#C8C8C8"
+  },
+  "roles": {
+    "ink": "black",
+    "paper": "white",
+    "muted": "graphite",
+    "primary": "black",
+    "light": "ash",
+    "reverse": "white",
+    "line": "mist",
+    "rule": "ash"
+  },
+  "logoColours": [
+    "black",
+    "white",
+    "currentColor"
+  ],
+  "rasterColours": [
+    "black",
+    "white"
+  ],
+  "fonts": {
+    "body": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/Sora-Regular.ttf",
+      "web": "fonts/Sora-Regular.ttf",
+      "label": "Sora Regular 400"
+    },
+    "bold": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 600,
+      "file": "fonts/Sora-SemiBold.ttf",
+      "web": "fonts/Sora-SemiBold.ttf",
+      "label": "Sora SemiBold 600"
+    },
+    "display": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 600,
+      "file": "fonts/Sora-SemiBold.ttf",
+      "web": "fonts/Sora-SemiBold.ttf",
+      "label": "Sora SemiBold 600"
+    },
+    "displayRegular": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/Sora-Regular.ttf",
+      "web": "fonts/Sora-Regular.ttf",
+      "label": "Sora Regular 400"
+    },
+    "extra": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 700,
+      "file": "fonts/Sora-Bold.ttf",
+      "web": "fonts/Sora-Bold.ttf",
+      "label": "Sora Bold 700"
+    },
+    "label": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 400,
+      "file": "fonts/Sora-Regular.ttf",
+      "web": "fonts/Sora-Regular.ttf",
+      "label": "Sora Regular 400"
+    },
+    "light": {
+      "family": "Sora",
+      "stack": "Sora, Helvetica, Arial, sans-serif",
+      "weight": 300,
+      "file": "fonts/Sora-Light.ttf",
+      "web": "fonts/Sora-Light.ttf",
+      "label": "Sora Light 300"
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Sora",
+      "weight": 600,
+      "trackingEm": -0.025
+    },
+    "body": {
+      "family": "Sora",
+      "weight": 400
+    },
+    "labels": {
+      "family": "Sora",
+      "weight": 400,
+      "trackingEm": 0.06
+    }
+  },
+  "symbol": {
+    "name": "two-blocks",
+    "viewBox": [
+      0,
+      0,
+      150,
+      215
+    ],
+    "paths": [
+      {
+        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+        "fillRule": "evenodd"
+      },
+      {
+        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+        "fillRule": "evenodd"
+      }
+    ],
+    "microPaths": [
+      {
+        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM40 136.16904811L65 121.16904811L65 80.16904811L100 59.16904811L100 29.83095189L40 65.83095189Z",
+        "fillRule": "evenodd"
+      },
+      {
+        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM110 78.83095189L85 93.83095189L85 134.83095189L50 155.83095189L50 185.16904811L110 149.16904811Z",
+        "fillRule": "evenodd"
+      }
+    ],
+    "title": "mark",
+    "masterTitle": "mark master",
+    "microDescription": "Small-size variant: the same blocks with a heavier front-face outline, for favicons and marks below 32 pixels.",
+    "construction": {
+      "slope": "3:5",
+      "outline": 1.6,
+      "microOutline": 5,
+      "rotation": 180,
+      "centre": [
+        75,
+        107.5
+      ]
+    }
+  },
+  "wordmark": {
+    "height": 188.12400000000002,
+    "left": 8.200000000000001,
+    "glyphs": {
+      "first": "M24.6 75.2L8.2 75.2L8.2 2.2L24.6 2.2L24.6 75.2M50.8 45.8L22.6 45.8L22.6 32.2L50.8 32.2L50.8 45.8M52 15.8L22.6 15.8L22.6 2.2L52 2.2L52 15.8M80.8 75.2L64.4 75.2L64.4 2.2L80.8 2.2L80.8 75.2M113.8 75.2L97.4 75.2L97.4 1.6L113.8 1.6L113.8 75.2M160.7 75.2L141.7 75.2L120.3 43.8L138.3 43.8L160.7 75.2M126.1 51.8L109.4 51.8L109.4 38.9L127.4 38.9Q131 38.9 133.65 37.45Q136.3 36 137.75 33.35Q139.2 30.7 139.2 27.2L139.2 27.2Q139.2 23.7 137.75 21.05Q136.3 18.4 133.65 16.95Q131 15.5 127.4 15.5L127.4 15.5L109.4 15.5L109.4 1.6L126.1 1.6Q135.2 1.6 141.9 4.35Q148.6 7.1 152.2 12.5Q155.8 17.9 155.8 26.1L155.8 26.1L155.8 27.7Q155.8 35.8 152.15 41.15Q148.5 46.5 141.85 49.15Q135.2 51.8 126.1 51.8L126.1 51.8M195.8 77.1L195.8 77.1Q185.9 77.1 179.1 73.95Q172.3 70.8 168.8 65.35Q165.3 59.9 165.3 52.8L165.3 52.8L181.2 52.8Q181.2 55.6 182.75 58Q184.3 60.4 187.5 61.85Q190.7 63.3 195.8 63.3L195.8 63.3Q200.4 63.3 203.5 62.1Q206.6 60.9 208.2 58.75Q209.8 56.6 209.8 53.8L209.8 53.8Q209.8 50.3 206.8 48.25Q203.8 46.2 197.1 45.6L197.1 45.6L191.6 45.1Q180.7 44.2 174.2 38.3Q167.7 32.4 167.7 22.7L167.7 22.7Q167.7 15.7 171.05 10.6Q174.4 5.5 180.4 2.75Q186.4 0 194.6 0L194.6 0Q203.2 0 209.35 2.95Q215.5 5.9 218.8 11.25Q222.1 16.6 222.1 23.8L222.1 23.8L206.1 23.8Q206.1 21.1 204.8 18.85Q203.5 16.6 200.95 15.2Q198.4 13.8 194.6 13.8L194.6 13.8Q191 13.8 188.55 15Q186.1 16.2 184.9 18.25Q183.7 20.3 183.7 22.7L183.7 22.7Q183.7 25.8 185.9 28.1Q188.1 30.4 193.1 30.8L193.1 30.8L198.7 31.3Q206.7 32 212.8 34.75Q218.9 37.5 222.35 42.25Q225.8 47 225.8 53.8L225.8 53.8Q225.8 60.8 222.15 66.05Q218.5 71.3 211.8 74.2Q205.1 77.1 195.8 77.1M268 75.2L251.6 75.2L251.6 14.5L268 14.5L268 75.2M288.6 16.5L231.1 16.5L231.1 2.2L288.6 2.2L288.6 16.5",
+      "form": "M24.6 75.2L8.2 75.2L8.2 2.2L24.6 2.2L24.6 75.2M50.8 45.8L22.6 45.8L22.6 32.2L50.8 32.2L50.8 45.8M52 15.8L22.6 15.8L22.6 2.2L52 2.2L52 15.8M99.2 77.1L99.2 77.1Q89.3 77.1 81.95 73.65Q74.6 70.2 69.8 64.55Q65 58.9 62.65 52.3Q60.3 45.7 60.3 39.6L60.3 39.6L60.3 37.4Q60.3 30.6 62.75 23.95Q65.2 17.3 70.1 11.9Q75 6.5 82.3 3.25Q89.6 0 99.2 0L99.2 0Q108.8 0 116.1 3.25Q123.4 6.5 128.3 11.9Q133.2 17.3 135.7 23.95Q138.2 30.6 138.2 37.4L138.2 37.4L138.2 39.6Q138.2 45.7 135.8 52.3Q133.4 58.9 128.6 64.55Q123.8 70.2 116.45 73.65Q109.1 77.1 99.2 77.1M99.2 61.8L99.2 61.8Q104.4 61.8 108.55 60Q112.7 58.2 115.65 55Q118.6 51.8 120.1 47.6Q121.6 43.4 121.6 38.6L121.6 38.6Q121.6 33.5 120.05 29.25Q118.5 25 115.55 21.85Q112.6 18.7 108.5 17Q104.4 15.3 99.2 15.3L99.2 15.3Q94 15.3 89.9 17Q85.8 18.7 82.85 21.85Q79.9 25 78.4 29.25Q76.9 33.5 76.9 38.6L76.9 38.6Q76.9 43.4 78.4 47.6Q79.9 51.8 82.85 55Q85.8 58.2 89.9 60Q94 61.8 99.2 61.8M167 75.2L150.6 75.2L150.6 1.6L167 1.6L167 75.2M213.9 75.2L194.9 75.2L173.5 43.8L191.5 43.8L213.9 75.2M179.3 51.8L162.6 51.8L162.6 38.9L180.6 38.9Q184.2 38.9 186.85 37.45Q189.5 36 190.95 33.35Q192.4 30.7 192.4 27.2L192.4 27.2Q192.4 23.7 190.95 21.05Q189.5 18.4 186.85 16.95Q184.2 15.5 180.6 15.5L180.6 15.5L162.6 15.5L162.6 1.6L179.3 1.6Q188.4 1.6 195.1 4.35Q201.8 7.1 205.4 12.5Q209 17.9 209 26.1L209 26.1L209 27.7Q209 35.8 205.35 41.15Q201.7 46.5 195.05 49.15Q188.4 51.8 179.3 51.8L179.3 51.8M238.6 75.2L223.6 75.2L223.6 2.2L246.2 2.2L262.9 43.2L264.8 43.2L281.3 2.2L304.3 2.2L304.3 75.2L288.1 75.2L288.1 12.9L290.4 13.1L271.1 60.4L255.5 60.4L236.1 13.1L238.6 12.9L238.6 75.2"
+    },
+    "variants": {
+      "firstform": {
+        "width": 304.3,
+        "parts": [
+          {
+            "glyph": "first",
+            "x": 0,
+            "y": 0,
+            "attrs": {
+              "data-word": "FIRST"
+            }
+          },
+          {
+            "glyph": "form",
+            "x": 0,
+            "y": 111.024,
+            "attrs": {
+              "data-word": "FORM"
+            }
+          }
+        ]
+      }
+    },
+    "editable": {
+      "text": {
+        "family": "firstform",
+        "wrap": true,
+        "title": "{name} / text / font-dependent approximation",
+        "parts": [
+          {
+            "element": "text",
+            "attrs": {
+              "x": "0",
+              "y": "75.2",
+              "font-family": "Sora, Helvetica, Arial, sans-serif",
+              "font-size": "100",
+              "font-weight": "700"
+            },
+            "content": "FIRST"
+          },
+          {
+            "element": "text",
+            "attrs": {
+              "x": "0",
+              "y": "186.224",
+              "font-family": "Sora, Helvetica, Arial, sans-serif",
+              "font-size": "100",
+              "font-weight": "700"
+            },
+            "content": "FORM"
+          }
+        ]
+      }
+    }
+  },
+  "families": [
+    {
+      "id": "firstform",
+      "wordmark": "firstform",
+      "typeHeight": 122,
+      "stackedTypeHeight": 92,
+      "label": "First Form"
+    }
+  ],
+  "lockup": {
+    "iconHeight": 214,
+    "iconGap": 22,
+    "stackedIconHeight": 160,
+    "stackedTypeHeight": 92,
+    "stackedGap": 28,
+    "canvasPadding": 16,
+    "wordmarkHeight": 122,
+    "clearspaceRecommendation": "The cap height of the F, clear on every side.",
+    "minimumSymbolHeightPx": 24,
+    "minimumHorizontalWidthPx": 70,
+    "minimumSymbolHeightMm": 7,
+    "minimumHorizontalWidthMm": 20
+  },
+  "copy": {
+    "svgDescription": "First Form identity artwork: the two-block mark and the FIRST / FORM wordmark. Self-contained vector artwork generated by brandkit.",
+    "templateDescription": "First Form application. Logo outlined; text live and editable.",
+    "logoLabel": "First Form logo",
+    "motifLabel": "First Form mark",
+    "tagline": "From first idea to first form.",
+    "descriptor": "Consulting · Design · Development"
+  },
+  "patterns": [
+    {
+      "id": "repeat",
+      "title": "{name} / repeating mark",
+      "width": 960,
+      "height": 600,
+      "background": "night",
+      "repeat": {
+        "x": [
+          -40,
+          1000,
+          200
+        ],
+        "y": [
+          -60,
+          700,
+          260
+        ],
+        "scale": 0.9,
+        "colour": "hairline"
+      }
+    },
+    {
+      "id": "crop",
+      "title": "{name} / large crop",
+      "width": 960,
+      "height": 600,
+      "background": "black",
+      "place": [
+        {
+          "x": 420,
+          "y": -180,
+          "scale": 4.2,
+          "colour": "hairline"
+        }
+      ]
+    },
+    {
+      "id": "field",
+      "title": "{name} / mark on ash",
+      "width": 960,
+      "height": 600,
+      "background": "ash",
+      "place": [
+        {
+          "x": 375,
+          "y": 125,
+          "scale": 1.65,
+          "colour": "black"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "business-card-front",
+      "label": "Business card, front",
+      "title": "{name} / business-card front / 90 × 50 mm trim + 3 mm bleed",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "ash"
+        },
+        {
+          "type": "logo",
+          "x": 300,
+          "y": 200,
+          "width": 360,
+          "colour": "black"
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "business-card-back",
+      "label": "Business card, back",
+      "title": "{name} / business-card back / replace placeholders",
+      "width": 960,
+      "height": 560,
+      "physical": [
+        "96mm",
+        "56mm"
+      ],
+      "raster": 1920,
+      "group": "Business cards",
+      "print": {
+        "trim": [
+          90,
+          50
+        ],
+        "bleed": 3,
+        "unit": "mm"
+      },
+      "elements": [
+        {
+          "type": "background",
+          "fill": "black"
+        },
+        {
+          "type": "symbol",
+          "x": 96,
+          "y": 92,
+          "height": 120,
+          "colour": "white"
+        },
+        {
+          "type": "text",
+          "id": "contact-name",
+          "text": "[Full Name]",
+          "x": 96,
+          "y": 380,
+          "size": 44,
+          "colour": "white",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "contact-role",
+          "text": "[TITLE] · FIRSTFORM.ORG",
+          "x": 96,
+          "y": 430,
+          "size": 20,
+          "colour": "mist",
+          "font": "label",
+          "tracking": 1.6
+        },
+        {
+          "type": "printGuides",
+          "colour": "muted",
+          "trim": {
+            "id": "trim-90x50mm",
+            "x": 30,
+            "y": 30,
+            "width": 900,
+            "height": 500
+          },
+          "safe": {
+            "id": "safe-3mm-inside-trim",
+            "x": 60,
+            "y": 60,
+            "width": 840,
+            "height": 440
+          }
+        }
+      ]
+    },
+    {
+      "id": "part-tag",
+      "label": "Part tag",
+      "group": "Labels",
+      "title": "{name} / part tag / 70 × 35 mm label",
+      "width": 700,
+      "height": 350,
+      "physical": [
+        "70mm",
+        "35mm"
+      ],
+      "raster": 1400,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "path",
+          "id": "tag-edge",
+          "d": "M32 4H668A28 28 0 0 1 696 32V318A28 28 0 0 1 668 346H32A28 28 0 0 1 4 318V32A28 28 0 0 1 32 4Z",
+          "fill": "none",
+          "stroke": "mist",
+          "strokeWidth": 2
+        },
+        {
+          "type": "symbol",
+          "x": 48,
+          "y": 70,
+          "height": 210,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "part-name",
+          "text": "[Part name]",
+          "x": 250,
+          "y": 112,
+          "size": 40,
+          "colour": "black",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "project-label",
+          "text": "PROJECT",
+          "x": 250,
+          "y": 176,
+          "size": 18,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "project-number",
+          "text": "[FF-0000]",
+          "x": 380,
+          "y": 176,
+          "size": 22,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "revision-label",
+          "text": "REV",
+          "x": 250,
+          "y": 222,
+          "size": 18,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "revision",
+          "text": "[A]",
+          "x": 380,
+          "y": 222,
+          "size": 22,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "date-label",
+          "text": "DATE",
+          "x": 250,
+          "y": 268,
+          "size": 18,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 1.44
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "text": "[YYYY-MM-DD]",
+          "x": 380,
+          "y": 268,
+          "size": 22,
+          "colour": "black"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "group": "Stationery",
+      "title": "{name} / A4 letterhead / replace placeholders",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 62,
+          "y": 58,
+          "width": 150,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "header-site",
+          "text": "FIRSTFORM.ORG",
+          "x": 732,
+          "y": 98,
+          "size": 11,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 0.88,
+          "anchor": "end"
+        },
+        {
+          "type": "path",
+          "id": "header-rule",
+          "d": "M62 184H732",
+          "stroke": "ash",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 62,
+          "y": 238,
+          "size": 14,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "recipient-name",
+          "text": "[Recipient]",
+          "x": 62,
+          "y": 287,
+          "size": 16,
+          "colour": "black",
+          "font": "bold"
+        },
+        {
+          "type": "text",
+          "id": "recipient-address",
+          "text": "[Address]",
+          "x": 62,
+          "y": 313,
+          "size": 14,
+          "colour": "graphite"
+        },
+        {
+          "type": "text",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 62,
+          "y": 404,
+          "size": 28,
+          "colour": "black",
+          "font": "display",
+          "tracking": -0.5
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-content",
+          "text": "[Letter content]",
+          "x": 62,
+          "y": 453,
+          "width": 670,
+          "size": 14,
+          "leading": 22,
+          "colour": "black"
+        },
+        {
+          "type": "path",
+          "id": "footer-rule",
+          "d": "M62 1015H732",
+          "stroke": "ash",
+          "strokeWidth": 1
+        },
+        {
+          "type": "text",
+          "id": "footer-contact",
+          "text": "[Contact details] · firstform.org",
+          "x": 62,
+          "y": 1056,
+          "size": 11,
+          "colour": "graphite"
+        }
+      ]
+    },
+    {
+      "id": "proposal-cover-a4",
+      "label": "Proposal cover",
+      "group": "Stationery",
+      "title": "{name} / A4 proposal cover / replace placeholders",
+      "width": 794,
+      "height": 1123,
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1588,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "night"
+        },
+        {
+          "type": "path",
+          "id": "blocks-left",
+          "d": "M-40 1099L0 1123L0 1171L-40 1147ZM40 1099L80 1123L80 1171L40 1147ZM120 1099L160 1123L160 1171L120 1147ZM200 1099L240 1123L240 1171L200 1147ZM280 1099L320 1123L320 1171L280 1147ZM360 1099L400 1123L400 1171L360 1147ZM440 1099L480 1123L480 1171L440 1147ZM520 1099L560 1123L560 1171L520 1147ZM600 1099L640 1123L640 1171L600 1147ZM680 1099L720 1123L720 1171L680 1147ZM760 1099L800 1123L800 1171L760 1147ZM0 1027L40 1051L40 1099L0 1075ZM80 1027L120 1051L120 1099L80 1075ZM160 1027L200 1051L200 1099L160 1075ZM240 1027L280 1051L280 1099L240 1075ZM320 1027L360 1051L360 1099L320 1075ZM400 1027L440 1051L440 1099L400 1075ZM480 1027L520 1051L520 1099L480 1075ZM560 1027L600 1051L600 1099L560 1075ZM640 1027L680 1051L680 1099L640 1075ZM720 1027L760 1051L760 1099L720 1075ZM800 1027L840 1051L840 1099L800 1075ZM-40 955L0 979L0 1027L-40 1003ZM40 955L80 979L80 1027L40 1003ZM120 955L160 979L160 1027L120 1003ZM200 955L240 979L240 1027L200 1003ZM280 955L320 979L320 1027L280 1003ZM360 955L400 979L400 1027L360 1003ZM440 955L480 979L480 1027L440 1003ZM520 955L560 979L560 1027L520 1003ZM600 955L640 979L640 1027L600 1003ZM680 955L720 979L720 1027L680 1003ZM760 955L800 979L800 1027L760 1003ZM0 883L40 907L40 955L0 931ZM80 883L120 907L120 955L80 931ZM160 883L200 907L200 955L160 931ZM240 883L280 907L280 955L240 931ZM320 883L360 907L360 955L320 931ZM400 883L440 907L440 955L400 931ZM480 883L520 907L520 955L480 931ZM560 883L600 907L600 955L560 931ZM640 883L680 907L680 955L640 931ZM720 883L760 907L760 955L720 931ZM800 883L840 907L840 955L800 931ZM-40 811L0 835L0 883L-40 859ZM40 811L80 835L80 883L40 859ZM120 811L160 835L160 883L120 859ZM200 811L240 835L240 883L200 859ZM280 811L320 835L320 883L280 859ZM360 811L400 835L400 883L360 859ZM440 811L480 835L480 883L440 859ZM520 811L560 835L560 883L520 859ZM600 811L640 835L640 883L600 859ZM680 811L720 835L720 883L680 859ZM760 811L800 835L800 883L760 859ZM0 739L40 763L40 811L0 787ZM80 739L120 763L120 811L80 787ZM160 739L200 763L200 811L160 787ZM240 739L280 763L280 811L240 787ZM320 739L360 763L360 811L320 787ZM400 739L440 763L440 811L400 787ZM480 739L520 763L520 811L480 787ZM560 739L600 763L600 811L560 787ZM640 739L680 763L680 811L640 787ZM720 739L760 763L760 811L720 787ZM800 739L840 763L840 811L800 787Z",
+          "fill": "night"
+        },
+        {
+          "type": "path",
+          "id": "blocks-right",
+          "d": "M0 1123L40 1099L40 1147L0 1171ZM80 1123L120 1099L120 1147L80 1171ZM160 1123L200 1099L200 1147L160 1171ZM240 1123L280 1099L280 1147L240 1171ZM320 1123L360 1099L360 1147L320 1171ZM400 1123L440 1099L440 1147L400 1171ZM480 1123L520 1099L520 1147L480 1171ZM560 1123L600 1099L600 1147L560 1171ZM640 1123L680 1099L680 1147L640 1171ZM720 1123L760 1099L760 1147L720 1171ZM800 1123L840 1099L840 1147L800 1171ZM40 1051L80 1027L80 1075L40 1099ZM120 1051L160 1027L160 1075L120 1099ZM200 1051L240 1027L240 1075L200 1099ZM280 1051L320 1027L320 1075L280 1099ZM360 1051L400 1027L400 1075L360 1099ZM440 1051L480 1027L480 1075L440 1099ZM520 1051L560 1027L560 1075L520 1099ZM600 1051L640 1027L640 1075L600 1099ZM680 1051L720 1027L720 1075L680 1099ZM760 1051L800 1027L800 1075L760 1099ZM840 1051L880 1027L880 1075L840 1099ZM0 979L40 955L40 1003L0 1027ZM80 979L120 955L120 1003L80 1027ZM160 979L200 955L200 1003L160 1027ZM240 979L280 955L280 1003L240 1027ZM320 979L360 955L360 1003L320 1027ZM400 979L440 955L440 1003L400 1027ZM480 979L520 955L520 1003L480 1027ZM560 979L600 955L600 1003L560 1027ZM640 979L680 955L680 1003L640 1027ZM720 979L760 955L760 1003L720 1027ZM800 979L840 955L840 1003L800 1027ZM40 907L80 883L80 931L40 955ZM120 907L160 883L160 931L120 955ZM200 907L240 883L240 931L200 955ZM280 907L320 883L320 931L280 955ZM360 907L400 883L400 931L360 955ZM440 907L480 883L480 931L440 955ZM520 907L560 883L560 931L520 955ZM600 907L640 883L640 931L600 955ZM680 907L720 883L720 931L680 955ZM760 907L800 883L800 931L760 955ZM840 907L880 883L880 931L840 955ZM0 835L40 811L40 859L0 883ZM80 835L120 811L120 859L80 883ZM160 835L200 811L200 859L160 883ZM240 835L280 811L280 859L240 883ZM320 835L360 811L360 859L320 883ZM400 835L440 811L440 859L400 883ZM480 835L520 811L520 859L480 883ZM560 835L600 811L600 859L560 883ZM640 835L680 811L680 859L640 883ZM720 835L760 811L760 859L720 883ZM800 835L840 811L840 859L800 883ZM40 763L80 739L80 787L40 811ZM120 763L160 739L160 787L120 811ZM200 763L240 739L240 787L200 811ZM280 763L320 739L320 787L280 811ZM360 763L400 739L400 787L360 811ZM440 763L480 739L480 787L440 811ZM520 763L560 739L560 787L520 811ZM600 763L640 739L640 787L600 811ZM680 763L720 739L720 787L680 811ZM760 763L800 739L800 787L760 811ZM840 763L880 739L880 787L840 811Z",
+          "fill": "coal"
+        },
+        {
+          "type": "path",
+          "id": "blocks-top",
+          "d": "M-40 1099L0 1075L40 1099L0 1123ZM40 1099L80 1075L120 1099L80 1123ZM120 1099L160 1075L200 1099L160 1123ZM200 1099L240 1075L280 1099L240 1123ZM280 1099L320 1075L360 1099L320 1123ZM360 1099L400 1075L440 1099L400 1123ZM440 1099L480 1075L520 1099L480 1123ZM520 1099L560 1075L600 1099L560 1123ZM600 1099L640 1075L680 1099L640 1123ZM680 1099L720 1075L760 1099L720 1123ZM760 1099L800 1075L840 1099L800 1123ZM0 1027L40 1003L80 1027L40 1051ZM80 1027L120 1003L160 1027L120 1051ZM160 1027L200 1003L240 1027L200 1051ZM240 1027L280 1003L320 1027L280 1051ZM320 1027L360 1003L400 1027L360 1051ZM400 1027L440 1003L480 1027L440 1051ZM480 1027L520 1003L560 1027L520 1051ZM560 1027L600 1003L640 1027L600 1051ZM640 1027L680 1003L720 1027L680 1051ZM720 1027L760 1003L800 1027L760 1051ZM800 1027L840 1003L880 1027L840 1051ZM-40 955L0 931L40 955L0 979ZM40 955L80 931L120 955L80 979ZM120 955L160 931L200 955L160 979ZM200 955L240 931L280 955L240 979ZM280 955L320 931L360 955L320 979ZM360 955L400 931L440 955L400 979ZM440 955L480 931L520 955L480 979ZM520 955L560 931L600 955L560 979ZM600 955L640 931L680 955L640 979ZM680 955L720 931L760 955L720 979ZM760 955L800 931L840 955L800 979ZM0 883L40 859L80 883L40 907ZM80 883L120 859L160 883L120 907ZM160 883L200 859L240 883L200 907ZM240 883L280 859L320 883L280 907ZM320 883L360 859L400 883L360 907ZM400 883L440 859L480 883L440 907ZM480 883L520 859L560 883L520 907ZM560 883L600 859L640 883L600 907ZM640 883L680 859L720 883L680 907ZM720 883L760 859L800 883L760 907ZM800 883L840 859L880 883L840 907ZM-40 811L0 787L40 811L0 835ZM40 811L80 787L120 811L80 835ZM120 811L160 787L200 811L160 835ZM200 811L240 787L280 811L240 835ZM280 811L320 787L360 811L320 835ZM360 811L400 787L440 811L400 835ZM440 811L480 787L520 811L480 835ZM520 811L560 787L600 811L560 835ZM600 811L640 787L680 811L640 835ZM680 811L720 787L760 811L720 835ZM760 811L800 787L840 811L800 835ZM0 739L40 715L80 739L40 763ZM80 739L120 715L160 739L120 763ZM160 739L200 715L240 739L200 763ZM240 739L280 715L320 739L280 763ZM320 739L360 715L400 739L360 763ZM400 739L440 715L480 739L440 763ZM480 739L520 715L560 739L520 763ZM560 739L600 715L640 739L600 763ZM640 739L680 715L720 739L680 763ZM720 739L760 715L800 739L760 763ZM800 739L840 715L880 739L840 763Z",
+          "fill": "hairline"
+        },
+        {
+          "type": "path",
+          "id": "logo-plate",
+          "d": "M94 70H256A24 24 0 0 1 280 94V150A24 24 0 0 1 256 174H94A24 24 0 0 1 70 150V94A24 24 0 0 1 94 70Z",
+          "fill": "ash"
+        },
+        {
+          "type": "logo",
+          "x": 92,
+          "y": 88,
+          "width": 166,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "proposal-kicker",
+          "text": "PROPOSAL · [MONTH YEAR]",
+          "x": 72,
+          "y": 360,
+          "size": 14,
+          "colour": "steel",
+          "font": "label",
+          "tracking": 1.12
+        },
+        {
+          "type": "paragraph",
+          "id": "project-name",
+          "text": "[Project name]",
+          "x": 72,
+          "y": 440,
+          "width": 640,
+          "size": 64,
+          "leading": 68,
+          "maxLines": 3,
+          "colour": "white",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "prepared-for",
+          "text": "Prepared for [Client]",
+          "x": 72,
+          "y": 620,
+          "size": 18,
+          "colour": "mist"
+        }
+      ]
+    },
+    {
+      "id": "social-statement",
+      "label": "Social post, statement",
+      "group": "Social",
+      "title": "{name} / square social post / statement",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "night"
+        },
+        {
+          "type": "path",
+          "id": "iso-grid",
+          "d": "M0 0L0 1080M60 0L60 1080M120 0L120 1080M180 0L180 1080M240 0L240 1080M300 0L300 1080M360 0L360 1080M420 0L420 1080M480 0L480 1080M540 0L540 1080M600 0L600 1080M660 0L660 1080M720 0L720 1080M780 0L780 1080M840 0L840 1080M900 0L900 1080M960 0L960 1080M1020 0L1020 1080M1080 0L1080 1080M1080 0L1080 0M960 0L1080 72M840 0L1080 144M720 0L1080 216M600 0L1080 288M480 0L1080 360M360 0L1080 432M240 0L1080 504M120 0L1080 576M0 0L1080 648M0 72L1080 720M0 144L1080 792M0 216L1080 864M0 288L1080 936M0 360L1080 1008M0 432L1080 1080M0 504L960 1080M0 576L840 1080M0 648L720 1080M0 720L600 1080M0 792L480 1080M0 864L360 1080M0 936L240 1080M0 1008L120 1080M0 1080L0 1080M0 0L0 0M0 72L120 0M0 144L240 0M0 216L360 0M0 288L480 0M0 360L600 0M0 432L720 0M0 504L840 0M0 576L960 0M0 648L1080 0M0 720L1080 72M0 792L1080 144M0 864L1080 216M0 936L1080 288M0 1008L1080 360M0 1080L1080 432M120 1080L1080 504M240 1080L1080 576M360 1080L1080 648M480 1080L1080 720M600 1080L1080 792M720 1080L1080 864M840 1080L1080 936M960 1080L1080 1008M1080 1080L1080 1080",
+          "fill": "none",
+          "stroke": "hairline",
+          "strokeWidth": 1
+        },
+        {
+          "type": "path",
+          "id": "logo-plate",
+          "d": "M108 80H320A28 28 0 0 1 348 108V184A28 28 0 0 1 320 212H108A28 28 0 0 1 80 184V108A28 28 0 0 1 108 80Z",
+          "fill": "ash"
+        },
+        {
+          "type": "logo",
+          "x": 106,
+          "y": 102,
+          "width": 216,
+          "colour": "black"
+        },
+        {
+          "type": "paragraph",
+          "id": "headline",
+          "text": "From first idea to first form.",
+          "x": 80,
+          "y": 600,
+          "width": 860,
+          "size": 104,
+          "leading": 106,
+          "maxLines": 3,
+          "colour": "white",
+          "font": "display"
+        },
+        {
+          "type": "path",
+          "id": "cta-pill",
+          "d": "M120 880H356A40 40 0 0 1 396 920V920A40 40 0 0 1 356 960H120A40 40 0 0 1 80 920V920A40 40 0 0 1 120 880Z",
+          "fill": "white"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "text": "SEE PROJECTS",
+          "x": 238,
+          "y": 930,
+          "size": 24,
+          "colour": "black",
+          "font": "label",
+          "tracking": 1.92,
+          "anchor": "middle"
+        }
+      ]
+    },
+    {
+      "id": "social-service",
+      "label": "Social post, service",
+      "group": "Social",
+      "title": "{name} / square social post / service",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "path",
+          "id": "service-icon",
+          "d": "M114 96H282A28 28 0 0 1 310 124V124A28 28 0 0 1 282 152H114A28 28 0 0 1 86 124V124A28 28 0 0 1 114 96ZM114 176H282A28 28 0 0 1 310 204V204A28 28 0 0 1 282 232H114A28 28 0 0 1 86 204V204A28 28 0 0 1 114 176ZM98 256H114A12 12 0 0 1 126 268V284A12 12 0 0 1 114 296H98A12 12 0 0 1 86 284V268A12 12 0 0 1 98 256ZM96 276l8 8 14-16M150 276H238",
+          "fill": "none",
+          "stroke": "black",
+          "strokeWidth": 6
+        },
+        {
+          "type": "text",
+          "id": "service-kicker",
+          "text": "SERVICE",
+          "x": 86,
+          "y": 690,
+          "size": 22,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 1.76
+        },
+        {
+          "type": "paragraph",
+          "id": "service-name",
+          "text": "[Forms and workflows]",
+          "x": 86,
+          "y": 790,
+          "width": 900,
+          "size": 88,
+          "leading": 94,
+          "maxLines": 2,
+          "colour": "black",
+          "font": "displayRegular"
+        },
+        {
+          "type": "paragraph",
+          "id": "service-detail",
+          "text": "[One sentence on what it covers.]",
+          "x": 86,
+          "y": 960,
+          "width": 760,
+          "size": 28,
+          "leading": 40,
+          "maxLines": 2,
+          "colour": "graphite"
+        },
+        {
+          "type": "symbol",
+          "x": 940,
+          "y": 916,
+          "height": 80,
+          "colour": "black"
+        }
+      ]
+    },
+    {
+      "id": "social-banner",
+      "label": "Social banner",
+      "group": "Social",
+      "title": "{name} / social banner / 1584 × 396",
+      "width": 1584,
+      "height": 396,
+      "raster": 1584,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "ash"
+        },
+        {
+          "type": "text",
+          "id": "banner-headline",
+          "text": "From first idea to first form.",
+          "x": 96,
+          "y": 218,
+          "size": 60,
+          "colour": "black",
+          "font": "display",
+          "tracking": -1.2
+        },
+        {
+          "type": "text",
+          "id": "banner-descriptor",
+          "text": "CONSULTING · DESIGN · DEVELOPMENT",
+          "x": 1488,
+          "y": 214,
+          "size": 18,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 1.44,
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "share-image",
+      "label": "Link preview image",
+      "group": "Web",
+      "title": "{name} / link preview / 1200 × 630",
+      "width": 1200,
+      "height": 630,
+      "raster": 1200,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "night"
+        },
+        {
+          "type": "path",
+          "id": "iso-grid",
+          "d": "M700 0L700 630M750 0L750 630M800 0L800 630M850 0L850 630M900 0L900 630M950 0L950 630M1000 0L1000 630M1050 0L1050 630M1100 0L1100 630M1150 0L1150 630M1200 0L1200 630M1200 0L1200 0M1100 0L1200 60M1000 0L1200 120M900 0L1200 180M800 0L1200 240M700 0L1200 300M700 60L1200 360M700 120L1200 420M700 180L1200 480M700 240L1200 540M700 300L1200 600M700 360L1150 630M700 420L1050 630M700 480L950 630M700 540L850 630M700 600L750 630M700 0L700 0M700 60L800 0M700 120L900 0M700 180L1000 0M700 240L1100 0M700 300L1200 0M700 360L1200 60M700 420L1200 120M700 480L1200 180M700 540L1200 240M700 600L1200 300M750 630L1200 360M850 630L1200 420M950 630L1200 480M1050 630L1200 540M1150 630L1200 600",
+          "fill": "none",
+          "stroke": "hairline",
+          "strokeWidth": 1
+        },
+        {
+          "type": "logo",
+          "x": 72,
+          "y": 66,
+          "width": 190,
+          "colour": "white"
+        },
+        {
+          "type": "paragraph",
+          "id": "page-title",
+          "text": "[Page title goes here]",
+          "x": 72,
+          "y": 360,
+          "width": 600,
+          "size": 64,
+          "leading": 68,
+          "maxLines": 2,
+          "colour": "white",
+          "font": "display"
+        },
+        {
+          "type": "text",
+          "id": "site",
+          "text": "FIRSTFORM.ORG",
+          "x": 72,
+          "y": 564,
+          "size": 18,
+          "colour": "steel",
+          "font": "label",
+          "tracking": 1.44
+        }
+      ]
+    },
+    {
+      "id": "slide-title",
+      "label": "Slide, title",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / title",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "night"
+        },
+        {
+          "type": "path",
+          "id": "iso-grid",
+          "d": "M0 0L0 1080M80 0L80 1080M160 0L160 1080M240 0L240 1080M320 0L320 1080M400 0L400 1080M480 0L480 1080M560 0L560 1080M640 0L640 1080M720 0L720 1080M800 0L800 1080M880 0L880 1080M960 0L960 1080M1040 0L1040 1080M1120 0L1120 1080M1200 0L1200 1080M1280 0L1280 1080M1360 0L1360 1080M1440 0L1440 1080M1520 0L1520 1080M1600 0L1600 1080M1680 0L1680 1080M1760 0L1760 1080M1840 0L1840 1080M1920 0L1920 1080M1920 0L1920 0M1760 0L1920 96M1600 0L1920 192M1440 0L1920 288M1280 0L1920 384M1120 0L1920 480M960 0L1920 576M800 0L1920 672M640 0L1920 768M480 0L1920 864M320 0L1920 960M160 0L1920 1056M0 0L1800 1080M0 96L1640 1080M0 192L1480 1080M0 288L1320 1080M0 384L1160 1080M0 480L1000 1080M0 576L840 1080M0 672L680 1080M0 768L520 1080M0 864L360 1080M0 960L200 1080M0 1056L40 1080M0 0L0 0M0 96L160 0M0 192L320 0M0 288L480 0M0 384L640 0M0 480L800 0M0 576L960 0M0 672L1120 0M0 768L1280 0M0 864L1440 0M0 960L1600 0M0 1056L1760 0M120 1080L1920 0M280 1080L1920 96M440 1080L1920 192M600 1080L1920 288M760 1080L1920 384M920 1080L1920 480M1080 1080L1920 576M1240 1080L1920 672M1400 1080L1920 768M1560 1080L1920 864M1720 1080L1920 960M1880 1080L1920 1056",
+          "fill": "none",
+          "stroke": "hairline",
+          "strokeWidth": 1
+        },
+        {
+          "type": "path",
+          "id": "logo-plate",
+          "d": "M128 96H364A32 32 0 0 1 396 128V212A32 32 0 0 1 364 244H128A32 32 0 0 1 96 212V128A32 32 0 0 1 128 96Z",
+          "fill": "ash"
+        },
+        {
+          "type": "logo",
+          "x": 126,
+          "y": 120,
+          "width": 240,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "deck-title",
+          "text": "[Deck title]",
+          "x": 96,
+          "y": 840,
+          "size": 120,
+          "colour": "white",
+          "font": "display",
+          "tracking": -2.4
+        },
+        {
+          "type": "text",
+          "id": "deck-details",
+          "text": "[CLIENT] · [MONTH YEAR]",
+          "x": 100,
+          "y": 920,
+          "size": 28,
+          "colour": "mist",
+          "font": "label",
+          "tracking": 2.24
+        }
+      ]
+    },
+    {
+      "id": "slide-case-study",
+      "label": "Slide, case study",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / case study",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "symbol",
+          "x": 96,
+          "y": 96,
+          "height": 84,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "case-kicker",
+          "text": "CASE STUDY",
+          "x": 96,
+          "y": 560,
+          "size": 26,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 2.08
+        },
+        {
+          "type": "paragraph",
+          "id": "case-title",
+          "text": "[Project name]",
+          "x": 96,
+          "y": 660,
+          "width": 800,
+          "size": 84,
+          "leading": 92,
+          "maxLines": 2,
+          "colour": "black",
+          "font": "display"
+        },
+        {
+          "type": "paragraph",
+          "id": "case-summary",
+          "text": "[Two lines on the need and what was made.]",
+          "x": 96,
+          "y": 880,
+          "width": 760,
+          "size": 36,
+          "leading": 52,
+          "maxLines": 3,
+          "colour": "graphite"
+        },
+        {
+          "type": "path",
+          "id": "photo-well",
+          "d": "M1040 96H1784A40 40 0 0 1 1824 136V944A40 40 0 0 1 1784 984H1040A40 40 0 0 1 1000 944V136A40 40 0 0 1 1040 96Z",
+          "fill": "coal"
+        },
+        {
+          "type": "path",
+          "id": "photo-brackets",
+          "d": "M1056 232V184A32 32 0 0 1 1088 152H1136M1688 152H1736A32 32 0 0 1 1768 184V232M1768 848V896A32 32 0 0 1 1736 928H1688M1136 928H1088A32 32 0 0 1 1056 896V848",
+          "fill": "none",
+          "stroke": "graphite",
+          "strokeWidth": 4
+        }
+      ]
+    },
+    {
+      "id": "slide-close",
+      "label": "Slide, close",
+      "group": "Presentations",
+      "title": "{name} / 16:9 slide / close",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "ash"
+        },
+        {
+          "type": "logo",
+          "x": 720,
+          "y": 400,
+          "width": 480,
+          "colour": "black"
+        },
+        {
+          "type": "text",
+          "id": "close-site",
+          "text": "FIRSTFORM.ORG",
+          "x": 960,
+          "y": 760,
+          "size": 28,
+          "colour": "graphite",
+          "font": "label",
+          "tracking": 2.24,
+          "anchor": "middle"
+        }
+      ]
+    }
+  ],
+  "guide": {
+    "title": "{name} brand guide",
+    "pdfTitle": "{name} brand guide / v{displayVersion}",
+    "sheetsPdfTitle": "{name} logo reference sheets / v{displayVersion}",
+    "pageTitle": "{name} brand guide / {page}",
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "paper",
+      "logo": {
+        "x": 62,
+        "y": 30,
+        "width": 120
+      },
+      "header": "{upperName} / BRAND GUIDE / V{displayVersion}",
+      "footer": "{upperName} / CONSULTING · DESIGN · DEVELOPMENT"
+    },
+    "pages": [
+      {
+        "title": "From first idea to first form.",
+        "subtitle": "Two blocks that fit into one whole, beside a two-line wordmark. Used the same way everywhere.",
+        "name": "Primary logo",
+        "elements": [
+          {
+            "type": "label",
+            "text": "PRIMARY · ON ASH",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 300,
+            "width": 836,
+            "height": 300,
+            "fill": "ash"
+          },
+          {
+            "type": "logo",
+            "x": 120,
+            "y": 330,
+            "width": 600,
+            "height": 240,
+            "align": "start"
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 300,
+            "width": 452,
+            "height": 300,
+            "fill": "black"
+          },
+          {
+            "type": "label",
+            "text": "REVERSED · ON BLACK",
+            "x": 948,
+            "y": 334,
+            "colour": "mist"
+          },
+          {
+            "type": "logo",
+            "x": 970,
+            "y": 370,
+            "width": 360,
+            "height": 190,
+            "colour": "white"
+          },
+          {
+            "type": "label",
+            "text": "WHAT FIRST FORM DOES",
+            "x": 64,
+            "y": 664
+          },
+          {
+            "type": "para",
+            "text": "Consulting, design and development. We take an idea, a website, a form, a product or a process, and build its first working version.",
+            "x": 64,
+            "y": 706,
+            "width": 836,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "label",
+            "text": "DESCRIPTOR",
+            "x": 952,
+            "y": 664
+          },
+          {
+            "type": "para",
+            "text": "Consulting · Design · Development",
+            "x": 952,
+            "y": 706,
+            "width": 424,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "The logo is drawn from brand.json as vectors. The kit’s original PNGs are kept in reference/ for comparison.",
+            "x": 64,
+            "y": 900,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "How the mark is built.",
+        "subtitle": "Two identical isometric blocks. The second is the first turned 180° about the centre.",
+        "name": "Construction and clearspace",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 256,
+            "width": 500,
+            "height": 400,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M82 257L82 655M138 257L138 655M194 257L194 655M250 257L250 655M306 257L306 655M362 257L362 655M418 257L418 655M474 257L474 655M530 257L530 655M485 257L563 303.8M373 257L563 371M261 257L563 438.2M149 257L563 505.4M65 273.8L563 572.6M65 341L563 639.8M65 408.2L476.33333333 655M65 475.4L364.33333333 655M65 542.6L252.33333333 655M65 609.8L140.33333333 655M65 294.2L127 257M65 361.4L239 257M65 428.6L351 257M65 495.8L463 257M65 563L563 264.2M65 630.2L563 331.4M135.66666667 655L563 398.6M247.66666667 655L563 465.8M359.66666667 655L563 533M471.66666667 655L563 600.2",
+            "stroke": "line"
+          },
+          {
+            "type": "symbol",
+            "x": 194,
+            "y": 284,
+            "height": 344
+          },
+          {
+            "type": "label",
+            "text": "GEOMETRY",
+            "x": 620,
+            "y": 277
+          },
+          {
+            "type": "specTable",
+            "x": 620,
+            "right": 1376,
+            "y": 320,
+            "step": 52,
+            "rows": [
+              [
+                "Canvas",
+                "{symbol.viewBox.2} × {symbol.viewBox.3} units"
+              ],
+              [
+                "Edge slope",
+                "3 : 5, about 31°"
+              ],
+              [
+                "Blocks",
+                "Two, identical, turned 180°"
+              ],
+              [
+                "Front face outline",
+                "{symbol.construction.outline} units"
+              ],
+              [
+                "Small-size outline",
+                "{symbol.construction.microOutline} units"
+              ],
+              [
+                "Gap between blocks",
+                "10 units"
+              ]
+            ]
+          },
+          {
+            "type": "label",
+            "text": "LOCKUP & CLEARSPACE",
+            "x": 64,
+            "y": 715
+          },
+          {
+            "type": "rect",
+            "x": 76,
+            "y": 740,
+            "width": 640,
+            "height": 200,
+            "fill": "none",
+            "stroke": "muted"
+          },
+          {
+            "type": "logo",
+            "x": 130,
+            "y": 770,
+            "width": 532,
+            "height": 140
+          },
+          {
+            "type": "para",
+            "text": "Clear space on every side is the cap height of the F. In the lockup the mark is {lockup.iconHeight} units tall and the gap to the wordmark is {lockup.iconGap} units.",
+            "x": 760,
+            "y": 760,
+            "width": 616,
+            "size": 20
+          }
+        ]
+      },
+      {
+        "title": "One logo, four formats.",
+        "subtitle": "Choose the arrangement that fits the space. Keep the logo in one colour.",
+        "name": "Lockup family",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 255,
+            "width": 828,
+            "height": 214,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 86,
+            "y": 284
+          },
+          {
+            "type": "logo",
+            "x": 86,
+            "y": 300,
+            "width": 780,
+            "height": 150
+          },
+          {
+            "type": "rect",
+            "x": 924,
+            "y": 255,
+            "width": 452,
+            "height": 214,
+            "fill": "black"
+          },
+          {
+            "type": "label",
+            "text": "REVERSED",
+            "x": 946,
+            "y": 284,
+            "colour": "mist"
+          },
+          {
+            "type": "logo",
+            "x": 946,
+            "y": 300,
+            "width": 408,
+            "height": 150,
+            "colour": "white"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 496,
+            "width": 550,
+            "height": 364,
+            "fill": "ash"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 88,
+            "y": 530
+          },
+          {
+            "type": "logo",
+            "x": 88,
+            "y": 550,
+            "width": 502,
+            "height": 286,
+            "layout": "stacked"
+          },
+          {
+            "type": "rect",
+            "x": 642,
+            "y": 496,
+            "width": 378,
+            "height": 364,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "label",
+            "text": "MARK ONLY",
+            "x": 666,
+            "y": 530
+          },
+          {
+            "type": "symbol",
+            "x": 772,
+            "y": 572,
+            "height": 230
+          },
+          {
+            "type": "rect",
+            "x": 1048,
+            "y": 496,
+            "width": 328,
+            "height": 364,
+            "fill": "black"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 1072,
+            "y": 530,
+            "colour": "mist"
+          },
+          {
+            "type": "logo",
+            "x": 1072,
+            "y": 580,
+            "width": 280,
+            "height": 200,
+            "layout": "wordmark",
+            "colour": "white"
+          }
+        ]
+      },
+      {
+        "title": "Strictly monochrome.",
+        "subtitle": "Black, white and grey. Contrast does the work colour usually does; photos of real work bring the colour.",
+        "name": "Colour",
+        "elements": [
+          {
+            "type": "swatches",
+            "x": 64,
+            "y": 267,
+            "step": 330,
+            "width": 300,
+            "height": 275,
+            "colours": [
+              "black",
+              "graphite",
+              "ash",
+              "white"
+            ]
+          },
+          {
+            "type": "label",
+            "text": "SUPPORT GREYS",
+            "x": 64,
+            "y": 735
+          },
+          {
+            "type": "swatchStrip",
+            "x": 64,
+            "y": 760,
+            "step": 262,
+            "width": 250,
+            "height": 70,
+            "colours": [
+              "night",
+              "coal",
+              "hairline",
+              "steel",
+              "mist"
+            ]
+          },
+          {
+            "type": "para",
+            "text": "Ink #060606 page ground · Coal #141414 panels · Rule #2A2A2A lines · Steel #A6A6A6 labels on dark · Mist #C8C8C8 body text on dark. Never set Black on Graphite (2.3 : 1).",
+            "x": 64,
+            "y": 870,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "One family: Sora.",
+        "subtitle": "A geometric sans with a technical edge. Free under the SIL Open Font License.",
+        "name": "Typography",
+        "elements": [
+          {
+            "type": "label",
+            "text": "HEADLINES / {fonts.display.label}",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "text",
+            "text": "From first idea to first form.",
+            "x": 62,
+            "y": 366,
+            "size": 70,
+            "font": "display",
+            "tracking": -0.025
+          },
+          {
+            "type": "rule",
+            "y": 415
+          },
+          {
+            "type": "label",
+            "text": "BODY / {fonts.body.label}",
+            "x": 64,
+            "y": 464
+          },
+          {
+            "type": "para",
+            "text": "Plain verbs and short sentences. Name the real thing: the probe holder, the intake form, the booking page.",
+            "x": 64,
+            "y": 516,
+            "width": 1230,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.6
+          },
+          {
+            "type": "rule",
+            "y": 618
+          },
+          {
+            "type": "label",
+            "text": "LABELS / {fonts.label.label}, CAPS",
+            "x": 64,
+            "y": 664
+          },
+          {
+            "type": "text",
+            "text": "PROJECTS · SERVICES · CONTACT",
+            "x": 64,
+            "y": 722,
+            "size": 28,
+            "font": "label",
+            "tracking": 0.06
+          },
+          {
+            "type": "rule",
+            "y": 767
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK / SORA BOLD, OUTLINED",
+            "x": 64,
+            "y": 812
+          },
+          {
+            "type": "logo",
+            "x": 58,
+            "y": 830,
+            "width": 400,
+            "height": 110,
+            "align": "start",
+            "layout": "wordmark"
+          },
+          {
+            "type": "para",
+            "text": "The wordmark is outlined artwork, so it looks the same everywhere and needs no font installed.",
+            "x": 752,
+            "y": 817,
+            "width": 606,
+            "size": 22
+          }
+        ]
+      },
+      {
+        "title": "Supporting graphics.",
+        "subtitle": "Repeat or crop the mark for grounds. Keep the logo itself whole.",
+        "name": "Patterns",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "patterns/repeat",
+            "x": 64,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "REPEAT",
+            "x": 64,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/crop",
+            "x": 512,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "CROP",
+            "x": 512,
+            "y": 561
+          },
+          {
+            "type": "nested",
+            "src": "patterns/field",
+            "x": 960,
+            "y": 266,
+            "width": 416,
+            "height": 260
+          },
+          {
+            "type": "label",
+            "text": "FIELD",
+            "x": 960,
+            "y": 561
+          },
+          {
+            "type": "rule",
+            "y": 610
+          },
+          {
+            "type": "para",
+            "text": "The templates add the isometric grid and stacked blocks, both drawn on the mark’s 3 : 5 slope. Use them as quiet grounds, never behind the logo.",
+            "x": 64,
+            "y": 680,
+            "width": 1312,
+            "size": 24,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "title": "Ready for everyday use.",
+        "subtitle": "Cards, tags, stationery, social graphics and slides, with editable text.",
+        "name": "Applications",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/business-card-front",
+            "x": 64,
+            "y": 263,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "nested",
+            "src": "templates/business-card-back",
+            "x": 64,
+            "y": 520,
+            "width": 403,
+            "height": 235
+          },
+          {
+            "type": "label",
+            "text": "90 x 50 MM CARDS / 3 MM BLEED",
+            "x": 64,
+            "y": 791
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-statement",
+            "x": 499,
+            "y": 263,
+            "width": 315,
+            "height": 315
+          },
+          {
+            "type": "label",
+            "text": "1080 x 1080 POST",
+            "x": 499,
+            "y": 611
+          },
+          {
+            "type": "nested",
+            "src": "templates/slide-title",
+            "x": 499,
+            "y": 649,
+            "width": 315,
+            "height": 177.2
+          },
+          {
+            "type": "label",
+            "text": "1920 x 1080 SLIDE",
+            "x": 499,
+            "y": 861
+          },
+          {
+            "type": "rect",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "nested",
+            "src": "templates/proposal-cover-a4",
+            "x": 846,
+            "y": 263,
+            "width": 247,
+            "height": 350
+          },
+          {
+            "type": "label",
+            "text": "A4 PROPOSAL",
+            "x": 846,
+            "y": 647
+          },
+          {
+            "type": "nested",
+            "src": "templates/part-tag",
+            "x": 1125,
+            "y": 263,
+            "width": 251,
+            "height": 125.5
+          },
+          {
+            "type": "label",
+            "text": "70 x 35 MM PART TAG",
+            "x": 1125,
+            "y": 420
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-banner",
+            "x": 846,
+            "y": 696,
+            "width": 530,
+            "height": 132.5
+          },
+          {
+            "type": "label",
+            "text": "1584 x 396 BANNER",
+            "x": 846,
+            "y": 865
+          },
+          {
+            "type": "para",
+            "text": "Replace bracketed fields in the SVG files, or fill them in brandkit and download the result.",
+            "x": 64,
+            "y": 920,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "Motion that assembles.",
+        "subtitle": "Parts slide along the mark’s own axes and lock together. Every logo animation ends on the still logo.",
+        "name": "Motion",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(102 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(102 296) scale(0.84) rotate(-180 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "TURN · START",
+            "x": 64,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 292,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(330 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(330 296) scale(0.84) rotate(-120 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "ONE THIRD",
+            "x": 292,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 520,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(558 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(558 296) scale(0.84) rotate(-60 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "TWO THIRDS",
+            "x": 520,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 748,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "ash"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(786 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(786 296) scale(0.84) rotate(0 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "END · THE STILL MARK",
+            "x": 748,
+            "y": 538
+          },
+          {
+            "type": "specTable",
+            "x": 990,
+            "right": 1376,
+            "y": 290,
+            "step": 46,
+            "rows": [
+              [
+                "Quick",
+                "160 ms"
+              ],
+              [
+                "Base",
+                "320 ms"
+              ],
+              [
+                "Slow",
+                "640 ms"
+              ],
+              [
+                "Draw",
+                "1200 ms"
+              ],
+              [
+                "Loop",
+                "1200 ms"
+              ],
+              [
+                "Stagger",
+                "80 ms"
+              ],
+              [
+                "Settle",
+                "ease out, (.2, .7, .2, 1)"
+              ]
+            ]
+          },
+          {
+            "type": "para",
+            "text": "Assemble, don’t decorate. Motion shows parts fitting together. Every logo animation ends on the exact still logo: no bounce, blur, glow or colour change.",
+            "x": 64,
+            "y": 624,
+            "width": 620,
+            "size": 19,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "One thing at a time. Stagger related parts by 80 ms. Move along the mark’s own axes: vertical, or the 3 : 5 isometric slope.",
+            "x": 728,
+            "y": 624,
+            "width": 620,
+            "size": 19,
+            "colour": "muted",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "Loops are for waiting. Only loaders loop, and only the mark loops, never the full logo. Stop the loop as soon as the wait is over.",
+            "x": 64,
+            "y": 736,
+            "width": 620,
+            "size": 19,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "Still is a valid frame. With reduced motion, show the final frame. Nothing should depend on the animation to be understood.",
+            "x": 728,
+            "y": 736,
+            "width": 620,
+            "size": 19,
+            "colour": "muted",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "All sixteen studies, with replay, are in motion/index.html in the kit and in brandkit’s Motion tab.",
+            "x": 64,
+            "y": 880,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
+        "title": "Use the right file for the job.",
+        "subtitle": "The same geometry drives the vectors, images, templates and website components.",
+        "name": "Files",
+        "elements": [
+          {
+            "type": "label",
+            "text": "SCREEN & PRINT",
+            "x": 64,
+            "y": 278
+          },
+          {
+            "type": "list",
+            "x": 64,
+            "detailX": 267,
+            "right": 818,
+            "y": 322,
+            "step": 63,
+            "rows": [
+              [
+                "SVG",
+                "Scale-independent logos and marks."
+              ],
+              [
+                "PNG",
+                "Transparent artwork for slides and documents."
+              ],
+              [
+                "PDF",
+                "Vector handoff and print proofs."
+              ],
+              [
+                "REACT / CSS",
+                "Inline colour inheritance and local fonts."
+              ],
+              [
+                "BRAND.JSON",
+                "One source for the whole identity."
+              ]
+            ]
+          },
+          {
+            "type": "rect",
+            "x": 883,
+            "y": 263,
+            "width": 493,
+            "height": 342,
+            "fill": "black"
+          },
+          {
+            "type": "label",
+            "text": "MINIMUM SIZES",
+            "x": 913,
+            "y": 307,
+            "colour": "mist"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumHorizontalWidthPx} px / {lockup.minimumHorizontalWidthMm} mm",
+            "x": 913,
+            "y": 366,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Full logo width (40 px / 12 mm tall).",
+            "x": 913,
+            "y": 407,
+            "width": 429,
+            "size": 19,
+            "colour": "mist"
+          },
+          {
+            "type": "text",
+            "text": "{lockup.minimumSymbolHeightPx} px / {lockup.minimumSymbolHeightMm} mm",
+            "x": 913,
+            "y": 494,
+            "size": 33,
+            "font": "display",
+            "colour": "reverse",
+            "tracking": -0.03
+          },
+          {
+            "type": "para",
+            "text": "Mark height, below which use the small-size mark.",
+            "x": 913,
+            "y": 535,
+            "width": 429,
+            "size": 19,
+            "colour": "mist"
+          },
+          {
+            "type": "label",
+            "text": "SMALL SCREEN ICONS",
+            "x": 64,
+            "y": 670
+          },
+          {
+            "type": "symbol",
+            "x": 66,
+            "y": 704,
+            "height": 136
+          },
+          {
+            "type": "symbol",
+            "x": 262,
+            "y": 704,
+            "height": 136,
+            "micro": true
+          },
+          {
+            "type": "label",
+            "text": "STANDARD",
+            "x": 64,
+            "y": 882
+          },
+          {
+            "type": "label",
+            "text": "SMALL SIZE",
+            "x": 264,
+            "y": 882
+          },
+          {
+            "type": "para",
+            "text": "Open index.html in the kit to browse every file. Edit brand.json, or this brand’s script, and rebuild to change any of them.",
+            "x": 493,
+            "y": 706,
+            "width": 800,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      }
+    ],
+    "sheets": [
+      {
+        "id": "logo-sheet-01",
+        "group": "logo-sheets",
+        "width": 1440,
+        "height": 1020,
+        "title": "{name} logo reference sheet 1",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "text",
+            "text": "Logo reference sheet",
+            "x": 64,
+            "y": 88,
+            "size": 42,
+            "font": "display",
+            "tracking": -0.03
+          },
+          {
+            "type": "label",
+            "text": "FIRSTFORM / SHEET 1 OF 1",
+            "x": 64,
+            "y": 128
+          },
+          {
+            "type": "label",
+            "text": "HORIZONTAL",
+            "x": 64,
+            "y": 221
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 240,
+            "width": 1000,
+            "height": 230,
+            "align": "start"
+          },
+          {
+            "type": "label",
+            "text": "WORDMARK",
+            "x": 64,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 56,
+            "y": 540,
+            "width": 760,
+            "height": 150,
+            "align": "start",
+            "layout": "wordmark"
+          },
+          {
+            "type": "label",
+            "text": "STACKED",
+            "x": 980,
+            "y": 518
+          },
+          {
+            "type": "logo",
+            "x": 972,
+            "y": 540,
+            "width": 404,
+            "height": 380,
+            "align": "start",
+            "layout": "stacked"
+          },
+          {
+            "type": "label",
+            "text": "OUTLINED ARTWORK / V{displayVersion}",
+            "x": 64,
+            "y": 980
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "FirstFormLogo",
+    "symbolComponentName": "FirstFormMark",
+    "cssPrefix": "ff",
+    "appIcon": {
+      "background": "black",
+      "colour": "white",
+      "size": 640
+    },
+    "favicon": {
+      "light": "#000000",
+      "dark": "#FFFFFF",
+      "size": 56,
+      "micro": true,
+      "title": "{name} favicon / small-size mark"
+    },
+    "intro": {
+      "eyebrow": "Consulting · Design · Development",
+      "headline": "First Form\nBrand assets.",
+      "body": "The two-block mark, the FIRST / FORM wordmark, Sora and a strictly monochrome palette: logos, templates and web files from one brand.json.",
+      "edition": "v{displayVersion}",
+      "typeSample": "From first idea\nto first form.",
+      "footer": "First Form · From first idea to first form."
+    },
+    "landing": {
+      "eyebrow": "Consulting · Design · Development",
+      "headline": "From first idea\nto first form.",
+      "body": "An independent practice that turns an idea into something people can use: a website, a form, a product or a process.",
+      "cta": "Start a conversation",
+      "contactEyebrow": "Have something that needs a first form?",
+      "contactBody": "[Add a contact address or form here.]",
+      "footer": "First Form"
+    }
+  },
+  "files": [
+    {
+      "to": "README.md",
+      "from": "docs/README.md"
+    },
+    {
+      "to": "CHANGELOG.md",
+      "from": "docs/CHANGELOG.md"
+    },
+    {
+      "to": "guidelines/brand-details.html",
+      "from": "docs/brand-details.html"
+    },
+    {
+      "to": "guidelines/brand-details-assets/logo-black.png",
+      "from": "docs/brand-details-assets/logo-black.png"
+    },
+    {
+      "to": "guidelines/brand-details-assets/logo-white.png",
+      "from": "docs/brand-details-assets/logo-white.png"
+    },
+    {
+      "to": "guidelines/brand-details-assets/mark-black.png",
+      "from": "docs/brand-details-assets/mark-black.png"
+    },
+    {
+      "to": "guidelines/brand-details-assets/mark-white.png",
+      "from": "docs/brand-details-assets/mark-white.png"
+    },
+    {
+      "to": "guidelines/brand-details-assets/wordmark-white.png",
+      "from": "docs/brand-details-assets/wordmark-white.png"
+    },
+    "motion/index.html",
+    "motion/motion.css",
+    "motion/motion-tokens.json",
+    "motion/README.md",
+    "fonts/README.md",
+    "fonts/Sora-OFL.txt",
+    "fonts/Sora-Light.ttf",
+    "fonts/Sora-Regular.ttf",
+    "fonts/Sora-SemiBold.ttf",
+    "fonts/Sora-Bold.ttf"
+  ],
+  "status": "Rebuilt as vectors from the kit PNGs: the mark redrawn on its isometric geometry, the wordmark set in Sora Bold as the nearest open face. Replace both with original vector masters when they exist.",
+  "colourNames": {
+    "night": "Ink",
+    "hairline": "Rule"
+  },
+  "icons": {
+    "size": 64,
+    "attrs": {
+      "stroke": "currentColor",
+      "stroke-width": "2",
+      "fill": "none",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    },
+    "title": "{name} / {icon} icon",
+    "items": [
+      {
+        "id": "consultation",
+        "content": "<circle cx=\"24\" cy=\"32\" r=\"20\"/><circle cx=\"40\" cy=\"32\" r=\"20\"/>"
+      },
+      {
+        "id": "design",
+        "content": "<rect x=\"3\" y=\"9\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"19\" y=\"9\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"35\" y=\"9\" width=\"12\" height=\"10\" rx=\"3.5\"/><circle cx=\"57\" cy=\"14\" r=\"5\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"3\" y=\"27\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"19\" y=\"27\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"35\" y=\"27\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"51\" y=\"27\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"3\" y=\"45\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"19\" y=\"45\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"35\" y=\"45\" width=\"12\" height=\"10\" rx=\"3.5\"/><rect x=\"51\" y=\"45\" width=\"12\" height=\"10\" rx=\"3.5\"/>"
+      },
+      {
+        "id": "prototyping",
+        "content": "<path d=\"M4 18V14A10 10 0 0 1 14 4h4M46 4h4a10 10 0 0 1 10 10v4M60 46v4a10 10 0 0 1-10 10h-4M18 60h-4A10 10 0 0 1 4 50v-4M32 20v24M20 32h24\"/>"
+      },
+      {
+        "id": "website",
+        "content": "<rect x=\"4\" y=\"10\" width=\"56\" height=\"44\" rx=\"10\"/><path d=\"M4 22h56\"/><circle cx=\"12\" cy=\"16\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"18\" cy=\"16\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\"/>"
+      },
+      {
+        "id": "forms",
+        "content": "<rect x=\"4\" y=\"8\" width=\"56\" height=\"14\" rx=\"7\"/><rect x=\"4\" y=\"28\" width=\"56\" height=\"14\" rx=\"7\"/><rect x=\"4\" y=\"48\" width=\"10\" height=\"10\" rx=\"3\"/><path d=\"M6.5 53l2 2 3.5-4M20 53h22\"/>"
+      },
+      {
+        "id": "build",
+        "content": "<path d=\"M32 6L56 19V45L32 58L8 45V19Z\"/><path d=\"M8 19L32 32L56 19M32 32V58\"/>"
+      },
+      {
+        "id": "systems",
+        "content": "<circle cx=\"14\" cy=\"14\" r=\"8\"/><circle cx=\"50\" cy=\"14\" r=\"8\"/><circle cx=\"32\" cy=\"50\" r=\"8\"/><path d=\"M22 14h20M18 21l10 22M46 21L36 43\"/>"
+      },
+      {
+        "id": "research",
+        "content": "<circle cx=\"32\" cy=\"32\" r=\"26\"/><circle cx=\"32\" cy=\"32\" r=\"14\"/><circle cx=\"32\" cy=\"32\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/>"
+      }
+    ]
+  },
+  "motion": {
+    "page": "motion/index.html",
+    "css": "motion/motion.css",
+    "tokens": {
+      "durations": {
+        "quick": 160,
+        "base": 320,
+        "slow": 640,
+        "draw": 1200,
+        "loop": 1200
+      },
+      "easings": {
+        "settle": "cubic-bezier(.2, .7, .2, 1)",
+        "move": "cubic-bezier(.6, 0, .2, 1)",
+        "linear": "linear"
+      },
+      "stagger": 80,
+      "distance": 24
+    },
+    "rules": [
+      {
+        "title": "Assemble, don’t decorate.",
+        "text": "Motion shows parts fitting together. Every logo animation ends on the exact still logo: no bounce, blur, glow or colour change."
+      },
+      {
+        "title": "One thing at a time.",
+        "text": "Stagger related parts by 80 ms. Move along the mark’s own axes: vertical, or the 3 : 5 isometric slope."
+      },
+      {
+        "title": "Loops are for waiting.",
+        "text": "Only loaders loop, and only the mark loops, never the full logo. Stop the loop as soon as the wait is over."
+      },
+      {
+        "title": "Still is a valid frame.",
+        "text": "With reduced motion, show the final frame. Nothing should depend on the animation to be understood."
+      }
+    ],
+    "studies": [
+      {
+        "id": "assemble",
+        "name": "Assemble",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "slow + base · settle",
+        "use": "Site intro, video opener, app launch",
+        "description": "The two blocks slide in along the isometric axis and lock together; then FIRST and FORM rise into place."
+      },
+      {
+        "id": "build",
+        "name": "Build",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "base, 80 ms stagger · settle",
+        "use": "Title slides, case study openers",
+        "description": "Each block is built face by face: top, side, then the outline of the open front."
+      },
+      {
+        "id": "draw",
+        "name": "Draw",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "draw + base · move",
+        "use": "Longer moments: video, keynote, reveal",
+        "description": "The line drawing of both blocks traces in, then the solid faces fill."
+      },
+      {
+        "id": "turn",
+        "name": "Turn",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "900 ms · move",
+        "use": "Explaining the mark; loading handing over to ready",
+        "description": "The second block starts on top of the first and turns 180° into place. The mark’s construction, shown."
+      },
+      {
+        "id": "blocks",
+        "name": "Block loader",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · move",
+        "use": "Page and app loading, 24 px and up",
+        "description": "The blocks part along their axis and meet again. Mark only; stops when loading ends."
+      },
+      {
+        "id": "stack",
+        "name": "Stack",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "1600 ms loop · settle",
+        "use": "Building, exporting, generating",
+        "description": "Three isometric blocks drop onto each other, then clear for the next round."
+      },
+      {
+        "id": "module",
+        "name": "Module",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · steps",
+        "use": "Panels and lists while content loads",
+        "description": "The design icon’s grid, with its one moving part travelling cell to cell."
+      },
+      {
+        "id": "overlap",
+        "name": "Overlap",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · move",
+        "use": "Connecting, sending, matching",
+        "description": "The consultation icon’s two circles meet in the middle and part again."
+      },
+      {
+        "id": "focus",
+        "name": "Focus",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "slow · settle",
+        "use": "Image loading, uploads, capture",
+        "description": "Viewfinder brackets close in, the crosshair sets, and the photo comes up behind it."
+      },
+      {
+        "id": "progress",
+        "name": "Progress",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "2400 ms · settle",
+        "use": "Multi-step forms, uploads",
+        "description": "A pill track fills in three steps, lighting each stage as it passes."
+      },
+      {
+        "id": "skeleton",
+        "name": "Skeleton",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "1400 ms loop · linear",
+        "use": "Cards and lists before data arrives",
+        "description": "Placeholder bars with a highlight passing along the 3 : 5 diagonal."
+      },
+      {
+        "id": "cards",
+        "name": "Cards",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "base, 80 ms stagger · settle",
+        "use": "Section entrances",
+        "description": "White, Graphite and Black cards rise 24 px into place, one after another."
+      },
+      {
+        "id": "headline",
+        "name": "Headline",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "slow, 80 ms stagger · settle",
+        "use": "Hero headlines, title slides",
+        "description": "Each line rises out of its own mask."
+      },
+      {
+        "id": "field",
+        "name": "Field",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "2400 ms · settle",
+        "use": "Contact and intake forms",
+        "description": "The field takes focus, the entry types in, and Send turns into a drawn check."
+      },
+      {
+        "id": "press",
+        "name": "Press",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "quick · settle",
+        "use": "Buttons and pills",
+        "description": "A pill presses in to 96% and darkens to Graphite, then lets go."
+      },
+      {
+        "id": "wipe",
+        "name": "Wipe",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "slow · move",
+        "use": "Page and slide transitions",
+        "description": "The next page sweeps in behind an edge cut at the mark’s slope."
+      }
+    ]
+  }
+}

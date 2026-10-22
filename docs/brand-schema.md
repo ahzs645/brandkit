@@ -9,6 +9,9 @@ are in this repository:
   byte (`test/parity.test.js`).
 - [`brands/northwind/brand.json`](../brands/northwind/brand.json): made by the starter
   (`npm run make:example`), which is also what the app's **New brand** does.
+- [`brands/firstform/brand.json`](../brands/firstform/brand.json): written by
+  `npm run make:firstform` from a kit that had only PNG logos. Its symbol is `paths` (two
+  even-odd blocks, with heavier `microPaths`), and its wordmark is two outlined lines.
 - [`brands/bc-province-1977/brand.json`](../brands/bc-province-1977/brand.json) and
   [`brands/bc-hydro-1983/brand.json`](../brands/bc-hydro-1983/brand.json): two historical identity
   programs, written by `npm run make:bc` from scripts that carry each manual measurement with its
@@ -302,3 +305,8 @@ with anything uncited).
   for the kit's index.html and landing template.
 - `files`: supplied files copied into the kit as they are (fonts, licences, documents).
   `{ "to": "README.md", "from": "docs/README.md" }` or a bare path.
+- `motion`: `{ page, css?, tokens, rules, studies }`. `page` is a self-contained HTML motion
+  library in the brand's folder; when the brand's files hold it, the app shows a **Motion** tab
+  with it. `tokens` (`durations` in ms, `easings`, `stagger`), `rules` (`[{ title, text }]`) and
+  `studies` (`[{ id, name, kind, group, timing, use, description }]`) describe it as data. List
+  the page and its CSS in `files` to carry them in the kit. See `scripts/brands/firstform-motion.mjs`.
