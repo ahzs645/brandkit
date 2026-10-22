@@ -47,3 +47,18 @@ test('First Form uses only its own palette, and every file it ships exists', () 
   for (const value of used) assert.ok(value === 'none' || palette.has(colour(brand, value)), value)
   for (const file of brand.files) assert.ok(existsSync(`${folder}${typeof file === 'string' ? file : file.from}`), JSON.stringify(file))
 })
+
+test('the motion library covers every study, defines every token, and ships in the kit', () => {
+  const { motion } = brand
+  const ids = motion.studies.map((study) => study.id)
+  assert.equal(new Set(ids).size, ids.length, 'unique study ids')
+  for (const study of motion.studies) assert.ok(study.name && study.kind && study.timing && study.use && study.description, study.id)
+  const page = readFileSync(`${folder}${motion.page}`, 'utf8')
+  const css = readFileSync(`${folder}${motion.css}`, 'utf8')
+  for (const id of ids) assert.match(page, new RegExp(`data-study="${id}"`), id)
+  for (const key of [...Object.keys(motion.tokens.durations), ...Object.keys(motion.tokens.easings), 'stagger']) assert.match(css, new RegExp(`--ff-${key}:`), key)
+  assert.match(css, /prefers-reduced-motion: reduce/)
+  assert.ok(!/NaN|undefined/.test(page + css))
+  const plan = planKit(brand).map((entry) => entry.path)
+  for (const file of ['motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md']) assert.ok(plan.includes(file), file)
+})

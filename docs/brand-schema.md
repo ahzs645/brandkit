@@ -305,3 +305,8 @@ with anything uncited).
   for the kit's index.html and landing template.
 - `files`: supplied files copied into the kit as they are (fonts, licences, documents).
   `{ "to": "README.md", "from": "docs/README.md" }` or a bare path.
+- `motion`: `{ page, css?, tokens, rules, studies }`. `page` is a self-contained HTML motion
+  library in the brand's folder; when the brand's files hold it, the app shows a **Motion** tab
+  with it. `tokens` (`durations` in ms, `easings`, `stagger`), `rules` (`[{ title, text }]`) and
+  `studies` (`[{ id, name, kind, group, timing, use, description }]`) describe it as data. List
+  the page and its CSS in `files` to carry them in the kit. See `scripts/brands/firstform-motion.mjs`.

@@ -19,6 +19,7 @@ import { bakeWordmark, createStarterBrand } from '../../src/engine/starter.js'
 import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 import { n } from '../../src/engine/format.js'
 import { updateManifest } from './common.mjs'
+import { motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './firstform-motion.mjs'
 
 const folder = new URL('../../brands/firstform/', import.meta.url).pathname
 mkdirSync(folder, { recursive: true })
@@ -48,6 +49,9 @@ const SILHOUETTE = [[70, 0], [105, 21], [105, 62], [70, 83], [70, 124], [35, 145
 // Its front face, the part left open inside the outline.
 const FACE = [[35, 63], [105, 21], [105, 62], [70, 83], [70, 124], [35, 145]]
 const turn = ([x, y]) => [WIDTH - x, HEIGHT - y]
+// The two solid faces, for drawing and animating a block part by part.
+const TOP = [[70, 0], [105, 21], [35, 63], [0, 42]]
+const SIDE = [[0, 42], [35, 63], [35, 145], [0, 124]]
 
 const inside = ([px, py], poly) => {
   let hit = false
@@ -80,7 +84,8 @@ const inset = (poly, d) => {
 
 const outline = (poly) => `M${poly.map(([x, y]) => `${n(x)} ${n(y)}`).join('L')}Z`
 const block = (outlineWidth, place = (p) => p) => ({
-  d: outline(SILHOUETTE.map(place)) + outline(inset(FACE.map(place), outlineWidth)),
+  // The open face is wound the other way, so it cuts out under the non-zero rule as well as even-odd.
+  d: outline(SILHOUETTE.map(place)) + outline(inset(FACE.map(place), outlineWidth).reverse()),
   fillRule: 'evenodd'
 })
 
@@ -333,6 +338,21 @@ const markX = CONSTRUCTION.x + (CONSTRUCTION.width - WIDTH * CONSTRUCTION.scale)
 const markY = CONSTRUCTION.y + (CONSTRUCTION.height - HEIGHT * CONSTRUCTION.scale) / 2
 const constructionGrid = isoGrid([CONSTRUCTION.x + 1, CONSTRUCTION.y + 1, CONSTRUCTION.x + CONSTRUCTION.width - 1, CONSTRUCTION.y + CONSTRUCTION.height - 1], 35 * CONSTRUCTION.scale, [markX + 70 * CONSTRUCTION.scale, markY])
 
+
+// The Turn study as four still frames: the second block on the first, a third, two thirds, home.
+const TURN_FRAMES = [-180, -120, -60, 0].map((angle, index) => {
+  const x = 64 + index * 228
+  const y = 266
+  const at = `translate(${x + 38} ${y + 30}) scale(0.84)`
+  return [
+    g.rect(x, y, 208, 240, index === 3 ? 'ash' : 'reverse', index === 3 ? undefined : 'line'),
+    { type: 'path', d: block(OUTLINE).d, fill: 'ink', transform: at },
+    { type: 'path', d: block(OUTLINE, turn).d, fill: 'ink', transform: `${at} rotate(${angle} ${WIDTH / 2} ${HEIGHT / 2})` },
+    g.label(['TURN · START', 'ONE THIRD', 'TWO THIRDS', 'END · THE STILL MARK'][index], x, y + 272)
+  ]
+}).flat()
+const MOTION_PAGE = { title: 'Motion that assembles.', subtitle: 'Parts slide along the mark’s own axes and lock together. Every logo animation ends on the still logo.', name: 'Motion', elements: [...TURN_FRAMES, { type: 'specTable', x: 990, right: 1376, y: 290, step: 46, rows: Object.entries(TOKENS.durations).map(([key, value]) => [key[0].toUpperCase() + key.slice(1), `${value} ms`]).concat([['Stagger', `${TOKENS.stagger} ms`], ['Settle', 'ease out, (.2, .7, .2, 1)']]) }, ...RULES.map((rule, index) => g.para(`${rule.title} ${rule.text}`, 64 + (index % 2) * 664, 624 + Math.floor(index / 2) * 112, 620, 19, { colour: index % 2 ? 'muted' : 'ink', line: 1.5 })), g.para('All sixteen studies, with replay, are in motion/index.html in the kit and in brandkit’s Motion tab.', 64, 880, 1312, 18)] }
+
 const GUIDE = {
   title: '{name} brand guide',
   pdfTitle: '{name} brand guide / v{displayVersion}',
@@ -349,6 +369,7 @@ const GUIDE = {
     { title: 'One family: Sora.', subtitle: 'A geometric sans with a technical edge. Free under the SIL Open Font License.', name: 'Typography', elements: [g.label('HEADLINES / {fonts.display.label}', 64, 278), { type: 'text', text: 'From first idea to first form.', x: 62, y: 366, size: 70, font: 'display', tracking: -0.025 }, { type: 'rule', y: 415 }, g.label('BODY / {fonts.body.label}', 64, 464), g.para('Plain verbs and short sentences. Name the real thing: the probe holder, the intake form, the booking page.', 64, 516, 1230, 29, { colour: 'ink', line: 1.6 }), { type: 'rule', y: 618 }, g.label('LABELS / {fonts.label.label}, CAPS', 64, 664), { type: 'text', text: 'PROJECTS · SERVICES · CONTACT', x: 64, y: 722, size: 28, font: 'label', tracking: 0.06 }, { type: 'rule', y: 767 }, g.label('WORDMARK / SORA BOLD, OUTLINED', 64, 812), g.logo(58, 830, 400, { height: 110, align: 'start', layout: 'wordmark' }), g.para('The wordmark is outlined artwork, so it looks the same everywhere and needs no font installed.', 752, 817, 606, 22)] },
     { title: 'Supporting graphics.', subtitle: 'Repeat or crop the mark for grounds. Keep the logo itself whole.', name: 'Patterns', elements: [g.nested('patterns/repeat', 64, 266, 416, 260), g.label('REPEAT', 64, 561), g.nested('patterns/crop', 512, 266, 416, 260), g.label('CROP', 512, 561), g.nested('patterns/field', 960, 266, 416, 260), g.label('FIELD', 960, 561), { type: 'rule', y: 610 }, g.para('The templates add the isometric grid and stacked blocks, both drawn on the mark’s 3 : 5 slope. Use them as quiet grounds, never behind the logo.', 64, 680, 1312, 24, { colour: 'ink' })] },
     { title: 'Ready for everyday use.', subtitle: 'Cards, tags, stationery, social graphics and slides, with editable text.', name: 'Applications', elements: [g.nested('templates/business-card-front', 64, 263, 403, 235), g.nested('templates/business-card-back', 64, 520, 403, 235), g.label('90 x 50 MM CARDS / 3 MM BLEED', 64, 791), g.nested('templates/social-statement', 499, 263, 315, 315), g.label('1080 x 1080 POST', 499, 611), g.nested('templates/slide-title', 499, 649, 315, 177.2), g.label('1920 x 1080 SLIDE', 499, 861), g.rect(846, 263, 247, 350, 'reverse', 'line'), g.nested('templates/proposal-cover-a4', 846, 263, 247, 350), g.label('A4 PROPOSAL', 846, 647), g.nested('templates/part-tag', 1125, 263, 251, 125.5), g.label('70 x 35 MM PART TAG', 1125, 420), g.nested('templates/social-banner', 846, 696, 530, 132.5), g.label('1584 x 396 BANNER', 846, 865), g.para('Replace bracketed fields in the SVG files, or fill them in brandkit and download the result.', 64, 920, 1312, 18)] },
+    MOTION_PAGE,
     { title: 'Use the right file for the job.', subtitle: 'The same geometry drives the vectors, images, templates and website components.', name: 'Files', elements: [g.label('SCREEN & PRINT', 64, 278), { type: 'list', x: 64, detailX: 267, right: 818, y: 322, step: 63, rows: [['SVG', 'Scale-independent logos and marks.'], ['PNG', 'Transparent artwork for slides and documents.'], ['PDF', 'Vector handoff and print proofs.'], ['REACT / CSS', 'Inline colour inheritance and local fonts.'], ['BRAND.JSON', 'One source for the whole identity.']] }, g.rect(883, 263, 493, 342, 'black'), g.label('MINIMUM SIZES', 913, 307, 'mist'), { type: 'text', text: '{lockup.minimumHorizontalWidthPx} px / {lockup.minimumHorizontalWidthMm} mm', x: 913, y: 366, size: 33, font: 'display', colour: 'reverse', tracking: -0.03 }, g.para('Full logo width (40 px / 12 mm tall).', 913, 407, 429, 19, { colour: 'mist' }), { type: 'text', text: '{lockup.minimumSymbolHeightPx} px / {lockup.minimumSymbolHeightMm} mm', x: 913, y: 494, size: 33, font: 'display', colour: 'reverse', tracking: -0.03 }, g.para('Mark height, below which use the small-size mark.', 913, 535, 429, 19, { colour: 'mist' }), g.label('SMALL SCREEN ICONS', 64, 670), { type: 'symbol', x: 66, y: 704, height: 136 }, { type: 'symbol', x: 262, y: 704, height: 136, micro: true }, g.label('STANDARD', 64, 882), g.label('SMALL SIZE', 264, 882), g.para('Open index.html in the kit to browse every file. Edit brand.json, or this brand’s script, and rebuild to change any of them.', 493, 706, 800, 23, { colour: 'ink' })] }
   ],
   sheets: [{ id: 'logo-sheet-01', group: 'logo-sheets', width: 1440, height: 1020, title: '{name} logo reference sheet 1', elements: [g.rect(0, 0, 1440, 1020, 'paper'), { type: 'text', text: 'Logo reference sheet', x: 64, y: 88, size: 42, font: 'display', tracking: -0.03 }, g.label('FIRSTFORM / SHEET 1 OF 1', 64, 128), g.label('HORIZONTAL', 64, 221), g.logo(56, 240, 1000, { height: 230, align: 'start' }), g.label('WORDMARK', 64, 518), g.logo(56, 540, 760, { height: 150, align: 'start', layout: 'wordmark' }), g.label('STACKED', 980, 518), g.logo(972, 540, 404, { height: 380, align: 'start', layout: 'stacked' }), g.label('OUTLINED ARTWORK / V{displayVersion}', 64, 980)] }]
@@ -400,6 +421,7 @@ const brand = {
     { id: 'field', title: '{name} / mark on ash', width: 960, height: 600, background: 'ash', place: [{ x: 375, y: 125, scale: 1.65, colour: 'black' }] }
   ],
   icons: ICONS,
+  motion: { page: 'motion/index.html', css: 'motion/motion.css', tokens: TOKENS, rules: RULES, studies: STUDIES },
   templates: TEMPLATES,
   guide: GUIDE,
   web: {
@@ -417,10 +439,19 @@ const brand = {
     { to: 'CHANGELOG.md', from: 'docs/CHANGELOG.md' },
     { to: 'guidelines/brand-details.html', from: 'docs/brand-details.html' },
     ...['logo-black', 'logo-white', 'mark-black', 'mark-white', 'wordmark-white'].map((name) => ({ to: `guidelines/brand-details-assets/${name}.png`, from: `docs/brand-details-assets/${name}.png` })),
+    'motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md',
     'fonts/README.md', 'fonts/Sora-OFL.txt', 'fonts/Sora-Light.ttf', 'fonts/Sora-Regular.ttf', 'fonts/Sora-SemiBold.ttf', 'fonts/Sora-Bold.ttf'
   ]
 }
 
+// The motion library and its CSS, drawn from the same geometry and palette.
+mkdirSync(`${folder}motion`, { recursive: true })
+const motionGeometry = { viewBox: symbol.viewBox, silhouette: SILHOUETTE, face: FACE, inner: inset(FACE, OUTLINE), top: TOP, side: SIDE, turn, wordmark, lockup: { iconHeight: brand.lockup.iconHeight, iconGap: brand.lockup.iconGap, typeHeight: brand.families[0].typeHeight } }
+writeFileSync(`${folder}motion/index.html`, motionPage(motionGeometry, brand.colours))
+writeFileSync(`${folder}motion/motion.css`, motionCss(brand.colours))
+writeFileSync(`${folder}motion/motion-tokens.json`, `${JSON.stringify({ ...TOKENS, rules: RULES.map((rule) => rule.title) }, null, 2)}\n`)
+writeFileSync(`${folder}motion/README.md`, motionReadme())
+
 writeFileSync(`${folder}brand.json`, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
-console.log(`brands/firstform/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons`)
+console.log(`brands/firstform/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons, ${brand.motion.studies.length} motion studies`)

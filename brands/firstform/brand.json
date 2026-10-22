@@ -119,21 +119,21 @@
     ],
     "paths": [
       {
-        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 63.90590461L103.4 23.82590461L103.4 61.09409539L68.4 82.09409539L68.4 123.09409539L36.6 142.17409539Z",
+        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
         "fillRule": "evenodd"
       },
       {
-        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 151.09409539L46.6 191.17409539L46.6 153.90590461L81.6 132.90590461L81.6 91.90590461L113.4 72.82590461Z",
+        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
         "fillRule": "evenodd"
       }
     ],
     "microPaths": [
       {
-        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM40 65.83095189L100 29.83095189L100 59.16904811L65 80.16904811L65 121.16904811L40 136.16904811Z",
+        "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM40 136.16904811L65 121.16904811L65 80.16904811L100 59.16904811L100 29.83095189L40 65.83095189Z",
         "fillRule": "evenodd"
       },
       {
-        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM110 149.16904811L50 185.16904811L50 155.83095189L85 134.83095189L85 93.83095189L110 78.83095189Z",
+        "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM110 78.83095189L85 93.83095189L85 134.83095189L50 155.83095189L50 185.16904811L110 149.16904811Z",
         "fillRule": "evenodd"
       }
     ],
@@ -1753,6 +1753,205 @@
         ]
       },
       {
+        "title": "Motion that assembles.",
+        "subtitle": "Parts slide along the mark’s own axes and lock together. Every logo animation ends on the still logo.",
+        "name": "Motion",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(102 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(102 296) scale(0.84) rotate(-180 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "TURN · START",
+            "x": 64,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 292,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(330 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(330 296) scale(0.84) rotate(-120 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "ONE THIRD",
+            "x": 292,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 520,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "reverse",
+            "stroke": "line"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(558 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(558 296) scale(0.84) rotate(-60 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "TWO THIRDS",
+            "x": 520,
+            "y": 538
+          },
+          {
+            "type": "rect",
+            "x": 748,
+            "y": 266,
+            "width": 208,
+            "height": 240,
+            "fill": "ash"
+          },
+          {
+            "type": "path",
+            "d": "M70 0L105 21L105 62L70 83L70 124L35 145L0 124L0 42ZM36.6 142.17409539L68.4 123.09409539L68.4 82.09409539L103.4 61.09409539L103.4 23.82590461L36.6 63.90590461Z",
+            "fill": "ink",
+            "transform": "translate(786 296) scale(0.84)"
+          },
+          {
+            "type": "path",
+            "d": "M80 215L45 194L45 153L80 132L80 91L115 70L150 91L150 173ZM113.4 72.82590461L81.6 91.90590461L81.6 132.90590461L46.6 153.90590461L46.6 191.17409539L113.4 151.09409539Z",
+            "fill": "ink",
+            "transform": "translate(786 296) scale(0.84) rotate(0 75 107.5)"
+          },
+          {
+            "type": "label",
+            "text": "END · THE STILL MARK",
+            "x": 748,
+            "y": 538
+          },
+          {
+            "type": "specTable",
+            "x": 990,
+            "right": 1376,
+            "y": 290,
+            "step": 46,
+            "rows": [
+              [
+                "Quick",
+                "160 ms"
+              ],
+              [
+                "Base",
+                "320 ms"
+              ],
+              [
+                "Slow",
+                "640 ms"
+              ],
+              [
+                "Draw",
+                "1200 ms"
+              ],
+              [
+                "Loop",
+                "1200 ms"
+              ],
+              [
+                "Stagger",
+                "80 ms"
+              ],
+              [
+                "Settle",
+                "ease out, (.2, .7, .2, 1)"
+              ]
+            ]
+          },
+          {
+            "type": "para",
+            "text": "Assemble, don’t decorate. Motion shows parts fitting together. Every logo animation ends on the exact still logo: no bounce, blur, glow or colour change.",
+            "x": 64,
+            "y": 624,
+            "width": 620,
+            "size": 19,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "One thing at a time. Stagger related parts by 80 ms. Move along the mark’s own axes: vertical, or the 3 : 5 isometric slope.",
+            "x": 728,
+            "y": 624,
+            "width": 620,
+            "size": 19,
+            "colour": "muted",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "Loops are for waiting. Only loaders loop, and only the mark loops, never the full logo. Stop the loop as soon as the wait is over.",
+            "x": 64,
+            "y": 736,
+            "width": 620,
+            "size": 19,
+            "colour": "ink",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "Still is a valid frame. With reduced motion, show the final frame. Nothing should depend on the animation to be understood.",
+            "x": 728,
+            "y": 736,
+            "width": 620,
+            "size": 19,
+            "colour": "muted",
+            "line": 1.5
+          },
+          {
+            "type": "para",
+            "text": "All sixteen studies, with replay, are in motion/index.html in the kit and in brandkit’s Motion tab.",
+            "x": 64,
+            "y": 880,
+            "width": 1312,
+            "size": 18
+          }
+        ]
+      },
+      {
         "title": "Use the right file for the job.",
         "subtitle": "The same geometry drives the vectors, images, templates and website components.",
         "name": "Files",
@@ -2041,6 +2240,10 @@
       "to": "guidelines/brand-details-assets/wordmark-white.png",
       "from": "docs/brand-details-assets/wordmark-white.png"
     },
+    "motion/index.html",
+    "motion/motion.css",
+    "motion/motion-tokens.json",
+    "motion/README.md",
     "fonts/README.md",
     "fonts/Sora-OFL.txt",
     "fonts/Sora-Light.ttf",
@@ -2095,6 +2298,190 @@
       {
         "id": "research",
         "content": "<circle cx=\"32\" cy=\"32\" r=\"26\"/><circle cx=\"32\" cy=\"32\" r=\"14\"/><circle cx=\"32\" cy=\"32\" r=\"3\" fill=\"currentColor\" stroke=\"none\"/>"
+      }
+    ]
+  },
+  "motion": {
+    "page": "motion/index.html",
+    "css": "motion/motion.css",
+    "tokens": {
+      "durations": {
+        "quick": 160,
+        "base": 320,
+        "slow": 640,
+        "draw": 1200,
+        "loop": 1200
+      },
+      "easings": {
+        "settle": "cubic-bezier(.2, .7, .2, 1)",
+        "move": "cubic-bezier(.6, 0, .2, 1)",
+        "linear": "linear"
+      },
+      "stagger": 80,
+      "distance": 24
+    },
+    "rules": [
+      {
+        "title": "Assemble, don’t decorate.",
+        "text": "Motion shows parts fitting together. Every logo animation ends on the exact still logo: no bounce, blur, glow or colour change."
+      },
+      {
+        "title": "One thing at a time.",
+        "text": "Stagger related parts by 80 ms. Move along the mark’s own axes: vertical, or the 3 : 5 isometric slope."
+      },
+      {
+        "title": "Loops are for waiting.",
+        "text": "Only loaders loop, and only the mark loops, never the full logo. Stop the loop as soon as the wait is over."
+      },
+      {
+        "title": "Still is a valid frame.",
+        "text": "With reduced motion, show the final frame. Nothing should depend on the animation to be understood."
+      }
+    ],
+    "studies": [
+      {
+        "id": "assemble",
+        "name": "Assemble",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "slow + base · settle",
+        "use": "Site intro, video opener, app launch",
+        "description": "The two blocks slide in along the isometric axis and lock together; then FIRST and FORM rise into place."
+      },
+      {
+        "id": "build",
+        "name": "Build",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "base, 80 ms stagger · settle",
+        "use": "Title slides, case study openers",
+        "description": "Each block is built face by face: top, side, then the outline of the open front."
+      },
+      {
+        "id": "draw",
+        "name": "Draw",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "draw + base · move",
+        "use": "Longer moments: video, keynote, reveal",
+        "description": "The line drawing of both blocks traces in, then the solid faces fill."
+      },
+      {
+        "id": "turn",
+        "name": "Turn",
+        "kind": "logo",
+        "group": "Logo",
+        "timing": "900 ms · move",
+        "use": "Explaining the mark; loading handing over to ready",
+        "description": "The second block starts on top of the first and turns 180° into place. The mark’s construction, shown."
+      },
+      {
+        "id": "blocks",
+        "name": "Block loader",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · move",
+        "use": "Page and app loading, 24 px and up",
+        "description": "The blocks part along their axis and meet again. Mark only; stops when loading ends."
+      },
+      {
+        "id": "stack",
+        "name": "Stack",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "1600 ms loop · settle",
+        "use": "Building, exporting, generating",
+        "description": "Three isometric blocks drop onto each other, then clear for the next round."
+      },
+      {
+        "id": "module",
+        "name": "Module",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · steps",
+        "use": "Panels and lists while content loads",
+        "description": "The design icon’s grid, with its one moving part travelling cell to cell."
+      },
+      {
+        "id": "overlap",
+        "name": "Overlap",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "loop · move",
+        "use": "Connecting, sending, matching",
+        "description": "The consultation icon’s two circles meet in the middle and part again."
+      },
+      {
+        "id": "focus",
+        "name": "Focus",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "slow · settle",
+        "use": "Image loading, uploads, capture",
+        "description": "Viewfinder brackets close in, the crosshair sets, and the photo comes up behind it."
+      },
+      {
+        "id": "progress",
+        "name": "Progress",
+        "kind": "loader",
+        "group": "Loading",
+        "timing": "2400 ms · settle",
+        "use": "Multi-step forms, uploads",
+        "description": "A pill track fills in three steps, lighting each stage as it passes."
+      },
+      {
+        "id": "skeleton",
+        "name": "Skeleton",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "1400 ms loop · linear",
+        "use": "Cards and lists before data arrives",
+        "description": "Placeholder bars with a highlight passing along the 3 : 5 diagonal."
+      },
+      {
+        "id": "cards",
+        "name": "Cards",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "base, 80 ms stagger · settle",
+        "use": "Section entrances",
+        "description": "White, Graphite and Black cards rise 24 px into place, one after another."
+      },
+      {
+        "id": "headline",
+        "name": "Headline",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "slow, 80 ms stagger · settle",
+        "use": "Hero headlines, title slides",
+        "description": "Each line rises out of its own mask."
+      },
+      {
+        "id": "field",
+        "name": "Field",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "2400 ms · settle",
+        "use": "Contact and intake forms",
+        "description": "The field takes focus, the entry types in, and Send turns into a drawn check."
+      },
+      {
+        "id": "press",
+        "name": "Press",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "quick · settle",
+        "use": "Buttons and pills",
+        "description": "A pill presses in to 96% and darkens to Graphite, then lets go."
+      },
+      {
+        "id": "wipe",
+        "name": "Wipe",
+        "kind": "interface",
+        "group": "Interface",
+        "timing": "slow · move",
+        "use": "Page and slide transitions",
+        "description": "The next page sweeps in behind an edge cut at the mark’s slope."
       }
     ]
   }

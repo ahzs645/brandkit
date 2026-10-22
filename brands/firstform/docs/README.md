@@ -6,9 +6,10 @@ Consulting · Design · Development. *From first idea to first form.*
 
 1. Open `index.html` to browse every file offline.
 2. Open `guidelines/brand-details.html` for the full reference: positioning and voice, logo rules, colour, type, icons, patterns, form styles, templates and where the brand can go next.
-3. Read `guidelines/firstform-brand-guide.pdf` for the eight-page guide.
-4. Use `logos/outlined/firstform-horizontal-black.svg` as the primary logo, on Ash (#DFDFDF) or White.
-5. Install the Sora files in `fonts/` before editing live text in the templates.
+3. Open `motion/index.html` for the motion library: logo animations, loaders and interface motion.
+4. Read `guidelines/firstform-brand-guide.pdf` for the nine-page guide.
+5. Use `logos/outlined/firstform-horizontal-black.svg` as the primary logo, on Ash (#DFDFDF) or White.
+6. Install the Sora files in `fonts/` before editing live text in the templates.
 
 ## What this kit is built from
 
@@ -36,6 +37,7 @@ When vector masters of the original logo exist, replace the mark's paths and the
 | `patterns/` | Repeat, crop and field graphics from the mark |
 | `icons/` | Consultation, design, prototyping, website, forms, build, systems and research, in one 2 px stroke |
 | `templates/` | Business card, part tag, letterhead, proposal cover, social posts and banner, link preview and three slides |
+| `motion/` | The motion library (`index.html`), `motion.css` with every token and keyframe, `motion-tokens.json` and a README |
 | `web/` | React components, CSS, tokens, landing template, app icons and favicons |
 | `fonts/` | Sora Light, Regular, SemiBold and Bold, with the SIL Open Font License |
 | `guidelines/` | The guide, logo sheet, brand details page |
