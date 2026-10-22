@@ -107,6 +107,10 @@ const studyArt = (id, parts, geometry) => {
   }
 }
 
+/** The horizontal lockup and the mark as animatable inline SVG, for pages outside the library (the site). */
+export const lockupMarkup = (geometry, prefix) => lockupSvg(markParts(geometry), geometry, prefix)
+export const markMarkup = (geometry, label = 'First Form mark') => markSvg(markParts(geometry), geometry.viewBox, label)
+
 // --- CSS ------------------------------------------------------------------------------------------
 
 const ms = (value) => `${value}ms`
@@ -472,7 +476,7 @@ Link \`motion.css\`. It defines the tokens as custom properties and every study'
 <div class="play" data-study="blocks"><!-- the mark's SVG, copied from index.html --></div>
 \`\`\`
 
-An element animates only inside a \`.play\` container, and its resting style is its last frame, so it reads correctly before, after, and without motion. Add \`.ff-paused\` to any ancestor to pause; with \`prefers-reduced-motion: reduce\` nothing moves.
+The First Form site (\`site/index.html\`) is a worked example: its intro, header logo and scroll reveals use this file. An element animates only inside a \`.play\` container, and its resting style is its last frame, so it reads correctly before, after, and without motion. Add \`.ff-paused\` to any ancestor to pause; with \`prefers-reduced-motion: reduce\` nothing moves.
 
 ## Tokens
 

@@ -62,3 +62,12 @@ test('the motion library covers every study, defines every token, and ships in t
   const plan = planKit(brand).map((entry) => entry.path)
   for (const file of ['motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md']) assert.ok(plan.includes(file), file)
 })
+
+test('the site uses the motion library: its CSS, and a logo and loader drawn from the brand', () => {
+  const site = readFileSync(`${folder}site/index.html`, 'utf8')
+  assert.equal(readFileSync(`${folder}site/assets/motion.css`, 'utf8'), readFileSync(`${folder}${brand.motion.css}`, 'utf8'))
+  assert.match(site, /href="assets\/motion\.css"/)
+  assert.match(site, /<!-- ff:logo --><svg class="ff-lockup"[\s\S]*?<\/svg><!-- \/ff:logo -->/)
+  assert.match(site, /<!-- ff:loader --><svg class="ff-mark"[\s\S]*?<\/svg><!-- \/ff:loader -->/)
+  for (const asset of [...site.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)].map((match) => match[1])) assert.ok(existsSync(`${folder}site/${asset}`), asset)
+})

@@ -2,6 +2,7 @@
 
 ## 1.0 - motion (22 October 2026)
 
+- The website uses it: a block-loader intro on the first visit, the header logo assembling, the headline rising, sections rising in on scroll, and pressed buttons. Its logo and loader are drawn from the brand by `npm run make:firstform`.
 - Added a motion library: sixteen studies of the logo (assemble, build, draw, turn), loading (block loader, stack, module, overlap, focus, progress) and the interface (skeleton, cards, headline, field, press, wipe).
 - Timing tokens (quick 160, base 320, slow 640, draw 1200 ms; settle and move easings; 80 ms stagger) and four rules, in `motion/motion.css` and `motion/motion-tokens.json`.
 - Every study rests on its final frame, so nothing moves with reduced motion and every logo animation ends on the still logo.

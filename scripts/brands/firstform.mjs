@@ -14,12 +14,12 @@
 //   the nearest open face to the kit's lettering, not the lettering itself: replace the glyphs when
 //   vector masters of the original wordmark exist. The PNGs are kept in reference/.
 
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { bakeWordmark, createStarterBrand } from '../../src/engine/starter.js'
 import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 import { n } from '../../src/engine/format.js'
 import { updateManifest } from './common.mjs'
-import { motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './firstform-motion.mjs'
+import { lockupMarkup, markMarkup, motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './firstform-motion.mjs'
 
 const folder = new URL('../../brands/firstform/', import.meta.url).pathname
 mkdirSync(folder, { recursive: true })
@@ -451,6 +451,18 @@ writeFileSync(`${folder}motion/index.html`, motionPage(motionGeometry, brand.col
 writeFileSync(`${folder}motion/motion.css`, motionCss(brand.colours))
 writeFileSync(`${folder}motion/motion-tokens.json`, `${JSON.stringify({ ...TOKENS, rules: RULES.map((rule) => rule.title) }, null, 2)}\n`)
 writeFileSync(`${folder}motion/README.md`, motionReadme())
+
+// The site uses the same CSS, and draws its header logo and loader from the same geometry: each sits
+// between <!-- ff:name --> markers in site/index.html, replaced on every run.
+writeFileSync(`${folder}site/assets/motion.css`, motionCss(brand.colours))
+const sitePath = `${folder}site/index.html`
+let site = readFileSync(sitePath, 'utf8')
+for (const [name, markup] of [['logo', lockupMarkup(motionGeometry, 'site-logo')], ['loader', markMarkup(motionGeometry, 'Loading')]]) {
+  const pattern = new RegExp(`(<!-- ff:${name} -->)[\\s\\S]*?(<!-- /ff:${name} -->)`)
+  if (!pattern.test(site)) throw new Error(`site/index.html has no ff:${name} markers`)
+  site = site.replace(pattern, (_, open, close) => open + markup + close)
+}
+writeFileSync(sitePath, site)
 
 writeFileSync(`${folder}brand.json`, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
