@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>First Form Brand Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: the brand's own world. Ash header bar, one 1240px column, specs as thin-ruled tables, artwork on its true grounds. */
+:root{
+  --ink:#060606; --black:#000000; --coal:#141414; --rule:#2A2A2A; --graphite:#484848;
+  --muted:#A6A6A6; --soft:#C8C8C8; --ash:#DFDFDF; --white:#FFFFFF;
+  --font:'Sora',Helvetica,Arial,sans-serif;
+  --r:24px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--white);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--white);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0;font-weight:600;text-wrap:balance}
+p{margin:0}
+.page{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 72px}
+.label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--soft);max-width:62ch;font-size:17px}
+
+/* header bar, same build as the site */
+.bar{background:var(--ash);color:var(--black);border-radius:var(--r);padding:12px 12px 12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bar img{height:52px;width:auto}
+.bar nav{display:flex;gap:8px;flex-wrap:wrap}
+.bar nav a{background:var(--black);color:var(--white);text-decoration:none;border-radius:999px;padding:10px 18px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.bar nav a:hover{background:var(--graphite)}
+
+.cover{padding-block:clamp(56px,9vw,112px) clamp(32px,5vw,56px);display:grid;gap:24px}
+.cover h1{font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:-.03em;max-width:12ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 28px;font-size:13px;color:var(--muted)}
+.meta b{color:var(--white);font-weight:400}
+
+section{padding-block:clamp(56px,7vw,88px);border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:36px}
+.sh{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px 48px;align-items:end}
+.sh h2{font-size:clamp(30px,3.8vw,48px);line-height:1.05;letter-spacing:-.02em;margin-top:8px}
+.sh p{color:var(--soft)}
+.sub{font-size:20px;font-weight:600;margin-bottom:-12px}
+
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* spec rows */
+.specs{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.specs li{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:20px;padding:16px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.specs li span:first-child{color:var(--muted)}
+.specs li span:last-child{color:var(--soft);min-width:0}
+
+/* positioning */
+.pos{background:var(--white);color:var(--black);border-radius:var(--r);padding:clamp(28px,4vw,48px);display:grid;gap:28px}
+.pos blockquote{margin:0;font-size:clamp(26px,3.2vw,40px);font-weight:600;line-height:1.15;letter-spacing:-.015em;max-width:24ch}
+.pos .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid #CFCFCF;padding-top:24px}
+.pos h3{font-size:15px;margin-bottom:6px}
+.pos p{font-size:15px;color:var(--graphite)}
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.voice div{border:1px solid var(--rule);border-radius:var(--r);padding:24px;display:grid;gap:12px;align-content:start}
+.voice ul{margin:0;padding-left:18px;color:var(--soft);display:grid;gap:6px;font-size:15px}
+
+/* logo plates */
+.plate{border-radius:var(--r);aspect-ratio:4/3;max-width:100%;padding:20px;display:flex;flex-direction:column}
+.plate .label{color:inherit;opacity:.7}
+.plate .art-c{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.on-ash{background:var(--ash);color:var(--black)}
+.on-white{background:var(--white);color:var(--black)}
+.on-black{background:var(--black);color:var(--white);outline:1px solid var(--rule);outline-offset:-1px}
+.on-graphite{background:var(--graphite);color:var(--white)}
+.clear{position:relative;padding:28px;outline:1.5px dashed currentColor;outline-offset:-1px;background:repeating-linear-gradient(45deg,#EDEDED 0 4px,transparent 4px 8px)}
+.clear img{background:var(--white)}
+.donts .plate{aspect-ratio:3/2}
+.donts p{font-size:14px;color:var(--soft);margin-top:10px}
+.x{display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--white);color:var(--black);font-size:12px;text-align:center;line-height:18px;margin-right:8px;font-weight:600}
+
+/* colour */
+.sw{all:unset;cursor:pointer;border-radius:var(--r);min-height:220px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;outline:1px solid var(--rule);outline-offset:-1px;transition:outline-color .2s}
+.sw:hover,.sw:focus-visible{outline-color:var(--muted)}
+.sw b{font-size:24px;font-weight:600}
+.sw small{font-size:13px;line-height:1.7;opacity:.8}
+.ext{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-radius:16px;overflow:hidden;outline:1px solid var(--rule);outline-offset:-1px}
+.ext button{all:unset;cursor:pointer;padding:16px;min-height:96px;display:flex;flex-direction:column;justify-content:flex-end;font-size:12px;gap:2px}
+.ext button:focus-visible{outline:2px solid var(--white);outline-offset:-4px}
+.bar-prop{display:flex;height:44px;border-radius:999px;overflow:hidden;outline:1px solid var(--rule);outline-offset:-1px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font-weight:400;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.chip{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:4px 12px;font-weight:600}
+.pass{color:var(--white)} .fail{color:var(--muted);text-decoration:line-through}
+
+/* type */
+.scale{border-top:1px solid var(--rule)}
+.scale div{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);gap:24px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--rule)}
+.scale span:first-child{font-size:12px;color:var(--muted);line-height:1.6}
+.scale span:last-child{min-width:0;overflow-wrap:anywhere}
+
+/* icons */
+.ic{border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:28px;justify-content:space-between;min-height:220px}
+.ic svg{width:64px;height:64px}
+.ic b{font-weight:400;font-size:20px;display:block}
+.ic small{font-size:13px;opacity:.75}
+.new{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:middle;opacity:.7}
+
+/* patterns */
+.pat{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;max-width:100%;position:relative;outline:1px solid var(--rule);outline-offset:-1px}
+.pat svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pcap{display:grid;gap:4px;margin-top:12px}
+.pcap b{font-weight:600;font-size:16px}
+.pcap span{font-size:14px;color:var(--soft)}
+
+/* templates: scaled artboards, all type in container units */
+#templates .grid > div,#templates .grid > div > div{container-type:inline-size;min-width:0}
+.art{container-type:inline-size;max-width:100%;position:relative;overflow:hidden}
+.tcap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:14px}
+.tcap span:last-child{color:var(--muted);text-align:right}
+.t-card{aspect-ratio:3.5/2;border-radius:2.5cqw}
+.t-sq{aspect-ratio:1/1;border-radius:3cqw}
+.t-169{aspect-ratio:16/9;border-radius:2cqw}
+.t-og{aspect-ratio:1200/630;border-radius:2cqw}
+.t-li{aspect-ratio:4/1;border-radius:1.2cqw}
+.t-a4{aspect-ratio:210/297;border-radius:1.5cqw}
+.t-tag{aspect-ratio:2/1;border-radius:4cqw}
+.grad{background:linear-gradient(120deg,#060606 0%,#1E1E1E 50%,#404040 100%)}
+.pill-s{display:inline-block;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+
+/* forms */
+.formdemo{background:var(--ash);color:var(--black);border-radius:var(--r);padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.f{display:grid;gap:8px;min-width:0}
+.f label,.f legend{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--graphite);padding:0}
+.f input[type=text],.f input[type=email],.f select,.f textarea{font:inherit;font-size:16px;color:var(--black);background:var(--white);border:1.5px solid transparent;border-radius:16px;padding:14px 18px;width:100%;outline:none}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--black)}
+.f .hint{font-size:13px;color:var(--graphite)}
+.f .err input{border-color:var(--black);background:#F4F4F4}
+.full{grid-column:1/-1}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:10px 16px;font-size:14px;text-transform:none;letter-spacing:0;color:var(--black);cursor:pointer}
+.opts input{accent-color:#000;margin:0}
+.formdemo .submit{justify-self:start;background:var(--black);color:var(--white);border:0;border-radius:999px;padding:16px 30px;font:inherit;font-size:15px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.formdemo .submit:hover{background:var(--graphite)}
+.formdemo .status{align-self:center;font-size:14px;color:var(--graphite)}
+
+/* uses */
+.uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0;border-top:1px solid var(--rule)}
+.uses div{padding:20px 20px 20px 0;border-bottom:1px solid var(--rule);display:grid;gap:4px}
+.uses b{font-weight:600}
+.uses span{color:var(--soft);font-size:14px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--white);color:var(--black);border-radius:999px;padding:10px 20px;font-size:14px;z-index:20}
+
+footer{border-top:1px solid var(--rule);padding-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer img{height:40px;width:auto}
+
+@media (max-width:960px){
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sh{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .g2,.g3,.g4,.voice,.pos .cols,.formdemo{grid-template-columns:minmax(0,1fr)}
+  .ext{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .specs li,.scale div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .bar img{height:44px}
+  .bar nav a{padding:9px 14px;font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<!-- shared SVG patterns -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="iso-d" width="40" height="23.094" patternUnits="userSpaceOnUse"><path d="M0 0L40 23.094M0 23.094L40 0M0 0V23.094M20 0V23.094" stroke="#2A2A2A" stroke-width="1" fill="none"/></pattern>
+    <pattern id="iso-l" width="40" height="23.094" patternUnits="userSpaceOnUse"><path d="M0 0L40 23.094M0 23.094L40 0M0 0V23.094M20 0V23.094" stroke="#C8C8C8" stroke-width="1" fill="none"/></pattern>
+    <g id="cube"><path d="M0 -20L17.32 -10L0 0L-17.32 -10Z" fill="var(--c-top)"/><path d="M-17.32 -10L0 0L0 20L-17.32 10Z" fill="var(--c-left)"/><path d="M0 0L17.32 -10L17.32 10L0 20Z" fill="var(--c-right)"/></g>
+    <pattern id="blocks-d" width="34.64" height="60" patternUnits="userSpaceOnUse" style="--c-top:#2A2A2A;--c-left:#0E0E0E;--c-right:#1A1A1A"><use href="#cube" x="0" y="0"/><use href="#cube" x="34.64" y="0"/><use href="#cube" x="17.32" y="30"/><use href="#cube" x="0" y="60"/><use href="#cube" x="34.64" y="60"/></pattern>
+    <pattern id="blocks-l" width="34.64" height="60" patternUnits="userSpaceOnUse" style="--c-top:#FFFFFF;--c-left:#DFDFDF;--c-right:#C8C8C8"><use href="#cube" x="0" y="0"/><use href="#cube" x="34.64" y="0"/><use href="#cube" x="17.32" y="30"/><use href="#cube" x="0" y="60"/><use href="#cube" x="34.64" y="60"/></pattern>
+    <pattern id="mod" width="32" height="28" patternUnits="userSpaceOnUse"><rect x="4" y="4" width="24" height="20" rx="7" fill="none" stroke="#484848" stroke-width="1.5"/></pattern>
+    <pattern id="rings" width="64" height="64" patternUnits="userSpaceOnUse"><circle cx="24" cy="32" r="20" fill="none" stroke="#3A3A3A" stroke-width="1.5"/><circle cx="40" cy="32" r="20" fill="none" stroke="#3A3A3A" stroke-width="1.5"/></pattern>
+  </defs>
+</svg>
+
+<div class="page">
+
+<header class="bar">
+  <img src="brand-details-assets/logo-black.png" alt="First Form">
+  <nav aria-label="Sections">
+    <a href="#logo">Logo</a><a href="#color">Color</a><a href="#type">Type</a><a href="#patterns">Patterns</a><a href="#templates">Templates</a>
+  </nav>
+</header>
+
+<div class="cover">
+  <span class="label">Brand details · Version 1.1</span>
+  <h1>First Form, in detail.</h1>
+  <p class="lede">The full reference for using the First Form identity: what the brand says, the logo and its rules, color, type, icons, patterns, interface parts and ready-made templates. Built on the V1.0 kit, cleaned up and extended.</p>
+  <div class="meta"><span>Typeface <b>Sora</b></span><span>Palette <b>4 core + 5 support greys</b></span><span>Radius <b>24 px cards, pill buttons</b></span><span>Spacing <b>8 · 16 · 24 · 48 · 96</b></span></div>
+</div>
+
+<!-- POSITIONING -->
+<section id="brand" aria-labelledby="h-brand">
+  <div class="sh"><div><span class="label">Positioning</span><h2 id="h-brand">Broad on purpose.</h2></div><p>First Form takes on websites, forms, products and processes. The brand describes the outcome, a first working version, so it never has to be rewritten when the work changes.</p></div>
+  <div class="pos">
+    <blockquote>From first idea to first form.</blockquote>
+    <div class="cols">
+      <div><h3>What we do</h3><p>Consulting, design and development. We scope the problem, shape it and build the first version that works.</p></div>
+      <div><h3>Who it's for</h3><p>Founders, teams and researchers with an idea that needs to become something people can use or test.</p></div>
+      <div><h3>Descriptor</h3><p>Use one everywhere: <b>Consulting · Design · Development</b>. Add a specific service only in context.</p></div>
+    </div>
+  </div>
+  <div class="voice">
+    <div><span class="label">Voice: say</span><ul><li>Plain verbs: scope, design, build, test.</li><li>The real thing: "the probe holder", "the intake form".</li><li>Short sentences. One idea each.</li><li>"We" for the practice, "you" for the client.</li></ul></div>
+    <div><span class="label">Voice: avoid</span><ul><li>Lists of every service in one line.</li><li>Hype words: revolutionary, world-class, cutting-edge.</li><li>Jargon a client would have to look up.</li><li>"Under construction" or apologies on live pages.</li></ul></div>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section id="logo" aria-labelledby="h-logo">
+  <div class="sh"><div><span class="label">Logo</span><h2 id="h-logo">Two blocks, one form.</h2></div><p>The mark is two interlocking isometric blocks: separate parts that fit into one whole. Use the files as supplied. Never redraw, retype or recolor them.</p></div>
+  <div class="grid g3">
+    <div class="plate on-ash"><span class="label">Primary · on Ash</span><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="First Form logo on Ash" style="width:62%;max-width:260px"></div></div>
+    <div class="plate on-white"><span class="label">Primary · on White</span><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="First Form logo on White" style="width:62%;max-width:260px"></div></div>
+    <div class="plate on-black"><span class="label">Reversed · on Black</span><div class="art-c"><img src="brand-details-assets/logo-white.png" alt="First Form logo reversed" style="width:62%;max-width:260px"></div></div>
+  </div>
+  <div class="grid g4">
+    <div class="plate on-white" style="aspect-ratio:1/1"><span class="label">Mark only</span><div class="art-c"><img src="brand-details-assets/mark-black.png" alt="First Form mark" style="height:45%"></div></div>
+    <div class="plate on-black" style="aspect-ratio:1/1"><span class="label">Wordmark only</span><div class="art-c"><img src="brand-details-assets/wordmark-white.png" alt="First Form wordmark" style="width:55%"></div></div>
+    <div class="plate on-white" style="aspect-ratio:1/1"><span class="label">Clear space = height of F</span><div class="art-c"><div class="clear"><img src="brand-details-assets/logo-black.png" alt="" style="height:56px"></div></div></div>
+    <div class="plate on-ash" style="aspect-ratio:1/1"><span class="label">App icon · favicon</span><div class="art-c" style="gap:12px;align-items:flex-end">
+      <span style="width:72px;height:72px;border-radius:18px;background:#000;display:flex;align-items:center;justify-content:center"><img src="brand-details-assets/mark-white.png" alt="" style="height:48px"></span>
+      <span style="width:40px;height:40px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center"><img src="brand-details-assets/mark-black.png" alt="" style="height:26px"></span>
+      <span style="width:24px;height:24px;border-radius:6px;background:#000;display:flex;align-items:center;justify-content:center"><img src="brand-details-assets/mark-white.png" alt="" style="height:16px"></span>
+    </div></div>
+  </div>
+  <ul class="specs">
+    <li><span>Minimum size</span><span>Full logo 40 px / 12 mm tall. Mark alone 24 px / 7 mm.</span></li>
+    <li><span>Grounds</span><span>Black logo on Ash or White. White logo on Black or the darkest greys. Never on Graphite or a busy photo.</span></li>
+    <li><span>Which version</span><span>Full logo by default. Mark alone where the name is already present nearby (avatars, favicons, page corners). Wordmark alone only in very narrow spaces.</span></li>
+    <li><span>Files needed</span><span>Vector (SVG, PDF) masters of all three. The current kit only has PNGs at 372 px wide.</span></li>
+  </ul>
+  <div class="grid g4 donts">
+    <div><div class="plate on-ash"><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="" style="height:44px;transform:scaleX(1.5)"></div></div><p><span class="x">×</span>Stretch or squash</p></div>
+    <div><div class="plate on-ash"><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="" style="height:52px;transform:rotate(-14deg)"></div></div><p><span class="x">×</span>Rotate</p></div>
+    <div><div class="plate on-ash"><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="" style="height:52px;filter:drop-shadow(6px 8px 6px rgba(0,0,0,.45))"></div></div><p><span class="x">×</span>Add shadows or effects</p></div>
+    <div><div class="plate on-graphite"><div class="art-c"><img src="brand-details-assets/logo-black.png" alt="" style="height:52px"></div></div><p><span class="x">×</span>Use low-contrast grounds</p></div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section id="color" aria-labelledby="h-color">
+  <div class="sh"><div><span class="label">Color</span><h2 id="h-color">Strictly monochrome.</h2></div><p>Black, white and grey. Contrast does the work color usually does, and real photos of the work bring the color. Select any swatch to copy its hex.</p></div>
+  <div class="grid g4">
+    <button class="sw" data-hex="#000000" style="background:#000;color:#fff"><b>Black</b><small>#000000 · RGB 0 0 0<br>CMYK 60 40 40 100<br>Buttons, emphasis cards</small></button>
+    <button class="sw" data-hex="#484848" style="background:#484848;color:#fff"><b>Graphite</b><small>#484848 · RGB 72 72 72<br>CMYK 0 0 0 85<br>Secondary cards, muted UI</small></button>
+    <button class="sw" data-hex="#DFDFDF" style="background:#DFDFDF;color:#000"><b>Ash</b><small>#DFDFDF · RGB 223 223 223<br>CMYK 0 0 0 15<br>Header bar, logo ground</small></button>
+    <button class="sw" data-hex="#FFFFFF" style="background:#fff;color:#000"><b>White</b><small>#FFFFFF · RGB 255 255 255<br>CMYK 0 0 0 0<br>Type on dark, primary cards</small></button>
+  </div>
+  <p class="sub">Support greys</p>
+  <div class="ext">
+    <button data-hex="#060606" style="background:#060606;color:#C8C8C8">Ink<br>#060606 · page ground</button>
+    <button data-hex="#141414" style="background:#141414;color:#C8C8C8">Coal<br>#141414 · panels, image wells</button>
+    <button data-hex="#2A2A2A" style="background:#2A2A2A;color:#DFDFDF">Rule<br>#2A2A2A · lines, borders</button>
+    <button data-hex="#A6A6A6" style="background:#A6A6A6;color:#000">Steel<br>#A6A6A6 · labels on dark</button>
+    <button data-hex="#C8C8C8" style="background:#C8C8C8;color:#000">Mist<br>#C8C8C8 · body text on dark</button>
+  </div>
+  <div class="grid g2">
+    <div style="display:grid;gap:14px;align-content:start">
+      <span class="label">Proportion</span>
+      <div class="bar-prop"><div style="flex:50;background:#060606"></div><div style="flex:20;background:#DFDFDF"></div><div style="flex:15;background:#FFFFFF"></div><div style="flex:10;background:#484848"></div><div style="flex:5;background:#000"></div></div>
+      <p style="color:var(--soft);font-size:15px">Dark grounds lead (50). Ash (20) and White (15) frame content and the logo. Graphite (10) separates. Pure Black (5) is for buttons and emphasis. The Shadow Gradient (#060606 → #404040, 120°) is for social posts and title slides only, never behind the logo.</p>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Pair</th><th>Ratio</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip" style="background:#060606;color:#fff;outline:1px solid #2A2A2A">Aa</span> White on Ink</td><td>20.3:1</td><td class="pass">Any text</td></tr>
+          <tr><td><span class="chip" style="background:#060606;color:#C8C8C8;outline:1px solid #2A2A2A">Aa</span> Mist on Ink</td><td>12.1:1</td><td class="pass">Body text</td></tr>
+          <tr><td><span class="chip" style="background:#060606;color:#A6A6A6;outline:1px solid #2A2A2A">Aa</span> Steel on Ink</td><td>8.3:1</td><td class="pass">Labels</td></tr>
+          <tr><td><span class="chip" style="background:#DFDFDF;color:#000">Aa</span> Black on Ash</td><td>15.8:1</td><td class="pass">Any text</td></tr>
+          <tr><td><span class="chip" style="background:#DFDFDF;color:#484848">Aa</span> Graphite on Ash</td><td>6.9:1</td><td class="pass">Secondary text</td></tr>
+          <tr><td><span class="chip" style="background:#484848;color:#fff">Aa</span> White on Graphite</td><td>9.1:1</td><td class="pass">Any text</td></tr>
+          <tr><td><span class="chip" style="background:#484848;color:#000">Aa</span> Black on Graphite</td><td>2.3:1</td><td class="fail">Never</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section id="type" aria-labelledby="h-type">
+  <div class="sh"><div><span class="label">Typography</span><h2 id="h-type">One family: Sora.</h2></div><p>A geometric sans with a technical edge: round enough to feel human, precise enough for engineering. Free on Google Fonts. Fallback: Helvetica, Arial. Three weights only.</p></div>
+  <div class="grid g3">
+    <div class="ic on-white"><span style="font-size:clamp(72px,9vw,120px);font-weight:600;line-height:.9">Aa</span><div style="display:flex;justify-content:space-between;font-size:14px"><span>SemiBold 600</span><span style="color:#484848">Headlines</span></div></div>
+    <div class="ic on-graphite"><span style="font-size:clamp(72px,9vw,120px);font-weight:400;line-height:.9">Aa</span><div style="display:flex;justify-content:space-between;font-size:14px"><span>Regular 400</span><span style="color:#DFDFDF">Body, nav, card titles</span></div></div>
+    <div class="ic on-black"><span style="font-size:clamp(72px,9vw,120px);font-weight:300;line-height:.9">Aa</span><div style="display:flex;justify-content:space-between;font-size:14px"><span>Light 300</span><span style="color:#A6A6A6">Large captions</span></div></div>
+  </div>
+  <div class="scale">
+    <div><span>Display<br>96 / 1.0 · 600 · −2.5%</span><span style="font-size:clamp(40px,6.5vw,96px);font-weight:600;line-height:1;letter-spacing:-.025em">First form.</span></div>
+    <div><span>Heading<br>48 / 1.1 · 600 · −1.5%</span><span style="font-size:clamp(28px,3.6vw,48px);font-weight:600;line-height:1.1;letter-spacing:-.015em">The approach</span></div>
+    <div><span>Card title<br>36 / 1.1 · 400</span><span style="font-size:clamp(24px,2.8vw,36px);line-height:1.1">Prototyping</span></div>
+    <div><span>Body<br>18 / 1.6 · 400</span><span style="font-size:18px;color:var(--soft);max-width:62ch">We scope the problem, design the system and build the first version that works, whether that's a website, a form, a part or a process.</span></div>
+    <div><span>Small<br>15 / 1.6 · 400</span><span style="font-size:15px;color:var(--soft)">Captions, card copy, footnotes.</span></div>
+    <div><span>Label<br>12–16 · 400 · caps +2 to +8%</span><span style="font-size:14px;letter-spacing:.06em;text-transform:uppercase">Projects · Services · Contact</span></div>
+  </div>
+</section>
+
+<!-- ICONS -->
+<section id="icons" aria-labelledby="h-icons">
+  <div class="sh"><div><span class="label">Iconography</span><h2 id="h-icons">Thin lines, simple geometry.</h2></div><p>Circles, rounded squares and corner brackets in one 2 px stroke on a 64 px grid. One icon per card, top left. The three originals map to the approach; five new ones cover the wider work.</p></div>
+  <div class="grid g4">
+    <div class="ic on-white"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="32" r="20"/><circle cx="40" cy="32" r="20"/></svg><div><b>Consultation</b><small>Overlap: shared ground</small></div></div>
+    <div class="ic on-graphite"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="12" height="10" rx="3.5"/><rect x="19" y="9" width="12" height="10" rx="3.5"/><rect x="35" y="9" width="12" height="10" rx="3.5"/><circle cx="57" cy="14" r="5" fill="#A6A6A6" stroke="none"/><rect x="3" y="27" width="12" height="10" rx="3.5"/><rect x="19" y="27" width="12" height="10" rx="3.5"/><rect x="35" y="27" width="12" height="10" rx="3.5"/><rect x="51" y="27" width="12" height="10" rx="3.5"/><rect x="3" y="45" width="12" height="10" rx="3.5"/><rect x="19" y="45" width="12" height="10" rx="3.5"/><rect x="35" y="45" width="12" height="10" rx="3.5"/><rect x="51" y="45" width="12" height="10" rx="3.5"/></svg><div><b>Design</b><small>Grid: one moving part</small></div></div>
+    <div class="ic on-black"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V14A10 10 0 0 1 14 4h4M46 4h4a10 10 0 0 1 10 10v4M60 46v4a10 10 0 0 1-10 10h-4M18 60h-4A10 10 0 0 1 4 50v-4M32 20v24M20 32h24"/></svg><div><b>Prototyping</b><small>Viewfinder: focus, test</small></div></div>
+    <div class="ic on-white"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="56" height="44" rx="10"/><path d="M4 22h56"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/><circle cx="18" cy="16" r="1.5" fill="currentColor"/></svg><div><b>Website<span class="new">New</span></b><small>Window: a page to build</small></div></div>
+    <div class="ic on-black"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="56" height="14" rx="7"/><rect x="4" y="28" width="56" height="14" rx="7"/><rect x="4" y="48" width="10" height="10" rx="3"/><path d="M6.5 53l2 2 3.5-4"/><path d="M20 53h22"/></svg><div><b>Forms<span class="new">New</span></b><small>Fields and a check</small></div></div>
+    <div class="ic on-graphite"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M32 6L56 19V45L32 58L8 45V19Z"/><path d="M8 19L32 32L56 19M32 32V58"/></svg><div><b>Build<span class="new">New</span></b><small>Block: the physical part</small></div></div>
+    <div class="ic on-white"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="14" cy="14" r="8"/><circle cx="50" cy="14" r="8"/><circle cx="32" cy="50" r="8"/><path d="M22 14h20M18 21l10 22M46 21L36 43"/></svg><div><b>Systems<span class="new">New</span></b><small>Nodes: things connected</small></div></div>
+    <div class="ic on-black"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="32" cy="32" r="26"/><circle cx="32" cy="32" r="14"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><div><b>Research<span class="new">New</span></b><small>Target: find the need</small></div></div>
+  </div>
+</section>
+
+<!-- PATTERNS -->
+<section id="patterns" aria-labelledby="h-patterns">
+  <div class="sh"><div><span class="label">Patterns</span><h2 id="h-patterns">Built from the mark's geometry.</h2></div><p>Each pattern comes from something already in the brand: the isometric angle of the blocks, the module grid, the overlap and the viewfinder. Use them as quiet grounds behind type, at low contrast, never behind the logo.</p></div>
+  <div class="grid g3">
+    <div><div class="pat" style="background:#060606"><svg><rect width="100%" height="100%" fill="url(#iso-d)"/></svg></div><div class="pcap"><b>Isometric grid</b><span>30° lines from the mark. Slide backgrounds, technical drawings, section breaks.</span></div></div>
+    <div><div class="pat"><svg><rect width="100%" height="100%" fill="url(#blocks-d)"/></svg></div><div class="pcap"><b>Blocks · dark</b><span>Stacked isometric blocks. Covers, social posts, packaging.</span></div></div>
+    <div><div class="pat"><svg><rect width="100%" height="100%" fill="url(#blocks-l)"/></svg></div><div class="pcap"><b>Blocks · light</b><span>The same on light grounds. Stationery backs, stickers.</span></div></div>
+    <div><div class="pat" style="background:#0E0E0E"><svg><rect width="100%" height="100%" fill="url(#mod)"/><circle cx="66%" cy="40%" r="10" fill="#A6A6A6"/></svg></div><div class="pcap"><b>Module grid</b><span>From the Design icon. One filled dot marks the moving part. Website hero, process slides.</span></div></div>
+    <div><div class="pat" style="background:#060606"><svg><rect width="100%" height="100%" fill="url(#rings)"/></svg></div><div class="pcap"><b>Overlap field</b><span>Paired circles from Consultation. Workshop material, meeting decks.</span></div></div>
+    <div><div class="pat" style="background:#DFDFDF"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet"><g fill="none" stroke="#000" stroke-width="2.5"><path d="M40 90V70a30 30 0 0 1 30-30h20M310 40h20a30 30 0 0 1 30 30v20M360 210v20a30 30 0 0 1-30 30h-20M90 260H70a30 30 0 0 1-30-30v-20"/></g><text x="200" y="158" text-anchor="middle" font-family="Sora,Helvetica,sans-serif" font-size="15" letter-spacing="2" fill="#484848">PHOTO OF THE REAL PART</text></svg></div><div class="pcap"><b>Viewfinder frame</b><span>Corner brackets around photos and placeholders. Case studies, image wells.</span></div></div>
+  </div>
+</section>
+
+<!-- UI -->
+<section id="ui" aria-labelledby="h-ui">
+  <div class="sh"><div><span class="label">Interface</span><h2 id="h-ui">Soft corners, hard contrast.</h2></div><p>Panels use a 24 px radius, fields 16 px, actions are full pills. Forms sit on Ash so fields read as White wells. This is the pattern for intake, booking and contact forms. Try it below.</p></div>
+  <form class="formdemo" id="demo" novalidate>
+    <div class="f"><label for="f-name">Name</label><input id="f-name" type="text" value="Sam Rivera" autocomplete="off"></div>
+    <div class="f" id="f-email-wrap"><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@company.com" autocomplete="off"><span class="hint" id="f-email-hint">So we can reply.</span></div>
+    <fieldset class="f full"><legend>What do you need?</legend>
+      <div class="opts">
+        <label><input type="checkbox" id="o-web" checked> Website</label>
+        <label><input type="checkbox" id="o-form"> Form or workflow</label>
+        <label><input type="checkbox" id="o-proto"> Prototype</label>
+        <label><input type="checkbox" id="o-consult"> Consulting</label>
+        <label><input type="checkbox" id="o-other"> Not sure yet</label>
+      </div>
+    </fieldset>
+    <div class="f"><label for="f-stage">Where is it now?</label><select id="f-stage"><option>Just an idea</option><option>Sketches or notes</option><option>An early version</option><option>Live, needs work</option></select></div>
+    <div class="f"><label for="f-when">Timing</label><select id="f-when"><option>No fixed date</option><option>Within a month</option><option>1–3 months</option><option>Later this year</option></select></div>
+    <div class="f full"><label for="f-msg">Tell us about it</label><textarea id="f-msg" rows="3">A booking form for our clinic that connects to the calendar we already use.</textarea></div>
+    <button class="submit" type="submit">Send</button>
+    <span class="status" id="f-status" role="status">Example form. Nothing is sent.</span>
+  </form>
+  <ul class="specs">
+    <li><span>Primary button</span><span>Black pill, white caps, 16 × 32 px padding. Hover: Graphite.</span></li>
+    <li><span>Secondary button</span><span>White pill, black caps. Hover: Ash. Text links stay sentence case.</span></li>
+    <li><span>Fields</span><span>White on Ash, 16 px radius, 14 × 18 px padding. Focus: 1.5 px Black border. Labels in small caps above, hints in Graphite below.</span></li>
+    <li><span>Errors</span><span>No red. Black border, a short plain sentence saying what to fix, and the field keeps what was typed.</span></li>
+    <li><span>Cards in a row</span><span>Alternate White, Graphite, Black. 24 px gutters.</span></li>
+  </ul>
+</section>
+
+<!-- TEMPLATES -->
+<section id="templates" aria-labelledby="h-templates">
+  <div class="sh"><div><span class="label">Templates</span><h2 id="h-templates">Ready to fill in.</h2></div><p>Every template uses the same parts: the logo or mark in a corner, one Sora headline, at most one pill, and either a flat ground or one pattern. Bracketed text is a placeholder.</p></div>
+
+  <p class="sub">Print</p>
+  <div class="grid g3">
+    <div>
+      <div class="art t-card on-ash" style="display:flex;align-items:center;justify-content:center"><img src="brand-details-assets/logo-black.png" alt="" style="width:46%"></div>
+      <div class="tcap"><span>Business card · front</span><span>3.5 × 2 in</span></div>
+    </div>
+    <div>
+      <div class="art t-card on-black" style="padding:8cqw;display:flex;flex-direction:column;justify-content:space-between">
+        <img src="brand-details-assets/mark-white.png" alt="" style="height:18cqw;width:auto;align-self:flex-start">
+        <div style="display:grid;gap:1.6cqw"><span style="font-size:6cqw;font-weight:600;line-height:1">[Full Name]</span><span style="font-size:3.4cqw;letter-spacing:.04em;color:#C8C8C8">[TITLE] · FIRSTFORM.ORG</span></div>
+      </div>
+      <div class="tcap"><span>Business card · back</span><span>3.5 × 2 in</span></div>
+    </div>
+    <div>
+      <div class="art t-tag on-white" style="padding:6cqw;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6cqw;align-items:center;outline:1px solid #ccc;outline-offset:-1px">
+        <img src="brand-details-assets/mark-black.png" alt="" style="height:30cqw;width:auto">
+        <div style="display:grid;gap:2cqw;font-size:4cqw;color:#000">
+          <span style="font-size:6.4cqw;font-weight:600;line-height:1.05">[Part name]</span>
+          <span style="display:grid;grid-template-columns:auto 1fr;gap:.6cqw 4cqw;color:#484848"><span>PROJECT</span><span style="color:#000">[FF-0000]</span><span>REV</span><span style="color:#000">[A]</span><span>DATE</span><span style="color:#000">[YYYY-MM-DD]</span></span>
+        </div>
+      </div>
+      <div class="tcap"><span>Part tag</span><span>70 × 35 mm label</span></div>
+    </div>
+  </div>
+  <div class="grid g3">
+    <div>
+      <div class="art t-a4" style="background:#060606;outline:1px solid #2A2A2A;outline-offset:-1px">
+        <svg style="position:absolute;inset:auto 0 0 0;width:100%;height:46%"><rect width="100%" height="100%" fill="url(#blocks-d)"/></svg>
+        <div style="position:absolute;inset:0;padding:9cqw;display:flex;flex-direction:column;gap:6cqw">
+          <span style="align-self:flex-start;background:#DFDFDF;border-radius:4cqw;padding:2.4cqw 3.4cqw"><img src="brand-details-assets/logo-black.png" alt="" style="height:10cqw;width:auto"></span>
+          <span style="font-size:3cqw;letter-spacing:.08em;color:#A6A6A6;margin-top:10cqw">PROPOSAL · [MONTH YEAR]</span>
+          <span style="font-size:9cqw;font-weight:600;line-height:1.02;letter-spacing:-.02em">[Project name]</span>
+          <span style="font-size:3.6cqw;color:#C8C8C8">Prepared for [Client]</span>
+        </div>
+      </div>
+      <div class="tcap"><span>Proposal cover</span><span>A4 / Letter</span></div>
+    </div>
+    <div>
+      <div class="art t-a4 on-white" style="padding:9cqw;display:flex;flex-direction:column;gap:5cqw;color:#000;font-size:2.8cqw">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><img src="brand-details-assets/logo-black.png" alt="" style="height:10cqw;width:auto"><span style="text-align:right;color:#484848;line-height:1.6">INVOICE [0001]<br>[YYYY-MM-DD]</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4cqw;color:#484848;line-height:1.6"><span>BILL TO<br><span style="color:#000">[Client name]<br>[Address]</span></span><span>FROM<br><span style="color:#000">First Form<br>firstform.org</span></span></div>
+        <div style="border-top:1.5px solid #000">
+          <div style="display:grid;grid-template-columns:1fr auto;padding:2.4cqw 0;border-bottom:1px solid #DFDFDF"><span>[Discovery and scope]</span><span>[0.00]</span></div>
+          <div style="display:grid;grid-template-columns:1fr auto;padding:2.4cqw 0;border-bottom:1px solid #DFDFDF"><span>[Design]</span><span>[0.00]</span></div>
+          <div style="display:grid;grid-template-columns:1fr auto;padding:2.4cqw 0;border-bottom:1px solid #DFDFDF"><span>[Build]</span><span>[0.00]</span></div>
+        </div>
+        <div style="align-self:flex-end;background:#000;color:#fff;border-radius:999px;padding:2cqw 4.4cqw;font-size:3.2cqw">TOTAL [0.00]</div>
+      </div>
+      <div class="tcap"><span>Invoice</span><span>A4 / Letter</span></div>
+    </div>
+    <div>
+      <div class="art t-a4 on-ash" style="padding:9cqw;display:flex;flex-direction:column;gap:4cqw;color:#000;font-size:2.8cqw">
+        <div style="display:flex;justify-content:space-between;align-items:center"><img src="brand-details-assets/logo-black.png" alt="" style="height:9cqw;width:auto"><span style="color:#484848">FIRSTFORM.ORG</span></div>
+        <span style="font-size:6.4cqw;font-weight:600;line-height:1.1;margin-top:6cqw">[Case study title]</span>
+        <div style="aspect-ratio:4/3;background:#fff;border-radius:3cqw;position:relative"><svg viewBox="0 0 400 300" style="position:absolute;inset:0;width:100%;height:100%"><g fill="none" stroke="#000" stroke-width="3"><path d="M40 90V70a30 30 0 0 1 30-30h20M310 40h20a30 30 0 0 1 30 30v20M360 210v20a30 30 0 0 1-30 30h-20M90 260H70a30 30 0 0 1-30-30v-20"/></g></svg></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;line-height:1.5"><span><b style="font-weight:600">Need</b><br>[One line]</span><span><b style="font-weight:600">Made</b><br>[One line]</span><span><b style="font-weight:600">Result</b><br>[One line]</span></div>
+      </div>
+      <div class="tcap"><span>One-page case study</span><span>A4 / Letter</span></div>
+    </div>
+  </div>
+
+  <p class="sub">Social and web</p>
+  <div class="grid g3">
+    <div>
+      <div class="art t-sq grad" style="padding:8cqw;display:flex;flex-direction:column;justify-content:space-between">
+        <span style="align-self:flex-start;background:#DFDFDF;border-radius:4cqw;padding:2.6cqw 3.6cqw"><img src="brand-details-assets/logo-black.png" alt="" style="height:9cqw;width:auto"></span>
+        <span style="font-size:10cqw;font-weight:600;line-height:1.02;letter-spacing:-.02em">From first idea to first form.</span>
+        <span class="pill-s" style="align-self:flex-start;background:#fff;color:#000;padding:2.6cqw 5cqw;font-size:3.4cqw">See projects</span>
+      </div>
+      <div class="tcap"><span>Post · statement</span><span>1080 × 1080</span></div>
+    </div>
+    <div>
+      <div class="art t-sq on-white" style="padding:8cqw;display:flex;flex-direction:column;justify-content:space-between;color:#000">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#000" stroke-width="2" style="width:20cqw;height:20cqw"><rect x="4" y="8" width="56" height="14" rx="7"/><rect x="4" y="28" width="56" height="14" rx="7"/><rect x="4" y="48" width="10" height="10" rx="3"/><path d="M6.5 53l2 2 3.5-4"/><path d="M20 53h22"/></svg>
+        <div style="display:grid;gap:3cqw"><span style="font-size:3.4cqw;letter-spacing:.08em;color:#484848">SERVICE</span><span style="font-size:9cqw;line-height:1.05">[Forms and workflows]</span><span style="font-size:4cqw;color:#484848;line-height:1.4">[One sentence on what it covers.]</span></div>
+        <img src="brand-details-assets/mark-black.png" alt="" style="height:9cqw;width:auto;align-self:flex-end">
+      </div>
+      <div class="tcap"><span>Post · service</span><span>1080 × 1080</span></div>
+    </div>
+    <div>
+      <div class="art t-sq" style="background:#000;outline:1px solid #2A2A2A;outline-offset:-1px">
+        <div style="position:absolute;inset:7cqw 7cqw 30cqw;background:#141414;border-radius:3cqw"><svg viewBox="0 0 400 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><g fill="none" stroke="#484848" stroke-width="3" vector-effect="non-scaling-stroke"><path d="M30 80V60a30 30 0 0 1 30-30h20M320 30h20a30 30 0 0 1 30 30v20M370 220v20a30 30 0 0 1-30 30h-20M80 270H60a30 30 0 0 1-30-30v-20"/></g></svg></div>
+        <div style="position:absolute;inset:auto 7cqw 7cqw;display:flex;justify-content:space-between;align-items:flex-end;gap:4cqw"><div style="display:grid;gap:1.6cqw"><span style="font-size:3.2cqw;letter-spacing:.08em;color:#A6A6A6">PROJECT</span><span style="font-size:6.4cqw;line-height:1.1">[Project name]</span></div><img src="brand-details-assets/mark-white.png" alt="" style="height:9cqw;width:auto"></div>
+      </div>
+      <div class="tcap"><span>Post · project photo</span><span>1080 × 1080</span></div>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div>
+      <div class="art t-og" style="background:#060606;outline:1px solid #2A2A2A;outline-offset:-1px">
+        <svg style="position:absolute;inset:0 0 0 55%;width:45%;height:100%"><rect width="100%" height="100%" fill="url(#iso-d)"/></svg>
+        <div style="position:absolute;inset:0;padding:6cqw;display:flex;flex-direction:column;justify-content:space-between;max-width:62%">
+          <img src="brand-details-assets/logo-white.png" alt="" style="height:8cqw;width:auto;align-self:flex-start">
+          <span style="font-size:5.6cqw;font-weight:600;line-height:1.05;letter-spacing:-.02em">[Page title goes here]</span>
+          <span style="font-size:2.2cqw;letter-spacing:.08em;color:#A6A6A6">FIRSTFORM.ORG</span>
+        </div>
+      </div>
+      <div class="tcap"><span>Link preview image</span><span>1200 × 630</span></div>
+    </div>
+    <div style="display:grid;gap:20px;align-content:start">
+      <div>
+        <div class="art t-li on-ash" style="display:flex;align-items:center;justify-content:space-between;padding:0 4cqw;color:#000">
+          <span style="font-size:3cqw;font-weight:600;letter-spacing:-.01em;max-width:60%;line-height:1.1">From first idea to first form.</span>
+          <span style="font-size:1.2cqw;letter-spacing:.08em;color:#484848">CONSULTING · DESIGN · DEVELOPMENT</span>
+        </div>
+        <div class="tcap"><span>LinkedIn banner</span><span>1584 × 396</span></div>
+      </div>
+      <div>
+        <div style="background:#fff;color:#000;border-radius:16px;padding:20px 22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;font-size:14px;line-height:1.5">
+          <img src="brand-details-assets/mark-black.png" alt="" style="height:44px;width:auto">
+          <div style="border-left:1px solid #DFDFDF;padding-left:16px;min-width:0"><b style="font-weight:600">[Full Name]</b><br><span style="color:#484848">[Title] · First Form</span><br><span style="color:#484848">firstform.org</span></div>
+        </div>
+        <div class="tcap"><span>Email signature</span><span>Mark 44 px, Sora or Helvetica</span></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sub">Presentation</p>
+  <div class="grid g2">
+    <div>
+      <div class="art t-169 grad">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.6"><rect width="100%" height="100%" fill="url(#iso-d)"/></svg>
+        <div style="position:absolute;inset:0;padding:5cqw;display:flex;flex-direction:column;justify-content:space-between">
+          <span style="align-self:flex-start;background:#DFDFDF;border-radius:2cqw;padding:1.2cqw 1.8cqw"><img src="brand-details-assets/logo-black.png" alt="" style="height:5cqw;width:auto"></span>
+          <div style="display:grid;gap:1.6cqw"><span style="font-size:6cqw;font-weight:600;line-height:1;letter-spacing:-.02em">[Deck title]</span><span style="font-size:1.8cqw;letter-spacing:.06em;color:#C8C8C8">[CLIENT] · [MONTH YEAR]</span></div>
+        </div>
+      </div>
+      <div class="tcap"><span>Slide · title</span><span>16:9</span></div>
+    </div>
+    <div>
+      <div class="art t-169 on-white" style="padding:5cqw;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4cqw;color:#000">
+        <div style="display:flex;flex-direction:column;justify-content:space-between;min-width:0">
+          <img src="brand-details-assets/mark-black.png" alt="" style="height:4.4cqw;width:auto;align-self:flex-start">
+          <div style="display:grid;gap:1.4cqw"><span style="font-size:1.3cqw;letter-spacing:.08em;color:#484848">CASE STUDY</span><span style="font-size:3.2cqw;font-weight:600;line-height:1.1">[Artificial Wetland Probe Holder]</span><span style="font-size:1.5cqw;color:#484848;line-height:1.5">[Two lines on the need and what was made.]</span></div>
+        </div>
+        <div style="background:#141414;border-radius:2cqw;position:relative"><svg viewBox="0 0 400 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><g fill="none" stroke="#484848" stroke-width="3" vector-effect="non-scaling-stroke"><path d="M30 80V60a30 30 0 0 1 30-30h20M320 30h20a30 30 0 0 1 30 30v20M370 220v20a30 30 0 0 1-30 30h-20M80 270H60a30 30 0 0 1-30-30v-20"/></g></svg></div>
+      </div>
+      <div class="tcap"><span>Slide · case study</span><span>16:9</span></div>
+    </div>
+    <div>
+      <div class="art t-169" style="background:#060606;outline:1px solid #2A2A2A;outline-offset:-1px;padding:5cqw;display:flex;flex-direction:column;gap:3cqw">
+        <span style="font-size:1.3cqw;letter-spacing:.08em;color:#A6A6A6">THE APPROACH</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;flex:1">
+          <div style="background:#fff;color:#000;border-radius:2cqw;padding:2.4cqw;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-size:2.6cqw">Consultation</span></div>
+          <div style="background:#484848;border-radius:2cqw;padding:2.4cqw;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-size:2.6cqw">Design</span></div>
+          <div style="background:#000;outline:1px solid #2A2A2A;outline-offset:-1px;border-radius:2cqw;padding:2.4cqw;display:flex;flex-direction:column;justify-content:flex-end"><span style="font-size:2.6cqw">Prototyping</span></div>
+        </div>
+      </div>
+      <div class="tcap"><span>Slide · three steps</span><span>16:9</span></div>
+    </div>
+    <div>
+      <div class="art t-169 on-ash" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3cqw;color:#000">
+        <img src="brand-details-assets/logo-black.png" alt="" style="height:10cqw;width:auto">
+        <span style="font-size:1.6cqw;letter-spacing:.08em;color:#484848">FIRSTFORM.ORG</span>
+      </div>
+      <div class="tcap"><span>Slide · close</span><span>16:9</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- USES -->
+<section id="uses" aria-labelledby="h-uses">
+  <div class="sh"><div><span class="label">Possibilities</span><h2 id="h-uses">Where the brand can go next.</h2></div><p>Ideas that use only the parts above. Start with the ones you'll see every week.</p></div>
+  <div class="uses">
+    <div><b>Proposal and report kit</b><span>Cover, contents, section dividers on the isometric grid, a closing page. One Word or Google Docs template.</span></div>
+    <div><b>Project tags and stickers</b><span>The part tag on every prototype you hand over, with project number and revision.</span></div>
+    <div><b>Form starter kit</b><span>Field, choice, select and error styles as a CSS file you drop into any client form build.</span></div>
+    <div><b>Case study pages</b><span>Need, made, result. One layout for print and web so every project reads the same.</span></div>
+    <div><b>Workshop canvases</b><span>A3 sheets on the overlap field for kickoff sessions: goals, users, constraints.</span></div>
+    <div><b>Packaging and shipping labels</b><span>Blocks pattern on kraft or white boxes, mark on the seal.</span></div>
+    <div><b>Video and motion</b><span>The two blocks sliding together as a 1-second intro. Use a vector master, never the PNG.</span></div>
+    <div><b>Merch</b><span>Mark-only on black tees and caps. White mark, nothing else.</span></div>
+    <div><b>Client portal or dashboard</b><span>The interface rules above, with Coal panels and Steel labels for dense screens.</span></div>
+  </div>
+</section>
+
+<footer>
+  <img src="brand-details-assets/logo-white.png" alt="First Form">
+  <span>Brand details V1.1 · built on the First Form Brand Kit V1.0</span>
+</footer>
+
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  var toast=document.getElementById('toast'), t;
+  function show(msg){toast.textContent=msg;toast.hidden=false;clearTimeout(t);t=setTimeout(function(){toast.hidden=true},1600);}
+  document.querySelectorAll('[data-hex]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var hex=b.getAttribute('data-hex');
+      try{
+        navigator.clipboard.writeText(hex).then(function(){show('Copied '+hex)},function(){show(hex)});
+      }catch(e){show(hex)}
+    });
+  });
+  var form=document.getElementById('demo'), email=document.getElementById('f-email'), wrap=document.getElementById('f-email-wrap'), hint=document.getElementById('f-email-hint'), status=document.getElementById('f-status');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!/^\S+@\S+\.\S+$/.test(email.value)){
+      wrap.classList.add('err'); hint.textContent='Add an email address, like name@company.com.'; email.focus();
+      status.textContent='One field needs fixing.'; return;
+    }
+    wrap.classList.remove('err'); hint.textContent='So we can reply.';
+    status.textContent='Looks good. In a real form, this is where it would send.';
+  });
+})();
+</script>
+</body>
+</html>
