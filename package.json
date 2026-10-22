@@ -43,7 +43,9 @@
     "import:pofbc": "node scripts/import-pofbc.mjs",
     "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs",
     "make:firstform": "node scripts/brands/firstform.mjs",
-    "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs"
+    "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
+    "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs",
+    "test:browser": "node test/browser/ddcnorth-motion.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -67,6 +69,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "1.54.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "vite": "^8.3.4"

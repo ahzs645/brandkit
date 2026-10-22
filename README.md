@@ -39,7 +39,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 
 | | |
 | --- | --- |
-| [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.1. The engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its eight guide pages page for page. On top of that, `npm run make:ddcnorth` adds an application system modelled on the BC manuals: 39 templates and 6 guide pages covering stationery, documents, publications, advertising, presentations and video, signs, vehicles and apparel, backgrounds, and incorrect usage. Each one cites the manual pages it follows. |
+| [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.1. The engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its eight guide pages page for page. On top of that, `npm run make:ddcnorth` adds an application system modelled on the BC manuals: 39 templates and 6 guide pages covering stationery, documents, publications, advertising, presentations and video, signs, vehicles and apparel, backgrounds, and incorrect usage. Each one cites the manual pages it follows. A proposed **v2.3**, *data, design, connection* (`npm run make:ddcnorth-v23`), adds the descriptor "Data · Design · Connection", four dot patterns, eight templates for findings, briefs, workshops and social, five icons, four guide pages, a brand details page, the redesigned website in `site/`, and a motion library of eighteen studies for the Motion tab; choose it in the header to see it. |
 | [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds twelve templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 | [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
@@ -141,9 +141,14 @@ The library components read the host page's custom properties (`--surface`, `--i
 npm install
 npm run dev                                    # the app
 npm test                                       # engine, manual pack, and parity (see below)
+npx playwright install chromium && npm run test:browser   # the Motion tab and pages, in Chromium
 node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
 ```
+
+`npm run test:browser` checks ddcnorth's proposed v2.3 in the app's Motion tab and its motion and
+brand-details pages, in Chromium at desktop and phone widths (it is not run in CI). Set
+`CHROMIUM_PATH` to use a Chromium you already have.
 
 `test/parity.test.js` compares the engine with the original ddcnorth kit, which is not in this
 repository; set `DDCNORTH_KIT` to an unzipped copy to run it. The CLI writes everything except

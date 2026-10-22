@@ -12,13 +12,13 @@ import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
 import { fill, logoOptions, paintOptions } from './brand.js'
 import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
-import { findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
+import { additionsOf, changesArtwork, findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
 import { officeFile } from '../export/office.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
-export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
+export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Motion', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
 
-const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', documents: 'Office documents', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', fonts: 'Fonts', source: 'Build sources', reference: 'References', revisions: 'Revisions' }
+const GROUP_BY_FOLDER = { logos: 'Logos', symbol: 'Symbols', templates: 'Templates', documents: 'Office documents', patterns: 'Patterns', icons: 'Supporting icons', web: 'Web assets', guidelines: 'Guidelines', motion: 'Motion', fonts: 'Fonts', source: 'Build sources', reference: 'References', revisions: 'Revisions' }
 export const groupOf = (path) => (path.includes('/') ? GROUP_BY_FOLDER[path.split('/')[0]] ?? 'Package files' : 'Package files')
 
 const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
@@ -182,6 +182,18 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     for (const revision of revisionsOf(brand)) {
       const folder = `revisions/${revision.id}`
       const revised = (ctx) => ({ ...ctx, brand: withRevision(ctx.brand, revision.id) })
+      add({ path: `${folder}/brand.json`, kind: 'text', make: (ctx) => json(withRevision(ctx.brand, revision.id)) })
+      add({ path: `${folder}/README.md`, kind: 'text', make: (ctx) => revisionReadme(ctx.brand, findRevision(ctx.brand, revision.id)) })
+      // A revision that only adds (templates, patterns, a motion library) carries what it adds, as
+      // vector and text files; the logos and symbol it would leave unchanged are not copied again.
+      if (!changesArtwork(revision)) {
+        const added = additionsOf(revision)
+        for (const spec of added.patterns) svgEntry(`${folder}/patterns/${spec.id}.svg`, (ctx) => pattern(revised(ctx), spec))
+        for (const template of added.templates) svgEntry(`${folder}/templates/${template.id}.svg`, (ctx) => renderTemplate(revised(ctx), template).svg)
+        for (const item of added.icons) svgEntry(`${folder}/icons/${item.id}.svg`, (ctx) => icon(revised(ctx), item))
+        if (assets) for (const file of added.files) add({ path: `${folder}/${file.to ?? file}`, kind: 'asset', src: file.from ?? file })
+        continue
+      }
       for (const logo of logoOptions(brand)) {
         for (const paint of paintOptions(brand)) {
           const make = (ctx) => logoDocument(revised(ctx), { ...logo, colourKey: paint.colour, colour: paint.colour === 'currentColor' || logo.signature ? paint.colour : undefined, colourway: paint.colourway })
@@ -191,8 +203,6 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
       }
       for (const key of logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
       if (brand.symbol.microRadius != null || brand.symbol.microPaths) svgEntry(`${folder}/symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(revised(ctx), { micro: true }))
-      add({ path: `${folder}/brand.json`, kind: 'text', make: (ctx) => json(withRevision(ctx.brand, revision.id)) })
-      add({ path: `${folder}/README.md`, kind: 'text', make: (ctx) => revisionReadme(ctx.brand, findRevision(ctx.brand, revision.id)) })
     }
   }
 

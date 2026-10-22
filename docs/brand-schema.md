@@ -245,6 +245,23 @@ symbols, a `README.md` with the rationale, its own `brand.json`, and any guide s
 `symbol` elements take `"revision": "<id>"` to draw a proposal's artwork for such a sheet.
 Approving a revision means moving its `changes` into the definition and removing the entry.
 
+A revision can add to a list instead of replacing it: `{ "$append": [ … ] }` in place of an array
+appends its items (or makes the array when there is none). ddcnorth's v2.3 proposal adds templates,
+patterns, icons, guide pages and files this way:
+
+```json
+"changes": { "templates": { "$append": [ … ] }, "icons": { "items": { "$append": [ … ] } }, "motion": { … } }
+```
+
+An object with `$append` and any other key, or a `$append` that is not an array, is an error, and
+so is `$append` anywhere outside a revision's `changes`; items inside a `$append` are kept as
+written. This changes what `mergePatch` (exported by the engine) does with such an object; every
+other patch behaves as before, with one edge: an object under a key the base does not have is now
+merged into an empty object, so a `null` inside it removes nothing and is dropped rather than kept. A revision whose `changes` leave the logo and symbol alone (no
+`symbol`, `wordmark`, `families`, `lockup`, `colours`, `roles` or `logoColours`) carries, in the
+approved kit's `revisions/<id>/`, the patterns, templates, icons and files it adds instead of copies
+of the unchanged logos, and its README says what approving it appends.
+
 ## Illustrations
 
 Drawings of what the identity goes on (a van, a cab door, a blazer, a locomotive), each with
@@ -299,7 +316,10 @@ with anything uncited).
 ## Web, patterns, icons, files
 
 - `patterns`: the symbol repeated (`repeat: { x: [from, to, step], y: […], scale, colour }`) or
-  placed (`place: [{ x, y, scale, colour }]`) on a background.
+  placed (`place: [{ x, y, scale, colour }]`) on a background, over any `dots`
+  (`[{ cx, cy, r, colour, opacity? }]`) and `lines` (`[{ points: [[x, y], …], colour, width, opacity? }]`).
+  Templates draw the same with a `dots` element (`{ type: 'dots', dots: [[cx, cy, r], …], fill,
+  opacity? }`) and a `polyline` element (`{ type: 'polyline', points, stroke, strokeWidth?, opacity? }`).
 - `icons`: `{ size, attrs, items: [{ id, content }] }`, drawn in `currentColor`.
 - `web`: React component names, CSS variable prefix, app icon and favicon settings, and the copy
   for the kit's index.html and landing template.
@@ -310,3 +330,7 @@ with anything uncited).
   with it. `tokens` (`durations` in ms, `easings`, `stagger`), `rules` (`[{ title, text }]`) and
   `studies` (`[{ id, name, kind, group, timing, use, description }]`) describe it as data. List
   the page and its CSS in `files` to carry them in the kit. See `scripts/brands/firstform-motion.mjs`.
+  ddcnorth's proposed v2.3 adds `motion.guardrails` (`{ do: [...], dont: [...] }`) and
+  `motion.groups` (`[{ id, label, kinds }]`, the library's filters), and a study may say `loop` and
+  its `background`. See `scripts/brands/ddcnorth-motion.mjs`. A study needs an id, name, kind,
+  timing, use and description, ids are unique, and durations are positive numbers of milliseconds.

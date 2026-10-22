@@ -1,5 +1,17 @@
 # Change log
 
+## Proposed: 2.3 - data, design, connection (22 October 2026)
+
+Not yet approved. Choose it in brandkit's header to see it; the approved kit carries it in
+`revisions/data-design-connection/`, and the identity remains v2.1 until it is approved. It is a
+sibling of the 2.2 rising proposal, made over v2.1.
+
+- Adds the descriptor "Data · Design · Connection" and four guide pages: reading the name, a data language, motion and voice.
+- Adds four patterns on the symbol's grid (network, field, ramp, signal), eight templates for the work itself (title and finding slides, insight card, section divider, project brief, workshop canvas, share image, LinkedIn banner) and five supporting icons.
+- Adds a motion library of eighteen studies for the Motion tab (`motion/`). Motion lives in fields, paths and loaders; the logo and the complete symbol never move.
+- Adds a brand details page (`docs/brand-details.html`) and the redesigned website (`site/`).
+- Leaves the logo, symbol, colours and type unchanged.
+
 ## Proposed: 2.2 - rising symbol (18 October 2026)
 
 Not yet approved. The files in `revisions/rising/` show it; the identity remains v2.1 until it is.

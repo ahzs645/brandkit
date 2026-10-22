@@ -1,0 +1,39 @@
+{
+  "durations": {
+    "quick": 200,
+    "base": 600,
+    "slow": 1200,
+    "draw": 1800
+  },
+  "easings": {
+    "settle": "cubic-bezier(.2,.7,.2,1)",
+    "move": "cubic-bezier(.6,0,.2,1)",
+    "linear": "linear"
+  },
+  "stagger": {
+    "field": [
+      20,
+      30
+    ],
+    "loaderStep": 200
+  },
+  "rules": [
+    "Fields, paths and loaders move",
+    "The logo never moves",
+    "Reduced motion shows the end"
+  ],
+  "guardrails": {
+    "do": [
+      "Use one move per screen or slide",
+      "Let loops run only where nothing needs reading",
+      "Offer a pause for anything that loops longer than five seconds",
+      "Finish transitions in under two seconds"
+    ],
+    "dont": [
+      "Fade, scale, spin or bounce the logo or the full symbol",
+      "Animate dots behind body text",
+      "Mix easings within one move",
+      "Use colours outside the kit for states"
+    ]
+  }
+}

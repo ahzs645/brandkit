@@ -30,6 +30,8 @@
 //   lines       { x, y, leading, size, colour, font?, align?, anchor?, lines: [{ id, text, font?, style?, size? }] }
 //   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
 //               one field, wrapped to `width` (and at any line break typed into it)
+//   dots        { dots: [[cx, cy, r], …], fill, opacity?, id? }        a field of circles, as one path
+//   polyline    { points: [[x, y], …], stroke, strokeWidth?, opacity?, id? }
 //   printGuides { colour, trim: {...}, safe: {...} }                  hidden trim and safe areas
 //
 // Every text element with an `id` is a field: `values[id]` replaces its text. A brand may list its
@@ -197,6 +199,12 @@ const renderElement = (ctx, element, template) => {
       return `<rect${idAttr(element)} x="${n6(u(element.x))}" y="${n6(u(element.y))}" width="${n6(u(element.width))}" height="${n6(u(element.height))}" fill="${resolveColour(brand, element.fill ?? 'none')}"${stroke(ctx, element, unit)}/>`
     case 'path':
       return `<path${idAttr(element)} d="${element.d}"${element.fill ? ` fill="${resolveColour(brand, element.fill)}"` : ''}${stroke(ctx, element, unit)}/>`
+    case 'dots': {
+      const d = element.dots.map(([cx, cy, r]) => { const [x, y, radius] = [u(cx), u(cy), u(r)]; return `M${n6(x - radius)} ${n6(y)}a${n6(radius)} ${n6(radius)} 0 1 0 ${n6(2 * radius)} 0a${n6(radius)} ${n6(radius)} 0 1 0 ${n6(-2 * radius)} 0Z` }).join('')
+      return `<path${idAttr(element)} d="${d}" fill="${resolveColour(brand, element.fill ?? 'ink')}"${element.opacity != null ? ` opacity="${n6(element.opacity)}"` : ''}/>`
+    }
+    case 'polyline':
+      return `<polyline${idAttr(element)} points="${element.points.map(([x, y]) => `${n6(u(x))},${n6(u(y))}`).join(' ')}" fill="none"${stroke(ctx, { stroke: 'ink', ...element }, unit)}${element.opacity != null ? ` opacity="${n6(element.opacity)}"` : ''}/>`
     case 'line':
       return `<path${idAttr(element)} d="M${n6(u(element.x1))} ${n6(u(element.y1))}L${n6(u(element.x2))} ${n6(u(element.y2))}"${stroke(ctx, { stroke: 'ink', ...element }, unit)}/>`
     case 'logo':

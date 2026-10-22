@@ -153,10 +153,17 @@ export const svgDocument = ({ brand }, width, height, art, title, { background, 
 /** Python wrote pattern scales as literals (".6"); a number prints the same way here. */
 const scaleText = (value) => String(value).replace(/^0\./, '.')
 
-/** A supporting pattern: the symbol repeated on a grid, or placed at given positions. */
+const opacityAttr = (value) => (value == null || value === 1 ? '' : ` opacity="${n(value)}"`)
+
+/**
+ * A supporting pattern: the symbol repeated on a grid, or placed at given positions, over any
+ * `dots` ({ cx, cy, r, colour, opacity? }) and `lines` ({ points: [[x, y], …], colour, width, opacity? }).
+ */
 export const pattern = (ctx, spec) => {
   const { brand } = ctx
   let art = ''
+  for (const dot of spec.dots ?? []) art += `<circle cx="${n(dot.cx)}" cy="${n(dot.cy)}" r="${n(dot.r)}" fill="${resolveColour(brand, dot.colour)}"${opacityAttr(dot.opacity)}/>`
+  for (const line of spec.lines ?? []) art += `<polyline points="${line.points.map(([x, y]) => `${n(x)},${n(y)}`).join(' ')}" fill="none" stroke="${resolveColour(brand, line.colour)}" stroke-width="${n(line.width ?? 1)}"${opacityAttr(line.opacity)}/>`
   if (spec.repeat) {
     const { x: [x0, x1, dx], y: [y0, y1, dy], scale, colour } = spec.repeat
     for (let y = y0; y < y1; y += dy) {

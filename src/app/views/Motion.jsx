@@ -1,8 +1,9 @@
 // A brand's motion library: the page the brand carries for it (`motion.page`), shown whole, so its
 // studies play exactly as they do in the kit's motion/index.html.
 
-/** The URL of the brand's motion library page, when the brand has one and its files hold it. */
-export const motionUrl = (brand, source) => (brand?.motion?.page && source?.url(brand.motion.page)) || null
+import { motionUrl } from '../motion.js'
+
+export { motionUrl }
 
 export const Motion = ({ brand, source }) => {
   const url = motionUrl(brand, source)
