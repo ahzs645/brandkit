@@ -47,37 +47,46 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
   )
 }
 
-/** What became of earlier versions and proposals: superseded, archived (with its logo, if it changed one) or approved. */
+const HistoryEntry = ({ brand, fonts, logo, entry }) => {
+  const archivedArt = entry.status === 'archived' && entry.changes && changesArtwork(entry)
+  return (
+    <article className="revision">
+      <div className="revision__head">
+        <h3>{entry.title ?? `v${entry.displayVersion ?? entry.version}`}</h3>
+        <span className={`revision__status revision__status--${entry.status}`}>{entry.status}</span>
+        <span className="muted">v{entry.displayVersion ?? entry.version}{entry.date ? ` · ${entry.date}` : ''}{entry.archived ? ` · archived ${entry.archived}` : ''}{entry.approved ? ` · approved ${entry.approved}` : ''}</span>
+      </div>
+      {archivedArt && (
+        <figure className="history__logo"><div><SvgImage svg={logoDocument({ brand: mergePatch(brand, entry.changes), fonts }, logo)} alt={`${entry.title}, archived`} /></div></figure>
+      )}
+      {entry.summary && <p className="muted" style={{ margin: 0 }}>{entry.summary}</p>}
+      {entry.note && <p className="caption caption--flush" style={{ paddingTop: 0 }}>{entry.note}</p>}
+    </article>
+  )
+}
+
+/**
+ * Where the identity stands: the approved version up front, and what it replaced or set aside
+ * (superseded versions, archived proposals and their logos) folded away in an archive.
+ */
 const History = ({ brand, fonts, logo }) => {
   if (!brand.history?.length) return null
   const entries = [...brand.history].reverse()
+  const current = entries.filter((entry) => entry.status === 'approved')
+  const archive = entries.filter((entry) => entry.status !== 'approved')
   return (
     <section className="panel">
       <div className="panel__head">
-        <h2>History</h2>
-        <p className="muted">How {brand.name} reached v{brand.displayVersion ?? brand.version}: the versions it replaced and the proposals decided along the way.</p>
+        <h2>Current version</h2>
+        <p className="muted">{brand.name} v{brand.displayVersion ?? brand.version}, and what it was built from.</p>
       </div>
-      {entries.map((entry) => {
-        const key = entry.id ?? entry.version
-        const archivedArt = entry.status === 'archived' && entry.changes && changesArtwork(entry)
-        return (
-          <article key={key} className="revision">
-            <div className="revision__head">
-              <h3>{entry.title ?? `v${entry.displayVersion ?? entry.version}`}</h3>
-              <span className={`revision__status revision__status--${entry.status}`}>{entry.status}</span>
-              <span className="muted">v{entry.displayVersion ?? entry.version}{entry.date ? ` · ${entry.date}` : ''}{entry.archived ? ` · archived ${entry.archived}` : ''}{entry.approved ? ` · approved ${entry.approved}` : ''}</span>
-            </div>
-            {archivedArt && (
-              <div className="revision__pair">
-                <figure><div><SvgImage svg={logoDocument({ brand, fonts }, logo)} alt="The current logo" /></div><figcaption>Current, v{brand.displayVersion ?? brand.version}</figcaption></figure>
-                <figure><div><SvgImage svg={logoDocument({ brand: mergePatch(brand, entry.changes), fonts }, logo)} alt={`${entry.title}, archived`} /></div><figcaption>{entry.title}, archived</figcaption></figure>
-              </div>
-            )}
-            {entry.summary && <p className="muted" style={{ margin: 0 }}>{entry.summary}</p>}
-            {entry.note && <p className="caption caption--flush" style={{ paddingTop: 0 }}>{entry.note}</p>}
-          </article>
-        )
-      })}
+      {current.map((entry) => <HistoryEntry key={entry.id ?? entry.version} brand={brand} fonts={fonts} logo={logo} entry={entry} />)}
+      {archive.length > 0 && (
+        <details className="history__archive">
+          <summary>Archive <span className="muted">{archive.length} earlier {archive.length === 1 ? 'version or proposal' : 'versions and proposals'}</span></summary>
+          {archive.map((entry) => <HistoryEntry key={entry.id ?? entry.version} brand={brand} fonts={fonts} logo={logo} entry={entry} />)}
+        </details>
+      )}
     </section>
   )
 }
