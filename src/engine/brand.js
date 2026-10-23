@@ -118,6 +118,9 @@ export const validateBrand = (brand) => {
     if (entry.stackedWordmark != null) need(brand.wordmark?.variants?.[entry.stackedWordmark], `Family \`${entry.id}\` names stacked wordmark \`${entry.stackedWordmark}\`, which is not defined.`)
     if (entry.lockupSymbol != null) need(typeof entry.lockupSymbol === 'boolean', `Family \`${entry.id}\`: \`lockupSymbol\` must be true or false.`)
   }
+  if (brand.wordmark?.optionalSubtext) {
+    for (const key of ['withFamily', 'withoutFamily']) need(brand.families?.some((entry) => entry.id === brand.wordmark.optionalSubtext[key]), `Optional subtext \`${key}\` must name an existing family.`)
+  }
   for (const [id, variant] of Object.entries(brand.wordmark?.variants ?? {})) {
     if (variant.height != null) need(typeof variant.height === 'number' && variant.height > 0, `Wordmark \`${id}\`: \`height\` must be a positive number.`)
     for (const part of variant.parts ?? []) {
@@ -199,7 +202,7 @@ export const validateBrand = (brand) => {
  * signature. `{ key, label, family?, layout?, signature? }`, in order, primary first.
  */
 export const logoOptions = (brand) => (brand.families?.length
-  ? brand.families.flatMap((entry) => ['horizontal', 'stacked', 'wordmark'].map((layout) => ({ key: `${entry.id}-${layout}`, label: `${entry.label ?? entry.id}, ${layout}`, family: entry.id, layout })))
+  ? brand.families.flatMap((entry) => ['horizontal', 'stacked', 'wordmark', ...(entry.stackedWordmark ? ['wordmark-stacked'] : [])].map((layout) => ({ key: `${entry.id}-${layout}`, label: `${entry.label ?? entry.id}, ${layout.replaceAll('-', ' ')}`, family: entry.id, layout })))
   : (brand.signatures ?? []).map((entry) => ({ key: entry.id, label: entry.label ?? entry.id, signature: entry.id })))
 
 /**

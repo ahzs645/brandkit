@@ -74,7 +74,7 @@ export const Segmented = ({ label, value, options, onChange }) => (
   <div className="segmented" role="group" aria-label={label}>
     {options.map((option) => {
       const { value: optionValue, label: optionLabel, title } = typeof option === 'string' ? { value: option, label: option } : option
-      return <button key={optionValue} type="button" title={title} aria-pressed={value === optionValue} onClick={() => onChange(optionValue)}>{optionLabel}</button>
+      return <button key={optionValue} type="button" title={title} aria-label={optionLabel} aria-pressed={value === optionValue} onClick={() => onChange(optionValue)}>{optionLabel}</button>
     })}
   </div>
 )

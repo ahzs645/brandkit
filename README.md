@@ -31,6 +31,16 @@ brandkit draws the whole kit from it:
   paste into a mail program. They are made from the same templates: the artwork drawn behind,
   the fields as real text in the brand's faces (embedded in the Word files where their licence
   allows), lines that share a baseline on tab stops.
+- **Template Printer**: the full [Template Printer](https://github.com/ahzs645/template-printer)
+  frontend, built from the Git submodule at `vendor/template-printer`. Its own tab offers card
+  design, people, exports, calibration and settings, with the linked **Staff Card** package ready
+  to open (front, back, fonts and sample values). It runs with browser storage, on the same site,
+  and can open in a separate tab. **Edit & print** sends a filled brand template with its fonts,
+  sides and variants directly to the editor; edited packages can be imported back into the brand.
+  The website handoff offers an editable ZIP/source folder, an external printer link and a
+  direct link to OTE's published original. SVG, PNG and PDF exports stay in Templates.
+  Reusable package, browser-bridge and Vite APIs, plus a plain-JavaScript host example, are
+  documented in [docs/template-printer.md](docs/template-printer.md).
 - **The brand guide**: eight framed pages, logo reference sheets and a one-page overview, as SVG
   and as one PDF, read in the same viewer as the manual library.
 - **Motion**: for a brand that defines it, a motion library (timing tokens, rules and animated
@@ -135,7 +145,9 @@ plugins: [manualPages({ pack: 'bc', mount: 'visual-guides' })]
 ```
 
 The host installs the dependencies the parts it uses need (`jspdf`, `svg2pdf.js` and `fflate` for
-exports; `opentype.js` only for `brandkit/fonts`).
+exports; `opentype.js` for `brandkit/fonts`; `@xmldom/xmldom` and `bwip-js` for the
+engine's imported SVG and barcode support). Installing brandkit as a package installs these
+dependencies automatically; a source submodule host installs them itself.
 
 | Import | What it is |
 | --- | --- |
@@ -146,6 +158,9 @@ exports; `opentype.js` only for `brandkit/fonts`).
 | `brandkit/manuals` | `<ManualLibrary books families pageUrl />`: families of books, a page grid, one page at a time. |
 | `brandkit/manuals/bc` | The BC pack's books and families. |
 | `brandkit/vite` | `manualPages()`, the Vite plugin that serves and copies a pack's page files. |
+| `brandkit/printer` | Portable package import/export for native templates and imported card designs, in browsers and Node. |
+| `brandkit/printer/bridge` | A framework-independent session and message protocol for an iframe or popup. |
+| `brandkit/printer/vite` | Builds and mounts any compatible upstream Template Printer frontend, with configurable paths and deployment prefix. |
 
 The library components read the host page's custom properties (`--surface`, `--ink`,
 `--radius`…) with neutral fallbacks, so they take on the host's theme.
@@ -153,10 +168,13 @@ The library components read the host page's custom properties (`--surface`, `--i
 ## Development
 
 ```sh
+git submodule update --init --recursive
 npm install
+npm run setup:printer                          # install the pinned Template Printer frontend
 npm run dev                                    # the app
 npm test                                       # engine, manual pack, and parity (see below)
 npx playwright install chromium && npm run test:browser   # the Motion tab and pages, in Chromium
+npm run build && npm run test:printer           # Template Printer integration, in Chromium
 node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
 ```

@@ -9,6 +9,7 @@
 
 import { readFileSync } from 'node:fs'
 import { n } from '../../src/engine/format.js'
+import { pathBounds } from './overtheedge-logo.mjs'
 
 export const TOKENS = {
   // quick and base are the site's own transitions (160 and 240 ms).
@@ -60,8 +61,14 @@ const lockupSvg = ({ wordmark }, prefix, label = 'Over the Edge', { subtext = tr
 
 /** The stacked logo, OVER / THE / EDGE, each line in its own mask. */
 const stackedSvg = ({ wordmark }, prefix) => {
-  const variant = wordmark.variants.stacked
-  const lines = variant.parts.map((part, index) => `<clipPath id="${prefix}-l${index}"><rect x="-2" y="${n(part.y - 4)}" width="${n(variant.width + 4)}" height="${n(96)}"/></clipPath><g clip-path="url(#${prefix}-l${index})"><g class="ote-line ote-line--${index + 1}"><path transform="translate(${n(part.x)} ${n(part.y)})" d="${wordmark.glyphs[part.glyph]}"/></g></g>`).join('')
+  const variant = wordmark.variants['cover-stacked'] ?? wordmark.variants.stacked
+  const lines = variant.parts.map((part, index) => {
+    const d = wordmark.glyphs[part.glyph]
+    const box = pathBounds(d)
+    const x = part.x ?? 0, y = part.y ?? 0
+    const line = part.glyph.includes('subtext') ? 2 : index + 1
+    return `<clipPath id="${prefix}-l${index}"><rect x="${n(box[0] + x - 2)}" y="${n(box[1] + y - 4)}" width="${n(box[2] - box[0] + 4)}" height="${n(box[3] - box[1] + 8)}"/></clipPath><g clip-path="url(#${prefix}-l${index})"><g class="ote-line ote-line--${line}"><path transform="translate(${n(x)} ${n(y)})" d="${d}"/></g></g>`
+  }).join('')
   return `<svg class="ote-stacked" viewBox="0 0 ${n(variant.width)} ${n(variant.height)}" role="img" aria-label="Over the Edge, stacked">${lines}</svg>`
 }
 
@@ -186,7 +193,7 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 .play .ote-index b, .play .ote-index li > span:last-child { animation: ote-in var(--ote-base) var(--ote-settle) calc(var(--i) * var(--ote-stagger) * 2 + var(--ote-base)) both; }
 
 /* Chip: press in to 96%, turn forest, let go. */
-.ote-chip { display: inline-block; border: 1px solid var(--ote-forest); background: var(--ote-white); color: var(--ote-forest); border-radius: 999px; padding: 10px 20px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 500; }
+.ote-chip { display: inline-block; border: 1px solid var(--ote-forest); background: var(--ote-white); color: var(--ote-forest); border-radius: 999px; padding: 10px 20px; font-family: "Helvetica Neue", system-ui, sans-serif; font-size: 14px; font-weight: 500; }
 @keyframes ote-chip { 0%, 40% { transform: none; border-color: var(--ote-pulp); color: var(--ote-bark); } 46%, 56% { transform: scale(.96); } 66%, 100% { transform: none; border-color: var(--ote-forest); color: var(--ote-forest); } }
 .play .ote-chip { animation: ote-chip calc(var(--ote-loop) * 1.25) var(--ote-settle) both; }
 
@@ -216,10 +223,10 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 
 // --- Fonts, embedded so the pages need no network ------------------------------------------------
 
-/** `@font-face` rules with the brand's own files (TTF or WOFF2) as data: URIs. */
+/** `@font-face` rules with the brand's own TTF, OTF or WOFF2 files as data: URIs. */
 export const embeddedFonts = (resolve, faces) => faces.map(({ family, weight, style = 'normal', file }) => {
   const data = readFileSync(resolve(file)).toString('base64')
-  const [mime, format] = file.endsWith('.woff2') ? ['font/woff2', 'woff2'] : ['font/ttf', 'truetype']
+  const [mime, format] = file.endsWith('.woff2') ? ['font/woff2', 'woff2'] : file.endsWith('.otf') ? ['font/otf', 'opentype'] : ['font/ttf', 'truetype']
   return `@font-face { font-family: '${family}'; font-weight: ${weight}; font-style: ${style}; font-display: swap; src: url(data:${mime};base64,${data}) format('${format}'); }`
 }).join('\n')
 
@@ -257,12 +264,12 @@ export const motionPage = (geometry, colours, fonts) => {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Over the Edge Motion Library</title>
 <style>
-/* Fonts: the brand's own files, embedded, under the SIL Open Font License (see fonts/). */
+/* Fonts: supplied originals and open-source faces; see each notice in fonts/. */
 ${fonts}
 ${motionCss(colours)}
 /* The library page: forest on newsprint, square corners, dashed rules. */
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--ote-newsprint); color: var(--ote-ink); font-family: Inter, system-ui, Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ote-newsprint); color: var(--ote-ink); font-family: "Helvetica Neue", system-ui, Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 :focus-visible { outline: 2px solid var(--ote-forest); outline-offset: 3px; }
 .page { max-width: 1240px; margin: 0 auto; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 72px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 56px; }
 .bar { background: var(--ote-forest); color: var(--ote-white); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }

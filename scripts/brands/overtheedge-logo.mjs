@@ -93,6 +93,17 @@ export const loadLogo = (file) => {
   return { svg, glyphs: logoGlyphs(readLogo(svg)) }
 }
 
+/** The cover's outlined three-line masthead, including its subtext beside THE. */
+export const loadCoverLogo = (file) => {
+  const svg = readFileSync(file, 'utf8')
+  const paths = readLogo(svg)
+  const glyphs = Object.fromEntries(['over', 'the', 'edge', 'subtext'].map((name) => [
+    `cover-${name}`, paths.filter((path) => path.groups.includes(name)).map((path) => path.d).join('')
+  ]))
+  if (paths.length !== 33 || Object.values(glyphs).some((d) => !d)) throw new Error('The cover masthead must have 33 paths in four named groups.')
+  return { glyphs }
+}
+
 /** The geometry of an icon as the site serves it: its shapes with only their geometric attributes. */
 export const GEOMETRY = ['d', 'cx', 'cy', 'r', 'x', 'y', 'width', 'height', 'rx', 'points', 'x1', 'y1', 'x2', 'y2']
 export const iconGeometry = (markup) => [...markup.replace(/^<svg\b[^>]*>|<\/svg>\s*$/g, '').matchAll(/<(path|circle|rect|line|polyline|ellipse)\b([^>]*?)\/?>/g)]

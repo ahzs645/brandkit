@@ -100,9 +100,9 @@ export const Logos = ({ brand, fonts, source, openManual }) => {
       {brand.families.map((entry) => (
         <section key={entry.id} className="panel">
           <h2>{entry.label ?? entry.id}</h2>
-          {LAYOUTS.map((layout) => (
+          {[...LAYOUTS, ...(entry.stackedWordmark ? ['wordmark-stacked'] : [])].map((layout) => (
             <div key={layout} className="asset-row">
-              <h3>{layout}</h3>
+              <h3>{layout.replaceAll('-', ' ')}</h3>
               <div className="asset-grid">
                 {colours.map((key) => (
                   <Card key={key} title={colourName(brand, key)} name={`${entry.id}-${layout}-${key}`} ground={groundFor(brand, key)}

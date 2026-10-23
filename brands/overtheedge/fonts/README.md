@@ -1,6 +1,6 @@
 # Fonts
 
-Every face is under the SIL Open Font License 1.1; each family's licence is beside its files. Downloaded on 22 October 2026.
+The open-source files in the source table are under the SIL Open Font License 1.1, downloaded on 22 October 2026. Supplied Helvetica Neue and Salted files have their own source terms and notices, described below.
 
 | Role | Face | Use |
 | --- | --- | --- |
@@ -8,11 +8,11 @@ Every face is under the SIL Open Font License 1.1; each family's licence is besi
 | `displayRegular` | Source Serif 4 Regular | Long reading |
 | `deck` | Source Serif 4 Italic | The one-sentence deck under a headline |
 | `extra` | Anton Regular | Capitals only: cover lines, section fronts, page and day numbers |
-| `body`, `bold` | Inter Regular and SemiBold | Interface and body text (brandkit's shared copies, `desktop/` and `web/`) |
+| `body`, `bold` | Helvetica Neue Medium and Bold | Interface and body text; original files from the supplied staff-card package |
 | `label` | IBM Plex Mono Medium | Datelines and labels, capitals, +0.08 em |
-| `hand` | Gochi Hand Regular | One hand-written note at most |
+| `hand` | Salted Regular | Original handwritten face from the supplied offline compiler kit |
 
-Anton and Gochi Hand stand in for the print covers' faces, which are not known. If the print team has the originals and their licences allow it, replace them here and in `scripts/brands/overtheedge.mjs`.
+The September 2025 PDF identifies the cover faces as Decalotype Black, Salted, and Helvetica Neue. Anton remains the Decalotype substitute. Salted and Helvetica Neue now use the supplied original files; the older OFL files remain available as source assets.
 
 | File | Source | SHA-256 |
 | --- | --- | --- |
@@ -28,3 +28,25 @@ Anton and Gochi Hand stand in for the print covers' faces, which are not known. 
 | `SourceSerif-OFL.md` | https://raw.githubusercontent.com/adobe-fonts/source-serif/release/LICENSE.md | `c21d7293d87b6d7ab1d0229a2f55b77f33a7613a6a4e66f6693d68d7d8d09464` |
 
 `Inter-OFL.txt` and the Inter files are brandkit's shared copies (see `brands/ddcnorth/fonts/`).
+
+## Original staff-card fonts
+
+These are the original Helvetica Neue files supplied inside
+[`templates/staff-card.zip`](../templates/staff-card.zip), used by the imported
+staff card and by the brand’s body and bold roles. Their original source terms
+are separate from the open-source faces and their OFL licences. Their source is the unchanged staff-card package recorded in the
+[integration guide](../../../docs/template-printer.md).
+
+| File | SHA-256 |
+| --- | --- |
+| `printer/staff-card/fonts/0-helveticaneue-bold.otf` | `14928444e337995a7fe9bae85e20b83139f6e0c78416df87feaf68613d41e02e` |
+| `printer/staff-card/fonts/1-helveticaneue-medium.otf` | `38188783e8ad07d2de83d901d559354be45b355d5e360a22a82efd48fa4a6278` |
+
+## Original Salted font
+
+Salted Regular was found in `assets/fonts/` inside the [offline compiler kit](https://drive.google.com/file/d/1abrjwvpXLDdOS2yj8SANenXz8RQgxr-E/view), alongside the supplied [September issue recipe](https://drive.google.com/file/d/1QU3bZf7G4UcmYow5kpK2Zdfo5M6L9I_l/view). Its original `LICENSE-Salted.txt` says **Personal use only** and is preserved unchanged. It is not covered by the OFL notices above.
+
+| File | SHA-256 |
+| --- | --- |
+| `Salted-Regular.otf` | `f7e039689dda7ba59357dbf22e255cdfd8690e4d5037a89d26672bc6f21d627c` |
+| `LICENSE-Salted.txt` | `320ba11b35abb21ee9889f6d95c56990e5a133359f3b8f1c8c5d52df25be5ade` |

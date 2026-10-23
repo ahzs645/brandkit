@@ -103,7 +103,7 @@
 .play .ote-index b, .play .ote-index li > span:last-child { animation: ote-in var(--ote-base) var(--ote-settle) calc(var(--i) * var(--ote-stagger) * 2 + var(--ote-base)) both; }
 
 /* Chip: press in to 96%, turn forest, let go. */
-.ote-chip { display: inline-block; border: 1px solid var(--ote-forest); background: var(--ote-white); color: var(--ote-forest); border-radius: 999px; padding: 10px 20px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 500; }
+.ote-chip { display: inline-block; border: 1px solid var(--ote-forest); background: var(--ote-white); color: var(--ote-forest); border-radius: 999px; padding: 10px 20px; font-family: "Helvetica Neue", system-ui, sans-serif; font-size: 14px; font-weight: 500; }
 @keyframes ote-chip { 0%, 40% { transform: none; border-color: var(--ote-pulp); color: var(--ote-bark); } 46%, 56% { transform: scale(.96); } 66%, 100% { transform: none; border-color: var(--ote-forest); color: var(--ote-forest); } }
 .play .ote-chip { animation: ote-chip calc(var(--ote-loop) * 1.25) var(--ote-settle) both; }
 

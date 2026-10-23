@@ -20,11 +20,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+          run_install: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run setup:printer
       # The parity test needs the original ddcnorth kit, which is not in the repository, so it
       # skips itself here; the engine and manual-pack tests run.
       - run: npm test

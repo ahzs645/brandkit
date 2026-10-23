@@ -44,6 +44,7 @@ import { lockup, mark, pattern } from './artwork.js'
 import { illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
+import { renderPrinterSvg } from '../printer/svg.js'
 
 const PT_TO_MM = 25.4 / 72
 const PX_PER_PT = 96 / 72
@@ -292,6 +293,7 @@ const renderElement = (ctx, element, template) => {
  * @param {object} template
  */
 export const renderTemplate = (ctx, template) => {
+  if (template.svg && template.printer) return renderPrinterSvg(ctx, template)
   const { brand } = ctx
   const unit = template.unit ?? 'px'
   const physical = template.physical ?? (unit === 'mm' ? [`${n6(template.width)}mm`, `${n6(template.height)}mm`] : [n6(template.width), n6(template.height)])
@@ -313,6 +315,10 @@ export const renderTemplate = (ctx, template) => {
 
 /** The editable fields a template exposes, in the order they appear. Pass the brand for its labels. */
 export const templateFields = (template, brand) => {
+  if (template.svg && template.printer) return (template.printer.fields ?? []).map((field) => {
+    const id = template.printer.fieldKeys?.[field.id] ?? field.id
+    return { id, label: brand?.fields?.[id]?.label ?? field.label ?? id, placeholder: String(template.printer.sampleData?.[field.id] ?? ''), multiline: Boolean(field.wrapWidth), type: field.type }
+  })
   const fields = []
   const seen = new Set()
   const add = (id, element, multiline) => {

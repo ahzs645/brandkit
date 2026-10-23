@@ -42,14 +42,15 @@ export const mark = ({ brand }, colour = 'currentColor', micro = false, symbolId
   return `<g data-brand-symbol="${escape(symbol.name ?? 'symbol')}" data-size="${size}" fill="${groupFill}">${inner}</g>`
 }
 
-const wordmarkPart = ({ brand, fonts }, part, colour) => {
+const wordmarkPart = ({ brand, fonts }, part, colour, subtextColour) => {
   const glyphs = brand.wordmark.glyphs ?? {}
+  const paint = subtextColour != null && part.attrs?.['data-line'] === 'subtext' ? { fill: subtextColour } : {}
   if (part.glyph) {
     const offset = part.y ? `${part.x ?? 0} ${part.y}` : `${part.x ?? 0} 0`
-    return `<path${attrs(part.attrs ?? {})} d="${glyphs[part.glyph]}" transform="translate(${offset})"${part.fillRule ? ` fill-rule="${part.fillRule}"` : ''}/>`
+    return `<path${attrs({ ...part.attrs, ...paint })} d="${glyphs[part.glyph]}" transform="translate(${offset})"${part.fillRule ? ` fill-rule="${part.fillRule}"` : ''}/>`
   }
   if (part.element) {
-    const filled = Object.fromEntries(Object.entries(part.attrs ?? {}).map(([key, value]) => [key, String(value).replace('{colour}', colour)]))
+    const filled = Object.fromEntries(Object.entries({ ...part.attrs, ...paint }).map(([key, value]) => [key, String(value).replace('{colour}', colour)]))
     return `<${part.element}${attrs(filled)}>${escape(part.content ?? '')}</${part.element}>`
   }
   if (part.text != null) {
@@ -57,9 +58,9 @@ const wordmarkPart = ({ brand, fonts }, part, colour) => {
     const key = part.font ?? 'display'
     const tracking = part.tracking ?? 0
     const d = fonts?.has(key) ? fonts.path(part.text, key, part.size, part.x ?? 0, part.y ?? 0, tracking) : ''
-    if (d) return `<path data-word="${escape(part.text)}" d="${d}"/>`
+    if (d) return `<path${attrs(paint)} data-word="${escape(part.text)}" d="${d}"/>`
     const face = brand.fonts?.[key] ?? {}
-    return `<text x="${n(part.x ?? 0)}" y="${n(part.y ?? 0)}" font-family="${escape(face.stack ?? 'sans-serif')}" font-size="${n(part.size)}" font-weight="${face.weight ?? 400}" letter-spacing="${n(tracking * part.size)}">${escape(part.text)}</text>`
+    return `<text${attrs(paint)} x="${n(part.x ?? 0)}" y="${n(part.y ?? 0)}" font-family="${escape(face.stack ?? 'sans-serif')}" font-size="${n(part.size)}" font-weight="${face.weight ?? 400}" letter-spacing="${n(tracking * part.size)}">${escape(part.text)}</text>`
   }
   return ''
 }
@@ -70,26 +71,26 @@ const wordmarkPart = ({ brand, fonts }, part, colour) => {
  * `mode` is 'outlined' (production) or one of the brand's `wordmark.editable` alternatives, which
  * keep some or all of the lettering as live, font-dependent text.
  */
-export const words = (ctx, wordmarkId, mode = 'outlined', colour = 'currentColor') => {
+export const words = (ctx, wordmarkId, mode = 'outlined', colour = 'currentColor', { subtextColour } = {}) => {
   const wordmark = ctx.brand.wordmark
   if (mode !== 'outlined') {
     const editable = wordmark.editable?.[mode]
     if (!editable) throw new Error(`Unknown wordmark mode: ${mode}`)
-    const pieces = editable.parts.map((part) => wordmarkPart(ctx, part, colour)).join('')
+    const pieces = editable.parts.map((part) => wordmarkPart(ctx, part, colour, subtextColour)).join('')
     return editable.wrap ? `<g data-wordmark="${escape(wordmarkId)}" fill="${colour}">${pieces}</g>` : pieces
   }
   const variant = wordmark.variants[wordmarkId]
   if (!variant) throw new Error(`Unknown wordmark: ${wordmarkId}`)
-  return `<g data-wordmark="${escape(wordmarkId)}" fill="${colour}">${variant.parts.map((part) => wordmarkPart(ctx, part, colour)).join('')}</g>`
+  return `<g data-wordmark="${escape(wordmarkId)}" fill="${colour}">${variant.parts.map((part) => wordmarkPart(ctx, part, colour, subtextColour)).join('')}</g>`
 }
 
-export const LAYOUTS = ['horizontal', 'stacked', 'wordmark', 'symbol']
+export const LAYOUTS = ['horizontal', 'stacked', 'wordmark', 'wordmark-stacked', 'symbol']
 
 /**
  * A complete lockup: `{ width, height, art }`, where `art` is drawn in a canvas of that size with
  * the brand's `lockup.canvasPadding` on every side.
  */
-export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'outlined', colour: given, signature, colourway } = {}) => {
+export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'outlined', colour: given, wordmarkColour, subtextColour, showWordmark = true, signature, colourway } = {}) => {
   const { brand } = ctx
   // A brand whose logo is composed (brand.signatures) rather than a fixed wordmark: the layout
   // names the signature, and a colourway, or else a single colour, paints it. With neither, the
@@ -100,6 +101,8 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
     return signatureLockup(ctx, { signature: id, colourway, colour: colourway ? undefined : given })
   }
   const colour = given ?? 'currentColor'
+  const lettering = wordmarkColour ?? colour
+  const drawWords = (id) => words(ctx, id, mode, lettering, { subtextColour })
   const wordmark = brand.wordmark
   const settings = brand.lockup
   const entry = findFamily(brand, familyId)
@@ -111,21 +114,18 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
   const variantHeight = variant.height ?? wordmark.height
   const { width: sw, height: sh } = symbolViewBox(brand)
 
-  if (layout === 'symbol') {
+  if (layout === 'symbol' || !showWordmark) {
     return { width: sw + 2 * pad, height: sh + 2 * pad, art: `<g transform="translate(${pad} ${pad})">${mark(ctx, colour)}</g>` }
   }
   /** A wordmark variant alone, `height` tall. */
   const wordmarkOnly = (wordmarkId, height) => {
     const chosen = wordmark.variants[wordmarkId]
     const scale = height / (chosen.height ?? wordmark.height)
-    const art = `<g transform="translate(${n(pad - left * scale)} ${pad}) scale(${n(scale)})">${words(ctx, wordmarkId, mode, colour)}</g>`
+    const art = `<g transform="translate(${n(pad - left * scale)} ${pad}) scale(${n(scale)})">${drawWords(wordmarkId)}</g>`
     return { width: (chosen.width - left) * scale + 2 * pad, height: height + 2 * pad, art }
   }
-  if (layout === 'wordmark') {
-    const height = settings.wordmarkHeight
-    const scale = height / variantHeight
-    const art = `<g transform="translate(${n(pad - left * scale)} ${pad}) scale(${n(scale)})">${words(ctx, entry.wordmark, mode, colour)}</g>`
-    return { width: baseWidth * scale + 2 * pad, height: height + 2 * pad, art }
+  if (layout === 'wordmark' || layout === 'wordmark-stacked') {
+    return wordmarkOnly(layout === 'wordmark-stacked' ? entry.stackedWordmark ?? entry.wordmark : entry.wordmark, settings.wordmarkHeight)
   }
   // A family whose logo is its lettering alone (`lockupSymbol: false`) draws no symbol beside or
   // above it: horizontal is its wordmark at `typeHeight`, stacked is `stackedWordmark` (or its own).
@@ -144,7 +144,7 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
     const typeWidth = baseWidth * scale
     const width = Math.max(iconWidth, typeWidth)
     let art = `<g transform="translate(${n(pad + (width - iconWidth) / 2)} ${pad}) scale(${n(iconScale)})">${mark(ctx, colour)}</g>`
-    art += `<g transform="translate(${n(pad + (width - typeWidth) / 2 - left * scale)} ${n(pad + iconHeight + settings.stackedGap)}) scale(${n(scale)})">${words(ctx, entry.wordmark, mode, colour)}</g>`
+    art += `<g transform="translate(${n(pad + (width - typeWidth) / 2 - left * scale)} ${n(pad + iconHeight + settings.stackedGap)}) scale(${n(scale)})">${drawWords(entry.wordmark)}</g>`
     return { width: width + 2 * pad, height: iconHeight + settings.stackedGap + typeHeight + 2 * pad, art }
   }
   if (layout !== 'horizontal') throw new Error(`Unknown layout: ${layout}`)
@@ -155,7 +155,7 @@ export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'o
   const iconWidth = sw * iconScale
   const bodyHeight = Math.max(typeHeight, iconHeight)
   let art = `<g transform="translate(${pad} ${n(pad + (bodyHeight - iconHeight) / 2)}) scale(${n(iconScale)})">${mark(ctx, colour)}</g>`
-  art += `<g transform="translate(${n(pad + iconWidth + settings.iconGap - left * scale)} ${n(pad + (bodyHeight - typeHeight) / 2)}) scale(${n(scale)})">${words(ctx, entry.wordmark, mode, colour)}</g>`
+  art += `<g transform="translate(${n(pad + iconWidth + settings.iconGap - left * scale)} ${n(pad + (bodyHeight - typeHeight) / 2)}) scale(${n(scale)})">${drawWords(entry.wordmark)}</g>`
   return { width: 2 * pad + iconWidth + settings.iconGap + baseWidth * scale, height: 2 * pad + bodyHeight, art }
 }
 
@@ -216,7 +216,7 @@ export const signatureDocument = (ctx, { signature, colourway, values, title }) 
 }
 
 /** A whole logo file: lockup on a transparent canvas. */
-export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, colourKey, signature, colourway, values }) => {
+export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, colourKey, wordmarkColour, subtextColour, showWordmark, signature, colourway, values }) => {
   const { brand } = ctx
   if (signature) {
     const entry = brand.signatures.find((item) => item.id === signature)
@@ -224,7 +224,9 @@ export const logoDocument = (ctx, { family, layout, mode = 'outlined', colour, c
     return svgDocument(ctx, width, height, art, `${brand.name} / ${entry?.label ?? signature} / ${colourway ?? (colour === 'currentColor' ? 'currentcolor' : colour)}`)
   }
   const resolved = colour ?? resolveColour(brand, colourKey)
-  const { width, height, art } = lockup(ctx, { family, layout, mode, colour: resolved })
+  const { width, height, art } = lockup(ctx, { family, layout, mode, colour: resolved,
+    wordmarkColour: wordmarkColour == null ? undefined : resolveColour(brand, wordmarkColour),
+    subtextColour: subtextColour == null ? undefined : resolveColour(brand, subtextColour), showWordmark })
   const key = colourKey === 'currentColor' ? 'currentcolor' : colourKey
   const title = mode === 'outlined'
     ? `${family} / ${layout} / ${key}`

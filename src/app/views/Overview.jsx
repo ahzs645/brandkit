@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { logoDocument, symbolDocument } from '../../engine/artwork.js'
-import { colour, colourName, fill, isDark, rgb } from '../../engine/brand.js'
+import { colour, colourName, isDark, rgb } from '../../engine/brand.js'
 import { guideSheets } from '../../engine/guide.js'
 import { changesArtwork, mergePatch, revisionsOf, withRevision } from '../../engine/revisions.js'
 import { colourEntries } from '../colours.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
+import { Typography } from './Typography.jsx'
 
 /** Each proposed change to the logo, beside the approved one, with why and a way to try it. */
 const Revisions = ({ base, fonts, active, onRevision }) => {
@@ -93,26 +94,38 @@ const History = ({ brand, fonts, logo }) => {
 
 const BACKGROUNDS = ['reverse', 'paper', 'light', 'primary', 'ink']
 
-export const Overview = ({ brand, base = brand, fonts, revision, onRevision, openManual }) => {
+export const Overview = ({ brand, base = brand, fonts, source, revision, onRevision, openManual }) => {
   const [familyId, setFamily] = useState(brand.families?.[0]?.id)
   const [layout, setLayout] = useState('horizontal')
+  const optional = brand.wordmark?.optionalSubtext
+  const [wordmarkEnabled, setWordmarkEnabled] = useState(true)
+  const drawingFamily = optional ? (wordmarkEnabled ? optional.withFamily : optional.withoutFamily) : familyId
   const [background, setBackground] = useState('reverse')
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   const backgroundHex = colour(brand, background)
   const [logoColour, setLogoColour] = useState(colours[0])
+  const [wordmarkColour, setWordmarkColour] = useState(optional?.colour ?? colours.find((key) => key !== colours[0] && isDark(colour(brand, key))) ?? colours[0])
   // A white logo on a white stage is invisible: when the ground changes, pick a colour that reads.
   const pickBackground = (value) => {
     setBackground(value)
     const dark = isDark(colour(brand, value))
-    const current = colour(brand, logoColour)
-    if (dark === isDark(current) || current.toLowerCase() === colour(brand, value).toLowerCase()) {
-      setLogoColour(colours.find((key) => isDark(colour(brand, key)) !== dark && colour(brand, key).toLowerCase() !== colour(brand, value).toLowerCase()) ?? colours[0])
+    const readable = (key) => {
+      const current = colour(brand, key)
+      return dark === isDark(current) || current.toLowerCase() === colour(brand, value).toLowerCase()
+        ? colours.find((entry) => isDark(colour(brand, entry)) !== dark && colour(brand, entry).toLowerCase() !== colour(brand, value).toLowerCase()) ?? colours[0]
+        : key
     }
+    setLogoColour(readable(logoColour))
+    setWordmarkColour(readable(wordmarkColour))
   }
   const ctx = { brand }
-  const make = () => (layout === 'symbol' ? symbolDocument(ctx, { colourKey: logoColour }) : logoDocument(ctx, { family: familyId, layout, colourKey: logoColour }))
+  const symbolOnly = layout === 'symbol' || (!optional && !wordmarkEnabled)
+  const make = () => (symbolOnly ? symbolDocument(ctx, { colourKey: logoColour }) : logoDocument(ctx, {
+    family: drawingFamily, layout, colourKey: logoColour,
+    ...(optional ? { subtextColour: wordmarkColour } : { wordmarkColour })
+  }))
   const svg = brand.families?.length ? make() : null
-  const name = layout === 'symbol' ? `${brand.id}-symbol-${logoColour}` : `${familyId}-${layout}-${logoColour}`
+  const name = symbolOnly ? `${brand.id}-symbol-${logoColour}` : `${drawingFamily}-${layout}-${logoColour}${wordmarkEnabled ? `-wordmark-${wordmarkColour}` : ''}`
 
   return (
     <div className="view overview">
@@ -122,19 +135,28 @@ export const Overview = ({ brand, base = brand, fonts, revision, onRevision, ope
           <SvgImage svg={svg} alt={`${brand.name} ${layout} logo`} className={`stage__art stage__art--${layout}`} />
         </div>
         <div className="toolbar">
-          {brand.families?.length > 1 && (
+          {!optional && brand.families?.length > 1 && (
             <Field label="Name">
               <Segmented label="Family" value={familyId} options={brand.families.map((entry) => ({ value: entry.id, label: entry.id }))} onChange={setFamily} />
             </Field>
           )}
           <Field label="Layout">
-            <Segmented label="Layout" value={layout} options={['horizontal', 'stacked', 'wordmark', 'symbol'].map((value) => ({ value, label: value.charAt(0).toUpperCase() + value.slice(1) }))} onChange={setLayout} />
+            <select value={layout} onChange={(event) => setLayout(event.target.value)}>
+              {['horizontal', 'stacked', 'symbol'].map((value) => <option key={value} value={value}>{value.charAt(0).toUpperCase() + value.slice(1)}</option>)}
+            </select>
           </Field>
+          <label className="wordmark-toggle"><input type="checkbox" checked={wordmarkEnabled} disabled={layout === 'symbol'} onChange={(event) => setWordmarkEnabled(event.target.checked)} /><span>Wordmark</span></label>
           <Field label="Colour">
-            <div className="chips">
-              {colours.map((key) => <button key={key} type="button" className="chip" aria-pressed={logoColour === key} title={colourName(brand, key)} style={{ background: colour(brand, key) }} onClick={() => setLogoColour(key)} />)}
+            <div className="chips" role="group" aria-label="Logo colour">
+              {colours.map((key) => <button key={key} type="button" className="chip" aria-label={colourName(brand, key)} aria-pressed={logoColour === key} title={colourName(brand, key)} style={{ background: colour(brand, key) }} onClick={() => setLogoColour(key)} />)}
             </div>
           </Field>
+          {wordmarkEnabled && layout !== 'symbol' && <div className="field">
+            <span className="field__label">Wordmark colour</span>
+            <div className="chips" role="group" aria-label="Wordmark colour">
+              {colours.map((key) => <button key={key} type="button" className="chip" aria-label={colourName(brand, key)} aria-pressed={wordmarkColour === key} title={colourName(brand, key)} style={{ background: colour(brand, key) }} onClick={() => setWordmarkColour(key)} />)}
+            </div>
+          </div>}
           <Field label="Preview on">
             <div className="chips">
               {BACKGROUNDS.map((role) => <button key={role} type="button" className="chip" aria-pressed={background === role} title={role} style={{ background: colour(brand, role) }} onClick={() => pickBackground(role)} />)}
@@ -165,16 +187,7 @@ export const Overview = ({ brand, base = brand, fonts, revision, onRevision, ope
         </div>
         <div className="panel">
           <h2>Typography</h2>
-          <div className="specimens">
-            {['display', 'body', 'label'].map((key) => [key, brand.fonts?.[key]]).filter(([, face]) => face).map(([key, face]) => (
-              <div key={key} className="specimen">
-                <span className="eyebrow">{key} · {face.label ?? `${face.family} ${face.weight}`}</span>
-                <p style={{ fontFamily: face.stack, fontWeight: face.weight, letterSpacing: key === 'display' ? `${brand.typography?.headlines?.trackingEm ?? -0.02}em` : key === 'label' ? `${brand.typography?.labels?.trackingEm ?? 0.12}em` : undefined, textTransform: key === 'label' ? 'uppercase' : undefined, fontSize: key === 'display' ? 40 : key === 'label' ? 13 : 17 }}>
-                  {key === 'display' ? fill(brand, brand.copy?.tagline ?? brand.name) : key === 'label' ? `${brand.name} / labels / captions` : 'Clear, plain sentences set in the body face, for paragraphs and interface text.'}
-                </p>
-              </div>
-            ))}
-          </div>
+          <Typography key={brand.id} brand={brand} source={source} />
         </div>
       </section>
 

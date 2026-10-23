@@ -1,5 +1,20 @@
 # Change log
 
+## Wordmarks and source typography
+
+- Extract the stacked masthead and its subtext from the September cover. Export full and words-only wordmarks in both arrangements.
+- Use supplied Helvetica Neue Medium/Bold and Salted Regular, preserving the supplied font notices.
+- Replace the mobile layout buttons with a dropdown. Toggle the small wordmark independently and choose its colour for previews and exports. Add live type samples and font downloads.
+
+## Staff card integration
+
+- Added the original Staff Card as a front/back template set, with editable name
+  and position fields and its original Helvetica Neue fonts.
+- Added direct editing and printing in Template Printer and portable package
+  downloads, with edited packages importable back into the brand.
+- Kept the original archive in `templates/staff-card.zip`; the imported design
+  keeps its own artwork and typography alongside Forest press.
+
 ## 1.0 - motion (22 October 2026)
 
 - Added a motion library: thirteen studies of the logo (press, stack, ink), loading (rolling rules, page count, O fill, paper airplane) and the interface (headline, card pick, index, chip, turn page, skeleton).

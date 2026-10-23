@@ -1,0 +1,3 @@
+[submodule "vendor/template-printer"]
+	path = vendor/template-printer
+	url = https://github.com/ahzs645/template-printer.git

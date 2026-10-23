@@ -138,6 +138,8 @@ false`: its `horizontal` layout is its wordmark at `typeHeight` with no symbol b
 no symbol above it. The `wordmark` and `symbol` layouts are unchanged. Over the Edge uses both
 ([`brands/overtheedge/brand.json`](../brands/overtheedge/brand.json)).
 
+A family with `stackedWordmark` also supports the `wordmark-stacked` layout, which draws only that lettering in its original proportions. The kit includes separately named horizontal and stacked wordmark exports. In the overview, Layout is a dropdown and Wordmark is an independent checkbox.
+
 ## Templates
 
 A template is a canvas and a list of elements. Coordinates are in `unit` (`px` by default, or
@@ -368,3 +370,42 @@ with anything uncited).
 - `print`: `{ pantone: { colourKey: "376" }, cmyk: { colourKey: "C50 Y100" }, note }`, the values a
   manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
   recipe gets one converted from its screen value, marked as converted.
+
+## Template Printer packages and imported SVG
+
+Native templates keep their existing `elements`. A package import adds a template
+with sanitized `svg`, `elements: []` and a `printer` record containing its package
+id, side/file, fields, mappings, sample data, native field-key mapping and optional
+card area. Rendering handles the SVG's original geometry and fonts; its fields are
+exposed through `templateFields`, just like native templates.
+
+`brand.printer.packages` records each archive's id, name, asset path, manifest and
+the template ids for its sides and variants. It also supplies the current brand's
+printer presets; no brand-specific preset is hard-coded into the app. A package's
+optional `sourceUrl` links to its published original (HTTP(S), with cross-origin
+fetching allowed). `brand.printer.website` can select a different standalone
+Template Printer website. Current edits transfer by ZIP download and upload;
+the original link opens the published sample data.
+
+`brand.assets` optionally maps relative paths to base64 bytes. Imported brands use
+this for portable archives and fonts that must survive saving a JSON file or
+reopening browser storage. The font provider and kit builder read these bytes
+before consulting the host's asset reader. `brand.files` still names the files
+that should be included in a kit. Repository generators can instead write the
+returned asset Map to disk and set `embedAssets: false`.
+
+The complete source archive retains printer-only data, including editable canvas
+scenes, variant selection rules and additional manifest properties. See
+[Template Printer integration](template-printer.md) for the public package,
+browser bridge and Vite APIs, supported features and the runnable host example.
+
+For a brand with an optional subtext line, `wordmark.optionalSubtext` can declare
+`{ withFamily, withoutFamily, colour }`. Both fields name existing families, so
+the checkbox switches to artwork with the correct dimensions rather than leaving
+an empty gap. OTE uses it for “UNBC’s Student Newspaper” in both arrangements.
+The wordmark colour control is independent of the main logo colour and is kept
+when the line is switched off and on. `logoDocument` accepts `subtextColour` for
+parts marked `data-line="subtext"`, or `wordmarkColour` for all lettering. These
+options accept colour keys or CSS colours and carry through SVG, PNG and PDF
+exports. `lockup({ brand }, { showWordmark: false })` renders only the symbol for
+ordinary symbol-and-lettering logos.

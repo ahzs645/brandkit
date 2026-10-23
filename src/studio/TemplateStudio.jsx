@@ -21,6 +21,7 @@ import { allFields, renderTemplate, templateFields } from '../engine/templates.j
 import { download, pdf, rasterise, zip } from '../export/render.js'
 import { documentsFor, FORMAT_LABELS, officeFile } from '../export/office.js'
 import { physicalSize } from '../engine/templates.js'
+import { PrinterWebsite } from './PrinterWebsite.jsx'
 import './studio.css'
 
 const useSvgUrl = (svg) => {
@@ -71,7 +72,7 @@ const slug = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g,
 export const TemplateStudio = ({
   brand, fonts, templates = brand.templates ?? [], storageKey = brand.id, values: controlled, onValuesChange,
   children, fileName = (template, fieldValues) => [brand.id, template.id, slug(fieldValues['contact-name'] ?? fieldValues.name)].filter(Boolean).join('-'),
-  note, departments = true, initialTemplate, onSelect, aside
+  note, departments = true, initialTemplate, onSelect, aside, onPrint, onPrinterPackage, printerWebsite
 }) => {
   const [selected, setSelectedState] = useState(() => (templates.some((entry) => entry.id === initialTemplate) ? initialTemplate : templates[0]?.id))
   const setSelected = (id) => { setSelectedState(id); onSelect?.(id) }
@@ -101,7 +102,7 @@ export const TemplateStudio = ({
       .filter((field) => !field.local || field.templates.includes(template.id))
     : templateFields(template, brand)
   const everyField = useMemo(() => allFields(templates, brand), [templates, brand])
-  const filled = everyField.filter((field) => values[field.id]?.trim()).length
+  const filled = everyField.filter((field) => typeof values[field.id] === 'string' ? values[field.id].trim() : values[field.id]?.src).length
 
   const run = async (label, task) => {
     setBusy(label)
@@ -170,6 +171,8 @@ export const TemplateStudio = ({
           )}
           <span className="studio__size">{template.print ? `${template.print.trim.join(' × ')} ${template.print.unit} trim, ${template.print.bleed} ${template.print.unit} bleed` : template.physical ? template.physical.join(' × ') : `${template.width} × ${template.height}${template.unit === 'mm' ? ' mm' : ' px'}`}</span>
           <div className="studio__downloads">
+            {onPrint && <button type="button" className="button" disabled={Boolean(busy) || !ready} onClick={() => run('printer', () => onPrint(template, values))}>{busy === 'printer' ? 'Opening…' : 'Edit & print'}</button>}
+            {onPrinterPackage && <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => run('printer-package', () => onPrinterPackage(template, values))}>↓ Printer package</button>}
             <button type="button" className="button button--quiet" disabled={Boolean(busy)} title="Text stays live and editable" onClick={() => run('svg', async () => download(renderTemplate(ctx(false), template).svg, `${name(template)}.svg`))}>↓ SVG</button>
             <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => run('png', async () => download((await files(template)).png, `${name(template)}.png`))}>{busy === 'png' ? '…' : '↓'} PNG</button>
             <button type="button" className="button" disabled={Boolean(busy) || !ready} onClick={() => run('pdf', async () => download((await files(template)).pdf, `${name(template)}.pdf`))}>{busy === 'pdf' ? '…' : '↓'} PDF</button>
@@ -189,6 +192,9 @@ export const TemplateStudio = ({
             })}>{busy === 'all' ? 'Making…' : '↓ All, zipped'}</button>
           </div>
         </div>
+        {onPrinterPackage && printerWebsite && <PrinterWebsite key={template.id} website={printerWebsite.website}
+          sourceUrl={brand.printer?.packages?.find((entry) => entry.id === template.printer?.packageId)?.sourceUrl}
+          disabled={Boolean(busy) || !ready} onDownload={() => run('printer-package', () => onPrinterPackage(template, values))} />}
         {documents.length > 0 && (
           <div className="studio__office">
             <span className="studio__office-label">Office</span>
@@ -225,7 +231,13 @@ export const TemplateStudio = ({
         {fields.map((field) => (
           <label key={field.id} className="field">
             <span className="field__label">{field.label}</span>
-            {field.multiline
+            {field.type === 'image' ? <input type="file" accept="image/png,image/jpeg,image/webp" onChange={async (event) => {
+              const file = event.target.files?.[0]
+              if (!file) return
+              const reader = new FileReader()
+              reader.onload = () => setValues({ ...values, [field.id]: { src: reader.result, fit: 'cover' } })
+              reader.readAsDataURL(file)
+            }} /> : field.multiline
               ? <textarea rows={3} value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />
               : <input type="text" value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />}
           </label>

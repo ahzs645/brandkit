@@ -4,7 +4,7 @@
     "source": "https://overtheedge.unbc.ca/",
     "element": "the inline <svg class=\"ote-logo ote-logo-full ote-logo-variant-green ote-logo-css-vars\"> in the site header (viewBox 0 0 690.73 118.6)",
     "normalisations": [
-      "removed the per-request random id (ote-logo-…)",
+      "removed the per-request random id (ote-logo-\u2026)",
       "removed the root's width, height and class attributes",
       "replaced each var(--ote-logo-main-color) and var(--ote-logo-subtext-color) fill with the theme's hex value",
       "added an XML declaration"
@@ -65,5 +65,14 @@
       "uses": "the stacked OVER / THE / EDGE lockup, the dashed issue index, the hand-lettered note, the photo frame"
     }
   ],
-  "notVendored": "The covers carry photographs and everything under brands/ is published with the app, so they are recorded here by URL and hash only."
+  "notVendored": "The covers carry photographs and everything under brands/ is published with the app, so they are recorded here by URL and hash only.",
+  "coverMasthead": {
+    "url": "https://overtheedge.unbc.ca/wp-content/uploads/2025/12/OTE-Issue-1-Sept-2025-.pdf",
+    "page": 1,
+    "pdfSha256": "4b39f709dfc79f57cb4dca2de542e6106428fe2aa737d9d52a7063165665a9de",
+    "file": "logo-cover-stacked.svg",
+    "sha256": "656fd441d9d517f32f7b9e7a6ab0b45d259bc782dde900087d8183683cc2f519",
+    "paths": 33,
+    "extraction": "scripts/import-overtheedge-cover.py; masthead paths only, no photographs; source geometry preserved, colors use the brand palette."
+  }
 }

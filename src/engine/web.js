@@ -107,7 +107,7 @@ export const reactComponent = (ctx) => {
   // layouts are its signatures, all drawn in currentColor.
   const signed = !brand.families?.length
   const families = signed ? ['signature'] : brand.families.map((entry) => entry.id)
-  const layouts = signed ? brand.signatures.map((entry) => entry.id) : ['horizontal', 'stacked', 'wordmark']
+  const layouts = signed ? brand.signatures.map((entry) => entry.id) : ['horizontal', 'stacked', 'wordmark', ...(brand.families.some((entry) => entry.stackedWordmark) ? ['wordmark-stacked'] : [])]
   const union = (values) => values.map((value) => `'${value}'`).join(' | ')
   const entries = families.map((familyId) => {
     const rows = layouts.map((layout) => {

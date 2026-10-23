@@ -67,6 +67,23 @@ export const memorySource = (files, label) => {
 
 export const librarySource = () => urlSource(libraryUrl, 'library')
 
+/** Add a brand's portable imported files to any existing source. */
+export const withBrandAssets = (brand, source) => {
+  if (!brand.assets) return source
+  const files = new Map(Object.entries(brand.assets).map(([path, data]) => [path, Uint8Array.from(atob(data), (char) => char.charCodeAt(0))]))
+  const urls = new Map()
+  return {
+    label: source.label,
+    url: (path) => {
+      if (!files.has(path)) return source.url(path)
+      if (!urls.has(path)) urls.set(path, URL.createObjectURL(new Blob([files.get(path)])))
+      return urls.get(path)
+    },
+    read: (path) => files.has(path) ? Promise.resolve(files.get(path).slice().buffer) : source.read(path),
+    has: (path) => files.has(path) || source.has(path)
+  }
+}
+
 /**
  * Opens a brand from a dropped or chosen file: a brand.json on its own, or a zip holding one
  * (a brand folder, or a whole kit, whose definition is at source/brand.json).
@@ -96,10 +113,12 @@ export const savedBrands = () => {
   try { return JSON.parse(localStorage.getItem(STORE) ?? '{}') } catch { return {} }
 }
 
-export const saveBrand = (brand) => {
+export const saveBrand = (brand, { strict = false } = {}) => {
   const all = savedBrands()
   all[brand.id] = brand
-  try { localStorage.setItem(STORE, JSON.stringify(all)) } catch { /* storage full or blocked: the brand still works this session */ }
+  try { localStorage.setItem(STORE, JSON.stringify(all)) } catch (error) {
+    if (strict) throw new Error('This brand could not be saved in browser storage. Free some space or use a smaller package; your source package is unchanged.', { cause: error })
+  }
 }
 
 export const forgetBrand = (id) => {

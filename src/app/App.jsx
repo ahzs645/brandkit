@@ -7,7 +7,10 @@ import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
 import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
-import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands } from './brands.js'
+import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
+import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
+import { createPrinterSession } from '../printer/bridge.js'
+import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
@@ -24,12 +27,14 @@ import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './s
 // The guide pulls in the manual viewer; the manual library pulls in 156 pages' worth of data.
 const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default: module.Guide })))
 const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ default: module.Manuals })))
+const TemplatePrinter = lazy(() => import('./views/TemplatePrinter.jsx').then((module) => ({ default: module.TemplatePrinter })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
   { id: 'colour', label: 'Colour' },
   { id: 'templates', label: 'Templates' },
+  { id: 'printer', label: 'Template Printer' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
   { id: 'kit', label: 'Download kit' },
@@ -65,7 +70,10 @@ const useWebFonts = (brand, source) => {
       const url = file && source.url(file)
       if (!url || seen.has(`${face.family}-${face.weight}-${face.style}`)) return ''
       seen.add(`${face.family}-${face.weight}-${face.style}`)
-      return `@font-face{font-family:"${face.family}";src:url("${url}");font-weight:${face.weight ?? 400};font-style:${face.style ?? 'normal'};font-display:swap}`
+      const quoted = (value) => JSON.stringify(String(value)).replaceAll('<', '\\3c ')
+      const weight = Number.isFinite(Number(face.weight)) ? Number(face.weight) : 400
+      const style = ['normal', 'italic', 'oblique'].includes(face.style) ? face.style : 'normal'
+      return `@font-face{font-family:${quoted(face.family)};src:url(${quoted(url)});font-weight:${weight};font-style:${style};font-display:swap}`
     }).join('\n')
     const style = document.createElement('style')
     style.dataset.brandFonts = brand.id
@@ -86,6 +94,7 @@ export const App = () => {
   const [libraryFonts, setLibraryFonts] = useState(null)
   const [error, setError] = useState(null)
   const [sharing, setSharing] = useState(false)
+  const [printerSession, setPrinterSession] = useState(null)
   const fileInput = useRef(null)
 
   const brandIds = [...new Set([...BUILT_IN, ...Object.keys(saved), ...Object.keys(opened)])]
@@ -128,7 +137,7 @@ export const App = () => {
     setRevisionId(id || null)
     writeUrl({ revision: id || null }, { keep: ['view'] })
   }
-  const source = current?.source
+  const source = useMemo(() => brand && current?.source ? withBrandAssets(brand, current.source) : current?.source, [brand?.assets, current?.source])
   const fontKey = brand ? JSON.stringify(brand.fonts) : ''
   useEffect(() => {
     if (!brand || !source) return undefined
@@ -187,6 +196,27 @@ export const App = () => {
   }
 
   const update = (next) => setCurrent((state) => ({ ...state, brand: next }))
+  const printerPackage = (template, values) => {
+    if (!values) try { values = JSON.parse(localStorage.getItem(`brandkit:fields:${brand.id}`) || '{}') } catch { values = {} }
+    return createPrinterPackage({ brand, fonts, values }, template, { readAsset: source.read })
+  }
+  const printTemplate = async (template, values) => {
+    const result = await printerPackage(template, values)
+    setPrinterSession(createPrinterSession(new URL(import.meta.env.BASE_URL, globalThis.location.origin), result.bytes, { label: 'brandkit' }))
+    go('printer')
+  }
+  const downloadPrinterPackage = async (template, values) => {
+    const result = await printerPackage(template, values)
+    download(result.bytes, `${brand.id}-${template.printer?.packageId ?? template.id}.zip`)
+  }
+  const importPrinterDesign = async (file) => {
+    const imported = importPrinterPackage(base, await file.arrayBuffer())
+    saveBrand(imported.brand, { strict: true })
+    update(imported.brand)
+    setSaved(savedBrands())
+    go('templates')
+    writeUrl({ template: Object.values(imported.record.templates)[0] })
+  }
   const save = () => {
     saveBrand(base)
     setSaved(savedBrands())
@@ -257,16 +287,20 @@ export const App = () => {
       <main className="main">
         {!brand ? !error && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
-            {view === 'overview' && <Overview brand={brand} base={base} fonts={fonts} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
+            {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'colour' && <Colour brand={brand} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
-            {view === 'templates' && <div className="view"><TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
+            {view === 'templates' && <div className="view">
+              {!SHARED && <div className="panel printer__intro"><p>Need card design, people, batch printing or calibration?</p><button type="button" className="button" onClick={() => go('printer')}>Open Template Printer</button></div>}
+              <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
+                onPrint={SHARED ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">
                   {template.description && <p>{template.description}</p>}
                   <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
                 </div>
               )} /></div>}
+            {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onPackage={downloadPrinterPackage} onImport={importPrinterDesign} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}

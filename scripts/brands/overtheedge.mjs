@@ -5,23 +5,25 @@
 //
 // The logo is the paper's own: the SVG its website serves, vendored once in reference/logo-site.svg
 // and read here path by path (scripts/brands/overtheedge-logo.mjs). The words OVER, THE and EDGE
-// and the subtext line become the wordmark's glyphs, unedited; the O alone is the symbol. Colours
-// come from the site's theme and the 2025 print covers; type is Source Serif 4, Anton, Inter,
-// IBM Plex Mono and Gochi Hand. Everything else is drawn from those.
+// and the subtext line become the horizontal wordmark's glyphs, unedited; the O alone is the symbol.
+// The stacked masthead is extracted from page 1 of the September 2025 PDF. Colours
+// come from the site's theme and the 2025 print covers; type is Source Serif 4, Anton, Helvetica Neue,
+// IBM Plex Mono and Salted. Everything else is drawn from those.
 
 import { extendBrandPatterns } from './pattern-collections.mjs'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createStarterBrand } from '../../src/engine/starter.js'
 import { findAsset, loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 import { updateManifest } from './common.mjs'
-import { loadLogo, pathBounds, siteIcons, union, up } from './overtheedge-logo.mjs'
+import { loadCoverLogo, loadLogo, pathBounds, siteIcons, union, up } from './overtheedge-logo.mjs'
 import { embeddedFonts, lockupMarkup, markMarkup, motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './overtheedge-motion.mjs'
 import { detailsPage } from './overtheedge-details.mjs'
+import { importPrinterPackage } from '../../src/printer/package.js'
 
 const folder = new URL('../../brands/overtheedge/', import.meta.url).pathname
 mkdirSync(folder, { recursive: true })
 
-const INPUTS = ['reference/logo-site.svg', 'reference/logo-site-dark.svg', 'reference/site-icons.json', 'fonts/Anton-Regular.ttf', 'fonts/SourceSerif4-Regular.ttf', 'fonts/SourceSerif4-Bold.ttf', 'fonts/SourceSerif4-It.ttf', 'fonts/IBMPlexMono-Medium.ttf', 'fonts/GochiHand-Regular.ttf', 'docs/README.md', 'docs/CHANGELOG.md', 'fonts/README.md', 'site/index.html']
+const INPUTS = ['reference/logo-site.svg', 'reference/logo-site-dark.svg', 'reference/logo-cover-stacked.svg', 'fonts/Salted-Regular.otf', 'fonts/LICENSE-Salted.txt', 'reference/site-icons.json', 'fonts/Anton-Regular.ttf', 'fonts/SourceSerif4-Regular.ttf', 'fonts/SourceSerif4-Bold.ttf', 'fonts/SourceSerif4-It.ttf', 'fonts/IBMPlexMono-Medium.ttf', 'fonts/GochiHand-Regular.ttf', 'docs/README.md', 'docs/CHANGELOG.md', 'fonts/README.md', 'site/index.html']
 for (const input of INPUTS) {
   if (!existsSync(`${folder}${input}`)) {
     console.error(`Missing input: brands/overtheedge/${input}`)
@@ -34,14 +36,14 @@ for (const input of INPUTS) {
 const face = (family, stack, file, weight, label, extra = {}) => ({ family, stack, weight, file, web: file, label, ...extra })
 const SERIF = '"Source Serif 4", Georgia, "Times New Roman", serif'
 const FONTS = {
-  body: face('Inter', 'Inter, system-ui, Arial, sans-serif', 'fonts/desktop/Inter-Regular.ttf', 400, 'Inter Regular 400', { web: 'fonts/web/Inter-Regular.woff2' }),
-  bold: face('Inter', 'Inter, system-ui, Arial, sans-serif', 'fonts/desktop/Inter-SemiBold.ttf', 600, 'Inter SemiBold 600', { web: 'fonts/web/Inter-SemiBold.woff2' }),
+  body: face('Helvetica Neue', '"Helvetica Neue", Helvetica, Arial, sans-serif', 'printer/staff-card/fonts/1-helveticaneue-medium.otf', 500, 'Helvetica Neue Medium'),
+  bold: face('Helvetica Neue', '"Helvetica Neue", Helvetica, Arial, sans-serif', 'printer/staff-card/fonts/0-helveticaneue-bold.otf', 700, 'Helvetica Neue Bold'),
   display: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-Bold.ttf', 700, 'Source Serif 4 Bold 700'),
   displayRegular: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-Regular.ttf', 400, 'Source Serif 4 Regular 400'),
   deck: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-It.ttf', 400, 'Source Serif 4 Italic 400', { style: 'italic' }),
   extra: face('Anton', 'Anton, "Arial Narrow", Impact, sans-serif', 'fonts/Anton-Regular.ttf', 400, 'Anton Regular 400'),
   label: face('IBM Plex Mono', '"IBM Plex Mono", ui-monospace, Menlo, monospace', 'fonts/IBMPlexMono-Medium.ttf', 500, 'IBM Plex Mono Medium 500'),
-  hand: face('Gochi Hand', '"Gochi Hand", "Comic Neue", cursive', 'fonts/GochiHand-Regular.ttf', 400, 'Gochi Hand Regular 400')
+  hand: face('Salted', 'Salted, cursive', 'fonts/Salted-Regular.otf', 400, 'Salted Regular', { license: 'fonts/LICENSE-Salted.txt', usage: 'Personal use only', sample: 'Over the Edge is back!' })
 }
 const fonts = await loadBrandFontsFromDisk({ fonts: FONTS }, folder)
 if (fonts.failures.length) throw new Error(`Fonts failed to load: ${fonts.failures.join(', ')}`)
@@ -49,25 +51,26 @@ if (fonts.failures.length) throw new Error(`Fonts failed to load: ${fonts.failur
 // --- The logo ------------------------------------------------------------------------------------
 
 const { glyphs: { o: O_PATH, ...glyphs } } = loadLogo(`${folder}reference/logo-site.svg`)
+const cover = loadCoverLogo(`${folder}reference/logo-cover-stacked.svg`)
 const box = (d) => pathBounds(d)
 const words = { over: box(glyphs.over), the: box(glyphs.the), edge: box(glyphs.edge) }
 const full = union(Object.values(glyphs).map(box))
 const main = union(Object.values(words))
-// OVER / THE / EDGE on three lines, left-aligned, as on the October 2025 cover.
-const PITCH = 100
-const stackedParts = ['over', 'the', 'edge'].map((word, line) => ({ glyph: word, x: -words[word][0], y: line * PITCH, attrs: { 'data-word': word.toUpperCase() } }))
-const stackedWidth = Math.max(...['over', 'the', 'edge'].map((word) => words[word][2] - words[word][0]))
-const stackedHeight = 2 * PITCH + Math.max(...['over', 'the', 'edge'].map((word) => words[word][3]))
+const stackedParts = ['over', 'the', 'edge'].map((word) => ({ glyph: `cover-${word}`, attrs: { 'data-word': word.toUpperCase() } }))
+const stackedBox = union(['over', 'the', 'edge'].map((word) => box(cover.glyphs[`cover-${word}`])))
+const coverBox = union(Object.values(cover.glyphs).map(box))
 const oBox = box(O_PATH)
 
 const wordmark = {
+  optionalSubtext: { withFamily: 'overtheedge', withoutFamily: 'words', colour: 'ink' },
   height: up(full[3]),
   left: 0,
-  glyphs,
+  glyphs: { ...glyphs, ...cover.glyphs },
   variants: {
     full: { width: up(full[2]), parts: [{ glyph: 'over', attrs: { 'data-word': 'OVER' } }, { glyph: 'the', attrs: { 'data-word': 'THE' } }, { glyph: 'edge', attrs: { 'data-word': 'EDGE' } }, { glyph: 'subtext', attrs: { 'data-line': 'subtext' } }, { glyph: 'apostrophe', attrs: { 'data-line': 'subtext' } }] },
     words: { width: up(main[2]), height: up(main[3]), parts: [{ glyph: 'over', attrs: { 'data-word': 'OVER' } }, { glyph: 'the', attrs: { 'data-word': 'THE' } }, { glyph: 'edge', attrs: { 'data-word': 'EDGE' } }] },
-    stacked: { width: up(stackedWidth), height: up(stackedHeight), parts: stackedParts }
+    stacked: { width: up(stackedBox[2]), height: up(stackedBox[3]), parts: stackedParts },
+    'cover-stacked': { width: up(coverBox[2]), height: up(coverBox[3]), parts: [...stackedParts, { glyph: 'cover-subtext', attrs: { 'data-line': 'subtext' } }] }
   }
 }
 const symbol = {
@@ -441,7 +444,7 @@ const GUIDE = {
       ]
     },
     {
-      name: 'Typography', title: 'Five voices, five jobs.', subtitle: 'Serif for the news, Anton for the front page, Inter for the interface, Plex Mono for the dateline, one hand-written note.',
+      name: 'Typography', title: 'Five voices, five jobs.', subtitle: 'Serif for the news, Anton for the front page, Helvetica Neue for the interface, Plex Mono for the dateline, one hand-written note.',
       elements: [
         g.label('HEADLINES / {fonts.display.label}', 64, 278),
         { type: 'text', text: 'Bears Don’t Really Hibernate… Or Do They?', x: 62, y: 352, size: 56, font: 'display', tracking: -0.01 },
@@ -458,7 +461,7 @@ const GUIDE = {
         { type: 'text', text: 'VOLUME 32 · ISSUE 2 · OCTOBER 16, 2025', x: 64, y: 818, size: 26, font: 'label', tracking: 0.08 },
         g.label('ONE NOTE / {fonts.hand.label}', 964, 768),
         { type: 'text', text: 'Over the Edge is here!', x: 962, y: 822, size: 40, font: 'hand', colour: 'primary' },
-        g.para('Anton and Gochi Hand stand in for the print covers’ faces, which are not known. Replace them if the print team has the originals.', 64, 900, 1312, 18)
+        g.para('Salted and Helvetica Neue are supplied originals. Anton stands in for Decalotype Black. Keep each font’s original licence with its files.', 64, 900, 1312, 18)
       ]
     },
     {
@@ -512,18 +515,18 @@ const brand = {
   ...starter,
   version: '1.0',
   displayVersion: '1.0',
-  source: 'The logo from the SVG overtheedge.unbc.ca serves (reference/logo-site.svg); colours from the site\'s theme and the 2025 print covers; written by scripts/brands/overtheedge.mjs.',
-  status: '"Forest press": an evolution of the paper\'s look. The logo is the site\'s own artwork, unedited. Anton and Gochi Hand stand in for the print covers\' faces.',
+  source: 'Horizontal logo from the site SVG (reference/logo-site.svg); stacked masthead from page 1 of the September 2025 PDF (reference/logo-cover-stacked.svg); colours from the site and print covers; written by scripts/brands/overtheedge.mjs.',
+  status: '"Forest press": the paper\'s own horizontal and stacked artwork. Salted and Helvetica Neue come from the supplied issue toolkit and staff-card package. Anton stands in for Decalotype Black.',
   colours: COLOURS,
   roles: { ink: 'ink', paper: 'newsprint', muted: 'bark', primary: 'forest', light: 'lichen', reverse: 'white', line: 'pulp', rule: 'kraft' },
   logoColours: ['forest', 'ink', 'white', 'lichen', 'currentColor'],
   rasterColours: ['forest', 'ink', 'white', 'lichen'],
   fonts: FONTS,
-  typography: { headlines: { family: 'Source Serif 4', weight: 700, trackingEm: -0.01 }, body: { family: 'Inter', weight: 400 }, labels: { family: 'IBM Plex Mono', weight: 500, trackingEm: 0.08 } },
+  typography: { headlines: { family: 'Source Serif 4', weight: 700, trackingEm: -0.01 }, body: { family: 'Helvetica Neue', weight: 500 }, labels: { family: 'IBM Plex Mono', weight: 500, trackingEm: 0.08 } },
   symbol,
   wordmark,
   families: [
-    { id: 'overtheedge', wordmark: 'full', typeHeight: 118.59, stackedTypeHeight: 280, lockupSymbol: false, stackedWordmark: 'stacked', label: 'Over the Edge' },
+    { id: 'overtheedge', wordmark: 'full', typeHeight: 118.59, stackedTypeHeight: 280, lockupSymbol: false, stackedWordmark: 'cover-stacked', label: 'Over the Edge' },
     { id: 'words', wordmark: 'words', typeHeight: 85.57, stackedTypeHeight: 280, lockupSymbol: false, stackedWordmark: 'stacked', label: 'Over the Edge, without subtext' }
   ],
   lockup: {
@@ -563,11 +566,23 @@ const brand = {
     'motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md',
     { to: 'logos/source/overtheedge-site-light.svg', from: 'reference/logo-site.svg' },
     { to: 'logos/source/overtheedge-site-dark.svg', from: 'reference/logo-site-dark.svg' },
-    'fonts/README.md', 'fonts/Inter-OFL.txt', 'fonts/desktop/Inter-Regular.ttf', 'fonts/desktop/Inter-SemiBold.ttf', 'fonts/web/Inter-Regular.woff2', 'fonts/web/Inter-SemiBold.woff2', 'fonts/Anton-OFL.txt', 'fonts/IBMPlexMono-OFL.txt', 'fonts/GochiHand-OFL.txt', 'fonts/SourceSerif-OFL.md',
+    'fonts/README.md', 'fonts/Salted-Regular.otf', 'fonts/LICENSE-Salted.txt', 'reference/logo-cover-stacked.svg', 'fonts/Inter-OFL.txt', 'fonts/desktop/Inter-Regular.ttf', 'fonts/desktop/Inter-SemiBold.ttf', 'fonts/web/Inter-Regular.woff2', 'fonts/web/Inter-SemiBold.woff2', 'fonts/Anton-OFL.txt', 'fonts/IBMPlexMono-OFL.txt', 'fonts/GochiHand-OFL.txt', 'fonts/SourceSerif-OFL.md',
     'fonts/Anton-Regular.ttf', 'fonts/SourceSerif4-Regular.ttf', 'fonts/SourceSerif4-Bold.ttf', 'fonts/SourceSerif4-It.ttf', 'fonts/IBMPlexMono-Medium.ttf', 'fonts/GochiHand-Regular.ttf'
   ]
 }
 delete brand.fields
+
+// The supplied legacy staff card remains its own original design alongside Forest press.
+// Import through the public adapter so the example exercises the same path as other hosts.
+const staffCard = importPrinterPackage(brand, readFileSync(`${folder}templates/staff-card.zip`), {
+  id: 'staff-card', file: 'templates/staff-card.zip', embedAssets: false,
+  sourceUrl: 'https://projects.ahmadjalil.com/builds/configs/staff_card.zip'
+})
+Object.assign(brand, staffCard.brand)
+for (const [path, bytes] of staffCard.assets) {
+  mkdirSync(`${folder}${path.slice(0, path.lastIndexOf('/'))}`, { recursive: true })
+  writeFileSync(`${folder}${path}`, bytes)
+}
 
 // --- Motion, brand details and site --------------------------------------------------------------
 // The pages embed the brand's own font files, so they need no network (docs/PLANS.md M3).
@@ -590,7 +605,7 @@ writeFileSync(`${folder}docs/brand-details.html`, detailsPage({ brand, fonts }, 
 mkdirSync(`${folder}site/assets`, { recursive: true })
 mkdirSync(`${folder}site/licenses`, { recursive: true })
 writeFileSync(`${folder}site/assets/motion.css`, motionCss(COLOURS))
-for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'SourceSerif-OFL.md', 'Inter-OFL.txt']) writeFileSync(`${folder}site/licenses/${file}`, readFileSync(asset(`fonts/${file}`)))
+for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'LICENSE-Salted.txt', 'SourceSerif-OFL.md', 'Inter-OFL.txt']) writeFileSync(`${folder}site/licenses/${file}`, readFileSync(asset(`fonts/${file}`)))
 const sitePath = `${folder}site/index.html`
 let site = readFileSync(sitePath, 'utf8')
 for (const [name, markup] of [
@@ -604,6 +619,7 @@ for (const [name, markup] of [
   if (!pattern.test(site)) throw new Error(`site/index.html has no ote:${name} markers`)
   site = site.replace(pattern, (_, open, close) => open + markup + close)
 }
+site = site.replaceAll('font-family: Inter,', 'font-family: "Helvetica Neue",').replaceAll("'Gochi Hand'", "'Salted'")
 writeFileSync(sitePath, site)
 
 await extendBrandPatterns(brand, folder)

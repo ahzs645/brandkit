@@ -21,6 +21,9 @@
     "./manuals/bc": "./manuals/bc/index.js",
     "./studio": "./src/studio/TemplateStudio.jsx",
     "./vite": "./src/vite.js",
+    "./printer": "./src/printer/package.js",
+    "./printer/bridge": "./src/printer/bridge.js",
+    "./printer/vite": "./src/printer/vite.js",
     "./package.json": "./package.json"
   },
   "files": [
@@ -34,7 +37,12 @@
     "*.css"
   ],
   "scripts": {
+    "setup:printer": "cd vendor/template-printer/frontend && corepack pnpm install --frozen-lockfile",
+    "build:printer": "node scripts/build-template-printer.mjs",
+    "example:printer": "npm run predev && vite --config examples/template-printer-host/vite.config.js",
+    "predev": "node scripts/build-template-printer.mjs --dev",
     "dev": "vite",
+    "prebuild": "npm run build:printer",
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test \"test/*.test.js\"",
@@ -50,7 +58,9 @@
     "test:browser": "node test/browser/ddcnorth-motion.check.mjs",
     "test:sparklab:browser": "node test/browser/sparklab.check.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
-    "test:patterns:browser": "node test/browser/pattern-collections.check.mjs"
+    "test:patterns:browser": "node test/browser/pattern-collections.check.mjs",
+    "test:printer": "node test/browser/template-printer.check.mjs",
+    "test:identity": "node test/browser/overtheedge-identity.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -65,6 +75,8 @@
     }
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.9.12",
+    "bwip-js": "^4.11.4",
     "docx": "^9.12.0",
     "fflate": "^0.8.3",
     "gifenc": "^1.0.3",

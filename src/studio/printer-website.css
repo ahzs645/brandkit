@@ -1,0 +1,5 @@
+.printer-website { width: 100%; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line, #e3e5e8); font-size: 13px; }
+.printer-website summary { cursor: pointer; font-weight: 600; }
+.printer-website p { margin: 10px 0; max-width: 76ch; line-height: 1.5; color: var(--ink-muted, #5b5f66); }
+.printer-website__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.printer-website a { overflow-wrap: anywhere; }

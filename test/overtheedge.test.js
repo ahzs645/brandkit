@@ -97,6 +97,12 @@ test('OTE-001: six fonts and four licences, hashed in the fonts README; every fi
   assert.deepEqual(fonts.failures, [])
   for (const key of ['body', 'bold', 'display', 'displayRegular', 'deck', 'extra', 'label', 'hand']) assert.ok(fonts.has(key), key)
   assert.equal(brand.fonts.deck.style, 'italic')
+  assert.equal(brand.fonts.body.family, 'Helvetica Neue')
+  assert.equal(brand.fonts.body.weight, 500)
+  assert.equal(brand.fonts.bold.weight, 700)
+  assert.equal(brand.fonts.hand.family, 'Salted')
+  assert.match(read('fonts/LICENSE-Salted.txt'), /Personal use only/)
+  for (const file of ['Salted-Regular.otf', 'LICENSE-Salted.txt']) assert.ok(readme.includes(sha(`${folder}fonts/${file}`)), `${file} source hash`)
   for (const face of Object.values(brand.fonts)) for (const path of [face.file, face.web]) assert.ok(readFileSync(findAsset(folder, path)).length > 0, path)
   for (const file of brand.files) assert.ok(readFileSync(findAsset(folder, typeof file === 'string' ? file : file.from)).length > 0, JSON.stringify(file))
   for (const file of ['fonts/Inter-OFL.txt', 'fonts/desktop/Inter-Regular.ttf', 'fonts/desktop/Inter-SemiBold.ttf', 'fonts/web/Inter-Regular.woff2', 'fonts/web/Inter-SemiBold.woff2']) assert.ok(brand.files.includes(file), file)
@@ -138,9 +144,24 @@ test('OTE-002: the wordmark and the O are the site SVG\'s own paths, and the cop
   const words = unite([...over, ...the, ...edge].map(bounds))
   near(brand.wordmark.variants.words.width, words[2], 'words width')
   near(brand.wordmark.variants.words.height, words[3], 'words height')
-  const lines = [over, the, edge].map((list) => unite(list.map(bounds)))
-  near(brand.wordmark.variants.stacked.width, Math.max(...lines.map((box) => box[2] - box[0])), 'stacked width')
-  near(brand.wordmark.variants.stacked.height, 200 + Math.max(...lines.map((box) => box[3])), 'stacked height')
+  const coverPaths = pathsOf(read('reference/logo-cover-stacked.svg'))
+  assert.equal(coverPaths.length, 33)
+  assert.equal(sha(`${folder}reference/logo-cover-stacked.svg`), provenance.coverMasthead.sha256)
+  const coverWords = []
+  for (const word of ['over', 'the', 'edge', 'subtext']) {
+    const paths = coverPaths.filter((path) => path.within.includes(`data-name="${word}"`)).map((path) => path.d)
+    assert.equal(brand.wordmark.glyphs[`cover-${word}`], paths.join(''))
+    if (word !== 'subtext') coverWords.push(...paths)
+  }
+  const stacked = unite(coverWords.map(bounds))
+  near(brand.wordmark.variants.stacked.width, stacked[2], 'stacked words width')
+  near(brand.wordmark.variants.stacked.height, stacked[3], 'stacked words height')
+  const cover = unite(coverPaths.map((path) => bounds(path.d)))
+  near(brand.wordmark.variants['cover-stacked'].width, cover[2], 'cover width with subtext')
+  near(brand.wordmark.variants['cover-stacked'].height, cover[3], 'cover height')
+  assert.equal(brand.families[0].stackedWordmark, 'cover-stacked')
+  assert.match(logoDocument({ brand }, { family: 'overtheedge', layout: 'wordmark-stacked', colourKey: 'forest' }), /data-line="subtext"/)
+  assert.doesNotMatch(logoDocument({ brand }, { family: 'words', layout: 'wordmark-stacked', colourKey: 'forest' }), /data-line="subtext"/)
   const o = bounds(over[0])
   near(brand.symbol.viewBox[2], o[2], 'O width')
   near(brand.symbol.viewBox[3], o[3], 'O height')
@@ -192,6 +213,32 @@ test('OTE-003: validation reports a missing stacked wordmark, a bad variant heig
   assert.deepEqual(validateBrand(fixture({ lockupSymbol: false, stackedWordmark: 'two' }, { height: 10 })), [])
 })
 
+test('optional wordmark colours reach both arrangements without changing the main lettering', () => {
+  for (const layout of ['horizontal', 'stacked']) {
+    const svg = logoDocument({ brand }, { family: 'overtheedge', layout, colourKey: 'forest', subtextColour: 'ink' })
+    const paths = [...svg.matchAll(/<path\b([^>]*)>/g)].map((match) => match[1])
+    const subtext = paths.filter((path) => path.includes('data-line="subtext"'))
+    assert.ok(subtext.length)
+    assert.ok(subtext.every((path) => path.includes('fill="#262626"')))
+    assert.ok(paths.filter((path) => path.includes('data-word=')).every((path) => !path.includes('fill=')))
+    assert.match(svg, /data-wordmark="[^"]+" fill="#155329"/)
+    const without = logoDocument({ brand }, { family: brand.wordmark.optionalSubtext.withoutFamily, layout, colourKey: 'forest', subtextColour: 'ink' })
+    assert.doesNotMatch(without, /data-line="subtext"/)
+    assert.match(without, /data-word="OVER"/)
+  }
+  const ordinary = fixture()
+  const twoColour = logoDocument({ brand: ordinary }, { family: 'f', layout: 'horizontal', colour: '#155329', wordmarkColour: '#262626' })
+  assert.match(twoColour, /data-brand-symbol[^>]+fill="#155329"/)
+  assert.match(twoColour, /data-wordmark="one" fill="#262626"/)
+  const symbolOnly = lockup({ brand: ordinary }, { family: 'f', layout: 'stacked', showWordmark: false })
+  assert.doesNotMatch(symbolOnly.art, /data-wordmark/)
+  assert.match(symbolOnly.art, /data-brand-symbol/)
+  assert.equal(symbolOnly.width, ordinary.symbol.viewBox[2])
+  const invalid = structuredClone(brand)
+  invalid.wordmark.optionalSubtext.withoutFamily = 'missing'
+  assert.ok(validateBrand(invalid).some((problem) => problem.includes('withoutFamily')))
+})
+
 test('OTE-003: a template path with dash is dashed, one without is not; the schema documents all four', () => {
   const template = { id: 'x', width: 10, height: 10, elements: [{ type: 'path', id: 'a', d: 'M0 0H10', stroke: 'ink', dash: '6 5' }, { type: 'path', id: 'b', d: 'M0 5H10', stroke: 'ink' }] }
   const { svg } = renderTemplate({ brand }, template)
@@ -210,7 +257,7 @@ test('OTE-004: the palette, roles and logo colours are as planned, and the kit h
   assert.deepEqual(brand.rasterColours, ['forest', 'ink', 'white', 'lichen'])
   const plan = planKit(brand).map((entry) => entry.path)
   assert.equal(new Set(plan).size, plan.length, 'no path twice')
-  for (const path of ['logos/outlined/overtheedge-horizontal-forest.svg', 'logos/outlined/overtheedge-stacked-forest.svg', 'logos/outlined/overtheedge-wordmark-forest.svg', 'symbol/overtheedge-symbol-forest.svg', 'logos/source/overtheedge-site-light.svg', 'logos/source/overtheedge-site-dark.svg']) assert.ok(plan.includes(path), path)
+  for (const path of ['logos/outlined/overtheedge-horizontal-forest.svg', 'logos/outlined/overtheedge-stacked-forest.svg', 'logos/outlined/overtheedge-wordmark-forest.svg', 'logos/outlined/overtheedge-wordmark-stacked-forest.svg', 'symbol/overtheedge-symbol-forest.svg', 'logos/source/overtheedge-site-light.svg', 'logos/source/overtheedge-site-dark.svg']) assert.ok(plan.includes(path), path)
 })
 
 // --- OTE-005 Templates ----------------------------------------------------------------------------
@@ -219,8 +266,11 @@ const MINIMUM = { full: { px: 288, mm: 58 }, words: { px: 96, mm: 20 }, symbol: 
 const minimumFor = (family = brand.families[0].id, layout = 'horizontal') => (layout === 'stacked' || family === 'words' ? MINIMUM.words : MINIMUM.full)
 
 test('OTE-005: fourteen templates render outlined, readable, with logos at or above their minimum', () => {
-  assert.deepEqual(originalEntries(brand.templates).map((t) => t.id), ['business-card-front', 'business-card-back', 'press-pass', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close'])
-  for (const template of originalEntries(brand.templates)) {
+  // Imported original artwork has its own typography and colours; the Forest press rules
+  // below continue to apply to every one of the fourteen generated identity templates.
+  const nativeTemplates = originalEntries(brand.templates).filter((template) => !template.printer)
+  assert.deepEqual(nativeTemplates.map((t) => t.id), ['business-card-front', 'business-card-back', 'press-pass', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close'])
+  for (const template of nativeTemplates) {
     const { svg } = renderTemplate({ brand, fonts, outline: true }, template)
     assert.ok(svg.includes('</svg>') && !/NaN|undefined|<text/.test(svg), template.id)
     for (const hex of paints(svg)) assert.ok(palette.has(hex), `${template.id}: ${hex}`)
@@ -372,7 +422,7 @@ test('OTE-009 and OTE-010: valid, registered, documented', () => {
   assert.equal(pkg.scripts['make:overtheedge'], 'node scripts/brands/overtheedge.mjs')
   assert.ok(JSON.parse(readFileSync(`${root}brands/index.json`, 'utf8')).some((entry) => entry.id === 'overtheedge'))
   const readme = read('docs/README.md')
-  for (const heading of ['## Start here', '## What this kit is built from', '## Rules in brief', '## Package contents', 'Anton and Gochi Hand stand in']) assert.ok(readme.includes(heading), heading)
+  for (const heading of ['## Start here', '## What this kit is built from', '## Rules in brief', '## Package contents', 'Salted and Helvetica Neue']) assert.ok(readme.includes(heading), heading)
   assert.match(read('docs/CHANGELOG.md'), /^## 1\.0 - 22 October 2026$/m)
   assert.ok(read('reference/README.md').includes('PROVENANCE.json'))
   const provenance = JSON.parse(read('reference/PROVENANCE.json'))
@@ -387,7 +437,7 @@ test('OTE-009 and OTE-010: valid, registered, documented', () => {
 
 /** Hex colours written in a stylesheet or page (embedded font data left out), each must be a palette colour. */
 /** The faces a page embeds, as 'family weight style', sorted; every one must be a data: URI. */
-const embedded = (text) => [...text.matchAll(/@font-face \{ font-family: '([^']+)'; font-weight: (\d+); font-style: (\w+);[^}]*src: url\(data:font\/(?:ttf|woff2);base64,/g)].map((m) => `${m[1]} ${m[2]} ${m[3]}`).sort()
+const embedded = (text) => [...text.matchAll(/@font-face \{ font-family: '([^']+)'; font-weight: (\d+); font-style: (\w+);[^}]*src: url\(data:font\/(?:ttf|otf|woff2);base64,/g)].map((m) => `${m[1]} ${m[2]} ${m[3]}`).sort()
 const cssColours = (text) => [...text.replace(/base64,[A-Za-z0-9+/=]+/g, 'base64,').matchAll(/#([0-9a-fA-F]{3,8})\b/g)].map((m) => `#${m[1]}`.toUpperCase())
 
 test('OTE-012: thirteen motion studies, their tokens as CSS variables, palette colours, in the kit', () => {
@@ -417,7 +467,7 @@ test('OTE-012: thirteen motion studies, their tokens as CSS variables, palette c
     assert.doesNotMatch(source, /\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/, 'no other colour functions')
     assert.doesNotMatch(source, /(?:url\(|@import\s)['"]?https?:/, 'nothing fetched from elsewhere')
   }
-  assert.deepEqual(embedded(page), ['Anton 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Source Serif 4 700 normal'])
+  assert.deepEqual(embedded(page), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'IBM Plex Mono 500 normal', 'Source Serif 4 700 normal'])
   const plan = planKit(brand).map((entry) => entry.path)
   for (const file of ['motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md', 'guidelines/brand-details.html']) assert.ok(plan.includes(file), file)
   const readme = read('motion/README.md')
@@ -441,7 +491,7 @@ test('OTE-014: the brand details page is self-contained, in palette colours, and
   assert.ok(brand.files.some((file) => file.to === 'guidelines/brand-details.html' && file.from === 'docs/brand-details.html'))
   assert.ok(!/NaN|undefined/.test(html.replace(/base64,[A-Za-z0-9+/=]+/g, '')))
   assert.match(html, /<svg class="logo"/)
-  assert.deepEqual(embedded(html), ['Anton 400 normal', 'Gochi Hand 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Source Serif 4 700 normal'])
+  assert.deepEqual(embedded(html), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'IBM Plex Mono 500 normal', 'Salted 400 normal', 'Source Serif 4 700 normal'])
   for (const hex of cssColours(html)) assert.ok(palette.has(hex), hex)
   assert.doesNotMatch(html, /(?:src|href)="https?:/, 'nothing loaded from elsewhere')
   assert.ok(!html.includes('—'))
@@ -455,7 +505,7 @@ test('OTE-015: the site uses the kit\'s motion CSS, its marked artwork, and only
   assert.match(site, /<!-- ote:issue-logo --><svg class="ote-lockup"[\s\S]*?<\/svg><!-- \/ote:issue-logo -->/)
   assert.match(site, /<!-- ote:loader --><svg class="ote-o"[\s\S]*?<\/svg><!-- \/ote:loader -->/)
   assert.match(site, /<!-- ote:fonts -->@font-face[\s\S]*?<!-- \/ote:fonts -->/)
-  assert.deepEqual(embedded(site), ['Anton 400 normal', 'Gochi Hand 400 normal', 'IBM Plex Mono 500 normal', 'Inter 400 normal', 'Inter 600 normal', 'Source Serif 4 700 normal'])
+  assert.deepEqual(embedded(site), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'Helvetica Neue 700 normal', 'IBM Plex Mono 500 normal', 'Salted 400 normal', 'Source Serif 4 700 normal'])
   for (const asset of [...site.matchAll(/(?:src|href)="((?:assets|licenses)\/[^"]+)"/g)].map((m) => m[1])) assert.ok(existsSync(`${folder}site/${asset}`), asset)
   for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'SourceSerif-OFL.md', 'Inter-OFL.txt']) assert.equal(sha(`${folder}site/licenses/${file}`), sha(findAsset(folder, `fonts/${file}`)), file)
   for (const hex of cssColours(site)) assert.ok(palette.has(hex), hex)

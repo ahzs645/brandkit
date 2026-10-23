@@ -14,6 +14,7 @@ import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
 import { additionsOf, changesArtwork, findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
 import { officeFile } from '../export/office.js'
+import { readBrandAsset } from '../assets.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
 export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Motion', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
@@ -68,7 +69,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
       const make = (ctx) => logoDocument(ctx, { ...logo, colourKey: paint.colour, colour: paint.colour === 'currentColor' || logo.signature ? paint.colour : undefined, colourway: paint.colourway })
       svgEntry(`logos/outlined/${stem}.svg`, make)
       if (!paint.raster) continue
-      if (rasters) for (const width of logo.layout === 'stacked' || logo.layout === 'wordmark' ? [1024] : [1024, 2048]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
+      if (rasters) for (const width of logo.layout === 'stacked' || logo.layout?.startsWith('wordmark') ? [1024] : [1024, 2048]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
       if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
     }
   }
@@ -235,7 +236,7 @@ const encoder = new TextEncoder()
  * @param {(entry) => boolean} [options.filter]
  */
 export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, ...planOptions } = {}) => {
-  const plan = planKit(ctx.brand, { rasters: Boolean(renderer), pdfs: Boolean(renderer), assets: Boolean(readAsset), ...planOptions })
+  const plan = planKit(ctx.brand, { rasters: Boolean(renderer), pdfs: Boolean(renderer), assets: Boolean(readAsset || ctx.brand.assets), ...planOptions })
     .filter((entry) => !filter || entry.kind === 'index' || filter(entry))
   const files = new Map()
   const skipped = []
@@ -248,7 +249,7 @@ export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, .
         case 'png': files.set(entry.path, await renderer.png(entry.svg(ctx), entry.width)); break
         case 'pdf': files.set(entry.path, await renderer.pdf(entry.pages(ctx), { title: fill(ctx.brand, entry.title ?? entry.path.split('/').pop()), author: ctx.brand.name })); break
         case 'ico': files.set(entry.path, await renderer.ico(entry.sizes.map((path) => files.get(path)).filter(Boolean), entry.sizes.map((path) => Number(/-(\d+)\.png$/.exec(path)[1])))); break
-        case 'asset': files.set(entry.path, new Uint8Array(await readAsset(entry.src))); break
+        case 'asset': files.set(entry.path, new Uint8Array(await readBrandAsset(ctx.brand, entry.src, readAsset))); break
         case 'office': {
           const file = await officeFile(ctx, entry.document, { png: renderer.png })
           files.set(entry.path, file.bytes)

@@ -14,6 +14,7 @@
 // builder set them, so wrapped paragraphs break at the same words.
 
 import * as opentype from 'opentype.js'
+import { readBrandAsset } from '../assets.js'
 
 // The package's Node entry is CommonJS (one default export); bundlers take its ES module.
 const parse = opentype.parse ?? opentype.default.parse
@@ -117,7 +118,7 @@ export const loadBrandFonts = async (brand, read) => {
   await Promise.all(Object.entries(brand.fonts ?? {}).map(async ([key, spec]) => {
     if (!spec.file) return
     try {
-      if (!cache.has(spec.file)) cache.set(spec.file, Promise.resolve(read(spec.file)).then((buffer) => ({ font: parse(buffer), bytes: new Uint8Array(buffer) })))
+      if (!cache.has(spec.file)) cache.set(spec.file, readBrandAsset(brand, spec.file, read).then((buffer) => ({ font: parse(buffer), bytes: new Uint8Array(buffer) })))
       // The file's bytes stay with the face, for documents that embed it (a Word template).
       const loaded = await cache.get(spec.file)
       faces[key] = { font: loaded.font, bytes: loaded.bytes, slant: spec.slant ?? 0 }

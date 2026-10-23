@@ -52,12 +52,12 @@ export const detailsPage = ({ brand, fonts }, { fontFaces, contrastPairs, largeO
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Over the Edge Brand Details</title>
 <style>
-/* Fonts: the brand's own files, embedded, under the SIL Open Font License (see fonts/). */
+/* Fonts: supplied originals and open-source faces; see each notice in fonts/. */
 ${fontFaces}
 /* Layout: one 1180 px column on newsprint, sections divided by the index's dashed rule, artwork on its true grounds. */
 :root { ${Object.entries(c).map(([key, hex]) => `--${key}: ${hex};`).join(' ')} }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--newsprint); color: var(--ink); font-family: Inter, system-ui, Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+body { margin: 0; background: var(--newsprint); color: var(--ink); font-family: "Helvetica Neue", system-ui, Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
 :focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
 h1, h2, h3 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; margin: 0; text-wrap: balance; }
 p { margin: 0; }
@@ -99,7 +99,7 @@ td { padding: 10px 8px; border-bottom: 1px solid var(--pulp); white-space: nowra
 .s-display { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; }
 .s-anton { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-size: clamp(36px, 5vw, 64px); line-height: 1; text-transform: uppercase; }
 .s-body { font-size: 18px; } .s-mono { font-family: 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 16px; }
-.s-hand { font-family: 'Gochi Hand', cursive; font-size: 34px; color: var(--forest); }
+.s-hand { font-family: 'Salted', cursive; font-size: 34px; color: var(--forest); }
 .icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
 .icons li { background: var(--white); border: 1px solid var(--pulp); padding: 18px 8px 10px; display: grid; justify-items: center; gap: 8px; color: var(--forest); font-size: 12px; }
 .icons .icon { width: 32px; height: 32px; }
@@ -150,7 +150,7 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
   </div>
   <div class="grid g3">
     <figure><div class="panel on-white">${logo('words', 'horizontal', 'forest')}</div><figcaption>Without subtext, for small spaces. 96 px / 20 mm or more.</figcaption></figure>
-    <figure><div class="panel on-lichen">${logo('overtheedge', 'stacked', 'forest')}</div><figcaption>Stacked, as on the October 2025 cover.</figcaption></figure>
+    <figure><div class="panel on-lichen">${logo('overtheedge', 'stacked', 'forest')}</div><figcaption>Stacked, extracted from page 1 of the September 2025 issue.</figcaption></figure>
     <figure><div class="panel on-pine"><div class="o-row">${symbol('lichen')}</div></div><figcaption>The O, alone only where the name can’t be read. 16 px / 5 mm or more.</figcaption></figure>
   </div>
   <ul class="rules">
@@ -166,13 +166,13 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
 </section>
 
 <section aria-labelledby="h-type">
-  <div class="sh"><div><span class="label">Typography</span><h2 id="h-type">Five voices, five jobs.</h2></div><p>Source Serif 4 and Inter are the site's. Anton and Gochi Hand stand in for the print covers' faces, which are not known.</p></div>
+  <div class="sh"><div><span class="label">Typography</span><h2 id="h-type">Five voices, five jobs.</h2></div><p>Helvetica Neue and Salted are supplied original faces. Anton remains the substitute for Decalotype Black; keep the supplied font notices.</p></div>
   <div class="type">
     <div><span class="label">Headlines · Source Serif 4 Bold</span><span class="s-display">Bears Don’t Really Hibernate… Or Do They?</span></div>
     <div><span class="label">Front page · Anton, capitals</span><span class="s-anton">October 16th · In this issue</span></div>
-    <div><span class="label">Interface · Inter</span><span class="s-body">Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.</span></div>
+    <div><span class="label">Interface · Helvetica Neue</span><span class="s-body">Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.</span></div>
     <div><span class="label">Dateline · IBM Plex Mono</span><span class="s-mono">Volume 32 · Issue 2 · October 16, 2025</span></div>
-    <div><span class="label">One note · Gochi Hand</span><span class="s-hand">Over the Edge is here!</span></div>
+    <div><span class="label">One note · Salted</span><span class="s-hand">Over the Edge is here!</span></div>
   </div>
 </section>
 
