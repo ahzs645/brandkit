@@ -1,5 +1,6 @@
 // Integration checks for the six brand-specific supporting collections. The committed fixture
-// records original definitions and legacy renders from 48f7248 before these additions. It was
+// records original definitions and legacy renders from 48f7248 before these additions, with
+// the explicit OTE identity/package refresh recorded in source.overrides. It was
 // captured once with `git show <commit>:brands/<id>/brand.json`, canonical JSON SHA-256 hashes,
 // and planKit({ rasters:false, pdfs:false, assets:false }) with the original local brand fonts.
 // Refreshing it is an explicit, reviewed baseline change; tests never record or rewrite it and
