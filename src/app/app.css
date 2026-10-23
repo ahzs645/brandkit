@@ -63,6 +63,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .brand-logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
 .brand-logo__art { display: block; height: 26px; max-width: min(240px, 52vw); }
+.brand-logo[data-brand='firstform'] .brand-logo__art { height: 44px; }
+.brand-logo[data-brand='bc-province-1977'] .brand-logo__art { height: 34px; }
 .brand-logo__art svg { display: block; width: 100%; height: 100%; }
 .brand-logo__name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; white-space: nowrap; }
 .badge { font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #fff1c2; color: #6b4e00; }
@@ -431,12 +433,14 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 @media (max-width: 600px) {
   .masthead__wide { display: none; }
   .more-menu { display: block; }
-  .menu__panel { position: fixed; top: 58px; left: 12px; right: 12px; max-width: none; }
+  .menu__panel { width: calc(100vw - 24px); max-width: none; }
   .menu__panel--end { left: auto; width: min(260px, calc(100vw - 24px)); }
 }
 @media (prefers-reduced-motion: reduce) { .menu__panel { animation: none; } }
 .menu-logo { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: var(--ink); }
 .menu-logo__art { display: block; height: 24px; max-width: 220px; }
+.menu-logo[data-brand='firstform'] .menu-logo__art { height: 40px; }
+.menu-logo[data-brand='bc-province-1977'] .menu-logo__art { height: 32px; }
 .menu-logo__art svg { display: block; width: 100%; height: 100%; }
 .menu-logo__name { font-size: 14px; }
 .brand-menu .menu__item { min-height: 48px; }

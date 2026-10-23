@@ -1,0 +1,12 @@
+:root {
+  --spark-quick: 180ms;
+  --spark-base: 400ms;
+  --spark-slow: 700ms;
+  --spark-reveal: 1200ms;
+  --spark-loader: 1600ms;
+  --spark-ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --spark-ease-move: cubic-bezier(0.25, 1, 0.5, 1);
+  --spark-ease-linear: linear;
+  --spark-stagger: 80ms;
+  --spark-distance: 24px;
+}

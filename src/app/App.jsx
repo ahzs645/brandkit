@@ -207,19 +207,19 @@ export const App = () => {
       <header className="masthead">
         {SHARED ? (
           <div className="masthead__row">
-            {brand ? <SharedMark brand={brand} /> : <span className="shared-mark" />}
+            {brand ? <SharedMark brand={brand} fonts={fonts} /> : <span className="shared-mark" />}
             {brand && <span className="badge badge--approved" title="The approved identity">v{brand.displayVersion ?? brand.version}</span>}
           </div>
         ) : (
         <div className="masthead__row">
           {/* The brand being looked at stands where the app's name would; it opens the brand menu. */}
           <BrandMenu
-            logo={brand ? <BrandLogo brand={brand} /> : <span className="brand-logo" />}
+            logo={brand ? <BrandLogo brand={brand} fonts={fonts} /> : <span className="brand-logo" />}
             current={brand?.id}
             brands={brandIds.map((id) => {
               const name = BUILT_IN.includes(id) ? builtInName(id) : saved[id]?.name ?? opened[id]?.brand?.name ?? id
               const own = opened[id]?.brand ?? (BUILT_IN.includes(id) ? null : saved[id])
-              return { id, name, note: saved[id] && !BUILT_IN.includes(id) ? 'saved' : opened[id] ? 'opened' : null, logo: <MenuLogo url={own ? null : menuLogoUrl(id)} brand={own} name={name} /> }
+              return { id, name, note: saved[id] && !BUILT_IN.includes(id) ? 'saved' : opened[id] ? 'opened' : null, logo: <MenuLogo id={id} url={own ? null : menuLogoUrl(id)} brand={own} name={name} /> }
             })}
             onBrand={(id) => select(id)}
             revisions={base && revisions.length ? [{ id: '', label: `Approved v${base.displayVersion ?? base.version}`, note: 'approved' }, ...revisions.map((entry) => ({ id: entry.id, label: entry.title, note: `${entry.status ?? 'proposed'} v${entry.displayVersion ?? entry.version}` }))] : []}

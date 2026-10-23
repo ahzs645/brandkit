@@ -44,9 +44,11 @@
     "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",
     "make:firstform": "node scripts/brands/firstform.mjs",
     "make:overtheedge": "node scripts/brands/overtheedge.mjs",
+    "make:sparklab": "node scripts/brands/sparklab.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
     "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",
-    "test:browser": "node test/browser/ddcnorth-motion.check.mjs"
+    "test:browser": "node test/browser/ddcnorth-motion.check.mjs",
+    "test:sparklab:browser": "node test/browser/sparklab.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

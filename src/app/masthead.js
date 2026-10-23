@@ -5,17 +5,21 @@
 import { logoDocument, symbolDocument } from '../engine/artwork.js'
 
 export const aspectOf = (svg) => {
-  const [, , width, height] = svg?.match(/viewBox="([^"]+)"/)?.[1].split(/[\s,]+/).map(Number) ?? []
+  // Vite's inlined SVGs use single quotes; generated artwork uses double quotes.
+  const [, , width, height] = svg?.match(/\bviewBox\s*=\s*(["'])(.*?)\1/)?.[2].trim().split(/[\s,]+/).map(Number) ?? []
   return width && height ? width / height : null
 }
 
 /**
  * The art for a masthead: the horizontal logo; for a brand of signatures, the first that is not
- * set for a department and is wide enough to read 26 px tall; failing both, the symbol, with the
- * name beside it.
+ * set for a department and is wide enough to read at masthead size; failing both, the symbol,
+ * with the name beside it. The Province uses its two-line logotype beside the emblem.
  */
 export const mastheadArt = (brand, fonts) => {
   if (brand.families?.length) return { svg: logoDocument({ brand, fonts }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
+  if (brand.id === 'bc-province-1977') {
+    return { svg: logoDocument({ brand, fonts, values: { ministry: '', 'ministry-split': '', address: '' } }, { signature: 'horizontal', colour: 'currentColor' }) }
+  }
   for (const signature of brand.signatures ?? []) {
     if (signature.departmental) continue
     const svg = logoDocument({ brand, fonts }, { signature: signature.id, colour: 'currentColor' })

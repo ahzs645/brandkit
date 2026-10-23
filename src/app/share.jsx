@@ -28,9 +28,9 @@ export const shareUrl = (brandId, view = 'overview') => {
 }
 
 /** The shared view's masthead mark: the brand's own logo, and what this is. */
-export const SharedMark = ({ brand }) => (
+export const SharedMark = ({ brand, fonts }) => (
   <a className="shared-mark" href={shareUrl(brand.id)} aria-label={`${brand.name} brand centre`}>
-    <BrandLogo brand={brand} />
+    <BrandLogo brand={brand} fonts={fonts} />
     <span className="shared-mark__label">Brand centre</span>
   </a>
 )

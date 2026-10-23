@@ -27,10 +27,10 @@ export const SvgImage = ({ svg, alt = '', ...props }) => {
 }
 
 const menuLogos = new Map()
-const MenuArt = ({ svg, name }) => {
+const MenuArt = ({ svg, name, id }) => {
   const aspect = aspectOf(svg)
   return (
-    <span className="menu-logo">
+    <span className="menu-logo" data-brand={id}>
       {aspect && <span className="menu-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: svg }} />}
       {(!aspect || aspect < 1.6) && <span className="menu-logo__name">{name}</span>}
     </span>
@@ -42,7 +42,7 @@ const MenuArt = ({ svg, name }) => {
  * or, for a brand made or opened here, drawn from its definition. A near-square logo (a symbol)
  * has the name beside it; until the logo arrives, the name stands in.
  */
-export const MenuLogo = ({ url, brand, name }) => {
+export const MenuLogo = ({ url, brand, name, id = brand?.id }) => {
   const [svg, setSvg] = useState(() => (url ? menuLogos.get(url) ?? null : null))
   useEffect(() => {
     if (!url || menuLogos.has(url)) return undefined
@@ -55,15 +55,15 @@ export const MenuLogo = ({ url, brand, name }) => {
     try { return mastheadArt(brand).svg?.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) } catch { return null }
   }, [url, brand])
   const art = svg ?? drawn
-  return art ? <MenuArt svg={art} name={name} /> : <span className="menu-logo"><span className="menu-logo__name">{name}</span></span>
+  return art ? <MenuArt svg={art} name={name} id={id} /> : <span className="menu-logo" data-brand={id}><span className="menu-logo__name">{name}</span></span>
 }
 
 /** The brand's logo in the masthead, drawn inline in currentColor to take the ink of light and dark alike. */
-export const BrandLogo = ({ brand }) => {
-  const art = useMemo(() => { try { return mastheadArt(brand) } catch { return { named: true } } }, [brand])
+export const BrandLogo = ({ brand, fonts }) => {
+  const art = useMemo(() => { try { return mastheadArt(brand, fonts) } catch { return { named: true } } }, [brand, fonts])
   const aspect = aspectOf(art.svg)
   return (
-    <span className="brand-logo" role="img" aria-label={brand.name}>
+    <span className="brand-logo" data-brand={brand.id} role="img" aria-label={brand.name}>
       {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
       {(art.named || !aspect) && <span className="brand-logo__name" aria-hidden="true">{brand.name}</span>}
     </span>
