@@ -9,6 +9,7 @@
 //
 //   node scripts/brands/bc-province-1977.mjs
 
+import { extendBrandPatterns } from './pattern-collections.mjs'
 import { box, cite, HEROS_CAP, hung, locked, pt, readJson, round, writeBrand } from './common.mjs'
 import { applications, guide } from './bc-province-1977-applications.mjs'
 import { illustrated } from './illustrations.mjs'
@@ -494,4 +495,5 @@ const motion = writeMotion(folder, provinceLibrary(brand, await loadBrandFontsFr
 brand.motion = motion.entry
 brand.files.push(...motion.files)
 
+await extendBrandPatterns(brand, folder)
 writeBrand(new URL('brand.json', folder), brand)

@@ -14,6 +14,7 @@
 //   the nearest open face to the kit's lettering, not the lettering itself: replace the glyphs when
 //   vector masters of the original wordmark exist. The PNGs are kept in reference/.
 
+import { extendBrandPatterns } from './pattern-collections.mjs'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { bakeWordmark, createStarterBrand } from '../../src/engine/starter.js'
 import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
@@ -464,6 +465,7 @@ for (const [name, markup] of [['logo', lockupMarkup(motionGeometry, 'site-logo')
 }
 writeFileSync(sitePath, site)
 
+await extendBrandPatterns(brand, folder)
 writeFileSync(`${folder}brand.json`, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
 console.log(`brands/firstform/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons, ${brand.motion.studies.length} motion studies`)

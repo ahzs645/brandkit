@@ -9,6 +9,7 @@
 //
 //   npm run make:ddcnorth-v23   (proposes v2.3 in the v2.1 definition, then runs this)
 
+import { extendBrandPatterns } from './pattern-collections.mjs'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { withRevision } from '../../src/engine/revisions.js'
 import { updateManifest } from './common.mjs'
@@ -51,6 +52,7 @@ brand.history = [
   { ...approvedRecord, status: 'approved', approved: DATE, note: 'Merged into this definition.' }
 ]
 
+await extendBrandPatterns(brand, root)
 writeFileSync(new URL('brand.json', root), `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
 console.log(`brands/ddcnorth/brand.json: v${brand.displayVersion}, approved; ${brand.templates.length} templates, ${brand.patterns.length} patterns, ${brand.guide.pages.length} guide pages, ${brand.motion.studies.length} motion studies; ${brand.history.length} history entries`)

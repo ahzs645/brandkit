@@ -11,6 +11,10 @@ const folder = new URL('../brands/ddcnorth/', import.meta.url).pathname
 const brand = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
 const v21 = JSON.parse(readFileSync(`${folder}history/2.1/brand.json`, 'utf8'))
 const proposed = withRevision(v21, 'data-design-connection')
+// Later supporting studies are explicitly additive; all approved v2.3 entries still match
+// the original proposal. Their IDs, metadata and source preservation are checked separately
+// in pattern-collections.test.js.
+const approvedEntries = (items) => items.filter((item) => item?.extension !== 'pattern-explorations')
 
 test('brand.json is approved v2.3, valid, with no open revisions', () => {
   assert.equal(brand.version, '2.3-data-design-connection')
@@ -23,7 +27,7 @@ test('brand.json is approved v2.3, valid, with no open revisions', () => {
 })
 
 test('everything v2.3 proposed is in it, and the logo and symbol are v2.1’s', () => {
-  for (const key of ['templates', 'patterns', 'sets', 'files']) assert.deepEqual(brand[key].map((item) => item.id ?? item.to ?? item), proposed[key].map((item) => item.id ?? item.to ?? item), key)
+  for (const key of ['templates', 'patterns', 'sets', 'files']) assert.deepEqual(approvedEntries(brand[key]).map((item) => item.id ?? item.to ?? item), proposed[key].map((item) => item.id ?? item.to ?? item), key)
   assert.deepEqual(brand.icons.items.map((item) => item.id), proposed.icons.items.map((item) => item.id))
   assert.deepEqual(brand.guide.pages.map((page) => page.title), proposed.guide.pages.map((page) => page.title))
   assert.deepEqual(brand.motion, proposed.motion)

@@ -7,6 +7,7 @@
 //
 //   node scripts/brands/bc-hydro-1983.mjs
 
+import { extendBrandPatterns } from './pattern-collections.mjs'
 import { readFileSync } from 'node:fs'
 import { box, cite, g, inch, line, locked, pt, readJson, round, shelf, text, writeBrand } from './common.mjs'
 import { loadBrandFonts } from '../../src/fonts/provider.js'
@@ -563,4 +564,5 @@ const motion = writeMotion(folder, hydroLibrary(brand, await loadBrandFontsFromD
 brand.motion = motion.entry
 brand.files.push(...motion.files)
 
+await extendBrandPatterns(brand, folder)
 writeBrand(new URL('brand.json', folder), brand)

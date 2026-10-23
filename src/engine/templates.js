@@ -32,6 +32,7 @@
 //               one field, wrapped to `width` (and at any line break typed into it)
 //   dots        { dots: [[cx, cy, r], …], fill, opacity?, id? }        a field of circles, as one path
 //   polyline    { points: [[x, y], …], stroke, strokeWidth?, opacity?, id? }
+//   pattern     { pattern: patternId, x, y, width, height, fit?: 'cover' | 'contain', id? }
 //   printGuides { colour, trim: {...}, safe: {...} }                  hidden trim and safe areas
 //
 // Every text element with an `id` is a field: `values[id]` replaces its text. A brand may list its
@@ -39,7 +40,7 @@
 // their defaults. Text is live by default, so the SVG stays editable; `outline: true` sets it as
 // paths for raster and PDF output.
 
-import { lockup, mark } from './artwork.js'
+import { lockup, mark, pattern } from './artwork.js'
 import { illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
@@ -199,6 +200,15 @@ const renderElement = (ctx, element, template) => {
       return `<rect${idAttr(element)} x="${n6(u(element.x))}" y="${n6(u(element.y))}" width="${n6(u(element.width))}" height="${n6(u(element.height))}" fill="${resolveColour(brand, element.fill ?? 'none')}"${stroke(ctx, element, unit)}/>`
     case 'path':
       return `<path${idAttr(element)} d="${element.d}"${element.fill ? ` fill="${resolveColour(brand, element.fill)}"` : ''}${stroke(ctx, element, unit)}/>`
+    case 'pattern': {
+      const spec = brand.patterns?.find(item => item.id === element.pattern)
+      if (!spec) throw new Error(`No pattern ${element.pattern}`)
+      const prefix = element.id ?? `pattern-${element.pattern}`
+      const x = u(element.x), y = u(element.y), width = u(element.width), height = u(element.height)
+      const clip = `${prefix}-clip`
+      const artwork = scopeIds(pattern(ctx, spec), prefix).replace(/^<svg\b[^>]*>/, `<svg x="${n6(x)}" y="${n6(y)}" width="${n6(width)}" height="${n6(height)}" viewBox="0 0 ${n6(spec.width)} ${n6(spec.height)}" preserveAspectRatio="xMidYMid ${element.fit === 'contain' ? 'meet' : 'slice'}" overflow="hidden">`)
+      return `<defs><clipPath id="${escape(clip)}"><rect x="${n6(x)}" y="${n6(y)}" width="${n6(width)}" height="${n6(height)}"/></clipPath></defs><g${idAttr(element)} clip-path="url(#${escape(clip)})">${artwork}</g>`
+    }
     case 'dots': {
       const d = element.dots.map(([cx, cy, r]) => { const [x, y, radius] = [u(cx), u(cy), u(r)]; return `M${n6(x - radius)} ${n6(y)}a${n6(radius)} ${n6(radius)} 0 1 0 ${n6(2 * radius)} 0a${n6(radius)} ${n6(radius)} 0 1 0 ${n6(-2 * radius)} 0Z` }).join('')
       return `<path${idAttr(element)} d="${d}" fill="${resolveColour(brand, element.fill ?? 'ink')}"${element.opacity != null ? ` opacity="${n6(element.opacity)}"` : ''}/>`

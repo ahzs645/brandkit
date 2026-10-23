@@ -67,7 +67,7 @@ export const SignatureStage = ({ brand, fonts, openManual }) => {
 
 /** The logos view: every signature in every colourway, and every department's set as one zip. */
 /** `before` sits at the top of the view: the Logos tab puts the brand's logo motion there. */
-export const SignatureLogos = ({ brand, fonts, openManual, before }) => {
+export const SignatureLogos = ({ brand, fonts, openManual, before, after }) => {
   const [department, setDepartment] = useState('')
   // Arriving from a manual page (?signature=…), bring that signature into view.
   useEffect(() => {
@@ -122,6 +122,7 @@ export const SignatureLogos = ({ brand, fonts, openManual, before }) => {
           <ManualSources brand={brand} sources={signature.sources} openManual={openManual} />
         </section>
       ))}
+      {after}
     </div>
   )
 }

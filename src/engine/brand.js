@@ -141,9 +141,18 @@ export const validateBrand = (brand) => {
   for (const spec of brand.patterns ?? []) {
     for (const dot of spec.dots ?? []) need(number(dot.cx) && number(dot.cy) && number(dot.r) && dot.r >= 0, `Pattern \`${spec.id}\` has a dot without a numeric cx, cy and non-negative r.`)
     for (const line of spec.lines ?? []) need(Array.isArray(line.points) && line.points.length >= 2, `Pattern \`${spec.id}\` has a line with fewer than two points.`)
+    for (const place of spec.place ?? []) {
+      need(number(place.x) && number(place.y) && number(place.scale) && place.scale > 0, `Pattern \`${spec.id}\` needs numeric x, y and a positive scale for each placement.`)
+      if (place.symbol != null) need(brand.symbols?.[place.symbol], `Pattern \`${spec.id}\` uses symbol \`${place.symbol}\`, which is not in \`symbols\`.`)
+      if (place.rotation != null) need(number(place.rotation), `Pattern \`${spec.id}\` needs a numeric rotation in degrees.`)
+    }
   }
   for (const template of brand.templates ?? []) {
     for (const element of template.elements ?? []) {
+      if (element.type === 'pattern') {
+        need(brand.patterns?.some(spec => spec.id === element.pattern), `Template \`${template.id}\` names pattern \`${element.pattern}\`, which is not defined.`)
+        need(number(element.x) && number(element.y) && number(element.width) && number(element.height) && element.width > 0 && element.height > 0, `Template \`${template.id}\` needs numeric pattern coordinates and positive dimensions.`)
+      }
       if (element.type === 'dots') need(Array.isArray(element.dots) && element.dots.every((dot) => Array.isArray(dot) && number(dot[0]) && number(dot[1]) && number(dot[2]) && dot[2] >= 0), `Template \`${template.id}\` has a dots element whose dots are not [cx, cy, r] numbers with r of zero or more.`)
       if (element.type === 'polyline') need(Array.isArray(element.points) && element.points.length >= 2, `Template \`${template.id}\` has a polyline with fewer than two points.`)
     }

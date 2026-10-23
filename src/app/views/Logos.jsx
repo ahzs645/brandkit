@@ -67,8 +67,31 @@ const LogoMotion = ({ brand, source }) => {
   )
 }
 
+const SupportingAssets = ({ brand, source }) => {
+  const ctx = { brand }
+  return <>
+    {brand.patterns?.length > 0 && (
+      <section className="panel">
+        <h2>Patterns</h2>
+        {brand.patternCollection?.page && source?.url(brand.patternCollection.page) && <p><a className="button" href={source.url(brand.patternCollection.page)} target="_blank" rel="noreferrer">Explore patterns ↗</a></p>}
+        <div className="asset-grid asset-grid--wide">
+          {brand.patterns.map((spec) => <Card key={spec.id} wide title={spec.name ?? spec.id} name={spec.id} width={spec.width * 2} make={() => pattern(ctx, spec)} />)}
+        </div>
+      </section>
+    )}
+    {brand.icons?.items?.length > 0 && (
+      <section className="panel">
+        <h2>Supporting icons</h2>
+        <div className="asset-grid asset-grid--small">
+          {brand.icons.items.map((item) => <Card key={item.id} title={item.id} name={item.id} ground="#fff" width={256} make={() => icon(ctx, item)} />)}
+        </div>
+      </section>
+    )}
+  </>
+}
+
 export const Logos = ({ brand, fonts, source, openManual }) => {
-  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} />
+  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} after={<SupportingAssets brand={brand} source={source} />} />
   const ctx = { brand }
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   return (
@@ -99,22 +122,7 @@ export const Logos = ({ brand, fonts, source, openManual }) => {
           {(brand.symbol.microRadius != null || brand.symbol.microPaths) && <Card title="Micro" name={`${brand.id}-symbol-micro`} ground="#fff" width={256} make={() => symbolDocument(ctx, { micro: true })} />}
         </div>
       </section>
-      {brand.patterns?.length > 0 && (
-        <section className="panel">
-          <h2>Patterns</h2>
-          <div className="asset-grid asset-grid--wide">
-            {brand.patterns.map((spec) => <Card key={spec.id} wide title={spec.id} name={spec.id} width={spec.width * 2} make={() => pattern(ctx, spec)} />)}
-          </div>
-        </section>
-      )}
-      {brand.icons?.items?.length > 0 && (
-        <section className="panel">
-          <h2>Supporting icons</h2>
-          <div className="asset-grid asset-grid--small">
-            {brand.icons.items.map((item) => <Card key={item.id} title={item.id} name={item.id} ground="#fff" width={256} make={() => icon(ctx, item)} />)}
-          </div>
-        </section>
-      )}
+      <SupportingAssets brand={brand} source={source} />
     </div>
   )
 }

@@ -94,6 +94,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     for (const paint of paintOptions(brand).filter((entry) => entry.colourway)) {
       svgEntry(`symbol/${id}-symbol-${symbolId}-${paint.id}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourway: paint.colourway }))
     }
+    if (!brand.colourways) for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${symbolId}-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourKey: key }))
   }
   svgEntry(`symbol/${id}-symbol-master.svg`, (ctx) => symbolDocument(ctx, { master: true }))
   if (brand.symbol.microRadius != null || brand.symbol.microPaths || brand.symbol.microMarkup) svgEntry(`symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(ctx, { micro: true }))
@@ -151,6 +152,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
     // A sheet may say where it goes (a revision's comparison lives with the revision).
     svgEntry(`${sheet.path ?? `guidelines/${sheet.id}`}.svg`, make)
     if (rasters) add({ path: sheet.path ? `${sheet.path}.png` : sheet.group === 'overview' ? `guidelines/${sheet.id}.png` : `guidelines/png/${sheet.id}.png`, kind: 'png', width: sheet.width, svg: make })
+    if (pdfs && brand.guide.sheets.find(item => item.id === sheet.id)?.pdf) add({ path: `${sheet.path ?? `guidelines/${sheet.id}`}.pdf`, kind: 'pdf', title: sheet.title, pages: ctx => [pageOf(make(ctx))] })
   }
   if (pdfs && brand.guide?.pages?.length) {
     add({ path: `guidelines/${id}-brand-guide.pdf`, kind: 'pdf', title: brand.guide.pdfTitle ?? '{name} brand guide', pages: (ctx) => pages(ctx).map((page) => pageOf(page.render())) })

@@ -16,6 +16,9 @@ const brand = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
 const read = (path) => readFileSync(`${folder}${path}`, 'utf8')
 const sha = (path) => createHash('sha256').update(readFileSync(path)).digest('hex')
 const fonts = await loadBrandFontsFromDisk(brand, folder)
+// Keep the original Forest press assertions exact. The explicitly tagged supporting
+// collection is validated independently in pattern-collections.test.js.
+const originalEntries = (items) => items.filter((item) => item?.extension !== 'pattern-explorations')
 
 // --- Helpers, written independently of the brand's script ----------------------------------------
 
@@ -216,8 +219,8 @@ const MINIMUM = { full: { px: 288, mm: 58 }, words: { px: 96, mm: 20 }, symbol: 
 const minimumFor = (family = brand.families[0].id, layout = 'horizontal') => (layout === 'stacked' || family === 'words' ? MINIMUM.words : MINIMUM.full)
 
 test('OTE-005: fourteen templates render outlined, readable, with logos at or above their minimum', () => {
-  assert.deepEqual(brand.templates.map((t) => t.id), ['business-card-front', 'business-card-back', 'press-pass', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close'])
-  for (const template of brand.templates) {
+  assert.deepEqual(originalEntries(brand.templates).map((t) => t.id), ['business-card-front', 'business-card-back', 'press-pass', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close'])
+  for (const template of originalEntries(brand.templates)) {
     const { svg } = renderTemplate({ brand, fonts, outline: true }, template)
     assert.ok(svg.includes('</svg>') && !/NaN|undefined|<text/.test(svg), template.id)
     for (const hex of paints(svg)) assert.ok(palette.has(hex), `${template.id}: ${hex}`)
@@ -265,8 +268,8 @@ const DATES = ['22 October 2026', 'April 2025', 'October 2025']
 const EXEMPT = [/\d+ × \d+/g, /\d+ ms\b/g, /Source Serif 4/gi, /\bA4\b/g, /#[0-9A-F]{6}\b/gi, /\d+(?:\.\d+)? ?(?:px|mm)\b/g, /\d+(?:\.\d+)? : 1\b/g, /\bv\d+\.\d+\b/g, /^## \d+\.\d+ - /g, /\b\d+(?:\.\d+)? logo units\b/g, ...DATES.map((date) => new RegExp(date, 'g'))]
 const strip = (text) => EXEMPT.reduce((value, pattern) => value.replace(pattern, ''), text.replace(/\[[^\]]*\]|\{[^}]*\}/g, ''))
 
-const guideStrings = () => [...brand.guide.pages, ...brand.guide.sheets].flatMap((page) => [page.title, page.subtitle, ...(page.elements ?? []).flatMap((e) => [e.text, ...(e.rows ?? []).flat()])]).filter((value) => typeof value === 'string')
-const templateStrings = () => brand.templates.flatMap((t) => t.elements.flatMap((e) => (e.items ?? [e]).map((item) => item.text))).filter((value) => typeof value === 'string')
+const guideStrings = () => [...brand.guide.pages, ...originalEntries(brand.guide.sheets)].flatMap((page) => [page.title, page.subtitle, ...(page.elements ?? []).flatMap((e) => [e.text, ...(e.rows ?? []).flat()])]).filter((value) => typeof value === 'string')
+const templateStrings = () => originalEntries(brand.templates).flatMap((t) => t.elements.flatMap((e) => (e.items ?? [e]).map((item) => item.text))).filter((value) => typeof value === 'string')
 const webStrings = () => [...Object.values(brand.copy), ...Object.values(brand.web.intro), ...Object.values(brand.web.landing)].filter((value) => typeof value === 'string')
 
 test('copy scan: the exemptions let measured values through, and not invented figures', () => {
@@ -289,6 +292,17 @@ test('copy: no em dashes, sourced or bracketed template text, and digits only wh
   for (const doc of docs) for (const line of doc.split('\n')) assert.doesNotMatch(strip(line.replace(/^\d+\. /, '')), /\d/, `docs: ${line}`)
 })
 
+test('copy: supporting applications use explicit placeholder defaults and named editorial labels', () => {
+  const defaults = new Set(['[Your headline]', '[Date] · [Time] · [Details]', '[Presenter] · [Date]'])
+  const labels = new Set(['OVER THE EDGE / INDEPENDENT VOICES', 'OVER THE EDGE / FOREST PRESS', 'OVER THE EDGE'])
+  for (const template of brand.templates.filter((item) => item.extension === 'pattern-explorations')) {
+    for (const element of template.elements.filter((item) => typeof item.text === 'string')) {
+      assert.ok((element.id && !element.locked ? defaults : labels).has(element.text), `${template.id}: ${element.text}`)
+      assert.doesNotMatch(element.text, /\d|—/, `${template.id}: no invented figures or em dashes`)
+    }
+  }
+})
+
 // --- OTE-006 Icons, OTE-007 Patterns --------------------------------------------------------------
 
 test('OTE-006: ten icons in currentColor, the site\'s five with its own geometry', () => {
@@ -307,7 +321,7 @@ test('OTE-006: ten icons in currentColor, the site\'s five with its own geometry
 })
 
 test('OTE-007: three patterns of the O in palette colours', () => {
-  assert.deepEqual(brand.patterns.map((p) => p.id), ['o-repeat', 'o-crop', 'o-field'])
+  assert.deepEqual(originalEntries(brand.patterns).map((p) => p.id), ['o-repeat', 'o-crop', 'o-field'])
   const plan = planKit(brand)
   for (const id of ['o-repeat', 'o-crop', 'o-field']) {
     const entry = plan.find((e) => e.path === `patterns/${id}.svg`)

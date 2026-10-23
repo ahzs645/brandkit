@@ -10,9 +10,19 @@ import { compareRenders, computeBrandRenders } from '../scripts/golden-base.mjs'
 const golden = JSON.parse(readFileSync(new URL('./fixtures/base-3a7cd38-brands.json', import.meta.url), 'utf8'))
 const root = new URL('..', import.meta.url).pathname
 
-test('First Form and northwind render as at 3a7cd38', async () => {
+test('First Form and northwind retain their original renders alongside named pattern additions', async () => {
   const now = await computeBrandRenders(root, Object.keys(golden))
   for (const id of Object.keys(golden)) {
-    assert.deepEqual(compareRenders(golden[id], now[id]), { changed: [], missing: [], added: [] }, id)
+    const brand = JSON.parse(readFileSync(`${root}/brands/${id}/brand.json`, 'utf8'))
+    const delta = compareRenders(golden[id], now[id])
+    assert.deepEqual(delta.changed, ['source/brand.json'], `${id}: only the rebuildable definition changes`)
+    assert.deepEqual(delta.missing, [], `${id}: all original exports remain`)
+    const added = [
+      'guidelines/pattern-studies.svg',
+      ...brand.patternCollection.patterns.map(key => `patterns/${key}.svg`),
+      ...brand.patternCollection.templates.map(key => `templates/${key}.svg`),
+      ...Object.keys(brand.symbols ?? {}).filter(key => key.startsWith('explore-')).flatMap(key => brand.logoColours.map(ink => `symbol/${id}-symbol-${key}-${ink === 'currentColor' ? 'currentcolor' : ink}.svg`))
+    ]
+    assert.deepEqual(delta.added.sort(), added.sort(), `${id}: only explicitly named supporting studies are added`)
   }
 })

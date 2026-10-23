@@ -662,7 +662,44 @@
           "Tractor Trailer, Hydro"
         ]
       ],
+      "hydro/H03": [
+        [
+          "template",
+          "explore-current-announcement",
+          "Current bands / announcement"
+        ],
+        [
+          "template",
+          "explore-reservoir-presentation",
+          "Reservoir contours / presentation"
+        ],
+        [
+          "signature",
+          "standard",
+          "Corporate"
+        ],
+        [
+          "signature",
+          "formal",
+          "Formal"
+        ],
+        [
+          "guide",
+          "guide-01",
+          "Main elements"
+        ]
+      ],
       "hydro/H04": [
+        [
+          "template",
+          "explore-current-announcement",
+          "Current bands / announcement"
+        ],
+        [
+          "template",
+          "explore-reservoir-presentation",
+          "Reservoir contours / presentation"
+        ],
         [
           "signature",
           "standard",
@@ -677,23 +714,6 @@
           "signature",
           "rail",
           "B.C.Hydro Rail"
-        ],
-        [
-          "signature",
-          "formal",
-          "Formal"
-        ],
-        [
-          "guide",
-          "guide-01",
-          "Main elements"
-        ]
-      ],
-      "hydro/H03": [
-        [
-          "signature",
-          "standard",
-          "Corporate"
         ],
         [
           "signature",
@@ -2125,6 +2145,16 @@
       ],
       "general/G05": [
         [
+          "template",
+          "explore-dogwood-announcement",
+          "Dogwood / announcement"
+        ],
+        [
+          "template",
+          "explore-contour-presentation",
+          "Contours / presentation"
+        ],
+        [
           "signature",
           "provincial",
           "Provincial signature"
@@ -2137,6 +2167,16 @@
       ],
       "general/G06": [
         [
+          "template",
+          "explore-dogwood-announcement",
+          "Dogwood / announcement"
+        ],
+        [
+          "template",
+          "explore-contour-presentation",
+          "Contours / presentation"
+        ],
+        [
           "signature",
           "provincial",
           "Provincial signature"
@@ -2148,6 +2188,16 @@
         ]
       ],
       "general/G07": [
+        [
+          "template",
+          "explore-dogwood-announcement",
+          "Dogwood / announcement"
+        ],
+        [
+          "template",
+          "explore-contour-presentation",
+          "Contours / presentation"
+        ],
         [
           "signature",
           "provincial",
@@ -2164,14 +2214,17 @@
           "Colour"
         ]
       ],
-      "reproduction/R31": [
-        [
-          "signature",
-          "provincial",
-          "Provincial signature"
-        ]
-      ],
       "reproduction/R32": [
+        [
+          "template",
+          "explore-dogwood-announcement",
+          "Dogwood / announcement"
+        ],
+        [
+          "template",
+          "explore-contour-presentation",
+          "Contours / presentation"
+        ],
         [
           "signature",
           "provincial",
@@ -2186,6 +2239,13 @@
           "guide",
           "guide-03",
           "Line spacing"
+        ]
+      ],
+      "reproduction/R31": [
+        [
+          "signature",
+          "provincial",
+          "Provincial signature"
         ]
       ],
       "reproduction/R13": [

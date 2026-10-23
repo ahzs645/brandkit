@@ -327,10 +327,22 @@ with anything uncited).
 ## Web, patterns, icons, files
 
 - `patterns`: the symbol repeated (`repeat: { x: [from, to, step], y: […], scale, colour }`) or
-  placed (`place: [{ x, y, scale, colour }]`) on a background, over any `dots`
+  placed (`place: [{ x, y, scale, colour, symbol?, rotation? }]`) on a background, over any `dots`
   (`[{ cx, cy, r, colour, opacity? }]`) and `lines` (`[{ points: [[x, y], …], colour, width, opacity? }]`).
+  A placement's optional `symbol` selects a named entry in `symbols`; otherwise it uses the
+  main symbol. `rotation` is in degrees clockwise around that symbol's viewBox centre,
+  after scaling. `x` and `y` locate the unrotated symbol origin.
   Templates draw the same with a `dots` element (`{ type: 'dots', dots: [[cx, cy, r], …], fill,
   opacity? }`) and a `polyline` element (`{ type: 'polyline', points, stroke, strokeWidth?, opacity? }`).
+  A `{ type: 'pattern', pattern: patternId, x, y, width, height, fit?: 'cover' | 'contain', id? }`
+  template element places an existing pattern in an explicitly clipped panel. Its default cover
+  fit preserves proportions and crops to the panel; contain shows the complete field.
+- `patternCollection`: optional discovery metadata `{ page, guide, status, patterns: [id, …],
+  templates: [id, …], palettes, description }`. `page` names a self-contained explorer included
+  in `files`; the Logos tab links to it. The six additional collections use
+  `extension: 'pattern-explorations'` on their patterns, templates, documents, files and guide
+  sheets, preserving existing identity definitions and historical material. A guide sheet may
+  set `pdf: true` to export an individual PDF alongside its SVG and PNG.
 - `icons`: `{ size, attrs, items: [{ id, content }] }`, drawn in `currentColor`.
 - `web`: React component names, CSS variable prefix, app icon and favicon settings, and the copy
   for the kit's index.html and landing template.

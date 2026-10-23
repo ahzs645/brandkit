@@ -190,7 +190,10 @@ export const pattern = (ctx, spec) => {
     }
   }
   for (const place of spec.place ?? []) {
-    art += `<g transform="translate(${place.x} ${place.y}) scale(${scaleText(place.scale)})">${mark(ctx, resolveColour(brand, place.colour))}</g>`
+    const symbol = (place.symbol && brand.symbols?.[place.symbol]) || brand.symbol
+    const [vx, vy, sw, sh] = symbol.viewBox
+    const rotation = place.rotation ? ` rotate(${n(place.rotation)} ${n(vx + sw / 2)} ${n(vy + sh / 2)})` : ''
+    art += `<g transform="translate(${place.x} ${place.y}) scale(${scaleText(place.scale)})${rotation}">${mark(ctx, resolveColour(brand, place.colour), false, place.symbol)}</g>`
   }
   return svgDocument(ctx, spec.width, spec.height, art, fill(brand, spec.title ?? '{name} / {pattern}', { pattern: spec.id }), { background: resolveColour(brand, spec.background) })
 }
@@ -236,8 +239,9 @@ export const symbolDocument = (ctx, { colourKey, micro = false, master = false, 
   if (symbolId) {
     const other = brand.symbols[symbolId]
     const [x, y, w, h] = other.viewBox
-    const art = `<g transform="translate(${n(-x)} ${n(-y)})">${mark(ctx, paintFor(brand, colourway), false, symbolId)}</g>`
-    return svgDocument(ctx, w, h, art, `${brand.name} / ${other.title ?? `${symbolId} symbol`} / ${colourway}`)
+    const ink = colourKey ? resolveColour(brand, colourKey) : paintFor(brand, colourway)
+    const art = `<g transform="translate(${n(-x)} ${n(-y)})">${mark(ctx, ink, false, symbolId)}</g>`
+    return svgDocument(ctx, w, h, art, `${brand.name} / ${other.title ?? `${symbolId} symbol`} / ${colourway ?? colourKey}`)
   }
   const symbol = brand.symbol
   const { width, height } = symbolViewBox(brand)

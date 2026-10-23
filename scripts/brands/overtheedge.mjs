@@ -9,6 +9,7 @@
 // come from the site's theme and the 2025 print covers; type is Source Serif 4, Anton, Inter,
 // IBM Plex Mono and Gochi Hand. Everything else is drawn from those.
 
+import { extendBrandPatterns } from './pattern-collections.mjs'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createStarterBrand } from '../../src/engine/starter.js'
 import { findAsset, loadBrandFontsFromDisk } from '../../src/fonts/node.js'
@@ -605,6 +606,7 @@ for (const [name, markup] of [
 }
 writeFileSync(sitePath, site)
 
+await extendBrandPatterns(brand, folder)
 writeFileSync(`${folder}brand.json`, `${JSON.stringify(brand, null, 2)}\n`)
 updateManifest(brand)
 console.log(`brands/overtheedge/brand.json: ${brand.templates.length} templates, ${brand.guide.pages.length} guide pages, ${brand.icons.items.length} icons, ${brand.motion.studies.length} motion studies`)

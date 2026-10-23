@@ -302,6 +302,5554 @@
           "colour": "primary"
         }
       ]
+    },
+    {
+      "id": "explore-turning-field",
+      "width": 960,
+      "height": 600,
+      "background": "paper",
+      "place": [
+        {
+          "x": 25.8,
+          "y": 40.8,
+          "scale": 0.26719,
+          "colour": "ink"
+        },
+        {
+          "x": 145.8,
+          "y": 40.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 25.8,
+          "y": 190.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 145.8,
+          "y": 190.8,
+          "scale": 0.26719,
+          "colour": "primary"
+        },
+        {
+          "x": 252.9,
+          "y": 20.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 312.9,
+          "y": 20.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 372.9,
+          "y": 20.4,
+          "scale": 0.13359,
+          "colour": "ink"
+        },
+        {
+          "x": 432.9,
+          "y": 20.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 252.9,
+          "y": 95.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 312.9,
+          "y": 95.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 372.9,
+          "y": 95.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 432.9,
+          "y": 95.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 252.9,
+          "y": 170.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 312.9,
+          "y": 170.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 45
+        },
+        {
+          "x": 372.9,
+          "y": 170.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 432.9,
+          "y": 170.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 252.9,
+          "y": 245.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 312.9,
+          "y": 245.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 372.9,
+          "y": 245.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 432.9,
+          "y": 245.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 90
+        },
+        {
+          "x": 505.8,
+          "y": 40.8,
+          "scale": 0.26719,
+          "colour": "primary"
+        },
+        {
+          "x": 625.8,
+          "y": 40.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 505.8,
+          "y": 190.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 625.8,
+          "y": 190.8,
+          "scale": 0.26719,
+          "colour": "ink"
+        },
+        {
+          "x": 771.6,
+          "y": 81.6,
+          "scale": 0.53437,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 12.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 72.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 132.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 135
+        },
+        {
+          "x": 192.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 12.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 72.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 132.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 192.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 12.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 72.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "ink"
+        },
+        {
+          "x": 132.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 192.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 12.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 72.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 132.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 192.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 45
+        },
+        {
+          "x": 291.6,
+          "y": 381.6,
+          "scale": 0.53437,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 505.8,
+          "y": 340.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 625.8,
+          "y": 340.8,
+          "scale": 0.26719,
+          "colour": "ink",
+          "rotation": 90
+        },
+        {
+          "x": 505.8,
+          "y": 490.8,
+          "scale": 0.26719,
+          "colour": "primary"
+        },
+        {
+          "x": 625.8,
+          "y": 490.8,
+          "scale": 0.26719,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 732.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 792.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 852.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 912.9,
+          "y": 320.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 90
+        },
+        {
+          "x": 732.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 90
+        },
+        {
+          "x": 792.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 852.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 912.9,
+          "y": 395.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 732.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 792.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 852.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "ink",
+          "rotation": 135
+        },
+        {
+          "x": 912.9,
+          "y": 470.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 732.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary"
+        },
+        {
+          "x": 792.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 45
+        },
+        {
+          "x": 852.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 912.9,
+          "y": 545.4,
+          "scale": 0.13359,
+          "colour": "primary",
+          "rotation": 135
+        }
+      ],
+      "name": "Turning field",
+      "description": "Intact seven-dot clusters turn through four visible orientations at three sizes. A modular repeat with a changing direction.",
+      "title": "{name} / Turning field / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-north-current",
+      "width": 960,
+      "height": 600,
+      "background": "primary",
+      "place": [
+        {
+          "x": 23.41658,
+          "y": 74.89708,
+          "scale": 0.28581,
+          "colour": "paper",
+          "rotation": 56.08655
+        },
+        {
+          "x": 147.80026,
+          "y": 95.51665,
+          "scale": 0.25156,
+          "colour": "light",
+          "rotation": 49.5922
+        },
+        {
+          "x": 273.99974,
+          "y": 101.71612,
+          "scale": 0.20313,
+          "colour": "light",
+          "rotation": 40.4078
+        },
+        {
+          "x": 398.38342,
+          "y": 89.86393,
+          "scale": 0.16888,
+          "colour": "light",
+          "rotation": 33.91345
+        },
+        {
+          "x": 518.38342,
+          "y": 66.90292,
+          "scale": 0.16888,
+          "colour": "paper",
+          "rotation": 33.91345
+        },
+        {
+          "x": 633.99974,
+          "y": 46.28335,
+          "scale": 0.20313,
+          "colour": "light",
+          "rotation": 40.4078
+        },
+        {
+          "x": 747.80026,
+          "y": 40.08388,
+          "scale": 0.25156,
+          "colour": "light",
+          "rotation": 49.5922
+        },
+        {
+          "x": 863.41658,
+          "y": 51.93607,
+          "scale": 0.28581,
+          "colour": "light",
+          "rotation": 56.08655
+        },
+        {
+          "x": 38.38342,
+          "y": 266.90292,
+          "scale": 0.16888,
+          "colour": "light",
+          "rotation": 123.91345
+        },
+        {
+          "x": 153.99974,
+          "y": 246.28335,
+          "scale": 0.20313,
+          "colour": "paper",
+          "rotation": 130.4078
+        },
+        {
+          "x": 267.80026,
+          "y": 240.08388,
+          "scale": 0.25156,
+          "colour": "light",
+          "rotation": 139.5922
+        },
+        {
+          "x": 383.41658,
+          "y": 251.93607,
+          "scale": 0.28581,
+          "colour": "light",
+          "rotation": 146.08655
+        },
+        {
+          "x": 503.41658,
+          "y": 274.89708,
+          "scale": 0.28581,
+          "colour": "light",
+          "rotation": 146.08655
+        },
+        {
+          "x": 627.80026,
+          "y": 295.51665,
+          "scale": 0.25156,
+          "colour": "paper",
+          "rotation": 139.5922
+        },
+        {
+          "x": 753.99974,
+          "y": 301.71612,
+          "scale": 0.20313,
+          "colour": "light",
+          "rotation": 130.4078
+        },
+        {
+          "x": 878.38342,
+          "y": 289.86393,
+          "scale": 0.16888,
+          "colour": "light",
+          "rotation": 123.91345
+        },
+        {
+          "x": 23.41658,
+          "y": 474.89708,
+          "scale": 0.28581,
+          "colour": "light",
+          "rotation": 56.08655
+        },
+        {
+          "x": 147.80026,
+          "y": 495.51665,
+          "scale": 0.25156,
+          "colour": "light",
+          "rotation": 49.5922
+        },
+        {
+          "x": 273.99974,
+          "y": 501.71612,
+          "scale": 0.20313,
+          "colour": "paper",
+          "rotation": 40.4078
+        },
+        {
+          "x": 398.38342,
+          "y": 489.86393,
+          "scale": 0.16888,
+          "colour": "light",
+          "rotation": 33.91345
+        },
+        {
+          "x": 518.38342,
+          "y": 466.90292,
+          "scale": 0.16888,
+          "colour": "light",
+          "rotation": 33.91345
+        },
+        {
+          "x": 633.99974,
+          "y": 446.28335,
+          "scale": 0.20313,
+          "colour": "light",
+          "rotation": 40.4078
+        },
+        {
+          "x": 747.80026,
+          "y": 440.08388,
+          "scale": 0.25156,
+          "colour": "paper",
+          "rotation": 49.5922
+        },
+        {
+          "x": 863.41658,
+          "y": 451.93607,
+          "scale": 0.28581,
+          "colour": "light",
+          "rotation": 56.08655
+        }
+      ],
+      "name": "North current",
+      "description": "Clusters travel in alternating streams, swelling and receding as they pass. A calm directional repeat for larger surfaces.",
+      "title": "{name} / North current / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-drift-lines",
+      "width": 960,
+      "height": 600,
+      "background": "paper",
+      "dots": [
+        {
+          "cx": 12,
+          "cy": 31.41226,
+          "r": 3.38944,
+          "colour": "primary"
+        },
+        {
+          "cx": 36,
+          "cy": 34.20202,
+          "r": 3.56613,
+          "colour": "primary"
+        },
+        {
+          "cx": 60,
+          "cy": 36.8883,
+          "r": 3.73626,
+          "colour": "primary"
+        },
+        {
+          "cx": 84,
+          "cy": 39.40497,
+          "r": 3.89565,
+          "colour": "primary"
+        },
+        {
+          "cx": 108,
+          "cy": 41.69006,
+          "r": 4.04037,
+          "colour": "primary"
+        },
+        {
+          "cx": 132,
+          "cy": 43.68731,
+          "r": 4.16686,
+          "colour": "primary"
+        },
+        {
+          "cx": 156,
+          "cy": 45.34752,
+          "r": 4.27201,
+          "colour": "primary"
+        },
+        {
+          "cx": 180,
+          "cy": 46.62983,
+          "r": 4.35322,
+          "colour": "primary"
+        },
+        {
+          "cx": 204,
+          "cy": 47.50266,
+          "r": 4.4085,
+          "colour": "primary"
+        },
+        {
+          "cx": 228,
+          "cy": 47.94451,
+          "r": 4.43649,
+          "colour": "primary"
+        },
+        {
+          "cx": 252,
+          "cy": 47.94451,
+          "r": 4.43649,
+          "colour": "primary"
+        },
+        {
+          "cx": 276,
+          "cy": 47.50266,
+          "r": 4.4085,
+          "colour": "primary"
+        },
+        {
+          "cx": 300,
+          "cy": 46.62983,
+          "r": 4.35322,
+          "colour": "primary"
+        },
+        {
+          "cx": 324,
+          "cy": 45.34752,
+          "r": 4.27201,
+          "colour": "primary"
+        },
+        {
+          "cx": 348,
+          "cy": 43.68731,
+          "r": 4.16686,
+          "colour": "primary"
+        },
+        {
+          "cx": 372,
+          "cy": 41.69006,
+          "r": 4.04037,
+          "colour": "primary"
+        },
+        {
+          "cx": 396,
+          "cy": 39.40497,
+          "r": 3.89565,
+          "colour": "primary"
+        },
+        {
+          "cx": 420,
+          "cy": 36.8883,
+          "r": 3.73626,
+          "colour": "primary"
+        },
+        {
+          "cx": 444,
+          "cy": 34.20202,
+          "r": 3.56613,
+          "colour": "primary"
+        },
+        {
+          "cx": 468,
+          "cy": 31.41226,
+          "r": 3.38944,
+          "colour": "primary"
+        },
+        {
+          "cx": 492,
+          "cy": 28.58774,
+          "r": 3.21056,
+          "colour": "primary"
+        },
+        {
+          "cx": 516,
+          "cy": 25.79798,
+          "r": 3.03387,
+          "colour": "primary"
+        },
+        {
+          "cx": 540,
+          "cy": 23.1117,
+          "r": 2.86374,
+          "colour": "primary"
+        },
+        {
+          "cx": 564,
+          "cy": 20.59503,
+          "r": 2.70435,
+          "colour": "primary"
+        },
+        {
+          "cx": 588,
+          "cy": 18.30994,
+          "r": 2.55963,
+          "colour": "primary"
+        },
+        {
+          "cx": 612,
+          "cy": 16.31269,
+          "r": 2.43314,
+          "colour": "primary"
+        },
+        {
+          "cx": 636,
+          "cy": 14.65248,
+          "r": 2.32799,
+          "colour": "primary"
+        },
+        {
+          "cx": 660,
+          "cy": 13.37017,
+          "r": 2.24678,
+          "colour": "primary"
+        },
+        {
+          "cx": 684,
+          "cy": 12.49734,
+          "r": 2.1915,
+          "colour": "primary"
+        },
+        {
+          "cx": 708,
+          "cy": 12.05549,
+          "r": 2.16351,
+          "colour": "primary"
+        },
+        {
+          "cx": 732,
+          "cy": 12.05549,
+          "r": 2.16351,
+          "colour": "primary"
+        },
+        {
+          "cx": 756,
+          "cy": 12.49734,
+          "r": 2.1915,
+          "colour": "primary"
+        },
+        {
+          "cx": 780,
+          "cy": 13.37017,
+          "r": 2.24678,
+          "colour": "primary"
+        },
+        {
+          "cx": 804,
+          "cy": 14.65248,
+          "r": 2.32799,
+          "colour": "primary"
+        },
+        {
+          "cx": 828,
+          "cy": 16.31269,
+          "r": 2.43314,
+          "colour": "primary"
+        },
+        {
+          "cx": 852,
+          "cy": 18.30994,
+          "r": 2.55963,
+          "colour": "primary"
+        },
+        {
+          "cx": 876,
+          "cy": 20.59503,
+          "r": 2.70435,
+          "colour": "primary"
+        },
+        {
+          "cx": 900,
+          "cy": 23.1117,
+          "r": 2.86374,
+          "colour": "primary"
+        },
+        {
+          "cx": 924,
+          "cy": 25.79798,
+          "r": 3.03387,
+          "colour": "primary"
+        },
+        {
+          "cx": 948,
+          "cy": 28.58774,
+          "r": 3.21056,
+          "colour": "primary"
+        },
+        {
+          "cx": 12,
+          "cy": 101.98405,
+          "r": 4.05899,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 103.93753,
+          "r": 4.18271,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 105.54781,
+          "r": 4.28469,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 106.77526,
+          "r": 4.36243,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 107.58964,
+          "r": 4.41401,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 107.97091,
+          "r": 4.43816,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 107.90968,
+          "r": 4.43428,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 107.40745,
+          "r": 4.40247,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 106.47659,
+          "r": 4.34352,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 105.14002,
+          "r": 4.25887,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 103.43065,
+          "r": 4.15061,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 101.39058,
+          "r": 4.0214,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 99.07003,
+          "r": 3.87444,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 96.52615,
+          "r": 3.71332,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 93.82158,
+          "r": 3.54203,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 91.0229,
+          "r": 3.36478,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 88.19904,
+          "r": 3.18594,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 85.41952,
+          "r": 3.0099,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 82.75279,
+          "r": 2.84101,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 80.26451,
+          "r": 2.68342,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 78.01595,
+          "r": 2.54101,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 76.06247,
+          "r": 2.41729,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 74.45219,
+          "r": 2.31531,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 73.22474,
+          "r": 2.23757,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 72.41036,
+          "r": 2.18599,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 72.02909,
+          "r": 2.16184,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 72.09032,
+          "r": 2.16572,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 72.59255,
+          "r": 2.19753,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 73.52341,
+          "r": 2.25648,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 74.85998,
+          "r": 2.34113,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 76.56935,
+          "r": 2.44939,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 78.60942,
+          "r": 2.5786,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 80.92997,
+          "r": 2.72556,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 83.47385,
+          "r": 2.88668,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 86.17842,
+          "r": 3.05797,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 88.9771,
+          "r": 3.23522,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 91.80096,
+          "r": 3.41406,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 94.58048,
+          "r": 3.5901,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 97.24721,
+          "r": 3.75899,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 99.73549,
+          "r": 3.91658,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 167.66836,
+          "r": 4.419,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 167.98886,
+          "r": 4.43929,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 167.86642,
+          "r": 4.43154,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 167.30405,
+          "r": 4.39592,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 166.3156,
+          "r": 4.33332,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 164.9254,
+          "r": 4.24528,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 163.16768,
+          "r": 4.13395,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 161.08574,
+          "r": 4.0021,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 158.73083,
+          "r": 3.85295,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 156.16093,
+          "r": 3.69019,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 153.43934,
+          "r": 3.51782,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 150.63305,
+          "r": 3.34009,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 147.81118,
+          "r": 3.16137,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 145.0432,
+          "r": 2.98607,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 142.39728,
+          "r": 2.81849,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 139.93856,
+          "r": 2.66278,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 137.72759,
+          "r": 2.52275,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 135.8188,
+          "r": 2.40186,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 134.2592,
+          "r": 2.30308,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 133.0872,
+          "r": 2.22886,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 132.33164,
+          "r": 2.181,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 132.01114,
+          "r": 2.16071,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 132.13358,
+          "r": 2.16846,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 132.69595,
+          "r": 2.20408,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 133.6844,
+          "r": 2.26668,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 135.0746,
+          "r": 2.35472,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 136.83232,
+          "r": 2.46605,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 138.91426,
+          "r": 2.5979,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 141.26917,
+          "r": 2.74705,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 143.83907,
+          "r": 2.90981,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 146.56066,
+          "r": 3.08218,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 149.36695,
+          "r": 3.25991,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 152.18882,
+          "r": 3.43863,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 154.9568,
+          "r": 3.61393,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 157.60272,
+          "r": 3.78151,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 160.06144,
+          "r": 3.93722,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 162.27241,
+          "r": 4.07725,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 164.1812,
+          "r": 4.19814,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 165.7408,
+          "r": 4.29692,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 166.9128,
+          "r": 4.37114,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 226.14694,
+          "r": 4.32264,
+          "colour": "primary"
+        },
+        {
+          "cx": 36,
+          "cy": 224.70376,
+          "r": 4.23124,
+          "colour": "primary"
+        },
+        {
+          "cx": 60,
+          "cy": 222.89853,
+          "r": 4.11691,
+          "colour": "primary"
+        },
+        {
+          "cx": 84,
+          "cy": 220.77569,
+          "r": 3.98246,
+          "colour": "primary"
+        },
+        {
+          "cx": 108,
+          "cy": 218.38752,
+          "r": 3.83121,
+          "colour": "primary"
+        },
+        {
+          "cx": 132,
+          "cy": 215.79282,
+          "r": 3.66688,
+          "colour": "primary"
+        },
+        {
+          "cx": 156,
+          "cy": 213.05548,
+          "r": 3.49351,
+          "colour": "primary"
+        },
+        {
+          "cx": 180,
+          "cy": 210.24291,
+          "r": 3.31538,
+          "colour": "primary"
+        },
+        {
+          "cx": 204,
+          "cy": 207.42436,
+          "r": 3.13688,
+          "colour": "primary"
+        },
+        {
+          "cx": 228,
+          "cy": 204.66922,
+          "r": 2.96238,
+          "colour": "primary"
+        },
+        {
+          "cx": 252,
+          "cy": 202.04535,
+          "r": 2.79621,
+          "colour": "primary"
+        },
+        {
+          "cx": 276,
+          "cy": 199.61735,
+          "r": 2.64243,
+          "colour": "primary"
+        },
+        {
+          "cx": 300,
+          "cy": 197.445,
+          "r": 2.50485,
+          "colour": "primary"
+        },
+        {
+          "cx": 324,
+          "cy": 195.5818,
+          "r": 2.38685,
+          "colour": "primary"
+        },
+        {
+          "cx": 348,
+          "cy": 194.07362,
+          "r": 2.29133,
+          "colour": "primary"
+        },
+        {
+          "cx": 372,
+          "cy": 192.9576,
+          "r": 2.22065,
+          "colour": "primary"
+        },
+        {
+          "cx": 396,
+          "cy": 192.26123,
+          "r": 2.17654,
+          "colour": "primary"
+        },
+        {
+          "cx": 420,
+          "cy": 192.00164,
+          "r": 2.1601,
+          "colour": "primary"
+        },
+        {
+          "cx": 444,
+          "cy": 192.18523,
+          "r": 2.17173,
+          "colour": "primary"
+        },
+        {
+          "cx": 468,
+          "cy": 192.80748,
+          "r": 2.21114,
+          "colour": "primary"
+        },
+        {
+          "cx": 492,
+          "cy": 193.85306,
+          "r": 2.27736,
+          "colour": "primary"
+        },
+        {
+          "cx": 516,
+          "cy": 195.29624,
+          "r": 2.36876,
+          "colour": "primary"
+        },
+        {
+          "cx": 540,
+          "cy": 197.10147,
+          "r": 2.48309,
+          "colour": "primary"
+        },
+        {
+          "cx": 564,
+          "cy": 199.22431,
+          "r": 2.61754,
+          "colour": "primary"
+        },
+        {
+          "cx": 588,
+          "cy": 201.61248,
+          "r": 2.76879,
+          "colour": "primary"
+        },
+        {
+          "cx": 612,
+          "cy": 204.20718,
+          "r": 2.93312,
+          "colour": "primary"
+        },
+        {
+          "cx": 636,
+          "cy": 206.94452,
+          "r": 3.10649,
+          "colour": "primary"
+        },
+        {
+          "cx": 660,
+          "cy": 209.75709,
+          "r": 3.28462,
+          "colour": "primary"
+        },
+        {
+          "cx": 684,
+          "cy": 212.57564,
+          "r": 3.46312,
+          "colour": "primary"
+        },
+        {
+          "cx": 708,
+          "cy": 215.33078,
+          "r": 3.63762,
+          "colour": "primary"
+        },
+        {
+          "cx": 732,
+          "cy": 217.95465,
+          "r": 3.80379,
+          "colour": "primary"
+        },
+        {
+          "cx": 756,
+          "cy": 220.38265,
+          "r": 3.95757,
+          "colour": "primary"
+        },
+        {
+          "cx": 780,
+          "cy": 222.555,
+          "r": 4.09515,
+          "colour": "primary"
+        },
+        {
+          "cx": 804,
+          "cy": 224.4182,
+          "r": 4.21315,
+          "colour": "primary"
+        },
+        {
+          "cx": 828,
+          "cy": 225.92638,
+          "r": 4.30867,
+          "colour": "primary"
+        },
+        {
+          "cx": 852,
+          "cy": 227.0424,
+          "r": 4.37935,
+          "colour": "primary"
+        },
+        {
+          "cx": 876,
+          "cy": 227.73877,
+          "r": 4.42346,
+          "colour": "primary"
+        },
+        {
+          "cx": 900,
+          "cy": 227.99836,
+          "r": 4.4399,
+          "colour": "primary"
+        },
+        {
+          "cx": 924,
+          "cy": 227.81477,
+          "r": 4.42827,
+          "colour": "primary"
+        },
+        {
+          "cx": 948,
+          "cy": 227.19252,
+          "r": 4.38886,
+          "colour": "primary"
+        },
+        {
+          "cx": 12,
+          "cy": 278.04027,
+          "r": 3.80922,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 275.42198,
+          "r": 3.64339,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 272.67019,
+          "r": 3.46911,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 269.85265,
+          "r": 3.29067,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 267.03874,
+          "r": 3.11245,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 264.29774,
+          "r": 2.93886,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 261.69716,
+          "r": 2.77415,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 259.30101,
+          "r": 2.6224,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 257.16831,
+          "r": 2.48733,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 255.35157,
+          "r": 2.37227,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 253.89553,
+          "r": 2.28005,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 252.83602,
+          "r": 2.21295,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 252.19916,
+          "r": 2.17261,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 252.0006,
+          "r": 2.16004,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 252.24526,
+          "r": 2.17553,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 252.92709,
+          "r": 2.21872,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 254.02931,
+          "r": 2.28852,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 255.52479,
+          "r": 2.38324,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 257.37669,
+          "r": 2.50052,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 259.53943,
+          "r": 2.6375,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 261.95973,
+          "r": 2.79078,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 264.57802,
+          "r": 2.95661,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 267.32981,
+          "r": 3.13089,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 270.14735,
+          "r": 3.30933,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 272.96126,
+          "r": 3.48755,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 275.70226,
+          "r": 3.66114,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 278.30284,
+          "r": 3.82585,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 280.69899,
+          "r": 3.9776,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 282.83169,
+          "r": 4.11267,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 284.64843,
+          "r": 4.22773,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 286.10447,
+          "r": 4.31995,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 287.16398,
+          "r": 4.38705,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 287.80084,
+          "r": 4.42739,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 287.9994,
+          "r": 4.43996,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 287.75474,
+          "r": 4.42447,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 287.07291,
+          "r": 4.38128,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 285.97069,
+          "r": 4.31148,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 284.47521,
+          "r": 4.21676,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 282.62331,
+          "r": 4.09948,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 280.46057,
+          "r": 3.9625,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 326.65452,
+          "r": 3.08812,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 323.92895,
+          "r": 2.9155,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 321.35287,
+          "r": 2.75235,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 318.98971,
+          "r": 2.60268,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 316.89766,
+          "r": 2.47019,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 315.12823,
+          "r": 2.35812,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 313.725,
+          "r": 2.26925,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 312.72251,
+          "r": 2.20576,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 312.14545,
+          "r": 2.16921,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 312.00803,
+          "r": 2.16051,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 312.31363,
+          "r": 2.17986,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 313.05473,
+          "r": 2.2268,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 314.21307,
+          "r": 2.30016,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 315.76014,
+          "r": 2.39814,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 317.65785,
+          "r": 2.51833,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 319.85946,
+          "r": 2.65777,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 322.31076,
+          "r": 2.81302,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 324.9514,
+          "r": 2.98026,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 327.71635,
+          "r": 3.15537,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 330.53754,
+          "r": 3.33404,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 333.34548,
+          "r": 3.51188,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 336.07105,
+          "r": 3.6845,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 338.64713,
+          "r": 3.84765,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 341.01029,
+          "r": 3.99732,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 343.10234,
+          "r": 4.12981,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 344.87177,
+          "r": 4.24188,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 346.275,
+          "r": 4.33075,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 347.27749,
+          "r": 4.39424,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 347.85455,
+          "r": 4.43079,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 347.99197,
+          "r": 4.43949,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 347.68637,
+          "r": 4.42014,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 346.94527,
+          "r": 4.3732,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 345.78693,
+          "r": 4.29984,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 344.23986,
+          "r": 4.20186,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 342.34215,
+          "r": 4.08167,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 340.14054,
+          "r": 3.94223,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 337.68924,
+          "r": 3.78698,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 335.0486,
+          "r": 3.61974,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 332.28365,
+          "r": 3.44463,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 329.46246,
+          "r": 3.26596,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 376.63316,
+          "r": 2.45343,
+          "colour": "primary"
+        },
+        {
+          "cx": 36,
+          "cy": 374.91188,
+          "r": 2.34442,
+          "colour": "primary"
+        },
+        {
+          "cx": 60,
+          "cy": 373.56212,
+          "r": 2.25893,
+          "colour": "primary"
+        },
+        {
+          "cx": 84,
+          "cy": 372.61712,
+          "r": 2.19908,
+          "colour": "primary"
+        },
+        {
+          "cx": 108,
+          "cy": 372.10014,
+          "r": 2.16634,
+          "colour": "primary"
+        },
+        {
+          "cx": 132,
+          "cy": 372.02391,
+          "r": 2.16151,
+          "colour": "primary"
+        },
+        {
+          "cx": 156,
+          "cy": 372.39031,
+          "r": 2.18472,
+          "colour": "primary"
+        },
+        {
+          "cx": 180,
+          "cy": 373.19033,
+          "r": 2.23539,
+          "colour": "primary"
+        },
+        {
+          "cx": 204,
+          "cy": 374.40425,
+          "r": 2.31227,
+          "colour": "primary"
+        },
+        {
+          "cx": 228,
+          "cy": 376.00219,
+          "r": 2.41347,
+          "colour": "primary"
+        },
+        {
+          "cx": 252,
+          "cy": 377.94481,
+          "r": 2.5365,
+          "colour": "primary"
+        },
+        {
+          "cx": 276,
+          "cy": 380.18426,
+          "r": 2.67834,
+          "colour": "primary"
+        },
+        {
+          "cx": 300,
+          "cy": 382.66541,
+          "r": 2.83548,
+          "colour": "primary"
+        },
+        {
+          "cx": 324,
+          "cy": 385.32716,
+          "r": 3.00405,
+          "colour": "primary"
+        },
+        {
+          "cx": 348,
+          "cy": 388.10397,
+          "r": 3.17992,
+          "colour": "primary"
+        },
+        {
+          "cx": 372,
+          "cy": 390.92747,
+          "r": 3.35874,
+          "colour": "primary"
+        },
+        {
+          "cx": 396,
+          "cy": 393.72813,
+          "r": 3.53612,
+          "colour": "primary"
+        },
+        {
+          "cx": 420,
+          "cy": 396.43699,
+          "r": 3.70768,
+          "colour": "primary"
+        },
+        {
+          "cx": 444,
+          "cy": 398.98736,
+          "r": 3.8692,
+          "colour": "primary"
+        },
+        {
+          "cx": 468,
+          "cy": 401.31642,
+          "r": 4.01671,
+          "colour": "primary"
+        },
+        {
+          "cx": 492,
+          "cy": 403.36684,
+          "r": 4.14657,
+          "colour": "primary"
+        },
+        {
+          "cx": 516,
+          "cy": 405.08812,
+          "r": 4.25558,
+          "colour": "primary"
+        },
+        {
+          "cx": 540,
+          "cy": 406.43788,
+          "r": 4.34107,
+          "colour": "primary"
+        },
+        {
+          "cx": 564,
+          "cy": 407.38288,
+          "r": 4.40092,
+          "colour": "primary"
+        },
+        {
+          "cx": 588,
+          "cy": 407.89986,
+          "r": 4.43366,
+          "colour": "primary"
+        },
+        {
+          "cx": 612,
+          "cy": 407.97609,
+          "r": 4.43849,
+          "colour": "primary"
+        },
+        {
+          "cx": 636,
+          "cy": 407.60969,
+          "r": 4.41528,
+          "colour": "primary"
+        },
+        {
+          "cx": 660,
+          "cy": 406.80967,
+          "r": 4.36461,
+          "colour": "primary"
+        },
+        {
+          "cx": 684,
+          "cy": 405.59575,
+          "r": 4.28773,
+          "colour": "primary"
+        },
+        {
+          "cx": 708,
+          "cy": 403.99781,
+          "r": 4.18653,
+          "colour": "primary"
+        },
+        {
+          "cx": 732,
+          "cy": 402.05519,
+          "r": 4.0635,
+          "colour": "primary"
+        },
+        {
+          "cx": 756,
+          "cy": 399.81574,
+          "r": 3.92166,
+          "colour": "primary"
+        },
+        {
+          "cx": 780,
+          "cy": 397.33459,
+          "r": 3.76452,
+          "colour": "primary"
+        },
+        {
+          "cx": 804,
+          "cy": 394.67284,
+          "r": 3.59595,
+          "colour": "primary"
+        },
+        {
+          "cx": 828,
+          "cy": 391.89603,
+          "r": 3.42008,
+          "colour": "primary"
+        },
+        {
+          "cx": 852,
+          "cy": 389.07253,
+          "r": 3.24126,
+          "colour": "primary"
+        },
+        {
+          "cx": 876,
+          "cy": 386.27187,
+          "r": 3.06388,
+          "colour": "primary"
+        },
+        {
+          "cx": 900,
+          "cy": 383.56301,
+          "r": 2.89232,
+          "colour": "primary"
+        },
+        {
+          "cx": 924,
+          "cy": 381.01264,
+          "r": 2.7308,
+          "colour": "primary"
+        },
+        {
+          "cx": 948,
+          "cy": 378.68358,
+          "r": 2.58329,
+          "colour": "primary"
+        },
+        {
+          "cx": 12,
+          "cy": 432.06324,
+          "r": 2.16401,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 432.04824,
+          "r": 2.16306,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 432.47528,
+          "r": 2.1901,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 433.33383,
+          "r": 2.24448,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 434.60276,
+          "r": 2.32484,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 436.25082,
+          "r": 2.42922,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 438.23743,
+          "r": 2.55504,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 440.51367,
+          "r": 2.6992,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 443.0235,
+          "r": 2.85816,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 445.70512,
+          "r": 3.02799,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 448.49248,
+          "r": 3.20452,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 451.31697,
+          "r": 3.38341,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 454.10903,
+          "r": 3.56024,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 456.79991,
+          "r": 3.73066,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 459.32336,
+          "r": 3.89048,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 461.61723,
+          "r": 4.03576,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 463.62505,
+          "r": 4.16292,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 465.29737,
+          "r": 4.26883,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 466.59302,
+          "r": 4.35089,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 467.4801,
+          "r": 4.40707,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 467.93676,
+          "r": 4.43599,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 467.95176,
+          "r": 4.43694,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 467.52472,
+          "r": 4.4099,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 466.66617,
+          "r": 4.35552,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 465.39724,
+          "r": 4.27516,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 463.74918,
+          "r": 4.17078,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 461.76257,
+          "r": 4.04496,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 459.48633,
+          "r": 3.9008,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 456.9765,
+          "r": 3.74184,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 454.29488,
+          "r": 3.57201,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 451.50752,
+          "r": 3.39548,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 448.68303,
+          "r": 3.21659,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 445.89097,
+          "r": 3.03976,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 443.20009,
+          "r": 2.86934,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 440.67664,
+          "r": 2.70952,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 438.38277,
+          "r": 2.56424,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 436.37495,
+          "r": 2.43708,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 434.70263,
+          "r": 2.33117,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 433.40698,
+          "r": 2.24911,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 432.5199,
+          "r": 2.19293,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 494.80851,
+          "r": 2.33787,
+          "colour": "light"
+        },
+        {
+          "cx": 36,
+          "cy": 496.50591,
+          "r": 2.44537,
+          "colour": "light"
+        },
+        {
+          "cx": 60,
+          "cy": 498.53558,
+          "r": 2.57392,
+          "colour": "light"
+        },
+        {
+          "cx": 84,
+          "cy": 500.84755,
+          "r": 2.72034,
+          "colour": "light"
+        },
+        {
+          "cx": 108,
+          "cy": 503.38487,
+          "r": 2.88104,
+          "colour": "light"
+        },
+        {
+          "cx": 132,
+          "cy": 506.08509,
+          "r": 3.05206,
+          "colour": "light"
+        },
+        {
+          "cx": 156,
+          "cy": 508.8817,
+          "r": 3.22917,
+          "colour": "light"
+        },
+        {
+          "cx": 180,
+          "cy": 511.70585,
+          "r": 3.40804,
+          "colour": "light"
+        },
+        {
+          "cx": 204,
+          "cy": 514.488,
+          "r": 3.58424,
+          "colour": "light"
+        },
+        {
+          "cx": 228,
+          "cy": 517.15963,
+          "r": 3.75344,
+          "colour": "light"
+        },
+        {
+          "cx": 252,
+          "cy": 519.65497,
+          "r": 3.91148,
+          "colour": "light"
+        },
+        {
+          "cx": 276,
+          "cy": 521.91258,
+          "r": 4.05446,
+          "colour": "light"
+        },
+        {
+          "cx": 300,
+          "cy": 523.87686,
+          "r": 4.17887,
+          "colour": "light"
+        },
+        {
+          "cx": 324,
+          "cy": 525.49944,
+          "r": 4.28163,
+          "colour": "light"
+        },
+        {
+          "cx": 348,
+          "cy": 526.74037,
+          "r": 4.36022,
+          "colour": "light"
+        },
+        {
+          "cx": 372,
+          "cy": 527.56911,
+          "r": 4.41271,
+          "colour": "light"
+        },
+        {
+          "cx": 396,
+          "cy": 527.96523,
+          "r": 4.4378,
+          "colour": "light"
+        },
+        {
+          "cx": 420,
+          "cy": 527.91899,
+          "r": 4.43487,
+          "colour": "light"
+        },
+        {
+          "cx": 444,
+          "cy": 527.43152,
+          "r": 4.404,
+          "colour": "light"
+        },
+        {
+          "cx": 468,
+          "cy": 526.51483,
+          "r": 4.34594,
+          "colour": "light"
+        },
+        {
+          "cx": 492,
+          "cy": 525.19149,
+          "r": 4.26213,
+          "colour": "light"
+        },
+        {
+          "cx": 516,
+          "cy": 523.49409,
+          "r": 4.15463,
+          "colour": "light"
+        },
+        {
+          "cx": 540,
+          "cy": 521.46442,
+          "r": 4.02608,
+          "colour": "light"
+        },
+        {
+          "cx": 564,
+          "cy": 519.15245,
+          "r": 3.87966,
+          "colour": "light"
+        },
+        {
+          "cx": 588,
+          "cy": 516.61513,
+          "r": 3.71896,
+          "colour": "light"
+        },
+        {
+          "cx": 612,
+          "cy": 513.91491,
+          "r": 3.54794,
+          "colour": "light"
+        },
+        {
+          "cx": 636,
+          "cy": 511.1183,
+          "r": 3.37083,
+          "colour": "light"
+        },
+        {
+          "cx": 660,
+          "cy": 508.29415,
+          "r": 3.19196,
+          "colour": "light"
+        },
+        {
+          "cx": 684,
+          "cy": 505.512,
+          "r": 3.01576,
+          "colour": "light"
+        },
+        {
+          "cx": 708,
+          "cy": 502.84037,
+          "r": 2.84656,
+          "colour": "light"
+        },
+        {
+          "cx": 732,
+          "cy": 500.34503,
+          "r": 2.68852,
+          "colour": "light"
+        },
+        {
+          "cx": 756,
+          "cy": 498.08742,
+          "r": 2.54554,
+          "colour": "light"
+        },
+        {
+          "cx": 780,
+          "cy": 496.12314,
+          "r": 2.42113,
+          "colour": "light"
+        },
+        {
+          "cx": 804,
+          "cy": 494.50056,
+          "r": 2.31837,
+          "colour": "light"
+        },
+        {
+          "cx": 828,
+          "cy": 493.25963,
+          "r": 2.23978,
+          "colour": "light"
+        },
+        {
+          "cx": 852,
+          "cy": 492.43089,
+          "r": 2.18729,
+          "colour": "light"
+        },
+        {
+          "cx": 876,
+          "cy": 492.03477,
+          "r": 2.1622,
+          "colour": "light"
+        },
+        {
+          "cx": 900,
+          "cy": 492.08101,
+          "r": 2.16513,
+          "colour": "light"
+        },
+        {
+          "cx": 924,
+          "cy": 492.56848,
+          "r": 2.196,
+          "colour": "light"
+        },
+        {
+          "cx": 948,
+          "cy": 493.48517,
+          "r": 2.25406,
+          "colour": "light"
+        },
+        {
+          "cx": 12,
+          "cy": 563.74936,
+          "r": 2.90413,
+          "colour": "primary"
+        },
+        {
+          "cx": 36,
+          "cy": 566.4669,
+          "r": 3.07624,
+          "colour": "primary"
+        },
+        {
+          "cx": 60,
+          "cy": 569.27145,
+          "r": 3.25386,
+          "colour": "primary"
+        },
+        {
+          "cx": 84,
+          "cy": 572.09393,
+          "r": 3.43262,
+          "colour": "primary"
+        },
+        {
+          "cx": 108,
+          "cy": 574.86485,
+          "r": 3.60811,
+          "colour": "primary"
+        },
+        {
+          "cx": 132,
+          "cy": 577.51599,
+          "r": 3.77601,
+          "colour": "primary"
+        },
+        {
+          "cx": 156,
+          "cy": 579.98205,
+          "r": 3.9322,
+          "colour": "primary"
+        },
+        {
+          "cx": 180,
+          "cy": 582.20233,
+          "r": 4.07281,
+          "colour": "primary"
+        },
+        {
+          "cx": 204,
+          "cy": 584.12214,
+          "r": 4.1944,
+          "colour": "primary"
+        },
+        {
+          "cx": 228,
+          "cy": 585.69422,
+          "r": 4.29397,
+          "colour": "primary"
+        },
+        {
+          "cx": 252,
+          "cy": 586.87985,
+          "r": 4.36906,
+          "colour": "primary"
+        },
+        {
+          "cx": 276,
+          "cy": 587.64985,
+          "r": 4.41782,
+          "colour": "primary"
+        },
+        {
+          "cx": 300,
+          "cy": 587.98525,
+          "r": 4.43907,
+          "colour": "primary"
+        },
+        {
+          "cx": 324,
+          "cy": 587.87779,
+          "r": 4.43226,
+          "colour": "primary"
+        },
+        {
+          "cx": 348,
+          "cy": 587.33012,
+          "r": 4.39757,
+          "colour": "primary"
+        },
+        {
+          "cx": 372,
+          "cy": 586.35573,
+          "r": 4.33586,
+          "colour": "primary"
+        },
+        {
+          "cx": 396,
+          "cy": 584.97861,
+          "r": 4.24865,
+          "colour": "primary"
+        },
+        {
+          "cx": 420,
+          "cy": 583.23266,
+          "r": 4.13807,
+          "colour": "primary"
+        },
+        {
+          "cx": 444,
+          "cy": 581.16088,
+          "r": 4.00686,
+          "colour": "primary"
+        },
+        {
+          "cx": 468,
+          "cy": 578.81428,
+          "r": 3.85824,
+          "colour": "primary"
+        },
+        {
+          "cx": 492,
+          "cy": 576.25064,
+          "r": 3.69587,
+          "colour": "primary"
+        },
+        {
+          "cx": 516,
+          "cy": 573.5331,
+          "r": 3.52376,
+          "colour": "primary"
+        },
+        {
+          "cx": 540,
+          "cy": 570.72855,
+          "r": 3.34614,
+          "colour": "primary"
+        },
+        {
+          "cx": 564,
+          "cy": 567.90607,
+          "r": 3.16738,
+          "colour": "primary"
+        },
+        {
+          "cx": 588,
+          "cy": 565.13515,
+          "r": 2.99189,
+          "colour": "primary"
+        },
+        {
+          "cx": 612,
+          "cy": 562.48401,
+          "r": 2.82399,
+          "colour": "primary"
+        },
+        {
+          "cx": 636,
+          "cy": 560.01795,
+          "r": 2.6678,
+          "colour": "primary"
+        },
+        {
+          "cx": 660,
+          "cy": 557.79767,
+          "r": 2.52719,
+          "colour": "primary"
+        },
+        {
+          "cx": 684,
+          "cy": 555.87786,
+          "r": 2.4056,
+          "colour": "primary"
+        },
+        {
+          "cx": 708,
+          "cy": 554.30578,
+          "r": 2.30603,
+          "colour": "primary"
+        },
+        {
+          "cx": 732,
+          "cy": 553.12015,
+          "r": 2.23094,
+          "colour": "primary"
+        },
+        {
+          "cx": 756,
+          "cy": 552.35015,
+          "r": 2.18218,
+          "colour": "primary"
+        },
+        {
+          "cx": 780,
+          "cy": 552.01475,
+          "r": 2.16093,
+          "colour": "primary"
+        },
+        {
+          "cx": 804,
+          "cy": 552.12221,
+          "r": 2.16774,
+          "colour": "primary"
+        },
+        {
+          "cx": 828,
+          "cy": 552.66988,
+          "r": 2.20243,
+          "colour": "primary"
+        },
+        {
+          "cx": 852,
+          "cy": 553.64427,
+          "r": 2.26414,
+          "colour": "primary"
+        },
+        {
+          "cx": 876,
+          "cy": 555.02139,
+          "r": 2.35135,
+          "colour": "primary"
+        },
+        {
+          "cx": 900,
+          "cy": 556.76734,
+          "r": 2.46193,
+          "colour": "primary"
+        },
+        {
+          "cx": 924,
+          "cy": 558.83912,
+          "r": 2.59314,
+          "colour": "primary"
+        },
+        {
+          "cx": 948,
+          "cy": 561.18572,
+          "r": 2.74176,
+          "colour": "primary"
+        }
+      ],
+      "name": "Drift lines",
+      "description": "Individual circles follow gentle, interleaved waves. A light texture for a cover margin, document back or digital panel.",
+      "title": "{name} / Drift lines / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-ring-lattice",
+      "width": 960,
+      "height": 600,
+      "background": "primary",
+      "place": [
+        {
+          "x": 30.72,
+          "y": 34.72,
+          "scale": 0.51,
+          "colour": "paper",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 222.72,
+          "y": 34.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 414.72,
+          "y": 34.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 606.72,
+          "y": 34.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 798.72,
+          "y": 34.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 30.72,
+          "y": 234.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 222.72,
+          "y": 234.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 414.72,
+          "y": 234.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 606.72,
+          "y": 234.72,
+          "scale": 0.51,
+          "colour": "paper",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 798.72,
+          "y": 234.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 30.72,
+          "y": 434.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 222.72,
+          "y": 434.72,
+          "scale": 0.51,
+          "colour": "paper",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 414.72,
+          "y": 434.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 606.72,
+          "y": 434.72,
+          "scale": 0.51,
+          "colour": "light",
+          "rotation": 90,
+          "symbol": "explore-seven-rings"
+        },
+        {
+          "x": 798.72,
+          "y": 434.72,
+          "scale": 0.51,
+          "colour": "light",
+          "symbol": "explore-seven-rings"
+        }
+      ],
+      "name": "Ring lattice",
+      "description": "Hollow circles keep the original seven-dot spacing while opening the pattern. Alternating turns form an airy lattice.",
+      "title": "{name} / Ring lattice / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-overscale",
+      "width": 960,
+      "height": 600,
+      "background": "primary",
+      "place": [
+        {
+          "x": -458,
+          "y": 12,
+          "scale": 1.07813,
+          "colour": "light"
+        },
+        {
+          "x": -138,
+          "y": 12,
+          "scale": 1.07813,
+          "colour": "paper"
+        },
+        {
+          "x": 182,
+          "y": 12,
+          "scale": 1.07813,
+          "colour": "light"
+        },
+        {
+          "x": 502,
+          "y": 12,
+          "scale": 1.07813,
+          "colour": "light"
+        },
+        {
+          "x": 822,
+          "y": 12,
+          "scale": 1.07813,
+          "colour": "paper"
+        },
+        {
+          "x": -298,
+          "y": 312,
+          "scale": 1.07813,
+          "colour": "paper",
+          "rotation": 90
+        },
+        {
+          "x": 22,
+          "y": 312,
+          "scale": 1.07813,
+          "colour": "light",
+          "rotation": 90
+        },
+        {
+          "x": 342,
+          "y": 312,
+          "scale": 1.07813,
+          "colour": "light",
+          "rotation": 90
+        },
+        {
+          "x": 662,
+          "y": 312,
+          "scale": 1.07813,
+          "colour": "paper",
+          "rotation": 90
+        },
+        {
+          "x": 982,
+          "y": 312,
+          "scale": 1.07813,
+          "colour": "light",
+          "rotation": 90
+        }
+      ],
+      "name": "Overscale",
+      "description": "Large clusters meet the edge of the tile. Broad, rounded forms suit covers, wraps and environmental graphics.",
+      "title": "{name} / Overscale / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-wind-rose",
+      "width": 960,
+      "height": 600,
+      "background": "paper",
+      "place": [
+        {
+          "x": 591,
+          "y": 276,
+          "scale": 0.1875,
+          "colour": "ink",
+          "rotation": 45
+        },
+        {
+          "x": 551.45942,
+          "y": 371.45942,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 90
+        },
+        {
+          "x": 456,
+          "y": 411,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 135
+        },
+        {
+          "x": 360.54058,
+          "y": 371.45942,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 180
+        },
+        {
+          "x": 321,
+          "y": 276,
+          "scale": 0.1875,
+          "colour": "ink",
+          "rotation": 225
+        },
+        {
+          "x": 360.54058,
+          "y": 180.54058,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 270
+        },
+        {
+          "x": 456,
+          "y": 141,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 315
+        },
+        {
+          "x": 551.45942,
+          "y": 180.54058,
+          "scale": 0.1875,
+          "colour": "primary",
+          "rotation": 360
+        },
+        {
+          "x": 676.36884,
+          "y": 327.44442,
+          "scale": 0.11328,
+          "colour": "ink",
+          "rotation": 56.25
+        },
+        {
+          "x": 644.26597,
+          "y": 404.9476,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 78.75
+        },
+        {
+          "x": 584.9476,
+          "y": 464.26597,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 101.25
+        },
+        {
+          "x": 507.44442,
+          "y": 496.36884,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 123.75
+        },
+        {
+          "x": 423.55558,
+          "y": 496.36884,
+          "scale": 0.11328,
+          "colour": "ink",
+          "rotation": 146.25
+        },
+        {
+          "x": 346.0524,
+          "y": 464.26597,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 168.75
+        },
+        {
+          "x": 286.73403,
+          "y": 404.9476,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 191.25
+        },
+        {
+          "x": 254.63116,
+          "y": 327.44442,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 213.75
+        },
+        {
+          "x": 254.63116,
+          "y": 243.55558,
+          "scale": 0.11328,
+          "colour": "ink",
+          "rotation": 236.25
+        },
+        {
+          "x": 286.73403,
+          "y": 166.0524,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 258.75
+        },
+        {
+          "x": 346.0524,
+          "y": 106.73403,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 281.25
+        },
+        {
+          "x": 423.55558,
+          "y": 74.63116,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 303.75
+        },
+        {
+          "x": 507.44442,
+          "y": 74.63116,
+          "scale": 0.11328,
+          "colour": "ink",
+          "rotation": 326.25
+        },
+        {
+          "x": 584.9476,
+          "y": 106.73403,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 348.75
+        },
+        {
+          "x": 644.26597,
+          "y": 166.0524,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 371.25
+        },
+        {
+          "x": 676.36884,
+          "y": 243.55558,
+          "scale": 0.11328,
+          "colour": "primary",
+          "rotation": 393.75
+        }
+      ],
+      "dots": [
+        {
+          "cx": 770,
+          "cy": 300,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 762.72909,
+          "cy": 364.53107,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 741.28097,
+          "cy": 425.82628,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 706.73113,
+          "cy": 480.81204,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 660.81204,
+          "cy": 526.73113,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 605.82628,
+          "cy": 561.28097,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 544.53107,
+          "cy": 582.72909,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 480,
+          "cy": 590,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 415.46893,
+          "cy": 582.72909,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 354.17372,
+          "cy": 561.28097,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 299.18796,
+          "cy": 526.73113,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 253.26887,
+          "cy": 480.81204,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 218.71903,
+          "cy": 425.82628,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 197.27091,
+          "cy": 364.53107,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 190,
+          "cy": 300,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 197.27091,
+          "cy": 235.46893,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 218.71903,
+          "cy": 174.17372,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 253.26887,
+          "cy": 119.18796,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 299.18796,
+          "cy": 73.26887,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 354.17372,
+          "cy": 38.71903,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 415.46893,
+          "cy": 17.27091,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 480,
+          "cy": 10,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 544.53107,
+          "cy": 17.27091,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 605.82628,
+          "cy": 38.71903,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 660.81204,
+          "cy": 73.26887,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 706.73113,
+          "cy": 119.18796,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 741.28097,
+          "cy": 174.17372,
+          "r": 3.7,
+          "colour": "light"
+        },
+        {
+          "cx": 762.72909,
+          "cy": 235.46893,
+          "r": 3.7,
+          "colour": "light"
+        }
+      ],
+      "name": "Wind rose",
+      "description": "Seven-dot clusters circulate around a clear centre, with smaller dots extending the rhythm. A focal composition rather than a repeat.",
+      "title": "{name} / Wind rose / supporting study",
+      "kind": "focal",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-dot-canopy",
+      "width": 960,
+      "height": 600,
+      "background": "light",
+      "dots": [
+        {
+          "cx": 24,
+          "cy": 25,
+          "r": 12,
+          "colour": "ink"
+        },
+        {
+          "cx": 72,
+          "cy": 25,
+          "r": 14.46916,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 25,
+          "r": 15.93132,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 25,
+          "r": 15.79016,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 25,
+          "r": 14.10325,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 25,
+          "r": 11.43938,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 25,
+          "r": 8.49044,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 25,
+          "r": 6.98261,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 25,
+          "r": 7.04256,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 25,
+          "r": 8.35994,
+          "colour": "ink"
+        },
+        {
+          "cx": 504,
+          "cy": 25,
+          "r": 10.37023,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 25,
+          "r": 12.40438,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 25,
+          "r": 13.80741,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 25,
+          "r": 14.0942,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 25,
+          "r": 13.16171,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 25,
+          "r": 10.69636,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 25,
+          "r": 8.62247,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 25,
+          "r": 7.92604,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 25,
+          "r": 8.89111,
+          "colour": "ink"
+        },
+        {
+          "cx": 936,
+          "cy": 25,
+          "r": 11.12408,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 75,
+          "r": 13.77466,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 75,
+          "r": 15.63613,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 75,
+          "r": 16.01466,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 75,
+          "r": 14.50172,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 75,
+          "r": 10.83503,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 75,
+          "r": 7.75612,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 75,
+          "r": 5.90479,
+          "colour": "ink"
+        },
+        {
+          "cx": 360,
+          "cy": 75,
+          "r": 5.35544,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 75,
+          "r": 5.79566,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 75,
+          "r": 6.80422,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 75,
+          "r": 8.01507,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 75,
+          "r": 9.10832,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 75,
+          "r": 9.75882,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 75,
+          "r": 9.71014,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 75,
+          "r": 8.98661,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 75,
+          "r": 8.07079,
+          "colour": "ink"
+        },
+        {
+          "cx": 792,
+          "cy": 75,
+          "r": 7.84102,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 75,
+          "r": 8.42816,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 75,
+          "r": 10.34987,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 75,
+          "r": 12.94456,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 125,
+          "r": 15.19597,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 125,
+          "r": 16.07912,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 125,
+          "r": 14.45614,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 125,
+          "r": 10.73795,
+          "colour": "ink"
+        },
+        {
+          "cx": 216,
+          "cy": 125,
+          "r": 7.43209,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 125,
+          "r": 5.23784,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 125,
+          "r": 4.21148,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 125,
+          "r": 3.95789,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 125,
+          "r": 4.03242,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 125,
+          "r": 4.24242,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 125,
+          "r": 4.62828,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 125,
+          "r": 5.198,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 125,
+          "r": 5.74403,
+          "colour": "ink"
+        },
+        {
+          "cx": 648,
+          "cy": 125,
+          "r": 5.97954,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 125,
+          "r": 5.87602,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 125,
+          "r": 5.87409,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 125,
+          "r": 6.74581,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 125,
+          "r": 9.1489,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 125,
+          "r": 12.13718,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 125,
+          "r": 14.57697,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 175,
+          "r": 15.98095,
+          "colour": "ink"
+        },
+        {
+          "cx": 72,
+          "cy": 175,
+          "r": 15.17848,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 175,
+          "r": 11.38037,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 175,
+          "r": 7.7443,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 175,
+          "r": 5.12638,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 175,
+          "r": 3.67091,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 175,
+          "r": 2.91512,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 175,
+          "r": 2.24778,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 175,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 175,
+          "r": 1.68,
+          "colour": "ink"
+        },
+        {
+          "cx": 504,
+          "cy": 175,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 175,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 175,
+          "r": 2.41773,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 175,
+          "r": 3.27923,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 175,
+          "r": 3.85094,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 175,
+          "r": 4.6086,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 175,
+          "r": 6.28447,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 175,
+          "r": 9.31959,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 175,
+          "r": 13.43439,
+          "colour": "ink"
+        },
+        {
+          "cx": 936,
+          "cy": 175,
+          "r": 15.6963,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 225,
+          "r": 15.9733,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 225,
+          "r": 12.89162,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 225,
+          "r": 8.88406,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 225,
+          "r": 5.73755,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 225,
+          "r": 3.8181,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 225,
+          "r": 2.72168,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "ink"
+        },
+        {
+          "cx": 360,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 225,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 225,
+          "r": 2.6876,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 225,
+          "r": 3.9555,
+          "colour": "ink"
+        },
+        {
+          "cx": 792,
+          "cy": 225,
+          "r": 6.17967,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 225,
+          "r": 9.55168,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 225,
+          "r": 13.47932,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 225,
+          "r": 16.07966,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 275,
+          "r": 15.17454,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 275,
+          "r": 10.92367,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 275,
+          "r": 7.17091,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 275,
+          "r": 4.68511,
+          "colour": "ink"
+        },
+        {
+          "cx": 216,
+          "cy": 275,
+          "r": 3.29855,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 275,
+          "r": 2.21534,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "ink"
+        },
+        {
+          "cx": 648,
+          "cy": 275,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 275,
+          "r": 2.14716,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 275,
+          "r": 3.77603,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 275,
+          "r": 6.41641,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 275,
+          "r": 9.91788,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 275,
+          "r": 13.40526,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 275,
+          "r": 15.65075,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 325,
+          "r": 13.74371,
+          "colour": "ink"
+        },
+        {
+          "cx": 72,
+          "cy": 325,
+          "r": 9.43411,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 325,
+          "r": 6.24475,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 325,
+          "r": 4.45585,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 325,
+          "r": 3.46502,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 325,
+          "r": 2.32643,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "ink"
+        },
+        {
+          "cx": 504,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 325,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 325,
+          "r": 2.21887,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 325,
+          "r": 4.21826,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 325,
+          "r": 7.18703,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 325,
+          "r": 10.57818,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 325,
+          "r": 13.34891,
+          "colour": "ink"
+        },
+        {
+          "cx": 936,
+          "cy": 325,
+          "r": 14.49495,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 375,
+          "r": 11.9657,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 375,
+          "r": 8.46803,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 375,
+          "r": 6.0614,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 375,
+          "r": 5.00337,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 375,
+          "r": 4.41885,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 375,
+          "r": 3.41801,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "ink"
+        },
+        {
+          "cx": 360,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 375,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 375,
+          "r": 3.1371,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 375,
+          "r": 5.55138,
+          "colour": "ink"
+        },
+        {
+          "cx": 792,
+          "cy": 375,
+          "r": 8.64742,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 375,
+          "r": 11.56407,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 375,
+          "r": 13.31198,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 375,
+          "r": 12.84239,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 425,
+          "r": 10.19452,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 425,
+          "r": 8.09584,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 425,
+          "r": 6.67962,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 425,
+          "r": 6.43642,
+          "colour": "ink"
+        },
+        {
+          "cx": 216,
+          "cy": 425,
+          "r": 6.34773,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 425,
+          "r": 5.65524,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 425,
+          "r": 4.24374,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 425,
+          "r": 2.59821,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 425,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 425,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 425,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 425,
+          "r": 1.68,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 425,
+          "r": 2.10411,
+          "colour": "ink"
+        },
+        {
+          "cx": 648,
+          "cy": 425,
+          "r": 3.18515,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 425,
+          "r": 5.13186,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 425,
+          "r": 7.85308,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 425,
+          "r": 10.68062,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 425,
+          "r": 12.67096,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 425,
+          "r": 13.16646,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 425,
+          "r": 11.0221,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 475,
+          "r": 8.78282,
+          "colour": "ink"
+        },
+        {
+          "cx": 72,
+          "cy": 475,
+          "r": 7.92031,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 475,
+          "r": 8.286,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 475,
+          "r": 8.91505,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 475,
+          "r": 9.30515,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 475,
+          "r": 8.82314,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 475,
+          "r": 7.49965,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 475,
+          "r": 5.83496,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 475,
+          "r": 4.38926,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 475,
+          "r": 3.46187,
+          "colour": "ink"
+        },
+        {
+          "cx": 504,
+          "cy": 475,
+          "r": 3.07931,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 475,
+          "r": 3.23365,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 475,
+          "r": 4.0641,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 475,
+          "r": 5.7467,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 475,
+          "r": 8.19041,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 475,
+          "r": 10.84982,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 475,
+          "r": 12.87305,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 475,
+          "r": 13.54785,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 475,
+          "r": 11.82854,
+          "colour": "ink"
+        },
+        {
+          "cx": 936,
+          "cy": 475,
+          "r": 9.39652,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 525,
+          "r": 8.01168,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 525,
+          "r": 8.30447,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 525,
+          "r": 10.10442,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 525,
+          "r": 12.46369,
+          "colour": "primary"
+        },
+        {
+          "cx": 216,
+          "cy": 525,
+          "r": 13.06191,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 525,
+          "r": 12.38842,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 525,
+          "r": 10.64707,
+          "colour": "ink"
+        },
+        {
+          "cx": 360,
+          "cy": 525,
+          "r": 8.45634,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 525,
+          "r": 6.47525,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 525,
+          "r": 5.16291,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 525,
+          "r": 4.75792,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 525,
+          "r": 5.36729,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 525,
+          "r": 6.98358,
+          "colour": "primary"
+        },
+        {
+          "cx": 648,
+          "cy": 525,
+          "r": 9.37433,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 525,
+          "r": 11.97687,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 525,
+          "r": 13.98644,
+          "colour": "ink"
+        },
+        {
+          "cx": 792,
+          "cy": 525,
+          "r": 14.69143,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 525,
+          "r": 12.64181,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 525,
+          "r": 10.07252,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 525,
+          "r": 8.28931,
+          "colour": "primary"
+        },
+        {
+          "cx": 24,
+          "cy": 575,
+          "r": 8.03464,
+          "colour": "primary"
+        },
+        {
+          "cx": 72,
+          "cy": 575,
+          "r": 9.42443,
+          "colour": "primary"
+        },
+        {
+          "cx": 120,
+          "cy": 575,
+          "r": 11.86463,
+          "colour": "primary"
+        },
+        {
+          "cx": 168,
+          "cy": 575,
+          "r": 14.36003,
+          "colour": "ink"
+        },
+        {
+          "cx": 216,
+          "cy": 575,
+          "r": 15.89294,
+          "colour": "primary"
+        },
+        {
+          "cx": 264,
+          "cy": 575,
+          "r": 15.66737,
+          "colour": "primary"
+        },
+        {
+          "cx": 312,
+          "cy": 575,
+          "r": 13.04423,
+          "colour": "primary"
+        },
+        {
+          "cx": 360,
+          "cy": 575,
+          "r": 10.11657,
+          "colour": "primary"
+        },
+        {
+          "cx": 408,
+          "cy": 575,
+          "r": 7.75983,
+          "colour": "primary"
+        },
+        {
+          "cx": 456,
+          "cy": 575,
+          "r": 6.58306,
+          "colour": "primary"
+        },
+        {
+          "cx": 504,
+          "cy": 575,
+          "r": 6.84404,
+          "colour": "primary"
+        },
+        {
+          "cx": 552,
+          "cy": 575,
+          "r": 8.45592,
+          "colour": "primary"
+        },
+        {
+          "cx": 600,
+          "cy": 575,
+          "r": 11.00259,
+          "colour": "ink"
+        },
+        {
+          "cx": 648,
+          "cy": 575,
+          "r": 13.77173,
+          "colour": "primary"
+        },
+        {
+          "cx": 696,
+          "cy": 575,
+          "r": 15.89097,
+          "colour": "primary"
+        },
+        {
+          "cx": 744,
+          "cy": 575,
+          "r": 15.45065,
+          "colour": "primary"
+        },
+        {
+          "cx": 792,
+          "cy": 575,
+          "r": 13.4295,
+          "colour": "primary"
+        },
+        {
+          "cx": 840,
+          "cy": 575,
+          "r": 10.82535,
+          "colour": "primary"
+        },
+        {
+          "cx": 888,
+          "cy": 575,
+          "r": 8.70027,
+          "colour": "primary"
+        },
+        {
+          "cx": 936,
+          "cy": 575,
+          "r": 7.92092,
+          "colour": "primary"
+        }
+      ],
+      "name": "Dot canopy",
+      "description": "A field of changing circle sizes opens into a soft central clearing. A supporting texture for a quiet title or a photograph.",
+      "title": "{name} / Dot canopy / supporting study",
+      "kind": "focal",
+      "extension": "pattern-explorations"
+    },
+    {
+      "id": "explore-seven-grid",
+      "width": 960,
+      "height": 600,
+      "background": "paper",
+      "place": [
+        {
+          "x": 22.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 102.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 25.65714,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 22.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 902.8,
+          "y": 111.37143,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 22.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 662.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 197.08571,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 22.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 422.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 282.8,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 22.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 182.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 368.51429,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 22.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 742.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 454.22857,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 22.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 102.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 182.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 262.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 342.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 422.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 502.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 582.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 662.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "primary"
+        },
+        {
+          "x": 742.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 822.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        },
+        {
+          "x": 902.8,
+          "y": 539.94286,
+          "scale": 0.13437,
+          "colour": "light"
+        }
+      ],
+      "name": "Seven grid",
+      "description": "Small clusters keep one direction and one scale. A restrained repeat for borders, stationery and reverse sides.",
+      "title": "{name} / Seven grid / supporting study",
+      "kind": "tile",
+      "extension": "pattern-explorations"
     }
   ],
   "templates": [
@@ -730,6 +6278,190 @@
           "y": 944,
           "size": 30,
           "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "explore-turning-post",
+      "label": "Turning field / announcement",
+      "group": "Pattern studies",
+      "extension": "pattern-explorations",
+      "title": "{name} / Turning field / announcement",
+      "description": "A square announcement with a changing field of seven-dot clusters above a clear, editable message area. Additional supporting study. Existing identifying artwork is preserved.",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "pattern",
+          "id": "study-pattern",
+          "pattern": "explore-turning-field",
+          "x": 0,
+          "y": 176,
+          "width": 1080,
+          "height": 420,
+          "fit": "cover"
+        },
+        {
+          "type": "logo",
+          "id": "study-logo",
+          "x": 64,
+          "y": 46,
+          "width": 340,
+          "height": 100,
+          "family": "northwind",
+          "layout": "horizontal",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "text": "NORTHWIND / NEW PERSPECTIVES",
+          "x": 64,
+          "y": 660,
+          "size": 18,
+          "tracking": 1.8,
+          "font": "label",
+          "colour": "ink",
+          "locked": true
+        },
+        {
+          "type": "paragraph",
+          "id": "study-title",
+          "text": "[Your headline]",
+          "x": 64,
+          "y": 768,
+          "width": 952,
+          "size": 86,
+          "leading": 92,
+          "maxLines": 2,
+          "font": "display",
+          "colour": "ink"
+        },
+        {
+          "type": "line",
+          "x1": 64,
+          "x2": 1016,
+          "y1": 920,
+          "y2": 920,
+          "stroke": "primary",
+          "strokeWidth": 2
+        },
+        {
+          "type": "text",
+          "id": "study-detail",
+          "text": "[Date] · [Time] · [Details]",
+          "x": 64,
+          "y": 972,
+          "size": 25,
+          "font": "displayRegular",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "text": "NORTHWIND",
+          "x": 64,
+          "y": 1030,
+          "size": 13,
+          "font": "label",
+          "colour": "ink",
+          "tracking": 1.1,
+          "locked": true
+        }
+      ]
+    },
+    {
+      "id": "explore-current-cover",
+      "label": "North current / presentation",
+      "group": "Pattern studies",
+      "extension": "pattern-explorations",
+      "title": "{name} / North current / presentation",
+      "description": "A presentation cover with a separate stream of seven-dot clusters, leaving the title and identifying logo clear. Additional supporting study. Existing identifying artwork is preserved.",
+      "width": 1920,
+      "height": 1080,
+      "raster": 1920,
+      "elements": [
+        {
+          "type": "background",
+          "fill": "paper"
+        },
+        {
+          "type": "pattern",
+          "id": "study-pattern",
+          "pattern": "explore-north-current",
+          "x": 1200,
+          "y": 0,
+          "width": 720,
+          "height": 1080,
+          "fit": "cover"
+        },
+        {
+          "type": "logo",
+          "id": "study-logo",
+          "x": 96,
+          "y": 64,
+          "width": 440,
+          "height": 120,
+          "family": "northwind",
+          "layout": "horizontal",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "text": "NORTHWIND / IDEAS IN MOTION",
+          "x": 96,
+          "y": 376,
+          "size": 22,
+          "tracking": 1.8,
+          "font": "label",
+          "colour": "ink",
+          "locked": true
+        },
+        {
+          "type": "paragraph",
+          "id": "study-title",
+          "text": "[Your headline]",
+          "x": 96,
+          "y": 516,
+          "width": 1008,
+          "size": 94,
+          "leading": 102,
+          "maxLines": 3,
+          "font": "display",
+          "colour": "ink"
+        },
+        {
+          "type": "line",
+          "x1": 96,
+          "x2": 1104,
+          "y1": 882,
+          "y2": 882,
+          "stroke": "primary",
+          "strokeWidth": 2
+        },
+        {
+          "type": "text",
+          "id": "study-detail",
+          "text": "[Presenter] · [Date]",
+          "x": 96,
+          "y": 942,
+          "size": 30,
+          "font": "displayRegular",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "text": "NORTHWIND",
+          "x": 96,
+          "y": 1020,
+          "size": 13,
+          "font": "label",
+          "colour": "ink",
+          "tracking": 1.1,
+          "locked": true
         }
       ]
     }
@@ -1657,6 +7389,207 @@
             "y": 980
           }
         ]
+      },
+      {
+        "id": "pattern-studies",
+        "group": "pattern-studies",
+        "path": "guidelines/pattern-studies",
+        "pdf": true,
+        "extension": "pattern-explorations",
+        "title": "{name} / Supporting pattern studies",
+        "width": 1440,
+        "height": 1020,
+        "elements": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 1020,
+            "fill": "paper"
+          },
+          {
+            "type": "label",
+            "text": "northwind / ADDITIONAL SUPPORTING STUDIES",
+            "x": 64,
+            "y": 64,
+            "colour": "ink",
+            "size": 14
+          },
+          {
+            "type": "text",
+            "text": "A pattern of possibilities.",
+            "x": 64,
+            "y": 152,
+            "size": 56,
+            "font": "display",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Additional supporting studies. Existing identifying artwork and identity guidance remain unchanged.",
+            "x": 64,
+            "y": 205,
+            "width": 1260,
+            "size": 20,
+            "colour": "ink",
+            "line": 1.35
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-turning-field",
+            "x": 64,
+            "y": 290,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Turning field",
+            "x": 64,
+            "y": 509.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-north-current",
+            "x": 390,
+            "y": 290,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "North current",
+            "x": 390,
+            "y": 509.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-drift-lines",
+            "x": 716,
+            "y": 290,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Drift lines",
+            "x": 716,
+            "y": 509.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-ring-lattice",
+            "x": 1042,
+            "y": 290,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Ring lattice",
+            "x": 1042,
+            "y": 509.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-overscale",
+            "x": 64,
+            "y": 580,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Overscale",
+            "x": 64,
+            "y": 799.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-wind-rose",
+            "x": 390,
+            "y": 580,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Wind rose",
+            "x": 390,
+            "y": 799.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-dot-canopy",
+            "x": 716,
+            "y": 580,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Dot canopy",
+            "x": 716,
+            "y": 799.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "nested",
+            "src": "patterns/explore-seven-grid",
+            "x": 1042,
+            "y": 580,
+            "width": 300,
+            "height": 187.5
+          },
+          {
+            "type": "text",
+            "text": "Seven grid",
+            "x": 1042,
+            "y": 799.5,
+            "size": 17,
+            "font": "label",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use one pattern family per surface. Small repeats give texture; larger fields suit covers and displays. Keep small text and the complete identifying logo on a clear ground.",
+            "x": 64,
+            "y": 914,
+            "width": 1260,
+            "size": 20,
+            "colour": "ink",
+            "line": 1.3
+          },
+          {
+            "type": "label",
+            "text": "EDITABLE SVG / PNG / PDF / POWERPOINT / OFFLINE EXPLORER",
+            "x": 64,
+            "y": 986,
+            "colour": "ink",
+            "size": 11
+          }
+        ]
       }
     ]
   },
@@ -1710,6 +7643,96 @@
     "fonts/desktop/InterDisplay-Medium.ttf",
     "fonts/web/InterDisplay-Medium.woff2",
     "fonts/desktop/InterDisplay-Regular.ttf",
-    "fonts/web/InterDisplay-Regular.woff2"
-  ]
+    "fonts/web/InterDisplay-Regular.woff2",
+    {
+      "from": "docs/pattern-explorer.html",
+      "to": "docs/pattern-explorer.html",
+      "extension": "pattern-explorations"
+    },
+    {
+      "from": "docs/patterns-guide.html",
+      "to": "docs/patterns-guide.html",
+      "extension": "pattern-explorations"
+    },
+    {
+      "from": "docs/patterns-README.md",
+      "to": "docs/patterns-README.md",
+      "extension": "pattern-explorations"
+    }
+  ],
+  "symbols": {
+    "explore-seven-rings": {
+      "name": "seven-ring-supporting-graphic",
+      "viewBox": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "paths": [
+        {
+          "d": "M0 40a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM15.2 40a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM88 40a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM103.2 40a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM0 128a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM15.2 128a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM88 128a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM103.2 128a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM176 128a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM191.2 128a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM88 216a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM103.2 216a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0ZM176 216a40 40 0 1 0 80 0a40 40 0 1 0 -80 0ZM191.2 216a24.8 24.8 0 1 0 49.6 0a24.8 24.8 0 1 0 -49.6 0Z",
+          "fillRule": "evenodd"
+        }
+      ],
+      "title": "seven-ring supporting graphic"
+    }
+  },
+  "documents": [
+    {
+      "id": "pattern-studies",
+      "label": "Pattern studies",
+      "format": "pptx",
+      "layouts": [
+        "explore-current-cover"
+      ],
+      "extension": "pattern-explorations"
+    }
+  ],
+  "patternCollection": {
+    "page": "docs/pattern-explorer.html",
+    "guide": "docs/patterns-guide.html",
+    "status": "Additional kit studies",
+    "patterns": [
+      "explore-turning-field",
+      "explore-north-current",
+      "explore-drift-lines",
+      "explore-ring-lattice",
+      "explore-overscale",
+      "explore-wind-rose",
+      "explore-dot-canopy",
+      "explore-seven-grid"
+    ],
+    "templates": [
+      "explore-turning-post",
+      "explore-current-cover"
+    ],
+    "palettes": [
+      {
+        "id": "paper",
+        "name": "Paper / green",
+        "background": "paper",
+        "ink": "primary",
+        "accent": "ink",
+        "secondary": "light"
+      },
+      {
+        "id": "forest",
+        "name": "Deep green / mint",
+        "background": "primary",
+        "ink": "light",
+        "accent": "paper",
+        "secondary": "ink"
+      },
+      {
+        "id": "mint",
+        "name": "Mint / green",
+        "background": "light",
+        "ink": "primary",
+        "accent": "ink",
+        "secondary": "paper"
+      }
+    ],
+    "description": "Northwind’s seven-dot geometry gives the patterns a compact, rounded rhythm. Turning clusters, drifting dots and contour bands suggest movement without introducing arrows or changing the identifying mark."
+  }
 }
