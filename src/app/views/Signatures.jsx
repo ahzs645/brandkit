@@ -17,6 +17,14 @@ const shortLabel = (label) => {
 
 export const groundOf = (brand, colourwayId) => colour(brand, brand.colourways?.[colourwayId]?.ground ?? 'reverse')
 
+// Departments listed with a `group` (UNBC's academic and administrative units) are offered under
+// those headings, in the order the groups first appear.
+const groupsOf = (items) => {
+  const groups = new Map()
+  for (const item of items) groups.set(item.group ?? '', [...(groups.get(item.group ?? '') ?? []), item])
+  return [...groups]
+}
+
 /** The department select every signature view shares. `value` is a department id, '' for none. */
 export const DepartmentSelect = ({ brand, value, onChange }) => {
   const departments = brand.departments
@@ -24,8 +32,11 @@ export const DepartmentSelect = ({ brand, value, onChange }) => {
   return (
     <Field label={departments.label ?? 'Department'}>
       <select value={value} onChange={(event) => onChange(event.target.value)}>
-        <option value="">As the manual shows it (placeholders)</option>
-        {departments.items.map((item) => <option key={item.id} value={item.id}>{item.name}{item.years ? ` (${item.years})` : ''}</option>)}
+        <option value="">{departments.emptyLabel ?? 'As the manual shows it (placeholders)'}</option>
+        {groupsOf(departments.items).map(([group, items]) => {
+          const options = items.map((item) => <option key={item.id} value={item.id}>{item.name}{item.years ? ` (${item.years})` : ''}</option>)
+          return group ? <optgroup key={group} label={group}>{options}</optgroup> : options
+        })}
       </select>
     </Field>
   )

@@ -596,3 +596,5 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .history__logo { margin: 0; }
 .history__logo > div { display: grid; place-items: center; height: 130px; max-width: 640px; padding: 18px; border-radius: var(--radius-sm); background: #fff; border: 1px solid var(--line); }
 .history__logo img { max-height: 100%; max-width: 100%; }
+.organization-controls textarea { width: 100%; padding: 8px 10px; background: var(--page); border: 1px solid var(--line); border-radius: var(--radius-sm); font: inherit; resize: vertical; }
+.organization-controls select { width: 100%; }

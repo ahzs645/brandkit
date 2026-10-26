@@ -57,10 +57,10 @@ body face differs from the bundled renderer; design tokens and the portable prof
 that family. `officialFamily` records the authoritative identity face without claiming that its
 font program is included. `stack` remains the CSS fallback stack, and `note` explains the choice.
 
-For example, UNBC declares `family: "TeX Gyre Heros"`, `office: "Arial"`,
-`consumerFamily: "Arial"` and `officialFamily: "Helvetica Neue"`. Helvetica Neue is official,
-Arial is the university's documented alternative, and the bundled open Heros font is only a
-portable rendering substitute. The consumer profile exposes this distinction as `family`,
+For example, UNBC declares `family: "Helvetica Neue LT Pro"`, `office: "Arial"`,
+`consumerFamily: "Arial"` and `officialFamily: "Helvetica Neue"`. The bundled LT Pro faces set
+the artwork; Arial, the university's documented alternative, is what Office files, email and
+web pages name, because the faces' licence allows preview and print embedding only. The consumer profile exposes this distinction as `family`,
 `renderingFamily`, `officialFamily` and `note`; it contains no font binaries. Logo artwork stays
 outlined and does not depend on any of these body-font selections.
 
@@ -173,7 +173,7 @@ Signature elements, in any units (the canvas is fitted to what is drawn):
 | `symbol` | A brand symbol (`brand.symbol`, or one of `brand.symbols` by `symbol`) at a height. |
 | `art` | Fixed artwork with `bounds`; `{role}` placeholders in its markup take the colourway's colours. |
 | `text` | A line: `text`, or a `field` filled from the values (a ministry, a branch). |
-| `stack` | Lines one under another, each item with its own size, face and `leading`, `gapBefore`, `wrap`, `caps`, `join` (set a multi-line field on one line), `when` (only if a field is filled). |
+| `stack` | Lines one under another, each item with its own size, face and `leading`, `gapBefore`, `wrap`, `openers` (words such as "and" and "&" that open a wrapped line rather than end one), `caps`, `join` (set a multi-line field on one line), `when` (only if a field is filled). |
 | `run` | One line in several faces: "**Province of British Columbia** Ministry of …". |
 | `rule` | A rule; `y` may be `after:<stack>+gap`, `x2` may be `auto` (to the artwork's edge), `when` a field. |
 
@@ -189,13 +189,21 @@ picks the one used when none is named; a colourway's `ground` is the background 
 "items": [{ "id": "forests", "name": "Ministry of Forests", "years": "1976–1986", "values": {
 "ministry": "Ministry of\nForests" } }] }`. The kit sets every `departmental` signature for every
 item (`logos/<folder>/<id>/`); the app's logos view and template studio fill their fields from the
-chosen one.
+chosen one. An item may also carry a `group` (the menus list items under it), a `path` (where the
+unit sits in the organization), `alternateOf` (the full name of a short form) and `matched` (the
+official artwork its line breaks were matched to). Optional `departments.note` explains the list.
+
+A brand with departmental signatures and `departments` has a **Departments** view: a sub-logo
+editor for any listed unit or a typed name, whose wrapping follows the signature's `wrap` and
+`openers` and which warns when a word is too long to break. UNBC's sub-logo is one `art` element
+(the full logo) and one `stack` hanging the `department` field under it.
 
 ## Organizational names and relationships
 
 Use `organization` when names should be editable document attribution beneath a fixed logo.
 This differs from `departments`, which composes signatures according to an established source
-construction. The optional **Departments** view is shown for brands with `organization`.
+construction. The **Departments** view is shown for brands with either. When a brand has both, as
+UNBC does, the sub-logo chosen there also names its documents and templates.
 
 ```json
 "organization": {

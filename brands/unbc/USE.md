@@ -6,7 +6,7 @@
 
 Identity version 1.0. Document application version 1.1.
 
-Official source artwork and published identity rules with local document applications. Department names are ordinary document text; custom sub-logos require artwork supplied by UNBC Communications and Marketing.
+Official source artwork and published identity rules with local document applications. Department sub-logos are set on the construction UNBC’s own sub-logos use, shared with the UNBC logo package and door signs; department names in documents remain ordinary text.
 
 Document layout extension using the current brand kit. These publication layouts do not replace or redraw the identity artwork.
 
@@ -26,11 +26,11 @@ The examples support US Letter and A4. This profile uses US Letter (215.9 × 279
 
 | Style | Family | Weight | Size | Line height |
 | --- | --- | --- | --- | --- |
-| title | TeX Gyre Heros | 700 | 30 pt | 1.12 |
-| heading1 | TeX Gyre Heros | 700 | 22 pt | 1.2 |
-| body | TeX Gyre Heros | 400 | 10.5 pt | 1.4 |
-| caption | TeX Gyre Heros | 400 | 8.5 pt | 1.35 |
-| table | TeX Gyre Heros | 400 | 9.5 pt | 1.3 |
+| title | Helvetica Neue LT Pro | 700 | 30 pt | 1.12 |
+| heading1 | Helvetica Neue LT Pro | 700 | 22 pt | 1.2 |
+| body | Helvetica Neue LT Pro | 400 | 10.5 pt | 1.4 |
+| caption | Helvetica Neue LT Pro | 400 | 8.5 pt | 1.35 |
+| table | Helvetica Neue LT Pro | 400 | 9.5 pt | 1.3 |
 
 Install the supplied fonts before editing outside the kit. The existing Word exporter embeds eligible fonts; a face with an explicit Office substitution uses that declared installed face. Font files and their licences remain in the kit.
 
@@ -42,7 +42,7 @@ Document colours: ink #000000; muted #4D4D4D; accent #035642; paper #FFFFFF; lin
 
 Supply department and subdepartment through the publication values.affiliation object, or use the naming fields in Documents. A subdepartment needs a parent department. Names remain editable text outside the logo, with automatic wrapping and a maximum of 180 characters per field.
 
-The department uses 12 pt and the subdepartment 10.5 pt, with 1.3 line spacing and 5 mm after the naming block. Names are document metadata, not an official departmental sub-logo. Type sizes and page spacing are local report defaults; no official sub-logo sizing formula is claimed.
+The department uses 12 pt and the subdepartment 10.5 pt, with 1.3 line spacing and 5 mm after the naming block. Names in a document’s naming block are text. Their type sizes and page spacing are local report defaults; the Departments view sets a unit’s sub-logo.
 
 Wrap at the available text width; retain type size and do not condense, truncate or stretch names.
 

@@ -64,7 +64,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds fourteen templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
 | [`brands/overtheedge`](brands/overtheedge) | Over the Edge, UNBC's independent student newspaper, in a "Forest press" identity: an evolution of the paper's look. `npm run make:overtheedge` reads the logo path for path from the SVG its website serves (the full logo, without its subtext, stacked OVER / THE / EDGE, and the O as the symbol), and adds a palette from the site and its 2025 print covers, Source Serif 4, Anton, Inter, IBM Plex Mono and Gochi Hand, sixteen templates (cards, press pass, letterhead, issue cover, social posts, slides), ten icons, ten patterns and a nine-page guide. Two engine options let a logo be its lettering alone: a wordmark variant's own `height`, and a family's `lockupSymbol: false` with `stackedWordmark`. |
 | [`brands/sparklab`](brands/sparklab) | SPARK Lab, UNBC’s product creation lab, from [sparklab.unbc.ca](https://sparklab.unbc.ca/). `npm run make:sparklab` preserves the original arrow, spark and lettering, with the website’s orange/navy/cream palette, Outfit and Source Serif 4. It adds four logo arrangements and four colourways, thirty templates for stationery, projects, workshops, social, slides and lab materials, editable Word and PowerPoint files and an email signature, ten icons, twenty-one patterns, a fifteen-page guide, sixteen motion studies, a brand details page and an offline website preview. Arrows, Signal, Connections and Layers pair eighteen patterns with twelve applications, including Word lab notes and a project report, three PowerPoint covers, and an interactive comparison board in `docs/patterns-and-templates.html`. `docs/arrow-patterns.html` explores twelve arrow and spark studies, including mixed directions at three scales, loose scatter, cross currents, orbit and constellations, with live scale, density and colour controls and SVG download. Source notes and font licences accompany the kit; layouts and motion are kit extensions. |
-| [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view explains sizing and carries separate department/subdepartment text into Documents and Templates. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. Official departmental sub-logos must come from UNBC Communications and Marketing; entered names do not create one. |
+| [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view sets a department sub-logo for any of 88 listed units or a typed name, in Helvetica Neue 95 Black on the construction of UNBC's own sub-logos (from the `unbc-logo` submodule), and carries the name into Documents and Templates; the kit includes every listed unit's sub-logo in three colours. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 | [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
 | [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the Corporate, Gas Operations, Rail and Formal signatures in their colourways; Corporate, Gas and Rail stationery; forms; publication covers and mastheads; advertising; audio-visual; signs; vehicles; and a guide with the background-value rules, incorrect usage and minimum sizes. |
@@ -112,18 +112,27 @@ document text hierarchy. Save the names once to use them in **Documents** and na
 per level; a subdepartment requires its parent department. The width control is a sizing
 calculator. It does not change a document's configured print profile.
 
-UNBC uses the full logo and published colour, size and clear-space rules. Its 12 pt department
-and 10.5 pt subdepartment text, 55 mm report logo and 20 mm page margins are local document
-defaults. The public guide does not provide a numeric construction formula for departmental
-sub-logos. The kit therefore keeps the names separate and links the official source materials.
-The brand portfolio links SPARK Lab as a UNBC lab and Over the Edge as an independent student
-newspaper; a relationship is not a claim of sub-logo approval.
+A brand that composes department sub-logos (departmental `signatures` and a `departments`
+list) gets a sub-logo editor in the same view: pick a listed unit or type a name, see it in each
+colourway and download it. For UNBC, choosing the unit there is also how documents and templates
+are named, so it has no separate naming form; the Province of British Columbia (1977) uses the
+same editor for its ministerial signatures.
+
+UNBC uses the full logo and published colour, size and clear-space rules. Its sub-logos set the
+unit's name under NORTHERN BRITISH COLUMBIA in Helvetica Neue 95 Black, on the construction
+measured from UNBC's own sub-logos. The construction, the 88 listed units and the line breaks
+matched to official artwork come from the [UNBC logo package](https://github.com/ahzs645/unbc-logo)
+(the `vendor/unbc-logo` submodule) that the door-sign generator also uses, and a test holds the
+kit's line breaks to the package's for every name it records. Its 12 pt department and 10.5 pt
+subdepartment document text, 55 mm report logo and 20 mm page margins are local document
+defaults. The brand portfolio links SPARK Lab as a UNBC lab and Over the Edge as an independent
+student newspaper; a relationship is not a claim of sub-logo approval.
 
 Optional `logoPolicy` controls restrict logo paint, disable standalone symbols and enforce a
 minimum physical size in native templates. `web.icons: false` omits favicons and app icons.
-These rules also travel in the portable consumer profile. UNBC's host font is Arial, the
-documented alternative to Helvetica Neue; bundled TeX Gyre Heros is identified separately as
-the open rendering substitute. See [the schema](docs/brand-schema.md) and
+These rules also travel in the portable consumer profile. UNBC's artwork is set in Helvetica
+Neue LT Pro, the faces the UNBC logo package ships; email, web pages and Word files name Arial,
+the documented alternative, since that licence allows preview and print embedding only. See [the schema](docs/brand-schema.md) and
 [consumer contract](docs/consuming-brandkit.md) for the data fields and integration rules.
 
 ## Pattern library

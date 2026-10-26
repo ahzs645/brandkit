@@ -128,8 +128,8 @@
     },
     "typography": {
       "office": "Arial",
-      "portableRenderer": "TeX Gyre Heros",
-      "note": "Open rendering substitute. No Helvetica Neue or Arial font program is redistributed."
+      "renderer": "Helvetica Neue LT Pro",
+      "note": "The official face, from the font package the UNBC logo package and door signs use. Its licence allows preview and print embedding only, so Office files name Arial."
     },
     "generatedSublogos": false,
     "patternGeneration": false,

@@ -1,15 +1,13 @@
 # UNBC typography
 
-The official face is Helvetica Neue; Arial is the official alternative (Graphics Standards Manual p. 9). No commercial font program is redistributed. Office documents request Arial.
+The official face is Helvetica Neue; Arial is the official alternative (Graphics Standards Manual p. 9). The kit sets its artwork, templates and guide in Helvetica Neue LT Pro: 55 Roman, 56 Italic, 75 Bold, 76 Bold Italic and 95 Black, the last for sub-logo department lines.
 
-The kit bundles unmodified TeX Gyre Heros Regular, Bold, Italic and Bold Italic under the GUST Font License solely as portable rendering substitutes. This is a local implementation choice, not a UNBC-approved typeface. Install licensed Helvetica Neue or Arial for production workflows that require them; review pagination after a font change. The logo is source vector artwork and never depends on these fonts.
-
-Source: https://www.gust.org.pl/projects/e-foundry/tex-gyre and https://mirrors.ctan.org/fonts/tex-gyre.zip (shared unmodified files from the existing brandkit font collection).
+The Roman, Italic, Bold and Black files are the ones the [UNBC logo package](https://github.com/ahzs645/unbc-logo) builds from its Helvetica Neue LT Pro package (kerning restored, a ligature table added to Black); Bold Italic is the package's own file. `npm run make:unbc` copies them from `vendor/unbc-logo/fonts`. They are licensed commercial fonts, redistributed on the same basis as that package and the UNBCDoor sign generator. Their licence allows preview and print embedding only, so Word and PowerPoint files name Arial instead of embedding them.
 
 | File | SHA-256 |
 | --- | --- |
-| GUST-FONT-LICENSE.txt | 2bd69affc3da00715116f713f57eab9707e96daf3562ad0215987b15b9c16f73 |
-| texgyreheros-bold.otf | b170162835f4efc288886dd4231406dc47e19b614cf4416836635599d44a7d60 |
-| texgyreheros-bolditalic.otf | 166fc6d068d9c9974281555cb3d730365537a9b676ab269bb5163f5a75496505 |
-| texgyreheros-italic.otf | 6473df7fa107b3fb4be38973710afe22b0640c2ac076d5337cf126bed9aa108c |
-| texgyreheros-regular.otf | 6ae1a09d5a940367b7aaaa91ee8bd8a2c333bfe193e7096e23f931357d62081f |
+| HelveticaNeueLTPro-black.otf | 1c177c6bbff5253b52c62e8da1636699db2c6a4e8f1d357f007e0b6fe96a0cb4 |
+| HelveticaNeueLTPro-bold.otf | 0ae049e0118d2c96d76cd769301ccc1fe83782635ee3198136c0b5d2e1f7aaa1 |
+| HelveticaNeueLTPro-bolditalic.otf | 465d786a44e4e5c86442b2fd3a84fce9e496075e2528767dd8e18a86cb7e0def |
+| HelveticaNeueLTPro-italic.otf | 37941bf580661a21e3513d84e14fe0ac6cbb18448bd94f42c885f1d388028158 |
+| HelveticaNeueLTPro-roman.otf | b853c2ea7cda76dff8bae1a07dd24296c93db6c797fd414962e6dd800cb73438 |

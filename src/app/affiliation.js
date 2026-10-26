@@ -29,3 +29,9 @@ export const writeAffiliation = (brandId, affiliation, storage = globalThis.loca
   }
   return value
 }
+
+/** Whether a brand composes department sub-logos: departmental signatures and a department list. */
+export const hasSubLogos = (brand) => Boolean(brand?.departments?.field && brand.signatures?.some((entry) => entry.departmental))
+
+/** The Departments view is for a brand that names its units in documents or sets sub-logos for them. */
+export const hasDepartments = (brand) => Boolean(brand?.organization) || hasSubLogos(brand)

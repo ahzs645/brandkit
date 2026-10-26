@@ -6,7 +6,7 @@ Use **Documents** for flowing report content, tables, figures and maintained Wor
 
 ## Naming and logo rules
 
-Use verified names in the department and subdepartment fields. They are ordinary document text, separated from the full university logo. The public guide gives sub-logo examples but no numerical construction formula; official department brand extensions must be supplied by Communications and Marketing. The generator does not fabricate them.
+**Departments** sets a unit's sub-logo: the full logo with the unit's name under it in Helvetica Neue 95 Black, built as UNBC's own sub-logos and the door signs are, from the same UNBC logo package. Pick one of 88 units or type a name; the kit also includes every listed unit's sub-logo in green, black and white. The department and subdepartment fields carry the same names into documents as ordinary text.
 
 The full logo is at least 38.1 mm wide. Keep its proportions and the B/N top difference clear on every side. Green appears on white; black is for black-only reproduction on white/light ground; white is preferably on UNBC Green. Gold is an accent only. No tiny favicons, separated lettermark, crest patterns or arbitrary logo colours are generated.
 
@@ -19,6 +19,6 @@ The full logo is at least 38.1 mm wide. Keep its proportions and the B/N top dif
 - Official resources, hashes and source discrepancies: `reference/`.
 - All new page layouts are local applications; original university template files remain unchanged.
 
-Word and PowerPoint request Arial, the university’s documented fallback. The open TeX Gyre Heros font files provide reproducible previews/outlines and PDF rendering, and are identified as substitutes.
+Artwork, previews and PDFs are set in Helvetica Neue LT Pro. Word and PowerPoint request Arial, the university’s documented alternative, because the font’s licence does not allow embedding in editable files.
 
 Rebuild the definition and guides with `npm run make:unbc`, then `npm run make:documentation`.

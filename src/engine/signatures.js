@@ -70,15 +70,26 @@ const valueOf = (ctx, item) => {
 const measure = (ctx, text, font, size) => ctx.fonts?.width?.(text, font, size) || Array.from(text).length * size * 0.55
 const capHeight = (ctx, font) => ctx.brand.fonts?.[font]?.capHeight ?? 0.72
 
-/** Breaks a field at typed line breaks, and between words at `wrap`, if given. */
-const linesOf = (ctx, text, item) => {
+/**
+ * Breaks a field at typed line breaks, and between words at `wrap`, if given. Words in `openers`
+ * ("and", "&") open a line rather than close one, as UNBC's sub-logos set "Faculty of Human /
+ * and Health Sciences", unless carrying one down would overrun the next line.
+ */
+export const linesOf = (ctx, text, item) => {
   const out = []
+  const openers = new Set((item.openers ?? []).map((word) => word.toLowerCase()))
+  const fits = (line) => measure(ctx, line, item.font, item.size) <= item.wrap
   for (const block of text.split('\n')) {
     if (!item.wrap) { out.push(block); continue }
     let current = ''
     for (const word of block.split(/\s+/).filter(Boolean)) {
       const trial = current ? `${current} ${word}` : word
-      if (current && measure(ctx, trial, item.font, item.size) > item.wrap) { out.push(current); current = word } else current = trial
+      if (!current || fits(trial)) { current = trial; continue }
+      const space = current.lastIndexOf(' ')
+      const last = current.slice(space + 1)
+      if (space > 0 && openers.has(last.toLowerCase()) && fits(`${last} ${word}`)) {
+        out.push(current.slice(0, space)); current = `${last} ${word}`
+      } else { out.push(current); current = word }
     }
     out.push(current)
   }
@@ -217,3 +228,14 @@ export const signatureLockup = (ctx, { signature: id, colourway, colour, padding
 
 /** Which colourways a brand draws its signatures in, in order. */
 export const colourwaysOf = (brand) => Object.entries(brand.colourways ?? {}).map(([id, spec]) => ({ id, ...spec }))
+
+/**
+ * How a departmental signature sets `values`: each wrapped field's lines, and those wider than
+ * the wrap (a single word too long to break), so an editor can warn rather than let them overhang.
+ */
+export const departmentLines = (ctx, signature, values) => signature.elements
+  .filter((element) => element.type === 'stack')
+  .flatMap((element) => element.items.filter((item) => item.field && item.wrap).map((item) => {
+    const lines = linesOf(ctx, String(values?.[item.field] ?? ''), item).filter((line) => line.trim())
+    return { field: item.field, lines, overflowing: lines.filter((line) => measure(ctx, line, item.font, item.size) > item.wrap) }
+  }))

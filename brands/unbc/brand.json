@@ -4,7 +4,7 @@
   "version": "1.0",
   "displayVersion": "1.0",
   "source": "University of Northern British Columbia, Graphics Standards Manual February 2020 (https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf), original official website vector (https://www.unbc.ca/themes/custom/unbc/gfx/logo-unbc-green.svg) and official logo/template downloads. Retrieved 2026-10-26.",
-  "status": "Official source artwork and published identity rules with local document applications. Department names are ordinary document text; custom sub-logos require artwork supplied by UNBC Communications and Marketing.",
+  "status": "Official source artwork and published identity rules with local document applications. Department sub-logos are set on the construction UNBC’s own sub-logos use, shared with the UNBC logo package and door signs; department names in documents remain ordinary text.",
   "organization": {
     "name": "University of Northern British Columbia",
     "shortName": "UNBC",
@@ -16,7 +16,7 @@
         "subdepartment"
       ],
       "sourceUrl": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf",
-      "note": "Use verified department and subdepartment names as document text, clearly separate from the university logo. Communications and Marketing supplies official departmental brand extensions; this kit does not create approved sub-logos."
+      "note": "Department and subdepartment names go into documents and templates as text under the logo. A unit’s sub-logo is set above; Communications and Marketing remains the source of record for official sub-logo artwork."
     }
   },
   "brandArchitecture": {
@@ -148,135 +148,140 @@
   },
   "fonts": {
     "body": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 400,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-regular.otf",
-      "web": "fonts/texgyreheros-regular.otf",
-      "label": "Arial fallback / open render substitute (400)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-roman.otf",
+      "web": "fonts/HelveticaNeueLTPro-roman.otf",
+      "label": "Helvetica Neue LT Pro 55 Roman"
     },
     "regular": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 400,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-regular.otf",
-      "web": "fonts/texgyreheros-regular.otf",
-      "label": "Arial fallback / open render substitute (400)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-roman.otf",
+      "web": "fonts/HelveticaNeueLTPro-roman.otf",
+      "label": "Helvetica Neue LT Pro 55 Roman"
     },
     "bold": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 700,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-bold.otf",
-      "web": "fonts/texgyreheros-bold.otf",
-      "label": "Arial fallback / open render substitute (700)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-bold.otf",
+      "web": "fonts/HelveticaNeueLTPro-bold.otf",
+      "label": "Helvetica Neue LT Pro 75 Bold"
     },
     "display": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 700,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-bold.otf",
-      "web": "fonts/texgyreheros-bold.otf",
-      "label": "Arial fallback / open render substitute (700)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-bold.otf",
+      "web": "fonts/HelveticaNeueLTPro-bold.otf",
+      "label": "Helvetica Neue LT Pro 75 Bold"
     },
     "displayRegular": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 400,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-regular.otf",
-      "web": "fonts/texgyreheros-regular.otf",
-      "label": "Arial fallback / open render substitute (400)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-roman.otf",
+      "web": "fonts/HelveticaNeueLTPro-roman.otf",
+      "label": "Helvetica Neue LT Pro 55 Roman"
     },
     "label": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 400,
       "style": "normal",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-regular.otf",
-      "web": "fonts/texgyreheros-regular.otf",
-      "label": "Arial fallback / open render substitute (400)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-roman.otf",
+      "web": "fonts/HelveticaNeueLTPro-roman.otf",
+      "label": "Helvetica Neue LT Pro 55 Roman"
     },
     "italic": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 400,
       "style": "italic",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-italic.otf",
-      "web": "fonts/texgyreheros-italic.otf",
-      "label": "Arial fallback / open render substitute (400 italic)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-italic.otf",
+      "web": "fonts/HelveticaNeueLTPro-italic.otf",
+      "label": "Helvetica Neue LT Pro 56 Italic"
     },
     "boldItalic": {
-      "family": "TeX Gyre Heros",
+      "family": "Helvetica Neue LT Pro",
       "consumerFamily": "Arial",
       "officialFamily": "Helvetica Neue",
-      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
       "weight": 700,
       "style": "italic",
-      "capHeight": 0.729,
-      "file": "fonts/texgyreheros-bolditalic.otf",
-      "web": "fonts/texgyreheros-bolditalic.otf",
-      "label": "Arial fallback / open render substitute (700 italic)",
-      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-bolditalic.otf",
+      "web": "fonts/HelveticaNeueLTPro-bolditalic.otf",
+      "label": "Helvetica Neue LT Pro 76 Bold Italic"
+    },
+    "black": {
+      "family": "Helvetica Neue LT Pro",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "office": "Arial",
+      "weight": 900,
+      "style": "normal",
+      "capHeight": 0.714,
+      "file": "fonts/HelveticaNeueLTPro-black.otf",
+      "web": "fonts/HelveticaNeueLTPro-black.otf",
+      "label": "Helvetica Neue LT Pro 95 Black"
     }
   },
   "typography": {
     "headlines": {
-      "family": "Arial",
+      "family": "Helvetica Neue LT Pro",
       "weight": 700,
       "trackingEm": 0
     },
     "body": {
-      "family": "Arial",
+      "family": "Helvetica Neue LT Pro",
       "weight": 400
     },
     "labels": {
-      "family": "Arial",
+      "family": "Helvetica Neue LT Pro",
       "weight": 400,
       "trackingEm": 0,
       "textTransform": "none"
     },
-    "note": "Helvetica Neue is official; Arial is the recommended alternative. Packaged TeX Gyre Heros only supplies portable preview/outlining and PDF rendering."
+    "note": "Helvetica Neue is the official face (Graphics Standards Manual p. 9): 55 Roman for text, 75 Bold for headings, 95 Black for sub-logo department lines. Arial is the official alternative, and the face Word documents name."
   },
   "symbol": {
     "name": "Complete official UNBC logo",
@@ -306,8 +311,868 @@
           "markup": "<polygon fill=\"{logo}\" points=\"42.27 16.05 30.33 74.97 40.71 74.97 48.7 36.33 54.58 58.02 64.51 58.02 76.28 0 66.29 0 58.97 36.59 52.26 16.05 42.27 16.05\"/><path fill=\"{logo}\" d=\"M81,42.13l1-4.9h4.47c2.78,0,4.83,1.39,4.61,5-.29,4.81-4,6.59-5.62,6.57H79.61L81,42.13l-9.72-3L67.38,58h19c5.94,0,14.28-5.41,14.88-14.89.5-7.7-1.78-9.82-5.13-12.28,2.4-2.28,3-3.89,3-7.49-.1-4.26-3-7.24-6.32-7.32H76L74.33,24.1l9.9,2,.65-3.2h2.36a2.38,2.38,0,0,1,2.25,2.77c-.25,2.69-2.15,4.15-3.82,4.17H83.47l.76-3.73-9.9-2-3.07,15Z\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M16.65,49.09c-2.48,0-5.86-.62-5.41-3.2L17.6,15.94H7.07L.16,48.47c-1.14,5.37,4,10.64,14.26,10.64S31.3,54,32.52,48.26l6.87-32.32H28.76L22.41,45.79c-.58,2.27-3.28,3.3-5.76,3.3\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M134.3,15.38c-9-1.16-27.16,2.84-31.14,21.6s12.92,23.5,22.06,22.13l2.64-12.43c-8.85,2-15.2-.84-13.3-9.8s10-12.22,17.31-10.54l2.43-11\"/><path fill=\"{logo}\" d=\"M155.52,19.79l-1.9,8.95a6.45,6.45,0,0,1-6.65,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78l1.85-8.72Z\"/><path fill=\"{logo}\" d=\"M167.62,19.79h1.8l-2.93,13.79H164.4l-4.64-11.14h0l-2.37,11.14h-1.8l2.93-13.79h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M171.56,33.57H169.7l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M186.55,19.79h2.09l-8,13.79h-2l-2.1-13.79h2.07l1.44,11.75h0Z\"/><path fill=\"{logo}\" d=\"M197.92,33.57H187.75l2.93-13.79h10l-.35,1.65h-8.18l-.9,4.22h7.55l-.35,1.65h-7.55l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M205,21.38h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38H204Zm-1.33,6.28h4.51c2.23,0,2.18,1.33,1.94,2.46a17,17,0,0,0-.41,3.46H212l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M224.61,23.82c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9a2.81,2.81,0,0,1,2.35,3.69c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.32a3.63,3.63,0,0,1-.66-3.5h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25a5.44,5.44,0,0,1,5.65-4.26c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M229.18,33.57h-1.86l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M234.11,19.79H245.3l-.35,1.65h-4.66L237.7,33.57h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M250,33.57h-1.86L249.29,28l-3.45-8.24H248l2.55,6.62,5.36-6.62h2.19l-7,8.24Z\"/><path fill=\"{logo}\" d=\"M274.52,26.68c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S275.21,23.43,274.52,26.68Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S275.8,29.65,276.44,26.68Z\"/><path fill=\"{logo}\" d=\"M279.23,33.57h-1.86l2.93-13.79h9.54l-.35,1.65h-7.68l-.9,4.22h6.76l-.35,1.65h-6.76Z\"/><path fill=\"{logo}\" d=\"M153.76,43h1.8l-2.93,13.79h-2.09L145.9,45.64h0l-2.37,11.14h-1.81L144.62,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M167.82,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S168.51,46.63,167.82,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S169.11,52.85,169.74,49.88Z\"/><path fill=\"{logo}\" d=\"M175.17,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.94,2.46a17.1,17.1,0,0,0-.41,3.46h2.29l.06-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M185.52,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M207.52,43h1.86l-2.93,13.79h-1.86L206,50.34h-7.2l-1.37,6.43h-1.86L198.46,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M219.74,56.77H209.56L212.49,43h10l-.35,1.65H214l-.9,4.22h7.55l-.35,1.65h-7.54l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M226.86,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28H230c2.23,0,2.18,1.32,1.93,2.46a17.15,17.15,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.41-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M248.11,43h1.8L247,56.77h-2.09l-4.64-11.14h0l-2.37,11.14H236L239,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M259.65,44.58H263c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36ZM255.2,56.77h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M272.73,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.93,2.46a17.07,17.07,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M284.06,56.77h-1.86L285.12,43H287Z\"/><path fill=\"{logo}\" d=\"M289,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M301.12,56.77h-1.86L302.19,43h1.86Z\"/><path fill=\"{logo}\" d=\"M314.7,47c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9A2.81,2.81,0,0,1,315.57,53c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.33a3.63,3.63,0,0,1-.66-3.49h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25A5.44,5.44,0,0,1,312,42.62c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M329.13,43H331l-2.93,13.79H326.2l1.37-6.43h-7.2L319,56.77h-1.86L320.07,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M348,47.13c0-2.42-1.93-2.86-3.25-2.86-2.5,0-4.9,1.84-5.67,5.47-.69,3.24-.07,5.74,3.35,5.74,1.21,0,3.42-.58,4.74-3.78H349c-1.87,5.2-6.15,5.43-7.18,5.43-3.13,0-5.77-2-4.64-7.33.9-4.24,3.95-7.18,8-7.18,3.55,0,4.93,2.21,4.71,4.51Z\"/><path fill=\"{logo}\" d=\"M362.45,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S363.14,46.63,362.45,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S363.74,52.85,364.37,49.88Z\"/><path fill=\"{logo}\" d=\"M367.33,55.12h7L374,56.77h-8.85L368,43h1.86Z\"/><path fill=\"{logo}\" d=\"M389.63,43l-1.9,8.95a6.45,6.45,0,0,1-6.66,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78L387.77,43Z\"/><path fill=\"{logo}\" d=\"M401,56.77l1.73-8.14c.08-.4.5-2.15.77-3.44h0l-6.34,11.58h-1.84l-1.42-11.56h0c-.27,1.27-.6,3-.69,3.42l-1.73,8.14h-1.8L392.53,43h2.67l1.46,11.65h0L403.09,43h2.65l-2.93,13.79Z\"/><path fill=\"{logo}\" d=\"M410.06,44.58h3.38c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36Zm-4.45,12.19h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M420.61,56.77h-1.86L421.67,43h1.86Z\"/><path fill=\"{logo}\" d=\"M427.74,51.11l3.5-6.07h0l.75,6.07Zm4.6,1.65.51,4h2L432.83,43h-2.11L422.6,56.77h1.92l2.29-4Z\"/>"
         }
       ]
+    },
+    {
+      "id": "sub-logo",
+      "label": "Department sub-logo",
+      "departmental": true,
+      "padding": 0,
+      "use": "The full logo with a department, school or office set under it in Helvetica Neue 95 Black, as on UNBC’s own sub-logos and door signs.",
+      "elements": [
+        {
+          "type": "art",
+          "bounds": [
+            0,
+            0,
+            434.89,
+            74.97
+          ],
+          "markup": "<polygon fill=\"{logo}\" points=\"42.27 16.05 30.33 74.97 40.71 74.97 48.7 36.33 54.58 58.02 64.51 58.02 76.28 0 66.29 0 58.97 36.59 52.26 16.05 42.27 16.05\"/><path fill=\"{logo}\" d=\"M81,42.13l1-4.9h4.47c2.78,0,4.83,1.39,4.61,5-.29,4.81-4,6.59-5.62,6.57H79.61L81,42.13l-9.72-3L67.38,58h19c5.94,0,14.28-5.41,14.88-14.89.5-7.7-1.78-9.82-5.13-12.28,2.4-2.28,3-3.89,3-7.49-.1-4.26-3-7.24-6.32-7.32H76L74.33,24.1l9.9,2,.65-3.2h2.36a2.38,2.38,0,0,1,2.25,2.77c-.25,2.69-2.15,4.15-3.82,4.17H83.47l.76-3.73-9.9-2-3.07,15Z\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M16.65,49.09c-2.48,0-5.86-.62-5.41-3.2L17.6,15.94H7.07L.16,48.47c-1.14,5.37,4,10.64,14.26,10.64S31.3,54,32.52,48.26l6.87-32.32H28.76L22.41,45.79c-.58,2.27-3.28,3.3-5.76,3.3\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M134.3,15.38c-9-1.16-27.16,2.84-31.14,21.6s12.92,23.5,22.06,22.13l2.64-12.43c-8.85,2-15.2-.84-13.3-9.8s10-12.22,17.31-10.54l2.43-11\"/><path fill=\"{logo}\" d=\"M155.52,19.79l-1.9,8.95a6.45,6.45,0,0,1-6.65,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78l1.85-8.72Z\"/><path fill=\"{logo}\" d=\"M167.62,19.79h1.8l-2.93,13.79H164.4l-4.64-11.14h0l-2.37,11.14h-1.8l2.93-13.79h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M171.56,33.57H169.7l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M186.55,19.79h2.09l-8,13.79h-2l-2.1-13.79h2.07l1.44,11.75h0Z\"/><path fill=\"{logo}\" d=\"M197.92,33.57H187.75l2.93-13.79h10l-.35,1.65h-8.18l-.9,4.22h7.55l-.35,1.65h-7.55l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M205,21.38h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38H204Zm-1.33,6.28h4.51c2.23,0,2.18,1.33,1.94,2.46a17,17,0,0,0-.41,3.46H212l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M224.61,23.82c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9a2.81,2.81,0,0,1,2.35,3.69c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.32a3.63,3.63,0,0,1-.66-3.5h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25a5.44,5.44,0,0,1,5.65-4.26c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M229.18,33.57h-1.86l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M234.11,19.79H245.3l-.35,1.65h-4.66L237.7,33.57h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M250,33.57h-1.86L249.29,28l-3.45-8.24H248l2.55,6.62,5.36-6.62h2.19l-7,8.24Z\"/><path fill=\"{logo}\" d=\"M274.52,26.68c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S275.21,23.43,274.52,26.68Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S275.8,29.65,276.44,26.68Z\"/><path fill=\"{logo}\" d=\"M279.23,33.57h-1.86l2.93-13.79h9.54l-.35,1.65h-7.68l-.9,4.22h6.76l-.35,1.65h-6.76Z\"/><path fill=\"{logo}\" d=\"M153.76,43h1.8l-2.93,13.79h-2.09L145.9,45.64h0l-2.37,11.14h-1.81L144.62,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M167.82,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S168.51,46.63,167.82,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S169.11,52.85,169.74,49.88Z\"/><path fill=\"{logo}\" d=\"M175.17,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.94,2.46a17.1,17.1,0,0,0-.41,3.46h2.29l.06-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M185.52,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M207.52,43h1.86l-2.93,13.79h-1.86L206,50.34h-7.2l-1.37,6.43h-1.86L198.46,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M219.74,56.77H209.56L212.49,43h10l-.35,1.65H214l-.9,4.22h7.55l-.35,1.65h-7.54l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M226.86,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28H230c2.23,0,2.18,1.32,1.93,2.46a17.15,17.15,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.41-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M248.11,43h1.8L247,56.77h-2.09l-4.64-11.14h0l-2.37,11.14H236L239,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M259.65,44.58H263c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36ZM255.2,56.77h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M272.73,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.93,2.46a17.07,17.07,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M284.06,56.77h-1.86L285.12,43H287Z\"/><path fill=\"{logo}\" d=\"M289,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M301.12,56.77h-1.86L302.19,43h1.86Z\"/><path fill=\"{logo}\" d=\"M314.7,47c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9A2.81,2.81,0,0,1,315.57,53c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.33a3.63,3.63,0,0,1-.66-3.49h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25A5.44,5.44,0,0,1,312,42.62c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M329.13,43H331l-2.93,13.79H326.2l1.37-6.43h-7.2L319,56.77h-1.86L320.07,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M348,47.13c0-2.42-1.93-2.86-3.25-2.86-2.5,0-4.9,1.84-5.67,5.47-.69,3.24-.07,5.74,3.35,5.74,1.21,0,3.42-.58,4.74-3.78H349c-1.87,5.2-6.15,5.43-7.18,5.43-3.13,0-5.77-2-4.64-7.33.9-4.24,3.95-7.18,8-7.18,3.55,0,4.93,2.21,4.71,4.51Z\"/><path fill=\"{logo}\" d=\"M362.45,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S363.14,46.63,362.45,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S363.74,52.85,364.37,49.88Z\"/><path fill=\"{logo}\" d=\"M367.33,55.12h7L374,56.77h-8.85L368,43h1.86Z\"/><path fill=\"{logo}\" d=\"M389.63,43l-1.9,8.95a6.45,6.45,0,0,1-6.66,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78L387.77,43Z\"/><path fill=\"{logo}\" d=\"M401,56.77l1.73-8.14c.08-.4.5-2.15.77-3.44h0l-6.34,11.58h-1.84l-1.42-11.56h0c-.27,1.27-.6,3-.69,3.42l-1.73,8.14h-1.8L392.53,43h2.67l1.46,11.65h0L403.09,43h2.65l-2.93,13.79Z\"/><path fill=\"{logo}\" d=\"M410.06,44.58h3.38c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36Zm-4.45,12.19h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M420.61,56.77h-1.86L421.67,43h1.86Z\"/><path fill=\"{logo}\" d=\"M427.74,51.11l3.5-6.07h0l.75,6.07Zm4.6,1.65.51,4h2L432.83,43h-2.11L422.6,56.77h1.92l2.29-4Z\"/>"
+        },
+        {
+          "type": "stack",
+          "id": "department",
+          "x": 141.046,
+          "y": 89.323,
+          "items": [
+            {
+              "field": "department",
+              "font": "black",
+              "size": 20.108,
+              "leading": 24.432,
+              "wrap": 298.071,
+              "openers": [
+                "and",
+                "&"
+              ],
+              "role": "logo"
+            }
+          ]
+        }
+      ]
     }
   ],
+  "departments": {
+    "label": "Department",
+    "field": "department",
+    "folder": "sub-logos",
+    "colourways": [
+      "green",
+      "black",
+      "white"
+    ],
+    "source": "https://github.com/ahzs645/unbc-logo",
+    "note": "The department list and its line breaks come from the UNBC logo package. Names marked as matched break exactly as UNBC’s own sub-logo artwork does.",
+    "items": [
+      {
+        "id": "faculty-of-human-and-health-sciences",
+        "name": "Faculty of Human and Health Sciences",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Faculty of Human\nand Health Sciences"
+        }
+      },
+      {
+        "id": "department-of-psychology",
+        "name": "Department of Psychology",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences › Department of Psychology",
+        "values": {
+          "department": "Department of Psychology"
+        }
+      },
+      {
+        "id": "school-of-education",
+        "name": "School of Education",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences › School of Education",
+        "values": {
+          "department": "School of Education"
+        }
+      },
+      {
+        "id": "school-of-health-sciences",
+        "name": "School of Health Sciences",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences › School of Health Sciences",
+        "values": {
+          "department": "School of Health Sciences"
+        }
+      },
+      {
+        "id": "school-of-nursing",
+        "name": "School of Nursing",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences › School of Nursing",
+        "values": {
+          "department": "School of Nursing"
+        }
+      },
+      {
+        "id": "school-of-social-work",
+        "name": "School of Social Work",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Human and Health Sciences › School of Social Work",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "School of Social Work"
+        }
+      },
+      {
+        "id": "faculty-of-indigenous-studies-social-sciences-and-humanities",
+        "name": "Faculty of Indigenous Studies, Social Sciences and Humanities",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Faculty of Indigenous\nStudies, Social Sciences\nand Humanities"
+        }
+      },
+      {
+        "id": "department-of-anthropology",
+        "name": "Department of Anthropology",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of Anthropology",
+        "values": {
+          "department": "Department of Anthropology"
+        }
+      },
+      {
+        "id": "department-of-english",
+        "name": "Department of English",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of English",
+        "values": {
+          "department": "Department of English"
+        }
+      },
+      {
+        "id": "department-of-first-nations-studies",
+        "name": "Department of First Nations Studies",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of First Nations Studies",
+        "values": {
+          "department": "Department of First Nations\nStudies"
+        }
+      },
+      {
+        "id": "department-of-history",
+        "name": "Department of History",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of History",
+        "values": {
+          "department": "Department of History"
+        }
+      },
+      {
+        "id": "department-of-global-and-international-studies",
+        "name": "Department of Global and International Studies",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of Global and International Studies",
+        "values": {
+          "department": "Department of Global\nand International Studies"
+        }
+      },
+      {
+        "id": "department-of-political-science",
+        "name": "Department of Political Science",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Department of Political Science",
+        "values": {
+          "department": "Department of Political\nScience"
+        }
+      },
+      {
+        "id": "women-s-and-gender-studies",
+        "name": "Women's and Gender Studies",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Women's and Gender Studies",
+        "values": {
+          "department": "Women's and Gender\nStudies"
+        }
+      },
+      {
+        "id": "northern-studies",
+        "name": "Northern Studies",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Northern Studies",
+        "values": {
+          "department": "Northern Studies"
+        }
+      },
+      {
+        "id": "interdisciplinary-studies",
+        "name": "Interdisciplinary Studies",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Indigenous Studies, Social Sciences and Humanities › Interdisciplinary Studies",
+        "values": {
+          "department": "Interdisciplinary Studies"
+        }
+      },
+      {
+        "id": "division-of-medical-sciences",
+        "name": "Division of Medical Sciences",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Division of Medical Sciences",
+        "values": {
+          "department": "Division of Medical\nSciences"
+        }
+      },
+      {
+        "id": "ubc-northern-medical-program-nmp",
+        "name": "UBC Northern Medical Program (NMP)",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Division of Medical Sciences › UBC Northern Medical Program (NMP)",
+        "values": {
+          "department": "UBC Northern Medical\nProgram (NMP)"
+        }
+      },
+      {
+        "id": "ubc-master-of-physical-therapy-north",
+        "name": "UBC Master of Physical Therapy - North",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Division of Medical Sciences › UBC Master of Physical Therapy - North",
+        "values": {
+          "department": "UBC Master of Physical\nTherapy - North"
+        }
+      },
+      {
+        "id": "ubc-master-of-occupational-therapy-mot-northern-and-rural-cohort",
+        "name": "UBC Master of Occupational Therapy (MOT) - Northern and Rural Cohort",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Division of Medical Sciences › UBC Master of Occupational Therapy (MOT) - Northern and Rural Cohort",
+        "values": {
+          "department": "UBC Master of Occupational\nTherapy (MOT) - Northern\nand Rural Cohort"
+        }
+      },
+      {
+        "id": "ubc-postgraduate-medical-education-residency-training",
+        "name": "UBC Postgraduate Medical Education - Residency Training",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Division of Medical Sciences › UBC Postgraduate Medical Education - Residency Training",
+        "values": {
+          "department": "UBC Postgraduate Medical\nEducation - Residency\nTraining"
+        }
+      },
+      {
+        "id": "faculty-of-science-and-engineering",
+        "name": "Faculty of Science and Engineering",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering",
+        "values": {
+          "department": "Faculty of Science\nand Engineering"
+        }
+      },
+      {
+        "id": "chemistry-and-biochemistry",
+        "name": "Chemistry and Biochemistry",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › Chemistry and Biochemistry",
+        "values": {
+          "department": "Chemistry and Biochemistry"
+        }
+      },
+      {
+        "id": "computer-science",
+        "name": "Computer Science",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › Computer Science",
+        "values": {
+          "department": "Computer Science"
+        }
+      },
+      {
+        "id": "integrated-science",
+        "name": "Integrated Science",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › Integrated Science",
+        "values": {
+          "department": "Integrated Science"
+        }
+      },
+      {
+        "id": "mathematics-and-statistics",
+        "name": "Mathematics and Statistics",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › Mathematics and Statistics",
+        "values": {
+          "department": "Mathematics and Statistics"
+        }
+      },
+      {
+        "id": "physics",
+        "name": "Physics",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › Physics",
+        "values": {
+          "department": "Physics"
+        }
+      },
+      {
+        "id": "school-of-engineering",
+        "name": "School of Engineering",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Science and Engineering › School of Engineering",
+        "values": {
+          "department": "School of Engineering"
+        }
+      },
+      {
+        "id": "faculty-of-environment",
+        "name": "Faculty of Environment",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Environment",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Faculty of Environment"
+        }
+      },
+      {
+        "id": "department-of-geography-earth-and-environmental-sciences",
+        "name": "Department of Geography, Earth and Environmental Sciences",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Environment › Department of Geography, Earth and Environmental Sciences",
+        "values": {
+          "department": "Department of Geography,\nEarth and Environmental\nSciences"
+        }
+      },
+      {
+        "id": "department-of-ecosystem-science-and-management",
+        "name": "Department of Ecosystem Science and Management",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Environment › Department of Ecosystem Science and Management",
+        "values": {
+          "department": "Department of Ecosystem\nScience and Management"
+        }
+      },
+      {
+        "id": "school-of-planning-and-sustainability",
+        "name": "School of Planning and Sustainability",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Environment › School of Planning and Sustainability",
+        "values": {
+          "department": "School of Planning\nand Sustainability"
+        }
+      },
+      {
+        "id": "faculty-of-business-and-economics",
+        "name": "Faculty of Business and Economics",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Business and Economics",
+        "values": {
+          "department": "Faculty of Business\nand Economics"
+        }
+      },
+      {
+        "id": "school-of-business",
+        "name": "School of Business",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Business and Economics › School of Business",
+        "matched": "unbc.ca/sites/default/files/continuing-studies/cs-course/2025/sublogoschoolofbusinessblack.png",
+        "values": {
+          "department": "School of Business"
+        }
+      },
+      {
+        "id": "economics",
+        "name": "Economics",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Faculty of Business and Economics › Economics",
+        "values": {
+          "department": "Economics"
+        }
+      },
+      {
+        "id": "centre-for-teaching-learning-and-technology",
+        "name": "Centre for Teaching, Learning and Technology",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Centre for Teaching, Learning and Technology",
+        "values": {
+          "department": "Centre for Teaching,\nLearning and Technology"
+        }
+      },
+      {
+        "id": "chemstores",
+        "name": "Chemstores",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Chemstores",
+        "values": {
+          "department": "Chemstores"
+        }
+      },
+      {
+        "id": "geoffrey-r-weller-library",
+        "name": "Geoffrey R. Weller Library",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Geoffrey R. Weller Library",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Geoffrey R. Weller Library"
+        }
+      },
+      {
+        "id": "library",
+        "name": "Library",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Geoffrey R. Weller Library (short form)",
+        "alternateOf": "Geoffrey R. Weller Library",
+        "matched": "unbc.ca/sites/default/files/sections/library/sublogolibrarywhite.png",
+        "values": {
+          "department": "Library"
+        }
+      },
+      {
+        "id": "northern-bc-archives-and-special-collections",
+        "name": "Northern BC Archives & Special Collections",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Geoffrey R. Weller Library › Northern BC Archives & Special Collections",
+        "matched": "SubLogo_Archives_GREEN.png, used by search.nbca.unbc.ca",
+        "values": {
+          "department": "Northern BC Archives\n& Special Collections"
+        }
+      },
+      {
+        "id": "office-of-student-recruitment",
+        "name": "Office of Student Recruitment",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Office of Student Recruitment",
+        "values": {
+          "department": "Office of Student\nRecruitment"
+        }
+      },
+      {
+        "id": "northern-analytical-laboratory-services",
+        "name": "Northern Analytical Laboratory Services",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Northern Analytical Laboratory Services",
+        "matched": "Official NALS sub-logo artwork supplied for this kit (Oct 2026); also the UNBCDoor production door-sign artboards",
+        "values": {
+          "department": "Northern Analytical\nLaboratory Services"
+        }
+      },
+      {
+        "id": "office-of-the-registrar",
+        "name": "Office of the Registrar",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Office of the Registrar",
+        "values": {
+          "department": "Office of the Registrar"
+        }
+      },
+      {
+        "id": "office-of-graduate-programs",
+        "name": "Office of Graduate Programs",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Office of Graduate Programs",
+        "values": {
+          "department": "Office of Graduate\nPrograms"
+        }
+      },
+      {
+        "id": "graduate-programs",
+        "name": "Graduate Programs",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Office of Graduate Programs (short form)",
+        "alternateOf": "Office of Graduate Programs",
+        "values": {
+          "department": "Graduate Programs"
+        }
+      },
+      {
+        "id": "student-success",
+        "name": "Student Success",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success",
+        "values": {
+          "department": "Student Success"
+        }
+      },
+      {
+        "id": "academic-advising",
+        "name": "Academic Advising",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Academic Advising",
+        "values": {
+          "department": "Academic Advising"
+        }
+      },
+      {
+        "id": "academic-success-centre",
+        "name": "Academic Success Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Academic Success Centre",
+        "values": {
+          "department": "Academic Success Centre"
+        }
+      },
+      {
+        "id": "access-resource-centre",
+        "name": "Access Resource Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Access Resource Centre",
+        "values": {
+          "department": "Access Resource Centre"
+        }
+      },
+      {
+        "id": "financial-aid",
+        "name": "Financial Aid",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Financial Aid",
+        "values": {
+          "department": "Financial Aid"
+        }
+      },
+      {
+        "id": "first-nations-centre",
+        "name": "First Nations Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › First Nations Centre",
+        "values": {
+          "department": "First Nations Centre"
+        }
+      },
+      {
+        "id": "health-and-wellness-centre",
+        "name": "Health and Wellness Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Health and Wellness Centre",
+        "values": {
+          "department": "Health and Wellness Centre"
+        }
+      },
+      {
+        "id": "counselling-centre",
+        "name": "Counselling Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Counselling Centre",
+        "values": {
+          "department": "Counselling Centre"
+        }
+      },
+      {
+        "id": "health-services",
+        "name": "Health Services",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Health Services",
+        "values": {
+          "department": "Health Services"
+        }
+      },
+      {
+        "id": "housing-and-residence-life",
+        "name": "Housing and Residence Life",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Housing and Residence Life",
+        "values": {
+          "department": "Housing and Residence Life"
+        }
+      },
+      {
+        "id": "international-exchanges-and-student-programs",
+        "name": "International Exchanges and Student Programs",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › International Exchanges and Student Programs",
+        "values": {
+          "department": "International Exchanges\nand Student Programs"
+        }
+      },
+      {
+        "id": "student-career-centre",
+        "name": "Student Career Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Student Career Centre",
+        "values": {
+          "department": "Student Career Centre"
+        }
+      },
+      {
+        "id": "career-centre",
+        "name": "Career Centre",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Student Career Centre (short form)",
+        "alternateOf": "Student Career Centre",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Career Centre"
+        }
+      },
+      {
+        "id": "co-operative-education",
+        "name": "Co-operative Education",
+        "group": "Academic Departments",
+        "path": "Provost and Vice-President, Academic › Student Success › Co-operative Education",
+        "values": {
+          "department": "Co-operative Education"
+        }
+      },
+      {
+        "id": "athletics",
+        "name": "Athletics",
+        "group": "Administrative Departments",
+        "path": "President › Athletics",
+        "values": {
+          "department": "Athletics"
+        }
+      },
+      {
+        "id": "office-of-indigenous-initiatives",
+        "name": "Office of Indigenous Initiatives",
+        "group": "Administrative Departments",
+        "path": "President › Office of Indigenous Initiatives",
+        "values": {
+          "department": "Office of Indigenous\nInitiatives"
+        }
+      },
+      {
+        "id": "facilities",
+        "name": "Facilities",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Facilities",
+        "values": {
+          "department": "Facilities"
+        }
+      },
+      {
+        "id": "financial-services",
+        "name": "Financial Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services",
+        "values": {
+          "department": "Financial Services"
+        }
+      },
+      {
+        "id": "budgets-and-reporting",
+        "name": "Budgets and Reporting",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Budgets and Reporting",
+        "values": {
+          "department": "Budgets and Reporting"
+        }
+      },
+      {
+        "id": "contracts-and-supply-chain-management",
+        "name": "Contracts and Supply Chain Management",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Contracts and Supply Chain Management",
+        "values": {
+          "department": "Contracts and Supply Chain\nManagement"
+        }
+      },
+      {
+        "id": "financial-services-and-systems",
+        "name": "Financial Services and Systems",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Financial Services and Systems",
+        "values": {
+          "department": "Financial Services\nand Systems"
+        }
+      },
+      {
+        "id": "payroll-services",
+        "name": "Payroll Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Payroll Services",
+        "values": {
+          "department": "Payroll Services"
+        }
+      },
+      {
+        "id": "research-accounting",
+        "name": "Research Accounting",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Research Accounting",
+        "values": {
+          "department": "Research Accounting"
+        }
+      },
+      {
+        "id": "treasury-services",
+        "name": "Treasury Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Financial Services › Treasury Services",
+        "values": {
+          "department": "Treasury Services"
+        }
+      },
+      {
+        "id": "hospitality-services",
+        "name": "Hospitality Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Hospitality Services",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Hospitality Services"
+        }
+      },
+      {
+        "id": "conference-and-event-services",
+        "name": "Conference and Event Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Hospitality Services › Conference and Event Services",
+        "values": {
+          "department": "Conference and Event\nServices"
+        }
+      },
+      {
+        "id": "food-services",
+        "name": "Food Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Hospitality Services › Food Services",
+        "values": {
+          "department": "Food Services"
+        }
+      },
+      {
+        "id": "human-resources",
+        "name": "Human Resources",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Human Resources",
+        "values": {
+          "department": "Human Resources"
+        }
+      },
+      {
+        "id": "information-technology-services",
+        "name": "Information Technology Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services",
+        "values": {
+          "department": "Information Technology\nServices"
+        }
+      },
+      {
+        "id": "administrative-and-enterprise-systems",
+        "name": "Administrative and Enterprise Systems",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services › Administrative and Enterprise Systems",
+        "values": {
+          "department": "Administrative\nand Enterprise Systems"
+        }
+      },
+      {
+        "id": "client-services",
+        "name": "Client Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services › Client Services",
+        "values": {
+          "department": "Client Services"
+        }
+      },
+      {
+        "id": "educational-media-services",
+        "name": "Educational Media Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services › Educational Media Services",
+        "values": {
+          "department": "Educational Media Services"
+        }
+      },
+      {
+        "id": "service-desk",
+        "name": "Service Desk",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services › Service Desk",
+        "values": {
+          "department": "Service Desk"
+        }
+      },
+      {
+        "id": "infrastructure-services",
+        "name": "Infrastructure Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Information Technology Services › Infrastructure Services",
+        "values": {
+          "department": "Infrastructure Services"
+        }
+      },
+      {
+        "id": "institutional-research",
+        "name": "Institutional Research",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Institutional Research",
+        "values": {
+          "department": "Institutional Research"
+        }
+      },
+      {
+        "id": "parking-services",
+        "name": "Parking Services",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Parking Services",
+        "values": {
+          "department": "Parking Services"
+        }
+      },
+      {
+        "id": "safety-and-risk-management",
+        "name": "Safety and Risk Management",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Safety and Risk Management",
+        "values": {
+          "department": "Safety and Risk\nManagement"
+        }
+      },
+      {
+        "id": "security",
+        "name": "Security",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Finance and Administration › Security",
+        "values": {
+          "department": "Security"
+        }
+      },
+      {
+        "id": "alumni-relations",
+        "name": "Alumni Relations",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Research and Innovation › Alumni Relations",
+        "values": {
+          "department": "Alumni Relations"
+        }
+      },
+      {
+        "id": "communications-and-marketing",
+        "name": "Communications and Marketing",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Research and Innovation › Communications and Marketing",
+        "values": {
+          "department": "Communications\nand Marketing"
+        }
+      },
+      {
+        "id": "health-research-institute",
+        "name": "Health Research Institute",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Research and Innovation › Health Research Institute",
+        "matched": "Official sub-logo artwork supplied for this kit (Oct 2026)",
+        "values": {
+          "department": "Health Research Institute"
+        }
+      },
+      {
+        "id": "office-of-research-and-innovation",
+        "name": "Office of Research and Innovation",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Research and Innovation › Office of Research and Innovation",
+        "values": {
+          "department": "Office of Research\nand Innovation"
+        }
+      },
+      {
+        "id": "development",
+        "name": "Development",
+        "group": "Administrative Departments",
+        "path": "Vice-President, Research and Innovation › Development",
+        "values": {
+          "department": "Development"
+        }
+      }
+    ]
+  },
   "colourways": {
     "green": {
       "label": "UNBC Green on white",
@@ -3652,7 +4517,7 @@
       "lineHeight": 1.3,
       "gapAfterMm": 5,
       "maxCharacters": 180,
-      "note": "Names are document metadata, not an official departmental sub-logo. Type sizes and page spacing are local report defaults; no official sub-logo sizing formula is claimed."
+      "note": "Names in a document’s naming block are text. Their type sizes and page spacing are local report defaults; the Departments view sets a unit’s sub-logo."
     },
     "footer": {
       "text": "University of Northern British Columbia"
@@ -3894,49 +4759,34 @@
         ]
       },
       {
-        "name": "Department names",
-        "title": "Keep names separate from logo artwork",
-        "subtitle": "Editable document hierarchy with no invented sub-logo approval.",
+        "name": "Department sub-logos",
+        "title": "One logo with the unit set beneath it",
+        "subtitle": "The construction of UNBC’s own sub-logos and door signs.",
         "elements": [
           {
             "type": "logo",
+            "signature": "sub-logo",
+            "colourway": "green",
+            "values": {
+              "department": "Faculty of Human\nand Health Sciences"
+            },
             "x": 80,
-            "y": 280,
-            "width": 930,
-            "signature": "official",
-            "colourway": "green"
-          },
-          {
-            "type": "text",
-            "text": "Department or academic unit",
-            "x": 80,
-            "y": 540,
-            "size": 38,
-            "font": "bold",
-            "colour": "ink"
-          },
-          {
-            "type": "text",
-            "text": "Subdepartment or team",
-            "x": 80,
-            "y": 602,
-            "size": 33,
-            "font": "body",
-            "colour": "ink"
+            "y": 270,
+            "width": 760
           },
           {
             "type": "para",
-            "text": "Enter verified names. Long names wrap at word boundaries; do not condense, stretch or rebuild the university logo. Omit a level when it does not apply.",
+            "text": "The unit’s name hangs under NORTHERN BRITISH COLUMBIA, aligned to its N, in Helvetica Neue 95 Black at the size and leading of the official sub-logos. Long names wrap; “and” and “&” open a line rather than end one. Names matched to UNBC’s artwork keep its exact breaks.",
             "x": 64,
-            "y": 708,
+            "y": 640,
             "width": 1250,
-            "size": 29,
+            "size": 28,
             "colour": "ink",
             "line": 1.4
           },
           {
             "type": "para",
-            "text": "Communications and Marketing supplies official department brand extensions. The manual provides examples but no public sizing algorithm. This document hierarchy is ordinary text and uses local 12 pt / 10.5 pt defaults.",
+            "text": "Use the established name of the unit. Never condense, stretch or rebuild the logo, and keep the full logo’s clear space and minimum width.",
             "x": 64,
             "y": 842,
             "width": 1250,
@@ -3997,7 +4847,7 @@
           },
           {
             "type": "para",
-            "text": "Word and PowerPoint request Arial. The kit bundles open TeX Gyre Heros for reproducible previews and vector rendering; it is an implementation substitute, not a new official UNBC face.",
+            "text": "The kit sets its artwork in Helvetica Neue LT Pro: 55 Roman, 75 Bold and 95 Black for sub-logo department lines. Word and PowerPoint request Arial, since the font’s licence does not allow it to be embedded in an editable file.",
             "x": 64,
             "y": 730,
             "width": 1250,
@@ -4252,12 +5102,12 @@
       "from": "docs/brand-details.html",
       "to": "guidelines/brand-details.html"
     },
-    "fonts/GUST-FONT-LICENSE.txt",
+    "fonts/HelveticaNeueLTPro-black.otf",
+    "fonts/HelveticaNeueLTPro-bold.otf",
+    "fonts/HelveticaNeueLTPro-bolditalic.otf",
+    "fonts/HelveticaNeueLTPro-italic.otf",
+    "fonts/HelveticaNeueLTPro-roman.otf",
     "fonts/README.md",
-    "fonts/texgyreheros-bold.otf",
-    "fonts/texgyreheros-bolditalic.otf",
-    "fonts/texgyreheros-italic.otf",
-    "fonts/texgyreheros-regular.otf",
     "reference/PROVENANCE.json",
     "reference/README.md",
     "reference/identity-rules.json",

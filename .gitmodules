@@ -1,3 +1,6 @@
 [submodule "vendor/template-printer"]
 	path = vendor/template-printer
 	url = https://github.com/ahzs645/template-printer.git
+[submodule "vendor/unbc-logo"]
+	path = vendor/unbc-logo
+	url = https://github.com/ahzs645/unbc-logo.git

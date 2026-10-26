@@ -51,9 +51,8 @@ do not guarantee that a host renderer has those fonts. `fonts.*.consumerFamily`,
 the source brand, becomes the profile's `typography.*.family`; otherwise the existing family
 is retained. The profile then records the bundled source face as `renderingFamily`, the
 authoritative identity face as `officialFamily`, and the explanation as `note`. UNBC exports
-Arial for consumers, Helvetica Neue as its official family, and TeX Gyre Heros as the bundled
-open rendering substitute. Design tokens use the same consumer-family choice. A consumer
-must not present the renderer substitute as the university's official typeface.
+Arial for consumers, Helvetica Neue as its official family, and Helvetica Neue LT Pro as the
+bundled face that sets its artwork. Design tokens use the same consumer-family choice.
 
 Bundle permitted brand fonts or show the actual fallback to the user. Logo
 outlines remain faithful even when body text uses a fallback. Societyer's companion importer

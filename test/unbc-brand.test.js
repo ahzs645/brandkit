@@ -6,6 +6,7 @@ import { resolve } from 'node:path'
 import { unzipSync, strFromU8 } from 'fflate'
 import { validateBrand } from '../src/engine/brand.js'
 import { logoDocument } from '../src/engine/artwork.js'
+import { departmentLines, linesOf } from '../src/engine/signatures.js'
 import { guidePages } from '../src/engine/guide.js'
 import { renderTemplate, templateFields, physicalSize } from '../src/engine/templates.js'
 import { buildKit, planKit } from '../src/engine/kit.js'
@@ -31,9 +32,9 @@ test('UNBC retains the entire supplied vector geometry and uses published identi
     assert.match(svg, new RegExp(`fill="${hex}"`))
     assert.doesNotMatch(svg, /<text\b|#00573D|#B79527/)
   }
-  assert.equal(brand.signatures.length, 1)
+  assert.deepEqual(brand.signatures.map(entry => entry.id), ['official', 'sub-logo'])
   assert.equal(brand.signatures[0].padding, 0, 'minimum width measures visible full artwork')
-  assert.equal(brand.signatures[0].departmental, undefined, 'editable names do not fabricate approved sub-logos')
+  assert.equal(brand.signatures[0].departmental, undefined, 'the full logo is never set for a department')
   assert.equal(brand.logoPolicy.minimumWidthMm, 38.1)
   assert.ok(brand.logoPolicy.clearSpaceRatio >= 16.02 / 434.89)
   assert.deepEqual(brand.colours.green, '#035642')
@@ -98,7 +99,7 @@ test('UNBC publications use sourced logo sizing and local affiliation rules in b
   assert.equal(brand.fields.department.placeholder, '')
   assert.equal(brand.fields.subdepartment.placeholder, '')
   assert.deepEqual(brand.documentation.publishedPurposes, ['report', 'portfolio', 'brief'])
-  assert.match(brand.fonts.body.note, /not a UNBC-approved/)
+  assert.equal(brand.fonts.body.family, 'Helvetica Neue LT Pro')
   assert.equal(brand.fonts.body.consumerFamily, 'Arial')
   assert.equal(brand.fonts.body.officialFamily, 'Helvetica Neue')
   assert.equal(brand.typography.labels.textTransform, 'none')
@@ -163,7 +164,7 @@ test('UNBC exported kit carries original sources and excludes isolated symbols a
   for (const entry of plan.filter(entry => entry.kind === 'asset')) assert.ok(existsSync(`${folder}${entry.src}`), entry.src)
   const { files, skipped } = await buildKit(ctx, { rasters: false, pdfs: false, office: false, readAsset: src => readAssetFromDisk(folder, src) })
   assert.deepEqual(skipped, [])
-  for (const path of ['official-templates/lhopt1official.docx', 'official-templates/unbcpowerpointtemplate.pptx', 'reference/unbc-graphics-standards-2020.pdf', 'reference/PROVENANCE.json', 'reference/identity-rules.json', 'fonts/GUST-FONT-LICENSE.txt']) assert.ok(files.has(path), path)
+  for (const path of ['official-templates/lhopt1official.docx', 'official-templates/unbcpowerpointtemplate.pptx', 'reference/unbc-graphics-standards-2020.pdf', 'reference/PROVENANCE.json', 'reference/identity-rules.json', 'fonts/HelveticaNeueLTPro-black.otf', 'logos/sub-logos/school-of-business/sub-logo-white.svg']) assert.ok(files.has(path), path)
   for (const path of ['docs/brand-details.html', 'guidelines/brand-details.html']) {
     assert.ok(files.has(path))
     const html = strFromU8(files.get(path))
@@ -172,5 +173,46 @@ test('UNBC exported kit carries original sources and excludes isolated symbols a
       const target = resolve('/', path, '..', href).slice(1)
       assert.ok(files.has(target), `${path} → ${target}`)
     }
+  }
+})
+
+// The sub-logo is drawn from the UNBC logo package's construction (vendor/unbc-logo), which the
+// door-sign generator also uses; these hold the kit to it.
+const logoPackage = new URL('../vendor/unbc-logo/src/logo/', import.meta.url).pathname
+const subLogo = brand.signatures.find(entry => entry.id === 'sub-logo')
+const departmentItem = subLogo.elements.find(element => element.type === 'stack').items[0]
+
+test('UNBC sub-logos set the department under the full logo in Helvetica Neue 95 Black', () => {
+  assert.equal(subLogo.departmental, true)
+  assert.equal(brand.fonts.black.weight, 900)
+  assert.ok(fonts.has('black'))
+  const svg = logoDocument({ brand, fonts, values: { department: 'School of Business' } }, { signature: 'sub-logo', colourway: 'white' })
+  for (const attribute of [...read('reference/logo-website.svg').matchAll(/\b(?:d|points)="[^"]+"/g)].map(match => match[0])) assert.ok(svg.includes(attribute), 'full logo geometry retained')
+  assert.match(svg, /aria-label="School of Business"/)
+  assert.doesNotMatch(svg, /<text\b/, 'department line is outlined')
+  assert.equal(brand.departments.field, 'department')
+  assert.ok(brand.departments.items.length >= 80)
+  const business = brand.departments.items.find(item => item.name === 'School of Business')
+  assert.ok(business.matched, 'names matched to official artwork carry their source')
+  const empty = logoDocument({ brand, fonts, values: { department: '' } }, { signature: 'sub-logo', colourway: 'green' })
+  assert.equal(empty.match(/viewBox="([^"]+)"/)[1], logoDocument(ctx, { signature: 'official', colourway: 'green' }).match(/viewBox="([^"]+)"/)[1], 'no department leaves the full logo alone')
+})
+
+test('UNBC sub-logo wrapping carries conjunctions down and flags unbreakable words', () => {
+  assert.deepEqual(linesOf(ctx, 'Faculty of Human and Health Sciences', departmentItem), ['Faculty of Human', 'and Health Sciences'])
+  assert.deepEqual(linesOf(ctx, 'Northern BC Archives & Special Collections', departmentItem), ['Northern BC Archives', '& Special Collections'])
+  assert.deepEqual(linesOf(ctx, 'Office of\nResearch', departmentItem), ['Office of', 'Research'], 'typed breaks are kept')
+  const [fit] = departmentLines(ctx, subLogo, { department: 'Pneumonoultramicroscopicsilicovolcanoconiosis Centre' })
+  assert.deepEqual(fit.overflowing, ['Pneumonoultramicroscopicsilicovolcanoconiosis'])
+})
+
+test('UNBC sub-logos break every department line as the UNBC logo package does', { skip: !existsSync(logoPackage) && 'vendor/unbc-logo is not checked out' }, async () => {
+  const { wrapDepartmentText, splitDepartmentText } = await import(`${logoPackage}logoText.js`)
+  const snapshot = JSON.parse(readFileSync(`${logoPackage}departmentWraps.snapshot.json`, 'utf8'))
+  for (const name of Object.keys(snapshot)) {
+    assert.deepEqual(linesOf(ctx, name, departmentItem), wrapDepartmentText(name), name)
+  }
+  for (const item of brand.departments.items) {
+    assert.deepEqual(item.values.department.split('\n'), splitDepartmentText(item.name), item.name)
   }
 })
