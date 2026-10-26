@@ -35,12 +35,37 @@ jobs:
       # The parity test needs the original ddcnorth kit, which is not in the repository, so it
       # skips itself here; the engine and manual-pack tests run.
       - run: npm test
+      - run: npm run make:documentation -- --check
       - name: Build the site
         run: npm run build
         env:
           # The repository's own name, so renaming it cannot leave the asset URLs pointing at a
           # path that no longer exists.
           BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Install document and browser renderers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer fontconfig
+          npx playwright install --with-deps chromium
+      - name: Verify the document workflow
+        run: npm run test:documents:browser
+        env:
+          SCREENSHOT_DIR: .documentation/browser
+          BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Build Word masters and matching PDF starters for every brand
+        run: npm run build:documentation -- --pdf --out dist/documentation
+      - name: Attach reviewable document starters
+        uses: actions/upload-artifact@v4
+        with:
+          name: brandkit-document-starters
+          path: dist/documentation
+      - name: Attach browser review captures
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: brandkit-document-browser-checks
+          path: .documentation/browser
+          if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

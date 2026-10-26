@@ -14,6 +14,11 @@ import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
 import { additionsOf, changesArtwork, findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
 import { officeFile } from '../export/office.js'
+import { publicationHtml } from '../export/publication.js'
+import { documentProfile, publicationModel, documentationDocumentsFor, documentationMarkdown } from './documentation.js'
+import { consumerProfile } from './consumer.js'
+import { assetRecord } from './catalog.js'
+import { inPack } from './packs.js'
 import { readBrandAsset } from '../assets.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
@@ -53,10 +58,10 @@ Keep a copy of an approved identity before changing it.
  *   kind 'asset'  src: a path in the brand's folder, copied as is
  *   kind 'index'  index.html and the asset catalog, made last from the finished list
  */
-export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = {}) => {
+export const planKit = (brand, { rasters = true, pdfs = true, assets = true, office = true, documentation = true, pack = 'complete' } = {}) => {
   const entries = []
   const add = (entry) => entries.push({ group: groupOf(entry.path), ...entry })
-  const svgEntry = (path, make) => add({ path, kind: 'text', make })
+  const svgEntry = (path, make, metadata = {}) => add({ path, kind: 'text', make, ...metadata })
   const id = brand.id
   const colourKey = (key) => (key === 'currentColor' ? 'currentcolor' : key)
   const logoColours = brand.logoColours ?? ['black']
@@ -118,11 +123,13 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
   }
 
   // Templates: the SVGs keep live text; their images and PDFs are outlined.
+  const presentationLayouts = new Set((brand.documents ?? []).filter((document) => document.format === 'pptx').flatMap((document) => document.layouts ?? []))
   for (const template of brand.templates ?? []) {
-    svgEntry(`templates/${template.id}.svg`, (ctx) => renderTemplate(ctx, template).svg)
+    const metadata = { templateId: template.id, presentation: presentationLayouts.has(template.id) }
+    svgEntry(`templates/${template.id}.svg`, (ctx) => renderTemplate(ctx, template).svg, metadata)
     const outlined = (ctx) => renderTemplate({ ...ctx, outline: true }, template)
-    if (rasters) add({ path: `templates/png/${template.id}.png`, kind: 'png', width: template.raster ?? Math.min(2400, template.width), svg: (ctx) => outlined(ctx).svg })
-    if (pdfs) add({ path: `templates/pdf/${template.id}.pdf`, kind: 'pdf', pages: (ctx) => { const rendered = outlined(ctx); return [{ svg: rendered.svg, ...physicalSize(rendered) }] } })
+    if (rasters) add({ path: `templates/png/${template.id}.png`, kind: 'png', width: template.raster ?? Math.min(2400, template.width), svg: (ctx) => outlined(ctx).svg, ...metadata })
+    if (pdfs) add({ path: `templates/pdf/${template.id}.pdf`, kind: 'pdf', pages: (ctx) => { const rendered = outlined(ctx); return [{ svg: rendered.svg, ...physicalSize(rendered) }] }, ...metadata })
   }
 
   // Sets: every variant of one thing in one PDF, a page each (a card's fronts and back).
@@ -134,10 +141,30 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
   }
 
   // Office documents: Word and PowerPoint templates, an HTML email signature with its image.
-  if (rasters) {
-    for (const document of brand.documents ?? []) {
+  if (office) {
+    for (const document of [...(brand.documents ?? []), ...(documentation ? documentationDocumentsFor(brand) : [])]) {
       const path = `documents/${id}-${document.id}.${document.format}`
       add({ path, kind: 'office', document })
+    }
+  }
+
+  if (documentation) {
+    // Word users need one convenient logo image even when the bulk PNG collection is off.
+    // The filename and geometry come from the same preferred logo as the document profile.
+    if (pack === 'documents' && office && !rasters) {
+      const preferred = documentProfile(brand).logo
+      add({ path: preferred.assets.png, kind: 'png', width: 2048,
+        svg: (ctx) => logoDocument({ ...ctx, outline: true }, preferred.options) })
+    }
+    for (const paper of ['letter', 'a4']) {
+      add({ path: `source/document-profile-${paper}.json`, kind: 'text', make: ({ brand }) => json(documentProfile(brand, { paper })) })
+    }
+    add({ path: 'source/consumer-profile.json', kind: 'text', make: (ctx) => json(consumerProfile(ctx)) })
+    add({ path: 'guidelines/documentation.md', kind: 'text', make: ({ brand }) => documentationMarkdown(brand) })
+    for (const document of documentationDocumentsFor(brand).filter((item) => item.publication)) {
+      const model = (ctx) => publicationModel(ctx.brand, { paper: document.paper, purpose: document.purpose, values: ctx.values })
+      add({ path: `documents/${id}-${document.id}.json`, kind: 'text', document, make: (ctx) => json(model(ctx)) })
+      add({ path: `documents/${id}-${document.id}.html`, kind: 'text', document, make: (ctx) => publicationHtml(ctx, model(ctx)) })
     }
   }
 
@@ -215,7 +242,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true } = 
   add({ path: 'source/README.md', kind: 'text', make: (ctx) => SOURCE_README(ctx.brand) })
   add({ path: 'web/asset-catalog.json', kind: 'index' })
   add({ path: 'index.html', kind: 'index' })
-  return entries
+  return entries.filter((entry) => inPack(entry, pack))
 }
 
 const pageOf = (svg) => {
@@ -235,8 +262,8 @@ const encoder = new TextEncoder()
  * @param {(done: number, total: number, path: string) => void} [options.onProgress]
  * @param {(entry) => boolean} [options.filter]
  */
-export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, ...planOptions } = {}) => {
-  const plan = planKit(ctx.brand, { rasters: Boolean(renderer), pdfs: Boolean(renderer), assets: Boolean(readAsset || ctx.brand.assets), ...planOptions })
+export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, sourceRevision, ...planOptions } = {}) => {
+  const plan = planKit(ctx.brand, { rasters: Boolean(renderer?.png), pdfs: Boolean(renderer?.pdf), office: Boolean(renderer?.png), assets: Boolean(readAsset || ctx.brand.assets), ...planOptions })
     .filter((entry) => !filter || entry.kind === 'index' || filter(entry))
   const files = new Map()
   const skipped = []
@@ -263,9 +290,10 @@ export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, .
     }
     done += 1
   }
-  const records = [...files].map(([path, bytes]) => ({ path, group: groupOf(path), bytes: bytes.length }))
+  const planned = new Map(plan.map((entry) => [entry.path, entry]))
+  const records = (await Promise.all([...files].map(([path, bytes]) => assetRecord(ctx.brand, path, bytes, groupOf(path), planned.get(path)))))
     .sort((a, b) => GROUPS.indexOf(a.group) - GROUPS.indexOf(b.group) || a.path.localeCompare(b.path))
-  files.set('web/asset-catalog.json', encoder.encode(json({ brand: ctx.brand.name, version: ctx.brand.version, pathBase: 'Package root, one folder above this catalog', assetCount: records.length, assets: records })))
+  files.set('web/asset-catalog.json', encoder.encode(json({ schema: 'brandkit/asset-catalog/2', brand: ctx.brand.name, brandId: ctx.brand.id, version: ctx.brand.version, sourceRevision: sourceRevision ?? null, pathBase: 'Package root, one folder above this catalog', assetCount: records.length, assets: records })))
   files.set('index.html', encoder.encode(indexHtml(ctx, records)))
   onProgress?.(plan.length, plan.length, '')
   return { files, skipped }

@@ -28,12 +28,14 @@ import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './s
 const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default: module.Guide })))
 const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ default: module.Manuals })))
 const TemplatePrinter = lazy(() => import('./views/TemplatePrinter.jsx').then((module) => ({ default: module.TemplatePrinter })))
+const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({ default: module.Documents })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
   { id: 'colour', label: 'Colour' },
   { id: 'templates', label: 'Templates' },
+  { id: 'documents', label: 'Documents' },
   { id: 'printer', label: 'Template Printer' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
@@ -301,6 +303,7 @@ export const App = () => {
                 </div>
               )} /></div>}
             {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onPackage={downloadPrinterPackage} onImport={importPrinterDesign} />}
+            {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}

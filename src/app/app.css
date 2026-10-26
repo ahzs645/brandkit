@@ -88,6 +88,30 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field { display: grid; gap: 5px; }
 .field__label { font-size: 12px; font-weight: 600; color: var(--ink-muted); }
 .field__hint { font-size: 12px; color: var(--ink-faint); }
+
+/* Document composition is a first-class workflow for every brand. */
+.documents-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.documents-head > div:first-child { flex: 1 1 460px; }
+.documents-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.documents-workspace { display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); align-items: start; gap: 16px; }
+.documents-controls { display: grid; gap: 14px; min-width: 0; }
+.documents-controls h3 { margin: 10px 0 0; }
+.documents-controls p { margin: 0; }
+.documents-controls textarea { resize: vertical; min-height: 70px; width: 100%; }
+.documents-controls input[type='file'] { max-width: 100%; font-size: 12px; }
+.documents-preview { position: sticky; top: 122px; padding: 8px; min-width: 0; }
+.documents-preview iframe { display: block; width: 100%; height: min(80vh, 950px); min-height: 540px; border: 0; border-radius: 8px; background: white; }
+.documents-preview .notice { margin: 10px; }
+.documents-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.documents-guidance { margin-top: 16px; }
+.kit-pack { margin-top: 14px; max-width: 380px; }
+@media (max-width: 850px) {
+  .documents-workspace { grid-template-columns: 1fr; }
+  .documents-preview { position: static; }
+  .documents-preview iframe { min-height: 520px; height: 70vh; }
+  .documents-rules { grid-template-columns: 1fr; }
+  .documents-actions .button { white-space: normal; }
+}
 .field--inline { grid-template-columns: 90px 1fr; align-items: center; }
 .field input[type='text'], .field select, .json { width: 100%; min-height: 36px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; }

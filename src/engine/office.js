@@ -34,10 +34,29 @@ const pointsPer = (template) => ((template.unit ?? 'px') === 'mm' ? 72 / 25.4 : 
 
 const hex = (value) => String(value).replace(/^#/, '').toUpperCase().slice(0, 6)
 
-/** A run's font: the face's Office name (an installed font), weight and style. */
-export const officeFont = (brand, key) => {
-  const face = faceOf(brand, key) ?? {}
-  return { name: face.office ?? face.family ?? 'Arial', bold: (face.weight ?? 400) >= 600, italic: face.style === 'italic' }
+const WEIGHT_NAMES = { 100: 'Thin', 200: 'ExtraLight', 300: 'Light', 500: 'Medium', 600: 'SemiBold', 800: 'ExtraBold', 900: 'Black' }
+const NAMED_WEIGHT = /(?:^|[\s-])(?:thin|extra[ -]?light|ultra[ -]?light|light|medium|semi[ -]?bold|demi[ -]?bold|extra[ -]?bold|ultra[ -]?bold|bold|black|heavy)(?:[\s-]|$)/i
+
+/**
+ * Word has only regular/bold slots for a family. A distinct name for intermediate
+ * weights keeps, for example, Sora Light, Regular, SemiBold and Bold from sharing
+ * and overwriting two embedded font files. Explicit Office substitutions remain
+ * authoritative. Resolve an element's weight override to its actual brand face.
+ */
+export const officeFont = (brand, key = 'body', overrides = {}) => {
+  const original = faceOf(brand, key) ?? {}
+  const weight = Number(overrides.weight ?? original.weight ?? 400)
+  const italic = overrides.italic ?? original.style === 'italic'
+  const candidate = Object.entries(brand.fonts ?? {}).find(([, face]) =>
+    face.family === original.family && (face.office ?? null) === (original.office ?? null) &&
+    Number(face.weight ?? 400) === weight && (face.style === 'italic') === italic)
+  const resolvedKey = candidate?.[0] ?? key
+  const face = candidate?.[1] ?? original
+  const family = face.office ?? face.family ?? 'Arial'
+  const explicitName = NAMED_WEIGHT.test(family)
+  const namedWeight = !face.office && !explicitName && ![400, 700].includes(weight)
+  const name = namedWeight ? `${family} ${WEIGHT_NAMES[weight] ?? `Weight ${weight}`}` : family
+  return { name, family, key: resolvedKey, weight, bold: !namedWeight && !explicitName && weight >= 600, italic }
 }
 
 /**
@@ -69,9 +88,8 @@ export const textItems = (ctx, template) => {
   }
 
   const add = (index, element, { x, y, size, value, lines, leading, width, field }) => {
-    const key = element.font ?? 'body'
-    const font = officeFont(brand, key)
-    const weight = element.weight ?? faceOf(brand, key)?.weight ?? 400
+    const font = officeFont(brand, element.font ?? 'body', { weight: element.weight })
+    const key = font.key
     const text = lines ?? String(value ?? '').split('\n')
     items.push({
       element: index,
@@ -86,7 +104,7 @@ export const textItems = (ctx, template) => {
       anchor: element.anchor ?? 'start',
       colour: hex(resolveColour(brand, element.colour ?? 'ink')),
       font: font.name, key,
-      bold: font.bold || weight >= 600, italic: font.italic,
+      bold: font.bold, italic: font.italic, weight: font.weight,
       tracking: u(element.tracking ?? 0) * k,
       caps: Boolean(element.caps)
     })

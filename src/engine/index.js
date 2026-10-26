@@ -12,3 +12,6 @@ export { appIconSvg, faviconSvg, brandCss, tokens, reactComponent, landingHtml, 
 export { GROUPS, groupOf, planKit, buildKit } from './kit.js'
 export { STARTER_FONTS, STARTER_DEFAULTS, bakeWordmark, createStarterBrand } from './starter.js'
 export { mergePatch, revisionsOf, findRevision, withRevision, approvedOnly, revisionReadme, additionsOf, changesArtwork } from './revisions.js'
+export { DOCUMENT_PURPOSES, documentProfile, publicationModel, publicationLayouts, validatePublication, documentationGuide, documentationMarkdown, documentationDocumentsFor } from './documentation.js'
+export { CONSUMER_PROFILE_SCHEMA, consumerProfile } from './consumer.js'
+export { KIT_PACKS, inPack } from './packs.js'

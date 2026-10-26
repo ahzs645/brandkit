@@ -4,6 +4,8 @@ Consulting · Design · Development. *From first idea to first form.*
 
 ## Start here
 
+For the source repository, begin with [`../USE.md`](../USE.md). For an exported kit, the paths below start at the kit root. [Open First Form directly](https://projects.ahmadjalil.com/brandkit/?brand=firstform&share=1); [open its document examples](https://projects.ahmadjalil.com/brandkit/?brand=firstform&share=1&view=documents).
+
 1. Open `index.html` to browse every file offline.
 2. Open `guidelines/brand-details.html` for the full reference: positioning and voice, logo rules, colour, type, icons, patterns, form styles, templates and where the brand can go next.
 3. Open `motion/index.html` for the motion library: logo animations, loaders and interface motion.
@@ -20,6 +22,8 @@ First Form Brand Kit V1.0 supplied the logo as PNGs only. This kit draws the log
 
 When vector masters of the original logo exist, replace the mark's paths and the wordmark's glyphs in `source/brand.json` and rebuild.
 
+That edit path applies to an exported standalone kit. In this repository, `brands/firstform/brand.json` is generated: persist changes in `scripts/brands/firstform.mjs` and rerun `npm run make:firstform`. Regenerate source use guides and reference metadata with `node scripts/brands/documentation.mjs`. The documentation system derives its defaults without changing the identity definition; optional `brand.documentation` overrides belong in the generator so they survive a rebuild.
+
 ## Rules in brief
 
 - Black logo on Ash or White; white logo on Black or the darkest greys. Never on Graphite (#484848).
@@ -27,6 +31,14 @@ When vector masters of the original logo exist, replace the mark's paths and the
 - Strictly monochrome: Black, Graphite, Ash, White, with Ink, Coal, Rule, Steel and Mist as support greys.
 - One typeface, Sora: SemiBold 600 for headlines, Regular 400 for body and labels, Light 300 for large captions.
 - Panels have a 24 px radius; buttons are full pills.
+
+## Documents and screenshots
+
+The document examples use the light paper and ink roles with First Form's own Sora files and supplied logo. Reports and product overviews have editable headings, body text, tables and captions. US Letter and A4 profiles share the same six layouts: cover, content, product detail, screenshot or evidence, comparison and closing.
+
+Keep screenshots in their application colours and make their labels readable at the final document size. Explain the visible action or result in the caption. Label examples, diagrams and placeholders accurately; a placeholder is not evidence of a working feature.
+
+Product copy describes capabilities and supported scope. It does not imply that a client has received the product. Add delivery history, compatibility, results and contact details only when the document's source material supports them. The sample publication contains instructional copy and a labelled image placeholder, ready to replace with the actual material.
 
 ## Package contents
 
