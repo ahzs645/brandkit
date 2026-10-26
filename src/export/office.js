@@ -160,9 +160,12 @@ export const officeStyles = (brand, profile = {}, defaults = {}) => {
     const heading = /^Heading[123]$/.test(id)
     return {
       id, name, ...(id === 'Normal' ? { next: 'Normal' } : { basedOn: 'Normal', next: 'BodyText' }), quickFormat: true,
-      run: { font: font.name, size: Math.round(size * 2), bold: font.bold, italics: font.italic, color: ink },
+      run: { font: font.name, size: Math.round(size * 2), bold: font.bold, italics: font.italic, color: String(spec.colour ?? ink).replace('#', ''),
+        ...(spec.caps ? { allCaps: true } : {}), ...(spec.trackingEm ? { characterSpacing: Math.round(spec.trackingEm * size * 20) } : {}) },
       paragraph: {
         spacing: { after: twips(spec.spaceAfterPt ?? (heading ? 8 : 6)), line: Math.round(240 * (spec.lineHeight ?? 1.2)) },
+        // Word measures a paragraph border in eighths of a point, its gap in points.
+        ...(spec.ruleBelow ? { border: { bottom: { style: 'single', size: Math.min(96, Math.round(spec.ruleBelow.widthPt * 8)), color: spec.ruleBelow.colour.replace('#', ''), space: Math.round(spec.ruleBelow.gapPt) } } } : {}),
         ...(heading ? { outlineLevel: Number(id.slice(-1)) - 1, keepNext: true } : {}),
         ...(id === 'Title' || id === 'Subtitle' ? { keepNext: true } : {})
       }

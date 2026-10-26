@@ -55,6 +55,14 @@ const FONT_FILES = {
 const NAMES = { roman: '55 Roman', italic: '56 Italic', bold: '75 Bold', black: '95 Black', bolditalic: '76 Bold Italic' }
 for (const file of readdirSync(`${folder}fonts`)) if (file !== 'README.md') rmSync(`${folder}fonts/${file}`)
 for (const [key, from] of Object.entries(FONT_FILES)) copyFileSync(from, `${folder}fonts/HelveticaNeueLTPro-${key}.otf`)
+// BC Sans, the open face www.unbc.ca sets its body text in, from the Province's own package.
+const BC_SANS = new URL('../../node_modules/@bcgov/bc-sans/', import.meta.url).pathname
+for (const face of ['Regular', 'Italic', 'Bold']) copyFileSync(`${BC_SANS}fonts/BCSans-${face}.woff`, `${folder}fonts/BCSans-${face}.woff`)
+copyFileSync(`${BC_SANS}LICENSE_OFL.txt`, `${folder}fonts/BCSans-OFL.txt`)
+const webFont = (face, weight = 400, style = 'normal') => ({
+  family: 'BC Sans', stack: '"BC Sans", "Helvetica Neue", Arial, sans-serif', office: 'Arial', weight, style,
+  file: `fonts/BCSans-${face}.woff`, web: `fonts/BCSans-${face}.woff`, label: `BC Sans ${face}, www.unbc.ca body text`
+})
 const font = (file, weight = 400, style = 'normal') => ({
   // Email and web pages can't count on the licensed face being installed, so they name Arial.
   family: 'Helvetica Neue LT Pro', consumerFamily: 'Arial', officialFamily: 'Helvetica Neue', stack: '"Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -117,14 +125,17 @@ const brand = {
     { id: 'overtheedge', label: 'Over the Edge', relationship: 'Independent student newspaper', note: 'Associated with the UNBC community; not a university department.' }
   ] },
   officialResources,
-  colours: { green: '#035642', gold: '#B79527', black: '#000000', white: '#FFFFFF', muted: '#4D4D4D', line: '#D9D9D9', light: '#F2F2F2' },
-  colourNames: { green: 'UNBC Green', gold: 'UNBC Gold', black: 'Black', white: 'White', muted: 'Document text grey', line: 'Document rule grey', light: 'Document panel grey' },
-  roles: { ink: 'black', paper: 'white', muted: 'muted', primary: 'green', light: 'light', reverse: 'white', line: 'line', rule: 'line' },
+  // The manual's green, gold, black and white, then the neutrals, text gold, link teal and deep
+  // green www.unbc.ca sets its pages in (measured October 2026, as the UNBC chrome and the NHHR
+  // Atlas use them), so documents read as the university's own pages do.
+  colours: { green: '#035642', gold: '#B79527', black: '#000000', white: '#FFFFFF', text: '#29292A', muted: '#525154', line: '#EAE7E5', light: '#F4F4F4', 'gold-text': '#977000', teal: '#006161', 'green-deep': '#00231A' },
+  colourNames: { green: 'UNBC Green', gold: 'UNBC Gold', black: 'Black', white: 'White', text: 'Text', muted: 'Muted text', line: 'Warm grey', light: 'Light grey', 'gold-text': 'Gold for text', teal: 'Link teal', 'green-deep': 'Deep green' },
+  roles: { ink: 'text', paper: 'white', muted: 'muted', primary: 'green', light: 'light', reverse: 'white', line: 'line', rule: 'line', link: 'teal', title: 'gold-text' },
   logoColours: ['green', 'black', 'white'], rasterColours: ['green', 'black', 'white'],
   print: { pantone: { green: '343 C / 3435 U', gold: '125 C / 117 U' }, cmyk: { green: 'C95 M15 Y62 K58', gold: 'C8 M31 Y100 K19' },
-    note: 'Official recipes: Graphics Standards Manual p. 8. Neutral document greys are local layout defaults, not additions to the official university palette. Gold is an accent and must never colour the logo. The secondary university palette is reserved for Communications and Marketing.' },
-  fonts: { body: font('roman'), regular: font('roman'), bold: font('bold', 700), display: font('bold', 700), displayRegular: font('roman'), label: font('roman'), italic: font('italic', 400, 'italic'), boldItalic: font('bolditalic', 700, 'italic'), black: font('black', 900) },
-  typography: { headlines: { family: 'Helvetica Neue LT Pro', weight: 700, trackingEm: 0 }, body: { family: 'Helvetica Neue LT Pro', weight: 400 }, labels: { family: 'Helvetica Neue LT Pro', weight: 400, trackingEm: 0, textTransform: 'none' }, note: 'Helvetica Neue is the official face (Graphics Standards Manual p. 9): 55 Roman for text, 75 Bold for headings, 95 Black for sub-logo department lines. Arial is the official alternative, and the face Word documents name.' },
+    note: 'Official recipes: Graphics Standards Manual p. 8. Text, the neutrals, gold for text, link teal and deep green are www.unbc.ca’s own web colours; gold for text is the darker gold unbc.ca sets page titles in, legible on white where the manual’s gold is not. Gold is an accent and must never colour the logo. The secondary university palette is reserved for Communications and Marketing.' },
+  fonts: { body: font('roman'), regular: font('roman'), bold: font('bold', 700), display: font('black', 900), displayRegular: font('roman'), label: font('roman'), italic: font('italic', 400, 'italic'), boldItalic: font('bolditalic', 700, 'italic'), black: font('black', 900), web: webFont('Regular'), webBold: webFont('Bold', 700), webItalic: webFont('Italic', 400, 'italic') },
+  typography: { headlines: { family: 'Helvetica Neue LT Pro', weight: 900, trackingEm: 0 }, body: { family: 'Helvetica Neue LT Pro', weight: 400 }, labels: { family: 'Helvetica Neue LT Pro', weight: 400, trackingEm: 0, textTransform: 'none' }, note: 'Helvetica Neue is the official face (Graphics Standards Manual p. 9): 55 Roman for text, 75 Bold for headings, 95 Black for sub-logo department lines. Arial is the official alternative, and the face Word documents name.' },
   symbol: { name: 'Complete official UNBC logo', viewBox, markup: artwork },
   signatures: [
     { id: 'official', label: 'Official full logo', use: 'Required for official documents and external audiences.', padding: 0, elements: [{ type: 'art', bounds: [0, 0, width, height], markup: artwork }] },
@@ -135,7 +146,7 @@ const brand = {
         { type: 'stack', id: 'department', x: round(subLogoLine.x), y: round(subLogoLine.y), items: [{ field: 'department', font: 'black', size: round(subLogoLine.size), leading: round(subLogoLine.leading), wrap: round(subLogoLine.wrap), openers: LOCKUP_LINE_OPENERS, role: 'logo' }] }
       ] }
   ],
-  departments: { label: 'Department', field: 'department', folder: 'sub-logos', colourways: ['green', 'black', 'white'], source: 'https://github.com/ahzs645/unbc-logo',
+  departments: { label: 'Department', emptyLabel: 'None: the full logo', field: 'department', folder: 'sub-logos', colourways: ['green', 'black', 'white'], source: 'https://github.com/ahzs645/unbc-logo',
     note: 'The department list and its line breaks come from the UNBC logo package. Names marked as matched break exactly as UNBC’s own sub-logo artwork does.',
     items: departmentItems },
   colourways: { green: { label: 'UNBC Green on white', all: 'green', ground: 'white' }, black: { label: 'Black for monochrome reproduction', all: 'black', ground: 'white' }, white: { label: 'White on UNBC Green', all: 'white', ground: 'green' } },
@@ -162,8 +173,11 @@ const brand = {
   documentation: {
     defaultPurpose: 'report', publishedPurposes: ['report', 'portfolio', 'brief'],
     margins: { topMm: 20, rightMm: 20, bottomMm: 20, leftMm: 20 },
-    typography: { title: { font: 'bold', sizePt: 30, lineHeight: 1.12 }, heading1: { font: 'bold', sizePt: 22 }, heading2: { font: 'bold', sizePt: 14 }, body: { font: 'body', sizePt: 10.5, lineHeight: 1.4 }, label: { font: 'label', sizePt: 8.5, trackingEm: 0 } },
-    logo: { widthMm: 55, clearSpaceMm: 8, options: { signature: 'official', colourway: 'green' } },
+    // Set as www.unbc.ca sets a page: a gold Helvetica Black title over a 6 px (4.5 pt) warm rule,
+    // Black headings in the text colour, and running heads as small bold capitals.
+    typography: { title: { font: 'display', sizePt: 30, lineHeight: 1.1, colour: 'gold-text', ruleBelow: { widthPt: 4.5, colour: 'line', gapPt: 8 } }, heading1: { font: 'display', sizePt: 20 }, heading2: { font: 'bold', sizePt: 13.5 }, body: { font: 'body', sizePt: 10.5, lineHeight: 1.4 }, label: { font: 'bold', sizePt: 8, trackingEm: 0.08, caps: true, colour: 'muted' } },
+    colours: { tableHeader: 'line', tableHeaderText: 'text' },
+    logo: { widthMm: 55, clearSpaceMm: 8, options: { signature: 'official', colourway: 'green' }, departmental: 'sub-logo' },
     affiliation: { mode: 'document-text', departmentSizePt: 12, subdepartmentSizePt: 10.5, lineHeight: 1.3, gapAfterMm: 5, maxCharacters: 180,
       note: 'Names in a document’s naming block are text. Their type sizes and page spacing are local report defaults; the Departments view sets a unit’s sub-logo.' },
     footer: { text: 'University of Northern British Columbia' },
@@ -189,7 +203,44 @@ const brand = {
     { name: 'Presentations and digital', title: 'Keep the same identity across applications', subtitle: 'Local slide and announcement layouts preserve the university logo.', elements: [nested('presentation-cover', 64, 260, 720, 405), nested('presentation-evidence', 64, 710, 430, 242), nested('social-post', 900, 260, 460, 460), gp('Four editable slide layouts. Keep figures at a readable size, explain the evidence and retain source captions.', 550, 750, 790, 28), gp('Official university templates are also included unchanged in official-templates/.', 550, 875, 790, 25)] },
     { name: 'Sources and production', title: 'Keep official sources alongside local applications', subtitle: 'Original resources hashes and reproducible generators.', elements: [gp('Original university resources: full logo EPS/GIF files, official website vector, Graphics Standards Manual, two letterheads, two document covers and the PowerPoint template.', 64, 285, 1250, 30), gp('Local additions: report, decision brief and brand portfolio models; editable Letter and A4 stationery; four slide layouts; social announcement and HTML email signature; this guide and the portable consumer profile.', 64, 470, 1250, 30), gp('Source differences are recorded in reference/PROVENANCE.json. The website logo uses #00573D; generated artwork retains every original path but uses the manual’s #035642. The manual’s gold RGB 183,149,39 agrees with #B79527; the website table’s 183,149,3 does not.', 64, 670, 1250, 26), gp('Rebuild with npm run make:unbc. Review fonts, pagination and source content before sharing a finished document.', 64, 885, 1250, 26)] }
   ] },
-  web: { componentName: 'UNBCLogo', symbolComponentName: 'UNBCFullLogo', cssPrefix: 'unbc', icons: false,
+  web: {
+    // The page anatomy of www.unbc.ca as the UNBC chrome and the NHHR Atlas measured it (October
+    // 2026): green masthead with the white sub-logo, gold Apply button, warm audience tabs, a gold
+    // Helvetica Black title over a 6 px warm rule, teal links, green calls to action, cards under a
+    // 4 px green rule, a warm aside closed by a gold bar, and the grey footer with the territory
+    // acknowledgement. Navigation, address and acknowledgement text are unbc.ca's own.
+    page: {
+      colours: { masthead: ['green', 'green-deep'], mastheadText: 'white', cta: 'gold-text', ctaText: 'white', title: 'gold-text', rule: 'line', link: 'teal', text: 'text', muted: 'muted', surface: 'light', warm: 'line', accent: 'green', asideBar: 'gold-text' },
+      fonts: { body: 'web', bold: 'webBold', italic: 'webItalic', display: 'display' },
+      logo: { signature: 'sub-logo', colourway: 'white', widthPx: 340, footer: { colourway: 'green', widthPx: 200 } },
+      cta: 'Apply to UNBC',
+      menu: ['Admissions', 'Programs and courses', 'Campus life', 'Indigenous', 'Research', 'About', 'myUNBC'],
+      tabs: ['Future students', 'Current students', 'Faculty and staff', 'Alumni', 'Donors'],
+      breadcrumbs: ['Home'],
+      content: {
+        title: 'University of Northern British Columbia',
+        eyebrow: 'About the department', headline: 'A short statement of what the unit does and for whom.',
+        lead: 'One or two sentences that tell a visitor why this page matters to them.',
+        body: 'Body copy in BC Sans at 16 px. Links are teal and underlined; keep paragraphs short and lead with the reader’s task.',
+        button: 'Primary action',
+        aside: { eyebrow: 'Key facts', title: 'A highlighted point or contact', body: 'Use the aside for a single fact, deadline or contact that a visitor should not miss.' },
+        sectionEyebrow: 'Find your starting point', sectionTitle: 'Explore the department',
+        cards: [
+          { title: 'Programs', body: 'What a student can study here, and how to start.', link: 'View programs' },
+          { title: 'Research', body: 'Current projects, labs and opportunities to take part.', link: 'Explore research' },
+          { title: 'People', body: 'Faculty, staff and how to reach them.', link: 'Find a contact' }
+        ],
+        table: { caption: 'Tables keep their source and period in the caption.', headers: ['Item', 'Detail', 'When'], rows: [['Information session', 'Room or online link', 'Date and time'], ['Application deadline', 'Program or intake', 'Date']] },
+        note: 'A web page template following www.unbc.ca. Replace the placeholder content; navigation, address and acknowledgement are the university’s own.'
+      },
+      footer: {
+        name: 'University of Northern British Columbia', lines: ['3333 University Way', 'Prince George, B.C.\u00a0 Canada\u00a0 V2N 4Z9'], phone: { label: 'Prince George campus phone:', number: '250-960-5555' },
+        acknowledgement: 'For thousands of years, Indigenous Peoples have walked gently on the diverse traditional territories where the University of Northern British Columbia community is grateful to live, work, learn, and play. We are committed to building and nurturing relationships with Indigenous Peoples and we acknowledge their traditional lands.',
+        links: ['Contact UNBC', 'Login', 'Careers', 'News', 'Library', 'Emergency'],
+        legal: ['Accessibility', 'Cookie notice', 'Privacy']
+      }
+    },
+    componentName: 'UNBCLogo', symbolComponentName: 'UNBCFullLogo', cssPrefix: 'unbc', icons: false,
     intro: { eyebrow: 'University of Northern British Columbia', headline: 'UNBC\nIdentity and documents', body: 'Official full-logo artwork and source guidance, with editable department names, research reports, decision briefs and a brand portfolio.', edition: 'Kit v{displayVersion}', typeSample: 'Research and\ncommunication', footer: 'UNBC identity sources / local document applications' },
     landing: { eyebrow: 'University of Northern British Columbia', headline: 'UNBC identity\nand document resources', body: 'Explore source artwork, official standards and local document applications.', cta: 'Official UNBC resources', contactEyebrow: 'Source guidance', contactBody: 'unbc.ca/communications-and-marketing', footer: 'Official resources remain authoritative.' } },
   files: []
@@ -236,7 +287,7 @@ write('reference/identity-rules.json', json(rules))
 for (const colourway of ['green', 'black', 'white']) write(`reference/logo-${colourway}.svg`, logoDocument({ brand }, { signature: 'official', colourway }))
 
 write('reference/README.md', `# UNBC source record\n\nRetrieved ${retrieved}. The source of record is the [UNBC identity resource page](${SOURCES.guidance}) and its linked [February 2020 Graphics Standards Manual](${SOURCES.manual}).\n\nThe website SVG is original source artwork. Its path and polygon coordinates are preserved in the generated full logo; generated green is normalized from the website’s #00573D to the manual’s explicit #035642 recipe. EPS/GIF originals remain unchanged. The guide’s gold RGB 183,149,39 agrees with #B79527; the web table’s 183,149,3 is inconsistent.\n\nThe clear-space rule is official; the numeric ratio 16.05/434.89 is a conservative implementation measurement from this supplied artwork. Department/subdepartment font sizes, report margins and template layouts are local defaults. The department sub-logo construction (line position, size, leading and wrap width) is measured from UNBC’s own sub-logo artwork and kept in the UNBC logo package (https://github.com/ahzs645/unbc-logo), which this kit draws from.\n\n\`PROVENANCE.json\` records source URLs, retrieval date, archive members, hashes and transformations. \`identity-rules.json\` separates official guidance from implementation decisions. No logo lettering is retyped, isolated, rearranged or used to invent a new mark.\n`)
-write('fonts/README.md', `# UNBC typography\n\nThe official face is Helvetica Neue; Arial is the official alternative (Graphics Standards Manual p. 9). The kit sets its artwork, templates and guide in Helvetica Neue LT Pro: 55 Roman, 56 Italic, 75 Bold, 76 Bold Italic and 95 Black, the last for sub-logo department lines.\n\nThe Roman, Italic, Bold and Black files are the ones the [UNBC logo package](https://github.com/ahzs645/unbc-logo) builds from its Helvetica Neue LT Pro package (kerning restored, a ligature table added to Black); Bold Italic is the package's own file. \`npm run make:unbc\` copies them from \`vendor/unbc-logo/fonts\`. They are licensed commercial fonts, redistributed on the same basis as that package and the UNBCDoor sign generator. Their licence allows preview and print embedding only, so Word and PowerPoint files name Arial instead of embedding them.\n\n| File | SHA-256 |\n| --- | --- |\n${readdirSync(`${folder}fonts`).filter(name => name !== 'README.md').sort().map(file => `| ${file} | ${hash(`fonts/${file}`)} |`).join('\n')}\n`)
+write('fonts/README.md', `# UNBC typography\n\nThe official face is Helvetica Neue; Arial is the official alternative (Graphics Standards Manual p. 9). The kit sets its artwork, templates and guide in Helvetica Neue LT Pro: 55 Roman, 56 Italic, 75 Bold, 76 Bold Italic and 95 Black, the last for sub-logo department lines.\n\nThe Roman, Italic, Bold and Black files are the ones the [UNBC logo package](https://github.com/ahzs645/unbc-logo) builds from its Helvetica Neue LT Pro package (kerning restored, a ligature table added to Black); Bold Italic is the package's own file. \`npm run make:unbc\` copies them from \`vendor/unbc-logo/fonts\`. They are licensed commercial fonts, redistributed on the same basis as that package and the UNBCDoor sign generator. Their licence allows preview and print embedding only, so Word and PowerPoint files name Arial instead of embedding them.\n\nBC Sans Regular, Italic and Bold are the face www.unbc.ca sets its body text in, used here for web pages. They come unmodified from the Province of British Columbia's \`@bcgov/bc-sans\` package (2.1.2) under the SIL Open Font License (\`BCSans-OFL.txt\`).\n\n| File | SHA-256 |\n| --- | --- |\n${readdirSync(`${folder}fonts`).filter(name => name !== 'README.md').sort().map(file => `| ${file} | ${hash(`fonts/${file}`)} |`).join('\n')}\n`)
 write('official-templates/README.md', `# Original UNBC templates\n\nThese files are the university-supplied originals linked from [UNBC branded templates](${SOURCES.templates}), retrieved ${retrieved}. They are retained without edits. They are distinct from the local document applications generated by this kit.\n\n${officialTemplates.map(([file, title]) => `- [${title}](${file}) — [official source](${BASE}${file})`).join('\n')}\n\nSource sizes and SHA-256 hashes are in \`../reference/PROVENANCE.json\`.\n`)
 write('docs/README.md', `# UNBC identity and document applications\n\nThis kit preserves the official full UNBC logo and records the published identity rules. It adds editable department/subdepartment document metadata, ${brand.templates.length} native templates, ten Word stationery/report starters, a four-layout PowerPoint presentation, an HTML email signature, shared research report/decision brief/brand portfolio publications in Letter and A4, and nine guide pages.\n\nUse **Documents** for flowing report content, tables, figures and maintained Word masters. Use **Templates** for stationery, slide and social layouts. **Brand portfolio** documents distinguish the university, units, initiatives and independent organizations. The existing SPARK Lab and Over the Edge identities are linked with explicit relationship notes.\n\n## Naming and logo rules\n\n**Departments** sets a unit's sub-logo: the full logo with the unit's name under it in Helvetica Neue 95 Black, built as UNBC's own sub-logos and the door signs are, from the same UNBC logo package. Pick one of ${brand.departments.items.length} units or type a name; the kit also includes every listed unit's sub-logo in green, black and white. The department and subdepartment fields carry the same names into documents as ordinary text.\n\nThe full logo is at least 38.1 mm wide. Keep its proportions and the B/N top difference clear on every side. Green appears on white; black is for black-only reproduction on white/light ground; white is preferably on UNBC Green. Gold is an accent only. No tiny favicons, separated lettermark, crest patterns or arbitrary logo colours are generated.\n\n## Editable outputs and source files\n\n- Letter and A4: letterhead, continuation, memorandum, research report, decision brief, brand portfolio.\n- Presentations: cover, section, content and evidence layouts.\n- Digital: social announcement and HTML email signature.\n- Original university templates are retained separately in \`official-templates/\`.\n- Official resources, hashes and source discrepancies: \`reference/\`.\n- All new page layouts are local applications; original university template files remain unchanged.\n\nArtwork, previews and PDFs are set in Helvetica Neue LT Pro. Word and PowerPoint request Arial, the university’s documented alternative, because the font’s licence does not allow embedding in editable files.\n\nRebuild the definition and guides with \`npm run make:unbc\`, then \`npm run make:documentation\`.\n`)
 

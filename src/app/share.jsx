@@ -9,6 +9,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { BrandLogo, Field, Segmented } from './ui.jsx'
 import { hasDepartments } from './affiliation.js'
+import { hasWebPage } from '../engine/webpage.js'
 
 export const isSharedView = () => new URLSearchParams(globalThis.location?.search ?? '').has('share')
 
@@ -17,8 +18,8 @@ export const Shared = createContext(false)
 export const useShared = () => useContext(Shared)
 
 // What a shared view offers, and where its link can open.
-export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'organization', 'patterns', 'templates', 'documents', 'guide', 'motion', 'kit']
-const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', organization: 'Departments', patterns: 'Patterns', templates: 'Templates', documents: 'Documents', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
+export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'organization', 'patterns', 'templates', 'web', 'documents', 'guide', 'motion', 'kit']
+const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', organization: 'Departments', patterns: 'Patterns', templates: 'Templates', web: 'Web', documents: 'Documents', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
 
 export const shareUrl = (brandId, view = 'overview') => {
   const url = new URL(import.meta.env.BASE_URL, globalThis.location.origin)
@@ -89,7 +90,7 @@ export const ShareDialog = ({ brand, shareable, edited, revision, view, onClose 
         {shareable ? (
           <>
             <Field label="Opens on">
-              <Segmented label="Opens on" value={start} options={SHARED_VIEWS.filter((value) => (value !== 'motion' || brand.motion?.page) && (value !== 'organization' || hasDepartments(brand))).map((value) => ({ value, label: START_LABELS[value] }))} onChange={setStart} />
+              <Segmented label="Opens on" value={start} options={SHARED_VIEWS.filter((value) => (value !== 'motion' || brand.motion?.page) && (value !== 'organization' || hasDepartments(brand)) && (value !== 'web' || hasWebPage(brand))).map((value) => ({ value, label: START_LABELS[value] }))} onChange={setStart} />
             </Field>
             <div className="share-link">
               <input type="text" readOnly value={link} aria-label="Share link" onFocus={(event) => event.target.select()} />

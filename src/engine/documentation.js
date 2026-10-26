@@ -90,8 +90,19 @@ const faceStyle = (brand, key, defaults, override = {}) => {
     sizePt: positive(override.sizePt, defaults.sizePt, `${font} sizePt`),
     lineHeight: positive(override.lineHeight, defaults.lineHeight ?? 1.4, `${font} lineHeight`),
     spaceAfterPt: nonnegative(override.spaceAfterPt, defaults.spaceAfterPt ?? 6, `${font} spaceAfterPt`),
-    trackingEm: Number.isFinite(override.trackingEm) ? override.trackingEm : defaults.trackingEm ?? 0
+    trackingEm: Number.isFinite(override.trackingEm) ? override.trackingEm : defaults.trackingEm ?? 0,
+    // Optional house styles: a colour other than the ink, capitals, and a rule under the line
+    // (UNBC's gold page title over a warm rule). Colours are brand keys or roles.
+    ...(override.colour ? { colour: hexOf(brand, override.colour, `${font} colour`) } : {}),
+    ...(override.caps ? { caps: true } : {}),
+    ...(override.ruleBelow ? { ruleBelow: { widthPt: positive(override.ruleBelow.widthPt, 1, `${font} ruleBelow widthPt`), colour: hexOf(brand, override.ruleBelow.colour ?? 'line', `${font} ruleBelow colour`), gapPt: nonnegative(override.ruleBelow.gapPt, 6, `${font} ruleBelow gapPt`) } } : {})
   }
+}
+
+const hexOf = (brand, key, label) => {
+  const value = colour(brand, brand.roles?.[key] ?? key)
+  if (!/^#[0-9a-f]{6}$/i.test(value ?? '')) throw new TypeError(`Document ${label} must resolve to a six-digit hex colour.`)
+  return value
 }
 
 const preferredLogo = (brand, override = {}) => {
@@ -114,8 +125,12 @@ const preferredLogo = (brand, override = {}) => {
   const minimumClearSpaceMm = Math.max(0, Number(brand.logoPolicy?.clearSpaceRatio) || 0) * widthMm
   const stem = `${selected.key}-${selectedPaint.id}`
   const status = statusOf(brand)
+  // A brand that sets department sub-logos can put the named department's on the cover instead
+  // of the plain logo with the name as text.
+  const departmental = override.departmental
+  if (departmental && !brand.signatures?.some((entry) => entry.id === departmental && entry.departmental)) throw new TypeError('The document sub-logo must be one of the brand’s departmental signatures.')
   return {
-    options, widthMm, minimumWidthMm,
+    options, ...(departmental ? { departmental } : {}), widthMm, minimumWidthMm,
     // Layout spacing supplements the native artwork padding; the quoted identity rule remains
     // authoritative. It is not a claim that an arbitrary 8 mm equals every brand's clear space.
     clearSpaceMm: Math.max(minimumClearSpaceMm, nonnegative(override.clearSpaceMm, 8, 'logo clearSpaceMm')),
@@ -186,7 +201,7 @@ export const documentProfile = (brand, { paper = 'letter' } = {}) => {
     label: faceStyle(brand, 'label', { sizePt: 8.5, lineHeight: 1.3, spaceAfterPt: 6, trackingEm: brand.typography?.labels?.trackingEm ?? 0 }, type.label),
     footer: faceStyle(brand, 'label', { sizePt: 8, lineHeight: 1.2, spaceAfterPt: 0 }, type.footer)
   }
-  const colourRoles = { ink: 'ink', muted: 'muted', accent: 'primary', paper: 'paper', light: 'light', line: 'line', reverse: 'reverse' }
+  const colourRoles = { ink: 'ink', muted: 'muted', accent: 'primary', paper: 'paper', light: 'light', line: 'line', reverse: 'reverse', tableHeader: 'ink', tableHeaderText: 'reverse' }
   const colours = Object.fromEntries(Object.entries(colourRoles).map(([key, role]) => {
     // Resolve semantic roles explicitly: a palette's name "Ink" need not be its text role.
     const value = colour(brand, override.colours?.[key] ?? brand.roles?.[role] ?? role)

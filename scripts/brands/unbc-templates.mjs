@@ -1,6 +1,6 @@
-// Local UNBC document applications. Dimensions and text hierarchy below are kit defaults,
-// not the official departmental sub-logo formula (UNBC does not publish such a formula).
-// The complete university logo remains separate from editable affiliation fields.
+// Local UNBC document applications. Dimensions and text hierarchy below are kit defaults; the
+// type follows www.unbc.ca: Helvetica Black titles (gold on covers, over a 6 px warm rule), small
+// bold capitals for eyebrows, and teal for web addresses.
 
 const MM_PER_PT = 25.4 / 72
 const pt = value => value * MM_PER_PT
@@ -8,6 +8,8 @@ const bg = (fill = 'white') => ({ type: 'background', fill })
 const text = (id, value, x, y, points = 10.5, colour = 'ink', extra = {}) => ({ type: 'text', id, text: value, x, y, size: pt(points), font: 'body', colour, ...extra })
 const para = (id, value, x, y, width, points = 10.5, extra = {}) => ({ type: 'paragraph', id, text: value, x, y, width, size: pt(points), leading: pt(points * 1.4), font: 'body', colour: 'ink', ...extra })
 const logo = (x, y, width = 55, colourway = 'green') => ({ type: 'logo', x, y, width, signature: 'official', colourway })
+// A cover's eyebrow, as unbc.ca sets one: small bold capitals, tracked, in the muted grey.
+const eyebrow = (value, x, y, points = 9) => text(null, value, x, y, points, 'muted', { font: 'bold', caps: true, tracking: pt(points * 0.08) })
 const rule = (x1, x2, y, colour = 'line', strokeWidth = .25) => ({ type: 'line', x1, x2, y1: y, y2: y, stroke: colour, strokeWidth })
 const affiliation = (x, y, width, { departmentPt = 12, subdepartmentPt = 10.5, colour = 'ink' } = {}) => ({
   type: 'flow', x, y, items: [
@@ -41,29 +43,30 @@ export const unbcTemplates = () => {
       text('author', '[Name]', 20, h - 48), text('author-role', '[Role]', 20, h - 41, 10.5, 'muted'), ...footer(w, h)
     ])
     add('continuation', 'Continuation sheet', [...compactHeader,
-      para('continued-heading', '[Section heading]', 20, 84, w - 40, 18, { font: 'bold', maxLines: 2 }),
+      para('continued-heading', '[Section heading]', 20, 84, w - 40, 18, { font: 'display', maxLines: 2 }),
       para('continued-content', '[Continue the document here. Word output keeps this text editable and allows it to flow across pages.]', 20, 98, w - 40, 10.5, { maxLines: 27 }), ...footer(w, h)
     ])
     add('memo', 'Memorandum', [...header,
-      text(null, 'Memorandum', 20, 97, 22, 'ink', { font: 'bold' }),
+      text(null, 'Memorandum', 20, 97, 22, 'ink', { font: 'display' }),
       text('memo-to', '[To]', 20, 112), text('memo-from', '[From]', 20, 122), text('memo-date', '[Date]', 20, 132),
       para('memo-subject', '[Subject]', 20, 150, w - 40, 15, { font: 'bold', maxLines: 2 }),
       para('memo-body', '[State the purpose, the supporting information and any decision or action requested.]', 20, 173, w - 40, 10.5, { maxLines: 14 }), ...footer(w, h)
     ])
     add('report-cover', 'Research report cover', [bg(), logo(20, 20, 65), affiliation(20, 52, w - 40),
-      text(null, 'Research report', 20, 103, 11, 'green', { font: 'bold' }),
-      para('report-title', '[Report title]', 20, 126, w - 40, 30, { font: 'bold', maxLines: 3, leading: pt(35) }),
+      eyebrow('Research report', 20, 103),
+      para('report-title', '[Report title]', 20, 126, w - 40, 30, { font: 'display', colour: 'gold-text', maxLines: 3, leading: pt(35) }),
+      rule(20, w - 20, 163, 'line', 1.6),
       para('report-subtitle', '[Question, scope and reporting period]', 20, 174, w - 40, 13, { maxLines: 3 }),
       text('author', '[Prepared by]', 20, h - 62, 11), text('document-date', '[Date]', 20, h - 51, 10.5, 'muted'), ...footer(w, h)
     ])
     add('report-page', 'Research report content', [...compactHeader,
-      para('report-section', '[Section heading]', 20, 84, w - 40, 22, { font: 'bold', maxLines: 2 }),
+      para('report-section', '[Section heading]', 20, 84, w - 40, 22, { font: 'display', maxLines: 2 }),
       para('report-body', '[Describe the research question, methods, findings and limitations. Connect each conclusion to its evidence.]', 20, 103, w - 40, 10.5, { maxLines: 17 }),
       text('evidence-label', '[Evidence or figure caption]', 20, h - 77, 9, 'muted'),
       para('evidence-source', '[Source and access or capture date]', 20, h - 66, w - 40, 8.5, { colour: 'muted', maxLines: 3 }), ...footer(w, h)
     ])
     add('brief', 'Decision brief', [...compactHeader,
-      para('brief-title', '[Decision title]', 20, 84, w - 40, 22, { font: 'bold', maxLines: 2 }),
+      para('brief-title', '[Decision title]', 20, 84, w - 40, 22, { font: 'display', maxLines: 2 }),
       text(null, 'Decision requested', 20, 105, 12, 'green', { font: 'bold' }),
       para('decision', '[State the specific decision and why it is needed.]', 20, 115, w - 40, 10.5, { maxLines: 4 }),
       text(null, 'Evidence and options', 20, 147, 12, 'green', { font: 'bold' }),
@@ -72,13 +75,14 @@ export const unbcTemplates = () => {
       para('recommendation', '[Give the recommendation, its rationale and the next action.]', 20, 210, w - 40, 10.5, { maxLines: 5 }), ...footer(w, h)
     ])
     add('portfolio-cover', 'Brand portfolio cover', [bg(), logo(20, 20, 65), affiliation(20, 52, w - 40),
-      text(null, 'Brand portfolio', 20, 103, 11, 'green', { font: 'bold' }),
-      para('portfolio-title', '[Portfolio title]', 20, 126, w - 40, 30, { font: 'bold', maxLines: 3, leading: pt(35) }),
+      eyebrow('Brand portfolio', 20, 103),
+      para('portfolio-title', '[Portfolio title]', 20, 126, w - 40, 30, { font: 'display', colour: 'gold-text', maxLines: 3, leading: pt(35) }),
+      rule(20, w - 20, 163, 'line', 1.6),
       para('portfolio-subtitle', '[Units, initiatives and relationships included in this portfolio]', 20, 174, w - 40, 13, { maxLines: 3 }),
       text('author', '[Prepared by]', 20, h - 62, 11), text('document-date', '[Date]', 20, h - 51, 10.5, 'muted'), ...footer(w, h)
     ])
     add('portfolio-page', 'Brand portfolio entry', [...compactHeader,
-      para('portfolio-entry', '[Unit or initiative name]', 20, 84, w - 40, 22, { font: 'bold', maxLines: 2 }),
+      para('portfolio-entry', '[Unit or initiative name]', 20, 84, w - 40, 22, { font: 'display', maxLines: 2 }),
       text(null, 'Purpose and audience', 20, 106, 12, 'green', { font: 'bold' }),
       para('portfolio-purpose', '[Describe this unit or initiative and the people it serves.]', 20, 117, w - 40, 10.5, { maxLines: 4 }),
       text(null, 'Relationship to the university', 20, 151, 12, 'green', { font: 'bold' }),
@@ -98,15 +102,15 @@ export const unbcTemplates = () => {
   const slideBase = { width: 338.667, height: 190.5, unit: 'mm', physical: ['338.667mm', '190.5mm'], raster: 1920, group: 'Presentations', extension: 'unbc-document-applications', description: sourceNote }
   const slide = (id, label, elements) => templates.push({ id: `presentation-${id}`, label, title: `{name} / ${label}`, ...slideBase, elements })
   slide('cover', 'Presentation cover', [bg('green'), logo(20, 18, 80, 'white'), affiliation(20, 61, 298, { departmentPt: 16, subdepartmentPt: 14, colour: 'white' }),
-    para('deck-title', '[Presentation title]', 20, 120, 298, 36, { font: 'bold', colour: 'white', leading: pt(43), maxLines: 3 }),
+    para('deck-title', '[Presentation title]', 20, 120, 298, 36, { font: 'display', colour: 'white', leading: pt(43), maxLines: 3 }),
     text('presenter', '[Presenter and date]', 20, 174, 16, 'white')])
-  slide('section', 'Presentation section', [bg(), logo(20, 18, 65), text('section-number', '[01]', 20, 70, 20, 'green', { font: 'bold' }),
-    para('section-title', '[Section title]', 20, 97, 298, 36, { font: 'bold', leading: pt(43), maxLines: 3 }),
+  slide('section', 'Presentation section', [bg(), logo(20, 18, 65), text('section-number', '[01]', 20, 70, 20, 'gold-text', { font: 'display' }),
+    para('section-title', '[Section title]', 20, 97, 298, 36, { font: 'display', leading: pt(43), maxLines: 3 }),
     para('section-summary', '[Explain the question or finding for this section.]', 20, 153, 298, 18, { maxLines: 2 })])
-  slide('content', 'Presentation content', [bg(), logo(20, 14, 55), para('slide-title', '[Slide title]', 20, 53, 298, 28, { font: 'bold', maxLines: 2 }),
+  slide('content', 'Presentation content', [bg(), logo(20, 14, 55), para('slide-title', '[Slide title]', 20, 53, 298, 28, { font: 'display', maxLines: 2 }),
     para('slide-body', '[Key finding]\n[Supporting evidence]\n[Implication or next step]', 20, 91, 280, 21, { leading: pt(31), maxLines: 7 }),
     text('slide-source', '[Source]', 20, 179, 10, 'muted')])
-  slide('evidence', 'Presentation evidence', [bg(), logo(20, 14, 55), para('slide-title', '[Evidence title]', 20, 53, 298, 28, { font: 'bold', maxLines: 2 }),
+  slide('evidence', 'Presentation evidence', [bg(), logo(20, 14, 55), para('slide-title', '[Evidence title]', 20, 53, 298, 28, { font: 'display', maxLines: 2 }),
     { type: 'rect', x: 20, y: 77, width: 181, height: 80, fill: 'light', stroke: 'line', strokeWidth: .3 },
     text(null, '[Insert a figure or screenshot]', 110.5, 118, 14, 'muted', { anchor: 'middle' }),
     para('evidence-explanation', '[Explain what this evidence shows and how it supports the conclusion.]', 215, 86, 104, 17, { maxLines: 8 }),
@@ -117,9 +121,9 @@ export const unbcTemplates = () => {
   const px = (id, label, width, height, elements) => templates.push({ id, label, title: `{name} / ${label}`, width, height, raster: width, group: 'Digital applications', extension: 'unbc-document-applications', description: sourceNote, elements })
   px('social-post', 'Social announcement', 1080, 1080, [bg(), logo(74, 74, 460),
     { ...affiliation(74, 252, 932), items: [{ id: 'department', text: '', size: 20, leading: 26, wrap: 932, font: 'bold', colour: 'ink' }, { id: 'subdepartment', text: '', size: 18, leading: 24, gap: 32, wrap: 932, font: 'body', colour: 'ink' }] },
-    { ...para('announcement-title', '[Announcement title]', 74, 500, 932), size: 72, leading: 86, font: 'bold', maxLines: 3 },
+    { ...para('announcement-title', '[Announcement title]', 74, 500, 932), size: 72, leading: 86, font: 'display', maxLines: 3 },
     { ...para('announcement-detail', '[Relevant event or project details]', 74, 830, 932), size: 30, leading: 43, maxLines: 3 },
-    text('announcement-link', '[Web address]', 74, 1003, 62, 'green')])
+    text('announcement-link', '[Web address]', 74, 1003, 62, 'teal')])
   // Email export's left artwork pane uses an untouched full logo; contact details stay text.
   px('email-signature', 'Email signature', 1000, 540, [bg(), logo(24, 50, 290),
     { type: 'line', x1: 350, x2: 350, y1: 30, y2: 510, stroke: 'line', strokeWidth: 1 },
@@ -129,7 +133,7 @@ export const unbcTemplates = () => {
       { id: 'department', text: '', size: 20, leading: 27, gap: 34, font: 'bold', colour: 'ink', wrap: 586 },
       { id: 'subdepartment', text: '', size: 18, leading: 25, gap: 31, font: 'body', colour: 'ink', wrap: 586 },
       { id: 'contact-email', text: '[Email]', size: 18, leading: 25, gap: 37, font: 'body', colour: 'ink', wrap: 586 },
-      { id: 'contact-website', text: '[Web address]', size: 18, leading: 25, gap: 30, font: 'body', colour: 'green', wrap: 586 }
+      { id: 'contact-website', text: '[Web address]', size: 18, leading: 25, gap: 30, font: 'body', colour: 'teal', wrap: 586 }
     ] }])
   documents.push({ id: 'email-signature', label: 'Email signature', format: 'html', template: 'email-signature', emailLayout: { compactArtwork: true } })
   return { templates, sets, documents }

@@ -87,15 +87,21 @@ const figureSize = (profile, block, image) => {
   const fit = Number.isFinite(ratio) && ratio > 0 ? ratio : 4 / 3
   return { width: Math.min(width, maxHeight * fit), height: Math.min(maxHeight, width / fit) }
 }
-const logoOf = (ctx, profile) => {
+const logoOf = (ctx, profile, affiliation) => {
   if (profile.logo?.hidden) return null
-  const svg = sanitizeSvg(logoDocument({ ...ctx, outline: true }, profile.logo?.options ?? {}))
+  // Named for a department, a brand with sub-logos puts the department's on the cover; its name
+  // is then in the logo, not repeated as text.
+  const field = ctx.brand.departments?.field
+  const unit = Boolean(profile.logo?.departmental && field && affiliation?.department)
+  const options = unit ? { signature: profile.logo.departmental, colourway: profile.logo.options?.colourway } : profile.logo?.options ?? {}
+  const svg = sanitizeSvg(logoDocument({ ...ctx, outline: true, ...(unit ? { values: { ...ctx.values, [field]: affiliation.department } } : {}) }, options))
   // The full mark belongs on the cover, where its minimum size is respected.
   // Continuation headers use native text instead of shrinking a logo below it.
   const width = Math.min(contentWidth(profile), Math.max(ctx.brand.lockup?.minimumHorizontalWidthMm ?? 0, profile.logo?.minimumWidthMm ?? 0, profile.logo?.widthMm ?? 40))
   const spacing = Number(profile.logo?.clearSpaceMm ?? 6)
   const clearSpaceMm = Math.max(Math.max(0, Number(ctx.brand.logoPolicy?.clearSpaceRatio) || 0) * width, Number.isFinite(spacing) ? Math.max(0, Math.min(100, spacing)) : 6)
-  return { svg, width, height: width / svgAspect(svg), clearSpaceMm, alt: profile.logo?.alt ?? `${ctx.brand.name} logo` }
+  const alt = profile.logo?.alt ?? `${ctx.brand.name} logo`
+  return { svg, width, height: width / svgAspect(svg), clearSpaceMm, unit, alt: unit ? `${alt}, ${affiliation.department}` : alt }
 }
 
 /** Native Word publication. All text, lists, headings and tables remain editable. */
@@ -105,7 +111,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
   const d = await import('docx')
   const { Document, Packer, Paragraph, TextRun, Header, Footer, ImageRun, Table, TableRow, TableCell, TableLayoutType, WidthType, BorderStyle, AlignmentType, PageNumber, Tab, TabStopType, SectionType, LevelFormat, HeightRule, VerticalAlignTable } = d
-  const logo = logoOf(ctx, profile)
+  const logo = logoOf(ctx, profile, publication.affiliation)
   if (logo && typeof png !== 'function') throw new Error('A PNG renderer is required to put the brand logo in Word.')
   const logoBytes = logo ? await png(logo.svg, Math.round(logo.width * 200 / 25.4)) : null
   const printableWidth = contentWidth(profile)
@@ -127,8 +133,8 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     const border = { style: BorderStyle.SINGLE, size: 4, color: hex(profile.colours.line, 'D9D9D9') }
     const rowOf = (row, isHeader, index) => new TableRow({ tableHeader: isHeader, cantSplit: true, children: widths.map((width, column) => new TableCell({
       width: { size: width, type: WidthType.DXA }, margins: { top: 100, bottom: 100, left: 110, right: 110 },
-      shading: { fill: isHeader ? hex(profile.colours.ink) : index % 2 ? hex(profile.colours.light, 'F5F5F5') : hex(profile.colours.paper, 'FFFFFF') },
-      children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), isHeader ? { bold: true, color: hex(profile.colours.reverse, 'FFFFFF') } : {}) })]
+      shading: { fill: isHeader ? hex(profile.colours.tableHeader ?? profile.colours.ink) : index % 2 ? hex(profile.colours.light, 'F5F5F5') : hex(profile.colours.paper, 'FFFFFF') },
+      children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), isHeader ? { bold: true, color: hex(profile.colours.tableHeaderText ?? profile.colours.reverse, 'FFFFFF') } : {}) })]
     })) })
     return [new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(printableWidth), type: WidthType.DXA }, columnWidths: widths,
       borders: { top: border, bottom: border, left: border, right: border, insideHorizontal: border, insideVertical: border },
@@ -173,7 +179,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
       transformation: { width: Math.round(logo.width * 96 / 25.4), height: Math.round(logo.height * 96 / 25.4) }, altText: { name: logo.alt, title: logo.alt, description: logo.alt } })] }))
     if (index === 0 && publication.affiliation?.department) {
       const { department, subdepartment } = publication.affiliation
-      children.push(paragraph(department, 'AffiliationDepartment', { keepNext: true, ...(!subdepartment ? { spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } } : {}) }))
+      if (!logo?.unit) children.push(paragraph(department, 'AffiliationDepartment', { keepNext: true, ...(!subdepartment ? { spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } } : {}) }))
       if (subdepartment) children.push(paragraph(subdepartment, 'AffiliationSubdepartment', { keepNext: true, spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } }))
     }
     for (const block of pageBlocks(page)) children.push(...await blockChildren(block, ++listId))
@@ -200,7 +206,7 @@ export const publicationHtml = (ctx, publication) => {
   validate(ctx, publication)
   const profile = profileOf(ctx, publication)
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
-  const logo = logoOf(ctx, profile)
+  const logo = logoOf(ctx, profile, publication.affiliation)
   const fontRules = []
   const seen = new Set()
   for (const item of officeStyleFonts(ctx.brand, profile)) {
@@ -215,7 +221,9 @@ export const publicationHtml = (ctx, publication) => {
   const typographyCss = Object.entries(STYLE_IDS).map(([token, id]) => {
     const spec = typeOf(profile, token)
     const face = officeFont(ctx.brand, spec.font, { weight: spec.weight, italic: spec.italic })
-    return `.s-${id}{font-family:${cssString(face.name)},sans-serif;font-size:${Number(spec.sizePt) || 11}pt;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};line-height:${Number(spec.lineHeight) || 1.3};margin:0 0 ${Number(spec.spaceAfterPt ?? 6)}pt;${/^Heading|Title|Subtitle/.test(id) ? 'break-after:avoid;' : ''}}`
+    const rule = spec.ruleBelow ? `padding-bottom:${spec.ruleBelow.gapPt}pt;border-bottom:${spec.ruleBelow.widthPt}pt solid #${hex(spec.ruleBelow.colour)};` : ''
+    const look = `${spec.colour ? `color:#${hex(spec.colour)};` : ''}${spec.caps ? 'text-transform:uppercase;' : ''}${spec.trackingEm ? `letter-spacing:${spec.trackingEm}em;` : ''}${rule}`
+    return `.s-${id}{font-family:${cssString(face.name)},sans-serif;font-size:${Number(spec.sizePt) || 11}pt;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};line-height:${Number(spec.lineHeight) || 1.3};margin:0 0 ${Number(spec.spaceAfterPt ?? 6)}pt;${look}${/^Heading|Title|Subtitle/.test(id) ? 'break-after:avoid;' : ''}}`
   }).join('\n')
   const blockHtml = (block) => {
     const style = styleOf(block)
@@ -238,13 +246,13 @@ export const publicationHtml = (ctx, publication) => {
   }
   const pages = publication.pages.map((page, index) => `<article class="page ${index ? 'continuation' : 'first-page'}" data-page-id="${escapeHtml(page.id ?? index)}">
 <header><p class="s-Header">${escapeHtml(index ? publication.title : profile.header?.text ?? ctx.brand.name)}</p></header>
-<main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm"><p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
+<main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department && !(logo?.unit && !publication.affiliation.subdepartment) ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm">${logo?.unit ? '' : `<p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>`}${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
 <footer class="s-Footer"><span>${escapeHtml([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  '))}</span><span>${index + 1}</span></footer>
 </article>`).join('\n')
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="${escapeHtml(ctx.brand.name)}">${sourceRevision ? `<meta name="brandkit-source-revision" content="${escapeHtml(sourceRevision)}">` : ''}<meta name="brandkit-font-requirements" content="${escapeHtml(JSON.stringify(officeFontRequirements(ctx, officeStyleFonts(ctx.brand, profile), { format: 'html' })))}"><title>${escapeHtml(publication.title ?? ctx.brand.name)}</title><style>
 ${fontRules.join('\n')}
 ${typographyCss}
 .affiliation{break-inside:avoid;break-after:avoid;overflow-wrap:anywhere}
-*{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}table{border-collapse:collapse;width:100%;margin:4mm 0}caption{caption-side:bottom;text-align:left;margin-top:3mm!important}td,th{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};padding:2mm;text-align:left;vertical-align:top}th{background:#${hex(profile.colours.ink)};color:#${hex(profile.colours.reverse, 'FFFFFF')};font-weight:700}tbody tr:nth-child(even){background:#${hex(profile.colours.light, 'F5F5F5')}}thead{display:table-header-group}tr{break-inside:avoid}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
+*{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}table{border-collapse:collapse;width:100%;margin:4mm 0}caption{caption-side:bottom;text-align:left;margin-top:3mm!important}td,th{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};padding:2mm;text-align:left;vertical-align:top}th{background:#${hex(profile.colours.tableHeader ?? profile.colours.ink)};color:#${hex(profile.colours.tableHeaderText ?? profile.colours.reverse, 'FFFFFF')};font-weight:700}tbody tr:nth-child(even){background:#${hex(profile.colours.light, 'F5F5F5')}}thead{display:table-header-group}tr{break-inside:avoid}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
 </style></head><body>${pages}</body></html>`
 }

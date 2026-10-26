@@ -396,8 +396,15 @@ product detail, screenshot/evidence, comparison and closing page kinds.
 ```
 
 Typography overrides select an existing font role and change `sizePt`, `lineHeight`,
-`spaceAfterPt` or `trackingEm`; family and weight remain those of the selected brand face.
-Logo `options` may select an existing family/layout or signature/colourway. Its width cannot
+`spaceAfterPt` or `trackingEm`; family and weight remain those of the selected brand face. A style
+may also take a `colour` (a colour key or role), `caps: true`, and `ruleBelow: { widthPt, colour,
+gapPt }`; Word styles and the print view both carry them. UNBC sets its title as unbc.ca sets a
+page title: `{ "font": "display", "colour": "gold-text", "ruleBelow": { "widthPt": 4.5, "colour":
+"line" } }`, with running heads as small tracked capitals. `colours.tableHeader` and
+`colours.tableHeaderText` colour table header rows (default: ink and reverse).
+Logo `options` may select an existing family/layout or signature/colourway; `logo.departmental`
+names a departmental signature to put on the cover when the document names a department, in
+place of the plain logo with the department as text (UNBC: `"sub-logo"`). Its width cannot
 fall below the brand's minimum. Extra layout spacing does not replace the existing identity
 clear-space rule. `header.text` and `footer.text` can set running text. Historical brands
 retain explicit reconstruction and modern-layout labels.
@@ -545,6 +552,16 @@ with anything uncited).
 - `icons`: `{ size, attrs, items: [{ id, content }] }`, drawn in `currentColor`.
 - `web`: React component names, CSS variable prefix, app icon and favicon settings, and the copy
   for the kit's index.html and landing template.
+- `web.page`: the brand's own website anatomy as components: `colours` (masthead gradient, call to
+  action, title, rule, link, text, muted, surface, warm, accent, aside bar), `fonts` (body, bold,
+  display), `logo` (the signature and colourway for the header, and for the footer), `cta`, `menu`,
+  `tabs`, `breadcrumbs`, sample `content` (intro, button, aside, cards, table, note) and `footer`
+  (address, acknowledgement, links, legal links). `webComponents(ctx, { department })` returns
+  each component (header, tabs, title, breadcrumbs, intro, button, aside, cards, table, note,
+  footer, legal bar) as `{ id, label, use, html, css }` over shared custom-property tokens;
+  `webPage` composes them into a page. The app's **Web** tab previews each component and the page,
+  set for a department, and the kit carries `web/page-template.html` and `web/components/`. UNBC's
+  follow www.unbc.ca as the UNBC chrome and the NHHR Atlas measured it.
 - `files`: supplied files copied into the kit as they are (fonts, licences, documents).
   `{ "to": "README.md", "from": "docs/README.md" }` or a bare path.
 - `motion`: `{ page, css?, tokens, rules, studies }`. `page` is a self-contained HTML motion

@@ -13,6 +13,8 @@ import { buildKit, planKit } from '../src/engine/kit.js'
 import { documentProfile, publicationModel } from '../src/engine/documentation.js'
 import { loadBrandFontsFromDisk, readAssetFromDisk } from '../src/fonts/node.js'
 import { officeFile } from '../src/export/office.js'
+import { publicationDocx, publicationHtml } from '../src/export/publication.js'
+import { webComponentDocument, webComponents, webPage } from '../src/engine/webpage.js'
 
 const folder = new URL('../brands/unbc/', import.meta.url).pathname
 const read = file => readFileSync(`${folder}${file}`, 'utf8')
@@ -215,4 +217,54 @@ test('UNBC sub-logos break every department line as the UNBC logo package does',
   for (const item of brand.departments.items) {
     assert.deepEqual(item.values.department.split('\n'), splitDepartmentText(item.name), item.name)
   }
+})
+
+test('UNBC documents are set as unbc.ca pages are, with the department’s sub-logo on the cover', async () => {
+  const profile = documentProfile(brand)
+  assert.equal(profile.typography.title.colour, '#977000', 'gold page title')
+  assert.deepEqual(profile.typography.title.ruleBelow, { widthPt: 4.5, colour: '#EAE7E5', gapPt: 8 }, 'over a 6 px warm rule')
+  assert.equal(profile.typography.title.weight, 900)
+  assert.equal(profile.typography.label.caps, true)
+  assert.equal(profile.colours.ink, '#29292A')
+  assert.equal(profile.colours.tableHeader, '#EAE7E5')
+  const named = publicationModel(brand, { purpose: 'report', values: { department: 'Faculty of Environment', subdepartment: 'School of Planning and Sustainability' } })
+  const html = publicationHtml(ctx, named)
+  assert.match(html, /\.s-Title\{[^}]*color:#977000;[^}]*border-bottom:4\.5pt solid #EAE7E5/)
+  assert.match(html, /alt="[^"]*, Faculty of Environment"/, 'cover logo is the department sub-logo')
+  assert.doesNotMatch(html, /s-AffiliationDepartment">Faculty of Environment/, 'the department is not repeated as text')
+  assert.match(html, /s-AffiliationSubdepartment">School of Planning and Sustainability/)
+  const plain = publicationHtml(ctx, publicationModel(brand, { purpose: 'report' }))
+  assert.doesNotMatch(plain, /class="affiliation"/)
+  let drawn
+  const docx = unzipSync(await publicationDocx(ctx, named, { png: async svg => { drawn ??= svg; return new Uint8Array([137, 80, 78, 71]) } }))
+  assert.match(drawn, /aria-label="Faculty of Environment"/)
+  const styles = strFromU8(docx['word/styles.xml'])
+  assert.match(styles, /w:styleId="Title"[\s\S]*?w:color w:val="977000"/)
+  assert.doesNotMatch(strFromU8(docx['word/document.xml']), />Faculty of Environment</)
+})
+
+test('UNBC web page follows www.unbc.ca and carries the department sub-logo', async () => {
+  const html = webPage(ctx, { department: 'School of Business', fontUrl: file => `fonts:${file}` })
+  assert.match(html, /<h1>School of Business<\/h1>/, 'the department titles the page')
+  assert.match(html, /--unbc-title:#977000;--unbc-rule:#EAE7E5/, 'tokens from www.unbc.ca')
+  assert.match(html, /\.unbc-title h1\{[^}]*color:var\(--unbc-title\);[^}]*border-bottom:6px solid var\(--unbc-rule\)/)
+  assert.match(html, /--unbc-masthead-from:#035642;--unbc-masthead-to:#00231A/)
+  assert.match(html, /aria-label="School of Business"/, 'masthead sub-logo is set for the department')
+  assert.match(html, /url\("fonts:fonts\/BCSans-Regular\.woff"\)/)
+  assert.match(html, /traditional territories/)
+  assert.doesNotMatch(webPage(ctx), /aria-label="School of Business"/)
+  const components = webComponents(ctx, { department: 'School of Business' })
+  assert.deepEqual(components.map(item => item.id), ['header', 'tabs', 'title', 'breadcrumbs', 'intro', 'button', 'aside', 'cards', 'table', 'note', 'footer', 'legal'])
+  for (const component of components) {
+    assert.ok(html.includes(component.html), `${component.id} is part of the page`)
+    assert.ok(html.includes(component.css), `${component.id}'s styles are in the page`)
+    const alone = webComponentDocument(ctx, component.id, { department: 'School of Business' })
+    assert.ok(alone.includes(component.html) && alone.includes('--unbc-accent:#035642'), `${component.id} stands alone on the shared tokens`)
+  }
+  const { files } = await buildKit({ ...ctx, values: { department: 'School of Business' } }, { rasters: false, pdfs: false, office: false, readAsset: src => readAssetFromDisk(folder, src) })
+  const page = strFromU8(files.get('web/page-template.html'))
+  assert.match(page, /url\("\.\.\/fonts\/BCSans-Bold\.woff"\)/)
+  assert.ok(files.has('fonts/BCSans-Bold.woff'), 'the page’s fonts travel with it')
+  assert.match(strFromU8(files.get('web/components/components.css')), /url\("\.\.\/\.\.\/fonts\/BCSans-Regular\.woff"\)/)
+  assert.match(strFromU8(files.get('web/components/header.html')), /aria-label="School of Business"/)
 })

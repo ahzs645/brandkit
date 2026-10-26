@@ -8,6 +8,7 @@
 // documents (Word, PowerPoint, an HTML signature) draw their artwork as images, so they need the
 // renderer too.
 
+import { hasWebPage, webComponentDocument, webComponents, webPage, webStylesheet } from './webpage.js'
 import { logoDocument, pattern, icon, symbolDocument } from './artwork.js'
 import { fill, logoOptions, paintOptions } from './brand.js'
 import { guidePages, guideSheets } from './guide.js'
@@ -203,6 +204,14 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   add({ path: 'web/tokens.json', kind: 'text', make: (ctx) => json(tokens(ctx)) })
   add({ path: `web/${brand.web?.componentName ?? 'BrandLogo'}.tsx`, kind: 'text', make: reactComponent })
   add({ path: 'web/landing-template.html', kind: 'text', make: landingHtml })
+  // The brand's own page anatomy, set for the department chosen in the kit (fonts from ../fonts).
+  if (hasWebPage(brand)) {
+    const department = (ctx) => ctx.values?.[brand.departments?.field ?? 'department'] ?? ''
+    add({ path: 'web/page-template.html', kind: 'text', make: (ctx) => webPage(ctx, { department: department(ctx) }) })
+    // Each component on its own, and one stylesheet for them all, for a site that takes a part.
+    add({ path: 'web/components/components.css', kind: 'text', make: (ctx) => webStylesheet(ctx, { fontUrl: (file) => `../../${file}` }) })
+    for (const { id } of webComponents({ brand })) add({ path: `web/components/${id}.html`, kind: 'text', make: (ctx) => webComponentDocument(ctx, id, { department: department(ctx), fontUrl: (file) => `../../${file}` }) })
+  }
   if (rasters && brand.web?.icons !== false) {
     for (const size of [512, 1024]) add({ path: `web/app-icon-${size}.png`, kind: 'png', width: size, svg: appIconSvg })
     add({ path: 'web/apple-touch-icon.png', kind: 'png', width: 180, svg: appIconSvg })

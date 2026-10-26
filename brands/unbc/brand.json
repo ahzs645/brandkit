@@ -102,28 +102,38 @@
     "gold": "#B79527",
     "black": "#000000",
     "white": "#FFFFFF",
-    "muted": "#4D4D4D",
-    "line": "#D9D9D9",
-    "light": "#F2F2F2"
+    "text": "#29292A",
+    "muted": "#525154",
+    "line": "#EAE7E5",
+    "light": "#F4F4F4",
+    "gold-text": "#977000",
+    "teal": "#006161",
+    "green-deep": "#00231A"
   },
   "colourNames": {
     "green": "UNBC Green",
     "gold": "UNBC Gold",
     "black": "Black",
     "white": "White",
-    "muted": "Document text grey",
-    "line": "Document rule grey",
-    "light": "Document panel grey"
+    "text": "Text",
+    "muted": "Muted text",
+    "line": "Warm grey",
+    "light": "Light grey",
+    "gold-text": "Gold for text",
+    "teal": "Link teal",
+    "green-deep": "Deep green"
   },
   "roles": {
-    "ink": "black",
+    "ink": "text",
     "paper": "white",
     "muted": "muted",
     "primary": "green",
     "light": "light",
     "reverse": "white",
     "line": "line",
-    "rule": "line"
+    "rule": "line",
+    "link": "teal",
+    "title": "gold-text"
   },
   "logoColours": [
     "green",
@@ -144,7 +154,7 @@
       "green": "C95 M15 Y62 K58",
       "gold": "C8 M31 Y100 K19"
     },
-    "note": "Official recipes: Graphics Standards Manual p. 8. Neutral document greys are local layout defaults, not additions to the official university palette. Gold is an accent and must never colour the logo. The secondary university palette is reserved for Communications and Marketing."
+    "note": "Official recipes: Graphics Standards Manual p. 8. Text, the neutrals, gold for text, link teal and deep green are www.unbc.ca’s own web colours; gold for text is the darker gold unbc.ca sets page titles in, legible on white where the manual’s gold is not. Gold is an accent and must never colour the logo. The secondary university palette is reserved for Communications and Marketing."
   },
   "fonts": {
     "body": {
@@ -192,12 +202,12 @@
       "officialFamily": "Helvetica Neue",
       "stack": "\"Helvetica Neue LT Pro\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
       "office": "Arial",
-      "weight": 700,
+      "weight": 900,
       "style": "normal",
       "capHeight": 0.714,
-      "file": "fonts/HelveticaNeueLTPro-bold.otf",
-      "web": "fonts/HelveticaNeueLTPro-bold.otf",
-      "label": "Helvetica Neue LT Pro 75 Bold"
+      "file": "fonts/HelveticaNeueLTPro-black.otf",
+      "web": "fonts/HelveticaNeueLTPro-black.otf",
+      "label": "Helvetica Neue LT Pro 95 Black"
     },
     "displayRegular": {
       "family": "Helvetica Neue LT Pro",
@@ -263,12 +273,42 @@
       "file": "fonts/HelveticaNeueLTPro-black.otf",
       "web": "fonts/HelveticaNeueLTPro-black.otf",
       "label": "Helvetica Neue LT Pro 95 Black"
+    },
+    "web": {
+      "family": "BC Sans",
+      "stack": "\"BC Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/BCSans-Regular.woff",
+      "web": "fonts/BCSans-Regular.woff",
+      "label": "BC Sans Regular, www.unbc.ca body text"
+    },
+    "webBold": {
+      "family": "BC Sans",
+      "stack": "\"BC Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "office": "Arial",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/BCSans-Bold.woff",
+      "web": "fonts/BCSans-Bold.woff",
+      "label": "BC Sans Bold, www.unbc.ca body text"
+    },
+    "webItalic": {
+      "family": "BC Sans",
+      "stack": "\"BC Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "italic",
+      "file": "fonts/BCSans-Italic.woff",
+      "web": "fonts/BCSans-Italic.woff",
+      "label": "BC Sans Italic, www.unbc.ca body text"
     }
   },
   "typography": {
     "headlines": {
       "family": "Helvetica Neue LT Pro",
-      "weight": 700,
+      "weight": 900,
       "trackingEm": 0
     },
     "body": {
@@ -354,6 +394,7 @@
   ],
   "departments": {
     "label": "Department",
+    "emptyLabel": "None: the full logo",
     "field": "department",
     "folder": "sub-logos",
     "colourways": [
@@ -1494,7 +1535,7 @@
           "width": 175.9,
           "size": 6.35,
           "leading": 8.889999999999999,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -1615,7 +1656,7 @@
           "x": 20,
           "y": 97,
           "size": 7.76111111111111,
-          "font": "bold",
+          "font": "display",
           "colour": "ink"
         },
         {
@@ -1768,9 +1809,11 @@
           "text": "Research report",
           "x": 20,
           "y": 103,
-          "size": 3.880555555555555,
+          "size": 3.175,
           "font": "bold",
-          "colour": "green"
+          "colour": "muted",
+          "caps": true,
+          "tracking": 0.25399999999999995
         },
         {
           "type": "paragraph",
@@ -1781,9 +1824,18 @@
           "width": 175.9,
           "size": 10.583333333333332,
           "leading": 12.347222222222221,
-          "font": "bold",
-          "colour": "ink",
+          "font": "display",
+          "colour": "gold-text",
           "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 163,
+          "y2": 163,
+          "stroke": "line",
+          "strokeWidth": 1.6
         },
         {
           "type": "paragraph",
@@ -1924,7 +1976,7 @@
           "width": 175.9,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -2070,7 +2122,7 @@
           "width": 175.9,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -2237,9 +2289,11 @@
           "text": "Brand portfolio",
           "x": 20,
           "y": 103,
-          "size": 3.880555555555555,
+          "size": 3.175,
           "font": "bold",
-          "colour": "green"
+          "colour": "muted",
+          "caps": true,
+          "tracking": 0.25399999999999995
         },
         {
           "type": "paragraph",
@@ -2250,9 +2304,18 @@
           "width": 175.9,
           "size": 10.583333333333332,
           "leading": 12.347222222222221,
-          "font": "bold",
-          "colour": "ink",
+          "font": "display",
+          "colour": "gold-text",
           "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 163,
+          "y2": 163,
+          "stroke": "line",
+          "strokeWidth": 1.6
         },
         {
           "type": "paragraph",
@@ -2393,7 +2456,7 @@
           "width": 175.9,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -2738,7 +2801,7 @@
           "width": 170,
           "size": 6.35,
           "leading": 8.889999999999999,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -2859,7 +2922,7 @@
           "x": 20,
           "y": 97,
           "size": 7.76111111111111,
-          "font": "bold",
+          "font": "display",
           "colour": "ink"
         },
         {
@@ -3012,9 +3075,11 @@
           "text": "Research report",
           "x": 20,
           "y": 103,
-          "size": 3.880555555555555,
+          "size": 3.175,
           "font": "bold",
-          "colour": "green"
+          "colour": "muted",
+          "caps": true,
+          "tracking": 0.25399999999999995
         },
         {
           "type": "paragraph",
@@ -3025,9 +3090,18 @@
           "width": 170,
           "size": 10.583333333333332,
           "leading": 12.347222222222221,
-          "font": "bold",
-          "colour": "ink",
+          "font": "display",
+          "colour": "gold-text",
           "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 163,
+          "y2": 163,
+          "stroke": "line",
+          "strokeWidth": 1.6
         },
         {
           "type": "paragraph",
@@ -3168,7 +3242,7 @@
           "width": 170,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -3314,7 +3388,7 @@
           "width": 170,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -3481,9 +3555,11 @@
           "text": "Brand portfolio",
           "x": 20,
           "y": 103,
-          "size": 3.880555555555555,
+          "size": 3.175,
           "font": "bold",
-          "colour": "green"
+          "colour": "muted",
+          "caps": true,
+          "tracking": 0.25399999999999995
         },
         {
           "type": "paragraph",
@@ -3494,9 +3570,18 @@
           "width": 170,
           "size": 10.583333333333332,
           "leading": 12.347222222222221,
-          "font": "bold",
-          "colour": "ink",
+          "font": "display",
+          "colour": "gold-text",
           "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 163,
+          "y2": 163,
+          "stroke": "line",
+          "strokeWidth": 1.6
         },
         {
           "type": "paragraph",
@@ -3637,7 +3722,7 @@
           "width": 170,
           "size": 7.76111111111111,
           "leading": 10.865555555555554,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -3807,7 +3892,7 @@
           "width": 298,
           "size": 12.7,
           "leading": 15.169444444444443,
-          "font": "bold",
+          "font": "display",
           "colour": "white",
           "maxLines": 3
         },
@@ -3858,8 +3943,8 @@
           "x": 20,
           "y": 70,
           "size": 7.055555555555555,
-          "font": "bold",
-          "colour": "green"
+          "font": "display",
+          "colour": "gold-text"
         },
         {
           "type": "paragraph",
@@ -3870,7 +3955,7 @@
           "width": 298,
           "size": 12.7,
           "leading": 15.169444444444443,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 3
         },
@@ -3926,7 +4011,7 @@
           "width": 298,
           "size": 9.877777777777776,
           "leading": 13.828888888888887,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -3992,7 +4077,7 @@
           "width": 298,
           "size": 9.877777777777776,
           "leading": 13.828888888888887,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 2
         },
@@ -4103,7 +4188,7 @@
           "width": 932,
           "size": 72,
           "leading": 86,
-          "font": "bold",
+          "font": "display",
           "colour": "ink",
           "maxLines": 3
         },
@@ -4128,7 +4213,7 @@
           "y": 1003,
           "size": 21.87222222222222,
           "font": "body",
-          "colour": "green"
+          "colour": "teal"
         }
       ]
     },
@@ -4225,7 +4310,7 @@
               "leading": 25,
               "gap": 30,
               "font": "body",
-              "colour": "green",
+              "colour": "teal",
               "wrap": 586
             }
           ]
@@ -4479,17 +4564,23 @@
     },
     "typography": {
       "title": {
-        "font": "bold",
+        "font": "display",
         "sizePt": 30,
-        "lineHeight": 1.12
+        "lineHeight": 1.1,
+        "colour": "gold-text",
+        "ruleBelow": {
+          "widthPt": 4.5,
+          "colour": "line",
+          "gapPt": 8
+        }
       },
       "heading1": {
-        "font": "bold",
-        "sizePt": 22
+        "font": "display",
+        "sizePt": 20
       },
       "heading2": {
         "font": "bold",
-        "sizePt": 14
+        "sizePt": 13.5
       },
       "body": {
         "font": "body",
@@ -4497,10 +4588,16 @@
         "lineHeight": 1.4
       },
       "label": {
-        "font": "label",
-        "sizePt": 8.5,
-        "trackingEm": 0
+        "font": "bold",
+        "sizePt": 8,
+        "trackingEm": 0.08,
+        "caps": true,
+        "colour": "muted"
       }
+    },
+    "colours": {
+      "tableHeader": "line",
+      "tableHeaderText": "text"
     },
     "logo": {
       "widthMm": 55,
@@ -4508,7 +4605,8 @@
       "options": {
         "signature": "official",
         "colourway": "green"
-      }
+      },
+      "departmental": "sub-logo"
     },
     "affiliation": {
       "mode": "document-text",
@@ -5070,6 +5168,139 @@
     ]
   },
   "web": {
+    "page": {
+      "colours": {
+        "masthead": [
+          "green",
+          "green-deep"
+        ],
+        "mastheadText": "white",
+        "cta": "gold-text",
+        "ctaText": "white",
+        "title": "gold-text",
+        "rule": "line",
+        "link": "teal",
+        "text": "text",
+        "muted": "muted",
+        "surface": "light",
+        "warm": "line",
+        "accent": "green",
+        "asideBar": "gold-text"
+      },
+      "fonts": {
+        "body": "web",
+        "bold": "webBold",
+        "italic": "webItalic",
+        "display": "display"
+      },
+      "logo": {
+        "signature": "sub-logo",
+        "colourway": "white",
+        "widthPx": 340,
+        "footer": {
+          "colourway": "green",
+          "widthPx": 200
+        }
+      },
+      "cta": "Apply to UNBC",
+      "menu": [
+        "Admissions",
+        "Programs and courses",
+        "Campus life",
+        "Indigenous",
+        "Research",
+        "About",
+        "myUNBC"
+      ],
+      "tabs": [
+        "Future students",
+        "Current students",
+        "Faculty and staff",
+        "Alumni",
+        "Donors"
+      ],
+      "breadcrumbs": [
+        "Home"
+      ],
+      "content": {
+        "title": "University of Northern British Columbia",
+        "eyebrow": "About the department",
+        "headline": "A short statement of what the unit does and for whom.",
+        "lead": "One or two sentences that tell a visitor why this page matters to them.",
+        "body": "Body copy in BC Sans at 16 px. Links are teal and underlined; keep paragraphs short and lead with the reader’s task.",
+        "button": "Primary action",
+        "aside": {
+          "eyebrow": "Key facts",
+          "title": "A highlighted point or contact",
+          "body": "Use the aside for a single fact, deadline or contact that a visitor should not miss."
+        },
+        "sectionEyebrow": "Find your starting point",
+        "sectionTitle": "Explore the department",
+        "cards": [
+          {
+            "title": "Programs",
+            "body": "What a student can study here, and how to start.",
+            "link": "View programs"
+          },
+          {
+            "title": "Research",
+            "body": "Current projects, labs and opportunities to take part.",
+            "link": "Explore research"
+          },
+          {
+            "title": "People",
+            "body": "Faculty, staff and how to reach them.",
+            "link": "Find a contact"
+          }
+        ],
+        "table": {
+          "caption": "Tables keep their source and period in the caption.",
+          "headers": [
+            "Item",
+            "Detail",
+            "When"
+          ],
+          "rows": [
+            [
+              "Information session",
+              "Room or online link",
+              "Date and time"
+            ],
+            [
+              "Application deadline",
+              "Program or intake",
+              "Date"
+            ]
+          ]
+        },
+        "note": "A web page template following www.unbc.ca. Replace the placeholder content; navigation, address and acknowledgement are the university’s own."
+      },
+      "footer": {
+        "name": "University of Northern British Columbia",
+        "lines": [
+          "3333 University Way",
+          "Prince George, B.C.  Canada  V2N 4Z9"
+        ],
+        "phone": {
+          "label": "Prince George campus phone:",
+          "number": "250-960-5555"
+        },
+        "acknowledgement": "For thousands of years, Indigenous Peoples have walked gently on the diverse traditional territories where the University of Northern British Columbia community is grateful to live, work, learn, and play. We are committed to building and nurturing relationships with Indigenous Peoples and we acknowledge their traditional lands.",
+        "links": [
+          "Contact UNBC",
+          "Login",
+          "Careers",
+          "News",
+          "Library",
+          "Emergency"
+        ],
+        "legal": [
+          "Accessibility",
+          "Cookie notice",
+          "Privacy"
+        ]
+      }
+    },
     "componentName": "UNBCLogo",
     "symbolComponentName": "UNBCFullLogo",
     "cssPrefix": "unbc",
@@ -5102,6 +5333,10 @@
       "from": "docs/brand-details.html",
       "to": "guidelines/brand-details.html"
     },
+    "fonts/BCSans-Bold.woff",
+    "fonts/BCSans-Italic.woff",
+    "fonts/BCSans-OFL.txt",
+    "fonts/BCSans-Regular.woff",
     "fonts/HelveticaNeueLTPro-black.otf",
     "fonts/HelveticaNeueLTPro-bold.otf",
     "fonts/HelveticaNeueLTPro-bolditalic.otf",

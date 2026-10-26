@@ -26,8 +26,8 @@ The examples support US Letter and A4. This profile uses US Letter (215.9 × 279
 
 | Style | Family | Weight | Size | Line height |
 | --- | --- | --- | --- | --- |
-| title | Helvetica Neue LT Pro | 700 | 30 pt | 1.12 |
-| heading1 | Helvetica Neue LT Pro | 700 | 22 pt | 1.2 |
+| title | Helvetica Neue LT Pro | 900 | 30 pt | 1.1 |
+| heading1 | Helvetica Neue LT Pro | 900 | 20 pt | 1.2 |
 | body | Helvetica Neue LT Pro | 400 | 10.5 pt | 1.4 |
 | caption | Helvetica Neue LT Pro | 400 | 8.5 pt | 1.35 |
 | table | Helvetica Neue LT Pro | 400 | 9.5 pt | 1.3 |
@@ -36,7 +36,7 @@ Install the supplied fonts before editing outside the kit. The existing Word exp
 
 Use the light paper and ink roles for document pages; retain the brand’s own typefaces and logo proportions.
 
-Document colours: ink #000000; muted #4D4D4D; accent #035642; paper #FFFFFF; lines #D9D9D9.
+Document colours: ink #29292A; muted #525154; accent #035642; paper #FFFFFF; lines #EAE7E5.
 
 ## Department and subdepartment names
 
