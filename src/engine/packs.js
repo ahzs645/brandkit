@@ -11,9 +11,9 @@ export const inPack = (entry, pack = 'complete') => {
   if (!KIT_PACKS.some((item) => item.id === pack)) throw new Error(`Unknown export pack: ${pack}`)
   if (pack === 'complete' || entry.kind === 'index') return true
   const path = entry.path
-  const essential = /^(source\/|fonts\/)/.test(path) || /^(README|CHANGELOG)\./.test(path) || ['web/brand.css', 'web/favicon.svg'].includes(path)
-  if (essential) return true
-  if (pack === 'documents') return /^(logos\/|symbol\/|documents\/|guidelines\/documentation)/.test(path) && !/\.pptx$/.test(path)
+  const essential = /^(source\/|fonts\/)/.test(path) || /^(README|CHANGELOG)\./.test(path) || ['web/brand.css', 'web/favicon.svg', 'reference/identity-rules.json', 'reference/PROVENANCE.json', 'reference/README.md'].includes(path)
+  if (essential || entry.identityReference) return true
+  if (pack === 'documents') return /^(logos\/|symbol\/|documents\/|official-templates\/|guidelines\/documentation)/.test(path) && !/\.pptx$/.test(path)
   if (pack === 'presentations') return entry.presentation === true || /^(logos\/|symbol\/)/.test(path) || /\.pptx$/.test(path) || /templates\/(?:png\/|pdf\/)?(?:slide|presentation)/.test(path)
   if (pack === 'web') return /^(web\/|logos\/|symbol\/|icons\/|patterns\/)/.test(path)
   if (pack === 'print') return /\.pdf$/.test(path) || /^(logos\/|symbol\/)/.test(path) || /^guidelines\/(?:documentation|COLOURS)/.test(path)

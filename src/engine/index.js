@@ -16,3 +16,4 @@ export { DOCUMENT_PURPOSES, documentProfile, publicationModel, publicationLayout
 export { CONSUMER_PROFILE_SCHEMA, consumerProfile } from './consumer.js'
 export { KIT_PACKS, inPack } from './packs.js'
 export { patternLibrary } from './pattern-catalog.js'
+export { assertLogoPaint, logoDimensions, identityRules } from './identity.js'

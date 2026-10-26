@@ -22,12 +22,14 @@ const decode64 = (text) => typeof Buffer !== 'undefined' ? new Uint8Array(Buffer
 const svgData = (svg) => `data:image/svg+xml;base64,${encode64(new TextEncoder().encode(svg))}`
 const textOf = (value) => value == null ? '' : typeof value === 'object' ? String(value.text ?? '') : String(value)
 const captionOf = (block) => block.provenance && !String(block.caption ?? '').includes(block.provenance) ? [block.caption, `Source: ${block.provenance}`].filter(Boolean).join(' ') : block.caption ?? ''
-const STYLE_IDS = { title: 'Title', subtitle: 'Subtitle', heading1: 'Heading1', heading2: 'Heading2', heading3: 'Heading3', body: 'BodyText', caption: 'Caption', table: 'TableText', label: 'Header', footer: 'Footer' }
+const STYLE_IDS = { title: 'Title', subtitle: 'Subtitle', heading1: 'Heading1', heading2: 'Heading2', heading3: 'Heading3', body: 'BodyText', caption: 'Caption', table: 'TableText', label: 'Header', footer: 'Footer', affiliationDepartment: 'AffiliationDepartment', affiliationSubdepartment: 'AffiliationSubdepartment' }
 
 const profileOf = (ctx, publication) => publication.profile ?? documentProfile(ctx.brand, { paper: publication.paper })
 const styleOf = (block) => STYLE_IDS[block.style] ?? (Object.values(STYLE_IDS).includes(block.style) ? block.style : block.type === 'heading' ? `Heading${Math.max(1, Math.min(3, Number(block.level) || 1))}` : 'BodyText')
 const tokenOf = (style) => Object.entries(STYLE_IDS).find(([, id]) => id === style)?.[0] ?? 'body'
-const typeOf = (profile, token) => profile.typography?.[token] ?? profile.typography?.body ?? { font: 'body', sizePt: 11, lineHeight: 1.3 }
+const typeOf = (profile, token) => token.startsWith('affiliation')
+  ? { ...typeOf(profile, 'body'), sizePt: profile.affiliation?.[token === 'affiliationDepartment' ? 'departmentSizePt' : 'subdepartmentSizePt'] ?? (token === 'affiliationDepartment' ? 12 : 10.5), lineHeight: profile.affiliation?.lineHeight ?? 1.3, spaceAfterPt: token === 'affiliationDepartment' ? 2 : 0 }
+  : profile.typography?.[token] ?? profile.typography?.body ?? { font: 'body', sizePt: 11, lineHeight: 1.3 }
 const contentWidth = (profile) => profile.paper.widthMm - profile.margins.leftMm - profile.margins.rightMm
 const pageBlocks = (page) => page.blocks?.length ? page.blocks : page.title ? [{ type: 'heading', text: page.title }] : []
 
@@ -90,9 +92,9 @@ const logoOf = (ctx, profile) => {
   const svg = sanitizeSvg(logoDocument({ ...ctx, outline: true }, profile.logo?.options ?? {}))
   // The full mark belongs on the cover, where its minimum size is respected.
   // Continuation headers use native text instead of shrinking a logo below it.
-  const width = Math.min(contentWidth(profile), Math.max(profile.logo?.minimumWidthMm ?? 0, profile.logo?.widthMm ?? 40))
+  const width = Math.min(contentWidth(profile), Math.max(ctx.brand.lockup?.minimumHorizontalWidthMm ?? 0, profile.logo?.minimumWidthMm ?? 0, profile.logo?.widthMm ?? 40))
   const spacing = Number(profile.logo?.clearSpaceMm ?? 6)
-  const clearSpaceMm = Number.isFinite(spacing) ? Math.max(0, Math.min(100, spacing)) : 6
+  const clearSpaceMm = Math.max(Math.max(0, Number(ctx.brand.logoPolicy?.clearSpaceRatio) || 0) * width, Number.isFinite(spacing) ? Math.max(0, Math.min(100, spacing)) : 6)
   return { svg, width, height: width / svgAspect(svg), clearSpaceMm, alt: profile.logo?.alt ?? `${ctx.brand.name} logo` }
 }
 
@@ -169,6 +171,11 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     const children = []
     if (index === 0 && logo) children.push(new Paragraph({ keepNext: true, spacing: { after: mmTwips(logo.clearSpaceMm) }, children: [new ImageRun({ type: 'png', data: logoBytes,
       transformation: { width: Math.round(logo.width * 96 / 25.4), height: Math.round(logo.height * 96 / 25.4) }, altText: { name: logo.alt, title: logo.alt, description: logo.alt } })] }))
+    if (index === 0 && publication.affiliation?.department) {
+      const { department, subdepartment } = publication.affiliation
+      children.push(paragraph(department, 'AffiliationDepartment', { keepNext: true, ...(!subdepartment ? { spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } } : {}) }))
+      if (subdepartment) children.push(paragraph(subdepartment, 'AffiliationSubdepartment', { keepNext: true, spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } }))
+    }
     for (const block of pageBlocks(page)) children.push(...await blockChildren(block, ++listId))
     sections.push({ properties: { type: SectionType.NEXT_PAGE,
       page: { size: { width: mmTwips(profile.paper.widthMm), height: mmTwips(profile.paper.heightMm) },
@@ -179,6 +186,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   const document = new Document({ creator: ctx.brand.name, title: publication.title ?? ctx.brand.name, subject: publication.subtitle ?? publication.purpose,
     description: `${ctx.brand.name} editable ${publication.purpose ?? 'publication'} · ${publication.edition ?? ctx.brand.version ?? ''}`,
     customProperties: [{ name: 'brandkit.publicationId', value: publication.id ?? '' }, { name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, officeStyleFonts(ctx.brand, profile))) },
+      ...(publication.affiliation?.department ? [{ name: 'brandkit.affiliation', value: JSON.stringify(publication.affiliation) }] : []),
       ...(sourceRevision ? [{ name: 'brandkit.sourceRevision', value: sourceRevision }] : [])],
     styles: officeStyles(ctx.brand, profile), fonts: embeddedFonts(ctx, officeStyleFonts(ctx.brand, profile)),
     numbering: { config: [{ reference: 'publication-numbering', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.START, style: { paragraph: { indent: { left: 360, hanging: 260 } } } }] }] },
@@ -207,7 +215,7 @@ export const publicationHtml = (ctx, publication) => {
   const typographyCss = Object.entries(STYLE_IDS).map(([token, id]) => {
     const spec = typeOf(profile, token)
     const face = officeFont(ctx.brand, spec.font, { weight: spec.weight, italic: spec.italic })
-    return `.s-${id}{font-family:${cssString(face.name)},sans-serif;font-size:${Number(spec.sizePt) || 11}pt;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};line-height:${Number(spec.lineHeight) || 1.3};margin:0 0 ${Number(spec.spaceAfterPt) || 6}pt;${/^Heading|Title|Subtitle/.test(id) ? 'break-after:avoid;' : ''}}`
+    return `.s-${id}{font-family:${cssString(face.name)},sans-serif;font-size:${Number(spec.sizePt) || 11}pt;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};line-height:${Number(spec.lineHeight) || 1.3};margin:0 0 ${Number(spec.spaceAfterPt ?? 6)}pt;${/^Heading|Title|Subtitle/.test(id) ? 'break-after:avoid;' : ''}}`
   }).join('\n')
   const blockHtml = (block) => {
     const style = styleOf(block)
@@ -230,12 +238,13 @@ export const publicationHtml = (ctx, publication) => {
   }
   const pages = publication.pages.map((page, index) => `<article class="page ${index ? 'continuation' : 'first-page'}" data-page-id="${escapeHtml(page.id ?? index)}">
 <header><p class="s-Header">${escapeHtml(index ? publication.title : profile.header?.text ?? ctx.brand.name)}</p></header>
-<main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
+<main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm"><p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
 <footer class="s-Footer"><span>${escapeHtml([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  '))}</span><span>${index + 1}</span></footer>
 </article>`).join('\n')
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="${escapeHtml(ctx.brand.name)}">${sourceRevision ? `<meta name="brandkit-source-revision" content="${escapeHtml(sourceRevision)}">` : ''}<meta name="brandkit-font-requirements" content="${escapeHtml(JSON.stringify(officeFontRequirements(ctx, officeStyleFonts(ctx.brand, profile), { format: 'html' })))}"><title>${escapeHtml(publication.title ?? ctx.brand.name)}</title><style>
 ${fontRules.join('\n')}
 ${typographyCss}
+.affiliation{break-inside:avoid;break-after:avoid;overflow-wrap:anywhere}
 *{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}table{border-collapse:collapse;width:100%;margin:4mm 0}caption{caption-side:bottom;text-align:left;margin-top:3mm!important}td,th{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};padding:2mm;text-align:left;vertical-align:top}th{background:#${hex(profile.colours.ink)};color:#${hex(profile.colours.reverse, 'FFFFFF')};font-weight:700}tbody tr:nth-child(even){background:#${hex(profile.colours.light, 'F5F5F5')}}thead{display:table-header-group}tr{break-inside:avoid}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
 </style></head><body>${pages}</body></html>`
 }

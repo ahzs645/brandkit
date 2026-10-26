@@ -4,17 +4,17 @@ import { readFileSync } from 'node:fs'
 import {
   documentProfile, publicationModel, publicationLayouts, documentationGuide,
   documentationDocumentsFor, templateCatalogMetadata, documentationMarkdown,
-  validatePublication
+  validatePublication, publicationAffiliation
 } from '../src/engine/documentation.js'
 
-const ids = ['ddcnorth', 'firstform', 'overtheedge', 'sparklab', 'northwind', 'bc-province-1977', 'bc-hydro-1983']
+const ids = JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8')).map((entry) => entry.id)
 const brands = Object.fromEntries(ids.map((id) => [id, JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))]))
 const png = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jY9kAAAAASUVORK5CYII='
 
-test('all seven brands produce six valid layouts in every paper and purpose without changing their definitions', () => {
+test('all registered brands produce six valid layouts in every paper and purpose without changing their definitions', () => {
   for (const brand of Object.values(brands)) {
     const before = JSON.stringify(brand)
-    for (const paper of ['letter', 'a4']) for (const purpose of ['product', 'report', 'brief']) {
+    for (const paper of ['letter', 'a4']) for (const purpose of ['product', 'report', 'brief', 'portfolio']) {
       const model = publicationModel(brand, { paper, purpose })
       assert.deepEqual(validatePublication(model), [], `${brand.id}/${purpose}/${paper}`)
       assert.deepEqual(model.pages.map((page) => page.kind), ['cover', 'content', 'product', 'screenshot', 'comparison', 'closing'])
@@ -101,7 +101,7 @@ test('profile overrides are measured, role-aware and cannot select unknown ident
 
 test('virtual publication and existing letterhead mappings do not duplicate supplied documents', () => {
   const first = documentationDocumentsFor(brands.firstform)
-  assert.equal(first.filter((entry) => entry.publication).length, 6)
+  assert.equal(first.filter((entry) => entry.publication).length, 8)
   assert.deepEqual(first.find((entry) => entry.id === 'letterhead-a4').pages, ['letterhead-a4'])
   assert.ok(first.filter((entry) => entry.publication).every((entry) => !entry.pages))
   const brand = structuredClone(brands.firstform)
@@ -167,4 +167,52 @@ test('imported logo clear space cannot inject HTML attributes or use invalid geo
   const model = publicationModel(brands.firstform)
   model.profile.logo.clearSpaceMm = 0
   assert.deepEqual(validatePublication(model), [])
+})
+
+test('department naming is independent editable metadata with a validated hierarchy', () => {
+  const brand = brands.firstform
+  const before = JSON.stringify(brand)
+  const values = { affiliation: { department: '  College of Science and Management  ', subdepartment: 'Natural Resources\n and Environmental Studies' } }
+  const model = publicationModel(brand, { purpose: 'report', values })
+  assert.deepEqual(model.affiliation, { department: 'College of Science and Management', subdepartment: 'Natural Resources and Environmental Studies' })
+  assert.deepEqual(model.logo, publicationModel(brand).logo, 'names never change the supplied logo')
+  assert.deepEqual(validatePublication(JSON.parse(JSON.stringify(model))), [])
+  assert.equal(JSON.stringify(brand), before)
+  assert.deepEqual(publicationAffiliation({ department: 'Research', subdepartment: 'Laboratory' }), { department: 'Research', subdepartment: 'Laboratory' })
+  assert.throws(() => publicationModel(brand, { values: { affiliation: { subdepartment: 'Laboratory' } } }), /Supply a department/)
+  assert.throws(() => publicationAffiliation({ affiliation: 'not an object' }), /must be an object/)
+  assert.throws(() => publicationAffiliation({ affiliation: { department: 42 } }), /must be text/)
+  assert.throws(() => publicationAffiliation({ department: 'a'.repeat(181) }), /180 characters/)
+})
+
+test('affiliation sizes are explicit layout defaults with safe imported bounds', () => {
+  const brand = structuredClone(brands.firstform)
+  brand.documentation = { affiliation: { departmentSizePt: 14, subdepartmentSizePt: 11, gapAfterMm: 6 } }
+  const model = publicationModel(brand)
+  assert.equal(model.profile.affiliation.departmentSizePt, 14)
+  assert.match(model.profile.affiliation.note, /document layout defaults/)
+  assert.match(model.profile.affiliation.wrapping, /do not condense, truncate or stretch/)
+  for (const bad of [null, 42, [], { department: {}, subdepartment: 5 }]) {
+    const source = structuredClone(model)
+    source.affiliation = bad
+    if (bad !== null) assert.ok(validatePublication(source).some((item) => /Affiliation|affiliation/.test(item)))
+    else assert.deepEqual(validatePublication(source), [])
+  }
+  model.profile.affiliation.gapAfterMm = '0\" onclick=\"alert(1)'
+  assert.ok(validatePublication(model).some((item) => /Affiliation spacing/.test(item)))
+  brand.documentation.affiliation.subdepartmentSizePt = 20
+  assert.throws(() => documentProfile(brand), /subdepartment no larger than department/)
+})
+
+test('brand portfolio and configured report defaults retain caller control and source scope', () => {
+  const brand = structuredClone(brands.firstform)
+  brand.documentation = { examples: { report: { title: 'Research report', detailTitle: 'Methods and scope', summary: 'Describe the evidence examined.' } } }
+  const report = publicationModel(brand, { purpose: 'report', values: { title: 'Air quality study' } })
+  assert.equal(report.title, 'Air quality study')
+  assert.equal(report.pages[2].title, 'Methods and scope')
+  const portfolio = publicationModel(brand, { purpose: 'portfolio' })
+  assert.equal(portfolio.title, `${brand.name} brand portfolio`)
+  assert.match(JSON.stringify(portfolio.pages), /does not create an approved departmental logo/)
+  assert.deepEqual(validatePublication(portfolio), [])
+  assert.ok(documentationDocumentsFor(brand).some((entry) => entry.purpose === 'portfolio' && entry.paper === 'a4'))
 })

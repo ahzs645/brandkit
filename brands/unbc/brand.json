@@ -1,0 +1,4282 @@
+{
+  "id": "unbc",
+  "name": "UNBC",
+  "version": "1.0",
+  "displayVersion": "1.0",
+  "source": "University of Northern British Columbia, Graphics Standards Manual February 2020 (https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf), original official website vector (https://www.unbc.ca/themes/custom/unbc/gfx/logo-unbc-green.svg) and official logo/template downloads. Retrieved 2026-10-26.",
+  "status": "Official source artwork and published identity rules with local document applications. Department names are ordinary document text; custom sub-logos require artwork supplied by UNBC Communications and Marketing.",
+  "organization": {
+    "name": "University of Northern British Columbia",
+    "shortName": "UNBC",
+    "kind": "university",
+    "naming": {
+      "mode": "document-text",
+      "levels": [
+        "department",
+        "subdepartment"
+      ],
+      "sourceUrl": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf",
+      "note": "Use verified department and subdepartment names as document text, clearly separate from the university logo. Communications and Marketing supplies official departmental brand extensions; this kit does not create approved sub-logos."
+    }
+  },
+  "brandArchitecture": {
+    "relatedBrands": [
+      {
+        "id": "sparklab",
+        "label": "SPARK Lab",
+        "relationship": "UNBC lab",
+        "note": "A separate identity already in this kit; inclusion does not establish an approved UNBC sub-logo."
+      },
+      {
+        "id": "overtheedge",
+        "label": "Over the Edge",
+        "relationship": "Independent student newspaper",
+        "note": "Associated with the UNBC community; not a university department."
+      }
+    ]
+  },
+  "officialResources": [
+    {
+      "title": "UNBC logos and graphic standards",
+      "url": "https://www.unbc.ca/communications-and-marketing/logos-and-graphic-standards",
+      "format": "web",
+      "note": "Current official landing page for identity resources."
+    },
+    {
+      "title": "Graphics Standards Manual February 2020",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf",
+      "localPath": "reference/unbc-graphics-standards-2020.pdf",
+      "format": "pdf",
+      "note": "Source of the full-logo, colour, clear-space, size and typeface rules."
+    },
+    {
+      "title": "Official UNBC logo download",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "format": "zip",
+      "note": "Original EPS and raster masters. No artwork has been retyped or rearranged."
+    },
+    {
+      "title": "Official branded template catalogue",
+      "url": "https://www.unbc.ca/communications-and-marketing/branded-templates",
+      "format": "web",
+      "note": "University-supplied document and presentation originals."
+    },
+    {
+      "title": "Official UNBC letterhead",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/lhopt1official.docx",
+      "localPath": "official-templates/lhopt1official.docx",
+      "format": "docx",
+      "note": "Original UNBC template supplied by Communications and Marketing."
+    },
+    {
+      "title": "Official UNBC letterhead with address",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/lhopt3officialaddress.docx",
+      "localPath": "official-templates/lhopt3officialaddress.docx",
+      "format": "docx",
+      "note": "Original UNBC template supplied by Communications and Marketing."
+    },
+    {
+      "title": "Official UNBC green document cover",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/documentcoverunbcgreen.docx",
+      "localPath": "official-templates/documentcoverunbcgreen.docx",
+      "format": "docx",
+      "note": "Original university cover template; retained without editing."
+    },
+    {
+      "title": "Official UNBC interactive document cover",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/documentcoverinteractive.docx",
+      "localPath": "official-templates/documentcoverinteractive.docx",
+      "format": "docx",
+      "note": "Original university cover template; retained without editing."
+    },
+    {
+      "title": "Official UNBC PowerPoint template",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbcpowerpointtemplate.pptx",
+      "localPath": "official-templates/unbcpowerpointtemplate.pptx",
+      "format": "pptx",
+      "note": "Original university slide template; separate from the local four-layout presentation."
+    }
+  ],
+  "colours": {
+    "green": "#035642",
+    "gold": "#B79527",
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "muted": "#4D4D4D",
+    "line": "#D9D9D9",
+    "light": "#F2F2F2"
+  },
+  "colourNames": {
+    "green": "UNBC Green",
+    "gold": "UNBC Gold",
+    "black": "Black",
+    "white": "White",
+    "muted": "Document text grey",
+    "line": "Document rule grey",
+    "light": "Document panel grey"
+  },
+  "roles": {
+    "ink": "black",
+    "paper": "white",
+    "muted": "muted",
+    "primary": "green",
+    "light": "light",
+    "reverse": "white",
+    "line": "line",
+    "rule": "line"
+  },
+  "logoColours": [
+    "green",
+    "black",
+    "white"
+  ],
+  "rasterColours": [
+    "green",
+    "black",
+    "white"
+  ],
+  "print": {
+    "pantone": {
+      "green": "343 C / 3435 U",
+      "gold": "125 C / 117 U"
+    },
+    "cmyk": {
+      "green": "C95 M15 Y62 K58",
+      "gold": "C8 M31 Y100 K19"
+    },
+    "note": "Official recipes: Graphics Standards Manual p. 8. Neutral document greys are local layout defaults, not additions to the official university palette. Gold is an accent and must never colour the logo. The secondary university palette is reserved for Communications and Marketing."
+  },
+  "fonts": {
+    "body": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-regular.otf",
+      "web": "fonts/texgyreheros-regular.otf",
+      "label": "Arial fallback / open render substitute (400)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "regular": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-regular.otf",
+      "web": "fonts/texgyreheros-regular.otf",
+      "label": "Arial fallback / open render substitute (400)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "bold": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 700,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-bold.otf",
+      "web": "fonts/texgyreheros-bold.otf",
+      "label": "Arial fallback / open render substitute (700)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "display": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 700,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-bold.otf",
+      "web": "fonts/texgyreheros-bold.otf",
+      "label": "Arial fallback / open render substitute (700)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "displayRegular": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-regular.otf",
+      "web": "fonts/texgyreheros-regular.otf",
+      "label": "Arial fallback / open render substitute (400)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "label": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "normal",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-regular.otf",
+      "web": "fonts/texgyreheros-regular.otf",
+      "label": "Arial fallback / open render substitute (400)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "italic": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 400,
+      "style": "italic",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-italic.otf",
+      "web": "fonts/texgyreheros-italic.otf",
+      "label": "Arial fallback / open render substitute (400 italic)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    },
+    "boldItalic": {
+      "family": "TeX Gyre Heros",
+      "consumerFamily": "Arial",
+      "officialFamily": "Helvetica Neue",
+      "stack": "\"Helvetica Neue\", Arial, \"TeX Gyre Heros\", sans-serif",
+      "office": "Arial",
+      "weight": 700,
+      "style": "italic",
+      "capHeight": 0.729,
+      "file": "fonts/texgyreheros-bolditalic.otf",
+      "web": "fonts/texgyreheros-bolditalic.otf",
+      "label": "Arial fallback / open render substitute (700 italic)",
+      "note": "Helvetica Neue is the official face; Arial is the official alternative. TeX Gyre Heros is a bundled open rendering substitute, not a UNBC-approved typeface."
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Arial",
+      "weight": 700,
+      "trackingEm": 0
+    },
+    "body": {
+      "family": "Arial",
+      "weight": 400
+    },
+    "labels": {
+      "family": "Arial",
+      "weight": 400,
+      "trackingEm": 0,
+      "textTransform": "none"
+    },
+    "note": "Helvetica Neue is official; Arial is the recommended alternative. Packaged TeX Gyre Heros only supplies portable preview/outlining and PDF rendering."
+  },
+  "symbol": {
+    "name": "Complete official UNBC logo",
+    "viewBox": [
+      0,
+      0,
+      434.89,
+      74.97
+    ],
+    "markup": "<polygon fill=\"{logo}\" points=\"42.27 16.05 30.33 74.97 40.71 74.97 48.7 36.33 54.58 58.02 64.51 58.02 76.28 0 66.29 0 58.97 36.59 52.26 16.05 42.27 16.05\"/><path fill=\"{logo}\" d=\"M81,42.13l1-4.9h4.47c2.78,0,4.83,1.39,4.61,5-.29,4.81-4,6.59-5.62,6.57H79.61L81,42.13l-9.72-3L67.38,58h19c5.94,0,14.28-5.41,14.88-14.89.5-7.7-1.78-9.82-5.13-12.28,2.4-2.28,3-3.89,3-7.49-.1-4.26-3-7.24-6.32-7.32H76L74.33,24.1l9.9,2,.65-3.2h2.36a2.38,2.38,0,0,1,2.25,2.77c-.25,2.69-2.15,4.15-3.82,4.17H83.47l.76-3.73-9.9-2-3.07,15Z\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M16.65,49.09c-2.48,0-5.86-.62-5.41-3.2L17.6,15.94H7.07L.16,48.47c-1.14,5.37,4,10.64,14.26,10.64S31.3,54,32.52,48.26l6.87-32.32H28.76L22.41,45.79c-.58,2.27-3.28,3.3-5.76,3.3\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M134.3,15.38c-9-1.16-27.16,2.84-31.14,21.6s12.92,23.5,22.06,22.13l2.64-12.43c-8.85,2-15.2-.84-13.3-9.8s10-12.22,17.31-10.54l2.43-11\"/><path fill=\"{logo}\" d=\"M155.52,19.79l-1.9,8.95a6.45,6.45,0,0,1-6.65,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78l1.85-8.72Z\"/><path fill=\"{logo}\" d=\"M167.62,19.79h1.8l-2.93,13.79H164.4l-4.64-11.14h0l-2.37,11.14h-1.8l2.93-13.79h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M171.56,33.57H169.7l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M186.55,19.79h2.09l-8,13.79h-2l-2.1-13.79h2.07l1.44,11.75h0Z\"/><path fill=\"{logo}\" d=\"M197.92,33.57H187.75l2.93-13.79h10l-.35,1.65h-8.18l-.9,4.22h7.55l-.35,1.65h-7.55l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M205,21.38h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38H204Zm-1.33,6.28h4.51c2.23,0,2.18,1.33,1.94,2.46a17,17,0,0,0-.41,3.46H212l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M224.61,23.82c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9a2.81,2.81,0,0,1,2.35,3.69c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.32a3.63,3.63,0,0,1-.66-3.5h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25a5.44,5.44,0,0,1,5.65-4.26c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M229.18,33.57h-1.86l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M234.11,19.79H245.3l-.35,1.65h-4.66L237.7,33.57h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M250,33.57h-1.86L249.29,28l-3.45-8.24H248l2.55,6.62,5.36-6.62h2.19l-7,8.24Z\"/><path fill=\"{logo}\" d=\"M274.52,26.68c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S275.21,23.43,274.52,26.68Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S275.8,29.65,276.44,26.68Z\"/><path fill=\"{logo}\" d=\"M279.23,33.57h-1.86l2.93-13.79h9.54l-.35,1.65h-7.68l-.9,4.22h6.76l-.35,1.65h-6.76Z\"/><path fill=\"{logo}\" d=\"M153.76,43h1.8l-2.93,13.79h-2.09L145.9,45.64h0l-2.37,11.14h-1.81L144.62,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M167.82,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S168.51,46.63,167.82,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S169.11,52.85,169.74,49.88Z\"/><path fill=\"{logo}\" d=\"M175.17,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.94,2.46a17.1,17.1,0,0,0-.41,3.46h2.29l.06-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M185.52,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M207.52,43h1.86l-2.93,13.79h-1.86L206,50.34h-7.2l-1.37,6.43h-1.86L198.46,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M219.74,56.77H209.56L212.49,43h10l-.35,1.65H214l-.9,4.22h7.55l-.35,1.65h-7.54l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M226.86,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28H230c2.23,0,2.18,1.32,1.93,2.46a17.15,17.15,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.41-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M248.11,43h1.8L247,56.77h-2.09l-4.64-11.14h0l-2.37,11.14H236L239,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M259.65,44.58H263c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36ZM255.2,56.77h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M272.73,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.93,2.46a17.07,17.07,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M284.06,56.77h-1.86L285.12,43H287Z\"/><path fill=\"{logo}\" d=\"M289,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M301.12,56.77h-1.86L302.19,43h1.86Z\"/><path fill=\"{logo}\" d=\"M314.7,47c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9A2.81,2.81,0,0,1,315.57,53c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.33a3.63,3.63,0,0,1-.66-3.49h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25A5.44,5.44,0,0,1,312,42.62c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M329.13,43H331l-2.93,13.79H326.2l1.37-6.43h-7.2L319,56.77h-1.86L320.07,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M348,47.13c0-2.42-1.93-2.86-3.25-2.86-2.5,0-4.9,1.84-5.67,5.47-.69,3.24-.07,5.74,3.35,5.74,1.21,0,3.42-.58,4.74-3.78H349c-1.87,5.2-6.15,5.43-7.18,5.43-3.13,0-5.77-2-4.64-7.33.9-4.24,3.95-7.18,8-7.18,3.55,0,4.93,2.21,4.71,4.51Z\"/><path fill=\"{logo}\" d=\"M362.45,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S363.14,46.63,362.45,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S363.74,52.85,364.37,49.88Z\"/><path fill=\"{logo}\" d=\"M367.33,55.12h7L374,56.77h-8.85L368,43h1.86Z\"/><path fill=\"{logo}\" d=\"M389.63,43l-1.9,8.95a6.45,6.45,0,0,1-6.66,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78L387.77,43Z\"/><path fill=\"{logo}\" d=\"M401,56.77l1.73-8.14c.08-.4.5-2.15.77-3.44h0l-6.34,11.58h-1.84l-1.42-11.56h0c-.27,1.27-.6,3-.69,3.42l-1.73,8.14h-1.8L392.53,43h2.67l1.46,11.65h0L403.09,43h2.65l-2.93,13.79Z\"/><path fill=\"{logo}\" d=\"M410.06,44.58h3.38c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36Zm-4.45,12.19h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M420.61,56.77h-1.86L421.67,43h1.86Z\"/><path fill=\"{logo}\" d=\"M427.74,51.11l3.5-6.07h0l.75,6.07Zm4.6,1.65.51,4h2L432.83,43h-2.11L422.6,56.77h1.92l2.29-4Z\"/>"
+  },
+  "signatures": [
+    {
+      "id": "official",
+      "label": "Official full logo",
+      "use": "Required for official documents and external audiences.",
+      "padding": 0,
+      "elements": [
+        {
+          "type": "art",
+          "bounds": [
+            0,
+            0,
+            434.89,
+            74.97
+          ],
+          "markup": "<polygon fill=\"{logo}\" points=\"42.27 16.05 30.33 74.97 40.71 74.97 48.7 36.33 54.58 58.02 64.51 58.02 76.28 0 66.29 0 58.97 36.59 52.26 16.05 42.27 16.05\"/><path fill=\"{logo}\" d=\"M81,42.13l1-4.9h4.47c2.78,0,4.83,1.39,4.61,5-.29,4.81-4,6.59-5.62,6.57H79.61L81,42.13l-9.72-3L67.38,58h19c5.94,0,14.28-5.41,14.88-14.89.5-7.7-1.78-9.82-5.13-12.28,2.4-2.28,3-3.89,3-7.49-.1-4.26-3-7.24-6.32-7.32H76L74.33,24.1l9.9,2,.65-3.2h2.36a2.38,2.38,0,0,1,2.25,2.77c-.25,2.69-2.15,4.15-3.82,4.17H83.47l.76-3.73-9.9-2-3.07,15Z\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M16.65,49.09c-2.48,0-5.86-.62-5.41-3.2L17.6,15.94H7.07L.16,48.47c-1.14,5.37,4,10.64,14.26,10.64S31.3,54,32.52,48.26l6.87-32.32H28.76L22.41,45.79c-.58,2.27-3.28,3.3-5.76,3.3\"/><path fill=\"{logo}\" fill-rule=\"evenodd\" d=\"M134.3,15.38c-9-1.16-27.16,2.84-31.14,21.6s12.92,23.5,22.06,22.13l2.64-12.43c-8.85,2-15.2-.84-13.3-9.8s10-12.22,17.31-10.54l2.43-11\"/><path fill=\"{logo}\" d=\"M155.52,19.79l-1.9,8.95a6.45,6.45,0,0,1-6.65,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78l1.85-8.72Z\"/><path fill=\"{logo}\" d=\"M167.62,19.79h1.8l-2.93,13.79H164.4l-4.64-11.14h0l-2.37,11.14h-1.8l2.93-13.79h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M171.56,33.57H169.7l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M186.55,19.79h2.09l-8,13.79h-2l-2.1-13.79h2.07l1.44,11.75h0Z\"/><path fill=\"{logo}\" d=\"M197.92,33.57H187.75l2.93-13.79h10l-.35,1.65h-8.18l-.9,4.22h7.55l-.35,1.65h-7.55l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M205,21.38h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38H204Zm-1.33,6.28h4.51c2.23,0,2.18,1.33,1.94,2.46a17,17,0,0,0-.41,3.46H212l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M224.61,23.82c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9a2.81,2.81,0,0,1,2.35,3.69c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.32a3.63,3.63,0,0,1-.66-3.5h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25a5.44,5.44,0,0,1,5.65-4.26c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M229.18,33.57h-1.86l2.93-13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M234.11,19.79H245.3l-.35,1.65h-4.66L237.7,33.57h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M250,33.57h-1.86L249.29,28l-3.45-8.24H248l2.55,6.62,5.36-6.62h2.19l-7,8.24Z\"/><path fill=\"{logo}\" d=\"M274.52,26.68c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S275.21,23.43,274.52,26.68Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S275.8,29.65,276.44,26.68Z\"/><path fill=\"{logo}\" d=\"M279.23,33.57h-1.86l2.93-13.79h9.54l-.35,1.65h-7.68l-.9,4.22h6.76l-.35,1.65h-6.76Z\"/><path fill=\"{logo}\" d=\"M153.76,43h1.8l-2.93,13.79h-2.09L145.9,45.64h0l-2.37,11.14h-1.81L144.62,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M167.82,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S168.51,46.63,167.82,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S169.11,52.85,169.74,49.88Z\"/><path fill=\"{logo}\" d=\"M175.17,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.94,2.46a17.1,17.1,0,0,0-.41,3.46h2.29l.06-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M185.52,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M207.52,43h1.86l-2.93,13.79h-1.86L206,50.34h-7.2l-1.37,6.43h-1.86L198.46,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M219.74,56.77H209.56L212.49,43h10l-.35,1.65H214l-.9,4.22h7.55l-.35,1.65h-7.54l-1,4.61h8.31Z\"/><path fill=\"{logo}\" d=\"M226.86,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28H230c2.23,0,2.18,1.32,1.93,2.46a17.15,17.15,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.41-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M248.11,43h1.8L247,56.77h-2.09l-4.64-11.14h0l-2.37,11.14H236L239,43h2.21l4.53,11.14h0Z\"/><path fill=\"{logo}\" d=\"M259.65,44.58H263c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36ZM255.2,56.77h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M272.73,44.58h4.65c.92,0,2.44.17,2,2.3s-1.95,2.38-3.31,2.38h-4.32Zm-1.33,6.28h4.51c2.23,0,2.18,1.32,1.93,2.46a17.07,17.07,0,0,0-.41,3.46h2.29l.07-.31c-.51-.33-.54-.61-.4-1.38l.42-2.5c.33-1.92-.38-2.27-1.1-2.59a4.46,4.46,0,0,0,2.62-3.3c.62-2.92-1.48-3.71-3.74-3.71h-6.37l-2.93,13.79h1.86Z\"/><path fill=\"{logo}\" d=\"M284.06,56.77h-1.86L285.12,43H287Z\"/><path fill=\"{logo}\" d=\"M289,43h11.19l-.35,1.65h-4.67l-2.58,12.13h-1.86l2.58-12.13h-4.67Z\"/><path fill=\"{logo}\" d=\"M301.12,56.77h-1.86L302.19,43h1.86Z\"/><path fill=\"{logo}\" d=\"M314.7,47c.36-2.13-1.27-2.8-2.82-2.8-1.17,0-3.22.33-3.66,2.42-.25,1.17.5,1.55,1.26,1.75l3.74.9A2.81,2.81,0,0,1,315.57,53c-.69,3.26-3.92,4.17-6.28,4.17-2.55,0-3.39-.77-3.88-1.33a3.63,3.63,0,0,1-.66-3.49h1.75c-.53,2.5,1.35,3.23,3.12,3.23,1.34,0,3.68-.35,4.1-2.32.31-1.44-.27-1.9-2.42-2.44l-2.68-.65c-.86-.21-2.76-.84-2.25-3.25A5.44,5.44,0,0,1,312,42.62c4.82,0,4.69,2.88,4.44,4.4Z\"/><path fill=\"{logo}\" d=\"M329.13,43H331l-2.93,13.79H326.2l1.37-6.43h-7.2L319,56.77h-1.86L320.07,43h1.86l-1.21,5.7h7.2Z\"/><path fill=\"{logo}\" d=\"M348,47.13c0-2.42-1.93-2.86-3.25-2.86-2.5,0-4.9,1.84-5.67,5.47-.69,3.24-.07,5.74,3.35,5.74,1.21,0,3.42-.58,4.74-3.78H349c-1.87,5.2-6.15,5.43-7.18,5.43-3.13,0-5.77-2-4.64-7.33.9-4.24,3.95-7.18,8-7.18,3.55,0,4.93,2.21,4.71,4.51Z\"/><path fill=\"{logo}\" d=\"M362.45,49.88c-.69,3.25-3,5.61-6,5.61s-4.3-2.36-3.61-5.61,3-5.61,6-5.61S363.14,46.63,362.45,49.88Zm1.92,0c.63-3,0-7.26-5.18-7.26s-7.63,4.28-8.26,7.26,0,7.26,5.18,7.26S363.74,52.85,364.37,49.88Z\"/><path fill=\"{logo}\" d=\"M367.33,55.12h7L374,56.77h-8.85L368,43h1.86Z\"/><path fill=\"{logo}\" d=\"M389.63,43l-1.9,8.95a6.45,6.45,0,0,1-6.66,5.2c-3.71,0-4.79-2.38-4.25-5l2-9.2h1.86l-1.84,8.68c-.64,3,1,3.82,2.68,3.82a4.3,4.3,0,0,0,4.43-3.78L387.77,43Z\"/><path fill=\"{logo}\" d=\"M401,56.77l1.73-8.14c.08-.4.5-2.15.77-3.44h0l-6.34,11.58h-1.84l-1.42-11.56h0c-.27,1.27-.6,3-.69,3.42l-1.73,8.14h-1.8L392.53,43h2.67l1.46,11.65h0L403.09,43h2.65l-2.93,13.79Z\"/><path fill=\"{logo}\" d=\"M410.06,44.58h3.38c2.07,0,2.71.73,2.43,2-.36,1.69-1.57,2.23-3.35,2.23h-3.36Zm-4.45,12.19h5.93a5.37,5.37,0,0,0,5.55-4.07,2.6,2.6,0,0,0-1.78-3.36,4,4,0,0,0,2.46-2.88c.4-1.88-.59-3.48-3.16-3.48h-6.07Zm3.23-6.43h3.67c1.52,0,3.14.38,2.73,2.32a3.18,3.18,0,0,1-3.45,2.52h-4Z\"/><path fill=\"{logo}\" d=\"M420.61,56.77h-1.86L421.67,43h1.86Z\"/><path fill=\"{logo}\" d=\"M427.74,51.11l3.5-6.07h0l.75,6.07Zm4.6,1.65.51,4h2L432.83,43h-2.11L422.6,56.77h1.92l2.29-4Z\"/>"
+        }
+      ]
+    }
+  ],
+  "colourways": {
+    "green": {
+      "label": "UNBC Green on white",
+      "all": "green",
+      "ground": "white"
+    },
+    "black": {
+      "label": "Black for monochrome reproduction",
+      "all": "black",
+      "ground": "white"
+    },
+    "white": {
+      "label": "White on UNBC Green",
+      "all": "white",
+      "ground": "green"
+    }
+  },
+  "defaultColourway": "green",
+  "lockup": {
+    "canvasPadding": 0,
+    "minimumHorizontalWidthMm": 38.1,
+    "minimumHorizontalWidthPx": 144,
+    "clearspaceRecommendation": "Reserve the vertical distance between the top of B and the top of N on every side of the complete logo, including to page edges. This source artwork is measured conservatively as 16.05/434.89 of its visible width."
+  },
+  "logoPolicy": {
+    "allowedColours": [
+      "green",
+      "black",
+      "white"
+    ],
+    "allowInheritedColour": false,
+    "standaloneSymbol": false,
+    "minimumWidthMm": 38.1,
+    "clearSpaceRatio": 0.036905884246591095,
+    "note": "Preserve the full logo and its proportions. Green is used only on white; black is for black-only reproduction on a white or light ground; white is preferred on UNBC Green. Gold, tints, rearrangements, separated lettering and generic small icons are excluded."
+  },
+  "fields": {
+    "department": {
+      "label": "Department or academic unit",
+      "placeholder": "",
+      "multiline": true
+    },
+    "subdepartment": {
+      "label": "Subdepartment or team",
+      "placeholder": "",
+      "multiline": true
+    },
+    "author": {
+      "label": "Author or contact name",
+      "placeholder": "[Name]"
+    },
+    "author-role": {
+      "label": "Author or contact role",
+      "placeholder": "[Role]"
+    },
+    "document-date": {
+      "label": "Document date",
+      "placeholder": "[Date]"
+    },
+    "document-reference": {
+      "label": "Document reference or version",
+      "placeholder": "[Reference or version]"
+    },
+    "contact-email": {
+      "label": "Email address",
+      "placeholder": "[Email]"
+    },
+    "contact-website": {
+      "label": "Website",
+      "placeholder": "[Web address]"
+    }
+  },
+  "copy": {
+    "svgDescription": "Complete official University of Northern British Columbia artwork. Original path geometry retained; green normalized to the published #035642 identity recipe.",
+    "logoLabel": "University of Northern British Columbia official full logo",
+    "motifLabel": "Complete UNBC logo, not an isolated symbol",
+    "templateDescription": "Local editable document application using official UNBC artwork. Department and subdepartment names remain separate document text.",
+    "tagline": "University of Northern British Columbia",
+    "descriptor": "Official identity resources and document applications"
+  },
+  "templates": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letterhead / Letter",
+      "title": "{name} / Letterhead / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 82,
+          "y2": 82,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 93,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "recipient",
+          "text": "[Recipient]\n[Address]",
+          "x": 20,
+          "y": 106,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 130,
+          "width": 175.9,
+          "size": 5.644444444444444,
+          "leading": 7.902222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-body",
+          "text": "[Explain the purpose of the letter, the supporting information and the action requested.]",
+          "x": 20,
+          "y": 150,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 13
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Name]",
+          "x": 20,
+          "y": 231.39999999999998,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "author-role",
+          "text": "[Role]",
+          "x": 20,
+          "y": 238.39999999999998,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "continuation-letter",
+      "label": "Continuation sheet / Letter",
+      "title": "{name} / Continuation sheet / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-heading",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 84,
+          "width": 175.9,
+          "size": 6.35,
+          "leading": 8.889999999999999,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-content",
+          "text": "[Continue the document here. Word output keeps this text editable and allows it to flow across pages.]",
+          "x": 20,
+          "y": 98,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 27
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "memo-letter",
+      "label": "Memorandum / Letter",
+      "title": "{name} / Memorandum / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 82,
+          "y2": 82,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Memorandum",
+          "x": 20,
+          "y": 97,
+          "size": 7.76111111111111,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-to",
+          "text": "[To]",
+          "x": 20,
+          "y": 112,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-from",
+          "text": "[From]",
+          "x": 20,
+          "y": 122,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 132,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "memo-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 150,
+          "width": 175.9,
+          "size": 5.291666666666666,
+          "leading": 7.408333333333332,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "memo-body",
+          "text": "[State the purpose, the supporting information and any decision or action requested.]",
+          "x": 20,
+          "y": 173,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 14
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "report-cover-letter",
+      "label": "Research report cover / Letter",
+      "title": "{name} / Research report cover / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 20,
+          "width": 65,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 52,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Research report",
+          "x": 20,
+          "y": 103,
+          "size": 3.880555555555555,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "report-title",
+          "text": "[Report title]",
+          "x": 20,
+          "y": 126,
+          "width": 175.9,
+          "size": 10.583333333333332,
+          "leading": 12.347222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "report-subtitle",
+          "text": "[Question, scope and reporting period]",
+          "x": 20,
+          "y": 174,
+          "width": 175.9,
+          "size": 4.58611111111111,
+          "leading": 6.420555555555555,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Prepared by]",
+          "x": 20,
+          "y": 217.39999999999998,
+          "size": 3.880555555555555,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "document-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 228.39999999999998,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "report-page-letter",
+      "label": "Research report content / Letter",
+      "title": "{name} / Research report content / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "report-section",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 84,
+          "width": 175.9,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "report-body",
+          "text": "[Describe the research question, methods, findings and limitations. Connect each conclusion to its evidence.]",
+          "x": 20,
+          "y": 103,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 17
+        },
+        {
+          "type": "text",
+          "id": "evidence-label",
+          "text": "[Evidence or figure caption]",
+          "x": 20,
+          "y": 202.39999999999998,
+          "size": 3.175,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-source",
+          "text": "[Source and access or capture date]",
+          "x": 20,
+          "y": 213.39999999999998,
+          "width": 175.9,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "muted",
+          "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "brief-letter",
+      "label": "Decision brief / Letter",
+      "title": "{name} / Decision brief / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "brief-title",
+          "text": "[Decision title]",
+          "x": 20,
+          "y": 84,
+          "width": 175.9,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Decision requested",
+          "x": 20,
+          "y": 105,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "decision",
+          "text": "[State the specific decision and why it is needed.]",
+          "x": 20,
+          "y": 115,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Evidence and options",
+          "x": 20,
+          "y": 147,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "options",
+          "text": "[Describe the relevant evidence, available options and their tradeoffs.]",
+          "x": 20,
+          "y": 157,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 6
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Recommendation and next step",
+          "x": 20,
+          "y": 200,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "recommendation",
+          "text": "[Give the recommendation, its rationale and the next action.]",
+          "x": 20,
+          "y": 210,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-cover-letter",
+      "label": "Brand portfolio cover / Letter",
+      "title": "{name} / Brand portfolio cover / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 20,
+          "width": 65,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 52,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Brand portfolio",
+          "x": 20,
+          "y": 103,
+          "size": 3.880555555555555,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-title",
+          "text": "[Portfolio title]",
+          "x": 20,
+          "y": 126,
+          "width": 175.9,
+          "size": 10.583333333333332,
+          "leading": 12.347222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-subtitle",
+          "text": "[Units, initiatives and relationships included in this portfolio]",
+          "x": 20,
+          "y": 174,
+          "width": 175.9,
+          "size": 4.58611111111111,
+          "leading": 6.420555555555555,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Prepared by]",
+          "x": 20,
+          "y": 217.39999999999998,
+          "size": 3.880555555555555,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "document-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 228.39999999999998,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-page-letter",
+      "label": "Brand portfolio entry / Letter",
+      "title": "{name} / Brand portfolio entry / Letter",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 175.9
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 175.9
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-entry",
+          "text": "[Unit or initiative name]",
+          "x": 20,
+          "y": 84,
+          "width": 175.9,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Purpose and audience",
+          "x": 20,
+          "y": 106,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-purpose",
+          "text": "[Describe this unit or initiative and the people it serves.]",
+          "x": 20,
+          "y": 117,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Relationship to the university",
+          "x": 20,
+          "y": 151,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-relationship",
+          "text": "[State the verified organizational relationship. Distinguish a department, a lab, an initiative and an independent organization.]",
+          "x": 20,
+          "y": 162,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Identity and applications",
+          "x": 20,
+          "y": 202,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-assets",
+          "text": "[Identify approved artwork, the source of the identity guidance and the applications that use it.]",
+          "x": 20,
+          "y": 213,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "Letterhead / A4",
+      "title": "{name} / Letterhead / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 82,
+          "y2": 82,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 93,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "recipient",
+          "text": "[Recipient]\n[Address]",
+          "x": 20,
+          "y": 106,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 130,
+          "width": 170,
+          "size": 5.644444444444444,
+          "leading": 7.902222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-body",
+          "text": "[Explain the purpose of the letter, the supporting information and the action requested.]",
+          "x": 20,
+          "y": 150,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 13
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Name]",
+          "x": 20,
+          "y": 249,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "author-role",
+          "text": "[Role]",
+          "x": 20,
+          "y": 256,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "continuation-a4",
+      "label": "Continuation sheet / A4",
+      "title": "{name} / Continuation sheet / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-heading",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 84,
+          "width": 170,
+          "size": 6.35,
+          "leading": 8.889999999999999,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-content",
+          "text": "[Continue the document here. Word output keeps this text editable and allows it to flow across pages.]",
+          "x": 20,
+          "y": 98,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 27
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "memo-a4",
+      "label": "Memorandum / A4",
+      "title": "{name} / Memorandum / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 82,
+          "y2": 82,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Memorandum",
+          "x": 20,
+          "y": 97,
+          "size": 7.76111111111111,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-to",
+          "text": "[To]",
+          "x": 20,
+          "y": 112,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-from",
+          "text": "[From]",
+          "x": 20,
+          "y": 122,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "memo-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 132,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "memo-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 150,
+          "width": 170,
+          "size": 5.291666666666666,
+          "leading": 7.408333333333332,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "memo-body",
+          "text": "[State the purpose, the supporting information and any decision or action requested.]",
+          "x": 20,
+          "y": 173,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 14
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "report-cover-a4",
+      "label": "Research report cover / A4",
+      "title": "{name} / Research report cover / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 20,
+          "width": 65,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 52,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Research report",
+          "x": 20,
+          "y": 103,
+          "size": 3.880555555555555,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "report-title",
+          "text": "[Report title]",
+          "x": 20,
+          "y": 126,
+          "width": 170,
+          "size": 10.583333333333332,
+          "leading": 12.347222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "report-subtitle",
+          "text": "[Question, scope and reporting period]",
+          "x": 20,
+          "y": 174,
+          "width": 170,
+          "size": 4.58611111111111,
+          "leading": 6.420555555555555,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Prepared by]",
+          "x": 20,
+          "y": 235,
+          "size": 3.880555555555555,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "document-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 246,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "report-page-a4",
+      "label": "Research report content / A4",
+      "title": "{name} / Research report content / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "report-section",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 84,
+          "width": 170,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "report-body",
+          "text": "[Describe the research question, methods, findings and limitations. Connect each conclusion to its evidence.]",
+          "x": 20,
+          "y": 103,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 17
+        },
+        {
+          "type": "text",
+          "id": "evidence-label",
+          "text": "[Evidence or figure caption]",
+          "x": 20,
+          "y": 220,
+          "size": 3.175,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-source",
+          "text": "[Source and access or capture date]",
+          "x": 20,
+          "y": 231,
+          "width": 170,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "muted",
+          "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "brief-a4",
+      "label": "Decision brief / A4",
+      "title": "{name} / Decision brief / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "brief-title",
+          "text": "[Decision title]",
+          "x": 20,
+          "y": 84,
+          "width": 170,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Decision requested",
+          "x": 20,
+          "y": 105,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "decision",
+          "text": "[State the specific decision and why it is needed.]",
+          "x": 20,
+          "y": 115,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Evidence and options",
+          "x": 20,
+          "y": 147,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "options",
+          "text": "[Describe the relevant evidence, available options and their tradeoffs.]",
+          "x": 20,
+          "y": 157,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 6
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Recommendation and next step",
+          "x": 20,
+          "y": 200,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "recommendation",
+          "text": "[Give the recommendation, its rationale and the next action.]",
+          "x": 20,
+          "y": 210,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-cover-a4",
+      "label": "Brand portfolio cover / A4",
+      "title": "{name} / Brand portfolio cover / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 20,
+          "width": 65,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 52,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 4.2333333333333325,
+              "leading": 5.503333333333333,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "gap": 5.873749999999999,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Brand portfolio",
+          "x": 20,
+          "y": 103,
+          "size": 3.880555555555555,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-title",
+          "text": "[Portfolio title]",
+          "x": 20,
+          "y": 126,
+          "width": 170,
+          "size": 10.583333333333332,
+          "leading": 12.347222222222221,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-subtitle",
+          "text": "[Units, initiatives and relationships included in this portfolio]",
+          "x": 20,
+          "y": 174,
+          "width": 170,
+          "size": 4.58611111111111,
+          "leading": 6.420555555555555,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Prepared by]",
+          "x": 20,
+          "y": 235,
+          "size": 3.880555555555555,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "document-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 246,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-page-a4",
+      "label": "Brand portfolio entry / A4",
+      "title": "{name} / Brand portfolio entry / A4",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 35,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 3.704166666666666,
+              "leading": 4.815416666666667,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 170
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 3.175,
+              "leading": 4.1275,
+              "gap": 5.185833333333333,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 170
+            }
+          ]
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 71,
+          "y2": 71,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-entry",
+          "text": "[Unit or initiative name]",
+          "x": 20,
+          "y": 84,
+          "width": 170,
+          "size": 7.76111111111111,
+          "leading": 10.865555555555554,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Purpose and audience",
+          "x": 20,
+          "y": 106,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-purpose",
+          "text": "[Describe this unit or initiative and the people it serves.]",
+          "x": 20,
+          "y": 117,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Relationship to the university",
+          "x": 20,
+          "y": 151,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-relationship",
+          "text": "[State the verified organizational relationship. Distinguish a department, a lab, an initiative and an independent organization.]",
+          "x": 20,
+          "y": 162,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Identity and applications",
+          "x": 20,
+          "y": 202,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "portfolio-assets",
+          "text": "[Identify approved artwork, the source of the identity guidance and the applications that use it.]",
+          "x": 20,
+          "y": 213,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "line",
+          "strokeWidth": 0.25
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference or version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "University of Northern British Columbia",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "presentation-cover",
+      "label": "Presentation cover",
+      "title": "{name} / Presentation cover",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "green"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 80,
+          "signature": "official",
+          "colourway": "white"
+        },
+        {
+          "type": "flow",
+          "x": 20,
+          "y": 61,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "label": "Department or academic unit",
+              "size": 5.644444444444444,
+              "leading": 7.337777777777777,
+              "font": "bold",
+              "colour": "white",
+              "wrap": 298
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "label": "Subdepartment or team",
+              "size": 4.938888888888888,
+              "leading": 6.420555555555555,
+              "gap": 7.478888888888888,
+              "font": "body",
+              "colour": "white",
+              "wrap": 298
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "id": "deck-title",
+          "text": "[Presentation title]",
+          "x": 20,
+          "y": 120,
+          "width": 298,
+          "size": 12.7,
+          "leading": 15.169444444444443,
+          "font": "bold",
+          "colour": "white",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "presenter",
+          "text": "[Presenter and date]",
+          "x": 20,
+          "y": 174,
+          "size": 5.644444444444444,
+          "font": "body",
+          "colour": "white"
+        }
+      ]
+    },
+    {
+      "id": "presentation-section",
+      "label": "Presentation section",
+      "title": "{name} / Presentation section",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 18,
+          "width": 65,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "text",
+          "id": "section-number",
+          "text": "[01]",
+          "x": 20,
+          "y": 70,
+          "size": 7.055555555555555,
+          "font": "bold",
+          "colour": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "section-title",
+          "text": "[Section title]",
+          "x": 20,
+          "y": 97,
+          "width": 298,
+          "size": 12.7,
+          "leading": 15.169444444444443,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "section-summary",
+          "text": "[Explain the question or finding for this section.]",
+          "x": 20,
+          "y": 153,
+          "width": 298,
+          "size": 6.35,
+          "leading": 8.889999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        }
+      ]
+    },
+    {
+      "id": "presentation-content",
+      "label": "Presentation content",
+      "title": "{name} / Presentation content",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 14,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Slide title]",
+          "x": 20,
+          "y": 53,
+          "width": 298,
+          "size": 9.877777777777776,
+          "leading": 13.828888888888887,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-body",
+          "text": "[Key finding]\n[Supporting evidence]\n[Implication or next step]",
+          "x": 20,
+          "y": 91,
+          "width": 280,
+          "size": 7.408333333333332,
+          "leading": 10.93611111111111,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 7
+        },
+        {
+          "type": "text",
+          "id": "slide-source",
+          "text": "[Source]",
+          "x": 20,
+          "y": 179,
+          "size": 3.5277777777777777,
+          "font": "body",
+          "colour": "muted"
+        }
+      ]
+    },
+    {
+      "id": "presentation-evidence",
+      "label": "Presentation evidence",
+      "title": "{name} / Presentation evidence",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 14,
+          "width": 55,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Evidence title]",
+          "x": 20,
+          "y": 53,
+          "width": 298,
+          "size": 9.877777777777776,
+          "leading": 13.828888888888887,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "x": 20,
+          "y": 77,
+          "width": 181,
+          "height": 80,
+          "fill": "light",
+          "stroke": "line",
+          "strokeWidth": 0.3
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "[Insert a figure or screenshot]",
+          "x": 110.5,
+          "y": 118,
+          "size": 4.938888888888888,
+          "font": "body",
+          "colour": "muted",
+          "anchor": "middle"
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-explanation",
+          "text": "[Explain what this evidence shows and how it supports the conclusion.]",
+          "x": 215,
+          "y": 86,
+          "width": 104,
+          "size": 5.997222222222222,
+          "leading": 8.396111111111109,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 8
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-source",
+          "text": "[Figure caption and source]",
+          "x": 20,
+          "y": 174,
+          "width": 298,
+          "size": 3.5277777777777777,
+          "leading": 4.938888888888888,
+          "font": "body",
+          "colour": "muted",
+          "maxLines": 2
+        }
+      ]
+    },
+    {
+      "id": "social-post",
+      "label": "Social announcement",
+      "title": "{name} / Social announcement",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "group": "Digital applications",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 74,
+          "y": 74,
+          "width": 460,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "flow",
+          "x": 74,
+          "y": 252,
+          "items": [
+            {
+              "id": "department",
+              "text": "",
+              "size": 20,
+              "leading": 26,
+              "wrap": 932,
+              "font": "bold",
+              "colour": "ink"
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "size": 18,
+              "leading": 24,
+              "gap": 32,
+              "wrap": 932,
+              "font": "body",
+              "colour": "ink"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "id": "announcement-title",
+          "text": "[Announcement title]",
+          "x": 74,
+          "y": 500,
+          "width": 932,
+          "size": 72,
+          "leading": 86,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "announcement-detail",
+          "text": "[Relevant event or project details]",
+          "x": 74,
+          "y": 830,
+          "width": 932,
+          "size": 30,
+          "leading": 43,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "announcement-link",
+          "text": "[Web address]",
+          "x": 74,
+          "y": 1003,
+          "size": 21.87222222222222,
+          "font": "body",
+          "colour": "green"
+        }
+      ]
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "title": "{name} / Email signature",
+      "width": 1000,
+      "height": 540,
+      "raster": 1000,
+      "group": "Digital applications",
+      "extension": "unbc-document-applications",
+      "description": "Local document layout using the official UNBC logo and identity rules. Department and subdepartment fields are ordinary text, separate from the logo. Replace bracketed instructional content before use.",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 24,
+          "y": 50,
+          "width": 290,
+          "signature": "official",
+          "colourway": "green"
+        },
+        {
+          "type": "line",
+          "x1": 350,
+          "x2": 350,
+          "y1": 30,
+          "y2": 510,
+          "stroke": "line",
+          "strokeWidth": 1
+        },
+        {
+          "type": "flow",
+          "x": 382,
+          "y": 61,
+          "items": [
+            {
+              "id": "author",
+              "text": "[Name]",
+              "size": 26,
+              "leading": 32,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 586
+            },
+            {
+              "id": "author-role",
+              "text": "[Role]",
+              "size": 20,
+              "leading": 26,
+              "gap": 36,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 586
+            },
+            {
+              "id": "department",
+              "text": "",
+              "size": 20,
+              "leading": 27,
+              "gap": 34,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 586
+            },
+            {
+              "id": "subdepartment",
+              "text": "",
+              "size": 18,
+              "leading": 25,
+              "gap": 31,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 586
+            },
+            {
+              "id": "contact-email",
+              "text": "[Email]",
+              "size": 18,
+              "leading": 25,
+              "gap": 37,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 586
+            },
+            {
+              "id": "contact-website",
+              "text": "[Web address]",
+              "size": 18,
+              "leading": 25,
+              "gap": 30,
+              "font": "body",
+              "colour": "green",
+              "wrap": 586
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sets": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letterhead / Letter",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "letterhead-letter",
+          "label": "First page"
+        },
+        {
+          "template": "continuation-letter",
+          "label": "Continuation"
+        }
+      ]
+    },
+    {
+      "id": "report-letter",
+      "label": "Research report / Letter",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "report-cover-letter",
+          "label": "Cover"
+        },
+        {
+          "template": "report-page-letter",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-letter",
+      "label": "Brand portfolio / Letter",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "portfolio-cover-letter",
+          "label": "Cover"
+        },
+        {
+          "template": "portfolio-page-letter",
+          "label": "Entry"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "Letterhead / A4",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "letterhead-a4",
+          "label": "First page"
+        },
+        {
+          "template": "continuation-a4",
+          "label": "Continuation"
+        }
+      ]
+    },
+    {
+      "id": "report-a4",
+      "label": "Research report / A4",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "report-cover-a4",
+          "label": "Cover"
+        },
+        {
+          "template": "report-page-a4",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "id": "portfolio-a4",
+      "label": "Brand portfolio / A4",
+      "group": "Documents",
+      "variants": [
+        {
+          "template": "portfolio-cover-a4",
+          "label": "Cover"
+        },
+        {
+          "template": "portfolio-page-a4",
+          "label": "Entry"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "group": "Presentations",
+      "variants": [
+        {
+          "template": "presentation-cover",
+          "label": "Cover"
+        },
+        {
+          "template": "presentation-section",
+          "label": "Section"
+        },
+        {
+          "template": "presentation-content",
+          "label": "Content"
+        },
+        {
+          "template": "presentation-evidence",
+          "label": "Evidence"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letter letterhead",
+      "format": "docx",
+      "pages": [
+        "letterhead-letter",
+        "continuation-letter"
+      ]
+    },
+    {
+      "id": "memo-letter",
+      "label": "Letter memorandum",
+      "format": "docx",
+      "pages": [
+        "memo-letter",
+        "continuation-letter"
+      ]
+    },
+    {
+      "id": "report-letter",
+      "label": "Letter research report",
+      "format": "docx",
+      "pages": [
+        "report-cover-letter",
+        "report-page-letter"
+      ],
+      "continue": true
+    },
+    {
+      "id": "brief-letter",
+      "label": "Letter decision brief",
+      "format": "docx",
+      "pages": [
+        "brief-letter",
+        "continuation-letter"
+      ]
+    },
+    {
+      "id": "portfolio-letter",
+      "label": "Letter brand portfolio",
+      "format": "docx",
+      "pages": [
+        "portfolio-cover-letter",
+        "portfolio-page-letter"
+      ],
+      "continue": true
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "format": "docx",
+      "pages": [
+        "letterhead-a4",
+        "continuation-a4"
+      ]
+    },
+    {
+      "id": "memo-a4",
+      "label": "A4 memorandum",
+      "format": "docx",
+      "pages": [
+        "memo-a4",
+        "continuation-a4"
+      ]
+    },
+    {
+      "id": "report-a4",
+      "label": "A4 research report",
+      "format": "docx",
+      "pages": [
+        "report-cover-a4",
+        "report-page-a4"
+      ],
+      "continue": true
+    },
+    {
+      "id": "brief-a4",
+      "label": "A4 decision brief",
+      "format": "docx",
+      "pages": [
+        "brief-a4",
+        "continuation-a4"
+      ]
+    },
+    {
+      "id": "portfolio-a4",
+      "label": "A4 brand portfolio",
+      "format": "docx",
+      "pages": [
+        "portfolio-cover-a4",
+        "portfolio-page-a4"
+      ],
+      "continue": true
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation / four layouts",
+      "format": "pptx",
+      "layouts": [
+        "presentation-cover",
+        "presentation-section",
+        "presentation-content",
+        "presentation-evidence"
+      ]
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "format": "html",
+      "template": "email-signature",
+      "emailLayout": {
+        "compactArtwork": true
+      }
+    }
+  ],
+  "documentation": {
+    "defaultPurpose": "report",
+    "publishedPurposes": [
+      "report",
+      "portfolio",
+      "brief"
+    ],
+    "margins": {
+      "topMm": 20,
+      "rightMm": 20,
+      "bottomMm": 20,
+      "leftMm": 20
+    },
+    "typography": {
+      "title": {
+        "font": "bold",
+        "sizePt": 30,
+        "lineHeight": 1.12
+      },
+      "heading1": {
+        "font": "bold",
+        "sizePt": 22
+      },
+      "heading2": {
+        "font": "bold",
+        "sizePt": 14
+      },
+      "body": {
+        "font": "body",
+        "sizePt": 10.5,
+        "lineHeight": 1.4
+      },
+      "label": {
+        "font": "label",
+        "sizePt": 8.5,
+        "trackingEm": 0
+      }
+    },
+    "logo": {
+      "widthMm": 55,
+      "clearSpaceMm": 8,
+      "options": {
+        "signature": "official",
+        "colourway": "green"
+      }
+    },
+    "affiliation": {
+      "mode": "document-text",
+      "departmentSizePt": 12,
+      "subdepartmentSizePt": 10.5,
+      "lineHeight": 1.3,
+      "gapAfterMm": 5,
+      "maxCharacters": 180,
+      "note": "Names are document metadata, not an official departmental sub-logo. Type sizes and page spacing are local report defaults; no official sub-logo sizing formula is claimed."
+    },
+    "footer": {
+      "text": "University of Northern British Columbia"
+    },
+    "examples": {
+      "report": {
+        "title": "Research report",
+        "subtitle": "Question methods findings and implications",
+        "summaryTitle": "Research question and summary",
+        "detailTitle": "Methods and scope",
+        "productName": "Study design",
+        "introduction": "Use this report to document a defined research question, the evidence examined and the findings it supports. Replace the instructional text with reviewed content and cite the source for each result.",
+        "summary": "State the research question and principal finding. Explain why it matters, the population or setting examined, and the limits of the available evidence.",
+        "detail": "Describe the study design, source data, collection period, preparation and analysis. Include the information needed to understand the result and reproduce the essential method.",
+        "scope": "Describe inclusion and exclusion criteria, uncertainty and any limits on interpretation. Separate planned work from completed analysis.",
+        "closingTitle": "Implications and next steps"
+      },
+      "portfolio": {
+        "title": "UNBC brand portfolio",
+        "subtitle": "Organizational relationships identity resources and applications"
+      },
+      "brief": {
+        "title": "Decision brief",
+        "subtitle": "Evidence options and the decision requested"
+      }
+    }
+  },
+  "guide": {
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "white",
+      "logo": {
+        "x": 64,
+        "y": 30,
+        "width": 250,
+        "signature": "official",
+        "colourway": "green"
+      },
+      "header": "UNBC / IDENTITY AND APPLICATIONS",
+      "footer": "UNBC / Source guidance February 2020 / Kit applications v1.0"
+    },
+    "pages": [
+      {
+        "name": "Identity",
+        "title": "University of Northern British Columbia",
+        "subtitle": "One complete official logo for documents and external audiences.",
+        "elements": [
+          {
+            "type": "logo",
+            "x": 96,
+            "y": 285,
+            "width": 1200,
+            "signature": "official",
+            "colourway": "green"
+          },
+          {
+            "type": "para",
+            "text": "The original university logo is retained as fixed vector artwork. Use the complete logo on official documents and material intended for external audiences.",
+            "x": 64,
+            "y": 590,
+            "width": 1250,
+            "size": 31,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "This kit pairs official identity resources with local editable applications. Local page layouts do not establish university approval of a report or a departmental logo.",
+            "x": 64,
+            "y": 765,
+            "width": 1250,
+            "size": 27,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "label",
+            "text": "SOURCE: GRAPHICS STANDARDS MANUAL / PAGES 2 AND 18",
+            "x": 64,
+            "y": 935,
+            "colour": "muted",
+            "size": 16
+          }
+        ]
+      },
+      {
+        "name": "Size and clear space",
+        "title": "Size the artwork and protect its space",
+        "subtitle": "Official minimum width and geometric clear-space rule.",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 100,
+            "y": 280,
+            "width": 1230,
+            "height": 285,
+            "fill": "light"
+          },
+          {
+            "type": "rect",
+            "x": 144,
+            "y": 324,
+            "width": 1142,
+            "height": 197,
+            "fill": "white"
+          },
+          {
+            "type": "logo",
+            "x": 144,
+            "y": 324,
+            "width": 1142,
+            "signature": "official",
+            "colourway": "green"
+          },
+          {
+            "type": "para",
+            "text": "Full logo: at least 38.1 mm (1.5 inches) wide. Width refers to visible artwork, excluding any surrounding blank space. Preserve the original aspect ratio.",
+            "x": 64,
+            "y": 630,
+            "width": 1250,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "On every side, reserve the difference between the top of B and the top of N. The supplied SVG measures approximately 0.03691 × full logo width: a 55 mm logo needs at least 2.03 mm clear. Documents reserve 8 mm as a local layout default.",
+            "x": 64,
+            "y": 776,
+            "width": 1250,
+            "size": 27,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "label",
+            "text": "SOURCE: MANUAL PAGES 3–4 / NUMERIC RATIO MEASURED FROM SOURCE ARTWORK",
+            "x": 64,
+            "y": 950,
+            "colour": "muted",
+            "size": 16
+          }
+        ]
+      },
+      {
+        "name": "Colour",
+        "title": "Use green white and black for the logo",
+        "subtitle": "Gold is an accent colour and never a logo colour.",
+        "elements": [
+          {
+            "type": "logo",
+            "x": 88,
+            "y": 298,
+            "width": 570,
+            "signature": "official",
+            "colourway": "green"
+          },
+          {
+            "type": "rect",
+            "x": 730,
+            "y": 246,
+            "width": 640,
+            "height": 210,
+            "fill": "green"
+          },
+          {
+            "type": "logo",
+            "x": 765,
+            "y": 298,
+            "width": 570,
+            "signature": "official",
+            "colourway": "white"
+          },
+          {
+            "type": "para",
+            "text": "Green on white. White preferably on solid UNBC Green. Black only for black-only reproduction on white or a light ground. No tints or other logo colours.",
+            "x": 64,
+            "y": 525,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 650,
+            "width": 560,
+            "height": 100,
+            "fill": "green"
+          },
+          {
+            "type": "rect",
+            "x": 750,
+            "y": 650,
+            "width": 560,
+            "height": 100,
+            "fill": "gold"
+          },
+          {
+            "type": "text",
+            "text": "UNBC Green  #035642",
+            "x": 64,
+            "y": 805,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "UNBC Gold  #B79527",
+            "x": 750,
+            "y": 805,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "RGB 3, 86, 66\nCMYK 95, 15, 62, 58\nPantone 343 C / 3435 U",
+            "x": 64,
+            "y": 855,
+            "width": 580,
+            "size": 22,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "RGB 183, 149, 39\nCMYK 8, 31, 100, 19\nPantone 125 C / 117 U",
+            "x": 750,
+            "y": 855,
+            "width": 580,
+            "size": 22,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      },
+      {
+        "name": "Department names",
+        "title": "Keep names separate from logo artwork",
+        "subtitle": "Editable document hierarchy with no invented sub-logo approval.",
+        "elements": [
+          {
+            "type": "logo",
+            "x": 80,
+            "y": 280,
+            "width": 930,
+            "signature": "official",
+            "colourway": "green"
+          },
+          {
+            "type": "text",
+            "text": "Department or academic unit",
+            "x": 80,
+            "y": 540,
+            "size": 38,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Subdepartment or team",
+            "x": 80,
+            "y": 602,
+            "size": 33,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Enter verified names. Long names wrap at word boundaries; do not condense, stretch or rebuild the university logo. Omit a level when it does not apply.",
+            "x": 64,
+            "y": 708,
+            "width": 1250,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "Communications and Marketing supplies official department brand extensions. The manual provides examples but no public sizing algorithm. This document hierarchy is ordinary text and uses local 12 pt / 10.5 pt defaults.",
+            "x": 64,
+            "y": 842,
+            "width": 1250,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      },
+      {
+        "name": "Typography",
+        "title": "Helvetica Neue with Arial as the alternative",
+        "subtitle": "The logo always uses its original outlined artwork.",
+        "elements": [
+          {
+            "type": "label",
+            "text": "OFFICIAL FAMILY",
+            "x": 64,
+            "y": 290,
+            "colour": "muted",
+            "size": 16
+          },
+          {
+            "type": "text",
+            "text": "Helvetica Neue",
+            "x": 64,
+            "y": 364,
+            "size": 68,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use the licensed face where it is available. UNBC encourages variation in weight within the family.",
+            "x": 64,
+            "y": 442,
+            "width": 1250,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "label",
+            "text": "OFFICIAL ALTERNATIVE",
+            "x": 64,
+            "y": 570,
+            "colour": "muted",
+            "size": 16
+          },
+          {
+            "type": "text",
+            "text": "Arial",
+            "x": 64,
+            "y": 640,
+            "size": 64,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Word and PowerPoint request Arial. The kit bundles open TeX Gyre Heros for reproducible previews and vector rendering; it is an implementation substitute, not a new official UNBC face.",
+            "x": 64,
+            "y": 730,
+            "width": 1250,
+            "size": 29,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "label",
+            "text": "SOURCE: GRAPHICS STANDARDS MANUAL / PAGE 9",
+            "x": 64,
+            "y": 935,
+            "colour": "muted",
+            "size": 16
+          }
+        ]
+      },
+      {
+        "name": "Reports and briefs",
+        "title": "Explain the question evidence and decision",
+        "subtitle": "Editable Letter and A4 applications for research and administration.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/report-cover-letter",
+            "x": 64,
+            "y": 270,
+            "width": 380,
+            "height": 492
+          },
+          {
+            "type": "nested",
+            "src": "templates/report-page-letter",
+            "x": 530,
+            "y": 270,
+            "width": 380,
+            "height": 492
+          },
+          {
+            "type": "nested",
+            "src": "templates/brief-letter",
+            "x": 996,
+            "y": 270,
+            "width": 380,
+            "height": 492
+          },
+          {
+            "type": "para",
+            "text": "Use the Documents editor for flowing reports, evidence figures, comparison tables, citations and editable Word masters. Use Templates for fixed stationery and graphic layouts.",
+            "x": 64,
+            "y": 850,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      },
+      {
+        "name": "Brand portfolio",
+        "title": "Describe each relationship accurately",
+        "subtitle": "University units and independent organizations have different relationships.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/portfolio-cover-letter",
+            "x": 64,
+            "y": 270,
+            "width": 380,
+            "height": 492
+          },
+          {
+            "type": "para",
+            "text": "The portfolio records a unit or initiative, its purpose, audience, organizational relationship, identity resources and applications.",
+            "x": 520,
+            "y": 295,
+            "width": 820,
+            "size": 30,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "text",
+            "text": "SPARK Lab",
+            "x": 520,
+            "y": 520,
+            "size": 38,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "An existing UNBC lab identity in this kit. Its presence does not establish an approved departmental sub-logo.",
+            "x": 520,
+            "y": 577,
+            "width": 820,
+            "size": 27,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "text",
+            "text": "Over the Edge",
+            "x": 520,
+            "y": 730,
+            "size": 38,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "An independent student newspaper associated with the UNBC community, not a university department.",
+            "x": 520,
+            "y": 787,
+            "width": 820,
+            "size": 27,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      },
+      {
+        "name": "Presentations and digital",
+        "title": "Keep the same identity across applications",
+        "subtitle": "Local slide and announcement layouts preserve the university logo.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/presentation-cover",
+            "x": 64,
+            "y": 260,
+            "width": 720,
+            "height": 405
+          },
+          {
+            "type": "nested",
+            "src": "templates/presentation-evidence",
+            "x": 64,
+            "y": 710,
+            "width": 430,
+            "height": 242
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-post",
+            "x": 900,
+            "y": 260,
+            "width": 460,
+            "height": 460
+          },
+          {
+            "type": "para",
+            "text": "Four editable slide layouts. Keep figures at a readable size, explain the evidence and retain source captions.",
+            "x": 550,
+            "y": 750,
+            "width": 790,
+            "size": 28,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "Official university templates are also included unchanged in official-templates/.",
+            "x": 550,
+            "y": 875,
+            "width": 790,
+            "size": 25,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      },
+      {
+        "name": "Sources and production",
+        "title": "Keep official sources alongside local applications",
+        "subtitle": "Original resources hashes and reproducible generators.",
+        "elements": [
+          {
+            "type": "para",
+            "text": "Original university resources: full logo EPS/GIF files, official website vector, Graphics Standards Manual, two letterheads, two document covers and the PowerPoint template.",
+            "x": 64,
+            "y": 285,
+            "width": 1250,
+            "size": 30,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "Local additions: report, decision brief and brand portfolio models; editable Letter and A4 stationery; four slide layouts; social announcement and HTML email signature; this guide and the portable consumer profile.",
+            "x": 64,
+            "y": 470,
+            "width": 1250,
+            "size": 30,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "Source differences are recorded in reference/PROVENANCE.json. The website logo uses #00573D; generated artwork retains every original path but uses the manual’s #035642. The manual’s gold RGB 183,149,39 agrees with #B79527; the website table’s 183,149,3 does not.",
+            "x": 64,
+            "y": 670,
+            "width": 1250,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.4
+          },
+          {
+            "type": "para",
+            "text": "Rebuild with npm run make:unbc. Review fonts, pagination and source content before sharing a finished document.",
+            "x": 64,
+            "y": 885,
+            "width": 1250,
+            "size": 26,
+            "colour": "ink",
+            "line": 1.4
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "UNBCLogo",
+    "symbolComponentName": "UNBCFullLogo",
+    "cssPrefix": "unbc",
+    "icons": false,
+    "intro": {
+      "eyebrow": "University of Northern British Columbia",
+      "headline": "UNBC\nIdentity and documents",
+      "body": "Official full-logo artwork and source guidance, with editable department names, research reports, decision briefs and a brand portfolio.",
+      "edition": "Kit v{displayVersion}",
+      "typeSample": "Research and\ncommunication",
+      "footer": "UNBC identity sources / local document applications"
+    },
+    "landing": {
+      "eyebrow": "University of Northern British Columbia",
+      "headline": "UNBC identity\nand document resources",
+      "body": "Explore source artwork, official standards and local document applications.",
+      "cta": "Official UNBC resources",
+      "contactEyebrow": "Source guidance",
+      "contactBody": "unbc.ca/communications-and-marketing",
+      "footer": "Official resources remain authoritative."
+    }
+  },
+  "files": [
+    {
+      "from": "docs/README.md",
+      "to": "README.md"
+    },
+    "docs/brand-details.html",
+    {
+      "from": "docs/brand-details.html",
+      "to": "guidelines/brand-details.html"
+    },
+    "fonts/GUST-FONT-LICENSE.txt",
+    "fonts/README.md",
+    "fonts/texgyreheros-bold.otf",
+    "fonts/texgyreheros-bolditalic.otf",
+    "fonts/texgyreheros-italic.otf",
+    "fonts/texgyreheros-regular.otf",
+    "reference/PROVENANCE.json",
+    "reference/README.md",
+    "reference/identity-rules.json",
+    "reference/logo-black.eps",
+    "reference/logo-black.gif",
+    "reference/logo-black.svg",
+    "reference/logo-green.eps",
+    "reference/logo-green.gif",
+    "reference/logo-green.svg",
+    "reference/logo-website.svg",
+    "reference/logo-white.eps",
+    "reference/logo-white.gif",
+    "reference/logo-white.svg",
+    "reference/unbc-graphics-standards-2020.pdf",
+    "official-templates/README.md",
+    "official-templates/documentcoverinteractive.docx",
+    "official-templates/documentcoverunbcgreen.docx",
+    "official-templates/lhopt1official.docx",
+    "official-templates/lhopt3officialaddress.docx",
+    "official-templates/unbcpowerpointtemplate.pptx"
+  ]
+}

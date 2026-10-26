@@ -1,0 +1,151 @@
+{
+  "schema": "brandkit/source-record/1",
+  "retrieved": "2026-10-26",
+  "resources": [
+    {
+      "file": "reference/logo-website.svg",
+      "url": "https://www.unbc.ca/themes/custom/unbc/gfx/logo-unbc-green.svg",
+      "status": "Original website bytes; original fill #00573D retained in this reference.",
+      "retrieved": "2026-10-26",
+      "bytes": 7116,
+      "sha256": "fe4782b4883bae311e988150bf20866db0a9d847507b968833ac77d1f63473a7"
+    },
+    {
+      "file": "reference/unbc-graphics-standards-2020.pdf",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf",
+      "status": "Original official manual, February 2020.",
+      "retrieved": "2026-10-26",
+      "bytes": 2808445,
+      "sha256": "bf676bb6dee72337a39cd4dacd8a705ddc1a0ce0196688bb5d5d75c1418452d9"
+    },
+    {
+      "file": "reference/logo-green.eps",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/Green UNBC Logo/logo_green.eps",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 356642,
+      "sha256": "22fa6bf39f8bcec6c3ae58d2409eeb1f331c6f6b2510540a872b14ee89b8997e"
+    },
+    {
+      "file": "reference/logo-green.gif",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/Green UNBC Logo/logo_green.gif",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 11890,
+      "sha256": "8c2fb96918981681e2fc886454844c990a74af26a327bbbeb01cf3ca286e6ae4"
+    },
+    {
+      "file": "reference/logo-black.eps",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/Black UNBC Logo/logo_black.eps",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 157059,
+      "sha256": "0982df94f6d61aa8657faaacf226aa1d7a25ac2b998c85168feea78eb46cad11"
+    },
+    {
+      "file": "reference/logo-black.gif",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/Black UNBC Logo/logo_black.gif",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 17582,
+      "sha256": "373a4343468542bf43da0053282d277090c37eed153c58e78cf4bc4d38d66fa3"
+    },
+    {
+      "file": "reference/logo-white.eps",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/White UNBC Logo/logo_white.eps",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 308978,
+      "sha256": "c59c96ae57ea963960e242c0880e782cecfbb45e8672375a93e1024f1c0687b7"
+    },
+    {
+      "file": "reference/logo-white.gif",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/Official-UNBC-Logo.zip",
+      "archiveMember": "Official-UNBC-Logo/White UNBC Logo/logo_white.gif",
+      "status": "Original file from the official logo archive; extracted without editing.",
+      "retrieved": "2026-10-26",
+      "bytes": 4045,
+      "sha256": "defab8eb34d59c1276b7b5c4888e6f720f57bca702eee98cf9a0bac05e851d76"
+    },
+    {
+      "file": "official-templates/lhopt1official.docx",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/lhopt1official.docx",
+      "status": "Original university template; unmodified.",
+      "retrieved": "2026-10-26",
+      "bytes": 47462,
+      "sha256": "0884de968eccb2cfa48ae205f66c86e4c86d56f60171de7a72e87de8d7b5178c"
+    },
+    {
+      "file": "official-templates/lhopt3officialaddress.docx",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/lhopt3officialaddress.docx",
+      "status": "Original university template; unmodified.",
+      "retrieved": "2026-10-26",
+      "bytes": 43471,
+      "sha256": "cee5e729e72bc8e96eaaa51da144cd12a9d582582b4ff798e55df3d6abcae407"
+    },
+    {
+      "file": "official-templates/documentcoverunbcgreen.docx",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/documentcoverunbcgreen.docx",
+      "status": "Original university template; unmodified.",
+      "retrieved": "2026-10-26",
+      "bytes": 51459,
+      "sha256": "25a82c43ab48d7c2543d98641b4aa12314ffbcd959f652f642b0d56c8e91886c"
+    },
+    {
+      "file": "official-templates/documentcoverinteractive.docx",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/documentcoverinteractive.docx",
+      "status": "Original university template; unmodified.",
+      "retrieved": "2026-10-26",
+      "bytes": 60551,
+      "sha256": "4f79c715a3b324a1f81641d21ddb42b56ffe2bf6107fc4d63b234c9cfbb19192"
+    },
+    {
+      "file": "official-templates/unbcpowerpointtemplate.pptx",
+      "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbcpowerpointtemplate.pptx",
+      "status": "Original university template; unmodified.",
+      "retrieved": "2026-10-26",
+      "bytes": 205655,
+      "sha256": "ac272862ca899d97073f93b1fab345bc830ecab939ef8caac0f6ae8081b4ca05"
+    }
+  ],
+  "transformations": [
+    {
+      "input": "reference/logo-website.svg",
+      "output": "brand.json/signatures/official",
+      "changes": "Remove the SVG wrapper, style selector definitions and title; replace logo class selectors with per-path colour placeholders; preserve all d and points values and the complete original arrangement."
+    },
+    {
+      "input": "reference/logo-website.svg",
+      "output": "generated green artwork",
+      "changes": "Replace website #00573D with the Graphics Standards Manual p. 8 official green #035642. Original bytes remain in reference/."
+    }
+  ],
+  "discrepancies": [
+    {
+      "topic": "Green",
+      "websiteSvg": "#00573D",
+      "officialManual": "#035642",
+      "decision": "Use the manual’s explicit digital colour recipe for generated artwork; retain website geometry and original source bytes."
+    },
+    {
+      "topic": "Gold RGB",
+      "websiteTable": [
+        183,
+        149,
+        3
+      ],
+      "officialManual": [
+        183,
+        149,
+        39
+      ],
+      "hex": "#B79527",
+      "decision": "Use the manual RGB, which agrees with the hex value on both sources."
+    }
+  ]
+}

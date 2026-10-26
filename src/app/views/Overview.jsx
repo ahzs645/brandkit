@@ -7,6 +7,7 @@ import { colourEntries } from '../colours.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
 import { Typography } from './Typography.jsx'
+import { OrganizationSources } from './Organization.jsx'
 
 /** Each proposed change to the logo, beside the approved one, with why and a way to try it. */
 const Revisions = ({ base, fonts, active, onRevision }) => {
@@ -191,7 +192,7 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
         </div>
       </section>
 
-      <section className="panel">
+      {brand.logoPolicy?.standaloneSymbol !== false && <section className="panel">
         <h2>Symbol</h2>
         <div className="symbol-row">
           {['standard', 'micro'].filter((size) => size === 'standard' || brand.symbol.microRadius != null || brand.symbol.microPaths).map((size) => (
@@ -208,7 +209,14 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
             <div><dt>Minimum</dt><dd>{brand.lockup?.minimumHorizontalWidthPx} px wide (horizontal), {brand.lockup?.minimumSymbolHeightPx} px tall (symbol)</dd></div>
           </dl>
         </div>
-      </section>
+      </section>}
+      {brand.organization && <section className="panel">
+        <h2>One institution with named departments</h2>
+        <p>{brand.organization.naming?.note}</p>
+        <p className="muted">Use Departments to set the parent and unit names, see the sizing rules, and carry those names into report, portfolio and stationery templates.</p>
+        <a className="button" href={`?brand=${encodeURIComponent(brand.id)}&view=organization${new URLSearchParams(globalThis.location?.search ?? '').has('share') ? '&share=1' : ''}`}>Set department names ↗</a>
+      </section>}
+      <OrganizationSources brand={brand} />
     </div>
   )
 }

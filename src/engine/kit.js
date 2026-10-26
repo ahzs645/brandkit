@@ -95,6 +95,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   }
 
   // Symbol, and any further symbols (BC Hydro's Gas Operations flame).
+  if (brand.logoPolicy?.standaloneSymbol !== false) {
   for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { colourKey: key }))
   for (const symbolId of Object.keys(brand.symbols ?? {})) {
     for (const paint of paintOptions(brand).filter((entry) => entry.colourway)) {
@@ -108,6 +109,7 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     const make = (ctx) => symbolDocument(ctx, { colourKey: key })
     if (rasters) for (const width of [256, 512, 1024]) add({ path: `symbol/${id}-symbol-${key}-${width}.png`, kind: 'png', width, svg: make })
     if (pdfs) add({ path: `symbol/pdf/${id}-symbol-${key}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+  }
   }
 
   // Patterns and icons.
@@ -193,13 +195,15 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   add({ path: `guidelines/${id}-palette.gpl`, kind: 'text', make: gimpPalette })
 
   // Web.
-  svgEntry('web/app-icon.svg', appIconSvg)
-  svgEntry('web/favicon.svg', faviconSvg)
+  if (brand.web?.icons !== false) {
+    svgEntry('web/app-icon.svg', appIconSvg)
+    svgEntry('web/favicon.svg', faviconSvg)
+  }
   add({ path: 'web/brand.css', kind: 'text', make: brandCss })
   add({ path: 'web/tokens.json', kind: 'text', make: (ctx) => json(tokens(ctx)) })
   add({ path: `web/${brand.web?.componentName ?? 'BrandLogo'}.tsx`, kind: 'text', make: reactComponent })
   add({ path: 'web/landing-template.html', kind: 'text', make: landingHtml })
-  if (rasters) {
+  if (rasters && brand.web?.icons !== false) {
     for (const size of [512, 1024]) add({ path: `web/app-icon-${size}.png`, kind: 'png', width: size, svg: appIconSvg })
     add({ path: 'web/apple-touch-icon.png', kind: 'png', width: 180, svg: appIconSvg })
     for (const size of FAVICON_SIZES) add({ path: `web/favicon-${size}.png`, kind: 'png', width: size, svg: faviconSvg })
@@ -231,13 +235,16 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
           if (rasters && logo.layout !== 'stacked' && logo.layout !== 'wordmark' && paint.raster) add({ path: `${folder}/logos/png/${logo.key}-${paint.id}-2048.png`, kind: 'png', width: 2048, svg: make })
         }
       }
-      for (const key of logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
-      if (brand.symbol.microRadius != null || brand.symbol.microPaths) svgEntry(`${folder}/symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(revised(ctx), { micro: true }))
+      if (brand.logoPolicy?.standaloneSymbol !== false) {
+        for (const key of logoColours) svgEntry(`${folder}/symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(revised(ctx), { colourKey: key }))
+        if (brand.symbol.microRadius != null || brand.symbol.microPaths) svgEntry(`${folder}/symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(revised(ctx), { micro: true }))
+      }
     }
   }
 
   // Supplied files, the definition itself, and the front page.
-  if (assets) for (const file of brand.files ?? []) add({ path: file.to ?? file, kind: 'asset', src: file.from ?? file })
+  if (assets) for (const file of brand.files ?? []) add({ path: file.to ?? file, kind: 'asset', src: file.from ?? file,
+    identityReference: Boolean(brand.logoPolicy && /^(reference\/|official-templates\/)/.test(file.to ?? file)) })
   add({ path: 'source/brand.json', kind: 'text', make: (ctx) => json(ctx.brand) })
   add({ path: 'source/README.md', kind: 'text', make: (ctx) => SOURCE_README(ctx.brand) })
   add({ path: 'web/asset-catalog.json', kind: 'index' })

@@ -5,7 +5,7 @@ publications. It adds document applications without modifying `brand.templates`,
 logo geometry or the existing identity exports.
 
 Every built-in brand has US Letter and A4 profiles and six reusable layouts. Product overviews,
-project reports and decision briefs use the same content model for Word and printable HTML.
+project reports, decision briefs and brand portfolios use the same content model for Word and printable HTML.
 The examples contain instructional text and a labelled screenshot placeholder; they do not
 claim that a fictional product exists or that work has been delivered to a client.
 
@@ -75,6 +75,7 @@ a product advertisement.
 | `typography` | Title, subtitle, heading1, heading2, body, caption, table, label and footer styles |
 | `colours` | Resolved ink, muted, accent, paper, light, line and reverse colours |
 | `header`, `footer` | Default running text; historical labels remain explicit |
+| `affiliation` | Department and subdepartment type sizes, wrapping, spacing and source-status note |
 | `logo` | Supplied logo options, asset paths, width, minimum width, clear-space rule and provenance |
 | `status` | Identity version, source, reconstruction status and document-extension label |
 | `rules` | Print, screenshot, caption, copy, contact and editing guidance |
@@ -92,6 +93,28 @@ Logo `clearSpaceMm` is additional layout spacing. It does not redefine the brand
 clear-space rule. The complete supplied artwork and minimum size remain authoritative. A full
 logo belongs on the cover; a running text header avoids shrinking a detailed logo below its
 minimum width.
+
+### Department and subdepartment naming
+
+Publication values accept `affiliation: { department, subdepartment }`. The same names can be
+supplied with flat `department` and `subdepartment` values when sharing values with ordinary
+templates. Names are stored separately in the publication source, rendered as editable text
+below the cover logo, and retained in Word custom properties. The supplied logo does not change.
+A subdepartment requires its parent department; empty names are omitted. Each name is limited
+to 180 characters. Whitespace is normalized, and text wraps at the available page width without
+being condensed, clipped or reduced in size.
+
+The default naming block uses 12 pt department text, 10.5 pt subdepartment text, 1.3 line height
+and a 5 mm gap after the block. These are document application defaults. A brand may override
+them through `documentation.affiliation` with `departmentSizePt`, `subdepartmentSizePt`,
+`lineHeight`, `gapAfterMm` and a source-aware `note`. Type must be 8–24 pt; subdepartment text
+cannot be larger than department text. Word carries reusable `AffiliationDepartment` and
+`AffiliationSubdepartment` paragraph styles. Formal unit identifiers still require the approved
+supplied artwork. UNBC's Communications and Marketing office supplies its departmental logos.
+
+The Documents view shares the selected names with the Organization view and native template
+fields. A downloaded publication source keeps its own names; importing it restores that
+affiliation without rewriting the logo or the other document content.
 
 ### Optional brand overrides
 
@@ -169,6 +192,14 @@ certification or an automated claim-verification mechanism.
 endorsement, compatibility or measured results without evidence. `report` explains actual
 findings and distinguishes observation from interpretation. `brief` explains a proposed
 decision and uses future or conditional language for work that has not occurred.
+`portfolio` records the brand architecture, supplied identity assets, naming hierarchy and
+document applications. Its examples explicitly separate official identity requirements from
+layout defaults and do not claim that a generated departmental identifier is approved.
+
+A brand may supply purpose-specific instructional defaults at
+`documentation.examples.report`, `documentation.examples.portfolio`, and so on. Caller values
+override those defaults. `documentation.defaultPurpose` chooses the initial purpose in the
+Documents view; it does not silently change an API caller's requested purpose.
 
 New purposes can be added deliberately in the shared model, with copy defaults and validation.
 They should not be inferred from a brand name or silently substituted for an existing purpose.
@@ -194,7 +225,7 @@ maintaining separate size lists.
 
 `documentationDocumentsFor(brand)` returns additions to the existing `brand.documents` list:
 
-- Six virtual DOCX descriptors for product/report/brief in Letter/A4. Each has
+- Eight virtual DOCX descriptors for product/report/brief/portfolio in Letter/A4. Each has
   `publication: true`, `purpose` and `paper`, and no template `pages`.
 - DOCX mappings for existing letterhead templates that do not already have a document mapping.
 
@@ -220,7 +251,7 @@ node scripts/brands/documentation.mjs
 node scripts/brands/documentation.mjs --check
 ```
 
-The first command updates `brands/<id>/USE.md` for the seven built-in brands and the marked
+The first command updates `brands/<id>/USE.md` for the registered brands and the marked
 factual sections of First Form's reference HTML. The second checks that these generated
 documents are current without writing. Pass one or more brand ids to limit the operation.
 Neither command writes `brand.json` or changes identity artwork.
@@ -234,3 +265,20 @@ After editing a publication, check the rendered result in both delivery formats.
 logos are complete, page titles fit, tables have readable columns, screenshots are legible,
 captions stay with their images, and page breaks remain sensible. The editable Word document
 is the maintained master; the PDF is the shared snapshot.
+
+### Published document starters
+
+The versioned publisher uses `documentation.publishedPurposes` when supplied; its default is
+`["report"]`. UNBC publishes `["report", "portfolio", "brief"]` in both Letter and A4,
+with a Word master, matching PDF, print preview and editable source for each. Release paths
+record the identity version, document application version and source commit. Source changes
+must be committed before the publisher runs, so a release cannot claim a stale revision.
+
+For a working draft, the CLI accepts one purpose or a comma-separated selection:
+
+```sh
+node bin/brandkit.mjs documents brands/unbc/brand.json --paper both --purpose report,portfolio,brief --pdf --out .documentation/unbc-review
+```
+
+Use `--values` to supply the affiliation and report content, or `--content` to regenerate an
+edited publication JSON. Export the current Word master again after making edits in Word.

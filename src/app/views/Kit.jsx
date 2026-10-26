@@ -3,6 +3,7 @@ import { buildKit, GROUPS, planKit } from '../../engine/kit.js'
 import { createBrowserRenderer, download, zip } from '../../export/render.js'
 import { formatBytes } from '../../engine/web.js'
 import { KIT_PACKS } from '../../engine/packs.js'
+import { readAffiliation } from '../affiliation.js'
 
 const KIND_LABEL = { text: 'vector or text', png: 'image', pdf: 'PDF', ico: 'icon', office: 'Office document', asset: 'supplied', index: 'index' }
 
@@ -12,6 +13,9 @@ export const Kit = ({ brand, fonts, source }) => {
   const [progress, setProgress] = useState(null)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
+  const affiliation = useMemo(() => readAffiliation(brand.id), [brand.id])
+  const [useUnitNames, setUseUnitNames] = useState(true)
+  const hasUnitNames = Boolean(brand.organization && (affiliation.department || affiliation.subdepartment))
   const plan = useMemo(() => planKit(brand, options), [brand, options])
   const groups = GROUPS.map((group) => [group, plan.filter((entry) => entry.group === group)]).filter(([, entries]) => entries.length)
   const kinds = plan.reduce((counts, entry) => ({ ...counts, [entry.kind]: (counts[entry.kind] ?? 0) + 1 }), {})
@@ -22,7 +26,8 @@ export const Kit = ({ brand, fonts, source }) => {
     setProgress({ done: 0, total: plan.length, path: '' })
     const started = performance.now()
     try {
-      const { files, skipped } = await buildKit({ brand, fonts }, {
+      const values = hasUnitNames && useUnitNames ? { ...affiliation, affiliation } : undefined
+      const { files, skipped } = await buildKit({ brand, fonts, values }, {
         ...options,
         renderer: options.rasters || options.pdfs || options.office ? createBrowserRenderer() : undefined,
         readAsset: options.assets ? source.read : undefined,
@@ -56,6 +61,7 @@ export const Kit = ({ brand, fonts, source }) => {
           <p className="muted">{KIT_PACKS.find((entry) => entry.id === options.pack)?.description}</p>
           <p className="muted">{plan.length} files: {Object.entries(kinds).map(([kind, count]) => `${count} ${KIND_LABEL[kind] ?? kind}`).join(', ')}. Every one is made in this browser from brand.json; nothing is uploaded.</p>
           <div className="checks">
+            {hasUnitNames && <label><input type="checkbox" checked={useUnitNames} onChange={event => setUseUnitNames(event.target.checked)} /> Use saved department names in generated templates and document starters</label>}
             <label><input type="checkbox" checked={options.rasters} onChange={() => toggle('rasters')} /> Images (PNG, favicon.ico)</label>
             <label><input type="checkbox" checked={options.pdfs} onChange={() => toggle('pdfs')} /> Graphic PDFs (logos, templates, the guide)</label>
             <label><input type="checkbox" checked={options.office} onChange={() => toggle('office')} /> Office documents (Word, PowerPoint, email)</label>

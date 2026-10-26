@@ -3,3 +3,8 @@
 brands/overtheedge/fonts/*-OFL.txt -whitespace -text
 brands/overtheedge/site/licenses/*-OFL.txt -whitespace -text
 brands/sparklab/fonts/*-OFL.* -whitespace -text
+brands/unbc/fonts/GUST-FONT-LICENSE.txt -whitespace -text
+
+# University-supplied artwork retains its original bytes and line endings.
+brands/unbc/reference/*.eps binary
+brands/unbc/reference/logo-website.svg -text

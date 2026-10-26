@@ -25,6 +25,7 @@
 // text); without it the later pages only lend their header and footer (a letter's second sheet).
 
 import { colour as resolveColour, face as faceOf } from './brand.js'
+import { lockup } from './artwork.js'
 import { textValue, toUnits, wrapLines } from './templates.js'
 
 const FIELD = /\{([\w-]+)\}/g
@@ -131,7 +132,7 @@ export const textItems = (ctx, template) => {
       case 'paragraph': {
         const size = u(element.size)
         const value = textValue(ctx, element)
-        const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(line, element.font ?? 'body', size)).slice(0, element.maxLines ?? Infinity)
+        const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(line, element.font ?? 'body', size), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) }).slice(0, element.maxLines ?? Infinity)
         add(index, element, { x: u(element.x), y: u(element.y), size, value, lines, leading: u(element.leading ?? size * 1.2), width: u(element.width), field: Boolean(element.id && !element.locked) })
         break
       }
@@ -141,7 +142,7 @@ export const textItems = (ctx, template) => {
           const merged = { ...element, ...item, type: 'text' }
           const size = u(item.size)
           const value = textValue(ctx, merged)
-          const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(line, merged.font ?? 'body', size)).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
+          const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(line, merged.font ?? 'body', size), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(item.id)) }).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
           if (!lines.length) continue
           baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
           const leading = u(item.leading ?? item.size)
@@ -174,7 +175,10 @@ const zonesOf = (items, height, bands = []) => {
   const headRule = items.filter((item) => item.kind === 'rule' && item.y < height / 4).sort((a, b) => b.y - a.y)[0]
   const footerRule = items.filter((item) => item.kind === 'rule' && item.y > height * 0.75).sort((a, b) => b.y - a.y)[0]
   const top = Math.max(headRule ? headRule.y + 1 : 0, ...bands)
-  return { top: top || height / 6, bottom: footerRule ? footerRule.y + 1 : height * 0.9 }
+  // The footer boundary rule belongs to the fixed artwork, like the header boundary rule.
+  // Leaving it in body text emits an empty bordered paragraph below the printable body,
+  // which Word/LibreOffice moves to an otherwise blank continuation page.
+  return { top: top || height / 6, bottom: footerRule ? footerRule.y - 1 : height * 0.9 }
 }
 
 const zoneOf = (item, zones) => (item.y < zones.top ? 'header' : item.y > zones.bottom ? 'footer' : 'body')
@@ -259,17 +263,53 @@ export const slideLayout = (ctx, template) => {
 }
 
 /** An email signature: the drawing left of the text as an image, then the text, line by line. */
-export const signatureLayout = (ctx, template) => {
+export const signatureLayout = (ctx, template, options = {}) => {
   const k = pointsPer(template)
   const items = textItems(ctx, template).filter((item) => item.kind !== 'rule').sort((a, b) => a.y - b.y || a.x - b.x)
   const left = Math.min(...items.map((item) => item.x)) / k
   const rule = template.elements.find((element) => element.type === 'line' && Math.abs(element.x1 - element.x2) < 0.01)
   const taken = new Set(items.map((item) => item.element))
-  return {
+  const layout = {
     template, k,
     // The image: everything that is not text, cropped to the left of the text (and its divider).
-    image: { width: rule ? rule.x1 - 8 : left - 16, height: template.height, elements: template.elements.filter((element, index) => !taken.has(index) && element !== rule && element.type !== 'background') },
+    image: { width: rule ? rule.x1 - 8 : left - 16, height: template.height, elements: template.elements.filter((element, index) => !taken.has(index) && element !== rule && (element.type !== 'background' || ctx.brand.logoPolicy?.allowInheritedColour === false)) },
     divider: rule ? { colour: hex(resolveColour(ctx.brand, rule.stroke ?? 'line')), gap: left - rule.x1 } : null,
     rows: rowsOf(items)
   }
+  if (!options.compactArtwork) return layout
+  if ((template.unit ?? 'px') !== 'px') throw new Error('Compact email artwork requires a template in pixels.')
+
+  // This opt-in layout is for complete supplied logos. Keep the original coordinates and crop
+  // only their surrounding canvas, including at least the brand's required clear space.
+  const artwork = layout.image.elements.filter(element => element.type !== 'background')
+  if (!artwork.length || artwork.some(element => element.type !== 'logo' || element.rotate || element.anchorX || element.anchorY || element.points != null)) {
+    throw new Error('Compact email artwork requires unrotated, top-left anchored complete logos.')
+  }
+  const boxes = artwork.map(element => {
+    const master = lockup(ctx, { signature: element.signature, family: element.family, layout: element.layout, colourway: element.colourway, colour: element.colour == null ? undefined : resolveColour(ctx.brand, element.colour) })
+    const padding = master.origin ? 0 : ctx.brand.lockup?.canvasPadding ?? 0
+    const width = toUnits(element.width, 'px')
+    const height = element.height == null ? null : toUnits(element.height, 'px')
+    const scale = height == null ? width / (master.width - 2 * padding) : Math.min(width / (master.width - 2 * padding), height / (master.height - 2 * padding))
+    const visibleWidth = (master.width - 2 * padding) * scale
+    const visibleHeight = (master.height - 2 * padding) * scale
+    const offset = height == null || !element.align || element.align === 'start' ? 0 : element.align === 'end' ? width - visibleWidth : (width - visibleWidth) / 2
+    const x = toUnits(element.x, 'px') + offset
+    const y = toUnits(element.y, 'px')
+    const clear = visibleWidth * (ctx.brand.logoPolicy?.clearSpaceRatio ?? 0)
+    return { x1: x - clear, y1: y - clear, x2: x + visibleWidth + clear, y2: y + visibleHeight + clear }
+  })
+  const x = Math.floor(Math.min(...boxes.map(box => box.x1)))
+  const y = Math.floor(Math.min(...boxes.map(box => box.y1)))
+  const right = Math.ceil(Math.max(...boxes.map(box => box.x2)))
+  const bottom = Math.ceil(Math.max(...boxes.map(box => box.y2)))
+  if (![x, y, right, bottom].every(Number.isFinite) || x < 0 || y < 0 || right > layout.image.width || bottom > layout.image.height || right <= x || bottom <= y) {
+    throw new Error('The email artwork pane must contain each complete logo and its required clear space.')
+  }
+  layout.image = { ...layout.image, sourceWidth: layout.image.width, sourceHeight: layout.image.height, width: right - x, height: bottom - y, viewport: { x, y, width: right - x, height: bottom - y } }
+  layout.compact = true
+  layout.verticalAlign = 'top'
+  layout.textWidth = Math.ceil(Math.max(...items.map(item => item.x / k + (item.width ?? item.measured) / k)) - left)
+  if (layout.divider) layout.divider = { ...layout.divider, imageGap: rule.x1 - right, textGap: left - rule.x1 }
+  return layout
 }

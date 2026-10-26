@@ -32,6 +32,7 @@
 
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, n } from './format.js'
+import { assertLogoPaint } from './identity.js'
 
 const PT = 1
 
@@ -202,6 +203,7 @@ export const layoutSignature = (ctx, signature, paint) => {
  */
 export const signatureLockup = (ctx, { signature: id, colourway, colour, padding } = {}) => {
   const { brand } = ctx
+  assertLogoPaint(brand, { colour, colourway: colour ? undefined : colourway })
   const signature = signatureOf(brand, id)
   if (!signature) throw new Error(`${brand.name} has no signatures`)
   const paint = paintFor(brand, colour ?? colourway ?? brand.defaultColourway ?? Object.keys(brand.colourways ?? {})[0])

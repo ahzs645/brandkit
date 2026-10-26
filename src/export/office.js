@@ -131,11 +131,15 @@ const STYLE_SPECS = [
   ['ListParagraph', 'List Paragraph', 'body', 'body', 11],
   ['TableText', 'Table Text', 'table', 'body', 10],
   ['Header', 'Header', 'label', 'label', 9],
-  ['Footer', 'Footer', 'footer', 'label', 9]
+  ['Footer', 'Footer', 'footer', 'label', 9],
+  ['AffiliationDepartment', 'Affiliation Department', 'affiliationDepartment', 'body', 12],
+  ['AffiliationSubdepartment', 'Affiliation Subdepartment', 'affiliationSubdepartment', 'body', 10.5]
 ]
 
 const styleSpec = (brand, profile, [, , token, key, size]) => {
-  const spec = profile.typography?.[token] ?? {}
+  const spec = token.startsWith('affiliation')
+    ? { ...profile.typography?.body, sizePt: profile.affiliation?.[token === 'affiliationDepartment' ? 'departmentSizePt' : 'subdepartmentSizePt'] ?? size, lineHeight: profile.affiliation?.lineHeight ?? 1.3, spaceAfterPt: token === 'affiliationDepartment' ? 2 : 0 }
+    : profile.typography?.[token] ?? {}
   const selected = brand.fonts?.[spec.font ?? key] ? spec.font ?? key : 'body'
   const font = officeFont(brand, selected, { weight: spec.weight, italic: spec.italic })
   return { spec, font, size: spec.sizePt ?? size }
@@ -284,6 +288,7 @@ export const docxFile = async (ctx, document, { png }) => {
       const lead = row[0]
       if (lead.kind === 'rule') {
         out.push(new Paragraph({
+          pageBreakBefore: breakBefore && !out.length,
           border: { bottom: { style: BorderStyle.SINGLE, size: Math.max(2, Math.round(lead.weight * 8)), color: lead.colour, space: 0 } },
           indent: { left: twips(lead.x - left), right: twips(Math.max(0, right - lead.x2)) },
           spacing: { before: twips(Math.max(0, lead.y - 2 - previous)), after: 0, line: twips(2), lineRule: LineRuleType.EXACT },
@@ -414,8 +419,16 @@ const linkFor = (item, text) => {
  */
 export const signatureHtml = async (ctx, document, { png, src } = {}) => {
   const template = templateOf(ctx.brand, document.template)
-  const layout = signatureLayout(ctx, template)
-  const image = await png(renderTemplate({ ...ctx, outline: true }, { ...template, width: layout.image.width, elements: layout.image.elements }).svg, Math.round(layout.image.width * 2))
+  const layout = signatureLayout(ctx, template, document.emailLayout)
+  let artwork = renderTemplate({ ...ctx, outline: true }, { ...template, width: layout.image.sourceWidth ?? layout.image.width, height: layout.image.sourceHeight ?? layout.image.height, elements: layout.image.elements }).svg
+  if (layout.image.viewport) {
+    const { x, y, width, height } = layout.image.viewport
+    artwork = artwork.replace(/<svg\b[^>]*>/, opening => opening
+      .replace(/\bwidth="[^"]*"/, `width="${width}"`)
+      .replace(/\bheight="[^"]*"/, `height="${height}"`)
+      .replace(/\bviewBox="[^"]*"/, `viewBox="${x} ${y} ${width} ${height}"`))
+  }
+  const image = await png(artwork, Math.round(layout.image.width * 2))
   const px = (points) => Math.round((points / 0.75) * 10) / 10
   // Each line keeps its distance from the one before, as the template spaces them.
   let previous = null
@@ -423,10 +436,11 @@ export const signatureHtml = async (ctx, document, { png, src } = {}) => {
     const lead = row[0]
     const height = Math.max(lead.leading, lead.size * 1.25)
     const gap = previous == null ? 0 : Math.max(0, lead.y - previous - height)
-    previous = lead.y
-    const style = `margin:${gap ? `${px(gap)}px` : 0} 0 0;font-family:'${ctx.brand.fonts?.[lead.key]?.family ?? lead.font}',Arial,Helvetica,sans-serif;font-size:${px(lead.size)}px;line-height:${px(Math.max(lead.leading, lead.size * 1.25))}px;color:#${lead.colour};font-weight:${lead.weight ?? (lead.bold ? 700 : 400)}${lead.tracking ? `;letter-spacing:${px(lead.tracking)}px` : ''}${lead.caps ? ';text-transform:uppercase' : ''}`
+    previous = layout.compact ? Math.max(...row.map(item => item.y + (item.lines.length - 1) * item.leading)) : lead.y
+    const wrapping = layout.compact ? ';white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word' : ''
+    const style = `margin:${gap ? `${px(gap)}px` : 0} 0 0;font-family:'${ctx.brand.fonts?.[lead.key]?.consumerFamily ?? ctx.brand.fonts?.[lead.key]?.family ?? lead.font}',Arial,Helvetica,sans-serif;font-size:${px(lead.size)}px;line-height:${px(Math.max(lead.leading, lead.size * 1.25))}px;color:#${lead.colour};font-weight:${lead.weight ?? (lead.bold ? 700 : 400)}${lead.tracking ? `;letter-spacing:${px(lead.tracking)}px` : ''}${lead.caps ? ';text-transform:uppercase' : ''}${wrapping}`
     const content = row.map((item) => {
-      const text = item.lines.join(' ')
+      const text = layout.compact ? item.value : item.lines.join(' ')
       const href = linkFor(item, text)
       return href ? `<a href="${escapeHtml(href)}" style="color:#${item.colour};text-decoration:none">${escapeHtml(text)}</a>` : escapeHtml(text)
     }).join(' ')
@@ -434,12 +448,18 @@ export const signatureHtml = async (ctx, document, { png, src } = {}) => {
   }).join('\n          ')
   const imageWidth = Math.round(layout.image.width)
   const imageHeight = Math.round(layout.image.height)
-  const html = `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse">
+  const backdrop = ctx.brand.logoPolicy?.allowInheritedColour === false ? ';background-color:#FFFFFF' : ''
+  const verticalAlign = layout.verticalAlign ?? 'middle'
+  const imageGap = Math.round(layout.divider?.imageGap ?? layout.divider?.gap ?? 16)
+  const textGap = Math.round(layout.divider?.textGap ?? layout.divider?.gap ?? 0)
+  const textWidth = layout.compact ? ` width="${layout.textWidth}"` : ''
+  const textStyle = layout.compact ? `width:${layout.textWidth}px;max-width:${layout.textWidth}px;` : ''
+  const html = `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse${backdrop}">
   <tr>
-    <td valign="middle" style="padding:0 ${Math.round(layout.divider?.gap ?? 16)}px 0 0">
+    <td valign="${verticalAlign}" style="padding:0 ${imageGap}px 0 0${backdrop}">
       <img src="${src ?? `data:image/png;base64,${base64(image)}`}" width="${imageWidth}" height="${imageHeight}" alt="${escapeHtml(ctx.brand.name)}" style="display:block;border:0;width:${imageWidth}px;height:${imageHeight}px">
     </td>
-    <td valign="middle" style="padding:0 0 0 ${Math.round(layout.divider?.gap ?? 0)}px;${layout.divider ? `border-left:1px solid #${layout.divider.colour}` : ''}">
+    <td valign="${verticalAlign}"${textWidth} style="${textStyle}padding:0 0 0 ${textGap}px;${layout.divider ? `border-left:1px solid #${layout.divider.colour}` : ''}">
           ${rows}
     </td>
   </tr>

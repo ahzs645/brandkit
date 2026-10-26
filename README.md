@@ -64,6 +64,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds fourteen templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
 | [`brands/overtheedge`](brands/overtheedge) | Over the Edge, UNBC's independent student newspaper, in a "Forest press" identity: an evolution of the paper's look. `npm run make:overtheedge` reads the logo path for path from the SVG its website serves (the full logo, without its subtext, stacked OVER / THE / EDGE, and the O as the symbol), and adds a palette from the site and its 2025 print covers, Source Serif 4, Anton, Inter, IBM Plex Mono and Gochi Hand, sixteen templates (cards, press pass, letterhead, issue cover, social posts, slides), ten icons, ten patterns and a nine-page guide. Two engine options let a logo be its lettering alone: a wordmark variant's own `height`, and a family's `lockupSymbol: false` with `stackedWordmark`. |
 | [`brands/sparklab`](brands/sparklab) | SPARK Lab, UNBC’s product creation lab, from [sparklab.unbc.ca](https://sparklab.unbc.ca/). `npm run make:sparklab` preserves the original arrow, spark and lettering, with the website’s orange/navy/cream palette, Outfit and Source Serif 4. It adds four logo arrangements and four colourways, thirty templates for stationery, projects, workshops, social, slides and lab materials, editable Word and PowerPoint files and an email signature, ten icons, twenty-one patterns, a fifteen-page guide, sixteen motion studies, a brand details page and an offline website preview. Arrows, Signal, Connections and Layers pair eighteen patterns with twelve applications, including Word lab notes and a project report, three PowerPoint covers, and an interactive comparison board in `docs/patterns-and-templates.html`. `docs/arrow-patterns.html` explores twelve arrow and spark studies, including mixed directions at three scales, loose scatter, cross currents, orbit and constellations, with live scale, density and colour controls and SVG download. Source notes and font licences accompany the kit; layouts and motion are kit extensions. |
+| [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view explains sizing and carries separate department/subdepartment text into Documents and Templates. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. Official departmental sub-logos must come from UNBC Communications and Marketing; entered names do not create one. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 | [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
 | [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the Corporate, Gas Operations, Rail and Formal signatures in their colourways; Corporate, Gas and Rail stationery; forms; publication covers and mastheads; advertising; audio-visual; signs; vehicles; and a guide with the background-value rules, incorrect usage and minimum sizes. |
@@ -102,6 +103,29 @@ and anything else as JSON. Brands made or edited are kept in the browser until d
 
 The definition is documented in [docs/brand-schema.md](docs/brand-schema.md).
 
+## Organizational names and identity rules
+
+A brand can declare an `organization` with separate department and subdepartment names. The
+**Departments** view shows the complete logo, its minimum width and surrounding space, and the
+document text hierarchy. Save the names once to use them in **Documents** and native
+**Templates**. Names remain editable, wrap without condensing and allow up to 180 characters
+per level; a subdepartment requires its parent department. The width control is a sizing
+calculator. It does not change a document's configured print profile.
+
+UNBC uses the full logo and published colour, size and clear-space rules. Its 12 pt department
+and 10.5 pt subdepartment text, 55 mm report logo and 20 mm page margins are local document
+defaults. The public guide does not provide a numeric construction formula for departmental
+sub-logos. The kit therefore keeps the names separate and links the official source materials.
+The brand portfolio links SPARK Lab as a UNBC lab and Over the Edge as an independent student
+newspaper; a relationship is not a claim of sub-logo approval.
+
+Optional `logoPolicy` controls restrict logo paint, disable standalone symbols and enforce a
+minimum physical size in native templates. `web.icons: false` omits favicons and app icons.
+These rules also travel in the portable consumer profile. UNBC's host font is Arial, the
+documented alternative to Helvetica Neue; bundled TeX Gyre Heros is identified separately as
+the open rendering substitute. See [the schema](docs/brand-schema.md) and
+[consumer contract](docs/consuming-brandkit.md) for the data fields and integration rules.
+
 ## Pattern library
 
 Every brand has a **Patterns** tab, with a searchable gallery of its registered patterns,
@@ -111,7 +135,7 @@ shows existing artwork and documented relationships without changing the identit
 
 Links from this section also open the existing interactive explorers, including SPARK Lab's
 arrow/spark studies and its pattern/application comparison board. These show additional ways
-to arrange the iconography and adjust scale, density and colour. The other six brands have
+to arrange the iconography and adjust scale, density and colour. Six brands have
 [pattern collections](brands/patterns.html) with 45 supporting studies, 12 editable applications,
 individual reference sheets and PowerPoint layouts. Historical BC collections retain their
 source and reconstruction notices.
@@ -202,7 +226,8 @@ node bin/brandkit.mjs check path/to/brand.json # validate a definition
 npm run make:documentation -- --check           # all brand use guides match their definitions
 npm run test:documents                         # model, Office and cross-brand export checks
 npm run build && npm run test:documents:browser # edit, import and download at desktop/phone widths
-npm run build:documentation -- --pdf            # all seven brands: Word masters + matching PDFs
+npm run make:unbc                               # rebuild UNBC from its vendored official sources
+npm run build:documentation -- --pdf            # configured brand starters: Word masters + PDFs
 ```
 
 `npm run test:browser` checks ddcnorth v2.3 in the app's Motion tab and its motion and
@@ -219,8 +244,8 @@ GitHub Pages builds from `main` (`.github/workflows/pages.yml`).
 
 ## Write, review and share documents
 
-Every configured brand has a **Documents** view, US Letter and A4 profiles, and three editable
-starters: product overview, project report and decision brief. Six page layouts cover a title
+Every configured brand has a **Documents** view, US Letter and A4 profiles, and four editable
+starters: product overview, project report, decision brief and brand portfolio. Six page layouts cover a title
 page, explanatory content, product/workstream detail, screenshot with caption, comparison table
 and closing page. Add your copy and an actual PNG/JPEG capture, then download Word, printable
 HTML or the editable publication JSON. Source JSON can be opened again for export.
@@ -256,8 +281,9 @@ The browser's print view is useful for review, but use the Word master to produc
 the same pagination as the maintained document. Editing a Word file does not update its
 original JSON; choose Word or the content model as the source for that publication.
 
-CI checks all brand guides, runs the document tests and browser workflow, and builds 14 Word/PDF
-example pairs for review. On main, the [published starters](https://projects.ahmadjalil.com/brandkit/documentation/)
+CI checks all brand guides, runs the document tests and browser workflow, and builds the configured
+Word/PDF example pairs for review: a report in both paper sizes for the seven earlier brands,
+plus a report, portfolio and brief in both sizes for UNBC, for 20 pairs. On main, the [published starters](https://projects.ahmadjalil.com/brandkit/documentation/)
 ship with the site. PR runs attach them as an artifact without deploying. See
 [the document model and editing rules](docs/documentation.md) for custom pages, screenshot
 provenance, copy conventions and font details.

@@ -46,8 +46,12 @@ jobs:
       - name: Install document and browser renderers
         run: |
           sudo apt-get update
-          sudo apt-get install -y libreoffice-writer fontconfig
+          sudo apt-get install -y libreoffice-writer fontconfig poppler-utils
           npx playwright install --with-deps chromium
+      - name: Verify native Word pagination
+        run: npm run test:documents:pagination
+        env:
+          REQUIRE_DOCUMENT_RENDERERS: '1'
       - name: Verify the document workflow
         run: npm run test:documents:browser
         env:
@@ -55,6 +59,11 @@ jobs:
           BASE_PATH: /${{ github.event.repository.name }}/
       - name: Build Word masters and matching PDF starters for every brand
         run: npm run build:documentation -- --pdf --out dist/documentation
+      - name: Verify UNBC naming and export rules
+        run: npm run test:unbc:browser
+        env:
+          SCREENSHOT_DIR: .documentation/unbc-browser
+          BASE_PATH: /${{ github.event.repository.name }}/
       - name: Verify the pattern library for every brand
         run: npm run test:patterns:view:browser
         env:
@@ -73,6 +82,7 @@ jobs:
           path: |
             .documentation/browser
             .documentation/patterns-browser
+            .documentation/unbc-browser
           if-no-files-found: ignore
           include-hidden-files: true
       - uses: actions/upload-pages-artifact@v3

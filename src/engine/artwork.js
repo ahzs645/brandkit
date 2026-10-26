@@ -7,6 +7,7 @@
 import { colour as resolveColour, family as findFamily, fill } from './brand.js'
 import { attrs, escape, n } from './format.js'
 import { paintFor, paintMarkup, signatureLockup } from './signatures.js'
+import { assertLogoPaint } from './identity.js'
 
 const symbolViewBox = (brand) => {
   const [, , width, height] = brand.symbol.viewBox
@@ -21,6 +22,7 @@ const symbolViewBox = (brand) => {
  * optical small-size variant where the brand defines one.
  */
 export const mark = ({ brand }, colour = 'currentColor', micro = false, symbolId) => {
+  if (brand.logoPolicy?.standaloneSymbol === false) throw new Error(`${brand.name} artwork must use the complete-logo placement, not a symbol or motif.`)
   const symbol = (symbolId && brand.symbols?.[symbolId]) || brand.symbol
   const size = micro ? 'micro' : 'standard'
   // A colourway's paint function colours a layered symbol part by part ({upper}, {lower}…);
@@ -92,6 +94,9 @@ export const LAYOUTS = ['horizontal', 'stacked', 'wordmark', 'wordmark-stacked',
  */
 export const lockup = (ctx, { family: familyId, layout = 'horizontal', mode = 'outlined', colour: given, wordmarkColour, subtextColour, showWordmark = true, signature, colourway } = {}) => {
   const { brand } = ctx
+  assertLogoPaint(brand, { colour: given, colourway })
+  if (wordmarkColour != null) assertLogoPaint(brand, { colour: wordmarkColour })
+  if (subtextColour != null) assertLogoPaint(brand, { colour: subtextColour })
   // A brand whose logo is composed (brand.signatures) rather than a fixed wordmark: the layout
   // names the signature, and a colourway, or else a single colour, paints it. With neither, the
   // brand's default colourway does.
@@ -238,6 +243,7 @@ const COUNT_WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'
 
 export const symbolDocument = (ctx, { colourKey, micro = false, master = false, symbolId, colourway }) => {
   const { brand } = ctx
+  if (brand.logoPolicy?.standaloneSymbol === false) throw new Error(`${brand.name} uses the complete supplied logo; standalone symbol exports are disabled.`)
   if (symbolId) {
     const other = brand.symbols[symbolId]
     const [x, y, w, h] = other.viewBox

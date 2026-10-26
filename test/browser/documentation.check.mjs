@@ -10,7 +10,7 @@ import { chromium } from 'playwright'
 import { unzipSync, strFromU8 } from 'fflate'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
-const ids = ['firstform', 'ddcnorth', 'overtheedge', 'sparklab', 'northwind', 'bc-province-1977', 'bc-hydro-1983']
+const ids = JSON.parse(readFileSync(resolve(root, 'brands/index.json'), 'utf8')).map((entry) => entry.id)
 const shotDir = process.env.SCREENSHOT_DIR ? resolve(process.env.SCREENSHOT_DIR) : null
 if (shotDir) mkdirSync(shotDir, { recursive: true })
 const launchArgs = process.env.CHROMIUM_ARGS ? JSON.parse(process.env.CHROMIUM_ARGS) : ['--no-sandbox', '--disable-dev-shm-usage']
@@ -87,6 +87,26 @@ const checkFirstFormEditing = async (page) => {
   assert.equal(changed.profile.paper.widthMm, 210)
   assert.equal(changed.profile.paper.heightMm, 297)
 
+  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('portfolio')
+  await waitForPreview(page, 'First Form brand portfolio')
+  const department = 'College of Science and Management and Interdisciplinary Research'
+  const subdepartment = 'Natural Resources and Environmental Studies Research Laboratory'
+  await page.getByLabel('Department or school', { exact: true }).fill(department)
+  await page.getByLabel('Subdepartment or unit', { exact: true }).fill(subdepartment)
+  await page.frameLocator('.documents-preview iframe').getByText(subdepartment, { exact: true }).waitFor()
+  const named = (await sourceOf(page)).model
+  assert.deepEqual(named.affiliation, { department, subdepartment })
+  assert.equal(named.purpose, 'portfolio')
+  assert.equal(named.profile.affiliation.mode, 'document-text')
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('brandkit:affiliation:firstform')))
+  assert.deepEqual(stored, { department, subdepartment }, 'Names persist independently of document content')
+  const wordNames = checkWord(await download(page, 'Download Word'), named.title).xml
+  assert.ok(wordNames.includes(department) && wordNames.includes(subdepartment), 'Both names remain native Word text')
+  assert.match(wordNames, /w:pStyle w:val="AffiliationDepartment"/)
+  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('brief')
+  await waitForPreview(page, 'Decision brief')
+  report.editing.push('brand portfolio, named unit, native Word styles and shared naming persistence')
+
   const title = page.getByLabel('Title', { exact: true })
   await title.fill('A temporary document title')
   await waitForPreview(page, 'A temporary document title')
@@ -148,9 +168,12 @@ const checkFirstFormEditing = async (page) => {
 
 try {
   browser = await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args: launchArgs })
+  // Keep an explicit context alive between brands. Some packaged Chromium builds close their
+  // single process when an implicit newPage context is destroyed with its last page.
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true, reducedMotion: 'reduce' })
   for (const id of ids) {
     const brand = JSON.parse(readFileSync(resolve(root, `brands/${id}/brand.json`), 'utf8'))
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true, reducedMotion: 'reduce' })
+    const page = await context.newPage()
     page.setDefaultTimeout(45000)
     const errors = []
     page.on('pageerror', (error) => errors.push(error.message))
@@ -160,18 +183,20 @@ try {
     try {
       await page.goto(`${server.resolvedUrls.local[0]}?brand=${id}&view=documents`, { waitUntil: 'networkidle' })
       await page.getByRole('heading', { name: `Write a document with ${brand.name}`, exact: true }).waitFor()
-      await waitForPreview(page, 'Product overview')
+      const defaultPurpose = brand.documentation?.defaultPurpose ?? 'product'
+      const defaultTitle = brand.documentation?.examples?.[defaultPurpose]?.title ?? { product: 'Product overview', report: 'Project report', brief: 'Decision brief', portfolio: `${brand.name} brand portfolio` }[defaultPurpose]
+      await waitForPreview(page, defaultTitle)
       assert.equal(await page.locator('.documents-preview [role="alert"]').count(), 0, `${id}: usable document preview`)
 
       const source = await sourceOf(page)
-      assert.equal(source.name, `${id}-product-letter.json`)
+      assert.equal(source.name, `${id}-${defaultPurpose}-letter.json`)
       assert.equal(source.model.schema, 'brandkit/publication/1')
       assert.equal(source.model.profile.brandId, id)
       assert.equal(source.model.pages.length, 6)
       assert.equal(source.model.profile.typography.body.family, brand.fonts.body.family)
       checkWord(await download(page, 'Download Word'), source.model.title)
       const html = await download(page, 'Download print view')
-      assert.equal(html.name, `${id}-product-letter.html`)
+      assert.equal(html.name, `${id}-${defaultPurpose}-letter.html`)
       const htmlText = html.bytes.toString('utf8')
       assert.equal((htmlText.match(/<article class="page /g) ?? []).length, 6, `${id}: HTML contains all six document layouts`)
       assert.match(htmlText, /data:image\/svg\+xml;base64,/, `${id}: HTML embeds its brand artwork`)
@@ -203,6 +228,10 @@ try {
       report.brands.push(id)
       report.mobileWidths.push({ brand: id, width: 390 })
       console.log(`PASS ${id}: six layouts, Word/source/HTML/consumer downloads, 390 px layout${id === 'firstform' ? ', editing and import recovery' : ''}`)
+    } catch (error) {
+      await screenshot(page, `documents-${id}-failure.png`).catch(() => {})
+      console.error(`${id} browser errors: ${JSON.stringify(errors)}`)
+      throw error
     } finally { await page.close() }
   }
   if (shotDir) writeFileSync(resolve(shotDir, 'documentation-summary.json'), `${JSON.stringify(report, null, 2)}\n`)

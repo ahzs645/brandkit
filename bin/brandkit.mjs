@@ -29,7 +29,7 @@ const encoder = new TextEncoder()
 const json = (value) => encoder.encode(`${JSON.stringify(value, null, 2)}\n`)
 const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|documents|presentations|web|print] [--office]
-       brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief] [--values values.json | --content publication.json] [--pdf] [--zip]
+       brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
 
 The documents command creates native Word files, printable HTML, editable content JSON and brand assets.
@@ -78,8 +78,9 @@ const main = async () => {
   const out = resolve(option('--out') ?? `${brand.id}-${command === 'documents' ? 'documents' : 'kit'}`)
   const paper = option('--paper') ?? 'both'
   const purpose = option('--purpose')
+  const purposes = purpose?.split(',')
   if (!['both', 'letter', 'a4'].includes(paper)) throw new Error('--paper must be letter, a4 or both.')
-  if (purpose && !['product', 'report', 'brief'].includes(purpose)) throw new Error('--purpose must be product, report or brief.')
+  if (purposes?.some((entry) => !['product', 'report', 'brief', 'portfolio'].includes(entry))) throw new Error('--purpose must be product, report, brief or portfolio, or a comma-separated list of these.')
   const withOffice = command === 'documents' || has('--office')
   if ((contentPath || has('--pdf')) && !withOffice) throw new Error('--content and --pdf require documents or build --office.')
   const renderer = withOffice ? await (await import('../src/export/node.js')).createNodeRenderer() : undefined
@@ -87,7 +88,7 @@ const main = async () => {
     if (entry.document) {
       if (contentPath) return false
       if ((paper !== 'both' || purpose) && !entry.document.publication) return false
-      if (entry.document.publication && ((paper !== 'both' && entry.document.paper !== paper) || (purpose && entry.document.purpose !== purpose))) return false
+      if (entry.document.publication && ((paper !== 'both' && entry.document.paper !== paper) || (purposes && !purposes.includes(entry.document.purpose)))) return false
     }
     if (paper !== 'both' && /^source\/document-profile-/.test(entry.path)) return entry.path.endsWith(`-${paper}.json`)
     return true

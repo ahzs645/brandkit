@@ -13,6 +13,7 @@ const prefix = (brand) => brand.web?.cssPrefix ?? brand.id
 /** The square app icon: the symbol, centred on the brand colour. */
 export const appIconSvg = (ctx) => {
   const { brand } = ctx
+  if (brand.web?.icons === false) throw new Error(`${brand.name} does not provide an approved app icon.`)
   const spec = brand.web?.appIcon ?? {}
   const [, , sw, sh] = brand.symbol.viewBox
   const scale = (spec.size ?? 760) / sw
@@ -24,6 +25,7 @@ export const appIconSvg = (ctx) => {
 /** The favicon: the micro symbol in currentColor, switching colour with the system theme. */
 export const faviconSvg = (ctx) => {
   const { brand } = ctx
+  if (brand.web?.icons === false) throw new Error(`${brand.name} does not provide an approved favicon.`)
   const spec = brand.web?.favicon ?? {}
   const [, , sw, sh] = brand.symbol.viewBox
   const scale = (spec.size ?? 56) / sw
@@ -65,7 +67,7 @@ ${Object.entries(brand.colours).map(([key, value]) => `  --${p}-${key}: ${value}
 }
 .${p}-display { font-family: var(--${p}-font-display); font-weight: ${display.weight ?? 500}; letter-spacing: ${display.trackingEm ?? 0}em; line-height: 1.06; font-size: clamp(2.5rem, 7vw, 5rem); }
 .${p}-body { font-family: var(--${p}-font-body); font-size: 1rem; line-height: 1.5; }
-.${p}-label { font-family: var(--${p}-font-label); font-size: .75rem; line-height: 1.4; letter-spacing: ${labels.trackingEm ?? 0.12}em; text-transform: uppercase; }
+.${p}-label { font-family: var(--${p}-font-label); font-size: .75rem; line-height: 1.4; letter-spacing: ${labels.trackingEm ?? 0.12}em; text-transform: ${['none', 'uppercase', 'lowercase', 'capitalize'].includes(labels.textTransform) ? labels.textTransform : 'uppercase'}; }
 .${p}-logo { display: block; max-width: 100%; height: auto; }
 /* Only inline SVG inherits currentColor. SVG loaded through <img> does not. */
 `
@@ -75,7 +77,7 @@ export const tokens = ({ brand }) => ({
   version: brand.version,
   colour: Object.fromEntries(Object.entries(brand.colours).map(([key, value]) => [key, { value, type: 'color' }])),
   roles: Object.fromEntries(Object.keys(brand.roles ?? {}).map((role) => [role, resolveColour(brand, brand.roles[role])])),
-  font: { body: brand.fonts?.body?.family, display: brand.fonts?.display?.family, label: brand.fonts?.label?.family },
+  font: { body: brand.fonts?.body?.consumerFamily ?? brand.fonts?.body?.family, display: brand.fonts?.display?.consumerFamily ?? brand.fonts?.display?.family, label: brand.fonts?.label?.consumerFamily ?? brand.fonts?.label?.family },
   typeScale: {
     display: { size: 72, lineHeight: 80, weight: brand.typography?.headlines?.weight ?? 500, tracking: `${brand.typography?.headlines?.trackingEm ?? 0}em` },
     h1: { size: 48, lineHeight: 56, weight: brand.typography?.headlines?.weight ?? brand.fonts?.display?.weight ?? 500 },
@@ -99,9 +101,48 @@ const jsx = (art) => {
   return out
 }
 
+// Fixed institutional artwork uses explicit colourways and preserves its physical minimum.
+const fixedColourReactComponent = (ctx) => {
+  const { brand } = ctx
+  const name = brand.web?.componentName ?? 'BrandLogo'
+  const paints = Object.entries(brand.colourways)
+  const rows = paints.map(([id, paint]) => {
+    const { width, height, art } = lockup(ctx, { signature: brand.signatures[0].id, colourway: id })
+    return `  ${JSON.stringify(id)}: { viewBox: ${JSON.stringify(`0 0 ${n6(width)} ${n6(height)}`)}, background: ${JSON.stringify(resolveColour(brand, paint.ground ?? 'white'))}, shape: (<g>${jsx(art)}</g>) }`
+  })
+  const minPx = (brand.logoPolicy.minimumWidthMm ?? 0) * 96 / 25.4
+  return `import * as React from 'react';
+
+/** Complete supplied artwork. Width is in CSS pixels (96 px per CSS inch).
+ * The minimum is a kit mapping of the print rule, not a separately published pixel standard.
+ * Padding follows the measured clear-space ratio. Unit names belong in separate document text.
+ */
+const ARTWORK = {
+${rows.join(',\n')}
+};
+export type ${name}Props = Omit<React.SVGProps<SVGSVGElement>, 'children' | 'viewBox' | 'width' | 'height' | 'color' | 'title'> & {
+  colourway?: keyof typeof ARTWORK;
+  width?: number;
+  title?: string;
+};
+export function ${name}({ colourway = ${JSON.stringify(brand.defaultColourway)}, width = 240, title = ${JSON.stringify(brand.name)}, style, ...props }: ${name}Props) {
+  const artwork = ARTWORK[colourway];
+  const actualWidth = Number.isFinite(width) ? Math.max(${n6(minPx)}, width) : 240;
+  const titleId = React.useId();
+  return <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox={artwork.viewBox}
+    width={actualWidth} role="img" aria-labelledby={titleId}
+    style={{ ...style, display: 'block', boxSizing: 'content-box', width: actualWidth, minWidth: ${n6(minPx)}, maxWidth: 'none', height: 'auto', padding: actualWidth * ${brand.logoPolicy.clearSpaceRatio ?? 0}, background: artwork.background }}>
+    <title id={titleId}>{title}</title>{artwork.shape}
+  </svg>;
+}
+export default ${name};
+`
+}
+
 /** A typed React component with every family and layout inlined, drawn in currentColor. */
 export const reactComponent = (ctx) => {
   const { brand } = ctx
+  if (brand.logoPolicy?.allowInheritedColour === false) return fixedColourReactComponent(ctx)
   const name = brand.web?.componentName ?? 'BrandLogo'
   const symbolName = brand.web?.symbolComponentName ?? 'BrandSymbol'
   // A fixed-wordmark brand has families in three layouts; a signature brand has one "family" whose
@@ -178,19 +219,36 @@ export default ${name};
 
 const lines = (text) => escape(text).split('\n').join('<br>')
 
+const applyWebsiteRules = (brand, html) => {
+  let result = html
+  if (brand.web?.icons === false) result = result.replace(/<link rel="icon"[^>]*>/g, '')
+  if (brand.logoPolicy?.standaloneSymbol === false) {
+    const primary = `${logoOptions(brand)[0].key}-${paintOptions(brand)[0].id}`
+    result = result.replace(`../symbol/${brand.id}-symbol-${brand.roles?.primary ?? 'black'}.svg`, `../logos/outlined/${primary}.svg`)
+      .replace('<option value="symbol">Symbol</option>', '')
+      .replace('<option>symbol</option>', '')
+  }
+  if (brand.logoPolicy?.allowInheritedColour === false) {
+    const minimumPx = n6((brand.logoPolicy.minimumWidthMm ?? 0) * 96 / 25.4)
+    result = result.replace('<select id="background">', '<select id="background" disabled>')
+      .replace('</style>', `\n/* Supplied logo geometry and approved backgrounds. */\nheader img{box-sizing:content-box;min-width:${minimumPx}px;padding:${Math.max(8, 236 * (brand.logoPolicy.clearSpaceRatio ?? 0)).toFixed(2)}px;background:#fff}.hero-art{background:#fff}.logo-card-art img{min-width:${minimumPx}px}@media(max-width:480px){.logo-grid,.applications{grid-template-columns:1fr}.topbar{flex-wrap:wrap;padding:16px 0}}\n</style>`)
+  }
+  return result
+}
+
 /** A one-page website starter in the brand's type, colour and logo. */
 export const landingHtml = ({ brand }) => {
   const p = prefix(brand)
   const copy = brand.web?.landing ?? {}
   const primary = `${logoOptions(brand)[0].key}-${paintOptions(brand)[0].id}`
-  return `<!doctype html>
+  return applyWebsiteRules(brand, `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="application-version" content="${escape(brand.version ?? '')}"><title>${escape(brand.name)} — landing template</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="brand.css">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--${p}-${brand.roles?.paper ?? 'paper'});color:var(--${p}-${brand.roles?.ink ?? 'ink'});font-family:var(--${p}-font-body);line-height:1.6}a{color:inherit;text-underline-offset:.25em}.wrap{max-width:1360px;margin:0 auto;padding:0 56px}header{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:30px;border-bottom:1px solid #b9bdbf}header img{width:236px;height:auto}header a{font-size:.9rem}main{padding:90px 0 0}.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}.hero h1{margin:22px 0 26px;font-size:clamp(3.2rem,6.4vw,6rem);line-height:1.01;font-weight:500;letter-spacing:-.05em;font-family:var(--${p}-font-display)}.hero p{max-width:530px}.hero-art{min-height:510px;background:var(--${p}-${brand.roles?.light ?? 'light'});display:flex;align-items:center;justify-content:center;padding:65px}.hero-art img{display:block;width:100%;height:auto}.button{display:inline-block;background:var(--${p}-${brand.roles?.ink ?? 'ink'});color:white;text-decoration:none;padding:13px 22px;margin-top:24px}.contact{padding:70px 0 76px;margin-top:90px;border-top:1px solid #b9bdbf}.contact h2{font-family:var(--${p}-font-display);font-size:clamp(2rem,4vw,3rem);line-height:1.1;font-weight:500;letter-spacing:-.04em;margin:16px 0 24px}footer{padding:24px 0 44px;border-top:1px solid #b9bdbf;font-size:.8rem}@media(max-width:700px){.wrap{padding:0 24px}.hero{grid-template-columns:1fr;gap:36px}.hero h1{font-size:3.7rem}.hero-art{min-height:330px;padding:54px}}
 </style></head>
 <body><div class="wrap"><header><img src="../logos/outlined/${primary}.svg" alt="${escape(brand.name)}"><a href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></header><main><section class="hero"><div><p class="${p}-label">${escape(copy.eyebrow ?? '')}</p><h1>${lines(copy.headline ?? brand.name)}</h1><p>${escape(copy.body ?? '')}</p><a class="button" href="#contact">${escape(copy.cta ?? 'Get in touch')}</a></div><div class="hero-art" aria-hidden="true"><img src="../symbol/${brand.id}-symbol-${brand.roles?.primary ?? 'black'}.svg" alt=""></div></section><section id="contact" class="contact"><p class="${p}-label">${escape(copy.contactEyebrow ?? '')}</p><h2>${escape(copy.cta ?? 'Get in touch')}</h2><p>${escape(copy.contactBody ?? '')}</p></section></main><footer>${escape(copy.footer ?? brand.name)}</footer></div></body></html>
-`
+`)
 }
 
 export const formatBytes = (size) => (size < 1024 ? `${size} B` : size < 1024 * 1024 ? `${Math.round(size / 1024)} KB` : `${(size / (1024 * 1024)).toFixed(1)} MB`)
@@ -234,7 +292,7 @@ export const indexHtml = ({ brand }, records) => {
   const options = (values) => values.map((value) => `<option value="${escape(value)}">${escape(value)}</option>`).join('')
   const colours = (brand.rasterColours ?? ['black']).map((key) => `<option value="${key}">${escape(colourName(brand, key))}</option>`).join('')
   const backgrounds = [['reverse', 'white'], ['paper', 'paper'], ['primary', 'primary'], ['light', 'light']].map(([role]) => resolveColour(brand, role))
-  return `<!doctype html>
+  return applyWebsiteRules(brand, `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -268,7 +326,7 @@ ${applications ? `<section class="section"><h2>Applications</h2><div class="appl
   const update = () => {
     const symbol = $('layout').value === 'symbol'
     const file = symbol ? 'symbol/${brand.id}-symbol-' + ${brand.families?.length ? "$('colour').value" : `'${brand.rasterColours?.[0] ?? brand.logoColours?.[0] ?? 'black'}'`} + '.svg' : 'logos/outlined/' + ${brand.families?.length ? "$('family').value + '-' + " : ''}$('layout').value + '-' + $('colour').value + '.svg'
-    $('preview').src = file; $('download').href = file; $('stage').style.background = $('background').value
+    $('preview').src = file; $('download').href = file; $('stage').style.background = ${brand.logoPolicy?.allowInheritedColour === false ? `$('background').value = ${JSON.stringify(Object.fromEntries(paints.map(paint => [paint.id, resolveColour(brand, paint.ground ?? 'white')])))}[$('colour').value]` : "$('background').value"}
   }
   ;['family', 'layout', 'colour', 'background'].forEach((id) => $(id).addEventListener('change', update)); update()
   const rows = [...document.querySelectorAll('[data-asset]')]
@@ -283,7 +341,7 @@ ${applications ? `<section class="section"><h2>Applications</h2><div class="appl
 })()
 </script>
 </body></html>
-`
+`)
 }
 
 /** COLOURS.json and a GIMP palette, from the brand's colours. */
