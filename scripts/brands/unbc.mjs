@@ -128,8 +128,8 @@ const brand = {
   // The manual's green, gold, black and white, then the neutrals, text gold, link teal and deep
   // green www.unbc.ca sets its pages in (measured October 2026, as the UNBC chrome and the NHHR
   // Atlas use them), so documents read as the university's own pages do.
-  colours: { green: '#035642', gold: '#B79527', black: '#000000', white: '#FFFFFF', text: '#29292A', muted: '#525154', line: '#EAE7E5', light: '#F4F4F4', 'gold-text': '#977000', teal: '#006161', 'green-deep': '#00231A' },
-  colourNames: { green: 'UNBC Green', gold: 'UNBC Gold', black: 'Black', white: 'White', text: 'Text', muted: 'Muted text', line: 'Warm grey', light: 'Light grey', 'gold-text': 'Gold for text', teal: 'Link teal', 'green-deep': 'Deep green' },
+  colours: { green: '#035642', gold: '#B79527', black: '#000000', white: '#FFFFFF', text: '#29292A', muted: '#525154', line: '#EAE7E5', light: '#F4F4F4', 'gold-text': '#977000', teal: '#006161', 'green-deep': '#00231A', 'line-hover': '#DFDAD7' },
+  colourNames: { green: 'UNBC Green', gold: 'UNBC Gold', black: 'Black', white: 'White', text: 'Text', muted: 'Muted text', line: 'Warm grey', light: 'Light grey', 'gold-text': 'Gold for text', teal: 'Link teal', 'green-deep': 'Deep green', 'line-hover': 'Warm grey, hover' },
   roles: { ink: 'text', paper: 'white', muted: 'muted', primary: 'green', light: 'light', reverse: 'white', line: 'line', rule: 'line', link: 'teal', title: 'gold-text' },
   logoColours: ['green', 'black', 'white'], rasterColours: ['green', 'black', 'white'],
   print: { pantone: { green: '343 C / 3435 U', gold: '125 C / 117 U' }, cmyk: { green: 'C95 M15 Y62 K58', gold: 'C8 M31 Y100 K19' },
@@ -210,7 +210,7 @@ const brand = {
     // 4 px green rule, a warm aside closed by a gold bar, and the grey footer with the territory
     // acknowledgement. Navigation, address and acknowledgement text are unbc.ca's own.
     page: {
-      colours: { masthead: ['green', 'green-deep'], mastheadText: 'white', cta: 'gold-text', ctaText: 'white', title: 'gold-text', rule: 'line', link: 'teal', text: 'text', muted: 'muted', surface: 'light', warm: 'line', accent: 'green', asideBar: 'gold-text' },
+      colours: { masthead: ['green', 'green-deep'], mastheadText: 'white', cta: 'gold-text', ctaText: 'white', title: 'gold-text', rule: 'line', link: 'teal', text: 'text', muted: 'muted', surface: 'light', warm: 'line', warmHover: 'line-hover', accent: 'green', asideBar: 'gold-text' },
       fonts: { body: 'web', bold: 'webBold', italic: 'webItalic', display: 'display' },
       logo: { signature: 'sub-logo', colourway: 'white', widthPx: 340, footer: { colourway: 'green', widthPx: 200 } },
       cta: 'Apply to UNBC',

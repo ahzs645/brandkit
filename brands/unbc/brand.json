@@ -108,7 +108,8 @@
     "light": "#F4F4F4",
     "gold-text": "#977000",
     "teal": "#006161",
-    "green-deep": "#00231A"
+    "green-deep": "#00231A",
+    "line-hover": "#DFDAD7"
   },
   "colourNames": {
     "green": "UNBC Green",
@@ -121,7 +122,8 @@
     "light": "Light grey",
     "gold-text": "Gold for text",
     "teal": "Link teal",
-    "green-deep": "Deep green"
+    "green-deep": "Deep green",
+    "line-hover": "Warm grey, hover"
   },
   "roles": {
     "ink": "text",
@@ -5184,6 +5186,7 @@
         "muted": "muted",
         "surface": "light",
         "warm": "line",
+        "warmHover": "line-hover",
         "accent": "green",
         "asideBar": "gold-text"
       },

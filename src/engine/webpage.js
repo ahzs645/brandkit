@@ -22,10 +22,16 @@
 import { colour } from './brand.js'
 import { logoDocument } from './artwork.js'
 import { escape } from './format.js'
+import { departmentLines } from './signatures.js'
 
 const hexOf = (brand, key, fallback) => colour(brand, brand.roles?.[key] ?? key ?? fallback) ?? fallback
 const inline = (svg) => svg.replace(/^<\?xml[^>]*>\s*/, '').replace(/<title>[\s\S]*?<\/title>|<desc>[\s\S]*?<\/desc>/g, '').replace(/\s(width|height)="[^"]*"/g, '')
 const list = (items, render) => (items ?? []).map(render).join('')
+// Icons drawn for the components (not Font Awesome): search, the search tab's chevron, the menu.
+const SEARCH_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5 15 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
+const CHEVRON_ICON = '<svg viewBox="0 0 14 16" aria-hidden="true"><path d="M2 11l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+const MENU_ICON = '<svg viewBox="0 0 28 24" aria-hidden="true"><path d="M2 4h24M2 12h24M2 20h24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>'
+const HOME_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 1 7.6h2v6.9h3.7V10h2.6v4.5H13V7.6h2z" fill="currentColor"/></svg>'
 const ARROW = '<svg class="{p}-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>'
 
 /** Whether the brand describes web components. */
@@ -53,14 +59,14 @@ const foundation = (ctx, fontUrl) => {
   const tokens = {
     'masthead-from': from, 'masthead-to': to, 'masthead-text': c('mastheadText', '#fff'), cta: c('cta', '#960'), 'cta-text': c('ctaText', '#fff'),
     title: c('title', '#960'), rule: c('rule', '#eee'), link: c('link', '#036'), text: c('text', '#222'), muted: c('muted', '#666'),
-    surface: c('surface', '#f4f4f4'), warm: c('warm', '#eee'), accent: c('accent', '#063'), 'aside-bar': c('asideBar', '#960'), 'aside-ground': c('asideGround', '#f0eeec'),
+    surface: c('surface', '#f4f4f4'), warm: c('warm', '#eee'), 'warm-hover': c('warmHover', '#ddd'), crumb: c('crumb', '#999'), accent: c('accent', '#063'), 'aside-bar': c('asideBar', '#960'), 'aside-ground': c('asideGround', '#f0eeec'),
     'font-body': stack('body'), 'font-bold': stack('bold'), 'font-display': stack('display'),
     'logo-width': `${page.logo?.widthPx ?? 340}px`, 'footer-logo-width': `${page.logo?.footer?.widthPx ?? 200}px`
   }
   return `${fontFace}
 :root{${Object.entries(tokens).map(([key, value]) => `--${p}-${key}:${value}`).join(';')}}
 *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--${p}-text);font:16px/1.5 var(--${p}-font-body)}a{color:var(--${p}-link)}
-.${p}-wrap{max-width:1170px;margin:0 auto;padding-left:15px;padding-right:15px}
+.${p}-wrap{width:100%;margin:0 auto;padding-left:15px;padding-right:15px}@media(min-width:768px){.${p}-wrap{max-width:750px}}@media(min-width:992px){.${p}-wrap{max-width:970px}}@media(min-width:1200px){.${p}-wrap{max-width:1170px}}@media(min-width:1590px){.${p}-wrap{max-width:1560px}}
 .${p}-arrow{width:16px;height:16px;flex:none}
 h2,h3{font-family:var(--${p}-font-display);font-weight:400;color:var(--${p}-text);margin:0 0 14px}h2{font-size:clamp(28px,calc(23.8px + .7vw),35px);line-height:1.1}h3{font-size:22px;line-height:1.2}`
 }
@@ -86,24 +92,40 @@ export const webComponents = (ctx, { department = '' } = {}) => {
     colourway: spec.colourway ?? page.logo?.colourway
   }))
   const crumbs = [...(page.breadcrumbs ?? []), title]
+  // How many lines the department takes under the wordmark: longer lockups are drawn narrower.
+  const subLogo = name && brand.signatures?.find((entry) => entry.id === page.logo?.signature)
+  const lineCount = subLogo ? departmentLines(ctx, subLogo, { [field]: department }).reduce((sum, entry) => sum + entry.lines.length, 0) : 0
   const all = [
-    { id: 'header', label: 'Header', use: 'Masthead with the logo (the department’s sub-logo when one is named), the call to action and the main menu.',
-      html: `<header class="${p}-header"><div class="${p}-wrap ${p}-header__inner"><a class="${p}-header__logo" href="#" aria-label="${escape([brand.organization?.name ?? brand.name, name].filter(Boolean).join(', '))}">${logoAt()}</a>
-<nav class="${p}-header__nav" aria-label="Main">${page.cta ? `<a class="${p}-header__cta" href="#">${escape(page.cta)}</a>` : ''}<ul class="${p}-header__menu">${list(page.menu, (item, index) => `<li><a href="#"${index ? '' : ' aria-current="page"'}>${escape(item)}</a></li>`)}</ul></nav></div></header>`,
-      css: `.${p}-header{background:linear-gradient(180deg,${v('masthead-from')},${v('masthead-to')});color:${v('masthead-text')}}.${p}-header__inner{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-top:22px;padding-bottom:18px}
-.${p}-header__logo{width:${v('logo-width')};max-width:62vw;display:block}.${p}-header__logo svg{width:100%;height:auto;display:block}
-.${p}-header__nav{display:flex;flex-direction:column;align-items:flex-end;gap:26px}.${p}-header__cta{background:${v('cta')};color:${v('cta-text')};font:700 15px/1 ${v('font-bold')};padding:8px 9px;border-radius:2px;text-decoration:none}
-.${p}-header__menu{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 22px;margin:0;padding:0;list-style:none;font:700 15px/1.3 ${v('font-bold')}}.${p}-header__menu a{color:inherit;text-decoration:none}.${p}-header__menu a[aria-current]{border-bottom:2px solid currentColor;padding-bottom:3px}
-@media(max-width:700px){.${p}-header__inner{flex-direction:column}.${p}-header__nav{align-items:flex-start;gap:14px}.${p}-header__menu{justify-content:flex-start}}` },
-    page.tabs?.length && { id: 'tabs', label: 'Audience tabs', use: 'Warm tabs under the header for each audience. Hidden on phones, where the menu carries them.',
-      html: `<nav class="${p}-wrap ${p}-tabs" aria-label="Information for">${list(page.tabs, (item) => `<a href="#">${escape(item)}</a>`)}</nav>`,
-      css: `.${p}-tabs{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding-top:10px}.${p}-tabs a{background:${v('warm')};color:${v('text')};font:700 13px/1 ${v('font-bold')};padding:7px 10px;text-decoration:none}@media(max-width:700px){.${p}-tabs{display:none}}` },
+    { id: 'header', label: 'Header', use: 'Masthead as www.unbc.ca draws it: the call to action and search tab hanging from the top edge, the logo (the department’s sub-logo when one is named) in the top row and the main menu in the row below; on phones, the menu button, logo and search tab in one 80 px row.',
+      html: `<header class="${p}-header">${page.cta || page.search !== false ? `<div class="${p}-wrap ${p}-header__utility">${page.cta ? `<a class="${p}-header__cta" href="#">${escape(page.cta)}</a>` : ''}${page.search !== false ? `<button class="${p}-header__search" type="button" aria-label="Search">${SEARCH_ICON}${CHEVRON_ICON}</button>` : ''}</div>` : ''}
+<div class="${p}-wrap ${p}-header__top"><button class="${p}-header__toggle" type="button" aria-label="Menu">${MENU_ICON}</button><a class="${p}-header__logo" href="#" data-lines="${lineCount}" aria-label="${escape([brand.organization?.name ?? brand.name, name].filter(Boolean).join(', '))}">${logoAt()}</a></div>
+<nav class="${p}-wrap ${p}-header__bottom" aria-label="Main"><ul class="${p}-header__menu">${list(page.menu, (item, index) => `<li><a href="#"${index ? '' : ' aria-current="page"'}>${escape(item)}</a></li>`)}</ul></nav></header>`,
+      // Geometry from www.unbc.ca (the UNBC chrome's measurements): a radial vignette; 141 px tall
+      // from 1200 px with the wordmark 38.7 px down and the menu at 100 px; 156 px from 768 px;
+      // an 80 px bar on phones. Longer department lockups step the logo down in width.
+      css: `.${p}-header{position:relative;background-color:${v('masthead-from')};background-image:radial-gradient(ellipse at center,${v('masthead-from')} 59%,${v('masthead-to')} 100%);color:${v('masthead-text')}}
+.${p}-header__utility{position:relative;height:0;z-index:2}.${p}-header__utility>*{position:absolute;top:0}
+.${p}-header__cta{right:82px;top:14.5px!important;background:${v('cta')};color:${v('cta-text')};font:700 15px/22.5px ${v('font-bold')};padding:3px 9px;border-radius:3px;text-decoration:none;white-space:nowrap}
+.${p}-header__search{right:15px;display:flex;align-items:center;justify-content:space-between;width:55px;height:43px;padding:21px 9px 6px;border:0;border-radius:0 0 3px 3px;background:${v('surface')};color:${v('masthead-from')};cursor:pointer}.${p}-header__search svg{height:16px;width:auto}
+.${p}-header__top{display:flex;align-items:center;gap:15px;height:80px}
+.${p}-header__toggle{display:none;flex:none;width:32px;padding:0;border:0;background:none;color:inherit;cursor:pointer}.${p}-header__toggle svg{display:block;height:32px;width:auto}
+.${p}-header__logo{display:block;flex:none;line-height:0;width:min(235px,calc(100vw - 147px))}.${p}-header__logo svg{display:block;width:100%;height:auto;overflow:visible}
+.${p}-header__logo[data-lines="3"]{width:min(212px,calc(100vw - 147px))}.${p}-header__logo[data-lines="4"],.${p}-header__logo[data-lines="5"],.${p}-header__logo[data-lines="6"]{width:min(180px,calc(100vw - 147px))}
+.${p}-header__bottom{display:none}
+.${p}-header__menu{display:flex;flex-wrap:wrap;justify-content:flex-end;margin:0;padding:0;list-style:none}.${p}-header__menu li{margin:0 10px}.${p}-header__menu li:last-child{margin-right:0}
+.${p}-header__menu a{display:block;color:inherit;font:700 15px/22.5px ${v('font-bold')};text-decoration:none;border-bottom:2px solid transparent}.${p}-header__menu a[aria-current],.${p}-header__menu a:hover{border-bottom-color:currentColor}
+@media(max-width:767.98px){.${p}-header{height:80px}.${p}-header__cta{display:none}.${p}-header__toggle{display:block}}
+@media(min-width:768px){.${p}-header{padding:15px 0}.${p}-header__top{align-items:flex-start}.${p}-header__logo{margin-top:5.7px;width:${v('logo-width')}}.${p}-header__logo[data-lines="3"]{width:260px}.${p}-header__logo[data-lines="4"],.${p}-header__logo[data-lines="5"],.${p}-header__logo[data-lines="6"]{width:200px}.${p}-header__bottom{display:block;margin-top:20px}}
+@media(min-width:1200px){.${p}-header{padding:0 0 15px}.${p}-header__logo{margin-top:38.7px}.${p}-header__logo[data-lines="3"]{width:290px}.${p}-header__logo[data-lines="4"],.${p}-header__logo[data-lines="5"],.${p}-header__logo[data-lines="6"]{width:230px}}` },
+    page.tabs?.length && { id: 'tabs', label: 'Audience tabs', use: 'Warm tabs hanging from the header’s bottom edge, one per audience. Hidden on phones, where the menu carries them.',
+      html: `<nav class="${p}-wrap ${p}-tabs" aria-label="Information for"><ul>${list(page.tabs, (item) => `<li><a href="#">${escape(item)}</a></li>`)}</ul></nav>`,
+      css: `.${p}-tabs{position:relative;height:0;z-index:1}.${p}-tabs ul{position:absolute;top:0;right:27px;display:flex;gap:12px;margin:0;padding:0;list-style:none}.${p}-tabs a{display:block;background:${v('warm')};color:#000;border-radius:0 0 3px 3px;font:700 14px/21px ${v('font-bold')};padding:6px 12px;white-space:nowrap;text-decoration:none}.${p}-tabs a:hover{background:${v('warm-hover')}}@media(max-width:767.98px){.${p}-tabs{display:none}}` },
     { id: 'title', label: 'Page title', use: 'The page’s name, in the display face and title colour over a 6 px rule.',
       html: `<div class="${p}-wrap ${p}-title"><h1>${escape(title)}</h1></div>`,
-      css: `.${p}-title{padding-top:56px}.${p}-title h1{margin:0;color:${v('title')};font:400 clamp(35px,calc(27.2px + 1.3vw),48px)/1.1 ${v('font-display')};padding-bottom:12px;border-bottom:6px solid ${v('rule')};overflow-wrap:break-word}@media(max-width:700px){.${p}-title{padding-top:30px}}` },
-    { id: 'breadcrumbs', label: 'Breadcrumbs', use: 'Where the page sits, under its title.',
-      html: `<nav class="${p}-wrap" aria-label="Breadcrumbs"><ol class="${p}-breadcrumbs">${list(crumbs, (item, index) => `<li>${index < crumbs.length - 1 ? `<a href="#">${escape(item)}</a>` : `<span aria-current="page">${escape(item)}</span>`}</li>`)}</ol></nav>`,
-      css: `.${p}-breadcrumbs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none;font-size:14px;color:${v('muted')}}.${p}-breadcrumbs li+li:before{content:"›";margin-right:6px}.${p}-breadcrumbs a{color:${v('link')};text-decoration:none}` },
+      css: `.${p}-title{padding-top:64px}.${p}-title h1{margin:0;color:${v('title')};font:400 clamp(35px,calc(27.2px + 1.3vw),48px)/1.1 ${v('font-display')};padding-bottom:12px;border-bottom:6px solid ${v('rule')};overflow-wrap:break-word}@media(max-width:700px){.${p}-title{padding-top:30px}}` },
+    { id: 'breadcrumbs', label: 'Breadcrumbs', use: 'Where the page sits, under its title: home as an icon, chevrons between, the current page in grey.',
+      html: `<nav class="${p}-wrap" aria-label="Breadcrumbs"><ol class="${p}-breadcrumbs">${list(crumbs, (item, index) => `<li>${index === crumbs.length - 1 ? `<span aria-current="page">${escape(item)}</span>` : `<a href="#"${index ? '' : ` aria-label="${escape(item)}"`}>${index ? escape(item) : HOME_ICON}</a>`}</li>`)}</ol></nav>`,
+      css: `.${p}-breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;margin:12px 0 0 -3px;padding:0;list-style:none;font-size:14px;line-height:21px;color:${v('crumb')}}.${p}-breadcrumbs li{display:flex;align-items:center}.${p}-breadcrumbs li+li:before{content:"";width:6px;height:6px;margin:0 10px 0 8px;border:solid ${v('crumb')};border-width:1.5px 1.5px 0 0;transform:rotate(45deg)}.${p}-breadcrumbs a{color:${v('link')};text-decoration:none}.${p}-breadcrumbs a:hover{text-decoration:underline}.${p}-breadcrumbs svg{display:block;width:15px;height:15px}` },
     { id: 'intro', label: 'Introduction', use: 'Eyebrow, headline, lead and body copy opening a page or section.',
       html: `<div class="${p}-intro">${t.eyebrow ? `<p class="${p}-eyebrow">${escape(t.eyebrow)}</p>` : ''}<h2>${escape(t.headline ?? '')}</h2>${t.lead ? `<p class="${p}-lead">${escape(t.lead)}</p>` : ''}${t.body ? `<p>${escape(t.body)}</p>` : ''}</div>`,
       css: `.${p}-eyebrow{margin:0 0 10px;color:${v('muted')};font:700 13px/1.3 ${v('font-bold')};letter-spacing:.08em;text-transform:uppercase}.${p}-intro h2{font-size:clamp(35px,calc(27.2px + 1.3vw),48px)}.${p}-lead{font-size:clamp(19px,calc(16px + .5vw),24px);line-height:1.45;margin:0 0 16px}` },
