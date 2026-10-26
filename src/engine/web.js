@@ -74,15 +74,16 @@ ${Object.entries(brand.colours).map(([key, value]) => `  --${p}-${key}: ${value}
 export const tokens = ({ brand }) => ({
   version: brand.version,
   colour: Object.fromEntries(Object.entries(brand.colours).map(([key, value]) => [key, { value, type: 'color' }])),
-  roles: Object.fromEntries(Object.keys(brand.roles ?? {}).map((role) => [role, resolveColour(brand, role)])),
+  roles: Object.fromEntries(Object.keys(brand.roles ?? {}).map((role) => [role, resolveColour(brand, brand.roles[role])])),
   font: { body: brand.fonts?.body?.family, display: brand.fonts?.display?.family, label: brand.fonts?.label?.family },
   typeScale: {
     display: { size: 72, lineHeight: 80, weight: brand.typography?.headlines?.weight ?? 500, tracking: `${brand.typography?.headlines?.trackingEm ?? 0}em` },
-    h1: { size: 48, lineHeight: 56, weight: 500 },
-    h2: { size: 32, lineHeight: 40, weight: 500 },
-    body: { size: 16, lineHeight: 24, weight: 400 },
-    caption: { size: 12, lineHeight: 16, weight: 400 },
-    label: { size: 12, lineHeight: 16, weight: 400, tracking: `${brand.typography?.labels?.trackingEm ?? 0.12}em` }
+    h1: { size: 48, lineHeight: 56, weight: brand.typography?.headlines?.weight ?? brand.fonts?.display?.weight ?? 500 },
+    h2: { size: 32, lineHeight: 40, weight: brand.typography?.headlines?.weight ?? brand.fonts?.display?.weight ?? 500 },
+    body: { size: 16, lineHeight: 24, weight: brand.typography?.body?.weight ?? brand.fonts?.body?.weight ?? 400 },
+    caption: { size: 12, lineHeight: 16, weight: brand.typography?.body?.weight ?? brand.fonts?.body?.weight ?? 400 },
+    label: { size: 12, lineHeight: 16, weight: brand.typography?.labels?.weight ?? brand.fonts?.label?.weight ?? 400, tracking: `${brand.typography?.labels?.trackingEm ?? 0.12}em` },
+    ...(brand.typography?.typeScale ?? {})
   },
   spacing: [4, 8, 12, 16, 24, 32, 48, 64, 96],
   symbol: brand.symbol,

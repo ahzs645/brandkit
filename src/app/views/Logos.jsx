@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { icon, logoDocument, pattern, symbolDocument } from '../../engine/artwork.js'
+import { icon, logoDocument, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, isDark } from '../../engine/brand.js'
 import { download } from '../../export/render.js'
 import { isLogoStudy } from '../motion.js'
@@ -67,16 +67,18 @@ const LogoMotion = ({ brand, source }) => {
   )
 }
 
-const SupportingAssets = ({ brand, source }) => {
+const SupportingAssets = ({ brand, onPatterns }) => {
   const ctx = { brand }
+  const params = new URLSearchParams(globalThis.location?.search ?? '')
+  params.set('brand', brand.id)
+  params.set('view', 'patterns')
+  for (const key of ['signature', 'template', 'study']) params.delete(key)
   return <>
     {brand.patterns?.length > 0 && (
       <section className="panel">
         <h2>Patterns</h2>
-        {brand.patternCollection?.page && source?.url(brand.patternCollection.page) && <p><a className="button" href={source.url(brand.patternCollection.page)} target="_blank" rel="noreferrer">Explore patterns ↗</a></p>}
-        <div className="asset-grid asset-grid--wide">
-          {brand.patterns.map((spec) => <Card key={spec.id} wide title={spec.name ?? spec.id} name={spec.id} width={spec.width * 2} make={() => pattern(ctx, spec)} />)}
-        </div>
+        <p className="muted">Explore {brand.patterns.length} patterns, their source shapes and the applications built from them.</p>
+        <a className="button" href={`?${params}`} onClick={(event) => { if (!onPatterns || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); onPatterns() }}>Browse patterns ↗</a>
       </section>
     )}
     {brand.icons?.items?.length > 0 && (
@@ -90,8 +92,8 @@ const SupportingAssets = ({ brand, source }) => {
   </>
 }
 
-export const Logos = ({ brand, fonts, source, openManual }) => {
-  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} after={<SupportingAssets brand={brand} source={source} />} />
+export const Logos = ({ brand, fonts, source, openManual, onPatterns }) => {
+  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} after={<SupportingAssets brand={brand} onPatterns={onPatterns} />} />
   const ctx = { brand }
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   return (
@@ -122,7 +124,7 @@ export const Logos = ({ brand, fonts, source, openManual }) => {
           {(brand.symbol.microRadius != null || brand.symbol.microPaths) && <Card title="Micro" name={`${brand.id}-symbol-micro`} ground="#fff" width={256} make={() => symbolDocument(ctx, { micro: true })} />}
         </div>
       </section>
-      <SupportingAssets brand={brand} source={source} />
+      <SupportingAssets brand={brand} onPatterns={onPatterns} />
     </div>
   )
 }

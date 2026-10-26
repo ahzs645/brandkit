@@ -24,7 +24,12 @@
     "./printer": "./src/printer/package.js",
     "./printer/bridge": "./src/printer/bridge.js",
     "./printer/vite": "./src/printer/vite.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./documents": "./src/export/publication.js",
+    "./documents/node": "./src/export/node.js",
+    "./documentation": "./src/engine/documentation.js",
+    "./consumer": "./src/engine/consumer.js",
+    "./patterns": "./src/engine/pattern-catalog.js"
   },
   "files": [
     "bin",
@@ -60,7 +65,12 @@
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "test:patterns:browser": "node test/browser/pattern-collections.check.mjs",
     "test:printer": "node test/browser/template-printer.check.mjs",
-    "test:identity": "node test/browser/overtheedge-identity.check.mjs"
+    "test:identity": "node test/browser/overtheedge-identity.check.mjs",
+    "make:documentation": "node scripts/brands/documentation.mjs",
+    "build:documentation": "node scripts/build-documentation.mjs",
+    "test:documents": "node --test test/documentation-model.test.js test/office-documents.test.js test/documentation-exports.test.js",
+    "test:documents:browser": "node test/browser/documentation.check.mjs",
+    "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -75,6 +85,7 @@
     }
   },
   "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
     "@xmldom/xmldom": "^0.9.12",
     "bwip-js": "^4.11.4",
     "docx": "^9.12.0",

@@ -5,9 +5,10 @@
 // them until someone asks for one. Backgrounds are drawn as PNG by the caller's `png(svg, width)`,
 // the same renderer the kit uses for its images.
 
-import { documentPage, rowsOf, signatureLayout, slideLayout } from '../engine/office.js'
+import { documentPage, officeFont, rowsOf, signatureLayout, slideLayout } from '../engine/office.js'
 import { fill } from '../engine/brand.js'
 import { renderTemplate } from '../engine/templates.js'
+import { documentationDocumentsFor, publicationModel } from '../engine/documentation.js'
 
 const twips = (points) => Math.round(points * 20)
 
@@ -31,7 +32,9 @@ const backgroundPng = async (ctx, page, png, dpi = 200, extra = {}) => {
 }
 
 /** The documents a template takes part in. */
-export const documentsFor = (brand, templateId) => (brand.documents ?? []).filter((document) => [...(document.pages ?? []), ...(document.layouts ?? []), document.template].includes(templateId))
+export const documentsFor = (brand, templateId) => [...(brand.documents ?? []), ...documentationDocumentsFor(brand)]
+  .filter((document, index, all) => all.findIndex((entry) => entry.id === document.id) === index)
+  .filter((document) => [...(document.pages ?? []), ...(document.layouts ?? []), document.template].includes(templateId))
 
 export const EXTENSIONS = { docx: 'docx', pptx: 'pptx', html: 'html' }
 export const FORMAT_LABELS = { docx: 'Word', pptx: 'PowerPoint', html: 'HTML' }
@@ -40,24 +43,129 @@ export const FORMAT_LABELS = { docx: 'Word', pptx: 'PowerPoint', html: 'HTML' }
 
 const isTrueType = (bytes) => bytes && bytes.length > 4 && ((bytes[0] === 0 && bytes[1] === 1 && bytes[2] === 0 && bytes[3] === 0) || String.fromCharCode(...bytes.subarray(0, 4)) === 'true')
 
+const embeddingFlags = (face) => {
+  const table = face?.font?.tables?.os2
+  if (Number.isInteger(table?.fsType)) return { fsType: table.fsType, version: table.version ?? 3 }
+  const bytes = face?.bytes
+  if (!bytes || bytes.length < 12) return null
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+  const count = view.getUint16(4)
+  for (let i = 0; i < count && 12 + (i + 1) * 16 <= bytes.length; i++) {
+    const offset = 12 + i * 16
+    if (String.fromCharCode(...bytes.subarray(offset, offset + 4)) !== 'OS/2') continue
+    const start = view.getUint32(offset + 8)
+    if (start + 10 <= bytes.length) return { version: view.getUint16(start), fsType: view.getUint16(start + 8) }
+  }
+  return null
+}
+
+/**
+ * Check OpenType OS/2 permissions for an editable document, without modifying
+ * them or subsetting the font. Vendor licence terms still accompany the kit.
+ * https://learn.microsoft.com/en-us/typography/opentype/spec/os2#fstype
+ */
+export const fontEmbeddingPermission = (face) => {
+  const flags = embeddingFlags(face)
+  if (!flags) return { allowed: false, reason: 'Embedding permissions are unavailable; install the licensed font locally.' }
+  const { fsType, version } = flags
+  const permission = fsType & 0x000f
+  if (version >= 2 && fsType & 0x0200) return { allowed: false, ...flags, reason: 'The font permits bitmap embedding only.' }
+  if (permission === 2) return { allowed: false, ...flags, reason: 'The font restricts embedding.' }
+  if (permission === 4) return { allowed: false, ...flags, reason: 'Preview and print embedding cannot be used in an editable document.' }
+  if (![0, 8].includes(permission) && !(version <= 2 && permission & 8)) return { allowed: false, ...flags, reason: 'Embedding flags do not grant editable use.' }
+  return { allowed: true, ...flags, reason: 'Complete font embedded; no subsetting.' }
+}
+
+/** Machine-readable installation requirements for faces that cannot travel. */
+export const officeFontRequirements = (ctx, items, { format = 'docx' } = {}) => {
+  const seen = new Set()
+  return items.filter((item) => item.key && item.kind !== 'rule').flatMap((item) => {
+    const key = `${item.font}|${item.bold}|${item.italic}`
+    if (seen.has(key)) return []
+    seen.add(key)
+    const face = ctx.fonts?.faces?.[item.key]
+    const spec = ctx.brand.fonts?.[item.key]
+    const permission = fontEmbeddingPermission(face)
+    let reason = permission.reason
+    let embedded = permission.allowed
+    if (!face?.bytes) { embedded = false; reason = 'Font bytes are unavailable; install the font locally.' }
+    else if (spec?.office && spec.office !== spec.family) { embedded = false; reason = 'The document uses the explicit installed Office substitute.' }
+    else if (format === 'docx' && !isTrueType(face.bytes)) { embedded = false; reason = 'Word export embeds TrueType outlines; install this OpenType face locally.' }
+    else if (item.weight != null && Number(spec?.weight ?? 400) !== Number(item.weight)) { embedded = false; reason = 'This requested weight has no matching supplied font face.' }
+    return [{ role: item.key, family: item.font, weight: item.weight ?? spec?.weight ?? 400, style: item.italic ? 'italic' : 'normal', embedded, reason, fsType: permission.fsType ?? null, licence: spec?.license ?? null, usage: spec?.usage ?? null }]
+  })
+}
+
 /**
  * The brand's own faces, embedded so the document looks right where they are not installed:
  * TrueType files only (what Word embeds), and only faces whose Office name is their own (a face
  * standing in for Helvetica is named Helvetica, and left to the system).
  */
-const embeddedFonts = (ctx, items) => {
+export const embeddedFonts = (ctx, items) => {
   const families = new Map()
   for (const item of items) {
     if (item.kind === 'rule' || !item.key) continue
     const face = ctx.fonts?.faces?.[item.key]
     const spec = ctx.brand.fonts?.[item.key]
     if (!isTrueType(face?.bytes) || (spec?.office && spec.office !== spec.family)) continue
+    if (!fontEmbeddingPermission(face).allowed) continue
+    // A synthesized weight must not register a different font's bytes as that face.
+    if (item.weight != null && Number(spec?.weight ?? 400) !== Number(item.weight)) continue
     const family = families.get(item.font) ?? {}
     const slot = item.bold && item.italic ? 'boldItalic' : item.bold ? 'bold' : item.italic ? 'italic' : 'data'
     family[slot] ??= face.bytes
     families.set(item.font, family)
   }
   return [...families].filter(([, faces]) => faces.data ?? faces.bold).map(([name, faces]) => ({ name, ...faces, data: faces.data ?? faces.bold }))
+}
+
+const STYLE_SPECS = [
+  ['Normal', 'Normal', 'body', 'body', 11],
+  ['Title', 'Title', 'title', 'display', 30],
+  ['Subtitle', 'Subtitle', 'subtitle', 'body', 14],
+  ['Heading1', 'Heading 1', 'heading1', 'display', 21],
+  ['Heading2', 'Heading 2', 'heading2', 'bold', 15],
+  ['Heading3', 'Heading 3', 'heading3', 'bold', 12],
+  ['BodyText', 'Body Text', 'body', 'body', 11],
+  ['Caption', 'Caption', 'caption', 'body', 9],
+  ['ListParagraph', 'List Paragraph', 'body', 'body', 11],
+  ['TableText', 'Table Text', 'table', 'body', 10],
+  ['Header', 'Header', 'label', 'label', 9],
+  ['Footer', 'Footer', 'footer', 'label', 9]
+]
+
+const styleSpec = (brand, profile, [, , token, key, size]) => {
+  const spec = profile.typography?.[token] ?? {}
+  const selected = brand.fonts?.[spec.font ?? key] ? spec.font ?? key : 'body'
+  const font = officeFont(brand, selected, { weight: spec.weight, italic: spec.italic })
+  return { spec, font, size: spec.sizePt ?? size }
+}
+
+/** Font records needed by named styles as well as by the existing text. */
+export const officeStyleFonts = (brand, profile = {}) => STYLE_SPECS.map((entry) => {
+  const { font } = styleSpec(brand, profile, entry)
+  return { ...font, font: font.name, kind: 'field' }
+})
+
+/** Named native Word styles let later editing retain the brand's hierarchy. */
+export const officeStyles = (brand, profile = {}, defaults = {}) => {
+  const ink = String(profile.colours?.ink ?? '000000').replace('#', '')
+  const paragraphStyles = STYLE_SPECS.map((entry) => {
+    const [id, name] = entry
+    const { spec, font, size } = styleSpec(brand, profile, entry)
+    const heading = /^Heading[123]$/.test(id)
+    return {
+      id, name, ...(id === 'Normal' ? { next: 'Normal' } : { basedOn: 'Normal', next: 'BodyText' }), quickFormat: true,
+      run: { font: font.name, size: Math.round(size * 2), bold: font.bold, italics: font.italic, color: ink },
+      paragraph: {
+        spacing: { after: twips(spec.spaceAfterPt ?? (heading ? 8 : 6)), line: Math.round(240 * (spec.lineHeight ?? 1.2)) },
+        ...(heading ? { outlineLevel: Number(id.slice(-1)) - 1, keepNext: true } : {}),
+        ...(id === 'Title' || id === 'Subtitle' ? { keepNext: true } : {})
+      }
+    }
+  })
+  const body = paragraphStyles.find((style) => style.id === 'BodyText')
+  return { default: { document: { run: { ...body.run, ...defaults }, paragraph: { widowControl: true } } }, paragraphStyles }
 }
 
 /** A Word template: the first page's background and text, later pages' header and footer. */
@@ -117,6 +225,7 @@ export const docxFile = async (ctx, document, { png }) => {
         const L = lineHeight(item)
         const top = item.y - 0.8 * L
         const paragraph = new Paragraph({
+          style: footer ? 'Footer' : 'Header',
           alignment: item.anchor === 'end' ? AlignmentType.RIGHT : item.anchor === 'middle' ? AlignmentType.CENTER : AlignmentType.LEFT,
           // In a footer, the last paragraph's space after carries it up from the page's foot.
           spacing: { before: twips(Math.max(0, top - previous)), after: footer && index === sorted.length - 1 ? twips(Math.max(0, height - bottomOf(item))) : 0, line: twips(L), lineRule: LineRuleType.EXACT },
@@ -188,6 +297,7 @@ export const docxFile = async (ctx, document, { png }) => {
       const single = row.length === 1
       const alignment = single && lead.anchor === 'end' ? AlignmentType.RIGHT : single && lead.anchor === 'middle' ? AlignmentType.CENTER : AlignmentType.LEFT
       out.push(new Paragraph({
+        style: page.template.elements[lead.element]?.documentStyle ?? (/title|subject|project-name/.test(lead.id ?? '') ? 'Title' : 'BodyText'),
         pageBreakBefore: breakBefore && !out.length,
         alignment,
         indent: {
@@ -214,11 +324,12 @@ export const docxFile = async (ctx, document, { png }) => {
   const footerOf = (page) => new Footer({ children: page.footer.length ? zoneTable(page.footer, { footer: true }) : [new Paragraph({ spacing: { line: 20, lineRule: LineRuleType.EXACT }, children: [] })] })
 
   const file = new Document({
-    fonts: embeddedFonts(ctx, pages.flatMap((page) => [...page.header, ...page.body, ...page.footer])),
+    fonts: embeddedFonts(ctx, [...pages.flatMap((page) => [...page.header, ...page.body, ...page.footer]), ...officeStyleFonts(ctx.brand)]),
     creator: ctx.brand.name,
     title: fill(ctx.brand, document.label ?? document.id),
     description: `${ctx.brand.name} ${document.label ?? document.id}, made by brandkit. Replace the bracketed text; the letterhead artwork is in the header.`,
-    styles: { default: { document: { run: defaults } } },
+    customProperties: [{ name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, [...pages.flatMap((page) => [...page.header, ...page.body, ...page.footer]), ...officeStyleFonts(ctx.brand)])) }],
+    styles: officeStyles(ctx.brand, {}, defaults),
     sections: [{
       properties: {
         titlePage: Boolean(rest),
@@ -313,7 +424,7 @@ export const signatureHtml = async (ctx, document, { png, src } = {}) => {
     const height = Math.max(lead.leading, lead.size * 1.25)
     const gap = previous == null ? 0 : Math.max(0, lead.y - previous - height)
     previous = lead.y
-    const style = `margin:${gap ? `${px(gap)}px` : 0} 0 0;font-family:'${lead.font}',Arial,Helvetica,sans-serif;font-size:${px(lead.size)}px;line-height:${px(Math.max(lead.leading, lead.size * 1.25))}px;color:#${lead.colour};font-weight:${lead.bold ? 700 : 400}${lead.tracking ? `;letter-spacing:${px(lead.tracking)}px` : ''}${lead.caps ? ';text-transform:uppercase' : ''}`
+    const style = `margin:${gap ? `${px(gap)}px` : 0} 0 0;font-family:'${ctx.brand.fonts?.[lead.key]?.family ?? lead.font}',Arial,Helvetica,sans-serif;font-size:${px(lead.size)}px;line-height:${px(Math.max(lead.leading, lead.size * 1.25))}px;color:#${lead.colour};font-weight:${lead.weight ?? (lead.bold ? 700 : 400)}${lead.tracking ? `;letter-spacing:${px(lead.tracking)}px` : ''}${lead.caps ? ';text-transform:uppercase' : ''}`
     const content = row.map((item) => {
       const text = item.lines.join(' ')
       const href = linkFor(item, text)
@@ -350,8 +461,18 @@ ${html}
 `
 
 /** Makes one document: `{ bytes, name, type }`. */
-export const officeFile = async (ctx, document, { png }) => {
+export const officeFile = async (ctx, document, { png } = {}) => {
   const name = `${ctx.brand.id}-${document.id}.${EXTENSIONS[document.format]}`
+  if (document.publication) {
+    const { publicationDocx, publicationHtml } = await import('./publication.js')
+    const publication = document.model ?? publicationModel(ctx.brand, { purpose: document.purpose, paper: document.paper, values: ctx.values })
+    if (document.format === 'docx') return { name, bytes: await publicationDocx(ctx, publication, { png }), type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }
+    if (document.format === 'html') {
+      const html = publicationHtml(ctx, publication)
+      return { name, bytes: new TextEncoder().encode(html), html, type: 'text/html' }
+    }
+    throw new Error(`Unsupported publication format ${document.format}`)
+  }
   if (document.format === 'docx') return { name, bytes: await docxFile(ctx, document, { png }), type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }
   if (document.format === 'pptx') return { name, bytes: await pptxFile(ctx, document, { png }), type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' }
   if (document.format === 'html') {

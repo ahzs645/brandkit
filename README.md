@@ -102,7 +102,23 @@ and anything else as JSON. Brands made or edited are kept in the browser until d
 
 The definition is documented in [docs/brand-schema.md](docs/brand-schema.md).
 
-The other six brands now have [pattern collections](brands/patterns.html): 45 new studies, 12 editable applications, individual reference sheets and PowerPoint layouts. Open **Explore patterns** in a brand’s Logos tab to adjust scale, density and colour and download SVG or PNG. These additional studies preserve the original identifying artwork, existing applications and approval/history records. The historical BC collections use supporting geometry; their official symbols remain intact. Rebuild all collections with `npm run make:patterns`, or use the existing per-brand generators, which also install them. Run `CHROMIUM_PATH=/usr/bin/chromium npm run test:patterns:browser` to check desktop, phone, downloads, app integration and focused export packs.
+## Pattern library
+
+Every brand has a **Patterns** tab, with a searchable gallery of its registered patterns,
+individual SVG/PNG downloads, source and motif notes, and previews of the actual templates that
+use them. Direct links retain the selected pattern, including in shared mode. The library
+shows existing artwork and documented relationships without changing the identity definition.
+
+Links from this section also open the existing interactive explorers, including SPARK Lab's
+arrow/spark studies and its pattern/application comparison board. These show additional ways
+to arrange the iconography and adjust scale, density and colour. The other six brands have
+[pattern collections](brands/patterns.html) with 45 supporting studies, 12 editable applications,
+individual reference sheets and PowerPoint layouts. Historical BC collections retain their
+source and reconstruction notices.
+
+Rebuild the source collections with `npm run make:patterns`; the per-brand generators also
+install them. `npm run test:patterns:view:browser` checks the dedicated section, and
+`npm run test:patterns:browser` checks the existing explorers, downloads and export packs.
 
 ## Manual library
 
@@ -118,9 +134,15 @@ writes `manuals/bc/books.js`; `scripts/render-guide-thumbnails.mjs` renders the 
 
 ## Using it from another project
 
-brandkit is meant to be a git submodule. [PofBC](https://github.com/ahzs645/PofBC) uses it at
-`vendor/brandkit` for its Visual Guides (the manual library) and its 1977 stationery (the template
-studio with a BC brand definition and PofBC's own Helvetica).
+For applications that only need artwork and brand roles, import the generated
+`source/consumer-profile.json`. It includes three outlined logo variants, resolved colours,
+font metadata and provenance for every configured brand. See [the consumer contract](docs/consuming-brandkit.md).
+This avoids rebuilding logo geometry in each application.
+
+For the engine, document exporter, manual library or template studio, Brandkit can be a pinned
+git submodule. The [PofBC](https://github.com/ahzs645/PofBC) integration on its historical
+`brandkit-submodule` branch is an adoption example; it is not present on PofBC's current main.
+The example below shows the source aliases needed by a host application.
 
 ```sh
 git submodule add https://github.com/ahzs645/brandkit vendor/brandkit
@@ -177,6 +199,10 @@ npx playwright install chromium && npm run test:browser   # the Motion tab and p
 npm run build && npm run test:printer           # Template Printer integration, in Chromium
 node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
+npm run make:documentation -- --check           # all brand use guides match their definitions
+npm run test:documents                         # model, Office and cross-brand export checks
+npm run build && npm run test:documents:browser # edit, import and download at desktop/phone widths
+npm run build:documentation -- --pdf            # all seven brands: Word masters + matching PDFs
 ```
 
 `npm run test:browser` checks ddcnorth v2.3 in the app's Motion tab and its motion and
@@ -184,7 +210,54 @@ brand-details pages, in Chromium at desktop and phone widths (it is not run in C
 `CHROMIUM_PATH` to use a Chromium you already have.
 
 `test/parity.test.js` compares the engine with the original ddcnorth kit, which is not in this
-repository; set `DDCNORTH_KIT` to an unzipped copy to run it. The CLI writes everything except
-images and PDFs, which are drawn by a browser.
+repository; set `DDCNORTH_KIT` to an unzipped copy to run it. `build` keeps its vector/text
+default. `build --office` and `documents` also render the artwork needed by Office documents in
+Node. Graphic PDF collections use the browser renderer; `documents --pdf` exports the actual
+Word masters with LibreOffice.
 
 GitHub Pages builds from `main` (`.github/workflows/pages.yml`).
+
+## Write, review and share documents
+
+Every configured brand has a **Documents** view, US Letter and A4 profiles, and three editable
+starters: product overview, project report and decision brief. Six page layouts cover a title
+page, explanatory content, product/workstream detail, screenshot with caption, comparison table
+and closing page. Add your copy and an actual PNG/JPEG capture, then download Word, printable
+HTML or the editable publication JSON. Source JSON can be opened again for export.
+
+Headings, lists, tables, captions and running text remain native Word content. The logo uses
+the selected brand's complete artwork, and the document uses its actual type weights. Font
+requirements and permitted embedding are recorded in the document. Historical BC identities
+retain their reconstruction notices; the new page layouts are identified as modern extensions.
+
+**Download kit** offers task packs for documents, presentations, websites and print, plus the
+complete kit. Office output has its own toggle. Focused packs include an offline index and a
+versioned asset catalog with MIME types, byte sizes and SHA-256 checksums. Each brand also has a
+generated `brands/<id>/USE.md` with artwork provenance and physical specifications.
+
+```sh
+# Build one report in both paper sizes; a PDF is exported from each Word master.
+node bin/brandkit.mjs documents brands/firstform/brand.json --purpose report --paper both --pdf --zip --out .documentation/firstform
+
+# Supply content values, or use --content for a complete exported publication model.
+node bin/brandkit.mjs documents brands/sparklab/brand.json --purpose product --paper a4 --values my-content.json --out .documentation/sparklab
+
+# Refresh the PDF after editing the maintained Word master.
+node bin/brandkit.mjs pdf .documentation/firstform/documents/firstform-publication-report-letter.docx --brand brands/firstform/brand.json
+
+# Publish versioned report examples for every registered brand (requires LibreOffice).
+npm run build:documentation -- --pdf --out dist/documentation
+```
+
+`soffice` must be available for PDF conversion; set `SOFFICE_PATH` for another installation.
+Release publishing requires a clean committed checkout and records that exact commit in the
+release folder, download filename and manifest. Use the `documents` command for working drafts.
+The browser's print view is useful for review, but use the Word master to produce a PDF with
+the same pagination as the maintained document. Editing a Word file does not update its
+original JSON; choose Word or the content model as the source for that publication.
+
+CI checks all brand guides, runs the document tests and browser workflow, and builds 14 Word/PDF
+example pairs for review. On main, the [published starters](https://projects.ahmadjalil.com/brandkit/documentation/)
+ship with the site. PR runs attach them as an artifact without deploying. See
+[the document model and editing rules](docs/documentation.md) for custom pages, screenshot
+provenance, copy conventions and font details.

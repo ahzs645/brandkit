@@ -221,6 +221,44 @@ A face's `office` name is the font a document asks for, where it differs from th
 the Province's TeX Gyre Heros stands in for Helvetica, so its documents name Helvetica. Faces with
 no `office` name are embedded in Word files when they are TrueType.
 
+### Document applications
+
+The optional `documentation` object adjusts the shared document profiles without changing
+identity artwork or adding layouts to `templates`. All brands derive useful defaults when it
+is absent. `documentProfile(brand, { paper: 'letter' | 'a4' })` resolves the brand's fonts,
+colours, preferred supplied logo, physical margins and source status. `publicationModel`
+produces a shared editable content model for Word and printable HTML, with cover, content,
+product detail, screenshot/evidence, comparison and closing page kinds.
+
+```json
+"documentation": {
+  "margins": { "topMm": 20, "rightMm": 18, "bottomMm": 18, "leftMm": 20 },
+  "typography": {
+    "title": { "font": "display", "sizePt": 32, "lineHeight": 1.12 },
+    "body": { "font": "body", "sizePt": 10.5, "lineHeight": 1.45 }
+  },
+  "colours": { "paper": "white", "ink": "ink" },
+  "logo": { "widthMm": 60, "clearSpaceMm": 8 }
+}
+```
+
+Typography overrides select an existing font role and change `sizePt`, `lineHeight`,
+`spaceAfterPt` or `trackingEm`; family and weight remain those of the selected brand face.
+Logo `options` may select an existing family/layout or signature/colourway. Its width cannot
+fall below the brand's minimum. Extra layout spacing does not replace the existing identity
+clear-space rule. `header.text` and `footer.text` can set running text. Historical brands
+retain explicit reconstruction and modern-layout labels.
+
+Publication content is a separate `brandkit/publication/1` source model, not part of the
+identity definition. The supported purposes are `product`, `report` and `brief`. Product
+defaults do not imply previous client delivery and contact information is omitted unless
+supplied. Figure data is embedded PNG/JPEG, with alt text and an explanatory caption;
+placeholders are visibly labelled. `validatePublication` returns problems for invalid JSON
+structures, unsafe image sources, inconsistent tables or unusable dimensions.
+
+See [Documents from a brand](documentation.md) for the complete model, value fields,
+source-maintenance commands and rendering guidance.
+
 ## Guide
 
 ```json

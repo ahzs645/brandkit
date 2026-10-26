@@ -150,7 +150,17 @@ test('existing generated vector and text assets remain identical after collectio
     const current = new Map(planKit(brand, planOptions).filter(entry => entry.kind === 'text').map(entry => [entry.path, entry]))
     for (const [path, expected] of Object.entries(before.renders)) {
       assert.ok(current.has(path), `${id}: existing ${path} retained`)
-      const actual = current.get(path).make({ brand, fonts: provider })
+      let actual = current.get(path).make({ brand, fonts: provider })
+      if (path === 'web/tokens.json') {
+        // Documentation corrects semantic colour resolution and source font weights. Assert
+        // those values, then restore only the former token defaults for this artwork baseline.
+        const values = JSON.parse(actual)
+        assert.deepEqual(values.roles, Object.fromEntries(Object.entries(brand.roles ?? {}).map(([role, value]) => [role, colour(brand, value)])))
+        for (const heading of ['h1', 'h2']) assert.equal(values.typeScale[heading].weight, brand.typography?.headlines?.weight ?? brand.fonts?.display?.weight ?? 500)
+        values.roles = Object.fromEntries(Object.keys(brand.roles ?? {}).map((role) => [role, colour(brand, role)]))
+        for (const [style, weight] of Object.entries({ h1: 500, h2: 500, body: 400, caption: 400, label: 400 })) values.typeScale[style].weight = weight
+        actual = `${JSON.stringify(values, null, 2)}\n`
+      }
       assert.equal(sha(actual), expected, `${id}: unchanged ${path}`)
     }
   }
