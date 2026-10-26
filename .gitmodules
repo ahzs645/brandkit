@@ -4,3 +4,6 @@
 [submodule "vendor/unbc-logo"]
 	path = vendor/unbc-logo
 	url = https://github.com/ahzs645/unbc-logo.git
+[submodule "vendor/door-sign"]
+	path = vendor/door-sign
+	url = https://github.com/ahzs645/door-sign.git

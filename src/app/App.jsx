@@ -19,6 +19,7 @@ import { Colour } from './views/Colour.jsx'
 import { motionUrl, viewOrOverview } from './motion.js'
 import { hasDepartments } from './affiliation.js'
 import { hasWebPage } from '../engine/webpage.js'
+import { loadExtension } from '../extensions/index.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
@@ -45,6 +46,8 @@ const VIEWS = [
   { id: 'web', label: 'Web' },
   { id: 'documents', label: 'Documents' },
   { id: 'printer', label: 'Template Printer' },
+  // A brand extension's own tab (UNBC's door signs), named by the extension.
+  { id: 'extension', label: 'Extension' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
   { id: 'kit', label: 'Download kit' },
@@ -163,6 +166,15 @@ export const App = () => {
     loadBrandFonts({ fonts: STARTER_FONTS }, librarySource().read).then(setLibraryFonts)
   }, [view, libraryFonts])
   useWebFonts(brand, source)
+  // The brand's extension, once loaded for this brand (null: it has none).
+  const [extension, setExtension] = useState({ id: undefined, value: null })
+  useEffect(() => {
+    let live = true
+    loadExtension(brand).then((value) => { if (live) setExtension({ id: brand?.extension ?? null, value }) }, () => { if (live) setExtension({ id: brand?.extension ?? null, value: null }) })
+    return () => { live = false }
+  }, [brand?.extension])
+  const extensionView = extension.id === (brand?.extension ?? null) ? extension.value?.view ?? null : undefined
+  const ExtensionView = useMemo(() => (extensionView ? lazy(extensionView.load) : null), [extensionView])
 
   const go = (next) => {
     setView(next)
@@ -175,7 +187,9 @@ export const App = () => {
   useEffect(() => {
     if (brand && viewOrOverview(view, motionLink) !== view) go('overview')
     if (brand && (view === 'organization' && !hasDepartments(brand) || view === 'web' && !hasWebPage(brand))) go('overview')
-  }, [brand, motionLink, view])
+    // Wait for the extension to load before deciding it has no tab.
+    if (brand && view === 'extension' && extensionView === null) go('overview')
+  }, [brand, motionLink, view, extensionView])
 
   // Between a brand and its manuals: a template's source page, and back from a page to a template.
   const openManual = (book, page) => {
@@ -288,7 +302,7 @@ export const App = () => {
         </div>
         )}
         {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
-          {TABS.filter((entry) => (entry.id !== 'motion' || motionUrl(brand, source)) && (entry.id !== 'organization' || hasDepartments(brand)) && (entry.id !== 'web' || hasWebPage(brand))).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
+          {TABS.filter((entry) => (entry.id !== 'motion' || motionUrl(brand, source)) && (entry.id !== 'organization' || hasDepartments(brand)) && (entry.id !== 'web' || hasWebPage(brand)) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -314,6 +328,10 @@ export const App = () => {
                 </div>
               )} /></div>}
             {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onPackage={downloadPrinterPackage} onImport={importPrinterDesign} />}
+            {view === 'extension' && ExtensionView && <div className="view">
+              <section className="panel"><h2>{extensionView.label}</h2>{extensionView.use && <p className="muted">{extensionView.use}</p>}</section>
+              <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
+            </div>}
             {view === 'web' && hasWebPage(brand) && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}

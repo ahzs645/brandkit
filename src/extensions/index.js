@@ -1,9 +1,15 @@
-// Brand extensions: capabilities a brand takes from a package of its own rather than from its
-// brand.json, named there as `extension` (UNBC's social-media profile pictures come from the
-// UNBC logo package). Each loads only when a brand that names it is open.
+// Brand extensions: capabilities a brand takes from packages of its own rather than from its
+// brand.json, named there as `extension`. UNBC's adds social-media profile pictures (from the UNBC
+// logo package) and a door-sign editor (from the door-sign package). Each loads only when a brand
+// that names it is open.
+//
+// An extension module may export:
+//   profilePictures   { label, use, shapes, size, caption(name), clipped(name, shape), render(ctx, { name, shape }) }
+//   view              { label, use, load: () => import(…) }   a tab of its own; the module's
+//                     default export is a React component taking { brand, fonts }
 
 const EXTENSIONS = {
-  'unbc-logo': () => import('./unbc-logo.js')
+  unbc: () => import('./unbc.js')
 }
 
 /** The extension a brand names, or null. */

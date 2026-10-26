@@ -282,3 +282,16 @@ test('UNBC profile pictures come from the UNBC logo package, outlined, in both l
   assert.deepEqual(profilePictures.clipped('School of Engineering', 'circle'), [])
   assert.equal(await loadExtension(JSON.parse(readFileSync(new URL('../brands/sparklab/brand.json', import.meta.url), 'utf8'))), null)
 })
+
+test('UNBC’s extension adds a door-sign editor from the door-sign package', async () => {
+  const { loadExtension } = await import('../src/extensions/index.js')
+  const extension = await loadExtension(brand)
+  assert.equal(extension.view.label, 'Door signs')
+  assert.equal(typeof extension.view.load, 'function')
+  const packageRoot = new URL('../vendor/door-sign/', import.meta.url).pathname
+  if (!existsSync(`${packageRoot}src/core.js`)) return
+  // The editor opens on the department chosen in Departments, as the package resolves it.
+  const core = await import(`${packageRoot}src/core.js`)
+  const selection = core.departmentSelection(core.departmentTypes, 'School of Engineering')
+  assert.equal(core.buildSignContent({ ...core.INITIAL_SIGN_DATA, ...selection }, { cardHolders: core.cardHolders }).departmentText, 'School of Engineering')
+})

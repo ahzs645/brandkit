@@ -46,6 +46,7 @@ An unknown placeholder is left as written, so a typo shows on the page.
 | `typography` | Headline, body and label settings for tokens and CSS. `labels.textTransform` accepts `none`, `uppercase`, `lowercase` or `capitalize`; omitted or unrecognized values retain the existing `uppercase` default. |
 | `logoPolicy` | Optional permitted paint, standalone-symbol, physical-width and clear-space controls. |
 | `organization` | Institutional name and separate document-text naming configuration. |
+| `extension` | A package that adds what brand.json cannot describe, by name (`src/extensions/index.js`). It may provide `profilePictures` (shown in Departments) and a `view` (a tab of its own). UNBC's, `unbc`, draws social-media profile pictures with the UNBC logo package and adds a **Door signs** tab from the door-sign package. |
 | `brandArchitecture` | Related brands with explicit relationship labels and notes. |
 | `officialResources` | Source-resource metadata and links; supplied local files must also be listed in `files`. |
 
