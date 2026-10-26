@@ -64,7 +64,8 @@ test('portable web outputs have supported colourways, mobile space and no unavai
   assert.doesNotThrow(() => new Script(script), 'offline index script parses')
   const landing = landingHtml(ctx)
   assert.doesNotMatch(landing, /href="favicon\.svg"|src="\.\.\/symbol\//)
-  assert.match(landing, /padding:8\.71px;background:#fff/)
+  assert.match(landing, /header img\{[^}]*padding:8\.71px\}/, 'the logo sits on the page, not on a painted box')
+  assert.doesNotMatch(landing, /background:#fff\}/)
 })
 
 test('identity sources and official originals accompany every portable task pack', () => {

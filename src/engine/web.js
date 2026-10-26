@@ -122,16 +122,18 @@ ${rows.join(',\n')}
 };
 export type ${name}Props = Omit<React.SVGProps<SVGSVGElement>, 'children' | 'viewBox' | 'width' | 'height' | 'color' | 'title'> & {
   colourway?: keyof typeof ARTWORK;
+  /** Paint the colourway's approved ground behind the logo; transparent otherwise. */
+  ground?: boolean;
   width?: number;
   title?: string;
 };
-export function ${name}({ colourway = ${JSON.stringify(brand.defaultColourway)}, width = 240, title = ${JSON.stringify(brand.name)}, style, ...props }: ${name}Props) {
+export function ${name}({ colourway = ${JSON.stringify(brand.defaultColourway)}, width = 240, ground = false, title = ${JSON.stringify(brand.name)}, style, ...props }: ${name}Props) {
   const artwork = ARTWORK[colourway];
   const actualWidth = Number.isFinite(width) ? Math.max(${n6(minPx)}, width) : 240;
   const titleId = React.useId();
   return <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox={artwork.viewBox}
     width={actualWidth} role="img" aria-labelledby={titleId}
-    style={{ ...style, display: 'block', boxSizing: 'content-box', width: actualWidth, minWidth: ${n6(minPx)}, maxWidth: 'none', height: 'auto', padding: actualWidth * ${brand.logoPolicy.clearSpaceRatio ?? 0}, background: artwork.background }}>
+    style={{ ...style, display: 'block', boxSizing: 'content-box', width: actualWidth, minWidth: ${n6(minPx)}, maxWidth: 'none', height: 'auto', padding: actualWidth * ${brand.logoPolicy.clearSpaceRatio ?? 0}, ...(ground ? { background: artwork.background } : {}) }}>
     <title id={titleId}>{title}</title>{artwork.shape}
   </svg>;
 }
@@ -231,7 +233,7 @@ const applyWebsiteRules = (brand, html) => {
   if (brand.logoPolicy?.allowInheritedColour === false) {
     const minimumPx = n6((brand.logoPolicy.minimumWidthMm ?? 0) * 96 / 25.4)
     result = result.replace('<select id="background">', '<select id="background" disabled>')
-      .replace('</style>', `\n/* Supplied logo geometry and approved backgrounds. */\nheader img{box-sizing:content-box;min-width:${minimumPx}px;padding:${Math.max(8, 236 * (brand.logoPolicy.clearSpaceRatio ?? 0)).toFixed(2)}px;background:#fff}.hero-art{background:#fff}.logo-card-art img{min-width:${minimumPx}px}@media(max-width:480px){.logo-grid,.applications{grid-template-columns:1fr}.topbar{flex-wrap:wrap;padding:16px 0}}\n</style>`)
+      .replace('</style>', `\n/* Supplied logo geometry and approved backgrounds. */\nheader img{box-sizing:content-box;min-width:${minimumPx}px;padding:${Math.max(8, 236 * (brand.logoPolicy.clearSpaceRatio ?? 0)).toFixed(2)}px}.logo-card-art img{min-width:${minimumPx}px}@media(max-width:480px){.logo-grid,.applications{grid-template-columns:1fr}.topbar{flex-wrap:wrap;padding:16px 0}}\n</style>`)
   }
   return result
 }

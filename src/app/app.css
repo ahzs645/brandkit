@@ -124,7 +124,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .organization-resources strong, .organization-resources span { display: block; }
 .organization-resources span { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
 .organization-relations p { margin: 8px 0 0; }
-.brand-logo[data-brand='unbc'] .brand-logo__art, .menu-logo[data-brand='unbc'] .menu-logo__art { background: #fff; box-sizing: content-box; padding: 6px; min-width: 144px; }
+.brand-logo[data-brand='unbc'] .brand-logo__art, .menu-logo[data-brand='unbc'] .menu-logo__art { min-width: 144px; }
 .brand-logo[data-brand='unbc'] .brand-logo__art { height: 27px; }
 .kit-pack { margin-top: 14px; max-width: 380px; }
 @media (max-width: 850px) {
