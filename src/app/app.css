@@ -605,3 +605,6 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 /* The page keeps its own width, so its layout is the one a visitor sees; narrower panels scroll. */
 .web-preview__scroll { overflow-x: auto; }
 .web-preview iframe { max-width: none; margin: 0 auto; }
+/* A warm ground so the avatars' white caption band reads against the card. */
+.profile-pictures .profile-pictures__art { height: 220px; background: #eae7e5; }
+.profile-pictures .profile-pictures__art img { height: 100%; width: auto; }

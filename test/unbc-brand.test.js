@@ -268,3 +268,17 @@ test('UNBC web page follows www.unbc.ca and carries the department sub-logo', as
   assert.match(strFromU8(files.get('web/components/components.css')), /url\("\.\.\/\.\.\/fonts\/BCSans-Regular\.woff"\)/)
   assert.match(strFromU8(files.get('web/components/header.html')), /aria-label="School of Business"/)
 })
+
+test('UNBC profile pictures come from the UNBC logo package, outlined, in both layouts', { skip: !existsSync(logoPackage) && 'vendor/unbc-logo is not checked out' }, async () => {
+  const { loadExtension } = await import('../src/extensions/index.js')
+  const { profilePictures } = await loadExtension(brand)
+  assert.deepEqual(profilePictures.shapes.map(shape => shape.id), ['square', 'circle'])
+  assert.equal(profilePictures.caption('Faculty of Environment'), 'Environment', 'faculties drop “Faculty of”')
+  for (const shape of ['square', 'circle']) {
+    const svg = profilePictures.render(ctx, { name: 'School of Engineering', shape })
+    assert.doesNotMatch(svg, /<text\b/, `${shape}: caption is outlined`)
+    assert.match(svg, /aria-label="School of/)
+  }
+  assert.deepEqual(profilePictures.clipped('School of Engineering', 'circle'), [])
+  assert.equal(await loadExtension(JSON.parse(readFileSync(new URL('../brands/sparklab/brand.json', import.meta.url), 'utf8'))), null)
+})

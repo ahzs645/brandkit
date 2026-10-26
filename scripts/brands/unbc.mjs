@@ -113,6 +113,8 @@ const officialResources = [
 ]
 const brand = {
   id: 'unbc', name: 'UNBC', version: '1.0', displayVersion: '1.0',
+  // Social-media profile pictures come from the UNBC logo package (src/extensions/unbc-logo.js).
+  extension: 'unbc-logo',
   source: `University of Northern British Columbia, Graphics Standards Manual February 2020 (${SOURCES.manual}), original official website vector (${SOURCES.vector}) and official logo/template downloads. Retrieved ${retrieved}.`,
   status: 'Official source artwork and published identity rules with local document applications. Department sub-logos are set on the construction UNBC’s own sub-logos use, shared with the UNBC logo package and door signs; department names in documents remain ordinary text.',
   organization: {

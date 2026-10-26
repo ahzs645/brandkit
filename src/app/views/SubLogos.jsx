@@ -3,15 +3,42 @@
 // composes its signatures this way gets the same editor: UNBC's sub-logos, the Province's
 // ministerial signatures.
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { logoDocument } from '../../engine/artwork.js'
 import { departmentLines } from '../../engine/signatures.js'
+import { loadExtension } from '../../extensions/index.js'
 import { Downloads, Field, SvgImage } from '../ui.jsx'
 import { DepartmentSelect, groundOf } from './Signatures.jsx'
 
 const slug = (text) => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'department'
 
 /** `actions(name)` adds controls for the chosen name, on one line (the Departments view's document buttons). */
+// A brand extension's profile pictures (UNBC's social-media avatars), set for the same name.
+const ProfilePictures = ({ brand, fonts, name }) => {
+  const [pictures, setPictures] = useState(null)
+  useEffect(() => {
+    let live = true
+    loadExtension(brand).then((extension) => { if (live) setPictures(extension?.profilePictures ?? null) })
+    return () => { live = false }
+  }, [brand.extension])
+  if (!pictures) return null
+  const clipped = name ? pictures.clipped(name, 'square') : []
+  return <section className="panel" aria-labelledby="profile-pictures">
+    <h2 id="profile-pictures">{pictures.label}</h2>
+    <p className="muted">{pictures.use}</p>
+    {clipped.length > 0 && <p className="notice" role="status">A circular crop clips “{clipped.join('”, “')}” from the square. Use the circle layout on platforms that crop.</p>}
+    <div className="asset-grid profile-pictures">
+      {pictures.shapes.map((shape) => {
+        const make = () => pictures.render({ fonts }, { name, shape: shape.id })
+        return <figure key={shape.id} className="asset-card">
+          <div className="asset-card__art profile-pictures__art"><SvgImage svg={make()} alt={`${pictures.label}, ${shape.label}: ${pictures.caption(name) || 'no caption'}`} /></div>
+          <figcaption><span>{shape.label}</span><Downloads make={make} name={[brand.id, 'profile', shape.id, slug(name)].join('-')} width={pictures.size} /></figcaption>
+        </figure>
+      })}
+    </div>
+  </section>
+}
+
 export const SubLogos = ({ brand, fonts, actions, initialName }) => {
   const departments = brand.departments
   const field = departments.field
@@ -69,5 +96,6 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
         </div>
       </section>
     </div>
+    <ProfilePictures brand={brand} fonts={fonts} name={name} />
   </>
 }
