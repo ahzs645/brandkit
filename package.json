@@ -28,7 +28,8 @@
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
-    "./consumer": "./src/engine/consumer.js"
+    "./consumer": "./src/engine/consumer.js",
+    "./patterns": "./src/engine/pattern-catalog.js"
   },
   "files": [
     "bin",
@@ -68,7 +69,8 @@
     "make:documentation": "node scripts/brands/documentation.mjs",
     "build:documentation": "node scripts/build-documentation.mjs",
     "test:documents": "node --test test/documentation-model.test.js test/office-documents.test.js test/documentation-exports.test.js",
-    "test:documents:browser": "node test/browser/documentation.check.mjs"
+    "test:documents:browser": "node test/browser/documentation.check.mjs",
+    "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

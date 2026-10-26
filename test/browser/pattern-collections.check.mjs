@@ -154,17 +154,17 @@ const runBrand = async id => {
   assert.deepEqual(explorerErrors, [], `${id}: controls and downloads produced no browser errors`)
   await explorer.close()
 
-  const { page: app, errors: appErrors } = await open(`${base}?brand=${id}&view=logos`)
-  await app.locator('nav.tabs').getByRole('button', { name: 'Logos', exact: true }).click()
-  const patterns = app.locator('section.panel').filter({ has: app.getByRole('heading', { name: 'Patterns', exact: true }) })
+  const { page: app, errors: appErrors } = await open(`${base}?brand=${id}&view=patterns`)
+  await app.locator('nav.tabs').getByRole('button', { name: 'Patterns', exact: true }).click()
+  const patterns = app.getByRole('region', { name: 'Pattern library', exact: true })
   await patterns.waitFor()
-  const link = app.getByRole('link', { name: /Explore patterns/i })
+  const link = app.locator('.patterns-resources a[href*="pattern-explorer"]')
   assert.ok(await link.isVisible(), `${id}: discoverable explorer link`)
   const href = await link.getAttribute('href')
   assert.ok(href?.includes('pattern-explorer'), `${id}: correct explorer target`)
   for (const patternId of collection.patterns) {
     const spec = brand.patterns.find(p => p.id === patternId)
-    assert.ok(await patterns.getByText(spec.name ?? patternId, { exact: true }).isVisible(), `${id}: ${patternId} in Logos`)
+    assert.ok(await patterns.getByText(spec.name ?? patternId, { exact: true }).isVisible(), `${id}: ${patternId} in Patterns`)
   }
   await app.locator('nav.tabs').getByRole('button', { name: 'Templates', exact: true }).click()
   await app.locator('.studio__stage svg, .studio__stage img').first().waitFor()
@@ -221,9 +221,9 @@ try {
     try {
       for (const id of report.brands.filter(r => r.pass).map(r => r.id)) {
         try {
-          const { page: app, errors } = await open(`${built.resolvedUrls.local[0]}?brand=${id}&view=logos`)
-          await app.locator('nav.tabs').getByRole('button', { name: 'Logos', exact: true }).click()
-          const link = app.getByRole('link', { name: /Explore patterns/i })
+          const { page: app, errors } = await open(`${built.resolvedUrls.local[0]}?brand=${id}&view=patterns`)
+          await app.locator('nav.tabs').getByRole('button', { name: 'Patterns', exact: true }).click()
+          const link = app.locator('.patterns-resources a[href*="pattern-explorer"]')
           await link.waitFor()
           const href = await link.getAttribute('href')
           assert.deepEqual(errors, [], `${id}: production app assets`)

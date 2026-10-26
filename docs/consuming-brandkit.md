@@ -79,3 +79,16 @@ the generating code revision when supplied. Checksums identify bytes, not approv
 
 See [documentation.md](documentation.md) for editable blocks, image validation and the
 one-way Word-to-PDF workflow. See the selected brand's `USE.md` for its own source notes.
+
+## Pattern libraries and applications
+
+`patternLibrary(brand)` from `brandkit/patterns` provides the same read-only catalog as the
+app's Patterns section. It lists every registered pattern, composition groups, source motifs,
+related application templates and existing explorer/guide resources. Each entry retains its
+original `spec` for the engine's `pattern({ brand }, spec)` renderer.
+
+Application relationships distinguish an explicit pattern reference from a shared graphic
+family. For example, SPARK's expanded native artwork belongs to named graphic directions;
+that does not establish that every tile in a family appears unchanged in each application.
+Resource paths refer to supplied brand files and should be resolved through the host's asset
+provider. This catalog adds navigation and relationships without rewriting artwork.

@@ -16,13 +16,15 @@ export const Shared = createContext(false)
 export const useShared = () => useContext(Shared)
 
 // What a shared view offers, and where its link can open.
-export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'templates', 'documents', 'guide', 'motion', 'kit']
-const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', templates: 'Templates', documents: 'Documents', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
+export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'patterns', 'templates', 'documents', 'guide', 'motion', 'kit']
+const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', patterns: 'Patterns', templates: 'Templates', documents: 'Documents', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
 
 export const shareUrl = (brandId, view = 'overview') => {
   const url = new URL(import.meta.env.BASE_URL, globalThis.location.origin)
   url.searchParams.set('brand', brandId)
   if (view !== 'overview') url.searchParams.set('view', view)
+  const current = new URLSearchParams(globalThis.location.search)
+  if (view === 'patterns' && current.get('brand') === brandId && current.get('view') === 'patterns' && current.get('pattern')) url.searchParams.set('pattern', current.get('pattern'))
   url.searchParams.set('share', '1')
   return url.href
 }
@@ -66,6 +68,7 @@ export const ShareDialog = ({ brand, shareable, edited, revision, view, onClose 
             <ul className="share-list share-list--yes">
               <li>The approved logo, v{brand.displayVersion ?? brand.version}</li>
               <li>Logos and symbols to download</li>
+              <li>Patterns, supporting shapes and applications</li>
               <li>Templates to fill in, and the Office files</li>
               <li>The brand guide</li>
               <li>The whole kit, as one download</li>

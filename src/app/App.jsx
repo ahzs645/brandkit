@@ -29,11 +29,13 @@ const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default
 const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ default: module.Manuals })))
 const TemplatePrinter = lazy(() => import('./views/TemplatePrinter.jsx').then((module) => ({ default: module.TemplatePrinter })))
 const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({ default: module.Documents })))
+const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ default: module.Patterns })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
   { id: 'colour', label: 'Colour' },
+  { id: 'patterns', label: 'Patterns' },
   { id: 'templates', label: 'Templates' },
   { id: 'documents', label: 'Documents' },
   { id: 'printer', label: 'Template Printer' },
@@ -112,7 +114,7 @@ export const App = () => {
       setCurrent({ ...next, original: structuredClone(next.brand) })
       // On arrival the address may point into a guide or manual; a later switch of brand starts fresh.
       // A shared link drops anything it does not offer (a revision, a view of the workshop).
-      writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature', 'study'] : [] })
+      writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature', 'study', 'pattern'] : [] })
       if (!SHARED) try { localStorage.setItem('brandkit:last', next.brand.id) } catch { /* fine */ }
     } catch (problem) {
       setError(problem.message)
@@ -291,7 +293,8 @@ export const App = () => {
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'colour' && <Colour brand={brand} />}
-            {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
+            {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} onPatterns={() => go('patterns')} />}
+            {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {view === 'templates' && <div className="view">
               {!SHARED && <div className="panel printer__intro"><p>Need card design, people, batch printing or calibration?</p><button type="button" className="button" onClick={() => go('printer')}>Open Template Printer</button></div>}
               <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}

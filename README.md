@@ -102,7 +102,23 @@ and anything else as JSON. Brands made or edited are kept in the browser until d
 
 The definition is documented in [docs/brand-schema.md](docs/brand-schema.md).
 
-The other six brands now have [pattern collections](brands/patterns.html): 45 new studies, 12 editable applications, individual reference sheets and PowerPoint layouts. Open **Explore patterns** in a brand’s Logos tab to adjust scale, density and colour and download SVG or PNG. These additional studies preserve the original identifying artwork, existing applications and approval/history records. The historical BC collections use supporting geometry; their official symbols remain intact. Rebuild all collections with `npm run make:patterns`, or use the existing per-brand generators, which also install them. Run `CHROMIUM_PATH=/usr/bin/chromium npm run test:patterns:browser` to check desktop, phone, downloads, app integration and focused export packs.
+## Pattern library
+
+Every brand has a **Patterns** tab, with a searchable gallery of its registered patterns,
+individual SVG/PNG downloads, source and motif notes, and previews of the actual templates that
+use them. Direct links retain the selected pattern, including in shared mode. The library
+shows existing artwork and documented relationships without changing the identity definition.
+
+Links from this section also open the existing interactive explorers, including SPARK Lab's
+arrow/spark studies and its pattern/application comparison board. These show additional ways
+to arrange the iconography and adjust scale, density and colour. The other six brands have
+[pattern collections](brands/patterns.html) with 45 supporting studies, 12 editable applications,
+individual reference sheets and PowerPoint layouts. Historical BC collections retain their
+source and reconstruction notices.
+
+Rebuild the source collections with `npm run make:patterns`; the per-brand generators also
+install them. `npm run test:patterns:view:browser` checks the dedicated section, and
+`npm run test:patterns:browser` checks the existing explorers, downloads and export packs.
 
 ## Manual library
 

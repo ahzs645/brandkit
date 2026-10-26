@@ -15,3 +15,4 @@ export { mergePatch, revisionsOf, findRevision, withRevision, approvedOnly, revi
 export { DOCUMENT_PURPOSES, documentProfile, publicationModel, publicationLayouts, validatePublication, documentationGuide, documentationMarkdown, documentationDocumentsFor } from './documentation.js'
 export { CONSUMER_PROFILE_SCHEMA, consumerProfile } from './consumer.js'
 export { KIT_PACKS, inPack } from './packs.js'
+export { patternLibrary } from './pattern-catalog.js'
