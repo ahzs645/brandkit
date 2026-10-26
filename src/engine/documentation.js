@@ -4,12 +4,13 @@
 
 import { colour, fill, logoOptions, paintOptions } from './brand.js'
 
-export const DOCUMENTATION_VERSION = '1.0'
+export const DOCUMENTATION_VERSION = '1.1'
 
 export const DOCUMENT_PURPOSES = Object.freeze([
   { id: 'product', label: 'Product overview', description: 'Explain an offering and its supported scope without implying previous client delivery.' },
   { id: 'report', label: 'Project report', description: 'Present findings, their evidence, decisions and follow-up work.' },
-  { id: 'brief', label: 'Decision brief', description: 'Explain the decision needed, compare options and identify the next step.' }
+  { id: 'brief', label: 'Decision brief', description: 'Explain the decision needed, compare options and identify the next step.' },
+  { id: 'portfolio', label: 'Brand portfolio', description: 'Explain an identity, its organizational relationships, approved assets and document applications.' }
 ])
 
 const PAPERS = {
@@ -33,7 +34,8 @@ const SOURCE_GENERATORS = {
   sparklab: { command: 'npm run make:sparklab', files: ['scripts/brands/sparklab.mjs'] },
   'bc-province-1977': { command: 'npm run make:bc', files: ['scripts/brands/bc-province-1977.mjs'] },
   'bc-hydro-1983': { command: 'npm run make:bc', files: ['scripts/brands/bc-hydro-1983.mjs'] },
-  northwind: { command: 'npm run make:example', files: ['scripts/make-example-brand.mjs'] }
+  northwind: { command: 'npm run make:example', files: ['scripts/make-example-brand.mjs'] },
+  unbc: { command: 'npm run make:unbc', files: ['scripts/brands/unbc.mjs'] }
 }
 
 const clone = (value) => structuredClone(value)
@@ -56,7 +58,7 @@ const assertBrand = (brand) => {
 
 const purposeOf = (purpose = 'product') => {
   const found = DOCUMENT_PURPOSES.find((item) => item.id === purpose)
-  if (!found) throw new RangeError(`Unknown document purpose: ${purpose}. Choose product, report or brief.`)
+  if (!found) throw new RangeError(`Unknown document purpose: ${purpose}. Choose product, report, brief or portfolio.`)
   return found
 }
 
@@ -109,13 +111,15 @@ const preferredLogo = (brand, override = {}) => {
   const minimumWidthMm = brand.lockup?.minimumHorizontalWidthMm ?? 20
   const widthMm = positive(override.widthMm, Math.max(55, minimumWidthMm), 'logo widthMm')
   if (widthMm < minimumWidthMm) throw new RangeError(`Document logo width must be at least ${minimumWidthMm} mm.`)
+  const minimumClearSpaceMm = Math.max(0, Number(brand.logoPolicy?.clearSpaceRatio) || 0) * widthMm
   const stem = `${selected.key}-${selectedPaint.id}`
   const status = statusOf(brand)
   return {
     options, widthMm, minimumWidthMm,
     // Layout spacing supplements the native artwork padding; the quoted identity rule remains
     // authoritative. It is not a claim that an arbitrary 8 mm equals every brand's clear space.
-    clearSpaceMm: nonnegative(override.clearSpaceMm, 8, 'logo clearSpaceMm'),
+    clearSpaceMm: Math.max(minimumClearSpaceMm, nonnegative(override.clearSpaceMm, 8, 'logo clearSpaceMm')),
+    minimumClearSpaceMm,
     clearSpaceRule: text(brand.lockup?.clearspaceRecommendation, 'Keep the supplied artwork clear of adjacent content.'),
     alt: fill(brand, brand.copy?.logoLabel ?? `${brand.name} logo`),
     assets: {
@@ -125,6 +129,37 @@ const preferredLogo = (brand, override = {}) => {
     },
     provenance: { kind: status.reconstruction ? 'reconstruction' : 'kit-artwork', source: status.source, note: status.note }
   }
+}
+
+const affiliationProfile = (override = {}) => {
+  const result = {
+    mode: 'document-text',
+    departmentSizePt: positive(override.departmentSizePt, 12, 'affiliation departmentSizePt'),
+    subdepartmentSizePt: positive(override.subdepartmentSizePt, 10.5, 'affiliation subdepartmentSizePt'),
+    lineHeight: positive(override.lineHeight, 1.3, 'affiliation lineHeight'),
+    gapAfterMm: nonnegative(override.gapAfterMm, 5, 'affiliation gapAfterMm'),
+    maxCharacters: 180,
+    wrapping: 'Wrap at the available text width; retain type size and do not condense, truncate or stretch names.',
+    note: text(override.note, 'Department and subdepartment names are editable document metadata. These type sizes are document layout defaults, not specifications for a departmental logo. Use an approved supplied logo for a formal unit identifier.')
+  }
+  if (result.departmentSizePt < 8 || result.departmentSizePt > 24 || result.subdepartmentSizePt < 8 || result.subdepartmentSizePt > result.departmentSizePt) throw new RangeError('Affiliation type must be between 8 and 24 pt, with subdepartment no larger than department.')
+  if (result.lineHeight < 1 || result.lineHeight > 2 || result.gapAfterMm > 20) throw new RangeError('Affiliation line height must be between 1 and 2 and spacing between 0 and 20 mm.')
+  return result
+}
+
+/** Resolve organization names without changing the brand or composing a new logo. */
+export const publicationAffiliation = (values = {}) => {
+  const supplied = values.affiliation
+  if (supplied != null && (typeof supplied !== 'object' || Array.isArray(supplied))) throw new TypeError('Publication affiliation must be an object.')
+  const names = {}
+  for (const key of ['department', 'subdepartment']) {
+    const value = supplied?.[key] ?? values[key] ?? ''
+    if (typeof value !== 'string') throw new TypeError(`Affiliation ${key} must be text.`)
+    names[key] = value.trim().replace(/\s+/g, ' ')
+    if (names[key].length > 180) throw new RangeError(`Affiliation ${key} must be no longer than 180 characters.`)
+  }
+  if (names.subdepartment && !names.department) throw new TypeError('Supply a department before its subdepartment.')
+  return names
 }
 
 /**
@@ -163,6 +198,7 @@ export const documentProfile = (brand, { paper = 'letter' } = {}) => {
     id: `${brand.id}-${paper}`, brandId: brand.id, brandName: brand.name, paper: paperSize, margins, typography, colours,
     header: { text: text(override.header?.text, brand.name) },
     footer: { text: text(override.footer?.text, status.historical ? 'Historical reconstruction · Modern document layout' : brand.name) },
+    affiliation: affiliationProfile(override.affiliation),
     logo: preferredLogo(brand, override.logo), status,
     rules: {
       print: 'Use the light paper and ink roles for document pages; retain the brand’s own typefaces and logo proportions.',
@@ -170,7 +206,8 @@ export const documentProfile = (brand, { paper = 'letter' } = {}) => {
       captions: 'Explain the visible action or result. Record source, capture date and context when relevant.',
       copy: 'Describe verified capabilities. Do not imply client delivery, endorsement, results or compatibility without supporting evidence.',
       contact: 'Include contact details only when explicitly supplied. Do not use a template placeholder as a real contact.',
-      editing: 'Keep headings, body text, captions and tables editable. Recheck pagination after changing content or fonts.'
+      editing: 'Keep headings, body text, captions and tables editable. Recheck pagination after changing content or fonts.',
+      affiliation: affiliationProfile(override.affiliation).note
     }
   }
 }
@@ -228,6 +265,22 @@ const EXAMPLES = {
     closingTitle: 'Make the decision reviewable',
     closing: 'Present the proposed next action with its conditions. State which information would change the recommendation and who should review it.',
     nextSteps: ['Confirm the preferred option or request the missing evidence.', 'Record conditions and unresolved assumptions.', 'Assign the next action and review date when agreed.']
+  },
+  portfolio: {
+    title: 'Brand portfolio', subtitle: 'Identity organizational naming and document applications',
+    introduction: 'Use this editable portfolio to explain the identity and how its approved assets connect to departments, subdepartments and everyday documents. Replace the instructional text with source-backed rules and reviewed examples before sharing.',
+    summaryTitle: 'Explain the identity and its relationships',
+    summary: 'State the organization’s name, the purpose of the identity and the relationship between the master brand and its organizational units. Identify the current source of authority for logo artwork and naming.',
+    summaryItems: ['Use the supplied master logo and record its source.', 'List organizational names separately from logo artwork.', 'Identify who supplies or approves formal departmental identifiers.'],
+    detailTitle: 'Document the naming hierarchy', productName: 'Department and subdepartment',
+    detail: 'Use the exact approved organizational name. Place the department before its subdepartment, and allow long names to wrap at the available text width. Keep the names editable and separate from the master logo.',
+    scope: 'Distinguish published identity requirements from application defaults such as report type sizes, page margins and paragraph spacing. A generated document naming block does not create an approved departmental logo.',
+    steps: ['Select the supplied master logo and preserve its proportions and minimum size.', 'Enter the department and, when applicable, its subdepartment.', 'Review the named unit and application with the responsible brand contact.'],
+    comparisonTitle: 'Connect the identity to its applications',
+    comparison: { headers: ['Application', 'Identity to retain', 'Content to adapt'], rows: [['Research or project report', 'Master logo, colours and type roles.', 'Question, method, findings and evidence.'], ['Department brief', 'Master logo and separate naming block.', 'Decision, options and next action.'], ['Presentation', 'Supplied artwork and minimum size.', 'Audience, slide content and source notes.'], ['Web or app profile', 'Supplied assets and semantic colour roles.', 'Product content and accessible interface states.']] },
+    closingTitle: 'Maintain the portfolio',
+    closing: 'Keep the editable document, approved artwork and source references together. Review names and identity requirements when the organization or its published guidance changes.',
+    nextSteps: ['Confirm the current organizational names.', 'Record the source and status of every logo variant.', 'Regenerate and inspect document outputs after edits.']
   }
 }
 
@@ -246,9 +299,13 @@ const contactLines = (contact) => {
 export const publicationModel = (brand, { paper = 'letter', purpose = 'product', values = {} } = {}) => {
   const descriptor = purposeOf(purpose)
   if (!values || typeof values !== 'object' || Array.isArray(values)) throw new TypeError('Publication values must be an object.')
+  const defaults = brand.documentation?.examples?.[purpose]
+  if (defaults != null && (typeof defaults !== 'object' || Array.isArray(defaults))) throw new TypeError(`Document defaults for ${purpose} must be an object.`)
+  values = { ...clone(defaults ?? {}), ...Object.fromEntries(Object.entries(values).filter(([, value]) => value !== undefined)) }
   const profile = documentProfile(brand, { paper })
   const example = EXAMPLES[purpose]
-  const title = text(values.title, example.title)
+  const affiliation = publicationAffiliation(values)
+  const title = text(values.title, purpose === 'portfolio' ? `${brand.name} brand portfolio` : example.title)
   const subtitle = text(values.subtitle, example.subtitle)
   const edition = text(values.edition, 'Editable example')
   const contentWidth = profile.paper.widthMm - profile.margins.leftMm - profile.margins.rightMm
@@ -302,7 +359,7 @@ export const publicationModel = (brand, { paper = 'letter', purpose = 'product',
       ...(profile.status.historical ? [paragraph(profile.status.note, 'caption')] : [])
     ] }
   ]
-  const model = { schema: 'brandkit/publication/1', id: `${brand.id}-${purpose}-${paper}`, title, subtitle, edition, purpose, paper, example: true, profile, logo: clone(profile.logo), status: clone(profile.status), pages }
+  const model = { schema: 'brandkit/publication/1', id: `${brand.id}-${purpose}-${paper}`, title, subtitle, edition, purpose, paper, affiliation, example: true, profile, logo: clone(profile.logo), status: clone(profile.status), pages }
   const problems = validatePublication(model)
   if (problems.length) throw new TypeError(problems.join(' '))
   return model
@@ -322,7 +379,14 @@ export const validatePublication = (publication) => {
   need(publication.schema == null || publication.schema === 'brandkit/publication/1', 'Unsupported publication schema; use brandkit/publication/1.')
   need(typeof publication.title === 'string' && publication.title.trim(), 'The publication needs a title.')
   need(PAPERS[publication.paper], 'Publication paper must be letter or a4.')
-  need(DOCUMENT_PURPOSES.some((entry) => entry.id === publication.purpose), 'Publication purpose must be product, report or brief.')
+  need(DOCUMENT_PURPOSES.some((entry) => entry.id === publication.purpose), 'Publication purpose must be product, report, brief or portfolio.')
+  if (publication.affiliation != null) {
+    need(object(publication.affiliation), 'Publication affiliation must be an object.')
+    if (object(publication.affiliation)) {
+      for (const key of ['department', 'subdepartment']) need(typeof publication.affiliation[key] === 'string' && publication.affiliation[key].length <= 180 && !/[\r\n\t]/.test(publication.affiliation[key]), `Affiliation ${key} must be single-line text no longer than 180 characters; wrapping is automatic.`)
+      need(typeof publication.affiliation.subdepartment !== 'string' || !publication.affiliation.subdepartment.trim() || typeof publication.affiliation.department === 'string' && Boolean(publication.affiliation.department.trim()), 'Supply a department before its subdepartment.')
+    }
+  }
   const profile = publication.profile
   need(object(profile), 'The publication needs a document profile.')
   let contentWidth = 180
@@ -343,6 +407,18 @@ export const validatePublication = (publication) => {
       need(contentWidth >= 50 && contentHeight >= 50, 'Profile margins must leave at least 50 mm of usable width and height.')
     }
     need(object(profile.typography), 'The document profile needs typography.')
+    if (profile.affiliation != null) {
+      need(object(profile.affiliation), 'Affiliation layout must be an object.')
+      if (object(profile.affiliation)) {
+        need(profile.affiliation.mode === 'document-text', 'Affiliation mode must be document-text; it does not create a logo lockup.')
+        need(finite(profile.affiliation.departmentSizePt, 8, 24) && finite(profile.affiliation.subdepartmentSizePt, 8, 24), 'Affiliation type sizes must be between 8 and 24 pt.')
+        need(profile.affiliation.subdepartmentSizePt <= profile.affiliation.departmentSizePt, 'Subdepartment type must not be larger than department type.')
+        need(finite(profile.affiliation.lineHeight, 1, 2), 'Affiliation line height must be between 1 and 2.')
+        need(finite(profile.affiliation.gapAfterMm, 0, 20), 'Affiliation spacing must be between 0 and 20 mm.')
+        need(profile.affiliation.maxCharacters === 180, 'Affiliation names must use the 180-character limit.')
+        need(typeof profile.affiliation.note === 'string', 'Affiliation layout note must be text.')
+      }
+    }
     if (object(profile.typography)) {
       for (const key of ['title', 'subtitle', 'heading1', 'heading2', 'body', 'caption', 'table', 'label', 'footer']) {
         const style = profile.typography[key]
@@ -365,6 +441,10 @@ export const validatePublication = (publication) => {
       need(finite(profile.logo.minimumWidthMm, 0, contentWidth), 'The preferred logo minimum width must fit within the document.')
       need(profile.logo.widthMm >= profile.logo.minimumWidthMm, 'The preferred logo is smaller than its stated minimum size.')
       if (profile.logo.clearSpaceMm != null) need(finite(profile.logo.clearSpaceMm, 0, 100), 'The preferred logo clear space must be a number between 0 and 100 mm.')
+      if (profile.logo.minimumClearSpaceMm != null) {
+        need(finite(profile.logo.minimumClearSpaceMm, 0, 100), 'The preferred logo minimum clear space must be between 0 and 100 mm.')
+        need(profile.logo.clearSpaceMm >= profile.logo.minimumClearSpaceMm, 'The preferred logo clear space is smaller than its identity requirement.')
+      }
     }
     if (/^bc-(?:province-1977|hydro-1983)$/.test(profile.brandId ?? '')) {
       need(profile.status?.historical === true, 'Historical brands must retain their historical status.')
@@ -533,6 +613,14 @@ Install the supplied fonts before editing outside the kit. The existing Word exp
 ${profile.rules.print}
 
 Document colours: ink ${profile.colours.ink}; muted ${profile.colours.muted}; accent ${profile.colours.accent}; paper ${profile.colours.paper}; lines ${profile.colours.line}.
+
+## Department and subdepartment names
+
+Supply department and subdepartment through the publication values.affiliation object, or use the naming fields in Documents. A subdepartment needs a parent department. Names remain editable text outside the logo, with automatic wrapping and a maximum of ${profile.affiliation.maxCharacters} characters per field.
+
+The department uses ${profile.affiliation.departmentSizePt} pt and the subdepartment ${profile.affiliation.subdepartmentSizePt} pt, with ${profile.affiliation.lineHeight} line spacing and ${profile.affiliation.gapAfterMm} mm after the naming block. ${profile.affiliation.note}
+
+${profile.affiliation.wrapping}
 
 ## Screenshots and figures
 

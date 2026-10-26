@@ -12,7 +12,7 @@ const root = new URL('..', import.meta.url).pathname
 const documentAdditions = (id) => [
   'guidelines/documentation.md', 'source/consumer-profile.json',
   'source/document-profile-letter.json', 'source/document-profile-a4.json',
-  ...['product', 'report', 'brief'].flatMap((purpose) => ['letter', 'a4'].flatMap((paper) =>
+  ...['product', 'report', 'brief', 'portfolio'].flatMap((purpose) => ['letter', 'a4'].flatMap((paper) =>
     ['html', 'json'].map((extension) => `documents/${id}-publication-${purpose}-${paper}.${extension}`)))
 ]
 

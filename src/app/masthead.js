@@ -16,6 +16,7 @@ export const aspectOf = (svg) => {
  * with the name beside it. The Province uses its two-line logotype beside the emblem.
  */
 export const mastheadArt = (brand, fonts) => {
+  if (brand.logoPolicy?.allowInheritedColour === false) return { svg: logoDocument({ brand, fonts }, { signature: brand.signatures[0].id, colourway: brand.defaultColourway }) }
   if (brand.families?.length) return { svg: logoDocument({ brand, fonts }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
   if (brand.id === 'bc-province-1977') {
     return { svg: logoDocument({ brand, fonts, values: { ministry: '', 'ministry-split': '', address: '' } }, { signature: 'horizontal', colour: 'currentColor' }) }

@@ -1,0 +1,123 @@
+// UNBC unit naming, rule enforcement, native-template handoff and portable downloads.
+import assert from 'node:assert/strict'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { preview } from 'vite'
+import { chromium } from 'playwright'
+import { unzipSync, strFromU8 } from 'fflate'
+
+const root = fileURLToPath(new URL('../../', import.meta.url))
+const screenshotDir = resolve(process.env.SCREENSHOT_DIR ?? '.documentation/unbc-browser')
+mkdirSync(screenshotDir, { recursive: true })
+const args = process.env.CHROMIUM_ARGS ? JSON.parse(process.env.CHROMIUM_ARGS) : ['--no-sandbox', '--disable-dev-shm-usage']
+assert.ok(Array.isArray(args) && args.every(arg => typeof arg === 'string'))
+const server = await preview({ root, logLevel: 'silent', preview: { port: 0, host: '127.0.0.1' } })
+const base = server.resolvedUrls.local[0]
+const result = { downloads: 0, mobileViews: [], checks: [] }
+let browser
+let currentPage
+
+try {
+  browser = await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args })
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true, reducedMotion: 'reduce' })
+  const page = await context.newPage()
+  currentPage = page
+  page.setDefaultTimeout(45000)
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+  page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`) })
+  const download = async name => {
+    const [file] = await Promise.all([page.waitForEvent('download', { timeout: 90000 }), page.getByRole('button', { name, exact: true }).click()])
+    assert.equal(await file.failure(), null)
+    result.downloads++
+    return readFileSync(await file.path())
+  }
+  const navigate = name => page.locator('nav.tabs').getByRole('button', { name, exact: true }).click()
+  const department = 'Faculty of Environment'
+  const subdepartment = 'Department of Geography, Earth and Environmental Sciences'
+  await page.goto(`${base}?brand=unbc&view=organization`, { waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: 'Department and subdepartment names', exact: true }).waitFor()
+  await page.getByLabel('Logo artwork width for sizing preview (mm)').fill('38')
+  assert.match(await page.getByRole('alert').innerText(), /38\.1/)
+  assert.equal(await page.getByRole('button', { name: 'Use in documents', exact: true }).isDisabled(), true)
+  await page.getByLabel('Logo artwork width for sizing preview (mm)').fill('55')
+  await page.getByLabel('Department or faculty', { exact: true }).fill(department)
+  await page.getByLabel('Subdepartment or unit', { exact: true }).fill(subdepartment)
+  await page.getByRole('button', { name: 'Save unit names', exact: true }).click()
+  await page.getByRole('status').waitFor()
+  await page.screenshot({ path: resolve(screenshotDir, 'unbc-departments-desktop.png'), fullPage: true })
+  await page.getByRole('button', { name: 'Use in documents', exact: true }).click()
+  await page.locator('.documents-preview iframe').waitFor()
+  assert.equal(await page.getByLabel('Department or school', { exact: true }).inputValue(), department)
+  assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), subdepartment)
+  const source = JSON.parse((await download('Download source')).toString())
+  assert.deepEqual(source.affiliation, { department, subdepartment })
+  assert.equal(source.purpose, 'report')
+  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('portfolio')
+  const word = unzipSync(await download('Download Word'))
+  assert.match(strFromU8(word['word/document.xml']), /Faculty of Environment/)
+  assert.match(strFromU8(word['word/document.xml']), /Department of Geography/)
+  await page.screenshot({ path: resolve(screenshotDir, 'unbc-portfolio-desktop.png'), fullPage: true })
+  result.checks.push('minimum-width guard', 'saved unit names', 'portfolio Word download')
+
+  await navigate('Templates')
+  await page.locator('.studio__preview').waitFor()
+  const templateDepartment = page.locator('.studio').getByRole('textbox', { name: /^Department or academic unit/ })
+  const templateUnit = page.locator('.studio').getByRole('textbox', { name: /^Subdepartment or team/ })
+  assert.equal(await templateDepartment.inputValue(), department)
+  assert.equal(await templateUnit.inputValue(), subdepartment)
+  await templateUnit.fill('School of Planning and Sustainability')
+  await navigate('Documents')
+  assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), 'School of Planning and Sustainability')
+  await navigate('Departments')
+  assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), 'School of Planning and Sustainability')
+  result.checks.push('bidirectional template and document naming')
+
+  await navigate('Templates')
+  await page.getByRole('button', { name: 'Clear every field', exact: true }).click()
+  await navigate('Documents')
+  assert.equal(await page.getByLabel('Department or school', { exact: true }).inputValue(), '')
+  assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), '')
+  await page.getByLabel('Department or school', { exact: true }).fill(department)
+  await page.getByLabel('Subdepartment or unit', { exact: true }).fill('School of Planning and Sustainability')
+  result.checks.push('cleared template names stay cleared')
+
+  await navigate('Logos')
+  assert.equal(await page.getByText('Inherited colour', { exact: true }).count(), 0)
+  assert.equal(await page.getByRole('heading', { name: 'Symbol', exact: true }).count(), 0)
+  await navigate('Download kit')
+  await page.getByRole('combobox', { name: /^What are you making/ }).selectOption('documents')
+  const archive = unzipSync(await download('Build and download'))
+  const names = Object.keys(archive)
+  assert.ok(!names.some(name => /(?:\/symbol\/|favicon|app-icon)/.test(name)))
+  for (const suffix of ['reference/identity-rules.json', 'official-templates/lhopt1official.docx', 'source/consumer-profile.json']) assert.ok(names.some(name => name.endsWith(suffix)), suffix)
+  const publication = JSON.parse(strFromU8(archive[names.find(name => name.endsWith('unbc-publication-report-letter.json'))]))
+  assert.equal(publication.affiliation.subdepartment, 'School of Planning and Sustainability')
+  const profile = JSON.parse(strFromU8(archive[names.find(name => name.endsWith('source/consumer-profile.json'))]))
+  assert.equal(profile.typography.body.family, 'Arial')
+  await page.locator('.kit-action p[role="status"]').waitFor()
+  assert.ok(!(await page.locator('.kit-action p[role="status"]').innerText()).includes('could not be made'))
+  result.checks.push('document pack original sources', 'personalized kit', 'permitted logo exports')
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  for (const [view, selector] of [['organization', '.organization-view'], ['documents', '.documents-view'], ['logos', '.asset-grid'], ['overview', '.overview']]) {
+    await page.goto(`${base}?brand=unbc&view=${view}&share=1`, { waitUntil: 'networkidle' })
+    await page.locator(selector).first().waitFor()
+    const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: innerWidth }))
+    assert.ok(dimensions.scroll <= dimensions.viewport + 1, `${view}: no page overflow at390px (${dimensions.scroll})`)
+    await page.screenshot({ path: resolve(screenshotDir, `unbc-${view}-mobile.png`), fullPage: true })
+    result.mobileViews.push(view)
+  }
+  assert.deepEqual(errors, [], 'no page or resource errors')
+  await context.close()
+  writeFileSync(resolve(screenshotDir, 'summary.json'), `${JSON.stringify(result, null, 2)}\n`)
+  console.log(JSON.stringify(result, null, 2))
+} catch (error) {
+  await currentPage?.screenshot({ path: resolve(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
+  console.error(error)
+  throw error
+} finally {
+  await browser?.close()
+  await new Promise(resolve => server.httpServer.close(resolve))
+}

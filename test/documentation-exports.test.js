@@ -27,22 +27,22 @@ const load = async (id) => {
 const decode = (bytes) => new TextDecoder().decode(bytes)
 const exec = promisify(execFile)
 
-test('all seven brands expose the same document choices without changing their identities', async () => {
-  assert.equal(registry.length, 7)
+test('all registered brands expose the same document choices without changing their identities', async () => {
+  assert.ok(registry.length > 0)
   for (const { id } of registry) {
     const { brand } = await load(id)
     const before = JSON.stringify(brand)
     const plan = planKit(brand, { pack: 'documents', ...KIT_PACKS.find((pack) => pack.id === 'documents').options })
     const masters = plan.filter((entry) => entry.kind === 'office' && entry.document.publication)
-    assert.equal(masters.length, 6, id)
-    for (const paper of ['letter', 'a4']) for (const purpose of ['product', 'report', 'brief']) {
+    assert.equal(masters.length, 8, id)
+    for (const paper of ['letter', 'a4']) for (const purpose of ['product', 'report', 'brief', 'portfolio']) {
       for (const extension of ['docx', 'html', 'json']) assert.ok(plan.some((entry) => entry.path === `documents/${id}-publication-${purpose}-${paper}.${extension}`), `${id} ${purpose} ${paper} ${extension}`)
     }
     assert.ok(plan.some((entry) => entry.path === documentProfile(brand).logo.assets.png), `${id}: preferred Word logo is included without the bulk PNG collection`)
     assert.equal(JSON.stringify(brand), before)
     for (const pack of KIT_PACKS) {
       const entries = planKit(brand, { ...pack.options, pack: pack.id })
-      for (const path of ['index.html', 'web/asset-catalog.json', 'web/brand.css', 'web/favicon.svg', 'source/brand.json']) assert.ok(entries.some((entry) => entry.path === path), `${id}/${pack.id}: offline index dependency ${path}`)
+      for (const path of ['index.html', 'web/asset-catalog.json', 'web/brand.css', ...(brand.web?.icons === false ? [] : ['web/favicon.svg']), 'source/brand.json']) assert.ok(entries.some((entry) => entry.path === path), `${id}/${pack.id}: offline index dependency ${path}`)
     }
     const independentlyEnabled = planKit(brand, { rasters: false, pdfs: false, office: true })
     assert.ok(independentlyEnabled.some((entry) => entry.kind === 'office'))
@@ -51,13 +51,13 @@ test('all seven brands expose the same document choices without changing their i
   }
 })
 
-test('portable profiles contain all 21 outlined logo variants and resolved brand roles', async () => {
+test('portable profiles contain primary black and reverse outlined logos and resolved brand roles', async () => {
   for (const { id } of registry) {
     const ctx = await load(id)
     const profile = consumerProfile(ctx)
     assert.equal(profile.schema, 'brandkit/consumer-profile/1')
     assert.equal(profile.id, id)
-    assert.equal(profile.typography.body.family, ctx.brand.fonts.body.family)
+    assert.equal(profile.typography.body.family, ctx.brand.fonts.body.consumerFamily ?? ctx.brand.fonts.body.family)
     for (const [role, value] of Object.entries(profile.colours)) assert.match(value, /^#[0-9a-f]{6}$/i, `${id}: ${role}`)
     for (const variant of ['primary', 'black', 'reverse']) {
       const { svg, viewBox } = profile.logos[variant]
@@ -124,7 +124,9 @@ test('CLI source round trip retains custom content, catalog metadata and exporte
     await copyFile(join(out, exported.fonts.body.file), join(out, 'fonts/Only-In-This-Export.ttf'))
     exported.fonts.body.file = 'fonts/Only-In-This-Export.ttf'
     await writeFile(exportedPath, JSON.stringify(exported))
-    await run(['documents', exportedPath, '--paper', 'letter', '--purpose', 'report', '--out', join(work, 'rebuilt')])
+    await run(['documents', exportedPath, '--paper', 'letter', '--purpose', 'report,portfolio', '--out', join(work, 'rebuilt')])
+    const rebuilt = JSON.parse(await readFile(join(work, 'rebuilt/web/asset-catalog.json'), 'utf8'))
+    assert.deepEqual(rebuilt.assets.filter((entry) => entry.path.endsWith('.docx')).map((entry) => entry.purpose).sort(), ['portfolio', 'report'])
     await assert.rejects(run(['build', 'brands/firstform/brand.json', '--content', source, '--out', join(work, 'invalid')]), { code: 1 })
     await assert.rejects(readFile(join(work, 'invalid/source/brand.json')), { code: 'ENOENT' })
     await assert.rejects(run(['check', 'brands/firstform/brand.json', '--unknown']), { code: 1 })

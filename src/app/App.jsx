@@ -30,11 +30,13 @@ const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ def
 const TemplatePrinter = lazy(() => import('./views/TemplatePrinter.jsx').then((module) => ({ default: module.TemplatePrinter })))
 const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({ default: module.Documents })))
 const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ default: module.Patterns })))
+const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
   { id: 'colour', label: 'Colour' },
+  { id: 'organization', label: 'Departments' },
   { id: 'patterns', label: 'Patterns' },
   { id: 'templates', label: 'Templates' },
   { id: 'documents', label: 'Documents' },
@@ -168,6 +170,7 @@ export const App = () => {
   const motionLink = brand ? motionUrl(brand, source) : undefined
   useEffect(() => {
     if (brand && viewOrOverview(view, motionLink) !== view) go('overview')
+    if (brand && view === 'organization' && !brand.organization) go('overview')
   }, [brand, motionLink, view])
 
   // Between a brand and its manuals: a template's source page, and back from a page to a template.
@@ -281,7 +284,7 @@ export const App = () => {
         </div>
         )}
         {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
-          {TABS.filter((entry) => entry.id !== 'motion' || motionUrl(brand, source)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
+          {TABS.filter((entry) => (entry.id !== 'motion' || motionUrl(brand, source)) && (entry.id !== 'organization' || brand?.organization)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -293,6 +296,7 @@ export const App = () => {
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'colour' && <Colour brand={brand} />}
+            {view === 'organization' && brand.organization && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} onPatterns={() => go('patterns')} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {view === 'templates' && <div className="view">

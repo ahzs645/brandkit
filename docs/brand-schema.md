@@ -1,7 +1,7 @@
 # brand.json
 
 One JSON document is a whole identity. brandkit draws every file of a kit from it: logos,
-symbols, patterns, icons, templates, the brand guide, logo sheets, web files. Two complete examples
+symbols, patterns, icons, templates, the brand guide, logo sheets, web files. Worked examples
 are in this repository:
 
 - [`brands/ddcnorth/brand.json`](../brands/ddcnorth/brand.json): a real identity, written by hand
@@ -17,6 +17,10 @@ are in this repository:
   programs, written by `npm run make:bc` from scripts that carry each manual measurement with its
   source. They exercise composed signatures, colourways, departments, and templates in
   millimetres.
+- [`brands/unbc/brand.json`](../brands/unbc/brand.json): complete supplied institutional
+  artwork, permitted logo colours, minimum physical size, source resources and separate
+  department/subdepartment document text. `npm run make:unbc` records the official rules and
+  local application defaults separately.
 
 Paths to files (`fonts.*.file`, `files`) are relative to the folder holding brand.json. A path the
 brand does not carry itself is looked up in the built-in brands' folders, which is how a starter
@@ -38,8 +42,75 @@ An unknown placeholder is left as written, so a typo shows on the page.
 | `roles` | Which colour does which job: `ink`, `paper`, `muted`, `primary`, `light`, `reverse`, `line`, `rule`. Templates and guide pages ask for roles, so a new palette re-colours them. A role may name a palette key or a literal hex. |
 | `logoColours` | Colours every logo is drawn in. `currentColor` gives the inheriting variant. |
 | `rasterColours` | The subset that also gets PNG and PDF files. |
-| `fonts` | Faces by role: `body`, `bold`, `display`, `displayRegular`, `extra`, `label`. Each `{ family, stack, weight, style?, file, web, label, slant? }`. `file` (TTF or OTF) is used to outline text; `web` (WOFF2 or any) goes in `@font-face`. `slant` (degrees) shears outlines for a face with no italic. |
-| `typography` | Headline, body and label settings for tokens and CSS. |
+| `fonts` | Faces by role: `body`, `bold`, `display`, `displayRegular`, `extra`, `label`. Each `{ family, stack, weight, style?, file, web, label, slant?, office?, consumerFamily?, officialFamily?, note? }`. `file` (TTF or OTF) is used to outline text; `web` (WOFF2 or any) goes in `@font-face`. `slant` (degrees) shears outlines for a face with no italic. See the font distinctions below. |
+| `typography` | Headline, body and label settings for tokens and CSS. `labels.textTransform` accepts `none`, `uppercase`, `lowercase` or `capitalize`; omitted or unrecognized values retain the existing `uppercase` default. |
+| `logoPolicy` | Optional permitted paint, standalone-symbol, physical-width and clear-space controls. |
+| `organization` | Institutional name and separate document-text naming configuration. |
+| `brandArchitecture` | Related brands with explicit relationship labels and notes. |
+| `officialResources` | Source-resource metadata and links; supplied local files must also be listed in `files`. |
+
+### Official faces and rendering substitutes
+
+`fonts.*.family` names the actual font program loaded by the engine. `office` names the face
+requested in Office documents. Set `consumerFamily` when a downstream application's intended
+body face differs from the bundled renderer; design tokens and the portable profile then use
+that family. `officialFamily` records the authoritative identity face without claiming that its
+font program is included. `stack` remains the CSS fallback stack, and `note` explains the choice.
+
+For example, UNBC declares `family: "TeX Gyre Heros"`, `office: "Arial"`,
+`consumerFamily: "Arial"` and `officialFamily: "Helvetica Neue"`. Helvetica Neue is official,
+Arial is the university's documented alternative, and the bundled open Heros font is only a
+portable rendering substitute. The consumer profile exposes this distinction as `family`,
+`renderingFamily`, `officialFamily` and `note`; it contains no font binaries. Logo artwork stays
+outlined and does not depend on any of these body-font selections.
+
+### Fixed institutional artwork
+
+For artwork that permits only specified variants, define one fixed `art` signature and explicit
+colourways, then declare the optional controls:
+
+```json
+"logoPolicy": {
+  "allowedColours": ["green", "black", "white"],
+  "allowInheritedColour": false,
+  "standaloneSymbol": false,
+  "minimumWidthMm": 38.1,
+  "clearSpaceRatio": 0.036905884246591095,
+  "note": "Use the complete supplied logo and observe its permitted background rules."
+},
+"web": { "icons": false }
+```
+
+| Field | Behaviour |
+| --- | --- |
+| `allowedColours` | Required when `logoPolicy` is present. Nonempty array of keys in `colours`. Logo rendering checks the resolved paint, including every role in a colourway, against this set. A literal resolving to a permitted colour is accepted. |
+| `allowInheritedColour` | `false` rejects `currentColor` and removes the inherited-colour export. The generated fixed-artwork React component selects explicit colourways and their configured backgrounds. |
+| `standaloneSymbol` | `false` rejects symbol/motif rendering and standalone symbol export, and omits symbol files and corresponding previews. The required `symbol` data may hold the complete source artwork for structural compatibility; that does not make it a permitted isolated mark. |
+| `minimumWidthMm` | Positive minimum width. Native templates reject complete-logo placements below this physical width. Use the same value in `lockup.minimumHorizontalWidthMm`, which the shared document profile also reads. |
+| `clearSpaceRatio` | Nonnegative ratio of logo width used to calculate surrounding space. Record whether it is an official numeric rule or an implementation measurement of an official visual rule. |
+| `note` | Plain-language restrictions and context, carried to consumers. Background and approval requirements must remain explicit in the source notes. |
+| `web.icons` | `false` omits generated favicon/app-icon files and links. Direct favicon/app-icon render calls reject instead of shrinking the logo into a new mark. |
+
+`logoDimensions(brand, widthMm)` from `brandkit/engine` validates the width and returns
+`widthMm`, `minimumWidthMm`, `clearSpaceMm` and `totalWidthMm`. The reserved space is the larger
+of `widthMm × clearSpaceRatio` and `documentation.logo.clearSpaceMm`. A document's spacing can
+therefore exceed the identity minimum without redefining it. Preserve the artwork's aspect
+ratio and distinguish its visible width from any padded canvas. UNBC's source signature has
+zero intrinsic padding so 38.1 mm means 38.1 mm of visible full artwork.
+
+The fixed-artwork React component also preserves proportional sizing and reserves the measured
+clear space. Its numeric width is in CSS pixels, with the print minimum mapped at 96 px/in;
+that mapping is an implementation choice, not a separately published digital standard.
+Use `colourways.*.ground` for the intended preview/component background. The paint check does
+not infer whether every surrounding photograph or separately authored page obeys the source's
+background guidance.
+
+For UNBC, the 38.1 mm minimum and the B-to-N clear-space definition come from the official
+manual. The numeric ratio is a conservative measurement of the supplied SVG. The default
+55 mm document logo, 8 mm reserved space and page-layout measurements are local decisions.
+See [`brands/unbc/reference/identity-rules.json`](../brands/unbc/reference/identity-rules.json)
+for the source pages and measured values. Other brands without these controls retain their
+existing behaviour.
 
 ## Symbol
 
@@ -119,6 +190,69 @@ picks the one used when none is named; a colourway's `ground` is the background 
 "ministry": "Ministry of\nForests" } }] }`. The kit sets every `departmental` signature for every
 item (`logos/<folder>/<id>/`); the app's logos view and template studio fill their fields from the
 chosen one.
+
+## Organizational names and relationships
+
+Use `organization` when names should be editable document attribution beneath a fixed logo.
+This differs from `departments`, which composes signatures according to an established source
+construction. The optional **Departments** view is shown for brands with `organization`.
+
+```json
+"organization": {
+  "name": "University of Northern British Columbia",
+  "shortName": "UNBC",
+  "kind": "university",
+  "naming": {
+    "mode": "document-text",
+    "levels": ["department", "subdepartment"],
+    "note": "Department names are document text; official departmental logos are supplied separately.",
+    "sourceUrl": "https://www.unbc.ca/communications-and-marketing/logos-and-graphic-standards"
+  }
+},
+"brandArchitecture": {
+  "relatedBrands": [{
+    "id": "sparklab",
+    "label": "SPARK Lab",
+    "relationship": "UNBC lab",
+    "note": "A separate identity in this kit; this relationship does not establish an approved sub-logo."
+  }]
+},
+"officialResources": [{
+  "title": "Official UNBC letterhead",
+  "url": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/lhopt1official.docx",
+  "format": "docx",
+  "localPath": "official-templates/lhopt1official.docx",
+  "note": "Original university template retained without edits."
+}]
+```
+
+`organization.name` is required and `organization.naming.mode` must be `document-text`.
+The current naming workflow has two fields, `department` and `subdepartment`; `levels` describes
+them and does not create arbitrary extra hierarchy levels. Names are normalized to one line
+of source text, have at most 180 characters each and wrap at the available width, including
+long words. A subdepartment requires a department in the naming/publication workflow. Save
+through **Departments**, or edit the affiliation fields in **Documents**, to carry the names
+into both publication values and the native template fields with those IDs. The sizing-preview
+width is a calculator setting, not a change to `documentation.logo.widthMm`.
+
+Publishers and CLI callers supply `values.affiliation: { department, subdepartment }`; the flat
+`values.department` and `values.subdepartment` aliases are also accepted. The exported
+publication stores `affiliation` separately from the logo. Importing its JSON retains the names
+as editable content. Empty levels disappear. Native templates should leave their naming defaults
+empty and reserve sufficient space for the supported name lengths.
+
+`brandArchitecture.relatedBrands` records links to other brand IDs with `label`, `relationship`
+and `note`; it does not inherit their artwork, merge identities or prove that an associated
+organization is a department. UNBC records SPARK Lab as a university lab and Over the Edge as
+an independent newspaper. Use evidence for the relationship and retain any qualification.
+
+`officialResources` is descriptive metadata, not a download instruction. `localPath` identifies
+an already-supplied file relative to the brand directory; list it in `files` to include its
+bytes. For brands with `logoPolicy`, supplied files under `reference/` and
+`official-templates/` are retained in task packs when asset inclusion is enabled. The source
+identity/provenance JSON and notes travel with the assets. Preserve official originals and
+record retrieval dates, source URLs, hashes and any transformations separately from local
+application templates.
 
 ## Families and lockups
 
@@ -238,7 +372,18 @@ product detail, screenshot/evidence, comparison and closing page kinds.
     "body": { "font": "body", "sizePt": 10.5, "lineHeight": 1.45 }
   },
   "colours": { "paper": "white", "ink": "ink" },
-  "logo": { "widthMm": 60, "clearSpaceMm": 8 }
+  "logo": { "widthMm": 60, "clearSpaceMm": 8 },
+  "affiliation": {
+    "mode": "document-text",
+    "departmentSizePt": 12,
+    "subdepartmentSizePt": 10.5,
+    "lineHeight": 1.3,
+    "gapAfterMm": 5,
+    "maxCharacters": 180,
+    "note": "Local document hierarchy; not a departmental-logo specification."
+  },
+  "defaultPurpose": "report",
+  "publishedPurposes": ["report", "portfolio", "brief"]
 }
 ```
 
@@ -249,8 +394,14 @@ fall below the brand's minimum. Extra layout spacing does not replace the existi
 clear-space rule. `header.text` and `footer.text` can set running text. Historical brands
 retain explicit reconstruction and modern-layout labels.
 
+Affiliation sizes must be 8–24 pt, with subdepartment type no larger than department type.
+Line height is 1–2, spacing after the block is 0–20 mm, and the character limit is fixed at 180
+per field. `defaultPurpose` selects the initial Documents starter; `publishedPurposes` selects
+which purposes the release publisher emits in both paper sizes. `documentation.examples`
+can provide per-purpose copy defaults, with caller-supplied values taking precedence.
+
 Publication content is a separate `brandkit/publication/1` source model, not part of the
-identity definition. The supported purposes are `product`, `report` and `brief`. Product
+identity definition. The supported purposes are `product`, `report`, `brief` and `portfolio`. Product
 defaults do not imply previous client delivery and contact information is omitted unless
 supplied. Figure data is embedded PNG/JPEG, with alt text and an explanatory caption;
 placeholders are visibly labelled. `validatePublication` returns problems for invalid JSON

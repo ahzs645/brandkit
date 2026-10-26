@@ -1,0 +1,138 @@
+{
+  "schema": "brandkit/identity-rules/1",
+  "brandId": "unbc",
+  "source": "https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf",
+  "sourceEdition": "February 2020",
+  "retrieved": "2026-10-26",
+  "official": {
+    "fullLogo": {
+      "requiredFor": [
+        "official university documents",
+        "external audiences"
+      ],
+      "minimumWidthMm": 38.1,
+      "printedPages": [
+        2,
+        4
+      ]
+    },
+    "lettermark": {
+      "minimumWidthMm": 12.7,
+      "permittedAudience": "Internal or already familiar audiences; promotional clothing, merchandise and selected digital media.",
+      "includedAsSeparateAsset": false,
+      "printedPages": [
+        2,
+        4
+      ]
+    },
+    "clearSpace": {
+      "rule": "Distance between the top of B and top of N on all sides, including page edges.",
+      "printedPage": 3
+    },
+    "logoColours": {
+      "green": {
+        "hex": "#035642",
+        "background": "white only"
+      },
+      "black": {
+        "hex": "#000000",
+        "background": "white or light",
+        "use": "black-only applications"
+      },
+      "white": {
+        "hex": "#FFFFFF",
+        "background": "prefer solid UNBC Green; other backgrounds must provide clarity"
+      },
+      "printedPage": 3
+    },
+    "palette": {
+      "green": {
+        "hex": "#035642",
+        "rgb": [
+          3,
+          86,
+          66
+        ],
+        "cmyk": [
+          95,
+          15,
+          62,
+          58
+        ],
+        "pantoneCoated": "343",
+        "pantoneUncoated": "3435"
+      },
+      "gold": {
+        "hex": "#B79527",
+        "rgb": [
+          183,
+          149,
+          39
+        ],
+        "cmyk": [
+          8,
+          31,
+          100,
+          19
+        ],
+        "pantoneCoated": "125",
+        "pantoneUncoated": "117",
+        "usage": "accent only, never logo"
+      },
+      "secondaryPalette": "Reserved for Communications and Marketing.",
+      "printedPages": [
+        7,
+        8
+      ]
+    },
+    "type": {
+      "primary": "Helvetica Neue",
+      "alternative": "Arial",
+      "printedPage": 9
+    },
+    "departmentLogos": {
+      "supplier": "UNBC Communications and Marketing",
+      "publicSizingFormula": null,
+      "rule": "Individual units do not create their own logos or unit identifiers.",
+      "printedPage": 5
+    },
+    "protectedArtwork": {
+      "rule": "Do not alter proportions, colours, typography, parts or positions; do not isolate lettering or combine the logo with another logo.",
+      "printedPage": 18
+    }
+  },
+  "implementation": {
+    "clearSpaceMeasurement": {
+      "sourceViewBox": [
+        0,
+        0,
+        434.89,
+        74.97
+      ],
+      "conservativeTopDifference": 16.05,
+      "ratioOfFullWidth": 0.036905884246591095,
+      "status": "Measured from the supplied SVG; not a numeric ratio printed by UNBC."
+    },
+    "digitalMinimumWidthPx": {
+      "value": 144,
+      "status": "1.5 inches at 96 CSS pixels per inch; local web sizing rule, not a separately published pixel minimum."
+    },
+    "documentLayout": {
+      "logoWidthMm": 55,
+      "reservedClearSpaceMm": 8,
+      "marginsMm": 20,
+      "departmentPt": 12,
+      "subdepartmentPt": 10.5,
+      "bodyPt": 10.5,
+      "status": "Local application defaults, not official letterhead or sub-logo dimensions."
+    },
+    "typography": {
+      "office": "Arial",
+      "portableRenderer": "TeX Gyre Heros",
+      "note": "Open rendering substitute. No Helvetica Neue or Arial font program is redistributed."
+    },
+    "generatedSublogos": false,
+    "patternGeneration": false,
+    "crestOrHeraldicAssetsIncluded": false
+  }
+}

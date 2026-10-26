@@ -3,14 +3,15 @@ import { DOCUMENT_PURPOSES, documentationGuide, publicationModel, validatePublic
 import { consumerProfile } from '../../engine/consumer.js'
 import { publicationDocx, publicationHtml } from '../../export/publication.js'
 import { download, rasterise } from '../../export/render.js'
+import { readAffiliation, writeAffiliation } from '../affiliation.js'
 
 const asJson = (value) => `${JSON.stringify(value, null, 2)}\n`
 
 /** Every brand gets the same document workflow, with its own identity and print profile. */
 export const Documents = ({ brand, fonts }) => {
   const [paper, setPaper] = useState('letter')
-  const [purpose, setPurpose] = useState('product')
-  const [values, setValues] = useState({})
+  const [purpose, setPurpose] = useState(() => DOCUMENT_PURPOSES.some((item) => item.id === brand.documentation?.defaultPurpose) ? brand.documentation.defaultPurpose : 'product')
+  const [values, setValues] = useState(() => ({ affiliation: readAffiliation(brand.id) }))
   const [imported, setImported] = useState(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
@@ -35,7 +36,15 @@ export const Documents = ({ brand, fonts }) => {
     try { return { html: publicationHtml(ctx, model), error: null } }
     catch (problem) { return { html: '', error: problem.message } }
   }, [ctx, model, fonts])
+  const activeAffiliation = (imported ? imported.affiliation : values.affiliation) ?? { department: '', subdepartment: '' }
   const update = (key, value) => { setValues((current) => ({ ...current, [key]: value.trim() ? value : undefined })); setStatus('') }
+  const updateAffiliation = (key, value) => {
+    const next = { department: '', subdepartment: '', ...activeAffiliation, [key]: value }
+    if (imported) setImported((current) => ({ ...current, affiliation: next }))
+    else setValues((current) => ({ ...current, affiliation: next }))
+    setStatus(''); setError(null)
+    try { writeAffiliation(brand.id, next) } catch (problem) { setError(problem.message) }
+  }
   const updateFigure = (key, value) => setValues((current) => ({ ...current, figure: { ...current.figure, [key]: value } }))
   const run = async (action) => {
     setBusy(true); setError(null); setStatus('')
@@ -55,6 +64,10 @@ export const Documents = ({ brand, fonts }) => {
     // Render once before adopting it, so an invalid image leaves the previous draft intact.
     publicationHtml(ctx, next)
     setImported(next); setPaper(next.paper); setPurpose(next.purpose)
+    if (next.affiliation) {
+      setValues((current) => ({ ...current, affiliation: next.affiliation }))
+      try { writeAffiliation(brand.id, next.affiliation) } catch (problem) { setError(problem.message) }
+    }
     setStatus('Publication source opened. Download Word to edit its content, or export the source for another workflow.')
   })
   const uploadFigure = (file) => run(async () => {
@@ -91,6 +104,11 @@ export const Documents = ({ brand, fonts }) => {
         <label className="field"><span className="field__label">Document purpose</span><select disabled={Boolean(imported)} value={purpose} onChange={(event) => setPurpose(event.target.value)}>{DOCUMENT_PURPOSES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
         <p className="muted">{DOCUMENT_PURPOSES.find((item) => item.id === purpose)?.description}</p>
         <label className="field"><span className="field__label">Paper size</span><select disabled={Boolean(imported)} value={paper} onChange={(event) => setPaper(event.target.value)}><option value="letter">US Letter</option><option value="a4">A4</option></select></label>
+        <h3>Department naming</h3>
+        <p className="muted">Optional names appear as editable document text below the logo. Use the exact organizational names.</p>
+        {['department', 'subdepartment'].map((key) => <label className="field" key={key}><span className="field__label">{key === 'department' ? 'Department or school' : 'Subdepartment or unit'}</span><input type="text" maxLength={180} value={activeAffiliation[key] ?? ''} onChange={(event) => updateAffiliation(key, event.target.value)} /></label>)}
+        {guide.profile.affiliation && <p className="caption">Department {guide.profile.affiliation.departmentSizePt} pt · subdepartment {guide.profile.affiliation.subdepartmentSizePt} pt · automatic line wrapping. {guide.profile.affiliation.note}</p>}
+        <h3>Document content</h3>
         {[
           ['title', 'Title', model.title], ['subtitle', 'Subtitle', model.subtitle], ['edition', 'Edition', model.edition],
           ['introduction', 'Opening paragraph', 'Explain the subject, reader and purpose.'], ['summary', 'Main point', 'State the outcome, finding or decision.'],

@@ -3,6 +3,7 @@
 // fixed wordmarks, path symbols or composed historical signatures themselves.
 import { logoDocument } from './artwork.js'
 import { colour, COLOUR_ROLES, logoOptions } from './brand.js'
+import { identityRules } from './identity.js'
 
 export const CONSUMER_PROFILE_SCHEMA = 'brandkit/consumer-profile/1'
 
@@ -17,10 +18,11 @@ const typeRole = (brand, role, key) => {
   const face = brand.fonts?.[key] ?? brand.fonts?.body ?? {}
   const type = brand.typography?.[role] ?? {}
   return {
-    family: face.family ?? type.family ?? 'Arial',
+    family: face.consumerFamily ?? face.family ?? type.family ?? 'Arial',
     weight: type.weight ?? face.weight ?? 400,
     style: face.style ?? 'normal',
-    fallback: face.stack ?? 'Arial, sans-serif'
+    fallback: face.stack ?? 'Arial, sans-serif',
+    ...(face.consumerFamily ? { renderingFamily: face.family, officialFamily: face.officialFamily ?? null, note: face.note ?? '' } : {})
   }
 }
 
@@ -48,6 +50,7 @@ export const consumerProfile = (ctx) => {
     colours: Object.fromEntries(COLOUR_ROLES.map((role) => [role, colour(brand, brand.roles?.[role] ?? role)])),
     typography: { body: typeRole(brand, 'body', 'body'), heading: typeRole(brand, 'headlines', 'display'), label: typeRole(brand, 'labels', 'label') },
     logos: { primary: make('primary'), black: make('black'), reverse: make('reverse') },
+    ...(brand.organization || brand.logoPolicy ? { identity: identityRules(brand), affiliation: structuredClone(brand.documentation?.affiliation ?? null) } : {}),
     provenance: {
       source: typeof brand.source === 'string' ? brand.source : JSON.stringify(brand.source ?? {}),
       status: typeof brand.status === 'string' ? brand.status : 'Use the source brand guidance for artwork provenance and approval status.'

@@ -106,6 +106,18 @@ export const validateBrand = (brand) => {
   need(symbol && Array.isArray(symbol.viewBox) && symbol.viewBox.length === 4, '`symbol.viewBox` must be four numbers.')
   need(symbol && (symbol.centres || symbol.paths || symbol.markup), '`symbol` needs `centres`, `paths` or `markup`.')
   need((Array.isArray(brand.families) && brand.families.length > 0) || (Array.isArray(brand.signatures) && brand.signatures.length > 0), 'The brand needs `families` (fixed wordmarks) or `signatures` (composed lockups).')
+  if (brand.logoPolicy) {
+    const policy = brand.logoPolicy
+    need(Array.isArray(policy.allowedColours) && policy.allowedColours.length > 0, '`logoPolicy.allowedColours` needs at least one palette colour.')
+    for (const key of Array.isArray(policy.allowedColours) ? policy.allowedColours : []) need(Boolean(brand.colours?.[key]), `Logo colour \`${key}\` must name a palette colour.`)
+    for (const key of ['allowInheritedColour', 'standaloneSymbol']) if (policy[key] != null) need(typeof policy[key] === 'boolean', `logoPolicy.${key} must be true or false.`)
+    if (policy.minimumWidthMm != null) need(Number.isFinite(policy.minimumWidthMm) && policy.minimumWidthMm > 0, 'logoPolicy.minimumWidthMm must be positive.')
+    if (policy.clearSpaceRatio != null) need(Number.isFinite(policy.clearSpaceRatio) && policy.clearSpaceRatio >= 0, 'logoPolicy.clearSpaceRatio must be non-negative.')
+  }
+  if (brand.organization) {
+    need(typeof brand.organization.name === 'string' && brand.organization.name.trim(), '`organization.name` is required.')
+    need(brand.organization.naming?.mode === 'document-text', 'Organizational naming must use separate document text; supplied sub-logos remain fixed artwork.')
+  }
   for (const signature of brand.signatures ?? []) {
     need(signature.id && Array.isArray(signature.elements), `Signature \`${signature.id ?? '?'}\` needs an id and elements.`)
     for (const element of signature.elements ?? []) {
@@ -211,4 +223,4 @@ export const logoOptions = (brand) => (brand.families?.length
  */
 export const paintOptions = (brand) => (brand.families?.length
   ? (brand.logoColours ?? ['black']).map((key) => ({ id: key === 'currentColor' ? 'currentcolor' : key, label: key === 'currentColor' ? 'Inherited colour' : colourName(brand, key), colour: key, raster: key !== 'currentColor' }))
-  : [...Object.entries(brand.colourways ?? {}).map(([id, spec]) => ({ id, label: spec.label ?? id, colourway: id, raster: true, ground: spec.ground })), { id: 'currentcolor', label: 'Inherited colour', colour: 'currentColor', raster: false }])
+  : [...Object.entries(brand.colourways ?? {}).map(([id, spec]) => ({ id, label: spec.label ?? id, colourway: id, raster: true, ground: spec.ground })), ...(brand.logoPolicy?.allowInheritedColour === false ? [] : [{ id: 'currentcolor', label: 'Inherited colour', colour: 'currentColor', raster: false }])])

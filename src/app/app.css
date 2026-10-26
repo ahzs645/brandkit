@@ -104,8 +104,31 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .documents-preview .notice { margin: 10px; }
 .documents-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
 .documents-guidance { margin-top: 16px; }
+.organization-workspace { display: grid; grid-template-columns: minmax(260px, 350px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.organization-controls { display: grid; gap: 18px; }
+.organization-controls p { margin: 0; }
+.organization-controls input { width: 100%; min-height: 40px; padding: 8px 10px; background: var(--page); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.organization-preview-panel { min-width: 0; }
+.organization-preview-scroll, .organization-table-scroll { max-width: 100%; overflow: auto; }
+.organization-preview { background: white; padding: 32px; min-width: 360px; min-height: 360px; }
+.organization-logo-zone { outline: 1px dashed #a5b5af; background: white; }
+.organization-attribution { margin-top: 30px; overflow-wrap: anywhere; max-width: 470px; }
+.organization-attribution p { margin: 0 0 5px; }
+.organization-preview-title { margin-top: 34px; font-size: 24px; font-weight: 700; }
+.organization-preview-caption { font-size: 12px; max-width: 460px; color: #555; }
+.organization-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+.organization-table th, .organization-table td { border-bottom: 1px solid var(--line); padding: 12px; vertical-align: top; }
+.organization-table th { font-weight: 600; }
+.organization-resources, .organization-relations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 12px; }
+.organization-resources a, .organization-relations article { padding: 16px; background: var(--page); border: 1px solid var(--line); border-radius: var(--radius-sm); color: inherit; overflow-wrap: anywhere; }
+.organization-resources strong, .organization-resources span { display: block; }
+.organization-resources span { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
+.organization-relations p { margin: 8px 0 0; }
+.brand-logo[data-brand='unbc'] .brand-logo__art, .menu-logo[data-brand='unbc'] .menu-logo__art { background: #fff; box-sizing: content-box; padding: 6px; min-width: 144px; }
+.brand-logo[data-brand='unbc'] .brand-logo__art { height: 27px; }
 .kit-pack { margin-top: 14px; max-width: 380px; }
 @media (max-width: 850px) {
+  .organization-workspace { grid-template-columns: 1fr; }
   .documents-workspace { grid-template-columns: 1fr; }
   .documents-preview { position: static; }
   .documents-preview iframe { min-height: 520px; height: 70vh; }

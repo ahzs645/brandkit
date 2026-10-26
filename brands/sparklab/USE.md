@@ -4,7 +4,7 @@
 
 [Open this brand](https://projects.ahmadjalil.com/brandkit/?brand=sparklab&share=1) · [Browse patterns](https://projects.ahmadjalil.com/brandkit/?brand=sparklab&share=1&view=patterns) · [Open document examples](https://projects.ahmadjalil.com/brandkit/?brand=sparklab&share=1&view=documents)
 
-Identity version 1.1. Document application version 1.0.
+Identity version 1.1. Document application version 1.1.
 
 Original website artwork preserved. Application layouts, alternate arrangements and motion are kit extensions.
 
@@ -38,6 +38,14 @@ Use the light paper and ink roles for document pages; retain the brand’s own t
 
 Document colours: ink #122738; muted #3A4F63; accent #122738; paper #FAF8F5; lines #E8EEF4.
 
+## Department and subdepartment names
+
+Supply department and subdepartment through the publication values.affiliation object, or use the naming fields in Documents. A subdepartment needs a parent department. Names remain editable text outside the logo, with automatic wrapping and a maximum of 180 characters per field.
+
+The department uses 12 pt and the subdepartment 10.5 pt, with 1.3 line spacing and 5 mm after the naming block. Department and subdepartment names are editable document metadata. These type sizes are document layout defaults, not specifications for a departmental logo. Use an approved supplied logo for a formal unit identifier.
+
+Wrap at the available text width; retain type size and do not condense, truncate or stretch names.
+
 ## Screenshots and figures
 
 Keep application colours and legible interface text. Use actual captures; label placeholders, mockups and diagrams explicitly. Explain the visible action or result. Record source, capture date and context when relevant. Crop to the relevant region without hiding information needed to interpret the image. Verify labels at the final printed size. A screenshot placeholder is not evidence of a working feature.
@@ -47,6 +55,7 @@ Keep application colours and legible interface text. Use actual captures; label 
 - **Product overview:** Explain an offering and its supported scope without implying previous client delivery.
 - **Project report:** Present findings, their evidence, decisions and follow-up work.
 - **Decision brief:** Explain the decision needed, compare options and identify the next step.
+- **Brand portfolio:** Explain an identity, its organizational relationships, approved assets and document applications.
 
 Describe verified capabilities. Do not imply client delivery, endorsement, results or compatibility without supporting evidence. Include contact details only when explicitly supplied. Do not use a template placeholder as a real contact. Product copy describes an offering; case-study language requires evidence of the work described. Historical identity examples keep their reconstruction and modern-layout labels.
 

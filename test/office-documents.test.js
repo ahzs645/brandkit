@@ -171,3 +171,28 @@ test('Publication styles remain reusable rather than pinning only direct run for
   assert.equal(styles.paragraphStyles.find((s) => s.id === 'BodyText').next, 'BodyText')
   assert.equal(styles.paragraphStyles.find((s) => s.id === 'Caption').basedOn, 'Normal')
 })
+
+test('organizational names remain native editable text, source metadata and safe HTML', async () => {
+  const model = publicationModel(brand, { purpose: 'portfolio', values: { affiliation: {
+    department: 'College of Science & Management', subdepartment: 'Environmental Health <Research>'
+  } } })
+  const original = structuredClone(model.logo)
+  const bytes = await publicationDocx(ctx, model, { png })
+  const xml = xmlOf(bytes, 'word/document.xml')
+  const styles = xmlOf(bytes, 'word/styles.xml')
+  assert.match(xml, /w:pStyle w:val="AffiliationDepartment"/)
+  assert.match(xml, /w:pStyle w:val="AffiliationSubdepartment"/)
+  assert.match(xml, /College of Science &amp; Management/)
+  assert.match(xml, /Environmental Health &lt;Research&gt;/)
+  assert.match(styles, /w:styleId="AffiliationDepartment"/)
+  assert.match(xmlOf(bytes, 'docProps/custom.xml'), /name="brandkit.affiliation"/)
+  const html = publicationHtml(ctx, model)
+  assert.match(html, /class="affiliation" aria-label="Organizational unit"/)
+  assert.match(html, /<p class="s-AffiliationDepartment">College of Science &amp; Management<\/p>/)
+  assert.match(html, /<p class="s-AffiliationSubdepartment">Environmental Health &lt;Research&gt;<\/p>/)
+  assert.doesNotMatch(html, /<Research>/)
+  assert.deepEqual(model.logo, original)
+  const department = officeStyles(brand, model.profile).paragraphStyles.find((s) => s.id === 'AffiliationDepartment')
+  assert.equal(department.run.size, 24, '12 pt is expressed in native Word half-points')
+  assert.equal(department.paragraph.spacing.line, 312, 'the naming block uses its declared line-height')
+})

@@ -91,14 +91,20 @@ export const textValue = (ctx, element) => {
     return element.compose.replace(FIELD_REFERENCE, (match, id) => ctx.values?.[id] ?? fieldDefault(ctx, id) ?? match)
   }
   const value = element.id != null ? ctx.values?.[element.id] : undefined
-  return value != null ? String(value) : fill(ctx.brand, element.text ?? fieldDefault(ctx, element.id) ?? '')
+  const content = value != null ? String(value) : fill(ctx.brand, element.text ?? fieldDefault(ctx, element.id) ?? '')
+  if (ctx.brand.organization && ['department', 'subdepartment'].includes(element.id)) {
+    const normalized = content.replace(/\s+/g, ' ').trim()
+    if (normalized.length > (ctx.brand.documentation?.affiliation?.maxCharacters ?? 180)) throw new Error('Keep each department and subdepartment name to 180 characters or fewer.')
+    return normalized
+  }
+  return content
 }
 
 /** Width of a line: measured by the font provider where it can, estimated where it cannot. */
 const measure = (ctx, text, key, size, tracking = 0) => ctx.fonts?.width?.(text, key, size, tracking) || Array.from(text).length * size * (0.55 + tracking)
 
-/** Breaks text at typed line breaks, then between words to fit `width`. */
-export const wrapLines = (text, width, measureLine) => {
+/** Breaks at typed line breaks and words. Opt in to glyph breaks for bounded input fields. */
+export const wrapLines = (text, width, measureLine, { breakWords = false } = {}) => {
   const lines = []
   for (const block of String(text).split('\n')) {
     let current = ''
@@ -106,8 +112,16 @@ export const wrapLines = (text, width, measureLine) => {
       const trial = current ? `${current} ${word}` : word
       if (current && measureLine(trial) > width) {
         lines.push(current)
-        current = word
-      } else current = trial
+        current = ''
+      }
+      if (breakWords && measureLine(word) > width && Number.isFinite(width) && width > 0) {
+        let part = ''
+        for (const glyph of Array.from(word)) {
+          if (part && measureLine(part + glyph) > width) { lines.push(part); part = glyph }
+          else part += glyph
+        }
+        current = part
+      } else current = current ? `${current} ${word}` : word
     }
     lines.push(current)
   }
@@ -252,7 +266,7 @@ const renderElement = (ctx, element, template) => {
       const key = element.font ?? 'body'
       const tracking = u(element.tracking ?? 0) / size
       const value = textValue(ctx, element)
-      const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(ctx, line, key, size, tracking))
+      const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(ctx, line, key, size, tracking), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) })
         .slice(0, element.maxLines ?? Infinity)
       return lines.map((line, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0) }, unit) : ''))
         .filter(Boolean).join('\n')
@@ -264,7 +278,7 @@ const renderElement = (ctx, element, template) => {
         const size = u(item.size)
         const key = item.font ?? element.font ?? 'body'
         const value = textValue(ctx, item)
-        const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(ctx, line, key, size)).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
+        const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(ctx, line, key, size), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(item.id)) }).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
         if (!lines.length) continue
         baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
         lines.forEach((line, index) => {
@@ -297,6 +311,17 @@ export const renderTemplate = (ctx, template) => {
   const { brand } = ctx
   const unit = template.unit ?? 'px'
   const physical = template.physical ?? (unit === 'mm' ? [`${n6(template.width)}mm`, `${n6(template.height)}mm`] : [n6(template.width), n6(template.height)])
+  if (brand.logoPolicy?.minimumWidthMm) {
+    const size = physicalSize({ ...template, physical })
+    const mmPerUnit = (size.unit === 'mm' ? size.width : size.width * 25.4 / 72) / template.width
+    for (const element of template.elements.filter(item => item.type === 'logo')) {
+      const master = lockup(ctx, { signature: element.signature, family: element.family, layout: element.layout, colourway: element.colourway })
+      const width = toUnits(element.width, unit)
+      const height = element.height == null ? undefined : toUnits(element.height, unit)
+      const visibleWidth = height == null ? width : Math.min(width, height * master.width / master.height)
+      if (!Number.isFinite(visibleWidth) || visibleWidth * mmPerUnit + 0.001 < brand.logoPolicy.minimumWidthMm) throw new Error(`${template.label ?? template.id}: the complete logo must be at least ${brand.logoPolicy.minimumWidthMm} mm wide.`)
+    }
+  }
   const title = fill(brand, template.title ?? `{name} / ${template.id}`)
   const desc = fill(brand, template.description ?? brand.copy?.templateDescription ?? '{name} application. Text is live and editable.')
   const body = template.elements.map((element) => renderElement(ctx, element, template)).filter((part) => part !== '')

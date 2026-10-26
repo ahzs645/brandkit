@@ -58,6 +58,7 @@
     "make:firstform": "node scripts/brands/firstform.mjs",
     "make:overtheedge": "node scripts/brands/overtheedge.mjs",
     "make:sparklab": "node scripts/brands/sparklab.mjs",
+    "make:unbc": "node scripts/brands/unbc.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
     "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",
     "test:browser": "node test/browser/ddcnorth-motion.check.mjs",
@@ -69,8 +70,10 @@
     "make:documentation": "node scripts/brands/documentation.mjs",
     "build:documentation": "node scripts/build-documentation.mjs",
     "test:documents": "node --test test/documentation-model.test.js test/office-documents.test.js test/documentation-exports.test.js",
+    "test:documents:pagination": "node --test test/native-word-pagination.test.js",
     "test:documents:browser": "node test/browser/documentation.check.mjs",
-    "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs"
+    "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs",
+    "test:unbc:browser": "node test/browser/unbc.check.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
