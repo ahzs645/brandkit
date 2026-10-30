@@ -402,7 +402,9 @@ const SIGN_KINDS = [
   ['Control', /POISON-BAITS|GAME-CHECK|WARNING|NO-ENTRY|NO-PARKING/],
   ['Symbol signs', /./]
 ]
-const signs = illustrated('province', ['G18', 'S03', 'S04', 'S05', 'S13', 'S15', 'S18', 'S20', 'S22', 'S24'], ['S07'], 'Signs, drawn', (asset) => SIGN_KINDS.find(([, pattern]) => pattern.test(asset))[0])
+// The manuals' own sign examples, drawn with their fixed wording: reference beside the editable
+// signs, which are the ones to make a sign from.
+const signs = illustrated('province', ['G18', 'S03', 'S04', 'S05', 'S13', 'S15', 'S18', 'S20', 'S22', 'S24'], ['S07'], 'Sign examples from the manual', (asset) => SIGN_KINDS.find(([, pattern]) => pattern.test(asset))[0])
 brand.illustrations = { ...drawn.drawings, ...signs.drawings }
 
 brand.templates = [...stationery, ...applications(brand), ...drawn.templates, ...signs.templates]
