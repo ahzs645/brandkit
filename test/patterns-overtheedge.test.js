@@ -43,7 +43,8 @@ test('Over the Edge patterns remain finite, clipped and palette-based across exp
     assert.doesNotMatch(svg, /NaN|undefined|Infinity/, study.id)
   }
   const patterns = STUDIES.map(s => buildPattern(brand, s.id, { palette: PALETTES.find(p => p.id === s.palette) }))
-  assert.deepEqual(validateBrand({ ...brand, patterns }), [])
+  // The brand's own patterns stay: its templates place them.
+  assert.deepEqual(validateBrand({ ...brand, patterns: [...source.patterns.filter((p) => !STUDIES.some((s) => s.id === p.id)), ...patterns] }), [])
   const compass = buildPattern(brand, 'explore-o-compass')
   assert.equal(new Set(compass.place.map(p => p.scale)).size, 3)
   assert.ok(new Set(compass.place.map(p => p.rotation ?? 0)).size > 3)

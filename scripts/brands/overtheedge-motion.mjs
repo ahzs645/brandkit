@@ -35,7 +35,7 @@ const LIST = [
   ['page-count', 'Page count', 'loader', 'Loading', 'loop · settle', 'Opening an issue, the archive', 'Anton page numbers turn over: 03, 05, 10, as in the index.'],
   ['o-fill', 'O fill', 'loader', 'Loading', 'loop · move', 'Page and app loading, 24 px and up', 'The O fills with forest from the foot up, holds, and empties. The O only; it stops when loading ends.'],
   ['airplane', 'Paper airplane', 'loader', 'Loading', 'loop · move', 'Sending a tip, submitting a story', 'A paper airplane, like the one drawn on the October 2025 cover, glides along a dashed line.'],
-  ['headline', 'Headline', 'interface', 'Interface', 'slow, 80 ms stagger · settle', 'Article headers, hero headlines, title slides', 'Each line of a Source Serif headline rises out of its own mask.'],
+  ['headline', 'Headline', 'interface', 'Interface', 'slow, 80 ms stagger · settle', 'Article headers, hero headlines, title slides', 'Each line of an Anton headline rises out of its own mask.'],
   ['card-pick', 'Card pick', 'interface', 'Interface', 'base · settle', 'Story cards on hover', 'A story card lifts 3 px, shifts 1 px and turns 0.4°, like a clipping picked up off the desk, then settles.'],
   ['index', 'Index', 'interface', 'Interface', 'base, 80 ms stagger · settle', 'The issue index, tables of contents', 'Each dashed rule draws across, then its page number and headline come in.'],
   ['chip', 'Chip', 'interface', 'Interface', 'quick · settle', 'Section filters', 'A filter chip presses in to 96%, and its border and label turn forest.'],
@@ -166,7 +166,7 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 .play .ote-plane__craft { animation: ote-glide calc(var(--ote-loop) * 1.5) var(--ote-move) infinite; }
 
 /* Headline: each line out of its own mask. */
-.ote-headline { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.01em; }
+.ote-headline { margin: 0; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -.01em; }
 .ote-headline > span { display: block; overflow: hidden; padding-bottom: .08em; }
 .ote-headline > span > span { display: block; }
 @keyframes ote-rise { from { transform: translateY(110%); } }
@@ -174,10 +174,10 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 .play .ote-headline > span:nth-child(2) > span { animation-delay: var(--ote-stagger); }
 
 /* Card pick: lift, shift, turn, settle. */
-.ote-card { width: min(200px, 100%); background: var(--ote-white); color: var(--ote-ink); border: 1px solid var(--ote-pulp); display: grid; gap: 8px; padding: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; }
+.ote-card { width: min(200px, 100%); background: var(--ote-white); color: var(--ote-ink); border: 1px solid var(--ote-pulp); display: grid; gap: 8px; padding: 0 0 14px; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 17px; }
 .ote-card__img { display: block; aspect-ratio: 4 / 3; background: var(--ote-sage); }
 .ote-card__tag, .ote-card b { margin: 0 14px; } .ote-card b { font-weight: 700; }
-.ote-card__tag { justify-self: start; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-forest); }
+.ote-card__tag { justify-self: start; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-forest); }
 @keyframes ote-pick { 0%, 20% { transform: none; box-shadow: 0 1px 2px color-mix(in srgb, var(--ote-ink) 10%, transparent); } 45%, 75% { transform: translate(1px, -3px) rotate(-0.4deg); box-shadow: 0 8px 24px color-mix(in srgb, var(--ote-ink) 18%, transparent); } 100% { transform: none; box-shadow: 0 1px 2px color-mix(in srgb, var(--ote-ink) 10%, transparent); } }
 .play .ote-card { animation: ote-pick calc(var(--ote-loop) * 1.5) var(--ote-settle) infinite; }
 
@@ -186,7 +186,7 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 .ote-index li { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 10px; padding: 10px 0; }
 .ote-index__rule { position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1.5px dashed var(--ote-bark); transform-origin: left; }
 .ote-index b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 28px; line-height: 1; color: var(--ote-forest); }
-.ote-index li > span:last-child { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 13px; line-height: 1.25; }
+.ote-index li > span:last-child { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 13px; line-height: 1.25; }
 @keyframes ote-draw-rule { from { transform: scaleX(0); } }
 @keyframes ote-in { from { transform: translateY(8px); opacity: 0; } }
 .play .ote-index__rule { animation: ote-draw-rule var(--ote-base) var(--ote-settle) calc(var(--i) * var(--ote-stagger) * 2) both; }
@@ -200,8 +200,8 @@ ${Object.entries(colours).map(([key, value]) => `  --ote-${key}: ${value};`).joi
 /* Turn page: the next page slides over from the right. */
 .ote-turn { position: relative; width: min(260px, 100%); aspect-ratio: 16 / 10; overflow: hidden; }
 .ote-turn__page { position: absolute; inset: 0; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
-.ote-turn__page small { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: .08em; }
-.ote-turn__page b { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; }
+.ote-turn__page small { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .08em; }
+.ote-turn__page b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 20px; }
 .ote-turn__page--a { background: var(--ote-newsprint); color: var(--ote-ink); }
 .ote-turn__page--b { background: var(--ote-forest); color: var(--ote-white); box-shadow: -8px 0 16px color-mix(in srgb, var(--ote-ink) 20%, transparent); }
 @keyframes ote-turn { from { transform: translateX(105%); } }
@@ -274,10 +274,10 @@ body { margin: 0; background: var(--ote-newsprint); color: var(--ote-ink); font-
 .page { max-width: 1240px; margin: 0 auto; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 72px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 56px; }
 .bar { background: var(--ote-forest); color: var(--ote-white); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .bar .ote-lockup { height: 48px; width: auto; }
-.bar span, .label, .kind, td:first-child, .chip, .action, .replay { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+.bar span, .label, .kind, td:first-child, .chip, .action, .replay { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; }
 .bar span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-lichen); }
 .label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-bark); }
-h1, h2, h3 { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; text-wrap: balance; }
+h1, h2, h3 { margin: 0; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; text-wrap: balance; }
 h1 { font-size: clamp(40px, 6.4vw, 80px); line-height: 1.02; letter-spacing: -.02em; max-width: 14ch; }
 h2 { font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
 .intro { display: grid; gap: 20px; padding-top: 24px; }
@@ -290,7 +290,7 @@ td .len { display: block; height: 6px; width: var(--w); background: var(--ote-fo
 .eases { display: grid; gap: 14px; }
 .ease { border: 1px solid var(--ote-pulp); background: var(--ote-white); padding: 16px; display: grid; gap: 14px; }
 .ease__head { display: flex; gap: 16px; align-items: center; }
-.ease__head b { display: block; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; }
+.ease__head b { display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; }
 .ease__head code { font-size: 12px; color: var(--ote-bark); }
 .curve { width: 56px; height: 56px; flex: none; } .curve__axis { fill: none; stroke: var(--ote-pulp); stroke-width: 2; } .curve__line { fill: none; stroke: var(--ote-forest); stroke-width: 3; }
 .ease__track { height: 12px; background: var(--ote-newsprint); position: relative; }
@@ -299,7 +299,7 @@ td .len { display: block; height: 6px; width: var(--w); background: var(--ote-fo
 .rules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
 .rules li { background: var(--ote-white); border: 1px solid var(--ote-pulp); padding: 24px; display: grid; gap: 8px; align-content: start; }
 .rules li:nth-child(2) { background: var(--ote-forest); color: var(--ote-white); border-color: var(--ote-forest); } .rules li:nth-child(3) { background: var(--ote-lichen); border-color: var(--ote-lichen); } .rules li:nth-child(4) { background: var(--ote-pine); color: var(--ote-white); border-color: var(--ote-pine); }
-.rules b { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; line-height: 1.25; } .rules span { font-size: 14px; }
+.rules b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 20px; line-height: 1.25; } .rules span { font-size: 14px; }
 .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
 .chips, .actions { display: flex; flex-wrap: wrap; gap: 8px; }
 button { font: inherit; cursor: pointer; }

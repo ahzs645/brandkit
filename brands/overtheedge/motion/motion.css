@@ -13,17 +13,21 @@
   --ote-stagger: 80ms;
   --ote-distance: 16px;
   --ote-forest: #155329;
-  --ote-pine: #0C3B1C;
-  --ote-newsprint: #F5F1E6;
-  --ote-ink: #262626;
+  --ote-newsprint: #FFFBF3;
   --ote-lichen: #E3EFCF;
+  --ote-ink: #262626;
+  --ote-haze: #F5F1EA;
+  --ote-flame: #FFF2D8;
+  --ote-crumple: #F4F4F4;
+  --ote-ember: #6D4900;
+  --ote-white: #FFFFFF;
+  --ote-pine: #0C3B1C;
   --ote-sage: #6AA380;
   --ote-moss: #466855;
   --ote-kraft: #D4C8AA;
   --ote-pulp: #DBD0BA;
   --ote-bark: #7D6B56;
   --ote-proof: #B54A35;
-  --ote-white: #FFFFFF;
 }
 
 /* The logo and the O draw in currentColor. */
@@ -76,7 +80,7 @@
 .play .ote-plane__craft { animation: ote-glide calc(var(--ote-loop) * 1.5) var(--ote-move) infinite; }
 
 /* Headline: each line out of its own mask. */
-.ote-headline { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.01em; }
+.ote-headline { margin: 0; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -.01em; }
 .ote-headline > span { display: block; overflow: hidden; padding-bottom: .08em; }
 .ote-headline > span > span { display: block; }
 @keyframes ote-rise { from { transform: translateY(110%); } }
@@ -84,10 +88,10 @@
 .play .ote-headline > span:nth-child(2) > span { animation-delay: var(--ote-stagger); }
 
 /* Card pick: lift, shift, turn, settle. */
-.ote-card { width: min(200px, 100%); background: var(--ote-white); color: var(--ote-ink); border: 1px solid var(--ote-pulp); display: grid; gap: 8px; padding: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; }
+.ote-card { width: min(200px, 100%); background: var(--ote-white); color: var(--ote-ink); border: 1px solid var(--ote-pulp); display: grid; gap: 8px; padding: 0 0 14px; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 17px; }
 .ote-card__img { display: block; aspect-ratio: 4 / 3; background: var(--ote-sage); }
 .ote-card__tag, .ote-card b { margin: 0 14px; } .ote-card b { font-weight: 700; }
-.ote-card__tag { justify-self: start; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-forest); }
+.ote-card__tag { justify-self: start; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ote-forest); }
 @keyframes ote-pick { 0%, 20% { transform: none; box-shadow: 0 1px 2px color-mix(in srgb, var(--ote-ink) 10%, transparent); } 45%, 75% { transform: translate(1px, -3px) rotate(-0.4deg); box-shadow: 0 8px 24px color-mix(in srgb, var(--ote-ink) 18%, transparent); } 100% { transform: none; box-shadow: 0 1px 2px color-mix(in srgb, var(--ote-ink) 10%, transparent); } }
 .play .ote-card { animation: ote-pick calc(var(--ote-loop) * 1.5) var(--ote-settle) infinite; }
 
@@ -96,7 +100,7 @@
 .ote-index li { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 10px; padding: 10px 0; }
 .ote-index__rule { position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1.5px dashed var(--ote-bark); transform-origin: left; }
 .ote-index b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 28px; line-height: 1; color: var(--ote-forest); }
-.ote-index li > span:last-child { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 13px; line-height: 1.25; }
+.ote-index li > span:last-child { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 13px; line-height: 1.25; }
 @keyframes ote-draw-rule { from { transform: scaleX(0); } }
 @keyframes ote-in { from { transform: translateY(8px); opacity: 0; } }
 .play .ote-index__rule { animation: ote-draw-rule var(--ote-base) var(--ote-settle) calc(var(--i) * var(--ote-stagger) * 2) both; }
@@ -110,8 +114,8 @@
 /* Turn page: the next page slides over from the right. */
 .ote-turn { position: relative; width: min(260px, 100%); aspect-ratio: 16 / 10; overflow: hidden; }
 .ote-turn__page { position: absolute; inset: 0; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
-.ote-turn__page small { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9px; letter-spacing: .08em; }
-.ote-turn__page b { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; }
+.ote-turn__page small { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .08em; }
+.ote-turn__page b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 20px; }
 .ote-turn__page--a { background: var(--ote-newsprint); color: var(--ote-ink); }
 .ote-turn__page--b { background: var(--ote-forest); color: var(--ote-white); box-shadow: -8px 0 16px color-mix(in srgb, var(--ote-ink) 20%, transparent); }
 @keyframes ote-turn { from { transform: translateX(105%); } }

@@ -4,15 +4,14 @@ The open-source files in the source table are under the SIL Open Font License 1.
 
 | Role | Face | Use |
 | --- | --- | --- |
-| `display` | Source Serif 4 Bold | Headlines |
-| `displayRegular` | Source Serif 4 Regular | Long reading |
-| `deck` | Source Serif 4 Italic | The one-sentence deck under a headline |
-| `extra` | Anton Regular | Capitals only: cover lines, section fronts, page and day numbers |
-| `body`, `bold` | Helvetica Neue Medium and Bold | Interface and body text; original files from the supplied staff-card package |
-| `label` | IBM Plex Mono Medium | Datelines and labels, capitals, +0.08 em |
-| `hand` | Salted Regular | Original handwritten face from the supplied offline compiler kit |
+| `display` | Anton Regular | Headlines, standing in for Decalotype: "Submission Schedule", "MEET THE BOARD", the logo-like lines |
+| `body`, `bold` | Helvetica Neue Medium and Bold | Reading text and dates; original files from the supplied staff-card package |
+| `label` | Helvetica Neue Bold | Dates, section names and day tags, in capitals |
+| `hand` | Salted Regular | The handwritten accents: ISSUE, SCHEDULE, DEADLINE, the month. Original file from the supplied offline compiler kit |
 
-The September 2025 PDF identifies the cover faces as Decalotype Black, Salted, and Helvetica Neue. Anton remains the Decalotype substitute. Salted and Helvetica Neue now use the supplied original files; the older OFL files remain available as source assets.
+The Doodle identity's palette slide names three faces: Decalotype, Helvetica Neue and Salted, as the September 2025 PDF's cover does. Decalotype is a commercial face and is not included; Anton, the closest open face already here, stands in for it. Replace it if the team has a Decalotype licence. Salted and Helvetica Neue use the supplied original files.
+
+Source Serif 4 and IBM Plex Mono are the website's own faces. They stay here for `site/`, which embeds them, and for anyone matching the site. Gochi Hand was the Forest press kit's first stand-in for Salted and is kept with its licence.
 
 | File | Source | SHA-256 |
 | --- | --- | --- |
