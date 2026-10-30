@@ -55,6 +55,8 @@ export const Documents = ({ brand, fonts }) => {
   const [paper, setPaper] = useState('letter')
   const [purpose, setPurpose] = useState(() => DOCUMENT_PURPOSES.some((item) => item.id === brand.documentation?.defaultPurpose) ? brand.documentation.defaultPurpose : 'product')
   const [values, setValues] = useState(() => ({ affiliation: readAffiliation(brand.id) }))
+  // Arriving with a saved department (from Departments' Use in documents), its names start open.
+  const [namedOnArrival] = useState(() => Boolean(readAffiliation(brand.id).department?.trim()))
   const [imported, setImported] = useState(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
@@ -149,7 +151,7 @@ export const Documents = ({ brand, fonts }) => {
         <p className="muted">{DOCUMENT_PURPOSES.find((item) => item.id === purpose)?.description}</p>
         <div className="field"><span className="field__label">Paper size</span>{imported ? <span>{paper === 'a4' ? 'A4' : 'US Letter'}</span> : <Segmented label="Paper size" value={paper} onChange={setPaper} options={[{ value: 'letter', label: 'US Letter' }, { value: 'a4', label: 'A4' }]} />}</div>
         {/* Optional sections fold away, so the content fields come sooner; each says what it holds. */}
-        <details className="documents-details">
+        <details className="documents-details" open={namedOnArrival}>
           <summary><span>Department naming</span><span className="documents-details__meta">{activeAffiliation.department?.trim() || 'Optional'}</span></summary>
           <div className="documents-details__body">
             <p className="muted">Optional names appear as editable document text below the logo. Use the exact organizational names.</p>
