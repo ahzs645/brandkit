@@ -53,6 +53,7 @@
     "make:firstform": "node scripts/brands/firstform.mjs",
     "make:overtheedge": "node scripts/brands/overtheedge.mjs",
     "make:sparklab": "node scripts/brands/sparklab.mjs",
+    "make:lovefutbol": "node scripts/brands/lovefutbol.mjs",
     "make:unbc": "node scripts/brands/unbc.mjs",
     "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
     "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",

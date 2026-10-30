@@ -1,0 +1,215 @@
+{
+  "brand": "lovefutbol",
+  "researched": "2026-10-30",
+  "scope": "Global identity; current website observations; official publications and contributor guide. Not a formally issued brand standard.",
+  "sources": [
+    {
+      "id": "lf-home",
+      "title": "love.fútbol global homepage",
+      "url": "https://www.lovefutbol.org/",
+      "publisher": "love.fútbol",
+      "evidence": "Current brand line, community-led framing, photography and live visual context. Volatile campaign metrics are excluded from reusable brand tokens.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-projects",
+      "title": "Projects",
+      "url": "https://www.lovefutbol.org/projects",
+      "publisher": "love.fútbol",
+      "evidence": "Uploaded HAR and public page: country sections use explicit Bahianita headings with light green and terracotta treatments. Captured page is not a formal brand manual.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-about",
+      "title": "About Us: origin and logo rationale",
+      "url": "https://www.lovefutbol.org/about-us",
+      "publisher": "love.fútbol",
+      "evidence": "December 2005 Morocco origin, 2006 founding, and explanation that the logo reflects the simplicity and imperfections of grassroots play.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-faq",
+      "title": "FAQ: naming, scope and ownership",
+      "url": "https://www.lovefutbol.org/faq",
+      "publisher": "love.fútbol",
+      "evidence": "Meaning of the separating dot, community-led model, multi-use sports spaces, and community ownership.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-governance",
+      "title": "Governance & Transparency",
+      "url": "https://www.lovefutbol.org/governance-transparency",
+      "publisher": "love.fútbol",
+      "evidence": "Mission, values, inclusion, and official links to culture and annual-report PDFs.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-culture",
+      "title": "LF Organizational Culture",
+      "url": "https://www.lovefutbol.org/hubfs/LF%20Organizational%20Culture.pdf?hsLang=en",
+      "publisher": "love.fútbol",
+      "evidence": "Three-page official document: accessible communication, authenticity, trust, teamwork and the dot as connection. Embedded Red Hat Text supplies typography evidence, not a full identity specification.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-inclusion",
+      "title": "LF Inclusion & Equity Framework",
+      "url": "https://www.lovefutbol.org/hubfs/LF%20Inclusion%20%26%20Equity%20Framework.pdf?hsLang=en",
+      "publisher": "love.fútbol",
+      "evidence": "Inclusion throughout project design, governance and programming; supports inclusive editorial direction.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-methodology",
+      "title": "Methodology",
+      "url": "https://www.lovefutbol.org/methodology",
+      "publisher": "love.fútbol",
+      "evidence": "Community participation throughout planning, building and sustained use.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "ussoccer-resource",
+      "title": "Best Practices for Community-Driven Sport Spaces",
+      "url": "https://www.ussoccer.com/soccer-forward/resource-hub/best-practices-for-community-driven-sport-spaces",
+      "publisher": "U.S. Soccer / love.fútbol",
+      "evidence": "Credits love.fútbol as contributor and links the native-vector PDF used for logo extraction. General adaptation guidance does not establish a blanket trademark or photo license.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30",
+      "published": "2025-09-19"
+    },
+    {
+      "id": "lf-community-practices-pdf",
+      "title": "Core Principles and Best Practice in Establishing Community-Driven Sport Spaces",
+      "url": "https://cdn.sanity.io/files/oyf3dba6/production/49cf0f4ff864cb7b66187236d4dd70bef71e32f4.pdf",
+      "publisher": "love.fútbol, published through U.S. Soccer",
+      "evidence": "Page 1 contains the complete white/red logo in native filled paths. PyMuPDF drawings 50–62; bounds approximately [363.599,36.726,713.710,235.759] on a 1080×1361 page. Source for faithful SVG extraction, not a formal standards manual.",
+      "status": "verified-contributed-primary-asset",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-report-2024",
+      "title": "2024 Annual Report",
+      "url": "https://www.lovefutbol.org/hubfs/%5BReview%20V02%5D%202024%20Annual%20Report.pptx.pdf?hsLang=en",
+      "publisher": "love.fútbol",
+      "evidence": "64-page PDF linked from governance page. Inspected for historical print styling: magenta/black, Caveat/Poppins, raster logos. No native logo vector recovered.",
+      "status": "observed-official-publication",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-report-2025",
+      "title": "2025 Annual Report",
+      "url": "https://www.lovefutbol.org/hubfs/2025%20Annual%20Report%20Review%20Version%2001_Copy.pptx-1.pdf?hsLang=en",
+      "publisher": "love.fútbol",
+      "evidence": "22-page PDF linked from governance page. Inspected for publication-specific blue/cyan styling with Bahianita/Avenir and raster logos. No native logo vector recovered.",
+      "status": "observed-official-publication",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-100",
+      "title": "100 Projects",
+      "url": "https://100.lovefutbol.org/",
+      "publisher": "love.fútbol",
+      "evidence": "Historical milestones: Villa Nueva in 2006 and Hissey Playground in November 2025. Campaign styling and counts remain contextual.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-child-css",
+      "title": "Current website child stylesheet",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css",
+      "publisher": "love.fútbol",
+      "evidence": "Observed declarations: DK Brush Crush H1/blog titles, Acumin Pro Condensed H3, #489D60 link/navigation treatment. Declarations must be distinguished from page overrides and computed use.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-main-head-css",
+      "title": "Current website theme head stylesheet",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204823925293/1793319994676/template_main-head.min.css",
+      "publisher": "love.fútbol",
+      "evidence": "Observed theme typography and colors. Theme values alone do not establish mandatory brand rules or final component styles.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-header-raster",
+      "title": "Current full-logo raster",
+      "url": "https://www.lovefutbol.org/hubfs/LoveFutbol_January2026/images/logo+love.futbol.webp",
+      "publisher": "love.fútbol",
+      "evidence": "Official full-logo artwork corroborating source geometry and black/red treatment. Raster asset; path name is not proof of an organization-wide rebrand date.",
+      "status": "observed-official-asset",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-footer-raster",
+      "title": "Current footer wordmark raster",
+      "url": "https://www.lovefutbol.org/hubfs/logo+love.futbol.png",
+      "publisher": "love.fútbol",
+      "evidence": "Official compact wordmark as served on the current site. Preserve supplied proportions. Raster asset.",
+      "status": "observed-official-asset",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "formby-portfolio",
+      "title": "love.futbol project portfolio",
+      "url": "https://formbycreative.com/lovefutbol",
+      "publisher": "Formby Creative",
+      "evidence": "Primary designer portfolio identifies branding, apparel, website and marketing work. Useful application history; does not date revisions or establish a current identity manual.",
+      "status": "primary-designer-context",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "bahianita-ofl",
+      "title": "Bahianita source and license",
+      "url": "https://github.com/google/fonts/tree/main/ofl/bahianita",
+      "publisher": "Google Fonts / Omnibus-Type",
+      "evidence": "Official font distribution with OFL.txt. Keep license with redistributed font; distinguish font software rights from brand artwork rights.",
+      "status": "primary-font-source",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "redhat-font",
+      "title": "Red Hat Typeface Files",
+      "url": "https://github.com/RedHatOfficial/RedHatFont",
+      "publisher": "Red Hat / MCKL",
+      "evidence": "Official Red Hat Text source and SIL OFL licensing. Text family is intended for readable small/long text; retain supplied license.",
+      "status": "primary-font-source",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "acumin-publisher",
+      "title": "Acumin",
+      "url": "https://fonts.adobe.com/fonts/acumin",
+      "publisher": "Adobe Originals",
+      "evidence": "Publisher source identifies Acumin by Robert Slimbach; distinguishes Adobe web projects from separate self-hosting licensing. Public site font URLs are not redistribution grants.",
+      "status": "primary-font-publisher",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "brush-crush-author",
+      "title": "DK Brush Crush author note",
+      "url": "https://www.dafont.com/dk-brush-crush.font",
+      "publisher": "Hanoded / David Kerkhoff, via DaFont",
+      "evidence": "Author identifies the downloadable demo as personal-use only and directs commercial/application users to appropriate licenses. Record as an observed alternative face; do not vendor the website binary.",
+      "status": "primary-author-statement",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-main-foot-css",
+      "title": "Current theme foot stylesheet",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204824001857/1793319999492/template_main-foot.min.css",
+      "publisher": "love.fútbol / HubSpot theme",
+      "evidence": "Additional base-theme button declarations, including #5A9F6F; kept distinct from prominent Projects-page colour roles.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    }
+  ]
+}

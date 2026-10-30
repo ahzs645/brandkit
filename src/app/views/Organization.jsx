@@ -10,7 +10,7 @@ import { SubLogos } from './SubLogos.jsx'
 export const OrganizationSources = ({ brand }) => <>
   {brand.officialResources?.length > 0 && <section className="panel">
     <h2>Official source materials</h2>
-    <p className="muted">Original university files and guidance. The editable applications in this kit have their own layout conventions.</p>
+    <p className="muted">{brand.officialResourcesNote ?? 'Original source files and guidance. The editable applications in this kit have their own layout conventions.'}</p>
     <div className="organization-resources">{brand.officialResources.map(resource => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer">
       <strong>{resource.title ?? resource.label}</strong><span>{resource.format}{resource.note ? ` · ${resource.note}` : ''} ↗</span>
     </a>)}</div>

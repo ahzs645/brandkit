@@ -8,3 +8,5 @@ brands/unbc/fonts/GUST-FONT-LICENSE.txt -whitespace -text
 # University-supplied artwork retains its original bytes and line endings.
 brands/unbc/reference/*.eps binary
 brands/unbc/reference/logo-website.svg -text
+# Preserve original upstream font licence bytes, including upstream whitespace.
+brands/lovefutbol/fonts/*-OFL.txt -whitespace -text

@@ -1,0 +1,45 @@
+{
+  "schema": "brandkit/identity-rules/1",
+  "brandId": "lovefutbol",
+  "reviewed": "2026-10-30",
+  "published": {
+    "naming": "love.fútbol",
+    "nameSource": "https://www.lovefutbol.org/faq",
+    "logoMeaningSource": "https://www.lovefutbol.org/about-us",
+    "vectorSource": "https://www.ussoccer.com/soccer-forward/resource-hub/best-practices-for-community-driven-sport-spaces"
+  },
+  "observed": {
+    "website": "https://www.lovefutbol.org/projects",
+    "paletteEvidence": "website-projects-brand-evidence.json",
+    "fonts": [
+      "Bahianita project headings",
+      "Red Hat Text body and supporting type"
+    ],
+    "otherDeclaredFonts": [
+      "DK Brush Crush H1",
+      "Acumin Pro Condensed H3"
+    ]
+  },
+  "unverified": {
+    "officialBrandManual": null,
+    "minimumLogoWidthMm": null,
+    "numericClearSpace": null,
+    "pantone": null,
+    "cmyk": null,
+    "coBrandingRules": null,
+    "officialTemplates": null
+  },
+  "implementation": {
+    "logoGeometry": "Preserved 13 source vector paths; normalize canvas by translation only.",
+    "positiveTreatment": "Source white body paths painted black to match observed official website logo; flag remains #ED1C24.",
+    "documentLogoWidthMm": 48,
+    "documentReservedSpaceMm": 8,
+    "documentMarginsMm": 20,
+    "templates": "Local applications, not official stationery.",
+    "typography": "Projects-page pairing; Italic added for document emphasis.",
+    "standaloneSymbol": false,
+    "faviconGeneration": false,
+    "partnerLogoGeneration": false,
+    "photographyIncluded": false
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-30",
+  "scope": "Selected public presentation evidence from the user-provided lovefutbol network capture; not an official brand standards manual.",
+  "sourcePrivacy": "Only public page/asset URLs, selected presentation declarations, and hashes of public asset bodies are retained. No request headers, cookies, analytics, identifiers, request bodies, storage or raw capture are included.",
+  "page": {
+    "url": "https://www.lovefutbol.org/projects",
+    "title": "Projects — love.fútbol"
+  },
+  "sources": [
+    {
+      "id": "projects-page",
+      "url": "https://www.lovefutbol.org/projects",
+      "kind": "official website HTML",
+      "authority": "observed implementation, not brand manual"
+    },
+    {
+      "id": "theme-head-css",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204823925293/1793319994676/template_main-head.min.css",
+      "kind": "official website stylesheet",
+      "authority": "observed implementation, not brand manual"
+    },
+    {
+      "id": "theme-foot-css",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204824001857/1793319999492/template_main-foot.min.css",
+      "kind": "official website stylesheet",
+      "authority": "observed implementation, not brand manual"
+    },
+    {
+      "id": "child-css",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css",
+      "kind": "official website stylesheet",
+      "authority": "observed implementation, not brand manual"
+    },
+    {
+      "id": "footer-css",
+      "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204823925274/1793319999563/template_global-footer.min.css",
+      "kind": "official website stylesheet",
+      "authority": "observed implementation, not brand manual"
+    }
+  ],
+  "typography": [
+    {
+      "family": "Bahianita",
+      "role": "Project country display headings",
+      "status": "observed HTML",
+      "details": "Inline spans inside H2, weight 400, 88px; sponsor-project display text at 60px. Not a minimum or universal size rule.",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": "<h2 style=\"font-size: 88px;\"><span style=\"color: #88c59b; font-family: Bahianita; font-weight: 400;\">Mexico</span></h2>"
+        }
+      ],
+      "fontSource": "https://www.lovefutbol.org/hubfs/Bahianita-Regular.ttf"
+    },
+    {
+      "family": "DK Brush Crush",
+      "role": "Global H1 and blog post H1 theme override",
+      "status": "observed CSS declaration; no H1 element in captured page",
+      "details": "child.css overrides the base theme H1 Bahianita declaration. Do not generalize this to every display heading; the project page explicitly uses Bahianita. Font payload absent from capture; license must be checked before redistribution.",
+      "evidence": [
+        {
+          "sourceId": "child-css",
+          "declaration": "body h1,\nbody h1.blog-post__title{\n\tfont-family: \"DK Brush Crush\";\n}"
+        }
+      ],
+      "fontSource": "https://50131413.fs1.hubspotusercontent-na1.net/hubfs/50131413/raw_assets/public/LoveFutbol_January2026/fonts/DK%20Brush%20Crush.otf"
+    },
+    {
+      "family": "Red Hat Text",
+      "role": "Body, supporting headings, forms and UI",
+      "status": "observed CSS",
+      "details": "Body/p default 20px, weight 400; H2 default 32px, weight 700. Font-face weights 400, 500, 600, 700 declared, although not all bodies retained in HAR.",
+      "evidence": [
+        {
+          "sourceId": "theme-head-css",
+          "declaration": "body,p{font-family:Red Hat Text;font-size:20px;font-weight:400}"
+        },
+        {
+          "sourceId": "theme-head-css",
+          "declaration": "h2{color:#1d1d1b;font-family:Red Hat Text;font-size:32px;font-style:normal;font-weight:700;letter-spacing:.32px;line-height:1em;text-decoration:none;text-transform:uppercase}"
+        }
+      ]
+    },
+    {
+      "family": "Acumin Pro Condensed",
+      "role": "Global H3 override",
+      "status": "observed CSS declaration",
+      "details": "Commercial Adobe font source; declaration does not prove license or use on captured page (no H3). Do not bundle the font from the website.",
+      "evidence": [
+        {
+          "sourceId": "child-css",
+          "declaration": "body h3{\n\tmargin-top: 0;\n\tmargin-bottom: 1em;\n}"
+        }
+      ]
+    },
+    {
+      "family": "Inter Tight",
+      "role": "Font-face declarations only",
+      "status": "declared but no element use established",
+      "details": "Do not treat a preload/declaration as a verified brand font."
+    }
+  ],
+  "palette": [
+    {
+      "hex": "#88C59B",
+      "label": "Project light green",
+      "status": "observed HTML/CSS",
+      "role": "Alternating project country headings and section backgrounds",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": "<h2 style=\"font-size: 88px;\"><span style=\"color: #88c59b; font-family: Bahianita; font-weight: 400;\">Mexico</span></h2>"
+        },
+        {
+          "sourceId": "projects-page",
+          "declaration": ".dnd_area-row-3-background-layers { background-image: linear-gradient(rgba(136, 197, 155, 1), rgba(136, 197, 155, 1)) !important; }"
+        }
+      ]
+    },
+    {
+      "hex": "#D17F2D",
+      "label": "Project terracotta",
+      "status": "observed HTML/CSS",
+      "role": "Alternating project headings/backgrounds; base links",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": "<h2 style=\"font-size: 88px;\"><span style=\"color: #d17f2d; font-family: Bahianita; font-weight: 400;\">usa</span></h2>"
+        },
+        {
+          "sourceId": "theme-head-css",
+          "declaration": "a{color:#d17f2d}"
+        }
+      ]
+    },
+    {
+      "hex": "#489D60",
+      "label": "Navigation and footer green",
+      "status": "observed CSS",
+      "role": "Footer background, active navigation, blog links",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": "#hs_cos_wrapper_global_footer .hhs-footer-mod { background-color: rgba(72, 157, 96, 1.0); }"
+        },
+        {
+          "sourceId": "child-css",
+          "declaration": ".header .hhs-top-bar .hs-menu-wrapper.hs-menu-flow-horizontal>ul li.hs-menu-depth-1.active-branch>a {\n\tcolor: #489d60;\n}"
+        }
+      ]
+    },
+    {
+      "hex": "#1D1D1B",
+      "label": "Heading charcoal",
+      "status": "observed CSS",
+      "role": "Headings and footer text",
+      "evidence": [
+        {
+          "sourceId": "theme-head-css",
+          "declaration": "h2{color:#1d1d1b;font-family:Red Hat Text;font-size:32px;font-style:normal;font-weight:700;letter-spacing:.32px;line-height:1em;text-decoration:none;text-transform:uppercase}"
+        }
+      ]
+    },
+    {
+      "hex": "#081913",
+      "label": "Body dark green",
+      "status": "observed CSS",
+      "role": "Default paragraphs/list text",
+      "evidence": [
+        {
+          "sourceId": "theme-head-css",
+          "declaration": "p{color:#081913;font-style:normal;letter-spacing:.14px;line-height:1em;text-decoration:none;text-transform:none}"
+        }
+      ]
+    },
+    {
+      "hex": "#F5F4EF",
+      "label": "Footer off-white",
+      "status": "observed CSS",
+      "role": "Footer social icon fills",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": "#hs_cos_wrapper_global_footer .hhs-social-con svg { fill: #F5F4EF; }"
+        }
+      ]
+    },
+    {
+      "hex": "#F5A300",
+      "label": "Mobile navigation amber",
+      "status": "observed CSS",
+      "role": "Hamburger lines and mobile menu icons",
+      "evidence": [
+        {
+          "sourceId": "projects-page",
+          "declaration": ".hamburger-icon .line { background: rgba(245, 163, 0, 1.0); }"
+        }
+      ]
+    },
+    {
+      "hex": "#ED1C24",
+      "label": "Corner flag red",
+      "status": "sampled raster asset, not declared standard",
+      "role": "Saturated red pixels in the official black-and-red logo",
+      "details": "1,249 opaque pixels in official-logo-14.webp equal RGB(237,28,36). Keep original logo colour; do not assert Pantone/CMYK equivalence."
+    },
+    {
+      "hex": "#000000",
+      "label": "Logo black",
+      "status": "sampled raster asset, not declared standard",
+      "role": "Black court and lettering in the official logo"
+    }
+  ],
+  "themeOnlyColours": [
+    {
+      "hex": "#5A9F6F",
+      "note": "Base theme forms, date picker and pagination; not evidence of a core corporate palette."
+    },
+    {
+      "hex": "#3CB1EA",
+      "note": "Base theme cta-primary text on #0C0C0C; captured markup may use per-module overrides. Not promoted into brand palette."
+    },
+    {
+      "hex": "#FFAF03",
+      "note": "Popup form button styles; not the same as mobile nav amber #F5A300."
+    }
+  ],
+  "logos": [
+    {
+      "file": "website-logo-original.webp",
+      "url": "https://www.lovefutbol.org/hs-fs/hubfs/LoveFutbol_January2026/images/logo+love.futbol.webp?width=2550&height=1750&name=logo+love.futbol.webp",
+      "responseMimeType": "image/webp",
+      "sha256": "ce1168b22211d8e1649e96f3167aa77b6132dadd209630da9ec8b1c0adf44d7d",
+      "width": 1275,
+      "height": 875,
+      "alphaBoundingBox": [
+        205,
+        172,
+        1137,
+        704
+      ],
+      "status": "unchanged official-site raster response",
+      "notes": "Primary high-resolution black/red artwork with transparent margins"
+    },
+    {
+      "file": null,
+      "url": "https://www.lovefutbol.org/hs-fs/hubfs/logo+love.futbol.png?width=1176&height=328&name=logo+love.futbol.png",
+      "responseMimeType": "image/webp",
+      "sha256": "cecf9f77b22667d48a9c726a63c8969d75c1d8b9b1bd524d3213fdc8504b7754",
+      "width": 478,
+      "height": 328,
+      "alphaBoundingBox": [
+        74,
+        62,
+        429,
+        266
+      ],
+      "status": "unchanged official-site raster response",
+      "notes": "Lower-resolution transformed image response; original request .png but bytes WebP. Declared HTML dimensions do not match actual response dimensions. Not bundled; retained in this inventory only to document the capture finding."
+    }
+  ],
+  "vectorStatus": "No logo SVG or PDF master present in the capture. Inline SVG elements are utility/social icons. Do not claim a vector master was supplied, and do not describe a raster inside SVG as vector artwork.",
+  "unknowns": [
+    "No official minimum-size rule",
+    "No official clear-space rule",
+    "No Pantone or CMYK standards",
+    "No supplied brand manual",
+    "No commercial font redistribution permission",
+    "No verified reverse or one-colour master",
+    "No official approval of template geometry inferred from the website"
+  ],
+  "layoutObservations": [
+    "Project listing uses large Bahianita country names and alternating light-green/terracotta panels.",
+    "Project photo grid images use a grayscale class, with public colour image bodies.",
+    "Navigation/header is white; footer is green with dark text.",
+    "Logo combines a rough court outline, custom lettering, and a small red corner flag. Preserve the artwork rather than typesetting a replacement."
+  ]
+}
