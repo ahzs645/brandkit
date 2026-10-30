@@ -77,7 +77,8 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     case 'web': return hasWebPage(brand)
     case 'patterns': return hasPatterns(brand)
     case 'guide': return Boolean(brand.guide?.pages?.length)
-    case 'printer': return Boolean(brand.templates?.length)
+    // The printer is for card designs: a brand with a printer package (a card set up) has it.
+    case 'printer': return Boolean(brand.printer?.packages?.length)
     case 'extension': return extensionView !== null
     default: return true
   }
@@ -356,12 +357,11 @@ export const App = () => {
                 { value: 'templates', label: 'Templates', title: 'Cards, stationery, social posts and slides: fill in the fields and download' },
                 { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' }
               ]} />
-              <p className="muted">{view === 'templates' ? 'Fill in the fields once, then download each design as SVG, PNG or PDF.' : 'Write a report, brief or letter in the brand’s layout, then download it as Word.'}</p>
               {!SHARED && available.has('printer') && <button type="button" className="button button--quiet" onClick={() => go('printer')}>Template Printer →</button>}
             </div>}
             {view === 'templates' && <div className="view">
               <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
-                onPrint={SHARED ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
+                onPrint={SHARED || !available.has('printer') ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">
                   {template.description && <p>{template.description}</p>}
@@ -370,7 +370,6 @@ export const App = () => {
               )} /></div>}
             {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onImport={importPrinterDesign} />}
             {view === 'extension' && ExtensionView && <div className="view">
-              <section className="panel"><h2>{extensionView.label}</h2>{extensionView.use && <p className="muted">{extensionView.use}</p>}</section>
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
             </div>}
             {view === 'web' && hasWebPage(brand) && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
@@ -388,11 +387,6 @@ export const App = () => {
           <p className="muted footnote"><button type="button" className="link" onClick={() => { forgetBrand(brand.id); setSaved(savedBrands()); select(BUILT_IN[0]) }}>Remove {brand.id} from this browser</button></p>
         )}
       </main>
-      <footer className="footer muted">
-        {SHARED
-          ? `${brand?.name ?? 'This'} brand centre. Every file is made in your browser from the approved identity; nothing is uploaded.`
-          : `brandkit makes every file in your browser; nothing is uploaded.${brand?.id === 'ddcnorth' ? ' ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.' : ''}`}
-      </footer>
     </div>
     </Shared.Provider>
   )

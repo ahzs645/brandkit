@@ -175,7 +175,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* The switch between a tab's parts (Templates and Documents), above the part shown. */
 .section-switch { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-bottom: var(--gap); }
 .section-switch .segmented button { padding: 7px 16px; font-size: 14px; }
-.section-switch > p { margin: 0; flex: 1 1 260px; }
+.section-switch > .button { margin-left: auto; }
 /* A wide child (a table that scrolls) must not widen the column it sits in. */
 .view > * { min-width: 0; }
 .printer__intro { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
@@ -734,3 +734,7 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .printer__saved { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
 .printer__stage { height: calc(100dvh - var(--masthead-h) - 24px); min-height: 560px; border-radius: var(--radius); overflow: hidden; background: var(--surface); }
 @media (max-width: 760px) { .printer__stage { height: calc(100dvh - var(--masthead-h) - 12px); min-height: 480px; } .printer__controls > .button { flex: 1 1 auto; } }
+/* Departments' reference section, closed by default. */
+.organization-reference > summary { cursor: pointer; font-weight: 600; }
+.organization-reference[open] > summary { margin-bottom: 16px; }
+.organization-reference h2 { margin-top: 18px; }

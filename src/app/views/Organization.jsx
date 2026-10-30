@@ -98,7 +98,9 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
         </section>
       </div>
     </>}
-    <section className="panel">
+    {/* The sizing rules and the related identities are reference, not the task: closed until asked for. */}
+    <details className="panel organization-reference">
+      <summary>Sizing rules{related.length > 0 ? ' and related brands' : ''}</summary>
       <h2>How the sizing works</h2>
       <div className="organization-table-scroll"><table className="organization-table"><thead><tr><th scope="col">Element</th><th scope="col">Rule</th><th scope="col">Basis</th></tr></thead><tbody>
         <tr><th scope="row">Complete logo</th><td>At least {brand.logoPolicy?.minimumWidthMm ?? profile.logo.minimumWidthMm} mm wide; scale proportionally.</td><td>Official minimum width</td></tr>
@@ -108,14 +110,14 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
         <tr><th scope="row">Department name</th><td>{size.departmentSizePt ?? 12} pt, bold, natural wrapping.</td><td>Kit document layout convention</td></tr>
         <tr><th scope="row">Subdepartment name</th><td>{size.subdepartmentSizePt ?? 10.5} pt, regular, below its parent.</td><td>Kit document layout convention</td></tr>
       </tbody></table></div>
-    </section>
-    {related.length > 0 && <section className="panel">
+    {related.length > 0 && <>
       <h2>Connections in the brand portfolio</h2>
       <div className="organization-relations">{related.map(item => <article key={item.id}>
         <h3><a href={`?brand=${encodeURIComponent(item.id)}`}>{item.label ?? item.id}</a></h3>
         <p><strong>{item.relationship}</strong></p><p className="muted">{item.note}</p>
       </article>)}</div>
-    </section>}
+    </>}
+    </details>
     <OrganizationSources brand={brand} />
   </div>
 }
