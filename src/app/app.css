@@ -328,11 +328,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .colour-edit__note { font-size: 11.5px; color: var(--ink-faint); }
 .colour-edit__roles { grid-area: roles; display: flex; flex-wrap: wrap; gap: 6px; min-height: 26px; align-items: center; }
 .colour-edit__none { font-size: 12px; color: var(--ink-faint); }
-.role-chip { position: relative; display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; background: var(--track); font-size: 12.5px; font-weight: 600; cursor: pointer; }
-.role-chip::after { content: '▾'; font-size: 10px; color: var(--ink-faint); }
-.role-chip:hover { background: var(--mid); }
-.role-chip:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
-.role-chip select { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }
+.select__button.role-chip { display: inline-flex; width: auto; min-height: 0; gap: 4px; padding: 3px 10px; border: 0; border-radius: 999px; background: var(--track); font-size: 12.5px; font-weight: 600; }
+.select__button.role-chip::after { content: '▾'; font-size: 10px; color: var(--ink-faint); }
+.select__button.role-chip:hover { background: var(--mid); }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .field--wide { grid-column: 1 / -1; }
 .json { min-height: 420px; font: 12.5px/1.45 ui-monospace, 'SF Mono', Menlo, monospace; resize: vertical; }
@@ -617,3 +615,4 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 /* The door-sign editor brings its own page ground (scoped to .door-sign-app); it sits in a panel
    here rather than filling the window. */
 .door-sign-app.door-signs { min-height: 0; border-radius: var(--radius); }
+

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { colour, colourName, validateBrand } from '../../engine/brand.js'
 import { download } from '../../export/render.js'
 import { colourEntries, editableRoles, ratioLabel, rolePairs } from '../colours.js'
+import { Select } from '../ui.jsx'
 
 const OWN = '#own'
 
@@ -52,14 +53,9 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
               <span className="colour-edit__roles">
                 {entry.roles.length === 0 && <span className="colour-edit__none">No role</span>}
                 {entry.roles.filter((role) => roles.includes(role)).map((role) => (
-                  <label key={role} className="role-chip" title={`Give ${role} to another colour`}>
-                    <span>{role}</span>
-                    <select value={entry.own ? OWN : entry.key} aria-label={`${role} role`}
-                      onChange={(event) => update((next) => { next.roles[role] = event.target.value === OWN ? colour(brand, role).toUpperCase() : event.target.value })}>
-                      {Object.keys(brand.colours).map((key) => <option key={key} value={key}>{colourName(brand, key)}</option>)}
-                      <option value={OWN}>Its own colour</option>
-                    </select>
-                  </label>
+                  <Select key={role} className="role-chip" trigger={<span>{role}</span>} title={`Give ${role} to another colour`} aria-label={`${role} role`}
+                    value={entry.own ? OWN : entry.key} onChange={(value) => update((next) => { next.roles[role] = value === OWN ? colour(brand, role).toUpperCase() : value })}
+                    options={[...Object.keys(brand.colours).map((key) => ({ value: key, label: colourName(brand, key) })), { value: OWN, label: 'Its own colour' }]} />
                 ))}
               </span>
             </div>

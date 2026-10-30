@@ -4,6 +4,7 @@ import { consumerProfile } from '../../engine/consumer.js'
 import { publicationDocx, publicationHtml } from '../../export/publication.js'
 import { download, rasterise } from '../../export/render.js'
 import { readAffiliation, writeAffiliation } from '../affiliation.js'
+import { Segmented, Select } from '../ui.jsx'
 
 const asJson = (value) => `${JSON.stringify(value, null, 2)}\n`
 
@@ -101,9 +102,9 @@ export const Documents = ({ brand, fonts }) => {
       <section className="panel documents-controls" aria-label="Document settings">
         <h3>Document settings</h3>
         {imported && <p className="notice">An imported document is open. <button type="button" className="link" onClick={() => { setImported(null); setError(null); setStatus('') }}>Start a new example</button></p>}
-        <label className="field"><span className="field__label">Document purpose</span><select disabled={Boolean(imported)} value={purpose} onChange={(event) => setPurpose(event.target.value)}>{DOCUMENT_PURPOSES.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}</select></label>
+        <label className="field"><span className="field__label">Document purpose</span><Select disabled={Boolean(imported)} value={purpose} onChange={setPurpose} options={DOCUMENT_PURPOSES.map((item) => ({ value: item.id, label: item.label }))} /></label>
         <p className="muted">{DOCUMENT_PURPOSES.find((item) => item.id === purpose)?.description}</p>
-        <label className="field"><span className="field__label">Paper size</span><select disabled={Boolean(imported)} value={paper} onChange={(event) => setPaper(event.target.value)}><option value="letter">US Letter</option><option value="a4">A4</option></select></label>
+        <div className="field"><span className="field__label">Paper size</span>{imported ? <span>{paper === 'a4' ? 'A4' : 'US Letter'}</span> : <Segmented label="Paper size" value={paper} onChange={setPaper} options={[{ value: 'letter', label: 'US Letter' }, { value: 'a4', label: 'A4' }]} />}</div>
         <h3>Department naming</h3>
         <p className="muted">Optional names appear as editable document text below the logo. Use the exact organizational names.</p>
         {['department', 'subdepartment'].map((key) => <label className="field" key={key}><span className="field__label">{key === 'department' ? 'Department or school' : 'Subdepartment or unit'}</span><input type="text" maxLength={180} value={activeAffiliation[key] ?? ''} onChange={(event) => updateAffiliation(key, event.target.value)} /></label>)}

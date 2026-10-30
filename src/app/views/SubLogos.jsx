@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { logoDocument } from '../../engine/artwork.js'
 import { departmentLines } from '../../engine/signatures.js'
 import { loadExtension } from '../../extensions/index.js'
-import { Downloads, Field, SvgImage } from '../ui.jsx'
+import { Downloads, Field, Select, SvgImage } from '../ui.jsx'
 import { DepartmentSelect, groundOf } from './Signatures.jsx'
 
 const slug = (text) => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'department'
@@ -71,9 +71,7 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
     <div className="organization-workspace">
       <section className="panel organization-controls" aria-label="Sub-logo settings">
         {signatures.length > 1 && <Field label="Signature">
-          <select value={signature.id} onChange={(event) => setSignatureId(event.target.value)}>
-            {signatures.map((entry) => <option key={entry.id} value={entry.id}>{entry.label}</option>)}
-          </select>
+          <Select value={signature.id} onChange={setSignatureId} options={signatures.map((entry) => ({ value: entry.id, label: entry.label }))} />
         </Field>}
         <DepartmentSelect brand={brand} value={preset} onChange={choose} />
         <Field label={`${departments.label ?? 'Department'} as set`} hint="Edit the name, or type another. A line break you type is kept; otherwise the name wraps by the signature’s rules.">

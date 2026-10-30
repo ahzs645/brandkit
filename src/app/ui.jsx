@@ -137,3 +137,6 @@ export const useStored = (key, initial) => {
   useEffect(() => { try { localStorage.setItem(key, JSON.stringify(value)) } catch { /* not persisted */ } }, [key, value])
   return [value, setValue]
 }
+
+
+export { Select } from '../ui/Select.jsx'

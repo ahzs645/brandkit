@@ -4,6 +4,7 @@ import { createBrowserRenderer, download, zip } from '../../export/render.js'
 import { formatBytes } from '../../engine/web.js'
 import { KIT_PACKS } from '../../engine/packs.js'
 import { readAffiliation } from '../affiliation.js'
+import { Select } from '../ui.jsx'
 
 const KIND_LABEL = { text: 'vector or text', png: 'image', pdf: 'PDF', ico: 'icon', office: 'Office document', asset: 'supplied', index: 'index' }
 
@@ -53,10 +54,10 @@ export const Kit = ({ brand, fonts, source }) => {
         <div>
           <h2>The {brand.name} kit{brand.revision ? `, with the ${brand.revision.title.toLowerCase()} (${brand.revision.status})` : ''}</h2>
           <label className="field kit-pack"><span className="field__label">What are you making?</span>
-            <select value={options.pack} disabled={Boolean(progress)} onChange={(event) => {
-              const preset = KIT_PACKS.find((entry) => entry.id === event.target.value)
+            <Select value={options.pack} disabled={Boolean(progress)} onChange={(value) => {
+              const preset = KIT_PACKS.find((entry) => entry.id === value)
               setOptions({ ...preset.options, pack: preset.id }); setResult(null)
-            }}>{KIT_PACKS.map((entry) => <option key={entry.id} value={entry.id}>{entry.label}</option>)}</select>
+            }} options={KIT_PACKS.map((entry) => ({ value: entry.id, label: entry.label }))} />
           </label>
           <p className="muted">{KIT_PACKS.find((entry) => entry.id === options.pack)?.description}</p>
           <p className="muted">{plan.length} files: {Object.entries(kinds).map(([kind, count]) => `${count} ${KIND_LABEL[kind] ?? kind}`).join(', ')}. Every one is made in this browser from brand.json; nothing is uploaded.</p>
