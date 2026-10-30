@@ -307,7 +307,7 @@ const brand = {
   displayVersion: '1983',
   source: 'BC Hydro Graphic Standards Manual, June 1983, as rebuilt in the BC manual pack (manuals/bc, book "hydro"); signatures from PofBC’s reconstruction.',
   status: 'A historical reconstruction for reference and study. Not current BC Hydro brand guidance.',
-  colours: { black: '#000000', white: '#FFFFFF', green: '#00AF00', blue: '#0069A2', tint: '#D3EDB8', grey: '#5A5A5A', yellow: '#FFF05A', emboss: '#E4E1DA' },
+  colours: { black: '#000000', white: '#FFFFFF', green: '#00AF00', blue: '#0069A2', tint: '#D3EDB8', grey: '#5A5A5A', yellow: '#FFF05A', emboss: '#9A958B' },
   colourNames: { tint: 'Light tint (≤ 20% value)', emboss: 'Blind emboss (no ink)' },
   roles: { ink: 'black', paper: 'white', muted: 'grey', primary: 'blue', light: 'tint', reverse: 'white', line: '#D3D3D3', rule: 'black' },
   print: { pantone: { green: '376', blue: '314' }, cmyk: { green: 'C50 Y100', blue: 'C90 M20 Y25 (coated); C90 M15 Y25 (uncoated)', black: 'K100' }, note: 'Pantone numbers and process recipes as the 1983 manual gives them. Screen colours are approximations.' },

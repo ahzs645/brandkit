@@ -380,7 +380,7 @@ export const App = () => {
             {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}
             {view === 'new' && <NewBrand fonts={libraryFonts} existing={brandIds} onCreate={create} />}
-            {view === 'manuals' && <Manuals openBuilt={openBuilt} />}
+            {view === 'manuals' && <Manuals brand={brand} openBuilt={openBuilt} />}
           </Suspense>
         )}
         {view === 'brand' && saved[brand?.id] && !BUILT_IN.includes(brand?.id) && (

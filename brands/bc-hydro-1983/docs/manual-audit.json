@@ -12,7 +12,7 @@
     "edition": "June 1983"
   },
   "baselineCommit": "e470434",
-  "brandDefinitionSha256": "f9685422962355df53dddebdaf01d4af044b4bc7462dbe9da494275c7396383e",
+  "brandDefinitionSha256": "63ee23dd6c43492064e0ff6b9106679d9a89ac3592e321ae4dcd0d7f05154e90",
   "baselinePreviewsAvailable": true,
   "previewComparison": {
     "method": "svg-dom-clean-preview-v1",
@@ -2252,9 +2252,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "0158ca578a13a12312117f7d768ed40f829142a5c459dead26b702a3b5b74a10",
+      "currentSvgSha256": "5e0e3b9ad788fc30104fbbf368b1316c92b1f06fa1ebea9e43bb2be250d971e6",
       "baselineSvgSha256": "49ea936a62d99abf154209ba85231f2b83d059bb12f4788c49732dc8dbe72fed",
-      "currentCleanPreviewSha256": "a6d230f5f0f9a546baf092b1f70c35302bfcaa5647e86e046b6e8237685ad32b",
+      "currentCleanPreviewSha256": "608a35d6c1396f66c3249001c3018e5c41418a5e04f62d36facd5f2fa1b1c7ed",
       "baselineCleanPreviewSha256": "3e2e9cea5dc217e14596e092429122149b0aaafd3c299877ab0b090c7f36bae5"
     },
     {
@@ -2351,9 +2351,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "d04520e1eee0ad4b95b59df3ff1827e62daf56e343a05556a1a007d99dd7f67a",
+      "currentSvgSha256": "bf6d561a42d65f5aac77cf40b0c4a3bde7e4551a1840a15b3d3fbd934e96ab7d",
       "baselineSvgSha256": "99d8d5d048dfb1709f8359a3eed830fdb92e16b4400ac1ce88e554f2c8376e03",
-      "currentCleanPreviewSha256": "63ede4db27de99cbbac7aca793bb8a25260dfd6a4d079d4cb55fb0278d5c3c68",
+      "currentCleanPreviewSha256": "b499739729e0c51beb390bc20352fbcf32e3165ab6838eece4c76db5ff50f7be",
       "baselineCleanPreviewSha256": "cb2b98cb06e8cf9283354b26d843b13d5fa291b9e5d030310795f529f751b04f"
     },
     {
@@ -2450,9 +2450,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "4dfaf7b22411b0e6513c01f404f70aaef85915c20ac042fe5d3ac35bdd9c49da",
+      "currentSvgSha256": "91008dc2a7751158c251a0fc020abdc2542e2dd0a33d0b8b259d1c11cb46a7ac",
       "baselineSvgSha256": "fb4e19a66a863236d908d77eaec2e2d2c694d21c1def322bd0ce6f50eae7417c",
-      "currentCleanPreviewSha256": "2e709e14cdf013f689915c8b829e9636771f6ebc9626401a45348bf0ee69800d",
+      "currentCleanPreviewSha256": "18102ca4210942545b5df2830072f075d20d8af6de17ae85551267edd818aa22",
       "baselineCleanPreviewSha256": "627d90213b61061d9091e073f4dff93e917223f2e0a41ed734db9b452b471ac8"
     },
     {

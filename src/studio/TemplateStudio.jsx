@@ -23,7 +23,6 @@ import { download, pdf, rasterise, zip } from '../export/render.js'
 import { documentsFor, FORMAT_LABELS, officeFile } from '../export/office.js'
 import { physicalSize } from '../engine/templates.js'
 import { PrinterWebsite } from './PrinterWebsite.jsx'
-import { safeDocumentHref } from './asset-urls.js'
 import { Select } from '../ui/Select.jsx'
 import { MenuButton } from '../ui/MenuButton.jsx'
 import { useEditPreviewDock } from '../ui/EditPreviewDock.jsx'
@@ -107,7 +106,6 @@ export const TemplateStudio = ({
   const template = templates.find((entry) => entry.id === selected) ?? templates[0]
   const hasLayoutRules = Boolean(template?.guides?.elements?.length)
   const referenceUrl = template?.reference?.src ? (resolveAsset ? resolveAsset(template.reference.src) : template.reference.src) : null
-  const auditUrl = safeDocumentHref(brand.manualAudit?.report ? (resolveAsset ? resolveAsset(brand.manualAudit.report) : brand.manualAudit.report) : null)
   useEffect(() => { setOverlay(false); setOverlayOpacity(50); setReferenceError(false) }, [template?.id, referenceUrl])
   const ready = Boolean(fonts)
   const entries = useMemo(() => entriesOf(templates, brand.sets ?? []), [templates, brand.sets])
@@ -223,14 +221,6 @@ export const TemplateStudio = ({
       </nav>
 
       <div className="studio__stage" {...dock.panel('preview')}>
-        {brand.manualAudit && <details className="studio__audit">
-          <summary>Manual coverage and fidelity</summary>
-          {brand.manualAudit.title && <p><strong>{brand.manualAudit.title}</strong></p>}
-          {brand.manualAudit.summary && <p>{brand.manualAudit.summary}</p>}
-          {(brand.manualAudit.pages || brand.manualAudit.checkedDate) && <p className="studio__audit-meta">{[brand.manualAudit.pages ? `${brand.manualAudit.pages}-page source` : null, brand.manualAudit.checkedDate ? `Checked ${brand.manualAudit.checkedDate}` : null].filter(Boolean).join(' · ')}</p>}
-          {brand.manualAudit.limitations?.length > 0 && <ul>{brand.manualAudit.limitations.map((entry, index) => <li key={index}>{entry}</li>)}</ul>}
-          {auditUrl && <a href={auditUrl} target="_blank" rel="noreferrer">Read the full manual audit ↗</a>}
-        </details>}
         {currentSet && (
           <div className="studio__variants" role="group" aria-label={`${currentSet.label} variants`}>
             {currentSet.variants.map((variant) => <button key={variant.template} type="button" aria-pressed={variant.template === template.id} onClick={() => setSelected(variant.template)}>{variant.label}</button>)}
