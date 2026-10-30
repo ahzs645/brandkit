@@ -12,7 +12,7 @@
     "edition": "June 1983"
   },
   "baselineCommit": "e470434",
-  "brandDefinitionSha256": "fa098cc6cbb413af98aa58d33a8643f550bb112a4b47cc5626cc52058850de6f",
+  "brandDefinitionSha256": "8237896e1bcea36e3bccccfb64c543193de4d9d0298de86c35eac909621b82ed",
   "baselinePreviewsAvailable": true,
   "previewComparison": {
     "method": "svg-dom-clean-preview-v1",
@@ -3728,7 +3728,7 @@
       "id": "illustrated-h39-office",
       "label": "Office identification",
       "title": "Office identification (H39)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Office identification, as on page H39: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H39",
@@ -3757,7 +3757,7 @@
       "id": "illustrated-h39-gas",
       "label": "Gas operations identification",
       "title": "Gas operations identification (H39)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Gas operations identification, as on page H39: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H39",
@@ -3786,7 +3786,7 @@
       "id": "illustrated-h39-freight",
       "label": "Huntingdon Freight Office",
       "title": "Huntingdon Freight Office (H39)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Huntingdon Freight Office, as on page H39: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H39",
@@ -3815,7 +3815,7 @@
       "id": "illustrated-h39-plant",
       "label": "Liquefied Natural Gas Plant",
       "title": "Liquefied Natural Gas Plant (H39)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Liquefied Natural Gas Plant, as on page H39: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H39",
@@ -3844,7 +3844,7 @@
       "id": "illustrated-h40-advisory",
       "label": "Advisory information",
       "title": "Advisory information (H40)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Advisory information, as on page H40: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H40",
@@ -3873,7 +3873,7 @@
       "id": "illustrated-h40-customer-service",
       "label": "Customer Service",
       "title": "Customer Service (H40)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Customer Service, as on page H40: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H40",
@@ -3902,7 +3902,7 @@
       "id": "illustrated-h40-shipping",
       "label": "Shipping & Receiving",
       "title": "Shipping & Receiving (H40)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Shipping & Receiving, as on page H40: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H40",
@@ -3931,7 +3931,7 @@
       "id": "illustrated-h40-directional",
       "label": "Visitor Parking / Electric Shop",
       "title": "Visitor Parking / Electric Shop (H40)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Visitor Parking / Electric Shop, as on page H40: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H40",
@@ -3960,7 +3960,7 @@
       "id": "illustrated-h41-danger",
       "label": "Danger / Keep away",
       "title": "Danger / Keep away (H41)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Danger / Keep away, as on page H41: ManualKit’s source-registered sign, its wording a field for each line, its identity set from the brand’s signature.",
       "sourcePages": [
         "H41",
@@ -3989,7 +3989,7 @@
       "id": "illustrated-h41-authorized-vehicles",
       "label": "Authorized vehicles only",
       "title": "Authorized vehicles only (H41)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Authorized vehicles only, as on page H41: ManualKit’s source-registered sign, its wording a field for each line, its identity set from the brand’s signature.",
       "sourcePages": [
         "H41",
@@ -4018,7 +4018,7 @@
       "id": "illustrated-h41-employees-only",
       "label": "Employees only",
       "title": "Employees only (H41)",
-      "group": "Signs, drawn",
+      "group": "Sign examples from the manual",
       "description": "Employees only, as on page H41: ManualKit’s source-registered sign, its wording a field for each line.",
       "sourcePages": [
         "H41",

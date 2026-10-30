@@ -545,7 +545,9 @@ brand.guide = {
 const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43', 'H42'], 'Vehicles and equipment, drawn')
 // Its signs, drawn: identification, guide and control, each line of wording a field.
 const DRAWN_SIGN_KINDS = { H39: 'Identification signs', H40: 'Guide signs', H41: 'Control signs' }
-const drawnSigns = illustrated('hydro', ['H39', 'H40', 'H41'], ['H38'], 'Signs, drawn', (asset) => DRAWN_SIGN_KINDS[asset.split('-')[0]])
+// The manual's own sign examples, drawn with their fixed wording: reference beside the editable
+// signs above, which are the ones to make a sign from.
+const drawnSigns = illustrated('hydro', ['H39', 'H40', 'H41'], ['H38'], 'Sign examples from the manual', (asset) => DRAWN_SIGN_KINDS[asset.split('-')[0]])
 brand.illustrations = { ...drawn.drawings, ...drawnSigns.drawings, ...bceRouteIllustrations({ blue: brand.colours.blue }) }
 brand.templates.push(...additionalForms, ...additionalPublications(art), ...drawn.templates, ...drawnSigns.templates)
 brand.relatedMarks = [{
