@@ -612,7 +612,25 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 /* A warm ground so the avatars' white caption band reads against the card. */
 .profile-pictures .profile-pictures__art { height: 220px; background: #eae7e5; }
 .profile-pictures .profile-pictures__art img { height: 100%; width: auto; }
-/* The door-sign editor brings its own page ground (scoped to .door-sign-app); it sits in a panel
-   here rather than filling the window. */
-.door-sign-app.door-signs { min-height: 0; border-radius: var(--radius); }
+/* The door-sign editor styles its interface from --ui-* tokens (scoped to .door-sign-app); here
+   they take brandkit's own, so the editor reads as part of the site: no ground of its own, the
+   same surfaces, lines, ink, type and black buttons, in light and dark alike. The sign artwork
+   keeps UNBC green from its own variables. */
+.door-sign-app.door-signs {
+  min-height: 0; background: none; font: inherit; color: var(--ink);
+  color-scheme: inherit;
+  --ui-page-bg: transparent; --ui-stage: var(--track);
+  --ui-surface: var(--surface); --ui-surface-muted: var(--page); --ui-surface-hover: var(--hover);
+  --ui-field: var(--page); --ui-border: var(--line); --ui-border-strong: var(--ink-faint);
+  --ui-text: var(--ink); --ui-text-muted: var(--ink-muted); --ui-placeholder: var(--ink-faint); --ui-heading: var(--ink);
+  --ui-accent: var(--ink); --ui-on-accent: var(--surface); --ui-accent-text: var(--ink);
+  --ui-accent-soft: var(--hover); --ui-accent-soft-strong: var(--mid);
+  --ui-primary: var(--ink); --ui-primary-hover: var(--ink-muted); --ui-on-primary: var(--surface);
+  --ui-radius: var(--radius); --ui-radius-sm: var(--radius-sm);
+  --ui-shadow-sm: none; --ui-shadow-md: none;
+  --ui-focus-ring: 0 0 0 2px var(--focus);
+}
 
+/* Its workspace and cards line up with the page's own panels: no inset, no outlines, the gap. */
+.door-sign-app.door-signs .workspace { max-width: none; padding: 0; gap: var(--gap); }
+.door-sign-app.door-signs .form-section, .door-sign-app.door-signs .output-card { border-color: transparent; }
