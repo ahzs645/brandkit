@@ -80,32 +80,39 @@ try {
       assert.deepEqual(previews.map((item) => item.id), brand.patterns.map((item) => item.id), `${id}: every registered pattern appears in source order`)
       assert.ok(previews.every((item) => item.svg && item.finite && item.geometry), `${id}: all cards contain actual finite SVG artwork`)
 
-      // A filtered fallback must become the URL selection and survive a full reload.
-      const group = library.groups.find((item) => item.id !== library.patterns[0].groupId) ?? library.groups[0]
-      await page.getByRole('combobox', { name: /^Collection/ }).click()
-      await page.getByRole('option', { name: `${group.label} (${group.count})`, exact: true }).click()
-      await waitForCards(page, group.count)
-      const groupFirst = library.patterns.find((item) => item.groupId === group.id)
-      await waitForSelected(page, groupFirst.id)
-      await page.reload({ waitUntil: 'networkidle' })
-      await waitForCards(page, brand.patterns.length)
-      await waitForSelected(page, groupFirst.id)
-
-      const composition = library.patterns.find((item) => item.kind !== library.patterns[0].kind) ?? library.patterns[0]
-      await page.getByRole('combobox', { name: /^Composition/ }).selectOption(composition.kind)
-      await waitForCards(page, library.patterns.filter((item) => item.kind === composition.kind).length)
-      await page.getByRole('button', { name: 'Clear filters', exact: true }).click()
-      await waitForCards(page, brand.patterns.length)
-      const search = page.getByRole('searchbox', { name: 'Search patterns', exact: true })
       const last = library.patterns.at(-1)
-      await search.fill(last.id)
-      await page.locator(`.pattern-card[data-pattern-id="${last.id}"]`).waitFor()
-      assert.ok(await page.locator('.pattern-card').count() < brand.patterns.length, `${id}: search narrows the library`)
-      await search.fill('no-pattern-matches-this-qa-query')
-      await waitForCards(page, 0)
-      assert.match(await page.locator('.patterns-empty').innerText(), /No patterns match/)
-      await page.getByRole('button', { name: 'Clear filters', exact: true }).click()
-      await waitForCards(page, brand.patterns.length)
+      // The current UI offers search/filters from a dozen patterns; smaller libraries remain
+      // fully visible. Assert that contract, then exercise every available filter interaction.
+      const hasFilters = brand.patterns.length >= 12
+      assert.equal(await page.locator('.patterns-filters').count(), hasFilters ? 1 : 0, `${id}: filters match library size`)
+      if (hasFilters) {
+        // A filtered fallback must become the URL selection and survive a full reload.
+        const group = library.groups.find((item) => item.id !== library.patterns[0].groupId) ?? library.groups[0]
+        await page.getByRole('combobox', { name: /^Collection/ }).click()
+        await page.getByRole('option', { name: `${group.label} (${group.count})`, exact: true }).click()
+        await waitForCards(page, group.count)
+        const groupFirst = library.patterns.find((item) => item.groupId === group.id)
+        await waitForSelected(page, groupFirst.id)
+        await page.reload({ waitUntil: 'networkidle' })
+        await waitForCards(page, brand.patterns.length)
+        await waitForSelected(page, groupFirst.id)
+
+        const composition = library.patterns.find((item) => item.kind !== library.patterns[0].kind) ?? library.patterns[0]
+        await page.getByRole('combobox', { name: /^Composition/ }).click()
+        await page.getByRole('option', { name: composition.kindLabel, exact: true }).click()
+        await waitForCards(page, library.patterns.filter((item) => item.kind === composition.kind).length)
+        await page.getByRole('button', { name: 'Clear filters', exact: true }).click()
+        await waitForCards(page, brand.patterns.length)
+        const search = page.getByRole('searchbox', { name: 'Search patterns', exact: true })
+        await search.fill(last.id)
+        await page.locator(`.pattern-card[data-pattern-id="${last.id}"]`).waitFor()
+        assert.ok(await page.locator('.pattern-card').count() < brand.patterns.length, `${id}: search narrows the library`)
+        await search.fill('no-pattern-matches-this-qa-query')
+        await waitForCards(page, 0)
+        assert.match(await page.locator('.patterns-empty').innerText(), /No patterns match/)
+        await page.getByRole('button', { name: 'Clear filters', exact: true }).click()
+        await waitForCards(page, brand.patterns.length)
+      }
 
       // Keyboard selection and byte-for-byte SVG parity with the existing engine.
       const choice = page.locator(`.pattern-card[data-pattern-id="${last.id}"] button`)
@@ -219,7 +226,7 @@ try {
     report.brands.push({ id, patterns: brand.patterns.length, applications: library.applications.length, mobile: 390 })
     report.patterns += brand.patterns.length
     report.applications += library.applications.length
-    console.log(`PASS ${id}: ${brand.patterns.length} patterns, search/filters, deep links, SVG/PNG, ${library.applications.length} applications, shared 390 px`)
+    console.log(`PASS ${id}: ${brand.patterns.length} patterns, ${brand.patterns.length >= 12 ? 'search/filters' : 'compact library'}, deep links, SVG/PNG, ${library.applications.length} applications, shared 390 px`)
   }
   assert.ok(report.sourceNoteDownloads > 0, 'At least one inlined Markdown resource was downloaded by clicking its link')
   if (shotDir) writeFileSync(resolve(shotDir, 'patterns-view-summary.json'), `${JSON.stringify(report, null, 2)}\n`)

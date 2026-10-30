@@ -33,12 +33,23 @@ try {
     result.downloads++
     return readFileSync(await file.path())
   }
-  const navigate = name => page.locator('nav.tabs').getByRole('button', { name, exact: true }).click()
+  const navigate = async name => {
+    await page.locator('nav.tabs').getByRole('button', { name: name === 'Documents' ? 'Templates' : name, exact: true }).click()
+    if (name === 'Documents') await page.getByRole('group', { name: 'Templates or documents', exact: true }).getByRole('button', { name, exact: true }).click()
+  }
+  const choose = async (name, label) => {
+    await page.getByRole('combobox', { name, exact: true }).click()
+    await page.getByRole('listbox').getByRole('option', { name: label, exact: true }).click()
+  }
+  const openDepartmentNaming = async () => {
+    const section = page.locator('details').filter({ has: page.locator('summary').filter({ hasText: 'Department naming' }) })
+    if (await section.getAttribute('open') === null) await section.locator('summary').click()
+  }
   const department = 'Faculty of Environment'
   const subdepartment = 'Department of Geography, Earth and Environmental Sciences'
   await page.goto(`${base}?brand=unbc&view=organization`, { waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: 'Department sub-logo', exact: true }).waitFor()
-  await page.getByRole('combobox', { name: 'Department', exact: true }).selectOption({ label: department })
+  await choose('Department', department)
   assert.equal(await page.getByRole('textbox', { name: /^Department as set/ }).inputValue(), department)
   const [svgFile] = await Promise.all([page.waitForEvent('download'), page.locator('.asset-card').first().getByRole('button', { name: /SVG/ }).click()])
   result.downloads++
@@ -46,16 +57,20 @@ try {
   assert.match(subLogo, /aria-label="Faculty of Environment"/)
   await page.getByRole('textbox', { name: /^Department as set/ }).fill('Pneumonoultramicroscopicsilicovolcanoconiosis Institute')
   assert.match(await page.getByRole('alert').innerText(), /Too long to break/)
-  await page.getByRole('combobox', { name: 'Department', exact: true }).selectOption({ label: department })
+  // A select-only combobox changes value only when a different option is chosen.
+  // Leave the current preset before choosing it again to restore its edited name.
+  await choose('Department', 'None: the full logo')
+  await choose('Department', department)
   await page.screenshot({ path: resolve(screenshotDir, 'unbc-departments-desktop.png'), fullPage: true })
   await page.getByRole('button', { name: 'Use in documents', exact: true }).click()
   await page.locator('.documents-preview iframe').waitFor()
+  await openDepartmentNaming()
   assert.equal(await page.getByLabel('Department or school', { exact: true }).inputValue(), department)
   await page.getByLabel('Subdepartment or unit', { exact: true }).fill(subdepartment)
   const source = JSON.parse((await download('Download source')).toString())
   assert.deepEqual(source.affiliation, { department, subdepartment })
   assert.equal(source.purpose, 'report')
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('portfolio')
+  await choose('Document purpose', 'Brand portfolio')
   const word = unzipSync(await download('Download Word'))
   assert.match(strFromU8(word['word/document.xml']), /Faculty of Environment/)
   assert.match(strFromU8(word['word/document.xml']), /Department of Geography/)
@@ -70,6 +85,7 @@ try {
   assert.equal(await templateUnit.inputValue(), subdepartment)
   await templateUnit.fill('School of Planning and Sustainability')
   await navigate('Documents')
+  await openDepartmentNaming()
   assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), 'School of Planning and Sustainability')
   await navigate('Departments')
   assert.equal(await page.getByRole('textbox', { name: /^Department as set/ }).inputValue(), department, 'the sub-logo opens on the saved department')
@@ -78,6 +94,7 @@ try {
   await navigate('Templates')
   await page.getByRole('button', { name: 'Clear every field', exact: true }).click()
   await navigate('Documents')
+  await openDepartmentNaming()
   assert.equal(await page.getByLabel('Department or school', { exact: true }).inputValue(), '')
   assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), '')
   await page.getByLabel('Department or school', { exact: true }).fill(department)
