@@ -16,12 +16,14 @@
 // its own controls (PofBC sets the ministry lines from its ministry picker). `children` render
 // above the fields, for those controls.
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { allFields, renderTemplate, templateFields } from '../engine/templates.js'
+import { referencePlacement } from '../engine/template-guides.js'
 import { download, pdf, rasterise, zip } from '../export/render.js'
 import { documentsFor, FORMAT_LABELS, officeFile } from '../export/office.js'
 import { physicalSize } from '../engine/templates.js'
 import { PrinterWebsite } from './PrinterWebsite.jsx'
+import { safeDocumentHref } from './asset-urls.js'
 import { Select } from '../ui/Select.jsx'
 import { MenuButton } from '../ui/MenuButton.jsx'
 import { useEditPreviewDock } from '../ui/EditPreviewDock.jsx'
@@ -77,12 +79,19 @@ const slug = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g,
 export const TemplateStudio = ({
   brand, fonts, templates = brand.templates ?? [], storageKey = brand.id, values: controlled, onValuesChange,
   children, fileName = (template, fieldValues) => [brand.id, template.id, slug(fieldValues['contact-name'] ?? fieldValues.name)].filter(Boolean).join('-'),
-  note, departments = true, initialTemplate, onSelect, aside, onPrint, onPrinterPackage, printerWebsite
+  note, departments = true, initialTemplate, onSelect, aside, onPrint, onPrinterPackage, printerWebsite,
+  resolveAsset
 }) => {
   const [selected, setSelectedState] = useState(() => (templates.some((entry) => entry.id === initialTemplate) ? initialTemplate : templates[0]?.id))
   const setSelected = (id) => { setSelectedState(id); onSelect?.(id) }
   const [own, setOwn] = useState(() => readStored(storageKey))
   const [guides, setGuides] = useState(false)
+  const [largePreview, setLargePreview] = useState(false)
+  const [layoutRules, setLayoutRules] = useState(false)
+  const [overlay, setOverlay] = useState(false)
+  const [overlayOpacity, setOverlayOpacity] = useState(50)
+  const [referenceError, setReferenceError] = useState(false)
+  const inspectionId = useId()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState(null)
   // On a phone the fields and the preview take turns; the preview first, with the picker above it.
@@ -96,12 +105,16 @@ export const TemplateStudio = ({
   useEffect(() => { if (!templates.some((template) => template.id === selected)) setSelectedState(templates[0]?.id) }, [templates, selected])
 
   const template = templates.find((entry) => entry.id === selected) ?? templates[0]
+  const hasLayoutRules = Boolean(template?.guides?.elements?.length)
+  const referenceUrl = template?.reference?.src ? (resolveAsset ? resolveAsset(template.reference.src) : template.reference.src) : null
+  const auditUrl = safeDocumentHref(brand.manualAudit?.report ? (resolveAsset ? resolveAsset(brand.manualAudit.report) : brand.manualAudit.report) : null)
+  useEffect(() => { setOverlay(false); setOverlayOpacity(50); setReferenceError(false) }, [template?.id, referenceUrl])
   const ready = Boolean(fonts)
   const entries = useMemo(() => entriesOf(templates, brand.sets ?? []), [templates, brand.sets])
   const currentSet = entries.flatMap(([, list]) => list).find((entry) => entry.set?.variants.some((variant) => variant.template === template?.id))?.set ?? null
   const documents = template ? documentsFor(brand, template.id) : []
   const ctx = (outline, extra = {}) => ({ brand, fonts, values, outline: outline && ready, ...extra })
-  const preview = template ? renderTemplate(ctx(true, { showGuides: guides }), template).svg : null
+  const preview = template ? renderTemplate(ctx(true, { showGuides: guides, showLayoutGuides: layoutRules }), template).svg : null
   // A set's fields are all its variants' (a card's name is on its back while its front is shown),
   // except fields local to another variant (a different sign's wording).
   const fields = !template ? [] : currentSet
@@ -156,6 +169,7 @@ export const TemplateStudio = ({
     primary.key !== 'pdf' && { label: 'PDF', hint: pdfHint, disabled, onSelect: downloadPdf },
     { label: 'PNG', hint: 'An image for screens, slides and posts', disabled, onSelect: () => run('png', async () => download((await files(template)).png, `${name(template)}.png`)) },
     { label: 'SVG', hint: 'Text stays live and editable', disabled: Boolean(busy), onSelect: () => run('svg', async () => download(renderTemplate(ctx(false), template).svg, `${name(template)}.svg`)) },
+    hasLayoutRules && { label: 'SVG with rules', hint: 'Editable artwork with a separate, visible layout-guides layer', disabled: Boolean(busy), onSelect: () => run('svg-rules', async () => download(renderTemplate(ctx(false, { showLayoutGuides: true }), template).svg, `${name(template)}-with-rules.svg`)) },
     currentSet && { label: 'PDF, all variants', hint: `Every variant of the ${currentSet.label.toLowerCase()}, one to a page`, disabled, onSelect: () => run('set', async () => {
       const pages = currentSet.variants.map((variant) => { const outlined = renderTemplate(ctx(true), templates.find((entry) => entry.id === variant.template)); return { svg: outlined.svg, ...physicalSize(outlined) } })
       download(await pdf(pages, { title: `${brand.name} ${currentSet.label}`, author: brand.name }), `${brand.id}-${currentSet.id}.pdf`)
@@ -209,14 +223,54 @@ export const TemplateStudio = ({
       </nav>
 
       <div className="studio__stage" {...dock.panel('preview')}>
+        {brand.manualAudit && <details className="studio__audit">
+          <summary>Manual coverage and fidelity</summary>
+          {brand.manualAudit.title && <p><strong>{brand.manualAudit.title}</strong></p>}
+          {brand.manualAudit.summary && <p>{brand.manualAudit.summary}</p>}
+          {(brand.manualAudit.pages || brand.manualAudit.checkedDate) && <p className="studio__audit-meta">{[brand.manualAudit.pages ? `${brand.manualAudit.pages}-page source` : null, brand.manualAudit.checkedDate ? `Checked ${brand.manualAudit.checkedDate}` : null].filter(Boolean).join(' · ')}</p>}
+          {brand.manualAudit.limitations?.length > 0 && <ul>{brand.manualAudit.limitations.map((entry, index) => <li key={index}>{entry}</li>)}</ul>}
+          {auditUrl && <a href={auditUrl} target="_blank" rel="noreferrer">Read the full manual audit ↗</a>}
+        </details>}
         {currentSet && (
           <div className="studio__variants" role="group" aria-label={`${currentSet.label} variants`}>
             {currentSet.variants.map((variant) => <button key={variant.template} type="button" aria-pressed={variant.template === template.id} onClick={() => setSelected(variant.template)}>{variant.label}</button>)}
           </div>
         )}
+        {(hasLayoutRules || template.reference) && (
+          <fieldset className="studio__inspection">
+            <legend>Layout inspection</legend>
+            <div className="studio__inspection-controls">
+              {hasLayoutRules && <label className="studio__toggle"><input type="checkbox" checked={layoutRules} onChange={(event) => setLayoutRules(event.target.checked)} aria-describedby={`${inspectionId}-rules`} /> Show layout rules</label>}
+              {referenceUrl && <label className="studio__toggle"><input type="checkbox" checked={overlay} disabled={referenceError} onChange={(event) => setOverlay(event.target.checked)} aria-describedby={`${inspectionId}-source`} /> Overlay original scan</label>}
+              <label className="studio__toggle"><input type="checkbox" checked={largePreview} onChange={(event) => setLargePreview(event.target.checked)} /> Larger preview</label>
+            </div>
+            {overlay && referenceUrl && !referenceError && <div className="studio__overlay-controls">
+              <label htmlFor={`${inspectionId}-opacity`}>Scan opacity</label>
+              <input id={`${inspectionId}-opacity`} type="range" min="0" max="100" step="1" value={overlayOpacity} onChange={(event) => setOverlayOpacity(Number(event.target.value))} />
+              <output htmlFor={`${inspectionId}-opacity`}>{overlayOpacity}%</output>
+              <button type="button" className="button button--quiet" onClick={() => setOverlayOpacity(50)}>Reset overlay</button>
+            </div>}
+            {hasLayoutRules && <div id={`${inspectionId}-rules`} className="studio__inspection-note">
+              <p>Rules appear on the preview and in “SVG with rules”. Standard downloads keep the artwork clean.</p>
+              {layoutRules && template.guides.notes?.length > 0 && <ul>{template.guides.notes.map((entry, index) => <li key={index}>{entry}</li>)}</ul>}
+            </div>}
+            {template.reference && <div id={`${inspectionId}-source`} className="studio__inspection-note">
+              <p><strong>{template.reference.label ?? 'Original manual scan'}</strong>{template.reference.note ? ` — ${template.reference.note}` : ''}</p>
+              {overlay && <p>The scan retains its original wording when you edit the template. The scan is never added to downloads.</p>}
+              {(!referenceUrl || referenceError) && <p role="status">The source image is unavailable. The template and its layout rules can still be used.</p>}
+            </div>}
+          </fieldset>
+        )}
         <div className="studio__canvas">
-          <Preview className="studio__preview" svg={preview} alt={`${template.label ?? template.id} preview`} />
+          <div className={`studio__comparison${largePreview ? ' studio__comparison--large' : ''}`} style={{ '--preview-ratio': template.width / template.height }}>
+            <Preview className="studio__preview" svg={preview} alt={`${template.label ?? template.id} preview${layoutRules && hasLayoutRules ? ', layout rules shown' : ''}`} />
+            {overlay && referenceUrl && !referenceError && <img className="studio__reference" src={referenceUrl} alt={template.reference.label ?? 'Original manual scan'} draggable={false} style={{ ...referencePlacement(template), opacity: overlayOpacity / 100 }} onError={() => { setReferenceError(true); setOverlay(false) }} />}
+          </div>
         </div>
+        {template.fidelity && <div className="studio__fidelity" data-status={template.fidelity.status}>
+          {template.fidelity.label && <strong>{template.fidelity.label}</strong>}
+          {template.fidelity.note && <p>{template.fidelity.note}</p>}
+        </div>}
         <div className="studio__bar">
           {template.elements.some((element) => element.type === 'printGuides') && (
             <label className="studio__toggle"><input type="checkbox" checked={guides} onChange={(event) => setGuides(event.target.checked)} /> Trim and safe area</label>

@@ -324,6 +324,49 @@ A `text` with `compose` (`"Phone: {telephone}"`) builds one line from other fiel
 out when any of them has been cleared. `brand.fields` (`{ "telephone": { "label": "Telephone",
 "placeholder": "(604) 000-0000" } }`) names fields and gives composed lines their defaults.
 
+### Layout inspection and source overlays
+
+A template may carry a separate `guides` object. Its `elements` use the ordinary drawing
+element schema and are locked annotations, never editable fields. `renderTemplate()` writes
+them in `<g id="layout-guides" display="none">`; `showLayoutGuides: true` makes that layer
+visible. This switch is independent of `showGuides`, which controls trim and safe-area marks.
+The studio exposes the switch and a distinct **SVG with rules** download. Standard PNG/PDF
+downloads do not paint the annotation layer, and Printer packages omit it entirely.
+
+```json
+"guides": {
+  "title": "Report cover construction",
+  "notes": ["Title: 36 on 36 pt. Subtitle: 18 on 18 pt."],
+  "elements": [
+    { "type": "line", "x1": 72, "x2": 190,
+      "y1": { "flow": "cover-title", "edge": "lastBaseline" },
+      "y2": { "flow": "cover-title", "edge": "lastBaseline" },
+      "stroke": "#A01B45", "strokeWidth": 0.2 },
+    { "type": "text", "text": "1 cap-height", "x": 190,
+      "y": { "flow": "cover-subtitle", "edge": "top", "offset": -2 },
+      "requiresFlow": ["cover-title", "cover-subtitle"],
+      "size": "8pt", "anchor": "end", "colour": "#A01B45" }
+  ]
+}
+```
+
+Guide coordinates can reference a laid-out flow item's `top` (cap line), `firstBaseline`,
+`lastBaseline`, `bottom` (last baseline), `left` or `right`. Numeric offsets use the template's
+units. Empty flow items remove their attached annotations. `requiresFlow` suppresses a
+relationship label when either participating item is empty. Unknown IDs or edges are errors.
+
+`reference` supplies `{ src, label, note, alignment?: { x, y, width, height } }`. The studio
+resolves `src` through its optional `resolveAsset(path)` callback and places the source image
+in the alignment rectangle, or the entire canvas when omitted, using `object-fit: contain`.
+Changing templates resets the scan and opacity. This inspection image is outside the artwork
+and is never part of a download. Record crop coordinates, scan padding, nominal alignment and
+any unverified dimensions in the reference notes and accompanying provenance.
+
+Optional `fidelity: { status, label, note }` describes each template's reconstruction limits.
+A brand-level `manualAudit: { title, summary, pages, checkedDate, report, limitations }` exposes
+a collapsible audit panel and report link. Include the report and reference files in `files`
+to carry them in the downloaded kit.
+
 ### Sets
 
 `sets` make variants of one thing one item in the studio, with a switcher between them and a PDF
@@ -359,6 +402,12 @@ stops, and rules become borders. A PowerPoint template gets a slide layout per t
 fields as placeholders (the largest worded one the title), and a sample slide of each. An email
 signature is a table: the drawing left of the text as an image, then the text, line by line,
 with mail, phone and web links.
+
+For a finite sequence of different page designs, set `pageMode: "sequence"`. Each entry in
+`pages` becomes its own section with its own dimensions, fixed artwork in the header and
+editable positioned text. This keeps a cover, a two-column interior and a final back cover as
+three distinct pages. It does not change the default first-page/continuation behavior used by
+letters. Layout inspection guides are omitted from all Office artwork renders.
 
 A face's `office` name is the font a document asks for, where it differs from the face itself:
 the Province's TeX Gyre Heros stands in for Helvetica, so its documents name Helvetica. Faces with

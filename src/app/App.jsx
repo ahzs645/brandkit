@@ -360,7 +360,7 @@ export const App = () => {
               {!SHARED && available.has('printer') && <button type="button" className="button button--quiet" onClick={() => go('printer')}>Template Printer →</button>}
             </div>}
             {view === 'templates' && <div className="view">
-              <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
+              <TemplateStudio key={brand.id} brand={brand} fonts={fonts} resolveAsset={source.url} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
                 onPrint={SHARED || !available.has('printer') ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">

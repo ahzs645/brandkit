@@ -49,7 +49,30 @@
   border-radius: var(--radius-sm, 8px);
   background: color-mix(in srgb, var(--ink, #16181c) 10%, var(--page, #f4f5f7));
 }
-.studio__preview { display: block; max-width: 100%; max-height: calc(100vh - var(--studio-sticky) - 200px); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); background: #fff; }
+.studio__comparison { position: relative; width: 100%; max-width: min(100%, calc(max(220px, 100vh - var(--studio-sticky) - 200px) * var(--preview-ratio, 1))); }
+.studio__comparison--large { max-width: 100%; }
+.studio__preview { display: block; width: 100%; height: auto; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); background: #fff; }
+.studio__reference { position: absolute; display: block; object-fit: contain; pointer-events: none; }
+.studio__inspection { min-width: 0; margin: 0 0 14px; padding: 10px 12px 12px; border: 1px solid var(--line, #e3e5e8); border-radius: var(--radius-sm, 8px); }
+.studio__inspection legend { padding: 0 5px; font-size: 13px; font-weight: 600; color: var(--ink-muted, #5b5f66); }
+.studio__inspection-controls { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.studio__inspection-note { margin-top: 8px; font-size: 12px; line-height: 1.5; color: var(--ink-muted, #5b5f66); }
+.studio__inspection-note p { margin: 4px 0 0; }
+.studio__inspection-note ul { padding-left: 18px; margin: 6px 0 0; }
+.studio__overlay-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 10px; font-size: 12px; }
+.studio__overlay-controls input[type='range'] { min-width: 90px; flex: 1 1 100px; accent-color: var(--focus, #2f6fde); }
+.studio__overlay-controls output { min-width: 3.5ch; font-variant-numeric: tabular-nums; }
+.studio__inspection input:focus-visible { outline: 2px solid var(--focus, #2f6fde); outline-offset: 3px; }
+.studio__audit { margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--line, #e3e5e8); border-radius: var(--radius-sm, 8px); color: var(--ink-muted, #5b5f66); font-size: 12.5px; line-height: 1.5; overflow-wrap: anywhere; }
+.studio__audit summary { cursor: pointer; color: var(--ink, #16181c); font-size: 13px; font-weight: 600; }
+.studio__audit summary:focus-visible { outline: 2px solid var(--focus, #2f6fde); outline-offset: 3px; }
+.studio__audit p { margin: 8px 0; }
+.studio__audit ul { padding-left: 18px; margin: 8px 0; }
+.studio__audit a { color: inherit; text-underline-offset: 3px; }
+.studio__audit-meta { font-size: 12px; }
+.studio__fidelity { border-left: 3px solid var(--line, #e3e5e8); margin-top: 12px; padding: 2px 10px; color: var(--ink-muted, #5b5f66); font-size: 12px; line-height: 1.5; }
+.studio__fidelity strong { color: var(--ink, #16181c); }
+.studio__fidelity p { margin: 3px 0 0; }
 .studio__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
 .studio__size { font-size: 13px; color: var(--ink-faint, #80858d); }
 .studio__toggle { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-muted, #5b5f66); }
@@ -109,7 +132,9 @@
   .studio .field.studio__picker { display: grid; padding: 12px 16px 14px; border-radius: var(--radius, 14px); background: var(--surface, #fff); }
   .studio__picker + .studio__list { display: none; }
   .studio__canvas { min-height: 220px; padding: 12px; }
-  .studio__preview { max-height: 62vh; }
+  /* Size the shared wrapper so the artwork and source image keep one coordinate system. */
+  .studio__comparison { max-width: min(100%, calc(62vh * var(--preview-ratio, 1))); }
+  .studio__comparison--large { max-width: 100%; }
   /* The main download a full row on its own, where a thumb finds it; the rest share the next. */
   .studio__downloads { width: 100%; margin-left: 0; justify-content: stretch; }
   .studio__downloads > * { flex: 1 1 0; justify-content: center; }

@@ -70,7 +70,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view sets a department sub-logo for any of 88 listed units or a typed name, in Helvetica Neue 95 Black on the construction of UNBC's own sub-logos (from the `unbc-logo` submodule), and carries the name into Documents and Templates; the kit includes every listed unit's sub-logo in three colours. Documents, templates and the **Web** components take www.unbc.ca's look (measured from the UNBC chrome and the NHHR Atlas): a gold Helvetica Black title over a warm rule, BC Sans web text, teal links and warm neutrals, with the department's sub-logo on document covers. The Departments view also makes the unit's social-media profile pictures (square and circle, from the UNBC logo package), and a **Door signs** tab runs the [door-sign](https://github.com/ahzs645/door-sign) package's editor, the one the UNBCDoor app uses, opened on the chosen department. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
 | [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
-| [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the Corporate, Gas Operations, Rail and Formal signatures in their colourways; Corporate, Gas and Rail stationery; forms; publication covers and mastheads; advertising; audio-visual; signs; vehicles; and a guide with the background-value rules, incorrect usage and minimum sizes. |
+| [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the four Corporate, Gas Operations, Rail and Formal signatures; two scan-derived BCE route locomotive vectors; stationery; five form layouts; publication covers, backs, spines and interior text; advertising; audio-visual; signs and vehicles. The 48-page source audit provides original/rebuilt overlays, 65 editable examples, 47 toggleable layout-rule layers and six registered template comparisons. See the [audit findings](brands/bc-hydro-1983/docs/manual-audit.md) or open `docs/manual-audit.html` from the kit for the interactive report. |
 
 The two BC brands are historical reconstructions for reference, not current guidance. Helvetica,
 Times and Courier are set in TeX Gyre Heros, Termes and Cursor (GUST Font License). Their artwork
@@ -86,6 +86,16 @@ page in place of the earlier draft.
 Every template, signature and guide page in them cites the manual pages it is built from. In the
 app, those pages show as thumbnails under it that open the page in the manual library; and a page
 in the library lists what is built from it, linking back.
+
+For BC Hydro, **Templates → Manual coverage and fidelity** opens the complete source audit.
+**Show layout rules** exposes construction lines and measurements; **Overlay original scan**
+and its opacity control compare the six registered examples. Flow-dependent rules follow edited
+titles and disappear when the relevant field is cleared. Standard downloads keep those rules
+hidden; **SVG with rules** exports a visible annotation layer. The BCE route marks are under
+**Logos → BCE route heritage mark**, and are used separately from the Rail signature on its
+letterhead and card. The scan-derived vectors, source crops, ink-mask comparisons and provenance
+travel with the kit. Original master artwork, physical colour swatches, the illustrated cover's
+source image and fabrication drawings remain unavailable; the audit records those limits.
 
 **Revisions** keep a proposed change beside the approved identity: ddcnorth carries one, the
 *rising symbol* (the six dots flipped so they climb to the right). Choosing it in the header shows

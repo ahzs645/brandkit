@@ -1,0 +1,871 @@
+{
+  "schema": "brandkit/bc-hydro-source-references/1",
+  "source": {
+    "filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+    "sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+    "pdfPages": 48,
+    "printedPages": "Cover, 1–47",
+    "edition": "June 1983"
+  },
+  "rendering": {
+    "fullPageWidth": 1224,
+    "dpi": 144.0,
+    "format": "WebP",
+    "quality": 88,
+    "colour": "RGB",
+    "script": "scripts/import-bc-hydro-scan.py"
+  },
+  "limits": [
+    "Reference images retain scan skew, paper texture and reproduction variation.",
+    "Written dimensions take precedence over a nominal full-page image overlay.",
+    "These are source references, not replacement vector artwork or production printing masters."
+  ],
+  "pages": [
+    {
+      "file": "reference/manual/H01.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "c9c63abdaacaf59674e26bc09958026a2ada3de8cc4cb4d5eae26c5fd14153c9",
+      "bytes": 22456,
+      "id": "H01",
+      "pdfPage": 1,
+      "printedPage": null,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H02.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "31bdb32fe2fd975d41e0d1e1d14e336e79aaff00f6760cfea147272248e719ba",
+      "bytes": 150364,
+      "id": "H02",
+      "pdfPage": 2,
+      "printedPage": 1,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H03.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "74fcc765d707f45145e30ac91a5be9be503c118c4f0633cf368aa65418005300",
+      "bytes": 139660,
+      "id": "H03",
+      "pdfPage": 3,
+      "printedPage": 2,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H04.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "320ce2587a1a5869639291338596d7c6d9c383eca6982437cb5c4acdcccccb9a",
+      "bytes": 119050,
+      "id": "H04",
+      "pdfPage": 4,
+      "printedPage": 3,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H05.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "3d30db3db743ad00b31fa1a5ff753423e015e7fd81287be01de6cc59b76b860d",
+      "bytes": 103754,
+      "id": "H05",
+      "pdfPage": 5,
+      "printedPage": 4,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H06.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "67d28381043b7e361f8d28d5e3d1ffe732e72a0cda96be9cfe1270aa13a7daea",
+      "bytes": 75184,
+      "id": "H06",
+      "pdfPage": 6,
+      "printedPage": 5,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H07.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "ca102088ca805a0d0156a2a14b61d294c58aea841281a9db373aa0fdad623762",
+      "bytes": 136142,
+      "id": "H07",
+      "pdfPage": 7,
+      "printedPage": 6,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H08.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "0bf67a9d364965adabb0aab0dfc82edd74d18cb90c65c223b7f011ff290c9f08",
+      "bytes": 254538,
+      "id": "H08",
+      "pdfPage": 8,
+      "printedPage": 7,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H09.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "91425278e81e392f89d350600a92e386c90e915e030ba0fe1810408319211af9",
+      "bytes": 117294,
+      "id": "H09",
+      "pdfPage": 9,
+      "printedPage": 8,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H10.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "6756b15240e40f3aa6561ba47fae53112d916c169c9c5d16b14e5ac4581dfbff",
+      "bytes": 73468,
+      "id": "H10",
+      "pdfPage": 10,
+      "printedPage": 9,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H11.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "44d068b28f43aadc30ff46e737eb9395b9071e28abdcf77fb97f39bccd981c78",
+      "bytes": 137830,
+      "id": "H11",
+      "pdfPage": 11,
+      "printedPage": 10,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H12.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "1230c65913a8a849bb999ddac3f549f5d2d7cced627e1e18d9826872f0c74178",
+      "bytes": 178852,
+      "id": "H12",
+      "pdfPage": 12,
+      "printedPage": 11,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H13.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "0ab2a1b8be63a5164ac599ce0843d24e3e4ef68f275890fb7105f4403d64047c",
+      "bytes": 114696,
+      "id": "H13",
+      "pdfPage": 13,
+      "printedPage": 12,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H14.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "36107b3f794656f3eda09e3eff7e2714275a10f52f276c0825b4be78b8f0f0d4",
+      "bytes": 57598,
+      "id": "H14",
+      "pdfPage": 14,
+      "printedPage": 13,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H15.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "0c60fd8be97c600f951aee68421089bcad4dbc33e49640bbf424aecedcd01fe4",
+      "bytes": 109742,
+      "id": "H15",
+      "pdfPage": 15,
+      "printedPage": 14,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H16.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "1a242b9fd0648f0192be099e8937e4249734403a63255886e3e9fa13906b2374",
+      "bytes": 45024,
+      "id": "H16",
+      "pdfPage": 16,
+      "printedPage": 15,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H17.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "20e6b0a2e9ccadedbe0d20817bfcedeee7220e77539efd6728a3271318878eb2",
+      "bytes": 54438,
+      "id": "H17",
+      "pdfPage": 17,
+      "printedPage": 16,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H18.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "34f5a1bfcec5a9857306b1d2bb403dfd656e93f4927733aad610928d820aae9d",
+      "bytes": 54570,
+      "id": "H18",
+      "pdfPage": 18,
+      "printedPage": 17,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H19.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "333f6471b5b796608ee7a34c79f333ec37540cc663e3b13313b3d28c2bc259e9",
+      "bytes": 173266,
+      "id": "H19",
+      "pdfPage": 19,
+      "printedPage": 18,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H20.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "8a3152e3843f3f36ca376f886b76175b066fbc4ba43612a066d094d9a1800986",
+      "bytes": 48138,
+      "id": "H20",
+      "pdfPage": 20,
+      "printedPage": 19,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H21.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "3b65c659eb0ac17a0befb211192072b149dc0dae0dce7161e8a49074a91b04a8",
+      "bytes": 104148,
+      "id": "H21",
+      "pdfPage": 21,
+      "printedPage": 20,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H22.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "acaddaba3bea7c2d83b88b4c39ddd264a2ef36cc986ff0b3ff4f0f3f1638c782",
+      "bytes": 105114,
+      "id": "H22",
+      "pdfPage": 22,
+      "printedPage": 21,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H23.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "7dc024a1117402195c7b7659ba8f65449cba83e5209ab9f0af212c5b6c8b54fd",
+      "bytes": 103312,
+      "id": "H23",
+      "pdfPage": 23,
+      "printedPage": 22,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H24.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "9e60f95b744e97ce96badd7411fbc0a9a316fb836f37de54f5bf196a1c0775c5",
+      "bytes": 168390,
+      "id": "H24",
+      "pdfPage": 24,
+      "printedPage": 23,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H25.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "72f9489c3f947b5061d98be4797c8ec02a3aa45485e866a7e5269bcbdc71fdf2",
+      "bytes": 166190,
+      "id": "H25",
+      "pdfPage": 25,
+      "printedPage": 24,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H26.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "7c4ff9d7542e65ce1cbb94be716506033748e0acd9ded2095dcca8ccc405b6ca",
+      "bytes": 52836,
+      "id": "H26",
+      "pdfPage": 26,
+      "printedPage": 25,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H27.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "e905163ae40c89dac1ff80d904fed0a4fbce860feb8c9bebb9422286741d934a",
+      "bytes": 89782,
+      "id": "H27",
+      "pdfPage": 27,
+      "printedPage": 26,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H28.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "8bb5381b001ce4ff7780eddd6b0b38fd14baa05f28d8954aedec9febd5d5190f",
+      "bytes": 42056,
+      "id": "H28",
+      "pdfPage": 28,
+      "printedPage": 27,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H29.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "d37f90340c107cd7dfea432130edd62c8cd9bb27d0199a1101e66bea4d1444fb",
+      "bytes": 90398,
+      "id": "H29",
+      "pdfPage": 29,
+      "printedPage": 28,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H30.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "2d714ca4319b54c360c304dfeae4c356b7555ea53018c4918cbbd003a256013c",
+      "bytes": 175292,
+      "id": "H30",
+      "pdfPage": 30,
+      "printedPage": 29,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H31.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "65bfc18ef793489a5cd643f03f88f2f27c432489b75a7890e440533e2b336a8c",
+      "bytes": 119878,
+      "id": "H31",
+      "pdfPage": 31,
+      "printedPage": 30,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H32.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "193a899cb6fd680962818b94f4bad313e06c392361f51b85e0047beec0063166",
+      "bytes": 73120,
+      "id": "H32",
+      "pdfPage": 32,
+      "printedPage": 31,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H33.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "e1cca749e55df2f1b01c91b3512806877d0fe078931fbad05bd2c4907b8ff69f",
+      "bytes": 313068,
+      "id": "H33",
+      "pdfPage": 33,
+      "printedPage": 32,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H34.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "21282677b5946c490a75710b0b8ddd89dc3f3e9462d0899eb2e9ed6d6415eb14",
+      "bytes": 193676,
+      "id": "H34",
+      "pdfPage": 34,
+      "printedPage": 33,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H35.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "b880a6e45a2262d3f937ef01aec1fe85bdea970a61fef12d7ecd27febf82d9c4",
+      "bytes": 239296,
+      "id": "H35",
+      "pdfPage": 35,
+      "printedPage": 34,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H36.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "5f67791acc87060badcb64353ec2b83b47e0fda9b760508ef139223a1003b0b9",
+      "bytes": 152602,
+      "id": "H36",
+      "pdfPage": 36,
+      "printedPage": 35,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H37.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "54a57d3dcc2e780a133f2b1042e543d5a5652f459a11fb1254c28fa6aab4d90a",
+      "bytes": 68976,
+      "id": "H37",
+      "pdfPage": 37,
+      "printedPage": 36,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H38.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "226fb1d2232fd6c96ac59e03e47513d6eb3f97c160d050c8ffc813dfaaf461f2",
+      "bytes": 137860,
+      "id": "H38",
+      "pdfPage": 38,
+      "printedPage": 37,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H39.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "c47142a42d64dcd50eee0e33e6f746abb1b8657409b8c1a9909b096883c335a6",
+      "bytes": 126332,
+      "id": "H39",
+      "pdfPage": 39,
+      "printedPage": 38,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H40.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "d0d38d749f7f4d0a1182cf2ba2f919a19411c6a50cbafdefb879905ad4712c7c",
+      "bytes": 122600,
+      "id": "H40",
+      "pdfPage": 40,
+      "printedPage": 39,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H41.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "9bcf250d743b57b9231b41cbf6a78db53acdf69319d705d4e466f3c0304d8db7",
+      "bytes": 239768,
+      "id": "H41",
+      "pdfPage": 41,
+      "printedPage": 40,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H42.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "19ef014158b03ff383a6221f2f65422ffad419682f8e386157f7200ca8faa1f5",
+      "bytes": 160870,
+      "id": "H42",
+      "pdfPage": 42,
+      "printedPage": 41,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H43.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "704474cf9f09142d30d856fbebfe83ecc978ef4a54f20f14c0eb8a4367ce2924",
+      "bytes": 131298,
+      "id": "H43",
+      "pdfPage": 43,
+      "printedPage": 42,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H44.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "71028109b687776aed1c015c181ce210e0dac87ed5f63ac9ef42cb9f535e100d",
+      "bytes": 138560,
+      "id": "H44",
+      "pdfPage": 44,
+      "printedPage": 43,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H45.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "6b9b1d8259efaa56a3af136639dd994c2cf256bce52c73ab0f84828c873ab0ea",
+      "bytes": 124834,
+      "id": "H45",
+      "pdfPage": 45,
+      "printedPage": 44,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H46.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "c03d1d237775f70f4be346ee9252ae8fca3b0aa436d6c3ae048ace8e1c046a49",
+      "bytes": 128770,
+      "id": "H46",
+      "pdfPage": 46,
+      "printedPage": 45,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H47.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "367b678323d12b5364408ca0ff3597967e473f0b9e5d504db6db829a1c941a97",
+      "bytes": 79962,
+      "id": "H47",
+      "pdfPage": 47,
+      "printedPage": 46,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    },
+    {
+      "file": "reference/manual/H48.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "4bfc89234a0681f4b1f135f677c3a2bbaa33ad97c7341bf37799cc724a3bac6f",
+      "bytes": 200182,
+      "id": "H48",
+      "pdfPage": 48,
+      "printedPage": 47,
+      "pagePoints": [
+        612.0,
+        792.0
+      ],
+      "registration": "Full PDF page; no deskew, rescaling within the page, or feature fitting."
+    }
+  ],
+  "templateReferences": [
+    {
+      "file": "reference/report-cover-source.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "7c4ff9d7542e65ce1cbb94be716506033748e0acd9ded2095dcca8ccc405b6ca",
+      "bytes": 52836,
+      "template": "cover-report",
+      "pdfPage": 26,
+      "printedPage": 25,
+      "sourceCropPoints": [
+        0,
+        0,
+        612,
+        792
+      ],
+      "fit": "full-page",
+      "note": "Full source page, including the original dimensional annotations."
+    },
+    {
+      "file": "reference/cover-illustrated-source.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "e905163ae40c89dac1ff80d904fed0a4fbce860feb8c9bebb9422286741d934a",
+      "bytes": 89782,
+      "template": "cover-illustrated",
+      "pdfPage": 27,
+      "printedPage": 26,
+      "sourceCropPoints": [
+        0,
+        0,
+        612,
+        792
+      ],
+      "fit": "full-page",
+      "note": "Full source page, including the original example artwork and scan artifacts."
+    },
+    {
+      "file": "reference/bulletin-source.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "8a3152e3843f3f36ca376f886b76175b066fbc4ba43612a066d094d9a1800986",
+      "bytes": 48138,
+      "template": "form-bulletin",
+      "pdfPage": 20,
+      "printedPage": 19,
+      "sourceCropPoints": [
+        0,
+        0,
+        612,
+        792
+      ],
+      "fit": "full-page",
+      "note": "Full source page. The historical sample text is retained."
+    },
+    {
+      "file": "reference/display-cover-source.webp",
+      "width": 816,
+      "height": 1836,
+      "sha256": "2d4e4a0c066b0eaa6076527c6f1aaba938e63d2e3201781304463fbd3b874257",
+      "bytes": 45948,
+      "template": "cover-display",
+      "pdfPage": 28,
+      "printedPage": 27,
+      "sourceCropPoints": [
+        243.2,
+        78,
+        290.7,
+        649.4
+      ],
+      "fit": "contain",
+      "paddingPixels": [
+        0,
+        7
+      ],
+      "fittedPixels": [
+        816,
+        1821
+      ],
+      "note": "Only the framed 4 × 9 inch cover is extracted. Surrounding manual text is excluded; annotations extending inside the frame remain. Uniform scaling with white padding preserves the scanned geometry."
+    },
+    {
+      "file": "reference/rail-card-source.webp",
+      "width": 1050,
+      "height": 600,
+      "sha256": "958f2581a47afc9d9188a7e9ea9343247177540294be30cdb4450882fc45a530",
+      "bytes": 32154,
+      "template": "card-rail",
+      "pdfPage": 18,
+      "printedPage": 17,
+      "sourceCropPoints": [
+        245.5,
+        580.5,
+        254,
+        144.5
+      ],
+      "fit": "contain",
+      "paddingPixels": [
+        0,
+        1
+      ],
+      "fittedPixels": [
+        1050,
+        597
+      ],
+      "note": "Only the rail business-card frame is extracted. Surrounding dimension labels are excluded. Uniform scaling with white padding preserves the scanned geometry."
+    },
+    {
+      "file": "reference/rail-letterhead-source.webp",
+      "width": 1224,
+      "height": 1584,
+      "sha256": "f808e78a7764cd9c89b9c7bc962a73b2c0d469dc7b7062dbb3d8226e3dc2a1ed",
+      "bytes": 19046,
+      "template": "letterhead-rail",
+      "pdfPage": 18,
+      "printedPage": 17,
+      "sourceCropPoints": [
+        0,
+        0,
+        612,
+        116
+      ],
+      "fit": "header-only-at-original-position",
+      "note": "Header-only reference: the top 116 pt of PDF page 18 is retained at its original position on a white Letter canvas. The envelope and business card beneath it are deliberately excluded; the blank lower area is not source evidence."
+    }
+  ]
+}
