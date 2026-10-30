@@ -33,12 +33,22 @@ try {
     result.downloads++
     return readFileSync(await file.path())
   }
-  const navigate = name => page.locator('nav.tabs').getByRole('button', { name, exact: true }).click()
+  // The app's dropdowns are styled comboboxes: open one, then pick the option by its label.
+  const choose = async (name, option) => {
+    await page.getByRole('combobox', { name: name instanceof RegExp ? name : new RegExp(`^${name}$`) }).click()
+    await page.getByRole('option', { name: option, exact: true }).click()
+  }
+  // Documents is the second part of the Templates tab, switched from the bar above it.
+  const navigate = async (name) => {
+    if (name !== 'Documents') return page.locator('nav.tabs').getByRole('button', { name, exact: true }).click()
+    await page.locator('nav.tabs').getByRole('button', { name: 'Templates', exact: true }).click()
+    await page.getByRole('group', { name: 'Templates or documents' }).getByRole('button', { name: 'Documents', exact: true }).click()
+  }
   const department = 'Faculty of Environment'
   const subdepartment = 'Department of Geography, Earth and Environmental Sciences'
   await page.goto(`${base}?brand=unbc&view=organization`, { waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: 'Department sub-logo', exact: true }).waitFor()
-  await page.getByRole('combobox', { name: 'Department', exact: true }).selectOption({ label: department })
+  await choose('Department', department)
   assert.equal(await page.getByRole('textbox', { name: /^Department as set/ }).inputValue(), department)
   const [svgFile] = await Promise.all([page.waitForEvent('download'), page.locator('.asset-card').first().getByRole('button', { name: /SVG/ }).click()])
   result.downloads++
@@ -46,7 +56,10 @@ try {
   assert.match(subLogo, /aria-label="Faculty of Environment"/)
   await page.getByRole('textbox', { name: /^Department as set/ }).fill('Pneumonoultramicroscopicsilicovolcanoconiosis Institute')
   assert.match(await page.getByRole('alert').innerText(), /Too long to break/)
-  await page.getByRole('combobox', { name: 'Department', exact: true }).selectOption({ label: department })
+  // Choosing the department again sets its name back; like a native select, choosing the option
+  // already chosen changes nothing, so another is chosen first.
+  await choose('Department', 'None: the full logo')
+  await choose('Department', department)
   await page.screenshot({ path: resolve(screenshotDir, 'unbc-departments-desktop.png'), fullPage: true })
   await page.getByRole('button', { name: 'Use in documents', exact: true }).click()
   await page.locator('.documents-preview iframe').waitFor()
@@ -55,7 +68,7 @@ try {
   const source = JSON.parse((await download('Download source')).toString())
   assert.deepEqual(source.affiliation, { department, subdepartment })
   assert.equal(source.purpose, 'report')
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('portfolio')
+  await choose('Document purpose', 'Brand portfolio')
   const word = unzipSync(await download('Download Word'))
   assert.match(strFromU8(word['word/document.xml']), /Faculty of Environment/)
   assert.match(strFromU8(word['word/document.xml']), /Department of Geography/)
@@ -80,6 +93,9 @@ try {
   await navigate('Documents')
   assert.equal(await page.getByLabel('Department or school', { exact: true }).inputValue(), '')
   assert.equal(await page.getByLabel('Subdepartment or unit', { exact: true }).inputValue(), '')
+  // With no saved names, the naming section starts closed.
+  const naming = page.locator('details.documents-details', { hasText: 'Department naming' })
+  if (!(await naming.evaluate((details) => details.open))) await naming.locator('summary').click()
   await page.getByLabel('Department or school', { exact: true }).fill(department)
   await page.getByLabel('Subdepartment or unit', { exact: true }).fill('School of Planning and Sustainability')
   result.checks.push('cleared template names stay cleared')

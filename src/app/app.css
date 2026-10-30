@@ -98,7 +98,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .documents-head > div:first-child { flex: 1 1 460px; }
 .documents-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .documents-workspace { display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); align-items: start; gap: 16px; }
-.documents-controls { display: grid; gap: 14px; min-width: 0; }
+.documents-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
 .documents-controls h3 { margin: 10px 0 0; }
 .documents-controls p { margin: 0; }
 .documents-controls textarea { resize: vertical; min-height: 70px; width: 100%; }
@@ -148,7 +148,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .organization-relations article:hover h3 a { text-decoration-color: currentColor; }
 @media (max-width: 850px) {
   .organization-workspace { grid-template-columns: 1fr; }
-  .documents-workspace { grid-template-columns: 1fr; }
+  .documents-workspace { grid-template-columns: minmax(0, 1fr); }
   .documents-preview { position: static; }
   .documents-rules { grid-template-columns: 1fr; }
   .documents-actions .button { white-space: normal; }
