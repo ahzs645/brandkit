@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { download, pdf, rasterise } from '../export/render.js'
 import { physicalSize } from '../engine/templates.js'
 import { aspectOf, mastheadArt } from './masthead.js'
+import { Select } from '../ui/Select.jsx'
 
 /** An object URL for an SVG string, revoked when the string changes or the component goes. */
 export const useSvgUrl = (svg) => {
@@ -26,12 +27,18 @@ export const SvgImage = ({ svg, alt = '', ...props }) => {
   return url ? <img src={url} alt={alt} draggable={false} {...props} /> : null
 }
 
+/**
+ * A logo's height from its proportions: drawn to about the same area, so a long logo is not a
+ * thin line and a near-square one does not tower, within a floor and a ceiling.
+ */
+export const logoHeight = (aspect, area, [floor, ceiling]) => `${Math.round(Math.min(ceiling, Math.max(floor, Math.sqrt(area / aspect))))}px`
+
 const menuLogos = new Map()
 const MenuArt = ({ svg, name, id }) => {
   const aspect = aspectOf(svg)
   return (
     <span className="menu-logo" data-brand={id}>
-      {aspect && <span className="menu-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: svg }} />}
+      {aspect && <span className="menu-logo__art" style={{ aspectRatio: aspect, '--logo-h': logoHeight(aspect, 3600, [20, 36]) }} dangerouslySetInnerHTML={{ __html: svg }} />}
       {(!aspect || aspect < 1.6) && <span className="menu-logo__name">{name}</span>}
     </span>
   )
@@ -64,13 +71,25 @@ export const BrandLogo = ({ brand, fonts }) => {
   const aspect = aspectOf(art.svg)
   return (
     <span className="brand-logo" data-brand={brand.id} role="img" aria-label={brand.name}>
-      {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
+      {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect, '--logo-h': logoHeight(aspect, 4200, [22, 40]) }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
       {(art.named || !aspect) && <span className="brand-logo__name" aria-hidden="true">{brand.name}</span>}
     </span>
   )
 }
 
-export const Segmented = ({ label, value, options, onChange }) => (
+/**
+ * A choice among a few: buttons side by side. More than four, or labels too long to sit in one
+ * row on a phone, become a dropdown instead of wrapping into ragged blocks.
+ */
+export const Segmented = ({ label, value, options, onChange }) => {
+  const items = options.map((option) => (typeof option === 'string' ? { value: option, label: option } : option))
+  if (items.length > 4 || items.reduce((length, item) => length + String(item.label).length, 0) > 44) {
+    return <Select aria-label={label} value={value} options={items} onChange={onChange} />
+  }
+  return <SegmentedButtons label={label} value={value} options={options} onChange={onChange} />
+}
+
+const SegmentedButtons = ({ label, value, options, onChange }) => (
   <div className="segmented" role="group" aria-label={label}>
     {options.map((option) => {
       const { value: optionValue, label: optionLabel, title } = typeof option === 'string' ? { value: option, label: option } : option
@@ -139,4 +158,4 @@ export const useStored = (key, initial) => {
 }
 
 
-export { Select } from '../ui/Select.jsx'
+export { Select }

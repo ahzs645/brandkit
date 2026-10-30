@@ -16,7 +16,9 @@
   --radius-sm: 9px;
   --gap: 16px;
   --line: color-mix(in srgb, var(--ink) 12%, transparent);
-  --studio-top: 116px;
+  /* The masthead's height, measured by App.jsx: everything sticky sits below it. */
+  --masthead-h: 116px;
+  --studio-top: var(--masthead-h);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -60,17 +62,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Masthead */
 .masthead { position: sticky; top: 0; z-index: 10; margin: 0 -20px 20px; padding: 12px 20px 0; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 44px; }
 .brand-logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
-.brand-logo__art { display: block; height: 26px; max-width: min(240px, 52vw); }
-.brand-logo[data-brand='firstform'] .brand-logo__art { height: 44px; }
-.brand-logo[data-brand='bc-province-1977'] .brand-logo__art { height: 34px; }
+/* Its height comes from its proportions (ui.jsx): a long logo a little taller, a near-square one
+   shorter, so every brand's logo has about the same presence and the masthead keeps one height. */
+.brand-logo__art { display: block; height: var(--logo-h, 26px); max-width: min(260px, 52vw); }
 .brand-logo__art svg { display: block; width: 100%; height: 100%; }
 .brand-logo__name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; white-space: nowrap; }
 .badge { font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #fff1c2; color: #6b4e00; }
 .badge--revision { background: #dbe8ff; color: #123b7a; }
 .masthead__actions { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
 .tabs { display: flex; gap: 2px; margin-top: 10px; overflow-x: auto; scrollbar-width: none; }
+/* On a phone most tabs are off to the side: the row fades out to say there are more. */
+@media (max-width: 760px) { .tabs { mask-image: linear-gradient(90deg, #000 82%, transparent); padding-right: 32px; } }
 .tabs button { border: 0; background: none; padding: 9px 14px 11px; color: var(--ink-muted); font-weight: 550; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
 .tabs button:hover { color: var(--ink); }
 .tabs button[aria-current='page'] { color: var(--ink); border-bottom-color: var(--ink); }
@@ -124,10 +128,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .organization-resources strong, .organization-resources span { display: block; }
 .organization-resources span { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
 .organization-relations p { margin: 8px 0 0; }
-.brand-logo[data-brand='unbc'] .brand-logo__art, .menu-logo[data-brand='unbc'] .menu-logo__art { min-width: 144px; }
-/* The full logo is long and its lettering small: drawn a little taller to read like the others. */
-.brand-logo[data-brand='unbc'] .brand-logo__art { height: 30px; }
-.menu-logo[data-brand='unbc'] .menu-logo__art { height: 30px; }
 .kit-pack { margin-top: 14px; max-width: 380px; }
 @media (max-width: 850px) {
   .organization-workspace { grid-template-columns: 1fr; }
@@ -179,9 +179,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .stage-panel { padding: 0; overflow: hidden; }
 .stage { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: clamp(200px, 32vw, 340px); padding: 40px; transition: background-color 150ms; }
 .stage--compact { height: 200px; border-radius: var(--radius-sm); background: var(--page); }
-.stage__art { max-width: min(880px, 100%); max-height: 100%; object-fit: contain; }
-.stage__art--stacked, .stage__art--symbol { max-height: 82%; }
-.stage__art--signature { max-width: min(960px, 100%); }
+/* Every brand's logo fitted to the same box, rather than drawn at its file's own size. */
+.stage__art { width: min(640px, 100%); height: 70%; object-fit: contain; }
+.stage__art--stacked, .stage__art--symbol { height: 82%; }
+.stage__art--signature { width: min(760px, 100%); }
 .toolbar--panel { border-top: 0; padding: 16px 20px; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: end; padding: 16px 20px; border-top: 1px solid var(--line); }
 .toolbar .downloads { margin-left: auto; }
@@ -208,10 +209,12 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .asset-grid--wide { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 .asset-grid--small { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 .asset-card { margin: 0; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
-.asset-card__art { display: grid; place-items: center; height: 150px; padding: 22px; background: #fff; }
+/* One cell that fills the box, so the art is fitted to it and never spills over the caption. */
+.asset-card__art { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: 150px; padding: 22px; background: #fff; }
 .asset-card--wide .asset-card__art { height: auto; padding: 0; }
-.asset-card__art img { max-height: 100%; object-fit: contain; }
-.asset-card--wide .asset-card__art img { width: 100%; max-height: none; }
+.asset-card__art img { width: 100%; height: 100%; object-fit: contain; }
+.asset-card--wide .asset-card__art { grid-template: auto / minmax(0, 1fr); }
+.asset-card--wide .asset-card__art img { width: 100%; height: auto; }
 .asset-card figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; font-size: 13px; }
 .asset-card .button { min-height: 26px; padding: 3px 9px; font-size: 12px; }
 
@@ -586,9 +589,7 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 }
 @media (prefers-reduced-motion: reduce) { .menu__panel { animation: none; } }
 .menu-logo { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: var(--ink); }
-.menu-logo__art { display: block; height: 24px; max-width: 220px; }
-.menu-logo[data-brand='firstform'] .menu-logo__art { height: 40px; }
-.menu-logo[data-brand='bc-province-1977'] .menu-logo__art { height: 32px; }
+.menu-logo__art { display: block; height: var(--logo-h, 24px); max-width: 220px; }
 .menu-logo__art svg { display: block; width: 100%; height: 100%; }
 .menu-logo__name { font-size: 14px; }
 .brand-menu .menu__item { min-height: 48px; }
@@ -634,3 +635,7 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 /* Its workspace and cards line up with the page's own panels: no inset, no outlines, the gap. */
 .door-sign-app.door-signs .workspace { max-width: none; padding: 0; gap: var(--gap); }
 .door-sign-app.door-signs .form-section, .door-sign-app.door-signs .output-card { border-color: transparent; }
+/* The editor's sticky preview (phone) and export column (desktop) stop under the masthead, and
+   the column grows with the page instead of scrolling inside it. */
+.door-sign-app.door-signs .live-preview { top: var(--masthead-h); z-index: 5; }
+.door-sign-app.door-signs .workspace__output { top: calc(var(--masthead-h) + 12px); max-height: none; overflow: visible; }

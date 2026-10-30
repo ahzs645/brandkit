@@ -53,10 +53,10 @@ const VIEWS = [
   { id: 'extension', label: 'Extension' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
-  { id: 'kit', label: 'Download kit' },
-  { id: 'brand', label: 'Edit brand' }
+  { id: 'kit', label: 'Download kit' }
 ]
-const OTHER_VIEWS = [{ id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
+// The workshop's views, in the masthead's buttons (the ⋯ menu on a phone) rather than the tabs.
+const OTHER_VIEWS = [{ id: 'brand', label: 'Edit brand' }, { id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
 const ALL_VIEWS = [...VIEWS, ...OTHER_VIEWS].map((view) => view.id)
 
 // A shared link (see ./share.jsx) is read once, on arrival, and kept in the address from then on.
@@ -132,6 +132,17 @@ export const App = () => {
   const [sharing, setSharing] = useState(false)
   const [printerSession, setPrinterSession] = useState(null)
   const fileInput = useRef(null)
+  const masthead = useRef(null)
+  const tabs = useRef(null)
+  // Everything sticky sits under the masthead, whose height changes with the brand's logo, the
+  // window's width and wrapping: it is measured, not assumed.
+  useEffect(() => {
+    const element = masthead.current
+    if (!element || typeof ResizeObserver === 'undefined') return undefined
+    const observer = new ResizeObserver(() => document.documentElement.style.setProperty('--masthead-h', `${Math.ceil(element.getBoundingClientRect().height)}px`))
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
 
   const brandIds = [...new Set([...BUILT_IN, ...Object.keys(saved), ...Object.keys(opened)])]
 
@@ -207,6 +218,8 @@ export const App = () => {
   // Motion only exists for a brand (or a chosen revision) with a motion library: arriving on it, or
   // switching brand or revision while on it, without one goes to the overview.
   const motionLink = brand ? motionUrl(brand, source) : undefined
+  // On a phone the tab row scrolls: the current tab is brought into it.
+  useEffect(() => { tabs.current?.querySelector('[aria-current="page"]')?.scrollIntoView?.({ inline: 'center', block: 'nearest' }) }, [view, brand?.id])
   const available = useMemo(() => new Set(TABS.map((entry) => entry.id).filter((id) => offers(id, { brand, motionLink, extensionView }))), [brand, motionLink, extensionView])
   useEffect(() => {
     if (brand && (viewOrOverview(view, motionLink) !== view || TABS.some((entry) => entry.id === view) && !available.has(view))) go('overview')
@@ -280,7 +293,7 @@ export const App = () => {
   return (
     <Shared.Provider value={SHARED}>
     <div className={`app${SHARED ? ' app--shared' : ''}`}>
-      <header className="masthead">
+      <header ref={masthead} className="masthead">
         {SHARED ? (
           <div className="masthead__row">
             {brand ? <SharedMark brand={brand} fonts={fonts} /> : <span className="shared-mark" />}
@@ -322,7 +335,7 @@ export const App = () => {
           </div>
         </div>
         )}
-        {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
+        {(!SHARED || brand) && <nav ref={tabs} className="tabs" aria-label="Sections">
           {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
         </nav>}
       </header>
@@ -378,7 +391,7 @@ export const App = () => {
       <footer className="footer muted">
         {SHARED
           ? `${brand?.name ?? 'This'} brand centre. Every file is made in your browser from the approved identity; nothing is uploaded.`
-          : 'brandkit makes every file in your browser; nothing is uploaded. ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.'}
+          : `brandkit makes every file in your browser; nothing is uploaded.${brand?.id === 'ddcnorth' ? ' ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.' : ''}`}
       </footer>
     </div>
     </Shared.Provider>
