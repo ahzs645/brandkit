@@ -125,7 +125,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .organization-resources span { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
 .organization-relations p { margin: 8px 0 0; }
 .brand-logo[data-brand='unbc'] .brand-logo__art, .menu-logo[data-brand='unbc'] .menu-logo__art { min-width: 144px; }
-.brand-logo[data-brand='unbc'] .brand-logo__art { height: 27px; }
+/* The full logo is long and its lettering small: drawn a little taller to read like the others. */
+.brand-logo[data-brand='unbc'] .brand-logo__art { height: 30px; }
+.menu-logo[data-brand='unbc'] .menu-logo__art { height: 30px; }
 .kit-pack { margin-top: 14px; max-width: 380px; }
 @media (max-width: 850px) {
   .organization-workspace { grid-template-columns: 1fr; }
@@ -154,6 +156,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Layout */
 .view { display: grid; gap: var(--gap); }
+/* The switch between a tab's parts (Templates and Documents), above the part shown. */
+.section-switch { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-bottom: var(--gap); }
+.section-switch .segmented button { padding: 7px 16px; font-size: 14px; }
+.section-switch > p { margin: 0; flex: 1 1 260px; }
 /* A wide child (a table that scrolls) must not widen the column it sits in. */
 .view > * { min-width: 0; }
 .printer__intro { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
