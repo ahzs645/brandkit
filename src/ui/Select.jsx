@@ -105,7 +105,7 @@ export const Select = ({ value, options, onChange, disabled, className = '', tri
           onMouseDown={(event) => event.preventDefault()}>
           {query && <li role="presentation" className="select__query">Finding “{query}”</li>}
           {items.map((item, index) => {
-            const heading = item.group && item.group !== lastGroup ? <li role="presentation" className="select__group">{item.group}</li> : null
+            const heading = item.group && item.group !== lastGroup ? <li key={`group-${index}`} role="presentation" className="select__group">{item.group}</li> : null
             lastGroup = item.group
             return [heading, (
               <li key={String(item.value)} id={`${id}-${index}`} data-index={index} role="option" aria-selected={index === selected} aria-disabled={item.disabled || undefined}

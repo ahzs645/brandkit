@@ -12,33 +12,46 @@ import { DepartmentSelect, groundOf } from './Signatures.jsx'
 
 const slug = (text) => text.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'department'
 
-/** `actions(name)` adds controls for the chosen name, on one line (the Departments view's document buttons). */
-// A brand extension's profile pictures (UNBC's social-media avatars), set for the same name.
+// A brand extension's profile pictures (UNBC's social-media avatars), set for the same name. The
+// extension loads on its own and each picture is drawn after it, so the cards hold their place
+// with a pulsing ground until their art arrives, rather than appearing a beat after the page.
 const ProfilePictures = ({ brand, fonts, name }) => {
-  const [pictures, setPictures] = useState(null)
+  // undefined while the extension loads; null when it has no profile pictures.
+  const [pictures, setPictures] = useState(undefined)
   useEffect(() => {
     let live = true
-    loadExtension(brand).then((extension) => { if (live) setPictures(extension?.profilePictures ?? null) })
+    setPictures(undefined)
+    loadExtension(brand).then((extension) => { if (live) setPictures(extension?.profilePictures ?? null) }, () => { if (live) setPictures(null) })
     return () => { live = false }
   }, [brand.extension])
-  if (!pictures) return null
+  if (pictures === null || !brand.extension) return null
+  if (!pictures) return <section className="panel" aria-busy="true" aria-label="Profile pictures loading">
+    <span className="profile-pictures__line profile-pictures__line--title" />
+    <span className="profile-pictures__line" />
+    <div className="asset-grid profile-pictures">
+      {[0, 1].map((index) => <div key={index} className="asset-card"><div className="asset-card__art profile-pictures__art is-loading" /></div>)}
+    </div>
+  </section>
   const clipped = name ? pictures.clipped(name, 'square') : []
   return <section className="panel" aria-labelledby="profile-pictures">
     <h2 id="profile-pictures">{pictures.label}</h2>
     <p className="muted">{pictures.use}</p>
     {clipped.length > 0 && <p className="notice" role="status">A circular crop clips “{clipped.join('”, “')}” from the square. Use the circle layout on platforms that crop.</p>}
     <div className="asset-grid profile-pictures">
-      {pictures.shapes.map((shape) => {
-        const make = () => pictures.render({ fonts }, { name, shape: shape.id })
-        return <figure key={shape.id} className="asset-card">
-          <div className="asset-card__art profile-pictures__art"><SvgImage svg={make()} alt={`${pictures.label}, ${shape.label}: ${pictures.caption(name) || 'no caption'}`} /></div>
-          <figcaption><span>{shape.label}</span><Downloads make={make} name={[brand.id, 'profile', shape.id, slug(name)].join('-')} width={pictures.size} /></figcaption>
-        </figure>
-      })}
+      {pictures.shapes.map((shape) => <ProfilePicture key={shape.id} brand={brand} pictures={pictures} shape={shape} make={() => pictures.render({ fonts }, { name, shape: shape.id })} name={name} />)}
     </div>
   </section>
 }
 
+const ProfilePicture = ({ brand, pictures, shape, make, name }) => {
+  const [loaded, setLoaded] = useState(false)
+  return <figure className="asset-card">
+    <div className={`asset-card__art profile-pictures__art${loaded ? '' : ' is-loading'}`}><SvgImage svg={make()} alt={`${pictures.label}, ${shape.label}: ${pictures.caption(name) || 'no caption'}`} onLoad={() => setLoaded(true)} /></div>
+    <figcaption><span>{shape.label}</span><Downloads make={make} name={[brand.id, 'profile', shape.id, slug(name)].join('-')} width={pictures.size} /></figcaption>
+  </figure>
+}
+
+/** `actions(name)` adds controls for the chosen name, on one line (the Departments view's document buttons). */
 export const SubLogos = ({ brand, fonts, actions, initialName }) => {
   const departments = brand.departments
   const field = departments.field

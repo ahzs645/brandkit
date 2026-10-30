@@ -8,6 +8,7 @@ import { download, zip } from '../../export/render.js'
 import { easingPath, motionGroups, motionUrl, tokenRows, tokensCss, tokensJson } from '../motion.js'
 import { animatedSvg, CssStage, StudyStage, useMotionLibrary, useReducedMotion } from '../motion-player.jsx'
 import { MotionExport } from '../MotionExport.jsx'
+import { Field, Select } from '../ui.jsx'
 
 export { motionUrl }
 
@@ -161,6 +162,13 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
         </nav>
 
         <section className="studio__stage motion-stage-panel" aria-label="Study">
+          {/* A phone has no room for the list beside the stage, and a list above it would push the
+              stage a screen down: there the studies are a dropdown, grouped as in the list. */}
+          <div className="motion-picker">
+            <Field label="Study">
+              <Select value={study?.id} onChange={choose} options={groups.flatMap((group) => group.studies.map((entry) => ({ value: entry.id, label: entry.name, group: group.label })))} />
+            </Field>
+          </div>
           <div className="motion-canvas">
             {!library ? <p className="muted">Loading the motion library…</p> : study && (
               <StudyStage key={library.mode === 'css' ? study.id : 'frame'} library={library} id={study.id} play={play} paused={paused} loop={loop && !reduced} design={720} label={`${study.name}: ${study.description}`} />

@@ -80,14 +80,31 @@ const Roles = ({ brand }) => {
   )
 }
 
+const badge = (value) => (value === 'AA large' ? 'AA18' : value)
+const phone = '(max-width: 760px)'
+
+/** Every text-on-ground pair, each graded, or only the pairs that pass AA; null where a colour meets itself. */
+const pairsOf = (entries, passing) => entries.map((ground) => ({
+  ground,
+  pairs: entries.map((text) => {
+    if (text.key === ground.key && text.own === ground.own) return null
+    const ratio = contrast(text.hex, ground.hex)
+    return { text, ratio, value: grade(ratio), hidden: passing && ratio < 4.5 }
+  })
+}))
+
+// A table of every pair is ten columns wide, which a phone shows two at a time; there the pairs are
+// listed by ground instead, each ground's texts wrapping beneath it, and only those that pass AA
+// unless asked for all of them.
 const Matrix = ({ entries }) => {
-  const [passing, setPassing] = useState(false)
+  const [passing, setPassing] = useState(() => Boolean(globalThis.matchMedia?.(phone).matches))
+  const grounds = pairsOf(entries, passing)
   return (
     <section className="panel">
       <div className="panel__head panel__head--row">
         <div>
           <h2>Every pair</h2>
-          <p className="muted">Each colour as text (rows) on each as a ground (columns).</p>
+          <p className="muted"><span className="contrast-intro--table">Each colour as text (rows) on each as a ground (columns).</span><span className="contrast-intro--list">Each colour as a ground, with every colour as text on it.</span></p>
         </div>
         <Segmented label="Show" value={passing ? 'passing' : 'all'} options={[{ value: 'all', label: 'All pairs' }, { value: 'passing', label: 'AA and better' }]} onChange={(value) => setPassing(value === 'passing')} />
       </div>
@@ -97,17 +114,15 @@ const Matrix = ({ entries }) => {
             <tr><th scope="col"><span className="visually-hidden">Text</span></th>{entries.map((ground) => <th key={ground.key} scope="col"><span className="contrast__dot" style={{ background: ground.hex }} />{ground.name}</th>)}</tr>
           </thead>
           <tbody>
-            {entries.map((text) => (
+            {entries.map((text, row) => (
               <tr key={text.key}>
                 <th scope="row"><span className="contrast__dot" style={{ background: text.hex }} />{text.name}</th>
-                {entries.map((ground) => {
-                  if (text.key === ground.key && text.own === ground.own) return <td key={ground.key} className="contrast__same" />
-                  const ratio = contrast(text.hex, ground.hex)
-                  const value = grade(ratio)
-                  const hidden = passing && ratio < 4.5
+                {grounds.map(({ ground, pairs }) => {
+                  const pair = pairs[row]
+                  if (!pair) return <td key={ground.key} className="contrast__same" />
                   return (
-                    <td key={ground.key} style={hidden ? undefined : { background: ground.hex, color: text.hex }} className={hidden ? 'contrast__hidden' : undefined} title={`${text.name} on ${ground.name}: ${ratioLabel(ratio)}, ${value}`}>
-                      {!hidden && <><b>Aa</b><span className={`contrast__badge contrast__badge--${slug(value)}`}>{value === 'AA large' ? 'AA18' : value}</span></>}
+                    <td key={ground.key} style={pair.hidden ? undefined : { background: ground.hex, color: text.hex }} className={pair.hidden ? 'contrast__hidden' : undefined} title={`${text.name} on ${ground.name}: ${ratioLabel(pair.ratio)}, ${pair.value}`}>
+                      {!pair.hidden && <><b>Aa</b><span className={`contrast__badge contrast__badge--${slug(pair.value)}`}>{badge(pair.value)}</span></>}
                     </td>
                   )
                 })}
@@ -115,6 +130,24 @@ const Matrix = ({ entries }) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="contrast-list">
+        {grounds.map(({ ground, pairs }) => {
+          const shown = pairs.filter((pair) => pair && !pair.hidden)
+          return (
+            <section key={ground.key} className="contrast-list__ground">
+              <h3><span className="contrast__dot" style={{ background: ground.hex }} />On {ground.name}</h3>
+              {shown.length ? <ul>
+                {shown.map(({ text, ratio, value }) => (
+                  <li key={text.key} title={`${text.name} on ${ground.name}: ${ratioLabel(ratio)}, ${value}`}>
+                    <span className="contrast-list__sample" style={{ background: ground.hex, color: text.hex }}>Aa<span className={`contrast__badge contrast__badge--${slug(value)}`}>{badge(value)}</span></span>
+                    <span className="contrast-list__name"><span className="contrast__dot" style={{ background: text.hex }} />{text.name}</span>
+                  </li>
+                ))}
+              </ul> : <p className="muted">No text colour reaches AA on it.</p>}
+            </section>
+          )
+        })}
       </div>
     </section>
   )

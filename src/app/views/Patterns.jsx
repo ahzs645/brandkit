@@ -5,6 +5,8 @@ import { renderTemplate } from '../../engine/templates.js'
 import { Downloads, Select, SvgImage } from '../ui.jsx'
 import { useShared } from '../share.jsx'
 
+const FILTER_FROM = 12
+
 const safely = (draw) => {
   try { return { svg: draw(), error: null } }
   catch (error) { return { svg: null, error: error.message } }
@@ -85,6 +87,8 @@ export const Patterns = ({ brand, fonts, source, initialPattern, onSelect, onTem
   const [group, setGroup] = useState('all')
   const [kind, setKind] = useState('all')
   const [relatedOnly, setRelatedOnly] = useState(false)
+  // A short library reads at a glance: search and filters only add to it from a dozen patterns.
+  const filterable = library.patterns.length >= FILTER_FROM
   const detail = useRef(null)
   const drawn = useMemo(() => new Map(library.patterns.map((entry) => [entry.id, safely(() => pattern({ brand }, entry.spec))])), [brand, library.patterns])
   const kinds = useMemo(() => [...new Map(library.patterns.map((entry) => [entry.kind, entry.kindLabel])).entries()], [library.patterns])
@@ -129,12 +133,12 @@ export const Patterns = ({ brand, fonts, source, initialPattern, onSelect, onTem
 
     <div className="patterns-browser">
       <section className="panel patterns-gallery-panel" aria-label="Pattern library">
-        <div className="patterns-filters">
+        {filterable && <div className="patterns-filters">
           <label className="field patterns-search"><span className="field__label">Search patterns</span><input type="search" value={query} placeholder="Name, shape or application" onChange={(event) => setQuery(event.target.value)} /></label>
           <label className="field"><span className="field__label">Collection</span><Select value={group} onChange={setGroup} options={[{ value: 'all', label: 'All collections' }, ...library.groups.map((entry) => ({ value: entry.id, label: `${entry.label} (${entry.count})` }))]} /></label>
           <label className="field"><span className="field__label">Composition</span><Select value={kind} onChange={setKind} options={[{ value: 'all', label: 'All compositions' }, ...kinds.map(([id, label]) => ({ value: id, label }))]} /></label>
-        </div>
-        <div className="patterns-results"><p role="status">Showing {visible.length} of {library.patterns.length} patterns</p>{(query || group !== 'all' || kind !== 'all') && <button type="button" className="link" onClick={clear}>Clear filters</button>}</div>
+        </div>}
+        {filterable && <div className="patterns-results"><p role="status">Showing {visible.length} of {library.patterns.length} patterns</p>{(query || group !== 'all' || kind !== 'all') && <button type="button" className="link" onClick={clear}>Clear filters</button>}</div>}
         {visible.length ? <ul className="patterns-gallery" aria-label="Patterns">
           {visible.map((entry) => <li className="pattern-card" key={entry.id} data-pattern-id={entry.id}>
             <button type="button" aria-label={`View ${entry.name}`} aria-pressed={selected?.id === entry.id} aria-controls="pattern-detail" onClick={() => choose(entry.id)}>
