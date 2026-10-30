@@ -34820,7 +34820,7 @@
   {
    "id": "illustrated-h39-office",
    "label": "Office identification",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 499,
    "raster": 1600,
@@ -34880,7 +34880,7 @@
   {
    "id": "illustrated-h39-gas",
    "label": "Gas operations identification",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 603,
    "raster": 1600,
@@ -34940,7 +34940,7 @@
   {
    "id": "illustrated-h39-freight",
    "label": "Huntingdon Freight Office",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 452,
    "raster": 1600,
@@ -35022,7 +35022,7 @@
   {
    "id": "illustrated-h39-plant",
    "label": "Liquefied Natural Gas Plant",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 1450,
    "raster": 1600,
@@ -35116,7 +35116,7 @@
   {
    "id": "illustrated-h40-advisory",
    "label": "Advisory information",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 724,
    "raster": 1600,
@@ -35214,7 +35214,7 @@
   {
    "id": "illustrated-h40-customer-service",
    "label": "Customer Service",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 559,
    "raster": 1600,
@@ -35308,7 +35308,7 @@
   {
    "id": "illustrated-h40-shipping",
    "label": "Shipping & Receiving",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 521,
    "raster": 1600,
@@ -35410,7 +35410,7 @@
   {
    "id": "illustrated-h40-directional",
    "label": "Visitor Parking / Electric Shop",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 618,
    "raster": 1600,
@@ -35496,7 +35496,7 @@
   {
    "id": "illustrated-h41-danger",
    "label": "Danger / Keep away",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 1851,
    "raster": 1600,
@@ -35591,7 +35591,7 @@
   {
    "id": "illustrated-h41-authorized-vehicles",
    "label": "Authorized vehicles only",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 2436,
    "raster": 1600,
@@ -35686,7 +35686,7 @@
   {
    "id": "illustrated-h41-employees-only",
    "label": "Employees only",
-   "group": "Signs, drawn",
+   "group": "Sign examples from the manual",
    "width": 1600,
    "height": 381,
    "raster": 1600,
