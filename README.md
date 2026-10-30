@@ -31,16 +31,15 @@ brandkit draws the whole kit from it:
   paste into a mail program. They are made from the same templates: the artwork drawn behind,
   the fields as real text in the brand's faces (embedded in the Word files where their licence
   allows), lines that share a baseline on tab stops.
-- **Template Printer**: the full [Template Printer](https://github.com/ahzs645/template-printer)
-  frontend, built from the Git submodule at `vendor/template-printer`. Its own tab offers card
-  design, people, exports, calibration and settings, with the linked **Staff Card** package ready
-  to open (front, back, fonts and sample values). It runs with browser storage, on the same site,
-  and can open in a separate tab. **Edit & print** sends a filled brand template with its fonts,
-  sides and variants directly to the editor; edited packages can be imported back into the brand.
-  The website handoff offers an editable ZIP/source folder, an external printer link and a
-  direct link to OTE's published original. SVG, PNG and PDF exports stay in Templates.
-  Reusable package, browser-bridge and Vite APIs, plus a plain-JavaScript host example, are
-  documented in [docs/template-printer.md](docs/template-printer.md).
+- **Template Printer**: the full [Template Printer](https://github.com/ahzs645/template-printer),
+  rendered in its own tab as a component from the Git submodule at `vendor/template-printer`:
+  the same component the printer's website renders, inside this page rather than a frame. It
+  offers card design, people, exports, calibration and settings, with the linked **Staff Card**
+  package ready to open, and keeps its records in browser storage. **Edit & print** in Templates
+  opens a filled brand template, with its fonts, sides and variants, in the printer; a package the
+  printer saves (Share → Download package) can be added back to the brand's templates in one
+  click. SVG, PNG and PDF exports stay in Templates. The package API is documented in
+  [docs/template-printer.md](docs/template-printer.md).
 - **The brand guide**: eight framed pages, logo reference sheets and a one-page overview, as SVG
   and as one PDF, read in the same viewer as the manual library.
 - **Motion**: for a brand that defines it, a motion library (timing tokens, rules and animated
@@ -224,8 +223,7 @@ dependencies automatically; a source submodule host installs them itself.
 | `brandkit/manuals/bc` | The BC pack's books and families. |
 | `brandkit/vite` | `manualPages()`, the Vite plugin that serves and copies a pack's page files. |
 | `brandkit/printer` | Portable package import/export for native templates and imported card designs, in browsers and Node. |
-| `brandkit/printer/bridge` | A framework-independent session and message protocol for an iframe or popup. |
-| `brandkit/printer/vite` | Builds and mounts any compatible upstream Template Printer frontend, with configurable paths and deployment prefix. |
+| `brandkit/printer/bridge` | Links to a standalone Template Printer website, with a published package. |
 
 The library components read the host page's custom properties (`--surface`, `--ink`,
 `--radius`…) with neutral fallbacks, so they take on the host's theme.
@@ -235,11 +233,10 @@ The library components read the host page's custom properties (`--surface`, `--i
 ```sh
 git submodule update --init --recursive
 npm install
-npm run setup:printer                          # install the pinned Template Printer frontend
+npm run setup:printer                          # install the Template Printer component's dependencies
 npm run dev                                    # the app
 npm test                                       # engine, manual pack, and parity (see below)
 npx playwright install chromium && npm run test:browser   # the Motion tab and pages, in Chromium
-npm run build && npm run test:printer           # Template Printer integration, in Chromium
 node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
 npm run make:documentation -- --check           # all brand use guides match their definitions

@@ -9,7 +9,6 @@ import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
-import { createPrinterSession } from '../printer/bridge.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
@@ -261,15 +260,16 @@ export const App = () => {
   }
   const printTemplate = async (template, values) => {
     const result = await printerPackage(template, values)
-    setPrinterSession(createPrinterSession(new URL(import.meta.env.BASE_URL, globalThis.location.origin), result.bytes, { label: 'brandkit' }))
+    setPrinterSession({ bytes: result.bytes, id: crypto.randomUUID() })
     go('printer')
   }
   const downloadPrinterPackage = async (template, values) => {
     const result = await printerPackage(template, values)
     download(result.bytes, `${brand.id}-${template.printer?.packageId ?? template.id}.zip`)
   }
-  const importPrinterDesign = async (file) => {
-    const imported = importPrinterPackage(base, await file.arrayBuffer())
+  /** A package the printer saved (its bytes), or a ZIP chosen from disk, added to the brand's templates. */
+  const importPrinterDesign = async (bytes) => {
+    const imported = importPrinterPackage(base, bytes instanceof Blob ? await bytes.arrayBuffer() : bytes)
     saveBrand(imported.brand, { strict: true })
     update(imported.brand)
     setSaved(savedBrands())
@@ -368,7 +368,7 @@ export const App = () => {
                   <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
                 </div>
               )} /></div>}
-            {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onPackage={downloadPrinterPackage} onImport={importPrinterDesign} />}
+            {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onImport={importPrinterDesign} />}
             {view === 'extension' && ExtensionView && <div className="view">
               <section className="panel"><h2>{extensionView.label}</h2>{extensionView.use && <p className="muted">{extensionView.use}</p>}</section>
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />

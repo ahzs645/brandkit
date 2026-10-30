@@ -1,8 +1,10 @@
 # Template Printer integration
 
-Template Printer is pinned as a Git submodule at `vendor/template-printer`, initially
-at `a60e07b66a02ff923d8170b4b27b37acc3befda4`. The integration uses its full browser
-application and documented package format. Upstream source remains unchanged.
+Template Printer is pinned as a Git submodule at `vendor/template-printer`. Its frontend exports
+one React component, `TemplatePrinter` (`frontend/src/embed`, documented in the submodule's
+`docs/embedding.md`), which its own website renders across the page and brandkit renders in the
+**Template Printer** tab, inside the page: no frame, no second build, no message passing. Its
+styles are scoped to its own root, so neither app's CSS reaches the other.
 
 ## Using both applications
 
@@ -27,12 +29,11 @@ Use **Share → Download package** there and import it into Brand Kit to return.
 The **Template Printer** tab includes all upstream tools: SVG import, canvas design,
 people, field mappings, photos, barcodes, front/back editing, variants, lanyards,
 batch exports, printer layouts, colour calibration, fonts, sharing and settings.
-Choose a brand template there, open a package belonging to the selected brand,
-or return to the saved printer library. **Open in new tab** also accepts an active
-package transfer.
+Choose a brand template there and **Open in the printer**, or open a package belonging
+to the brand (OTE's staff card). **Printer website** opens the standalone deployment.
 
-To bring an edited design back, use the printer's **Share → Download package**,
-then **Import package into [brand]** above the printer. It appears in the brand's
+To bring an edited design back, use the printer's **Share → Download package**: a
+notice above the printer offers **Add it to [brand]'s templates**. It appears in the brand's
 Templates list with editable fields, and is saved in this browser. Download the
 brand JSON or kit to move it to another machine; imported files are embedded in
 JSON and included in the kit. A failed browser save is reported instead of
@@ -85,8 +86,7 @@ These entry points are independent of the React app:
 | Entry point | Exports |
 | --- | --- |
 | `brandkit/printer` | `readPrinterPackage(bytes)`, `importPrinterPackage(brand, bytes, options)`, `createPrinterPackage(context, template, options)`; package size/format constants and base64 helpers. Works in browsers and Node. |
-| `brandkit/printer/bridge` | `printerUrl(base, packageUrl, options)`, `createPrinterSession(base, bytes, options)`, `connectPrinter({ session, targets, origin })`; `printerWebsiteUrl(packageUrl, { website })` and `PRINTER_WEBSITE` for standalone deployments. |
-| `brandkit/printer/vite` | `buildTemplatePrinter({ frontend, outDir, base, mount, typecheck })`, `templatePrinter({ dir, mount })`. Builds and serves the isolated upstream frontend. |
+| `brandkit/printer/bridge` | `printerWebsiteUrl(packageUrl, { website })` and `PRINTER_WEBSITE`: a link to a standalone printer website, opening a published HTTP(S) package. |
 
 A package import returns `{ brand, assets, record }`. By default, its complete
 archive and font bytes are embedded in the brand's `assets` map so JSON and
@@ -114,35 +114,20 @@ const portable = await createPrinterPackage(
 // portable.bytes is a ZIP accepted by standalone Template Printer.
 ```
 
-```js
-import { createPrinterSession, connectPrinter } from 'brandkit/printer/bridge'
+To show the printer in another React app, render the component itself:
 
-const session = createPrinterSession(siteBase, portable.bytes)
-const disconnect = connectPrinter({
-  session,
-  targets: () => [iframe.contentWindow]
-})
-iframe.src = session.url
-// Call disconnect() when this host session ends.
+```jsx
+import { TemplatePrinter } from './vendor/template-printer/frontend/src/embed'
+import './vendor/template-printer/frontend/src/embed/template-printer.css'
+
+<div style={{ height: '80vh' }}>
+  <TemplatePrinter initialPackage={portable.bytes} packageLabel="My app"
+    onExportPackage={(bytes) => importPrinterPackage(brand, bytes)} />
+</div>
 ```
 
-The bridge checks origin, source window, protocol version and transfer token.
-The printer receives the bytes through its normal package-import pipeline. A
-small build-time adapter accepts only the blob URL created by that handshake;
-untrusted links retain upstream's HTTP(S)-only URL checks. There is no dependency
-on upstream's internal IndexedDB schema, no global fetch override and no change
-to its React component source.
-
-A runnable, framework-free consumer is in
-[`examples/template-printer-host`](../examples/template-printer-host/README.md):
-
-```sh
-npm run example:printer
-```
-
-It uses the public modules, opens OTE or an uploaded package and embeds the entire
-printer. Other repositories can install brandkit from Git, or include it as a
-submodule and alias its public entry points to the corresponding source modules.
+The host needs React 19, `@tailwindcss/vite` and `resolve.dedupe: ['react', 'react-dom']`
+(see `vite.config.js`), and the printer's dependencies installed with `npm run setup:printer`.
 
 ## Brand schema
 
@@ -169,16 +154,10 @@ npm run setup:printer
 npm run dev
 npm test
 npm run build
-CHROMIUM_PATH=/path/to/chromium npm run test:printer
 ```
 
-Use Node with Corepack; the submodule pins pnpm 10.11.0. CI uses Node 22 and checks
-out submodules recursively. The two applications retain separate dependencies,
-React versions and CSS. `npm run dev` builds the printer for the development
-prefix; `npm run build` includes it in `dist/template-printer/`. `BASE_PATH` applies
-to both applications, presets and transfers. Builds are ignored by Git.
-
-The reusable Vite adapter accepts any upstream frontend and output directory.
-Its build-time module replacement is covered by browser tests against the pinned
-upstream revision. When updating that revision, reinstall its frontend, rebuild
-and run the compatibility tests before recording the new submodule pointer.
+Use Node with Corepack; the submodule pins pnpm 10.11.0. CI uses Node 22 and checks out
+submodules recursively. The printer is compiled with the app, by brandkit's own Vite and
+Tailwind plugin, into the Template Printer tab's chunk, loaded only when the tab is opened. When
+updating the submodule, reinstall its frontend (`npm run setup:printer`), then run the tests and
+open the tab before recording the new pointer.

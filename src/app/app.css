@@ -183,7 +183,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .printer__intro > p, .printer__intro > div > p { margin: 0; }
 .printer__intro h1 { margin-bottom: 8px; }
 .printer__hint { margin: 0; font-size: 13px; }
-.printer__frame { display: block; width: 100%; height: max(680px, 80dvh); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .panel { background: var(--surface); border-radius: var(--radius); padding: 20px; }
 .panel__head { margin-bottom: 14px; }
 .panel__head h2 { margin-bottom: 4px; }
@@ -725,3 +724,13 @@ a.sources__item:hover { border-color: var(--ink-faint); }
    the column grows with the page instead of scrolling inside it. */
 .door-sign-app.door-signs .live-preview { top: var(--masthead-h); z-index: 5; }
 .door-sign-app.door-signs .workspace__output { top: calc(var(--masthead-h) + 12px); max-height: none; overflow: visible; }
+/* The Template Printer, inline: a header like every other view's, then the printer in a box the
+   height of the window below the masthead (it fills whatever box it is given). */
+.printer__head { display: grid; gap: 14px; }
+.printer__head h2 { margin-bottom: 6px; }
+.printer__head p { margin: 0; }
+.printer__controls { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
+.printer__template { flex: 1 1 260px; max-width: 420px; }
+.printer__saved { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.printer__stage { height: calc(100dvh - var(--masthead-h) - 24px); min-height: 560px; border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+@media (max-width: 760px) { .printer__stage { height: calc(100dvh - var(--masthead-h) - 12px); min-height: 480px; } .printer__controls > .button { flex: 1 1 auto; } }
