@@ -53,8 +53,6 @@ const Palette = ({ brand, entries }) => (
         )
       })}
     </div>
-    {brand.print?.note && <p className="caption caption--flush">{brand.print.note}</p>}
-    {entries.some((entry) => printValues(brand, entry.key, entry.hex).converted) && <p className="caption caption--flush">≈ CMYK converted from the screen colour. It is a starting point, not a press match.</p>}
   </section>
 )
 

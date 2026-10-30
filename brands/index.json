@@ -177,6 +177,26 @@
           "Form: Bulletin"
         ],
         [
+          "template",
+          "form-tender",
+          "Form: Tender, legal"
+        ],
+        [
+          "template",
+          "form-employee-transfer",
+          "Form: Salary Employee Transfer"
+        ],
+        [
+          "template",
+          "form-service-application",
+          "Form: Application for Service"
+        ],
+        [
+          "template",
+          "form-formal-header",
+          "Form: Formal signature header study"
+        ],
+        [
           "guide",
           "guide-07",
           "Stationery and forms"
@@ -204,6 +224,26 @@
           "template",
           "cover-display",
           "Display cover, 4 × 9"
+        ],
+        [
+          "template",
+          "cover-back",
+          "Back cover, 8.5in × 11in"
+        ],
+        [
+          "template",
+          "cover-back-display",
+          "Back cover, 4in × 9in"
+        ],
+        [
+          "template",
+          "spine-broad",
+          "Broad publication spine"
+        ],
+        [
+          "template",
+          "spine-narrow",
+          "Narrow publication spine"
         ],
         [
           "guide",
@@ -261,6 +301,16 @@
           "Advertisement, classified"
         ],
         [
+          "template",
+          "display-panel",
+          "Portable display panel"
+        ],
+        [
+          "template",
+          "advert-single-column",
+          "Advertisement, single column"
+        ],
+        [
           "guide",
           "guide-09",
           "Applications"
@@ -271,6 +321,11 @@
           "template",
           "advert-classified",
           "Advertisement, classified"
+        ],
+        [
+          "template",
+          "advert-single-column",
+          "Advertisement, single column"
         ]
       ],
       "hydro/H35": [
@@ -594,6 +649,82 @@
           "Applications"
         ]
       ],
+      "hydro/H21": [
+        [
+          "template",
+          "form-tender",
+          "Form: Tender, legal"
+        ]
+      ],
+      "hydro/H12": [
+        [
+          "template",
+          "form-tender",
+          "Form: Tender, legal"
+        ],
+        [
+          "template",
+          "publication-text",
+          "Publication text page"
+        ],
+        [
+          "guide",
+          "guide-05",
+          "Corporate typeface"
+        ]
+      ],
+      "hydro/H22": [
+        [
+          "template",
+          "form-employee-transfer",
+          "Form: Salary Employee Transfer"
+        ]
+      ],
+      "hydro/H23": [
+        [
+          "template",
+          "form-service-application",
+          "Form: Application for Service"
+        ]
+      ],
+      "hydro/H29": [
+        [
+          "template",
+          "spine-broad",
+          "Broad publication spine"
+        ],
+        [
+          "template",
+          "spine-narrow",
+          "Narrow publication spine"
+        ]
+      ],
+      "hydro/H31": [
+        [
+          "template",
+          "publication-text",
+          "Publication text page"
+        ]
+      ],
+      "hydro/H24": [
+        [
+          "template",
+          "publication-text",
+          "Publication text page"
+        ],
+        [
+          "guide",
+          "guide-08",
+          "Publications"
+        ]
+      ],
+      "hydro/H36": [
+        [
+          "template",
+          "display-panel",
+          "Portable display panel"
+        ]
+      ],
       "hydro/H48": [
         [
           "template",
@@ -805,20 +936,6 @@
           "guide",
           "guide-04",
           "Incorrect usage"
-        ]
-      ],
-      "hydro/H12": [
-        [
-          "guide",
-          "guide-05",
-          "Corporate typeface"
-        ]
-      ],
-      "hydro/H24": [
-        [
-          "guide",
-          "guide-08",
-          "Publications"
         ]
       ]
     }

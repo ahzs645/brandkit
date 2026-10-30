@@ -45,6 +45,7 @@ import { illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
 import { renderPrinterSvg } from '../printer/svg.js'
+import { layoutGuideElements } from './template-guides.js'
 
 const PT_TO_MM = 25.4 / 72
 const PX_PER_PT = 96 / 72
@@ -204,6 +205,35 @@ const stroke = (ctx, element, unit) => {
 
 const idAttr = (element) => (element.id ? ` id="${escape(element.id)}"` : '')
 
+/** Text elements and cap/baseline anchors from the same flow calculation used for rendering. */
+export const layoutFlow = (ctx, element, unit = 'px') => {
+  const u = (value) => toUnits(value, unit)
+  let baseline = null
+  const elements = []
+  const bounds = new Map()
+  for (const item of element.items) {
+    const size = u(item.size)
+    const key = item.font ?? element.font ?? 'body'
+    const value = textValue(ctx, item)
+    const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(ctx, line, key, size), { breakWords: Boolean(ctx.brand.organization && ['department', 'subdepartment'].includes(item.id)) }).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
+    if (!lines.length) { if (item.id) bounds.set(item.id, null); continue }
+    baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
+    const firstBaseline = baseline
+    const x = u(item.x ?? element.x)
+    lines.forEach((line, index) => {
+      if (index > 0) baseline += u(item.leading ?? item.size)
+      elements.push({ ...element, ...item, font: key, id: lines.length > 1 ? `${item.id}-${index + 1}` : item.id, literal: line, x, y: baseline, size, tracking: u(item.tracking ?? 0) })
+    })
+    if (item.id) bounds.set(item.id, {
+      firstBaseline, lastBaseline: baseline,
+      top: firstBaseline - (ctx.brand.fonts?.[key]?.capHeight ?? 0.7) * size,
+      bottom: baseline, left: x,
+      right: x + Math.max(...lines.map((line) => measure(ctx, line, key, size)))
+    })
+  }
+  return { elements, bounds }
+}
+
 const renderElement = (ctx, element, template) => {
   const unit = template.unit ?? 'px'
   const u = (value) => toUnits(value, unit)
@@ -272,21 +302,7 @@ const renderElement = (ctx, element, template) => {
         .filter(Boolean).join('\n')
     }
     case 'flow': {
-      let baseline = null
-      const out = []
-      for (const item of element.items) {
-        const size = u(item.size)
-        const key = item.font ?? element.font ?? 'body'
-        const value = textValue(ctx, item)
-        const lines = wrapLines(item.caps ? value.toUpperCase() : value, item.wrap ? u(item.wrap) : Infinity, (line) => measure(ctx, line, key, size), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(item.id)) }).slice(0, item.maxLines ?? Infinity).filter((line) => line.trim())
-        if (!lines.length) continue
-        baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
-        lines.forEach((line, index) => {
-          if (index > 0) baseline += u(item.leading ?? item.size)
-          out.push(textElement(ctx, { ...element, ...item, font: key, id: lines.length > 1 ? `${item.id}-${index + 1}` : item.id, literal: line, x: u(item.x ?? element.x), y: baseline, size, tracking: u(item.tracking ?? 0) }, unit))
-        })
-      }
-      return out.filter(Boolean).join('\n')
+      return layoutFlow(ctx, element, unit).elements.map((item) => textElement(ctx, item, unit)).filter(Boolean).join('\n')
     }
     case 'illustration':
       return placeIllustration(ctx, element, u)
@@ -303,7 +319,7 @@ const renderElement = (ctx, element, template) => {
 /**
  * Draws a template. Returns the SVG and its size.
  *
- * @param {object} ctx  `{ brand, fonts?, values?, outline?, showGuides? }`
+ * @param {object} ctx  `{ brand, fonts?, values?, outline?, showGuides?, showLayoutGuides? }`
  * @param {object} template
  */
 export const renderTemplate = (ctx, template) => {
@@ -325,6 +341,11 @@ export const renderTemplate = (ctx, template) => {
   const title = fill(brand, template.title ?? `{name} / ${template.id}`)
   const desc = fill(brand, template.description ?? brand.copy?.templateDescription ?? '{name} application. Text is live and editable.')
   const body = template.elements.map((element) => renderElement(ctx, element, template)).filter((part) => part !== '')
+  if (template.guides?.elements?.length) {
+    const bounds = new Map(template.elements.filter((element) => element.type === 'flow').flatMap((element) => [...layoutFlow(ctx, element, unit).bounds]))
+    const annotations = layoutGuideElements(template.guides, bounds).map((element) => renderElement(ctx, element, template)).filter(Boolean).join('\n')
+    body.push(`<g id="layout-guides" display="${ctx.showLayoutGuides ? 'inline' : 'none'}" aria-label="${escape(template.guides.title ?? 'Layout rules')}">\n${scopeIds(annotations, 'layout-guide')}\n</g>`)
+  }
   const svg = '<?xml version="1.0" encoding="UTF-8"?>\n'
     + '<svg xmlns="http://www.w3.org/2000/svg" '
     + `width="${physical[0]}" height="${physical[1]}" `

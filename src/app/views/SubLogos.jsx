@@ -76,11 +76,6 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
   const colourways = (departments.colourways ?? Object.keys(brand.colourways ?? {})).map((id) => [id, brand.colourways[id]])
   const fileName = (colourway) => [brand.id, signature.id, chosen?.values?.[field] === text ? chosen.id : slug(name), colourway].join('-')
   return <>
-    <section className="panel">
-      <h2>{signature.label}</h2>
-      {signature.use && <p className="muted">{signature.use}</p>}
-      {departments.note && <p className="muted">{departments.note}</p>}
-    </section>
     <div className="organization-workspace">
       <section className="panel organization-controls" aria-label="Sub-logo settings">
         {signatures.length > 1 && <Field label="Signature">
@@ -90,7 +85,6 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
         <Field label={`${departments.label ?? 'Department'} as set`} hint="Edit the name, or type another. A line break you type is kept; otherwise the name wraps by the signature’s rules.">
           <textarea rows={3} value={text} onChange={(event) => { setText(event.target.value) }} placeholder="Type the unit’s established name" />
         </Field>
-        {chosen?.matched && chosen.values?.[field] === text && <p className="notice" role="status">Line breaks matched to official artwork: {chosen.matched}</p>}
         {chosen?.alternateOf && chosen.values?.[field] === text && <p className="muted">Short form of {chosen.alternateOf}.</p>}
         {fit?.overflowing.length > 0 && <p className="notice notice--error" role="alert">Too long to break: “{fit.overflowing.join('”, “')}” runs past the line. Shorten the name or break it by hand.</p>}
         {actions?.(name)}

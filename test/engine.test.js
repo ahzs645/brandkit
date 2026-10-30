@@ -160,7 +160,8 @@ test('the BC example brands validate, and draw every template, signature and gui
     assert.deepEqual(fonts.failures, [], `${id} fonts`)
     for (const template of bc.templates) {
       const { svg } = renderTemplate({ brand: bc, fonts, outline: true }, template)
-      assert.ok(svg.includes('</svg>') && !svg.includes('NaN') && !svg.includes('undefined'), `${id}/${template.id}`)
+      // Historical H23 legitimately says “Service address – undefined”; reject invalid SVG values, not that source wording or its field IDs.
+      assert.ok(svg.includes('</svg>') && !svg.includes('NaN') && !/\b(?:x|y|x1|y1|x2|y2|width|height|viewBox|transform|d|fill|stroke|font-size|stroke-width)="[^"]*\bundefined\b/.test(svg), `${id}/${template.id}`)
     }
     for (const page of [...guidePages({ brand: bc, fonts }), ...guideSheets({ brand: bc, fonts })]) assert.ok(!/NaN|undefined/.test(page.render()), `${id}/${page.id}`)
     const plan = planKit(bc).map((entry) => entry.path)

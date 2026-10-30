@@ -47,7 +47,7 @@ try {
   const department = 'Faculty of Environment'
   const subdepartment = 'Department of Geography, Earth and Environmental Sciences'
   await page.goto(`${base}?brand=unbc&view=organization`, { waitUntil: 'networkidle' })
-  await page.getByRole('heading', { name: 'Department sub-logo', exact: true }).waitFor()
+  await page.getByRole('region', { name: 'Sub-logo settings' }).waitFor()
   await choose('Department', department)
   assert.equal(await page.getByRole('textbox', { name: /^Department as set/ }).inputValue(), department)
   const [svgFile] = await Promise.all([page.waitForEvent('download'), page.locator('.asset-card').first().getByRole('button', { name: /SVG/ }).click()])

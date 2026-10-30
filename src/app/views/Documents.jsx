@@ -134,8 +134,6 @@ export const Documents = ({ brand, fonts }) => {
   return <div className="view documents-view">
     <section className="panel documents-head">
       <div><h2>Write a document with {brand.name}</h2>
-        <p className="muted">Choose an editable starter, add your content, and download a Word master. The preview uses the same content and brand profile.</p>
-        <p className="caption">Identity v{guide.version} · Document layouts v{guide.profile.status.documentationVersion}</p>
       </div>
       <div className="documents-actions">
         <button className="button button--quiet" type="button" disabled={!fonts || busy} onClick={() => sourceInput.current?.click()}>Open document source</button>

@@ -87,7 +87,6 @@ export const Web = ({ brand, fonts, source }) => {
   return <div className="view">
     <section className="panel">
       <h2>Web components</h2>
-      <p className="muted">{brand.web.page.summary ?? `${brand.name}’s page parts, each with its own markup and styles over shared tokens. Take one, or the whole page; downloads carry their fonts.`}</p>
       <div className="toolbar">
         {brand.departments?.items?.length > 0 && <DepartmentSelect brand={brand} value={preset?.id ?? ''} onChange={(id) => setDepartment(brand.departments.items.find((item) => item.id === id)?.values?.[field] ?? '')} />}
         <Field label="Department as set"><input type="text" value={department.replace(/\n/g, ' ')} onChange={(event) => setDepartment(event.target.value)} placeholder="None: the full logo" /></Field>
@@ -97,7 +96,7 @@ export const Web = ({ brand, fonts, source }) => {
     </section>
     {components.map((component) => <section key={component.id} className="panel web-component" aria-labelledby={`web-${component.id}`}>
       <div className="web-component__head">
-        <div><h3 id={`web-${component.id}`}>{component.label}</h3><p className="muted">{component.use}</p></div>
+        <h3 id={`web-${component.id}`}>{component.label}</h3>
         <div className="documents-actions">
           <Copy label="Copy HTML" text={component.html} />
           <Copy label="Copy CSS" text={component.css} />

@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { icon, logoDocument, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, isDark } from '../../engine/brand.js'
-import { download } from '../../export/render.js'
-import { isLogoStudy } from '../motion.js'
-import { animatedSvg, CssStage, useMotionLibrary, useReducedMotion } from '../motion-player.jsx'
-import { QuickExport } from '../MotionExport.jsx'
 import { Downloads, SvgImage } from '../ui.jsx'
 import { SignatureLogos } from './Signatures.jsx'
 
@@ -24,48 +20,6 @@ const Card = ({ title, make, name, ground, width = 2048, wide }) => (
     </figcaption>
   </figure>
 )
-
-/** One logo animation: it plays as the tab opens, and again on hover or Play. */
-const MotionCard = ({ brand, library, study, reduced }) => {
-  const [play, setPlay] = useState(1)
-  const replay = () => { if (!reduced) setPlay((value) => value + 1) }
-  return (
-    <figure className="asset-card motion-card" onMouseEnter={replay}>
-      <div className="motion-card__art">
-        <CssStage library={library} id={study.id} play={play} design={560} label={`${study.name}: ${study.description}`} />
-      </div>
-      <figcaption>
-        <span className="motion-card__name">{study.name}<small>{study.use ?? study.timing}</small></span>
-        <span className="downloads">
-          <button type="button" className="button button--quiet" disabled={reduced} onClick={replay}>▶ Play</button>
-          {library.stages.get(study.id)?.vector && <QuickExport brand={brand} library={library} study={study} />}
-          {library.stages.get(study.id)?.shapesOnly && <button type="button" className="button button--quiet" title="For a web page: plays once, then holds the logo" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-logo-${study.id}.svg`)}>↓ SVG</button>}
-        </span>
-      </figcaption>
-    </figure>
-  )
-}
-
-/** The brand's logo studies from its motion library, played in place: the logo as media. */
-const LogoMotion = ({ brand, source }) => {
-  const library = useMotionLibrary(brand, source)
-  const reduced = useReducedMotion()
-  const studies = (brand.motion?.studies ?? []).filter(isLogoStudy)
-  if (!studies.length || library?.mode !== 'css') return null
-  const shown = studies.filter((study) => library.stages.has(study.id))
-  if (!shown.length) return null
-  return (
-    <section className="panel">
-      <div className="panel__head">
-        <h2>Logo in motion</h2>
-        <p className="muted">From the motion library. Hover or press Play to run one again; each ends on the still logo. Download one as video or a GIF for slides and social, or as SVG for a web page.{reduced ? ' Your device asks for reduced motion, so each shows its final frame.' : ''}</p>
-      </div>
-      <div className="asset-grid asset-grid--motion">
-        {shown.map((study) => <MotionCard key={study.id} brand={brand} library={library} study={study} reduced={reduced} />)}
-      </div>
-    </section>
-  )
-}
 
 const SupportingAssets = ({ brand, onPatterns }) => {
   const ctx = { brand }
@@ -93,12 +47,11 @@ const SupportingAssets = ({ brand, onPatterns }) => {
 }
 
 export const Logos = ({ brand, fonts, source, openManual, onPatterns }) => {
-  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} before={brand.motion && <LogoMotion brand={brand} source={source} />} after={<SupportingAssets brand={brand} onPatterns={onPatterns} />} />
+  if (!brand.families?.length) return <SignatureLogos brand={brand} fonts={fonts} openManual={openManual} after={<SupportingAssets brand={brand} onPatterns={onPatterns} />} />
   const ctx = { brand }
   const colours = brand.logoColours.filter((key) => key !== 'currentColor')
   return (
     <div className="view">
-      {brand.motion && <LogoMotion brand={brand} source={source} />}
       {brand.families.map((entry) => (
         <section key={entry.id} className="panel">
           <h2>{entry.label ?? entry.id}</h2>
