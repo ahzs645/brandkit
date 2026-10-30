@@ -1,6 +1,6 @@
 // The shared interchange format is upstream's documented package, not either app's storage DB.
 import { strFromU8, strToU8, unzipSync, zipSync } from 'fflate'
-import { renderTemplate, templateFields, toUnits } from '../engine/templates.js'
+import { renderTemplate, templateFields, textValue, toUnits } from '../engine/templates.js'
 import { nodes, parseSvg, sanitizeSvg, serializeSvg, svgSize } from './svg.js'
 import { fromBase64, toBase64 } from '../assets.js'
 export { fromBase64, toBase64 } from '../assets.js'
@@ -95,7 +95,19 @@ export const importPrinterPackage = (brand, input, { id, embedAssets = true, fil
 
 const assetBytes = async (brand, path, readAsset) => brand.assets?.[path] ? fromBase64(brand.assets[path]) : new Uint8Array(await readAsset(path))
 const nativeSide = (ctx, template, files, path) => {
-  const doc = parseSvg(renderTemplate({ ...ctx, outline: false }, template).svg)
+  // Construction notes belong to the preview, not the printable artwork. Upstream's SVG
+  // field extraction does not exclude hidden groups, so omit guides instead of hiding them.
+  const printContext = { ...ctx, outline: false, showLayoutGuides: false, showGuides: false }
+  const artwork = { ...template, guides: undefined }
+  const doc = parseSvg(renderTemplate(printContext, artwork).svg)
+  // An empty paragraph has no visible SVG lines, but its explicit baseline, width and
+  // type style still define a usable entry field. Retain an empty text node as its target.
+  // Flow items deliberately collapse when cleared and do not have this fixed contract.
+  const emptyParagraphs = template.elements.filter((element) => element.type === 'paragraph' && element.id && !element.locked && !textValue(ctx, element).trim())
+  if (emptyParagraphs.length) {
+    const empty = parseSvg(renderTemplate(printContext, { ...artwork, elements: emptyParagraphs.map((element) => ({ ...element, type: 'text' })) }).svg)
+    for (const node of nodes(empty, 'text')) doc.documentElement.appendChild(doc.importNode(node, true))
+  }
   // Give each font role its own family so Regular/Bold/Italic files cannot overwrite one
   // another in upstream's font library, which is keyed by family name.
   for (const node of nodes(doc, 'text')) {
@@ -130,6 +142,7 @@ const nativeSide = (ctx, template, files, path) => {
     if (element?.type === 'paragraph') {
       if (element.width) fieldSpec.wrapWidth = toUnits(element.width, template.unit)
       fieldSpec.lineHeight = toUnits(element.leading ?? size * 1.2, template.unit)
+      if (element.maxLines != null) fieldSpec.maxLines = element.maxLines
     }
     const sample = String(ctx.values?.[field.id] ?? field.placeholder ?? text.textContent)
     fields.push(fieldSpec); sampleData[field.id] = element?.caps ? sample.toUpperCase() : sample

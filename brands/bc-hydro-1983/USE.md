@@ -102,6 +102,17 @@ These sizes come from the template definitions rather than a separately maintain
 | Sign: guide, directional | 340 × 120 mm | sign-guide |
 | Vehicle: panel van, light body | 4800 × 2050 mm | vehicle-van-black |
 | Vehicle: panel van, dark body | 4800 × 2050 mm | vehicle-van-white |
+| Form: Tender, legal | 215.9 × 355.6 mm | form-tender |
+| Form: Salary Employee Transfer | 146.05 × 234.95 mm | form-employee-transfer |
+| Form: Application for Service | 203.2 × 127 mm | form-service-application |
+| Form: Formal signature header study | 215.9 × 279.4 mm | form-formal-header |
+| Back cover, 8.5in × 11in | 215.9 × 279.4 mm | cover-back |
+| Back cover, 4in × 9in | 101.6 × 228.6 mm | cover-back-display |
+| Broad publication spine | 279.4 × 50.8 mm | spine-broad |
+| Narrow publication spine | 279.4 × 19.05 mm | spine-narrow |
+| Publication text page | 215.9 × 279.4 mm | publication-text |
+| Portable display panel | 164.67 × 52.17 mm | display-panel |
+| Advertisement, single column | 54.61 × 152.4 mm | advert-single-column |
 | Boxcar, Hydro | 423.33 × 168.28 mm | illustrated-h48-boxcar |
 | Generator, Hydro | 423.33 × 438.41 mm | illustrated-h47-generator |
 | Crawler Side, Hydro | 423.33 × 259.03 mm | illustrated-h47-crawler-side |

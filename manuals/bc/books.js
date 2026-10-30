@@ -1395,7 +1395,8 @@ export const GUIDE_BOOKS = [
     "notes": [
      "Source line positions and drop caps are restored in declared prose regions; compatible Times cuts differ from the historical printing face.",
      "Tables, specimen artwork and technical drawings outside the declared prose regions still have material source differences; see the per-page overlay review.",
-     "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading."
+     "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading.",
+     "The two BCE route drawings use source-page vector traces: black outline on the letterhead and blue with white lettering on the card. The card-width extension line ends above the Rail signature as in the source. Other artwork and typography retain the earlier reconstruction limits."
     ]
    },
    {

@@ -14,6 +14,10 @@ import { loadBrandFonts } from '../../src/fonts/provider.js'
 import { illustrated } from './illustrations.mjs'
 import { hydroLibrary, writeMotion } from './bc-motion.mjs'
 import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
+import { bceRouteIllustrations, writeBceRouteAssets } from './bc-hydro-bce-route.mjs'
+import { additionalForms, additionalFormSources } from './bc-hydro-forms.mjs'
+import { additionalPublications, additionalPublicationSources } from './bc-hydro-publications.mjs'
+import { attachHydroGuides } from './bc-hydro-guides.mjs'
 
 const folder = new URL('../../brands/bc-hydro-1983/', import.meta.url)
 const art = readJson(new URL('artwork.json', folder))
@@ -52,13 +56,15 @@ const stationery = SETS.flatMap((set) => {
       elements: [
         { type: 'background', fill: 'paper' },
         { type: 'logo', signature: set.id, colourway: 'black', x: letterX, y: inch(1), width, anchorY: 'baseline' },
-        { type: 'lines', x: logotypeAt(set.id, letterX, width), y: round(inch(1) + inch(3 / 16)), leading: pt(11), size: '10pt', font: 'body', colour: 'ink', lines: set.letterLines }
+        { type: 'lines', x: logotypeAt(set.id, letterX, width), y: round(inch(1) + inch(3 / 16)), leading: pt(11), size: '10pt', font: 'body', colour: 'ink', lines: set.letterLines },
+        // H18: ¾ in left is printed; width and bottom alignment are measured from the scan.
+        ...(set.id === 'rail' ? [{ type: 'illustration', id: 'bce-route-letterhead', illustration: 'bce-route-outline', x: inch(0.75), y: round(inch(1 + 3 / 16) + pt(11) + pt(2.5) - inch(1.375) * 150 / 415), width: inch(1.375) }] : [])
       ]
     },
     {
       id: `envelope-${set.id}`, label: 'Envelope, No. 10', group, unit: 'mm', width: 241.3, height: 104.775, physical: ['9.5in', '4.125in'], raster: 1900,
       title: `B.C.Hydro / ${set.name} envelope, No. 10`,
-      description: `${set.name} No. 10 envelope: form number 6 point, return statement 10 point, signature ½ in from the left and its baseline ¾ in from the top.`,
+      description: `${set.name} envelope: form number 6 point, return statement 10 point, signature ½ in from the left and its baseline ¾ in from the top. The manual shows only the left portion; the No. 10 overall size is an adopted reconstruction format.`,
       elements: [
         { type: 'background', fill: 'paper' },
         text('form-number', '12345', inch(0.25), inch(0.25), '6pt', { font: 'body', colour: 'ink' }),
@@ -76,7 +82,9 @@ const stationery = SETS.flatMap((set) => {
         { type: 'logo', signature: set.id, colourway: 'blind', x: cardX, y: inch(0.625), width, anchorY: 'baseline' },
         text('name', undefined, logotypeAt(set.id, cardX, width), inch(1.125), '12pt', { font: 'body', colour: 'ink' }),
         { type: 'lines', x: logotypeAt(set.id, cardX, width), y: inch(1.75), align: 'bottom', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardLines },
-        ...(set.cardPhone.length ? [{ type: 'lines', x: round(cardX - 1.6), y: inch(1.75), align: 'bottom', anchor: 'end', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardPhone }] : [])
+        ...(set.cardPhone.length ? [{ type: 'lines', x: cardX, y: inch(1.75), align: 'bottom', anchor: 'end', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardPhone }] : []),
+        // H18 dimensions the separate blue mark at 1 in with 1/16 in to the address.
+        ...(set.id === 'rail' ? [{ type: 'illustration', id: 'bce-route-card', illustration: 'bce-route-card', x: round(logotypeAt(set.id, cardX, width) - inch(1 + 1 / 16)), y: round(inch(1.75) - inch(1) * 105 / 300), width: inch(1) }] : [])
       ]
     }
   ]
@@ -225,7 +233,7 @@ const identification = (id, { name, label, layout }) => {
   return {
     id: `sign-${label.toLowerCase().replace(/[^a-z]+/g, '-')}`, label: `Sign: ${label.toLowerCase()}`, group: 'Signs', unit: 'mm', width, height, raster: 1600,
     title: `B.C.Hydro / identification sign, ${label.toLowerCase()}`,
-    description: 'An identification sign (Graphic Standards Manual p. 38): the full signature, borders of half its logotype’s cap height (a full cap height above the Gas flame), and any facility name immediately below, with capitals as tall as the logotype’s, one x-height under it.',
+    description: 'An identification sign (Graphic Standards Manual p. 38): the full signature, borders of half its logotype’s cap height (a full cap height above the Gas logotype, to accommodate its flame), and any facility name immediately below, with capitals as tall as the logotype’s, one x-height under it.',
     elements: [
       { type: 'background', fill: 'paper' },
       { type: 'rect', x: 0, y: 0, width, height, fill: 'none', stroke: 'ink', strokeWidth: 1 },
@@ -485,8 +493,21 @@ const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'],
 // Its signs, drawn: identification, guide and control, each line of wording a field.
 const DRAWN_SIGN_KINDS = { H39: 'Identification signs', H40: 'Guide signs', H41: 'Control signs' }
 const drawnSigns = illustrated('hydro', ['H39', 'H40', 'H41'], ['H38'], 'Signs, drawn', (asset) => DRAWN_SIGN_KINDS[asset.split('-')[0]])
-brand.illustrations = { ...drawn.drawings, ...drawnSigns.drawings }
-brand.templates.push(...drawn.templates, ...drawnSigns.templates)
+brand.illustrations = { ...drawn.drawings, ...drawnSigns.drawings, ...bceRouteIllustrations({ blue: brand.colours.blue }) }
+brand.templates.push(...additionalForms, ...additionalPublications(art), ...drawn.templates, ...drawnSigns.templates)
+brand.relatedMarks = [{
+  id: 'bce-route', label: 'BCE route heritage mark',
+  use: 'The locomotive identifies “the BCE route”. It is separate from the four official signatures and must not be placed close to the Rail signature (printed p. 2). These two source-specific versions are traced from the Rail stationery on printed p. 17; they are scan-derived reconstructions, not original production masters.',
+  sources: [{ book: 'hydro', page: 'H03', manual: 'Graphic Standards Manual', title: 'Main elements', printed: '2' }, { book: 'hydro', page: 'H18', manual: 'Graphic Standards Manual', title: 'Rail stationery', printed: '17' }],
+  variants: [
+    { id: 'outline', label: 'Black outline · letterhead', asset: 'assets/bce-route-outline-black.svg', illustration: 'bce-route-outline' },
+    { id: 'card', label: 'Blue silhouette · business card', asset: 'assets/bce-route-card-blue.svg', illustration: 'bce-route-card' }
+  ]
+}]
+brand.files.push(...writeBceRouteAssets({ blue: brand.colours.blue }),
+  'reference/bce-route-provenance.md', 'reference/bce-route-trace.json', 'reference/bce-route-overlay-metrics.json',
+  'reference/bce-route-source-outline.png', 'reference/bce-route-source-card.png',
+  'reference/bce-route-overlay-outline.png', 'reference/bce-route-overlay-card.png')
 
 // Variants of one thing are one item in the studio: a stationery piece in each division, a cover
 // in each format, a sign in each kind.
@@ -498,7 +519,9 @@ brand.sets = [
   set('business-card', 'Business card', DIVISIONS.map(([division, name]) => [`card-${division}`, name]), 'Stationery'),
   set('cover', 'Publication cover', [['cover-report', 'Report'], ['cover-illustrated', 'Illustrated'], ['cover-display', 'Display']]),
   set('masthead', 'Masthead', [['masthead-band', 'Band'], ['masthead-rule', 'Rule']]),
-  set('advertisement', 'Advertisement', [['advert-display', 'Display'], ['advert-classified', 'Classified']]),
+  set('back-cover', 'Back cover', [['cover-back', 'Letter'], ['cover-back-display', 'Display']], 'Publications'),
+  set('spine', 'Publication spine', [['spine-broad', 'Broad'], ['spine-narrow', 'Narrow']], 'Publications'),
+  set('advertisement', 'Advertisement', [['advert-display', 'Display'], ['advert-classified', 'Classified'], ['advert-single-column', 'Single column']]),
   set('sign', 'Sign', [['sign-office-identification', 'Office identification'], ['sign-gas-identification', 'Gas identification'], ['sign-horizontal-facility', 'Facility, horizontal'], ['sign-vertical-facility', 'Facility, vertical'], ['sign-danger', 'Danger'], ['sign-guide', 'Guide']]),
   set('panel-van', 'Panel van', [['vehicle-van-black', 'Black signature'], ['vehicle-van-white', 'White signature']]),
   ...drawn.sets,
@@ -513,6 +536,10 @@ brand.documents = [
   { id: 'bulletin', label: 'Bulletin form', format: 'docx', pages: ['form-bulletin'] },
   { id: 'masthead-band', label: 'Newsletter, band masthead', format: 'docx', pages: ['masthead-band'] },
   { id: 'masthead-rule', label: 'Newsletter, ruled masthead', format: 'docx', pages: ['masthead-rule'] },
+  { id: 'report', label: 'Report cover, text page and back cover', format: 'docx', pageMode: 'sequence', pages: ['cover-report', 'publication-text', 'cover-back'] },
+  // Dense historic grids are editable in SVG/Template Printer; the flowing Word exporter is
+  // appropriate for the simple header study, not a faithful export of the multi-cell forms.
+  { id: 'form-formal-header', label: 'Formal form header', format: 'docx', pages: ['form-formal-header'] },
   { id: 'presentation', label: 'Presentation', format: 'pptx', layouts: ['av-title'] }
 ]
 
@@ -531,6 +558,8 @@ cite(brand, {
     'advert-display': ['H33', 'H32'],
     'advert-classified': ['H34', 'H32'],
     'av-title': ['H35'],
+    ...additionalFormSources,
+    ...additionalPublicationSources,
     ...Object.fromEntries(['sign-office-identification', 'sign-gas-identification', 'sign-horizontal-facility', 'sign-vertical-facility'].map((id) => [id, ['H39', 'H38']])),
     'sign-danger': ['H41', 'H38'],
     'sign-guide': ['H40', 'H38'],
@@ -565,4 +594,32 @@ brand.motion = motion.entry
 brand.files.push(...motion.files)
 
 await extendBrandPatterns(brand, folder)
+attachHydroGuides(brand, art)
+brand.manualAudit = {
+  title: 'BC Hydro 1983: manual coverage and overlay review', pages: 48, checkedDate: '2026-10-30',
+  report: 'docs/manual-audit.html',
+  summary: 'All 48 source pages are inventoried against the kit. The audit includes original/reconstructed page overlays, template mappings, the report-cover rules and both BCE route vectors. Coverage does not mean an exact facsimile or an authenticated production master.',
+  limitations: [
+    'The four signature masters remain PofBC reconstructions; Times Roman is represented by TeX Gyre Termes and screen colours approximate the specified inks.',
+    'The illustrated cover still needs its original high-quality illustration. The tinted panel is marked as a placeholder.',
+    'Undimensioned form trims, spine thicknesses and example canvases are identified as reconstruction choices. Three-dimensional signs still require the official large-scale drawings.'
+  ],
+  pageFindings: {
+    H18: ['Both BCE route variants are now present on Rail stationery and available separately in Logos.'],
+    H21: ['The legal-size tender layout is now present; scan break marks are excluded from the printable form.'],
+    H22: ['The employee-transfer layout is present; its snap-set trim is scan-derived.'],
+    H23: ['The compact service layout is present; its trim and compact header placement are scan-derived.'],
+    H25: ['Cover rules can be shown or hidden. Both standard back-cover sizes now omit the signature and use a 6 point printing code.'],
+    H26: ['The ⅓-width, ¼-depth, 36/36 and 18/18 rules are implemented and follow editable cover text. Scan overlay is available.'],
+    H27: ['Text/grid are implemented; the illustration area remains a disclosed placeholder, with the original visible in the overlay.'],
+    H29: ['Broad and narrow spine examples are now present, with source rules and example dimensions distinguished.'],
+    H31: ['A text-page template applies the written typography principles; it is a new example, not a source facsimile.'],
+    H34: ['Display, single-column and classified advertisement variants are represented.'],
+    H36: ['Portable-panel half-cap clearance is implemented. Three-dimensional fabrication remains dependent on official large-scale drawings.'],
+    H37: ['Written out-of-home and specialty-media guidance is covered in the audit; this page supplies no fixed production template.']
+  }
+}
+brand.files.push('docs/manual-audit.html', 'docs/manual-audit.json', 'docs/manual-audit.md', 'reference/manual-source.json', 'reference/manual-audit-baseline.json',
+  ...['report-cover-source', 'cover-illustrated-source', 'display-cover-source', 'bulletin-source', 'rail-card-source', 'rail-letterhead-source'].map((name) => `reference/${name}.webp`),
+  ...Array.from({ length: 48 }, (_, index) => `reference/manual/H${String(index + 1).padStart(2, '0')}.webp`))
 writeBrand(new URL('brand.json', folder), brand)

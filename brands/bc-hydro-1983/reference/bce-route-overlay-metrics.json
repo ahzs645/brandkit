@@ -1,0 +1,49 @@
+{
+  "comparison": "Native-pixel, same-canvas registration; no fitted transform or per-feature warping. Thresholded vector versus segmented source raster.",
+  "limitations": [
+    "Agreement measures the traced scan crop, not compliance with original unscanned master artwork.",
+    "Two source marks were independently traced; the card is not a simple reversed outline.",
+    "Scanned printing irregularities remain; small lettering is reconstructed from limited raster detail.",
+    "Colour uses the kit's existing #0069A2 rendering of Hydro blue, not a colorimetric measurement of the scan."
+  ],
+  "variants": {
+    "outline": {
+      "canvasPixels": [
+        415,
+        150
+      ],
+      "sourceInkPixels": 8143,
+      "vectorInkPixels": 8256,
+      "intersectionPixels": 7859,
+      "vectorOnlyPixels": 397,
+      "sourceOnlyPixels": 284,
+      "intersectionOverUnion": 0.920258,
+      "precision": 0.951914,
+      "recall": 0.965123,
+      "symmetricInkDistancePixels": {
+        "mean": 0.041613,
+        "p95": 0.0,
+        "maximum": 2.0
+      }
+    },
+    "card": {
+      "canvasPixels": [
+        300,
+        105
+      ],
+      "sourceInkPixels": 18076,
+      "vectorInkPixels": 18230,
+      "intersectionPixels": 17949,
+      "vectorOnlyPixels": 281,
+      "sourceOnlyPixels": 127,
+      "intersectionOverUnion": 0.977774,
+      "precision": 0.984586,
+      "recall": 0.992974,
+      "symmetricInkDistancePixels": {
+        "mean": 0.011238,
+        "p95": 0.0,
+        "maximum": 1.0
+      }
+    }
+  }
+}

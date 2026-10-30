@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react'
 import { logoDocument } from '../../engine/artwork.js'
 import { colour } from '../../engine/brand.js'
+import { renderTemplate } from '../../engine/templates.js'
 import { download, zip } from '../../export/render.js'
 import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
 import { ManualSources } from './Sources.jsx'
@@ -76,14 +77,68 @@ export const SignatureStage = ({ brand, fonts, openManual }) => {
   )
 }
 
+/** Related artwork uses its own illustration geometry; it never becomes a signature option. */
+const RelatedMarkCard = ({ brand, fonts, mark, variant }) => {
+  const illustration = brand.illustrations?.[variant.illustration]
+  const label = variant.label ?? illustration?.title ?? variant.id
+  if (!illustration) return (
+    <figure className="asset-card">
+      <div className="asset-card__art"><p className="muted">Artwork unavailable in this kit.</p></div>
+      <figcaption>{label}</figcaption>
+    </figure>
+  )
+  const [, , width, height] = illustration.viewBox
+  const template = {
+    id: variant.id,
+    width,
+    height,
+    unit: 'px',
+    title: `${brand.name} / ${mark.label} / ${label}`,
+    description: [mark.use, variant.use ?? illustration.source?.use, illustration.provenance].filter(Boolean).join(' '),
+    elements: [{ type: 'illustration', illustration: variant.illustration, x: 0, y: 0, width, height }]
+  }
+  const make = (outline = false) => renderTemplate({ brand, fonts, outline }, template).svg
+  return (
+    <figure className="asset-card">
+      <div className="asset-card__art" style={{ background: colour(brand, variant.ground ?? 'paper') }}>
+        <SvgImage svg={make()} alt={`${mark.label}, ${label}`} />
+      </div>
+      <figcaption>
+        <span>{label}</span>
+        <Downloads make={make} name={[brand.id, mark.id, variant.id].join('-')} width={2400} />
+      </figcaption>
+    </figure>
+  )
+}
+
+/** A brand can expose source-specific secondary marks without adding official signatures. */
+export const RelatedMarks = ({ brand, fonts, openManual }) => (
+  <>
+    {(brand.relatedMarks ?? []).map((mark) => (
+      <section key={mark.id} id={`related-mark-${mark.id}`} className="panel panel--anchor" aria-labelledby={`related-mark-${mark.id}-heading`}>
+        <div className="panel__head">
+          <h2 id={`related-mark-${mark.id}-heading`}>{mark.label}</h2>
+          {mark.use && <p className="muted">{mark.use}</p>}
+        </div>
+        <div className="asset-grid">
+          {(mark.variants ?? []).map((variant) => <RelatedMarkCard key={variant.id} brand={brand} fonts={fonts} mark={mark} variant={variant} />)}
+        </div>
+        <ManualSources brand={brand} sources={mark.sources} openManual={openManual} />
+      </section>
+    ))}
+  </>
+)
+
 /** The logos view: every signature in every colourway, and every department's set as one zip. */
 /** `before` sits at the top of the view: the Logos tab puts the brand's logo motion there. */
 export const SignatureLogos = ({ brand, fonts, openManual, before, after }) => {
   const [department, setDepartment] = useState('')
   // Arriving from a manual page (?signature=…), bring that signature into view.
   useEffect(() => {
-    const id = new URLSearchParams(globalThis.location?.search ?? '').get('signature')
+    const params = new URLSearchParams(globalThis.location?.search ?? '')
+    const id = params.get('signature')
     if (id) document.getElementById(`signature-${id}`)?.scrollIntoView({ block: 'start' })
+    else if (params.get('mark')) document.getElementById(`related-mark-${params.get('mark')}`)?.scrollIntoView({ block: 'start' })
   }, [])
   const [busy, setBusy] = useState(false)
   const values = departmentValues(brand, department)
@@ -108,6 +163,11 @@ export const SignatureLogos = ({ brand, fonts, openManual, before, after }) => {
   return (
     <div className="view">
       {before}
+      {brand.relatedMarks?.length > 0 && (
+        <p className="muted">
+          Related artwork: {brand.relatedMarks.map((mark, index) => <span key={mark.id}>{index > 0 ? ' · ' : ''}<a href={`#related-mark-${mark.id}`}>{mark.label}</a></span>)}
+        </p>
+      )}
       {brand.departments?.items?.length > 0 && departmental.length > 0 && (
         <section className="panel toolbar toolbar--panel">
           <DepartmentSelect brand={brand} value={department} onChange={setDepartment} />
@@ -133,6 +193,7 @@ export const SignatureLogos = ({ brand, fonts, openManual, before, after }) => {
           <ManualSources brand={brand} sources={signature.sources} openManual={openManual} />
         </section>
       ))}
+      <RelatedMarks brand={brand} fonts={fonts} openManual={openManual} />
       {after}
     </div>
   )

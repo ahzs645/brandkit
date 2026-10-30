@@ -319,7 +319,7 @@ export const App = () => {
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {view === 'templates' && <div className="view">
               {!SHARED && <div className="panel printer__intro"><p>Need card design, people, batch printing or calibration?</p><button type="button" className="button" onClick={() => go('printer')}>Open Template Printer</button></div>}
-              <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
+              <TemplateStudio key={brand.id} brand={brand} fonts={fonts} resolveAsset={source.url} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
                 onPrint={SHARED ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
                 <div className="template-about">

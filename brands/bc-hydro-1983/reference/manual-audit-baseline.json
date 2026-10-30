@@ -1,0 +1,1553 @@
+{
+  "schema": "brandkit/bc-hydro-audit-baseline/1",
+  "coverage": {
+    "schema": "brandkit/manual-audit/1",
+    "date": "2026-10-30",
+    "brand": "bc-hydro-1983",
+    "source": {
+      "filename": "BC Hydro Graphic Standards Manual - 1983.pdf",
+      "sha256": "ca5e1bc22d8908d69b7f56e75ff84bbfbe7e7e2a4f45260d44bc7372ff775b18",
+      "pdfPages": 48,
+      "printedPages": "Cover, 1–47",
+      "date": "June 1983"
+    },
+    "scope": "Read-only baseline audit of scripts/brands/bc-hydro-1983.mjs and supplied original PDF. Rows describe pre-update coverage, not post-change completion. Every page is classified; a guidance-only page does not require an editable template.",
+    "caveats": [
+      "Scans are slightly skewed/scaled; written measurements take precedence over raw page pixels.",
+      "The manual directs users to separate official reproduction proofs, grids, larger color swatches and 3D production drawings. Those production originals are not supplied.",
+      "No uniforms chapter appears in this 48-page manual.",
+      "Historical phototype is approximated by TeX Gyre Termes; signature artwork must remain fixed outlined paths."
+    ],
+    "pages": [
+      {
+        "id": "H01",
+        "pdfPage": 1,
+        "printedPage": null,
+        "title": "Manual cover",
+        "baselineStatus": "reference-only",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "No original source scan comparison; reconstructed guide is separate from historical cover."
+        ]
+      },
+      {
+        "id": "H02",
+        "pdfPage": 2,
+        "printedPage": 1,
+        "title": "Introduction, contents and terminology",
+        "baselineStatus": "reference-only",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "No full terminology/contents audit surfaced in template studio."
+        ]
+      },
+      {
+        "id": "H03",
+        "pdfPage": 3,
+        "printedPage": 2,
+        "title": "Four signatures and BCE route distinction",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Main elements"
+        ],
+        "baselineSignatures": [
+          "standard",
+          "formal"
+        ],
+        "findings": [
+          "BCE legacy-mark constraint is documented but mark itself is missing."
+        ]
+      },
+      {
+        "id": "H04",
+        "pdfPage": 4,
+        "printedPage": 3,
+        "title": "Official color signatures and fixed artwork",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Main elements"
+        ],
+        "baselineSignatures": [
+          "standard",
+          "gas",
+          "rail",
+          "formal"
+        ],
+        "findings": [
+          "Production-master fidelity cannot be established from this scan; artwork is reconstructed."
+        ]
+      },
+      {
+        "id": "H05",
+        "pdfPage": 5,
+        "printedPage": 4,
+        "title": "Corporate green / blue / black",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Corporate colours"
+        ],
+        "baselineSignatures": [
+          "standard"
+        ],
+        "findings": [
+          "Digital hex colors are approximations; source says its small swatches are inadequate for production matching."
+        ]
+      },
+      {
+        "id": "H06",
+        "pdfPage": 6,
+        "printedPage": 5,
+        "title": "Gas Operations blue",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Corporate colours"
+        ],
+        "baselineSignatures": [
+          "gas"
+        ],
+        "findings": [
+          "Production swatches are not available in supplied source."
+        ]
+      },
+      {
+        "id": "H07",
+        "pdfPage": 7,
+        "printedPage": 6,
+        "title": "Single-color backgrounds",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Backgrounds"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Embedded construction/background rules not available as toggle on templates."
+        ]
+      },
+      {
+        "id": "H08",
+        "pdfPage": 8,
+        "printedPage": 7,
+        "title": "Corporate-color backgrounds and value scale",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Backgrounds"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Source value chart exists in reference; no direct original-scan overlay."
+        ]
+      },
+      {
+        "id": "H09",
+        "pdfPage": 9,
+        "printedPage": 8,
+        "title": "Incorrect use examples 1–5",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Incorrect usage"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Guide condenses violations; not all original illustrations separately reproduced."
+        ]
+      },
+      {
+        "id": "H10",
+        "pdfPage": 10,
+        "printedPage": 9,
+        "title": "Incorrect use examples 6–10",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Incorrect usage"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Guide condenses violations; original examples are source reference, not editable test cases."
+        ]
+      },
+      {
+        "id": "H11",
+        "pdfPage": 11,
+        "printedPage": 10,
+        "title": "Incorrect use examples 11–15",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Incorrect usage"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Guide condenses violations; original examples are source reference, not editable test cases."
+        ]
+      },
+      {
+        "id": "H12",
+        "pdfPage": 12,
+        "printedPage": 11,
+        "title": "Corporate typeface",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Corporate typeface"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Times replacement disclosed; original phototype and special logotype are not the font itself."
+        ]
+      },
+      {
+        "id": "H13",
+        "pdfPage": 13,
+        "printedPage": 12,
+        "title": "Signature minimum sizes",
+        "baselineStatus": "represented",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Minimum sizes"
+        ],
+        "baselineSignatures": [
+          "standard",
+          "gas",
+          "rail"
+        ],
+        "findings": []
+      },
+      {
+        "id": "H14",
+        "pdfPage": 14,
+        "printedPage": 13,
+        "title": "Stationery/forms general",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "letterhead-standard",
+          "envelope-standard",
+          "card-standard",
+          "letterhead-gas",
+          "envelope-gas",
+          "card-gas",
+          "letterhead-rail",
+          "envelope-rail",
+          "card-rail"
+        ],
+        "baselineGuides": [
+          "Stationery and forms"
+        ],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H15",
+        "pdfPage": 15,
+        "printedPage": 14,
+        "title": "Stationery design principles",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "letterhead-standard",
+          "envelope-standard",
+          "card-standard",
+          "letterhead-gas",
+          "envelope-gas",
+          "card-gas",
+          "letterhead-rail",
+          "envelope-rail",
+          "card-rail"
+        ],
+        "baselineGuides": [
+          "Stationery and forms"
+        ],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H16",
+        "pdfPage": 16,
+        "printedPage": 15,
+        "title": "Corporate stationery",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "letterhead-standard",
+          "envelope-standard",
+          "card-standard"
+        ],
+        "baselineGuides": [
+          "Stationery and forms"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "No scan overlay or dimension layer."
+        ]
+      },
+      {
+        "id": "H17",
+        "pdfPage": 17,
+        "printedPage": 16,
+        "title": "Gas Operations stationery",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "letterhead-gas",
+          "envelope-gas",
+          "card-gas"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "No scan overlay or dimension layer."
+        ]
+      },
+      {
+        "id": "H18",
+        "pdfPage": 18,
+        "printedPage": 17,
+        "title": "Rail stationery and BCE route marks",
+        "baselineStatus": "partial",
+        "baselineTemplates": [
+          "letterhead-rail",
+          "envelope-rail",
+          "card-rail"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "BCE outline absent on letterhead.",
+          "BCE blue silhouette/white-type mark absent on card."
+        ]
+      },
+      {
+        "id": "H19",
+        "pdfPage": 19,
+        "printedPage": 18,
+        "title": "Forms design rules",
+        "baselineStatus": "partial",
+        "baselineTemplates": [
+          "form-bulletin"
+        ],
+        "baselineGuides": [
+          "Stationery and forms"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Formal 14pt baseline-aligned header exception not demonstrated."
+        ]
+      },
+      {
+        "id": "H20",
+        "pdfPage": 20,
+        "printedPage": 19,
+        "title": "Bulletin form",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "form-bulletin"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Editable reconstruction; source text/field layout partly adapted, not an exact facsimile."
+        ]
+      },
+      {
+        "id": "H21",
+        "pdfPage": 21,
+        "printedPage": 20,
+        "title": "Tender Form",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Legal Tender Form absent."
+        ]
+      },
+      {
+        "id": "H22",
+        "pdfPage": 22,
+        "printedPage": 21,
+        "title": "Salary Employee Transfer",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Odd-size transfer form absent; physical overall size not explicitly stated."
+        ]
+      },
+      {
+        "id": "H23",
+        "pdfPage": 23,
+        "printedPage": 22,
+        "title": "Application for Service",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Compact landscape service form absent; physical overall size not explicitly stated."
+        ]
+      },
+      {
+        "id": "H24",
+        "pdfPage": 24,
+        "printedPage": 23,
+        "title": "Publication formats",
+        "baselineStatus": "partial",
+        "baselineTemplates": [],
+        "baselineGuides": [
+          "Publications"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Publication back cover/spines/content starter absent."
+        ]
+      },
+      {
+        "id": "H25",
+        "pdfPage": 25,
+        "printedPage": 24,
+        "title": "Cover proportions and back-cover rule",
+        "baselineStatus": "partial",
+        "baselineTemplates": [
+          "cover-report",
+          "cover-illustrated",
+          "cover-display"
+        ],
+        "baselineGuides": [
+          "Publications"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Back-cover printing-code template absent.",
+          "Construction guides cannot be toggled."
+        ]
+      },
+      {
+        "id": "H26",
+        "pdfPage": 26,
+        "printedPage": 25,
+        "title": "Report cover with dimensions",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "cover-report"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Construction guides and original-page overlay absent; numeric cover formula is already correct."
+        ]
+      },
+      {
+        "id": "H27",
+        "pdfPage": 27,
+        "printedPage": 26,
+        "title": "Illustrated publication cover",
+        "baselineStatus": "partial",
+        "baselineTemplates": [
+          "cover-illustrated"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Plain tinted illustration placeholder instead of historical source drawing."
+        ]
+      },
+      {
+        "id": "H28",
+        "pdfPage": 28,
+        "printedPage": 27,
+        "title": "4×9 display cover",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "cover-display"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "No construction overlay; green block itself is source illustration placeholder."
+        ]
+      },
+      {
+        "id": "H29",
+        "pdfPage": 29,
+        "printedPage": 28,
+        "title": "Publication spines",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Broad and narrow spine templates absent."
+        ]
+      },
+      {
+        "id": "H30",
+        "pdfPage": 30,
+        "printedPage": 29,
+        "title": "Newsletter mastheads",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "masthead-band",
+          "masthead-rule"
+        ],
+        "baselineGuides": [
+          "Publications"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "No original-source overlay; point size/margins are reconstruction choices."
+        ]
+      },
+      {
+        "id": "H31",
+        "pdfPage": 31,
+        "printedPage": 30,
+        "title": "Publication text and graphics",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "No body/content layout template or explicit content guidance sheet."
+        ]
+      },
+      {
+        "id": "H32",
+        "pdfPage": 32,
+        "printedPage": 31,
+        "title": "Advertising/AV/display general",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "advert-display",
+          "advert-classified"
+        ],
+        "baselineGuides": [
+          "Applications"
+        ],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H33",
+        "pdfPage": 33,
+        "printedPage": 32,
+        "title": "Display advertisement",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "advert-display"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Ad graphic and copy adapted, not a facsimile; exact inch sizes are measured reconstruction values."
+        ]
+      },
+      {
+        "id": "H34",
+        "pdfPage": 34,
+        "printedPage": 33,
+        "title": "Single-column and classified advertisements",
+        "baselineStatus": "partial",
+        "baselineTemplates": [
+          "advert-classified"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Single-column notice absent, while classified is present."
+        ]
+      },
+      {
+        "id": "H35",
+        "pdfPage": 35,
+        "printedPage": 34,
+        "title": "Audio-visual and television",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "av-title"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "4:3 canvas is an implementation choice; not specified in text."
+        ]
+      },
+      {
+        "id": "H36",
+        "pdfPage": 36,
+        "printedPage": 35,
+        "title": "Displays and 3D signature",
+        "baselineStatus": "application-missing",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Portable display panel template absent.",
+          "3D construction reference absent; production drawings not supplied."
+        ]
+      },
+      {
+        "id": "H37",
+        "pdfPage": 37,
+        "printedPage": 36,
+        "title": "Outdoor and specialty advertising",
+        "baselineStatus": "reference-only",
+        "baselineTemplates": [],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Outdoor/specialty lighting/context rules not surfaced as coverage entry."
+        ]
+      },
+      {
+        "id": "H38",
+        "pdfPage": 38,
+        "printedPage": 37,
+        "title": "Sign general rules",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "sign-office-identification",
+          "sign-gas-identification",
+          "sign-horizontal-facility",
+          "sign-vertical-facility",
+          "sign-danger",
+          "sign-guide",
+          "illustrated-h39-office",
+          "illustrated-h39-gas",
+          "illustrated-h39-freight",
+          "illustrated-h39-plant",
+          "illustrated-h40-advisory",
+          "illustrated-h40-customer-service",
+          "illustrated-h40-shipping",
+          "illustrated-h40-directional",
+          "illustrated-h41-danger",
+          "illustrated-h41-authorized-vehicles",
+          "illustrated-h41-employees-only"
+        ],
+        "baselineGuides": [
+          "Applications"
+        ],
+        "baselineSignatures": [],
+        "findings": [
+          "Viewing-distance rule not directly represented in template controls."
+        ]
+      },
+      {
+        "id": "H39",
+        "pdfPage": 39,
+        "printedPage": 38,
+        "title": "Identification signs",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "sign-office-identification",
+          "sign-gas-identification",
+          "sign-horizontal-facility",
+          "sign-vertical-facility",
+          "illustrated-h39-office",
+          "illustrated-h39-gas",
+          "illustrated-h39-freight",
+          "illustrated-h39-plant"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Descriptions incorrectly call Gas top clearance above flame; source says above logotype."
+        ]
+      },
+      {
+        "id": "H40",
+        "pdfPage": 40,
+        "printedPage": 39,
+        "title": "Guide signs",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "sign-guide",
+          "illustrated-h40-advisory",
+          "illustrated-h40-customer-service",
+          "illustrated-h40-shipping",
+          "illustrated-h40-directional"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H41",
+        "pdfPage": 41,
+        "printedPage": 40,
+        "title": "Control signs",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "sign-danger",
+          "illustrated-h41-danger",
+          "illustrated-h41-authorized-vehicles",
+          "illustrated-h41-employees-only"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H42",
+        "pdfPage": 42,
+        "printedPage": 41,
+        "title": "Vehicles general",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "vehicle-van-black",
+          "vehicle-van-white"
+        ],
+        "baselineGuides": [
+          "Applications"
+        ],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H43",
+        "pdfPage": 43,
+        "printedPage": 42,
+        "title": "Vehicle positive/reverse background rules",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "vehicle-van-black",
+          "vehicle-van-white",
+          "illustrated-h48-boxcar",
+          "illustrated-h47-generator",
+          "illustrated-h47-crawler-side",
+          "illustrated-h48-locomotive",
+          "illustrated-h47-crawler-front",
+          "illustrated-h44-van-side",
+          "illustrated-h45-stepvan-rear",
+          "illustrated-h44-van-rear",
+          "illustrated-h44-van-door",
+          "illustrated-h47-seat-panel",
+          "illustrated-h46-flatbed",
+          "illustrated-h45-stepvan-side",
+          "illustrated-h46-cab-door",
+          "illustrated-h45-roller-truck-rear",
+          "illustrated-h46-tractor-trailer"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H44",
+        "pdfPage": 44,
+        "printedPage": 43,
+        "title": "Light vehicles",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "vehicle-van-black",
+          "vehicle-van-white",
+          "illustrated-h44-van-side",
+          "illustrated-h44-van-rear",
+          "illustrated-h44-van-door"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Simplified van dimensions/proportions are implementation examples, not source dimensions."
+        ]
+      },
+      {
+        "id": "H45",
+        "pdfPage": 45,
+        "printedPage": 44,
+        "title": "Heavy trucks",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "illustrated-h45-stepvan-rear",
+          "illustrated-h45-stepvan-side",
+          "illustrated-h45-roller-truck-rear"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H46",
+        "pdfPage": 46,
+        "printedPage": 45,
+        "title": "Tractor trailers / mobile generators",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "illustrated-h46-flatbed",
+          "illustrated-h46-cab-door",
+          "illustrated-h46-tractor-trailer"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      },
+      {
+        "id": "H47",
+        "pdfPage": 47,
+        "printedPage": 46,
+        "title": "Equipment",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "illustrated-h47-generator",
+          "illustrated-h47-crawler-side",
+          "illustrated-h47-crawler-front",
+          "illustrated-h47-seat-panel"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": [
+          "Equipment locations are explicitly guidelines, not dimensions."
+        ]
+      },
+      {
+        "id": "H48",
+        "pdfPage": 48,
+        "printedPage": 47,
+        "title": "Railway rolling stock",
+        "baselineStatus": "represented",
+        "baselineTemplates": [
+          "illustrated-h48-boxcar",
+          "illustrated-h48-locomotive"
+        ],
+        "baselineGuides": [],
+        "baselineSignatures": [],
+        "findings": []
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction and terminology",
+      "printedPages": [
+        1
+      ],
+      "pdfPages": [
+        2
+      ],
+      "kind": "reference",
+      "rules": [
+        "Signature means symbol plus logotype; symbol/logotype are distinct terms.",
+        "Manual dated June 1983."
+      ]
+    },
+    {
+      "id": "signatures",
+      "title": "Official signatures",
+      "printedPages": [
+        2,
+        3
+      ],
+      "pdfPages": [
+        3,
+        4
+      ],
+      "kind": "vector-and-guidance",
+      "rules": [
+        "Four signatures: Corporate, Gas Operations, B.C.Hydro Rail, Formal.",
+        "Only one signature at a time. Corporate covers electrical/general and gas/rail as part of whole organization.",
+        "Each signature is inseparable symbol and specially cut/spaced logotype; no resetting, movement or reproportioning.",
+        "BCE route locomotive is an independent legacy mark, not part of Rail signature; do not place close together.",
+        "Formal signature wording and two-line arrangement may not be abbreviated or moved.",
+        "Official reproduction proofs / grid versions were separate controlled artwork, not included as production masters in this scan."
+      ]
+    },
+    {
+      "id": "colours",
+      "title": "Corporate colours",
+      "printedPages": [
+        4,
+        5
+      ],
+      "pdfPages": [
+        5,
+        6
+      ],
+      "kind": "tokens-and-reference",
+      "rules": [
+        "Green non-process376; process C50 Y100 (coated/uncoated).",
+        "Blue non-process314; coated C90 M20 Y25; uncoated C90 M15 Y25.",
+        "Black100%.",
+        "Green/blue occur in symbol only; logotypes black. Gas flame and H are same blue/value.",
+        "Printed manual swatches explicitly unsuitable for color production testing; original larger swatches were required."
+      ]
+    },
+    {
+      "id": "backgrounds",
+      "title": "Backgrounds",
+      "printedPages": [
+        6,
+        7
+      ],
+      "pdfPages": [
+        7,
+        8
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Normal print: black on white preferred; black on backgrounds0–20% value; dark>=70% single-color on white only; white reverse on80–100% value.",
+        "Avoid intermediate print backgrounds21–79%.",
+        "Corporate color positive on white only; no artificial white windows or white fill inside symbol.",
+        "Transparent backgrounds inside symbol match outer background.",
+        "AV/backlit and3D exceptions elsewhere."
+      ]
+    },
+    {
+      "id": "incorrect",
+      "title": "Incorrect usage",
+      "printedPages": [
+        8,
+        9,
+        10
+      ],
+      "pdfPages": [
+        9,
+        10,
+        11
+      ],
+      "kind": "guidance-and-examples",
+      "rules": [
+        "15 examples: wrong symbol placement; repeated isolated symbol; incorrect symbol colors; wrong blue; mismatched gas blue; colored Rail word; undersized color; reset logotype; abbreviated formal; reformatted formal; colored single-color on color; corporate colors on nonwhite; corporate colors on colored background; white forced inside symbol; colored fill in reverse signature."
+      ]
+    },
+    {
+      "id": "typography",
+      "title": "Corporate typeface",
+      "printedPages": [
+        11
+      ],
+      "pdfPages": [
+        12
+      ],
+      "kind": "tokens-and-guidance",
+      "rules": [
+        "Times Roman regular is primary; matched Times Italic for emphasis; other styles illustrated.",
+        "Upper/lower case; no all-cap settings. Sentence-case headings; initial capitals for first/principal words of titles and forms.",
+        "Company name in copy: B.C.Hydro with no spaces.",
+        "Body10–12pt,35–55 characters per line.",
+        "Bold sparingly; black on white preferred."
+      ]
+    },
+    {
+      "id": "minimum-sizes",
+      "title": "Signature minimum sizes",
+      "printedPages": [
+        12
+      ],
+      "pdfPages": [
+        13
+      ],
+      "kind": "rules-table",
+      "rules": [
+        "Minimum widths differ by signature, color treatment and background; see minimum-widths.json.",
+        "This table concerns the printed page, not a universal screen-pixel minimum."
+      ]
+    },
+    {
+      "id": "stationery-general",
+      "title": "Stationery and forms general",
+      "printedPages": [
+        13,
+        14
+      ],
+      "pdfPages": [
+        14,
+        15
+      ],
+      "kind": "guidance",
+      "rules": [
+        "White stock/black copy normally; colored stock only special needs such as multipart forms.",
+        "Enlarge signature/type for lower-contrast stock.",
+        "Corporate/Gas/Rail principal stationery coordinated; copy10/11pt Times Roman address.",
+        "Envelope form number6pt and return statement10pt.",
+        "Business card12pt name,8/9pt details, blind-embossed signature."
+      ]
+    },
+    {
+      "id": "corporate-stationery",
+      "title": "Corporate stationery",
+      "printedPages": [
+        15
+      ],
+      "pdfPages": [
+        16
+      ],
+      "kind": "templates",
+      "rules": [
+        "Letterhead, envelope, business card full-size fragments.",
+        "Signature1.5in wide; letterhead signature baseline1in from top, address first baseline3/16in below signature.",
+        "Letterhead dimension4in from symbol left to right trim; generator uses x4.5in on8.5in Letter, consistent with this annotated dimension.",
+        "Envelope symbol left0.5in, signature baseline0.75in down; form number0.25in in/down.",
+        "Card details use source dimensional diagram; signature baseline5/8in, name baseline1⅛in, lower copy baseline0.25in above bottom."
+      ]
+    },
+    {
+      "id": "gas-stationery",
+      "title": "Gas Operations stationery",
+      "printedPages": [
+        16
+      ],
+      "pdfPages": [
+        17
+      ],
+      "kind": "templates",
+      "rules": [
+        "Same coordinated letterhead/envelope/card sizing as Corporate; signature1.5in wide measured across whole mark.",
+        "Envelope preprinted return address10pt with3/16in spacing below signature.",
+        "Card includes telephone local beneath number at left."
+      ]
+    },
+    {
+      "id": "rail-stationery",
+      "title": "B.C.Hydro Rail stationery and BCE marks",
+      "printedPages": [
+        17
+      ],
+      "pdfPages": [
+        18
+      ],
+      "kind": "templates-and-vector",
+      "rules": [
+        "Rail signature2⅛in wide; same logotype type size/location as Corporate/Gas.",
+        "Letterhead BCE outline isolated at left, left-edge dimension0.75in shown.",
+        "Card BCE blue silhouette with white text1in wide;1/16in gap to right copy; telephone in bottom body-copy line.",
+        "Blue BCE card variant has no black outline; white lettering is knocked out."
+      ]
+    },
+    {
+      "id": "forms-general",
+      "title": "Forms rules",
+      "printedPages": [
+        18
+      ],
+      "pdfPages": [
+        19
+      ],
+      "kind": "layout-rules",
+      "rules": [
+        "Letter8.5×11in normal; black on white.",
+        "Form title/signature20pt on all form sizes; title top left aligns body; signature top right1in from right edge; both3/8in from top.",
+        "Formal signature14pt and aligned to form-name baseline.",
+        "Ruled lines0.5pt; no outside border; localized boxes allowed with square corners.",
+        "Form number6pt bottom left."
+      ]
+    },
+    {
+      "id": "bulletin-form",
+      "title": "Bulletin form",
+      "printedPages": [
+        19
+      ],
+      "pdfPages": [
+        20
+      ],
+      "kind": "template",
+      "rules": [
+        "Letter8.5×11; full-size form example; fields, paired header areas and department/division name at lower right."
+      ]
+    },
+    {
+      "id": "tender-form",
+      "title": "Tender form",
+      "printedPages": [
+        20
+      ],
+      "pdfPages": [
+        21
+      ],
+      "kind": "template",
+      "rules": [
+        "Legal8.5×14; scan uses breaks, not vertically compressed printed dimensions.",
+        "Two-column body for35–55-character lines; italic emphasis; sentence-case table headings."
+      ]
+    },
+    {
+      "id": "transfer-form",
+      "title": "Salary Employee Transfer form",
+      "printedPages": [
+        21
+      ],
+      "pdfPages": [
+        22
+      ],
+      "kind": "template",
+      "rules": [
+        "Odd-size snap-set example; exact overall paper size not stated.",
+        "Same20pt header/signature and0.5pt ruled lines; checkboxes and multipart-copy color distribution."
+      ]
+    },
+    {
+      "id": "service-form",
+      "title": "Application for Service form",
+      "printedPages": [
+        22
+      ],
+      "pdfPages": [
+        23
+      ],
+      "kind": "template",
+      "rules": [
+        "Compact landscape form divided down middle; title/signature retain standard size/left-right relationship.",
+        "Exact overall physical dimensions not stated in text; small dense grid can only be measured from scan."
+      ]
+    },
+    {
+      "id": "publications-general",
+      "title": "Publication formats",
+      "printedPages": [
+        23
+      ],
+      "pdfPages": [
+        24
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Letter8.5×11in first choice; vertical4×9in rack format; occasional3¾×8½in substitute.",
+        "Vertical design retained unless technical contents force horizontal.",
+        "Signature first element near cover top; no noninformational decoration.",
+        "Relevant graphics grouped; avoid additional logos/symbols."
+      ]
+    },
+    {
+      "id": "covers",
+      "title": "Publication covers",
+      "printedPages": [
+        24,
+        25,
+        26,
+        27
+      ],
+      "pdfPages": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "kind": "templates-and-overlays",
+      "rules": [
+        "Text begins1/3 cover width across and1/4 depth down.",
+        "All text flush with B; symbol hangs left.",
+        "Signature/title same type size;2 dominant cap-heights from signature baseline to title cap top.",
+        "Letter signature/title36/36pt, subtitle/authorship18/18pt. Rack signature/title24/24pt, subordinate12/12pt.",
+        "Subtitle1 dominant cap-height below title; authorship/location/date1 dominant cap-height below previous element.",
+        "No extra leading within multiline elements.",
+        "Letter example includes0.5in binding allowance; proportions same with/without binding.",
+        "Back cover no signature,6pt printing code lower right; no printer name.",
+        "Photo/illustration cover and rack cover also shown."
+      ]
+    },
+    {
+      "id": "spines",
+      "title": "Publication spines",
+      "printedPages": [
+        28
+      ],
+      "pdfPages": [
+        29
+      ],
+      "kind": "templates",
+      "rules": [
+        "Read left-to-right with book lying on back. Signature before title.",
+        "Broad: signature/title separate lines, same36pt as cover; symbols align to cover, text to B.",
+        "Narrow: one line; reduced to fit length."
+      ]
+    },
+    {
+      "id": "mastheads",
+      "title": "Mastheads",
+      "printedPages": [
+        29
+      ],
+      "pdfPages": [
+        30
+      ],
+      "kind": "templates",
+      "rules": [
+        "Letter preferred; horizontal top masthead; signature left/title right at equal type size.",
+        "Date/issue/contact below as part of masthead.",
+        "With light band or without band; normal positive standards.",
+        "No exact masthead point size dictated in text."
+      ]
+    },
+    {
+      "id": "contents",
+      "title": "Publication contents",
+      "printedPages": [
+        30
+      ],
+      "pdfPages": [
+        31
+      ],
+      "kind": "template-and-guidance",
+      "rules": [
+        "Consistent size, column width and spacing. Compact reading units; excess whitespace better in margins.",
+        "Consistent drawing line weights/rendering.",
+        "Simple contrasting legend colors; avoid small colored type.",
+        "Drafting-convention exception for engineering-drawing lettering; name still B.C.Hydro and covers use signature."
+      ]
+    },
+    {
+      "id": "advertising-general",
+      "title": "Advertising general",
+      "printedPages": [
+        31
+      ],
+      "pdfPages": [
+        32
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Corporate typeface/signature fundamentals across print, television, radio, exhibits, etc.",
+        "Signature final element in advertising; upper/lower case typography."
+      ]
+    },
+    {
+      "id": "print-ads",
+      "title": "Print advertising",
+      "printedPages": [
+        32,
+        33
+      ],
+      "pdfPages": [
+        33,
+        34
+      ],
+      "kind": "templates",
+      "rules": [
+        "Large display ad, single-column notice, classified tender example.",
+        "Signature positive at base/final element; minimum widths enforced.",
+        "Times regular upper/lower case, nearest equivalent for publisher-setting; italics for emphasis."
+      ]
+    },
+    {
+      "id": "audio-visual",
+      "title": "Audio-visual / television",
+      "printedPages": [
+        34
+      ],
+      "pdfPages": [
+        35
+      ],
+      "kind": "template-and-guidance",
+      "rules": [
+        "Reverse preferred to avoid white-screen eyestrain.",
+        "Color reverse exception: white logotype/circle, green/blue retained; dark neutral background.",
+        "Use highest-contrast single-color when backgrounds distort colors or change.",
+        "Titles/credits/diagrams corporate typeface."
+      ]
+    },
+    {
+      "id": "displays",
+      "title": "Displays and 3D signature",
+      "printedPages": [
+        35
+      ],
+      "pdfPages": [
+        36
+      ],
+      "kind": "template-vector-guidance",
+      "rules": [
+        "Portable panel border minimum0.5 cap-height all sides.",
+        "Signature only main ID, not excess/decorative symbol.",
+        "3D from official large-scale drawings; scan diagram simplified.",
+        "Diagram notes30deg bevel on H,20deg bevel on logotype, broad-stroke width:depth2:1.",
+        "Color reverse allowed on appropriate neutral backgrounds in dimensional applications.",
+        "Metallic finish H must match letters; avoid coarse/conflicting backgrounds."
+      ]
+    },
+    {
+      "id": "other-advertising",
+      "title": "Outdoor and specialty advertising",
+      "printedPages": [
+        36
+      ],
+      "pdfPages": [
+        37
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Front-lit standard print rules; back-lit AV rules. Signature final element.",
+        "Specialty items must suit imprint size/texture/contour. No uniform standards or uniform illustrations appear here."
+      ]
+    },
+    {
+      "id": "signs-general",
+      "title": "Signs general",
+      "printedPages": [
+        37
+      ],
+      "pdfPages": [
+        38
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Black on white, upper/lower case, flush left general rule.",
+        "Guide/control signature only when identity not already clear; at top.",
+        "Guide lower-case letter height1in per50ft viewing (25mm per15m), with favorable conditions; enlarge when compromised.",
+        "Roadway/railway traffic signs and some international safety signs are outside manual scope."
+      ]
+    },
+    {
+      "id": "identification-signs",
+      "title": "Identification signs",
+      "printedPages": [
+        38
+      ],
+      "pdfPages": [
+        39
+      ],
+      "kind": "templates-and-overlays",
+      "rules": [
+        "Full signature only or facility name immediately below.",
+        "Borders0.5 cap-height all sides; Gas top border is1 full cap-height above logotype.",
+        "Name top1 x-height below signature baseline; tight multiline name (descenders just clear).",
+        "Horizontal and vertical examples."
+      ]
+    },
+    {
+      "id": "guide-signs",
+      "title": "Guide signs",
+      "printedPages": [
+        39
+      ],
+      "pdfPages": [
+        40
+      ],
+      "kind": "templates-vector-overlays",
+      "rules": [
+        "Borders0.5 cap-height; copy line gap1 x-height as rule.",
+        "Sentence copy sentence case; brief labels principal-word capitalization.",
+        "Subordinate cap-height equals dominant x-height.",
+        "Directional lines1 cap-height apart, ruled divider, source arrow style.",
+        "7:30 am to4:30 pm example uses lower-case am/pm and ampersand."
+      ]
+    },
+    {
+      "id": "control-signs",
+      "title": "Control signs",
+      "printedPages": [
+        40
+      ],
+      "pdfPages": [
+        41
+      ],
+      "kind": "templates-and-vector",
+      "rules": [
+        "Safety black on yellow with specific exceptions.",
+        "Traffic/pedestrian follow UTCD conventions (historic source).",
+        "Danger/prohibit access example; red do-not-enter circle with white bar; indoor Employees only black-on-white, no signature needed."
+      ]
+    },
+    {
+      "id": "vehicles-general",
+      "title": "Vehicles general",
+      "printedPages": [
+        41,
+        42
+      ],
+      "pdfPages": [
+        42,
+        43
+      ],
+      "kind": "guidance",
+      "rules": [
+        "Corporate/Gas/Rail single-color only; same logotype height on same vehicle type.",
+        "Vehicle value thresholds differ: black0–30%, white31–100%.",
+        "One per side, third rear where fits, extra pair on tractor cab; none on front.",
+        "Unit numbers clear of signatures, not on fixed-chassis/cab doors; rear units right/signatures left.",
+        "Transparent-carrier decal/die-cut; flat vertical placement preferred.",
+        "Pool cars, aircraft, some security/other vehicles unmarked and omitted."
+      ]
+    },
+    {
+      "id": "light-vehicles",
+      "title": "Light vehicles",
+      "printedPages": [
+        43
+      ],
+      "pdfPages": [
+        44
+      ],
+      "kind": "application-vector",
+      "rules": [
+        "Panel van side upper rear; rear upper left door below window/clear hardware.",
+        "Without upper panels, front doors below windows; rear left only if clear.",
+        "Passenger cars usually unmarked."
+      ]
+    },
+    {
+      "id": "heavy-trucks",
+      "title": "Heavy trucks",
+      "printedPages": [
+        44
+      ],
+      "pdfPages": [
+        45
+      ],
+      "kind": "application-vector",
+      "rules": [
+        "Both side marks upper rear; if obstructed on either side, both on doors instead.",
+        "Rear upper left below hinged-door window or near roll-up top; none on aerial equipment.",
+        "Extreme protrusions require separate flat panel."
+      ]
+    },
+    {
+      "id": "tractor-trailers",
+      "title": "Tractor trailers / mobile generators",
+      "printedPages": [
+        45
+      ],
+      "pdfPages": [
+        46
+      ],
+      "kind": "application-vector",
+      "rules": [
+        "Upper rear both trailer sides; both cab doors; rear upper left.",
+        "Flatbed side marks only, towards back wheels."
+      ]
+    },
+    {
+      "id": "equipment",
+      "title": "Equipment",
+      "printedPages": [
+        46
+      ],
+      "pdfPages": [
+        47
+      ],
+      "kind": "application-vector",
+      "rules": [
+        "One each side, third rear if appropriate; least-wear positions. Illustrative guidance, not exact dimensional specification."
+      ]
+    },
+    {
+      "id": "railway",
+      "title": "Railway rolling stock",
+      "printedPages": [
+        47
+      ],
+      "pdfPages": [
+        48
+      ],
+      "kind": "application-vector",
+      "rules": [
+        "One signature per side. Locomotive below cab windows; railcars same end towards top."
+      ]
+    }
+  ],
+  "minimumWidths": {
+    "corporate": {
+      "blackWhite": {
+        "in": 1,
+        "mm": 25
+      },
+      "black20": {
+        "in": 1.25,
+        "mm": 32
+      },
+      "dark70White": {
+        "in": 1.5,
+        "mm": 38
+      },
+      "colourWhite": {
+        "in": 1.875,
+        "mm": 48
+      },
+      "whiteBlack": {
+        "in": 1.25,
+        "mm": 32
+      },
+      "white80": {
+        "in": 1.5,
+        "mm": 38
+      }
+    },
+    "gas": {
+      "blackWhite": {
+        "in": 1,
+        "mm": 25
+      },
+      "black20": {
+        "in": 1.25,
+        "mm": 32
+      },
+      "dark70White": {
+        "in": 1.5,
+        "mm": 38
+      },
+      "colourWhite": {
+        "in": 1.875,
+        "mm": 48
+      },
+      "whiteBlack": {
+        "in": 1.25,
+        "mm": 32
+      },
+      "white80": {
+        "in": 1.5,
+        "mm": 38
+      }
+    },
+    "rail": {
+      "blackWhite": {
+        "in": 1.5,
+        "mm": 38
+      },
+      "black20": {
+        "in": 1.75,
+        "mm": 44
+      },
+      "dark70White": {
+        "in": 2,
+        "mm": 51
+      },
+      "colourWhite": {
+        "in": 2.25,
+        "mm": 57
+      },
+      "whiteBlack": {
+        "in": 2,
+        "mm": 51
+      },
+      "white80": {
+        "in": 2.25,
+        "mm": 57
+      }
+    },
+    "formal": {
+      "blackWhite": {
+        "in": 2,
+        "mm": 51
+      },
+      "black20": {
+        "in": 2.25,
+        "mm": 57
+      },
+      "colourWhite": {
+        "in": 2.5,
+        "mm": 63
+      },
+      "whiteBlack": {
+        "in": 2.5,
+        "mm": 63
+      },
+      "white80": {
+        "in": 2.75,
+        "mm": 70
+      }
+    },
+    "source": {
+      "pdfPage": 13,
+      "printedPage": 12,
+      "note": "in and mm values are the historical rounded values printed in manual, not exact conversion."
+    }
+  }
+}

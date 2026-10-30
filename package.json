@@ -73,7 +73,9 @@
     "test:documents:pagination": "node --test test/native-word-pagination.test.js",
     "test:documents:browser": "node test/browser/documentation.check.mjs",
     "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs",
-    "test:unbc:browser": "node test/browser/unbc.check.mjs"
+    "test:unbc:browser": "node test/browser/unbc.check.mjs",
+    "test:hydro:browser": "node test/browser/bc-hydro.check.mjs",
+    "audit:hydro": "node scripts/audit-bc-hydro.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

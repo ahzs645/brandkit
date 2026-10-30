@@ -27,7 +27,9 @@ const templateOf = (brand, id) => {
 
 /** The template's background (what is not text) as a PNG `dpi` dots to the inch. */
 const backgroundPng = async (ctx, page, png, dpi = 200, extra = {}) => {
-  const svg = renderTemplate({ ...ctx, outline: true }, { ...page.template, ...extra, elements: page.background }).svg
+  // Fields have been removed from this artwork. Their construction guides are preview-only
+  // and may refer to those missing flow items, so remove the guide model before rendering.
+  const svg = renderTemplate({ ...ctx, outline: true, showLayoutGuides: false, showGuides: false }, { ...page.template, ...extra, guides: undefined, elements: page.background }).svg
   return png(svg, Math.min(3000, Math.round((page.width / 72) * dpi)))
 }
 
@@ -175,11 +177,76 @@ export const officeStyles = (brand, profile = {}, defaults = {}) => {
   return { default: { document: { run: { ...body.run, ...defaults }, paragraph: { widowControl: true } } }, paragraphStyles }
 }
 
-/** A Word template: the first page's background and text, later pages' header and footer. */
+/**
+ * An explicit, finite sequence of page designs. Each page has its own artwork and native
+ * positioned text, so columns and a final back cover are retained. This is opt-in: ordinary
+ * letters keep their established first-page/continuation-page flowing-text behavior below.
+ */
+const sequenceDocx = async (ctx, document, pages, docx, png) => {
+  const { AlignmentType, Document, Footer, FrameAnchorType, FrameWrap, Header, HorizontalPositionRelativeFrom, ImageRun, LineRuleType, Packer, PageNumber, PageOrientation, Paragraph, SectionType, TextRun, TextWrappingType, VerticalPositionRelativeFrom } = docx
+  const textOf = (page) => [...page.header, ...page.body, ...page.footer].filter((item) => item.kind !== 'rule')
+  const allText = [...pages.flatMap(textOf), ...officeStyleFonts(ctx.brand)]
+  const empty = () => new Paragraph({ spacing: { before: 0, after: 0, line: 1, lineRule: LineRuleType.EXACT }, children: [] })
+  const sections = []
+  for (const page of pages) {
+    const items = textOf(page)
+    const taken = new Set(items.map((item) => item.element))
+    // Rules stay with the fixed artwork in this mode, including those in the text zone.
+    const data = await backgroundPng(ctx, { ...page, background: page.template.elements.filter((element, index) => !taken.has(index)) }, png)
+    const artwork = new Paragraph({
+      spacing: { before: 0, after: 0, line: 1, lineRule: LineRuleType.EXACT },
+      children: [new ImageRun({
+        type: 'png', data,
+        transformation: { width: Math.round(page.width / 0.75), height: Math.round(page.height / 0.75) },
+        floating: { horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 }, verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: 0 }, behindDocument: true, allowOverlap: true, wrap: { type: TextWrappingType.NONE } },
+        altText: { name: 'Page artwork', description: `${ctx.brand.name} ${page.template.label ?? page.template.id}`, title: page.template.label ?? page.template.id }
+      })]
+    })
+    const children = items.map((item) => {
+      const leading = item.lines.length > 1 || item.width ? item.leading : Math.max(item.leading, item.size * 1.15)
+      const width = item.width ?? Math.max(item.measured + 2, item.size)
+      const x = item.anchor === 'end' ? item.x - width : item.anchor === 'middle' ? item.x - width / 2 : item.x
+      const style = { font: item.font, size: Math.round(item.size * 2), color: item.colour, bold: item.bold, italics: item.italic, characterSpacing: twips(item.tracking), allCaps: item.caps }
+      // Keep the engine's measured line breaks, while preserving actual page-number fields.
+      const runs = item.runs.some((run) => run.page) ? item.runs : [{ text: item.lines.join('\n') }]
+      return new Paragraph({
+        style: page.template.elements[item.element]?.documentStyle ?? (/title|subject|project-name/.test(item.id ?? '') ? 'Title' : 'BodyText'),
+        alignment: item.anchor === 'end' ? AlignmentType.RIGHT : item.anchor === 'middle' ? AlignmentType.CENTER : AlignmentType.LEFT,
+        keepNext: false, keepLines: true, widowControl: false,
+        indent: { left: 0, right: 0 },
+        spacing: { before: 0, after: 0, line: twips(leading), lineRule: LineRuleType.EXACT },
+        frame: { type: 'absolute', position: { x: twips(x), y: twips(item.y - 0.8 * leading) }, anchor: { horizontal: FrameAnchorType.PAGE, vertical: FrameAnchorType.PAGE }, width: twips(width), wrap: FrameWrap.THROUGH, space: { horizontal: 0, vertical: 0 } },
+        children: runs.flatMap((run) => run.page ? [new TextRun({ ...style, children: [PageNumber.CURRENT] })] : run.text.split('\n').map((line, index) => new TextRun({ ...style, text: line, ...(index ? { break: 1 } : {}) })))
+      })
+    })
+    const landscape = page.width > page.height
+    sections.push({
+      properties: {
+        type: SectionType.NEXT_PAGE,
+        // docx swaps the supplied dimensions for landscape, so give it the portrait pair.
+        page: { size: { width: twips(landscape ? page.height : page.width), height: twips(landscape ? page.width : page.height), orientation: landscape ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } }
+      },
+      headers: { default: new Header({ children: [artwork] }) },
+      footers: { default: new Footer({ children: [empty()] }) },
+      children: [...children, empty()]
+    })
+  }
+  const file = new Document({
+    fonts: embeddedFonts(ctx, allText), creator: ctx.brand.name,
+    title: fill(ctx.brand, document.label ?? document.id),
+    description: `${ctx.brand.name} ${document.label ?? document.id}, made by brandkit. A fixed page sequence with editable positioned text and page artwork in each header.`,
+    customProperties: [{ name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, allText)) }],
+    styles: officeStyles(ctx.brand), sections
+  })
+  return new Uint8Array(await Packer.toArrayBuffer(file))
+}
+
+/** A Word template: first/rest letter behavior, or an explicitly requested page sequence. */
 export const docxFile = async (ctx, document, { png }) => {
   const docx = await import('docx')
   const { AlignmentType, BorderStyle, Document, Footer, Header, HorizontalPositionRelativeFrom, ImageRun, LineRuleType, Packer, PageNumber, Paragraph, Tab, TabStopType, Table, TableCell, TableLayoutType, TableRow, TextRun, TextWrappingType, VerticalPositionRelativeFrom, WidthType } = docx
   const pages = document.pages.map((id) => documentPage(ctx, templateOf(ctx.brand, id)))
+  if (document.pageMode === 'sequence') return sequenceDocx(ctx, document, pages, docx, png)
   const [first, rest = null] = pages
   const width = first.width
   const height = first.height
@@ -423,7 +490,7 @@ const linkFor = (item, text) => {
 export const signatureHtml = async (ctx, document, { png, src } = {}) => {
   const template = templateOf(ctx.brand, document.template)
   const layout = signatureLayout(ctx, template, document.emailLayout)
-  let artwork = renderTemplate({ ...ctx, outline: true }, { ...template, width: layout.image.sourceWidth ?? layout.image.width, height: layout.image.sourceHeight ?? layout.image.height, elements: layout.image.elements }).svg
+  let artwork = renderTemplate({ ...ctx, outline: true, showLayoutGuides: false, showGuides: false }, { ...template, guides: undefined, width: layout.image.sourceWidth ?? layout.image.width, height: layout.image.sourceHeight ?? layout.image.height, elements: layout.image.elements }).svg
   if (layout.image.viewport) {
     const { x, y, width, height } = layout.image.viewport
     artwork = artwork.replace(/<svg\b[^>]*>/, opening => opening
