@@ -1,7 +1,5 @@
 # B.C.Hydro motion (example)
 
-The 1983 Graphic Standards Manual predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the manual’s rules; they are not BC Hydro guidance.
-
 7 studies on one set of timings, all drawn from the brand's own artwork with
 the type outlined. Open `index.html` to play them; `motion.css` holds the tokens and keyframes,
 and `motion-tokens.json` the same values for code. brandkit's Motion tab plays them too, and

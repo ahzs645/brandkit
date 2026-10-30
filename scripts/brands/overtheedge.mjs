@@ -1,14 +1,18 @@
 // Writes brands/overtheedge/brand.json: Over the Edge, UNBC's independent student newspaper, in its
-// "Forest press" identity.
+// "Doodle" identity, the one the paper's own team designed for 2025–27.
 //
 //   npm run make:overtheedge
 //
 // The logo is the paper's own: the SVG its website serves, vendored once in reference/logo-site.svg
 // and read here path by path (scripts/brands/overtheedge-logo.mjs). The words OVER, THE and EDGE
 // and the subtext line become the horizontal wordmark's glyphs, unedited; the O alone is the symbol.
-// The stacked masthead is extracted from page 1 of the September 2025 PDF. Colours
-// come from the site's theme and the 2025 print covers; type is Source Serif 4, Anton, Helvetica Neue,
-// IBM Plex Mono and Salted. Everything else is drawn from those.
+// The stacked masthead is extracted from page 1 of the September 2025 PDF.
+//
+// Colour, type and the applications follow the team's identity files (reference/identity/): four
+// flat colours (Cream #FFFBF3, Forest #155329, Lichen #E3EFCF, Ink #262626) read from the files'
+// own fills; Decalotype, Helvetica Neue and Salted, with Anton standing in for Decalotype, which is
+// not openly licensed; and the doodles, stickers, tags and dashed rules drawn in
+// scripts/brands/overtheedge-doodle.mjs. The earlier "Forest press" templates stay, re-set in this type.
 
 import { extendBrandPatterns } from './pattern-collections.mjs'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -18,6 +22,7 @@ import { updateManifest } from './common.mjs'
 import { loadCoverLogo, loadLogo, pathBounds, siteIcons, union, up } from './overtheedge-logo.mjs'
 import { embeddedFonts, lockupMarkup, markMarkup, motionCss, motionPage, motionReadme, RULES, STUDIES, TOKENS } from './overtheedge-motion.mjs'
 import { detailsPage } from './overtheedge-details.mjs'
+import { doodleKit } from './overtheedge-doodle.mjs'
 import { importPrinterPackage } from '../../src/printer/package.js'
 
 const folder = new URL('../../brands/overtheedge/', import.meta.url).pathname
@@ -34,16 +39,17 @@ for (const input of INPUTS) {
 // --- Type ----------------------------------------------------------------------------------------
 
 const face = (family, stack, file, weight, label, extra = {}) => ({ family, stack, weight, file, web: file, label, ...extra })
-const SERIF = '"Source Serif 4", Georgia, "Times New Roman", serif'
+const HELVETICA = '"Helvetica Neue", Helvetica, Arial, sans-serif'
+// The identity names three faces: Decalotype for headlines, Helvetica Neue for reading and Salted
+// for the handwritten accents. Decalotype is a commercial face, so Anton, the closest open face
+// already in fonts/, stands in for it. Labels are Helvetica Neue Bold in capitals, as the dates
+// and section names in the posts are.
 const FONTS = {
-  body: face('Helvetica Neue', '"Helvetica Neue", Helvetica, Arial, sans-serif', 'printer/staff-card/fonts/1-helveticaneue-medium.otf', 500, 'Helvetica Neue Medium'),
-  bold: face('Helvetica Neue', '"Helvetica Neue", Helvetica, Arial, sans-serif', 'printer/staff-card/fonts/0-helveticaneue-bold.otf', 700, 'Helvetica Neue Bold'),
-  display: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-Bold.ttf', 700, 'Source Serif 4 Bold 700'),
-  displayRegular: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-Regular.ttf', 400, 'Source Serif 4 Regular 400'),
-  deck: face('Source Serif 4', SERIF, 'fonts/SourceSerif4-It.ttf', 400, 'Source Serif 4 Italic 400', { style: 'italic' }),
-  extra: face('Anton', 'Anton, "Arial Narrow", Impact, sans-serif', 'fonts/Anton-Regular.ttf', 400, 'Anton Regular 400'),
-  label: face('IBM Plex Mono', '"IBM Plex Mono", ui-monospace, Menlo, monospace', 'fonts/IBMPlexMono-Medium.ttf', 500, 'IBM Plex Mono Medium 500'),
-  hand: face('Salted', 'Salted, cursive', 'fonts/Salted-Regular.otf', 400, 'Salted Regular', { license: 'fonts/LICENSE-Salted.txt', usage: 'Personal use only', sample: 'Over the Edge is back!' })
+  body: face('Helvetica Neue', HELVETICA, 'printer/staff-card/fonts/1-helveticaneue-medium.otf', 500, 'Helvetica Neue Medium'),
+  bold: face('Helvetica Neue', HELVETICA, 'printer/staff-card/fonts/0-helveticaneue-bold.otf', 700, 'Helvetica Neue Bold'),
+  display: face('Anton', 'Anton, "Arial Narrow", Impact, sans-serif', 'fonts/Anton-Regular.ttf', 400, 'Anton Regular 400, for Decalotype'),
+  label: face('Helvetica Neue', HELVETICA, 'printer/staff-card/fonts/0-helveticaneue-bold.otf', 700, 'Helvetica Neue Bold, capitals'),
+  hand: face('Salted', 'Salted, cursive', 'fonts/Salted-Regular.otf', 400, 'Salted Regular', { license: 'fonts/LICENSE-Salted.txt', usage: 'Personal use only', sample: 'ISSUE #2 is out!' })
 }
 const fonts = await loadBrandFontsFromDisk({ fonts: FONTS }, folder)
 if (fonts.failures.length) throw new Error(`Fonts failed to load: ${fonts.failures.join(', ')}`)
@@ -82,22 +88,42 @@ const symbol = {
   construction: { source: 'The first path of OVER in reference/logo-site.svg, unedited.' }
 }
 
+// The logo's OVER THE EDGE lettering, for the identity's faint repeated ground.
+const WORDS = { d: glyphs.over + glyphs.the + glyphs.edge, width: up(main[2]), height: up(main[3]) }
+
 // --- Colour --------------------------------------------------------------------------------------
-// From the site's theme (oklch values converted to hex) and the April 2025 cover. See docs/PLANS.md M2.
+// The identity's palette slide names four colours, and its SVGs fill with exactly those: Cream
+// #FFFBF3, Lichen #E3EFCF, Forest #155329 and Ink #262626. Cream keeps the key `newsprint`, the
+// paper's role, so the supporting pattern studies and the motion library keep working. Four tints are
+// sampled from the posts: the faint OVER THE EDGE ground on cream (Haze), the flame behind a deadline
+// (Flame), the crumpled paper sheet (Crumple) and the issue number on the cream deadline (Ember).
+// Pine to Proof are the earlier Forest press colours, kept for the supporting studies and the site.
 
 const COLOURS = {
-  forest: '#155329', pine: '#0C3B1C', newsprint: '#F5F1E6', ink: '#262626', lichen: '#E3EFCF', sage: '#6AA380',
-  moss: '#466855', kraft: '#D4C8AA', pulp: '#DBD0BA', bark: '#7D6B56', proof: '#B54A35', white: '#FFFFFF'
+  forest: '#155329', newsprint: '#FFFBF3', lichen: '#E3EFCF', ink: '#262626',
+  haze: '#F5F1EA', flame: '#FFF2D8', crumple: '#F4F4F4', ember: '#6D4900', white: '#FFFFFF',
+  pine: '#0C3B1C', sage: '#6AA380', moss: '#466855', kraft: '#D4C8AA', pulp: '#DBD0BA', bark: '#7D6B56', proof: '#B54A35'
 }
+const COLOUR_NAMES = { newsprint: 'Cream' }
 
-// Every text pair the templates use, and its contrast as measured (docs/PLANS.md M2, Contrast).
-const CONTRAST = [['ink', 'newsprint', '13.4'], ['forest', 'newsprint', '8.1'], ['white', 'forest', '9.1'], ['lichen', 'forest', '7.6'], ['white', 'pine', '12.7'], ['lichen', 'pine', '10.6'], ['white', 'moss', '6.2'], ['ink', 'sage', '5.2'], ['bark', 'newsprint', '4.53'], ['proof', 'newsprint', '4.7'], ['white', 'proof', '5.3']]
+/** WCAG 2 contrast between two palette colours, to one decimal place. */
+const contrastOf = (a, b) => {
+  const lum = (hex) => {
+    const [r, g, bl] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl
+  }
+  const [hi, lo] = [lum(COLOURS[a]), lum(COLOURS[b])].sort((x, y) => y - x)
+  return ((hi + 0.05) / (lo + 0.05)).toFixed(1)
+}
+// Every text pair the templates use, and its contrast as measured.
+const CONTRAST = [['ink', 'newsprint'], ['forest', 'newsprint'], ['ember', 'newsprint'], ['newsprint', 'forest'], ['lichen', 'forest'], ['white', 'forest'], ['newsprint', 'ink'], ['lichen', 'ink'], ['ink', 'lichen'], ['forest', 'lichen'], ['ink', 'crumple'], ['forest', 'crumple'], ['bark', 'newsprint'], ['white', 'moss'], ['bark', 'white'], ['ink', 'white']].map(([fg, bg]) => [fg, bg, contrastOf(fg, bg)])
 // Allowed only for text 24 px and larger.
-const LARGE_ONLY = [['sage', 'pine', '4.3'], ['sage', 'forest', '3.1']]
+const LARGE_ONLY = [['sage', 'forest']].map(([fg, bg]) => [fg, bg, contrastOf(fg, bg)])
 
 // --- Copy ----------------------------------------------------------------------------------------
-// Only lines the paper already uses, on its site or its covers. Templates use these or bracketed
-// placeholders; test/overtheedge.test.js holds them to it.
+// Only lines the paper already uses: on its site, its covers or its own identity files (the
+// Doodle templates quote those). Templates use these or bracketed placeholders;
+// test/overtheedge.test.js holds them to it.
 
 export const SOURCED_LINES = {
   tagline: "UNBC's Independent Student Newspaper",
@@ -113,7 +139,7 @@ export const SOURCED_LINES = {
 
 const t = (id, text, x, y, size, colour, extra = {}) => ({ type: 'text', id, text, x, y, size, colour, ...extra })
 const label = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, size, colour, { font: 'label', tracking: size * 0.08, ...extra })
-const anton = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, size, colour, { font: 'extra', ...extra })
+const anton = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, size, colour, { font: 'display', ...extra })
 const hand = (id, text, x, y, size, colour, extra = {}) => t(id, text, x, y, size, colour, { font: 'hand', ...extra })
 const rect = (id, x, y, width, height, fill, extra = {}) => ({ type: 'rect', id, x, y, width, height, fill, ...extra })
 /** A dashed rule, as in the print issue's index. */
@@ -137,8 +163,13 @@ const issueIndex = (x, y, width, rowHeight, rows, numberSize, titleSize, ground)
 ]
 
 // --- Templates -----------------------------------------------------------------------------------
+// The Doodle identity's own applications come first (scripts/brands/overtheedge-doodle.mjs); the
+// cards, letterhead and earlier Forest press posts and slides follow, re-set in the identity's type.
+
+const DOODLE = doodleKit({ hex: (key) => COLOURS[key], fonts, words: WORDS })
 
 const TEMPLATES = [
+  ...DOODLE.templates,
   {
     id: 'business-card-front', label: 'Business card, front', title: '{name} / business-card front / 90 × 50 mm trim + 3 mm bleed', ...card,
     elements: [
@@ -160,21 +191,6 @@ const TEMPLATES = [
       t('contact-email', '[Email]', 96, 444, 24, 'ink'),
       label('contact-site', 'OVERTHEEDGE.UNBC.CA', 96, 482, 18, 'forest'),
       cardGuides
-    ]
-  },
-  {
-    id: 'press-pass', label: 'Press pass', group: 'Credentials', title: '{name} / press pass / 54 × 86 mm', width: 540, height: 860, physical: ['54mm', '86mm'], raster: 1080,
-    elements: [
-      { type: 'background', fill: 'newsprint' },
-      rect('pass-band', 0, 0, 540, 200, 'forest'),
-      { type: 'logo', x: 70, y: 58, width: 400, colour: 'white', family: 'words', ground: 'forest' },
-      label('pass-subtext', "UNBC'S STUDENT NEWSPAPER", 270, 150, 16, 'lichen', { anchor: 'middle', ground: 'forest' }),
-      rect('photo-well', 150, 240, 240, 290, 'kraft', { stroke: 'forest', strokeWidth: 2 }),
-      t('photo-note', '[Photo]', 270, 395, 20, 'ink', { anchor: 'middle', ground: 'kraft' }),
-      t('pass-name', '[Full Name]', 270, 598, 34, 'ink', { font: 'display', anchor: 'middle' }),
-      label('pass-role', '[ROLE]', 270, 634, 16, 'bark', { anchor: 'middle' }),
-      anton('pass-press', 'PRESS', 270, 752, 96, 'forest', { anchor: 'middle' }),
-      label('pass-term', 'VOLUME [00] · [YEAR]', 270, 816, 16, 'bark', { anchor: 'middle' })
     ]
   },
   {
@@ -224,7 +240,7 @@ const TEMPLATES = [
       { type: 'flow', x: 64, y: 600, items: [
         { id: 'story-section', text: '[SECTION] · [DATE]', size: 22, font: 'label', tracking: 1.76, colour: 'forest' },
         { id: 'story-headline', text: '[Headline]', size: 84, leading: 92, gap: 104, wrap: 952, maxLines: 4, font: 'display', colour: 'ink' },
-        { id: 'story-deck', text: '[One-sentence deck]', size: 32, leading: 44, gap: 76, wrap: 900, maxLines: 2, font: 'deck', colour: 'ink' }
+        { id: 'story-deck', text: '[One-sentence deck]', size: 32, leading: 44, gap: 76, wrap: 900, maxLines: 2, font: 'body', colour: 'ink' }
       ] },
       dashed('bottom-rule', 64, 1016, 1210),
       label('story-site', 'READ AT OVERTHEEDGE.UNBC.CA', 64, 1270, 20, 'forest')
@@ -403,28 +419,29 @@ const GUIDE = {
     {
       name: 'Primary logo', title: 'The paper’s own lettering.', subtitle: 'OVER THE EDGE over the line UNBC’S STUDENT NEWSPAPER, exactly as the website draws it. It is never redrawn or reset in a font.',
       elements: [
-        g.label('PRIMARY · FOREST ON NEWSPRINT', 64, 278), g.rect(64, 300, 836, 300, 'reverse', 'line'), g.logo(120, 330, 724, { height: 240, colour: 'primary' }),
-        g.rect(924, 300, 452, 300, 'primary'), g.label('REVERSED · WHITE ON FOREST', 948, 334, 'light'), g.logo(966, 370, 368, { height: 190, colour: 'reverse' }),
-        g.label('WHAT OVER THE EDGE IS', 64, 664), g.para('UNBC’s independent student newspaper, in print and at overtheedge.unbc.ca. Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.', 64, 706, 836, 26, { colour: 'ink', line: 1.5 }),
+        g.label('PRIMARY · FOREST ON CREAM', 64, 278), g.rect(64, 300, 836, 300, 'paper', 'line'), g.logo(120, 330, 724, { height: 240, colour: 'primary' }),
+        g.rect(924, 300, 452, 300, 'primary'), g.label('REVERSED · CREAM ON FOREST', 948, 334, 'light'), g.logo(966, 370, 368, { height: 190, colour: 'reverse' }),
+        g.label('WHAT OVER THE EDGE IS', 64, 664), g.para('A student-run newspaper and creative platform that gives students space to share their voices, perspectives, and ideas. In print and at overtheedge.unbc.ca.', 64, 706, 836, 26, { colour: 'ink', line: 1.5 }),
         g.label('DESCRIPTOR', 952, 664), g.para('{copy.descriptor}', 952, 706, 424, 26, { colour: 'ink', line: 1.5 }),
         g.para('The site’s header sets the subtext in ink (#262626) under forest words. That two-colour original is in logos/source/. Every other logo in this kit is one colour.', 64, 900, 1312, 18)
       ]
     },
     {
-      name: 'Logo family', title: 'Four ways to sign.', subtitle: 'Choose the one that fits the space. Keep it in one colour, and keep the O whole.',
+      name: 'Logo family', title: 'Four grounds, one colour each.', subtitle: 'The stacked masthead leads the identity, in the four pairings its files use. Keep it in one colour, and keep the O whole.',
       elements: [
-        g.rect(64, 255, 828, 214, 'reverse', 'line'), g.label('FULL', 86, 284), g.logo(86, 310, 780, { height: 140, align: 'start', colour: 'primary' }),
-        g.rect(924, 255, 452, 214, 'primary'), g.label('WITHOUT SUBTEXT', 946, 284, 'light'), g.logo(946, 320, 408, { height: 120, family: 'words', colour: 'reverse' }),
-        g.rect(64, 496, 550, 364, 'light'), g.label('STACKED', 88, 530), g.logo(88, 556, 502, { height: 280, layout: 'stacked', align: 'start', colour: 'primary' }),
-        g.rect(642, 496, 378, 364, 'reverse', 'line'), g.label('THE O', 666, 530), { type: 'symbol', x: 760, y: 570, height: 240, colour: 'primary' },
-        g.rect(1048, 496, 328, 364, 'ink'), g.label('SMALL SPACES', 1072, 530, 'light'), g.logo(1072, 600, 280, { height: 200, family: 'words', layout: 'wordmark', colour: 'reverse' }),
+        ...[['paper', 'primary', 'FOREST ON CREAM'], ['ink', 'light', 'LICHEN ON INK'], ['light', 'primary', 'FOREST ON LICHEN'], ['primary', 'reverse', 'CREAM ON FOREST']].flatMap(([ground, colour, text], i) => [
+          g.rect(64 + i * 334, 255, 310, 300, ground, ground === 'paper' ? 'line' : undefined), g.logo(88 + i * 334, 280, 262, { height: 250, layout: 'stacked', colour }), g.label(text, 64 + i * 334, 585)
+        ]),
+        g.rect(64, 630, 828, 214, 'paper', 'line'), g.label('FULL', 86, 659), g.logo(86, 685, 780, { height: 140, align: 'start', colour: 'primary' }),
+        g.rect(924, 630, 220, 214, 'light'), g.label('THE O', 946, 659), { type: 'symbol', x: 1000, y: 690, height: 120, colour: 'primary' },
+        g.rect(1156, 630, 220, 214, 'ink'), g.label('SMALL SPACES', 1176, 659, 'light'), g.logo(1176, 690, 180, { height: 136, family: 'words', layout: 'stacked', colour: 'light' }),
         g.para('The O is the logo’s own first letter. Use it alone only where the name cannot be read: favicons, app icons, avatars, patterns.', 64, 920, 1312, 18)
       ]
     },
     {
       name: 'Clear space and sizes', title: 'Room to breathe.', subtitle: 'Half the height of the O, clear on every side. Below 288 px wide, drop the subtext.',
       elements: [
-        g.rect(64, 260, 840, 330, 'reverse', 'line'),
+        g.rect(64, 260, 840, 330, 'paper', 'line'),
         { type: 'rect', x: 124, y: 330, width: 720, height: 190, fill: 'none', stroke: 'line', dash: '6 5' },
         g.logo(124 + 720 * 42.8 / (690.72 + 85.6), 330 + 190 * 42.8 / (118.59 + 85.6), 720 * 690.72 / (690.72 + 85.6), { colour: 'primary' }),
         g.label('CLEAR SPACE · HALF THE O', 64, 630),
@@ -433,52 +450,60 @@ const GUIDE = {
       ]
     },
     {
-      name: 'Colour', title: 'Forest on newsprint.', subtitle: 'One green, one paper, one ink. The rest supports them, and red is only ever an editor’s mark.',
+      name: 'Colour', title: 'Cream, Forest, Lichen, Ink.', subtitle: 'Four flat colours, read straight from the identity’s own files. Tints are grounds and doodles, never text.',
       elements: [
-        { type: 'swatches', x: 64, y: 267, step: 330, width: 300, height: 275, colours: ['forest', 'pine', 'newsprint', 'ink'] },
-        g.label('SUPPORT', 64, 728),
-        { type: 'swatchStrip', x: 64, y: 748, step: 164, width: 150, height: 64, colours: ['lichen', 'sage', 'moss', 'kraft', 'pulp', 'bark', 'proof', 'white'] },
-        g.para('Lichen #E3EFCF · Sage #6AA380 · Moss #466855 · Kraft #D4C8AA · Pulp #DBD0BA · Bark #7D6B56 · Proof #B54A35 · White #FFFFFF.', 64, 840, 1312, 15),
-        // Every text pair the templates use, as measured (WCAG 2). test/overtheedge.test.js holds the page to the plan's list.
-        g.para(`Text pairs, measured: ${CONTRAST.map(([fg, bg, ratio]) => `${fg} on ${bg} ${ratio} : 1`).join(' · ')}. At 24 px and up only: ${LARGE_ONLY.map(([fg, bg, ratio]) => `${fg} on ${bg} ${ratio} : 1`).join(' · ')}. Proof is for Breaking and Correction only.`, 64, 868, 1312, 15)
+        { type: 'swatches', x: 64, y: 252, step: 330, width: 300, height: 245, colours: ['newsprint', 'forest', 'lichen', 'ink'] },
+        g.label('TINTS FROM THE POSTS', 64, 690),
+        { type: 'swatchStrip', x: 64, y: 708, step: 164, width: 150, height: 52, colours: ['haze', 'flame', 'crumple', 'ember', 'white'] },
+        g.para('Haze #F5F1EA, the OVER THE EDGE ground on cream · Flame #FFF2D8, the flame behind a deadline · Crumple #F4F4F4, the crumpled sheet · Ember #6D4900, a deadline’s issue number · White.', 64, 790, 1312, 15),
+        g.label('EARLIER, FOR THE SUPPORTING STUDIES', 900, 690),
+        { type: 'swatchStrip', x: 900, y: 708, step: 68, width: 56, height: 52, colours: ['pine', 'sage', 'moss', 'kraft', 'pulp', 'bark', 'proof'] },
+        // Every text pair the templates use, as measured (WCAG 2). test/overtheedge.test.js holds the page to the palette.
+        g.para(`Text pairs, measured: ${CONTRAST.map(([fg, bg, ratio]) => `${fg} on ${bg} ${ratio} : 1`).join(' · ')}. At 24 px and up only: ${LARGE_ONLY.map(([fg, bg, ratio]) => `${fg} on ${bg} ${ratio} : 1`).join(' · ')}. Newsprint is the key Cream is stored under.`, 64, 850, 1312, 15)
       ]
     },
     {
-      name: 'Typography', title: 'Five voices, five jobs.', subtitle: 'Serif for the news, Anton for the front page, Helvetica Neue for the interface, Plex Mono for the dateline, one hand-written note.',
+      name: 'Typography', title: 'Three voices.', subtitle: 'Decalotype shouts, Helvetica Neue explains, and Salted scribbles in the margin.',
       elements: [
         g.label('HEADLINES / {fonts.display.label}', 64, 278),
-        { type: 'text', text: 'Bears Don’t Really Hibernate… Or Do They?', x: 62, y: 352, size: 56, font: 'display', tracking: -0.01 },
-        { type: 'rule', y: 392 },
-        g.label('FRONT PAGE / {fonts.extra.label}, CAPITALS', 64, 436),
-        { type: 'text', text: 'OCTOBER 16TH · IN THIS ISSUE', x: 62, y: 510, size: 64, font: 'extra' },
-        { type: 'rule', y: 550 },
-        g.label('INTERFACE / {fonts.body.label}', 64, 594),
-        g.para('Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.', 64, 640, 860, 26, { colour: 'ink', line: 1.5 }),
-        g.label('DECK / {fonts.deck.label}', 964, 594),
-        g.para('One sentence under the headline.', 964, 640, 412, 26, { colour: 'ink', line: 1.5, font: 'deck' }),
-        { type: 'rule', y: 724 },
-        g.label('DATELINE / {fonts.label.label}', 64, 768),
-        { type: 'text', text: 'VOLUME 32 · ISSUE 2 · OCTOBER 16, 2025', x: 64, y: 818, size: 26, font: 'label', tracking: 0.08 },
-        g.label('ONE NOTE / {fonts.hand.label}', 964, 768),
-        { type: 'text', text: 'Over the Edge is here!', x: 962, y: 822, size: 40, font: 'hand', colour: 'primary' },
-        g.para('Salted and Helvetica Neue are supplied originals. Anton stands in for Decalotype Black. Keep each font’s original licence with its files.', 64, 900, 1312, 18)
+        { type: 'text', text: 'Submission Schedule', x: 62, y: 380, size: 96, font: 'display', colour: 'primary' },
+        { type: 'rule', y: 420 },
+        g.label('READING / {fonts.body.label}', 64, 464),
+        g.para('Over the Edge is a student-run newspaper and creative platform that gives students space to share their voices, perspectives, and ideas.', 64, 506, 860, 26, { colour: 'ink', line: 1.5 }),
+        g.label('LABELS / {fonts.label.label}', 964, 464),
+        { type: 'text', text: 'CAMPUS CORNERS', x: 964, y: 516, size: 34, font: 'label' },
+        { type: 'rule', y: 620 },
+        g.label('ACCENTS / {fonts.hand.label}', 64, 664),
+        { type: 'text', text: 'WEEK SCHEDULE', x: 62, y: 742, size: 64, font: 'hand', colour: 'ink' },
+        { type: 'text', text: 'DEADLINE', x: 620, y: 742, size: 64, font: 'hand', colour: 'primary' },
+        g.para('Salted takes a word or two at a time: ISSUE, SCHEDULE, DEADLINE, a month. Never a paragraph.', 964, 700, 412, 20, { colour: 'ink', line: 1.4 }),
+        g.para('Decalotype is the identity’s headline face. It is a commercial font, so Anton, the closest open face, stands in for it here; replace it if the team has the licence. Helvetica Neue and Salted are the supplied originals. Keep each font’s notice with its files.', 64, 880, 1312, 18)
       ]
     },
     {
-      name: 'Print devices', title: 'Borrowed from the front page.', subtitle: 'The dashed index, page numbers, the masthead block and the keyline frame come from the printed issue.',
+      name: 'Doodles and elements', title: 'Drawn in the margins.', subtitle: 'Six line doodles at one weight, and the stickers, tags, dashed rules and crumpled paper that carry the schedules.',
       elements: [
-        g.nested('templates/issue-cover', 64, 262, 488, 610), g.label('ISSUE COVER · 1080 × 1350', 64, 900),
-        g.nested('patterns/o-repeat', 600, 262, 360, 225), g.label('O REPEAT', 600, 515),
-        g.nested('patterns/o-crop', 1000, 262, 376, 235), g.label('O CROP', 1000, 525),
-        g.nested('patterns/o-field', 600, 560, 360, 225), g.label('O FIELD', 600, 813),
-        { type: 'list', x: 1000, detailX: 1130, right: 1376, y: 590, step: 52, rows: [['INDEX', 'Dashed rules, bark.'], ['PAGES', 'Two digits, Anton.'], ['MASTHEAD', 'Forest block.'], ['FRAME', 'White keyline.'], ['NOTE', 'One, by hand.']] }
+        g.nested('patterns/doodle-set', 64, 255, 560, 350), g.label('THE DOODLES', 64, 635),
+        g.nested('patterns/doodle-wall', 660, 255, 340, 212), g.label('DOODLE WALL', 660, 497),
+        g.rect(1036, 255, 340, 212, 'paper', 'line'), g.nested('patterns/edge-ghost', 1036, 255, 340, 212), g.label('OVER THE EDGE GROUND', 1036, 497),
+        g.nested('templates/month-sticker', 660, 540, 340, 102), g.label('MONTH STICKER', 660, 672),
+        g.nested('patterns/zigzag-frame', 1036, 540, 120, 150), g.label('ZIGZAG FRAME', 1036, 720),
+        g.nested('templates/post-week-schedule', 1196, 540, 180, 225), g.label('WEEK SCHEDULE', 1196, 795),
+        { type: 'list', x: 64, detailX: 250, right: 980, y: 720, step: 46, rows: [['DOODLES', 'One round stroke, no fill but pupils and dots.'], ['DASHED RULES', 'Thin ink dashes between rows and around headings.'], ['TAGS', 'Tilted forest blocks for days of the week.'], ['STICKERS', 'Blobs with a softer copy behind, for months and titles.'], ['PAPER', 'A crumpled sheet behind a schedule.']] }
       ]
     },
     {
-      name: 'Applications', title: 'Ready for the newsroom.', subtitle: 'Cards, a press pass, social posts and slides, with editable text. Letterhead, banner and link preview are in the kit.',
+      name: 'Social', title: 'Made for the feed.', subtitle: 'Posts at 1080 × 1350, stories and reels at 1080 × 1920, all with editable text.',
       elements: [
-        ...shelf([['business-card-front', 403, '90 × 50 MM CARD, FRONT'], ['business-card-back', 403, 'BACK', true], ['slide-title', 418, '1920 × 1080 SLIDE', true]], 263, 235),
-        ...shelf([['press-pass', 188, 'PRESS PASS', true], ['story-post', 240, 'STORY POST', true], ['event-post', 300, 'EVENT POST', true], ['story-vertical', 169, 'VERTICAL'], ['issue-out', 300, 'NEW ISSUE']], 568, 300)
+        ...shelf([['post-submission-schedule', 224, 'SUBMISSIONS'], ['post-schedule', 224, 'SCHEDULE', true], ['post-deadline', 224, 'DEADLINE', true], ['post-meet-the-board', 224, 'MEET THE BOARD', true], ['post-week-schedule-forest', 224, 'WEEK']], 250, 280),
+        ...shelf([['post-front-page', 224, 'FRONT PAGE', true], ['post-schedule-paper', 224, 'ON PAPER'], ['post-season-schedule', 224, 'SEASON'], ['story-week-schedule', 158, 'STORY', true], ['reel-cover', 158, 'REEL', true], ['story-issue-out', 158, 'ISSUE OUT']], 610, 280)
+      ]
+    },
+    {
+      name: 'Applications', title: 'Slides, calendars and print.', subtitle: 'The deck, the month at a glance, a poster and the stationery. The Staff Card, under Printer designs, is the press pass.',
+      elements: [
+        ...shelf([['slide-cover-doodle', 416, '1920 × 1080 SLIDE', true], ['slide-doodle', 416, 'DOODLE WALL'], ['slide-colourways', 416, 'COLOURWAYS']], 255, 234),
+        ...shelf([['calendar-month', 240, 'MONTHLY CALENDAR', true], ['poster-write-for-us', 212, 'A4 POSTER', true], ['business-card-front', 514, '90 × 50 MM CARD'], ['story-write-for-us', 169, 'WRITE FOR US']], 570, 300)
       ]
     },
     MOTION_PAGE,
@@ -509,20 +534,21 @@ const GUIDE = {
 
 // --- The brand -----------------------------------------------------------------------------------
 
-const starter = createStarterBrand({ id: 'overtheedge', name: 'Over the Edge', tagline: SOURCED_LINES.tagline, wordmark: { text: 'OVER THE EDGE', font: 'extra' } }, fonts)
+const starter = createStarterBrand({ id: 'overtheedge', name: 'Over the Edge', tagline: SOURCED_LINES.tagline, wordmark: { text: 'OVER THE EDGE', font: 'display' } }, fonts)
 
 const brand = {
   ...starter,
   version: '1.0',
   displayVersion: '1.0',
-  source: 'Horizontal logo from the site SVG (reference/logo-site.svg); stacked masthead from page 1 of the September 2025 PDF (reference/logo-cover-stacked.svg); colours from the site and print covers; written by scripts/brands/overtheedge.mjs.',
-  status: '"Forest press": the paper\'s own horizontal and stacked artwork. Salted and Helvetica Neue come from the supplied issue toolkit and staff-card package. Anton stands in for Decalotype Black.',
+  source: 'Horizontal logo from the site SVG (reference/logo-site.svg); stacked masthead from page 1 of the September 2025 PDF (reference/logo-cover-stacked.svg); colour, type, doodles and applications from the team\'s Doodle identity files (reference/identity/); written by scripts/brands/overtheedge.mjs.',
+  status: '"Doodle": the team\'s own identity, Cream, Forest, Lichen and Ink with line doodles, on the paper\'s own horizontal and stacked artwork. Salted and Helvetica Neue come from the supplied issue toolkit and staff-card package. Anton stands in for Decalotype.',
   colours: COLOURS,
-  roles: { ink: 'ink', paper: 'newsprint', muted: 'bark', primary: 'forest', light: 'lichen', reverse: 'white', line: 'pulp', rule: 'kraft' },
-  logoColours: ['forest', 'ink', 'white', 'lichen', 'currentColor'],
-  rasterColours: ['forest', 'ink', 'white', 'lichen'],
+  colourNames: COLOUR_NAMES,
+  roles: { ink: 'ink', paper: 'newsprint', muted: 'ink', primary: 'forest', light: 'lichen', reverse: 'newsprint', line: 'lichen', rule: 'ink' },
+  logoColours: ['forest', 'ink', 'newsprint', 'lichen', 'white', 'currentColor'],
+  rasterColours: ['forest', 'ink', 'newsprint', 'lichen'],
   fonts: FONTS,
-  typography: { headlines: { family: 'Source Serif 4', weight: 700, trackingEm: -0.01 }, body: { family: 'Helvetica Neue', weight: 500 }, labels: { family: 'IBM Plex Mono', weight: 500, trackingEm: 0.08 } },
+  typography: { headlines: { family: 'Anton', weight: 400 }, body: { family: 'Helvetica Neue', weight: 500 }, labels: { family: 'Helvetica Neue', weight: 700, trackingEm: 0.04 } },
   symbol,
   wordmark,
   families: [
@@ -543,8 +569,11 @@ const brand = {
   patterns: [
     { id: 'o-repeat', title: '{name} / repeating O', width: 960, height: 600, background: 'newsprint', repeat: { x: [-20, 1000, 120], y: [-40, 680, 150], scale: 1.2, colour: 'pulp' } },
     { id: 'o-crop', title: '{name} / large O crop', width: 960, height: 600, background: 'forest', place: [{ x: 380, y: -160, scale: 9, colour: 'pine' }] },
-    { id: 'o-field', title: '{name} / the O on lichen', width: 960, height: 600, background: 'lichen', place: [{ x: 391, y: 172, scale: 3, colour: 'forest' }] }
+    { id: 'o-field', title: '{name} / the O on lichen', width: 960, height: 600, background: 'lichen', place: [{ x: 391, y: 172, scale: 3, colour: 'forest' }] },
+    ...DOODLE.patterns
   ],
+  symbols: DOODLE.symbols,
+  illustrations: DOODLE.illustrations,
   icons: ICONS,
   motion: { page: 'motion/index.html', css: 'motion/motion.css', tokens: TOKENS, rules: RULES, studies: STUDIES },
   templates: TEMPLATES,
@@ -554,9 +583,9 @@ const brand = {
     componentName: 'OverTheEdgeLogo',
     symbolComponentName: 'OverTheEdgeO',
     cssPrefix: 'ote',
-    appIcon: { background: 'forest', colour: 'white', size: 640 },
+    appIcon: { background: 'forest', colour: 'newsprint', size: 640 },
     favicon: { light: COLOURS.forest, dark: COLOURS.lichen, size: 56, title: '{name} favicon / the O' },
-    intro: { eyebrow: SOURCED_LINES.descriptor, headline: 'Over the Edge\nBrand assets.', body: 'The paper’s own lettering, forest on newsprint, Source Serif and Anton: logos, templates and web files from one brand.json.', edition: 'v{displayVersion}', typeSample: 'Over the Edge\nis here!', footer: "Over the Edge · UNBC's Independent Student Newspaper" },
+    intro: { eyebrow: SOURCED_LINES.descriptor, headline: 'Over the Edge\nBrand assets.', body: 'The paper’s own lettering in Cream, Forest, Lichen and Ink, with a margin full of doodles: logos, templates and web files from one brand.json.', edition: 'v{displayVersion}', typeSample: 'Submission\nSchedule', footer: "Over the Edge · UNBC's Independent Student Newspaper" },
     landing: { eyebrow: SOURCED_LINES.descriptor, headline: "UNBC's Independent\nStudent Newspaper", body: SOURCED_LINES.hero, cta: 'Read News', contactEyebrow: 'Get Involved', contactBody: '[Add a contact address or form here.]', footer: 'Over the Edge' }
   },
   files: [
@@ -572,7 +601,7 @@ const brand = {
 }
 delete brand.fields
 
-// The supplied legacy staff card remains its own original design alongside Forest press.
+// The supplied staff card keeps its own original design, and is the paper's press pass.
 // Import through the public adapter so the example exercises the same path as other hosts.
 const staffCard = importPrinterPackage(brand, readFileSync(`${folder}templates/staff-card.zip`), {
   id: 'staff-card', file: 'templates/staff-card.zip', embedAssets: false,
@@ -583,22 +612,26 @@ for (const [path, bytes] of staffCard.assets) {
   mkdirSync(`${folder}${path.slice(0, path.lastIndexOf('/'))}`, { recursive: true })
   writeFileSync(`${folder}${path}`, bytes)
 }
+// The Doodle identity's colourways: the same week schedule on three grounds, and the deadline on two.
+brand.sets = [...(brand.sets ?? []), ...DOODLE.sets]
 
 // --- Motion, brand details and site --------------------------------------------------------------
 // The pages embed the brand's own font files, so they need no network (docs/PLANS.md M3).
 
 const asset = (file) => findAsset(folder, file)
-// Each face's web file: the shared Inter woff2, and the brand's own TTFs.
-const faces = (...keys) => keys.map((key) => ({ family: FONTS[key].family, weight: FONTS[key].weight, style: FONTS[key].style ?? 'normal', file: FONTS[key].web }))
+// Each face's file, once: label and bold share Helvetica Neue Bold.
+const faces = (...keys) => [...new Map(keys.map((key) => FONTS[key]).map((f) => [`${f.family} ${f.weight}`, { family: f.family, weight: f.weight, style: f.style ?? 'normal', file: f.web }])).values()]
+// The site keeps the website's own headline and dateline faces, Source Serif 4 and IBM Plex Mono.
+const SITE_FACES = [{ family: 'Source Serif 4', weight: 700, style: 'normal', file: 'fonts/SourceSerif4-Bold.ttf' }, { family: 'IBM Plex Mono', weight: 500, style: 'normal', file: 'fonts/IBMPlexMono-Medium.ttf' }]
 const geometry = { wordmark, o: O_PATH, oBox: symbol.viewBox.slice(2) }
 
 mkdirSync(`${folder}motion`, { recursive: true })
-writeFileSync(`${folder}motion/index.html`, motionPage(geometry, COLOURS, embeddedFonts(asset, faces('display', 'body', 'label', 'extra'))))
+writeFileSync(`${folder}motion/index.html`, motionPage(geometry, COLOURS, embeddedFonts(asset, faces('display', 'body', 'bold'))))
 writeFileSync(`${folder}motion/motion.css`, motionCss(COLOURS))
 writeFileSync(`${folder}motion/motion-tokens.json`, `${JSON.stringify({ ...TOKENS, rules: RULES.map((rule) => rule.title) }, null, 2)}\n`)
 writeFileSync(`${folder}motion/README.md`, motionReadme())
 
-writeFileSync(`${folder}docs/brand-details.html`, detailsPage({ brand, fonts }, { fontFaces: embeddedFonts(asset, faces('display', 'body', 'label', 'extra', 'hand')), contrastPairs: CONTRAST, largeOnly: LARGE_ONLY, studies: STUDIES }))
+writeFileSync(`${folder}docs/brand-details.html`, detailsPage({ brand, fonts }, { fontFaces: embeddedFonts(asset, faces('display', 'body', 'bold', 'hand')), contrastPairs: CONTRAST, largeOnly: LARGE_ONLY, studies: STUDIES }))
 
 // The site uses the same CSS, and draws its fonts, header logo, issue logo and loader from the brand:
 // each sits between <!-- ote:name --> markers in site/index.html, replaced on every run.
@@ -609,7 +642,7 @@ for (const file of ['Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt',
 const sitePath = `${folder}site/index.html`
 let site = readFileSync(sitePath, 'utf8')
 for (const [name, markup] of [
-  ['fonts', embeddedFonts(asset, faces('display', 'body', 'bold', 'label', 'extra', 'hand'))],
+  ['fonts', embeddedFonts(asset, [...SITE_FACES, ...faces('display', 'body', 'bold', 'hand')])],
   ['logo', lockupMarkup(geometry, 'site-logo', 'Over the Edge')],
   // The issue panel is narrower than the full logo's 288 px minimum, so it carries the logo without its subtext.
   ['issue-logo', lockupMarkup(geometry, 'issue-logo', 'Over the Edge', { subtext: false })],

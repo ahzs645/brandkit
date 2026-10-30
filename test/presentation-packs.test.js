@@ -6,7 +6,8 @@ import { KIT_PACKS } from '../src/engine/packs.js'
 
 const ids = ['ddcnorth', 'firstform', 'overtheedge', 'sparklab', 'northwind', 'bc-province-1977', 'bc-hydro-1983']
 const brands = ids.map((id) => JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8')))
-const preset = KIT_PACKS.find((pack) => pack.id === 'presentations')
+// Presentations share the documents pack; 'presentations' remains an alias for the CLI.
+const preset = KIT_PACKS.find((pack) => pack.id === 'documents')
 
 test('presentation packs carry the artwork for every actual PowerPoint layout, including historical and explore layouts', () => {
   for (const brand of brands) {

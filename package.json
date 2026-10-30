@@ -23,7 +23,6 @@
     "./vite": "./src/vite.js",
     "./printer": "./src/printer/package.js",
     "./printer/bridge": "./src/printer/bridge.js",
-    "./printer/vite": "./src/printer/vite.js",
     "./package.json": "./package.json",
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
@@ -43,11 +42,7 @@
   ],
   "scripts": {
     "setup:printer": "cd vendor/template-printer/frontend && corepack pnpm install --frozen-lockfile",
-    "build:printer": "node scripts/build-template-printer.mjs",
-    "example:printer": "npm run predev && vite --config examples/template-printer-host/vite.config.js",
-    "predev": "node scripts/build-template-printer.mjs --dev",
     "dev": "vite",
-    "prebuild": "npm run build:printer",
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test \"test/*.test.js\"",
@@ -65,7 +60,6 @@
     "test:sparklab:browser": "node test/browser/sparklab.check.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "test:patterns:browser": "node test/browser/pattern-collections.check.mjs",
-    "test:printer": "node test/browser/template-printer.check.mjs",
     "test:identity": "node test/browser/overtheedge-identity.check.mjs",
     "make:documentation": "node scripts/brands/documentation.mjs",
     "build:documentation": "node scripts/build-documentation.mjs",
@@ -105,10 +99,12 @@
   },
   "devDependencies": {
     "@bcgov/bc-sans": "2.1.2",
+    "@tailwindcss/vite": "^4.2.2",
     "@vitejs/plugin-react": "^6.1.2",
     "playwright": "1.54.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.9",
+    "react-dom": "^19.2.9",
+    "tailwindcss": "^4.2.2",
     "vite": "^8.3.4"
   }
 }

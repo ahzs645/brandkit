@@ -24,6 +24,9 @@ import { documentsFor, FORMAT_LABELS, officeFile } from '../export/office.js'
 import { physicalSize } from '../engine/templates.js'
 import { PrinterWebsite } from './PrinterWebsite.jsx'
 import { safeDocumentHref } from './asset-urls.js'
+import { Select } from '../ui/Select.jsx'
+import { MenuButton } from '../ui/MenuButton.jsx'
+import { useEditPreviewDock } from '../ui/EditPreviewDock.jsx'
 import './studio.css'
 
 const useSvgUrl = (svg) => {
@@ -69,6 +72,8 @@ const entriesOf = (templates, sets) => {
   return [...groups]
 }
 
+const OFFICE_HINTS = { docx: 'a Word template', pptx: 'a PowerPoint template with a slide layout for each', html: 'an HTML signature to paste into a mail program' }
+
 const slug = (value) => String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 
 export const TemplateStudio = ({
@@ -89,6 +94,8 @@ export const TemplateStudio = ({
   const inspectionId = useId()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState(null)
+  // On a phone the fields and the preview take turns; the preview first, with the picker above it.
+  const dock = useEditPreviewDock({ initial: 'preview', labels: { edit: 'Fill in', preview: 'Preview' }, label: 'Fields or preview' })
   const values = controlled ?? own
   const setValues = (next) => {
     if (onValuesChange) onValuesChange(next)
@@ -146,10 +153,56 @@ export const TemplateStudio = ({
     }
   }
 
+  const disabled = Boolean(busy) || !ready
+  const downloadPdf = () => run('pdf', async () => download((await files(template)).pdf, `${name(template)}.pdf`))
+  const pdfHint = 'Print-ready, with crop marks where the design has them'
+  // One download stands out: the editable Office master where the template has one (a letterhead's
+  // Word template), the signature to paste for an email signature, otherwise the PDF. Everything
+  // else is in the menu beside it.
+  const master = documents.find((document) => document.format === 'docx') ?? documents.find((document) => document.format === 'pptx')
+  const signature = !master && documents.find((document) => document.format === 'html')
+  const primary = master ? { key: master.id, label: `↓ ${officeLabel(master)}`, title: OFFICE_HINTS[master.format], act: () => office(master) }
+    : signature ? { key: `${signature.id}-copy`, label: copied === signature.id ? 'Copied' : 'Copy signature', title: 'Copy it to paste into a mail program', act: () => copySignature(signature) }
+      : { key: 'pdf', label: '↓ PDF', title: pdfHint, act: downloadPdf }
+  const more = [
+    { heading: 'This design' },
+    primary.key !== 'pdf' && { label: 'PDF', hint: pdfHint, disabled, onSelect: downloadPdf },
+    { label: 'PNG', hint: 'An image for screens, slides and posts', disabled, onSelect: () => run('png', async () => download((await files(template)).png, `${name(template)}.png`)) },
+    { label: 'SVG', hint: 'Text stays live and editable', disabled: Boolean(busy), onSelect: () => run('svg', async () => download(renderTemplate(ctx(false), template).svg, `${name(template)}.svg`)) },
+    hasLayoutRules && { label: 'SVG with rules', hint: 'Editable artwork with a separate, visible layout-guides layer', disabled: Boolean(busy), onSelect: () => run('svg-rules', async () => download(renderTemplate(ctx(false, { showLayoutGuides: true }), template).svg, `${name(template)}-with-rules.svg`)) },
+    currentSet && { label: 'PDF, all variants', hint: `Every variant of the ${currentSet.label.toLowerCase()}, one to a page`, disabled, onSelect: () => run('set', async () => {
+      const pages = currentSet.variants.map((variant) => { const outlined = renderTemplate(ctx(true), templates.find((entry) => entry.id === variant.template)); return { svg: outlined.svg, ...physicalSize(outlined) } })
+      download(await pdf(pages, { title: `${brand.name} ${currentSet.label}`, author: brand.name }), `${brand.id}-${currentSet.id}.pdf`)
+    }) },
+    documents.some((document) => document !== master) && { heading: 'Office' },
+    ...documents.filter((document) => document !== master).flatMap((document) => [
+      document === signature && { label: 'Copy signature', hint: 'To paste into a mail program', disabled, onSelect: () => copySignature(document) },
+      { label: officeLabel(document), hint: `${document.label}: ${OFFICE_HINTS[document.format]}`, disabled, onSelect: () => office(document) }
+    ]),
+    { heading: 'Print and more' },
+    onPrinterPackage && { label: 'Printer package', hint: 'For Template Printer: artwork, fonts, fields and variants, zipped', disabled, onSelect: () => run('printer-package', () => onPrinterPackage(template, values)) },
+    { label: 'All templates, zipped', hint: `Every template as SVG, PNG and PDF`, disabled, onSelect: () => run('all', async () => {
+      const out = new Map()
+      for (const entry of templates) {
+        const made = await files(entry)
+        for (const [format, bytes] of Object.entries(made)) out.set(`${format}/${name(entry)}.${format}`, bytes)
+      }
+      download(await zip(out, `${brand.id}-templates`), `${brand.id}-templates.zip`)
+    }) }
+  ]
+  const entryOf = (id) => entries.flatMap(([, list]) => list).find((entry) => (entry.set ? entry.set.variants.some((variant) => variant.template === id) : entry.template.id === id))
+
   if (!template) return <p className="studio__empty">This brand defines no templates.</p>
 
   return (
-    <div className="studio">
+    <div ref={dock.ref} className={`studio ${dock.className}`}>
+      {/* On a phone the list, thumbnails and all, would be a sideways scroller with its names cut
+          short; a grouped dropdown in its place names every template whole. */}
+      <label className="field studio__picker">
+        <span className="field__label">Template</span>
+        <Select aria-label="Template" value={entryOf(template.id)?.key} onChange={(key) => setSelected(entries.flatMap(([, list]) => list).find((entry) => entry.key === key).template.id)}
+          options={entries.flatMap(([group, list]) => list.map((entry) => ({ value: entry.key, label: entry.label, group: entries.length > 1 ? group : undefined })))} />
+      </label>
       <nav className="studio__list" aria-label="Templates">
         {entries.map(([group, list]) => (
           <div key={group} className="studio__group">
@@ -169,7 +222,7 @@ export const TemplateStudio = ({
         ))}
       </nav>
 
-      <div className="studio__stage">
+      <div className="studio__stage" {...dock.panel('preview')}>
         {brand.manualAudit && <details className="studio__audit">
           <summary>Manual coverage and fidelity</summary>
           {brand.manualAudit.title && <p><strong>{brand.manualAudit.title}</strong></p>}
@@ -224,60 +277,29 @@ export const TemplateStudio = ({
           )}
           <span className="studio__size">{template.print ? `${template.print.trim.join(' × ')} ${template.print.unit} trim, ${template.print.bleed} ${template.print.unit} bleed` : template.physical ? template.physical.join(' × ') : `${template.width} × ${template.height}${template.unit === 'mm' ? ' mm' : ' px'}`}</span>
           <div className="studio__downloads">
-            {onPrint && <button type="button" className="button" disabled={Boolean(busy) || !ready} onClick={() => run('printer', () => onPrint(template, values))}>{busy === 'printer' ? 'Opening…' : 'Edit & print'}</button>}
-            {onPrinterPackage && <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => run('printer-package', () => onPrinterPackage(template, values))}>↓ Printer package</button>}
-            <button type="button" className="button button--quiet" disabled={Boolean(busy)} title="Text stays live and editable" onClick={() => run('svg', async () => download(renderTemplate(ctx(false), template).svg, `${name(template)}.svg`))}>↓ SVG</button>
-            {hasLayoutRules && <button type="button" className="button button--quiet" disabled={Boolean(busy)} title="Editable artwork with a separate, visible layout-guides layer" onClick={() => run('svg-rules', async () => download(renderTemplate(ctx(false, { showLayoutGuides: true }), template).svg, `${name(template)}-with-rules.svg`))}>↓ SVG with rules</button>}
-            <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => run('png', async () => download((await files(template)).png, `${name(template)}.png`))}>{busy === 'png' ? '…' : '↓'} PNG</button>
-            <button type="button" className="button" disabled={Boolean(busy) || !ready} onClick={() => run('pdf', async () => download((await files(template)).pdf, `${name(template)}.pdf`))}>{busy === 'pdf' ? '…' : '↓'} PDF</button>
-            {currentSet && (
-              <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} title={`Every variant of the ${currentSet.label.toLowerCase()}, one to a page`} onClick={() => run('set', async () => {
-                const pages = currentSet.variants.map((variant) => { const outlined = renderTemplate(ctx(true), templates.find((entry) => entry.id === variant.template)); return { svg: outlined.svg, ...physicalSize(outlined) } })
-                download(await pdf(pages, { title: `${brand.name} ${currentSet.label}`, author: brand.name }), `${brand.id}-${currentSet.id}.pdf`)
-              })}>{busy === 'set' ? '…' : '↓'} PDF, all variants</button>
-            )}
-            <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} title="Every template, as SVG, PNG and PDF" onClick={() => run('all', async () => {
-              const out = new Map()
-              for (const entry of templates) {
-                const made = await files(entry)
-                for (const [format, bytes] of Object.entries(made)) out.set(`${format}/${name(entry)}.${format}`, bytes)
-              }
-              download(await zip(out, `${brand.id}-templates`), `${brand.id}-templates.zip`)
-            })}>{busy === 'all' ? 'Making…' : '↓ All, zipped'}</button>
+            {onPrint && <button type="button" className="button button--quiet" disabled={disabled} onClick={() => run('printer', () => onPrint(template, values))}>{busy === 'printer' ? 'Opening…' : 'Edit & print'}</button>}
+            <MenuButton className="button button--quiet" label={busy && ![primary.key, 'printer'].includes(busy) ? 'Making…' : 'More formats'} items={more} />
+            <button type="button" className="button studio__primary" disabled={disabled} title={primary.title} onClick={primary.act}>{busy === primary.key ? 'Making…' : primary.label}</button>
           </div>
         </div>
         {onPrinterPackage && printerWebsite && <PrinterWebsite key={template.id} website={printerWebsite.website}
           sourceUrl={brand.printer?.packages?.find((entry) => entry.id === template.printer?.packageId)?.sourceUrl}
-          disabled={Boolean(busy) || !ready} onDownload={() => run('printer-package', () => onPrinterPackage(template, values))} />}
-        {documents.length > 0 && (
-          <div className="studio__office">
-            <span className="studio__office-label">Office</span>
-            {documents.map((document) => (
-              <span key={document.id} className="studio__office-item">
-                <button type="button" className="button" disabled={Boolean(busy) || !ready} title={`${document.label}: ${{ docx: 'a Word template', pptx: 'a PowerPoint template with a slide layout for each', html: 'an HTML signature to paste into a mail program' }[document.format]}`} onClick={() => office(document)}>{busy === document.id ? 'Making…' : `↓ ${officeLabel(document)}`}</button>
-                {document.format === 'html' && <button type="button" className="button button--quiet" disabled={Boolean(busy) || !ready} onClick={() => copySignature(document)}>{copied === document.id ? 'Copied' : 'Copy signature'}</button>}
-              </span>
-            ))}
-          </div>
-        )}
+          disabled={disabled} onDownload={() => run('printer-package', () => onPrinterPackage(template, values))} />}
         {error && <p className="studio__error" role="alert">{error}</p>}
         {!ready && <p className="studio__note">Loading the brand’s fonts. Previews use stand-in type until they arrive.</p>}
         {note && <p className="studio__note">{note}</p>}
         {aside?.(template)}
       </div>
 
-      <form className="studio__fields" onSubmit={(event) => event.preventDefault()}>
+      <form className="studio__fields" {...dock.panel('edit')} onSubmit={(event) => event.preventDefault()}>
         {children}
         {departments && brand.departments?.items?.length > 0 && (
           <label className="field">
             <span className="field__label">{brand.departments.label ?? 'Department'}</span>
-            <select value={brand.departments.items.find((item) => Object.entries(item.values ?? {}).every(([key, value]) => (values[key] ?? '') === value))?.id ?? ''} onChange={(event) => {
-              const item = brand.departments.items.find((entry) => entry.id === event.target.value)
+            <Select value={brand.departments.items.find((item) => Object.entries(item.values ?? {}).every(([key, value]) => (values[key] ?? '') === value))?.id ?? ''} onChange={(id) => {
+              const item = brand.departments.items.find((entry) => entry.id === id)
               setValues({ ...values, ...(item?.values ?? {}) })
-            }}>
-              <option value="">Choose to fill the fields…</option>
-              {brand.departments.items.map((item) => <option key={item.id} value={item.id}>{item.name}{item.years ? ` (${item.years})` : ''}</option>)}
-            </select>
+            }} options={[{ value: '', label: 'Choose to fill the fields…' }, ...brand.departments.items.map((item) => ({ value: item.id, label: `${item.name}${item.years ? ` (${item.years})` : ''}` }))]} />
           </label>
         )}
         <h3>{currentSet?.label ?? template.label ?? template.id}</h3>
@@ -299,6 +321,7 @@ export const TemplateStudio = ({
         <p className="studio__note">{filled} of {everyField.length} fields filled across {templates.length} templates. Fields with the same name are shared.</p>
         {filled > 0 && <button type="button" className="button button--quiet" onClick={() => setValues({})}>Clear every field</button>}
       </form>
+      {dock.bar}
     </div>
   )
 }

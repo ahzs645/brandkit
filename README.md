@@ -31,16 +31,15 @@ brandkit draws the whole kit from it:
   paste into a mail program. They are made from the same templates: the artwork drawn behind,
   the fields as real text in the brand's faces (embedded in the Word files where their licence
   allows), lines that share a baseline on tab stops.
-- **Template Printer**: the full [Template Printer](https://github.com/ahzs645/template-printer)
-  frontend, built from the Git submodule at `vendor/template-printer`. Its own tab offers card
-  design, people, exports, calibration and settings, with the linked **Staff Card** package ready
-  to open (front, back, fonts and sample values). It runs with browser storage, on the same site,
-  and can open in a separate tab. **Edit & print** sends a filled brand template with its fonts,
-  sides and variants directly to the editor; edited packages can be imported back into the brand.
-  The website handoff offers an editable ZIP/source folder, an external printer link and a
-  direct link to OTE's published original. SVG, PNG and PDF exports stay in Templates.
-  Reusable package, browser-bridge and Vite APIs, plus a plain-JavaScript host example, are
-  documented in [docs/template-printer.md](docs/template-printer.md).
+- **Template Printer**: the full [Template Printer](https://github.com/ahzs645/template-printer),
+  rendered in its own tab as a component from the Git submodule at `vendor/template-printer`:
+  the same component the printer's website renders, inside this page rather than a frame. It
+  offers card design, people, exports, calibration and settings, with the linked **Staff Card**
+  package ready to open, and keeps its records in browser storage. **Edit & print** in Templates
+  opens a filled brand template, with its fonts, sides and variants, in the printer; a package the
+  printer saves (Share → Download package) can be added back to the brand's templates in one
+  click. SVG, PNG and PDF exports stay in Templates. The package API is documented in
+  [docs/template-printer.md](docs/template-printer.md).
 - **The brand guide**: eight framed pages, logo reference sheets and a one-page overview, as SVG
   and as one PDF, read in the same viewer as the manual library.
 - **Motion**: for a brand that defines it, a motion library (timing tokens, rules and animated
@@ -66,7 +65,7 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 | --- | --- |
 | [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.3. From its v2.1 definition (kept in `history/2.1/brand.json`) the engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its eight guide pages page for page. On top of that, `npm run make:ddcnorth` adds an application system modelled on the BC manuals: 39 templates and 6 guide pages covering stationery, documents, publications, advertising, presentations and video, signs, vehicles and apparel, backgrounds, and incorrect usage. Each one cites the manual pages it follows. **v2.3**, *data, design, connection*, approved 22 October 2026, adds the descriptor "Data · Design · Connection", four dot patterns, eight templates for findings, briefs, workshops and social, five icons, four guide pages, a brand details page, the redesigned website in `site/`, and a motion library of eighteen studies for the Motion tab. `npm run make:ddcnorth-v23` records it as proposed in the v2.1 definition, then `scripts/brands/ddcnorth-accept-v23.mjs` merges it into brand.json with the history: v2.1 superseded, the 2.2 rising proposal archived, v2.3 approved. |
 | [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds fourteen templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
-| [`brands/overtheedge`](brands/overtheedge) | Over the Edge, UNBC's independent student newspaper, in a "Forest press" identity: an evolution of the paper's look. `npm run make:overtheedge` reads the logo path for path from the SVG its website serves (the full logo, without its subtext, stacked OVER / THE / EDGE, and the O as the symbol), and adds a palette from the site and its 2025 print covers, Source Serif 4, Anton, Inter, IBM Plex Mono and Gochi Hand, sixteen templates (cards, press pass, letterhead, issue cover, social posts, slides), ten icons, ten patterns and a nine-page guide. Two engine options let a logo be its lettering alone: a wordmark variant's own `height`, and a family's `lockupSymbol: false` with `stackedWordmark`. |
+| [`brands/overtheedge`](brands/overtheedge) | Over the Edge, UNBC's independent student newspaper, in the team's own "Doodle" identity: Cream, Lichen, Forest and Ink, Anton (standing in for Decalotype), Helvetica Neue and Salted for handwritten accents, one-stroke line doodles (googly eyes, calendar, flame, pencil, paper plane, spark), dashed rules and boxes, tilted day tags, month stickers, crumpled paper and zigzag frames. `npm run make:overtheedge` reads the logo path for path from the SVG its website serves (stacked OVER / THE / EDGE, the O as the symbol) and adds forty-three templates (Instagram posts and schedules in three grounds, stories, a reel cover, slides, a monthly calendar and month stickers, an A4 poster, cards, letterhead and the Staff Card that serves as the press pass), ten icons, fourteen patterns and a ten-page guide. Downsized references from the identity are in `reference/identity/`. Two engine options let a logo be its lettering alone: a wordmark variant's own `height`, and a family's `lockupSymbol: false` with `stackedWordmark`. |
 | [`brands/sparklab`](brands/sparklab) | SPARK Lab, UNBC’s product creation lab, from [sparklab.unbc.ca](https://sparklab.unbc.ca/). `npm run make:sparklab` preserves the original arrow, spark and lettering, with the website’s orange/navy/cream palette, Outfit and Source Serif 4. It adds four logo arrangements and four colourways, thirty templates for stationery, projects, workshops, social, slides and lab materials, editable Word and PowerPoint files and an email signature, ten icons, twenty-one patterns, a fifteen-page guide, sixteen motion studies, a brand details page and an offline website preview. Arrows, Signal, Connections and Layers pair eighteen patterns with twelve applications, including Word lab notes and a project report, three PowerPoint covers, and an interactive comparison board in `docs/patterns-and-templates.html`. `docs/arrow-patterns.html` explores twelve arrow and spark studies, including mixed directions at three scales, loose scatter, cross currents, orbit and constellations, with live scale, density and colour controls and SVG download. Source notes and font licences accompany the kit; layouts and motion are kit extensions. |
 | [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view sets a department sub-logo for any of 88 listed units or a typed name, in Helvetica Neue 95 Black on the construction of UNBC's own sub-logos (from the `unbc-logo` submodule), and carries the name into Documents and Templates; the kit includes every listed unit's sub-logo in three colours. Documents, templates and the **Web** components take www.unbc.ca's look (measured from the UNBC chrome and the NHHR Atlas): a gold Helvetica Black title over a warm rule, BC Sans web text, teal links and warm neutrals, with the department's sub-logo on document covers. The Departments view also makes the unit's social-media profile pictures (square and circle, from the UNBC logo package), and a **Door signs** tab runs the [door-sign](https://github.com/ahzs645/door-sign) package's editor, the one the UNBCDoor app uses, opened on the chosen department. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. |
 | [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
@@ -234,8 +233,7 @@ dependencies automatically; a source submodule host installs them itself.
 | `brandkit/manuals/bc` | The BC pack's books and families. |
 | `brandkit/vite` | `manualPages()`, the Vite plugin that serves and copies a pack's page files. |
 | `brandkit/printer` | Portable package import/export for native templates and imported card designs, in browsers and Node. |
-| `brandkit/printer/bridge` | A framework-independent session and message protocol for an iframe or popup. |
-| `brandkit/printer/vite` | Builds and mounts any compatible upstream Template Printer frontend, with configurable paths and deployment prefix. |
+| `brandkit/printer/bridge` | Links to a standalone Template Printer website, with a published package. |
 
 The library components read the host page's custom properties (`--surface`, `--ink`,
 `--radius`…) with neutral fallbacks, so they take on the host's theme.
@@ -245,11 +243,10 @@ The library components read the host page's custom properties (`--surface`, `--i
 ```sh
 git submodule update --init --recursive
 npm install
-npm run setup:printer                          # install the pinned Template Printer frontend
+npm run setup:printer                          # install the Template Printer component's dependencies
 npm run dev                                    # the app
 npm test                                       # engine, manual pack, and parity (see below)
 npx playwright install chromium && npm run test:browser   # the Motion tab and pages, in Chromium
-npm run build && npm run test:printer           # Template Printer integration, in Chromium
 node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
 npm run make:documentation -- --check           # all brand use guides match their definitions

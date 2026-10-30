@@ -39598,7 +39598,6 @@
  "motion": {
   "page": "motion/index.html",
   "css": "motion/motion.css",
-  "note": "The 1983 Graphic Standards Manual predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the manual’s rules; they are not BC Hydro guidance.",
   "tokens": {
    "durations": {
     "quick": 200,

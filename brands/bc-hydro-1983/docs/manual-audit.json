@@ -12,7 +12,7 @@
     "edition": "June 1983"
   },
   "baselineCommit": "e470434",
-  "brandDefinitionSha256": "db69d5ae6353ddeb353e0a14e89a1e4ea0e2e3099fa2f7c59d2784a004cab1be",
+  "brandDefinitionSha256": "f9685422962355df53dddebdaf01d4af044b4bc7462dbe9da494275c7396383e",
   "baselinePreviewsAvailable": true,
   "previewComparison": {
     "method": "svg-dom-clean-preview-v1",

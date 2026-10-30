@@ -1,8 +1,9 @@
 // A brand's web components (brand.web.page): each previewed on its own, with its markup and
-// styles to copy or download, then the page they compose, at desktop or phone width. All of
-// them are set for the department chosen in Departments, or another named here.
+// styles to copy or download, then the page they compose, at desktop or phone width. Every
+// preview is drawn at its full width and scaled to fit, so none scrolls sideways. All of them are
+// set for the department chosen in Departments, or another named here.
 
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { webComponentDocument, webComponents, webPage, webStylesheet } from '../../engine/webpage.js'
 import { download } from '../../export/render.js'
 import { readAffiliation } from '../affiliation.js'
@@ -25,17 +26,41 @@ const embedFonts = async (brand, source) => {
   return (file) => urls[file] ?? ''
 }
 
-// A preview frame grows to its content, so a component shows whole without a scrollbar.
-const Frame = ({ title, html, width, minHeight = 80 }) => {
+// A preview draws its page at `width` px, or the room it has where that is wider, and scales it
+// down where there is less: a phone sees a component as a desktop browser lays it out, not as its
+// own phone layout (in which some parts, the audience tabs, hide). `exact` keeps the width as
+// given, for the page template's phone width. The frame grows to its content, so a component
+// shows whole without a scrollbar. Components stay in frames rather than shadow roots because
+// their styles answer to the viewport: media queries and vw would read the app's window, not the
+// preview's width.
+const Frame = ({ title, html, width = WIDTHS.desktop, exact = false, minHeight = 80 }) => {
+  const box = useRef(null)
+  const [room, setRoom] = useState(0)
   const [height, setHeight] = useState(minHeight)
+  useLayoutEffect(() => {
+    const element = box.current
+    setRoom(element.clientWidth)
+    const observer = new ResizeObserver(() => setRoom(element.clientWidth))
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
   const fit = (event) => {
+    const view = event.currentTarget.contentWindow
     const body = event.currentTarget.contentDocument?.body
     if (!body) return
     const measure = () => setHeight(Math.max(minHeight, body.scrollHeight))
     measure()
-    event.currentTarget.contentDocument.fonts?.ready.then(measure)
+    view.document.fonts?.ready.then(measure)
+    // A wider room redraws the page wider, and its height changes with it.
+    view.addEventListener('resize', measure)
   }
-  return <iframe title={title} srcDoc={html} onLoad={fit} style={{ width: width ?? '100%', height }} />
+  const drawn = exact ? width : Math.max(width, room)
+  const scale = room ? Math.min(1, room / drawn) : 1
+  return <div ref={box} className="web-frame">
+    <div className="web-frame__page" style={{ width: Math.min(room || drawn, drawn), height: Math.ceil(height * scale) }}>
+      <iframe title={title} srcDoc={html} onLoad={fit} style={{ width: drawn, height, transform: scale < 1 ? `scale(${scale})` : undefined }} />
+    </div>
+  </div>
 }
 
 const Copy = ({ label, text }) => {
@@ -89,7 +114,7 @@ export const Web = ({ brand, fonts, source }) => {
           <button type="button" className="button" disabled={Boolean(busy)} onClick={() => save(`${brand.id}-web-page.html`, (url) => webPage(ctx, { department, fontUrl: url }))}>{busy === `${brand.id}-web-page.html` ? '…' : '↓ Page HTML'}</button>
         </div>
       </div>
-      <div className="web-preview__scroll"><Frame key={width} title={`${brand.name} web page preview`} html={page} width={WIDTHS[width]} minHeight={600} /></div>
+      <Frame key={width} title={`${brand.name} web page preview`} html={page} width={WIDTHS[width]} exact minHeight={600} />
     </section>
   </div>
 }

@@ -19,7 +19,7 @@ import { publicationHtml } from '../export/publication.js'
 import { documentProfile, publicationModel, documentationDocumentsFor, documentationMarkdown } from './documentation.js'
 import { consumerProfile } from './consumer.js'
 import { assetRecord } from './catalog.js'
-import { inPack } from './packs.js'
+import { inPack, packId } from './packs.js'
 import { readBrandAsset } from '../assets.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
 
@@ -58,8 +58,13 @@ Keep a copy of an approved identity before changing it.
  *   kind 'ico'    sizes: the favicon PNGs to pack
  *   kind 'asset'  src: a path in the brand's folder, copied as is
  *   kind 'index'  index.html and the asset catalog, made last from the finished list
+ *
+ * `department` picks the departmental logos: '' for none (the default), a department id for that
+ * unit's logos in every format the pack makes, '*' for every department as SVG, or a list such as
+ * [id, '*'] for both. The complete kit always carries every department, as it always has. `logoWidths` and
+ * `symbolWidths` replace the usual PNG sizes when a pack wants fewer.
  */
-export const planKit = (brand, { rasters = true, pdfs = true, assets = true, office = true, documentation = true, pack = 'complete' } = {}) => {
+export const planKit = (brand, { rasters = true, pdfs = true, assets = true, office = true, documentation = true, pack = 'complete', department = '', logoWidths, symbolWidths } = {}) => {
   const entries = []
   const add = (entry) => entries.push({ group: groupOf(entry.path), ...entry })
   const svgEntry = (path, make, metadata = {}) => add({ path, kind: 'text', make, ...metadata })
@@ -69,24 +74,37 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   const rasterColours = brand.rasterColours ?? logoColours.filter((key) => key !== 'currentColor')
 
   // Logos: every family in every layout and colour, or every signature in every colourway.
+  // A departmental signature here is set for the kit's chosen names, or shows placeholders.
   for (const logo of logoOptions(brand)) {
+    const departmental = Boolean(logo.signature && brand.signatures?.find((entry) => entry.id === logo.signature)?.departmental)
     for (const paint of paintOptions(brand)) {
       const stem = `${logo.key}-${paint.id}`
       const make = (ctx) => logoDocument(ctx, { ...logo, colourKey: paint.colour, colour: paint.colour === 'currentColor' || logo.signature ? paint.colour : undefined, colourway: paint.colourway })
-      svgEntry(`logos/outlined/${stem}.svg`, make)
+      svgEntry(`logos/outlined/${stem}.svg`, make, { departmental })
       if (!paint.raster) continue
-      if (rasters) for (const width of logo.layout === 'stacked' || logo.layout?.startsWith('wordmark') ? [1024] : [1024, 2048]) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make })
-      if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+      if (rasters) for (const width of logoWidths ?? (logo.layout === 'stacked' || logo.layout?.startsWith('wordmark') ? [1024] : [1024, 2048])) add({ path: `logos/png/${stem}-${width}.png`, kind: 'png', width, svg: make, departmental })
+      if (pdfs) add({ path: `logos/pdf/${stem}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))], departmental })
     }
   }
-  // Departmental signatures: each ministry or division set in each departmental signature.
+  // Departmental signatures: each ministry or division set in each departmental signature. A
+  // person's own unit comes in the pack's image formats too (the renderer an Office pack already
+  // needs draws its PNG); the whole folder, for communications staff and archives, is SVG alone.
   if (brand.departments?.items?.length) {
     const departmental = (brand.signatures ?? []).filter((entry) => entry.departmental)
     const ways = brand.departments.colourways ?? [Object.keys(brand.colourways ?? {})[0]]
+    const wanted = [department].flat()
+    const all = wanted.includes('*') || packId(pack) === 'complete'
     for (const item of brand.departments.items) {
+      const chosen = wanted.includes(item.id)
+      if (!all && !chosen) continue
+      const folder = `logos/${brand.departments.folder ?? 'departments'}/${item.id}`
       for (const signature of departmental) {
         for (const colourway of ways) {
-          svgEntry(`logos/${brand.departments.folder ?? 'departments'}/${item.id}/${signature.id}-${colourway}.svg`, (ctx) => logoDocument(ctx, { signature: signature.id, colourway, values: { ...item.values } }))
+          const make = (ctx) => logoDocument(ctx, { signature: signature.id, colourway, values: { ...item.values } })
+          svgEntry(`${folder}/${signature.id}-${colourway}.svg`, make, { unit: item.id })
+          if (!chosen) continue
+          if (rasters || office) add({ path: `${folder}/png/${signature.id}-${colourway}-2048.png`, kind: 'png', width: 2048, svg: make, unit: item.id })
+          if (pdfs) add({ path: `${folder}/pdf/${signature.id}-${colourway}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))], unit: item.id })
         }
       }
     }
@@ -100,15 +118,15 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { colourKey: key }))
   for (const symbolId of Object.keys(brand.symbols ?? {})) {
     for (const paint of paintOptions(brand).filter((entry) => entry.colourway)) {
-      svgEntry(`symbol/${id}-symbol-${symbolId}-${paint.id}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourway: paint.colourway }))
+      svgEntry(`symbol/${id}-symbol-${symbolId}-${paint.id}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourway: paint.colourway }), { furtherSymbol: symbolId })
     }
-    if (!brand.colourways) for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${symbolId}-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourKey: key }))
+    if (!brand.colourways) for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${symbolId}-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourKey: key }), { furtherSymbol: symbolId })
   }
   svgEntry(`symbol/${id}-symbol-master.svg`, (ctx) => symbolDocument(ctx, { master: true }))
   if (brand.symbol.microRadius != null || brand.symbol.microPaths || brand.symbol.microMarkup) svgEntry(`symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(ctx, { micro: true }))
   for (const key of rasterColours) {
     const make = (ctx) => symbolDocument(ctx, { colourKey: key })
-    if (rasters) for (const width of [256, 512, 1024]) add({ path: `symbol/${id}-symbol-${key}-${width}.png`, kind: 'png', width, svg: make })
+    if (rasters) for (const width of symbolWidths ?? [256, 512, 1024]) add({ path: `symbol/${id}-symbol-${key}-${width}.png`, kind: 'png', width, svg: make })
     if (pdfs) add({ path: `symbol/pdf/${id}-symbol-${key}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
   }
   }
@@ -154,9 +172,9 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   if (documentation) {
     // Word users need one convenient logo image even when the bulk PNG collection is off.
     // The filename and geometry come from the same preferred logo as the document profile.
-    if (pack === 'documents' && office && !rasters) {
+    if (packId(pack) === 'documents' && office && !rasters) {
       const preferred = documentProfile(brand).logo
-      add({ path: preferred.assets.png, kind: 'png', width: 2048,
+      add({ path: preferred.assets.png, kind: 'png', width: 2048, preferred: true,
         svg: (ctx) => logoDocument({ ...ctx, outline: true }, preferred.options) })
     }
     for (const paper of ['letter', 'a4']) {

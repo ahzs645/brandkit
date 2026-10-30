@@ -19,20 +19,24 @@ const contrast = (a, b) => {
   return (hi + 0.05) / (lo + 0.05)
 }
 
-const NAMES = { forest: 'Forest', pine: 'Pine', newsprint: 'Newsprint', ink: 'Ink', lichen: 'Lichen', sage: 'Sage', moss: 'Moss', kraft: 'Kraft', pulp: 'Pulp', bark: 'Bark', proof: 'Proof', white: 'White' }
+const NAMES = { forest: 'Forest', newsprint: 'Cream', lichen: 'Lichen', ink: 'Ink', haze: 'Haze', flame: 'Flame', crumple: 'Crumple', ember: 'Ember', white: 'White', pine: 'Pine', sage: 'Sage', moss: 'Moss', kraft: 'Kraft', pulp: 'Pulp', bark: 'Bark', proof: 'Proof' }
 const ROLE = {
-  forest: 'The brand. The logo, links, primary buttons, page numbers, masthead blocks.',
-  pine: 'Deep ground for covers and slides; pressed buttons.',
-  newsprint: 'The page. Every surface starts here.',
-  ink: 'Headlines and body text; the logo in one colour on light grounds.',
-  lichen: 'Logo and text on forest; light panels.',
-  sage: 'Print boxes and large figures on pine or forest, 24 px and up.',
-  moss: 'Photo wells and info boxes on covers, with white text.',
-  kraft: 'Rules and placeholders only. Not a text colour.',
-  pulp: 'Hairlines and quiet patterns only. Not a text colour.',
-  bark: 'Metadata, labels and dashed index rules.',
-  proof: 'Breaking and Correction, and nothing else.',
-  white: 'Cards, paper stock, and text on forest, pine, moss and proof.'
+  forest: 'The brand. The logo, headlines, photo blocks, day tags and stickers.',
+  newsprint: 'The page. Most posts, stories and slides start here.',
+  lichen: 'The second ground; the logo and text on Forest or Ink; the doodle wall.',
+  ink: 'Body text, Salted accents and doodles on light grounds; a dark ground for season posts.',
+  haze: 'OVER THE EDGE repeated faintly behind a schedule on Cream. Never text.',
+  flame: 'The big flame behind a deadline on Cream. Never text.',
+  crumple: 'The crumpled sheet a schedule is printed on.',
+  ember: 'The issue number on the Cream deadline post.',
+  white: 'Highlights in crumpled paper; text on Forest where Cream is not to hand.',
+  pine: 'Earlier Forest press colour, kept for the supporting studies.',
+  sage: 'Earlier Forest press colour: large figures on Forest, 24 px and up.',
+  moss: 'Earlier Forest press colour: the photo well of the issue cover.',
+  kraft: 'Earlier Forest press colour: rules and placeholders only.',
+  pulp: 'Earlier Forest press colour: hairlines and quiet patterns only.',
+  bark: 'Earlier Forest press colour: labels on the cards and letterhead.',
+  proof: 'Earlier Forest press colour: Breaking and Correction, and nothing else.'
 }
 
 export const detailsPage = ({ brand, fonts }, { fontFaces, contrastPairs, largeOnly, studies }) => {
@@ -54,15 +58,15 @@ export const detailsPage = ({ brand, fonts }, { fontFaces, contrastPairs, largeO
 <style>
 /* Fonts: supplied originals and open-source faces; see each notice in fonts/. */
 ${fontFaces}
-/* Layout: one 1180 px column on newsprint, sections divided by the index's dashed rule, artwork on its true grounds. */
+/* Layout: one 1180 px column on cream, sections divided by the identity's dashed ink rule, artwork on its true grounds. */
 :root { ${Object.entries(c).map(([key, hex]) => `--${key}: ${hex};`).join(' ')} }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--newsprint); color: var(--ink); font-family: "Helvetica Neue", system-ui, Arial, sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
 :focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
-h1, h2, h3 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; margin: 0; text-wrap: balance; }
 p { margin: 0; }
-code, .label, th, .mono { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
-.label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--bark); }
+code, .label, th, .mono { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; }
+.label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
 .page { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 72px; }
 .bar { background: var(--forest); color: var(--white); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .bar .logo { width: min(280px, 70vw); height: auto; display: block; }
@@ -71,51 +75,51 @@ code, .label, th, .mono { font-family: 'IBM Plex Mono', ui-monospace, Menlo, mon
 .cover h1 { font-size: clamp(44px, 7vw, 92px); line-height: 1.02; letter-spacing: -.02em; max-width: 13ch; }
 .cover p { max-width: 62ch; font-size: 18px; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 28px; }
-section { border-top: 1.5px dashed var(--bark); padding-block: clamp(48px, 6vw, 80px); display: grid; gap: 32px; }
+section { border-top: 1.5px dashed var(--ink); padding-block: clamp(48px, 6vw, 80px); display: grid; gap: 32px; }
 .sh { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 12px 48px; align-items: end; }
 .sh h2 { font-size: clamp(30px, 3.8vw, 46px); line-height: 1.06; margin-top: 8px; }
 .grid { display: grid; gap: 20px; }
 .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .panel { padding: clamp(20px, 4vw, 40px); display: grid; place-items: center; min-height: 200px; }
 .panel svg { width: 100%; height: auto; max-height: 220px; }
-.on-white { background: var(--white); border: 1px solid var(--pulp); } .on-forest { background: var(--forest); } .on-pine { background: var(--pine); } .on-lichen { background: var(--lichen); }
+.on-white { background: var(--newsprint); border: 1px solid var(--lichen); } .on-forest { background: var(--forest); } .on-ink { background: var(--ink); } .on-lichen { background: var(--lichen); }
 figure { margin: 0; display: grid; gap: 10px; } figcaption { font-size: 14px; }
-.voice { background: var(--white); border: 1px solid var(--pulp); padding: clamp(24px, 4vw, 40px); display: grid; gap: 18px; }
-.voice blockquote { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.2; color: var(--forest); }
-.rules { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--pulp); }
-.rules li { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--pulp); }
+.voice { background: var(--white); border: 1px solid var(--lichen); padding: clamp(24px, 4vw, 40px); display: grid; gap: 18px; }
+.voice blockquote { margin: 0; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: clamp(24px, 3vw, 34px); line-height: 1.2; color: var(--forest); }
+.rules { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--lichen); }
+.rules li { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--lichen); }
 .rules li b { font-weight: 600; }
 .swatches { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 20px; }
 .swatches li { display: grid; gap: 4px; align-content: start; }
-.swatches .chip { height: 96px; border: 1px solid var(--pulp); margin-bottom: 6px; }
-.swatches code { font-size: 13px; color: var(--bark); } .swatches small { font-size: 13px; }
+.swatches .chip { height: 96px; border: 1px solid var(--lichen); margin-bottom: 6px; }
+.swatches code { font-size: 13px; color: var(--ink); } .swatches small { font-size: 13px; }
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 15px; }
-th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bark); font-weight: 500; padding: 8px; border-bottom: 1.5px dashed var(--bark); }
-td { padding: 10px 8px; border-bottom: 1px solid var(--pulp); white-space: nowrap; }
-.pair { display: inline-grid; place-items: center; width: 44px; height: 32px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; }
-.type { display: grid; gap: 0; border-top: 1px solid var(--pulp); }
-.type > div { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--pulp); align-items: baseline; }
-.s-display { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; }
+th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); font-weight: 500; padding: 8px; border-bottom: 1.5px dashed var(--ink); }
+td { padding: 10px 8px; border-bottom: 1px solid var(--lichen); white-space: nowrap; }
+.pair { display: inline-grid; place-items: center; width: 44px; height: 32px; font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; }
+.type { display: grid; gap: 0; border-top: 1px solid var(--lichen); }
+.type > div { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--lichen); align-items: baseline; }
+.s-display { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; }
 .s-anton { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-size: clamp(36px, 5vw, 64px); line-height: 1; text-transform: uppercase; }
-.s-body { font-size: 18px; } .s-mono { font-family: 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; font-size: 16px; }
+.s-body { font-size: 18px; } .s-mono { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 16px; }
 .s-hand { font-family: 'Salted', cursive; font-size: 34px; color: var(--forest); }
 .icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
-.icons li { background: var(--white); border: 1px solid var(--pulp); padding: 18px 8px 10px; display: grid; justify-items: center; gap: 8px; color: var(--forest); font-size: 12px; }
+.icons li { background: var(--white); border: 1px solid var(--lichen); padding: 18px 8px 10px; display: grid; justify-items: center; gap: 8px; color: var(--forest); font-size: 12px; }
 .icons .icon { width: 32px; height: 32px; }
 .templates { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 20px; }
-.templates figure .template { width: 100%; height: auto; border: 1px solid var(--pulp); background: var(--white); }
+.templates figure .template { width: 100%; height: auto; border: 1px solid var(--lichen); background: var(--white); }
 .o-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: end; }
 .o-row .o { width: 64px; height: auto; }
 .studies { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 0 24px; }
-.studies li { padding: 14px 0; border-bottom: 1.5px dashed var(--bark); display: grid; gap: 2px; }
-.studies li span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bark); }
+.studies li { padding: 14px 0; border-bottom: 1.5px dashed var(--ink); display: grid; gap: 2px; }
+.studies li span { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
 .studies li p { font-size: 14px; }
 .next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
 .next li { background: var(--lichen); padding: 24px; display: grid; gap: 8px; align-content: start; }
-.next li:nth-child(2) { background: var(--forest); color: var(--white); } .next li:nth-child(3) { background: var(--white); border: 1px solid var(--pulp); }
-.next b { font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; }
-footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.next li:nth-child(2) { background: var(--forest); color: var(--white); } .next li:nth-child(3) { background: var(--white); border: 1px solid var(--lichen); }
+.next b { font-family: Anton, 'Arial Narrow', Impact, sans-serif; font-weight: 400; font-size: 20px; }
+footer { border-top: 1.5px dashed var(--ink); padding-top: 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 @media (max-width: 860px) { .sh, .g2, .g3, .g4 { grid-template-columns: minmax(0, 1fr); } .rules li, .type > div { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
 </style>
 </head>
@@ -125,8 +129,8 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
 
 <div class="cover">
   <span class="label">UNBC's Independent Student Newspaper</span>
-  <h1>Forest on newsprint, off the press.</h1>
-  <p>The full reference for Over the Edge's "Forest press" identity: the paper's own lettering, one green on one paper, Source Serif headlines, Anton on the front page, and the printed issue's dashed index. Everything here is drawn from one brand.json.</p>
+  <h1>Drawn in the margins.</h1>
+  <p>The full reference for Over the Edge's "Doodle" identity: the paper's own lettering in Cream, Forest, Lichen and Ink, Decalotype headlines, Helvetica Neue for reading, Salted for the handwritten accents, and the line doodles students leave in their notebooks. Everything here is drawn from one brand.json.</p>
   <div class="meta label"><span>v${brand.displayVersion}</span><span>overtheedge.unbc.ca</span><span>Generated by brandkit</span></div>
 </div>
 
@@ -143,15 +147,15 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
 </section>
 
 <section aria-labelledby="h-logo">
-  <div class="sh"><div><span class="label">Logo</span><h2 id="h-logo">The paper’s own lettering.</h2></div><p>Drawn path for path from the SVG the site serves. One colour at a time: Forest or Ink on light grounds, White or Lichen on Forest, Pine or Moss.</p></div>
+  <div class="sh"><div><span class="label">Logo</span><h2 id="h-logo">The paper’s own lettering.</h2></div><p>Drawn path for path from the SVG the site serves. One colour at a time: Forest on Cream or Lichen, Lichen on Ink, Cream on Forest.</p></div>
   <div class="grid g2">
-    <figure><div class="panel on-white">${logo('overtheedge', 'horizontal', 'forest')}</div><figcaption>Primary. Forest on Newsprint or White. 288 px / 58 mm wide or more.</figcaption></figure>
-    <figure><div class="panel on-forest">${logo('overtheedge', 'horizontal', 'white')}</div><figcaption>Reversed. White on Forest.</figcaption></figure>
+    <figure><div class="panel on-white">${logo('overtheedge', 'horizontal', 'forest')}</div><figcaption>Primary. Forest on Cream. 288 px / 58 mm wide or more.</figcaption></figure>
+    <figure><div class="panel on-forest">${logo('overtheedge', 'horizontal', 'newsprint')}</div><figcaption>Reversed. Cream on Forest.</figcaption></figure>
   </div>
   <div class="grid g3">
     <figure><div class="panel on-white">${logo('words', 'horizontal', 'forest')}</div><figcaption>Without subtext, for small spaces. 96 px / 20 mm or more.</figcaption></figure>
-    <figure><div class="panel on-lichen">${logo('overtheedge', 'stacked', 'forest')}</div><figcaption>Stacked, extracted from page 1 of the September 2025 issue.</figcaption></figure>
-    <figure><div class="panel on-pine"><div class="o-row">${symbol('lichen')}</div></div><figcaption>The O, alone only where the name can’t be read. 16 px / 5 mm or more.</figcaption></figure>
+    <figure><div class="panel on-lichen">${logo('overtheedge', 'stacked', 'forest')}</div><figcaption>Stacked, extracted from the first page of the September issue.</figcaption></figure>
+    <figure><div class="panel on-ink"><div class="o-row">${symbol('lichen')}</div></div><figcaption>The O, alone only where the name can’t be read. 16 px / 5 mm or more.</figcaption></figure>
   </div>
   <ul class="rules">
     <li><b>Clear space</b><span>Half the height of the O on every side.</span></li>
@@ -160,19 +164,18 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
 </section>
 
 <section aria-labelledby="h-colour">
-  <div class="sh"><div><span class="label">Colour</span><h2 id="h-colour">One green, one paper, one ink.</h2></div><p>From the site's theme and the April 2025 cover. Proof red is an editor's mark: Breaking and Correction only.</p></div>
+  <div class="sh"><div><span class="label">Colour</span><h2 id="h-colour">Cream, Forest, Lichen, Ink.</h2></div><p>The identity's four colours, read from its own files' fills, then four tints sampled from its posts. The earlier Forest press colours follow, kept for the supporting studies and the site.</p></div>
   <ul class="swatches">${swatches}</ul>
   <div class="table-wrap"><table><thead><tr><th></th><th>Text pair</th><th>Contrast</th><th>Use</th></tr></thead><tbody>${pairs}</tbody></table></div>
 </section>
 
 <section aria-labelledby="h-type">
-  <div class="sh"><div><span class="label">Typography</span><h2 id="h-type">Five voices, five jobs.</h2></div><p>Helvetica Neue and Salted are supplied original faces. Anton remains the substitute for Decalotype Black; keep the supplied font notices.</p></div>
+  <div class="sh"><div><span class="label">Typography</span><h2 id="h-type">Three voices.</h2></div><p>The identity names Decalotype, Helvetica Neue and Salted. Decalotype is a commercial face, so Anton stands in for it. Helvetica Neue and Salted are supplied originals; keep their notices.</p></div>
   <div class="type">
-    <div><span class="label">Headlines · Source Serif 4 Bold</span><span class="s-display">Bears Don’t Really Hibernate… Or Do They?</span></div>
-    <div><span class="label">Front page · Anton, capitals</span><span class="s-anton">October 16th · In this issue</span></div>
-    <div><span class="label">Interface · Helvetica Neue</span><span class="s-body">Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.</span></div>
-    <div><span class="label">Dateline · IBM Plex Mono</span><span class="s-mono">Volume 32 · Issue 2 · October 16, 2025</span></div>
-    <div><span class="label">One note · Salted</span><span class="s-hand">Over the Edge is here!</span></div>
+    <div><span class="label">Headlines · Decalotype (Anton)</span><span class="s-display">Submission Schedule</span></div>
+    <div><span class="label">Reading · Helvetica Neue</span><span class="s-body">Over the Edge is a student-run newspaper and creative platform that gives students space to share their voices, perspectives, and ideas.</span></div>
+    <div><span class="label">Labels · Helvetica Neue Bold</span><span class="s-mono">Campus Corners · Weather</span></div>
+    <div><span class="label">Accents · Salted</span><span class="s-hand">Week schedule · Deadline</span></div>
   </div>
 </section>
 
@@ -182,12 +185,12 @@ footer { border-top: 1.5px dashed var(--bark); padding-top: 24px; display: flex;
 </section>
 
 <section aria-labelledby="h-print">
-  <div class="sh"><div><span class="label">Print devices and templates</span><h2 id="h-print">Borrowed from the front page.</h2></div><p>The dashed index, two-digit page numbers in Anton, the forest masthead and date box, and a white keyline inside a forest photo frame. Corners are square.</p></div>
+  <div class="sh"><div><span class="label">Doodles and templates</span><h2 id="h-print">Drawn in the margins.</h2></div><p>Googly eyes, a calendar with a clock, a flame, a pencil, a paper plane and a spark, at one round stroke. Around them: dashed rules, tilted day tags, blob stickers, crumpled paper and a faint OVER THE EDGE ground. The Staff Card is the press pass.</p></div>
   <div class="templates">
-    <figure>${template('issue-cover')}<figcaption>Issue cover, 1080 × 1350</figcaption></figure>
-    <figure>${template('story-post')}<figcaption>Story post, 1080 × 1350</figcaption></figure>
-    <figure>${template('event-post')}<figcaption>Event post, 1080 × 1080</figcaption></figure>
-    <figure>${template('press-pass')}<figcaption>Press pass, 54 × 86 mm</figcaption></figure>
+    <figure>${template('post-submission-schedule')}<figcaption>Submission schedule, 1080 × 1350</figcaption></figure>
+    <figure>${template('post-week-schedule')}<figcaption>Week schedule, 1080 × 1350</figcaption></figure>
+    <figure>${template('post-deadline')}<figcaption>Deadline, 1080 × 1350</figcaption></figure>
+    <figure>${template('post-schedule-paper')}<figcaption>Schedule on paper, 1080 × 1350</figcaption></figure>
   </div>
 </section>
 

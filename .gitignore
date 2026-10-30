@@ -1,6 +1,5 @@
 node_modules/
 dist/
-.template-printer/
 *-kit/
 .DS_Store
 __pycache__/

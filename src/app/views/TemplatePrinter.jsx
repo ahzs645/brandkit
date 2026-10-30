@@ -1,55 +1,55 @@
-import { useEffect, useRef, useState } from 'react'
-import { connectPrinter, createPrinterSession, printerUrl } from '../template-printer.js'
-import { PrinterWebsite } from '../../studio/PrinterWebsite.jsx'
+// The Template Printer, rendered here as a component (vendor/template-printer, the same one its
+// own website renders), not framed: a brand template opens in it as a package, and a package
+// the printer saves can be added back to the brand.
+import { useEffect, useState } from 'react'
+import { TemplatePrinter as Printer } from '../../../vendor/template-printer/frontend/src/embed'
+import '../../../vendor/template-printer/frontend/src/embed/template-printer.css'
+import { PRINTER_WEBSITE, printerWebsiteUrl } from '../../printer/bridge.js'
+import { Select } from '../ui.jsx'
 
-export const TemplatePrinter = ({ brand, source, request, ready, onPrint, onPackage, onImport }) => {
-  const base = new URL(import.meta.env.BASE_URL, globalThis.location.origin).href
-  const [session, setSession] = useState(() => request ?? { url: printerUrl(base), token: 'library' })
+export const TemplatePrinter = ({ brand, source, request, ready, onPrint, onImport }) => {
+  // The package open in the printer: one sent from Templates, a brand preset, or none (its library).
+  const [open, setOpen] = useState(request ?? null)
   const [selected, setSelected] = useState(brand.templates[0]?.id ?? '')
+  const [saved, setSaved] = useState(null)
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
-  const frame = useRef(null)
-  const popups = useRef([])
-  const input = useRef(null)
   const template = brand.templates.find((entry) => entry.id === selected)
-  useEffect(() => { if (request) setSession(request) }, [request])
-  useEffect(() => { if (!brand.templates.some((template) => template.id === selected)) setSelected(brand.templates[0]?.id ?? '') }, [brand.templates, selected])
-  useEffect(() => session.bytes ? connectPrinter({ session, targets: () => [frame.current?.contentWindow, ...popups.current] }) : undefined, [session])
-  const open = (packagePath) => setSession({ url: printerUrl(base, packagePath), token: crypto.randomUUID() })
+  useEffect(() => { if (request) setOpen(request) }, [request])
+  useEffect(() => { if (!brand.templates.some((entry) => entry.id === selected)) setSelected(brand.templates[0]?.id ?? '') }, [brand.templates, selected])
   const run = async (task) => { setBusy(true); setError(null); try { await task() } catch (problem) { setError(problem.message) } finally { setBusy(false) } }
+  let website
+  try { website = printerWebsiteUrl(null, { website: brand.printer?.website }) } catch { website = PRINTER_WEBSITE }
   return (
     <div className="view printer">
-      <section className="panel printer__intro">
+      <section className="panel printer__head">
         <div>
-          <h1>Template Printer</h1>
-          <p className="muted">Design and fill cards, manage people, print both sides, and calibrate your printer. Your templates, fonts and records stay in this browser.</p>
+          <h2>Template Printer</h2>
+          <p className="muted">Design and fill cards, manage people, print both sides and calibrate your printer. Templates, people and settings stay in this browser.</p>
         </div>
-        <div className="downloads">
-          {(brand.printer?.packages ?? []).map((preset) => <button key={preset.id} type="button" className="button" disabled={busy} onClick={() => run(async () => {
-            const bytes = await source.read(preset.file)
-            setSession(createPrinterSession(base, bytes, { label: 'brandkit' }))
+        <div className="printer__controls">
+          <label className="field printer__template"><span className="field__label">Brand template</span>
+            <Select value={selected} onChange={setSelected} options={brand.templates.map((entry) => ({ value: entry.id, label: entry.label ?? entry.id }))} />
+          </label>
+          <button type="button" className="button" disabled={busy || !template || !ready} onClick={() => run(() => onPrint(template))}>Open in the printer</button>
+          {(brand.printer?.packages ?? []).map((preset) => <button key={preset.id} type="button" className="button button--quiet" disabled={busy} onClick={() => run(async () => {
+            setOpen({ bytes: new Uint8Array(await source.read(preset.file)), id: crypto.randomUUID() })
           })}>Open {preset.name.toLowerCase()}</button>)}
-          <button type="button" className="button button--quiet" onClick={() => open()}>Open library</button>
-          <button type="button" className="button button--quiet" disabled={busy} onClick={() => input.current?.click()}>Import package into {brand.name}</button>
-          <a className="button button--quiet" href={session.url} target="_blank" rel={session.bytes ? undefined : 'noopener'} onClick={(event) => {
-            if (!session.bytes) return
-            event.preventDefault()
-            const popup = window.open(session.url, '_blank')
-            if (popup) popups.current.push(popup)
-          }}>Open in new tab ↗</a>
-          <input ref={input} type="file" accept=".zip,application/zip" hidden onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ''; if (file) run(() => onImport(file)) }} />
+          <a className="button button--quiet" href={website} target="_blank" rel="noopener noreferrer">Printer website ↗</a>
         </div>
+        {saved && (
+          <p className="notice printer__saved" role="status">
+            The printer saved <strong>{saved.filename}</strong>.
+            <button type="button" className="button" disabled={busy} onClick={() => run(async () => { await onImport(saved.bytes); setSaved(null) })}>Add it to {brand.name}’s templates</button>
+            <button type="button" className="link" onClick={() => setSaved(null)}>Dismiss</button>
+          </p>
+        )}
+        {error && <p className="notice notice--error" role="alert">{error}</p>}
       </section>
-      <div className="panel printer__intro">
-        <label className="field"><span className="field__label">Brand template</span><select aria-label="Brand template" value={selected} onChange={(event) => setSelected(event.target.value)}>{brand.templates.map((template) => <option key={template.id} value={template.id}>{template.label ?? template.id}</option>)}</select></label>
-        <button type="button" className="button" disabled={busy || !selected || !ready} onClick={() => run(() => onPrint(template))}>Edit &amp; print selected</button>
-        <p className="muted printer__hint">Fields, fonts, both sides and variants travel together. Use the printer’s Share → Download package to bring an edited design back into this brand.</p>
-        <PrinterWebsite key={selected} website={brand.printer?.website}
-          sourceUrl={brand.printer?.packages?.find((entry) => entry.id === template?.printer?.packageId)?.sourceUrl}
-          disabled={busy || !template || !ready} onDownload={() => run(() => onPackage(template))} />
+      <div className="printer__stage">
+        <Printer initialPackage={open?.bytes} packageLabel="brandkit" shareUrl={website}
+          onExportPackage={(bytes, filename) => setSaved({ bytes, filename })} />
       </div>
-      {error && <p className="notice notice--error" role="alert">{error}</p>}
-      <iframe ref={frame} key={session.token} className="printer__frame" title="Template Printer" src={session.url} allow="camera; fullscreen" />
     </div>
   )
 }

@@ -6,19 +6,19 @@
 
 Identity version 1.0. Document application version 1.1.
 
-"Forest press": the paper's own horizontal and stacked artwork. Salted and Helvetica Neue come from the supplied issue toolkit and staff-card package. Anton stands in for Decalotype Black.
+"Doodle": the team's own identity, Cream, Forest, Lichen and Ink with line doodles, on the paper's own horizontal and stacked artwork. Salted and Helvetica Neue come from the supplied issue toolkit and staff-card package. Anton stands in for Decalotype.
 
 Document layout extension using the current brand kit. These publication layouts do not replace or redraw the identity artwork.
 
 ## Start with the supplied assets
 
-The complete brand kit generates `logos/outlined/overtheedge-horizontal-forest.svg` for vector placement, `logos/png/overtheedge-horizontal-forest-2048.png` for Word-compatible raster placement, and `logos/pdf/overtheedge-horizontal-forest.pdf` for a vector proof. The repository generates these paths from `brands/overtheedge/brand.json`.
+The **Logos** pack (and **Everything**) generates `logos/outlined/overtheedge-horizontal-forest.svg` for vector placement, `logos/png/overtheedge-horizontal-forest-2048.png` for Word-compatible raster placement, and `logos/pdf/overtheedge-horizontal-forest.pdf` for a vector proof. The repository generates these paths from `brands/overtheedge/brand.json`.
 
-Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Send to a printer** or **Complete brand kit** pack with graphic PDFs enabled when a separate vector PDF is required.
+Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Logos**, **Print shop** or **Everything** pack when a separate vector PDF is required.
 
 The preferred logo is the horizontal overtheedge lockup. Keep its proportions. Minimum width: 58 mm. Half the height of the O, clear on every side. The document profile adds 8 mm of layout spacing; the identity clear-space rule remains authoritative.
 
-Artwork provenance: Horizontal logo from the site SVG (reference/logo-site.svg); stacked masthead from page 1 of the September 2025 PDF (reference/logo-cover-stacked.svg); colours from the site and print covers; written by scripts/brands/overtheedge.mjs.
+Artwork provenance: Horizontal logo from the site SVG (reference/logo-site.svg); stacked masthead from page 1 of the September 2025 PDF (reference/logo-cover-stacked.svg); colour, type, doodles and applications from the team's Doodle identity files (reference/identity/); written by scripts/brands/overtheedge.mjs.
 
 ## Document styles
 
@@ -26,17 +26,17 @@ The examples support US Letter and A4. This profile uses US Letter (215.9 × 279
 
 | Style | Family | Weight | Size | Line height |
 | --- | --- | --- | --- | --- |
-| title | Source Serif 4 | 700 | 30 pt | 1.12 |
-| heading1 | Source Serif 4 | 700 | 22 pt | 1.2 |
+| title | Anton | 400 | 30 pt | 1.12 |
+| heading1 | Anton | 400 | 22 pt | 1.2 |
 | body | Helvetica Neue | 500 | 10.5 pt | 1.45 |
-| caption | IBM Plex Mono | 500 | 8.5 pt | 1.35 |
+| caption | Helvetica Neue | 700 | 8.5 pt | 1.35 |
 | table | Helvetica Neue | 500 | 9.5 pt | 1.3 |
 
 Install the supplied fonts before editing outside the kit. The existing Word exporter embeds eligible fonts; a face with an explicit Office substitution uses that declared installed face. Font files and their licences remain in the kit.
 
 Use the light paper and ink roles for document pages; retain the brand’s own typefaces and logo proportions.
 
-Document colours: ink #262626; muted #7D6B56; accent #155329; paper #F5F1E6; lines #DBD0BA.
+Document colours: ink #262626; muted #262626; accent #155329; paper #FFFBF3; lines #E3EFCF.
 
 ## Department and subdepartment names
 
@@ -76,9 +76,34 @@ These sizes come from the template definitions rather than a separately maintain
 
 | Template | Physical size | Source id |
 | --- | --- | --- |
+| Submission schedule | 285.75 × 357.19 mm | post-submission-schedule |
+| Issue schedule | 285.75 × 357.19 mm | post-schedule |
+| Deadline, cream | 285.75 × 357.19 mm | post-deadline |
+| Deadline, forest | 285.75 × 357.19 mm | post-deadline-forest |
+| Meet the board | 285.75 × 357.19 mm | post-meet-the-board |
+| Board member | 285.75 × 357.19 mm | post-board-member |
+| Issue is out | 285.75 × 357.19 mm | post-issue-out |
+| Front page | 285.75 × 357.19 mm | post-front-page |
+| Front page, masthead tab | 285.75 × 357.19 mm | post-front-page-tab |
+| Schedule on paper | 285.75 × 357.19 mm | post-schedule-paper |
+| Season schedule | 285.75 × 357.19 mm | post-season-schedule |
+| Week schedule, cream | 285.75 × 357.19 mm | post-week-schedule |
+| Week schedule, lichen | 285.75 × 357.19 mm | post-week-schedule-lichen |
+| Week schedule, forest | 285.75 × 357.19 mm | post-week-schedule-forest |
+| Weekend schedule | 285.75 × 357.19 mm | post-weekend-schedule |
+| Week schedule, story | 285.75 × 508 mm | story-week-schedule |
+| Reel cover | 285.75 × 508 mm | reel-cover |
+| Issue is out, story | 285.75 × 508 mm | story-issue-out |
+| Write for us, story | 285.75 × 508 mm | story-write-for-us |
+| Monthly calendar | 285.75 × 357.19 mm | calendar-month |
+| Month sticker | 211.67 × 63.5 mm | month-sticker |
+| Slide, cover | 508 × 285.75 mm | slide-cover-doodle |
+| Slide, doodle wall | 508 × 285.75 mm | slide-doodle |
+| Slide, content | 508 × 285.75 mm | slide-content-doodle |
+| Slide, colourways | 508 × 285.75 mm | slide-colourways |
+| Write for us, A4 poster | 210 × 297 mm | poster-write-for-us |
 | Business card, front | 90 × 50 mm trim + 3 mm bleed | business-card-front |
 | Business card, back | 90 × 50 mm trim + 3 mm bleed | business-card-back |
-| Press pass | 54 × 86 mm | press-pass |
 | A4 letterhead | 210 × 297 mm | letterhead-a4 |
 | Issue cover | 285.75 × 357.19 mm | issue-cover |
 | Story post | 285.75 × 357.19 mm | story-post |

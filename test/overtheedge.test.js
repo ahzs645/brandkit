@@ -1,5 +1,6 @@
-// Over the Edge: the paper's own logo, read from the site's SVG, in its "Forest press" identity
-// (scripts/brands/overtheedge.mjs). Requirement ids are docs/PLANS.md M2's.
+// Over the Edge: the paper's own logo, read from the site's SVG, in the team's "Doodle" identity
+// (scripts/brands/overtheedge.mjs and overtheedge-doodle.mjs). Requirement ids are docs/PLANS.md M2's;
+// the Doodle update (30 October 2026) changed the palette, type, templates and guide they check.
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
@@ -16,7 +17,7 @@ const brand = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
 const read = (path) => readFileSync(`${folder}${path}`, 'utf8')
 const sha = (path) => createHash('sha256').update(readFileSync(path)).digest('hex')
 const fonts = await loadBrandFontsFromDisk(brand, folder)
-// Keep the original Forest press assertions exact. The explicitly tagged supporting
+// Keep the brand's own assertions exact. The explicitly tagged supporting
 // collection is validated independently in pattern-collections.test.js.
 const originalEntries = (items) => items.filter((item) => item?.extension !== 'pattern-explorations')
 
@@ -86,7 +87,7 @@ const templateGround = (template, element) => colour(brand, element.ground ?? te
 
 // --- OTE-001 Fonts --------------------------------------------------------------------------------
 
-test('OTE-001: six fonts and four licences, hashed in the fonts README; every file and web face resolves', () => {
+test('OTE-001: the identity\'s faces and the kit\'s licences, hashed in the fonts README; every file and web face resolves', () => {
   const readme = read('fonts/README.md')
   const own = ['Anton-Regular.ttf', 'SourceSerif4-Regular.ttf', 'SourceSerif4-Bold.ttf', 'SourceSerif4-It.ttf', 'IBMPlexMono-Medium.ttf', 'GochiHand-Regular.ttf', 'Anton-OFL.txt', 'IBMPlexMono-OFL.txt', 'GochiHand-OFL.txt', 'SourceSerif-OFL.md']
   for (const file of own) {
@@ -95,8 +96,12 @@ test('OTE-001: six fonts and four licences, hashed in the fonts README; every fi
     assert.ok(row.includes(sha(`${folder}fonts/${file}`)), `${file} hash matches`)
   }
   assert.deepEqual(fonts.failures, [])
-  for (const key of ['body', 'bold', 'display', 'displayRegular', 'deck', 'extra', 'label', 'hand']) assert.ok(fonts.has(key), key)
-  assert.equal(brand.fonts.deck.style, 'italic')
+  // The staff card package adds its own two faces after these.
+  assert.deepEqual(Object.keys(brand.fonts).slice(0, 5), ['body', 'bold', 'display', 'label', 'hand'])
+  for (const key of Object.keys(brand.fonts)) assert.ok(fonts.has(key), key)
+  // The identity's three faces: Decalotype (Anton stands in), Helvetica Neue and Salted.
+  assert.equal(brand.fonts.display.family, 'Anton')
+  assert.equal(brand.fonts.label.family, 'Helvetica Neue')
   assert.equal(brand.fonts.body.family, 'Helvetica Neue')
   assert.equal(brand.fonts.body.weight, 500)
   assert.equal(brand.fonts.bold.weight, 700)
@@ -250,11 +255,18 @@ test('OTE-003: a template path with dash is dashed, one without is not; the sche
 
 // --- OTE-004 Palette, roles, logos ----------------------------------------------------------------
 
-test('OTE-004: the palette, roles and logo colours are as planned, and the kit has the logo files', () => {
-  assert.deepEqual(brand.colours, { forest: '#155329', pine: '#0C3B1C', newsprint: '#F5F1E6', ink: '#262626', lichen: '#E3EFCF', sage: '#6AA380', moss: '#466855', kraft: '#D4C8AA', pulp: '#DBD0BA', bark: '#7D6B56', proof: '#B54A35', white: '#FFFFFF' })
-  assert.deepEqual(brand.roles, { ink: 'ink', paper: 'newsprint', muted: 'bark', primary: 'forest', light: 'lichen', reverse: 'white', line: 'pulp', rule: 'kraft' })
-  assert.deepEqual(brand.logoColours, ['forest', 'ink', 'white', 'lichen', 'currentColor'])
-  assert.deepEqual(brand.rasterColours, ['forest', 'ink', 'white', 'lichen'])
+test('OTE-004: the palette, roles and logo colours are the identity\'s, and the kit has the logo files', () => {
+  // The identity's four (its palette slide and its SVG fills), four tints sampled from its posts, and
+  // the earlier Forest press colours kept for the supporting studies.
+  assert.deepEqual(brand.colours, {
+    forest: '#155329', newsprint: '#FFFBF3', lichen: '#E3EFCF', ink: '#262626',
+    haze: '#F5F1EA', flame: '#FFF2D8', crumple: '#F4F4F4', ember: '#6D4900', white: '#FFFFFF',
+    pine: '#0C3B1C', sage: '#6AA380', moss: '#466855', kraft: '#D4C8AA', pulp: '#DBD0BA', bark: '#7D6B56', proof: '#B54A35'
+  })
+  assert.equal(brand.colourNames.newsprint, 'Cream')
+  assert.deepEqual(brand.roles, { ink: 'ink', paper: 'newsprint', muted: 'ink', primary: 'forest', light: 'lichen', reverse: 'newsprint', line: 'lichen', rule: 'ink' })
+  assert.deepEqual(brand.logoColours, ['forest', 'ink', 'newsprint', 'lichen', 'white', 'currentColor'])
+  assert.deepEqual(brand.rasterColours, ['forest', 'ink', 'newsprint', 'lichen'])
   const plan = planKit(brand).map((entry) => entry.path)
   assert.equal(new Set(plan).size, plan.length, 'no path twice')
   for (const path of ['logos/outlined/overtheedge-horizontal-forest.svg', 'logos/outlined/overtheedge-stacked-forest.svg', 'logos/outlined/overtheedge-wordmark-forest.svg', 'logos/outlined/overtheedge-wordmark-stacked-forest.svg', 'symbol/overtheedge-symbol-forest.svg', 'logos/source/overtheedge-site-light.svg', 'logos/source/overtheedge-site-dark.svg']) assert.ok(plan.includes(path), path)
@@ -265,26 +277,31 @@ test('OTE-004: the palette, roles and logo colours are as planned, and the kit h
 const MINIMUM = { full: { px: 288, mm: 58 }, words: { px: 96, mm: 20 }, symbol: { px: 16, mm: 5 } }
 const minimumFor = (family = brand.families[0].id, layout = 'horizontal') => (layout === 'stacked' || family === 'words' ? MINIMUM.words : MINIMUM.full)
 
-test('OTE-005: fourteen templates render outlined, readable, with logos at or above their minimum', () => {
-  // Imported original artwork has its own typography and colours; the Forest press rules
-  // below continue to apply to every one of the fourteen generated identity templates.
+const DOODLE_TEMPLATES = ['post-submission-schedule', 'post-schedule', 'post-deadline', 'post-deadline-forest', 'post-meet-the-board', 'post-board-member', 'post-issue-out', 'post-front-page', 'post-front-page-tab', 'post-schedule-paper', 'post-season-schedule', 'post-week-schedule', 'post-week-schedule-lichen', 'post-week-schedule-forest', 'post-weekend-schedule', 'story-week-schedule', 'reel-cover', 'story-issue-out', 'story-write-for-us', 'calendar-month', 'month-sticker', 'slide-cover-doodle', 'slide-doodle', 'slide-content-doodle', 'slide-colourways', 'poster-write-for-us']
+const EARLIER_TEMPLATES = ['business-card-front', 'business-card-back', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close']
+
+test('OTE-005: the identity\'s templates and the earlier ones render outlined, readable, with logos at or above their minimum', () => {
+  // Imported original artwork has its own typography and colours; these rules apply to every
+  // generated template: the Doodle identity's, then the cards, letterhead and earlier posts.
   const nativeTemplates = originalEntries(brand.templates).filter((template) => !template.printer)
-  assert.deepEqual(nativeTemplates.map((t) => t.id), ['business-card-front', 'business-card-back', 'press-pass', 'letterhead-a4', 'issue-cover', 'story-post', 'issue-out', 'event-post', 'story-vertical', 'share-image', 'social-banner', 'slide-title', 'slide-section', 'slide-close'])
+  assert.deepEqual(nativeTemplates.map((t) => t.id), [...DOODLE_TEMPLATES, ...EARLIER_TEMPLATES])
   for (const template of nativeTemplates) {
     const { svg } = renderTemplate({ brand, fonts, outline: true }, template)
     assert.ok(svg.includes('</svg>') && !/NaN|undefined|<text/.test(svg), template.id)
     for (const hex of paints(svg)) assert.ok(palette.has(hex), `${template.id}: ${hex}`)
     const texts = template.elements.flatMap((e) => (e.type === 'flow' ? e.items.map((item) => ({ ...item, type: 'text', ground: e.ground })) : [e])).filter((e) => ['text', 'paragraph'].includes(e.type))
-    assert.ok(texts.some((e) => e.id), `${template.id} has a field`)
+    // A drawing's text zones (a day tag, a sticker) are fields too.
+    const zoneFields = template.elements.filter((e) => e.type === 'illustration').flatMap((e) => Object.values(e.zones ?? {})).filter((zone) => zone.id)
+    assert.ok(texts.some((e) => e.id) || zoneFields.length, `${template.id} has a field`)
     // Template units are CSS px, or for a print template its physical size converted at 96 dpi.
     const mmPerUnit = template.physical ? parseFloat(template.physical[0]) / template.width : null
     const cssPx = (units) => (mmPerUnit ? units * mmPerUnit * 96 / 25.4 : units)
     for (const e of texts) {
       const ratio = contrast(colour(brand, e.colour), templateGround(template, e))
       assert.ok(ratio >= (cssPx(e.size) >= 24 ? 3 : 4.5), `${template.id}/${e.id ?? e.text}: ${ratio.toFixed(2)} at ${cssPx(e.size).toFixed(1)} css px`)
-      if (e.font === 'extra') assert.equal(e.text, e.text.toUpperCase(), `${template.id}/${e.id}: Anton in capitals`)
+      // Salted is for a word or two at a time, never running text.
+      if (e.font === 'hand' && e.type === 'paragraph') assert.ok(e.maxLines <= 2 && e.text.length < 40, `${template.id}/${e.id}: Salted stays short`)
     }
-    assert.ok(texts.filter((e) => e.font === 'hand').length <= 1, `${template.id}: one hand note at most`)
     for (const e of template.elements) {
       if (e.type === 'logo') {
         const minimum = minimumFor(e.family, e.layout)
@@ -298,14 +315,30 @@ test('OTE-005: fourteen templates render outlined, readable, with logos at or ab
       }
       if (e.type === 'symbol' && mmPerUnit) assert.ok(e.height * mmPerUnit >= MINIMUM.symbol.mm, `${template.id}: O height`)
       if (e.type === 'symbol' && !mmPerUnit) assert.ok(e.height >= MINIMUM.symbol.px, `${template.id}: O height`)
+      if (e.type === 'illustration') assert.ok(brand.illustrations[e.illustration], `${template.id}: drawing ${e.illustration}`)
     }
   }
+})
+
+test('the press pass is gone: the Staff Card replaces it everywhere', () => {
+  assert.ok(!brand.templates.some((t) => t.id === 'press-pass'))
+  assert.ok(brand.templates.some((t) => t.id === 'staff-card-front'))
+  for (const text of [JSON.stringify(brand), read('docs/README.md'), read('docs/brand-details.html'), read('USE.md')]) assert.doesNotMatch(text, /press-pass/)
+})
+
+test('the week schedule and the deadline keep their colourways together as sets', () => {
+  const sets = Object.fromEntries(brand.sets.map((set) => [set.id, set.variants.map((variant) => variant.template)]))
+  assert.deepEqual(sets['week-schedule'], ['post-week-schedule', 'post-week-schedule-lichen', 'post-week-schedule-forest', 'story-week-schedule'])
+  assert.deepEqual(sets.deadline, ['post-deadline', 'post-deadline-forest'])
+  assert.deepEqual(sets['staff-card'], ['staff-card-front', 'staff-card-back'])
 })
 
 // --- Copy scan (OTE-005, OTE-008, OTE-010) --------------------------------------------------------
 
 const SOURCED = ["UNBC's Independent Student Newspaper", "UNBC's Student Newspaper", 'Over the Edge is here!', 'Breaking news, vibrant clubs, can’t-miss events, and a shared university calendar.', 'News · Clubs · Events · Calendar', 'overtheedge.unbc.ca']
-const LOCKED = ['IN THIS ISSUE', 'PRESS', 'CALENDAR', 'WHERE', 'WHEN', 'HOST', 'OVERTHEEDGE.UNBC.CA', 'READ AT OVERTHEEDGE.UNBC.CA', 'READ IT AT OVERTHEEDGE.UNBC.CA', 'OVERTHEEDGE.UNBC.CA/CALENDAR', "UNBC'S STUDENT NEWSPAPER", 'NEWS · CLUBS · EVENTS · CALENDAR']
+// Lines the identity's own posts and slides use, word for word.
+const IDENTITY = ['Submission Schedule', 'Submission', 'SCHEDULE', 'DEADLINE', 'ISSUE', 'WEEK', 'WEEKEND', 'OUT!', 'is out!', 'In partnership with', 'WE’RE STUDENTS', '(just like you), somehow in charge of a newspaper.', 'WE WRITE, WE EDIT, AND WE CARE', 'way too much about paragraph breaks.', 'WRITE FOR\nOVER THE EDGE', 'WHAT YOU CAN WRITE', 'SCAN. CLICK. JOIN THE EDGE.', 'OTE', 'Doodle', 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+const LOCKED = ['IN THIS ISSUE', 'CALENDAR', 'WHERE', 'WHEN', 'HOST', 'OVERTHEEDGE.UNBC.CA', 'READ AT OVERTHEEDGE.UNBC.CA', 'READ IT AT OVERTHEEDGE.UNBC.CA', 'OVERTHEEDGE.UNBC.CA/CALENDAR', "UNBC'S STUDENT NEWSPAPER", 'NEWS · CLUBS · EVENTS · CALENDAR']
 // Sourced facts with digits, and where they come from.
 const FACTS = {
   'VOLUME 32 · ISSUE 2 · OCTOBER 16, 2025': 'October 16, 2025 cover',
@@ -314,12 +347,13 @@ const FACTS = {
 // Exempt categories, as docs/PLANS.md records them: hex codes; measured sizes (px, mm), contrast ratios
 // (": 1") and logo units; canvas dimensions; version numbers; the dates the sources were published or
 // read; durations in ms (amended in M3); and names that contain a digit (Source Serif 4, A4).
-const DATES = ['22 October 2026', 'April 2025', 'October 2025']
+const DATES = ['22 October 2026', '30 October 2026', 'April 2025', 'October 2025']
 const EXEMPT = [/\d+ × \d+/g, /\d+ ms\b/g, /Source Serif 4/gi, /\bA4\b/g, /#[0-9A-F]{6}\b/gi, /\d+(?:\.\d+)? ?(?:px|mm)\b/g, /\d+(?:\.\d+)? : 1\b/g, /\bv\d+\.\d+\b/g, /^## \d+\.\d+ - /g, /\b\d+(?:\.\d+)? logo units\b/g, ...DATES.map((date) => new RegExp(date, 'g'))]
 const strip = (text) => EXEMPT.reduce((value, pattern) => value.replace(pattern, ''), text.replace(/\[[^\]]*\]|\{[^}]*\}/g, ''))
 
 const guideStrings = () => [...brand.guide.pages, ...originalEntries(brand.guide.sheets)].flatMap((page) => [page.title, page.subtitle, ...(page.elements ?? []).flatMap((e) => [e.text, ...(e.rows ?? []).flat()])]).filter((value) => typeof value === 'string')
-const templateStrings = () => originalEntries(brand.templates).flatMap((t) => t.elements.flatMap((e) => (e.items ?? [e]).map((item) => item.text))).filter((value) => typeof value === 'string')
+// A monthly calendar's day numbers are the grid, not figures; they are left out.
+const templateStrings = () => originalEntries(brand.templates).flatMap((t) => t.elements.flatMap((e) => (e.items ?? [e]).filter((item) => !/^date-\d+$/.test(item.id ?? '')).map((item) => item.text))).filter((value) => typeof value === 'string')
 const webStrings = () => [...Object.values(brand.copy), ...Object.values(brand.web.intro), ...Object.values(brand.web.landing)].filter((value) => typeof value === 'string')
 
 test('copy scan: the exemptions let measured values through, and not invented figures', () => {
@@ -331,7 +365,7 @@ test('copy: no em dashes, sourced or bracketed template text, and digits only wh
   const docs = [read('docs/README.md'), read('docs/CHANGELOG.md')]
   for (const value of [...templateStrings(), ...guideStrings(), ...webStrings(), ...docs]) assert.ok(!value.includes('—'), value.slice(0, 60))
   for (const value of templateStrings()) {
-    assert.ok(/\[[^\]]+\]/.test(value) || SOURCED.includes(value) || LOCKED.includes(value), `template text: ${value}`)
+    assert.ok(/\[[^\]]+\]/.test(value) || SOURCED.includes(value) || LOCKED.includes(value) || IDENTITY.includes(value), `template text: ${value}`)
     assert.doesNotMatch(value.replace(/\[[^\]]*\]/g, ''), /\d/, `template digits: ${value}`)
   }
   for (const value of [...guideStrings(), ...webStrings()]) {
@@ -370,10 +404,12 @@ test('OTE-006: ten icons in currentColor, the site\'s five with its own geometry
   }
 })
 
-test('OTE-007: three patterns of the O in palette colours', () => {
-  assert.deepEqual(originalEntries(brand.patterns).map((p) => p.id), ['o-repeat', 'o-crop', 'o-field'])
+test('OTE-007: three patterns of the O and four of the identity\'s elements, in palette colours', () => {
+  const ids = ['o-repeat', 'o-crop', 'o-field', 'doodle-wall', 'doodle-set', 'edge-ghost', 'zigzag-frame']
+  assert.deepEqual(originalEntries(brand.patterns).map((p) => p.id), ids)
+  for (const key of ['eyes', 'calendar', 'flame', 'pencil', 'plane', 'spark', 'scribble']) assert.match(brand.symbols[`doodle-${key}`].markup, /\{ink\}/, key)
   const plan = planKit(brand)
-  for (const id of ['o-repeat', 'o-crop', 'o-field']) {
+  for (const id of ids) {
     const entry = plan.find((e) => e.path === `patterns/${id}.svg`)
     const svg = entry.make({ brand, fonts })
     for (const hex of paints(svg)) assert.ok(palette.has(hex), `${id}: ${hex}`)
@@ -382,9 +418,9 @@ test('OTE-007: three patterns of the O in palette colours', () => {
 
 // --- OTE-008 Guide --------------------------------------------------------------------------------
 
-test('OTE-008: nine guide pages (amended in M3) and a logo sheet, in palette colours, with readable logos', () => {
+test('OTE-008: ten guide pages (amended for Doodle) and a logo sheet, in palette colours, with readable logos', () => {
   const pages = guidePages({ brand, fonts })
-  assert.equal(pages.length, 9)
+  assert.equal(pages.length, 10)
   assert.equal(brand.guide.frame.header, '{upperName} / BRAND GUIDE / V{displayVersion}')
   assert.equal(brand.guide.frame.footer, "{upperName} / UNBC'S INDEPENDENT STUDENT NEWSPAPER")
   assert.equal(brand.guide.frame.logo.family, 'words')
@@ -403,15 +439,14 @@ test('OTE-008: nine guide pages (amended in M3) and a logo sheet, in palette col
   }
   // The Colour page states every pair the plan measured, each matching the palette to its stated precision.
   const colourPage = brand.guide.pages[3].elements.map((e) => e.text ?? '').join(' ')
-  const PAIRS = [['ink', 'newsprint'], ['bark', 'newsprint'], ['forest', 'newsprint'], ['white', 'forest'], ['lichen', 'forest'], ['white', 'pine'], ['lichen', 'pine'], ['white', 'moss'], ['ink', 'sage'], ['proof', 'newsprint'], ['white', 'proof'], ['sage', 'pine'], ['sage', 'forest']]
+  const PAIRS = [['ink', 'newsprint'], ['forest', 'newsprint'], ['ember', 'newsprint'], ['newsprint', 'forest'], ['lichen', 'forest'], ['white', 'forest'], ['newsprint', 'ink'], ['lichen', 'ink'], ['ink', 'lichen'], ['forest', 'lichen'], ['ink', 'crumple'], ['forest', 'crumple'], ['bark', 'newsprint'], ['white', 'moss'], ['bark', 'white'], ['ink', 'white'], ['sage', 'forest']]
   for (const [fg, bg] of PAIRS) {
     const stated = new RegExp(`${fg} on ${bg} ([\\d.]+) : 1`).exec(colourPage)
     assert.ok(stated, `${fg} on ${bg} is stated`)
     const places = (stated[1].split('.')[1] ?? '').length
     assert.equal(Number(stated[1]), Number(contrast(brand.colours[fg], brand.colours[bg]).toFixed(places)), `${fg} on ${bg}`)
   }
-  assert.match(colourPage, /bark on newsprint 4\.53 : 1/)
-  assert.match(colourPage, /At 24 px and up only: sage on pine [\d.]+ : 1 · sage on forest [\d.]+ : 1/)
+  assert.match(colourPage, /At 24 px and up only: sage on forest [\d.]+ : 1/)
 })
 
 // --- OTE-009 Definition, OTE-010 Docs -------------------------------------------------------------
@@ -467,7 +502,7 @@ test('OTE-012: thirteen motion studies, their tokens as CSS variables, palette c
     assert.doesNotMatch(source, /\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(/, 'no other colour functions')
     assert.doesNotMatch(source, /(?:url\(|@import\s)['"]?https?:/, 'nothing fetched from elsewhere')
   }
-  assert.deepEqual(embedded(page), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'IBM Plex Mono 500 normal', 'Source Serif 4 700 normal'])
+  assert.deepEqual(embedded(page), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'Helvetica Neue 700 normal'])
   const plan = planKit(brand).map((entry) => entry.path)
   for (const file of ['motion/index.html', 'motion/motion.css', 'motion/motion-tokens.json', 'motion/README.md', 'guidelines/brand-details.html']) assert.ok(plan.includes(file), file)
   const readme = read('motion/README.md')
@@ -476,14 +511,14 @@ test('OTE-012: thirteen motion studies, their tokens as CSS variables, palette c
   for (const key of Object.keys(motion.tokens.durations)) assert.ok(readme.includes(`--ote-${key}`), key)
 })
 
-test('OTE-013: nine guide pages, the Motion page before Files, in palette colours', () => {
+test('OTE-013: ten guide pages, the Motion page before Files, in palette colours', () => {
   const pages = guidePages({ brand, fonts })
-  assert.equal(pages.length, 9)
+  assert.equal(pages.length, 10)
   assert.deepEqual(brand.guide.pages.slice(-2).map((page) => page.name), ['Motion', 'Files'])
-  const motion = pages[7].render()
+  const motion = pages[8].render()
   assert.ok(!/NaN|undefined/.test(motion))
   for (const hex of paints(motion)) assert.ok(palette.has(hex), hex)
-  assert.equal(brand.guide.pages[7].elements.filter((e) => e.type === 'path' && e.d === brand.wordmark.glyphs.over).length, 4, 'OVER in each of four frames')
+  assert.equal(brand.guide.pages[8].elements.filter((e) => e.type === 'path' && e.d === brand.wordmark.glyphs.over).length, 4, 'OVER in each of four frames')
 })
 
 test('OTE-014: the brand details page is self-contained, in palette colours, and shipped', () => {
@@ -491,7 +526,7 @@ test('OTE-014: the brand details page is self-contained, in palette colours, and
   assert.ok(brand.files.some((file) => file.to === 'guidelines/brand-details.html' && file.from === 'docs/brand-details.html'))
   assert.ok(!/NaN|undefined/.test(html.replace(/base64,[A-Za-z0-9+/=]+/g, '')))
   assert.match(html, /<svg class="logo"/)
-  assert.deepEqual(embedded(html), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'IBM Plex Mono 500 normal', 'Salted 400 normal', 'Source Serif 4 700 normal'])
+  assert.deepEqual(embedded(html), ['Anton 400 normal', 'Helvetica Neue 500 normal', 'Helvetica Neue 700 normal', 'Salted 400 normal'])
   for (const hex of cssColours(html)) assert.ok(palette.has(hex), hex)
   assert.doesNotMatch(html, /(?:src|href)="https?:/, 'nothing loaded from elsewhere')
   assert.ok(!html.includes('—'))
