@@ -50,7 +50,7 @@ const tokenCss = (prefix, tokens) => [
 const entryOf = (library) => ({
   page: 'motion/index.html',
   css: 'motion/motion.css',
-  note: library.note,
+  ...(library.note ? { note: library.note } : {}),
   tokens: library.tokens,
   rules: library.rules,
   studies: library.studies.map(({ id, name, kind, group, timing, use, description, loop }) => ({ id, name, kind, group, timing, use, description, ...(loop ? { loop } : {}) }))
@@ -130,8 +130,7 @@ footer { border-top: 1px solid ${colours.line}; padding-top: 20px; font-size: 13
   <span class="label">${escape(library.eyebrow)}</span>
   <h1>${escape(library.headline)}</h1>
   <p>${escape(library.intro)}</p>
-  <p class="note">${escape(library.note)}</p>
-</section>
+${library.note ? `  <p class="note">${escape(library.note)}</p>\n` : ''}</section>
 <section class="sec" aria-labelledby="h-tokens">
   <div><span class="label">Tokens</span><h2 id="h-tokens">Timing and easing</h2></div>
   <table><tbody>${rows}<tr><td>--${prefix}-stagger</td><td>${tokens.stagger} ms</td><td></td></tr>${Object.entries(tokens.easings).map(([key, value]) => `<tr><td>--${prefix}-${key}</td><td colspan="2">${escape(value)}</td></tr>`).join('')}</tbody></table>
@@ -186,9 +185,7 @@ ${tiles}
 
 const readme = (library) => `# ${library.name} motion (example)
 
-${library.note}
-
-${library.studies.length} studies on one set of timings, all drawn from the brand's own artwork with
+${library.note ? `${library.note}\n\n` : ''}${library.studies.length} studies on one set of timings, all drawn from the brand's own artwork with
 the type outlined. Open \`index.html\` to play them; \`motion.css\` holds the tokens and keyframes,
 and \`motion-tokens.json\` the same values for code. brandkit's Motion tab plays them too, and
 exports the logo and loader studies as video and GIF.
@@ -351,7 +348,6 @@ export const hydroLibrary = (brand, fonts) => {
     eyebrow: 'Motion · an example for the 1983 identity',
     headline: 'Power that arrives on time.',
     intro: 'Seven studies for the 1983 signature: three for the logo, two loaders made of the symbol alone, and two for interfaces. They share four timings and two eases, and each ends on the signature exactly as the manual draws it.',
-    note: 'The 1983 Graphic Standards Manual predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the manual’s rules; they are not BC Hydro guidance.',
     colours: { page: '#FFFFFF', ink: brand.colours.black, muted: brand.colours.grey, accent: brand.colours.blue, line: '#D3D3D3' },
     fontStack: '"TeX Gyre Termes", "Times New Roman", Times, serif',
     fontFaces: "@font-face { font-family: 'TeX Gyre Termes'; font-weight: 400; src: url('../fonts/texgyretermes-regular.otf') format('opentype'); }\n@font-face { font-family: 'TeX Gyre Termes'; font-weight: 700; src: url('../fonts/texgyretermes-bold.otf') format('opentype'); }",
@@ -463,7 +459,6 @@ export const provinceLibrary = (brand, fonts) => {
     eyebrow: 'Motion · an example for the 1977 identity',
     headline: 'The seal, set in motion.',
     intro: 'Five studies for the 1977 provincial signature: three for the logo, a loader made of the symbol alone, and a sign panel for screens. They share one set of timings, and each ends on the signature exactly as the program draws it.',
-    note: 'The 1977 Visual Identity Program predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the program’s rules; they are not the Province’s guidance.',
     colours: { page: brand.colours.white, ink: brand.colours.black, muted: brand.colours.grey, accent: brand.colours.brown, line: '#DDD6C8' },
     fontStack: '"TeX Gyre Heros", Helvetica, Arial, sans-serif',
     fontFaces: "@font-face { font-family: 'TeX Gyre Heros'; font-weight: 400; src: url('../fonts/texgyreheros-regular.otf') format('opentype'); }\n@font-face { font-family: 'TeX Gyre Heros'; font-weight: 700; src: url('../fonts/texgyreheros-bold.otf') format('opentype'); }",

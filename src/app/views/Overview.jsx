@@ -4,7 +4,7 @@ import { colour, colourName, isDark, rgb } from '../../engine/brand.js'
 import { guideSheets } from '../../engine/guide.js'
 import { changesArtwork, mergePatch, revisionsOf, withRevision } from '../../engine/revisions.js'
 import { colourEntries } from '../colours.js'
-import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
+import { Downloads, Field, Segmented, Select, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
 import { Typography } from './Typography.jsx'
 import { OrganizationSources } from './Organization.jsx'
@@ -142,9 +142,7 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
             </Field>
           )}
           <Field label="Layout">
-            <select value={layout} onChange={(event) => setLayout(event.target.value)}>
-              {['horizontal', 'stacked', 'symbol'].map((value) => <option key={value} value={value}>{value.charAt(0).toUpperCase() + value.slice(1)}</option>)}
-            </select>
+            <Select value={layout} onChange={setLayout} options={['horizontal', 'stacked', 'symbol'].map((value) => ({ value, label: value.charAt(0).toUpperCase() + value.slice(1) }))} />
           </Field>
           <label className="wordmark-toggle"><input type="checkbox" checked={wordmarkEnabled} disabled={layout === 'symbol'} onChange={(event) => setWordmarkEnabled(event.target.checked)} /><span>Wordmark</span></label>
           <Field label="Colour">

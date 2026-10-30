@@ -16,7 +16,14 @@ export const aspectOf = (svg) => {
  * with the name beside it. The Province uses its two-line logotype beside the emblem.
  */
 export const mastheadArt = (brand, fonts) => {
-  if (brand.logoPolicy?.allowInheritedColour === false) return { svg: logoDocument({ brand, fonts }, { signature: brand.signatures[0].id, colourway: brand.defaultColourway }) }
+  if (brand.logoPolicy?.allowInheritedColour === false) {
+    // A brand that forbids inheriting colour still permits its black, monochrome colourway: the
+    // interface draws that one, with its black taking the ink, so it stands with every other
+    // brand's logo in the masthead and the menu (and turns white, also permitted, in the dark).
+    const mono = Object.entries(brand.colourways ?? {}).find(([, spec]) => /^#0{6}$/i.test(brand.colours?.[spec.all] ?? ''))
+    const svg = logoDocument({ brand, fonts }, { signature: brand.signatures[0].id, colourway: mono?.[0] ?? brand.defaultColourway })
+    return { svg: mono ? svg.replace(/(fill|stroke)="#0{6}"/gi, '$1="currentColor"') : svg }
+  }
   if (brand.families?.length) return { svg: logoDocument({ brand, fonts }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
   if (brand.id === 'bc-province-1977') {
     return { svg: logoDocument({ brand, fonts, values: { ministry: '', 'ministry-split': '', address: '' } }, { signature: 'horizontal', colour: 'currentColor' }) }

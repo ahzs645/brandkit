@@ -82,7 +82,6 @@ test('the BC identities carry example motion libraries, drawn from their own art
     const brand = read(id)
     const { motion } = brand
     assert.equal(motion.studies.length, count, id)
-    assert.match(motion.note, /predates screen motion/)
     assert.ok(motion.studies.some(isLogoStudy), `${id} has logo studies`)
     const folder = new URL(`../brands/${id}/`, import.meta.url)
     const page = readFileSync(new URL(motion.page, folder), 'utf8')

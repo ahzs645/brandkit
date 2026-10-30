@@ -9,7 +9,6 @@ import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
-import { createPrinterSession } from '../printer/bridge.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
 import { Logos } from './views/Logos.jsx'
@@ -19,11 +18,12 @@ import { Colour } from './views/Colour.jsx'
 import { motionUrl, viewOrOverview } from './motion.js'
 import { hasDepartments } from './affiliation.js'
 import { hasWebPage } from '../engine/webpage.js'
+import { patternLibrary } from '../engine/pattern-catalog.js'
 import { loadExtension } from '../extensions/index.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
 import { ManualSources } from './views/Sources.jsx'
-import { BrandLogo, MenuLogo } from './ui.jsx'
+import { BrandLogo, MenuLogo, Segmented } from './ui.jsx'
 import { BrandMenu, MoreMenu } from './BrandMenu.jsx'
 import { isSharedView, Shared, SHARED_VIEWS, ShareDialog, SharedMark } from './share.jsx'
 
@@ -42,24 +42,46 @@ const VIEWS = [
   { id: 'colour', label: 'Colour' },
   { id: 'organization', label: 'Departments' },
   { id: 'patterns', label: 'Patterns' },
+  // Templates holds the documents too: `documents` is its second part, kept as a view of its own
+  // so a link to it still opens there, and shown under the Templates tab.
   { id: 'templates', label: 'Templates' },
+  { id: 'documents', label: 'Documents', within: 'templates' },
   { id: 'web', label: 'Web' },
-  { id: 'documents', label: 'Documents' },
   { id: 'printer', label: 'Template Printer' },
   // A brand extension's own tab (UNBC's door signs), named by the extension.
   { id: 'extension', label: 'Extension' },
   { id: 'guide', label: 'Guide' },
   { id: 'motion', label: 'Motion' },
-  { id: 'kit', label: 'Download kit' },
-  { id: 'brand', label: 'Edit brand' }
+  { id: 'kit', label: 'Download kit' }
 ]
-const OTHER_VIEWS = [{ id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
+// The workshop's views, in the masthead's buttons (the ⋯ menu on a phone) rather than the tabs.
+const OTHER_VIEWS = [{ id: 'brand', label: 'Edit brand' }, { id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
 const ALL_VIEWS = [...VIEWS, ...OTHER_VIEWS].map((view) => view.id)
 
 // A shared link (see ./share.jsx) is read once, on arrival, and kept in the address from then on.
 const SHARED = isSharedView()
 const TABS = SHARED ? VIEWS.filter((view) => SHARED_VIEWS.includes(view.id)) : VIEWS
 const OPEN_VIEWS = SHARED ? SHARED_VIEWS : ALL_VIEWS
+
+/**
+ * Whether a brand has anything for a view: a tab for a brand with nothing in it is not shown, and
+ * arriving on one goes to the overview. `extensionView` is undefined while the brand's extension
+ * loads, so nothing is decided about its tab until then.
+ */
+const hasPatterns = (brand) => { try { return patternLibrary(brand).patterns.length > 0 } catch { return false } }
+const offers = (view, { brand, motionLink, extensionView }) => {
+  if (!brand) return true
+  switch (view) {
+    case 'motion': return Boolean(motionLink)
+    case 'organization': return hasDepartments(brand)
+    case 'web': return hasWebPage(brand)
+    case 'patterns': return hasPatterns(brand)
+    case 'guide': return Boolean(brand.guide?.pages?.length)
+    case 'printer': return Boolean(brand.templates?.length)
+    case 'extension': return extensionView !== null
+    default: return true
+  }
+}
 
 const params = () => new URLSearchParams(globalThis.location?.search ?? '')
 
@@ -109,6 +131,17 @@ export const App = () => {
   const [sharing, setSharing] = useState(false)
   const [printerSession, setPrinterSession] = useState(null)
   const fileInput = useRef(null)
+  const masthead = useRef(null)
+  const tabs = useRef(null)
+  // Everything sticky sits under the masthead, whose height changes with the brand's logo, the
+  // window's width and wrapping: it is measured, not assumed.
+  useEffect(() => {
+    const element = masthead.current
+    if (!element || typeof ResizeObserver === 'undefined') return undefined
+    const observer = new ResizeObserver(() => document.documentElement.style.setProperty('--masthead-h', `${Math.ceil(element.getBoundingClientRect().height)}px`))
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
 
   const brandIds = [...new Set([...BUILT_IN, ...Object.keys(saved), ...Object.keys(opened)])]
 
@@ -184,12 +217,12 @@ export const App = () => {
   // Motion only exists for a brand (or a chosen revision) with a motion library: arriving on it, or
   // switching brand or revision while on it, without one goes to the overview.
   const motionLink = brand ? motionUrl(brand, source) : undefined
+  // On a phone the tab row scrolls: the current tab is brought into it.
+  useEffect(() => { tabs.current?.querySelector('[aria-current="page"]')?.scrollIntoView?.({ inline: 'center', block: 'nearest' }) }, [view, brand?.id])
+  const available = useMemo(() => new Set(TABS.map((entry) => entry.id).filter((id) => offers(id, { brand, motionLink, extensionView }))), [brand, motionLink, extensionView])
   useEffect(() => {
-    if (brand && viewOrOverview(view, motionLink) !== view) go('overview')
-    if (brand && (view === 'organization' && !hasDepartments(brand) || view === 'web' && !hasWebPage(brand))) go('overview')
-    // Wait for the extension to load before deciding it has no tab.
-    if (brand && view === 'extension' && extensionView === null) go('overview')
-  }, [brand, motionLink, view, extensionView])
+    if (brand && (viewOrOverview(view, motionLink) !== view || TABS.some((entry) => entry.id === view) && !available.has(view))) go('overview')
+  }, [brand, motionLink, view, available])
 
   // Between a brand and its manuals: a template's source page, and back from a page to a template.
   const openManual = (book, page) => {
@@ -227,15 +260,16 @@ export const App = () => {
   }
   const printTemplate = async (template, values) => {
     const result = await printerPackage(template, values)
-    setPrinterSession(createPrinterSession(new URL(import.meta.env.BASE_URL, globalThis.location.origin), result.bytes, { label: 'brandkit' }))
+    setPrinterSession({ bytes: result.bytes, id: crypto.randomUUID() })
     go('printer')
   }
   const downloadPrinterPackage = async (template, values) => {
     const result = await printerPackage(template, values)
     download(result.bytes, `${brand.id}-${template.printer?.packageId ?? template.id}.zip`)
   }
-  const importPrinterDesign = async (file) => {
-    const imported = importPrinterPackage(base, await file.arrayBuffer())
+  /** A package the printer saved (its bytes), or a ZIP chosen from disk, added to the brand's templates. */
+  const importPrinterDesign = async (bytes) => {
+    const imported = importPrinterPackage(base, bytes instanceof Blob ? await bytes.arrayBuffer() : bytes)
     saveBrand(imported.brand, { strict: true })
     update(imported.brand)
     setSaved(savedBrands())
@@ -259,7 +293,7 @@ export const App = () => {
   return (
     <Shared.Provider value={SHARED}>
     <div className={`app${SHARED ? ' app--shared' : ''}`}>
-      <header className="masthead">
+      <header ref={masthead} className="masthead">
         {SHARED ? (
           <div className="masthead__row">
             {brand ? <SharedMark brand={brand} fonts={fonts} /> : <span className="shared-mark" />}
@@ -301,8 +335,8 @@ export const App = () => {
           </div>
         </div>
         )}
-        {(!SHARED || brand) && <nav className="tabs" aria-label="Sections">
-          {TABS.filter((entry) => (entry.id !== 'motion' || motionUrl(brand, source)) && (entry.id !== 'organization' || hasDepartments(brand)) && (entry.id !== 'web' || hasWebPage(brand)) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
+        {(!SHARED || brand) && <nav ref={tabs} className="tabs" aria-label="Sections">
+          {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -317,8 +351,15 @@ export const App = () => {
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} onPatterns={() => go('patterns')} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
+            {(view === 'templates' || view === 'documents') && <div className="section-switch">
+              <Segmented label="Templates or documents" value={view} onChange={go} options={[
+                { value: 'templates', label: 'Templates', title: 'Cards, stationery, social posts and slides: fill in the fields and download' },
+                { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' }
+              ]} />
+              <p className="muted">{view === 'templates' ? 'Fill in the fields once, then download each design as SVG, PNG or PDF.' : 'Write a report, brief or letter in the brand’s layout, then download it as Word.'}</p>
+              {!SHARED && available.has('printer') && <button type="button" className="button button--quiet" onClick={() => go('printer')}>Template Printer →</button>}
+            </div>}
             {view === 'templates' && <div className="view">
-              {!SHARED && <div className="panel printer__intro"><p>Need card design, people, batch printing or calibration?</p><button type="button" className="button" onClick={() => go('printer')}>Open Template Printer</button></div>}
               <TemplateStudio key={brand.id} brand={brand} fonts={fonts} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
                 onPrint={SHARED ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
               aside={(template) => (template.description || (!SHARED && template.sources)) && (
@@ -327,7 +368,7 @@ export const App = () => {
                   <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
                 </div>
               )} /></div>}
-            {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onPackage={downloadPrinterPackage} onImport={importPrinterDesign} />}
+            {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onImport={importPrinterDesign} />}
             {view === 'extension' && ExtensionView && <div className="view">
               <section className="panel"><h2>{extensionView.label}</h2>{extensionView.use && <p className="muted">{extensionView.use}</p>}</section>
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
@@ -350,7 +391,7 @@ export const App = () => {
       <footer className="footer muted">
         {SHARED
           ? `${brand?.name ?? 'This'} brand centre. Every file is made in your browser from the approved identity; nothing is uploaded.`
-          : 'brandkit makes every file in your browser; nothing is uploaded. ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.'}
+          : `brandkit makes every file in your browser; nothing is uploaded.${brand?.id === 'ddcnorth' ? ' ddcnorth’s original v2.1 kit is reproduced byte for byte from its definition.' : ''}`}
       </footer>
     </div>
     </Shared.Provider>

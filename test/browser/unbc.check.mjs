@@ -88,8 +88,9 @@ try {
   assert.equal(await page.getByText('Inherited colour', { exact: true }).count(), 0)
   assert.equal(await page.getByRole('heading', { name: 'Symbol', exact: true }).count(), 0)
   await navigate('Download kit')
-  await page.getByRole('combobox', { name: /^What are you making/ }).selectOption('documents')
-  const archive = unzipSync(await download('Build and download'))
+  // The department saved in Documents arrives as the kit's chosen unit, and names the starters.
+  await page.getByRole('radio', { name: /^Documents & slides/ }).check()
+  const archive = unzipSync(await download(/^Download Documents & slides for Faculty of Environment — \d+ files$/))
   const names = Object.keys(archive)
   assert.ok(!names.some(name => /(?:\/symbol\/|favicon|app-icon)/.test(name)))
   for (const suffix of ['reference/identity-rules.json', 'official-templates/lhopt1official.docx', 'source/consumer-profile.json']) assert.ok(names.some(name => name.endsWith(suffix)), suffix)

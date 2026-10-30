@@ -3,6 +3,7 @@ import { logoDocument } from '../../engine/artwork.js'
 import { createStarterBrand, STARTER_DEFAULTS } from '../../engine/starter.js'
 import { renderTemplate } from '../../engine/templates.js'
 import { Field, Segmented, SvgImage } from '../ui.jsx'
+import { useEditPreviewDock } from '../../ui/EditPreviewDock.jsx'
 
 const FACES = [
   { value: 'display', label: 'Medium' },
@@ -51,10 +52,12 @@ export const NewBrand = ({ fonts, onCreate, existing }) => {
   }, [options, fonts, name])
   const brand = result.brand
   const clash = brand && existing.includes(brand.id)
+  // On a phone the form and the preview take turns, rather than the preview waiting past Create.
+  const dock = useEditPreviewDock({ label: 'Form or preview' })
 
   return (
-    <div className="view new-brand">
-      <section className="panel new-brand__form">
+    <div ref={dock.ref} className={`view new-brand ${dock.className}`}>
+      <section className="panel new-brand__form" {...dock.panel('edit')}>
         <h2>A new brand</h2>
         <p className="muted">A starting point with everything in place: logos, templates, a guide and web files. Refine it afterwards in the Brand tab, or by editing its brand.json.</p>
         <Field label="Name"><input type="text" value={options.name} placeholder="yourbrand" onChange={(event) => set({ name: event.target.value })} /></Field>
@@ -89,7 +92,7 @@ export const NewBrand = ({ fonts, onCreate, existing }) => {
         <button type="button" className="button button--large" disabled={!brand || clash} onClick={() => onCreate(brand)}>Create {name}</button>
         {clash && <p className="error">There is already a brand called {brand.id}. Choose another name.</p>}
       </section>
-      <section className="panel new-brand__preview" aria-label="Preview">
+      <section className="panel new-brand__preview" aria-label="Preview" {...dock.panel('preview')}>
         {result.error && <p className="muted">{result.error}</p>}
         {brand && (
           <>
@@ -101,7 +104,10 @@ export const NewBrand = ({ fonts, onCreate, existing }) => {
             </div>
           </>
         )}
+        {/* Create is on both sides, so a phone need not go back to the form to finish. */}
+        {dock.compact && <button type="button" className="button button--large" disabled={!brand || clash} onClick={() => onCreate(brand)}>Create {name}</button>}
       </section>
+      {dock.bar}
     </div>
   )
 }

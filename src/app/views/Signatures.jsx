@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { logoDocument } from '../../engine/artwork.js'
 import { colour } from '../../engine/brand.js'
 import { download, zip } from '../../export/render.js'
-import { Downloads, Field, Segmented, SvgImage } from '../ui.jsx'
+import { Downloads, Field, Segmented, Select, SvgImage } from '../ui.jsx'
 import { ManualSources } from './Sources.jsx'
 
 /** "One colour: brown" → "Brown"; "Reverse, white" → "Reverse, white". Short enough for a button. */
@@ -31,13 +31,10 @@ export const DepartmentSelect = ({ brand, value, onChange }) => {
   if (!departments?.items?.length) return null
   return (
     <Field label={departments.label ?? 'Department'}>
-      <select value={value} onChange={(event) => onChange(event.target.value)}>
-        <option value="">{departments.emptyLabel ?? 'As the manual shows it (placeholders)'}</option>
-        {groupsOf(departments.items).map(([group, items]) => {
-          const options = items.map((item) => <option key={item.id} value={item.id}>{item.name}{item.years ? ` (${item.years})` : ''}</option>)
-          return group ? <optgroup key={group} label={group}>{options}</optgroup> : options
-        })}
-      </select>
+      <Select value={value} onChange={onChange} options={[
+        { value: '', label: departments.emptyLabel ?? 'As the manual shows it (placeholders)' },
+        ...groupsOf(departments.items).flatMap(([group, items]) => items.map((item) => ({ value: item.id, label: `${item.name}${item.years ? ` (${item.years})` : ''}`, group })))
+      ]} />
     </Field>
   )
 }
@@ -60,9 +57,7 @@ export const SignatureStage = ({ brand, fonts, openManual }) => {
       </div>
       <div className="toolbar">
         <Field label="Signature">
-          <select value={signature.id} onChange={(event) => setSignature(event.target.value)}>
-            {brand.signatures.map((entry) => <option key={entry.id} value={entry.id}>{entry.label}</option>)}
-          </select>
+          <Select value={signature.id} onChange={setSignature} options={brand.signatures.map((entry) => ({ value: entry.id, label: entry.label }))} />
         </Field>
         <Field label="Colourway">
           <Segmented label="Colourway" value={colourway} options={colourways.map(([id, spec]) => ({ value: id, label: shortLabel(spec.label ?? id), title: spec.label }))} onChange={setColourway} />

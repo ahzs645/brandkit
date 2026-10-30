@@ -1,7 +1,5 @@
 # Province of British Columbia motion (example)
 
-The 1977 Visual Identity Program predates screen motion and says nothing about it. These studies are brandkit’s example of how the identity could move under the program’s rules; they are not the Province’s guidance.
-
 5 studies on one set of timings, all drawn from the brand's own artwork with
 the type outlined. Open `index.html` to play them; `motion.css` holds the tokens and keyframes,
 and `motion-tokens.json` the same values for code. brandkit's Motion tab plays them too, and

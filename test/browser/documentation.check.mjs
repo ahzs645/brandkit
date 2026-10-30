@@ -75,11 +75,17 @@ const screenshot = async (page, name) => {
   }
 }
 
+// The app's dropdowns are styled comboboxes, not <select>: open one, then pick the option.
+const choose = async (page, name, option) => {
+  await page.getByRole('combobox', { name: new RegExp(`^${name}`) }).click()
+  await page.getByRole('option', { name: option, exact: true }).click()
+}
+
 const checkFirstFormEditing = async (page) => {
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('report')
+  await choose(page, 'Document purpose', 'Project report')
   await waitForPreview(page, 'Project report')
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('brief')
-  await page.getByRole('combobox', { name: /^Paper size/ }).selectOption('a4')
+  await choose(page, 'Document purpose', 'Decision brief')
+  await page.getByRole('group', { name: 'Paper size' }).getByRole('button', { name: 'A4', exact: true }).click()
   await waitForPreview(page, 'Decision brief')
   const changed = (await sourceOf(page)).model
   assert.equal(changed.purpose, 'brief')
@@ -87,10 +93,11 @@ const checkFirstFormEditing = async (page) => {
   assert.equal(changed.profile.paper.widthMm, 210)
   assert.equal(changed.profile.paper.heightMm, 297)
 
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('portfolio')
+  await choose(page, 'Document purpose', 'Brand portfolio')
   await waitForPreview(page, 'First Form brand portfolio')
   const department = 'College of Science and Management and Interdisciplinary Research'
   const subdepartment = 'Natural Resources and Environmental Studies Research Laboratory'
+  await page.locator('summary', { hasText: 'Department naming' }).click()
   await page.getByLabel('Department or school', { exact: true }).fill(department)
   await page.getByLabel('Subdepartment or unit', { exact: true }).fill(subdepartment)
   await page.frameLocator('.documents-preview iframe').getByText(subdepartment, { exact: true }).waitFor()
@@ -103,7 +110,7 @@ const checkFirstFormEditing = async (page) => {
   const wordNames = checkWord(await download(page, 'Download Word'), named.title).xml
   assert.ok(wordNames.includes(department) && wordNames.includes(subdepartment), 'Both names remain native Word text')
   assert.match(wordNames, /w:pStyle w:val="AffiliationDepartment"/)
-  await page.getByRole('combobox', { name: /^Document purpose/ }).selectOption('brief')
+  await choose(page, 'Document purpose', 'Decision brief')
   await waitForPreview(page, 'Decision brief')
   report.editing.push('brand portfolio, named unit, native Word styles and shared naming persistence')
 
@@ -121,6 +128,7 @@ const checkFirstFormEditing = async (page) => {
   await waitForPreview(page, finalTitle)
   // Capture the actual tested interface, then exercise the user image-upload path.
   const capture = await page.locator('.documents-head').screenshot()
+  await page.locator('summary', { hasText: 'Screenshot or evidence' }).click()
   await page.getByLabel('Figure caption', { exact: true }).fill('Figure 1. The document workflow in the tested application.')
   await page.getByLabel('Image description', { exact: true }).fill('The First Form document editor heading and download controls.')
   await page.getByLabel('Source and capture date', { exact: true }).fill('Local production application; browser verification capture.')

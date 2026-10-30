@@ -12,9 +12,9 @@ Document layout extension using the current brand kit. These publication layouts
 
 ## Start with the supplied assets
 
-The complete brand kit generates `logos/outlined/ddcnorth-horizontal-black.svg` for vector placement, `logos/png/ddcnorth-horizontal-black-2048.png` for Word-compatible raster placement, and `logos/pdf/ddcnorth-horizontal-black.pdf` for a vector proof. The repository generates these paths from `brands/ddcnorth/brand.json`.
+The **Logos** pack (and **Everything**) generates `logos/outlined/ddcnorth-horizontal-black.svg` for vector placement, `logos/png/ddcnorth-horizontal-black-2048.png` for Word-compatible raster placement, and `logos/pdf/ddcnorth-horizontal-black.pdf` for a vector proof. The repository generates these paths from `brands/ddcnorth/brand.json`.
 
-Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Send to a printer** or **Complete brand kit** pack with graphic PDFs enabled when a separate vector PDF is required.
+Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Logos**, **Print shop** or **Everything** pack when a separate vector PDF is required.
 
 The preferred logo is the horizontal ddcnorth lockup. Keep its proportions. Minimum width: 55 mm. At least one dot diameter around the visible artwork. The document profile adds 8 mm of layout spacing; the identity clear-space rule remains authoritative.
 

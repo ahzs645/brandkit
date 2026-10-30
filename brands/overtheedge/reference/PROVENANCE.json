@@ -74,5 +74,98 @@
     "sha256": "656fd441d9d517f32f7b9e7a6ab0b45d259bc782dde900087d8183683cc2f519",
     "paths": 33,
     "extraction": "scripts/import-overtheedge-cover.py; masthead paths only, no photographs; source geometry preserved, colors use the brand palette."
+  },
+  "identity": {
+    "received": "2026-10-30",
+    "source": "Over the Edge Brand Identity, the team\u2019s own export: Instagram posts and stories, a reel cover, 16:9 slides, issue announcements, month stickers, logo lockups, an A4 page and a phone mock-up",
+    "note": "Downsized JPEG copies for reference only. Files with photographs of people were not copied.",
+    "palette": {
+      "slide": "Slide 16_9 - 6 names E3EFCF, FFFBF3, 155329 and 262626; the SVG exports fill with exactly those four.",
+      "sampled": {
+        "haze": [
+          "#F5F1EA",
+          "Instagram post - 131.svg: #262626 at opacity 0.04 on #FFFBF3"
+        ],
+        "flame": [
+          "#FFF2D8",
+          "Instagram post - 92.png, the flame behind the deadline"
+        ],
+        "crumple": [
+          "#F4F4F4",
+          "Instagram post - 116.png and 121.png, the crumpled sheet"
+        ],
+        "ember": [
+          "#6D4900",
+          "Instagram post - 92.png, the issue number"
+        ]
+      }
+    },
+    "type": "Slide 16_9 - 6 names Helvetica Neue, Decalotype and Salted.",
+    "files": {
+      "palette-and-type.jpg": {
+        "from": "Slide 16_9 - 6.png",
+        "sha256": "03e5a20333dc3f9fe7923c6d65639f4ccec022095d5972dc71351ccd13169fcc"
+      },
+      "doodle-wall.jpg": {
+        "from": "Slide 16_9 - 3.png",
+        "sha256": "ed86bea0588a2471e64b37b7ad245af617c21410bb96df4fd872d96c9c9766d2"
+      },
+      "doodle-concept.jpg": {
+        "from": "Slide 16_9 - 15.png",
+        "sha256": "85b36b2e452c6b1becf42c8bc7e974a0bdecc8a8b91890d31d1e58a0146c3a82"
+      },
+      "logo-colourways.jpg": {
+        "from": "Slide 16_9 - 16.png",
+        "sha256": "210fca9e1a3d62902226f8d620e8d03d827c61c57933341f8da175fad8f24bf8"
+      },
+      "post-submission-schedule.jpg": {
+        "from": "Instagram post - 89.png",
+        "sha256": "52a8eb5b30f9c5dc1b60f8d16bffa786e7af5af80e681e4acad0582eeebf2f1e"
+      },
+      "post-schedule.jpg": {
+        "from": "Instagram post - 90.png",
+        "sha256": "39cba767ee67e0d485868a20789e4ea3a21a36fe68e9d28a4aee546da322ce7b"
+      },
+      "post-deadline.jpg": {
+        "from": "Instagram post - 92.png",
+        "sha256": "9429377da49ee3a2b6510241ab794f2c1c8dccad8f64a3ca28f3038e11dd2e19"
+      },
+      "post-meet-the-board.jpg": {
+        "from": "Instagram post - 94.png",
+        "sha256": "833aaa575f9f3bdd09d234c863788455122c4edbaa0d4d7c7df67cea716bd8e9"
+      },
+      "post-issue-out.jpg": {
+        "from": "Instagram post - 102.png",
+        "sha256": "9a62f7f0a1b16d9502ce74f7ca826ac53b9ee06dd34fb20d256cd36faee78628"
+      },
+      "post-front-page.jpg": {
+        "from": "Instagram post - 106.png",
+        "sha256": "0ec4bb1a704c50d620ccafffb9a8bcea6cc95f9fabe9154f7d8d0d1ae6b9ff7b"
+      },
+      "post-schedule-paper.jpg": {
+        "from": "Instagram post - 116.png",
+        "sha256": "bdd43fb7974a2e78b89a90fc52e1239feb3bdb808be34304af926265cabfa602"
+      },
+      "post-season-schedule.jpg": {
+        "from": "Instagram post - 119.png",
+        "sha256": "109618f7058b213e29e3f7392a5861a36bdfd336c7191fd7ff83a1e588107361"
+      },
+      "post-week-schedule.jpg": {
+        "from": "Instagram post - 131.svg",
+        "sha256": "b91564deb3ec56b240c7300804a440422a76d28a3ed89bbff3a3a93b90d8292d"
+      },
+      "post-weekend-schedule.jpg": {
+        "from": "Instagram post - 136.svg",
+        "sha256": "09b1560825d80233912af7b0d3a52c682352de2822726acc506675d604be5cee"
+      },
+      "reel-cover.jpg": {
+        "from": "Reel.png",
+        "sha256": "f4e3743e5325dcbcd04d86c4a5cfc5285ccf7f6ce8cf72d50e77167c845eb947"
+      },
+      "month-sticker.jpg": {
+        "from": "november 2026.svg",
+        "sha256": "14119c6ad88834f96614469fda44a6239630ba79e4ff79ef5918b357078cb982"
+      }
+    }
   }
 }

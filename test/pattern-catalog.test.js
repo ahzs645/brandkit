@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { patternLibrary } from '../src/engine/pattern-catalog.js'
 
 const root = new URL('../brands/', import.meta.url).pathname
-const counts = { firstform: 11, ddcnorth: 15, overtheedge: 10, sparklab: 21, northwind: 11, 'bc-province-1977': 8, 'bc-hydro-1983': 6 }
+const counts = { firstform: 11, ddcnorth: 15, overtheedge: 14, sparklab: 21, northwind: 11, 'bc-province-1977': 8, 'bc-hydro-1983': 6 }
 const brands = Object.fromEntries(Object.keys(counts).map((id) => [id, JSON.parse(readFileSync(join(root, id, 'brand.json'), 'utf8'))]))
 
 test('all seven pattern libraries preserve every source pattern once and leave definitions untouched', () => {
@@ -21,7 +21,7 @@ test('all seven pattern libraries preserve every source pattern once and leave d
     assert.equal(JSON.stringify(brand), before, `${id}: read-only indexing`)
     total += library.patterns.length
   }
-  assert.equal(total, 82)
+  assert.equal(total, 86)
 })
 
 test('every explicit pattern use has a real bidirectional application link', () => {
@@ -45,7 +45,7 @@ test('every explicit pattern use has a real bidirectional application link', () 
       for (const id of application.patternIds) assert.ok(library.patterns.find((pattern) => pattern.id === id).templateIds.includes(application.id))
     }
   }
-  assert.equal(directApplications, 12)
+  assert.equal(directApplications, 14)
 })
 
 test('SPARK expanded artwork is related by graphic direction without claiming an exact pattern reference', () => {

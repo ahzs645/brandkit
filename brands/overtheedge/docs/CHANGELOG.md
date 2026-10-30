@@ -1,5 +1,14 @@
 # Change log
 
+## Doodle identity (30 October 2026)
+
+- Follow the team's own Doodle identity. Cream #FFFBF3 replaces Newsprint as the page (the key stays `newsprint`), beside Forest, Lichen and Ink; Haze, Flame, Crumple and Ember are sampled from the posts.
+- Set headlines in Anton for Decalotype, reading text and labels in Helvetica Neue, and the handwritten accents in Salted. Source Serif 4 and IBM Plex Mono stay for the site only.
+- Draw the six line doodles (googly eyes, calendar and clock, flame, pencil, paper plane, spark) and a scribble as symbols, with four new patterns: the doodle wall, the doodles, the OVER THE EDGE ground and the zigzag frame.
+- Add twenty-six templates from the identity's posts, stories, reel cover, slides, month stickers and poster, with tilted day tags, blob stickers, crumpled paper and dashed rules. Two sets keep their colourways together: the week schedule on Cream, Lichen and Forest, and the deadline on Cream and Forest.
+- Remove the press pass. The Staff Card, under Printer designs, replaces it.
+- Rewrite the guide's colour, type, logo family and applications pages, and add Doodles and elements and Social pages.
+
 ## Wordmarks and source typography
 
 - Extract the stacked masthead and its subtext from the September cover. Export full and words-only wordmarks in both arrangements.

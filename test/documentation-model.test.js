@@ -32,8 +32,8 @@ test('all registered brands produce six valid layouts in every paper and purpose
 test('document appearance retains distinct identity choices instead of applying one brand to all', () => {
   assert.equal(documentProfile(brands.firstform).typography.title.family, 'Sora')
   assert.equal(documentProfile(brands.firstform).typography.title.weight, 600)
-  assert.equal(documentProfile(brands.overtheedge).typography.title.family, 'Source Serif 4')
-  assert.equal(documentProfile(brands.overtheedge).typography.caption.family, 'IBM Plex Mono')
+  assert.equal(documentProfile(brands.overtheedge).typography.title.family, 'Anton')
+  assert.equal(documentProfile(brands.overtheedge).typography.caption.family, 'Helvetica Neue')
   assert.equal(documentProfile(brands.sparklab).typography.title.family, 'Outfit')
   assert.equal(documentProfile(brands.sparklab).typography.body.family, 'Source Serif 4')
   assert.equal(documentProfile(brands.ddcnorth).colours.accent, '#0B2B4A')
