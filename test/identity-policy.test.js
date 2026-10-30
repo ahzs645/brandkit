@@ -68,10 +68,12 @@ test('portable web outputs have supported colourways, mobile space and no unavai
   assert.doesNotMatch(landing, /background:#fff\}/)
 })
 
-test('identity sources and official originals accompany every portable task pack', () => {
+test('identity sources accompany every portable task pack, and official originals every pack used to make something', () => {
   for (const pack of KIT_PACKS) {
     const paths = planKit(brand, { ...pack.options, pack: pack.id }).map(entry => entry.path)
-    for (const path of ['reference/identity-rules.json', 'reference/PROVENANCE.json', 'reference/README.md', 'official-templates/lhopt1official.docx', 'official-templates/unbcpowerpointtemplate.pptx']) assert.ok(paths.includes(path), `${pack.id}: ${path}`)
+    for (const path of ['reference/identity-rules.json', 'reference/PROVENANCE.json', 'reference/README.md']) assert.ok(paths.includes(path), `${pack.id}: ${path}`)
+    // The logos pack is artwork alone; the Word and PowerPoint originals travel with the rest.
+    for (const path of ['official-templates/lhopt1official.docx', 'official-templates/unbcpowerpointtemplate.pptx']) assert.equal(paths.includes(path), pack.id !== 'logos', `${pack.id}: ${path}`)
     assert.ok(!paths.some(path => /^symbol\/|favicon|app-icon/.test(path)), pack.id)
   }
 })

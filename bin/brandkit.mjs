@@ -28,7 +28,7 @@ const validateOptions = () => {
 const encoder = new TextEncoder()
 const json = (value) => encoder.encode(`${JSON.stringify(value, null, 2)}\n`)
 const usage = `usage: brandkit check <brand.json>
-       brandkit build <brand.json> [--out folder] [--pack complete|documents|presentations|web|print] [--office]
+       brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
 

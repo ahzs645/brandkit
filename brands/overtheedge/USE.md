@@ -12,9 +12,9 @@ Document layout extension using the current brand kit. These publication layouts
 
 ## Start with the supplied assets
 
-The complete brand kit generates `logos/outlined/overtheedge-horizontal-forest.svg` for vector placement, `logos/png/overtheedge-horizontal-forest-2048.png` for Word-compatible raster placement, and `logos/pdf/overtheedge-horizontal-forest.pdf` for a vector proof. The repository generates these paths from `brands/overtheedge/brand.json`.
+The **Logos** pack (and **Everything**) generates `logos/outlined/overtheedge-horizontal-forest.svg` for vector placement, `logos/png/overtheedge-horizontal-forest-2048.png` for Word-compatible raster placement, and `logos/pdf/overtheedge-horizontal-forest.pdf` for a vector proof. The repository generates these paths from `brands/overtheedge/brand.json`.
 
-Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Send to a printer** or **Complete brand kit** pack with graphic PDFs enabled when a separate vector PDF is required.
+Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Logos**, **Print shop** or **Everything** pack when a separate vector PDF is required.
 
 The preferred logo is the horizontal overtheedge lockup. Keep its proportions. Minimum width: 58 mm. Half the height of the O, clear on every side. The document profile adds 8 mm of layout spacing; the identity clear-space rule remains authoritative.
 
