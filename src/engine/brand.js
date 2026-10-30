@@ -142,6 +142,11 @@ export const validateBrand = (brand) => {
   }
   for (const template of brand.templates ?? []) {
     need(template.id && template.width > 0 && template.height > 0, `Template \`${template.id ?? '?'}\` needs an id, width and height.`)
+    // A colourway this brand does not define would paint the signature in a non-colour (a ring
+    // stroked "positive" is not drawn at all).
+    for (const element of template.elements ?? []) {
+      if (element.type === 'logo' && element.colourway != null) need(brand.colourways?.[element.colourway], `Template \`${template.id}\` paints its logo in colourway \`${element.colourway}\`, which is not in \`colourways\`.`)
+    }
   }
   const templateIds = new Set((brand.templates ?? []).map((template) => template.id))
   for (const set of brand.sets ?? []) {

@@ -21,10 +21,14 @@ const applicationTemplate = (brand, app) => {
   const pad = square ? 64 : 96, fieldX = square ? 0 : 1200, fieldY = square ? 176 : 0
   const logo = brand.families?.length
     ? { family: brand.families[0].id, layout: 'horizontal', colour: 'ink' }
-    : { signature: brand.id === 'bc-province-1977' ? 'horizontal' : 'standard', colourway: 'positive', values: { ministry: '', 'ministry-split': '', address: '' } }
+    // Each signature brand's own colourways: the Province's positive, B.C.Hydro's corporate colours.
+    : { signature: brand.id === 'bc-province-1977' ? 'horizontal' : 'standard', colourway: brand.colourways?.positive ? 'positive' : brand.defaultColourway, values: { ministry: '', 'ministry-split': '', address: '' } }
   const display = brand.fonts.display ? 'display' : 'bold', regular = brand.fonts.displayRegular ? 'displayRegular' : 'body'
   // Province's complete provincial signature is deliberately larger than the other headers.
   const logoWidth = brand.id === 'bc-province-1977' ? square ? 500 : 620 : square ? 340 : 440
+  // Letterspaced capitals for the small labels, unless the brand sets its labels as written
+  // (B.C.Hydro's manual calls all-capital settings incorrect).
+  const spaced = brand.typography?.labels?.textTransform !== 'none'
   const sourceNote = brand.manuals ? 'New supporting study; sources describe the identifying artwork and palette, not approval of this layout.' : 'Additional supporting study. Existing identifying artwork is preserved.'
   const sources = brand.manuals ? structuredClone(brand.guide.pages[0].sources) : undefined
   return {
@@ -35,11 +39,11 @@ const applicationTemplate = (brand, app) => {
       { type: 'background', fill: 'paper' },
       { type: 'pattern', id: 'study-pattern', pattern: app.pattern, x: fieldX, y: fieldY, width: square ? width : 720, height: square ? 420 : height, fit: 'cover' },
       { type: 'logo', id: 'study-logo', x: pad, y: square ? 46 : 64, width: logoWidth, height: square ? 100 : 120, ...logo },
-      { type: 'text', text: app.eyebrow, x: pad, y: square ? 660 : 376, size: square ? 18 : 22, tracking: 1.8, font: 'label', colour: 'ink', locked: true },
+      { type: 'text', text: app.eyebrow, x: pad, y: square ? 660 : 376, size: square ? 18 : 22, tracking: spaced ? 1.8 : 0, font: 'label', colour: 'ink', locked: true },
       { type: 'paragraph', id: 'study-title', text: '[Your headline]', x: pad, y: square ? 768 : 516, width: square ? 952 : 1008, size: square ? 86 : 94, leading: square ? 92 : 102, maxLines: square ? 2 : 3, font: display, colour: 'ink' },
       { type: 'line', x1: pad, x2: square ? width - pad : 1104, y1: square ? 920 : 882, y2: square ? 920 : 882, stroke: 'primary', strokeWidth: 2 },
       { type: 'text', id: 'study-detail', text: square ? '[Date] · [Time] · [Details]' : '[Presenter] · [Date]', x: pad, y: square ? 972 : 942, size: square ? 25 : 30, font: regular, colour: 'ink' },
-      { type: 'text', text: brand.name.toUpperCase(), x: pad, y: square ? 1030 : 1020, size: 13, font: 'label', colour: 'ink', tracking: 1.1, locked: true }
+      { type: 'text', text: spaced ? brand.name.toUpperCase() : brand.name, x: pad, y: square ? 1030 : 1020, size: 13, font: 'label', colour: 'ink', tracking: spaced ? 1.1 : 0, locked: true }
     ]
   }
 }

@@ -65,7 +65,7 @@ const textOf = (ctx, spec, zone) => {
   return spec.caps ? value.toUpperCase() : value
 }
 
-/** Text fitted to the zone: as many lines as it has, centred, as large as fits. */
+/** Text fitted to the zone: as many lines as it has, centred (or flush left with `align: 'start'`), as large as fits. */
 const zoneText = (ctx, spec, zone, w, h, fill) => {
   const { fonts, brand } = ctx
   const key = spec.font ?? 'body'
@@ -80,11 +80,12 @@ const zoneText = (ctx, spec, zone, w, h, fill) => {
   const size = Math.min((h * (spec.fill ?? 0.82)) / blockAt1, (w * 0.96) / (widest * (spec.curve ? 0.94 : 1)))
   const top = (h - blockAt1 * size) / 2 + cap * size
   if (spec.curve && fonts?.has(key) && ctx.outline && lines.length === 1) return curvedLine(ctx, lines[0], key, size, w, h, spec.curve, fill)
+  const [x, anchor] = spec.align === 'start' ? [0, 'start'] : [w / 2, 'middle']
   return lines.map((line, index) => {
     const y = top + index * leading * size
-    if (ctx.outline && fonts?.has(key)) return `<path fill="${fill}" aria-label="${escape(line)}" d="${fonts.path(line, key, size, w / 2, y, 0, 'middle')}"/>`
+    if (ctx.outline && fonts?.has(key)) return `<path fill="${fill}" aria-label="${escape(line)}" d="${fonts.path(line, key, size, x, y, 0, anchor)}"/>`
     const face = brand.fonts?.[key] ?? {}
-    return `<text x="${n6(w / 2)}" y="${n6(y)}" text-anchor="middle" font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}" fill="${fill}">${escape(line)}</text>`
+    return `<text x="${n6(x)}" y="${n6(y)}"${anchor === 'middle' ? ' text-anchor="middle"' : ''} font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}" fill="${fill}">${escape(line)}</text>`
   }).join('')
 }
 
@@ -172,10 +173,10 @@ export const illustrationLettering = (ctx, illustration, spec) => (illustration.
   const { fonts, brand } = ctx
   const run = letteringRun(ctx, illustration, spec, line, index)
   if (!run) return ''
-  const { text, key, size } = run
-  if (ctx.outline && fonts?.has(key)) return `<path fill="${escape(line.fill)}" aria-label="${escape(text)}" d="${fonts.path(text, key, size, line.x, line.y, 0, line.anchor)}"/>`
+  const { text, key, size, tracking } = run
+  if (ctx.outline && fonts?.has(key)) return `<path fill="${escape(line.fill)}" aria-label="${escape(text)}" d="${fonts.path(text, key, size, line.x, line.y, tracking, line.anchor)}"/>`
   const face = brand.fonts?.[key] ?? {}
-  return `<text x="${n6(line.x)}" y="${n6(line.y)}" text-anchor="${line.anchor}" font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}" fill="${escape(line.fill)}">${escape(text)}</text>`
+  return `<text x="${n6(line.x)}" y="${n6(line.y)}" text-anchor="${line.anchor}" font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}"${tracking ? ` letter-spacing="${n6(tracking * size)}"` : ''} fill="${escape(line.fill)}">${escape(text)}</text>`
 }).join('')
 
 /** Where one lettering line is drawn and at what size, as illustrationLettering sets it. */
@@ -186,7 +187,11 @@ const letteringRun = (ctx, illustration, spec, line, index) => {
   const key = spec ? letteringFont(spec, line) : 'body'
   const natural = ctx.fonts?.has(key) ? ctx.fonts.width(text, key, line.size) : Array.from(text).length * line.size * 0.55
   const size = line.width && natural > line.width ? line.size * (line.width / natural) : line.size
-  return { text, key, size, width: Math.min(natural, line.width ?? natural) }
+  // A line the source letterspaces to its measure (lengthAdjust="spacing", a sign's "Danger") is
+  // tracked out to it when shorter; tracking is in ems, as the font provider takes it.
+  const glyphs = Array.from(text).length
+  const tracking = line.adjust === 'spacing' && line.width && natural < line.width && glyphs > 1 ? (line.width - natural) / (glyphs - 1) / size : 0
+  return { text, key, size, tracking, width: line.width && (natural > line.width || tracking) ? line.width : natural }
 }
 
 /** The whole drawing, identity and lettering included, in the illustration's coordinates. */

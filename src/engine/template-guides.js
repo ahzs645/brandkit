@@ -134,7 +134,11 @@ const rowOf = (box, edge) => {
 
 const FRACTION = /(\d+) (\d+)\/(\d+)|(\d+)\/(\d+)/g
 
-const typesetLine = (text, size, measure) => {
+/**
+ * One line as runs of text (`{ text, dx, dy, size }`), its fractions ("1 7/8", or any that
+ * `pattern` finds) built from small figures. `measure(text, size)` gives a run's width.
+ */
+export const typesetLine = (text, size, measure, pattern = FRACTION) => {
   const runs = []
   let x = 0
   const push = (value, scale = 1, rise = 0) => {
@@ -143,7 +147,7 @@ const typesetLine = (text, size, measure) => {
     x += measure(value, size * scale)
   }
   let last = 0
-  for (const match of text.matchAll(FRACTION)) {
+  for (const match of text.matchAll(pattern)) {
     push(text.slice(last, match.index))
     const [whole, numerator, denominator] = match[1] ? match.slice(1, 4) : [null, match[4], match[5]]
     push(whole)

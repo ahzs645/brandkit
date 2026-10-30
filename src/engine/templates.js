@@ -24,12 +24,17 @@
 //               title pushes what follows it down
 //   motif       { x, y, width, height, colour, align?, id? }          the symbol fitted in a box
 //   symbol      { x, y, height, colour, id? }                         the symbol at a set height
-//   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor? }
+//   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor?, fitWidth? }
 //               or { compose: 'Phone: {telephone}', … }: a line built from other fields; it is left
 //               out when any field it names has been cleared
-//   lines       { x, y, leading, size, colour, font?, align?, anchor?, lines: [{ id, text, font?, style?, size? }] }
-//   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
-//               one field, wrapped to `width` (and at any line break typed into it)
+//   lines       { x, y, leading, size, colour, font?, tracking?, align?, anchor?, fitWidth?, lines: [{ id, text, font?, style?, size?, alignLeft? }] }
+//               `fitWidth`: the type (and its tracking) shrinks, every line by one factor, until the
+//               longest line fits, so a longer typed title stays inside its panel; never enlarged.
+//               A line with `alignLeft: 'above'` starts where the line above it does
+//   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps?, align?, alignLast? }
+//               one field, wrapped to `width` (and at any line break typed into it); `align:
+//               'justify'` spaces each line out to the width but the last of each paragraph, and
+//               `alignLast: 'justify'` that one too (a column continued in the next)
 //   dots        { dots: [[cx, cy, r], …], fill, opacity?, id? }        a field of circles, as one path
 //   polyline    { points: [[x, y], …], stroke, strokeWidth?, opacity?, id? }
 //   pattern     { pattern: patternId, x, y, width, height, fit?: 'cover' | 'contain', id? }
@@ -138,10 +143,23 @@ const textElement = (ctx, element, unit) => {
   const content = element.literal != null ? element.literal : textValue(ctx, element)
   const colourValue = resolveColour(brand, element.colour ?? 'ink')
   const tracking = toUnits(element.tracking ?? 0, unit)
+  // Extra space after each word, in template units: a justified line's (set from the left only).
+  const wordSpacing = element.wordSpacing ?? 0
   const transformed = element.caps ? content.toUpperCase() : content
   if (ctx.outline && fonts?.has(key)) {
     if (!transformed.trim()) return ''
-    const d = fonts.path(transformed, key, size, toUnits(element.x, unit), toUnits(element.y, unit), tracking / size, element.anchor ?? 'start')
+    const x = toUnits(element.x, unit)
+    const y = toUnits(element.y, unit)
+    let d
+    if (wordSpacing) {
+      // Word by word, each moved on by what live text's word-spacing and letter-spacing add.
+      let cursor = x
+      d = transformed.split(' ').map((word) => {
+        const part = word ? fonts.path(word, key, size, cursor, y, tracking / size) : ''
+        cursor += measure(ctx, `${word} `, key, size, tracking / size) + tracking + wordSpacing
+        return part
+      }).join('')
+    } else d = fonts.path(transformed, key, size, x, y, tracking / size, element.anchor ?? 'start')
     return `<path${element.id ? ` id="${escape(element.id)}"` : ''} aria-label="${escape(transformed)}" fill="${colourValue}" d="${d}"/>`
   }
   const weight = element.weight ?? face.weight ?? 400
@@ -149,8 +167,58 @@ const textElement = (ctx, element, unit) => {
   return `<text${element.id ? ` id="${escape(element.id)}"` : ''} x="${n6(toUnits(element.x, unit))}" y="${n6(toUnits(element.y, unit))}" `
     + `font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" `
     + `font-size="${n6(size)}" font-weight="${weight}"${style && style !== 'normal' ? ` font-style="${style}"` : ''} `
-    + `letter-spacing="${n6(tracking)}"${element.anchor && element.anchor !== 'start' ? ` text-anchor="${element.anchor}"` : ''} fill="${colourValue}">`
+    + `letter-spacing="${n6(tracking)}"${wordSpacing ? ` word-spacing="${n6(wordSpacing)}"` : ''}${element.anchor && element.anchor !== 'start' ? ` text-anchor="${element.anchor}"` : ''} fill="${colourValue}">`
     + `${escape(transformed)}</text>`
+}
+
+/**
+ * Type shrunk to an element's `fitWidth`: one factor for every row given (`{ text, font, size,
+ * tracking }`, in template units), so a block keeps its proportions and a longer typed title stays
+ * inside its panel instead of running past it. Never enlarges.
+ */
+const fitFactor = (ctx, element, rows, unit) => {
+  if (element.fitWidth == null || !rows.length) return 1
+  const widest = Math.max(...rows.map((row) => measure(ctx, row.text, row.font ?? 'body', row.size, (row.tracking ?? 0) / row.size)))
+  const limit = toUnits(element.fitWidth, unit)
+  return widest > limit ? limit / widest : 1
+}
+
+/** A `text` element with its size and tracking in template units, shrunk to its `fitWidth`. */
+const fitText = (ctx, element, unit) => {
+  const content = textValue(ctx, element)
+  const size = toUnits(element.size, unit)
+  const tracking = toUnits(element.tracking ?? 0, unit)
+  const factor = fitFactor(ctx, element, [{ text: element.caps ? content.toUpperCase() : content, font: element.font, size, tracking }], unit)
+  return { ...element, size: size * factor, tracking: tracking * factor }
+}
+
+/**
+ * A `lines` block's visible rows, each with its text, baseline, size and tracking as drawn: empty
+ * lines close up (unless `collapse` is false), and the rows shrink together to `fitWidth`.
+ */
+const layoutLines = (ctx, element, unit) => {
+  const u = (value) => toUnits(value, unit)
+  const leading = u(element.leading ?? element.size)
+  const rows = element.lines
+    .map((line) => ({ font: element.font, colour: element.colour, size: element.size, anchor: element.anchor, tracking: element.tracking, ...line, x: line.x ?? element.x }))
+    .map((line) => ({ ...line, literal: textValue(ctx, line) }))
+    .filter((line) => element.collapse === false || line.literal.trim())
+    .map((line) => ({ ...line, literal: line.caps ? line.literal.toUpperCase() : line.literal, caps: false, size: u(line.size), tracking: u(line.tracking ?? 0) }))
+  // With align 'bottom', y is the last line's baseline and the block grows upward, as an address
+  // block set from the foot of a card does.
+  const top = element.align === 'bottom' ? u(element.y) - (rows.length - 1) * leading : u(element.y)
+  const factor = fitFactor(ctx, element, rows.map((row) => ({ ...row, text: row.literal })), unit)
+  const placed = rows.map((row, index) => ({ ...row, y: top + index * leading, size: row.size * factor, tracking: row.tracking * factor }))
+  // A line with `alignLeft: 'above'` starts where the line above it starts, however long that one
+  // is: "Local 123" under a telephone number set flush right to the symbol.
+  placed.forEach((row, index) => {
+    const above = placed[index - 1]
+    if (row.alignLeft !== 'above' || !above) return
+    const width = measure(ctx, above.literal, above.font ?? 'body', above.size, above.tracking / above.size)
+    const x = u(above.x)
+    Object.assign(row, { x: above.anchor === 'end' ? x - width : above.anchor === 'middle' ? x - width / 2 : x, anchor: 'start' })
+  })
+  return placed
 }
 
 /**
@@ -292,16 +360,14 @@ export const measureTemplate = (ctx, template) => {
       case 'text': {
         const content = textValue(ctx, element)
         const value = element.caps ? content.toUpperCase() : content
-        set(key, value.trim() ? lineBox(ctx, value, element.font ?? 'body', u(element.size), u(element.x), u(element.y), element.anchor, u(element.tracking ?? 0)) : null)
+        const fitted = fitText(ctx, element, unit)
+        set(key, value.trim() ? lineBox(ctx, value, element.font ?? 'body', fitted.size, u(element.x), u(element.y), element.anchor, fitted.tracking) : null)
         break
       }
       case 'lines': {
-        const leading = u(element.leading ?? element.size)
-        const visible = element.lines.map((line) => ({ font: element.font, size: element.size, anchor: element.anchor, ...line, x: line.x ?? element.x }))
-          .filter((line) => element.collapse === false || textValue(ctx, { ...element, ...line }).trim())
-        if (!visible.length) { set(key, null); break }
-        const top = element.align === 'bottom' ? u(element.y) - (visible.length - 1) * leading : u(element.y)
-        const boxes = visible.map((line, row) => lineBox(ctx, textValue(ctx, { ...element, ...line }), line.font ?? 'body', u(line.size), u(line.x), top + row * leading, line.anchor))
+        const rows = layoutLines(ctx, element, unit)
+        if (!rows.length) { set(key, null); break }
+        const boxes = rows.map((row) => lineBox(ctx, row.literal, row.font ?? 'body', row.size, u(row.x), row.y, row.anchor, row.tracking))
         set(key, { left: Math.min(...boxes.map((box) => box.left)), right: Math.max(...boxes.map((box) => box.right)), top: boxes[0].top, bottom: boxes.at(-1).bottom, firstBaseline: boxes[0].baseline, lastBaseline: boxes.at(-1).baseline, rows: boxes })
         break
       }
@@ -369,33 +435,27 @@ const renderElement = (ctx, element, template) => {
       return placeMotif(ctx, u(element.x), u(element.y), height * symbolWidth / symbolHeight, resolveColour(brand, element.colour ?? 'ink'), element.id ?? 'brand-symbol')
     }
     case 'text':
-      return textElement(ctx, element, unit)
-    case 'lines': {
-      const leading = u(element.leading ?? element.size)
-      // With align 'bottom', y is the last line's baseline and the block grows upward, as an
-      // address block set from the foot of a card does.
-      const visible = element.lines.filter((line) => element.collapse === false || textValue(ctx, { ...element, ...line }).trim())
-      const top = element.align === 'bottom' ? u(element.y) - (visible.length - 1) * leading : u(element.y)
-      let row = 0
-      const out = []
-      for (const line of element.lines) {
-        const merged = { font: element.font, colour: element.colour, size: element.size, anchor: element.anchor, ...line, x: line.x ?? element.x, y: top + row * leading }
-        const text = textValue(ctx, merged)
-        if (!text.trim() && element.collapse !== false) continue
-        out.push(textElement(ctx, merged, unit))
-        row += 1
-      }
-      return out.filter(Boolean).join('\n')
-    }
+      return textElement(ctx, fitText(ctx, element, unit), unit)
+    case 'lines':
+      return layoutLines(ctx, element, unit).map((row) => textElement(ctx, row, unit)).filter(Boolean).join('\n')
     case 'paragraph': {
       const size = u(element.size)
       const leading = u(element.leading ?? size * 1.2)
       const key = element.font ?? 'body'
       const tracking = u(element.tracking ?? 0) / size
+      const width = u(element.width)
       const value = textValue(ctx, element)
-      const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(ctx, line, key, size, tracking), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) })
+      const fits = (line) => measure(ctx, line, key, size, tracking)
+      // Wrapped paragraph by paragraph, so a justified one knows which line ends it.
+      const lines = String(element.caps ? value.toUpperCase() : value).split('\n')
+        .flatMap((block) => wrapLines(block, width, fits, { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) }).map((line, index, all) => ({ line, last: index === all.length - 1 })))
         .slice(0, element.maxLines ?? Infinity)
-      return lines.map((line, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0) }, unit) : ''))
+      const justify = (line, last) => {
+        const gaps = line.trim().split(/\s+/).length - 1
+        if (element.align !== 'justify' || (last && element.alignLast !== 'justify') || !gaps) return 0
+        return Math.max(0, (width - fits(line)) / gaps)
+      }
+      return lines.map(({ line, last }, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0), wordSpacing: justify(line, last) }, unit) : ''))
         .filter(Boolean).join('\n')
     }
     case 'flow': {

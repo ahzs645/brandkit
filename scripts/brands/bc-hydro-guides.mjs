@@ -148,7 +148,7 @@ export const attachHydroGuides = (brand, art) => {
     if (COVERS[template.id]) {
       template.guides = coverGuides(template)
       template.reference = crop({ 'cover-report': 'report-cover-source', 'cover-illustrated': 'cover-illustrated-source', 'cover-display': 'display-cover-source' }[template.id], `Original manual · printed p. ${COVERS[template.id]}`, note)
-      template.fidelity = { status: template.id === 'cover-illustrated' ? 'partial-artwork' : 'reconstructed', label: 'Measured cover layout', note: template.id === 'cover-illustrated' ? 'The cover grid and editable text are reconstructed. The tinted illustration area is a placeholder; the original drawing remains visible in the scan overlay.' : 'The published proportions and point sizes are implemented. The lettering uses the kit’s substitute typeface; this is not an original production master.' }
+      template.fidelity = { status: template.id === 'cover-illustrated' ? 'partial-artwork' : 'reconstructed', label: 'Measured cover layout', note: template.id === 'cover-illustrated' ? 'The cover grid and editable text are reconstructed. The dashed illustration area is a placeholder; the original drawing remains visible in the scan overlay.' : 'The published proportions and point sizes are implemented. The lettering uses the kit’s substitute typeface; this is not an original production master.' }
     }
     const set = template.id.split('-').at(-1)
     if (template.id.startsWith('letterhead-')) {

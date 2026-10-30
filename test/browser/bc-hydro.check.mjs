@@ -113,6 +113,24 @@ try {
   result.checks.push('source crop loads from production asset URL', 'opacity/reset controls', 'template switch resets source overlay')
   console.log('Edited title, rule visibility and source overlay controls passed.')
 
+  // A longer masthead title is set smaller rather than run out of its band (fitWidth).
+  await page.goto(`${base}?brand=bc-hydro-1983&view=templates&template=masthead-band`, { waitUntil: 'networkidle' })
+  await waitImages(page, '.studio__preview')
+  await page.getByRole('textbox', { name: 'Masthead title', exact: true }).fill('Human Resources and Industrial Relations')
+  await page.waitForFunction(async () => /Industrial Relations/.test(await (await fetch(document.querySelector('.studio__preview').src)).text()))
+  const titleRight = await page.evaluate(async () => {
+    const host = document.createElement('div')
+    host.innerHTML = await (await fetch(document.querySelector('.studio__preview').src)).text()
+    document.body.append(host)
+    const box = host.querySelector('#masthead-title').getBBox()
+    host.remove()
+    return box.x + box.width
+  })
+  assert.ok(titleRight < 195.58 - 4, `the long title ends at ${titleRight.toFixed(1)} mm, inside the band (195.6 mm)`)
+  await page.getByRole('button', { name: 'Clear every field', exact: true }).click()
+  result.checks.push('long masthead title shrinks to fit its band')
+  console.log('Masthead title fit passed.')
+
   // The complete report must work as a self-contained asset, not depend on unhashed siblings.
   // The studio no longer links it, so it is opened from the build by its hashed name.
   const report = readdirSync(resolve(root, 'dist/assets')).find((name) => /^manual-audit-[\w-]+\.html$/.test(name))

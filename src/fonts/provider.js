@@ -5,6 +5,7 @@
 //   has(key)                                       is the face for this role available?
 //   width(text, key, size, tracking = 0)           advance width of the line, in user units
 //   path(text, key, size, x, y, tracking = 0, anchor = 'start')   outline path data ('' if none)
+//   covers(text, key)                              optional: does the face draw every character?
 //
 // `key` is a role from the brand's `fonts` ("body", "display", "label"…); `tracking` is in ems.
 // This module builds a provider from opentype.js faces. A host app can supply its own instead:
@@ -104,7 +105,14 @@ export const createFontProvider = (faces) => {
     return Number.isFinite(box.x1) ? box : null
   }
 
-  return { has: (key) => Boolean(faces[key]), width, path, bounds, faces }
+  /** Whether the face has a glyph for every character (a missing one would draw nothing). */
+  const covers = (text, key) => {
+    const face = faces[key]
+    if (!face) return false
+    return Array.from(String(text)).every((char) => /\s/.test(char) || face.font.charToGlyphIndex(char) > 0)
+  }
+
+  return { has: (key) => Boolean(faces[key]), width, path, bounds, covers, faces }
 }
 
 /**

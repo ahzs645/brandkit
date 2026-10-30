@@ -91,13 +91,13 @@ These sizes come from the template definitions rather than a separately maintain
 | Display cover, 4 × 9 | 101.6 × 228.6 mm | cover-display |
 | Newsletter masthead, colour band | 215.9 × 279.4 mm | masthead-band |
 | Newsletter masthead, rule | 215.9 × 279.4 mm | masthead-rule |
-| Advertisement, display | 166.88 × 231.39 mm | advert-display |
+| Advertisement, display | 166.88 × 224.03 mm | advert-display |
 | Advertisement, classified | 39.37 × 71.37 mm | advert-classified |
 | Audio-visual title | 381 × 285.75 mm | av-title |
 | Sign: office identification | 293.8 × 80 mm | sign-office-identification |
 | Sign: gas identification | 293.8 × 100 mm | sign-gas-identification |
 | Sign: horizontal facility | 687.8 × 147.19 mm | sign-horizontal-facility |
-| Sign: vertical facility | 330.27 × 267.19 mm | sign-vertical-facility |
+| Sign: vertical facility | 293.8 × 267.19 mm | sign-vertical-facility |
 | Sign: danger | 333 × 387 mm | sign-danger |
 | Sign: guide, directional | 340 × 120 mm | sign-guide |
 | Form: Tender, legal | 215.9 × 355.6 mm | form-tender |
@@ -110,7 +110,7 @@ These sizes come from the template definitions rather than a separately maintain
 | Narrow publication spine | 279.4 × 19.05 mm | spine-narrow |
 | Publication text page | 215.9 × 279.4 mm | publication-text |
 | Portable display panel | 164.67 × 52.17 mm | display-panel |
-| Advertisement, single column | 54.61 × 152.4 mm | advert-single-column |
+| Advertisement, single column | 84.84 × 139.7 mm | advert-single-column |
 | Boxcar, Hydro | 423.33 × 168.28 mm | illustrated-h48-boxcar |
 | Generator, Hydro | 423.33 × 438.41 mm | illustrated-h47-generator |
 | Crawler Side, Hydro | 423.33 × 259.03 mm | illustrated-h47-crawler-side |

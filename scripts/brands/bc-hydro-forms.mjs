@@ -31,6 +31,8 @@ const tender = page('form-tender', 'Form: Tender, legal', 612, 1008,
     label('To', 30, 76, 9),
     para('tender-addressee', 'Purchasing Department\nB.C.Hydro\n1265 Howe Street, Suite 200\nVancouver, B.C.\nV6Z 2G8', 30, 89, 250, 11, 11),
     ...[['Date', 'tender-date', 78], ["Tenderer’s reference", 'tenderer-reference', 102], ['B.C.Hydro’s reference', 'hydro-reference', 126]].flatMap(([name, id, y]) => [label(name, 312, y, 9), value(id, 415, y, 10), rule(312, y + 3, 540, y + 3)]),
+    // The date line is printed for the year: "Date ______ 19__".
+    label('19', 503, 78, 9),
     para('tender-offer', 'The Tenderer hereby offers to furnish to British Columbia Hydro and Power Authority (herein called “B.C.Hydro”) any part or all of any one of the following payment items, for the following prices, on the Terms and Conditions contained herein and in the Invitation to Tender and attachments thereto.', 30, 160, 264, 11, 12.5),
     para('tender-tax-note', 'For purposes of adjustment pursuant to clause 4 of the Invitation to Tender, Federal Sales Tax is included at ____ % and Duty is included at ____ %.', 312, 160, 264, 11, 12.5),
     para('tender-delivery-note', 'Delivery shall be as required in the Invitation to Tender or as noted below.', 312, 220, 264, 11, 12.5, { font: 'italic' }),
@@ -60,7 +62,7 @@ const transfer = page('form-employee-transfer', 'Form: Salary Employee Transfer'
     box(p(36), p(106), p(342), p(96)),
     ...[130, 154, 178].map(y => rule(36, y, 378, y)), rule(266, 106, 266, 202),
     ...[['To', 'transfer-to', 122], ['From', 'transfer-from', 146], ['Competition', 'transfer-competition', 170], ['Employee', 'transfer-employee', 194]].flatMap(([name, id, y]) => [label(name, 42, y, 9), value(id, 105, y, 9)]),
-    label('Date', 272, 115, 9), label('Day      Month      Year', 278, 128, 6.5), value('transfer-date', 298, 116, 8),
+    label('Date', 272, 115, 9), label('Day    |    Month    |    Year', 278, 128, 6.5), value('transfer-date', 298, 116, 8),
     label('cc:', 272, 140, 9), value('transfer-cc', 290, 147, 8),
     label('Bulletin number', 272, 163, 8.5), value('transfer-bulletin-number', 272, 174, 8),
     label('Social insurance number', 272, 187, 8.5), value('transfer-social-insurance-number', 276, 199, 8),
@@ -79,7 +81,9 @@ const transfer = page('form-employee-transfer', 'Form: Salary Employee Transfer'
     label('If required, the employee’s current status is shown below.', 36, 420, 10),
     box(p(36), p(432), p(342), p(132)),
     ...[454, 476, 498, 520, 542].map(y => rule(36, y, 378, y)), rule(288, 432, 288, 476),
-    ...[['Present job title', 'present-job-title', 448], ['Present job code', 'present-job-code', 470], ['Division', 'present-division', 492], ['Department name', 'present-department', 514], ['Department number', 'present-department-number', 536], ['Present salary    $      Group', 'present-salary-group', 558]].flatMap(([name, id, y]) => [label(name, 42, y, 8.5), value(id, name.startsWith('Present salary') ? 190 : 130, y, 8.5)]),
+    ...[['Present job title', 'present-job-title', 448], ['Present job code', 'present-job-code', 470], ['Division', 'present-division', 492], ['Department name', 'present-department', 514], ['Department number', 'present-department-number', 536]].flatMap(([name, id, y]) => [label(name, 42, y, 8.5), value(id, 130, y, 8.5)]),
+    // H22: the salary after a "$" a fifth of the way along the row, "Group" about half way.
+    label('Present salary', 42, 558, 8.5), label('$', 105, 558, 8.5), value('present-salary', 113, 558, 8.5), label('Group', 212, 558, 8.5), value('present-group', 240, 558, 8.5),
     ...check('status-ftr', 299, 439, 9), label('FTR', 312, 447, 8), ...check('status-ftt', 338, 439, 9), label('FTT', 351, 447, 8),
     ...check('status-ptr', 299, 461, 9), label('PTR', 312, 469, 8), ...check('status-ptt', 338, 461, 9), label('PTT', 351, 469, 8),
     para(null, 'White – Receiving supervisor\nPink – Losing supervisor\nGreen – Employee’s file\nBuff – Competition file\nWhite – Additional admin. (Use when required)\nBlue – Manpower Planning', 36, 575, 207, 8, 8.5, { locked: true }),
@@ -98,7 +102,9 @@ const transfer = page('form-employee-transfer', 'Form: Salary Employee Transfer'
 const serviceTickRow = (y, from = 6, to = 288) => Array.from({ length: Math.floor((to - from) / 13) }, (_, i) => rule(from + (i + 1) * 13, y - 5, from + (i + 1) * 13, y))
 const service = page('form-service-application', 'Form: Application for Service', 576, 360,
   'Editable reconstruction of the compact Application for Service (printed p. 22 / PDF H23). The approximately 8 × 5 in landscape trim and dense grid are measured/rounded from the scan; no total dimensions are stated. The 20 point title and signature share the right half as shown, with compact scan-derived insets rather than the generic 1 in form inset. Historical labels and readable agreement wording are retained; spacing, field entry areas and some minor grid subdivisions are reconstructed. The paper edge is not printed as an outside border.', [
-    text('form-name', 'Application for Service', p(294), round(p(13) + cap(20)), '20pt', { font: 'body', colour: 'ink' }),
+    // Set tight, as H23's title is (59 mm against Termes' 66 mm), for the clear space H19 asks for
+    // before the signature; a longer title shrinks rather than run into it.
+    text('form-name', 'Application for Service', p(294), round(p(13) + cap(20)), '20pt', { font: 'body', colour: 'ink', tracking: '-1pt', fitWidth: round(p(570) - 29.64 - 5 - p(294)) }),
     { type: 'logo', signature: 'standard', colourway: 'black', points: 20, x: p(570), y: p(13), anchorX: 'end', anchorY: 'cap' },
     rule(288, 0, 288, 360),
     ...[36, 58, 80, 102, 124, 146, 168, 190, 212, 234, 256, 278, 300, 322, 337].map(y => rule(0, y, 288, y)),

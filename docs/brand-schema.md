@@ -185,6 +185,9 @@ or with the left of its logotype on a column.
 `colourways` say what each colour role is painted in: `{ "positive": { "label": …, "roles": {
 "symbol": "brown", "type": "black" } }, "black": { "all": "black" }, … }`. `defaultColourway`
 picks the one used when none is named; a colourway's `ground` is the background it is shown on.
+A template `logo`'s `colourway` must be one of these (validation says so); a name the brand does
+not define, such as another brand's `positive`, is drawn in the default colourway rather than in
+an invalid colour.
 
 `departments` are the units a signature is set for: `{ "label": "Ministry", "field": "ministry",
 "items": [{ "id": "forests", "name": "Ministry of Forests", "years": "1976–1986", "values": {
@@ -309,7 +312,12 @@ Templates in `mm` may also use:
 - `flow`: fields stacked down the page, each item's first baseline `gap` below the last baseline
   of the one before, so a longer title pushes what follows it down.
 - `lines` with `align: 'bottom'` (y is the last baseline, as on a card whose address is set from
-  its foot) and `anchor`.
+  its foot), `anchor`, `tracking`, and `fitWidth`: the lines shrink together, size and tracking
+  by one factor, until the longest fits, so a longer typed masthead title stays inside its band
+  (never enlarged). A line with `alignLeft: 'above'` starts where the line above it starts, as
+  "Local 123" does under a telephone number set flush right. A `text` takes `fitWidth` too.
+- `paragraph` with `align: 'justify'`: each line spaced out to the width, except the last of each
+  paragraph; `alignLast: 'justify'` justifies that one too, for a column continued in the next.
 
 In any unit, a stroked `rect`, `path` or `line` may take `dash` (an SVG `stroke-dasharray`, such as
 `"6 5"`): Over the Edge's issue index is ruled with dashed `path`s.
@@ -517,7 +525,9 @@ source-maintenance commands and rendering guidance.
 Guide elements: `label`, `text`, `para` (wrapped), `rect`, `rule`, `path`, `logo` (scaled to
 `width`, or fitted in a `width` × `height` box), `symbol`, `nested` (another kit file, e.g.
 `"templates/social-post"`), and the composite blocks `symbolConstruction`, `specTable`,
-`swatches`, `swatchStrip` and `list`. Text on guide pages is set as outlines.
+`swatches` (`symbol: false` for plain bars), `swatchStrip` and `list`. Text on guide pages is set
+as outlines; a precomposed fraction the face lacks (TeX Gyre Termes has ¼ ½ ¾ but not ⅓ or ⅞) is
+built from small figures, with the other fractions on that line, rather than drawn as nothing.
 
 ## Revisions
 

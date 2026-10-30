@@ -187,7 +187,8 @@
   "labels": {
    "family": "Times Roman",
    "weight": 400,
-   "trackingEm": 0.08
+   "trackingEm": 0,
+   "textTransform": "none"
   },
   "note": "Times Roman throughout, upper and lower case; all-capitals settings are incorrect. 10 to 12 point for text, 35 to 55 characters a line; italics of the regular weight for emphasis, bold sparingly (Graphic Standards Manual p. 11)."
  },
@@ -560,7 +561,7 @@
   },
   "telex": {
    "label": "Telex",
-   "placeholder": "04-54395"
+   "placeholder": "04·54395"
   }
  },
  "copy": {
@@ -24014,7 +24015,8 @@
        "compose": "{telephone}"
       },
       {
-       "compose": "Local {local}"
+       "compose": "Local {local}",
+       "alignLeft": "above"
       }
      ]
     }
@@ -24862,15 +24864,27 @@
      "colour": "ink"
     },
     {
+     "type": "text",
+     "text": "of",
+     "x": 138.43,
+     "y": 35.198,
+     "size": "8pt",
+     "locked": true,
+     "font": "body",
+     "colour": "ink"
+    },
+    {
      "type": "paragraph",
      "id": "instructions",
      "locked": true,
-     "text": "This bulletin shall be used for circulating general information (local or division-wide);",
+     "text": "This bulletin shall be used for circulating general information (local or division-wide); or information which clarifies, but does not alter the intent of,",
      "x": 16.51,
-     "y": 52.07,
-     "width": 86.36,
+     "y": 55.06,
+     "width": 88.6,
      "size": "12pt",
-     "leading": 4.939,
+     "leading": 4.49,
+     "align": "justify",
+     "alignLast": "justify",
      "font": "body",
      "colour": "ink"
     },
@@ -24878,12 +24892,13 @@
      "type": "paragraph",
      "id": "instructions-2",
      "locked": true,
-     "text": "or information which clarifies, but does not alter the intent of, an approved standard practice instruction or job breakdown.",
+     "text": "an approved standard practice instruction or job breakdown.",
      "x": 114.3,
-     "y": 52.07,
-     "width": 86.36,
+     "y": 55.06,
+     "width": 88.6,
      "size": "12pt",
-     "leading": 4.939,
+     "leading": 4.49,
+     "align": "justify",
      "font": "body",
      "colour": "ink"
     },
@@ -25377,11 +25392,26 @@
     {
      "type": "rect",
      "id": "illustration",
-     "x": 75.565,
-     "y": 142.494,
-     "width": 127.381,
-     "height": 78.232,
-     "fill": "light"
+     "fill": "none",
+     "x": 4.318,
+     "y": 139.7,
+     "width": 200.787,
+     "height": 108.966,
+     "stroke": "primary",
+     "strokeWidth": "0.75pt",
+     "dash": "3 2",
+     "label": "[Illustration: line drawing in corporate blue]"
+    },
+    {
+     "type": "text",
+     "text": "[Illustration: line drawing in corporate blue]",
+     "x": 104.712,
+     "y": 194.183,
+     "size": "12pt",
+     "locked": true,
+     "font": "italic",
+     "colour": "primary",
+     "anchor": "middle"
     }
    ],
    "sources": [
@@ -25548,7 +25578,7 @@
    "fidelity": {
     "status": "partial-artwork",
     "label": "Measured cover layout",
-    "note": "The cover grid and editable text are reconstructed. The tinted illustration area is a placeholder; the original drawing remains visible in the scan overlay."
+    "note": "The cover grid and editable text are reconstructed. The dashed illustration area is a placeholder; the original drawing remains visible in the scan overlay."
    }
   },
   {
@@ -25595,7 +25625,7 @@
       },
       {
        "id": "cover-subtitle",
-       "text": "A tour of Revelstoke's history\nand the Columbia River system",
+       "text": "A tour of Revelstoke’s history\nand the Columbia River system",
        "size": "12pt",
        "leading": 4.233,
        "gap": 8.407
@@ -25605,11 +25635,11 @@
     {
      "type": "rect",
      "id": "illustration",
+     "fill": "green",
      "x": 33.867,
      "y": 107.95,
      "width": 60.113,
-     "height": 88.9,
-     "fill": "light"
+     "height": 88.9
     }
    ],
    "sources": [
@@ -25792,7 +25822,7 @@
    ],
    "raster": 1700,
    "title": "B.C.Hydro / newsletter masthead (band)",
-   "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule.",
+   "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule. A longer title is set smaller to stay inside the band.",
    "elements": [
     {
      "type": "background",
@@ -25811,16 +25841,19 @@
      "signature": "standard",
      "colourway": "black",
      "x": 21.844,
-     "y": 29.069,
-     "width": 63.5,
+     "y": 32.6,
+     "width": 61.6,
      "anchorY": "baseline"
     },
     {
      "type": "lines",
+     "id": "masthead-title-block",
      "x": 96.52,
-     "y": 29.069,
-     "leading": 15.134,
-     "size": "42.9pt",
+     "y": 32.6,
+     "leading": 11.994,
+     "size": "41.6pt",
+     "tracking": "-2.7pt",
+     "fitWidth": 93.218,
      "font": "body",
      "colour": "ink",
      "lines": [
@@ -25839,8 +25872,8 @@
      "id": "dateline",
      "text": "November 15, 1983    Contact: Earl Simmons 663-0000",
      "x": 96.52,
-     "y": 58.42,
-     "size": "11pt",
+     "y": 58.5,
+     "size": "12pt",
      "font": "body",
      "colour": "ink"
     },
@@ -25848,23 +25881,26 @@
      "type": "text",
      "id": "headline",
      "text": "Autumn sessions in Electricity Fundamentals",
-     "x": 107.95,
-     "y": 72.39,
-     "size": "24pt",
+     "x": 105.791,
+     "y": 74.5,
+     "size": "27pt",
      "font": "body",
      "colour": "ink",
-     "anchor": "middle"
+     "anchor": "middle",
+     "tracking": "-1.35pt",
+     "fitWidth": 167.894
     },
     {
      "type": "paragraph",
      "id": "column-1",
-     "text": "[Story text, two justified columns of 12 point Times Roman.]",
+     "text": "[Story text, two justified columns of 12 on 12 point Times Roman.]",
      "x": 16.002,
-     "y": 83.82,
+     "y": 81.5,
      "width": 85.725,
      "size": "12pt",
-     "leading": 4.939,
-     "maxLines": 40,
+     "leading": 4.233,
+     "maxLines": 44,
+     "align": "justify",
      "font": "body",
      "colour": "ink"
     },
@@ -25872,12 +25908,13 @@
      "type": "paragraph",
      "id": "column-2",
      "text": "[Second column.]",
-     "x": 110.109,
-     "y": 83.82,
+     "x": 109.855,
+     "y": 81.5,
      "width": 85.725,
      "size": "12pt",
-     "leading": 4.939,
-     "maxLines": 40,
+     "leading": 4.233,
+     "maxLines": 44,
+     "align": "justify",
      "font": "body",
      "colour": "ink"
     }
@@ -25905,7 +25942,7 @@
    ],
    "raster": 1700,
    "title": "B.C.Hydro / newsletter masthead (rule)",
-   "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule.",
+   "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule. A longer title is set smaller to stay inside the band.",
    "elements": [
     {
      "type": "background",
@@ -25914,10 +25951,10 @@
     {
      "type": "line",
      "x1": 16.002,
-     "y1": 47.378,
+     "y1": 50.194,
      "x2": 195.58,
-     "y2": 47.378,
-     "strokeWidth": "3pt",
+     "y2": 50.194,
+     "strokeWidth": "2.9pt",
      "stroke": "ink"
     },
     {
@@ -25925,16 +25962,19 @@
      "signature": "standard",
      "colourway": "black",
      "x": 21.844,
-     "y": 29.069,
-     "width": 63.5,
+     "y": 32.6,
+     "width": 61.6,
      "anchorY": "baseline"
     },
     {
      "type": "lines",
+     "id": "masthead-title-block",
      "x": 96.52,
-     "y": 29.069,
-     "leading": 15.134,
-     "size": "42.9pt",
+     "y": 32.6,
+     "leading": 11.994,
+     "size": "41.6pt",
+     "tracking": "-2.7pt",
+     "fitWidth": 93.218,
      "font": "body",
      "colour": "ink",
      "lines": [
@@ -25953,8 +25993,8 @@
      "id": "dateline",
      "text": "November 15, 1983    Contact: Earl Simmons 663-0000",
      "x": 96.52,
-     "y": 58.42,
-     "size": "11pt",
+     "y": 58.094,
+     "size": "12pt",
      "font": "body",
      "colour": "ink"
     },
@@ -25962,23 +26002,26 @@
      "type": "text",
      "id": "headline",
      "text": "Autumn sessions in Electricity Fundamentals",
-     "x": 107.95,
-     "y": 72.39,
-     "size": "24pt",
+     "x": 105.791,
+     "y": 74.094,
+     "size": "27pt",
      "font": "body",
      "colour": "ink",
-     "anchor": "middle"
+     "anchor": "middle",
+     "tracking": "-1.35pt",
+     "fitWidth": 167.894
     },
     {
      "type": "paragraph",
      "id": "column-1",
-     "text": "[Story text, two justified columns of 12 point Times Roman.]",
+     "text": "[Story text, two justified columns of 12 on 12 point Times Roman.]",
      "x": 16.002,
-     "y": 83.82,
+     "y": 81.094,
      "width": 85.725,
      "size": "12pt",
-     "leading": 4.939,
-     "maxLines": 40,
+     "leading": 4.233,
+     "maxLines": 44,
+     "align": "justify",
      "font": "body",
      "colour": "ink"
     },
@@ -25986,12 +26029,13 @@
      "type": "paragraph",
      "id": "column-2",
      "text": "[Second column.]",
-     "x": 110.109,
-     "y": 83.82,
+     "x": 109.855,
+     "y": 81.094,
      "width": 85.725,
      "size": "12pt",
-     "leading": 4.939,
-     "maxLines": 40,
+     "leading": 4.233,
+     "maxLines": 44,
+     "align": "justify",
      "font": "body",
      "colour": "ink"
     }
@@ -26012,10 +26056,10 @@
    "group": "Advertising",
    "unit": "mm",
    "width": 166.878,
-   "height": 231.394,
+   "height": 224.028,
    "physical": [
     "6.57in",
-    "9.11in"
+    "8.82in"
    ],
    "raster": 1300,
    "title": "B.C.Hydro / display advertisement",
@@ -26028,19 +26072,19 @@
     {
      "type": "line",
      "x1": 0,
-     "y1": 0.406,
+     "y1": 0.511,
      "x2": 166.878,
-     "y2": 0.406,
-     "strokeWidth": "2.3pt",
+     "y2": 0.511,
+     "strokeWidth": "2.9pt",
      "stroke": "ink"
     },
     {
      "type": "line",
      "x1": 0,
-     "y1": 230.988,
+     "y1": 223.516,
      "x2": 166.878,
-     "y2": 230.988,
-     "strokeWidth": "2.3pt",
+     "y2": 223.516,
+     "strokeWidth": "2.9pt",
      "stroke": "ink"
     },
     {
@@ -26052,6 +26096,7 @@
      "width": 148.59,
      "size": "30pt",
      "leading": 10.936,
+     "tracking": "-1.2pt",
      "maxLines": 4,
      "font": "body",
      "colour": "ink"
@@ -26070,11 +26115,11 @@
      "id": "column-1",
      "text": "[Copy in three columns, 12 point leading.]",
      "x": 0,
-     "y": 145.288,
+     "y": 148.3,
      "width": 53.34,
      "size": "10.5pt",
      "leading": 4.233,
-     "maxLines": 22,
+     "maxLines": 17,
      "font": "body",
      "colour": "ink"
     },
@@ -26083,11 +26128,11 @@
      "id": "column-2",
      "text": "",
      "x": 56.896,
-     "y": 145.288,
+     "y": 148.3,
      "width": 53.34,
      "size": "10.5pt",
      "leading": 4.233,
-     "maxLines": 22,
+     "maxLines": 17,
      "font": "body",
      "colour": "ink"
     },
@@ -26096,11 +26141,11 @@
      "id": "column-3",
      "text": "",
      "x": 113.792,
-     "y": 145.288,
+     "y": 148.3,
      "width": 53.34,
      "size": "10.5pt",
      "leading": 4.233,
-     "maxLines": 14,
+     "maxLines": 13,
      "font": "body",
      "colour": "ink"
     },
@@ -26109,7 +26154,7 @@
      "signature": "standard",
      "colourway": "black",
      "x": 166.878,
-     "y": 222.555,
+     "y": 216.028,
      "width": 52.578,
      "anchorX": "end",
      "anchorY": "baseline"
@@ -26174,9 +26219,9 @@
      "id": "headline",
      "text": "Invitation\nto tender",
      "x": 19.685,
-     "y": 8.816,
+     "y": 6.9,
      "width": 38.1,
-     "size": "16pt",
+     "size": "14pt",
      "leading": 5.115,
      "maxLines": 3,
      "anchor": "middle",
@@ -26187,12 +26232,12 @@
      "type": "paragraph",
      "id": "body",
      "text": "Sealed tenders, marked with the tender number, will be received at the Purchasing Department until the date shown.",
-     "x": 0,
-     "y": 24.13,
-     "width": 39.37,
-     "size": "8pt",
+     "x": 0.5,
+     "y": 16.8,
+     "width": 38.37,
+     "size": "8.5pt",
      "leading": 3.528,
-     "maxLines": 10,
+     "maxLines": 13,
      "font": "body",
      "colour": "ink"
     },
@@ -26201,7 +26246,7 @@
      "signature": "standard",
      "colourway": "black",
      "x": 4.699,
-     "y": 69.342,
+     "y": 68.074,
      "width": 29.972,
      "anchorY": "baseline"
     }
@@ -26441,7 +26486,7 @@
    "label": "Sign: vertical facility",
    "group": "Signs",
    "unit": "mm",
-   "width": 330.272,
+   "width": 293.8,
    "height": 267.19,
    "raster": 1600,
    "title": "B.C.Hydro / identification sign, vertical facility",
@@ -26455,7 +26500,7 @@
      "type": "rect",
      "x": 0,
      "y": 0,
-     "width": 330.272,
+     "width": 293.8,
      "height": 267.19,
      "fill": "none",
      "stroke": "ink",
@@ -26476,10 +26521,11 @@
      "text": "Liquefied\nNatural Gas\nPlant",
      "x": 20,
      "y": 147.19,
-     "width": 294.272,
+     "width": 257.8,
      "size": "171.3pt",
      "leading": 50,
      "maxLines": 3,
+     "tracking": "-10.33pt",
      "font": "body",
      "colour": "ink"
     }
@@ -26520,40 +26566,42 @@
      "type": "logo",
      "signature": "standard",
      "colourway": "black",
-     "x": 24,
-     "y": 18,
-     "width": 173
+     "x": 26,
+     "y": 22,
+     "width": 160
     },
     {
      "type": "text",
      "id": "warning",
      "text": "Danger",
-     "x": 24,
-     "y": 150,
+     "x": 25,
+     "y": 132,
      "size": "175pt",
      "font": "bold",
      "colour": "ink",
-     "tracking": "36pt"
+     "tracking": "53.4pt",
+     "fitWidth": 293.789
     },
     {
      "type": "text",
      "id": "instruction",
      "text": "Keep away",
-     "x": 24,
-     "y": 226,
+     "x": 25,
+     "y": 198,
      "size": "175pt",
      "font": "bold",
-     "colour": "ink"
+     "colour": "ink",
+     "fitWidth": 293.789
     },
     {
      "type": "paragraph",
      "id": "explanation",
-     "text": "High voltage equipment.\nUnauthorized entry\nprohibited.",
-     "x": 24,
-     "y": 285,
-     "width": 290,
-     "size": "64pt",
-     "leading": 27,
+     "text": "Dangerous undertow\nand current from\npower plant operation",
+     "x": 25,
+     "y": 254,
+     "width": 292,
+     "size": "92pt",
+     "leading": 29.7,
      "maxLines": 4,
      "font": "body",
      "colour": "ink"
@@ -26585,7 +26633,7 @@
    "height": 120,
    "raster": 1000,
    "title": "B.C.Hydro / directional guide sign",
-   "description": "A guide sign (Graphic Standards Manual p. 39): one destination to a row, rows divided by a keyline, each with its arrow; the names aligned on one left edge.",
+   "description": "A guide sign (Graphic Standards Manual p. 39): one destination to a row, rows divided by a keyline, each with its arrow; the names aligned on one left edge; borders ½ cap-height.",
    "elements": [
     {
      "type": "background",
@@ -26612,37 +26660,41 @@
     },
     {
      "type": "path",
-     "d": "M22 47V15M12 25L22 15L32 25",
+     "d": "M32.947 44.893V18.818M20.7 31.065L32.947 18.818L45.194 31.065",
      "fill": "none",
      "stroke": "ink",
-     "strokeWidth": 4
+     "strokeWidth": 5.4
     },
     {
      "type": "path",
-     "d": "M10 90H40M30 80L40 90L30 100",
+     "d": "M18 89.947H44.075M31.828 77.7L44.075 89.947L31.828 102.194",
      "fill": "none",
      "stroke": "ink",
-     "strokeWidth": 4
+     "strokeWidth": 5.4
     },
     {
      "type": "text",
      "id": "destination-1",
      "text": "Visitor Parking",
-     "x": 58,
-     "y": 43,
-     "size": "64pt",
+     "x": 78.5,
+     "y": 44.893,
+     "size": "128pt",
      "font": "body",
-     "colour": "ink"
+     "colour": "ink",
+     "tracking": "-6.4pt",
+     "fitWidth": 246.554
     },
     {
      "type": "text",
      "id": "destination-2",
      "text": "Electric Shop",
-     "x": 58,
-     "y": 103,
-     "size": "64pt",
+     "x": 78.5,
+     "y": 104.893,
+     "size": "128pt",
      "font": "body",
-     "colour": "ink"
+     "colour": "ink",
+     "tracking": "-6.4pt",
+     "fitWidth": 246.554
     }
    ],
    "sources": [
@@ -26809,6 +26861,16 @@
      "y2": 45.508,
      "strokeWidth": "0.5pt",
      "stroke": "ink"
+    },
+    {
+     "type": "text",
+     "text": "19",
+     "x": 177.447,
+     "y": 27.517,
+     "size": "9pt",
+     "locked": true,
+     "font": "body",
+     "colour": "ink"
     },
     {
      "type": "paragraph",
@@ -27573,7 +27635,7 @@
     },
     {
      "type": "text",
-     "text": "Day      Month      Year",
+     "text": "Day    |    Month    |    Year",
      "x": 98.072,
      "y": 45.156,
      "size": "6.5pt",
@@ -28163,7 +28225,7 @@
     },
     {
      "type": "text",
-     "text": "Present salary    $      Group",
+     "text": "Present salary",
      "x": 14.817,
      "y": 196.85,
      "size": "8.5pt",
@@ -28173,9 +28235,39 @@
     },
     {
      "type": "text",
-     "id": "present-salary-group",
+     "text": "$",
+     "x": 37.042,
+     "y": 196.85,
+     "size": "8.5pt",
+     "locked": true,
+     "font": "body",
+     "colour": "ink"
+    },
+    {
+     "type": "text",
+     "id": "present-salary",
      "text": "",
-     "x": 67.028,
+     "x": 39.864,
+     "y": 196.85,
+     "size": "8.5pt",
+     "font": "body",
+     "colour": "ink"
+    },
+    {
+     "type": "text",
+     "text": "Group",
+     "x": 74.789,
+     "y": 196.85,
+     "size": "8.5pt",
+     "locked": true,
+     "font": "body",
+     "colour": "ink"
+    },
+    {
+     "type": "text",
+     "id": "present-group",
+     "text": "",
+     "x": 84.667,
      "y": 196.85,
      "size": "8.5pt",
      "font": "body",
@@ -28512,7 +28604,9 @@
      "y": 9.257,
      "size": "20pt",
      "font": "body",
-     "colour": "ink"
+     "colour": "ink",
+     "tracking": "-1pt",
+     "fitWidth": 62.726
     },
     {
      "type": "logo",
@@ -33068,7 +33162,7 @@
    "elements": [
     {
      "type": "background",
-     "fill": "ink"
+     "fill": "primary"
     },
     {
      "type": "logo",
@@ -33076,7 +33170,7 @@
      "colourway": "white",
      "points": 36,
      "x": 69.85,
-     "y": 17.2974,
+     "y": 21.1963,
      "anchorY": "baseline"
     },
     {
@@ -33084,10 +33178,12 @@
      "id": "spine-title",
      "text": "Training in Basic Supervision",
      "x": 80.56447730870713,
-     "y": 38.404799999999994,
+     "y": 38.0111,
      "size": "36pt",
      "font": "body",
-     "colour": "reverse"
+     "colour": "reverse",
+     "tracking": "-1.44pt",
+     "fitWidth": 186.136
     }
    ],
    "sources": [
@@ -33175,7 +33271,7 @@
    "elements": [
     {
      "type": "background",
-     "fill": "ink"
+     "fill": "primary"
     },
     {
      "type": "logo",
@@ -33190,11 +33286,13 @@
      "type": "text",
      "id": "spine-title",
      "text": "Training in Basic Supervision",
-     "x": 109.98663592517873,
+     "x": 111.01978992517873,
      "y": 12.327577000000002,
      "size": "24pt",
      "font": "body",
-     "colour": "reverse"
+     "colour": "reverse",
+     "tracking": "-0.96pt",
+     "fitWidth": 155.68
     }
    ],
    "sources": [
@@ -33450,19 +33548,19 @@
    "label": "Advertisement, single column",
    "group": "Advertising",
    "unit": "mm",
-   "width": 54.61,
-   "height": 152.4,
+   "width": 84.836,
+   "height": 139.7,
    "physical": [
-    "2.15in",
-    "6in"
+    "3.34in",
+    "5.5in"
    ],
    "raster": 800,
    "title": "B.C.Hydro / single-column advertisement",
-   "description": "Graphic Standards Manual p. 33: a single-column advertisement with rules, a headline in upper and lower case, body copy and the positive signature as the final element. The example canvas and copy are reconstructed; the source does not specify a universal column width.",
+   "description": "Graphic Standards Manual p. 33, Example 2: a single-column advertisement between heavy rules: the headline in upper and lower case, the copy with italic subheads (the manual’s choice for emphasis), and the positive signature flush left as the final element.",
    "fidelity": {
     "status": "reconstructed",
     "label": "Rule-based reconstruction",
-    "note": "Applies the single-column example’s hierarchy and signature placement. The original copy and newspaper column dimensions are not production specifications."
+    "note": "Format, type sizes and positions are measured from the full-size example. The copy is sample wording in the example’s structure, not a production advertisement."
    },
    "elements": [
     {
@@ -33472,52 +33570,93 @@
     {
      "type": "line",
      "x1": 0,
-     "y1": 0.212,
-     "x2": 54.61,
-     "y2": 0.212,
-     "strokeWidth": "1.2pt",
+     "y1": 0.512,
+     "x2": 84.836,
+     "y2": 0.512,
+     "strokeWidth": "2.9pt",
      "stroke": "ink"
     },
     {
-     "type": "paragraph",
-     "id": "single-ad-headline",
-     "text": "Overhead lines\nand your safety",
-     "x": 2.032,
-     "y": 7.62,
-     "width": 50.546,
-     "size": "18pt",
-     "leading": 6.703,
+     "type": "flow",
+     "x": 5.6,
+     "y": 15.3,
      "font": "body",
-     "colour": "ink"
-    },
-    {
-     "type": "paragraph",
-     "id": "single-ad-copy",
-     "text": "Before starting work near overhead electrical lines, find out what precautions are required.\n\nPlan the work so that people, vehicles and equipment remain clear. Contact B.C.Hydro for information before beginning.\n\nThis specimen demonstrates the historic advertising layout. Replace this sample wording with reviewed, applicable copy before use.",
-     "x": 2.032,
-     "y": 29.21,
-     "width": 50.546,
-     "size": "10pt",
-     "leading": 4.233,
-     "font": "body",
-     "colour": "ink"
+     "colour": "ink",
+     "items": [
+      {
+       "id": "single-ad-headline",
+       "text": "Brief power\ninterruptions in\nthe Hope area",
+       "size": "30pt",
+       "leading": 10.936,
+       "tracking": "-1.5pt",
+       "wrap": 73,
+       "maxLines": 4
+      },
+      {
+       "id": "single-ad-intro",
+       "text": "Power will be off for short periods in parts of the Hope area while crews replace equipment on the lines that serve it.",
+       "size": "11pt",
+       "leading": 4.057,
+       "gap": 9.5,
+       "wrap": 73,
+       "maxLines": 3
+      },
+      {
+       "id": "single-ad-subhead-1",
+       "text": "Tuesday, August 16",
+       "size": "18pt",
+       "font": "italic",
+       "leading": 6.35,
+       "gap": 8.3,
+       "wrap": 73,
+       "maxLines": 1
+      },
+      {
+       "id": "single-ad-copy-1",
+       "text": "Between 9 am and noon, power to [streets affected] will be interrupted for up to fifteen minutes at a time. Please switch off sensitive equipment before the work begins. Replace this sample wording with the notice’s own details before use.",
+       "size": "11pt",
+       "leading": 4.057,
+       "gap": 5.3,
+       "wrap": 73,
+       "maxLines": 6
+      },
+      {
+       "id": "single-ad-subhead-2",
+       "text": "Saturday, August 20",
+       "size": "18pt",
+       "font": "italic",
+       "leading": 6.35,
+       "gap": 8.3,
+       "wrap": 73,
+       "maxLines": 1
+      },
+      {
+       "id": "single-ad-copy-2",
+       "text": "Between 1 pm and 4 pm, power to [streets affected] will be interrupted for short periods while the work is completed. If the work is postponed, the new date will be announced here. For information, call [telephone].",
+       "size": "11pt",
+       "leading": 4.057,
+       "gap": 5.3,
+       "wrap": 73,
+       "maxLines": 6
+      }
+     ]
     },
     {
      "type": "logo",
      "signature": "standard",
      "colourway": "black",
-     "x": 6.35,
-     "y": 143.51,
-     "width": 41.91,
+     "x": 5.6,
+     "y": 133.9,
+     "width": 44.704,
      "anchorY": "baseline"
     },
     {
      "type": "line",
      "x1": 0,
-     "y1": 152.18800000000002,
-     "x2": 54.61,
-     "y2": 152.18800000000002,
-     "strokeWidth": "1.2pt",
+     "y1": 139.188,
+     "x2": 84.836,
+     "y2": 139.188,
+     "strokeWidth": "2.9pt",
      "stroke": "ink"
     }
    ],
@@ -33643,7 +33782,8 @@
        "text": "Danger\nHigh Voltage",
        "font": "body",
        "leading": 1.05,
-       "fill": 0.9
+       "fill": 0.9,
+       "align": "start"
       }
      }
     }
@@ -35670,7 +35810,7 @@
      "width": 340,
      "height": 100,
      "signature": "standard",
-     "colourway": "positive",
+     "colourway": "corporate",
      "values": {
       "ministry": "",
       "ministry-split": "",
@@ -35683,7 +35823,7 @@
      "x": 64,
      "y": 660,
      "size": 18,
-     "tracking": 1.8,
+     "tracking": 0,
      "font": "label",
      "colour": "ink",
      "locked": true
@@ -35722,13 +35862,13 @@
     },
     {
      "type": "text",
-     "text": "B.C.HYDRO",
+     "text": "B.C.Hydro",
      "x": 64,
      "y": 1030,
      "size": 13,
      "font": "label",
      "colour": "ink",
-     "tracking": 1.1,
+     "tracking": 0,
      "locked": true
     }
    ]
@@ -35782,7 +35922,7 @@
      "width": 440,
      "height": 120,
      "signature": "standard",
-     "colourway": "positive",
+     "colourway": "corporate",
      "values": {
       "ministry": "",
       "ministry-split": "",
@@ -35795,7 +35935,7 @@
      "x": 96,
      "y": 376,
      "size": 22,
-     "tracking": 1.8,
+     "tracking": 0,
      "font": "label",
      "colour": "ink",
      "locked": true
@@ -35834,13 +35974,13 @@
     },
     {
      "type": "text",
-     "text": "B.C.HYDRO",
+     "text": "B.C.Hydro",
      "x": 96,
      "y": 1020,
      "size": 13,
      "font": "label",
      "colour": "ink",
-     "tracking": 1.1,
+     "tracking": 0,
      "locked": true
     }
    ]
@@ -36140,7 +36280,8 @@
        "green",
        "blue",
        "black"
-      ]
+      ],
+      "symbol": false
      },
      {
       "type": "specTable",
@@ -36203,10 +36344,10 @@
       "type": "logo",
       "signature": "standard",
       "colourway": "corporate",
-      "x": 92,
-      "y": 274,
-      "width": 360,
-      "height": 152
+      "x": 152,
+      "y": 299.3333333333333,
+      "width": 240,
+      "height": 101.33333333333333
      },
      {
       "type": "label",
@@ -36227,10 +36368,10 @@
       "type": "logo",
       "signature": "standard",
       "colourway": "black",
-      "x": 540,
-      "y": 274,
-      "width": 360,
-      "height": 152
+      "x": 600,
+      "y": 299.3333333333333,
+      "width": 240,
+      "height": 101.33333333333333
      },
      {
       "type": "label",
@@ -36250,10 +36391,10 @@
       "type": "logo",
       "signature": "standard",
       "colourway": "black",
-      "x": 988,
-      "y": 274,
-      "width": 360,
-      "height": 152
+      "x": 1018,
+      "y": 286.6666666666667,
+      "width": 300,
+      "height": 126.66666666666667
      },
      {
       "type": "label",
@@ -36273,10 +36414,10 @@
       "type": "logo",
       "signature": "standard",
       "colourway": "white",
-      "x": 92,
-      "y": 574,
-      "width": 360,
-      "height": 152
+      "x": 122,
+      "y": 586.6666666666666,
+      "width": 300,
+      "height": 126.66666666666667
      },
      {
       "type": "label",
@@ -36290,7 +36431,7 @@
       "y": 550,
       "width": 416,
       "height": 200,
-      "fill": "grey"
+      "fill": "#333333"
      },
      {
       "type": "logo",
@@ -36306,6 +36447,15 @@
       "text": "WHITE ON 80% OR MORE",
       "x": 512,
       "y": 780
+     },
+     {
+      "type": "para",
+      "text": "Signatures are enlarged on tints and on reverse grounds, where they lose definition: at least 1¼ in wide on 20% and on black, 1½ in on 80%, against 1 in on white (minimum sizes, p. 12).",
+      "x": 960,
+      "y": 560,
+      "width": 416,
+      "size": 20,
+      "colour": "ink"
      }
     ],
     "sources": [
@@ -36771,8 +36921,8 @@
       "type": "rect",
       "x": 64,
       "y": 300,
-      "width": 116.63861406338734,
-      "height": 161.73177688241378,
+      "width": 120.09491167940944,
+      "height": 161.2233060901661,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -36781,56 +36931,56 @@
       "src": "templates/advert-display",
       "x": 64,
       "y": 300,
-      "width": 116.6,
-      "height": 161.7
+      "width": 120.1,
+      "height": 161.2
      },
      {
       "type": "label",
       "text": "DISPLAY AD",
       "x": 64,
-      "y": 487.7
+      "y": 487.2
      },
      {
       "type": "nested",
       "src": "templates/av-title",
-      "x": 212.6,
+      "x": 216.1,
       "y": 300,
-      "width": 215.6,
-      "height": 161.7
+      "width": 215,
+      "height": 161.2
      },
      {
       "type": "label",
       "text": "AUDIO-VISUAL",
-      "x": 212.6,
-      "y": 487.7
+      "x": 216.1,
+      "y": 487.2
      },
      {
       "type": "nested",
       "src": "templates/sign-horizontal-facility",
-      "x": 460.3,
+      "x": 463.1,
       "y": 300,
-      "width": 469,
-      "height": 161.7
+      "width": 467.5,
+      "height": 161.2
      },
      {
       "type": "label",
       "text": "IDENTIFICATION SIGN",
-      "x": 460.3,
-      "y": 487.7
+      "x": 463.1,
+      "y": 487.2
      },
      {
       "type": "nested",
       "src": "templates/illustrated-h44-van-side",
-      "x": 961.3,
+      "x": 962.6,
       "y": 300,
-      "width": 414.7,
-      "height": 161.7
+      "width": 413.4,
+      "height": 161.2
      },
      {
       "type": "label",
       "text": "PANEL VAN",
-      "x": 961.3,
-      "y": 487.7
+      "x": 962.6,
+      "y": 487.2
      }
     ],
     "sources": [
@@ -38308,7 +38458,8 @@
      "family": "serif",
      "anchor": "start",
      "fill": "#20221d",
-     "width": 208
+     "width": 208,
+     "adjust": "spacing"
     },
     {
      "text": "Keep away",
@@ -39164,7 +39315,8 @@
   "summary": "All 48 source pages are inventoried against the kit. The audit includes original/reconstructed page overlays, template mappings, the report-cover rules and both BCE route vectors. Coverage does not mean an exact facsimile or an authenticated production master.",
   "limitations": [
    "The four signature masters remain PofBC reconstructions; Times Roman is represented by TeX Gyre Termes and screen colours approximate the specified inks.",
-   "The illustrated cover still needs its original high-quality illustration. The tinted panel is marked as a placeholder.",
+   "A signature sized in points has the cap height of that size of Termes (0.662 em), so it matches its title as the manual asks. The printed examples’ Times has capitals about 12% taller at the same nominal size, so their signatures are about 15% wider (a 20 point signature is 34 mm on H20 and H23, 29.6 mm here; 36 point, 61 mm on H26 against 53 mm).",
+   "The illustrated cover still needs its original high-quality illustration. Its area is a dashed, labelled placeholder.",
    "Undimensioned form trims, spine thicknesses and example canvases are identified as reconstruction choices. Three-dimensional signs still require the official large-scale drawings."
   ],
   "pageFindings": {
@@ -39190,13 +39342,20 @@
     "Text/grid are implemented; the illustration area remains a disclosed placeholder, with the original visible in the overlay."
    ],
    "H29": [
-    "Broad and narrow spine examples are now present, with source rules and example dimensions distinguished."
+    "Broad and narrow spines follow the binder shown: corporate blue with the signature and title reversed white. On the broad spine the title starts under the B, two cap-heights below the signature; on the narrow one it follows a cap-height after it. Spine thicknesses are example settings, not specified sizes."
+   ],
+   "H30": [
+    "Both mastheads are measured from the full-size example: a 61.6 mm signature with the title at its size, set tight, on a shared baseline; 12 mm between title lines; dateline 12 point, headline 27 point, columns 12 on 12. A longer typed title is set smaller to stay inside the band or rule."
    ],
    "H31": [
     "A text-page template applies the written typography principles; it is a new example, not a source facsimile."
    ],
+   "H33": [
+    "The display advertisement is 6.57 × 8.82 in between 2.9 point rules, with 17-line columns (13 in the third, above the signature) ending 8 mm above the foot."
+   ],
    "H34": [
-    "Display, single-column and classified advertisement variants are represented."
+    "The single-column advertisement is rebuilt to the measured example: 3.34 × 5.5 in between 2.9 point rules, a 73 mm measure, a 30 point headline, 11 on 11½ point copy with 18 point italic date subheads, and a 1.76 in signature flush left. Its copy is sample wording in the example’s structure.",
+    "The classified advertisement has the 14 point headline, 8½ on 10 point copy and the signature 3.3 mm above the foot, as measured."
    ],
    "H36": [
     "Portable-panel half-cap clearance is implemented. Three-dimensional fabrication remains dependent on official large-scale drawings."
