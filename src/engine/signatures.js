@@ -36,11 +36,18 @@ import { assertLogoPaint } from './identity.js'
 
 const PT = 1
 
+/** Whether a paint name is a colour (a palette key, a role, a CSS value) rather than a colourway's name. */
+const isColour = (brand, value) => resolveColour(brand, value) !== value || /^(#|rgba?\(|hsla?\(|currentColor$|none$|transparent$|black$|white$)/i.test(value)
+
 /** A paint function for a colourway: role → colour. A plain colour paints every role. */
 export const paintFor = (brand, colourway) => {
   if (typeof colourway === 'function') return colourway
   if (colourway == null) return () => 'currentColor'
   const spec = typeof colourway === 'string' ? brand.colourways?.[colourway] : colourway
+  // A name that is neither this brand's colourway nor a colour (another brand's "positive", say)
+  // would paint every part in an invalid colour; the brand's default colourway paints it instead.
+  const fallback = brand.defaultColourway ?? Object.keys(brand.colourways ?? {})[0]
+  if (!spec && typeof colourway === 'string' && fallback && fallback !== colourway && brand.colourways?.[fallback] && !isColour(brand, colourway)) return paintFor(brand, fallback)
   if (!spec) {
     const single = resolveColour(brand, colourway)
     return () => single

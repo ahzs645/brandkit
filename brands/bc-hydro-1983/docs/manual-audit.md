@@ -8,10 +8,10 @@ All 48 source pages are inventoried against the kit. The audit includes original
 
 - 48 original PDF pages inventoried.
 - 48 existing rebuilt manual SVG pages available for comparison.
-- 65 editable examples in the current kit.
+- 63 editable examples in the current kit.
 - 47 examples with embedded, toggleable layout rules.
 - 6 template source comparisons.
-- 11 added examples and 4 changed clean previews relative to e470434.
+- 11 added examples and 19 changed clean previews relative to e470434.
 
 Counts establish presence, not exactness or production readiness.
 
@@ -35,7 +35,8 @@ The HTML report embeds the original scans, the existing rebuilt manual SVGs with
 ## Limitations
 
 - The four signature masters remain PofBC reconstructions; Times Roman is represented by TeX Gyre Termes and screen colours approximate the specified inks.
-- The illustrated cover still needs its original high-quality illustration. The tinted panel is marked as a placeholder.
+- A signature sized in points has the cap height of that size of Termes (0.662 em), so it matches its title as the manual asks. The printed examples’ Times has capitals about 12% taller at the same nominal size, so their signatures are about 15% wider (a 20 point signature is 34 mm on H20 and H23, 29.6 mm here; 36 point, 61 mm on H26 against 53 mm).
+- The illustrated cover still needs its original high-quality illustration. Its area is a dashed, labelled placeholder.
 - Undimensioned form trims, spine thicknesses and example canvases are identified as reconstruction choices. Three-dimensional signs still require the official large-scale drawings.
 - Scans are slightly skewed/scaled; written measurements take precedence over raw page pixels.
 - The manual directs users to separate official reproduction proofs, grids, larger color swatches and 3D production drawings. Those production originals are not supplied.
@@ -107,9 +108,9 @@ Detailed method and limits: `reference/bce-route-provenance.md` and `reference/b
 | H39 / PDF 39 / p. 38 | Identification signs | represented | Editable example represented | `sign-office-identification`, `sign-gas-identification`, `sign-horizontal-facility`, `sign-vertical-facility`, `illustrated-h39-office`, `illustrated-h39-gas`, `illustrated-h39-freight`, `illustrated-h39-plant` |
 | H40 / PDF 40 / p. 39 | Guide signs | represented | Editable example represented | `sign-guide`, `illustrated-h40-advisory`, `illustrated-h40-customer-service`, `illustrated-h40-shipping`, `illustrated-h40-directional` |
 | H41 / PDF 41 / p. 40 | Control signs | represented | Editable example represented | `sign-danger`, `illustrated-h41-danger`, `illustrated-h41-authorized-vehicles`, `illustrated-h41-employees-only` |
-| H42 / PDF 42 / p. 41 | Vehicles general | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white` |
-| H43 / PDF 43 / p. 42 | Vehicle positive/reverse background rules | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white`, `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
-| H44 / PDF 44 / p. 43 | Light vehicles | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white`, `illustrated-h44-van-side`, `illustrated-h44-van-rear`, `illustrated-h44-van-door` |
+| H42 / PDF 42 / p. 41 | Vehicles general | represented | Editable example represented | `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
+| H43 / PDF 43 / p. 42 | Vehicle positive/reverse background rules | represented | Editable example represented | `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
+| H44 / PDF 44 / p. 43 | Light vehicles | represented | Editable example represented | `illustrated-h44-van-side`, `illustrated-h44-van-rear`, `illustrated-h44-van-door` |
 | H45 / PDF 45 / p. 44 | Heavy trucks | represented | Editable example represented | `illustrated-h45-stepvan-rear`, `illustrated-h45-stepvan-side`, `illustrated-h45-roller-truck-rear` |
 | H46 / PDF 46 / p. 45 | Tractor trailers / mobile generators | represented | Editable example represented | `illustrated-h46-flatbed`, `illustrated-h46-cab-door`, `illustrated-h46-tractor-trailer` |
 | H47 / PDF 47 / p. 46 | Equipment | represented | Editable example represented | `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h47-crawler-front`, `illustrated-h47-seat-panel` |
@@ -716,7 +717,7 @@ Existing manual-page reconstruction notes:
 
 **Current coverage:** Editable example represented.
 
-- Broad and narrow spine examples are now present, with source rules and example dimensions distinguished.
+- Broad and narrow spines follow the binder shown: corporate blue with the signature and title reversed white. On the broad spine the title starts under the B, two cap-heights below the signature; on the narrow one it follows a cap-height after it. Spine thicknesses are example settings, not specified sizes.
 
 Source rules:
 
@@ -737,6 +738,8 @@ Existing manual-page reconstruction notes:
 ### H30 · PDF 30 · printed 29 — Newsletter mastheads
 
 **Current coverage:** Editable example represented.
+
+- Both mastheads are measured from the full-size example: a 61.6 mm signature with the title at its size, set tight, on a shared baseline; 12 mm between title lines; dateline 12 point, headline 27 point, columns 12 on 12. A longer typed title is set smaller to stay inside the band or rule.
 
 Source rules:
 
@@ -797,6 +800,8 @@ Existing manual-page reconstruction notes:
 
 **Current coverage:** Editable example represented.
 
+- The display advertisement is 6.57 × 8.82 in between 2.9 point rules, with 17-line columns (13 in the third, above the signature) ending 8 mm above the foot.
+
 Source rules:
 
 - Large display ad, single-column notice, classified tender example.
@@ -817,7 +822,8 @@ Existing manual-page reconstruction notes:
 
 **Current coverage:** Editable example represented.
 
-- Display, single-column and classified advertisement variants are represented.
+- The single-column advertisement is rebuilt to the measured example: 3.34 × 5.5 in between 2.9 point rules, a 73 mm measure, a 30 point headline, 11 on 11½ point copy with 18 point italic date subheads, and a 1.76 in signature flush left. Its copy is sample wording in the example’s structure.
+- The classified advertisement has the 14 point headline, 8½ on 10 point copy and the signature 3.3 mm above the foot, as measured.
 
 Source rules:
 
@@ -1194,7 +1200,7 @@ Layout rules are available. Original-scan comparison: Printed dimensions govern 
 
 B.C.Hydro / Illustrated cover. Measured cover layout.
 
-The cover grid and editable text are reconstructed. The tinted illustration area is a placeholder; the original drawing remains visible in the scan overlay.
+The cover grid and editable text are reconstructed. The dashed illustration area is a placeholder; the original drawing remains visible in the scan overlay.
 
 Layout rules are available. Original-scan comparison: Printed dimensions govern the editable layout. The scanned page has small registration and typesetting differences; TeX Gyre Termes substitutes for the original Times Roman.
 
@@ -1294,22 +1300,6 @@ Presence of an editable example does not establish exact fidelity to the origina
 
 No registered template scan is supplied.
 
-### vehicle-van-black
-
-B.C.Hydro / panel van, positive. Historical reconstruction.
-
-Presence of an editable example does not establish exact fidelity to the original page or to an official production master.
-
-No registered template scan is supplied.
-
-### vehicle-van-white
-
-B.C.Hydro / panel van, reverse. Historical reconstruction.
-
-Presence of an editable example does not establish exact fidelity to the original page or to an official production master.
-
-No registered template scan is supplied.
-
 ### form-tender
 
 B.C.Hydro / Form: Tender, legal. Historical reconstruction.
@@ -1394,7 +1384,7 @@ Layout rules are available. No registered template scan is supplied.
 
 B.C.Hydro / single-column advertisement. Rule-based reconstruction.
 
-Applies the single-column example’s hierarchy and signature placement. The original copy and newspaper column dimensions are not production specifications.
+Format, type sizes and positions are measured from the full-size example. The copy is sample wording in the example’s structure, not a production advertisement.
 
 No registered template scan is supplied.
 

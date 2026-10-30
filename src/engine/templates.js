@@ -24,12 +24,17 @@
 //               title pushes what follows it down
 //   motif       { x, y, width, height, colour, align?, id? }          the symbol fitted in a box
 //   symbol      { x, y, height, colour, id? }                         the symbol at a set height
-//   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor? }
+//   text        { id, text, x, y, size, colour, font?, weight?, tracking?, style?, anchor?, fitWidth? }
 //               or { compose: 'Phone: {telephone}', … }: a line built from other fields; it is left
 //               out when any field it names has been cleared
-//   lines       { x, y, leading, size, colour, font?, align?, anchor?, lines: [{ id, text, font?, style?, size? }] }
-//   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps? }
-//               one field, wrapped to `width` (and at any line break typed into it)
+//   lines       { x, y, leading, size, colour, font?, tracking?, align?, anchor?, fitWidth?, lines: [{ id, text, font?, style?, size?, alignLeft? }] }
+//               `fitWidth`: the type (and its tracking) shrinks, every line by one factor, until the
+//               longest line fits, so a longer typed title stays inside its panel; never enlarged.
+//               A line with `alignLeft: 'above'` starts where the line above it does
+//   paragraph   { id, text, x, y, width, size, leading?, maxLines?, colour, font?, caps?, align?, alignLast? }
+//               one field, wrapped to `width` (and at any line break typed into it); `align:
+//               'justify'` spaces each line out to the width but the last of each paragraph, and
+//               `alignLast: 'justify'` that one too (a column continued in the next)
 //   dots        { dots: [[cx, cy, r], …], fill, opacity?, id? }        a field of circles, as one path
 //   polyline    { points: [[x, y], …], stroke, strokeWidth?, opacity?, id? }
 //   pattern     { pattern: patternId, x, y, width, height, fit?: 'cover' | 'contain', id? }
@@ -41,11 +46,11 @@
 // paths for raster and PDF output.
 
 import { lockup, mark, pattern } from './artwork.js'
-import { illustrationFields, placeIllustration } from './illustrations.js'
+import { illustrationBounds, illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
 import { renderPrinterSvg } from '../printer/svg.js'
-import { layoutGuideElements } from './template-guides.js'
+import { layoutGuides } from './template-guides.js'
 
 const PT_TO_MM = 25.4 / 72
 const PX_PER_PT = 96 / 72
@@ -138,10 +143,23 @@ const textElement = (ctx, element, unit) => {
   const content = element.literal != null ? element.literal : textValue(ctx, element)
   const colourValue = resolveColour(brand, element.colour ?? 'ink')
   const tracking = toUnits(element.tracking ?? 0, unit)
+  // Extra space after each word, in template units: a justified line's (set from the left only).
+  const wordSpacing = element.wordSpacing ?? 0
   const transformed = element.caps ? content.toUpperCase() : content
   if (ctx.outline && fonts?.has(key)) {
     if (!transformed.trim()) return ''
-    const d = fonts.path(transformed, key, size, toUnits(element.x, unit), toUnits(element.y, unit), tracking / size, element.anchor ?? 'start')
+    const x = toUnits(element.x, unit)
+    const y = toUnits(element.y, unit)
+    let d
+    if (wordSpacing) {
+      // Word by word, each moved on by what live text's word-spacing and letter-spacing add.
+      let cursor = x
+      d = transformed.split(' ').map((word) => {
+        const part = word ? fonts.path(word, key, size, cursor, y, tracking / size) : ''
+        cursor += measure(ctx, `${word} `, key, size, tracking / size) + tracking + wordSpacing
+        return part
+      }).join('')
+    } else d = fonts.path(transformed, key, size, x, y, tracking / size, element.anchor ?? 'start')
     return `<path${element.id ? ` id="${escape(element.id)}"` : ''} aria-label="${escape(transformed)}" fill="${colourValue}" d="${d}"/>`
   }
   const weight = element.weight ?? face.weight ?? 400
@@ -149,12 +167,65 @@ const textElement = (ctx, element, unit) => {
   return `<text${element.id ? ` id="${escape(element.id)}"` : ''} x="${n6(toUnits(element.x, unit))}" y="${n6(toUnits(element.y, unit))}" `
     + `font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" `
     + `font-size="${n6(size)}" font-weight="${weight}"${style && style !== 'normal' ? ` font-style="${style}"` : ''} `
-    + `letter-spacing="${n6(tracking)}"${element.anchor && element.anchor !== 'start' ? ` text-anchor="${element.anchor}"` : ''} fill="${colourValue}">`
+    + `letter-spacing="${n6(tracking)}"${wordSpacing ? ` word-spacing="${n6(wordSpacing)}"` : ''}${element.anchor && element.anchor !== 'start' ? ` text-anchor="${element.anchor}"` : ''} fill="${colourValue}">`
     + `${escape(transformed)}</text>`
 }
 
-/** The complete horizontal lockup, scaled so its visible artwork is `width` wide at (x, y). */
-export const placeLogo = (ctx, { x, y, width, height, points, anchorX, anchorY, rotate, colour, family, layout = 'horizontal', signature, colourway, values, id = 'brand-logo', align = 'start' }) => {
+/**
+ * Type shrunk to an element's `fitWidth`: one factor for every row given (`{ text, font, size,
+ * tracking }`, in template units), so a block keeps its proportions and a longer typed title stays
+ * inside its panel instead of running past it. Never enlarges.
+ */
+const fitFactor = (ctx, element, rows, unit) => {
+  if (element.fitWidth == null || !rows.length) return 1
+  const widest = Math.max(...rows.map((row) => measure(ctx, row.text, row.font ?? 'body', row.size, (row.tracking ?? 0) / row.size)))
+  const limit = toUnits(element.fitWidth, unit)
+  return widest > limit ? limit / widest : 1
+}
+
+/** A `text` element with its size and tracking in template units, shrunk to its `fitWidth`. */
+const fitText = (ctx, element, unit) => {
+  const content = textValue(ctx, element)
+  const size = toUnits(element.size, unit)
+  const tracking = toUnits(element.tracking ?? 0, unit)
+  const factor = fitFactor(ctx, element, [{ text: element.caps ? content.toUpperCase() : content, font: element.font, size, tracking }], unit)
+  return { ...element, size: size * factor, tracking: tracking * factor }
+}
+
+/**
+ * A `lines` block's visible rows, each with its text, baseline, size and tracking as drawn: empty
+ * lines close up (unless `collapse` is false), and the rows shrink together to `fitWidth`.
+ */
+const layoutLines = (ctx, element, unit) => {
+  const u = (value) => toUnits(value, unit)
+  const leading = u(element.leading ?? element.size)
+  const rows = element.lines
+    .map((line) => ({ font: element.font, colour: element.colour, size: element.size, anchor: element.anchor, tracking: element.tracking, ...line, x: line.x ?? element.x }))
+    .map((line) => ({ ...line, literal: textValue(ctx, line) }))
+    .filter((line) => element.collapse === false || line.literal.trim())
+    .map((line) => ({ ...line, literal: line.caps ? line.literal.toUpperCase() : line.literal, caps: false, size: u(line.size), tracking: u(line.tracking ?? 0) }))
+  // With align 'bottom', y is the last line's baseline and the block grows upward, as an address
+  // block set from the foot of a card does.
+  const top = element.align === 'bottom' ? u(element.y) - (rows.length - 1) * leading : u(element.y)
+  const factor = fitFactor(ctx, element, rows.map((row) => ({ ...row, text: row.literal })), unit)
+  const placed = rows.map((row, index) => ({ ...row, y: top + index * leading, size: row.size * factor, tracking: row.tracking * factor }))
+  // A line with `alignLeft: 'above'` starts where the line above it starts, however long that one
+  // is: "Local 123" under a telephone number set flush right to the symbol.
+  placed.forEach((row, index) => {
+    const above = placed[index - 1]
+    if (row.alignLeft !== 'above' || !above) return
+    const width = measure(ctx, above.literal, above.font ?? 'body', above.size, above.tracking / above.size)
+    const x = u(above.x)
+    Object.assign(row, { x: above.anchor === 'end' ? x - width : above.anchor === 'middle' ? x - width / 2 : x, anchor: 'start' })
+  })
+  return placed
+}
+
+/**
+ * Where a lockup goes: its scale and the offsets from (x, y) that put its visible artwork, or its
+ * logotype and baseline, there. Shared by drawing it and by measuring it for layout rules.
+ */
+const logoPlacement = (ctx, { width, height, points, anchorX, anchorY, colour, family, layout = 'horizontal', signature, colourway, values, align = 'start' }) => {
   const { brand } = ctx
   // `values` override the template's fields for this signature alone (a cover's signature
   // without its ministry, say).
@@ -173,11 +244,32 @@ export const placeLogo = (ctx, { x, y, width, height, points, anchorX, anchorY, 
   const dx = anchorX === 'logotype' && metrics ? -(master.origin.x + metrics.logotypeX) * scale : anchorX === 'end' ? -(master.width - padding) * scale : -padding * scale
   const dy = anchorY === 'baseline' && metrics ? -(master.origin.y + metrics.baseline) * scale
     : anchorY === 'cap' && metrics ? -(master.origin.y + metrics.baseline - metrics.capHeight) * scale : -padding * scale
-  const label = fill(brand, brand.copy?.logoLabel ?? '{name} logo')
+  return { master, padding, metrics, scale, offset, dx, dy }
+}
+
+/** The complete horizontal lockup, scaled so its visible artwork is `width` wide at (x, y). */
+export const placeLogo = (ctx, options) => {
+  const { x, y, rotate, id = 'brand-logo' } = options
+  const { master, scale, offset, dx, dy } = logoPlacement(ctx, options)
+  const label = fill(ctx.brand, ctx.brand.copy?.logoLabel ?? '{name} logo')
   const transform = rotate
     ? `translate(${n6(x)} ${n6(y)}) rotate(${rotate}) translate(${n6(offset + dx)} ${n6(dy)}) scale(${n6(scale)})`
     : `translate(${n6(x + offset + dx)} ${n6(y + dy)}) scale(${n6(scale)})`
   return `<g id="${escape(id)}" aria-label="${escape(label)}" transform="${transform}">${scopeIds(master.art, id)}</g>`
+}
+
+/** A placed lockup's visible extent, with its baseline, cap line and logotype edge where known. */
+const logoBounds = (ctx, options) => {
+  if (options.rotate) return undefined
+  const { master, padding, metrics, scale, offset, dx, dy } = logoPlacement(ctx, options)
+  const left = options.x + offset + dx
+  const top = options.y + dy
+  const box = { left: left + padding * scale, top: top + padding * scale, right: left + (master.width - padding) * scale, bottom: top + (master.height - padding) * scale }
+  if (metrics) {
+    const baseline = top + (master.origin.y + metrics.baseline) * scale
+    Object.assign(box, { baseline, cap: baseline - metrics.capHeight * scale, logotype: left + (master.origin.x + metrics.logotypeX) * scale })
+  }
+  return box
 }
 
 const placeMotif = (ctx, x, y, width, colour, id) => {
@@ -220,18 +312,89 @@ export const layoutFlow = (ctx, element, unit = 'px') => {
     baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
     const firstBaseline = baseline
     const x = u(item.x ?? element.x)
+    const rows = []
     lines.forEach((line, index) => {
       if (index > 0) baseline += u(item.leading ?? item.size)
       elements.push({ ...element, ...item, font: key, id: lines.length > 1 ? `${item.id}-${index + 1}` : item.id, literal: line, x, y: baseline, size, tracking: u(item.tracking ?? 0) })
+      rows.push({ baseline, left: x, right: x + measure(ctx, line, key, size) })
     })
     if (item.id) bounds.set(item.id, {
       firstBaseline, lastBaseline: baseline,
       top: firstBaseline - (ctx.brand.fonts?.[key]?.capHeight ?? 0.7) * size,
       bottom: baseline, left: x,
-      right: x + Math.max(...lines.map((line) => measure(ctx, line, key, size)))
+      right: Math.max(...rows.map((row) => row.right)),
+      rows
     })
   }
   return { elements, bounds }
+}
+
+/** One line's extent: x by its anchor, y from its cap line to its baseline. */
+const lineBox = (ctx, text, key, size, x, y, anchor, tracking = 0) => {
+  const width = measure(ctx, text, key, size, tracking / size)
+  const left = anchor === 'end' ? x - width : anchor === 'middle' ? x - width / 2 : x
+  return { left, right: left + width, top: y - (ctx.brand.fonts?.[key]?.capHeight ?? 0.7) * size, bottom: y, baseline: y }
+}
+
+const KEYS = { logo: 'brand-logo', motif: 'brand-motif', symbol: 'brand-symbol' }
+
+/**
+ * Where a template's parts actually fall, for layout rules to measure: elements by id (a logo
+ * without one by its SVG id, 'brand-logo'), flow items, and an illustration's zones and lettering.
+ * Text that has been emptied measures null.
+ */
+export const measureTemplate = (ctx, template) => {
+  const unit = template.unit ?? 'px'
+  const u = (value) => toUnits(value, unit)
+  const elements = new Map()
+  const flows = new Map()
+  let zones = new Map()
+  let lettering = []
+  const set = (key, box) => { if (key != null && !elements.has(key)) elements.set(key, box) }
+  for (const element of template.elements) {
+    const key = element.id ?? KEYS[element.type]
+    switch (element.type) {
+      case 'logo':
+        set(key, placeLogoBounds(ctx, element, u))
+        break
+      case 'text': {
+        const content = textValue(ctx, element)
+        const value = element.caps ? content.toUpperCase() : content
+        const fitted = fitText(ctx, element, unit)
+        set(key, value.trim() ? lineBox(ctx, value, element.font ?? 'body', fitted.size, u(element.x), u(element.y), element.anchor, fitted.tracking) : null)
+        break
+      }
+      case 'lines': {
+        const rows = layoutLines(ctx, element, unit)
+        if (!rows.length) { set(key, null); break }
+        const boxes = rows.map((row) => lineBox(ctx, row.literal, row.font ?? 'body', row.size, u(row.x), row.y, row.anchor, row.tracking))
+        set(key, { left: Math.min(...boxes.map((box) => box.left)), right: Math.max(...boxes.map((box) => box.right)), top: boxes[0].top, bottom: boxes.at(-1).bottom, firstBaseline: boxes[0].baseline, lastBaseline: boxes.at(-1).baseline, rows: boxes })
+        break
+      }
+      case 'flow':
+        for (const [id, box] of layoutFlow(ctx, element, unit).bounds) flows.set(id, box)
+        break
+      case 'illustration': {
+        const placed = illustrationBounds(ctx, element, u)
+        if (!zones.size) zones = placed.zones
+        if (!lettering.length) lettering = placed.lettering
+        set(key, placed.drawing)
+        break
+      }
+      case 'rect': case 'motif': case 'pattern':
+        set(key, { left: u(element.x), top: u(element.y), right: u(element.x) + u(element.width), bottom: u(element.y) + u(element.height) })
+        break
+    }
+  }
+  return { elements, flows, zones, lettering }
+}
+
+const placeLogoBounds = (ctx, element, u) => logoBounds(ctx, { ...element, x: u(element.x), y: u(element.y), width: element.width == null ? undefined : u(element.width), height: element.height == null ? undefined : u(element.height), points: element.points == null ? undefined : u(`${element.points}pt`) })
+
+/** Scales a physical size ("3.5in", "612pt", 1600) by a factor, keeping its unit. */
+const scalePhysical = (value, factor) => {
+  const match = /^([\d.]+)(\D*)$/.exec(String(value))
+  return match ? `${n6(Number(match[1]) * factor)}${match[2]}` : value
 }
 
 const renderElement = (ctx, element, template) => {
@@ -272,33 +435,27 @@ const renderElement = (ctx, element, template) => {
       return placeMotif(ctx, u(element.x), u(element.y), height * symbolWidth / symbolHeight, resolveColour(brand, element.colour ?? 'ink'), element.id ?? 'brand-symbol')
     }
     case 'text':
-      return textElement(ctx, element, unit)
-    case 'lines': {
-      const leading = u(element.leading ?? element.size)
-      // With align 'bottom', y is the last line's baseline and the block grows upward, as an
-      // address block set from the foot of a card does.
-      const visible = element.lines.filter((line) => element.collapse === false || textValue(ctx, { ...element, ...line }).trim())
-      const top = element.align === 'bottom' ? u(element.y) - (visible.length - 1) * leading : u(element.y)
-      let row = 0
-      const out = []
-      for (const line of element.lines) {
-        const merged = { font: element.font, colour: element.colour, size: element.size, anchor: element.anchor, ...line, x: line.x ?? element.x, y: top + row * leading }
-        const text = textValue(ctx, merged)
-        if (!text.trim() && element.collapse !== false) continue
-        out.push(textElement(ctx, merged, unit))
-        row += 1
-      }
-      return out.filter(Boolean).join('\n')
-    }
+      return textElement(ctx, fitText(ctx, element, unit), unit)
+    case 'lines':
+      return layoutLines(ctx, element, unit).map((row) => textElement(ctx, row, unit)).filter(Boolean).join('\n')
     case 'paragraph': {
       const size = u(element.size)
       const leading = u(element.leading ?? size * 1.2)
       const key = element.font ?? 'body'
       const tracking = u(element.tracking ?? 0) / size
+      const width = u(element.width)
       const value = textValue(ctx, element)
-      const lines = wrapLines(element.caps ? value.toUpperCase() : value, u(element.width), (line) => measure(ctx, line, key, size, tracking), { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) })
+      const fits = (line) => measure(ctx, line, key, size, tracking)
+      // Wrapped paragraph by paragraph, so a justified one knows which line ends it.
+      const lines = String(element.caps ? value.toUpperCase() : value).split('\n')
+        .flatMap((block) => wrapLines(block, width, fits, { breakWords: Boolean(brand.organization && ['department', 'subdepartment'].includes(element.id)) }).map((line, index, all) => ({ line, last: index === all.length - 1 })))
         .slice(0, element.maxLines ?? Infinity)
-      return lines.map((line, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0) }, unit) : ''))
+      const justify = (line, last) => {
+        const gaps = line.trim().split(/\s+/).length - 1
+        if (element.align !== 'justify' || (last && element.alignLast !== 'justify') || !gaps) return 0
+        return Math.max(0, (width - fits(line)) / gaps)
+      }
+      return lines.map(({ line, last }, index) => (line.trim() ? textElement(ctx, { ...element, id: `${element.id}-${index + 1}`, literal: line, x: u(element.x), y: u(element.y) + index * leading, size, tracking: u(element.tracking ?? 0), wordSpacing: justify(line, last) }, unit) : ''))
         .filter(Boolean).join('\n')
     }
     case 'flow': {
@@ -321,6 +478,8 @@ const renderElement = (ctx, element, template) => {
  *
  * @param {object} ctx  `{ brand, fonts?, values?, outline?, showGuides?, showLayoutGuides? }`
  * @param {object} template
+ * @returns {{ svg, width, height, unit, physical, frame? }}  `frame` is the margin added on each
+ *   side for layout rules, in template units, when they are shown.
  */
 export const renderTemplate = (ctx, template) => {
   if (template.svg && template.printer) return renderPrinterSvg(ctx, template)
@@ -341,22 +500,34 @@ export const renderTemplate = (ctx, template) => {
   const title = fill(brand, template.title ?? `{name} / ${template.id}`)
   const desc = fill(brand, template.description ?? brand.copy?.templateDescription ?? '{name} application. Text is live and editable.')
   const body = template.elements.map((element) => renderElement(ctx, element, template)).filter((part) => part !== '')
+  // Layout rules are drawn outside the trim, as a manual's construction drawing is. Shown, the
+  // canvas grows by the margin they need; hidden (every standard export), it stays the trim and
+  // the layer stays a switched-off group.
+  let frame
   if (template.guides?.elements?.length) {
-    const bounds = new Map(template.elements.filter((element) => element.type === 'flow').flatMap((element) => [...layoutFlow(ctx, element, unit).bounds]))
-    const annotations = layoutGuideElements(template.guides, bounds).map((element) => renderElement(ctx, element, template)).filter(Boolean).join('\n')
+    const font = brand.fonts?.italic ? 'italic' : 'body'
+    const layout = layoutGuides(template.guides, { width: template.width, height: template.height, ...measureTemplate(ctx, template), font, measure: (text, size) => measure(ctx, text, font, size) })
+    const annotations = layout.annotations.map((annotation) => {
+      const parts = annotation.parts.map((part) => renderElement(ctx, part, template)).filter(Boolean).join('')
+      return `<g data-layout-guide="${annotation.type}"${annotation.id ? ` id="${escape(annotation.id)}"` : ''}${annotation.label ? ` aria-label="${escape(annotation.label.replace(/\s*\n\s*/g, ' '))}"` : ''}>${parts}</g>`
+    }).join('\n')
     body.push(`<g id="layout-guides" display="${ctx.showLayoutGuides ? 'inline' : 'none'}" aria-label="${escape(template.guides.title ?? 'Layout rules')}">\n${scopeIds(annotations, 'layout-guide')}\n</g>`)
+    if (ctx.showLayoutGuides) frame = layout.frame
   }
+  const { left = 0, top = 0, right = 0, bottom = 0 } = frame ?? {}
+  const viewWidth = template.width + left + right
+  const viewHeight = template.height + top + bottom
   const svg = '<?xml version="1.0" encoding="UTF-8"?>\n'
     + '<svg xmlns="http://www.w3.org/2000/svg" '
-    + `width="${physical[0]}" height="${physical[1]}" `
-    + `viewBox="0 0 ${n6(template.width)} ${n6(template.height)}" `
+    + `width="${frame ? scalePhysical(physical[0], viewWidth / template.width) : physical[0]}" height="${frame ? scalePhysical(physical[1], viewHeight / template.height) : physical[1]}" `
+    + `viewBox="${n6(-left)} ${n6(-top)} ${n6(viewWidth)} ${n6(viewHeight)}" `
     + 'role="img" aria-labelledby="template-title template-description" '
     + `data-brand-version="${escape(brand.version ?? '')}" overflow="hidden">\n`
     + `<title id="template-title">${escape(title)}</title>\n`
     + `<desc id="template-description">${escape(desc)}</desc>\n`
     + body.join('\n')
     + '\n</svg>\n'
-  return { svg, width: template.width, height: template.height, unit, physical }
+  return { svg, width: template.width, height: template.height, unit, physical, ...(frame ? { frame } : {}) }
 }
 
 /** The editable fields a template exposes, in the order they appear. Pass the brand for its labels. */

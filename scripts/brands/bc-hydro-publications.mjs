@@ -20,12 +20,16 @@ export const additionalPublications = (art) => {
     elements: [paper, text('printing-code', '83-12 · 1000', width - inch(0.5), height - inch(0.5), '6pt', { anchor: 'end', font: 'body', colour: 'ink' })]
   })
 
+  // H29's binder: corporate blue with the signature and title reversed white, set tight. On a
+  // broad spine the title's baseline is 2 cap-heights under the signature's and the pair is
+  // centred across the spine (from the signature's cap line to the title's baseline); on a narrow
+  // one the title follows a cap-height after the signature.
   const spine = (narrow) => {
     const size = narrow ? 24 : 36
     const width = inch(11)
     const height = inch(narrow ? 0.75 : 2)
     const start = inch(11) / 4
-    const base = narrow ? (height + cap(size)) / 2 : inch(0.35) + cap(size)
+    const base = narrow ? (height + cap(size)) / 2 : (height - 3 * cap(size)) / 2 + cap(size)
     return {
       id: `spine-${narrow ? 'narrow' : 'broad'}`, label: `${narrow ? 'Narrow' : 'Broad'} publication spine`, group: 'Publications', unit: 'mm', width, height,
       physical: ['11in', narrow ? '0.75in' : '2in'], raster: 1800,
@@ -33,9 +37,46 @@ export const additionalPublications = (art) => {
       description: `Graphic Standards Manual p. 28: read left to right with the publication lying on its back. Signature precedes title; ${narrow ? 'both occupy one line, with a reduced typesize to fit' : 'signature and title occupy separate lines, at the cover’s 36 point size; title aligns under the B'}. This is a flat spine strip; its ${narrow ? '¾ inch' : '2 inch'} thickness is an example, not a prescribed binder size.`,
       fidelity: reconstruction('The reading direction and signature/title relationship follow the manual. Spine thickness and the narrow-spine 24 point size are example settings. Confirm the actual binding before printing.'),
       elements: [
-        { type: 'background', fill: 'ink' },
+        { type: 'background', fill: 'primary' },
         { type: 'logo', signature: 'standard', colourway: 'white', points: size, x: start, y: base, anchorY: 'baseline' },
-        text('spine-title', 'Training in Basic Supervision', narrow ? start + widthAt(size) + inch(0.18) : start + logotypeOffset(size), narrow ? base : base + cap(size) + pt(size), `${size}pt`, { font: 'body', colour: 'reverse' })
+        text('spine-title', 'Training in Basic Supervision', narrow ? start + widthAt(size) + cap(size) : start + logotypeOffset(size), narrow ? base : base + 2 * cap(size), `${size}pt`, { font: 'body', colour: 'reverse', tracking: `${-0.04 * size}pt`, fitWidth: round(width - (narrow ? start + widthAt(size) + cap(size) : start + logotypeOffset(size)) - inch(0.5)) })
+      ]
+    }
+  }
+
+  // H34 Example 2, measured at full size: 3.34 × 5.5 in between the outer edges of 1 mm (2.9
+  // point) rules; a 73 mm measure 5.6 mm in; a 30 point headline on 31 point, set tight; 11 on
+  // 11½ point copy with 18 point italic date subheads; the signature 1.76 in wide, flush left
+  // with the copy, its baseline 5.8 mm above the foot.
+  const singleColumn = () => {
+    const width = inch(3.34)
+    const height = inch(5.5)
+    const left = 5.6
+    const measure = 73
+    // Line limits keep the longest copy clear of the signature: 3 lines of introduction, a line
+    // for each subhead and 6 for each paragraph, as in the example.
+    const body = (id, value, gap, maxLines = 6) => ({ id, text: value, size: '11pt', leading: pt(11.5), gap, wrap: measure, maxLines })
+    const subhead = (id, value) => ({ id, text: value, size: '18pt', font: 'italic', leading: pt(18), gap: 8.3, wrap: measure, maxLines: 1 })
+    return {
+      id: 'advert-single-column', label: 'Advertisement, single column', group: 'Advertising', unit: 'mm', width, height, physical: ['3.34in', '5.5in'], raster: 800,
+      title: 'B.C.Hydro / single-column advertisement',
+      description: 'Graphic Standards Manual p. 33, Example 2: a single-column advertisement between heavy rules: the headline in upper and lower case, the copy with italic subheads (the manual’s choice for emphasis), and the positive signature flush left as the final element.',
+      fidelity: reconstruction('Format, type sizes and positions are measured from the full-size example. The copy is sample wording in the example’s structure, not a production advertisement.'),
+      elements: [paper,
+        line(0, pt(1.45), width, pt(1.45), '2.9pt'),
+        {
+          type: 'flow', x: left, y: 15.3, font: 'body', colour: 'ink',
+          items: [
+            { id: 'single-ad-headline', text: 'Brief power\ninterruptions in\nthe Hope area', size: '30pt', leading: pt(31), tracking: '-1.5pt', wrap: measure, maxLines: 4 },
+            body('single-ad-intro', 'Power will be off for short periods in parts of the Hope area while crews replace equipment on the lines that serve it.', 9.5, 3),
+            subhead('single-ad-subhead-1', 'Tuesday, August 16'),
+            body('single-ad-copy-1', 'Between 9 am and noon, power to [streets affected] will be interrupted for up to fifteen minutes at a time. Please switch off sensitive equipment before the work begins. Replace this sample wording with the notice’s own details before use.', 5.3),
+            subhead('single-ad-subhead-2', 'Saturday, August 20'),
+            body('single-ad-copy-2', 'Between 1 pm and 4 pm, power to [streets affected] will be interrupted for short periods while the work is completed. If the work is postponed, the new date will be announced here. For information, call [telephone].', 5.3)
+          ]
+        },
+        { type: 'logo', signature: 'standard', colourway: 'black', x: left, y: round(height - 5.8), width: inch(1.76), anchorY: 'baseline' },
+        line(0, height - pt(1.45), width, height - pt(1.45), '2.9pt')
       ]
     }
   }
@@ -64,19 +105,7 @@ export const additionalPublications = (art) => {
       fidelity: reconstruction('The half-cap border is measured from the visible complete signature, including the ring and descenders. Overall panel size is an example. Three-dimensional work still requires the official large-scale drawings.'),
       elements: [paper, { type: 'logo', signature: 'standard', colourway: 'corporate', points: 96, x: cap(96) / 2, y: cap(96) / 2 }]
     },
-    {
-      id: 'advert-single-column', label: 'Advertisement, single column', group: 'Advertising', unit: 'mm', width: inch(2.15), height: inch(6), physical: ['2.15in', '6in'], raster: 800,
-      title: 'B.C.Hydro / single-column advertisement',
-      description: 'Graphic Standards Manual p. 33: a single-column advertisement with rules, a headline in upper and lower case, body copy and the positive signature as the final element. The example canvas and copy are reconstructed; the source does not specify a universal column width.',
-      fidelity: reconstruction('Applies the single-column example’s hierarchy and signature placement. The original copy and newspaper column dimensions are not production specifications.'),
-      elements: [paper,
-        line(0, pt(0.6), inch(2.15), pt(0.6), '1.2pt'),
-        para('single-ad-headline', 'Overhead lines\nand your safety', inch(0.08), inch(0.3), inch(1.99), 18, 19),
-        para('single-ad-copy', 'Before starting work near overhead electrical lines, find out what precautions are required.\n\nPlan the work so that people, vehicles and equipment remain clear. Contact B.C.Hydro for information before beginning.\n\nThis specimen demonstrates the historic advertising layout. Replace this sample wording with reviewed, applicable copy before use.', inch(0.08), inch(1.15), inch(1.99), 10, 12),
-        { type: 'logo', signature: 'standard', colourway: 'black', x: inch(0.25), y: inch(5.65), width: inch(1.65), anchorY: 'baseline' },
-        line(0, inch(6) - pt(0.6), inch(2.15), inch(6) - pt(0.6), '1.2pt')
-      ]
-    }
+    singleColumn()
   ]
 }
 

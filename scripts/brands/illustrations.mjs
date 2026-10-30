@@ -68,7 +68,7 @@ const sign = (id, folder, revision) => {
     return {
       text: unescapeXml(text), x: Number(attr(tag, 'x')), y: Number(attr(tag, 'y')), size: Number(attr(tag, 'font-size')),
       bold: attr(tag, 'data-bold') === 'true' || Number(attr(tag, 'font-weight')) >= 600, family: attr(tag, 'data-font-family') ?? 'sans',
-      anchor: attr(tag, 'text-anchor') ?? 'start', fill: attr(tag, 'fill') ?? '#000', ...(attr(tag, 'textLength') ? { width: Number(attr(tag, 'textLength')) } : {})
+      anchor: attr(tag, 'text-anchor') ?? 'start', fill: attr(tag, 'fill') ?? '#000', ...(attr(tag, 'textLength') ? { width: Number(attr(tag, 'textLength')), ...(attr(tag, 'lengthAdjust') === 'spacing' ? { adjust: 'spacing' } : {}) } : {})
     }
   })
   const drawing = [layerOf(svg, 'object'), layerOf(svg, 'printed-rules'), content.replace(/<text\b[^>]*>[^<]*<\/text>/g, ''), zone ? '' : identity].join('')
@@ -145,7 +145,8 @@ const hydroZone = (zone, id) => {
     case 'hydro': return { signature: 'standard' }
     case 'hydro-gas': return { signature: id.startsWith('H44-') ? 'gas' : 'standard' }
     case 'hydro-rail': return { signature: 'rail' }
-    case 'caption': return { text: zone.default, font: 'body', leading: 1.05, fill: 0.9 }
+    // H47: the generator's safety wording is flush left, under the signature's symbol.
+    case 'caption': return { text: zone.default, font: 'body', leading: 1.05, fill: 0.9, align: 'start' }
     case 'sign-identity': return { signature: 'standard', inset: 0 }
     default: return null
   }

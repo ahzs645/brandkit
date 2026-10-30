@@ -12,7 +12,7 @@
     "edition": "June 1983"
   },
   "baselineCommit": "e470434",
-  "brandDefinitionSha256": "63ee23dd6c43492064e0ff6b9106679d9a89ac3592e321ae4dcd0d7f05154e90",
+  "brandDefinitionSha256": "fa098cc6cbb413af98aa58d33a8643f550bb112a4b47cc5626cc52058850de6f",
   "baselinePreviewsAvailable": true,
   "previewComparison": {
     "method": "svg-dom-clean-preview-v1",
@@ -21,16 +21,17 @@
   "counts": {
     "sourcePages": 48,
     "rebuiltPages": 48,
-    "editableTemplates": 65,
+    "editableTemplates": 63,
     "templatesWithLayoutRules": 47,
     "templatesWithRegisteredScans": 6,
     "newTemplates": 11,
-    "updatedPreviews": 4,
+    "updatedPreviews": 19,
     "applicationGaps": 0
   },
   "limitations": [
     "The four signature masters remain PofBC reconstructions; Times Roman is represented by TeX Gyre Termes and screen colours approximate the specified inks.",
-    "The illustrated cover still needs its original high-quality illustration. The tinted panel is marked as a placeholder.",
+    "A signature sized in points has the cap height of that size of Termes (0.662 em), so it matches its title as the manual asks. The printed examples’ Times has capitals about 12% taller at the same nominal size, so their signatures are about 15% wider (a 20 point signature is 34 mm on H20 and H23, 29.6 mm here; 36 point, 61 mm on H26 against 53 mm).",
+    "The illustrated cover still needs its original high-quality illustration. Its area is a dashed, labelled placeholder.",
     "Undimensioned form trims, spine thicknesses and example canvases are identified as reconstruction choices. Three-dimensional signs still require the official large-scale drawings.",
     "Scans are slightly skewed/scaled; written measurements take precedence over raw page pixels.",
     "The manual directs users to separate official reproduction proofs, grids, larger color swatches and 3D production drawings. Those production originals are not supplied.",
@@ -1291,7 +1292,7 @@
         "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading."
       ],
       "currentFindings": [
-        "Broad and narrow spine examples are now present, with source rules and example dimensions distinguished."
+        "Broad and narrow spines follow the binder shown: corporate blue with the signature and title reversed white. On the broad spine the title starts under the B, two cap-heights below the signature; on the narrow one it follows a cap-height after it. Spine thicknesses are example settings, not specified sizes."
       ],
       "sourceRules": [
         "Read left-to-right with book lying on back. Signature before title.",
@@ -1336,7 +1337,9 @@
         "Tables, specimen artwork and technical drawings outside the declared prose regions still have material source differences; see the per-page overlay review.",
         "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading."
       ],
-      "currentFindings": [],
+      "currentFindings": [
+        "Both mastheads are measured from the full-size example: a 61.6 mm signature with the title at its size, set tight, on a shared baseline; 12 mm between title lines; dateline 12 point, headline 27 point, columns 12 on 12. A longer typed title is set smaller to stay inside the band or rule."
+      ],
       "sourceRules": [
         "Letter preferred; horizontal top masthead; signature left/title right at equal type size.",
         "Date/issue/contact below as part of masthead.",
@@ -1457,7 +1460,9 @@
         "Tables, specimen artwork and technical drawings outside the declared prose regions still have material source differences; see the per-page overlay review.",
         "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading."
       ],
-      "currentFindings": [],
+      "currentFindings": [
+        "The display advertisement is 6.57 × 8.82 in between 2.9 point rules, with 17-line columns (13 in the third, above the signature) ending 8 mm above the foot."
+      ],
       "sourceRules": [
         "Large display ad, single-column notice, classified tender example.",
         "Signature positive at base/final element; minimum widths enforced.",
@@ -1497,7 +1502,8 @@
         "Registered source text is OCR-derived; dense copy and subtle punctuation still require proofreading."
       ],
       "currentFindings": [
-        "Display, single-column and classified advertisement variants are represented."
+        "The single-column advertisement is rebuilt to the measured example: 3.34 × 5.5 in between 2.9 point rules, a 73 mm measure, a 30 point headline, 11 on 11½ point copy with 18 point italic date subheads, and a 1.76 in signature flush left. Its copy is sample wording in the example’s structure.",
+        "The classified advertisement has the 14 point headline, 8½ on 10 point copy and the signature 3.3 mm above the foot, as measured."
       ],
       "sourceRules": [
         "Large display ad, single-column notice, classified tender example.",
@@ -1855,8 +1861,21 @@
       "currentStatus": "editable-example",
       "currentStatusLabel": "Editable example represented",
       "currentTemplates": [
-        "vehicle-van-black",
-        "vehicle-van-white"
+        "illustrated-h48-boxcar",
+        "illustrated-h47-generator",
+        "illustrated-h47-crawler-side",
+        "illustrated-h48-locomotive",
+        "illustrated-h47-crawler-front",
+        "illustrated-h44-van-side",
+        "illustrated-h45-stepvan-rear",
+        "illustrated-h44-van-rear",
+        "illustrated-h44-van-door",
+        "illustrated-h47-seat-panel",
+        "illustrated-h46-flatbed",
+        "illustrated-h45-stepvan-side",
+        "illustrated-h46-cab-door",
+        "illustrated-h45-roller-truck-rear",
+        "illustrated-h46-tractor-trailer"
       ],
       "currentGuides": [
         "Applications"
@@ -1913,8 +1932,6 @@
       "currentStatus": "editable-example",
       "currentStatusLabel": "Editable example represented",
       "currentTemplates": [
-        "vehicle-van-black",
-        "vehicle-van-white",
         "illustrated-h48-boxcar",
         "illustrated-h47-generator",
         "illustrated-h47-crawler-side",
@@ -1974,8 +1991,6 @@
       "currentStatus": "editable-example",
       "currentStatusLabel": "Editable example represented",
       "currentTemplates": [
-        "vehicle-van-black",
-        "vehicle-van-white",
         "illustrated-h44-van-side",
         "illustrated-h44-van-rear",
         "illustrated-h44-van-door"
@@ -2185,10 +2200,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "d2e17b50271ebf6fb58fd5dcdaf2621780f94a021e4e741820ff67dbfb2f2fe0",
+      "change": "updated-preview",
+      "currentSvgSha256": "d6e3540ad04d8d678b09d1d6929884e24d7301fd96e2f55c694d5c0eae395a47",
       "baselineSvgSha256": "59a1b544e72a3ced0da1ffc812a9f312df0ab7ced478202acfb57adeb5b23935",
-      "currentCleanPreviewSha256": "e528431bd58a014bd536d6d26c58e908df9f85381b151826a76d20fa8b7fabec",
+      "currentCleanPreviewSha256": "632c652ddbdcdf66d7ca06ba840a2d57268d48bc42a42eca78e3847691e6349f",
       "baselineCleanPreviewSha256": "e528431bd58a014bd536d6d26c58e908df9f85381b151826a76d20fa8b7fabec"
     },
     {
@@ -2219,7 +2234,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "1abff2440ed6af842594019db4eddf170ae35cc9e04fb8eafe64fbb9b6e83615",
+      "currentSvgSha256": "738732728d9054ce49e90d0506623d8d33fd40423be1e3c4c14d048d1005c53c",
       "baselineSvgSha256": "d799154d1c11f110cf0b15556a37e4b55827b8bd31e235e598b382fa72e4077b",
       "currentCleanPreviewSha256": "96063b29baa7283ab9d1bc9326281d18ac085c781b1ebbe069a3509b0dc9cc9d",
       "baselineCleanPreviewSha256": "96063b29baa7283ab9d1bc9326281d18ac085c781b1ebbe069a3509b0dc9cc9d"
@@ -2252,7 +2267,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "5e0e3b9ad788fc30104fbbf368b1316c92b1f06fa1ebea9e43bb2be250d971e6",
+      "currentSvgSha256": "11c050b090fe151a82db5f83f22414444810f30314fa6933f937f764dc0f63fe",
       "baselineSvgSha256": "49ea936a62d99abf154209ba85231f2b83d059bb12f4788c49732dc8dbe72fed",
       "currentCleanPreviewSha256": "608a35d6c1396f66c3249001c3018e5c41418a5e04f62d36facd5f2fa1b1c7ed",
       "baselineCleanPreviewSha256": "3e2e9cea5dc217e14596e092429122149b0aaafd3c299877ab0b090c7f36bae5"
@@ -2285,7 +2300,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "7ea142e804fd97227ca320d64cb222087cad9ecc525d94d4e0ffc9af986807e7",
+      "currentSvgSha256": "f2943b6103004568ae90e9992613a1b9fce51eaa5834f5c887e007c04baeb53c",
       "baselineSvgSha256": "5535d444f0f503c955b4c7d5f542e0d786d8bbd34f9230fb970b1129e1cb8dd8",
       "currentCleanPreviewSha256": "ab21221e953e5d648ee87b7e289ff54fdce9a9a0ec4ca37a619e0b53b905de63",
       "baselineCleanPreviewSha256": "ab21221e953e5d648ee87b7e289ff54fdce9a9a0ec4ca37a619e0b53b905de63"
@@ -2318,7 +2333,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "b22a8542cdc62935906dbe99b9bb477d03df8e9ab143e6febd065539704c67ea",
+      "currentSvgSha256": "0ee4a08111fd587ed1d4a20b38fc55b675391556681c62a849eb5a8f6a6f2c18",
       "baselineSvgSha256": "b8a90f50476f4b9bfa60cb40df9ec701cfc23999e6ae9c47e90305db4785b7ff",
       "currentCleanPreviewSha256": "f16fd7ef8dad9d59232060ce2f6dff33cefb81c6bb67a51ead2da6a46566c781",
       "baselineCleanPreviewSha256": "f16fd7ef8dad9d59232060ce2f6dff33cefb81c6bb67a51ead2da6a46566c781"
@@ -2351,9 +2366,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "bf6d561a42d65f5aac77cf40b0c4a3bde7e4551a1840a15b3d3fbd934e96ab7d",
+      "currentSvgSha256": "951506b672d14a84765a5fa4fe698be826f64245aae8e62acdf5e784737a8162",
       "baselineSvgSha256": "99d8d5d048dfb1709f8359a3eed830fdb92e16b4400ac1ce88e554f2c8376e03",
-      "currentCleanPreviewSha256": "b499739729e0c51beb390bc20352fbcf32e3165ab6838eece4c76db5ff50f7be",
+      "currentCleanPreviewSha256": "5939228c7aab53cd38869e432f06e40618d72cf1bac4800c402c025385fafa1d",
       "baselineCleanPreviewSha256": "cb2b98cb06e8cf9283354b26d843b13d5fa291b9e5d030310795f529f751b04f"
     },
     {
@@ -2384,9 +2399,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "24651843b469caac7b82d4a3a2aa60ad750ddda25dc6aa68afed168cba2583a7",
+      "currentSvgSha256": "2a6ec0a5dcd27fc6b6e9cf01727df560f74ab92526643f90370b814b1f11e2e4",
       "baselineSvgSha256": "3d37f9321a8464be9a15a096a82beec99ce06d488f0aa7053929fc0bbee9d6ec",
-      "currentCleanPreviewSha256": "c45ff24f0e8ed43c4ad9621cfdfe015d3a87931cc27b9724a4f51b1d9c61d3a3",
+      "currentCleanPreviewSha256": "711304e920c0eaaedb24fbc4e643ddf9ef4db2eb1960622d200f9c61a96b9f0a",
       "baselineCleanPreviewSha256": "9ca42be95a5da1a0ffd72a9764834f03cce6fb2585b073650b31acb4ebcd3736"
     },
     {
@@ -2417,7 +2432,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "b108fd76abee63ef02cf5c15fd9b0f8214461fae649c0fb8deb0814f997e5408",
+      "currentSvgSha256": "24073d777f688a0f51a026683fa519aa4cda69d763b7640fa01bdbe56bad0ca6",
       "baselineSvgSha256": "a8bfeb4edb65d2e43b5eccf8eea361a52c0fe622a4f06db1168494d8fae0be13",
       "currentCleanPreviewSha256": "c0e6df00592cfcc468025ac6d3748463d2b919ca077ce81038e46af05e1c8879",
       "baselineCleanPreviewSha256": "c0e6df00592cfcc468025ac6d3748463d2b919ca077ce81038e46af05e1c8879"
@@ -2450,9 +2465,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "updated-preview",
-      "currentSvgSha256": "91008dc2a7751158c251a0fc020abdc2542e2dd0a33d0b8b259d1c11cb46a7ac",
+      "currentSvgSha256": "6f89123fc05e02e65b90f16b0faf0ae4ba86f318850c47d8e34b8fbe05c3b62d",
       "baselineSvgSha256": "fb4e19a66a863236d908d77eaec2e2d2c694d21c1def322bd0ce6f50eae7417c",
-      "currentCleanPreviewSha256": "18102ca4210942545b5df2830072f075d20d8af6de17ae85551267edd818aa22",
+      "currentCleanPreviewSha256": "36ac91115e8f7c9896cebc49800481fad124387c4a7d0fc7d3a449100e0feef5",
       "baselineCleanPreviewSha256": "627d90213b61061d9091e073f4dff93e917223f2e0a41ed734db9b452b471ac8"
     },
     {
@@ -2481,10 +2496,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "75bb3d6f4da27c49789a3c900f9693c44e08b9bf50b1d58e7ab6e8d412906a5c",
+      "change": "updated-preview",
+      "currentSvgSha256": "2886515cd462eaf2aed961dc4126a30715f8482a686c2b8d3c5545769c8abf78",
       "baselineSvgSha256": "94129ef517807970c5fe2d6d79e2c0b35bd0b640bf4f0fc86efa51db4873249a",
-      "currentCleanPreviewSha256": "c8166d0d329be0391d4347971369a22a9b9aa9fc87a505c3ed681a8a871fecaa",
+      "currentCleanPreviewSha256": "4ab1ac16f7bfbf0a5e05a22db5bdda07e4498b6163334c3201007d4bf7f5bf09",
       "baselineCleanPreviewSha256": "c8166d0d329be0391d4347971369a22a9b9aa9fc87a505c3ed681a8a871fecaa"
     },
     {
@@ -2514,7 +2529,7 @@
         "note": "The published proportions and point sizes are implemented. The lettering uses the kit’s substitute typeface; this is not an original production master."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "c7975f7fd050777efcec19236d87b976a9eb94c0e326d8a60c6a4b41dc46d6b2",
+      "currentSvgSha256": "e8fe2675fc2b726fa876786336fabb7a34f8006b0ea93f7067eef2304ca93e02",
       "baselineSvgSha256": "95e7f16ca2b2a70503d38a11c6c06263f312c134a423ca884ea5f60332442bc2",
       "currentCleanPreviewSha256": "75f82a36fa4aee9888cb0b9a107a45936550a4fbce0a065975267b9b04969f9a",
       "baselineCleanPreviewSha256": "75f82a36fa4aee9888cb0b9a107a45936550a4fbce0a065975267b9b04969f9a"
@@ -2543,12 +2558,12 @@
       "fidelity": {
         "status": "partial-artwork",
         "label": "Measured cover layout",
-        "note": "The cover grid and editable text are reconstructed. The tinted illustration area is a placeholder; the original drawing remains visible in the scan overlay."
+        "note": "The cover grid and editable text are reconstructed. The dashed illustration area is a placeholder; the original drawing remains visible in the scan overlay."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "bbb726eeecd529d452f3a6bb2f9d681f254761daeed153677fa6653efb98f174",
+      "change": "updated-preview",
+      "currentSvgSha256": "b814d352bd70e4be4074a2d191894eed7a73e4b9082be6f79e79205b83c1ccb5",
       "baselineSvgSha256": "6b0a4fb2f3a4b4ca7026ea65f114da85da75b38ea4a783619a8b4c70db60db4b",
-      "currentCleanPreviewSha256": "86dff0ff35199c4c8f12bb2b765e40acf109cfbfd59c82816d995d7c099cd32f",
+      "currentCleanPreviewSha256": "251d5b577d7c2eb053310dedc420e622d5a049a71615688c3cecbceeb9793be9",
       "baselineCleanPreviewSha256": "86dff0ff35199c4c8f12bb2b765e40acf109cfbfd59c82816d995d7c099cd32f"
     },
     {
@@ -2577,10 +2592,10 @@
         "label": "Measured cover layout",
         "note": "The published proportions and point sizes are implemented. The lettering uses the kit’s substitute typeface; this is not an original production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "fcd9d6c74637254ad336bc4dbe1d8832dffc6cc68dd8b26b669cad048607fa20",
+      "change": "updated-preview",
+      "currentSvgSha256": "17cf0c2bb6ef21b87ff690896593237313fd5b74f3245138eef4168d9c37babc",
       "baselineSvgSha256": "77992e5e3c468321b001d9c86d79aead37d27da07089daaf73fcfe457d6e00d7",
-      "currentCleanPreviewSha256": "2f09de67c3cc1b3cc220d5a652a82ddd41b249f200b0e025f4db5a5474dbbda0",
+      "currentCleanPreviewSha256": "d5d231120b8e46bc8362d72ec426677545c4415ed76b7efc3beca5d82b1111e4",
       "baselineCleanPreviewSha256": "2f09de67c3cc1b3cc220d5a652a82ddd41b249f200b0e025f4db5a5474dbbda0"
     },
     {
@@ -2588,7 +2603,7 @@
       "label": "Newsletter masthead, colour band",
       "title": "B.C.Hydro / newsletter masthead (band)",
       "group": "Publications",
-      "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule.",
+      "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule. A longer title is set smaller to stay inside the band.",
       "sourcePages": [
         "H30"
       ],
@@ -2608,10 +2623,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "58a71ddaf39583be413ce8ecf6fa84748e6fcd4f61847a438f35f708b4f96834",
+      "change": "updated-preview",
+      "currentSvgSha256": "57bd77075c3d4f2f011fd470cbf08d114d872982bf9919759ee42c77f8697276",
       "baselineSvgSha256": "58a71ddaf39583be413ce8ecf6fa84748e6fcd4f61847a438f35f708b4f96834",
-      "currentCleanPreviewSha256": "3c9400a09d03c076e1649c4af18036eaa2996ca99119cff582d6f5ebea4a2330",
+      "currentCleanPreviewSha256": "b1ac3c325373896342344efa05cb0daaffbdcb6ab844c9da8806be23b677bf0a",
       "baselineCleanPreviewSha256": "3c9400a09d03c076e1649c4af18036eaa2996ca99119cff582d6f5ebea4a2330"
     },
     {
@@ -2619,7 +2634,7 @@
       "label": "Newsletter masthead, rule",
       "title": "B.C.Hydro / newsletter masthead (rule)",
       "group": "Publications",
-      "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule.",
+      "description": "Masthead (Graphic Standards Manual p. 29): signature and title side by side in one size, subordinate matter below; a band of colour of no more than 20% value, or a heavy rule. A longer title is set smaller to stay inside the band.",
       "sourcePages": [
         "H30"
       ],
@@ -2639,10 +2654,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "6b679c3d9d8a4ba0a00b24a12253f91efb771e1d50d8a9106d6d26b00c29f2c8",
+      "change": "updated-preview",
+      "currentSvgSha256": "8d43c2cc46bb7666ef74a977a08bab3b17f2052e383c7bdbefc46e017bf6bd20",
       "baselineSvgSha256": "6b679c3d9d8a4ba0a00b24a12253f91efb771e1d50d8a9106d6d26b00c29f2c8",
-      "currentCleanPreviewSha256": "c8317c07d1492168c55cacad11de0cc0eae8fecbf0ef4b0d6080c592c2ccc36c",
+      "currentCleanPreviewSha256": "18551dca629e5089655bb7ed1e1ed4bbd438f61d16e1b62c9eb950e92b432cde",
       "baselineCleanPreviewSha256": "c8317c07d1492168c55cacad11de0cc0eae8fecbf0ef4b0d6080c592c2ccc36c"
     },
     {
@@ -2656,10 +2671,10 @@
         "H32"
       ],
       "width": 166.878,
-      "height": 231.394,
+      "height": 224.028,
       "physical": [
         "6.57in",
-        "9.11in"
+        "8.82in"
       ],
       "hasRules": false,
       "hasRegisteredScan": false,
@@ -2671,10 +2686,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "c45c78d3da4393a1f12ccecf4d3967de3ec9543cdd8148394e5451d9f1da1317",
+      "change": "updated-preview",
+      "currentSvgSha256": "9ba4eb1f195d5099ec9a9d2eeb534eb04cbb272776b6fd88d322f3803a38daf7",
       "baselineSvgSha256": "c45c78d3da4393a1f12ccecf4d3967de3ec9543cdd8148394e5451d9f1da1317",
-      "currentCleanPreviewSha256": "7f28fe06bdf1fe2ba7cdefadf08e5495aec559bb460de3a4edef444e941dfa41",
+      "currentCleanPreviewSha256": "9a3644be33fef619ea74daef64ece13410eaada68688f8d995a57b04cb3b6a44",
       "baselineCleanPreviewSha256": "7f28fe06bdf1fe2ba7cdefadf08e5495aec559bb460de3a4edef444e941dfa41"
     },
     {
@@ -2703,10 +2718,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "f804184d86c205522acf746b45833aa5f5400867814b6136cb036c34a00fdc59",
+      "change": "updated-preview",
+      "currentSvgSha256": "b59bb85cc7952eec5d858d63b48988e0d760e720c255536611a32e68c2649459",
       "baselineSvgSha256": "f804184d86c205522acf746b45833aa5f5400867814b6136cb036c34a00fdc59",
-      "currentCleanPreviewSha256": "775dca6478d813c65d99f2098ebf9f5296eb007c20a7d8644ef6051fabded890",
+      "currentCleanPreviewSha256": "f25ebf72115b49dbab1ae371f33df4306e88ec3efe58bd6e86325a7364eb3e4a",
       "baselineCleanPreviewSha256": "775dca6478d813c65d99f2098ebf9f5296eb007c20a7d8644ef6051fabded890"
     },
     {
@@ -2834,7 +2849,7 @@
         "H39",
         "H38"
       ],
-      "width": 330.272,
+      "width": 293.8,
       "height": 267.19,
       "physical": null,
       "hasRules": false,
@@ -2847,10 +2862,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "d932460cebaf1aab006d6467f792ead46af061022c6bc3c1601e7b922023818c",
+      "change": "updated-preview",
+      "currentSvgSha256": "34bcd30cc705959b6219bb127cea59f06e8bfe023bd70f99e7d32f3db394345b",
       "baselineSvgSha256": "47bc63d402c74acf706e41deb286ecf518ca088d7bd24f7576d107fc75af944a",
-      "currentCleanPreviewSha256": "36ad46ef5cbdbaa77b6c2b959632d92ca8b3906f2303f6e64c2e2cb8edddc0a1",
+      "currentCleanPreviewSha256": "c1eedeec9d03b9285d5307f3a243e690ea381770847e281b4b56564960685be7",
       "baselineCleanPreviewSha256": "36ad46ef5cbdbaa77b6c2b959632d92ca8b3906f2303f6e64c2e2cb8edddc0a1"
     },
     {
@@ -2876,10 +2891,10 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "ccfcc82562d2947cb0a116697b0a95b877826ebddae07c967693bdd53a1c5d7a",
+      "change": "updated-preview",
+      "currentSvgSha256": "98d3c61f721a9805dc69cf8296307e4f86edf4711c2378e9a4e1985ca0e80261",
       "baselineSvgSha256": "ccfcc82562d2947cb0a116697b0a95b877826ebddae07c967693bdd53a1c5d7a",
-      "currentCleanPreviewSha256": "430683eb1285d3abcb27df60db494a24396d91279ebd2ef634cbe358336ef9ae",
+      "currentCleanPreviewSha256": "64b1fb7afc5d32bb8b9f085a497e250468ea09ae7083651fd9213369797136db",
       "baselineCleanPreviewSha256": "430683eb1285d3abcb27df60db494a24396d91279ebd2ef634cbe358336ef9ae"
     },
     {
@@ -2887,7 +2902,7 @@
       "label": "Sign: guide, directional",
       "title": "B.C.Hydro / directional guide sign",
       "group": "Signs",
-      "description": "A guide sign (Graphic Standards Manual p. 39): one destination to a row, rows divided by a keyline, each with its arrow; the names aligned on one left edge.",
+      "description": "A guide sign (Graphic Standards Manual p. 39): one destination to a row, rows divided by a keyline, each with its arrow; the names aligned on one left edge; borders ½ cap-height.",
       "sourcePages": [
         "H40",
         "H38"
@@ -2905,71 +2920,11 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "692894ef5605f1815edd6382090647edd457e7edfbfd6ea8d6207be58c354bd4",
+      "change": "updated-preview",
+      "currentSvgSha256": "4fe8006e92be8d21bd4c496ef0d6ea70a200e3d8ee952582600b8a9a9162f322",
       "baselineSvgSha256": "692894ef5605f1815edd6382090647edd457e7edfbfd6ea8d6207be58c354bd4",
-      "currentCleanPreviewSha256": "8b757b85ac4afb7533e4126d7fd28395f5211e2584e65756751e2441234f90a1",
+      "currentCleanPreviewSha256": "db1546a574837d0f6241df481eae9497245aba8c7d03dcfba353cc9da3460919",
       "baselineCleanPreviewSha256": "8b757b85ac4afb7533e4126d7fd28395f5211e2584e65756751e2441234f90a1"
-    },
-    {
-      "id": "vehicle-van-black",
-      "label": "Vehicle: panel van, light body",
-      "title": "B.C.Hydro / panel van, positive",
-      "group": "Vehicles",
-      "description": "A panel van’s side (Graphic Standards Manual p. 43): the signature in the upper rear panel, 0.09 of the length from the rear, 0.21 of the length wide. Black on a body of 30% value or less, white on a darker one.",
-      "sourcePages": [
-        "H44",
-        "H43",
-        "H42"
-      ],
-      "width": 4800,
-      "height": 2050,
-      "physical": null,
-      "hasRules": false,
-      "hasRegisteredScan": false,
-      "referenceNote": "",
-      "referenceLabel": "",
-      "referenceAlignment": null,
-      "fidelity": {
-        "status": "reconstruction",
-        "label": "Historical reconstruction",
-        "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
-      },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "5c0715a5750f4885c835cf9a28d825932fda03716827d0304d0df10c2ab1f94c",
-      "baselineSvgSha256": "5c0715a5750f4885c835cf9a28d825932fda03716827d0304d0df10c2ab1f94c",
-      "currentCleanPreviewSha256": "f1f594973fa973cd37e4a97c8eb235ae2495918cbcd4e6a79cc5a3d2cbc9b4af",
-      "baselineCleanPreviewSha256": "f1f594973fa973cd37e4a97c8eb235ae2495918cbcd4e6a79cc5a3d2cbc9b4af"
-    },
-    {
-      "id": "vehicle-van-white",
-      "label": "Vehicle: panel van, dark body",
-      "title": "B.C.Hydro / panel van, reverse",
-      "group": "Vehicles",
-      "description": "A panel van’s side (Graphic Standards Manual p. 43): the signature in the upper rear panel, 0.09 of the length from the rear, 0.21 of the length wide. Black on a body of 30% value or less, white on a darker one.",
-      "sourcePages": [
-        "H44",
-        "H43",
-        "H42"
-      ],
-      "width": 4800,
-      "height": 2050,
-      "physical": null,
-      "hasRules": false,
-      "hasRegisteredScan": false,
-      "referenceNote": "",
-      "referenceLabel": "",
-      "referenceAlignment": null,
-      "fidelity": {
-        "status": "reconstruction",
-        "label": "Historical reconstruction",
-        "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
-      },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "a5fc57760a61d543a152c37886f3748f31183d5078338ca8ca6355a9f9cec0ef",
-      "baselineSvgSha256": "a5fc57760a61d543a152c37886f3748f31183d5078338ca8ca6355a9f9cec0ef",
-      "currentCleanPreviewSha256": "09be98e8355632ac8847db3616a7ed10786d150ae877bc3b40e28b44f3af7f34",
-      "baselineCleanPreviewSha256": "09be98e8355632ac8847db3616a7ed10786d150ae877bc3b40e28b44f3af7f34"
     },
     {
       "id": "form-tender",
@@ -2999,9 +2954,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "new-example",
-      "currentSvgSha256": "241d77bc4d0b4b8390432ba12d85eb28c15e4be720c8880b070ceb003a12ff96",
+      "currentSvgSha256": "5b7ae18a5024aab0d85ac62a199472a84b93ada1dfa024588b0ad7ac6f5f30fe",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "419ac12a882bd51f52fb4d26e1efd8164e0e01d5bc099dd27464928ceb8bbbd6",
+      "currentCleanPreviewSha256": "d0569bb7044106522ba428b70a303861f9c2032144fef6ffb24ef724a5754963",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3031,9 +2986,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "new-example",
-      "currentSvgSha256": "93c4670867774836bdbf14f1f4f256a6a191efa4de70afd21a6a9e7e10098ae6",
+      "currentSvgSha256": "2c623e2a7a58754689b2a82d04531e64e85eb07c50f1edc986dbab303bd3622d",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "0868a21be728f2fe10ed1001179eedf7f8dc503d5661da693edf9d720002bace",
+      "currentCleanPreviewSha256": "a67b40b8ecd069afe1c3dedf91c5ca5662f52efdbbed8302460d00c7e1c125c4",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3063,9 +3018,9 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "new-example",
-      "currentSvgSha256": "9c6fd3b531ee0d9b32c6acc53af3629eefd8a0ab00d02262a81626a9a7da82b9",
+      "currentSvgSha256": "8f0f1c07fa99cd6f89eb9f1cf00a33e8823bbe551deed601dd0bea5167322c06",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "20c6411aa11a74461776b1f408ef763f2c8193321f0ad951635b32bef7578add",
+      "currentCleanPreviewSha256": "d4e68959b01fa227ddb4e98d4c0d8fe8b875c1fe3e61984a529f33dcb355ae99",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3094,7 +3049,7 @@
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
       "change": "new-example",
-      "currentSvgSha256": "64bab38838d91cf2805cc928239b354672032e4b9afeaf01505efcaeb6dd1f8c",
+      "currentSvgSha256": "88febe9140ab20a68ac7d32d223a4ba337207f7bbf0ddc6b48ac5982d72460da",
       "baselineSvgSha256": null,
       "currentCleanPreviewSha256": "b557c182bcd7acbd02f11fc1b4bf000120fda35a88a2b4acbb381d5887fe61be",
       "baselineCleanPreviewSha256": null
@@ -3125,7 +3080,7 @@
         "note": "The absence of a signature and the 6 point printing code are prescribed. The bottom/right inset is a practical choice."
       },
       "change": "new-example",
-      "currentSvgSha256": "e5425997c27e45187e08bf6d27482235661ef1749bd992dd319e592f599de794",
+      "currentSvgSha256": "7c284e547a31b00c7a04ee56d033c49a9fd2db90f456568ff102096fdd0991cb",
       "baselineSvgSha256": null,
       "currentCleanPreviewSha256": "2762a42369dd5b35874609c9c07e44ddde53e5aad02e7e886cb8a168829ea4f9",
       "baselineCleanPreviewSha256": null
@@ -3156,7 +3111,7 @@
         "note": "The absence of a signature and the 6 point printing code are prescribed. The bottom/right inset is a practical choice."
       },
       "change": "new-example",
-      "currentSvgSha256": "3f0162f5876cd7d4d2ea1037acacc5db357569001cc2d921d98d15172be202b8",
+      "currentSvgSha256": "4241d91dfaa1bebcfab14d328b3c4a84a0b70c98346619a1252beccfd9ac783a",
       "baselineSvgSha256": null,
       "currentCleanPreviewSha256": "9430482102e6f741692932ff3bc557cde557b1ece6fa3a9f618095ad64b9559a",
       "baselineCleanPreviewSha256": null
@@ -3188,9 +3143,9 @@
         "note": "The reading direction and signature/title relationship follow the manual. Spine thickness and the narrow-spine 24 point size are example settings. Confirm the actual binding before printing."
       },
       "change": "new-example",
-      "currentSvgSha256": "e48181abe3819d57d060a80d6b1b3f6c9251fcc9a5f0538ec17dce67f84a7bf1",
+      "currentSvgSha256": "4b414ec038bde2203c69a4c36e1f51f92c0a65dd873a9d5ab74f8ce6134187e9",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "fc31a4c97132c5743ce3a354953e5299f703405d85e8af88639c2f3c3798486b",
+      "currentCleanPreviewSha256": "1193dd7ed56e5499f463c39d496345bf05059d3255dcfc394ec54230be954c5b",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3220,9 +3175,9 @@
         "note": "The reading direction and signature/title relationship follow the manual. Spine thickness and the narrow-spine 24 point size are example settings. Confirm the actual binding before printing."
       },
       "change": "new-example",
-      "currentSvgSha256": "2fc131989de3425cbef4fe8f9750c7499306c71af9fba9716082264f5552b68e",
+      "currentSvgSha256": "a13250c0bc2acb77f532a56e4aef8d5951cc8e14a630d16d4d7163cec4dba7fb",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "5952c854cc8c9f1c474c0711ec5ec4260371336a1913adf0ec1d9012c14184b7",
+      "currentCleanPreviewSha256": "7d03a173922e81f1c3a1896274cba793befb2d1dba58f63e9db9e58369f3124b",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3282,7 +3237,7 @@
         "note": "The half-cap border is measured from the visible complete signature, including the ring and descenders. Overall panel size is an example. Three-dimensional work still requires the official large-scale drawings."
       },
       "change": "new-example",
-      "currentSvgSha256": "6ab9e24be7faf313d0c4a3731af7e54b9df21a16c6e77d69935d45b6ecb2ad82",
+      "currentSvgSha256": "81f7262cc4ce0816d90aa88e3d6b9b3645e050ab1b4df8905451322f1416551b",
       "baselineSvgSha256": null,
       "currentCleanPreviewSha256": "1dcb8a49c4a1e5fbf6ad9289230523c0099b44c6d0fe9c2dc9c3ab9b5a65c43d",
       "baselineCleanPreviewSha256": null
@@ -3292,16 +3247,16 @@
       "label": "Advertisement, single column",
       "title": "B.C.Hydro / single-column advertisement",
       "group": "Advertising",
-      "description": "Graphic Standards Manual p. 33: a single-column advertisement with rules, a headline in upper and lower case, body copy and the positive signature as the final element. The example canvas and copy are reconstructed; the source does not specify a universal column width.",
+      "description": "Graphic Standards Manual p. 33, Example 2: a single-column advertisement between heavy rules: the headline in upper and lower case, the copy with italic subheads (the manual’s choice for emphasis), and the positive signature flush left as the final element.",
       "sourcePages": [
         "H34",
         "H32"
       ],
-      "width": 54.61,
-      "height": 152.4,
+      "width": 84.836,
+      "height": 139.7,
       "physical": [
-        "2.15in",
-        "6in"
+        "3.34in",
+        "5.5in"
       ],
       "hasRules": false,
       "hasRegisteredScan": false,
@@ -3311,12 +3266,12 @@
       "fidelity": {
         "status": "reconstructed",
         "label": "Rule-based reconstruction",
-        "note": "Applies the single-column example’s hierarchy and signature placement. The original copy and newspaper column dimensions are not production specifications."
+        "note": "Format, type sizes and positions are measured from the full-size example. The copy is sample wording in the example’s structure, not a production advertisement."
       },
       "change": "new-example",
-      "currentSvgSha256": "aca45161cd85e11c12b7d5b5544de1e3723a35f213daf335053e11d83d0daa4e",
+      "currentSvgSha256": "be0c78ced4286f65a8f51118252b050590a078d45f164b61b74b3c542ad03ddb",
       "baselineSvgSha256": null,
-      "currentCleanPreviewSha256": "ab8bc928f680493084d7c0125fa4323f7ceb73b13891e76f80fe60a38b73e619",
+      "currentCleanPreviewSha256": "c1bdd64b71c7244fd7e5736c061c65ad6e1a0e0a236b2ba547e4d97bf08c46d1",
       "baselineCleanPreviewSha256": null
     },
     {
@@ -3327,7 +3282,8 @@
       "description": "Boxcar — Hydro, as on page H48: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (rail signature).",
       "sourcePages": [
         "H48",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 636,
@@ -3343,7 +3299,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "6df9d2da949ae91209ba08db8a6ba422d5c3ebc63cfc3e7a8d517c6b84f8bb92",
+      "currentSvgSha256": "a5e99976a97200ca0a56855ba3c01e9095303a337e6478cc0b45ef50be950300",
       "baselineSvgSha256": "e70fb6bbf0f1d7bd5d7401fc42c475ed5d604cf3dbfc3039685c746abed29134",
       "currentCleanPreviewSha256": "427d1c66f494a011a52b08046363b03734cf4d09d6370dfb4887bde6c145fe84",
       "baselineCleanPreviewSha256": "427d1c66f494a011a52b08046363b03734cf4d09d6370dfb4887bde6c145fe84"
@@ -3356,7 +3312,8 @@
       "description": "Generator — Hydro, as on page H47: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (side signature, safety caption).",
       "sourcePages": [
         "H47",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 1657,
@@ -3371,10 +3328,10 @@
         "label": "Source-based vector drawing",
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "be6b6935eb3cc96fab49183a3f290d2fd95a23627903d6311e7731d4d955189c",
+      "change": "updated-preview",
+      "currentSvgSha256": "68809454dc6051c24567ff50f1cf8f8044dd2efd518b96cd31963969cd7cf671",
       "baselineSvgSha256": "ea81518fbdc0d21c69653291b3f5c95d5f4da61792faeb5af5ee2957bbe5a879",
-      "currentCleanPreviewSha256": "d1c4a56b9f9a36f3a97ca175a6b48e935ac9a948d23313043c22d2bb555a3e64",
+      "currentCleanPreviewSha256": "00bddc10dad2c2cbdc7636c278e28dbc6d0df096fc1ce1f42a0083206bb9e84d",
       "baselineCleanPreviewSha256": "d1c4a56b9f9a36f3a97ca175a6b48e935ac9a948d23313043c22d2bb555a3e64"
     },
     {
@@ -3385,7 +3342,8 @@
       "description": "Crawler Side — Hydro, as on page H47: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (seat signature).",
       "sourcePages": [
         "H47",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 979,
@@ -3401,7 +3359,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "c69282a2777110ceda77db102ecef7261a101c3664c16d068364d6d22b13a05b",
+      "currentSvgSha256": "6faea3f864979463ff240f6d252646da8d584669ba1cde285bf133546e42ca41",
       "baselineSvgSha256": "4f3f808a04540da295c2c57c6eac2a1fd68da574dd7470baf119e46bed4e5a4b",
       "currentCleanPreviewSha256": "51a41b5426e697cec456c2af5ca7f34d29dd21c982023c48ffa291004ed2d035",
       "baselineCleanPreviewSha256": "51a41b5426e697cec456c2af5ca7f34d29dd21c982023c48ffa291004ed2d035"
@@ -3414,7 +3372,8 @@
       "description": "Locomotive — Hydro, as on page H48: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (cab rail signature).",
       "sourcePages": [
         "H48",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 561,
@@ -3430,7 +3389,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "7398bc0858959209706afc9297d8a42b3b9fab6d04b64be07c42612109210857",
+      "currentSvgSha256": "13c949acda3b094e2ca3deba33228439dc649d87b6b939379a533fda78557382",
       "baselineSvgSha256": "d2030f6a79096fe4a8d3e8ebbd9fccc57b8215cb68d2e651af83cf5ad49271e7",
       "currentCleanPreviewSha256": "e703c880f9b71e9487500f85d6114b22e9be2162ac5ab1febea949a41dc7545f",
       "baselineCleanPreviewSha256": "e703c880f9b71e9487500f85d6114b22e9be2162ac5ab1febea949a41dc7545f"
@@ -3443,7 +3402,8 @@
       "description": "Crawler Front — Hydro, as on page H47: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (front signature).",
       "sourcePages": [
         "H47",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 1865,
@@ -3459,7 +3419,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "3d4e45a21fb2ceb099f88ab8efe4e589ebb123a266287da2f2417eb4b364c794",
+      "currentSvgSha256": "c85f1000c9dc527687fde870face208bc1e02c4ae3e3bf137f52d2b770d8000b",
       "baselineSvgSha256": "5578722ff7844a1314a373e44a07fd90ee45b95c85f7060397b9cd4832cddf34",
       "currentCleanPreviewSha256": "35fadec358928bb69b23818ff8840af309d905720ef258f2a4a9bb7d30451419",
       "baselineCleanPreviewSha256": "35fadec358928bb69b23818ff8840af309d905720ef258f2a4a9bb7d30451419"
@@ -3472,7 +3432,8 @@
       "description": "Van Side — Hydro, as on page H44: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (side signature).",
       "sourcePages": [
         "H44",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 624,
@@ -3488,7 +3449,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "ffb3c9beecbf5975d566b022e8fb33d747a94a63bdc312fc279f1685920fecdb",
+      "currentSvgSha256": "74f21f387975cacb278f0f1765804218875555bf72da81c3440e651765e84a92",
       "baselineSvgSha256": "ce5f82f17507f5ad26899d7b037e100e3b6e5ebfe76c27a4df3fe6f2c6c08e37",
       "currentCleanPreviewSha256": "cb1b71b9f280caa070b223b6290ce2d29912abb0f8c37cd75e10845dfd214080",
       "baselineCleanPreviewSha256": "cb1b71b9f280caa070b223b6290ce2d29912abb0f8c37cd75e10845dfd214080"
@@ -3501,7 +3462,8 @@
       "description": "Stepvan Rear — Hydro, as on page H45: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (rear signature).",
       "sourcePages": [
         "H45",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 2127,
@@ -3517,7 +3479,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "4188fd9a6c2be5af33692bb63ccb9ae37804eef1270dbfa0c4b80402bbec4aee",
+      "currentSvgSha256": "9424781d5e417f3fc9376169aa92062a6e13291b23c4e7ab8e2aa6696d9e9df3",
       "baselineSvgSha256": "a713b567f99e30b2a2258894e871e5ba6d505d6600d2691d697918175bedda06",
       "currentCleanPreviewSha256": "c56e003486a638a1bd424fcc594af8d2ae4330534f333b21ffe1678e1181aaa2",
       "baselineCleanPreviewSha256": "c56e003486a638a1bd424fcc594af8d2ae4330534f333b21ffe1678e1181aaa2"
@@ -3530,7 +3492,8 @@
       "description": "Van Rear — Hydro, as on page H44: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (rear signature).",
       "sourcePages": [
         "H44",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 1710,
@@ -3546,7 +3509,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "351ad25cac298a7a2c10350f464e00acd538686a8e355de4eb29af1d6003af4d",
+      "currentSvgSha256": "f8442779b627a5861047a664d1b585100927177960d718371fc284f89445174e",
       "baselineSvgSha256": "933c6bbce6a6df3b6f8a25950aea0a9979477c7c0a5a870a5aac263752489608",
       "currentCleanPreviewSha256": "c11199ed957a49d3599d278b0be6d336afb5e5592980e61357cdcb456a33a621",
       "baselineCleanPreviewSha256": "c11199ed957a49d3599d278b0be6d336afb5e5592980e61357cdcb456a33a621"
@@ -3559,7 +3522,8 @@
       "description": "Van Door — Hydro, as on page H44: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (door signature).",
       "sourcePages": [
         "H44",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 1922,
@@ -3575,7 +3539,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "a17d2aa6de85806c5ac8696bc18115a1bc61ded0104e1eb0c313a981121f6e79",
+      "currentSvgSha256": "930cadc2ba990634e0d9f62a36489f62056018156cf35ebfbf9325f906d9bfc2",
       "baselineSvgSha256": "022d06c985fecd8cab069dd544dec392df392479614bdfb1c997fa1db37cfbd7",
       "currentCleanPreviewSha256": "9f224cbb52d600a867f59cba04a6170df01cec4d6b6de3bdeda5ca42c7f37bee",
       "baselineCleanPreviewSha256": "9f224cbb52d600a867f59cba04a6170df01cec4d6b6de3bdeda5ca42c7f37bee"
@@ -3588,7 +3552,8 @@
       "description": "Seat Panel — Hydro, as on page H47: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (seat panel signature).",
       "sourcePages": [
         "H47",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 1443,
@@ -3604,7 +3569,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "8e18c4492da724ba01cd13a25de61935edb15144128890f146740cc6e46c1483",
+      "currentSvgSha256": "db0096cadcabfa4865b4802628ca335526659f0cdb7eed49b7803bfc8a9c3a23",
       "baselineSvgSha256": "cb62188a0d722e772447e4e7976e65839aa7cd95ed81b017617f510e4cfaa096",
       "currentCleanPreviewSha256": "add1a39cbbc2e5e9c0cbe2eacd2a4678097ac75da5eb6eab03760dbfe0dcfe29",
       "baselineCleanPreviewSha256": "add1a39cbbc2e5e9c0cbe2eacd2a4678097ac75da5eb6eab03760dbfe0dcfe29"
@@ -3617,7 +3582,8 @@
       "description": "Flatbed — Hydro, as on page H46: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (deck signature).",
       "sourcePages": [
         "H46",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 281,
@@ -3633,7 +3599,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "0cd19a8389d6105cd174c18d0021d0d8b1ff715a8e908ff49facfdcd442a6276",
+      "currentSvgSha256": "17a0d0328c0567a6cc3d67a2c6a52b2e2047d501cddf7adbc50962623b3659ee",
       "baselineSvgSha256": "6658572988e65c4ab52aeeb0833a38707a3b93788b4c02095880aa628d2fa025",
       "currentCleanPreviewSha256": "a012cae9a2081429b1b105241db5262b863037306ee41fd39ee557ba377f16b2",
       "baselineCleanPreviewSha256": "a012cae9a2081429b1b105241db5262b863037306ee41fd39ee557ba377f16b2"
@@ -3646,7 +3612,8 @@
       "description": "Stepvan Side — Hydro, as on page H45: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (side signature).",
       "sourcePages": [
         "H45",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 701,
@@ -3662,7 +3629,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "a5110543c94e364e041eb518c82d2311ec9e756cd64ad57df850317a277a1c43",
+      "currentSvgSha256": "f86fa21c40cd4fe822211f4453814ef4ba6671586ea142a6f795874e95338d1f",
       "baselineSvgSha256": "42c8054cd4878f0e59b67ddfe072b11ec4136a8fc4e19f6daa3596423175b5f9",
       "currentCleanPreviewSha256": "13b3871e2d4201d4957827a81f9a0831361c8550a558499252d44615110c13b1",
       "baselineCleanPreviewSha256": "13b3871e2d4201d4957827a81f9a0831361c8550a558499252d44615110c13b1"
@@ -3675,7 +3642,8 @@
       "description": "Cab Door — Hydro, as on page H46: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (door signature).",
       "sourcePages": [
         "H46",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 2439,
@@ -3691,7 +3659,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "0ee8692b22330f0c07a2ec76a18b294078e5d3526693d46f7e65ddb3c32d930a",
+      "currentSvgSha256": "379cab561eefd7bf38008d376c7772bd36637e67559614b816c7b00ea261a272",
       "baselineSvgSha256": "e8f3f82cc9b579908efc92e528b861bc036da48867bf3ee2215dd7b83b7149dc",
       "currentCleanPreviewSha256": "5496bf51d5b0fe98fa1b9072b8afdf7e8650a09611414689d3ea1e86312fb1e1",
       "baselineCleanPreviewSha256": "5496bf51d5b0fe98fa1b9072b8afdf7e8650a09611414689d3ea1e86312fb1e1"
@@ -3704,7 +3672,8 @@
       "description": "Roller Truck Rear — Hydro, as on page H45: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (rear signature).",
       "sourcePages": [
         "H45",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 2204,
@@ -3720,7 +3689,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "23a4f458689fe9257aa945e11d14b886f532378463a1dfa0561e25c899a4ad49",
+      "currentSvgSha256": "29857fed4173deeb5a4b9c567ba60f97850c2d78d1a99fcb76ff246feaace195",
       "baselineSvgSha256": "e7ade2637f782254d0b86809ce9fc01fe7e4e5abad9dad777b69d61f546635e6",
       "currentCleanPreviewSha256": "cc38aa3593fd4a7baea13858d43cc28ac0e9788e306b6be7a595b494f90556af",
       "baselineCleanPreviewSha256": "cc38aa3593fd4a7baea13858d43cc28ac0e9788e306b6be7a595b494f90556af"
@@ -3733,7 +3702,8 @@
       "description": "Tractor Trailer — Hydro, as on page H46: ManualKit’s source-registered drawing, with the identity set into each of its branding zones (trailer signature).",
       "sourcePages": [
         "H46",
-        "H43"
+        "H43",
+        "H42"
       ],
       "width": 1600,
       "height": 606,
@@ -3749,7 +3719,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "ed65cf8045e84af55b60a3ebb6ebed5cff5fac4b8329fa511ef6e251b6e7c7bd",
+      "currentSvgSha256": "f4026e3cfaba088cc770f37a00c9ac71ec131a19c61ab8c3d54113e39499281d",
       "baselineSvgSha256": "a5b73615a48307d9ae7cbb4084491ca9907acb7b4a4a0ff2e91517d5d5e9d08c",
       "currentCleanPreviewSha256": "4a4359c0c31bfb9aed96fdc1ad06865b01a9c5a65ed323fef2a694b8a5c2a41a",
       "baselineCleanPreviewSha256": "4a4359c0c31bfb9aed96fdc1ad06865b01a9c5a65ed323fef2a694b8a5c2a41a"
@@ -3778,7 +3748,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "e4408df8ae261f186b2d852d7aa70985fd9fb1b38d4f725b921a0e2cba6906ee",
+      "currentSvgSha256": "51f6408197ee34d3d18941cfd8a42c09a220caee748996febb0c4a84917653a8",
       "baselineSvgSha256": "a3f40d0bd8b23958059fd22d37d3b39c7893a3c8e16df7b261f25e6512980815",
       "currentCleanPreviewSha256": "e8e9d2ecba59288486b4b4f80c53a5f2bcdd17b81f8938d0b83e59ba06d6add1",
       "baselineCleanPreviewSha256": "e8e9d2ecba59288486b4b4f80c53a5f2bcdd17b81f8938d0b83e59ba06d6add1"
@@ -3807,7 +3777,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "457aa5929cd1ccb1358d5573dbb35d662586439494760d48e640f56d34f836ff",
+      "currentSvgSha256": "b27f1c7e477335c4e8e7d38c9249e97ebb6413abf186450af1a87d417dc61669",
       "baselineSvgSha256": "6d6759612cb28c56993260d04a4d778e44281af81895dbd61958714a5603c53d",
       "currentCleanPreviewSha256": "6aeda8a156545728a08d4f8fc785941cff626f5aa21ff9afb793f1f1d3f04a79",
       "baselineCleanPreviewSha256": "6aeda8a156545728a08d4f8fc785941cff626f5aa21ff9afb793f1f1d3f04a79"
@@ -3836,7 +3806,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "2eda5abd565c2c6ba9b743bee818470ccd10f4adee5096c44e1c93ab60c0983c",
+      "currentSvgSha256": "ac1d1dd3b9282b6a23f01e1ece9614fed3bba979c65a17288de26a7235389720",
       "baselineSvgSha256": "628561db818628bf07b8f22543128d5502d667868a82f2714a49c8ebf0cf6808",
       "currentCleanPreviewSha256": "0c05eca38d9aee96c8f3ad16110cd2470ecba665aeacae29324830e5a794d305",
       "baselineCleanPreviewSha256": "0c05eca38d9aee96c8f3ad16110cd2470ecba665aeacae29324830e5a794d305"
@@ -3865,7 +3835,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "c1aae3628a424289deb44f2c2a6cd87b7d45646077d40d57df5f540d00db77e4",
+      "currentSvgSha256": "fa4799a5ef02ea33613dde51727dcf0d18602a40953dd9d4a675c63cfd95ee0f",
       "baselineSvgSha256": "5bf91ba731ac9d76fc3859b656fb8a6b67811b96e99c3733f9c6aa2020e62297",
       "currentCleanPreviewSha256": "b3e7c33068afae5c9ba8fd970a873eda2f780448e3c904bb1759c340f63ea62f",
       "baselineCleanPreviewSha256": "b3e7c33068afae5c9ba8fd970a873eda2f780448e3c904bb1759c340f63ea62f"
@@ -3894,7 +3864,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "45136eb901642a510fd5b8b816a1a2e2a745f819aad4f9e721b933e3dc28e30b",
+      "currentSvgSha256": "bcf40d5f96ca4a752eaa6f552605443a4b03c42ca64eb7f85aba51f0ac1e5074",
       "baselineSvgSha256": "302937623dbe193ff2f3dbc43d71bbd5df3b8aad064249ef6382280570540213",
       "currentCleanPreviewSha256": "b5c268e64196be3f6021afd576daef07fdc1996d9ea57681898572b663000caf",
       "baselineCleanPreviewSha256": "b5c268e64196be3f6021afd576daef07fdc1996d9ea57681898572b663000caf"
@@ -3923,7 +3893,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "2104aad1f09c08d34a1916b8257ba4b01f665aa8d774671ec0aad319e73ca054",
+      "currentSvgSha256": "c995a72f208590a03ac9de1653e6d953e15b5c550edb134ed9116cb614262161",
       "baselineSvgSha256": "8997fea2fda4deaa29a152c162e295876db285a27d24311c0f74c321a8b2c321",
       "currentCleanPreviewSha256": "9454491a49dafa3860f7a90a8f06ab3aa3c4c0c4ce405db2e2953ee37524539e",
       "baselineCleanPreviewSha256": "9454491a49dafa3860f7a90a8f06ab3aa3c4c0c4ce405db2e2953ee37524539e"
@@ -3952,7 +3922,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "a9cf0113047bfa0040a6153be8c0c572e2bc45e65988a0745bc0eb3b29937262",
+      "currentSvgSha256": "163ce35e0405e3013c793364301362c107985471e344e9ddf33250bbe1ec5dec",
       "baselineSvgSha256": "03b50a3284e38b857b5ce38314575fce611ec4c2f0ee15a992a2ba12dc615beb",
       "currentCleanPreviewSha256": "1ff5a7aea0e34c99a0f4cf56100cd6b0b8b55f1b4fce7c3b37971dda56acc79e",
       "baselineCleanPreviewSha256": "1ff5a7aea0e34c99a0f4cf56100cd6b0b8b55f1b4fce7c3b37971dda56acc79e"
@@ -3981,7 +3951,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "70988a11ad7fc3a2876d94b4798d4a4b0a7ed03f229f509615657a6ecccd47cd",
+      "currentSvgSha256": "ab2b1902f052d0dd1b08d4ca3a027df4a7fce4e1d68a91f2a3c870e46cfccdb0",
       "baselineSvgSha256": "c3fcb75d70312c340c1cdf0699f9ce1e94b3fe799228e80c0366ef2f7c409faa",
       "currentCleanPreviewSha256": "e2438edda74227d47f6a976cb4e0f870f81809eb6571c14a367fd142259d887d",
       "baselineCleanPreviewSha256": "e2438edda74227d47f6a976cb4e0f870f81809eb6571c14a367fd142259d887d"
@@ -4009,10 +3979,10 @@
         "label": "Source-based vector drawing",
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "cadac75b9dc5314cbd011367385458bcb049d7a871e1f4e99d365d59fd1a3d8e",
+      "change": "updated-preview",
+      "currentSvgSha256": "1aa5a11b201e8a46ec167b3885f4ad5ac40db9cc2ce88a69b0141045f65a26d3",
       "baselineSvgSha256": "9bd774b6d601e4846811e7ce177e084eda8faabbd8c4d2984dacd51d04377e61",
-      "currentCleanPreviewSha256": "7189b4a22b89480c8008eba5e0cd97d2c2ebd35dbb1bc5fe8387824491ba154e",
+      "currentCleanPreviewSha256": "c115c76eae999610a513b72affa524eaf6480745634c6135a138a2686887cbc7",
       "baselineCleanPreviewSha256": "7189b4a22b89480c8008eba5e0cd97d2c2ebd35dbb1bc5fe8387824491ba154e"
     },
     {
@@ -4039,7 +4009,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "7e33c8f8a3531bf3b06d42b17fac1f0ca02cb5ef2976d9581335f12a6f745cb9",
+      "currentSvgSha256": "30170c08eabdf346664ee49fa70f7b9c7ee4dba33ded79623641ea9948028e8b",
       "baselineSvgSha256": "683e8bf95ab357cc2218afc71f16defad21c94ba99be6f75a25b1ade597f64e3",
       "currentCleanPreviewSha256": "7100d23490413f4be108d43a011427d3dd16ecb9a3ff4d413d679ed26b3b825c",
       "baselineCleanPreviewSha256": "7100d23490413f4be108d43a011427d3dd16ecb9a3ff4d413d679ed26b3b825c"
@@ -4068,7 +4038,7 @@
         "note": "The vehicle/equipment/sign illustration is a reconstruction of the manual example. Dimensions and shape details are not certified manufacturing specifications."
       },
       "change": "unchanged-preview",
-      "currentSvgSha256": "2752e539263cfb3fb900258c69c837501281cfba93b86328328b5fe2833c721b",
+      "currentSvgSha256": "fd5915c2d88c6b0d1a25ede9fbe8bd1d0ee15e0e9d248c9e59ee1b268bd985a0",
       "baselineSvgSha256": "b399f748c9c3b17088cd8051e20b39d5babd87c1a499c31516a80d3a83816168",
       "currentCleanPreviewSha256": "8dbb886bfda39dda4c7ba9bc3893b913ba9abebd3f30ce299444626cc49aa97f",
       "baselineCleanPreviewSha256": "8dbb886bfda39dda4c7ba9bc3893b913ba9abebd3f30ce299444626cc49aa97f"
@@ -4096,11 +4066,11 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "6f58cbf74c788510cb8af916aaab3c9a71b35a33eefd20c4075b483a09e47815",
-      "baselineSvgSha256": "6f58cbf74c788510cb8af916aaab3c9a71b35a33eefd20c4075b483a09e47815",
-      "currentCleanPreviewSha256": "f0102958772533af74b10e528d55ae7ab8296e0b8940876743d51c6eee5325b2",
-      "baselineCleanPreviewSha256": "f0102958772533af74b10e528d55ae7ab8296e0b8940876743d51c6eee5325b2"
+      "change": "updated-preview",
+      "currentSvgSha256": "d6cd10ef875b6cf6f46b99c1d1f10052f2ba076862aefdf4f5ebdb3f53ff0267",
+      "baselineSvgSha256": "0a609b4ef5c8bb5c0b95b8d37871162ec624a9d257c5ab4e89183958c7da72ac",
+      "currentCleanPreviewSha256": "1d862ab79b05f676fceebe22f99328d9da8e0d80b9c7dc59820810d4f91687b9",
+      "baselineCleanPreviewSha256": "f53e62dfb076e5fdbbed66b343ab1f5c82011d9b7be084c1e2b47507220c4494"
     },
     {
       "id": "explore-reservoir-presentation",
@@ -4125,11 +4095,11 @@
         "label": "Historical reconstruction",
         "note": "Presence of an editable example does not establish exact fidelity to the original page or to an official production master."
       },
-      "change": "unchanged-preview",
-      "currentSvgSha256": "01fd0365d5c2dd2fc5a248855cdbf33d8cd6f8acc5154a467b593f7cbb557f3d",
-      "baselineSvgSha256": "01fd0365d5c2dd2fc5a248855cdbf33d8cd6f8acc5154a467b593f7cbb557f3d",
-      "currentCleanPreviewSha256": "15a3a3798dea30873fde4ff2a9845b390a38c3b42088b2ce85a04e6d9807b7c6",
-      "baselineCleanPreviewSha256": "15a3a3798dea30873fde4ff2a9845b390a38c3b42088b2ce85a04e6d9807b7c6"
+      "change": "updated-preview",
+      "currentSvgSha256": "24084565458a87a918124a71a25065ca1404308fb2b2b19e879caaff28b29576",
+      "baselineSvgSha256": "cef858533a7dc23355ba1f9b06532c1a19df92ab368ce407243a949a8e7e8a8f",
+      "currentCleanPreviewSha256": "37119b5c0950e0182c3e8c629f739762eae6e95120eac9c9290a8d1f061f6b15",
+      "baselineCleanPreviewSha256": "f99ec9d367dc40796951bcdc1a290ce642128a69438da6ba702385cd88e48445"
     }
   ],
   "sections": [

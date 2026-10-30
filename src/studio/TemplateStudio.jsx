@@ -112,7 +112,11 @@ export const TemplateStudio = ({
   const currentSet = entries.flatMap(([, list]) => list).find((entry) => entry.set?.variants.some((variant) => variant.template === template?.id))?.set ?? null
   const documents = template ? documentsFor(brand, template.id) : []
   const ctx = (outline, extra = {}) => ({ brand, fonts, values, outline: outline && ready, ...extra })
-  const preview = template ? renderTemplate(ctx(true, { showGuides: guides, showLayoutGuides: layoutRules }), template).svg : null
+  // With rules shown the preview gains a margin outside the trim (`frame`), which the preview's
+  // proportions and the scan overlay's registration both have to allow for.
+  const rendered = template ? renderTemplate(ctx(true, { showGuides: guides, showLayoutGuides: layoutRules }), template) : null
+  const preview = rendered?.svg ?? null
+  const frame = rendered?.frame ?? null
   // A set's fields are all its variants' (a card's name is on its back while its front is shown),
   // except fields local to another variant (a different sign's wording).
   const fields = !template ? [] : currentSet
@@ -252,9 +256,9 @@ export const TemplateStudio = ({
           </fieldset>
         )}
         <div className="studio__canvas">
-          <div className={`studio__comparison${largePreview ? ' studio__comparison--large' : ''}`} style={{ '--preview-ratio': template.width / template.height }}>
+          <div className={`studio__comparison${largePreview ? ' studio__comparison--large' : ''}`} style={{ '--preview-ratio': (template.width + (frame ? frame.left + frame.right : 0)) / (template.height + (frame ? frame.top + frame.bottom : 0)) }}>
             <Preview className="studio__preview" svg={preview} alt={`${template.label ?? template.id} preview${layoutRules && hasLayoutRules ? ', layout rules shown' : ''}`} />
-            {overlay && referenceUrl && !referenceError && <img className="studio__reference" src={referenceUrl} alt={template.reference.label ?? 'Original manual scan'} draggable={false} style={{ ...referencePlacement(template), opacity: overlayOpacity / 100 }} onError={() => { setReferenceError(true); setOverlay(false) }} />}
+            {overlay && referenceUrl && !referenceError && <img className="studio__reference" src={referenceUrl} alt={template.reference.label ?? 'Original manual scan'} draggable={false} style={{ ...referencePlacement(template, frame), opacity: overlayOpacity / 100 }} onError={() => { setReferenceError(true); setOverlay(false) }} />}
           </div>
         </div>
         {template.fidelity && <div className="studio__fidelity" data-status={template.fidelity.status}>

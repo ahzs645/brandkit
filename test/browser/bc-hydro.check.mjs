@@ -113,6 +113,24 @@ try {
   result.checks.push('source crop loads from production asset URL', 'opacity/reset controls', 'template switch resets source overlay')
   console.log('Edited title, rule visibility and source overlay controls passed.')
 
+  // A longer masthead title is set smaller rather than run out of its band (fitWidth).
+  await page.goto(`${base}?brand=bc-hydro-1983&view=templates&template=masthead-band`, { waitUntil: 'networkidle' })
+  await waitImages(page, '.studio__preview')
+  await page.getByRole('textbox', { name: 'Masthead title', exact: true }).fill('Human Resources and Industrial Relations')
+  await page.waitForFunction(async () => /Industrial Relations/.test(await (await fetch(document.querySelector('.studio__preview').src)).text()))
+  const titleRight = await page.evaluate(async () => {
+    const host = document.createElement('div')
+    host.innerHTML = await (await fetch(document.querySelector('.studio__preview').src)).text()
+    document.body.append(host)
+    const box = host.querySelector('#masthead-title').getBBox()
+    host.remove()
+    return box.x + box.width
+  })
+  assert.ok(titleRight < 195.58 - 4, `the long title ends at ${titleRight.toFixed(1)} mm, inside the band (195.6 mm)`)
+  await page.getByRole('button', { name: 'Clear every field', exact: true }).click()
+  result.checks.push('long masthead title shrinks to fit its band')
+  console.log('Masthead title fit passed.')
+
   // The complete report must work as a self-contained asset, not depend on unhashed siblings.
   // The studio no longer links it, so it is opened from the build by its hashed name.
   const report = readdirSync(resolve(root, 'dist/assets')).find((name) => /^manual-audit-[\w-]+\.html$/.test(name))
@@ -198,11 +216,20 @@ try {
   await page.getByRole('checkbox', { name: 'Overlay original scan', exact: true }).check()
   await waitImages(page, '.studio__reference')
   await noOverflow(page, 'Report cover and inspection controls')
-  const mobileOverlay = await page.evaluate(() => ['.studio__preview', '.studio__reference'].map((selector) => {
-    const box = document.querySelector(selector).getBoundingClientRect()
-    return [box.x, box.y, box.width, box.height]
-  }))
-  assert.ok(mobileOverlay[0].every((value, index) => Math.abs(value - mobileOverlay[1][index]) < 1), 'mobile height cap preserves scan/artwork registration')
+  // With rules shown the preview has a margin outside the trim (its viewBox starts before 0 0);
+  // the scan must cover the trim within it, not the whole image.
+  const mobileOverlay = await page.evaluate(async () => {
+    const preview = document.querySelector('.studio__preview')
+    const svg = await (await fetch(preview.src)).text()
+    const [x, y, width, height] = svg.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number)
+    const [trimWidth, trimHeight] = svg.match(/data-layout-guide="trim"><rect x="0" y="0" width="([^"]+)" height="([^"]+)"/).slice(1).map(Number)
+    const box = preview.getBoundingClientRect()
+    const scan = document.querySelector('.studio__reference').getBoundingClientRect()
+    const trim = [box.x - x / width * box.width, box.y - y / height * box.height, trimWidth / width * box.width, trimHeight / height * box.height]
+    return { x, trim, scan: [scan.x, scan.y, scan.width, scan.height] }
+  })
+  assert.ok(mobileOverlay.x < 0, 'the rules margin is shown outside the trim')
+  assert.ok(mobileOverlay.trim.every((value, index) => Math.abs(value - mobileOverlay.scan[index]) < 1.5), 'mobile height cap preserves scan/artwork registration inside the rules margin')
   await page.locator('.studio__stage').screenshot({ path: resolve(output, 'template-mobile.png') })
   await audit.bringToFront()
   await audit.setViewportSize({ width: 390, height: 844 })

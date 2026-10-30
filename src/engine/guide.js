@@ -19,9 +19,15 @@ import { icon, lockup, mark, pattern, svgDocument } from './artwork.js'
 import { colour as resolveColour, colourName, face as faceOf, fill, isDark, luminance, rgb } from './brand.js'
 import { escape, n } from './format.js'
 import { renderTemplate, scopeIds } from './templates.js'
+import { typesetLine } from './template-guides.js'
 import { withRevision } from './revisions.js'
 
 const ROLE = { ink: 'ink', paper: 'paper', muted: 'muted', primary: 'primary', light: 'light', reverse: 'reverse', line: 'line' }
+
+// Precomposed fractions, spelt out with a fraction slash, for a face that lacks them (TeX Gyre
+// Termes has ¼ ½ ¾ but no ⅓ or ⅞): set from small figures instead of drawing nothing.
+const VULGAR = { '¼': '1/4', '½': '1/2', '¾': '3/4', '⅐': '1/7', '⅑': '1/9', '⅒': '1/10', '⅓': '1/3', '⅔': '2/3', '⅕': '1/5', '⅖': '2/5', '⅗': '3/5', '⅘': '4/5', '⅙': '1/6', '⅚': '5/6', '⅛': '1/8', '⅜': '3/8', '⅝': '5/8', '⅞': '7/8' }
+const BUILT = /(\d+) (\d+)\u2044(\d+)|(\d+)\u2044(\d+)/g
 
 /** Glyph-free fallback width, for wrapping when a face is not loaded. */
 const approximateWidth = (text, size, tracking = 0) => Array.from(text).length * size * (0.55 + tracking)
@@ -34,6 +40,14 @@ export const createGuideKit = (ctx) => {
   const text = (s, x, y, size = 22, kind = 'body', colourValue = ROLE.ink, tracking = 0, anchor = 'start') => {
     const content = fill(brand, s)
     if (fonts?.has(kind)) {
+      // Every fraction in the line is built alike once one has to be, so they match.
+      if (Array.from(content).some((char) => VULGAR[char] && fonts.covers?.(char, kind) === false)) {
+        const spelt = content.replace(/(\d*)([¼-¾⅐-⅞])/g, (match, whole, char) => `${whole}${whole ? ' ' : ''}${VULGAR[char].replace('/', '\u2044')}`)
+        const set = typesetLine(spelt, size, (run, runSize) => fonts.width(run, kind, runSize, tracking), BUILT)
+        const left = anchor === 'end' ? x - set.width : anchor === 'middle' ? x - set.width / 2 : x
+        const d = set.runs.map((run) => fonts.path(run.text, kind, run.size, left + run.dx, y + run.dy, tracking)).join('')
+        return `<path fill="${c(colourValue)}" aria-label="${escape(content)}" d="${d}"/>`
+      }
       const d = fonts.path(content, kind, size, x, y, tracking, anchor)
       return `<path fill="${c(colourValue)}" aria-label="${escape(content)}" d="${d}"/>`
     }
@@ -132,7 +146,7 @@ export const createGuideKit = (ctx) => {
       const hex = c(key)
       const s = e.width / 246
       return rect(x, e.y, e.width, e.height, hex, luminance(hex) > 0.85 ? ROLE.line : null)
-        + symbol(x + 31 * s, e.y + 41 * s, 132 * s, isDark(hex) ? ROLE.reverse : ROLE.ink)
+        + (e.symbol === false ? '' : symbol(x + 31 * s, e.y + 41 * s, 132 * s, isDark(hex) ? ROLE.reverse : ROLE.ink))
         + text(colourName(brand, key), x, e.y + 321, 27, 'display', ROLE.ink, -0.03)
         + text(hex, x, e.y + 358, 21, 'label')
         + text(`RGB ${(rgb(hex) ?? []).join(', ')}`, x, e.y + 391, 15, 'label', ROLE.muted)
