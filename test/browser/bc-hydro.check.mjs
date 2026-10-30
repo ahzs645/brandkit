@@ -1,7 +1,7 @@
 // npm run build && CHROMIUM_PATH=/path/to/chromium npm run test:hydro:browser
 // Exercises the production bundle, including its hashed source/report assets and clean exports.
 import assert from 'node:assert/strict'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { preview } from 'vite'
@@ -114,8 +114,11 @@ try {
   console.log('Edited title, rule visibility and source overlay controls passed.')
 
   // The complete report must work as a self-contained asset, not depend on unhashed siblings.
-  await page.getByText('Manual coverage and fidelity', { exact: true }).click()
-  const [audit] = await Promise.all([context.waitForEvent('page'), page.getByRole('link', { name: 'Read the full manual audit ↗', exact: true }).click()])
+  // The studio no longer links it, so it is opened from the build by its hashed name.
+  const report = readdirSync(resolve(root, 'dist/assets')).find((name) => /^manual-audit-[\w-]+\.html$/.test(name))
+  assert.ok(report, 'the build carries the manual audit report')
+  const audit = await context.newPage()
+  await audit.goto(new URL(`assets/${report}`, base).href)
   watch(audit)
   audit.setDefaultTimeout(60000)
   await audit.waitForFunction(() => document.querySelector('#page-select') && !document.querySelector('#page-select').disabled)
