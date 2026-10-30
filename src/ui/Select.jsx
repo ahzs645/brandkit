@@ -112,7 +112,7 @@ export const Select = ({ value, options, onChange, disabled, className = '', tri
                 className={`select__option${index === active ? ' select__option--active' : ''}`} title={item.title}
                 onMouseMove={() => { if (!item.disabled && active !== index) setActive(index) }}
                 onClick={(event) => { event.preventDefault(); choose(index); button.current?.focus() }}>
-                <span className="select__check" aria-hidden="true">{index === selected ? '✓' : ''}</span><span>{item.label}</span>
+                <span className="select__check" aria-hidden="true" /><span>{item.label}</span>
               </li>
             )]
           })}

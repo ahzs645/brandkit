@@ -82,7 +82,8 @@ try {
 
       // A filtered fallback must become the URL selection and survive a full reload.
       const group = library.groups.find((item) => item.id !== library.patterns[0].groupId) ?? library.groups[0]
-      await page.getByRole('combobox', { name: /^Collection/ }).selectOption(group.id)
+      await page.getByRole('combobox', { name: /^Collection/ }).click()
+      await page.getByRole('option', { name: `${group.label} (${group.count})`, exact: true }).click()
       await waitForCards(page, group.count)
       const groupFirst = library.patterns.find((item) => item.groupId === group.id)
       await waitForSelected(page, groupFirst.id)

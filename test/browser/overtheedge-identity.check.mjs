@@ -18,8 +18,12 @@ try {
     page.on('response', (response) => { if (response.status() >= 400) errors.push(`${response.status()}: ${response.url()}`) })
     await page.goto(`${server.resolvedUrls.local[0]}?brand=overtheedge`, { waitUntil: 'networkidle' })
     const layout = page.getByRole('combobox', { name: 'Layout', exact: true })
+    // Layout is a styled combobox: open it and choose the option by its label.
+    const pick = async (combobox, label) => { await combobox.click(); await page.getByRole('option', { name: label, exact: true }).click() }
     await layout.waitFor()
-    assert.deepEqual(await layout.locator('option').evaluateAll((options) => options.map((option) => option.value)), ['horizontal', 'stacked', 'symbol'])
+    await layout.click()
+    assert.deepEqual(await page.getByRole('option').allTextContents(), ['Horizontal', 'Stacked', 'Symbol'])
+    await page.keyboard.press('Escape')
     assert.equal(await page.getByRole('group', { name: 'Wordmark arrangement', exact: true }).count(), 0)
     const toggle = page.getByRole('checkbox', { name: 'Wordmark', exact: true })
     assert.equal(await toggle.isChecked(), true)
@@ -28,7 +32,7 @@ try {
       const img = document.querySelector('.stage__art')
       return img && (await fetch(img.src).then((response) => response.text())).includes(`data-wordmark="${expected}"`)
     }, name)
-    await layout.selectOption('stacked')
+    await pick(layout, 'Stacked')
     await waitForWordmark('cover-stacked')
     assert.match(await artwork(), /data-line="subtext" fill="#262626"/)
     await toggle.uncheck()
@@ -36,7 +40,7 @@ try {
     assert.doesNotMatch(await artwork(), /data-line="subtext"/)
     assert.match(await artwork(), /data-word="OVER"/)
     assert.equal(await page.getByRole('group', { name: 'Wordmark colour', exact: true }).count(), 0)
-    await layout.selectOption('horizontal')
+    await pick(layout, 'Horizontal')
     await waitForWordmark('words')
     await toggle.check()
     await waitForWordmark('full')
@@ -53,7 +57,7 @@ try {
     await waitForWordmark('full')
     assert.equal(await wordmarkColour.getByRole('button', { name: 'Lichen', exact: true }).getAttribute('aria-pressed'), 'true')
     await wordmarkColour.getByRole('button', { name: 'Ink', exact: true }).click()
-    await layout.selectOption('stacked')
+    await pick(layout, 'Stacked')
     await waitForWordmark('cover-stacked')
     const [download] = await Promise.all([
       page.waitForEvent('download'),
@@ -83,10 +87,10 @@ try {
       }, [...readFileSync(await png.path())])
       assert.ok(counts.green > 100 && counts.ink > 100, 'the PNG preserves forest lettering and ink subtext')
     }
-    await layout.selectOption('symbol')
+    await pick(layout, 'Symbol')
     assert.equal(await toggle.isEnabled(), false)
     await page.waitForFunction(async () => !(await fetch(document.querySelector('.stage__art').src).then((response) => response.text())).includes('data-wordmark='))
-    await layout.selectOption('stacked')
+    await pick(layout, 'Stacked')
     await waitForWordmark('cover-stacked')
 
     const fonts = page.locator('.specimens')

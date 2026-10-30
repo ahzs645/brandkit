@@ -1,0 +1,44 @@
+/* The edit / preview dock. Above the phone width it adds nothing: the host lays the two panels out
+   side by side. Colours come from the host's tokens where it has brandkit's, with fallbacks. */
+.edit-preview { scroll-margin-top: calc(var(--masthead-h, 116px) + 12px); }
+.edit-preview__bar { display: none; }
+
+@media (max-width: 760px) {
+  .edit-preview--edit [data-dock-panel='preview'], .edit-preview--preview [data-dock-panel='edit'] { display: none; }
+  .edit-preview__bar {
+    position: sticky;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 20;
+    grid-column: 1 / -1;
+    display: block;
+    width: min(100%, 420px);
+    margin: 4px auto 0;
+    padding: 5px;
+    border: 1px solid var(--line, #e3e5e8);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--surface, #fff) 90%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  .edit-preview__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .edit-preview__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 12px;
+    background: none;
+    color: var(--ink-muted, #545a62);
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .edit-preview__tab[aria-selected='true'] { background: var(--ink, #16181c); color: var(--page, #fff); }
+  .edit-preview__tab:focus-visible { outline: 2px solid var(--focus, #2f6fde); outline-offset: 2px; }
+  .edit-preview__tab svg { flex: none; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+}

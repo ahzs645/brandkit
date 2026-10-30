@@ -22,3 +22,5 @@
 @media (prefers-reduced-motion: reduce) { .select__list { animation: none; } }
 @keyframes select-in { from { opacity: 0; transform: translateY(-4px); } }
 .select__check { font-size: 12px; color: var(--ink, #16181b); }
+/* Drawn by CSS so an option's text is its label alone. */
+.select__option[aria-selected='true'] .select__check::before { content: '✓'; }
