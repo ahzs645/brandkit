@@ -326,34 +326,62 @@ out when any of them has been cleared. `brand.fields` (`{ "telephone": { "label"
 
 ### Layout inspection and source overlays
 
-A template may carry a separate `guides` object. Its `elements` use the ordinary drawing
-element schema and are locked annotations, never editable fields. `renderTemplate()` writes
-them in `<g id="layout-guides" display="none">`; `showLayoutGuides: true` makes that layer
-visible. This switch is independent of `showGuides`, which controls trim and safe-area marks.
-The studio exposes the switch and a distinct **SVG with rules** download. Standard PNG/PDF
-downloads do not paint the annotation layer, and Printer packages omit it entirely.
+A template may carry a separate `guides` object: construction annotations drawn the way an
+identity manual draws them, outside the trim. They are locked, never editable fields.
+`renderTemplate()` writes them in `<g id="layout-guides" display="none">` on the trim-sized
+canvas; with `showLayoutGuides: true` the layer is visible and the canvas grows by the margin the
+annotations need (its `viewBox` starts before `0 0`, its physical size grows in proportion, and
+the result's `frame` gives the margin on each side in template units). This switch is independent
+of `showGuides`, which controls trim and safe-area marks. The studio exposes the switch and a
+distinct **SVG with rules** download. Standard SVG/PNG/PDF downloads keep the trim-sized canvas
+and do not paint the layer, and Printer packages omit it entirely.
+
+Annotations name what they measure rather than carrying coordinates, so they follow the artwork
+as its text is edited:
 
 ```json
 "guides": {
-  "title": "Report cover construction",
-  "notes": ["Title: 36 on 36 pt. Subtitle: 18 on 18 pt."],
+  "title": "Business-card construction",
+  "notes": ["Name 12 point; remaining information 8 on 9 point."],
   "elements": [
-    { "type": "line", "x1": 72, "x2": 190,
-      "y1": { "flow": "cover-title", "edge": "lastBaseline" },
-      "y2": { "flow": "cover-title", "edge": "lastBaseline" },
-      "stroke": "#A01B45", "strokeWidth": 0.2 },
-    { "type": "text", "text": "1 cap-height", "x": 190,
-      "y": { "flow": "cover-subtitle", "edge": "top", "offset": -2 },
-      "requiresFlow": ["cover-title", "cover-subtitle"],
-      "size": "8pt", "anchor": "end", "colour": "#A01B45" }
+    { "type": "dimension", "axis": "x", "from": { "element": "brand-logo", "edge": "left" }, "to": "trim.right", "label": "2 1/2\"" },
+    { "type": "dimension", "axis": "y", "from": "trim.top", "to": { "element": "name", "edge": "baseline" }, "label": "1 1/8\"", "side": "right" },
+    { "type": "callout", "target": { "element": "name" }, "label": "12 point", "side": "right" },
+    { "type": "dimension", "axis": "y", "from": { "flow": "cover-title", "edge": "lastBaseline" },
+      "to": { "flow": "cover-subtitle", "edge": "top" }, "label": "1 cap-height", "ends": "none",
+      "requiresFlow": ["cover-title", "cover-subtitle"] },
+    { "type": "align", "axis": "x", "refs": [{ "element": "brand-logo", "edge": "left" }, { "element": "card-telephone", "edge": "right" }], "side": "bottom" },
+    { "type": "note", "label": "Ruled lines 1/2 point" }
   ]
 }
 ```
 
-Guide coordinates can reference a laid-out flow item's `top` (cap line), `firstBaseline`,
-`lastBaseline`, `bottom` (last baseline), `left` or `right`. Numeric offsets use the template's
-units. Empty flow items remove their attached annotations. `requiresFlow` suppresses a
-relationship label when either participating item is empty. Unknown IDs or edges are errors.
+- `dimension { axis, from, to, label, side?, ends?, track?, labelAt? }`: x dimensions run above
+  (`side: "top"`, the default) or below the trim, y dimensions to its `right` (default) or `left`,
+  with extension lines to the edges measured. `ends` is `arrow` (default), `tick`, or `none` for a
+  band of extension lines with its label between them. Nested and overlapping dimensions are
+  stacked outward, shortest nearest the trim, unless `track` pins one.
+- `callout { target, label, side?, at?, outline? }`: a label in the margin with a leader from the
+  target's `at` edge (its baseline for text, otherwise its middle or centre); `outline` boxes the
+  target lightly. Without `side`, the nearest side is used.
+- `align { axis, refs, side?, label? }`: a dashed line through every element sharing an edge,
+  continued into the margin on `side`.
+- `note { label, side? }`: a printed rule with nothing to point at, under (or above) the drawing.
+
+An edge is `trim.left|right|top|bottom`, `{ at: n }` (a position nothing marks, drawn dashed), or
+a target with an `edge` and optional `offset` in template units. Targets are `{ element: id }`
+(any element with an id; a logo without one is `brand-logo`, its SVG id), `{ flow: id }`,
+`{ zone: id }` and `{ lettering: index | [first, last] }` of the template's illustration, or
+`{ box: [x, y, width, height] }`. x edges are `left`, `right`, `center` and `logotype` (where a
+signature's logotype starts); y edges are `top`, `cap`, `baseline`, `firstBaseline`,
+`lastBaseline`, `middle` and `bottom`. Bounds are measured from the rendered layout. Labels set
+fractions (`1 1/8"`) in small figures and may break lines with `\n`.
+
+An annotation whose target or edge belongs to emptied text is omitted. `requiresFlow` also omits
+a relationship when either participating flow item is empty, and `requiresEmptyFlow` draws one
+only while the items it lists are empty (the closed-up gap once the item between is cleared).
+Unknown IDs, types or edges are errors. `labelSize` overrides the label size, which otherwise
+scales with the drawing (2.1% of its longer side).
 
 `reference` supplies `{ src, label, note, alignment?: { x, y, width, height } }`. The studio
 resolves `src` through its optional `resolveAsset(path)` callback and places the source image

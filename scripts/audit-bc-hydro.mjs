@@ -61,7 +61,7 @@ const templateResults = brand.templates.map((template) => {
   templateAssets[template.id] = {
     current,
     before: before && changed ? before : null,
-    rules: template.guides?.elements?.length ? renderTemplate({ brand, fonts, outline: true, showLayoutGuides: true }, template).svg : null,
+    ...(template.guides?.elements?.length ? (({ svg, frame }) => ({ rules: svg, rulesFrame: frame }))(renderTemplate({ brand, fonts, outline: true, showLayoutGuides: true }, template)) : { rules: null }),
     reference: registeredReference && existsSync(join(folder, registeredReference)) ? assetData(registeredReference) : null
   }
   return {
@@ -243,8 +243,11 @@ ${bceHtml}<section class="panel" id="page-comparison"><div id="load-status" role
       else { const view = figure(current, mode === 'scan' ? 'Current template + original scan overlay' : 'Current editable example');
         if (mode === 'scan' && assets.reference) {
           const layer = image(assets.reference, template.referenceLabel || 'Original source reference', 'layer'); layer.style.opacity = Number(byId('template-opacity').value) / 100;
-          const box = template.referenceAlignment;
-          if (box) { layer.style.left = (100 * box.x / template.width) + '%'; layer.style.top = (100 * box.y / template.height) + '%'; layer.style.width = (100 * box.width / template.width) + '%'; layer.style.height = (100 * box.height / template.height) + '%'; }
+          // With rules shown the drawing gains a margin outside the trim; register the scan within it.
+          const box = template.referenceAlignment || { x: 0, y: 0, width: template.width, height: template.height };
+          const frame = useRules && assets.rulesFrame ? assets.rulesFrame : { left: 0, top: 0, right: 0, bottom: 0 };
+          const width = template.width + frame.left + frame.right; const height = template.height + frame.top + frame.bottom;
+          layer.style.left = (100 * (box.x + frame.left) / width) + '%'; layer.style.top = (100 * (box.y + frame.top) / height) + '%'; layer.style.width = (100 * box.width / width) + '%'; layer.style.height = (100 * box.height / height) + '%';
           view.paper.append(layer);
         } stage.append(view.fig);
       }

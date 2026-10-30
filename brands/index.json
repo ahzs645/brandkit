@@ -518,137 +518,6 @@
           "Visitor Parking / Electric Shop"
         ]
       ],
-      "hydro/H44": [
-        [
-          "template",
-          "vehicle-van-black",
-          "Vehicle: panel van, light body"
-        ],
-        [
-          "template",
-          "vehicle-van-white",
-          "Vehicle: panel van, dark body"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-side",
-          "Van Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-rear",
-          "Van Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-door",
-          "Van Door, Hydro"
-        ]
-      ],
-      "hydro/H43": [
-        [
-          "template",
-          "vehicle-van-black",
-          "Vehicle: panel van, light body"
-        ],
-        [
-          "template",
-          "vehicle-van-white",
-          "Vehicle: panel van, dark body"
-        ],
-        [
-          "template",
-          "illustrated-h48-boxcar",
-          "Boxcar, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-generator",
-          "Generator, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-crawler-side",
-          "Crawler Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h48-locomotive",
-          "Locomotive, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-crawler-front",
-          "Crawler Front, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-side",
-          "Van Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h45-stepvan-rear",
-          "Stepvan Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-rear",
-          "Van Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h44-van-door",
-          "Van Door, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h47-seat-panel",
-          "Seat Panel, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h46-flatbed",
-          "Flatbed, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h45-stepvan-side",
-          "Stepvan Side, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h46-cab-door",
-          "Cab Door, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h45-roller-truck-rear",
-          "Roller Truck Rear, Hydro"
-        ],
-        [
-          "template",
-          "illustrated-h46-tractor-trailer",
-          "Tractor Trailer, Hydro"
-        ]
-      ],
-      "hydro/H42": [
-        [
-          "template",
-          "vehicle-van-black",
-          "Vehicle: panel van, light body"
-        ],
-        [
-          "template",
-          "vehicle-van-white",
-          "Vehicle: panel van, dark body"
-        ],
-        [
-          "guide",
-          "guide-09",
-          "Applications"
-        ]
-      ],
       "hydro/H21": [
         [
           "template",
@@ -737,6 +606,165 @@
           "Locomotive, Hydro"
         ]
       ],
+      "hydro/H43": [
+        [
+          "template",
+          "illustrated-h48-boxcar",
+          "Boxcar, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-locomotive",
+          "Locomotive, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-side",
+          "Stepvan Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-cab-door",
+          "Cab Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-tractor-trailer",
+          "Tractor Trailer, Hydro"
+        ]
+      ],
+      "hydro/H42": [
+        [
+          "template",
+          "illustrated-h48-boxcar",
+          "Boxcar, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-generator",
+          "Generator, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-side",
+          "Crawler Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h48-locomotive",
+          "Locomotive, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-crawler-front",
+          "Crawler Front, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-rear",
+          "Stepvan Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h47-seat-panel",
+          "Seat Panel, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-flatbed",
+          "Flatbed, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-stepvan-side",
+          "Stepvan Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-cab-door",
+          "Cab Door, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h45-roller-truck-rear",
+          "Roller Truck Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h46-tractor-trailer",
+          "Tractor Trailer, Hydro"
+        ],
+        [
+          "guide",
+          "guide-09",
+          "Applications"
+        ]
+      ],
       "hydro/H47": [
         [
           "template",
@@ -757,6 +785,23 @@
           "template",
           "illustrated-h47-seat-panel",
           "Seat Panel, Hydro"
+        ]
+      ],
+      "hydro/H44": [
+        [
+          "template",
+          "illustrated-h44-van-side",
+          "Van Side, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-rear",
+          "Van Rear, Hydro"
+        ],
+        [
+          "template",
+          "illustrated-h44-van-door",
+          "Van Door, Hydro"
         ]
       ],
       "hydro/H45": [

@@ -88,8 +88,8 @@ const transfer = page('form-employee-transfer', 'Form: Salary Employee Transfer'
     text('form-number', '80431', p(36), p(656), '6pt', { font: 'body', colour: 'ink' })
   ], {
     dimensionStatus: 'scan-derived',
-    reconstruction: { pdfPage: 22, printedPage: 21, paper: 'Approx. 5.75 × 9.25 in including snap strip; source says odd-size, no overall dimension printed.', note: 'Dimensions rounded from the scanned paper outline; the generic header inset is used rather than treating scanner offsets as official dimensions.' },
-    guides: { title: 'Snap-set strip (scan-derived)', elements: [line(0, p(42), p(414), p(42), '0.5pt', { dash: '4 2', stroke: '#B04778' }), label('Approximate snap-set strip; not a printed rule', 36, 30, 8, { colour: '#B04778' })] }
+    reconstruction: { pdfPage: 22, printedPage: 21, paper: 'Approx. 5.75 × 9.25 in including snap strip; source says odd-size, no overall dimension printed.', note: 'Dimensions rounded from the scanned paper outline; the generic header inset is used rather than treating scanner offsets as official dimensions.' }
+    // Its layout rules, including the scan-derived snap-set strip, are in bc-hydro-guides.mjs.
   })
 
 // The compact example on H23 differs from the spacious generic form header:

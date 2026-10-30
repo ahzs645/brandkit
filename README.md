@@ -88,9 +88,10 @@ app, those pages show as thumbnails under it that open the page in the manual li
 in the library lists what is built from it, linking back.
 
 For BC Hydro, **Templates → Manual coverage and fidelity** opens the complete source audit.
-**Show layout rules** exposes construction lines and measurements; **Overlay original scan**
-and its opacity control compare the six registered examples. Flow-dependent rules follow edited
-titles and disappear when the relevant field is cleared. Standard downloads keep those rules
+**Show layout rules** draws the manual's construction dimensions and notes in a margin outside
+the trim, measured from the rendered artwork; **Overlay original scan** and its opacity control
+compare the six registered examples. The rules follow edited text and disappear when the field
+they describe is cleared. Standard downloads keep those rules
 hidden; **SVG with rules** exports a visible annotation layer. The BCE route marks are under
 **Logos → BCE route heritage mark**, and are used separately from the Rail signature on its
 letterhead and card. The scan-derived vectors, source crops, ink-mask comparisons and provenance

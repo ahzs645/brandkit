@@ -100,8 +100,6 @@ These sizes come from the template definitions rather than a separately maintain
 | Sign: vertical facility | 330.27 × 267.19 mm | sign-vertical-facility |
 | Sign: danger | 333 × 387 mm | sign-danger |
 | Sign: guide, directional | 340 × 120 mm | sign-guide |
-| Vehicle: panel van, light body | 4800 × 2050 mm | vehicle-van-black |
-| Vehicle: panel van, dark body | 4800 × 2050 mm | vehicle-van-white |
 | Form: Tender, legal | 215.9 × 355.6 mm | form-tender |
 | Form: Salary Employee Transfer | 146.05 × 234.95 mm | form-employee-transfer |
 | Form: Application for Service | 203.2 × 127 mm | form-service-application |

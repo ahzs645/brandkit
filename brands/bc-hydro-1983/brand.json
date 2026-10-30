@@ -23157,6 +23157,7 @@
     },
     {
      "type": "lines",
+     "id": "address",
      "x": 121.953,
      "y": 30.162,
      "leading": 3.881,
@@ -23199,92 +23200,62 @@
    "guides": {
     "title": "Letterhead placement",
     "notes": [
-     "Signature baseline 1 inch from top; symbol 4 inches from right edge. Address 10 on 11 point, 3/16 inch below the signature baseline and aligned under the B."
+     "Signature baseline 1 inch from the top; symbol 4 inches from the right edge. Address 10 on 11 point (H14), 3/16 inch below the signature baseline and aligned under the B."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 8,
-      "x2": 215.9,
-      "y2": 8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "4\""
      },
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 7,
-      "x2": 114.3,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 7,
-      "x2": 215.9,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "1\""
      },
      {
-      "type": "text",
-      "text": "4 in to right edge",
-      "x": 165.1,
-      "y": 6.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "to": {
+       "element": "address",
+       "edge": "firstBaseline"
+      },
+      "label": "3/16\""
      },
      {
-      "type": "line",
-      "x1": 111.3,
-      "y1": 0,
-      "x2": 111.3,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1 in to baseline",
-      "x": 109.3,
-      "y": 15.24,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 25.4,
-      "x2": 210.9,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 30.162,
-      "x2": 210.9,
-      "y2": 30.162,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "3/16 in · 10 on 11 point",
-      "x": 210.9,
-      "y": 42.162,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "address"
+      },
+      "label": "10 on 11 point",
+      "side": "right"
      }
     ]
    }
@@ -23365,90 +23336,79 @@
     "title": "Envelope left-side construction",
     "notes": [
      "Only the left portion of the envelope is shown in the manual. The No. 10 overall canvas is an adopted format.",
-     "Form number 6 point; return instruction 10 point; signature starts ½ inch from the left with its baseline ¾ inch from the top."
+     "Form number 6 point; return statement 10 point (H14). Form number ¼ inch in and down; signature ½ inch from the left with its baseline ¾ inch from the top."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 33.02,
-      "x2": 12.7,
-      "y2": 33.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "form-number",
+       "edge": "left"
+      },
+      "label": "1/4\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 32.02,
-      "x2": 0,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "label": "1/2\""
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 32.02,
-      "x2": 12.7,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "text",
-      "text": "1/2 in",
-      "x": 6.35,
-      "y": 31.520000000000003,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-number",
+       "edge": "baseline"
+      },
+      "label": "1/4\"",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 0,
-      "x2": 12.7,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "3/4\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/4 in to signature baseline",
-      "x": 58.42,
-      "y": 21.05,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point",
+      "side": "top"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 19.05,
-      "x2": 55.88,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 6.35,
-      "y": 12.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "text",
-      "text": "10 point return instruction",
-      "x": 25.4,
-      "y": 3.048,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "return-statement"
+      },
+      "label": "10 point",
+      "side": "top"
      }
     ]
    }
@@ -23492,6 +23452,7 @@
     },
     {
      "type": "lines",
+     "id": "card-details",
      "x": 33.053,
      "y": 44.45,
      "align": "bottom",
@@ -23510,6 +23471,7 @@
     },
     {
      "type": "lines",
+     "id": "card-telephone",
      "x": 25.4,
      "y": 44.45,
      "align": "bottom",
@@ -23552,102 +23514,103 @@
     "title": "Business-card construction",
     "notes": [
      "The signature is blind embossed: the grey preview represents relief, not printing ink. Name 12 point; remaining information 8 on 9 point.",
-     "The last body baseline is ¼ inch from the bottom. Corporate/Gas telephone ends at the left edge of the symbol."
+     "The last body baseline is ¼ inch from the bottom. The signature’s symbol is 2½ inches from the right edge, so 1 inch from the left (derived, not printed).",
+     "The telephone number’s right side is aligned below the left side of the symbol (H14)."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 3,
-      "x2": 25.4,
-      "y2": 3,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "2 1/2\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 2,
-      "x2": 0,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 2,
-      "x2": 25.4,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "5/8\""
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 12.7,
-      "y": 1.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "name",
+       "edge": "baseline"
+      },
+      "label": "1 1/8\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 0,
-      "x2": 25.4,
-      "y2": 15.875,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "card-details",
+       "edge": "lastBaseline"
+      },
+      "to": "trim.bottom",
+      "label": "1/4\""
      },
      {
-      "type": "text",
-      "text": "5/8 in · embossed",
-      "x": 86.9,
-      "y": 5.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "blind embossed\nsignature",
+      "side": "right",
+      "at": "middle"
      },
      {
-      "type": "line",
-      "x1": 86.9,
-      "y1": 44.45,
-      "x2": 86.9,
-      "y2": 50.8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "name"
+      },
+      "label": "12 point",
+      "side": "right"
      },
      {
-      "type": "text",
-      "text": "1/4 in",
-      "x": 85.9,
-      "y": 49.8,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "card-details"
+      },
+      "label": "8 on 9 point",
+      "side": "right",
+      "at": "firstBaseline"
      },
      {
-      "type": "text",
-      "text": "12 point name",
-      "x": 86.9,
-      "y": 23.575,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "8 on 9 point",
-      "x": 1.5,
-      "y": 32.512,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "left"
+       },
+       {
+        "element": "card-telephone",
+        "edge": "right"
+       }
+      ],
+      "side": "bottom"
      }
     ]
    }
@@ -23682,6 +23645,7 @@
     },
     {
      "type": "lines",
+     "id": "address",
      "x": 121.953,
      "y": 30.162,
      "leading": 3.881,
@@ -23724,92 +23688,62 @@
    "guides": {
     "title": "Letterhead placement",
     "notes": [
-     "Signature baseline 1 inch from top; symbol 4 inches from right edge. Address 10 on 11 point, 3/16 inch below the signature baseline and aligned under the B."
+     "Signature baseline 1 inch from the top; symbol 4 inches from the right edge. Address 10 on 11 point (H14), 3/16 inch below the signature baseline and aligned under the B."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 8,
-      "x2": 215.9,
-      "y2": 8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "4\""
      },
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 7,
-      "x2": 114.3,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 7,
-      "x2": 215.9,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "1\""
      },
      {
-      "type": "text",
-      "text": "4 in to right edge",
-      "x": 165.1,
-      "y": 6.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "to": {
+       "element": "address",
+       "edge": "firstBaseline"
+      },
+      "label": "3/16\""
      },
      {
-      "type": "line",
-      "x1": 111.3,
-      "y1": 0,
-      "x2": 111.3,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1 in to baseline",
-      "x": 109.3,
-      "y": 15.24,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 25.4,
-      "x2": 210.9,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 30.162,
-      "x2": 210.9,
-      "y2": 30.162,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "3/16 in · 10 on 11 point",
-      "x": 210.9,
-      "y": 42.162,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "address"
+      },
+      "label": "10 on 11 point",
+      "side": "right"
      }
     ]
    }
@@ -23900,90 +23834,103 @@
     "title": "Envelope left-side construction",
     "notes": [
      "Only the left portion of the envelope is shown in the manual. The No. 10 overall canvas is an adopted format.",
-     "Form number 6 point; return instruction 10 point; signature starts ½ inch from the left with its baseline ¾ inch from the top."
+     "Form number 6 point; return statement 10 point (H14). Form number ¼ inch in and down; signature ½ inch from the left with its baseline ¾ inch from the top.",
+     "The preprinted return address is 10 point, 3/16 inch below the signature baseline."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 33.02,
-      "x2": 12.7,
-      "y2": 33.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "form-number",
+       "edge": "left"
+      },
+      "label": "1/4\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 32.02,
-      "x2": 0,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "label": "1/2\""
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 32.02,
-      "x2": 12.7,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "text",
-      "text": "1/2 in",
-      "x": 6.35,
-      "y": 31.520000000000003,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-number",
+       "edge": "baseline"
+      },
+      "label": "1/4\"",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 0,
-      "x2": 12.7,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "3/4\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/4 in to signature baseline",
-      "x": 58.42,
-      "y": 21.05,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "to": {
+       "element": "return-address",
+       "edge": "baseline"
+      },
+      "label": "3/16\"",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 19.05,
-      "x2": 55.88,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 6.35,
-      "y": 12.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "return-statement"
+      },
+      "label": "10 point",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "10 point return instruction",
-      "x": 25.4,
-      "y": 3.048,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "return-address"
+      },
+      "label": "10 point",
+      "side": "bottom",
+      "at": "left"
      }
     ]
    }
@@ -24027,6 +23974,7 @@
     },
     {
      "type": "lines",
+     "id": "card-details",
      "x": 33.053,
      "y": 44.45,
      "align": "bottom",
@@ -24052,6 +24000,7 @@
     },
     {
      "type": "lines",
+     "id": "card-telephone",
      "x": 25.4,
      "y": 44.45,
      "align": "bottom",
@@ -24097,102 +24046,103 @@
     "title": "Business-card construction",
     "notes": [
      "The signature is blind embossed: the grey preview represents relief, not printing ink. Name 12 point; remaining information 8 on 9 point.",
-     "The last body baseline is ¼ inch from the bottom. Corporate/Gas telephone ends at the left edge of the symbol."
+     "The last body baseline is ¼ inch from the bottom. The signature’s symbol is 2½ inches from the right edge, so 1 inch from the left (derived, not printed).",
+     "The telephone number’s right side is aligned below the left side of the symbol (H14)."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 3,
-      "x2": 25.4,
-      "y2": 3,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "2 1/2\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 2,
-      "x2": 0,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "1 1/2\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 2,
-      "x2": 25.4,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "5/8\""
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 12.7,
-      "y": 1.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "name",
+       "edge": "baseline"
+      },
+      "label": "1 1/8\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 0,
-      "x2": 25.4,
-      "y2": 15.875,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "card-details",
+       "edge": "lastBaseline"
+      },
+      "to": "trim.bottom",
+      "label": "1/4\""
      },
      {
-      "type": "text",
-      "text": "5/8 in · embossed",
-      "x": 86.9,
-      "y": 5.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "blind embossed\nsignature",
+      "side": "right",
+      "at": "middle"
      },
      {
-      "type": "line",
-      "x1": 86.9,
-      "y1": 44.45,
-      "x2": 86.9,
-      "y2": 50.8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "name"
+      },
+      "label": "12 point",
+      "side": "right"
      },
      {
-      "type": "text",
-      "text": "1/4 in",
-      "x": 85.9,
-      "y": 49.8,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "card-details"
+      },
+      "label": "8 on 9 point",
+      "side": "right",
+      "at": "firstBaseline"
      },
      {
-      "type": "text",
-      "text": "12 point name",
-      "x": 86.9,
-      "y": 23.575,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "8 on 9 point",
-      "x": 1.5,
-      "y": 32.512,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "left"
+       },
+       {
+        "element": "card-telephone",
+        "edge": "right"
+       }
+      ],
+      "side": "bottom"
      }
     ]
    }
@@ -24227,6 +24177,7 @@
     },
     {
      "type": "lines",
+     "id": "address",
      "x": 122.239,
      "y": 30.162,
      "leading": 3.881,
@@ -24277,130 +24228,73 @@
    "guides": {
     "title": "Letterhead placement",
     "notes": [
-     "Signature baseline 1 inch from top; symbol 4 inches from right edge. Address 10 on 11 point, 3/16 inch below the signature baseline and aligned under the B.",
-     "The BCE mark is separate from the Rail signature. Its ¾ inch left inset is specified; its 1⅜ inch width and vertical alignment are measured from the scan."
+     "Signature baseline 1 inch from the top; symbol 4 inches from the right edge. Address 10 on 11 point (H14), 3/16 inch below the signature baseline and aligned under the B.",
+     "The BCE mark is separate from the Rail signature. Its ¾ inch left inset is printed; its 1⅜ inch width and vertical alignment are measured from the scan, so only the inset is dimensioned."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 8,
-      "x2": 215.9,
-      "y2": 8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "4\""
      },
      {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 7,
-      "x2": 114.3,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "2 1/8\""
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 7,
-      "x2": 215.9,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "1\""
      },
      {
-      "type": "text",
-      "text": "4 in to right edge",
-      "x": 165.1,
-      "y": 6.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "to": {
+       "element": "address",
+       "edge": "firstBaseline"
+      },
+      "label": "3/16\""
      },
      {
-      "type": "line",
-      "x1": 111.3,
-      "y1": 0,
-      "x2": 111.3,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "address"
+      },
+      "label": "10 on 11 point",
+      "side": "right"
      },
      {
-      "type": "text",
-      "text": "1 in to baseline",
-      "x": 109.3,
-      "y": 15.24,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 25.4,
-      "x2": 210.9,
-      "y2": 25.4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 114.3,
-      "y1": 30.162,
-      "x2": 210.9,
-      "y2": 30.162,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "3/16 in · 10 on 11 point",
-      "x": 210.9,
-      "y": 42.162,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "line",
-      "x1": 0,
-      "y1": 8,
-      "x2": 19.05,
-      "y2": 8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 0,
-      "y1": 7,
-      "x2": 0,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 19.05,
-      "y1": 7,
-      "x2": 19.05,
-      "y2": 9,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "3/4 in",
-      "x": 9.525,
-      "y": 6.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "bce-route-letterhead",
+       "edge": "left"
+      },
+      "label": "3/4\""
      }
     ]
    },
@@ -24496,90 +24390,103 @@
     "title": "Envelope left-side construction",
     "notes": [
      "Only the left portion of the envelope is shown in the manual. The No. 10 overall canvas is an adopted format.",
-     "Form number 6 point; return instruction 10 point; signature starts ½ inch from the left with its baseline ¾ inch from the top."
+     "Form number 6 point; return statement 10 point (H14). Form number ¼ inch in and down; signature ½ inch from the left with its baseline ¾ inch from the top.",
+     "The preprinted return address is 10 point, 3/16 inch below the signature baseline."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 33.02,
-      "x2": 12.7,
-      "y2": 33.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "form-number",
+       "edge": "left"
+      },
+      "label": "1/4\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 32.02,
-      "x2": 0,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "label": "1/2\""
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 32.02,
-      "x2": 12.7,
-      "y2": 34.02,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "2 1/8\""
      },
      {
-      "type": "text",
-      "text": "1/2 in",
-      "x": 6.35,
-      "y": 31.520000000000003,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-number",
+       "edge": "baseline"
+      },
+      "label": "1/4\"",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 0,
-      "x2": 12.7,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "3/4\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/4 in to signature baseline",
-      "x": 58.42,
-      "y": 21.05,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "to": {
+       "element": "return-address",
+       "edge": "baseline"
+      },
+      "label": "3/16\"",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 12.7,
-      "y1": 19.05,
-      "x2": 55.88,
-      "y2": 19.05,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 6.35,
-      "y": 12.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "return-statement"
+      },
+      "label": "10 point",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "10 point return instruction",
-      "x": 25.4,
-      "y": 3.048,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "element": "return-address"
+      },
+      "label": "10 point",
+      "side": "bottom",
+      "at": "left"
      }
     ]
    }
@@ -24623,6 +24530,7 @@
     },
     {
      "type": "lines",
+     "id": "card-details",
      "x": 33.339,
      "y": 44.45,
      "align": "bottom",
@@ -24681,140 +24589,116 @@
     "title": "Business-card construction",
     "notes": [
      "The signature is blind embossed: the grey preview represents relief, not printing ink. Name 12 point; remaining information 8 on 9 point.",
-     "The last body baseline is ¼ inch from the bottom. Corporate/Gas telephone ends at the left edge of the symbol.",
-     "The separate blue BCE locomotive is 1 inch wide, with 1/16 inch between its right edge and the address."
+     "The last body baseline is ¼ inch from the bottom. The signature’s symbol is 2½ inches from the right edge, so 1 inch from the left (derived, not printed).",
+     "The separate blue BCE locomotive is 1 inch wide, with 1/16 inch between its right edge and the address. The Rail telephone is in the bottom line."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 3,
-      "x2": 25.4,
-      "y2": 3,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": "trim.right",
+      "label": "2 1/2\""
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 2,
-      "x2": 0,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "to": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "label": "2 1/8\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 2,
-      "x2": 25.4,
-      "y2": 4,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
+      },
+      "label": "5/8\""
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 12.7,
-      "y": 1.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "name",
+       "edge": "baseline"
+      },
+      "label": "1 1/8\""
      },
      {
-      "type": "line",
-      "x1": 25.4,
-      "y1": 0,
-      "x2": 25.4,
-      "y2": 15.875,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "card-details",
+       "edge": "lastBaseline"
+      },
+      "to": "trim.bottom",
+      "label": "1/4\""
      },
      {
-      "type": "text",
-      "text": "5/8 in · embossed",
-      "x": 86.9,
-      "y": 5.5,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "blind embossed\nsignature",
+      "side": "right",
+      "at": "middle"
      },
      {
-      "type": "line",
-      "x1": 86.9,
-      "y1": 44.45,
-      "x2": 86.9,
-      "y2": 50.8,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "name"
+      },
+      "label": "12 point",
+      "side": "right"
      },
      {
-      "type": "text",
-      "text": "1/4 in",
-      "x": 85.9,
-      "y": 49.8,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "card-details"
+      },
+      "label": "8 on 9 point",
+      "side": "right",
+      "at": "firstBaseline"
      },
      {
-      "type": "text",
-      "text": "12 point name",
-      "x": 86.9,
-      "y": 23.575,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "bce-route-card",
+       "edge": "left"
+      },
+      "to": {
+       "element": "bce-route-card",
+       "edge": "right"
+      },
+      "label": "1\"",
+      "side": "bottom"
      },
      {
-      "type": "text",
-      "text": "8 on 9 point",
-      "x": 1.5,
-      "y": 32.512,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "line",
-      "x1": 6.352,
-      "y1": 49.199999999999996,
-      "x2": 31.752,
-      "y2": 49.199999999999996,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 6.352,
-      "y1": 48.199999999999996,
-      "x2": 6.352,
-      "y2": 50.199999999999996,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 31.752,
-      "y1": 48.199999999999996,
-      "x2": 31.752,
-      "y2": 50.199999999999996,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1 in · BCE mark",
-      "x": 19.052,
-      "y": 47.699999999999996,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "bce-route-card",
+       "edge": "right"
+      },
+      "to": {
+       "element": "card-details",
+       "edge": "left"
+      },
+      "label": "1/16\"",
+      "side": "bottom"
      }
     ]
    },
@@ -25081,83 +24965,78 @@
    "guides": {
     "title": "Form header rules",
     "notes": [
-     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; cap line ⅜ inch from the top.",
-     "Formal signature is the two-line exception: 14 point, aligned with the 20 point form name at the baseline. Rules are ½ point, boxes have square corners; form number 6 point bottom left."
+     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; both cap lines ⅜ inch from the top.",
+     "Formal signature is the two-line exception: 14 point, its lower line aligned with the 20 point form name at the baseline.",
+     "Ruled lines are ½ point; boxes have square corners; no ruled border round the form. Form number 6 point, bottom left."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 3,
-      "y1": 9.525,
-      "x2": 212.9,
-      "y2": 9.525,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-name",
+       "edge": "cap"
+      },
+      "label": "3/8\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/8 in to cap line · 20 point name",
-      "x": 12.7,
-      "y": 7.525,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "cap"
+      },
+      "label": "3/8\"",
+      "side": "right"
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 22.86,
-      "x2": 215.9,
-      "y2": 22.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "to": "trim.right",
+      "label": "1\""
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 21.86,
-      "x2": 190.5,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-name"
+      },
+      "label": "20 point Times Regular",
+      "side": "top"
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 21.86,
-      "x2": 215.9,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "20 point signature",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 203.2,
-      "y": 21.36,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point form number",
+      "side": "bottom"
      },
      {
-      "type": "text",
-      "text": "1/2 point rules",
-      "x": 210.9,
-      "y": 139.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "callout",
+      "target": {
+       "element": "division"
+      },
+      "label": "department or division name",
+      "side": "bottom"
      },
      {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 12.7,
-      "y": 266.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "note",
+      "label": "Ruled lines ½ point; boxes with square corners"
      }
     ]
    },
@@ -25245,296 +25124,191 @@
    "guides": {
     "title": "Cover proportions and type",
     "notes": [
-     "B of the logotype and all written matter align at one-third of the cover width. The symbol hangs to the left.",
-     "Cap-height means the dominant signature/title size, including the gap before authorship. Multi-line text is set solid. Rules follow the edited text.",
+     "The B of the logotype and all written matter align at one-third of the cover width; the symbol hangs to the left. The signature’s cap line is one-quarter of the cover depth down.",
+     "Cap-height means the dominant signature/title size, including the space before authorship. Multi-line elements are set solid. The bands follow the edited text, and go with an emptied element.",
      "Printed dimensions govern the editable layout. The scanned page has small registration and typesetting differences; TeX Gyre Termes substitutes for the original Times Roman."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 2,
-      "y1": 31.432499999999997,
-      "x2": 71.96666666666667,
-      "y2": 31.432499999999997,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 2,
-      "y1": 30.432499999999997,
-      "x2": 2,
-      "y2": 32.4325,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 71.96666666666667,
-      "y1": 30.432499999999997,
-      "x2": 71.96666666666667,
-      "y2": 32.4325,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/3 of cover width",
-      "x": 36.983333333333334,
-      "y": 29.932499999999997,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
-     },
-     {
-      "type": "line",
-      "x1": 71.96666666666667,
-      "y1": 3,
-      "x2": 71.96666666666667,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 70.96666666666667,
-      "y1": 69.85,
-      "x2": 72.96666666666667,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/4 of cover depth",
-      "x": 73.96666666666667,
-      "y": 18.160999999999998,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "line",
-      "x1": 187.9,
-      "y1": 69.85,
-      "x2": 212.9,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 187.9,
-      "y1": 78.25739999999999,
-      "x2": 212.9,
-      "y2": 78.25739999999999,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "36 point signature",
-      "x": 212.9,
-      "y": 67.85,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "2 cap-heights",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": -4.2036999999999995
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "logotype"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "1/3 of cover width"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "1/4 of cover depth",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "36 point",
+      "side": "right",
+      "ends": "none"
      },
      {
-      "type": "text",
-      "text": "36 on 36 point",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-title",
-       "edge": "firstBaseline",
-       "offset": 3.5
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "to": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "label": "2 cap-heights",
+      "side": "right",
+      "ends": "none",
+      "requiresFlow": [
+       "cover-title"
+      ]
      },
      {
-      "type": "text",
-      "text": "1 cap-height",
-      "x": 212.9,
-      "y": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "to": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "label": "36 on 36 point",
+      "side": "right",
+      "ends": "none"
+     },
+     {
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "logotype"
+       },
+       {
+        "flow": "cover-title",
+        "edge": "left"
+       },
+       {
+        "flow": "cover-subtitle",
+        "edge": "left"
+       },
+       {
+        "flow": "cover-credits",
+        "edge": "left"
+       }
+      ]
+     },
+     {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": -2
+       "edge": "top"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end",
+      "label": "1 cap-height",
+      "side": "right",
+      "ends": "none",
       "requiresFlow": [
        "cover-title",
        "cover-subtitle"
       ]
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "top"
       },
-      "x2": 212.9,
-      "y2": {
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "lastBaseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "18 on 18 point",
+      "side": "right",
+      "ends": "none"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
        "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
+       "edge": "lastBaseline"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "18 on 18 point",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-subtitle",
-       "edge": "firstBaseline",
-       "offset": 2
-      },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "1 cap-height",
-      "x": 212.9,
-      "y": {
+      "to": {
        "flow": "cover-credits",
-       "edge": "top",
-       "offset": -2
+       "edge": "top"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end",
+      "label": "1 cap-height",
+      "side": "right",
+      "ends": "none",
       "requiresFlow": [
        "cover-subtitle",
        "cover-credits"
       ]
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-credits",
-       "edge": "top",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
       },
-      "x2": 212.9,
-      "y2": {
+      "to": {
        "flow": "cover-credits",
-       "edge": "top",
-       "offset": 0
+       "edge": "top"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "1 cap-height",
+      "side": "right",
+      "ends": "none",
+      "requiresFlow": [
+       "cover-title",
+       "cover-credits"
+      ],
+      "requiresEmptyFlow": [
+       "cover-subtitle"
+      ]
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
        "flow": "cover-credits",
-       "edge": "lastBaseline",
-       "offset": 0
+       "edge": "top"
       },
-      "x2": 212.9,
-      "y2": {
+      "to": {
        "flow": "cover-credits",
-       "edge": "lastBaseline",
-       "offset": 0
+       "edge": "lastBaseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "18 on 18 point",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-credits",
-       "edge": "firstBaseline",
-       "offset": 2
-      },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "18 on 18 point",
+      "side": "right",
+      "ends": "none"
      }
     ]
    },
@@ -25629,230 +25403,140 @@
    "guides": {
     "title": "Cover proportions and type",
     "notes": [
-     "B of the logotype and all written matter align at one-third of the cover width. The symbol hangs to the left.",
-     "Cap-height means the dominant signature/title size, including the gap before authorship. Multi-line text is set solid. Rules follow the edited text.",
+     "The B of the logotype and all written matter align at one-third of the cover width; the symbol hangs to the left. The signature’s cap line is one-quarter of the cover depth down.",
+     "Cap-height means the dominant signature/title size, including the space before authorship. Multi-line elements are set solid. The bands follow the edited text, and go with an emptied element.",
      "Printed dimensions govern the editable layout. The scanned page has small registration and typesetting differences; TeX Gyre Termes substitutes for the original Times Roman."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 2,
-      "y1": 31.432499999999997,
-      "x2": 71.96666666666667,
-      "y2": 31.432499999999997,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 2,
-      "y1": 30.432499999999997,
-      "x2": 2,
-      "y2": 32.4325,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 71.96666666666667,
-      "y1": 30.432499999999997,
-      "x2": 71.96666666666667,
-      "y2": 32.4325,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/3 of cover width",
-      "x": 36.983333333333334,
-      "y": 29.932499999999997,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
-     },
-     {
-      "type": "line",
-      "x1": 71.96666666666667,
-      "y1": 3,
-      "x2": 71.96666666666667,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 70.96666666666667,
-      "y1": 69.85,
-      "x2": 72.96666666666667,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/4 of cover depth",
-      "x": 73.96666666666667,
-      "y": 18.160999999999998,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "line",
-      "x1": 187.9,
-      "y1": 69.85,
-      "x2": 212.9,
-      "y2": 69.85,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 187.9,
-      "y1": 78.25739999999999,
-      "x2": 212.9,
-      "y2": 78.25739999999999,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "36 point signature",
-      "x": 212.9,
-      "y": 67.85,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "2 cap-heights",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": -4.2036999999999995
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "logotype"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "1/3 of cover width"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "1/4 of cover depth",
+      "side": "left"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "36 point",
+      "side": "right",
+      "ends": "none"
      },
      {
-      "type": "text",
-      "text": "36 on 36 point",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-title",
-       "edge": "firstBaseline",
-       "offset": 3.5
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "to": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "label": "2 cap-heights",
+      "side": "right",
+      "ends": "none",
+      "requiresFlow": [
+       "cover-title"
+      ]
      },
      {
-      "type": "text",
-      "text": "1 cap-height",
-      "x": 212.9,
-      "y": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "to": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "label": "36 on 36 point",
+      "side": "right",
+      "ends": "none"
+     },
+     {
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "logotype"
+       },
+       {
+        "flow": "cover-title",
+        "edge": "left"
+       },
+       {
+        "flow": "cover-subtitle",
+        "edge": "left"
+       }
+      ]
+     },
+     {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": -2
+       "edge": "top"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end",
+      "label": "1 cap-height",
+      "side": "right",
+      "ends": "none",
       "requiresFlow": [
        "cover-title",
        "cover-subtitle"
       ]
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "top"
       },
-      "x2": 212.9,
-      "y2": {
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "lastBaseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "18 on 18 point",
+      "side": "right",
+      "ends": "none"
      },
      {
-      "type": "line",
-      "x1": 187.9,
-      "y1": {
-       "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
+      "type": "callout",
+      "target": {
+       "element": "illustration"
       },
-      "x2": 212.9,
-      "y2": {
-       "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "18 on 18 point",
-      "x": 212.9,
-      "y": {
-       "flow": "cover-subtitle",
-       "edge": "firstBaseline",
-       "offset": 2
-      },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "illustrative matter collected as a unit",
+      "side": "bottom",
+      "outline": true
      }
     ]
    },
@@ -25947,230 +25631,140 @@
    "guides": {
     "title": "Cover proportions and type",
     "notes": [
-     "B of the logotype and all written matter align at one-third of the cover width. The symbol hangs to the left.",
-     "Cap-height means the dominant signature/title size, including the gap before authorship. Multi-line text is set solid. Rules follow the edited text.",
+     "The B of the logotype and all written matter align at one-third of the cover width; the symbol hangs to the left. The signature’s cap line is one-quarter of the cover depth down.",
+     "Cap-height means the dominant signature/title size, including the space before authorship. Multi-line elements are set solid. The bands follow the edited text, and go with an emptied element.",
      "Printed dimensions govern the editable layout. The scanned page has small registration and typesetting differences; TeX Gyre Termes substitutes for the original Times Roman."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 2,
-      "y1": 25.7175,
-      "x2": 33.86666666666667,
-      "y2": 25.7175,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 2,
-      "y1": 24.7175,
-      "x2": 2,
-      "y2": 26.7175,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 33.86666666666667,
-      "y1": 24.7175,
-      "x2": 33.86666666666667,
-      "y2": 26.7175,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/3 of cover width",
-      "x": 17.933333333333334,
-      "y": 24.2175,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
-     },
-     {
-      "type": "line",
-      "x1": 33.86666666666667,
-      "y1": 3,
-      "x2": 33.86666666666667,
-      "y2": 57.15,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 32.86666666666667,
-      "y1": 57.15,
-      "x2": 34.86666666666667,
-      "y2": 57.15,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/4 of cover depth",
-      "x": 35.86666666666667,
-      "y": 14.859,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "line",
-      "x1": 79.6,
-      "y1": 57.15,
-      "x2": 98.6,
-      "y2": 57.15,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "line",
-      "x1": 79.6,
-      "y1": 62.755154,
-      "x2": 98.6,
-      "y2": 62.755154,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "24 point signature",
-      "x": 98.6,
-      "y": 55.15,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "2 cap-heights",
-      "x": 98.6,
-      "y": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": -2.8025770000000003
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "logotype"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "1/3 of cover width"
      },
      {
-      "type": "line",
-      "x1": 79.6,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 98.6,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "top",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "1/4 of cover depth",
+      "side": "right"
      },
      {
-      "type": "line",
-      "x1": 79.6,
-      "y1": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "cap"
       },
-      "x2": 98.6,
-      "y2": {
-       "flow": "cover-title",
-       "edge": "lastBaseline",
-       "offset": 0
+      "to": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "24 point",
+      "side": "left",
+      "ends": "none"
      },
      {
-      "type": "text",
-      "text": "24 on 24 point",
-      "x": 98.6,
-      "y": {
-       "flow": "cover-title",
-       "edge": "firstBaseline",
-       "offset": 3.5
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "baseline"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "to": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "label": "2 cap-heights",
+      "side": "left",
+      "ends": "none",
+      "requiresFlow": [
+       "cover-title"
+      ]
      },
      {
-      "type": "text",
-      "text": "1 cap-height",
-      "x": 98.6,
-      "y": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "top"
+      },
+      "to": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "label": "24 on 24 point",
+      "side": "left",
+      "ends": "none"
+     },
+     {
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "logotype"
+       },
+       {
+        "flow": "cover-title",
+        "edge": "left"
+       },
+       {
+        "flow": "cover-subtitle",
+        "edge": "left"
+       }
+      ]
+     },
+     {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "flow": "cover-title",
+       "edge": "lastBaseline"
+      },
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": -2
+       "edge": "top"
       },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end",
+      "label": "1 cap-height",
+      "side": "left",
+      "ends": "none",
       "requiresFlow": [
        "cover-title",
        "cover-subtitle"
       ]
      },
      {
-      "type": "line",
-      "x1": 79.6,
-      "y1": {
+      "type": "dimension",
+      "axis": "y",
+      "from": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "top"
       },
-      "x2": 98.6,
-      "y2": {
+      "to": {
        "flow": "cover-subtitle",
-       "edge": "top",
-       "offset": 0
+       "edge": "lastBaseline"
       },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "label": "12 on 12 point",
+      "side": "left",
+      "ends": "none"
      },
      {
-      "type": "line",
-      "x1": 79.6,
-      "y1": {
-       "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
+      "type": "callout",
+      "target": {
+       "element": "illustration"
       },
-      "x2": 98.6,
-      "y2": {
-       "flow": "cover-subtitle",
-       "edge": "lastBaseline",
-       "offset": 0
-      },
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "12 on 12 point",
-      "x": 98.6,
-      "y": {
-       "flow": "cover-subtitle",
-       "edge": "firstBaseline",
-       "offset": 2
-      },
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "label": "illustrative matter collected as a unit",
+      "side": "bottom",
+      "outline": true
      }
     ]
    },
@@ -27069,148 +26663,6 @@
    ]
   },
   {
-   "id": "vehicle-van-black",
-   "label": "Vehicle: panel van, light body",
-   "group": "Vehicles",
-   "unit": "mm",
-   "width": 4800,
-   "height": 2050,
-   "raster": 1800,
-   "title": "B.C.Hydro / panel van, positive",
-   "description": "A panel van’s side (Graphic Standards Manual p. 43): the signature in the upper rear panel, 0.09 of the length from the rear, 0.21 of the length wide. Black on a body of 30% value or less, white on a darker one.",
-   "elements": [
-    {
-     "type": "path",
-     "id": "body",
-     "d": "M60 300Q60 120 260 120H3500Q3800 120 4000 520L4700 900Q4760 940 4760 1050V1700H60Z",
-     "fill": "#DBECEE"
-    },
-    {
-     "type": "path",
-     "d": "M3560 220H3900L4280 760H3560Z",
-     "fill": "#CFE3EA",
-     "stroke": "#6C7A80",
-     "strokeWidth": 12
-    },
-    {
-     "type": "line",
-     "x1": 60,
-     "y1": 980,
-     "x2": 4760,
-     "y2": 980,
-     "strokeWidth": 10,
-     "stroke": "#6C7A80"
-    },
-    {
-     "type": "path",
-     "d": "M700 1700A330 330 0 0 1 1360 1700ZM3500 1700A330 330 0 0 1 4160 1700Z",
-     "fill": "#2B2B2B"
-    },
-    {
-     "type": "logo",
-     "signature": "gas",
-     "colourway": "black",
-     "x": 432,
-     "y": 230,
-     "width": 1008
-    }
-   ],
-   "sources": [
-    {
-     "book": "hydro",
-     "page": "H44",
-     "manual": "Graphic Standards Manual",
-     "title": "Light vehicles",
-     "printed": "43"
-    },
-    {
-     "book": "hydro",
-     "page": "H43",
-     "manual": "Graphic Standards Manual",
-     "title": "Vehicle signatures",
-     "printed": "42"
-    },
-    {
-     "book": "hydro",
-     "page": "H42",
-     "manual": "Graphic Standards Manual",
-     "title": "Vehicles",
-     "printed": "41"
-    }
-   ]
-  },
-  {
-   "id": "vehicle-van-white",
-   "label": "Vehicle: panel van, dark body",
-   "group": "Vehicles",
-   "unit": "mm",
-   "width": 4800,
-   "height": 2050,
-   "raster": 1800,
-   "title": "B.C.Hydro / panel van, reverse",
-   "description": "A panel van’s side (Graphic Standards Manual p. 43): the signature in the upper rear panel, 0.09 of the length from the rear, 0.21 of the length wide. Black on a body of 30% value or less, white on a darker one.",
-   "elements": [
-    {
-     "type": "path",
-     "id": "body",
-     "d": "M60 300Q60 120 260 120H3500Q3800 120 4000 520L4700 900Q4760 940 4760 1050V1700H60Z",
-     "fill": "#00AF00"
-    },
-    {
-     "type": "path",
-     "d": "M3560 220H3900L4280 760H3560Z",
-     "fill": "#CFE3EA",
-     "stroke": "#6C7A80",
-     "strokeWidth": 12
-    },
-    {
-     "type": "line",
-     "x1": 60,
-     "y1": 980,
-     "x2": 4760,
-     "y2": 980,
-     "strokeWidth": 10,
-     "stroke": "#6C7A80"
-    },
-    {
-     "type": "path",
-     "d": "M700 1700A330 330 0 0 1 1360 1700ZM3500 1700A330 330 0 0 1 4160 1700Z",
-     "fill": "#2B2B2B"
-    },
-    {
-     "type": "logo",
-     "signature": "standard",
-     "colourway": "white",
-     "x": 432,
-     "y": 230,
-     "width": 1008
-    }
-   ],
-   "sources": [
-    {
-     "book": "hydro",
-     "page": "H44",
-     "manual": "Graphic Standards Manual",
-     "title": "Light vehicles",
-     "printed": "43"
-    },
-    {
-     "book": "hydro",
-     "page": "H43",
-     "manual": "Graphic Standards Manual",
-     "title": "Vehicle signatures",
-     "printed": "42"
-    },
-    {
-     "book": "hydro",
-     "page": "H42",
-     "manual": "Graphic Standards Manual",
-     "title": "Vehicles",
-     "printed": "41"
-    }
-   ]
-  },
-  {
    "id": "form-tender",
    "label": "Form: Tender, legal",
    "group": "Forms",
@@ -27876,83 +27328,70 @@
    "guides": {
     "title": "Form header rules",
     "notes": [
-     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; cap line ⅜ inch from the top.",
-     "Formal signature is the two-line exception: 14 point, aligned with the 20 point form name at the baseline. Rules are ½ point, boxes have square corners; form number 6 point bottom left."
+     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; both cap lines ⅜ inch from the top.",
+     "Formal signature is the two-line exception: 14 point, its lower line aligned with the 20 point form name at the baseline.",
+     "Ruled lines are ½ point; boxes have square corners; no ruled border round the form. Form number 6 point, bottom left."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 3,
-      "y1": 9.525,
-      "x2": 212.9,
-      "y2": 9.525,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-name",
+       "edge": "cap"
+      },
+      "label": "3/8\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/8 in to cap line · 20 point name",
-      "x": 12.7,
-      "y": 7.525,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "cap"
+      },
+      "label": "3/8\"",
+      "side": "right"
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 22.86,
-      "x2": 215.9,
-      "y2": 22.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "to": "trim.right",
+      "label": "1\""
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 21.86,
-      "x2": 190.5,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-name"
+      },
+      "label": "20 point Times Regular",
+      "side": "top"
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 21.86,
-      "x2": 215.9,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "20 point signature",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 203.2,
-      "y": 21.36,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point form number",
+      "side": "bottom"
      },
      {
-      "type": "text",
-      "text": "1/2 point rules",
-      "x": 210.9,
-      "y": 177.8,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 12.7,
-      "y": 342.90000000000003,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "note",
+      "label": "Ruled lines ½ point; boxes with square corners"
      }
     ]
    }
@@ -28975,31 +28414,6 @@
     "paper": "Approx. 5.75 × 9.25 in including snap strip; source says odd-size, no overall dimension printed.",
     "note": "Dimensions rounded from the scanned paper outline; the generic header inset is used rather than treating scanner offsets as official dimensions."
    },
-   "guides": {
-    "title": "Snap-set strip (scan-derived)",
-    "elements": [
-     {
-      "type": "line",
-      "x1": 0,
-      "y1": 14.817,
-      "x2": 146.05,
-      "y2": 14.817,
-      "strokeWidth": "0.5pt",
-      "stroke": "#B04778",
-      "dash": "4 2"
-     },
-     {
-      "type": "text",
-      "text": "Approximate snap-set strip; not a printed rule",
-      "x": 12.7,
-      "y": 10.583,
-      "size": "8pt",
-      "locked": true,
-      "font": "body",
-      "colour": "#B04778"
-     }
-    ]
-   },
    "sources": [
     {
      "book": "hydro",
@@ -29015,7 +28429,61 @@
      "title": "Forms",
      "printed": "18"
     }
-   ]
+   ],
+   "guides": {
+    "title": "Snap-set form header",
+    "notes": [
+     "Form name and signature keep the standard 20 point size; the signature 1 inch from the right.",
+     "The snap-set strip is measured from the scan, not printed: it is shown dashed as a reconstruction, not a rule."
+    ],
+    "elements": [
+     {
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "at": 14.817
+      },
+      "label": "snap-set strip\n(from the scan)",
+      "side": "left",
+      "ends": "tick"
+     },
+     {
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "to": "trim.right",
+      "label": "1\""
+     },
+     {
+      "type": "callout",
+      "target": {
+       "element": "form-name"
+      },
+      "label": "20 point Times Regular",
+      "side": "top"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "20 point signature",
+      "side": "top"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point form number",
+      "side": "bottom"
+     }
+    ]
+   }
   },
   {
    "id": "form-service-application",
@@ -33366,83 +32834,76 @@
    "guides": {
     "title": "Form header rules",
     "notes": [
-     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; cap line ⅜ inch from the top.",
-     "Formal signature is the two-line exception: 14 point, aligned with the 20 point form name at the baseline. Rules are ½ point, boxes have square corners; form number 6 point bottom left."
+     "Form name 20 point, upper and lower case. Ordinary signature 20 point, 1 inch from the right trim; both cap lines ⅜ inch from the top.",
+     "Formal signature is the two-line exception: 14 point, its lower line aligned with the 20 point form name at the baseline.",
+     "Ruled lines are ½ point; boxes have square corners; no ruled border round the form. Form number 6 point, bottom left."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 3,
-      "y1": 9.525,
-      "x2": 212.9,
-      "y2": 9.525,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "form-name",
+       "edge": "cap"
+      },
+      "label": "3/8\"",
+      "side": "left"
      },
      {
-      "type": "text",
-      "text": "3/8 in to cap line · 20 point name",
-      "x": 12.7,
-      "y": 7.525,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "to": "trim.right",
+      "label": "1\""
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 22.86,
-      "x2": 215.9,
-      "y2": 22.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-name"
+      },
+      "label": "20 point form name",
+      "side": "top"
      },
      {
-      "type": "line",
-      "x1": 190.5,
-      "y1": 21.86,
-      "x2": 190.5,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "14 point Formal signature",
+      "side": "top"
      },
      {
-      "type": "line",
-      "x1": 215.9,
-      "y1": 21.86,
-      "x2": 215.9,
-      "y2": 23.86,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "form-number"
+      },
+      "label": "6 point form number",
+      "side": "bottom"
      },
      {
-      "type": "text",
-      "text": "1 in",
-      "x": 203.2,
-      "y": 21.36,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "align",
+      "axis": "y",
+      "refs": [
+       {
+        "element": "form-name",
+        "edge": "baseline"
+       },
+       {
+        "element": "brand-logo",
+        "edge": "baseline",
+        "offset": 4.115833333333334
+       }
+      ],
+      "side": "right",
+      "label": "aligned at the baseline"
      },
      {
-      "type": "text",
-      "text": "1/2 point rules",
-      "x": 210.9,
-      "y": 139.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
-     },
-     {
-      "type": "text",
-      "text": "6 point form number",
-      "x": 12.7,
-      "y": 266.7,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "note",
+      "label": "Ruled lines ½ point; boxes with square corners"
      }
     ]
    }
@@ -33496,28 +32957,22 @@
     "title": "Back-cover rule",
     "notes": [
      "No signature and no printer name appear on the back cover. The printing code is 6 point at bottom right.",
-     "This example uses a ½ inch inset; the manual does not specify the inset."
+     "This example uses a ½ inch inset; the manual does not specify the inset, so it is not dimensioned."
     ],
     "elements": [
      {
-      "type": "text",
-      "text": "No signature on the back",
-      "x": 107.95,
-      "y": 139.7,
-      "size": "12pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "printing-code"
+      },
+      "label": "6 point printing code",
+      "side": "bottom",
+      "at": "right"
      },
      {
-      "type": "text",
-      "text": "6 point printing code",
-      "x": 203.20000000000002,
-      "y": 261.62,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "note",
+      "label": "No signature on the back cover; no printer’s name",
+      "side": "top"
      }
     ]
    }
@@ -33571,28 +33026,22 @@
     "title": "Back-cover rule",
     "notes": [
      "No signature and no printer name appear on the back cover. The printing code is 6 point at bottom right.",
-     "This example uses a ½ inch inset; the manual does not specify the inset."
+     "This example uses a ½ inch inset; the manual does not specify the inset, so it is not dimensioned."
     ],
     "elements": [
      {
-      "type": "text",
-      "text": "No signature on the back",
-      "x": 50.8,
-      "y": 114.3,
-      "size": "12pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "printing-code"
+      },
+      "label": "6 point printing code",
+      "side": "bottom",
+      "at": "right"
      },
      {
-      "type": "text",
-      "text": "6 point printing code",
-      "x": 88.89999999999999,
-      "y": 210.82,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "end"
+      "type": "note",
+      "label": "No signature on the back cover; no printer’s name",
+      "side": "top"
      }
     ]
    }
@@ -33661,27 +33110,45 @@
     "title": "Spine reading direction",
     "notes": [
      "Read left to right when the publication lies on its back. The signature precedes the title.",
-     "On a broad spine the signature/title use the cover’s 36 point size and the title starts under the B."
+     "On a broad spine the signature and title are on separate lines at the cover’s 36 point size, the title starting under the B."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 5,
-      "y1": 47.8,
-      "x2": 274.4,
-      "y2": 47.8,
-      "stroke": "#E8A7C3",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "36 point signature",
+      "side": "top",
+      "at": "logotype"
      },
      {
-      "type": "text",
-      "text": "Read left to right with publication on its back",
-      "x": 139.7,
-      "y": 46.3,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#E8A7C3",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "spine-title"
+      },
+      "label": "36 point title",
+      "side": "bottom",
+      "at": "left"
+     },
+     {
+      "type": "align",
+      "axis": "x",
+      "refs": [
+       {
+        "element": "brand-logo",
+        "edge": "logotype"
+       },
+       {
+        "element": "spine-title",
+        "edge": "left"
+       }
+      ]
+     },
+     {
+      "type": "note",
+      "label": "Reads left to right with the publication on its back →",
+      "side": "bottom"
      }
     ]
    }
@@ -33750,27 +33217,29 @@
     "title": "Spine reading direction",
     "notes": [
      "Read left to right when the publication lies on its back. The signature precedes the title.",
-     "On a narrow spine both share a line. Reduce the size to fit; this specimen uses 24 point."
+     "On a narrow spine both share a line, the size reduced to fit; this specimen uses 24 point."
     ],
     "elements": [
      {
-      "type": "line",
-      "x1": 5,
-      "y1": 16.05,
-      "x2": 274.4,
-      "y2": 16.05,
-      "stroke": "#E8A7C3",
-      "strokeWidth": 0.18
+      "type": "callout",
+      "target": {
+       "element": "brand-logo"
+      },
+      "label": "signature first",
+      "side": "top"
      },
      {
-      "type": "text",
-      "text": "Read left to right with publication on its back",
-      "x": 139.7,
-      "y": 14.55,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#E8A7C3",
-      "anchor": "middle"
+      "type": "callout",
+      "target": {
+       "element": "spine-title"
+      },
+      "label": "title on the same line,\nsize reduced to fit",
+      "side": "bottom"
+     },
+     {
+      "type": "note",
+      "label": "Reads left to right with the publication on its back →",
+      "side": "bottom"
      }
     ]
    }
@@ -33929,67 +33398,49 @@
    "guides": {
     "title": "Portable display clearance",
     "notes": [
-     "At least half a cap-height on all four sides of the complete signature, measured from its visible extent.",
+     "At least half a cap-height of border on all four sides of the complete signature, measured from its visible extent (H35).",
      "This flat panel is not a three-dimensional fabrication master. The manual calls for official large-scale drawings for fabrication."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 11.209977,
-      "y": 11.209977,
-      "width": 142.25404600000002,
-      "height": 29.745046,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18,
-      "dash": "1 1"
+      "type": "dimension",
+      "axis": "x",
+      "from": "trim.left",
+      "to": {
+       "element": "brand-logo",
+       "edge": "left"
+      },
+      "label": "1/2 cap-height"
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 26.0825,
-      "x2": 11.209977,
-      "y2": 26.0825,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "x",
+      "from": {
+       "element": "brand-logo",
+       "edge": "right"
+      },
+      "to": "trim.right",
+      "label": "1/2 cap-height"
      },
      {
-      "type": "line",
-      "x1": 0,
-      "y1": 25.0825,
-      "x2": 0,
-      "y2": 27.0825,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
+      "type": "dimension",
+      "axis": "y",
+      "from": "trim.top",
+      "to": {
+       "element": "brand-logo",
+       "edge": "top"
+      },
+      "label": "1/2 cap-height"
      },
      {
-      "type": "line",
-      "x1": 11.209977,
-      "y1": 25.0825,
-      "x2": 11.209977,
-      "y2": 27.0825,
-      "stroke": "#9A2455",
-      "strokeWidth": 0.18
-     },
-     {
-      "type": "text",
-      "text": "1/2 cap",
-      "x": 5.6049885,
-      "y": 24.5825,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
-     },
-     {
-      "type": "text",
-      "text": "1/2 cap-height border",
-      "x": 82.337,
-      "y": 50.165,
-      "size": "8pt",
-      "font": "italic",
-      "colour": "#9A2455",
-      "anchor": "middle"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "element": "brand-logo",
+       "edge": "bottom"
+      },
+      "to": "trim.bottom",
+      "label": "1/2 cap-height"
      }
     ]
    }
@@ -34130,34 +33581,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 92.05020920502092,
-      "y": 68.62761506276154,
-      "width": 314.64435146443515,
-      "height": 50.2092050209205,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Rail Signature",
-      "x": 92.05020920502092,
-      "y": 60.627615062761535,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "rail-signature"
+      },
+      "label": "at one end, towards the top",
+      "outline": true
      }
     ]
    },
@@ -34216,54 +33662,37 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 859.4795539033456,
-      "y": 725.8977695167287,
-      "width": 463.9405204460966,
-      "height": 89.21933085501858,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "zone": "side-signature"
+      },
+      "label": "a signature on each side",
+      "outline": true
      },
      {
-      "type": "text",
-      "text": "Side Signature",
-      "x": 859.4795539033456,
-      "y": 717.8977695167287,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
-     },
-     {
-      "type": "rect",
-      "x": 847.5836431226766,
-      "y": 898.3884758364312,
-      "width": 511.5241635687732,
-      "height": 178.43866171003717,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Safety Caption",
-      "x": 847.5836431226766,
-      "y": 890.3884758364312,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "safety-caption"
+      },
+      "label": "safety wording (example)",
+      "outline": true
      }
     ]
    },
@@ -34316,34 +33745,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 1126.2135922330096,
-      "y": 385.9401294498382,
-      "width": 124.27184466019418,
-      "height": 51.7799352750809,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Seat Signature",
-      "x": 1126.2135922330096,
-      "y": 377.9401294498382,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "seat-signature"
+      },
+      "label": "where it is subject\nto the least wear",
+      "outline": true
      }
     ]
    },
@@ -34396,34 +33820,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 178.89285714285717,
-      "y": 151.9375,
-      "width": 233.75,
-      "height": 46.75,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Cab Rail Signature",
-      "x": 178.89285714285717,
-      "y": 143.9375,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "cab-rail-signature"
+      },
+      "label": "below the cab windows",
+      "outline": true
      }
     ]
    },
@@ -34476,34 +33895,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 525.1578947368422,
-      "y": 554.5921052631579,
-      "width": 539.8684210526316,
-      "height": 107.97368421052632,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Front Signature",
-      "x": 525.1578947368422,
-      "y": 546.5921052631579,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "front-signature"
+      },
+      "label": "where it is subject\nto the least wear",
+      "outline": true
      }
     ]
    },
@@ -34556,34 +33970,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 149.23324396782846,
-      "y": 56.879356568364614,
-      "width": 371.3887399463807,
-      "height": 120.45040214477211,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Side Signature",
-      "x": 149.23324396782846,
-      "y": 48.879356568364614,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "side-signature"
+      },
+      "label": "upper rear panel",
+      "outline": true
      }
     ]
    },
@@ -34636,34 +34045,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 414.6341463414634,
-      "y": 834.2317073170731,
-      "width": 360.9756097560975,
-      "height": 68.29268292682927,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Rear Signature",
-      "x": 414.6341463414634,
-      "y": 826.2317073170731,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "rear-signature"
+      },
+      "label": "high in the left-hand position,\nbelow the window of a hinged door",
+      "outline": true
      }
     ]
    },
@@ -34716,34 +34120,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 269.7142857142857,
-      "y": 690.4285714285714,
-      "width": 484.57142857142856,
-      "height": 182.85714285714283,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Rear Signature",
-      "x": 269.7142857142857,
-      "y": 682.4285714285714,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "rear-signature"
+      },
+      "label": "centred in the upper part\nof the left door, below the window,\nclear of contours and handle",
+      "outline": true
      }
     ]
    },
@@ -34796,34 +34195,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 326.62721893491124,
-      "y": 1159.8165680473373,
-      "width": 965.6804733727811,
-      "height": 302.9585798816568,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Door Signature",
-      "x": 326.62721893491124,
-      "y": 1151.8165680473373,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "door-signature"
+      },
+      "label": "front door, below the window,\nclear of contours and mouldings",
+      "outline": true
      }
     ]
    },
@@ -34876,34 +34270,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 107.14285714285715,
-      "y": 764.3571428571429,
-      "width": 1128.5714285714287,
-      "height": 228.57142857142858,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Seat Panel Signature",
-      "x": 107.14285714285715,
-      "y": 756.3571428571429,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "seat-panel-signature"
+      },
+      "label": "where it is subject\nto the least wear",
+      "outline": true
      }
     ]
    },
@@ -34956,34 +34345,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 528.0645161290322,
-      "y": 49.854838709677416,
-      "width": 244.74193548387098,
-      "height": 45.32258064516129,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Deck Signature",
-      "x": 528.0645161290322,
-      "y": 41.854838709677416,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "deck-signature"
+      },
+      "label": "side signatures only,\ntowards the back wheels",
+      "outline": true
      }
     ]
    },
@@ -35036,34 +34420,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 970.4704545454545,
-      "y": 151.35227272727275,
-      "width": 353.68636363636364,
-      "height": 63.727272727272734,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Side Signature",
-      "x": 970.4704545454545,
-      "y": 143.35227272727275,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "side-signature"
+      },
+      "label": "upper rear position",
+      "outline": true
      }
     ]
    },
@@ -35116,34 +34495,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 195.12800000000004,
-      "y": 1219.5,
-      "width": 1229.256,
-      "height": 253.656,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Door Signature",
-      "x": 195.12800000000004,
-      "y": 1211.5,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "door-signature"
+      },
+      "label": "on both doors of the cab",
+      "outline": true
      }
     ]
    },
@@ -35196,34 +34570,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 135.8490566037736,
-      "y": 377.4716981132076,
-      "width": 543.3962264150944,
-      "height": 120.75471698113208,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Rear Signature",
-      "x": 135.8490566037736,
-      "y": 369.4716981132076,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "rear-signature"
+      },
+      "label": "near the top of a roll-up door",
+      "outline": true
      }
     ]
    },
@@ -35276,34 +34645,29 @@
      "manual": "Graphic Standards Manual",
      "title": "Vehicle signatures",
      "printed": "42"
+    },
+    {
+     "book": "hydro",
+     "page": "H42",
+     "manual": "Graphic Standards Manual",
+     "title": "Vehicles",
+     "printed": "41"
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Signature positions",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures."
+     "Outlined regions are the reconstructed drawing’s identity zones, measured from the example, not official fabrication dimensions. Their labels quote the manual’s placement rules.",
+     "Vehicle signatures use black on 0–30% background value and white on 31–100%; no corporate-colour vehicle signatures (H43)."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 100.41152263374487,
-      "y": 77.48559670781893,
-      "width": 273.2510288065844,
-      "height": 49.382716049382715,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
-     },
-     {
-      "type": "text",
-      "text": "Trailer Signature",
-      "x": 100.41152263374487,
-      "y": 69.48559670781893,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "zone": "trailer-signature"
+      },
+      "label": "upper rear position of the trailer",
+      "outline": true
      }
     ]
    },
@@ -35355,22 +34719,15 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Borders ½ cap-height on all four sides.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 495,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "note",
+      "label": "Border ½ cap-height on all four sides"
      }
     ]
    },
@@ -35422,22 +34779,15 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "As for the Corporate sign, except that the Gas signature needs a full cap-height above the logotype.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 599,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "note",
+      "label": "Border ½ cap-height; a full cap-height above the Gas signature"
      }
     ]
    },
@@ -35502,22 +34852,24 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "The name accompanies the signature in a horizontal format: an x-height between the signature’s baseline and the name’s top line. Borders ½ cap-height (a full cap-height on top for the Gas signature).",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 448,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "lettering": 0
+      },
+      "label": "name an x-height below\nthe signature baseline",
+      "side": "right",
+      "at": "cap"
+     },
+     {
+      "type": "note",
+      "label": "Border ½ cap-height"
      }
     ]
    },
@@ -35582,22 +34934,36 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Vertical counterpart: an x-height from the signature’s baseline to the name’s top line; the name’s lines have no extra space between them. Borders ½ cap-height (a full cap-height on top for the Gas signature).",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 1446,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "lettering": 0
+      },
+      "label": "name an x-height below\nthe signature baseline",
+      "side": "right",
+      "at": "cap"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "lettering": [
+        0,
+        2
+       ]
+      },
+      "label": "no extra space\nbetween lines",
+      "side": "right",
+      "at": "middle"
+     },
+     {
+      "type": "note",
+      "label": "Border ½ cap-height; a full cap-height on top for the Gas signature"
      }
     ]
    },
@@ -35662,22 +35028,40 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Sentence form, initial capital only. Borders ½ cap-height; spacing between lines of copy is x-height.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 720,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "lettering": 0,
+       "edge": "baseline"
+      },
+      "to": {
+       "lettering": 1,
+       "edge": "cap"
+      },
+      "label": "x-height"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "lettering": [
+        0,
+        2
+       ]
+      },
+      "label": "sentence form,\ninitial capital only",
+      "side": "right",
+      "at": "lastBaseline"
+     },
+     {
+      "type": "note",
+      "label": "Borders ½ cap-height on all four sides."
      }
     ]
    },
@@ -35742,22 +35126,36 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Initial capitals on principal words. The cap-height of subordinate copy equals the x-height of the dominant copy.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 555,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "lettering": 0,
+       "edge": "baseline"
+      },
+      "to": {
+       "lettering": 1,
+       "edge": "cap"
+      },
+      "label": "x-height"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "lettering": 1
+      },
+      "label": "cap-height = x-height\nof the dominant copy",
+      "side": "right"
+     },
+     {
+      "type": "note",
+      "label": "Borders ½ cap-height on all four sides."
      }
     ]
    },
@@ -35822,22 +35220,44 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Key information conveyed quickly: ampersand, lower-case “am” and “pm”.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 517,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "lettering": 0,
+       "edge": "baseline"
+      },
+      "to": {
+       "lettering": 1,
+       "edge": "cap"
+      },
+      "label": "x-height"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "lettering": 0
+      },
+      "label": "ampersand",
+      "side": "right"
+     },
+     {
+      "type": "callout",
+      "target": {
+       "lettering": 1
+      },
+      "label": "lower-case am and pm",
+      "side": "right"
+     },
+     {
+      "type": "note",
+      "label": "Borders ½ cap-height on all four sides."
      }
     ]
    },
@@ -35902,22 +35322,28 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Directional sign: spacing between lines of copy is a cap-height, and a ruled line divides them.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 614,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "dimension",
+      "axis": "y",
+      "from": {
+       "lettering": 0,
+       "edge": "baseline"
+      },
+      "to": {
+       "lettering": 1,
+       "edge": "cap"
+      },
+      "label": "cap-height"
+     },
+     {
+      "type": "note",
+      "label": "Lines a cap-height apart, divided by a ruled line"
      }
     ]
    },
@@ -35987,31 +35413,32 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "Black lettering on yellow for safety. A signature is included where the identity might not be apparent, or to reinforce the legal implication.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 149.60567010309285,
-      "y": 101.77319587628877,
-      "width": 731.4948453608247,
-      "height": 222.62886597938143,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "zone": "identity"
+      },
+      "label": "Corporate, Gas or Rail\nsignature as relevant",
+      "side": "right",
+      "outline": true
      },
      {
-      "type": "text",
-      "text": "Replaceable Hydro identity",
-      "x": 149.60567010309285,
-      "y": 93.77319587628877,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "lettering": [
+        0,
+        1
+       ]
+      },
+      "label": "black on yellow",
+      "side": "right",
+      "at": "middle"
      }
     ]
    },
@@ -36081,31 +35508,32 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "A conventional UTCD “do not enter” red symbol on white, with the signature.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 163.05732484076432,
-      "y": 112.26751592356689,
-      "width": 1273.8853503184712,
-      "height": 356.68789808917194,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "zone": "identity"
+      },
+      "label": "signature where identity\nmight not be apparent",
+      "side": "right",
+      "outline": true
      },
      {
-      "type": "text",
-      "text": "Replaceable Hydro identity",
-      "x": 163.05732484076432,
-      "y": 104.26751592356689,
-      "size": 22,
-      "font": "italic",
-      "colour": "#9A2455"
+      "type": "callout",
+      "target": {
+       "lettering": [
+        0,
+        1
+       ]
+      },
+      "label": "UTCD convention",
+      "side": "right",
+      "at": "middle"
      }
     ]
    },
@@ -36170,22 +35598,20 @@
     }
    ],
    "guides": {
-    "title": "Registered drawing zones",
+    "title": "Sign rules",
     "notes": [
-     "Outlined regions identify the reconstructed drawing’s identity and lettering zones. Their positions are measured from the example, not official fabrication dimensions.",
-     "Use the sign-specific rules for type, borders and contrast."
+     "An indoor sign restricting public access: black on white, no signature required.",
+     "The sign is a traced reconstruction of the manual example; its proportions are measured from the scan."
     ],
     "elements": [
      {
-      "type": "rect",
-      "x": 2,
-      "y": 2,
-      "width": 1596,
-      "height": 377,
-      "fill": "none",
-      "stroke": "#9A2455",
-      "strokeWidth": 2,
-      "dash": "8 5"
+      "type": "callout",
+      "target": {
+       "lettering": 0
+      },
+      "label": "black on white;\nno signature required",
+      "side": "right",
+      "at": "middle"
      }
     ]
    },
@@ -37345,8 +36771,8 @@
       "type": "rect",
       "x": 64,
       "y": 300,
-      "width": 120.19787735523067,
-      "height": 166.6670719491859,
+      "width": 116.63861406338734,
+      "height": 161.73177688241378,
       "fill": "reverse",
       "stroke": "line"
      },
@@ -37355,56 +36781,56 @@
       "src": "templates/advert-display",
       "x": 64,
       "y": 300,
-      "width": 120.2,
-      "height": 166.7
+      "width": 116.6,
+      "height": 161.7
      },
      {
       "type": "label",
       "text": "DISPLAY AD",
       "x": 64,
-      "y": 492.7
+      "y": 487.7
      },
      {
       "type": "nested",
       "src": "templates/av-title",
-      "x": 216.2,
+      "x": 212.6,
       "y": 300,
-      "width": 222.2,
-      "height": 166.7
+      "width": 215.6,
+      "height": 161.7
      },
      {
       "type": "label",
       "text": "AUDIO-VISUAL",
-      "x": 216.2,
-      "y": 492.7
+      "x": 212.6,
+      "y": 487.7
      },
      {
       "type": "nested",
       "src": "templates/sign-horizontal-facility",
-      "x": 470.4,
+      "x": 460.3,
       "y": 300,
-      "width": 483.3,
-      "height": 166.7
+      "width": 469,
+      "height": 161.7
      },
      {
       "type": "label",
       "text": "IDENTIFICATION SIGN",
-      "x": 470.4,
-      "y": 492.7
+      "x": 460.3,
+      "y": 487.7
      },
      {
       "type": "nested",
-      "src": "templates/vehicle-van-black",
-      "x": 985.8,
+      "src": "templates/illustrated-h44-van-side",
+      "x": 961.3,
       "y": 300,
-      "width": 390.2,
-      "height": 166.7
+      "width": 414.7,
+      "height": 161.7
      },
      {
       "type": "label",
       "text": "PANEL VAN",
-      "x": 985.8,
-      "y": 492.7
+      "x": 961.3,
+      "y": 487.7
      }
     ],
     "sources": [
@@ -39309,20 +38735,6 @@
     {
      "template": "sign-guide",
      "label": "Guide"
-    }
-   ]
-  },
-  {
-   "id": "panel-van",
-   "label": "Panel van",
-   "variants": [
-    {
-     "template": "vehicle-van-black",
-     "label": "Black signature"
-    },
-    {
-     "template": "vehicle-van-white",
-     "label": "White signature"
     }
    ]
   },

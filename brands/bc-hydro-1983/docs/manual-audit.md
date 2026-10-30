@@ -8,7 +8,7 @@ All 48 source pages are inventoried against the kit. The audit includes original
 
 - 48 original PDF pages inventoried.
 - 48 existing rebuilt manual SVG pages available for comparison.
-- 65 editable examples in the current kit.
+- 63 editable examples in the current kit.
 - 47 examples with embedded, toggleable layout rules.
 - 6 template source comparisons.
 - 11 added examples and 4 changed clean previews relative to e470434.
@@ -107,9 +107,9 @@ Detailed method and limits: `reference/bce-route-provenance.md` and `reference/b
 | H39 / PDF 39 / p. 38 | Identification signs | represented | Editable example represented | `sign-office-identification`, `sign-gas-identification`, `sign-horizontal-facility`, `sign-vertical-facility`, `illustrated-h39-office`, `illustrated-h39-gas`, `illustrated-h39-freight`, `illustrated-h39-plant` |
 | H40 / PDF 40 / p. 39 | Guide signs | represented | Editable example represented | `sign-guide`, `illustrated-h40-advisory`, `illustrated-h40-customer-service`, `illustrated-h40-shipping`, `illustrated-h40-directional` |
 | H41 / PDF 41 / p. 40 | Control signs | represented | Editable example represented | `sign-danger`, `illustrated-h41-danger`, `illustrated-h41-authorized-vehicles`, `illustrated-h41-employees-only` |
-| H42 / PDF 42 / p. 41 | Vehicles general | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white` |
-| H43 / PDF 43 / p. 42 | Vehicle positive/reverse background rules | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white`, `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
-| H44 / PDF 44 / p. 43 | Light vehicles | represented | Editable example represented | `vehicle-van-black`, `vehicle-van-white`, `illustrated-h44-van-side`, `illustrated-h44-van-rear`, `illustrated-h44-van-door` |
+| H42 / PDF 42 / p. 41 | Vehicles general | represented | Editable example represented | `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
+| H43 / PDF 43 / p. 42 | Vehicle positive/reverse background rules | represented | Editable example represented | `illustrated-h48-boxcar`, `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h48-locomotive`, `illustrated-h47-crawler-front`, `illustrated-h44-van-side`, `illustrated-h45-stepvan-rear`, `illustrated-h44-van-rear`, `illustrated-h44-van-door`, `illustrated-h47-seat-panel`, `illustrated-h46-flatbed`, `illustrated-h45-stepvan-side`, `illustrated-h46-cab-door`, `illustrated-h45-roller-truck-rear`, `illustrated-h46-tractor-trailer` |
+| H44 / PDF 44 / p. 43 | Light vehicles | represented | Editable example represented | `illustrated-h44-van-side`, `illustrated-h44-van-rear`, `illustrated-h44-van-door` |
 | H45 / PDF 45 / p. 44 | Heavy trucks | represented | Editable example represented | `illustrated-h45-stepvan-rear`, `illustrated-h45-stepvan-side`, `illustrated-h45-roller-truck-rear` |
 | H46 / PDF 46 / p. 45 | Tractor trailers / mobile generators | represented | Editable example represented | `illustrated-h46-flatbed`, `illustrated-h46-cab-door`, `illustrated-h46-tractor-trailer` |
 | H47 / PDF 47 / p. 46 | Equipment | represented | Editable example represented | `illustrated-h47-generator`, `illustrated-h47-crawler-side`, `illustrated-h47-crawler-front`, `illustrated-h47-seat-panel` |
@@ -1289,22 +1289,6 @@ No registered template scan is supplied.
 ### sign-guide
 
 B.C.Hydro / directional guide sign. Historical reconstruction.
-
-Presence of an editable example does not establish exact fidelity to the original page or to an official production master.
-
-No registered template scan is supplied.
-
-### vehicle-van-black
-
-B.C.Hydro / panel van, positive. Historical reconstruction.
-
-Presence of an editable example does not establish exact fidelity to the original page or to an official production master.
-
-No registered template scan is supplied.
-
-### vehicle-van-white
-
-B.C.Hydro / panel van, reverse. Historical reconstruction.
 
 Presence of an editable example does not establish exact fidelity to the original page or to an official production master.
 

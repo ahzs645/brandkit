@@ -71,7 +71,7 @@ test('artwork-only Office renders discard flow guides before their fields are re
       { type: 'rect', x: 0, y: 0, width: 40, height: 40, fill: 'ink' },
       { type: 'flow', x: 100, y: 30, items: [{ id: 'email-name', text: 'Example name', size: 14, font: 'body' }] }
     ],
-    guides: { elements: [{ type: 'line', x1: 0, x2: 100, y1: { flow: 'email-name', edge: 'firstBaseline' }, y2: { flow: 'email-name', edge: 'firstBaseline' }, stroke: 'ink' }] }
+    guides: { elements: [{ type: 'callout', target: { flow: 'email-name' }, label: '14 point name', side: 'right' }] }
   }
   const html = await signatureHtml({ ...ctx, brand: { ...brand, templates: [signature] }, showLayoutGuides: true }, { template: signature.id }, { png })
   assert.match(html.html, /Example name/)

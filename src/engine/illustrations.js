@@ -170,24 +170,31 @@ const letteringFont = (spec, line) => {
 /** The words on an illustration, each line a field, in the brand's faces. */
 export const illustrationLettering = (ctx, illustration, spec) => (illustration.lettering ?? []).map((line, index) => {
   const { fonts, brand } = ctx
-  const given = spec ? ctx.values?.[letteringId(spec, index)] : undefined
-  const text = given != null && given !== '' ? String(given) : line.text
-  if (!text.trim()) return ''
-  const key = spec ? letteringFont(spec, line) : 'body'
-  const natural = fonts?.has(key) ? fonts.width(text, key, line.size) : Array.from(text).length * line.size * 0.55
-  const size = line.width && natural > line.width ? line.size * (line.width / natural) : line.size
+  const run = letteringRun(ctx, illustration, spec, line, index)
+  if (!run) return ''
+  const { text, key, size } = run
   if (ctx.outline && fonts?.has(key)) return `<path fill="${escape(line.fill)}" aria-label="${escape(text)}" d="${fonts.path(text, key, size, line.x, line.y, 0, line.anchor)}"/>`
   const face = brand.fonts?.[key] ?? {}
   return `<text x="${n6(line.x)}" y="${n6(line.y)}" text-anchor="${line.anchor}" font-family="${escape(face.stack ?? face.family ?? 'sans-serif')}" font-weight="${face.weight ?? 400}" font-size="${n6(size)}" fill="${escape(line.fill)}">${escape(text)}</text>`
 }).join('')
+
+/** Where one lettering line is drawn and at what size, as illustrationLettering sets it. */
+const letteringRun = (ctx, illustration, spec, line, index) => {
+  const given = spec ? ctx.values?.[letteringId(spec, index)] : undefined
+  const text = given != null && given !== '' ? String(given) : line.text
+  if (!text.trim()) return null
+  const key = spec ? letteringFont(spec, line) : 'body'
+  const natural = ctx.fonts?.has(key) ? ctx.fonts.width(text, key, line.size) : Array.from(text).length * line.size * 0.55
+  const size = line.width && natural > line.width ? line.size * (line.width / natural) : line.size
+  return { text, key, size, width: Math.min(natural, line.width ?? natural) }
+}
 
 /** The whole drawing, identity and lettering included, in the illustration's coordinates. */
 export const illustrationArt = (ctx, illustration, { zones, markings = true, materials, lettering } = {}) =>
   `<g data-layer="object">${recolour(ctx, illustration.object, materials)}</g>${markings && illustration.markings ? `<g data-layer="markings">${illustration.markings}</g>` : ''}`
   + `${illustration.lettering?.length ? `<g data-layer="lettering">${illustrationLettering(ctx, illustration, lettering)}</g>` : ''}<g data-layer="identity">${illustrationIdentity(ctx, illustration, zones)}</g>`
 
-/** The template element: the illustration fitted to `width` (and `height`, if given) at x, y. */
-export const placeIllustration = (ctx, element, u) => {
+const fitted = (ctx, element, u) => {
   const illustration = ctx.brand.illustrations?.[element.illustration]
   if (!illustration) throw new Error(`No illustration ${element.illustration}`)
   const [vx, vy, vw, vh] = illustration.viewBox
@@ -195,7 +202,39 @@ export const placeIllustration = (ctx, element, u) => {
   const scale = element.height == null ? width / vw : Math.min(width / vw, u(element.height) / vh)
   const dx = element.height == null ? 0 : (width - vw * scale) / 2
   const dy = element.height == null ? 0 : (u(element.height) - vh * scale) / 2
-  return `<g${element.id ? ` id="${escape(element.id)}"` : ''} transform="translate(${n6(u(element.x) + dx)} ${n6(u(element.y) + dy)}) scale(${n6(scale)}) translate(${n6(-vx)} ${n6(-vy)})">${illustrationArt(ctx, illustration, element)}</g>`
+  const left = u(element.x) + dx
+  const top = u(element.y) + dy
+  return { illustration, scale, left, top, x: left - vx * scale, y: top - vy * scale, vx, vy, vw, vh }
+}
+
+/** The template element: the illustration fitted to `width` (and `height`, if given) at x, y. */
+export const placeIllustration = (ctx, element, u) => {
+  const { illustration, scale, left, top, vx, vy } = fitted(ctx, element, u)
+  return `<g${element.id ? ` id="${escape(element.id)}"` : ''} transform="translate(${n6(left)} ${n6(top)}) scale(${n6(scale)}) translate(${n6(-vx)} ${n6(-vy)})">${illustrationArt(ctx, illustration, element)}</g>`
+}
+
+/**
+ * Where a placed illustration's parts are, in template units, for layout rules to point at: the
+ * drawing, each branding zone (the quad's extent) and each lettering line as currently filled
+ * (null when emptied, so a rule about it can be left out).
+ */
+export const illustrationBounds = (ctx, element, u) => {
+  const { illustration, scale, x, y, vx, vy, vw, vh } = fitted(ctx, element, u)
+  const box = (left, top, right, bottom, extra = {}) => ({ left: x + left * scale, top: y + top * scale, right: x + right * scale, bottom: y + bottom * scale, ...extra })
+  const zones = new Map(illustration.zones.map((zone) => {
+    const corners = zone.quad ?? [[zone.box[0], zone.box[1]], [zone.box[0] + zone.box[2], zone.box[1] + zone.box[3]]]
+    const xs = corners.map((point) => point[0])
+    const ys = corners.map((point) => point[1])
+    return [zone.id, box(Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys))]
+  }))
+  const lettering = (illustration.lettering ?? []).map((line, index) => {
+    const run = letteringRun(ctx, illustration, element.lettering, line, index)
+    if (!run) return null
+    const left = line.anchor === 'end' ? line.x - run.width : line.anchor === 'middle' ? line.x - run.width / 2 : line.x
+    const cap = (ctx.brand.fonts?.[run.key]?.capHeight ?? 0.7) * run.size
+    return box(left, line.y - cap, left + run.width, line.y, { baseline: y + line.y * scale })
+  })
+  return { drawing: box(vx, vy, vx + vw, vy + vh), zones, lettering }
 }
 
 /**

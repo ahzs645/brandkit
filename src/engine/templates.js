@@ -41,11 +41,11 @@
 // paths for raster and PDF output.
 
 import { lockup, mark, pattern } from './artwork.js'
-import { illustrationFields, placeIllustration } from './illustrations.js'
+import { illustrationBounds, illustrationFields, placeIllustration } from './illustrations.js'
 import { colour as resolveColour, face as faceOf, fill } from './brand.js'
 import { escape, humanize, n6 } from './format.js'
 import { renderPrinterSvg } from '../printer/svg.js'
-import { layoutGuideElements } from './template-guides.js'
+import { layoutGuides } from './template-guides.js'
 
 const PT_TO_MM = 25.4 / 72
 const PX_PER_PT = 96 / 72
@@ -153,8 +153,11 @@ const textElement = (ctx, element, unit) => {
     + `${escape(transformed)}</text>`
 }
 
-/** The complete horizontal lockup, scaled so its visible artwork is `width` wide at (x, y). */
-export const placeLogo = (ctx, { x, y, width, height, points, anchorX, anchorY, rotate, colour, family, layout = 'horizontal', signature, colourway, values, id = 'brand-logo', align = 'start' }) => {
+/**
+ * Where a lockup goes: its scale and the offsets from (x, y) that put its visible artwork, or its
+ * logotype and baseline, there. Shared by drawing it and by measuring it for layout rules.
+ */
+const logoPlacement = (ctx, { width, height, points, anchorX, anchorY, colour, family, layout = 'horizontal', signature, colourway, values, align = 'start' }) => {
   const { brand } = ctx
   // `values` override the template's fields for this signature alone (a cover's signature
   // without its ministry, say).
@@ -173,11 +176,32 @@ export const placeLogo = (ctx, { x, y, width, height, points, anchorX, anchorY, 
   const dx = anchorX === 'logotype' && metrics ? -(master.origin.x + metrics.logotypeX) * scale : anchorX === 'end' ? -(master.width - padding) * scale : -padding * scale
   const dy = anchorY === 'baseline' && metrics ? -(master.origin.y + metrics.baseline) * scale
     : anchorY === 'cap' && metrics ? -(master.origin.y + metrics.baseline - metrics.capHeight) * scale : -padding * scale
-  const label = fill(brand, brand.copy?.logoLabel ?? '{name} logo')
+  return { master, padding, metrics, scale, offset, dx, dy }
+}
+
+/** The complete horizontal lockup, scaled so its visible artwork is `width` wide at (x, y). */
+export const placeLogo = (ctx, options) => {
+  const { x, y, rotate, id = 'brand-logo' } = options
+  const { master, scale, offset, dx, dy } = logoPlacement(ctx, options)
+  const label = fill(ctx.brand, ctx.brand.copy?.logoLabel ?? '{name} logo')
   const transform = rotate
     ? `translate(${n6(x)} ${n6(y)}) rotate(${rotate}) translate(${n6(offset + dx)} ${n6(dy)}) scale(${n6(scale)})`
     : `translate(${n6(x + offset + dx)} ${n6(y + dy)}) scale(${n6(scale)})`
   return `<g id="${escape(id)}" aria-label="${escape(label)}" transform="${transform}">${scopeIds(master.art, id)}</g>`
+}
+
+/** A placed lockup's visible extent, with its baseline, cap line and logotype edge where known. */
+const logoBounds = (ctx, options) => {
+  if (options.rotate) return undefined
+  const { master, padding, metrics, scale, offset, dx, dy } = logoPlacement(ctx, options)
+  const left = options.x + offset + dx
+  const top = options.y + dy
+  const box = { left: left + padding * scale, top: top + padding * scale, right: left + (master.width - padding) * scale, bottom: top + (master.height - padding) * scale }
+  if (metrics) {
+    const baseline = top + (master.origin.y + metrics.baseline) * scale
+    Object.assign(box, { baseline, cap: baseline - metrics.capHeight * scale, logotype: left + (master.origin.x + metrics.logotypeX) * scale })
+  }
+  return box
 }
 
 const placeMotif = (ctx, x, y, width, colour, id) => {
@@ -220,18 +244,91 @@ export const layoutFlow = (ctx, element, unit = 'px') => {
     baseline = baseline == null ? u(element.y) : baseline + u(item.gap ?? item.leading ?? item.size)
     const firstBaseline = baseline
     const x = u(item.x ?? element.x)
+    const rows = []
     lines.forEach((line, index) => {
       if (index > 0) baseline += u(item.leading ?? item.size)
       elements.push({ ...element, ...item, font: key, id: lines.length > 1 ? `${item.id}-${index + 1}` : item.id, literal: line, x, y: baseline, size, tracking: u(item.tracking ?? 0) })
+      rows.push({ baseline, left: x, right: x + measure(ctx, line, key, size) })
     })
     if (item.id) bounds.set(item.id, {
       firstBaseline, lastBaseline: baseline,
       top: firstBaseline - (ctx.brand.fonts?.[key]?.capHeight ?? 0.7) * size,
       bottom: baseline, left: x,
-      right: x + Math.max(...lines.map((line) => measure(ctx, line, key, size)))
+      right: Math.max(...rows.map((row) => row.right)),
+      rows
     })
   }
   return { elements, bounds }
+}
+
+/** One line's extent: x by its anchor, y from its cap line to its baseline. */
+const lineBox = (ctx, text, key, size, x, y, anchor, tracking = 0) => {
+  const width = measure(ctx, text, key, size, tracking / size)
+  const left = anchor === 'end' ? x - width : anchor === 'middle' ? x - width / 2 : x
+  return { left, right: left + width, top: y - (ctx.brand.fonts?.[key]?.capHeight ?? 0.7) * size, bottom: y, baseline: y }
+}
+
+const KEYS = { logo: 'brand-logo', motif: 'brand-motif', symbol: 'brand-symbol' }
+
+/**
+ * Where a template's parts actually fall, for layout rules to measure: elements by id (a logo
+ * without one by its SVG id, 'brand-logo'), flow items, and an illustration's zones and lettering.
+ * Text that has been emptied measures null.
+ */
+export const measureTemplate = (ctx, template) => {
+  const unit = template.unit ?? 'px'
+  const u = (value) => toUnits(value, unit)
+  const elements = new Map()
+  const flows = new Map()
+  let zones = new Map()
+  let lettering = []
+  const set = (key, box) => { if (key != null && !elements.has(key)) elements.set(key, box) }
+  for (const element of template.elements) {
+    const key = element.id ?? KEYS[element.type]
+    switch (element.type) {
+      case 'logo':
+        set(key, placeLogoBounds(ctx, element, u))
+        break
+      case 'text': {
+        const content = textValue(ctx, element)
+        const value = element.caps ? content.toUpperCase() : content
+        set(key, value.trim() ? lineBox(ctx, value, element.font ?? 'body', u(element.size), u(element.x), u(element.y), element.anchor, u(element.tracking ?? 0)) : null)
+        break
+      }
+      case 'lines': {
+        const leading = u(element.leading ?? element.size)
+        const visible = element.lines.map((line) => ({ font: element.font, size: element.size, anchor: element.anchor, ...line, x: line.x ?? element.x }))
+          .filter((line) => element.collapse === false || textValue(ctx, { ...element, ...line }).trim())
+        if (!visible.length) { set(key, null); break }
+        const top = element.align === 'bottom' ? u(element.y) - (visible.length - 1) * leading : u(element.y)
+        const boxes = visible.map((line, row) => lineBox(ctx, textValue(ctx, { ...element, ...line }), line.font ?? 'body', u(line.size), u(line.x), top + row * leading, line.anchor))
+        set(key, { left: Math.min(...boxes.map((box) => box.left)), right: Math.max(...boxes.map((box) => box.right)), top: boxes[0].top, bottom: boxes.at(-1).bottom, firstBaseline: boxes[0].baseline, lastBaseline: boxes.at(-1).baseline, rows: boxes })
+        break
+      }
+      case 'flow':
+        for (const [id, box] of layoutFlow(ctx, element, unit).bounds) flows.set(id, box)
+        break
+      case 'illustration': {
+        const placed = illustrationBounds(ctx, element, u)
+        if (!zones.size) zones = placed.zones
+        if (!lettering.length) lettering = placed.lettering
+        set(key, placed.drawing)
+        break
+      }
+      case 'rect': case 'motif': case 'pattern':
+        set(key, { left: u(element.x), top: u(element.y), right: u(element.x) + u(element.width), bottom: u(element.y) + u(element.height) })
+        break
+    }
+  }
+  return { elements, flows, zones, lettering }
+}
+
+const placeLogoBounds = (ctx, element, u) => logoBounds(ctx, { ...element, x: u(element.x), y: u(element.y), width: element.width == null ? undefined : u(element.width), height: element.height == null ? undefined : u(element.height), points: element.points == null ? undefined : u(`${element.points}pt`) })
+
+/** Scales a physical size ("3.5in", "612pt", 1600) by a factor, keeping its unit. */
+const scalePhysical = (value, factor) => {
+  const match = /^([\d.]+)(\D*)$/.exec(String(value))
+  return match ? `${n6(Number(match[1]) * factor)}${match[2]}` : value
 }
 
 const renderElement = (ctx, element, template) => {
@@ -321,6 +418,8 @@ const renderElement = (ctx, element, template) => {
  *
  * @param {object} ctx  `{ brand, fonts?, values?, outline?, showGuides?, showLayoutGuides? }`
  * @param {object} template
+ * @returns {{ svg, width, height, unit, physical, frame? }}  `frame` is the margin added on each
+ *   side for layout rules, in template units, when they are shown.
  */
 export const renderTemplate = (ctx, template) => {
   if (template.svg && template.printer) return renderPrinterSvg(ctx, template)
@@ -341,22 +440,34 @@ export const renderTemplate = (ctx, template) => {
   const title = fill(brand, template.title ?? `{name} / ${template.id}`)
   const desc = fill(brand, template.description ?? brand.copy?.templateDescription ?? '{name} application. Text is live and editable.')
   const body = template.elements.map((element) => renderElement(ctx, element, template)).filter((part) => part !== '')
+  // Layout rules are drawn outside the trim, as a manual's construction drawing is. Shown, the
+  // canvas grows by the margin they need; hidden (every standard export), it stays the trim and
+  // the layer stays a switched-off group.
+  let frame
   if (template.guides?.elements?.length) {
-    const bounds = new Map(template.elements.filter((element) => element.type === 'flow').flatMap((element) => [...layoutFlow(ctx, element, unit).bounds]))
-    const annotations = layoutGuideElements(template.guides, bounds).map((element) => renderElement(ctx, element, template)).filter(Boolean).join('\n')
+    const font = brand.fonts?.italic ? 'italic' : 'body'
+    const layout = layoutGuides(template.guides, { width: template.width, height: template.height, ...measureTemplate(ctx, template), font, measure: (text, size) => measure(ctx, text, font, size) })
+    const annotations = layout.annotations.map((annotation) => {
+      const parts = annotation.parts.map((part) => renderElement(ctx, part, template)).filter(Boolean).join('')
+      return `<g data-layout-guide="${annotation.type}"${annotation.id ? ` id="${escape(annotation.id)}"` : ''}${annotation.label ? ` aria-label="${escape(annotation.label.replace(/\s*\n\s*/g, ' '))}"` : ''}>${parts}</g>`
+    }).join('\n')
     body.push(`<g id="layout-guides" display="${ctx.showLayoutGuides ? 'inline' : 'none'}" aria-label="${escape(template.guides.title ?? 'Layout rules')}">\n${scopeIds(annotations, 'layout-guide')}\n</g>`)
+    if (ctx.showLayoutGuides) frame = layout.frame
   }
+  const { left = 0, top = 0, right = 0, bottom = 0 } = frame ?? {}
+  const viewWidth = template.width + left + right
+  const viewHeight = template.height + top + bottom
   const svg = '<?xml version="1.0" encoding="UTF-8"?>\n'
     + '<svg xmlns="http://www.w3.org/2000/svg" '
-    + `width="${physical[0]}" height="${physical[1]}" `
-    + `viewBox="0 0 ${n6(template.width)} ${n6(template.height)}" `
+    + `width="${frame ? scalePhysical(physical[0], viewWidth / template.width) : physical[0]}" height="${frame ? scalePhysical(physical[1], viewHeight / template.height) : physical[1]}" `
+    + `viewBox="${n6(-left)} ${n6(-top)} ${n6(viewWidth)} ${n6(viewHeight)}" `
     + 'role="img" aria-labelledby="template-title template-description" '
     + `data-brand-version="${escape(brand.version ?? '')}" overflow="hidden">\n`
     + `<title id="template-title">${escape(title)}</title>\n`
     + `<desc id="template-description">${escape(desc)}</desc>\n`
     + body.join('\n')
     + '\n</svg>\n'
-  return { svg, width: template.width, height: template.height, unit, physical }
+  return { svg, width: template.width, height: template.height, unit, physical, ...(frame ? { frame } : {}) }
 }
 
 /** The editable fields a template exposes, in the order they appear. Pass the brand for its labels. */

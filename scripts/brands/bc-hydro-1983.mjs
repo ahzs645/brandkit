@@ -56,7 +56,7 @@ const stationery = SETS.flatMap((set) => {
       elements: [
         { type: 'background', fill: 'paper' },
         { type: 'logo', signature: set.id, colourway: 'black', x: letterX, y: inch(1), width, anchorY: 'baseline' },
-        { type: 'lines', x: logotypeAt(set.id, letterX, width), y: round(inch(1) + inch(3 / 16)), leading: pt(11), size: '10pt', font: 'body', colour: 'ink', lines: set.letterLines },
+        { type: 'lines', id: 'address', x: logotypeAt(set.id, letterX, width), y: round(inch(1) + inch(3 / 16)), leading: pt(11), size: '10pt', font: 'body', colour: 'ink', lines: set.letterLines },
         // H18: ¾ in left is printed; width and bottom alignment are measured from the scan.
         ...(set.id === 'rail' ? [{ type: 'illustration', id: 'bce-route-letterhead', illustration: 'bce-route-outline', x: inch(0.75), y: round(inch(1 + 3 / 16) + pt(11) + pt(2.5) - inch(1.375) * 150 / 415), width: inch(1.375) }] : [])
       ]
@@ -81,8 +81,8 @@ const stationery = SETS.flatMap((set) => {
         { type: 'background', fill: 'paper' },
         { type: 'logo', signature: set.id, colourway: 'blind', x: cardX, y: inch(0.625), width, anchorY: 'baseline' },
         text('name', undefined, logotypeAt(set.id, cardX, width), inch(1.125), '12pt', { font: 'body', colour: 'ink' }),
-        { type: 'lines', x: logotypeAt(set.id, cardX, width), y: inch(1.75), align: 'bottom', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardLines },
-        ...(set.cardPhone.length ? [{ type: 'lines', x: cardX, y: inch(1.75), align: 'bottom', anchor: 'end', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardPhone }] : []),
+        { type: 'lines', id: 'card-details', x: logotypeAt(set.id, cardX, width), y: inch(1.75), align: 'bottom', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardLines },
+        ...(set.cardPhone.length ? [{ type: 'lines', id: 'card-telephone', x: cardX, y: inch(1.75), align: 'bottom', anchor: 'end', leading: pt(9), size: '8pt', font: 'body', colour: 'ink', lines: set.cardPhone }] : []),
         // H18 dimensions the separate blue mark at 1 in with 1/16 in to the address.
         ...(set.id === 'rail' ? [{ type: 'illustration', id: 'bce-route-card', illustration: 'bce-route-card', x: round(logotypeAt(set.id, cardX, width) - inch(1 + 1 / 16)), y: round(inch(1.75) - inch(1) * 105 / 300), width: inch(1) }] : [])
       ]
@@ -276,25 +276,7 @@ const signs = [
   }
 ]
 
-// Vehicles (H42–H48): single-colour signatures only, black on bodies of 30% value or less, white
-// on darker ones; one signature a side and a third on the rear, never on the front; Corporate,
-// Gas and Rail at one logotype height for a type of vehicle.
-const VAN = { length: 4800, height: 2050 }
-const van = (body, colourway, set) => ({
-  id: `vehicle-van-${colourway}`, label: `Vehicle: panel van, ${colourway === 'black' ? 'light body' : 'dark body'}`, group: 'Vehicles', unit: 'mm', width: VAN.length, height: VAN.height, raster: 1800,
-  title: `B.C.Hydro / panel van, ${colourway === 'black' ? 'positive' : 'reverse'}`,
-  description: 'A panel van’s side (Graphic Standards Manual p. 43): the signature in the upper rear panel, 0.09 of the length from the rear, 0.21 of the length wide. Black on a body of 30% value or less, white on a darker one.',
-  elements: [
-    { type: 'path', id: 'body', d: `M60 300Q60 120 260 120H3500Q3800 120 4000 520L4700 900Q4760 940 4760 1050V1700H60Z`, fill: body },
-    { type: 'path', d: 'M3560 220H3900L4280 760H3560Z', fill: '#CFE3EA', stroke: '#6C7A80', strokeWidth: 12 },
-    line(60, 980, 4760, 980, 10, { stroke: '#6C7A80' }),
-    { type: 'path', d: 'M700 1700A330 330 0 0 1 1360 1700ZM3500 1700A330 330 0 0 1 4160 1700Z', fill: '#2B2B2B' },
-    { type: 'logo', signature: set, colourway, x: round(0.09 * VAN.length), y: 230, width: round(0.21 * VAN.length) }
-  ]
-})
-const vehicles = [van('#DBECEE', 'black', 'gas'), van('#00AF00', 'white', 'standard')]
-
-const templates = [...stationery, bulletin, ...publications, masthead('band'), masthead('rule'), advert, classified, slide, ...signs, ...vehicles]
+const templates = [...stationery, bulletin, ...publications, masthead('band'), masthead('rule'), advert, classified, slide, ...signs]
 
 // `office`: the face Word and PowerPoint should ask for (the manual's Times Roman).
 const FONT = (file, label, extra = {}) => ({ family: 'TeX Gyre Termes', office: 'Times New Roman', stack: '"TeX Gyre Termes", "Times New Roman", Times, serif', weight: 400, capHeight: CAP, file: `fonts/${file}`, web: `fonts/${file}`, label, ...extra })
@@ -471,7 +453,7 @@ brand.guide = {
     },
     {
       title: 'Advertising, signs and vehicles.', name: 'Applications', subtitle: 'In all advertising the signature is the final element. Signs are black on white, flush left. Vehicles take single-colour signatures only.',
-      elements: shelf([{ src: 'templates/advert-display', ratio: 6.57 / 9.11, label: 'DISPLAY AD', frame: true }, { src: 'templates/av-title', ratio: 4 / 3, label: 'AUDIO-VISUAL' }, { src: 'templates/sign-horizontal-facility', ratio: 2.9, label: 'IDENTIFICATION SIGN' }, { src: 'templates/vehicle-van-black', ratio: 4800 / 2050, label: 'PANEL VAN' }], { y: 300, height: 360 })
+      elements: shelf([{ src: 'templates/advert-display', ratio: 6.57 / 9.11, label: 'DISPLAY AD', frame: true }, { src: 'templates/av-title', ratio: 4 / 3, label: 'AUDIO-VISUAL' }, { src: 'templates/sign-horizontal-facility', ratio: 2.9, label: 'IDENTIFICATION SIGN' }, { src: 'templates/illustrated-h44-van-side', ratio: 1600 / 624, label: 'PANEL VAN' }], { y: 300, height: 360 })
     }
   ],
   sheets: [
@@ -489,7 +471,7 @@ brand.guide = {
 
 // The drawings of vans, trucks, equipment and rolling stock (ManualKit's source-registered
 // illustrations), each a template with the signature in its branding zones.
-const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43'], 'Vehicles and equipment, drawn')
+const drawn = illustrated('hydro', ['H44', 'H45', 'H46', 'H47', 'H48'], ['H43', 'H42'], 'Vehicles and equipment, drawn')
 // Its signs, drawn: identification, guide and control, each line of wording a field.
 const DRAWN_SIGN_KINDS = { H39: 'Identification signs', H40: 'Guide signs', H41: 'Control signs' }
 const drawnSigns = illustrated('hydro', ['H39', 'H40', 'H41'], ['H38'], 'Signs, drawn', (asset) => DRAWN_SIGN_KINDS[asset.split('-')[0]])
@@ -523,7 +505,6 @@ brand.sets = [
   set('spine', 'Publication spine', [['spine-broad', 'Broad'], ['spine-narrow', 'Narrow']], 'Publications'),
   set('advertisement', 'Advertisement', [['advert-display', 'Display'], ['advert-classified', 'Classified'], ['advert-single-column', 'Single column']]),
   set('sign', 'Sign', [['sign-office-identification', 'Office identification'], ['sign-gas-identification', 'Gas identification'], ['sign-horizontal-facility', 'Facility, horizontal'], ['sign-vertical-facility', 'Facility, vertical'], ['sign-danger', 'Danger'], ['sign-guide', 'Guide']]),
-  set('panel-van', 'Panel van', [['vehicle-van-black', 'Black signature'], ['vehicle-van-white', 'White signature']]),
   ...drawn.sets,
   ...drawnSigns.sets.map((entry) => ({ ...entry, id: entry.id.replace(/^drawn-/, 'drawn-sign-') }))
 ]
@@ -563,8 +544,6 @@ cite(brand, {
     ...Object.fromEntries(['sign-office-identification', 'sign-gas-identification', 'sign-horizontal-facility', 'sign-vertical-facility'].map((id) => [id, ['H39', 'H38']])),
     'sign-danger': ['H41', 'H38'],
     'sign-guide': ['H40', 'H38'],
-    'vehicle-van-black': ['H44', 'H43', 'H42'],
-    'vehicle-van-white': ['H44', 'H43', 'H42'],
     ...drawn.sources,
     ...drawnSigns.sources
   },
