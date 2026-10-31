@@ -6,7 +6,7 @@ The kit bundles four **original static font files** under the SIL Open Font Lice
 
 | Kit role | Bundled face | Basis |
 | --- | --- | --- |
-| Display | Bahianita Regular | Explicitly used for country/project display headings on the official Projects page. |
+| Display | Bahianita Regular | Explicitly used on Projects and in headings across Home, About, Methodology, Governance, Donate and Contact. See the cross-page visual evidence record. |
 | Body | Red Hat Text Regular | Observed website body and UI family. |
 | Bold/supporting headings | Red Hat Text Bold | Observed website supporting headings and bold styles. |
 | Document emphasis | Red Hat Text Italic | Authentic upstream italic supplied for document use; this does not assert that the captured Projects page uses italic text. |

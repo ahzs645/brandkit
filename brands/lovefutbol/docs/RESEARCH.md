@@ -2,6 +2,8 @@
 
 Research date: 30 October 2026. Scope: the global love.fútbol identity and its current public digital presence. This is a researched Brandkit implementation, not an organization-issued graphic standards manual. The source register is [`../reference/sources.json`](../reference/sources.json).
 
+The [extended site research](SITE-RESEARCH.md) adds cross-page visual evidence, English/Spanish/Brazilian Portuguese contexts, audience routes, project content and source-quality findings. The [application guide](APPLICATION-GUIDE.md) gives explicit local working defaults without changing the status of unverified official standards.
+
 ## What is established
 
 **Use the name `love.fútbol` in prose.** The lowercase name, separating dot, and accented `ú` are consistently used by the organization. Its FAQ explains the dot as a point of connection across people, languages, and shared passions. The logo is a hand-drawn pitch containing the custom wordmark, with an asymmetric outline, open goal areas, center line, and a small corner flag. These irregularities are part of the artwork. The founder explicitly connects the logo to the simplicity and imperfect, improvised spaces of grassroots football. Do not replace the mark with typed text, a geometric rectangle, or an invented football icon. ([FAQ](https://www.lovefutbol.org/faq), [About Us](https://www.lovefutbol.org/about-us))
@@ -39,6 +41,7 @@ The uploaded capture and the live public site support the following digital valu
 | `#489D60` | Navigation active states, blog links, and footer treatment; current child stylesheet and page styles. |
 | `#88C59B` | Light green display headings and country-section treatments on the projects page. |
 | `#D17F2D` | Terracotta links/theme accent and alternating project-section treatments. |
+| `#3CB1EA` | Active cyan headings, metric figures and section fields on the homepage; contact treatment in the About/Partners section. Confirmed beyond a generic theme declaration. |
 | `#5A9F6F` | Green in theme button definitions; record separately from the stronger recurring green. |
 | `#1D1D1B` | Dark heading/footer-related theme value. |
 | `#081913` | Very dark green body-text theme value. |
@@ -52,9 +55,9 @@ For accessible document text, the dark ink works well against the observed green
 
 ## Typography: distinguish the evidence layers
 
-**Bahianita** is explicitly used for country display headings on the projects page, and appears in the 2025 annual report. **Red Hat Text** appears in the current site's font declarations (including the local family alias `Red Hat`) and in the organizational culture PDF. These provide a practical, reproducible pairing for Brandkit starter documents. Bahianita is a display face; Red Hat Text is better suited to long text and small labels.
+**Bahianita** is explicitly used for country display headings on the projects page, appears in the 2025 annual report, and is now documented in inline heading styles on Home, About, Methodology, Governance, Donate and Contact. **Red Hat Text** appears in the current site's font declarations (including the local family alias `Red Hat`) and in the organizational culture PDF. These provide a practical, reproducible pairing for Brandkit starter documents. Bahianita is a display face; Red Hat Text is better suited to long text and small labels. The [cross-page evidence record](../reference/site-visual-evidence.json) preserves the observed declarations and their limits.
 
-The site's child CSS also assigns **DK Brush Crush** to H1 and blog-post titles, and **Acumin Pro Condensed** to H3. Those declarations do not mean every current page uses them: the captured projects page has explicit Bahianita country headings and no H1. Record these as observed alternative roles. Do not redistribute commercial font files merely because the site loads them publicly. Include licensed local fallbacks or explanatory metadata where the full commercial face is unavailable. ([Child CSS](https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css), [Acumin publisher](https://fonts.adobe.com/fonts/acumin), [Brush Crush author note](https://www.dafont.com/dk-brush-crush.font))
+The site's child CSS also assigns **DK Brush Crush** to H1 and blog-post titles, and **Acumin Pro Condensed** to H3. Those declarations do not mean every current page uses them: the captured projects page has explicit Bahianita country headings and no H1. The later audit found plain H1 titles on Dharavi and Milpa Alta detail pages matching the brush-font rule without a descendant family override. That is a supported CSS-cascade inference for present content; browser-computed styles and successful commercial font loading were not measured. Record these as observed alternative roles. Do not redistribute commercial font files merely because the site loads them publicly. ([Child CSS](https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css), [Acumin publisher](https://fonts.adobe.com/fonts/acumin), [Brush Crush author note](https://www.dafont.com/dk-brush-crush.font))
 
 Bahianita and Red Hat Text are available under the SIL Open Font License from their official source repositories. Keep their license files with any redistributed fonts. Font rights do not confer rights to the love.fútbol name or mark. ([Bahianita source](https://github.com/google/fonts/tree/main/ofl/bahianita), [Red Hat source](https://github.com/RedHatOfficial/RedHatFont))
 

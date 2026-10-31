@@ -1,0 +1,803 @@
+{
+  "schema": "brandkit/site-visual-evidence/1",
+  "brandId": "lovefutbol",
+  "reviewed": "2026-10-30",
+  "scope": "Live public global website and explicitly linked assets; source observations are separate from proposed local defaults.",
+  "method": "Read public HTML/CSS and inspect selected directly linked artwork plus official report pages. No browser-computed style measurement or live-page screenshot was available.",
+  "privacy": "Only public source URLs and selected presentation facts are retained. No raw HTML, HAR, headers, cookies, trackers, request payloads or personal contact details.",
+  "pages": [
+    {
+      "id": "home",
+      "url": "https://www.lovefutbol.org/",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "Built with Communities",
+          "selector": "#hs_cos_wrapper_dnd_area-module-5_ h1",
+          "headingInline": {
+            "font-size": "48px",
+            "line-height": "1"
+          },
+          "inlineSpans": [
+            {
+              "color": "#3cb1ea",
+              "font-family": "Bahianita",
+              "font-weight": "400"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "FROM SPACE TO PLACE",
+          "selector": "#hs_cos_wrapper_module_17775658990013_ h1",
+          "headingInline": {
+            "text-align": "center",
+            "font-family": "Bahianita",
+            "font-weight": "400",
+            "color": "#88c59b",
+            "margin-bottom": "8px",
+            "line-height": "1"
+          },
+          "inlineSpans": [
+            {
+              "color": "#3cb1ea"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "EXPLORE THE MOVEMENT",
+          "selector": "#hs_cos_wrapper_module_1780681160936_ h1",
+          "headingInline": {
+            "text-align": "center",
+            "font-family": "Bahianita",
+            "font-weight": "400",
+            "color": "#88c59b",
+            "margin-bottom": "8px",
+            "line-height": "1"
+          },
+          "inlineSpans": [
+            {
+              "color": "#3cb1ea"
+            },
+            {
+              "font-size": "60px"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "GLOBAL PARTNERS IN PLAY",
+          "selector": "#hs_cos_wrapper_widget_1777559867539_ h1",
+          "headingInline": {
+            "text-align": "center"
+          },
+          "inlineSpans": [
+            {
+              "color": "#d17f2d",
+              "font-family": "Bahianita"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "about-us",
+      "url": "https://www.lovefutbol.org/about-us",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "Our history",
+          "selector": "#hs_cos_wrapper_widget_1783702910954_ h2",
+          "headingInline": {
+            "font-size": "89px",
+            "text-align": "left"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#88c59b"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "It begins with a place to play",
+          "selector": "#hs_cos_wrapper_module_1783703565691_ h2",
+          "headingInline": {
+            "font-size": "48px"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#88c59b",
+              "font-size": "55px"
+            },
+            {
+              "letter-spacing": "0.32px",
+              "background-color": "transparent"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "Our team",
+          "selector": "#hs_cos_wrapper_module_1783703704615_ h2",
+          "headingInline": {
+            "font-size": "89px",
+            "text-align": "center"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#d17f2d"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "methodology",
+      "url": "https://www.lovefutbol.org/methodology",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "how we work",
+          "selector": "#hs_cos_wrapper_widget_1783944497752_ h1",
+          "headingInline": {
+            "font-size": "72px"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#d17f2d"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "awards",
+          "selector": "#hs_cos_wrapper_module_17839448885246_ h1",
+          "headingInline": {
+            "font-size": "72px"
+          },
+          "inlineSpans": [
+            {
+              "color": "#d17f2d",
+              "font-family": "Bahianita"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "why we exist",
+          "selector": "#hs_cos_wrapper_module_1783945797578_ h2",
+          "headingInline": {
+            "font-size": "60px",
+            "text-align": "left"
+          },
+          "inlineSpans": [
+            {
+              "color": "#88c59b",
+              "font-family": "Bahianita"
+            },
+            {
+              "font-weight": "400"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "governance-transparency",
+      "url": "https://www.lovefutbol.org/governance-transparency",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "Governance & Transparency",
+          "selector": "#hs_cos_wrapper_widget_1778684685322_ h3",
+          "headingInline": {
+            "line-height": "1.25",
+            "font-weight": "bold",
+            "font-size": "48px"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#d17f2d",
+              "font-size": "60px"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "People, Culture & Inclusion",
+          "selector": "#hs_cos_wrapper_module_1779130337683_ h3",
+          "headingInline": {
+            "line-height": "1.25",
+            "font-weight": "bold",
+            "font-size": "48px"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#88c59b"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "Financial Transparency",
+          "selector": "#hs_cos_wrapper_module_17791310498256_ h3",
+          "headingInline": {
+            "line-height": "1.25",
+            "font-weight": "bold",
+            "font-size": "48px"
+          },
+          "inlineSpans": [
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400",
+              "color": "#d17f2d"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "donate",
+      "url": "https://www.lovefutbol.org/donate",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "Build for the future.donate today.",
+          "selector": "#hs_cos_wrapper_widget_1784128791206_ h2",
+          "headingInline": {
+            "font-size": "60px"
+          },
+          "inlineSpans": [
+            {
+              "color": "#d17f2d"
+            },
+            {
+              "font-family": "Bahianita",
+              "font-weight": "400"
+            },
+            {
+              "font-family": "Bahianita"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "url": "https://www.lovefutbol.org/contact",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "we'd love to hear from you!",
+          "selector": "#hs_cos_wrapper_widget_1784296516107_ h2",
+          "headingInline": {
+            "text-align": "center",
+            "font-size": "60px"
+          },
+          "inlineSpans": [
+            {
+              "color": "#d17f2d",
+              "font-family": "Bahianita",
+              "font-weight": "400"
+            }
+          ],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "dharavi-india",
+      "url": "https://www.lovefutbol.org/dharavi-india",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "dharavi",
+          "selector": "#hs_cos_wrapper_dnd_area-module-5_ h1",
+          "headingInline": {
+            "text-align": "center",
+            "margin-bottom": "34px"
+          },
+          "inlineSpans": [],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        },
+        {
+          "text": "Mumbai, India",
+          "selector": "#hs_cos_wrapper_dnd_area-module-5_ h2",
+          "headingInline": {
+            "text-align": "center",
+            "white-space": "pre-wrap",
+            "color": "#489d60"
+          },
+          "inlineSpans": [],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "milpaalta",
+      "url": "https://www.lovefutbol.org/milpaalta",
+      "httpStatus": 200,
+      "headings": [
+        {
+          "text": "Milpa Alta",
+          "selector": "#hs_cos_wrapper_dnd_area-module-5_ h1",
+          "headingInline": {
+            "text-align": "center",
+            "margin-bottom": "34px"
+          },
+          "inlineSpans": [],
+          "evidence": "live HTML element and declarations",
+          "browserComputedStyleVerified": false
+        }
+      ]
+    },
+    {
+      "id": "starting-squad",
+      "url": "https://www.lovefutbol.org/starting-squad",
+      "httpStatus": 200,
+      "headings": []
+    }
+  ],
+  "observations": [
+    {
+      "id": "cyan-current-use",
+      "pages": [
+        "home",
+        "about-us"
+      ],
+      "kind": "observed-explicit-html-and-css",
+      "confidence": "high",
+      "summary": "Cyan #3CB1EA is an active page accent, not only a generic theme residue. Its usage remains scoped to these pages; no evidence makes it mandatory globally.",
+      "declarations": [
+        {
+          "page": "home",
+          "selectors": [
+            ".dnd_area-row-3-background-layers",
+            ".dnd_area-row-8-background-layers",
+            ".dnd_area-row-11-background-layers"
+          ],
+          "property": "background-image",
+          "value": "linear-gradient(rgba(60, 177, 234, 1), rgba(60, 177, 234, 1))"
+        },
+        {
+          "page": "home",
+          "selector": "#hs_cos_wrapper_module_1778169182526 .number-counter-card-inner",
+          "properties": {
+            "color": "#3cb1ea",
+            "font-family": "Bahianita",
+            "font-size": "80px",
+            "font-weight": "400"
+          }
+        },
+        {
+          "page": "about-us",
+          "locator": "Partner-section contact link and explanatory spans",
+          "properties": {
+            "span color": "#3cb1ea",
+            "contact link background-color": "#3cb1ea",
+            "contact link color": "#000000"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bahianita-broad-display",
+      "pages": [
+        "home",
+        "about-us",
+        "methodology",
+        "governance-transparency",
+        "donate",
+        "contact"
+      ],
+      "kind": "observed-explicit-inline-type",
+      "confidence": "high",
+      "summary": "Explicit Bahianita spans across six additional page types strengthen the choice of Bahianita for the local display system beyond Projects alone.",
+      "sizeRangePx": [
+        48,
+        89
+      ],
+      "limits": "A collection of observed sizes, not an official type scale. Inline spans can override the global H1/H3 font rules."
+    },
+    {
+      "id": "brush-crush-on-detail-h1",
+      "pages": [
+        "dharavi-india",
+        "milpaalta"
+      ],
+      "kind": "actual-elements-plus-css-cascade-inference",
+      "confidence": "high for matching declarations; font-file load not measured",
+      "summary": "Both pages contain plain H1 project titles, with no descendant font-family override. The shared child CSS body h1 rule matches those actual elements. This is stronger than an unused font-face declaration but is not a browser-computed or font-download measurement.",
+      "sourceUrl": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css",
+      "selector": "body h1, body h1.blog-post__title",
+      "properties": {
+        "font-family": "DK Brush Crush"
+      },
+      "baseH1": {
+        "sourceUrl": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/204823925293/1793319994676/template_main-head.min.css",
+        "font-size": "64px",
+        "font-weight": "400",
+        "line-height": "1em",
+        "text-transform": "uppercase"
+      },
+      "responsiveBaseH1": {
+        "media": "(max-width:992px)",
+        "font-size": "32px"
+      },
+      "cascadeChecks": [
+        "No font-family declarations in either page inline CSS outside font-face registration.",
+        "The two additional shared foundation/Magic Module CSS files contain no font-family property.",
+        "Title HTML supplies alignment/margin only."
+      ],
+      "redistribution": "Not bundled; this observation does not grant a license."
+    },
+    {
+      "id": "red-hat-alias",
+      "pages": [
+        "home"
+      ],
+      "kind": "observed-font-face-map",
+      "confidence": "high",
+      "summary": "The CSS alias Red Hat resolves to Red Hat Text font files rather than a separate unidentified brand family.",
+      "fontFaceExamples": [
+        {
+          "family": "Red Hat",
+          "weight": 400,
+          "style": "normal",
+          "url": "https://www.lovefutbol.org/hubfs/RedHatText-Regular.ttf"
+        },
+        {
+          "family": "Red Hat",
+          "weight": 700,
+          "style": "normal",
+          "url": "https://www.lovefutbol.org/hubfs/RedHatText-Bold.ttf"
+        }
+      ]
+    },
+    {
+      "id": "home-counters-responsive",
+      "pages": [
+        "home"
+      ],
+      "kind": "observed-css-matching-present-module",
+      "confidence": "high",
+      "selector": "#hs_cos_wrapper_module_1778169182526 .number-counter-grid",
+      "properties": {
+        "display": "grid",
+        "grid-template-columns": "repeat(4,1fr)"
+      },
+      "responsive": [
+        {
+          "media": "screen and (max-width:922px)",
+          "grid-template-columns": "repeat(2,1fr)"
+        },
+        {
+          "media": "screen and (max-width:575px)",
+          "grid-template-columns": "1fr"
+        }
+      ],
+      "labelProperties": {
+        "color": "#FFFFFF",
+        "font-size": "16px",
+        "font-weight": "700",
+        "font-family": "Red Hat"
+      },
+      "limits": "Do not reuse volatile numeric impact claims as brand content."
+    },
+    {
+      "id": "home-project-gallery",
+      "pages": [
+        "home"
+      ],
+      "kind": "observed-css-matching-present-module",
+      "confidence": "high",
+      "selector": "#hs_cos_wrapper_module_17807787106367 .hs-image__grid__list__item",
+      "properties": {
+        "aspect-ratio": "16/9",
+        "flex-basis": "calc(33.333333333333336% - 10px)"
+      },
+      "listProperties": {
+        "gap": "10px"
+      },
+      "responsive": [
+        {
+          "media": "screen and (max-width:767px)",
+          "flex-basis": "calc(100.0% - 10px)"
+        }
+      ],
+      "summary": "Three landscape columns collapse to a single column, with compact gaps. Photo/project captions are conveyed separately in the content."
+    },
+    {
+      "id": "home-partner-strip",
+      "pages": [
+        "home"
+      ],
+      "kind": "observed-css-matching-present-class",
+      "confidence": "high",
+      "selector": ".partners-strip img",
+      "properties": {
+        "max-height": "55px",
+        "max-width": "150px",
+        "width": "auto",
+        "height": "auto",
+        "object-fit": "contain"
+      },
+      "container": {
+        "selector": ".partners-strip .row-fluid",
+        "max-width": "1400px",
+        "display": "flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "gap": "55px",
+        "flex-wrap": "wrap"
+      },
+      "responsive": [
+        {
+          "media": "(max-width:768px)",
+          "max-height": "38px",
+          "max-width": "110px",
+          "gap": "28px"
+        },
+        {
+          "media": "(max-width:480px)",
+          "max-height": "30px",
+          "max-width": "90px"
+        }
+      ],
+      "limits": "These are a specific homepage strip implementation, not approved co-branding equivalence or clear-space standards."
+    },
+    {
+      "id": "about-logo-grids",
+      "pages": [
+        "about-us"
+      ],
+      "kind": "observed-css-matching-present-modules",
+      "confidence": "high",
+      "selectors": [
+        "#hs_cos_wrapper_module_17842069838973 .hs-logo-grid",
+        "#hs_cos_wrapper_module_17912980808453 .hs-logo-grid"
+      ],
+      "properties": {
+        "gap": "10px"
+      },
+      "wrapper": {
+        "flex": "0 1 calc(20.0% - 8.0px)",
+        "max-width": "calc(20.0% - 8.0px)",
+        "padding": "5px"
+      },
+      "logo": {
+        "max-height": "95px"
+      },
+      "summary": "Two sponsor/partner groups each use a five-column desktop sizing rule."
+    },
+    {
+      "id": "project-detail-gallery",
+      "pages": [
+        "dharavi-india",
+        "milpaalta"
+      ],
+      "kind": "observed-css-and-element-classes",
+      "confidence": "high",
+      "selector": "#hs_cos_wrapper_widget_1768887978663 .card-image",
+      "properties": {
+        "aspect-ratio": "1",
+        "object-fit": "cover"
+      },
+      "cardClasses": [
+        "card",
+        "filter-card",
+        "col-lg-3",
+        "col-md-6",
+        "col-sm-12",
+        "flex-col"
+      ],
+      "columnInterpretation": "Shared Bootstrap-like stylesheet gives four columns at large widths, two at medium widths, and a single column at small widths.",
+      "imageAttributeExamples": {
+        "alt": "Project name",
+        "width": "2000",
+        "style": "max-width: 100%; height: auto;"
+      },
+      "limits": "Preserve the full original photograph for its lightbox; square framing is a thumbnail choice."
+    },
+    {
+      "id": "public-logo-size-observation",
+      "pages": [
+        "home",
+        "about-us",
+        "methodology",
+        "governance-transparency",
+        "donate",
+        "contact",
+        "dharavi-india",
+        "milpaalta"
+      ],
+      "kind": "observed-component-css",
+      "confidence": "high",
+      "selectors": [
+        ".logo-standard",
+        ".logo-sticky"
+      ],
+      "properties": {
+        "max-width": "121px",
+        "float": "left"
+      },
+      "header": {
+        "background-color": "rgba(255, 255, 255, 1)",
+        "padding": "10px 0"
+      },
+      "limits": "The 121px value constrains the source image canvas, which has transparent padding. It is not 121px of visible artwork and is not an official minimum logo size."
+    },
+    {
+      "id": "shared-grain-backgrounds",
+      "pages": [
+        "home",
+        "about-us",
+        "methodology",
+        "governance-transparency"
+      ],
+      "kind": "observed-css-and-viewed-assets",
+      "confidence": "high",
+      "summary": "Flat colour bands alternate with subtle grain-texture image fields. Inspected black4 and blue4 are subdued granular surfaces, not pictorial backgrounds.",
+      "examples": [
+        {
+          "sourceUrl": "https://www.lovefutbol.org/hs-fs/hubfs/BGs%20-%20La%20Cantina/black%204.png?width=2000&height=1125",
+          "viewed": true,
+          "usedOn": [
+            "about-us",
+            "methodology",
+            "governance-transparency"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.lovefutbol.org/hs-fs/hubfs/BGs%20-%20La%20Cantina/blue%204.png?width=2000&height=1125",
+          "viewed": true,
+          "usedOn": [
+            "home"
+          ]
+        },
+        {
+          "sourceUrl": "https://www.lovefutbol.org/hs-fs/hubfs/BGs%20-%20La%20Cantina/white%201.png?width=2000&height=1125",
+          "viewed": false,
+          "usedOn": [
+            "about-us",
+            "governance-transparency",
+            "contact"
+          ]
+        }
+      ],
+      "properties": {
+        "background-position": "center center",
+        "background-size": "cover",
+        "background-repeat": "no-repeat"
+      },
+      "limits": "No broad artwork redistribution license established. Do not sample one texture colour as a new official solid brand token."
+    },
+    {
+      "id": "methodology-community-diagram",
+      "pages": [
+        "methodology"
+      ],
+      "kind": "viewed-official-linked-asset",
+      "confidence": "high",
+      "sourceUrl": "https://www.lovefutbol.org/hs-fs/hubfs/Layer%201.png?width=489&height=500&name=Layer%201.png",
+      "summary": "Green outlined stakeholder illustrations sit around a circular connection graphic; the complete black/red logo remains intact in the centre.",
+      "limits": "This is a specific raster diagram, not a published reusable icon set or permission to extract a new brand symbol."
+    },
+    {
+      "id": "photography-framing",
+      "pages": [
+        "home",
+        "about-us",
+        "dharavi-india",
+        "milpaalta"
+      ],
+      "kind": "observed-html-plus-viewed-photo",
+      "confidence": "high for content examples; medium for proposed general direction",
+      "sourceUrl": "https://www.lovefutbol.org/hs-fs/hubfs/Holding%20Hands.png?width=1104&height=1080&name=Holding%20Hands.png",
+      "summary": "Documentary colour photography focuses on participation, human connection and the site itself. The homepage includes a before/after slider with a separate project/location caption; project detail pages use galleries.",
+      "captionExample": {
+        "page": "home",
+        "role": "before/after site and project-number caption",
+        "properties": {
+          "text-align": "center",
+          "font-family": "Red Hat",
+          "font-size": "16px",
+          "font-weight": "400",
+          "color": "#ffffff"
+        }
+      },
+      "limits": "No website photograph is bundled or offered as reusable stock. Reproduce composition principles with appropriately sourced project imagery."
+    },
+    {
+      "id": "logo-raster-transparent-insets",
+      "kind": "measured-official-raster-alpha-bounds",
+      "sourceId": "lf-header-raster",
+      "canvasPixels": [
+        1275,
+        875
+      ],
+      "alphaBoundingBoxPixels": [
+        205,
+        172,
+        1137,
+        704
+      ],
+      "visibleHeightPixels": 532,
+      "smallestInsetPixels": 138,
+      "smallestInsetToVisibleHeight": 0.2593984962406015,
+      "interpretation": "Supports a quarter-height local reserve as a practical inference; image padding is not an official exclusion-zone specification."
+    }
+  ],
+  "publicationExamples": [
+    {
+      "url": "https://www.lovefutbol.org/hubfs/2025%20Annual%20Report%20Review%20Version%2001_Copy.pptx-1.pdf?hsLang=en",
+      "document": "2025 Annual Report",
+      "pdfPages": [
+        2,
+        5,
+        11,
+        17
+      ],
+      "status": "observed publication-specific styling",
+      "findings": [
+        "Dark granular background surfaces",
+        "Light-green condensed Bahianita headings",
+        "Rectangular photographic crops and asymmetrical split layouts",
+        "Fine white/grey separator rules",
+        "Occasional diagonal-hatch edge panels and large outlined page numerals",
+        "Small green project-number tags over gallery photographs"
+      ],
+      "limits": "These are examples from the 2025 report, not a universal identity standard. The 2024 publication has a different palette and typography."
+    }
+  ],
+  "standardsSearch": {
+    "result": "No public visual identity manual, current logo-download kit, numerical clear-space standard or minimum-size rule found in these nine pages, their explicit resource links, or scoped English/Portuguese brand searches. This does not prove none exists.",
+    "searchTerms": [
+      "site:lovefutbol.org (\"brand guidelines\" OR \"brand book\" OR \"media kit\" OR \"press kit\")",
+      "site:lovefutbol.org (\"manual de marca\" OR \"identidade visual\" OR \"brand assets\" OR \"logo download\")",
+      "site:lovefutbolbrasil.org (\"manual\" OR \"marca\" OR \"identidade visual\")"
+    ],
+    "falsePositive": {
+      "url": "https://www.lovefutbolbrasil.org/metodologia-2",
+      "explanation": "Its named Manual love.fútbol concerns project mobilization, planning, construction and management; it is not evidence of a visual identity manual."
+    },
+    "officialDownloadsPage": "https://www.lovefutbol.org/governance-transparency"
+  },
+  "localGuidance": "Consolidated implementation decisions live in application-assumptions.json. Candidate audit sizes were reviewed against source geometry and rendered specimens before adopting the working 32 mm / 144 CSS px recommendations."
+}

@@ -12,9 +12,11 @@
     "website": "https://www.lovefutbol.org/projects",
     "paletteEvidence": "website-projects-brand-evidence.json",
     "fonts": [
-      "Bahianita project headings",
+      "Bahianita display headings across multiple live page types",
       "Red Hat Text body and supporting type"
     ],
+    "siteEvidence": "site-visual-evidence.json",
+    "contentModel": "content-patterns.json",
     "otherDeclaredFonts": [
       "DK Brush Crush H1",
       "Acumin Pro Condensed H3"
@@ -36,7 +38,11 @@
     "documentReservedSpaceMm": 8,
     "documentMarginsMm": 20,
     "templates": "Local applications, not official stationery.",
-    "typography": "Projects-page pairing; Italic added for document emphasis.",
+    "assumptions": "application-assumptions.json",
+    "recommendedPrintLogoWidthMm": 32,
+    "recommendedScreenLogoWidthCssPx": 144,
+    "recommendedClearSpaceHeightRatio": 0.25,
+    "typography": "Broader observed Bahianita / Red Hat Text pairing; sizes and Italic use are local defaults.",
     "standaloneSymbol": false,
     "faviconGeneration": false,
     "partnerLogoGeneration": false,

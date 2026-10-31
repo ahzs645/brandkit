@@ -1,29 +1,29 @@
 # love.fútbol — researched application kit
 
-Sources reviewed 2026-10-30. This kit preserves original vector logo geometry, records the official identity story, and adds 13 editable local layouts. It is not an official standards manual and does not imply organization approval.
+Sources reviewed 2026-10-30. Version 1.1 preserves original vector logo geometry, extends the live-site research and supplies 19 editable local layouts. The evidence and practical assumptions are labelled separately. This is not an organization-issued standards manual.
 
 ## What is included
 
-- Complete logo in black/red and white/red, with the original red flag retained. SVG, PNG and PDF exports use genuine vector source geometry.
-- Observed digital colours, Bahianita and Red Hat Text, their original font files and SIL Open Font License notices.
-- 8 guide pages; Letter/A4 stationery and project briefs; four presentation layouts; social and email applications.
-- Documents profiles for project reports, decision briefs, brand references and initiative overviews, with editable Word and printable HTML output.
-- CSS, tokens and a React full-logo component through the existing web export pipeline.
+- Complete logo in black/red and white/red, with the original red flag retained. SVG, PNG and PDF exports use the preserved source paths.
+- Observed digital colours, including the active homepage cyan accent; Bahianita and Red Hat Text with original font files, OFL notices and source hashes.
+- 12 guide pages; Letter/A4 stationery, proposed project briefs and documented project profiles; six presentation layouts; four social layouts and an email signature.
+- Editable Word publications and stationery, a six-slide PowerPoint and HTML email signature through the existing export pipeline.
+- Web tokens, CSS and a React full-logo component. The additional application guidance does not change the app into a translated website or add unsupported photo-upload controls.
 
-## Evidence and choices
+## Evidence and practical choices
 
-[Research](RESEARCH.md) explains the name, identity, history, community model, visual sources and unresolved questions. [Source index](../reference/sources.json) records the research trail. [Identity rules](../reference/identity-rules.json) distinguishes published facts, observed implementation and local choices. [Logo extraction](../reference/logo-extraction.json) records the source PDF and path/raster comparison; [font sources](../fonts/source-manifest.json) record immutable upstream revisions and hashes.
+[Original research](RESEARCH.md) covers identity and artwork provenance. [Extended site research](SITE-RESEARCH.md) covers page patterns, audiences, language routes and source inconsistencies. [Application guide](APPLICATION-GUIDE.md) turns this evidence into twelve explicit local decisions, with sources and limits. The [source index](../reference/sources.json), [site evidence](../reference/site-visual-evidence.json), [content model](../reference/content-patterns.json) and [identity record](../reference/identity-rules.json) are included in the exported pack.
 
-The vector source is love.fútbol’s 2025 guide contributed to U.S. Soccer. Its white/red artwork is preserved; the black/red variant changes only the main path fill to match the official website. The website capture contains a different raster canvas and does not establish numerical clear space. The raw capture, request headers, tracking data and commercial font files are not part of the kit.
+The vector source is love.fútbol’s 2025 guide contributed to U.S. Soccer. Its white/red artwork is preserved; the black/red variant changes only the main path fill to match the official website. See [extraction evidence](../reference/logo-extraction.json).
 
-The Projects page uses Bahianita display headings and Red Hat Text. Other website styles declare DK Brush Crush and Acumin, and annual reports have different typography. The kit therefore describes its pairing as an observed application, not a universal official font specification.
+Bahianita is observed across several current pages, not only Projects. Some live project-detail H1 headings inherit DK Brush Crush, and H3 rules declare Acumin. Those commercial font files are not bundled. Annual reports and campaign pages use context-specific treatments. See [font sources](../fonts/source-manifest.json).
 
-No official minimum size, clear-space measurement, Pantone/CMYK recipe, partner lockup or stationery standard was found. The 48 mm document logo, 8 mm space and 20 mm margins are local choices. Dark text is used on green and terracotta surfaces because white on those accents does not satisfy 4.5:1 for normal text.
+Local recommendations reserve one quarter of the complete logo height, start primary logos at 32 mm or 144 CSS px, and retain the report profile’s 48 mm artwork, 8 mm reserve and 20 mm margins. The [size specimens](logo-size-study.png) support visual review; the numbers are not official minima or a physical print proof. Dark text on green, light green, terracotta and cyan gives readable starter combinations.
 
 ## Rebuild and use
 
-Run `npm run make:lovefutbol` to regenerate the definition, guide, menu logo and use instructions from local source files; no network access is needed. For an independent logo extraction check, run `python scripts/extract-lovefutbol-logo.py --help`. The source PDF and original font files are preserved with hashes.
+Run `npm run make:lovefutbol` to regenerate the definition, guide, local-assumption records, reference pages and instructions without network access. For an independent logo check, run `python scripts/extract-lovefutbol-logo.py --help`.
 
-Use the app’s **Logos**, **Colour**, **Typography**, **Templates**, **Guide** and **Documents** views. Replace all project, contact and image placeholders. Keep local communities central in the copy, preserve the dot and accent in love.fútbol, and cite dated sources for every impact measure. Partner logos and project photographs are not bundled.
+Use **Logos**, **Colour**, **Typography**, **Templates**, **Guide** and **Documents**. Replace every instructional placeholder. Add verified project information, dated metric definitions, exact approved quotations and suitable image files. Use the photo frames in exported SVG or PowerPoint for insertion; they are not an image-upload feature. Partner marks are supplied separately by their owners.
 
-See [USE.md](../USE.md) for reusable document and consumer integration instructions.
+See [USE.md](../USE.md) for document and consumer integration instructions, and [validation](VALIDATION.md) for what was checked.

@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "brand": "lovefutbol",
+  "reviewed": "2026-10-30",
+  "status": "local-editorial-proposal-not-official-standard",
+  "purpose": "Editable starter content informed by verified public pages. Empty strings and null values are intentional. Review and source factual fields before publishing.",
+  "brandName": {
+    "display": "love.fútbol",
+    "asciiKey": "lovefutbol",
+    "sourceIds": [
+      "lf-faq",
+      "lf-faq-es"
+    ]
+  },
+  "locales": {
+    "en": {
+      "label": "English",
+      "tagline": "MORE THAN A PLACE TO PLAY!",
+      "labels": {
+        "donate": "Donate",
+        "projects": "Projects",
+        "contact": "Get in touch",
+        "suggestSpace": "Suggest a space"
+      },
+      "routes": {
+        "home": "https://www.lovefutbol.org/",
+        "donate": "https://www.lovefutbol.org/donate",
+        "projects": "https://www.lovefutbol.org/projects",
+        "contact": "https://www.lovefutbol.org/contact",
+        "suggestSpace": "https://www.lovefutbol.org/suggest-a-space"
+      },
+      "status": "observed-official-website-labels",
+      "sourceIds": [
+        "lf-projects",
+        "lf-donate",
+        "lf-contact",
+        "lf-suggest-space"
+      ]
+    },
+    "es": {
+      "label": "Español",
+      "tagline": "¡MÁS QUE UN LUGAR PARA JUGAR!",
+      "labels": {
+        "donate": "Donar",
+        "projects": "Proyectos",
+        "contact": "Contáctanos",
+        "suggestSpace": "Sugiere un espacio"
+      },
+      "routes": {
+        "home": "https://www.lovefutbol.org/es/",
+        "donate": "https://www.lovefutbol.org/es/donate",
+        "projects": "https://www.lovefutbol.org/es/projects",
+        "contact": "https://www.lovefutbol.org/es/contact",
+        "suggestSpace": "https://www.lovefutbol.org/es/suggest-a-space"
+      },
+      "status": "observed-official-website-labels",
+      "sourceIds": [
+        "lf-projects-es",
+        "lf-donate-es",
+        "lf-contact-es",
+        "lf-suggest-space-es"
+      ]
+    },
+    "pt-BR": {
+      "label": "Português - Brasil",
+      "tagline": "MAIS DO QUE UM LUGAR PARA JOGAR!",
+      "labels": {
+        "donate": "Doe",
+        "projects": "Projetos",
+        "contact": "Entre em contato",
+        "suggestSpace": "Sugira um espaço"
+      },
+      "routes": {
+        "home": "https://www.lovefutbol.org/pt-br/",
+        "donate": "https://www.lovefutbol.org/pt-br/donate",
+        "projects": "https://www.lovefutbol.org/pt-br/projects",
+        "contact": "https://www.lovefutbol.org/pt-br/contact",
+        "suggestSpace": "https://www.lovefutbol.org/pt-br/suggest-a-space"
+      },
+      "status": "observed-official-website-labels",
+      "sourceIds": [
+        "lf-projects-pt-br",
+        "lf-donate-pt-br",
+        "lf-contact-pt-br",
+        "lf-suggest-space-pt-br"
+      ]
+    }
+  },
+  "audiences": [
+    {
+      "id": "individual-giving",
+      "audience": "Individual supporter",
+      "defaultCtaKey": "donate",
+      "programName": null,
+      "amount": null,
+      "currency": null,
+      "frequency": null,
+      "status": "local-grouping-from-official-pathway",
+      "sourceIds": [
+        "lf-donate",
+        "lf-home"
+      ]
+    },
+    {
+      "id": "monthly-giving",
+      "audience": "Recurring individual supporter",
+      "defaultCtaKey": "donate",
+      "programName": "Teammates",
+      "amount": null,
+      "currency": null,
+      "frequency": "monthly",
+      "status": "verified-program-local-amount-free-preset",
+      "sourceIds": [
+        "lf-faq",
+        "lf-es-home",
+        "lf-pt-home"
+      ]
+    },
+    {
+      "id": "institutional-philanthropy",
+      "audience": "Individual or family supporting long-term organizational capacity",
+      "defaultCtaKey": null,
+      "destination": "https://www.lovefutbol.org/starting-squad",
+      "programName": "Starting Squad",
+      "amount": null,
+      "currency": null,
+      "frequency": null,
+      "status": "local-grouping-from-official-program",
+      "sourceIds": [
+        "lf-starting-squad"
+      ]
+    },
+    {
+      "id": "community-partner",
+      "audience": "Municipality, school, nonprofit, sports club or community organization",
+      "defaultCtaKey": "contact",
+      "programName": null,
+      "status": "local-grouping-from-official-pathway",
+      "sourceIds": [
+        "lf-home",
+        "lf-contact",
+        "lf-partners"
+      ]
+    },
+    {
+      "id": "project-sponsor",
+      "audience": "Organization supporting a space or multiple projects",
+      "defaultCtaKey": "contact",
+      "programName": null,
+      "status": "local-grouping-from-official-pathway",
+      "sourceIds": [
+        "lf-projects",
+        "lf-methodology",
+        "lf-contact",
+        "lf-partners"
+      ]
+    },
+    {
+      "id": "community-proposal",
+      "audience": "Resident or community proposing a potential space",
+      "defaultCtaKey": "suggestSpace",
+      "programName": null,
+      "status": "local-grouping-from-official-pathway",
+      "sourceIds": [
+        "lf-suggest-space"
+      ]
+    },
+    {
+      "id": "brazil-corporate-clube",
+      "audience": "Brazil corporate supporter of institutional costs",
+      "defaultCtaKey": null,
+      "destination": "https://www.lovefutbolbrasil.org/clubelovefutbol",
+      "programName": "Clube love.fútbol",
+      "status": "optional-regional-program-preset",
+      "sourceIds": [
+        "lf-brazil-clube"
+      ]
+    },
+    {
+      "id": "brazil-volunteer",
+      "audience": "Regional volunteer community in Brazil",
+      "defaultCtaKey": null,
+      "destination": "https://www.lovefutbolbrasil.org/facaparte",
+      "programName": null,
+      "status": "optional-regional-pathway-preset",
+      "sourceIds": [
+        "lf-brazil-volunteer"
+      ]
+    }
+  ],
+  "projectProfile": {
+    "id": "",
+    "properName": "",
+    "locale": "en",
+    "localizedDescription": "",
+    "location": {
+      "community": "",
+      "city": "",
+      "region": "",
+      "country": "",
+      "countryCode": null
+    },
+    "projectNumber": null,
+    "projectNumberSourceId": null,
+    "associations": [],
+    "summary": "",
+    "communityParticipation": "",
+    "activitiesAndAccess": "",
+    "continuedCare": "",
+    "partnerContributions": [],
+    "dates": {
+      "eventDate": null,
+      "publishedAt": null,
+      "updatedAt": null,
+      "accessedAt": null
+    },
+    "media": {
+      "path": "",
+      "alt": "",
+      "credit": "",
+      "permissionStatus": "unverified"
+    },
+    "sourceIds": [],
+    "status": "editable-local-template",
+    "projectStatus": null,
+    "reportingPeriod": {
+      "start": null,
+      "end": null,
+      "description": ""
+    }
+  },
+  "partnerContribution": {
+    "name": "",
+    "role": "",
+    "description": "",
+    "sourceId": "",
+    "logoAsset": null,
+    "logoPermissionStatus": "unverified"
+  },
+  "association": {
+    "name": "",
+    "kind": "",
+    "scope": "",
+    "startsAt": null,
+    "endsAt": null,
+    "sourceId": "",
+    "status": "unverified"
+  },
+  "associationKinds": [
+    "geographic-initiative",
+    "partnership",
+    "regional-program",
+    "dated-campaign"
+  ],
+  "metricCard": {
+    "label": "",
+    "value": null,
+    "unit": "",
+    "definition": "",
+    "scope": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "sourceId": "",
+    "sourceDate": null,
+    "denominator": null,
+    "methodNote": "",
+    "isSelfReported": null,
+    "comparabilityNote": "",
+    "lastReviewed": null,
+    "status": "unverified-placeholder",
+    "claimType": null
+  },
+  "communityObservation": {
+    "text": "",
+    "speakerDisplayName": "",
+    "roleOrContext": "",
+    "date": null,
+    "sourceId": "",
+    "quotePermissionStatus": "unverified",
+    "status": "unverified-placeholder"
+  },
+  "localDraftCopy": {
+    "status": "original-local-paraphrase-not-official-mission",
+    "locale": "en",
+    "description": "love.fútbol works alongside communities to shape inclusive places for sport and play. Local leadership, shared design, and continued care help these spaces become places where people meet, participate, and build lasting connections.",
+    "sourceIds": [
+      "lf-methodology",
+      "lf-faq",
+      "lf-governance"
+    ]
+  },
+  "localAssumptions": [
+    {
+      "id": "community-agency",
+      "choice": "Give local participation and continued care separate fields in every project brief.",
+      "rationale": "Official methodology treats community leadership and sustainability as integral throughout the work.",
+      "sourceIds": [
+        "lf-methodology",
+        "lf-faq"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "amount-free-default",
+      "choice": "Leave donation amount and currency empty in evergreen templates.",
+      "rationale": "Localized current pages contain multiple amounts/currencies without resolving their relationship.",
+      "sourceIds": [
+        "lf-es-home",
+        "lf-pt-home"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "explicit-geography",
+      "choice": "Store country and location explicitly and require evidence for them.",
+      "rationale": "Some current project return-link labels are inconsistent with the project context.",
+      "sourceIds": [
+        "lf-project-la-z",
+        "lf-project-guildford",
+        "lf-news-la-z-2026"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "separate-event-dates",
+      "choice": "Store event dates separately from article publication and update dates.",
+      "rationale": "Several live stories have newer page updates than the events or campaigns they describe.",
+      "sourceIds": [
+        "lf-news-penrose-2026",
+        "lf-news-safehub-2025",
+        "lf-news-thread-future-2022"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "overlapping-associations",
+      "choice": "Allow a project to have multiple initiative, partnership or campaign associations.",
+      "rationale": "Penrose is described within both Philly Plays and Power to Play.",
+      "sourceIds": [
+        "lf-news-penrose-2026"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "source-bound-metrics",
+      "choice": "Use null metric defaults and provide scope, period, definition and source fields.",
+      "rationale": "Website counters differ by locale and questionnaire percentages need their original study context.",
+      "sourceIds": [
+        "lf-methodology",
+        "lf-es-home",
+        "lf-pt-home"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "campaign-separation",
+      "choice": "Keep campaign names, milestone numbers, anniversary copy and partner graphics optional and dated.",
+      "rationale": "The live site spans historical campaigns, annual reports and current institutional content.",
+      "sourceIds": [
+        "lf-100",
+        "lf-home",
+        "lf-news-thread-future-2022",
+        "lf-report-2024",
+        "lf-report-2025"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "locale-not-currency",
+      "choice": "Treat language, target market, currency and program as separate editable attributes.",
+      "rationale": "Spanish and Portuguese pages do not each expose one consistent currency-specific offer.",
+      "sourceIds": [
+        "lf-es-home",
+        "lf-pt-home",
+        "lf-brazil-clube"
+      ],
+      "status": "inferred-local-application",
+      "confidence": "high"
+    },
+    {
+      "id": "stable-landing-links",
+      "choice": "Use verified public landing pages instead of copying embedded form endpoints.",
+      "rationale": "Landing pages preserve explanation and can change their linked form; some localized hero buttons remain placeholders.",
+      "sourceIds": [
+        "lf-donate",
+        "lf-contact",
+        "lf-suggest-space",
+        "lf-es-home",
+        "lf-pt-home"
+      ],
+      "status": "local-maintainability-choice",
+      "confidence": "high"
+    }
+  ],
+  "metricClaimTypes": [
+    "observed",
+    "estimated",
+    "target"
+  ]
+}

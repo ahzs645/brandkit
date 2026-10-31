@@ -1,14 +1,14 @@
 {
   "brand": "lovefutbol",
   "researched": "2026-10-30",
-  "scope": "Global identity; current website observations; official publications and contributor guide. Not a formally issued brand standard.",
+  "scope": "Global identity and current live-site applications across pages and locales; regional/program/campaign contexts; official publications and contributor guide. Includes explicit local application assumptions, not a formally issued brand standard.",
   "sources": [
     {
       "id": "lf-home",
       "title": "love.fútbol global homepage",
       "url": "https://www.lovefutbol.org/",
       "publisher": "love.fútbol",
-      "evidence": "Current brand line, community-led framing, photography and live visual context. Volatile campaign metrics are excluded from reusable brand tokens.",
+      "evidence": "Current brand line, community-led framing, photography and live visual context. Volatile campaign metrics are excluded from reusable brand tokens. Current anniversary content and four action pathways: give, collaborate, sponsor a space, and suggest a community space. Keep current counts and offers outside permanent brand tokens. Explicit Bahianita spans, active cyan #3CB1EA fields/headings/counters, before/after comparison, community voices and responsive photo/partner groups are captured in site-visual-evidence.json.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -26,7 +26,7 @@
       "title": "About Us: origin and logo rationale",
       "url": "https://www.lovefutbol.org/about-us",
       "publisher": "love.fútbol",
-      "evidence": "December 2005 Morocco origin, 2006 founding, and explanation that the logo reflects the simplicity and imperfections of grassroots play.",
+      "evidence": "December 2005 Morocco origin, 2006 founding, and explanation that the logo reflects the simplicity and imperfections of grassroots play. Sponsor and partner galleries are separate categories. Public listing does not authorize new endorsement lockups or establish present activity dates. Explicit cyan call-to-action styling and separate sponsor/partner sections are observed.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -35,7 +35,7 @@
       "title": "FAQ: naming, scope and ownership",
       "url": "https://www.lovefutbol.org/faq",
       "publisher": "love.fútbol",
-      "evidence": "Meaning of the separating dot, community-led model, multi-use sports spaces, and community ownership.",
+      "evidence": "Meaning of the separating dot, community-led model, multi-use sports spaces, and community ownership. Multi-use community spaces; local stewardship; recurring Teammates giving. Source does not support describing love.fútbol as the direct operator of all leagues or local programming.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -44,7 +44,7 @@
       "title": "Governance & Transparency",
       "url": "https://www.lovefutbol.org/governance-transparency",
       "publisher": "love.fútbol",
-      "evidence": "Mission, values, inclusion, and official links to culture and annual-report PDFs.",
+      "evidence": "Mission, values, inclusion, and official links to culture and annual-report PDFs. Mission and all-generations vision differ in emphasis from FAQ's child-focused vision; ten webpage values versus an additional ownership/commitment principle in the linked culture PDF.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -71,7 +71,7 @@
       "title": "Methodology",
       "url": "https://www.lovefutbol.org/methodology",
       "publisher": "love.fútbol",
-      "evidence": "Community participation throughout planning, building and sustained use.",
+      "evidence": "Community participation throughout planning, building and sustained use. Community engagement is integral throughout. Three impact areas and survey figures are reported; page-level sample sizes do not establish the denominator/timeframe of each displayed percentage.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -117,7 +117,7 @@
       "title": "100 Projects",
       "url": "https://100.lovefutbol.org/",
       "publisher": "love.fútbol",
-      "evidence": "Historical milestones: Villa Nueva in 2006 and Hissey Playground in November 2025. Campaign styling and counts remain contextual.",
+      "evidence": "Historical milestones: Villa Nueva in 2006 and Hissey Playground in November 2025. Campaign styling and counts remain contextual. Campaign-specific 2025 milestone and commemorative material should remain separate from current global counts and permanent brand identity.",
       "status": "verified-primary",
       "accessed": "2026-10-30"
     },
@@ -126,7 +126,7 @@
       "title": "Current website child stylesheet",
       "url": "https://www.lovefutbol.org/hubfs/hub_generated/template_assets/1/205378236071/1793319989497/template_child.css",
       "publisher": "love.fútbol",
-      "evidence": "Observed declarations: DK Brush Crush H1/blog titles, Acumin Pro Condensed H3, #489D60 link/navigation treatment. Declarations must be distinguished from page overrides and computed use.",
+      "evidence": "Observed declarations: DK Brush Crush H1/blog titles, Acumin Pro Condensed H3, #489D60 link/navigation treatment. Declarations must be distinguished from page overrides and computed use. Dharavi and Milpa Alta detail pages contain matching unoverridden H1 elements, so the brush rule is a cascade inference for present content; successful browser font loading is not measured.",
       "status": "observed-official-website",
       "accessed": "2026-10-30"
     },
@@ -209,6 +209,314 @@
       "publisher": "love.fútbol / HubSpot theme",
       "evidence": "Additional base-theme button declarations, including #5A9F6F; kept distinct from prominent Projects-page colour roles.",
       "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-donate",
+      "title": "Donate",
+      "url": "https://www.lovefutbol.org/donate",
+      "publisher": "love.fútbol",
+      "evidence": "General giving landing page and embedded donation form. Stable landing destination for amount-free local CTA presets.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-starting-squad",
+      "title": "Starting Squad",
+      "url": "https://www.lovefutbol.org/starting-squad",
+      "publisher": "love.fútbol",
+      "evidence": "Long-term institutional support from individuals and families; emphasizes capacity, flexibility, innovation, systems and partnerships. Distinct from monthly Teammates giving.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-contact",
+      "title": "Contact",
+      "url": "https://www.lovefutbol.org/contact",
+      "publisher": "love.fútbol",
+      "evidence": "General inquiry landing page. Practical local destination for partnership or sponsorship starter CTAs.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-suggest-space",
+      "title": "Suggest a new love.fútbol Project",
+      "url": "https://www.lovefutbol.org/suggest-a-space",
+      "publisher": "love.fútbol",
+      "evidence": "Invites potential community project suggestions and links the official intake form. Does not guarantee selection.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-es-home",
+      "title": "Spanish global homepage",
+      "url": "https://www.lovefutbol.org/es/",
+      "publisher": "love.fútbol",
+      "evidence": "Observed Spanish navigation, anniversary content and four audience pathways. Donation amounts differ within the page; annual community reach differs from Portuguese. Hero button contains a CMS placeholder.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-pt-home",
+      "title": "Brazilian Portuguese global homepage",
+      "url": "https://www.lovefutbol.org/pt-br/",
+      "publisher": "love.fútbol",
+      "evidence": "Observed Portuguese navigation and belonging-oriented messaging. Contains US-dollar and Brazilian-real monthly asks and a CMS placeholder button. Context-specific figures are not evergreen brand tokens.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-projects-es",
+      "title": "Proyectos",
+      "url": "https://www.lovefutbol.org/es/projects",
+      "publisher": "love.fútbol",
+      "evidence": "Verified short Spanish navigation labels and tagline; project proper names remain distinct from country/group labels.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-projects-pt-br",
+      "title": "Projetos",
+      "url": "https://www.lovefutbol.org/pt-br/projects",
+      "publisher": "love.fútbol",
+      "evidence": "Verified short Brazilian Portuguese navigation labels and tagline; preserves place-name diacritics.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-donate-es",
+      "title": "Spanish donation page",
+      "url": "https://www.lovefutbol.org/es/donate",
+      "publisher": "love.fútbol",
+      "evidence": "Verified Spanish donation landing route with donation form; use landing URL in locale-aware CTA presets.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-donate-pt-br",
+      "title": "Brazilian Portuguese donation page",
+      "url": "https://www.lovefutbol.org/pt-br/donate",
+      "publisher": "love.fútbol",
+      "evidence": "Verified Brazilian Portuguese donation landing route with donation form.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-contact-es",
+      "title": "Spanish contact page",
+      "url": "https://www.lovefutbol.org/es/contact",
+      "publisher": "love.fútbol",
+      "evidence": "Verified localized inquiry route and contact heading. English top tagline persists despite Spanish navigation, showing incomplete component localization.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-contact-pt-br",
+      "title": "Brazilian Portuguese contact page",
+      "url": "https://www.lovefutbol.org/pt-br/contact",
+      "publisher": "love.fútbol",
+      "evidence": "Verified localized inquiry route and Portuguese navigation.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-suggest-space-es",
+      "title": "Sugiere un nuevo proyecto love.fútbol",
+      "url": "https://www.lovefutbol.org/es/suggest-a-space",
+      "publisher": "love.fútbol",
+      "evidence": "Verified Spanish suggestion landing route; potential project intake with operations follow-up.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-suggest-space-pt-br",
+      "title": "Sugira um novo projeto love.fútbol",
+      "url": "https://www.lovefutbol.org/pt-br/suggest-a-space",
+      "publisher": "love.fútbol",
+      "evidence": "Verified Brazilian Portuguese suggestion landing route; potential project intake with operations follow-up.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-faq-es",
+      "title": "Spanish FAQ",
+      "url": "https://www.lovefutbol.org/es/faq",
+      "publisher": "love.fútbol",
+      "evidence": "Spanish naming explanation, community stewardship and multi-use spaces; retains the Teammates program name.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-brazil-home",
+      "title": "love.fútbol Brazil regional homepage",
+      "url": "https://www.lovefutbolbrasil.org/",
+      "publisher": "love.fútbol Brazil",
+      "evidence": "Explicitly linked Brazil regional presence and regional supporter/volunteer routes. Separate regional-site totals whose reporting period is not established; do not merge them with current global counters.",
+      "status": "observed-official-regional-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-latam-home",
+      "title": "love.fútbol LATAM regional homepage",
+      "url": "https://www.lovefutbollatam.org/",
+      "publisher": "love.fútbol LATAM",
+      "evidence": "Explicitly linked LATAM regional presence. Its regional design and totals have their own context and do not override the global site; the reporting period of its totals is not established.",
+      "status": "observed-official-regional-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-brazil-mission",
+      "title": "Missão",
+      "url": "https://www.lovefutbolbrasil.org/missao",
+      "publisher": "love.fútbol Brazil",
+      "evidence": "Portuguese mission and three impact areas; community method and questionnaire figures parallel the global methodology page.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-brazil-clube",
+      "title": "Clube love.fútbol",
+      "url": "https://www.lovefutbolbrasil.org/clubelovefutbol",
+      "publisher": "love.fútbol Brazil",
+      "evidence": "Regional corporate supporter program for strategic institutional costs: team/culture, technologies/innovation, impact/stories. Distinct from Starting Squad and Teammates.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-brazil-volunteer",
+      "title": "Faça parte",
+      "url": "https://www.lovefutbolbrasil.org/facaparte",
+      "publisher": "love.fútbol Brazil",
+      "evidence": "Volunteer-community invitation and regional hashtag. Not evidence of global employment or universal volunteer intake.",
+      "status": "verified-primary",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-news-penrose-2026",
+      "title": "Penrose Elementary School celebrates New Community Play Space Through the Power to Play Initiative",
+      "url": "https://www.lovefutbol.org/news/penrose-elementary-school-community-celebrated-the-opening-of-a-new-community-driven-play-space-as-part-of-philly-plays-and-the-international-power-to-play-partnership",
+      "publisher": "love.fútbol",
+      "evidence": "Explains overlapping Philly Plays initiative, Power to Play partnership, individual school space and community participation. Separates July 31 event from August 1 page update.",
+      "status": "verified-primary-dated-story",
+      "accessed": "2026-10-30",
+      "eventDate": "2026-07-31",
+      "updated": "2026-08-01"
+    },
+    {
+      "id": "lf-news-safehub-2025",
+      "title": "Safe-Hub Philadelphia project story",
+      "url": "https://www.lovefutbol.org/news/safehub",
+      "publisher": "love.fútbol",
+      "evidence": "Facility, wider campus and supporting-organization roles; Safe Play Corridors context. March 2025 event is distinct from January 2026 page update.",
+      "status": "verified-primary-dated-story",
+      "accessed": "2026-10-30",
+      "eventDate": "2025-03-27",
+      "updated": "2026-01-29"
+    },
+    {
+      "id": "lf-news-thread-future-2022",
+      "title": "Thread The Future jersey collaboration",
+      "url": "https://www.lovefutbol.org/news/thread-the-future-jersey",
+      "publisher": "love.fútbol",
+      "evidence": "2022 EA SPORTS/FIFA 23 apparel campaign on a page updated in 2026. Campaign patterns and graphics are contextual, not permanent brand standards or reusable licensed assets.",
+      "status": "verified-primary-historical-campaign",
+      "accessed": "2026-10-30",
+      "eventDate": "2022-11-11",
+      "updated": "2026-01-29"
+    },
+    {
+      "id": "lf-news-la-z-2026",
+      "title": "United by the game: Atlas Femenil and love.fútbol inaugurate the La Z pitch",
+      "url": "https://www.lovefutbol.org/news/united-by-the-game-atlas-femenil-and-love.f%C3%BAtbol-inaugurate-the-la-z-pitch",
+      "publisher": "love.fútbol",
+      "evidence": "Named project in Tabachines, Zapopan, Jalisco; Atlas Femenil collaboration and girls/women participation. Geography and roles have stronger evidence here than in the sparse profile's return-link label.",
+      "status": "verified-primary-dated-story",
+      "accessed": "2026-10-30",
+      "published": "2026-08-26"
+    },
+    {
+      "id": "lf-project-la-z",
+      "title": "La Z project profile",
+      "url": "https://www.lovefutbol.org/mx-la-z",
+      "publisher": "love.fútbol",
+      "evidence": "Direct public HTML inspection: image-led profile with a La Z heading and an inherited Brazil return-link label. The label is not reliable geographic evidence.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-project-hissey",
+      "title": "Hissey Playground project profile",
+      "url": "https://www.lovefutbol.org/usa-hissey-playground",
+      "publisher": "love.fútbol",
+      "evidence": "Direct public HTML inspection: Hissey Playground heading, Philadelphia/United States location and Other return-link label. Demonstrates separate name/location/group fields.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-project-guildford",
+      "title": "Guildford Heights Park project profile",
+      "url": "https://www.lovefutbol.org/ca-guildford-heights-park",
+      "publisher": "love.fútbol",
+      "evidence": "Direct public HTML inspection: image-led named profile with inherited Brazil return-link label. Do not infer location or partner roles from that label or URL alone.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-project-paraisopolis",
+      "title": "Paraisópolis project profile",
+      "url": "https://www.lovefutbol.org/br-parais%C3%B3polis",
+      "publisher": "love.fútbol",
+      "evidence": "Direct public HTML inspection: preserved accented place name and image-led layout. Supports keeping proper names distinct from translated generic descriptions.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-partners",
+      "title": "About Us: sponsor and partner galleries",
+      "url": "https://www.lovefutbol.org/about-us#partners",
+      "publisher": "love.fútbol",
+      "evidence": "Official navigation links this existing anchor. Separate sponsors/partners galleries and contact CTA; cyan introductory text and Bahianita section headings observed in live HTML. Gallery inclusion is not a new endorsement-lockup permission or a relationship end-date.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-project-dharavi",
+      "title": "Dharavi project detail",
+      "url": "https://www.lovefutbol.org/dharavi-india",
+      "publisher": "love.fútbol",
+      "evidence": "Actual project H1 matches the shared DK Brush Crush rule; rectangular/square project gallery classes and matching responsive styles are recorded in site-visual-evidence.json. Browser font loading was not measured.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-project-milpa-alta",
+      "title": "Milpa Alta project detail",
+      "url": "https://www.lovefutbol.org/milpaalta",
+      "publisher": "love.fútbol",
+      "evidence": "Actual project H1 matches the shared DK Brush Crush rule, with no descendant family override; gallery crop and layout evidence corroborate the detail-page pattern.",
+      "status": "observed-official-website",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-brazil-operational-manual",
+      "title": "Brazil methodology and operational manual context",
+      "url": "https://www.lovefutbolbrasil.org/metodologia-2",
+      "publisher": "love.fútbol Brasil",
+      "evidence": "The named love.fútbol manual concerns community project mobilization, planning, construction and management. It is not evidence of a public graphic-standards manual.",
+      "status": "verified-primary-context",
+      "accessed": "2026-10-30"
+    },
+    {
+      "id": "w3c-contrast",
+      "title": "WCAG 2.2 Understanding Contrast (Minimum)",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "publisher": "W3C WAI",
+      "evidence": "Primary accessibility basis for local colour-pair calculations: 4.5:1 normal-text AA threshold, 3:1 large text and the logotype exception. This is not love.fútbol identity guidance.",
+      "status": "primary-technical-guidance",
       "accessed": "2026-10-30"
     }
   ]

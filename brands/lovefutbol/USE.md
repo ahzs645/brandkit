@@ -4,7 +4,7 @@
 
 [Open this brand](https://projects.ahmadjalil.com/brandkit/?brand=lovefutbol&share=1) · [Open document examples](https://projects.ahmadjalil.com/brandkit/?brand=lovefutbol&share=1&view=documents)
 
-Identity version 1.0. Document application version 1.1.
+Identity version 1.1. Document application version 1.1.
 
 Researched application kit. Source vector geometry is preserved; website colours and typography are observed usage. Templates and spacing are local proposals, not an official love.fútbol standards manual or endorsement.
 
@@ -16,7 +16,7 @@ The **Logos** pack (and **Everything**) generates `logos/outlined/full-positive.
 
 Focused packs contain selected formats. Check `web/asset-catalog.json` or the package’s `index.html` before using a path; these files list what was actually exported. Word documents embed their logo, while standalone PNG availability depends on the selected pack and rendering options. Choose the **Logos**, **Print shop** or **Everything** pack when a separate vector PDF is required.
 
-The preferred logo is the supplied full signature. Keep its proportions. No source-verified minimum width is recorded. Keep the complete artwork clear and proportional. No source-verified numeric clear-space or minimum-width rule is recorded. Document layouts reserve 8 mm as a local application choice. The document profile adds 8 mm of layout spacing as a local layout convention.
+The preferred logo is the supplied full signature. Keep its proportions. No source-verified minimum width is recorded. Local recommendation: reserve one quarter of the complete artwork height on each side; keep the larger 8 mm reserve in document layouts. Start primary artwork at 32 mm in print or 144 CSS px on screen and proof the output. No official numeric minimum or clear-space standard was found. The document profile adds 8 mm of layout spacing as a local layout convention.
 
 Artwork provenance: Original logo paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide, published by U.S. Soccer; website styling observed 30 October 2026; official About, FAQ, history, culture and report resources.
 
@@ -79,15 +79,21 @@ These sizes come from the template definitions rather than a separately maintain
 | Letterhead / Letter | 215.9 × 279.4 mm | letterhead-letter |
 | Continuation sheet / Letter | 215.9 × 279.4 mm | continuation-letter |
 | Community project brief / Letter | 215.9 × 279.4 mm | project-brief-letter |
+| Community project profile / Letter | 215.9 × 279.4 mm | project-profile-letter |
 | Letterhead / A4 | 210 × 297 mm | letterhead-a4 |
 | Continuation sheet / A4 | 210 × 297 mm | continuation-a4 |
 | Community project brief / A4 | 210 × 297 mm | project-brief-a4 |
+| Community project profile / A4 | 210 × 297 mm | project-profile-a4 |
 | Presentation cover | 338.67 × 190.5 mm | presentation-cover |
 | Presentation section | 338.67 × 190.5 mm | presentation-section |
 | Presentation content | 338.67 × 190.5 mm | presentation-content |
 | Presentation evidence | 338.67 × 190.5 mm | presentation-evidence |
+| Presentation comparison | 338.67 × 190.5 mm | presentation-comparison |
+| Presentation community voice | 338.67 × 190.5 mm | presentation-community-voice |
 | Social announcement / square | 285.75 × 285.75 mm | social-post |
 | Community story / portrait | 285.75 × 508 mm | social-story |
+| Impact measure / square | 285.75 × 285.75 mm | social-impact |
+| Community invitation / square | 285.75 × 285.75 mm | social-call-to-action |
 | Email signature | 164.04 × 84.67 mm | email-signature |
 
 ## Supported edit path
