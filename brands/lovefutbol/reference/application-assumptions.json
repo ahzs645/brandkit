@@ -1,0 +1,214 @@
+{
+  "schema": "brandkit/application-assumptions/1",
+  "brandId": "lovefutbol",
+  "reviewed": "2026-10-30",
+  "status": "Local recommendations informed by public website evidence; not organization-issued standards.",
+  "logo": {
+    "clearSpace": {
+      "measure": "complete artwork height",
+      "ratio": 0.25,
+      "official": false
+    },
+    "recommendedPrintWidthMm": 32,
+    "recommendedScreenWidthCssPx": 144,
+    "documentWidthMm": 48,
+    "documentReservedSpaceMm": 8,
+    "enforcement": "Recommendations, not source-verified export limits. Review secondary small marks and proof the actual output.",
+    "rationale": "One quarter of the full artwork height gives a scalable reserve without editing the paths. The official raster’s smallest transparent inset is about 0.259 of its visible artwork height, supporting this as an inference rather than an official rule. Screen sizes were compared as rendered specimens; the print starting size is a local design judgment requiring a physical proof.",
+    "sources": [
+      "lf-header-raster",
+      "lf-community-practices-pdf"
+    ]
+  },
+  "typography": {
+    "display": {
+      "font": "Bahianita",
+      "webStartPx": 48,
+      "webEndPx": 88,
+      "printTitlePt": 38,
+      "trackingEm": 0,
+      "use": "Short display headings; keep diacritics and natural word spacing."
+    },
+    "body": {
+      "font": "Red Hat Text",
+      "webPx": 18,
+      "webLineHeight": 1.5,
+      "printPt": 10.5,
+      "printLineHeight": 1.45
+    },
+    "secondary": {
+      "printHeadingPt": 20,
+      "printCaptionPt": 9,
+      "webCaptionPx": 16
+    },
+    "status": "Font roles are observed; this reusable scale is a local application choice.",
+    "sources": [
+      "lf-home",
+      "lf-projects",
+      "lf-methodology",
+      "lf-child-css"
+    ]
+  },
+  "layout": {
+    "printMarginsMm": 20,
+    "webSpaceUnitPx": 8,
+    "textMeasureCh": 65,
+    "responsive": "Use content-led wrapping: stack image/text and partner groups when readable widths no longer fit. Keep logical reading order.",
+    "status": "Local defaults, not extracted mandatory breakpoints or official grid ratios."
+  },
+  "rules": [
+    {
+      "id": "logo-space",
+      "title": "Give the complete mark room",
+      "basis": "Local geometry-based recommendation, corroborated by source raster margins",
+      "confidence": "medium",
+      "decision": "Reserve at least one quarter of the complete logo height on every side. Document layouts retain their larger 8 mm reserve. Keep red flag, pitch and lettering together.",
+      "sources": [
+        "lf-about",
+        "lf-header-raster",
+        "lf-community-practices-pdf"
+      ],
+      "limit": "No official numeric exclusion zone was recovered; image padding alone does not establish one."
+    },
+    {
+      "id": "logo-size",
+      "title": "Start at a practical readable size",
+      "basis": "Local specimen review",
+      "confidence": "medium",
+      "decision": "Start primary logos at 32 mm in print or 144 CSS px on screen; use 48 mm for report covers. Small secondary marks need an output-size review.",
+      "sources": [
+        "lf-header-raster"
+      ],
+      "limit": "These are recommendations, not official minima. A screen rendering is not a physical print proof."
+    },
+    {
+      "id": "colour-roles",
+      "title": "Separate colour evidence from readable use",
+      "basis": "Observed website roles plus calculated contrast",
+      "confidence": "high",
+      "decision": "Keep green and light green for project surfaces, terracotta for emphasis, and cyan for an additional website accent. Use charcoal on these surfaces; reserve red for the source flag within this kit.",
+      "sources": [
+        "lf-home",
+        "lf-projects",
+        "lf-partners",
+        "w3c-contrast"
+      ],
+      "limit": "Website observations do not establish print conversions or fixed colour percentages."
+    },
+    {
+      "id": "type-scale",
+      "title": "Use expressive titles and readable supporting text",
+      "basis": "Observed font roles; local sizes",
+      "confidence": "high",
+      "decision": "Use Bahianita for short titles and Red Hat Text for paragraphs, labels, captions and numbers. Start web body at 18 px/1.5 and document body at 10.5 pt/1.45. Allow wrapping instead of squeezing translated text.",
+      "sources": [
+        "lf-home",
+        "lf-methodology",
+        "lf-projects",
+        "lf-child-css"
+      ],
+      "limit": "Some project-detail H1 elements match the DK Brush Crush CSS rule; browser font loading was not measured. This kit does not recreate or redistribute that face."
+    },
+    {
+      "id": "project-record",
+      "title": "Lead with the place and the people",
+      "basis": "Editorial synthesis of official project and methodology pages",
+      "confidence": "high",
+      "decision": "Record project/community name, city and country, verified project identifier, status or reporting period, local leadership, activities, stewardship and evidence. Keep a proposed project distinct from an observed project profile.",
+      "sources": [
+        "lf-projects",
+        "lf-methodology",
+        "lf-faq"
+      ],
+      "limit": "Project numbers and locations need project-specific verification; global counters do not identify a project."
+    },
+    {
+      "id": "audience-action",
+      "title": "Choose one primary action for each audience",
+      "basis": "Observed homepage audience routes; local content structure",
+      "confidence": "high",
+      "decision": "Use a community enquiry for a proposed space, a partnership conversation for collaborators, a sponsorship conversation for project funders, and giving links for individual supporters. Specify the audience, destination and next step.",
+      "sources": [
+        "lf-home",
+        "lf-donate",
+        "lf-starting-squad",
+        "lf-contact"
+      ],
+      "limit": "Verify current destinations and local-language routes. Campaign amounts and supporter programs are not permanent identity tokens."
+    },
+    {
+      "id": "partners",
+      "title": "Keep partner attribution separate from the mark",
+      "basis": "Observed partner groupings; local layout convention",
+      "confidence": "medium",
+      "decision": "Use a separate acknowledgement area with named roles. Keep the full love.fútbol logo clear, give other approved marks their own space and balance prominence optically. Use text placeholders until approved assets and relationships are supplied.",
+      "sources": [
+        "lf-partners",
+        "lf-home"
+      ],
+      "limit": "No fixed official partner-logo size ratio or fused co-brand lockup was recovered."
+    },
+    {
+      "id": "photography",
+      "title": "Show context and credit the image",
+      "basis": "Observed project storytelling; local editorial convention",
+      "confidence": "high",
+      "decision": "Use real community-led activity, the space and its ongoing use. Provide a concise caption with place, date and creator. Keep essential text off busy images. For before/after comparisons, identify both dates and the same location.",
+      "sources": [
+        "lf-home",
+        "lf-methodology",
+        "lf-inclusion"
+      ],
+      "limit": "Public images are research references, not a stock-photo licence; frames stay empty until suitable assets are provided."
+    },
+    {
+      "id": "community-voice",
+      "title": "Attribute quotations precisely",
+      "basis": "Observed homepage community voices",
+      "confidence": "high",
+      "decision": "Use a verified exact quotation with the speaker’s approved name or role, community, date and source. Identify any translation. Leave placeholder copy visibly instructional until it is replaced.",
+      "sources": [
+        "lf-home",
+        "lf-culture"
+      ],
+      "limit": "Do not invent testimonials or let a local quotation stand in for a measured population outcome."
+    },
+    {
+      "id": "metrics",
+      "title": "Keep the definition with the number",
+      "basis": "Observed impact counters; evidence-quality convention",
+      "confidence": "high",
+      "decision": "Pair every metric with its unit, geography or population, period, source and whether it is observed, estimated or a target. Use a dated source; distinguish visits, unique participants, annual reach and cumulative reach.",
+      "sources": [
+        "lf-home",
+        "lf-governance"
+      ],
+      "limit": "Inconsistent or undated site totals are not frozen into default assets."
+    },
+    {
+      "id": "languages",
+      "title": "Preserve the identity across languages",
+      "basis": "Observed English, Spanish and Brazilian Portuguese routes",
+      "confidence": "high",
+      "decision": "Keep love.fútbol unchanged. Preserve place-name accents, review translation with local speakers, adapt dates and numbers to the chosen locale, and keep each call to action in the destination language.",
+      "sources": [
+        "lf-home",
+        "lf-es-home",
+        "lf-pt-home"
+      ],
+      "limit": "The kit remains an English authoring interface; locale guidance and glyph coverage do not imply a complete translated UI."
+    },
+    {
+      "id": "site-quality",
+      "title": "Use recurring design evidence, review content inconsistencies",
+      "basis": "Cross-page source review",
+      "confidence": "high",
+      "decision": "Record conflicting captions, inherited return-link labels and placeholder controls as source-quality observations. Confirm names and destinations against stronger project text before publishing.",
+      "sources": [
+        "lf-home",
+        "lf-projects"
+      ],
+      "limit": "A visible website inconsistency is not an identity rule to reproduce."
+    }
+  ]
+}

@@ -1,0 +1,4714 @@
+{
+  "id": "lovefutbol",
+  "name": "love.fútbol",
+  "version": "1.1",
+  "displayVersion": "1.1",
+  "source": "Original logo paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide, published by U.S. Soccer; website styling observed 30 October 2026; official About, FAQ, history, culture and report resources.",
+  "status": "Researched application kit. Source vector geometry is preserved; website colours and typography are observed usage. Templates and spacing are local proposals, not an official love.fútbol standards manual or endorsement.",
+  "officialResourcesNote": "Published identity context and original source material. Website observations, preserved artwork and local application choices are documented separately in the research record.",
+  "officialResources": [
+    {
+      "title": "About love.fútbol",
+      "url": "https://www.lovefutbol.org/about-us",
+      "format": "Official website",
+      "note": "Purpose and the meaning of the imperfect grassroots pitch."
+    },
+    {
+      "title": "Name, dot and community model",
+      "url": "https://www.lovefutbol.org/faq",
+      "format": "Official FAQ",
+      "note": "Naming and the role of community ownership."
+    },
+    {
+      "title": "Community-Driven Sport Spaces, 2025",
+      "url": "https://www.ussoccer.com/soccer-forward/resource-hub/best-practices-for-community-driven-sport-spaces",
+      "format": "love.fútbol contribution to U.S. Soccer",
+      "note": "Source of the preserved full-logo vector paths; a methodology guide, not a brand manual."
+    },
+    {
+      "title": "Projects: observed website styling",
+      "url": "https://www.lovefutbol.org/projects",
+      "format": "Official website",
+      "note": "Bahianita display headings, Red Hat Text and green/terracotta page treatments."
+    },
+    {
+      "title": "Homepage: audiences and visual applications",
+      "url": "https://www.lovefutbol.org/",
+      "format": "Official website",
+      "note": "Active cyan accent, Bahianita headings, project comparisons, community voices and audience-specific actions."
+    },
+    {
+      "title": "Methodology and sustained use",
+      "url": "https://www.lovefutbol.org/methodology",
+      "format": "Official website",
+      "note": "Community-led process and ongoing care; informs project-content fields and dark/light application treatments."
+    },
+    {
+      "title": "Partners and attribution",
+      "url": "https://www.lovefutbol.org/about-us#partners",
+      "format": "Official website",
+      "note": "Observed partnership context; no numerical partner-logo ratio is established."
+    },
+    {
+      "title": "Governance, culture and annual reports",
+      "url": "https://www.lovefutbol.org/governance-transparency",
+      "format": "Official resource collection",
+      "note": "Voice, values and dated reports; reports use different design treatments."
+    }
+  ],
+  "colours": {
+    "green": "#489D60",
+    "light-green": "#88C59B",
+    "terracotta": "#D17F2D",
+    "cyan": "#3CB1EA",
+    "off-white": "#F5F4EF",
+    "charcoal": "#1D1D1B",
+    "forest": "#081913",
+    "black": "#000000",
+    "white": "#FFFFFF",
+    "red": "#ED1C24",
+    "amber": "#F5A300"
+  },
+  "colourNames": {
+    "green": "Website green",
+    "light-green": "Projects light green",
+    "terracotta": "Projects terracotta",
+    "cyan": "Homepage cyan accent",
+    "off-white": "Website off-white",
+    "charcoal": "Charcoal text",
+    "forest": "Dark-green body text",
+    "red": "Source logo flag red",
+    "amber": "Mobile menu amber"
+  },
+  "roles": {
+    "ink": "charcoal",
+    "paper": "white",
+    "muted": "charcoal",
+    "primary": "green",
+    "light": "off-white",
+    "reverse": "white",
+    "line": "light-green",
+    "rule": "green",
+    "link": "forest"
+  },
+  "logoColours": [
+    "black",
+    "white"
+  ],
+  "rasterColours": [
+    "black",
+    "white"
+  ],
+  "print": {
+    "note": "Palette values are observed digital usage, not published print specifications. No official Pantone or CMYK recipes were verified. Any automatic conversion shown by Brandkit is an approximation; request production specifications for print."
+  },
+  "fonts": {
+    "body": {
+      "family": "Red Hat Text",
+      "stack": "\"Red Hat Text\", Arial, sans-serif",
+      "office": "Red Hat Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/RedHatText-Regular.ttf",
+      "web": "fonts/RedHatText-Regular.ttf",
+      "license": "fonts/RedHatText-OFL.txt",
+      "label": "Red Hat Text Regular",
+      "usage": "Observed website body and supporting type. SIL Open Font License.",
+      "note": "Original static upstream font. The website observation does not establish a universal corporate typography rule."
+    },
+    "regular": {
+      "family": "Red Hat Text",
+      "stack": "\"Red Hat Text\", Arial, sans-serif",
+      "office": "Red Hat Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/RedHatText-Regular.ttf",
+      "web": "fonts/RedHatText-Regular.ttf",
+      "license": "fonts/RedHatText-OFL.txt",
+      "label": "Red Hat Text Regular",
+      "usage": "Observed website body and supporting type. SIL Open Font License.",
+      "note": "Original static upstream font. The website observation does not establish a universal corporate typography rule."
+    },
+    "bold": {
+      "family": "Red Hat Text",
+      "stack": "\"Red Hat Text\", Arial, sans-serif",
+      "office": "Red Hat Text",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/RedHatText-Bold.ttf",
+      "web": "fonts/RedHatText-Bold.ttf",
+      "license": "fonts/RedHatText-OFL.txt",
+      "label": "Red Hat Text Bold",
+      "usage": "Observed website body and supporting type. SIL Open Font License.",
+      "note": "Original static upstream font. The website observation does not establish a universal corporate typography rule."
+    },
+    "italic": {
+      "family": "Red Hat Text",
+      "stack": "\"Red Hat Text\", Arial, sans-serif",
+      "office": "Red Hat Text",
+      "weight": 400,
+      "style": "italic",
+      "file": "fonts/RedHatText-Italic.ttf",
+      "web": "fonts/RedHatText-Italic.ttf",
+      "license": "fonts/RedHatText-OFL.txt",
+      "label": "Red Hat Text Italic",
+      "usage": "Document emphasis; a bundled local application choice.",
+      "note": "Original static upstream font. The website observation does not establish a universal corporate typography rule."
+    },
+    "display": {
+      "family": "Bahianita",
+      "stack": "\"Bahianita\", \"Red Hat Text\", sans-serif",
+      "office": "Bahianita",
+      "weight": 400,
+      "file": "fonts/Bahianita-Regular.ttf",
+      "web": "fonts/Bahianita-Regular.ttf",
+      "license": "fonts/Bahianita-OFL.txt",
+      "label": "Bahianita Regular",
+      "usage": "Observed display headings across home, Projects, methodology, governance, donate and contact; use for short, large headings.",
+      "note": "Multiple live pages explicitly use Bahianita. Some project-detail H1 elements match the DK Brush Crush CSS rule and H3 rules declare Acumin; those commercial faces are not bundled."
+    },
+    "displayRegular": {
+      "family": "Bahianita",
+      "stack": "\"Bahianita\", \"Red Hat Text\", sans-serif",
+      "office": "Bahianita",
+      "weight": 400,
+      "file": "fonts/Bahianita-Regular.ttf",
+      "web": "fonts/Bahianita-Regular.ttf",
+      "license": "fonts/Bahianita-OFL.txt",
+      "label": "Bahianita Regular",
+      "usage": "Observed display headings across home, Projects, methodology, governance, donate and contact; use for short, large headings.",
+      "note": "Multiple live pages explicitly use Bahianita. Some project-detail H1 elements match the DK Brush Crush CSS rule and H3 rules declare Acumin; those commercial faces are not bundled."
+    },
+    "label": {
+      "family": "Red Hat Text",
+      "stack": "\"Red Hat Text\", Arial, sans-serif",
+      "office": "Red Hat Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/RedHatText-Regular.ttf",
+      "web": "fonts/RedHatText-Regular.ttf",
+      "license": "fonts/RedHatText-OFL.txt",
+      "label": "Red Hat Text Regular",
+      "usage": "Observed website body and supporting type. SIL Open Font License.",
+      "note": "Original static upstream font. The website observation does not establish a universal corporate typography rule."
+    }
+  },
+  "typography": {
+    "headlines": {
+      "family": "Bahianita",
+      "weight": 400,
+      "trackingEm": 0
+    },
+    "body": {
+      "family": "Red Hat Text",
+      "weight": 400
+    },
+    "labels": {
+      "family": "Red Hat Text",
+      "weight": 400,
+      "trackingEm": 0,
+      "textTransform": "none"
+    },
+    "note": "Bahianita display type is observed on home, Projects, methodology, governance, donate and contact; Red Hat Text supplies supporting text. Some live project-detail H1 elements match the DK Brush Crush CSS rule and H3 rules declare Acumin Pro Condensed. The kit uses the documented open-font pairing; the outlined logo lettering is separate artwork."
+  },
+  "symbol": {
+    "name": "Complete source love.fútbol logo",
+    "viewBox": [
+      0,
+      0,
+      350.11102294921875,
+      199.03307342529297
+    ],
+    "markup": "<g transform=\"translate(-363.5989990234375 -36.72595977783203)\"><path transform=\"matrix(1,0,0,-1,497.295,141.03003)\" d=\"M0 0C-6.013 2.804-1.513 11.355 2.483 13.038 7.296 10.25 3.869 1.466 0 0M198.049-57.117C190.207-55.664 196.289-81.035 193.703-86.917 183.483-88.962 173.23-86.433 162.661-85.675 108.832-81.821 50.36-87.901 7.45-85.056 4.764-60.086 6.252-29.692 3.724-6.207 9.34-3.793 13.967 2.617 11.796 11.176 10.905 14.686 5.352 16.172 3.724 19.868 2.126 23.498 3.276 30.719 3.104 36.631 2.611 53.505 3.314 70.174 4.967 86.298 71.723 87.261 128.362 84.572 191.841 83.815 192.009 76.055 188.841 59.653 193.083 52.773 195.385 52.333 195.747 53.832 198.049 53.394 200.078 62.673 198.546 81.556 199.911 91.265 199.98 91.305 200.055 91.341 200.126 91.38 199.977 91.408 199.825 91.444 199.669 91.491 198.103 91.965 196.692 92.392 195.354 93.021 195.228 92.839 195.092 92.667 194.945 92.507 142.585 91.833 90.701 93.545 35.389 93.748-16.809 93.938-78.082 91.991-129.136 94.99-130.728 88.927-129.554 80.613-129.757 73.26-129.941 66.641-133.696 56.721-126.032 55.256-121.969 58.206-123.57 64.874-123.549 70.156-123.524 76.279-123.127 82.091-122.928 87.539-86.353 87.534-39.139 87.261-3.105 86.298-5.082 64.941-3.393 36.038-3.726 18.005-11.765 14.115-10.655-3.391-3.105-6.829-2.527-32.792-.871-62.914-1.242-86.298-41.133-86.771-83.811-88.229-122.307-85.056-122.767-79.567-124.01-70.45-124.17-63.326-124.297-57.622-122.309-50.386-129.757-52.151-131.549-64.784-128.367-81.402-129.757-93.748-113.302-93.43-95.925-93.569-81.331-93.748-.521-94.729 71.365-89.2 149.003-91.886 166.38-92.485 183.467-94.05 199.911-93.748 202.345-90.026 201.102-82.28 201.152-75.121 201.196-69.27 203.418-58.111 198.049-57.117\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,558.138,115.579959)\" d=\"M0 0C-2.223-1.913-3.728-1.77-7.451-1.243-12.042 3.234-11.079 15.531-17.384 16.762-29.063 19.042-24.734-11.003-26.697-19.247-24.865-21.037-22.219-18.376-19.247-19.247-19.91-21.567-17.704-21.016-18.005-22.971-18.764-26.353-24.329-24.926-26.697-26.696-26.716-42.618-27.104-57.71-26.076-74.501-29.406-76.655-35.951-75.52-38.493-73.26-36.984-57.294-37.897-45.753-37.251-29.8-41.622-30.603-44.439-32.959-49.668-32.906-51.387-29.765-49.062-27.448-48.427-24.833-43.893-25.023-41.318-23.252-37.251-22.971-35.317-9.18-39.943 32.751-14.28 23.592-6.242 20.723-1.23 9.031 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,378.713,92.609989)\" d=\"M0 0C.955-32.824-6.16-63.638 .621-93.128-3.346-94.231-8.779-92.452-12.417-91.263-12.411-62.585-12.654-29.74-10.554-1.242-8.908 1.604-3.465 .458 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,696.587,96.94995)\" d=\"M0 0C.39-30.03-4.36-63.228 .619-92.507-2.741-94.714-7.044-96.686-11.798-94.369-12.59-60.174-11.39-31.104-11.176 1.863-7.377 2.948-3.05 1.475 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,620.222,149.09998)\" d=\"M0 0C.118-11.696 .962-20.522 .622-33.527 6.307-33.834 9.48-31.625 13.659-30.423 18.021-21.371 16.165-5.111 12.417 3.103 7.845 4.632 2.685 2.329 0 0M0 50.908V9.932C18.141 13.059 23.701 3.117 26.076-13.659 26.851-19.141 28.703-25.655 27.939-29.179 25.251-41.562 4.217-42.517-8.691-40.976-10.93-12.662-10.641 23.201-11.176 52.771H-9.933C-6.551 54.15-2.742 52.079 0 50.908\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,592.905,108.75)\" d=\"M0 0C1.431-9.123 2.617-18.491 2.483-29.18 5.82-29.687 7.787-28.14 9.933-29.18 13.889-34.646 8.289-38.911 2.483-38.491 3.537-53.373 6.096-66.748 7.449-81.33 3.762-83.888-1.597-83.112-6.209-82.573-7.178-69.055-7.402-54.792-7.45-40.354-9.258-39.571-12.86-40.937-14.28-38.491-15.373-36.401-13.863-35.308-14.28-32.285-12.899-31.389-11.286-30.724-8.692-31.043-8.716-19.398-9.806-10.123-9.313 0-7.04 1.11-4.651-.543 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,459.423,154.06995)\" d=\"M0 0C4.77 2.265 10.138 3.933 15.521 5.586 16.319 24.396-2.767 14.105 0 0M22.971-1.243C15.073-4.106 7.536-7.329-1.242-9.313-.137-18.649 2.214-28.912 9.933-28.56 16.973-28.238 13.765-19.057 21.729-18.626 30.354-32.068 10.293-42.244-1.242-34.148-15.774-23.947-13.6 27.342 6.829 27.937 18.845 28.286 23.965 13.929 22.971-1.243\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,399.822,136.06995)\" d=\"M0 0C-4.143-10.421-14.806-43.339 4.346-42.838 6.493-28.969 6.967-11.347 1.863 0ZM-3.105 8.692C10.898 13.182 15.996-8.037 16.142-21.729 16.265-33.273 15.709-48.531 7.45-51.53-8.534-57.334-18.298-41.44-17.384-25.454-16.669-12.974-10.686 6.26-3.105 8.692\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,422.793,127.98999)\" d=\"M0 0C1.734-13.167 5.988-23.813 8.071-36.63 11.712-24.75 14.513-12.029 18.626-.621 23.285-1.022 26.196 .68 29.18-1.242 23.028-20.751 19.357-42.741 11.175-60.223 8.175-60.118 6.336-58.854 3.725-58.36-.17-39.266-5.84-18.693-8.071 0-5.769 1.695-2.876-.311 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,573.037,132.33997)\" d=\"M0 0C-8.705-2.286-19.12-6.095-27.937-6.207-29.475-4.598-27.334-3.164-27.937-.621-19.844 1.841-11.095 3.646-1.863 4.967-1.452 3.1 .524 2.8 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,668.027,182.01001)\" d=\"M0 0C6.277 7.971 5.473 29.04-3.104 34.145-8.109 26.031-12.282 3.358 0 0M4.347-7.452C-27.856-15.809-23.198 47.052-.622 46.562 7.841 46.378 11.629 33.327 12.417 24.213 13.56 10.98 10.226-1.866 4.347-7.452\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,550.067,141.03003)\" d=\"M0 0C4.852-1.238 2.896-8.116 3.104-13.036 3.493-22.268 3.866-35.286 6.208-39.734 9.429-45.852 16.179-45.209 17.384-37.249 18.081-32.631 17.057-24.766 16.762-17.382 16.484-10.432 15.368-2.31 19.246 .622 26.426 .97 25.454-8.592 25.454-16.142 25.454-30.222 28.16-49.577 16.14-52.151 11.585-53.126 3.183-50.521 0-47.184-9.007-37.747-4.448-14.823-5.589-.62-3.5-1.012-1.061 1.419 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,713.65,42.20996)\" d=\"M0 0C.016 .265 .038 .529 .06 .794-1.662 2.082-5.516 2.464-7.752 3.001-11.516 3.905-15.703 4.589-18.307 5.484-19.541 1.909-19.075-3.364-21.2-6.047-19.123-6.277-18.609-7.333-16.551-7.665-12.266-6.097-4.455-5.912-.839-3.189-.644-2.099-.386-1.028 0 0\" fill=\"#ED1C24\" fill-rule=\"evenodd\"/></g>"
+  },
+  "signatures": [
+    {
+      "id": "full",
+      "label": "Complete pitch and wordmark",
+      "padding": 0,
+      "use": "Preserve the complete source geometry and red flag. Positive black/red matches observed website usage; reverse white/red is the source PDF treatment.",
+      "elements": [
+        {
+          "type": "art",
+          "bounds": [
+            0,
+            0,
+            350.11102294921875,
+            199.03307342529297
+          ],
+          "markup": "<g transform=\"translate(-363.5989990234375 -36.72595977783203)\"><path transform=\"matrix(1,0,0,-1,497.295,141.03003)\" d=\"M0 0C-6.013 2.804-1.513 11.355 2.483 13.038 7.296 10.25 3.869 1.466 0 0M198.049-57.117C190.207-55.664 196.289-81.035 193.703-86.917 183.483-88.962 173.23-86.433 162.661-85.675 108.832-81.821 50.36-87.901 7.45-85.056 4.764-60.086 6.252-29.692 3.724-6.207 9.34-3.793 13.967 2.617 11.796 11.176 10.905 14.686 5.352 16.172 3.724 19.868 2.126 23.498 3.276 30.719 3.104 36.631 2.611 53.505 3.314 70.174 4.967 86.298 71.723 87.261 128.362 84.572 191.841 83.815 192.009 76.055 188.841 59.653 193.083 52.773 195.385 52.333 195.747 53.832 198.049 53.394 200.078 62.673 198.546 81.556 199.911 91.265 199.98 91.305 200.055 91.341 200.126 91.38 199.977 91.408 199.825 91.444 199.669 91.491 198.103 91.965 196.692 92.392 195.354 93.021 195.228 92.839 195.092 92.667 194.945 92.507 142.585 91.833 90.701 93.545 35.389 93.748-16.809 93.938-78.082 91.991-129.136 94.99-130.728 88.927-129.554 80.613-129.757 73.26-129.941 66.641-133.696 56.721-126.032 55.256-121.969 58.206-123.57 64.874-123.549 70.156-123.524 76.279-123.127 82.091-122.928 87.539-86.353 87.534-39.139 87.261-3.105 86.298-5.082 64.941-3.393 36.038-3.726 18.005-11.765 14.115-10.655-3.391-3.105-6.829-2.527-32.792-.871-62.914-1.242-86.298-41.133-86.771-83.811-88.229-122.307-85.056-122.767-79.567-124.01-70.45-124.17-63.326-124.297-57.622-122.309-50.386-129.757-52.151-131.549-64.784-128.367-81.402-129.757-93.748-113.302-93.43-95.925-93.569-81.331-93.748-.521-94.729 71.365-89.2 149.003-91.886 166.38-92.485 183.467-94.05 199.911-93.748 202.345-90.026 201.102-82.28 201.152-75.121 201.196-69.27 203.418-58.111 198.049-57.117\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,558.138,115.579959)\" d=\"M0 0C-2.223-1.913-3.728-1.77-7.451-1.243-12.042 3.234-11.079 15.531-17.384 16.762-29.063 19.042-24.734-11.003-26.697-19.247-24.865-21.037-22.219-18.376-19.247-19.247-19.91-21.567-17.704-21.016-18.005-22.971-18.764-26.353-24.329-24.926-26.697-26.696-26.716-42.618-27.104-57.71-26.076-74.501-29.406-76.655-35.951-75.52-38.493-73.26-36.984-57.294-37.897-45.753-37.251-29.8-41.622-30.603-44.439-32.959-49.668-32.906-51.387-29.765-49.062-27.448-48.427-24.833-43.893-25.023-41.318-23.252-37.251-22.971-35.317-9.18-39.943 32.751-14.28 23.592-6.242 20.723-1.23 9.031 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,378.713,92.609989)\" d=\"M0 0C.955-32.824-6.16-63.638 .621-93.128-3.346-94.231-8.779-92.452-12.417-91.263-12.411-62.585-12.654-29.74-10.554-1.242-8.908 1.604-3.465 .458 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,696.587,96.94995)\" d=\"M0 0C.39-30.03-4.36-63.228 .619-92.507-2.741-94.714-7.044-96.686-11.798-94.369-12.59-60.174-11.39-31.104-11.176 1.863-7.377 2.948-3.05 1.475 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,620.222,149.09998)\" d=\"M0 0C.118-11.696 .962-20.522 .622-33.527 6.307-33.834 9.48-31.625 13.659-30.423 18.021-21.371 16.165-5.111 12.417 3.103 7.845 4.632 2.685 2.329 0 0M0 50.908V9.932C18.141 13.059 23.701 3.117 26.076-13.659 26.851-19.141 28.703-25.655 27.939-29.179 25.251-41.562 4.217-42.517-8.691-40.976-10.93-12.662-10.641 23.201-11.176 52.771H-9.933C-6.551 54.15-2.742 52.079 0 50.908\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,592.905,108.75)\" d=\"M0 0C1.431-9.123 2.617-18.491 2.483-29.18 5.82-29.687 7.787-28.14 9.933-29.18 13.889-34.646 8.289-38.911 2.483-38.491 3.537-53.373 6.096-66.748 7.449-81.33 3.762-83.888-1.597-83.112-6.209-82.573-7.178-69.055-7.402-54.792-7.45-40.354-9.258-39.571-12.86-40.937-14.28-38.491-15.373-36.401-13.863-35.308-14.28-32.285-12.899-31.389-11.286-30.724-8.692-31.043-8.716-19.398-9.806-10.123-9.313 0-7.04 1.11-4.651-.543 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,459.423,154.06995)\" d=\"M0 0C4.77 2.265 10.138 3.933 15.521 5.586 16.319 24.396-2.767 14.105 0 0M22.971-1.243C15.073-4.106 7.536-7.329-1.242-9.313-.137-18.649 2.214-28.912 9.933-28.56 16.973-28.238 13.765-19.057 21.729-18.626 30.354-32.068 10.293-42.244-1.242-34.148-15.774-23.947-13.6 27.342 6.829 27.937 18.845 28.286 23.965 13.929 22.971-1.243\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,399.822,136.06995)\" d=\"M0 0C-4.143-10.421-14.806-43.339 4.346-42.838 6.493-28.969 6.967-11.347 1.863 0ZM-3.105 8.692C10.898 13.182 15.996-8.037 16.142-21.729 16.265-33.273 15.709-48.531 7.45-51.53-8.534-57.334-18.298-41.44-17.384-25.454-16.669-12.974-10.686 6.26-3.105 8.692\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,422.793,127.98999)\" d=\"M0 0C1.734-13.167 5.988-23.813 8.071-36.63 11.712-24.75 14.513-12.029 18.626-.621 23.285-1.022 26.196 .68 29.18-1.242 23.028-20.751 19.357-42.741 11.175-60.223 8.175-60.118 6.336-58.854 3.725-58.36-.17-39.266-5.84-18.693-8.071 0-5.769 1.695-2.876-.311 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,573.037,132.33997)\" d=\"M0 0C-8.705-2.286-19.12-6.095-27.937-6.207-29.475-4.598-27.334-3.164-27.937-.621-19.844 1.841-11.095 3.646-1.863 4.967-1.452 3.1 .524 2.8 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,668.027,182.01001)\" d=\"M0 0C6.277 7.971 5.473 29.04-3.104 34.145-8.109 26.031-12.282 3.358 0 0M4.347-7.452C-27.856-15.809-23.198 47.052-.622 46.562 7.841 46.378 11.629 33.327 12.417 24.213 13.56 10.98 10.226-1.866 4.347-7.452\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,550.067,141.03003)\" d=\"M0 0C4.852-1.238 2.896-8.116 3.104-13.036 3.493-22.268 3.866-35.286 6.208-39.734 9.429-45.852 16.179-45.209 17.384-37.249 18.081-32.631 17.057-24.766 16.762-17.382 16.484-10.432 15.368-2.31 19.246 .622 26.426 .97 25.454-8.592 25.454-16.142 25.454-30.222 28.16-49.577 16.14-52.151 11.585-53.126 3.183-50.521 0-47.184-9.007-37.747-4.448-14.823-5.589-.62-3.5-1.012-1.061 1.419 0 0\" fill=\"{logo}\" fill-rule=\"evenodd\"/><path transform=\"matrix(1,0,0,-1,713.65,42.20996)\" d=\"M0 0C.016 .265 .038 .529 .06 .794-1.662 2.082-5.516 2.464-7.752 3.001-11.516 3.905-15.703 4.589-18.307 5.484-19.541 1.909-19.075-3.364-21.2-6.047-19.123-6.277-18.609-7.333-16.551-7.665-12.266-6.097-4.455-5.912-.839-3.189-.644-2.099-.386-1.028 0 0\" fill=\"#ED1C24\" fill-rule=\"evenodd\"/></g>"
+        }
+      ]
+    }
+  ],
+  "colourways": {
+    "positive": {
+      "label": "Black with red flag",
+      "all": "black",
+      "ground": "white"
+    },
+    "reverse": {
+      "label": "White with red flag",
+      "all": "white",
+      "ground": "charcoal"
+    }
+  },
+  "defaultColourway": "positive",
+  "logoPolicy": {
+    "allowedColours": [
+      "black",
+      "white"
+    ],
+    "allowInheritedColour": false,
+    "standaloneSymbol": false,
+    "note": "Conservative source-preservation controls for this kit. Only the complete black/red and white/red treatments are offered; the flag keeps its source red. Local recommendations start primary logos at 32 mm or 144 CSS px with one quarter of the full logo height reserved around them. These are not official minima or source-verified exclusion zones."
+  },
+  "lockup": {
+    "canvasPadding": 0,
+    "clearspaceRecommendation": "Local recommendation: reserve one quarter of the complete artwork height on each side; keep the larger 8 mm reserve in document layouts. Start primary artwork at 32 mm in print or 144 CSS px on screen and proof the output. No official numeric minimum or clear-space standard was found."
+  },
+  "applicationGuidance": {
+    "schema": "brandkit/application-assumptions/1",
+    "brandId": "lovefutbol",
+    "reviewed": "2026-10-30",
+    "status": "Local recommendations informed by public website evidence; not organization-issued standards.",
+    "logo": {
+      "clearSpace": {
+        "measure": "complete artwork height",
+        "ratio": 0.25,
+        "official": false
+      },
+      "recommendedPrintWidthMm": 32,
+      "recommendedScreenWidthCssPx": 144,
+      "documentWidthMm": 48,
+      "documentReservedSpaceMm": 8,
+      "enforcement": "Recommendations, not source-verified export limits. Review secondary small marks and proof the actual output.",
+      "rationale": "One quarter of the full artwork height gives a scalable reserve without editing the paths. The official raster’s smallest transparent inset is about 0.259 of its visible artwork height, supporting this as an inference rather than an official rule. Screen sizes were compared as rendered specimens; the print starting size is a local design judgment requiring a physical proof.",
+      "sources": [
+        "lf-header-raster",
+        "lf-community-practices-pdf"
+      ]
+    },
+    "typography": {
+      "display": {
+        "font": "Bahianita",
+        "webStartPx": 48,
+        "webEndPx": 88,
+        "printTitlePt": 38,
+        "trackingEm": 0,
+        "use": "Short display headings; keep diacritics and natural word spacing."
+      },
+      "body": {
+        "font": "Red Hat Text",
+        "webPx": 18,
+        "webLineHeight": 1.5,
+        "printPt": 10.5,
+        "printLineHeight": 1.45
+      },
+      "secondary": {
+        "printHeadingPt": 20,
+        "printCaptionPt": 9,
+        "webCaptionPx": 16
+      },
+      "status": "Font roles are observed; this reusable scale is a local application choice.",
+      "sources": [
+        "lf-home",
+        "lf-projects",
+        "lf-methodology",
+        "lf-child-css"
+      ]
+    },
+    "layout": {
+      "printMarginsMm": 20,
+      "webSpaceUnitPx": 8,
+      "textMeasureCh": 65,
+      "responsive": "Use content-led wrapping: stack image/text and partner groups when readable widths no longer fit. Keep logical reading order.",
+      "status": "Local defaults, not extracted mandatory breakpoints or official grid ratios."
+    },
+    "rules": [
+      {
+        "id": "logo-space",
+        "title": "Give the complete mark room",
+        "basis": "Local geometry-based recommendation, corroborated by source raster margins",
+        "confidence": "medium",
+        "decision": "Reserve at least one quarter of the complete logo height on every side. Document layouts retain their larger 8 mm reserve. Keep red flag, pitch and lettering together.",
+        "sources": [
+          "lf-about",
+          "lf-header-raster",
+          "lf-community-practices-pdf"
+        ],
+        "limit": "No official numeric exclusion zone was recovered; image padding alone does not establish one."
+      },
+      {
+        "id": "logo-size",
+        "title": "Start at a practical readable size",
+        "basis": "Local specimen review",
+        "confidence": "medium",
+        "decision": "Start primary logos at 32 mm in print or 144 CSS px on screen; use 48 mm for report covers. Small secondary marks need an output-size review.",
+        "sources": [
+          "lf-header-raster"
+        ],
+        "limit": "These are recommendations, not official minima. A screen rendering is not a physical print proof."
+      },
+      {
+        "id": "colour-roles",
+        "title": "Separate colour evidence from readable use",
+        "basis": "Observed website roles plus calculated contrast",
+        "confidence": "high",
+        "decision": "Keep green and light green for project surfaces, terracotta for emphasis, and cyan for an additional website accent. Use charcoal on these surfaces; reserve red for the source flag within this kit.",
+        "sources": [
+          "lf-home",
+          "lf-projects",
+          "lf-partners",
+          "w3c-contrast"
+        ],
+        "limit": "Website observations do not establish print conversions or fixed colour percentages."
+      },
+      {
+        "id": "type-scale",
+        "title": "Use expressive titles and readable supporting text",
+        "basis": "Observed font roles; local sizes",
+        "confidence": "high",
+        "decision": "Use Bahianita for short titles and Red Hat Text for paragraphs, labels, captions and numbers. Start web body at 18 px/1.5 and document body at 10.5 pt/1.45. Allow wrapping instead of squeezing translated text.",
+        "sources": [
+          "lf-home",
+          "lf-methodology",
+          "lf-projects",
+          "lf-child-css"
+        ],
+        "limit": "Some project-detail H1 elements match the DK Brush Crush CSS rule; browser font loading was not measured. This kit does not recreate or redistribute that face."
+      },
+      {
+        "id": "project-record",
+        "title": "Lead with the place and the people",
+        "basis": "Editorial synthesis of official project and methodology pages",
+        "confidence": "high",
+        "decision": "Record project/community name, city and country, verified project identifier, status or reporting period, local leadership, activities, stewardship and evidence. Keep a proposed project distinct from an observed project profile.",
+        "sources": [
+          "lf-projects",
+          "lf-methodology",
+          "lf-faq"
+        ],
+        "limit": "Project numbers and locations need project-specific verification; global counters do not identify a project."
+      },
+      {
+        "id": "audience-action",
+        "title": "Choose one primary action for each audience",
+        "basis": "Observed homepage audience routes; local content structure",
+        "confidence": "high",
+        "decision": "Use a community enquiry for a proposed space, a partnership conversation for collaborators, a sponsorship conversation for project funders, and giving links for individual supporters. Specify the audience, destination and next step.",
+        "sources": [
+          "lf-home",
+          "lf-donate",
+          "lf-starting-squad",
+          "lf-contact"
+        ],
+        "limit": "Verify current destinations and local-language routes. Campaign amounts and supporter programs are not permanent identity tokens."
+      },
+      {
+        "id": "partners",
+        "title": "Keep partner attribution separate from the mark",
+        "basis": "Observed partner groupings; local layout convention",
+        "confidence": "medium",
+        "decision": "Use a separate acknowledgement area with named roles. Keep the full love.fútbol logo clear, give other approved marks their own space and balance prominence optically. Use text placeholders until approved assets and relationships are supplied.",
+        "sources": [
+          "lf-partners",
+          "lf-home"
+        ],
+        "limit": "No fixed official partner-logo size ratio or fused co-brand lockup was recovered."
+      },
+      {
+        "id": "photography",
+        "title": "Show context and credit the image",
+        "basis": "Observed project storytelling; local editorial convention",
+        "confidence": "high",
+        "decision": "Use real community-led activity, the space and its ongoing use. Provide a concise caption with place, date and creator. Keep essential text off busy images. For before/after comparisons, identify both dates and the same location.",
+        "sources": [
+          "lf-home",
+          "lf-methodology",
+          "lf-inclusion"
+        ],
+        "limit": "Public images are research references, not a stock-photo licence; frames stay empty until suitable assets are provided."
+      },
+      {
+        "id": "community-voice",
+        "title": "Attribute quotations precisely",
+        "basis": "Observed homepage community voices",
+        "confidence": "high",
+        "decision": "Use a verified exact quotation with the speaker’s approved name or role, community, date and source. Identify any translation. Leave placeholder copy visibly instructional until it is replaced.",
+        "sources": [
+          "lf-home",
+          "lf-culture"
+        ],
+        "limit": "Do not invent testimonials or let a local quotation stand in for a measured population outcome."
+      },
+      {
+        "id": "metrics",
+        "title": "Keep the definition with the number",
+        "basis": "Observed impact counters; evidence-quality convention",
+        "confidence": "high",
+        "decision": "Pair every metric with its unit, geography or population, period, source and whether it is observed, estimated or a target. Use a dated source; distinguish visits, unique participants, annual reach and cumulative reach.",
+        "sources": [
+          "lf-home",
+          "lf-governance"
+        ],
+        "limit": "Inconsistent or undated site totals are not frozen into default assets."
+      },
+      {
+        "id": "languages",
+        "title": "Preserve the identity across languages",
+        "basis": "Observed English, Spanish and Brazilian Portuguese routes",
+        "confidence": "high",
+        "decision": "Keep love.fútbol unchanged. Preserve place-name accents, review translation with local speakers, adapt dates and numbers to the chosen locale, and keep each call to action in the destination language.",
+        "sources": [
+          "lf-home",
+          "lf-es-home",
+          "lf-pt-home"
+        ],
+        "limit": "The kit remains an English authoring interface; locale guidance and glyph coverage do not imply a complete translated UI."
+      },
+      {
+        "id": "site-quality",
+        "title": "Use recurring design evidence, review content inconsistencies",
+        "basis": "Cross-page source review",
+        "confidence": "high",
+        "decision": "Record conflicting captions, inherited return-link labels and placeholder controls as source-quality observations. Confirm names and destinations against stronger project text before publishing.",
+        "sources": [
+          "lf-home",
+          "lf-projects"
+        ],
+        "limit": "A visible website inconsistency is not an identity rule to reproduce."
+      }
+    ]
+  },
+  "copy": {
+    "tagline": "More than a place to play",
+    "descriptor": "Community-led places for play and connection",
+    "logoLabel": "love.fútbol complete pitch and wordmark with red flag",
+    "svgDescription": "love.fútbol source logo geometry from its 2025 U.S. Soccer resource. Original paths retained; black/red treatment follows the official website. Application kit, not a brand standards manual.",
+    "templateDescription": "Editable local application informed by observed love.fútbol website styling. Placeholder content must be replaced with verified project information."
+  },
+  "patterns": [],
+  "templates": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letterhead / Letter",
+      "title": "{name} / Letterhead / Letter",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "team-region",
+          "text": "[Team or region]",
+          "x": 195.9,
+          "y": 26,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 195.9,
+          "y": 34,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 65,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "recipient",
+          "text": "[Recipient]\n[Address]",
+          "x": 20,
+          "y": 78,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 107,
+          "width": 175.9,
+          "size": 4.938888888888888,
+          "leading": 6.35,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-body",
+          "text": "[Explain the purpose of this letter, the community context and the action or response requested.]",
+          "x": 20,
+          "y": 130,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 17
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Name]",
+          "x": 20,
+          "y": 232.39999999999998,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "author-role",
+          "text": "[Role]",
+          "x": 20,
+          "y": 240.39999999999998,
+          "size": 3.5277777777777777,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "continuation-letter",
+      "label": "Continuation sheet / Letter",
+      "title": "{name} / Continuation sheet / Letter",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 32,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "running-title",
+          "text": "[Document title]",
+          "x": 195.9,
+          "y": 28,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 46,
+          "y2": 46,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-heading",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 65,
+          "width": 175.9,
+          "size": 9.17222222222222,
+          "leading": 10.548055555555553,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-content",
+          "text": "[Continue the letter or project brief here. Describe the evidence, responsibilities, decisions and next steps in clear language.]",
+          "x": 20,
+          "y": 95,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 28
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "project-brief-letter",
+      "label": "Community project brief / Letter",
+      "title": "{name} / Community project brief / Letter",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Community project brief",
+          "x": 83,
+          "y": 24,
+          "size": 2.998611111111111,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.17991666666666664
+        },
+        {
+          "type": "paragraph",
+          "id": "project-location",
+          "text": "[Community / location]",
+          "x": 83,
+          "y": 35,
+          "width": 112.9,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "project-title",
+          "text": "[Project title]",
+          "x": 20,
+          "y": 69,
+          "width": 175.9,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": "project-period",
+          "text": "[Reporting period or project stage]",
+          "x": 20,
+          "y": 94,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 106,
+          "width": 175.9,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Community context",
+          "x": 23,
+          "y": 112.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-context",
+          "text": "[Describe the place, the people leading the work and the locally identified need.]",
+          "x": 20,
+          "y": 124,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 151,
+          "width": 175.9,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "The proposed space and approach",
+          "x": 23,
+          "y": 157.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-approach",
+          "text": "[Describe what is proposed, how residents will shape it and the responsibilities agreed with partners.]",
+          "x": 20,
+          "y": 169,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 196,
+          "width": 175.9,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Stewardship and next steps",
+          "x": 23,
+          "y": 202.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-stewardship",
+          "text": "[Explain access, upkeep, local decision-making and the next agreed action. Add dated evidence where available.]",
+          "x": 20,
+          "y": 214,
+          "width": 175.9,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "project-profile-letter",
+      "label": "Community project profile / Letter",
+      "title": "{name} / Community project profile / Letter",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact.",
+      "width": 215.9,
+      "height": 279.4,
+      "unit": "mm",
+      "physical": [
+        "215.9mm",
+        "279.4mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Documented project",
+          "x": 83,
+          "y": 24,
+          "size": 2.998611111111111,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.17991666666666664
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-location",
+          "text": "[Community / location]",
+          "x": 83,
+          "y": 35,
+          "width": 112.9,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-title",
+          "text": "[Project name]",
+          "x": 20,
+          "y": 69,
+          "width": 175.9,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-observation",
+          "text": "[Recorded stage / completion date · Observation period]",
+          "x": 20,
+          "y": 94,
+          "width": 175.9,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "id": "profile-image-frame",
+          "x": 20,
+          "y": 108,
+          "width": 175.9,
+          "height": 52,
+          "fill": "off-white",
+          "stroke": "light-green",
+          "strokeWidth": 0.4
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-image-note",
+          "text": "[Insert a reviewed project photograph]",
+          "x": 107.95,
+          "y": 135,
+          "width": 159.9,
+          "size": 4.2333333333333325,
+          "leading": 5.926666666666665,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-image-credit",
+          "text": "[What is shown / place / image date / creator]",
+          "x": 20,
+          "y": 167,
+          "width": 175.9,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Local leadership",
+          "x": 20,
+          "y": 186,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Ongoing stewardship",
+          "x": 113.95,
+          "y": 186,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-leadership",
+          "text": "[Name the local people or group shaping decisions and describe their role.]",
+          "x": 20,
+          "y": 195,
+          "width": 81.95,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-stewardship",
+          "text": "[Describe agreed access, upkeep and local responsibilities as of the date above.]",
+          "x": 113.95,
+          "y": 195,
+          "width": 81.95,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Evidence and further detail",
+          "x": 20,
+          "y": 228,
+          "size": 3.175,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-sources",
+          "text": "[Sources / dates / methods / contact or link for further information]",
+          "x": 20,
+          "y": 236,
+          "width": 175.9,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 195.9,
+          "y1": 257.4,
+          "y2": 257.4,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 195.9,
+          "y": 264.4,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ],
+      "guides": {
+        "title": "Local project profile construction",
+        "labelSize": 3,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "label": "20 mm / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "to": {
+              "element": "brand-logo",
+              "edge": "right"
+            },
+            "label": "43 mm / complete logo"
+          },
+          {
+            "type": "dimension",
+            "axis": "y",
+            "from": {
+              "element": "profile-image-frame",
+              "edge": "top"
+            },
+            "to": {
+              "element": "profile-image-frame",
+              "edge": "bottom"
+            },
+            "label": "52 mm / image frame"
+          },
+          {
+            "type": "note",
+            "label": "Dated snapshot. Keep local roles, image credit and sources with the project."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "Letterhead / A4",
+      "title": "{name} / Letterhead / A4",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "team-region",
+          "text": "[Team or region]",
+          "x": 190,
+          "y": 26,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 190,
+          "y": 34,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "letter-date",
+          "text": "[Date]",
+          "x": 20,
+          "y": 65,
+          "size": 3.704166666666666,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "recipient",
+          "text": "[Recipient]\n[Address]",
+          "x": 20,
+          "y": 78,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-subject",
+          "text": "[Subject]",
+          "x": 20,
+          "y": 107,
+          "width": 170,
+          "size": 4.938888888888888,
+          "leading": 6.35,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "letter-body",
+          "text": "[Explain the purpose of this letter, the community context and the action or response requested.]",
+          "x": 20,
+          "y": 130,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 17
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "text": "[Name]",
+          "x": 20,
+          "y": 250,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": "author-role",
+          "text": "[Role]",
+          "x": 20,
+          "y": 258,
+          "size": 3.5277777777777777,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "continuation-a4",
+      "label": "Continuation sheet / A4",
+      "title": "{name} / Continuation sheet / A4",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 32,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "running-title",
+          "text": "[Document title]",
+          "x": 190,
+          "y": 28,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 46,
+          "y2": 46,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-heading",
+          "text": "[Section heading]",
+          "x": 20,
+          "y": 65,
+          "width": 170,
+          "size": 9.17222222222222,
+          "leading": 10.548055555555553,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "continued-content",
+          "text": "[Continue the letter or project brief here. Describe the evidence, responsibilities, decisions and next steps in clear language.]",
+          "x": 20,
+          "y": 95,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 31
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "project-brief-a4",
+      "label": "Community project brief / A4",
+      "title": "{name} / Community project brief / A4",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Community project brief",
+          "x": 83,
+          "y": 24,
+          "size": 2.998611111111111,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.17991666666666664
+        },
+        {
+          "type": "paragraph",
+          "id": "project-location",
+          "text": "[Community / location]",
+          "x": 83,
+          "y": 35,
+          "width": 107,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "project-title",
+          "text": "[Project title]",
+          "x": 20,
+          "y": 69,
+          "width": 170,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": "project-period",
+          "text": "[Reporting period or project stage]",
+          "x": 20,
+          "y": 94,
+          "size": 3.175,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 106,
+          "width": 170,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Community context",
+          "x": 23,
+          "y": 112.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-context",
+          "text": "[Describe the place, the people leading the work and the locally identified need.]",
+          "x": 20,
+          "y": 124,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 151,
+          "width": 170,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "The proposed space and approach",
+          "x": 23,
+          "y": 157.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-approach",
+          "text": "[Describe what is proposed, how residents will shape it and the responsibilities agreed with partners.]",
+          "x": 20,
+          "y": 169,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 4
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 20,
+          "y": 196,
+          "width": 170,
+          "height": 9,
+          "fill": "light-green"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Stewardship and next steps",
+          "x": 23,
+          "y": 202.5,
+          "size": 3.5277777777777777,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "project-stewardship",
+          "text": "[Explain access, upkeep, local decision-making and the next agreed action. Add dated evidence where available.]",
+          "x": 20,
+          "y": 214,
+          "width": 170,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ]
+    },
+    {
+      "id": "project-profile-a4",
+      "label": "Community project profile / A4",
+      "title": "{name} / Community project profile / A4",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact.",
+      "width": 210,
+      "height": 297,
+      "unit": "mm",
+      "physical": [
+        "210mm",
+        "297mm"
+      ],
+      "raster": 1700,
+      "group": "Documents",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 20,
+          "y": 16,
+          "width": 43,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Documented project",
+          "x": 83,
+          "y": 24,
+          "size": 2.998611111111111,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.17991666666666664
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-location",
+          "text": "[Community / location]",
+          "x": 83,
+          "y": 35,
+          "width": 107,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 52,
+          "y2": 52,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-title",
+          "text": "[Project name]",
+          "x": 20,
+          "y": 69,
+          "width": 170,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-observation",
+          "text": "[Recorded stage / completion date · Observation period]",
+          "x": 20,
+          "y": 94,
+          "width": 170,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "id": "profile-image-frame",
+          "x": 20,
+          "y": 108,
+          "width": 170,
+          "height": 52,
+          "fill": "off-white",
+          "stroke": "light-green",
+          "strokeWidth": 0.4
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-image-note",
+          "text": "[Insert a reviewed project photograph]",
+          "x": 105,
+          "y": 135,
+          "width": 154,
+          "size": 4.2333333333333325,
+          "leading": 5.926666666666665,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-image-credit",
+          "text": "[What is shown / place / image date / creator]",
+          "x": 20,
+          "y": 167,
+          "width": 170,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Local leadership",
+          "x": 20,
+          "y": 186,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Ongoing stewardship",
+          "x": 111,
+          "y": 186,
+          "size": 3.704166666666666,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-leadership",
+          "text": "[Name the local people or group shaping decisions and describe their role.]",
+          "x": 20,
+          "y": 195,
+          "width": 79,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-stewardship",
+          "text": "[Describe agreed access, upkeep and local responsibilities as of the date above.]",
+          "x": 111,
+          "y": 195,
+          "width": 79,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 5
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Evidence and further detail",
+          "x": 20,
+          "y": 228,
+          "size": 3.175,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "profile-sources",
+          "text": "[Sources / dates / methods / contact or link for further information]",
+          "x": 20,
+          "y": 236,
+          "width": 170,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "line",
+          "x1": 20,
+          "x2": 190,
+          "y1": 275,
+          "y2": 275,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "text",
+          "id": "document-reference",
+          "text": "[Reference / version]",
+          "x": 20,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 190,
+          "y": 282,
+          "size": 2.822222222222222,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "end"
+        }
+      ],
+      "guides": {
+        "title": "Local project profile construction",
+        "labelSize": 3,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "label": "20 mm / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "to": {
+              "element": "brand-logo",
+              "edge": "right"
+            },
+            "label": "43 mm / complete logo"
+          },
+          {
+            "type": "dimension",
+            "axis": "y",
+            "from": {
+              "element": "profile-image-frame",
+              "edge": "top"
+            },
+            "to": {
+              "element": "profile-image-frame",
+              "edge": "bottom"
+            },
+            "label": "52 mm / image frame"
+          },
+          {
+            "type": "note",
+            "label": "Dated snapshot. Keep local roles, image credit and sources with the project."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "presentation-cover",
+      "label": "Presentation cover",
+      "title": "{name} / Presentation cover",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light-green"
+        },
+        {
+          "type": "logo",
+          "x": 18,
+          "y": 16,
+          "width": 54,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "Community / project",
+          "x": 90,
+          "y": 30,
+          "size": 4.2333333333333325,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.25399999999999995
+        },
+        {
+          "type": "paragraph",
+          "id": "deck-title",
+          "text": "[Presentation title]",
+          "x": 18,
+          "y": 85,
+          "width": 302,
+          "size": 16.227777777777778,
+          "leading": 18.661944444444444,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "deck-summary",
+          "text": "[Place, purpose and scope]",
+          "x": 18,
+          "y": 148,
+          "width": 302,
+          "size": 6.35,
+          "leading": 8.889999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": "presenter",
+          "text": "[Presenter / date]",
+          "x": 18,
+          "y": 178,
+          "size": 4.2333333333333325,
+          "font": "body",
+          "colour": "ink"
+        }
+      ]
+    },
+    {
+      "id": "presentation-section",
+      "label": "Presentation section",
+      "title": "{name} / Presentation section",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "terracotta"
+        },
+        {
+          "type": "logo",
+          "x": 18,
+          "y": 16,
+          "width": 45,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "section-number",
+          "text": "[01]",
+          "x": 18,
+          "y": 66,
+          "size": 4.938888888888888,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "section-title",
+          "text": "[Section title]",
+          "x": 18,
+          "y": 97,
+          "width": 302,
+          "size": 16.227777777777778,
+          "leading": 18.661944444444444,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "paragraph",
+          "id": "section-summary",
+          "text": "[The question or purpose of this section.]",
+          "x": 18,
+          "y": 163,
+          "width": 302,
+          "size": 5.997222222222222,
+          "leading": 8.396111111111109,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        }
+      ]
+    },
+    {
+      "id": "presentation-content",
+      "label": "Presentation content",
+      "title": "{name} / Presentation content",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 280,
+          "y": 14,
+          "width": 40,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Slide title]",
+          "x": 18,
+          "y": 32,
+          "width": 246,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 18,
+          "x2": 320.667,
+          "y1": 56,
+          "y2": 56,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-body",
+          "text": "[Key point]\n[Supporting evidence]\n[What this means for the community]",
+          "x": 18,
+          "y": 79,
+          "width": 292,
+          "size": 7.76111111111111,
+          "leading": 10.583333333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 8
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-source",
+          "text": "[Source and reporting period]",
+          "x": 18,
+          "y": 181,
+          "width": 302,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 1
+        }
+      ]
+    },
+    {
+      "id": "presentation-evidence",
+      "label": "Presentation evidence",
+      "title": "{name} / Presentation evidence",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 280,
+          "y": 14,
+          "width": 40,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Evidence title]",
+          "x": 18,
+          "y": 32,
+          "width": 246,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 18,
+          "x2": 320.667,
+          "y1": 56,
+          "y2": 56,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "rect",
+          "id": "evidence-image-frame",
+          "x": 18,
+          "y": 67,
+          "width": 180,
+          "height": 89,
+          "fill": "off-white",
+          "stroke": "light-green",
+          "strokeWidth": 0.4
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-image-note",
+          "text": "[Insert a sourced image or chart]",
+          "x": 108,
+          "y": 109,
+          "width": 162,
+          "size": 4.58611111111111,
+          "leading": 6.420555555555555,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-caption",
+          "text": "[Caption / creator / date]",
+          "x": 18,
+          "y": 166,
+          "width": 180,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "What it shows",
+          "x": 215,
+          "y": 71,
+          "size": 3.175,
+          "font": "bold",
+          "colour": "ink",
+          "caps": true,
+          "tracking": 0.1905
+        },
+        {
+          "type": "paragraph",
+          "id": "evidence-explanation",
+          "text": "[Describe the evidence, what it supports and any limits on interpretation.]",
+          "x": 215,
+          "y": 85,
+          "width": 105,
+          "size": 5.997222222222222,
+          "leading": 7.76111111111111,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 9
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-source",
+          "text": "[Source / permission / reporting period]",
+          "x": 18,
+          "y": 183,
+          "width": 302,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 1
+        }
+      ]
+    },
+    {
+      "id": "presentation-comparison",
+      "label": "Presentation comparison",
+      "title": "{name} / Presentation comparison",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Compare two dated views with equal image frames. Identify location, dates, viewpoints and creators; keep meaningful context when cropping. Describe only what the evidence supports. Before-and-after images alone do not establish that an intervention caused a change. Insert reviewed images in the exported SVG or PowerPoint.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 280,
+          "y": 14,
+          "width": 40,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Place across two dates]",
+          "x": 18,
+          "y": 32,
+          "width": 246,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 18,
+          "x2": 320.667,
+          "y1": 56,
+          "y2": 56,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "paragraph",
+          "id": "comparison-location",
+          "text": "[Community / location / scope of comparison]",
+          "x": 18,
+          "y": 67,
+          "width": 302,
+          "size": 3.704166666666666,
+          "leading": 5.185833333333332,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 1
+        },
+        {
+          "type": "paragraph",
+          "id": "before-date",
+          "text": "[Before · date / viewpoint]",
+          "x": 18,
+          "y": 77,
+          "width": 144,
+          "size": 3.5277777777777777,
+          "leading": 4.938888888888888,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "after-date",
+          "text": "[After · date / viewpoint]",
+          "x": 176,
+          "y": 77,
+          "width": 144,
+          "size": 3.5277777777777777,
+          "leading": 4.938888888888888,
+          "font": "bold",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "id": "before-image-frame",
+          "x": 18,
+          "y": 85,
+          "width": 144,
+          "height": 59,
+          "fill": "off-white",
+          "stroke": "light-green",
+          "strokeWidth": 0.4
+        },
+        {
+          "type": "rect",
+          "id": "after-image-frame",
+          "x": 176,
+          "y": 85,
+          "width": 144,
+          "height": 59,
+          "fill": "off-white",
+          "stroke": "light-green",
+          "strokeWidth": 0.4
+        },
+        {
+          "type": "paragraph",
+          "id": "before-image-note",
+          "text": "[Insert earlier image]",
+          "x": 90,
+          "y": 116,
+          "width": 128,
+          "size": 4.2333333333333325,
+          "leading": 5.926666666666665,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "after-image-note",
+          "text": "[Insert later image]",
+          "x": 248,
+          "y": 116,
+          "width": 128,
+          "size": 4.2333333333333325,
+          "leading": 5.926666666666665,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "before-caption",
+          "text": "[What is shown / creator / source]",
+          "x": 18,
+          "y": 152,
+          "width": 144,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "after-caption",
+          "text": "[What is shown / creator / source]",
+          "x": 176,
+          "y": 152,
+          "width": 144,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "comparison-context",
+          "text": "[State the observable changes and relevant limits. Images alone do not establish the cause of change.]",
+          "x": 18,
+          "y": 169,
+          "width": 302,
+          "size": 3.3513888888888888,
+          "leading": 4.691944444444443,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "comparison-source",
+          "text": "[Evidence source / image permissions / reporting date]",
+          "x": 18,
+          "y": 183,
+          "width": 302,
+          "size": 2.822222222222222,
+          "leading": 3.9511111111111106,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 1
+        }
+      ],
+      "guides": {
+        "title": "Local comparison slide construction",
+        "labelSize": 3.5,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "before-image-frame",
+              "edge": "left"
+            },
+            "label": "18 mm / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "before-image-frame",
+              "edge": "left"
+            },
+            "to": {
+              "element": "before-image-frame",
+              "edge": "right"
+            },
+            "label": "144 mm / each image"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "before-image-frame",
+              "edge": "right"
+            },
+            "to": {
+              "element": "after-image-frame",
+              "edge": "left"
+            },
+            "label": "14 mm / gap"
+          },
+          {
+            "type": "note",
+            "label": "Equal frames; retain dates, location, credits and limits. No causal claim is implied."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "presentation-community-voice",
+      "label": "Presentation community voice",
+      "title": "{name} / Presentation community voice",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. A flat charcoal surface, light-green title and reversed complete logo apply the observed dark contrast treatment without inventing a grain or pattern system. Use a short quotation approved for the intended audience and context. Preserve its exact words and meaning, identify the speaker’s role, place, date and source, and record permission for this use. Check that the complete quotation fits within four lines; otherwise select a separately approved shorter quotation or another layout. A translated quotation requires a reviewed translation; do not invent a testimonial or convert a paraphrase into a direct quotation.",
+      "width": 338.667,
+      "height": 190.5,
+      "unit": "mm",
+      "physical": [
+        "338.667mm",
+        "190.5mm"
+      ],
+      "raster": 1920,
+      "group": "Presentations",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "charcoal"
+        },
+        {
+          "type": "logo",
+          "x": 280,
+          "y": 14,
+          "width": 40,
+          "signature": "full",
+          "colourway": "reverse"
+        },
+        {
+          "type": "paragraph",
+          "id": "slide-title",
+          "text": "[Community perspective]",
+          "x": 18,
+          "y": 32,
+          "width": 246,
+          "size": 10.583333333333332,
+          "leading": 12.170833333333333,
+          "font": "display",
+          "colour": "light-green",
+          "maxLines": 2
+        },
+        {
+          "type": "line",
+          "x1": 18,
+          "x2": 320.667,
+          "y1": 56,
+          "y2": 56,
+          "stroke": "light-green",
+          "strokeWidth": 0.35
+        },
+        {
+          "type": "rect",
+          "id": "voice-accent",
+          "x": 18,
+          "y": 67,
+          "width": 5,
+          "height": 72,
+          "fill": "cyan"
+        },
+        {
+          "type": "paragraph",
+          "id": "voice-quotation",
+          "text": "[Insert a short, exact approved quotation. Keep the complete quotation within four lines.]",
+          "x": 31,
+          "y": 86,
+          "width": 277,
+          "size": 9.17222222222222,
+          "leading": 11.994444444444444,
+          "font": "body",
+          "colour": "off-white",
+          "maxLines": 4
+        },
+        {
+          "type": "paragraph",
+          "id": "voice-speaker",
+          "text": "[Speaker name]",
+          "x": 18,
+          "y": 151,
+          "width": 210,
+          "size": 4.938888888888888,
+          "leading": 6.9144444444444435,
+          "font": "bold",
+          "colour": "white",
+          "maxLines": 1
+        },
+        {
+          "type": "paragraph",
+          "id": "voice-date",
+          "text": "[Date]",
+          "x": 320,
+          "y": 151,
+          "width": 80,
+          "size": 3.175,
+          "leading": 4.444999999999999,
+          "font": "body",
+          "colour": "white",
+          "anchor": "end",
+          "maxLines": 1
+        },
+        {
+          "type": "paragraph",
+          "id": "voice-role-place",
+          "text": "[Speaker’s role / community / place]",
+          "x": 18,
+          "y": 163,
+          "width": 302,
+          "size": 3.5277777777777777,
+          "leading": 4.938888888888888,
+          "font": "body",
+          "colour": "off-white",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "voice-source",
+          "text": "[Original source / permission for this use / approved translation, if applicable]",
+          "x": 18,
+          "y": 181,
+          "width": 302,
+          "size": 2.998611111111111,
+          "leading": 4.1980555555555545,
+          "font": "body",
+          "colour": "off-white",
+          "maxLines": 2
+        }
+      ],
+      "guides": {
+        "title": "Local community voice slide construction",
+        "labelSize": 3.5,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "voice-accent",
+              "edge": "left"
+            },
+            "label": "18 mm / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "voice-accent",
+              "edge": "left"
+            },
+            "to": {
+              "element": "voice-accent",
+              "edge": "right"
+            },
+            "label": "5 mm / cyan accent"
+          },
+          {
+            "type": "callout",
+            "target": {
+              "box": [
+                31,
+                79.5,
+                277,
+                43
+              ]
+            },
+            "label": "26 / 34 pt Red Hat Text\nComplete quote / four lines maximum",
+            "side": "right"
+          },
+          {
+            "type": "note",
+            "label": "Keep speaker, role, place, date and source with the quotation."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "social-post",
+      "label": "Social announcement / square",
+      "title": "{name} / Social announcement / square",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "group": "Digital applications",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light-green"
+        },
+        {
+          "type": "logo",
+          "x": 72,
+          "y": 64,
+          "width": 260,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "post-context",
+          "text": "[Community / project]",
+          "x": 72,
+          "y": 286,
+          "size": 26,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "post-title",
+          "text": "[Announcement title]",
+          "x": 72,
+          "y": 398,
+          "width": 936,
+          "size": 92,
+          "leading": 106,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 0,
+          "y": 734,
+          "width": 1080,
+          "height": 346,
+          "fill": "off-white"
+        },
+        {
+          "type": "paragraph",
+          "id": "post-detail",
+          "text": "[Share the relevant details and the next action.]",
+          "x": 72,
+          "y": 808,
+          "width": 936,
+          "size": 32,
+          "leading": 45,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "post-website",
+          "text": "lovefutbol.org",
+          "x": 72,
+          "y": 1008,
+          "size": 26,
+          "font": "body",
+          "colour": "ink"
+        }
+      ]
+    },
+    {
+      "id": "social-story",
+      "label": "Community story / portrait",
+      "title": "{name} / Community story / portrait",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 1080,
+      "height": 1920,
+      "raster": 1080,
+      "group": "Digital applications",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "off-white"
+        },
+        {
+          "type": "logo",
+          "x": 80,
+          "y": 200,
+          "width": 260,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "story-context",
+          "text": "[Community / location]",
+          "x": 80,
+          "y": 416,
+          "size": 28,
+          "font": "bold",
+          "colour": "ink"
+        },
+        {
+          "type": "paragraph",
+          "id": "story-title",
+          "text": "[Story title]",
+          "x": 80,
+          "y": 532,
+          "width": 920,
+          "size": 104,
+          "leading": 116,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "id": "story-image-frame",
+          "x": 80,
+          "y": 756,
+          "width": 920,
+          "height": 554,
+          "fill": "light-green"
+        },
+        {
+          "type": "paragraph",
+          "id": "story-image-note",
+          "text": "[Insert a community photograph]",
+          "x": 540,
+          "y": 1035,
+          "width": 820,
+          "size": 30,
+          "leading": 42,
+          "font": "body",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "story-caption",
+          "text": "[Caption / creator / date]",
+          "x": 80,
+          "y": 1372,
+          "width": 920,
+          "size": 24,
+          "leading": 34,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "story-detail",
+          "text": "[Explain what happened and who shaped the work.]",
+          "x": 80,
+          "y": 1500,
+          "width": 920,
+          "size": 34,
+          "leading": 48,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "text",
+          "id": "story-website",
+          "text": "lovefutbol.org",
+          "x": 80,
+          "y": 1702,
+          "size": 26,
+          "font": "body",
+          "colour": "ink"
+        }
+      ]
+    },
+    {
+      "id": "social-impact",
+      "label": "Impact measure / square",
+      "title": "{name} / Impact measure / square",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Publish one verified measure with its unit, precise definition, geography, reporting period and source. Preserve qualifications that affect interpretation; do not describe participation, capacity or a project count as a causal outcome. Use the caption or linked source for full methodology.",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "group": "Digital applications",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "off-white"
+        },
+        {
+          "type": "logo",
+          "x": 72,
+          "y": 64,
+          "width": 220,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "impact-context",
+          "text": "[Community / project / measure]",
+          "x": 72,
+          "y": 270,
+          "size": 26,
+          "font": "bold",
+          "colour": "ink",
+          "fitWidth": 936
+        },
+        {
+          "type": "text",
+          "id": "impact-value",
+          "text": "[Value + unit]",
+          "x": 72,
+          "y": 455,
+          "size": 152,
+          "font": "bold",
+          "colour": "ink",
+          "fitWidth": 936
+        },
+        {
+          "type": "paragraph",
+          "id": "impact-definition",
+          "text": "[Define exactly what the value counts]",
+          "x": 72,
+          "y": 540,
+          "width": 936,
+          "size": 42,
+          "leading": 54,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "impact-qualification",
+          "text": "[Scope or methodological limit relevant to this value]",
+          "x": 72,
+          "y": 661,
+          "width": 936,
+          "size": 27,
+          "leading": 36,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "rect",
+          "id": "impact-accent",
+          "x": 72,
+          "y": 730,
+          "width": 936,
+          "height": 8,
+          "fill": "cyan"
+        },
+        {
+          "type": "paragraph",
+          "id": "impact-geography",
+          "text": "[Geography / people or places included]",
+          "x": 72,
+          "y": 794,
+          "width": 936,
+          "size": 28,
+          "leading": 36,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": "impact-period",
+          "text": "[Reporting period / as-of date]",
+          "x": 72,
+          "y": 881,
+          "size": 28,
+          "font": "body",
+          "colour": "ink",
+          "fitWidth": 936
+        },
+        {
+          "type": "paragraph",
+          "id": "impact-source",
+          "text": "[Source / method / link to full evidence]",
+          "x": 72,
+          "y": 944,
+          "width": 936,
+          "size": 24,
+          "leading": 32,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": null,
+          "text": "lovefutbol.org",
+          "x": 72,
+          "y": 1040,
+          "size": 22,
+          "font": "body",
+          "colour": "ink"
+        }
+      ],
+      "guides": {
+        "title": "Local impact card construction",
+        "labelSize": 22,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "label": "72 px / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "to": {
+              "element": "brand-logo",
+              "edge": "right"
+            },
+            "label": "220 px / complete logo"
+          },
+          {
+            "type": "callout",
+            "target": {
+              "element": "impact-value"
+            },
+            "label": "Value + unit\nRed Hat Text Bold; shrink to fit",
+            "side": "right"
+          },
+          {
+            "type": "note",
+            "label": "Keep definition, geography, period, source and relevant limits with the value."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "social-call-to-action",
+      "label": "Community invitation / square",
+      "title": "{name} / Community invitation / square",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Address one audience, ask for one concrete action and provide a verified destination or access instruction. State relevant participation or accessibility details. This static artwork has no working button: include the usable URL or access information in the post and caption. Donation amounts, incentives and promises require separately verified content.",
+      "width": 1080,
+      "height": 1080,
+      "raster": 1080,
+      "group": "Digital applications",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "light-green"
+        },
+        {
+          "type": "logo",
+          "x": 72,
+          "y": 64,
+          "width": 220,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "text",
+          "id": "cta-audience",
+          "text": "[Who this invitation is for]",
+          "x": 72,
+          "y": 270,
+          "size": 26,
+          "font": "bold",
+          "colour": "ink",
+          "fitWidth": 936
+        },
+        {
+          "type": "paragraph",
+          "id": "cta-headline",
+          "text": "[What people can do]",
+          "x": 72,
+          "y": 382,
+          "width": 936,
+          "size": 92,
+          "leading": 106,
+          "font": "display",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "cta-context",
+          "text": "[Why this matters here, and what to expect.]",
+          "x": 72,
+          "y": 600,
+          "width": 936,
+          "size": 34,
+          "leading": 46,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 3
+        },
+        {
+          "type": "rect",
+          "id": null,
+          "x": 0,
+          "y": 768,
+          "width": 1080,
+          "height": 312,
+          "fill": "off-white"
+        },
+        {
+          "type": "rect",
+          "id": "cta-action-panel",
+          "x": 72,
+          "y": 802,
+          "width": 936,
+          "height": 116,
+          "fill": "cyan"
+        },
+        {
+          "type": "paragraph",
+          "id": "cta-action",
+          "text": "[One clear action]",
+          "x": 540,
+          "y": 852,
+          "width": 840,
+          "size": 38,
+          "leading": 45,
+          "font": "bold",
+          "colour": "ink",
+          "anchor": "middle",
+          "maxLines": 2
+        },
+        {
+          "type": "paragraph",
+          "id": "cta-destination",
+          "text": "[Destination URL / access details]",
+          "x": 72,
+          "y": 969,
+          "width": 936,
+          "size": 28,
+          "leading": 34,
+          "font": "body",
+          "colour": "ink",
+          "maxLines": 2
+        },
+        {
+          "type": "text",
+          "id": "cta-contact",
+          "text": "[Contact or accessibility details]",
+          "x": 72,
+          "y": 1040,
+          "size": 22,
+          "font": "body",
+          "colour": "ink",
+          "fitWidth": 936
+        }
+      ],
+      "guides": {
+        "title": "Local community invitation construction",
+        "labelSize": 22,
+        "elements": [
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": "trim.left",
+            "to": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "label": "72 px / local inset"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "brand-logo",
+              "edge": "left"
+            },
+            "to": {
+              "element": "brand-logo",
+              "edge": "right"
+            },
+            "label": "220 px / complete logo"
+          },
+          {
+            "type": "dimension",
+            "axis": "x",
+            "from": {
+              "element": "cta-action-panel",
+              "edge": "left"
+            },
+            "to": {
+              "element": "cta-action-panel",
+              "edge": "right"
+            },
+            "label": "936 px / action panel"
+          },
+          {
+            "type": "note",
+            "label": "One audience, one action, one verified destination. Cyan uses charcoal text."
+          },
+          {
+            "type": "note",
+            "label": "Local application defaults; not published love.fútbol standards."
+          }
+        ]
+      }
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "title": "{name} / Email signature",
+      "extension": "lovefutbol-local-applications",
+      "description": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "width": 620,
+      "height": 320,
+      "raster": 620,
+      "group": "Digital applications",
+      "elements": [
+        {
+          "type": "background",
+          "fill": "white"
+        },
+        {
+          "type": "logo",
+          "x": 24,
+          "y": 28,
+          "width": 160,
+          "signature": "full",
+          "colourway": "positive"
+        },
+        {
+          "type": "line",
+          "x1": 210,
+          "x2": 210,
+          "y1": 20,
+          "y2": 296,
+          "stroke": "light-green",
+          "strokeWidth": 1
+        },
+        {
+          "type": "flow",
+          "x": 234,
+          "y": 46,
+          "items": [
+            {
+              "id": "author",
+              "text": "[Name]",
+              "size": 23,
+              "leading": 29,
+              "font": "bold",
+              "colour": "ink",
+              "wrap": 360,
+              "maxLines": 2
+            },
+            {
+              "id": "author-role",
+              "text": "[Role]",
+              "size": 17,
+              "leading": 23,
+              "gap": 31,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 360,
+              "maxLines": 2
+            },
+            {
+              "id": "team-region",
+              "text": "[Team or region]",
+              "size": 15,
+              "leading": 21,
+              "gap": 27,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 360,
+              "maxLines": 2
+            },
+            {
+              "id": "contact-email",
+              "text": "[Email]",
+              "size": 15,
+              "leading": 21,
+              "gap": 31,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 360,
+              "maxLines": 2
+            },
+            {
+              "id": "contact-website",
+              "text": "lovefutbol.org",
+              "size": 15,
+              "leading": 21,
+              "gap": 27,
+              "font": "body",
+              "colour": "ink",
+              "wrap": 360,
+              "maxLines": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sets": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letterhead / Letter",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "letterhead-letter",
+          "label": "First page"
+        },
+        {
+          "template": "continuation-letter",
+          "label": "Continuation"
+        }
+      ]
+    },
+    {
+      "id": "project-brief-letter",
+      "label": "Community project brief / Letter",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "project-brief-letter",
+          "label": "Brief"
+        },
+        {
+          "template": "continuation-letter",
+          "label": "Supporting detail"
+        }
+      ]
+    },
+    {
+      "id": "project-profile-letter",
+      "label": "Community project profile / Letter",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact.",
+      "variants": [
+        {
+          "template": "project-profile-letter",
+          "label": "Project snapshot"
+        },
+        {
+          "template": "continuation-letter",
+          "label": "Supporting evidence"
+        }
+      ]
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "Letterhead / A4",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "letterhead-a4",
+          "label": "First page"
+        },
+        {
+          "template": "continuation-a4",
+          "label": "Continuation"
+        }
+      ]
+    },
+    {
+      "id": "project-brief-a4",
+      "label": "Community project brief / A4",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "project-brief-a4",
+          "label": "Brief"
+        },
+        {
+          "template": "continuation-a4",
+          "label": "Supporting detail"
+        }
+      ]
+    },
+    {
+      "id": "project-profile-a4",
+      "label": "Community project profile / A4",
+      "group": "Documents",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact.",
+      "variants": [
+        {
+          "template": "project-profile-a4",
+          "label": "Project snapshot"
+        },
+        {
+          "template": "continuation-a4",
+          "label": "Supporting evidence"
+        }
+      ]
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "group": "Presentations",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "presentation-cover",
+          "label": "Cover"
+        },
+        {
+          "template": "presentation-section",
+          "label": "Section"
+        },
+        {
+          "template": "presentation-content",
+          "label": "Content"
+        },
+        {
+          "template": "presentation-evidence",
+          "label": "Evidence"
+        },
+        {
+          "template": "presentation-comparison",
+          "label": "Comparison"
+        },
+        {
+          "template": "presentation-community-voice",
+          "label": "Community voice"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "label": "Community announcements",
+      "group": "Digital applications",
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim.",
+      "variants": [
+        {
+          "template": "social-post",
+          "label": "Square announcement"
+        },
+        {
+          "template": "social-story",
+          "label": "Portrait story"
+        },
+        {
+          "template": "social-impact",
+          "label": "Impact measure"
+        },
+        {
+          "template": "social-call-to-action",
+          "label": "Community invitation"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "letterhead-letter",
+      "label": "Letter letterhead",
+      "format": "docx",
+      "pages": [
+        "letterhead-letter",
+        "continuation-letter"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    },
+    {
+      "id": "project-brief-letter",
+      "label": "Letter community project brief",
+      "format": "docx",
+      "pages": [
+        "project-brief-letter",
+        "continuation-letter"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    },
+    {
+      "id": "project-profile-letter",
+      "label": "Letter community project profile",
+      "format": "docx",
+      "pageMode": "sequence",
+      "pages": [
+        "project-profile-letter",
+        "continuation-letter"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact."
+    },
+    {
+      "id": "letterhead-a4",
+      "label": "A4 letterhead",
+      "format": "docx",
+      "pages": [
+        "letterhead-a4",
+        "continuation-a4"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    },
+    {
+      "id": "project-brief-a4",
+      "label": "A4 community project brief",
+      "format": "docx",
+      "pages": [
+        "project-brief-a4",
+        "continuation-a4"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    },
+    {
+      "id": "project-profile-a4",
+      "label": "A4 community project profile",
+      "format": "docx",
+      "pageMode": "sequence",
+      "pages": [
+        "project-profile-a4",
+        "continuation-a4"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim. Record a completed or otherwise documented project as a dated snapshot, separate from a proposal. Identify local leadership and continuing stewardship. Insert the reviewed photograph in the exported document or SVG, replace its instruction, and retain its caption and credit. A photograph alone does not establish impact."
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation / six layouts",
+      "format": "pptx",
+      "layouts": [
+        "presentation-cover",
+        "presentation-section",
+        "presentation-content",
+        "presentation-evidence",
+        "presentation-comparison",
+        "presentation-community-voice"
+      ],
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    },
+    {
+      "id": "email-signature",
+      "label": "Email signature",
+      "format": "html",
+      "template": "email-signature",
+      "emailLayout": {
+        "compactArtwork": true
+      },
+      "use": "Local Brandkit application informed by love.fútbol’s community model (lovefutbol.org/about-us and /faq), Projects-page Bahianita / Red Hat Text and green / terracotta treatments (lovefutbol.org/projects), the homepage cyan accent (lovefutbol.org), and dark / light-green treatments in methodology and governance materials, observed 30 October 2026. The complete logo preserves paths from love.fútbol’s 2025 Community-Driven Sport Spaces guide published by U.S. Soccer. This is not an official love.fútbol template: layouts, spacing, type sizes and content fields are local proposals. Replace bracketed instructions with reviewed content; retain the relevant dates, sources, credits and limits of any claim."
+    }
+  ],
+  "documentation": {
+    "defaultPurpose": "report",
+    "publishedPurposes": [
+      "report",
+      "brief",
+      "portfolio"
+    ],
+    "margins": {
+      "topMm": 20,
+      "rightMm": 20,
+      "bottomMm": 20,
+      "leftMm": 20
+    },
+    "typography": {
+      "title": {
+        "font": "display",
+        "sizePt": 38,
+        "lineHeight": 1.1,
+        "colour": "charcoal"
+      },
+      "heading1": {
+        "font": "bold",
+        "sizePt": 20,
+        "colour": "charcoal"
+      },
+      "heading2": {
+        "font": "bold",
+        "sizePt": 13.5
+      },
+      "body": {
+        "font": "body",
+        "sizePt": 10.5,
+        "lineHeight": 1.45
+      },
+      "label": {
+        "font": "label",
+        "sizePt": 9,
+        "trackingEm": 0
+      }
+    },
+    "colours": {
+      "accent": "charcoal",
+      "tableHeader": "light-green",
+      "tableHeaderText": "charcoal"
+    },
+    "logo": {
+      "widthMm": 48,
+      "clearSpaceMm": 8,
+      "options": {
+        "signature": "full",
+        "colourway": "positive"
+      }
+    },
+    "footer": {
+      "text": "love.fútbol · Local document application"
+    },
+    "affiliation": {
+      "note": "Project, community and partner names are separate document text. Their inclusion does not create an official sub-logo or imply a confirmed partnership."
+    },
+    "examples": {
+      "report": {
+        "title": "Community project report",
+        "subtitle": "Local priorities, shared decisions and evidence",
+        "summaryTitle": "Community priorities and progress",
+        "detailTitle": "Process and participation",
+        "productName": "Community project",
+        "introduction": "Use this editable report to explain a specific community project, the people involved and the evidence available. Replace instructional copy with verified information and cite each result.",
+        "summary": "Describe the priorities identified by local participants, the decisions taken together and what has changed during the stated reporting period.",
+        "summaryItems": [
+          "Name the community and reporting period.",
+          "Describe local leadership and participation.",
+          "Separate verified outcomes from plans and estimates."
+        ],
+        "detail": "Record how residents and local organizations helped shape the project. Explain site selection, access, design choices, responsibilities and maintenance arrangements.",
+        "scope": "State what the evidence covers, how it was collected and whose perspectives may be missing. Give dates and sources for all impact figures.",
+        "closingTitle": "Shared responsibilities and next steps"
+      },
+      "brief": {
+        "title": "Community project brief",
+        "subtitle": "Priorities, options and the next shared decision",
+        "summaryTitle": "The decision to make together"
+      },
+      "portfolio": {
+        "title": "love.fútbol brand reference",
+        "subtitle": "Source artwork, observed styling and local applications",
+        "summary": "This reference separates the preserved logo, dated website observations and proposed application layouts. It does not establish organization approval or replace an official brand manual."
+      },
+      "product": {
+        "title": "Community initiative overview",
+        "subtitle": "Purpose, participation and proposed scope",
+        "productName": "Initiative name",
+        "introduction": "Describe the initiative and its evidence. Replace all example content and identify proposed work clearly."
+      }
+    }
+  },
+  "guide": {
+    "width": 1440,
+    "height": 1020,
+    "frame": {
+      "background": "white",
+      "logo": {
+        "x": 64,
+        "y": 13,
+        "width": 110,
+        "signature": "full",
+        "colourway": "positive"
+      },
+      "header": "LOVE.FÚTBOL / RESEARCHED APPLICATION KIT",
+      "footer": "Public sources reviewed 30 October 2026 / Local applications v1.1"
+    },
+    "pages": [
+      {
+        "name": "Identity and context",
+        "title": "People, play and a shared place",
+        "subtitle": "An evidence-based reference with local applications; no organization approval is implied.",
+        "elements": [
+          {
+            "type": "logo",
+            "x": 90,
+            "y": 310,
+            "width": 420,
+            "signature": "full",
+            "colourway": "positive"
+          },
+          {
+            "type": "text",
+            "text": "love.fútbol",
+            "x": 620,
+            "y": 302,
+            "size": 72,
+            "font": "display",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "The name connects passion and the game. Its dot represents a meeting point; the intentionally imperfect pitch reflects grassroots spaces made by people.",
+            "x": 620,
+            "y": 375,
+            "width": 730,
+            "size": 29,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Describe communities as active partners and local leaders. Keep the complete logo and its custom lettering intact.",
+            "x": 620,
+            "y": 600,
+            "width": 730,
+            "size": 29,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 780,
+            "width": 1312,
+            "height": 108,
+            "fill": "light-green"
+          },
+          {
+            "type": "para",
+            "text": "Identity context: official About and FAQ. Visual styling: observed website. Page layouts: local Brandkit proposals.",
+            "x": 90,
+            "y": 823,
+            "width": 1250,
+            "size": 25,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Logo artwork",
+        "title": "Preserve the source artwork",
+        "subtitle": "Thirteen original vector paths; a red flag retained in both treatments.",
+        "elements": [
+          {
+            "type": "logo",
+            "x": 108,
+            "y": 315,
+            "width": 430,
+            "signature": "full",
+            "colourway": "positive"
+          },
+          {
+            "type": "rect",
+            "x": 750,
+            "y": 280,
+            "width": 610,
+            "height": 340,
+            "fill": "charcoal"
+          },
+          {
+            "type": "logo",
+            "x": 815,
+            "y": 315,
+            "width": 480,
+            "signature": "full",
+            "colourway": "reverse"
+          },
+          {
+            "type": "text",
+            "text": "Website treatment: black and red",
+            "x": 95,
+            "y": 675,
+            "size": 28,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "PDF source treatment: white and red",
+            "x": 760,
+            "y": 675,
+            "size": 28,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "The vector comes from love.fútbol’s 2025 guide published by U.S. Soccer. A single translation normalizes the canvas; the original paths and proportions remain intact.",
+            "x": 64,
+            "y": 748,
+            "width": 1250,
+            "size": 26,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "No isolated pitch, retyped wordmark, arbitrary recolours or invented favicon is generated. Official minimum size and numeric clear space remain unverified.",
+            "x": 64,
+            "y": 850,
+            "width": 1250,
+            "size": 24,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Digital palette",
+        "title": "Colours observed on the website",
+        "subtitle": "Use accents as surfaces and emphasis; keep small text dark and readable.",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 285,
+            "width": 240,
+            "height": 165,
+            "fill": "green"
+          },
+          {
+            "type": "text",
+            "text": "Website green",
+            "x": 64,
+            "y": 492,
+            "size": 23,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "#489D60",
+            "x": 64,
+            "y": 531,
+            "size": 25,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 332,
+            "y": 285,
+            "width": 240,
+            "height": 165,
+            "fill": "light-green"
+          },
+          {
+            "type": "text",
+            "text": "Light green",
+            "x": 332,
+            "y": 492,
+            "size": 23,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "#88C59B",
+            "x": 332,
+            "y": 531,
+            "size": 25,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 600,
+            "y": 285,
+            "width": 240,
+            "height": 165,
+            "fill": "terracotta"
+          },
+          {
+            "type": "text",
+            "text": "Terracotta",
+            "x": 600,
+            "y": 492,
+            "size": 23,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "#D17F2D",
+            "x": 600,
+            "y": 531,
+            "size": 25,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 868,
+            "y": 285,
+            "width": 240,
+            "height": 165,
+            "fill": "cyan"
+          },
+          {
+            "type": "text",
+            "text": "Homepage cyan",
+            "x": 868,
+            "y": 492,
+            "size": 23,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "#3CB1EA",
+            "x": 868,
+            "y": 531,
+            "size": 25,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 1136,
+            "y": 285,
+            "width": 240,
+            "height": 165,
+            "fill": "off-white"
+          },
+          {
+            "type": "text",
+            "text": "Off-white",
+            "x": 1136,
+            "y": 492,
+            "size": 23,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "#F5F4EF",
+            "x": 1136,
+            "y": 531,
+            "size": 25,
+            "font": "body",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Supporting values: charcoal #1D1D1B, dark-green body text #081913 and mobile-menu amber #F5A300. The logo uses black/white with source flag red #ED1C24.",
+            "x": 64,
+            "y": 620,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "White text on green, terracotta, light green or cyan does not reach 4.5:1. These templates use charcoal text on those accents. Verify the final pair and type size in Colour.",
+            "x": 64,
+            "y": 745,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "No official Pantone or CMYK recipes were found. Website colours are observations, not print specifications.",
+            "x": 64,
+            "y": 875,
+            "width": 1250,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Typography",
+        "title": "Keep the type roles distinct",
+        "subtitle": "Original font files under the SIL Open Font License are included.",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Bahianita",
+            "x": 64,
+            "y": 330,
+            "size": 90,
+            "font": "display",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Observed on home, Projects, methodology, governance, donate and contact pages. A supported default for short, large display headings.",
+            "x": 600,
+            "y": 290,
+            "width": 740,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Red Hat Text",
+            "x": 64,
+            "y": 525,
+            "size": 48,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Observed body, navigation and supporting type. Regular and Bold set these applications; Italic is an additional document-emphasis choice.",
+            "x": 600,
+            "y": 465,
+            "width": 740,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Some live project-detail H1 elements match the DK Brush Crush CSS rule; H3 rules declare Acumin Pro Condensed. Those commercial fonts are not bundled. Local web body starts at 18 px / 1.5; document body at 10.5 pt / 1.45.",
+            "x": 64,
+            "y": 675,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "The logo’s custom wordmark is vector artwork. Never replace it with Bahianita, Red Hat Text or typed letters.",
+            "x": 64,
+            "y": 850,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Language and voice",
+        "title": "Write with community agency",
+        "subtitle": "Editorial recommendations derived from the official mission, FAQ and culture resources.",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Keep the name intact",
+            "x": 64,
+            "y": 295,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use love.fútbol in running copy: lower case, a dot, and an accented ú. Use lovefutbol only where URLs or file identifiers require it.",
+            "x": 64,
+            "y": 352,
+            "width": 610,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Describe participation",
+            "x": 770,
+            "y": 295,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Name local leaders, shared decisions and ongoing responsibilities. Make the community’s role visible in the story.",
+            "x": 770,
+            "y": 352,
+            "width": 600,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Support every impact claim",
+            "x": 64,
+            "y": 595,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Give the measure, period, geography and source. Do not turn illustrative project placeholders into reported achievements.",
+            "x": 64,
+            "y": 652,
+            "width": 610,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Respect language and context",
+            "x": 770,
+            "y": 595,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Retain people’s names and place names accurately. Review translations locally. Use consented photography and meaningful captions.",
+            "x": 770,
+            "y": 652,
+            "width": 600,
+            "size": 28,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Document applications",
+        "title": "Useful pages for community projects",
+        "subtitle": "Local layouts informed by the website; not recovered official stationery.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/letterhead-letter",
+            "x": 64,
+            "y": 275,
+            "width": 370,
+            "height": 480
+          },
+          {
+            "type": "nested",
+            "src": "templates/project-brief-letter",
+            "x": 535,
+            "y": 275,
+            "width": 370,
+            "height": 480
+          },
+          {
+            "type": "para",
+            "text": "Letter and A4 stationery and project briefs. Use the Documents editor for flowing reports, decision briefs and brand references with editable Word output.",
+            "x": 980,
+            "y": 310,
+            "width": 385,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Add verified local information and sources. The 48 mm document logo, 8 mm reserved space and 20 mm margins are local defaults, not published brand rules.",
+            "x": 64,
+            "y": 835,
+            "width": 1250,
+            "size": 27,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Presentation and digital",
+        "title": "Carry the same identity into each format",
+        "subtitle": "Editable slide, social and email applications with explicit placeholders.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/presentation-cover",
+            "x": 64,
+            "y": 275,
+            "width": 750,
+            "height": 422
+          },
+          {
+            "type": "nested",
+            "src": "templates/social-post",
+            "x": 910,
+            "y": 275,
+            "width": 430,
+            "height": 430
+          },
+          {
+            "type": "para",
+            "text": "Six slides support an opening, section break, content, evidence, before/after comparison and community voice. Social and email layouts keep content editable.",
+            "x": 64,
+            "y": 790,
+            "width": 1250,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use approved project photography and captions. Partner logos and endorsements need separate confirmation.",
+            "x": 64,
+            "y": 895,
+            "width": 1250,
+            "size": 23,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Local sizing and spacing",
+        "title": "Practical defaults you can apply",
+        "subtitle": "These are local recommendations. Official minimum sizes and numeric clear space remain unverified.",
+        "elements": [
+          {
+            "type": "rect",
+            "x": 90,
+            "y": 300,
+            "width": 500,
+            "height": 385,
+            "fill": "off-white"
+          },
+          {
+            "type": "rect",
+            "x": 95.9938684131481,
+            "y": 310.9938684131481,
+            "width": 488.0122631737038,
+            "height": 324.03678952111136,
+            "fill": "white",
+            "stroke": "green",
+            "dash": "7 6"
+          },
+          {
+            "type": "logo",
+            "x": 150,
+            "y": 365,
+            "width": 380,
+            "signature": "full",
+            "colourway": "positive"
+          },
+          {
+            "type": "text",
+            "text": "Reserve = one quarter of logo height",
+            "x": 90,
+            "y": 727,
+            "size": 24,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Print: start at 32 mm",
+            "x": 700,
+            "y": 310,
+            "size": 36,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use 48 mm on report covers. Retain the document profile’s 8 mm reserve when it is larger than the proportional space.",
+            "x": 700,
+            "y": 370,
+            "width": 650,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Screen: start at 144 CSS px",
+            "x": 700,
+            "y": 545,
+            "size": 36,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "This is a conservative starting point for the primary mark. Review small secondary marks at actual size and proof printed output.",
+            "x": 700,
+            "y": 606,
+            "width": 650,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Keep the original proportions and red flag. The reserve is surrounding layout space; it does not change the logo canvas or its source paths.",
+            "x": 64,
+            "y": 840,
+            "width": 1260,
+            "size": 27,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Project content pattern",
+        "title": "Give each project a complete record",
+        "subtitle": "A proposed brief and a documented project profile have different jobs.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/project-profile-a4",
+            "x": 64,
+            "y": 275,
+            "width": 425,
+            "height": 600
+          },
+          {
+            "type": "text",
+            "text": "Place and people first",
+            "x": 590,
+            "y": 300,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Name the community, city and country. Add a verified project number only when the project source supports it. Record the period or project stage.",
+            "x": 590,
+            "y": 360,
+            "width": 760,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Show who shapes the space",
+            "x": 590,
+            "y": 530,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Describe local leadership, participation, access and ongoing care. Name partners by their role. Keep estimates and proposed activities explicit.",
+            "x": 590,
+            "y": 590,
+            "width": 760,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Keep a source trail",
+            "x": 590,
+            "y": 760,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Credit images and give dates and sources for factual claims. Project records, news and site labels can disagree; verify the relevant project.",
+            "x": 590,
+            "y": 820,
+            "width": 760,
+            "size": 26,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Images, voices and evidence",
+        "title": "Make the evidence easy to understand",
+        "subtitle": "New comparison, quotation and metric layouts keep their context editable.",
+        "elements": [
+          {
+            "type": "nested",
+            "src": "templates/presentation-comparison",
+            "x": 64,
+            "y": 280,
+            "width": 790,
+            "height": 445
+          },
+          {
+            "type": "text",
+            "text": "Before and after",
+            "x": 920,
+            "y": 300,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Identify the same place, both dates and the image creator. A visual change does not establish every claimed social outcome.",
+            "x": 920,
+            "y": 360,
+            "width": 430,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Community voices",
+            "x": 920,
+            "y": 560,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Use an exact approved quotation, speaker role, place and source. Identify translated wording.",
+            "x": 920,
+            "y": 620,
+            "width": 430,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "rect",
+            "x": 64,
+            "y": 790,
+            "width": 1312,
+            "height": 125,
+            "fill": "cyan"
+          },
+          {
+            "type": "para",
+            "text": "Metric cards need a measure, unit, geography, period and source. Label a target or estimate. Keep annual reach, unique participants and visits distinct.",
+            "x": 90,
+            "y": 832,
+            "width": 1250,
+            "size": 26,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Audiences and languages",
+        "title": "Make the next step relevant",
+        "subtitle": "Website audiences inform the content; these layouts and copy structures are local choices.",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Communities",
+            "x": 64,
+            "y": 300,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Describe a place, its priorities and local leadership. Use the current community-enquiry route.",
+            "x": 64,
+            "y": 355,
+            "width": 610,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Partners and sponsors",
+            "x": 770,
+            "y": 300,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Explain the proposed contribution and next conversation. Keep partner identities in a separate attribution area.",
+            "x": 770,
+            "y": 355,
+            "width": 600,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Individual supporters",
+            "x": 64,
+            "y": 560,
+            "size": 32,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Choose the current giving program and destination. Keep donation amounts and anniversary campaigns out of permanent brand tokens.",
+            "x": 64,
+            "y": 615,
+            "width": 610,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "English / español / português",
+            "x": 770,
+            "y": 560,
+            "size": 30,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Keep love.fútbol unchanged. Preserve names and accents, allow natural wrapping, review translations locally and match the link’s language.",
+            "x": 770,
+            "y": 615,
+            "width": 600,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "One primary action per layout. Verify its destination before publishing. The kit has editable content and multilingual guidance; its interface remains English.",
+            "x": 64,
+            "y": 867,
+            "width": 1260,
+            "size": 25,
+            "colour": "ink"
+          }
+        ]
+      },
+      {
+        "name": "Sources and open questions",
+        "title": "Keep evidence with the assets",
+        "subtitle": "The research record separates published facts, observed implementations and local choices.",
+        "elements": [
+          {
+            "type": "text",
+            "text": "Preserved and documented",
+            "x": 64,
+            "y": 290,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Original vector paths and source PDF. Official website logo reference. Sanitized Projects-page evidence. Source URLs and hashes. Original open-licence font files.",
+            "x": 64,
+            "y": 355,
+            "width": 610,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "text",
+            "text": "Still unverified",
+            "x": 770,
+            "y": 290,
+            "size": 34,
+            "font": "bold",
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "A current official brand standards manual; minimum sizes; numeric clear space; print recipes; partner lockup rules; official stationery and motion guidance.",
+            "x": 770,
+            "y": 355,
+            "width": 600,
+            "size": 28,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Research: docs/RESEARCH.md and docs/SITE-RESEARCH.md. Working defaults: docs/APPLICATION-GUIDE.md and reference/application-assumptions.json. Evidence and source index: reference/.",
+            "x": 64,
+            "y": 655,
+            "width": 1250,
+            "size": 27,
+            "colour": "ink"
+          },
+          {
+            "type": "para",
+            "text": "Rebuild with npm run make:lovefutbol. Update source evidence before changing a claimed brand rule. Public availability does not grant blanket permission for trademarks or photography.",
+            "x": 64,
+            "y": 810,
+            "width": 1250,
+            "size": 27,
+            "colour": "ink"
+          }
+        ]
+      }
+    ]
+  },
+  "web": {
+    "componentName": "LoveFutbolLogo",
+    "symbolComponentName": "LoveFutbolFullLogo",
+    "cssPrefix": "lovefutbol",
+    "icons": false,
+    "intro": {
+      "eyebrow": "Source artwork and observed website styling",
+      "headline": "love.fútbol\nBrand reference",
+      "body": "Preserved logo geometry, documented digital colours and fonts, and editable local applications for community projects.",
+      "edition": "Researched kit v{displayVersion}",
+      "typeSample": "More than a\nplace to play",
+      "footer": "Public sources / local applications / 30 October 2026"
+    },
+    "landing": {
+      "eyebrow": "love.fútbol",
+      "headline": "More than a\nplace to play",
+      "body": "A local application example. Replace this text with reviewed project information before publishing.",
+      "cta": "Explore community projects",
+      "contactEyebrow": "Project details",
+      "contactBody": "Add verified local contact information.",
+      "footer": "Local application example; organization approval is not implied."
+    }
+  },
+  "files": [
+    "USE.md",
+    "docs/APPLICATION-GUIDE.md",
+    "docs/README.md",
+    "docs/RESEARCH.md",
+    "docs/SITE-RESEARCH.md",
+    "docs/VALIDATION.md",
+    "docs/brand-details.html",
+    "docs/logo-size-study.png",
+    "docs/logo-size-study.svg",
+    "docs/preview.png",
+    "fonts/Bahianita-OFL.txt",
+    "fonts/Bahianita-Regular.ttf",
+    "fonts/README.md",
+    "fonts/RedHatText-Bold.ttf",
+    "fonts/RedHatText-Italic.ttf",
+    "fonts/RedHatText-OFL.txt",
+    "fonts/RedHatText-Regular.ttf",
+    "fonts/source-manifest.json",
+    "reference/application-assumptions.json",
+    "reference/community-driven-sport-spaces-2025.pdf",
+    "reference/content-patterns.json",
+    "reference/identity-rules.json",
+    "reference/logo-extraction.json",
+    "reference/logo-geometry.json",
+    "reference/logo-positive-derived.svg",
+    "reference/logo-source-reversed.svg",
+    "reference/site-visual-evidence.json",
+    "reference/sources.json",
+    "reference/website-logo-original.webp",
+    "reference/website-projects-brand-evidence.json"
+  ]
+}

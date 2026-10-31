@@ -1,0 +1,106 @@
+{
+  "schema": "brandkit/logo-extraction-evidence/1",
+  "retrieved": "2026-10-30",
+  "source": {
+    "title": "Core Principles and Best Practice in Establishing Community-Driven Sport Spaces",
+    "contributor": "love.futbol",
+    "landingUrl": "https://www.ussoccer.com/soccer-forward/resource-hub/best-practices-for-community-driven-sport-spaces",
+    "fileUrl": "https://cdn.sanity.io/files/oyf3dba6/production/49cf0f4ff864cb7b66187236d4dd70bef71e32f4.pdf",
+    "file": "community-driven-sport-spaces-2025.pdf",
+    "bytes": 950611,
+    "sha256": "4a8d88fbc8b5ee4a021b63fca3cb1aaa1a4dbfee638ae9c89aa79cf441fb9d48",
+    "page": 1
+  },
+  "extraction": {
+    "script": "scripts/extract-lovefutbol-logo.py",
+    "pymupdfVersion": "1.26.6",
+    "drawingIndicesZeroBased": [
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ],
+    "svgPathIndicesZeroBased": [
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "sourceBounds": [
+      363.5989990234375,
+      36.72595977783203,
+      713.7100219726562,
+      235.759033203125
+    ],
+    "pathCount": 13,
+    "originalPathDataAndTransformsPreserved": true,
+    "curveSimplification": false,
+    "tracing": false,
+    "imageDependencies": 0,
+    "fontDependencies": 0
+  },
+  "colourways": {
+    "sourceReversed": "White/red extracted from the publication, with its source colours preserved.",
+    "positiveDerived": "Twelve white paths changed to #000000. Red flag retained at #ED1C24. Geometry unchanged. Matches the positive appearance on the official website; not a separately supplied vector master.",
+    "flagColour": "The source PDF's normalized RGB rounds to #ED1C24; no Pantone or CMYK specification is inferred."
+  },
+  "verification": {
+    "method": "Direct original PDF raster versus extracted SVG at four pixels per source point. White body and red flag masks are compared separately; antialiasing edge differences are reported, not hidden.",
+    "scale": 4,
+    "pixelAlignedSourceCrop": [
+      363.0,
+      36.0,
+      714.0,
+      236.0
+    ],
+    "whiteBody": {
+      "sourcePixels": 303363,
+      "extractedPixels": 303361,
+      "differentPixels": 4,
+      "intersectionOverUnion": 0.9999868145198507
+    },
+    "redFlag": {
+      "sourcePixels": 2862,
+      "extractedPixels": 2858,
+      "differentPixels": 4,
+      "intersectionOverUnion": 0.9986023759608665
+    },
+    "thresholds": {
+      "whiteBodyMinimumIoU": 0.999,
+      "redFlagMinimumIoU": 0.995
+    }
+  },
+  "outputs": [
+    {
+      "file": "logo-geometry.json",
+      "sha256": "b3fa7a8e97eeb02ca4a04d0b98f2ca152ed089b77cbfa11a3efc487d960f27bb"
+    },
+    {
+      "file": "logo-source-reversed.svg",
+      "sha256": "b7a8d67932d0baae9c6c77e504301a352c15d3ef767f5793f6312f9da773b585"
+    },
+    {
+      "file": "logo-positive-derived.svg",
+      "sha256": "67ecce38ea3baecaf06634c94c0f9034fafbec0d239541ca22721d6063a686ab"
+    }
+  ],
+  "rights": "The publication and logo remain their respective owners' work. This source record identifies provenance and does not grant a trademark or redistribution licence."
+}
