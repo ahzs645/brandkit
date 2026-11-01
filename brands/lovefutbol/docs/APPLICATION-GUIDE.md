@@ -1,6 +1,6 @@
 # love.fútbol — practical application guide
 
-Version 1.1 · reviewed 30 October 2026
+Version 1.2 · reviewed 30 October 2026
 
 This guide makes usable working assumptions where the public material does not specify a rule. It accompanies the [site research](SITE-RESEARCH.md), [original identity research](RESEARCH.md) and machine-readable [application assumptions](../reference/application-assumptions.json). The original logo geometry and sourced font files remain unchanged.
 

@@ -518,6 +518,90 @@
       "evidence": "Primary accessibility basis for local colour-pair calculations: 4.5:1 normal-text AA threshold, 3:1 large text and the logotype exception. This is not love.fútbol identity guidance.",
       "status": "primary-technical-guidance",
       "accessed": "2026-10-30"
+    },
+    {
+      "id": "lf-home-project-map",
+      "title": "Homepage project map, gallery captions and counters",
+      "url": "https://www.lovefutbol.org/",
+      "publisher": "love.fútbol",
+      "evidence": "Re-inspected 1 November 2026 for the atlas work. The homepage embeds the MAPPA MUNDI Leaflet map (iframe from lizziemoon.github.io, 1200 × 580). Gallery captions number some projects differently from the map: El Sarchal #105 (map #107), Santa Ana #97 (map #96), Cancha Indeco #96 (no map pin) and Parque Exfactoría #40 (map has no #40). Counters read 128 projects, 24 countries, 10,440 volunteer hours and 255,200 community members impacted per year (raw HTML 10440 and 255200). Dated campaign figures, not identity tokens.",
+      "status": "observed-official-website",
+      "accessed": "2026-11-01",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "mappa-mundi-embed",
+      "title": "MAPPA MUNDI — HubSpot Embed",
+      "url": "https://lizziemoon.github.io/mappa-mundi/hubspot-map.html",
+      "publisher": "Unattributed HTML fragment on lizziemoon.github.io, embedded by the love.fútbol homepage",
+      "evidence": "Leaflet 1.9.4 map with OpenStreetMap tiles; a Portuguese comment says to paste it into a HubSpot custom HTML module. 114 numbered pins (popup label “Court #n”) with approximate coordinates and Portuguese place labels such as Brasil and EUA. Numbers run 1–128 with 15 absent; #52 is used twice (Bom Sucesso, Quixeré and YMCA San Juan); Surrey is labelled “British Columbia, Espanha”. Styling differs from the site palette: Georgia serif, #f5f0e8 ground, #c8a96e border, #b84a2e accent and a sepia(12%) saturate(88%) map filter. Location evidence, not brand styling.",
+      "status": "observed-embedded-third-party-page",
+      "accessed": "2026-11-01",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-projects-profile-count",
+      "title": "Projects: profile pages compared with the homepage map",
+      "url": "https://www.lovefutbol.org/projects",
+      "publisher": "love.fútbol",
+      "evidence": "The Projects page links 104 distinct project profile pages on 1 November 2026. Matched by hand against the homepage map, 21 numbered courts have no profile page and 11 profile pages have no pin; the match is a research judgment, not a published crosswalk.",
+      "status": "observed-official-website",
+      "accessed": "2026-11-01",
+      "retrievalMethod": "direct-public-html"
+    },
+    {
+      "id": "lf-100-headline-figures",
+      "title": "100 Projects: headline figures",
+      "url": "https://100.lovefutbol.org/",
+      "publisher": "love.fútbol",
+      "evidence": "“A Journey Through 100 Spaces” reads 5 Continents | 17 Countries | +170,000 Direct Individuals Impacted | +150,000 Volunteer Hours on 1 November 2026. These conflict with the homepage counters (24 countries, 10,440 volunteer hours, 255,200 people per year); keep both as dated campaign figures with their page.",
+      "status": "verified-primary-historical-campaign",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "wikidata",
+      "title": "Wikidata",
+      "url": "https://www.wikidata.org/",
+      "publisher": "Wikimedia Foundation and Wikidata contributors",
+      "evidence": "Third-party dataset used by the companion atlas for administrative-area population (with its year), area and elevation. Not love.fútbol data and not identity evidence.",
+      "status": "third-party-data-source",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "world-bank-wdi",
+      "title": "World Bank World Development Indicators",
+      "url": "https://databank.worldbank.org/source/world-development-indicators",
+      "publisher": "World Bank",
+      "evidence": "Third-party country indicators used by the companion atlas (population, children under 15, urbanisation, density, GDP per person, life expectancy; most recent available year). Not love.fútbol data and not identity evidence.",
+      "status": "third-party-data-source",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "census-reporter-acs",
+      "title": "American Community Survey 5-year estimates via Census Reporter",
+      "url": "https://censusreporter.org/",
+      "publisher": "U.S. Census Bureau; Census Reporter",
+      "evidence": "Third-party census-tract figures used by the companion atlas for United States spaces (residents, under-18s, median household income, poverty rate), cited with their release. Not love.fútbol data and not identity evidence.",
+      "status": "third-party-data-source",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "openstreetmap",
+      "title": "OpenStreetMap",
+      "url": "https://www.openstreetmap.org/copyright",
+      "publisher": "OpenStreetMap contributors",
+      "evidence": "Map data under the ODbL used by the companion atlas for boundaries, geocoding (Nominatim), the neighbourhood lens and nearby-facility counts. Requires attribution. Not love.fútbol data and not identity evidence.",
+      "status": "third-party-data-source",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "openfreemap",
+      "title": "OpenFreeMap Positron style",
+      "url": "https://openfreemap.org/",
+      "publisher": "OpenFreeMap",
+      "evidence": "Vector basemap style (OpenMapTiles schema) that the companion atlas restyles with the local basemap palette. A technical dependency, not identity evidence.",
+      "status": "third-party-data-source",
+      "accessed": "2026-11-01"
     }
   ]
 }

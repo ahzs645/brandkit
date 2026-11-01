@@ -32,6 +32,9 @@
     "officialTemplates": null
   },
   "implementation": {
+    "atlas": "atlas-cartography.json",
+    "atlasIcons": "Original 24 px map and place icons; not derived from logo geometry.",
+    "atlasPatterns": "Dots and linework only; no logo or symbol placement.",
     "logoGeometry": "Preserved 13 source vector paths; normalize canvas by translation only.",
     "positiveTreatment": "Source white body paths painted black to match observed official website logo; flag remains #ED1C24.",
     "documentLogoWidthMm": 48,

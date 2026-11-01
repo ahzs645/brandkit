@@ -1,6 +1,6 @@
 # love.fútbol: deeper website and editorial research
 
-Reviewed 30 October 2026. This extends the initial research with primary-source observations and explicit local application decisions. It is not an organization-issued communications manual. See the [source register](../reference/sources.json), [visual evidence](../reference/site-visual-evidence.json), [content model](../reference/content-patterns.json) and [working application guide](APPLICATION-GUIDE.md).
+Reviewed 30 October 2026; section 9 added 1 November 2026. This extends the initial research with primary-source observations and explicit local application decisions. It is not an organization-issued communications manual. See the [source register](../reference/sources.json), [visual evidence](../reference/site-visual-evidence.json), [content model](../reference/content-patterns.json) and [working application guide](APPLICATION-GUIDE.md).
 
 ## Main finding
 
@@ -118,3 +118,26 @@ Scoped brand-manual searches and explicit resource links did not yield a public 
 5. **Context notes:** distinguish organization, regional presence, supporter program, initiative, partnership, project, and dated campaign. This helps future contributors avoid treating every new campaign design as a rebrand.
 
 The follow-up implementation adds six layouts: project profiles in Letter and A4, comparison and community-voice slides, a metric card and a call-to-action card. Four new guide pages explain working dimensions, project content, evidence and audiences. The machine-readable assumptions remain separate from the unresolved official rules.
+
+## 9. The homepage project map and dated counters
+
+Added 1 November 2026 while building an unofficial companion map atlas. Sources: [homepage map, captions and counters](https://www.lovefutbol.org/), [MAPPA MUNDI embed](https://lizziemoon.github.io/mappa-mundi/hubspot-map.html), [Projects](https://www.lovefutbol.org/projects) and [100 Projects](https://100.lovefutbol.org/), each re-read from public HTML on that date. The register entries are `lf-home-project-map`, `mappa-mundi-embed`, `lf-projects-profile-count` and `lf-100-headline-figures`.
+
+**What the map is.** The homepage embeds a Leaflet map in an iframe from `lizziemoon.github.io/mappa-mundi/hubspot-map.html`. The fragment is headed “MAPPA MUNDI — HubSpot Embed”, with a Portuguese comment telling the editor to paste it into a HubSpot custom HTML module. It lists 114 numbered pins, each with a “Court #n” label, a name, a place label and approximate coordinates. Place labels are in Portuguese (“Brasil”, “EUA”, “Indonésia”). The host does not identify a publisher; the homepage embed is the only evidence connecting it to love.fútbol.
+
+**Its styling is not the site’s.** The embed uses Georgia serif, a `#f5f0e8` ground, a `#c8a96e` border, a `#b84a2e` accent for the court label, standard OpenStreetMap tiles and a `sepia(12%) saturate(88%)` filter. None of these values appears in the site palette or type. Treat the map as location evidence, not as visual evidence; this kit’s [map guidance](ATLAS.md) uses the observed website palette instead.
+
+**Its numbers need care.**
+
+| Observation | Detail | Consequence |
+| --- | --- | --- |
+| Numbering has gaps | Court numbers run 1–128; 15 numbers have no pin. | A number alone does not prove a project is mapped, and the count of pins is not the project count. |
+| A number is reused | #52 is both Bom Sucesso (Quixeré, Brasil) and YMCA San Juan (Porto Rico). | Key projects by name and place, not by number alone. |
+| A place is mislabelled | Surrey is labelled “British Columbia, Espanha”. | Take country and region from stronger sources, such as the profile or a news story. |
+| Gallery captions disagree | Homepage captions give El Sarchal #105 (map #107), Santa Ana #97 (map #96), Cancha Indeco #96 (no pin) and Parque Exfactoría #40 (no #40 on the map). | Show a project number only with its source, and note the conflict. |
+| Profiles and pins differ | The Projects page links 104 profile pages. Matched by hand, 21 numbered courts have no profile and 11 profiles have no pin, for 125 distinct spaces. | Keep “has a profile page” and “is on the homepage map” as separate facts. The hand match is a research judgment, not a published crosswalk. |
+| Coordinates are approximate | Several pins sit at a city centre or in a neighbouring municipality. | Present map positions as approximate and say where each came from. |
+
+**Headline figures conflict.** On 1 November 2026 the homepage counters read 128 projects, 24 countries, 10,440 volunteer hours and 255,200 community members impacted per year. The 100.lovefutbol.org page reads “5 Continents | 17 Countries | +170,000 Direct Individuals Impacted | +150,000 Volunteer Hours”. Section 5 already records 14,200 versus 255,200 for annual reach across locales. These are dated campaign figures with different definitions and periods. A reusable asset should quote one with its page and date, never merge them, and never recompute a total from the map.
+
+**How the findings are applied.** The atlas guidance in [ATLAS.md](ATLAS.md) distinguishes profile pins (green) from homepage-only pins (amber), treats coordinates as approximate, labels every third-party statistic with its source and year, and quotes love.fútbol’s counters as dated figures. These are local application choices. The research does not show how love.fútbol maintains the map, whether it is current, or which numbering it considers authoritative.
