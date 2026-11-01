@@ -87,6 +87,26 @@ files saves, and offers to ask the browser to keep the brands when it is short o
 Files are read when they are drawn or downloaded: IndexedDB returns Blobs backed by disk, and each
 is given a URL typed by its extension.
 
+### Pages at real addresses
+
+A pack's pages (a brand-details page, a website, a motion library) lean on what is around them:
+images beside them, stylesheets and scripts, fonts in `../fonts/`, other pages. So pages are not
+given `blob:` URLs, which have no folder around them, but real addresses:
+
+```
+<base>packs/<brand id>/<path in the pack>
+```
+
+`public/pack-sw.js`, a service worker scoped to `<base>packs/`, answers them from the same
+IndexedDB store, typed by extension. A path the pack does not hold is looked for in brandkit's
+library (served by path at `<base>library/`, listed in `<base>library/index.json`); anything else
+is a 404. The worker's scope keeps it out of the app's own requests, so it only serves documents
+opened there (a link, the Motion stage's frame) and what they load. Where a service worker cannot
+run (a private window that refuses them, an insecure origin), pages fall back to `blob:` URLs.
+
+Pages from a pack run at the app's origin, as they did from `blob:` URLs: install packs from
+catalogs and links you trust.
+
 ## Hosting
 
 Any static host works. A pack on another origin needs `Access-Control-Allow-Origin` (GitHub Pages

@@ -76,7 +76,10 @@ A brand opened from a pack is kept in IndexedDB, so it opens again after a reloa
 without being downloaded. Files are stored once by their SHA-256, however many brands (or
 versions of one brand) hold them: an update stores only what changed, and removing a brand frees
 only the files no other brand uses. A revisit to the same link asks the host whether the pack
-changed, and a catalog entry with a new SHA-256 is offered (and taken) as an update.
+changed, and a catalog entry with a new SHA-256 is offered (and taken) as an update. A pack's own
+pages (brand details, its website, its motion library) open at real addresses,
+`/brandkit/packs/<id>/…`, served from the browser by a service worker, so the images, styles,
+fonts and pages they link to load as they do in a downloaded kit.
 **Brands** in the masthead lists what is kept, what it takes and what sharing saves, the
 catalogs, and what they offer.
 
