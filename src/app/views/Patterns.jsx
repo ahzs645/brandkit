@@ -21,8 +21,10 @@ const templateHref = (brand, id, shared) => {
 }
 
 const ResourceLink = ({ entry, href }) => {
-  const inline = /^data:/i.test(href)
-  return <a href={href} {...(inline ? { download: entry.path.split('/').at(-1) } : { target: '_blank', rel: 'noopener noreferrer' })}>
+  // A file held in the page (a data: URL, or a blob: from a brand pack) is saved under its own name,
+  // except a page, which opens.
+  const inline = /^(data|blob):/i.test(href) && !/\.html?$/i.test(entry.path)
+  return <a href={href} data-path={entry.path} {...(inline ? { download: entry.path.split('/').at(-1) } : { target: '_blank', rel: 'noopener noreferrer' })}>
     {entry.label}{inline ? ' · Download ↓' : ' ↗'}
   </a>
 }

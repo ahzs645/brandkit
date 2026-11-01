@@ -8,7 +8,8 @@ import { loadBrandFontsFromDisk } from '../../src/fonts/node.js'
 import { collectionIndexPage, patternExplorerPage, patternGuidePage } from './pattern-pages.mjs'
 import { updateManifest } from './common.mjs'
 
-export const BRAND_IDS = ['ddcnorth', 'northwind', 'firstform', 'overtheedge', 'bc-hydro-1983', 'bc-province-1977']
+// brandkit's own brand. The brands made with brandkit keep their collections where they are kept.
+export const BRAND_IDS = ['northwind']
 export const EXTENSION = 'pattern-explorations'
 const root = new URL('../../', import.meta.url).pathname
 const keepOriginal = values => (values ?? []).filter(item => item.extension !== EXTENSION)
@@ -117,7 +118,6 @@ export const installCollections = async (ids = BRAND_IDS) => {
     updateManifest(brand)
     console.log(`${id}: ${brand.patternCollection.patterns.length} pattern studies, ${brand.patternCollection.templates.length} applications`)
   }
-  writeCollectionIndex()
 }
 
 export const writeCollectionIndex = ({ embedded = false, output = resolve(root, 'brands/patterns.html') } = {}) => {

@@ -33,8 +33,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run setup:printer
-      # The parity test needs the original ddcnorth kit, which is not in the repository, so it
-      # skips itself here; the engine and manual-pack tests run.
+      # The engine, pack and manual-pack tests, on the brand brandkit ships (northwind). The brands
+      # made with brandkit are tested where they are kept, against this engine.
       - run: npm test
       - run: npm run make:documentation -- --check
       - name: Build the site
@@ -43,37 +43,21 @@ jobs:
           # The repository's own name, so renaming it cannot leave the asset URLs pointing at a
           # path that no longer exists.
           BASE_PATH: /${{ github.event.repository.name }}/
+          # The catalogs whose brands the site offers (space-separated): the repository variable
+          # BRANDKIT_CATALOGS, or for this repository the brands published with the builds site.
+          VITE_BRANDKIT_CATALOGS: ${{ vars.BRANDKIT_CATALOGS || (github.repository == 'ahzs645/brandkit' && 'https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json' || '') }}
       - name: Install document and browser renderers
         run: |
           sudo apt-get update
           sudo apt-get install -y libreoffice-writer fontconfig poppler-utils
           npx playwright install --with-deps chromium
-      - name: Verify native Word pagination
-        run: npm run test:documents:pagination
+      - name: Verify brand packs in the app
+        run: npm run test:packs:browser
         env:
-          REQUIRE_DOCUMENT_RENDERERS: '1'
-      - name: Verify the document workflow
-        run: npm run test:documents:browser
-        env:
-          SCREENSHOT_DIR: .documentation/browser
+          SCREENSHOT_DIR: .documentation/packs-browser
           BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Build Word masters and matching PDF starters for every brand
+      - name: Build Word masters and matching PDF starters for the built-in brand
         run: npm run build:documentation -- --pdf --out dist/documentation
-      - name: Verify UNBC naming and export rules
-        run: npm run test:unbc:browser
-        env:
-          SCREENSHOT_DIR: .documentation/unbc-browser
-          BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Verify the pattern library for every brand
-        run: npm run test:patterns:view:browser
-        env:
-          SCREENSHOT_DIR: .documentation/patterns-browser
-          BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Verify BC Hydro source comparisons and exports
-        run: npm run test:hydro:browser
-        env:
-          SCREENSHOT_DIR: .documentation/bc-hydro-browser
-          BASE_PATH: /${{ github.event.repository.name }}/
       - name: Attach reviewable document starters
         uses: actions/upload-artifact@v4
         with:
@@ -84,11 +68,7 @@ jobs:
         if: always()
         with:
           name: brandkit-browser-checks
-          path: |
-            .documentation/browser
-            .documentation/patterns-browser
-            .documentation/unbc-browser
-            .documentation/bc-hydro-browser
+          path: .documentation/packs-browser
           if-no-files-found: ignore
           include-hidden-files: true
       - uses: actions/upload-pages-artifact@v3

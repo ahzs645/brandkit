@@ -1,15 +1,17 @@
-// The engine's general behaviour, independent of any one brand's reference files.
+// The engine's general behaviour, on the example brand brandkit ships (northwind). The brands made
+// with brandkit are tested where they are kept, against this engine, with their own reference files.
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { allFields, colour, interpolate, n, planKit, renderTemplate, scopeIds, templateFields, toUnits, validateBrand } from '../src/engine/index.js'
 import { guidePages, guideSheets } from '../src/engine/guide.js'
 import { createStarterBrand, STARTER_FONTS } from '../src/engine/starter.js'
-import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
-import { BRAND_DIR, brand } from './fixtures.js'
+import { findAsset, loadBrandFontsFromDisk } from '../src/fonts/node.js'
 
-const northwind = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
+const BRAND_DIR = fileURLToPath(new URL('../brands/northwind/', import.meta.url))
+const brand = JSON.parse(readFileSync(new URL('brand.json', `file://${BRAND_DIR}`), 'utf8'))
 
 test('numbers print the way the original Python builder printed them', () => {
   assert.equal(n(16), '16')
@@ -19,9 +21,8 @@ test('numbers print the way the original Python builder printed them', () => {
 })
 
 test('colours resolve by palette key, by role, and pass literals through', () => {
-  assert.equal(colour(brand, 'midnight'), '#0B2B4A')
-  assert.equal(colour(brand, 'primary'), '#0B2B4A')
-  assert.equal(colour(brand, 'line'), '#D9DCDF')
+  assert.equal(colour(brand, 'primary'), '#1F4E46')
+  assert.equal(colour(brand, 'reverse'), '#FFFFFF', 'a role names a palette key')
   assert.equal(colour(brand, 'currentColor'), 'currentColor')
 })
 
@@ -40,23 +41,24 @@ test('ids are scoped so repeated artwork stays valid in one document', () => {
   assert.equal(scopeIds('<g id="a"><use href="#a"/><path fill="url(#a)"/></g>', 'p'), '<g id="p-a"><use href="#p-a"/><path fill="url(#p-a)"/></g>')
 })
 
-test('the built-in brands validate', () => {
+test('the built-in brand validates, and a bad definition does not', () => {
   assert.deepEqual(validateBrand(brand), [])
-  assert.deepEqual(validateBrand(northwind), [])
   assert.ok(validateBrand({ id: 'Bad Id' }).length > 3)
 })
 
 test('fields are the templates’ text ids, shared across templates by name', () => {
-  const card = brand.templates.find((template) => template.id === 'business-card-back')
-  assert.deepEqual(templateFields(card).map((field) => field.id), ['contact-name', 'contact-role', 'contact-email', 'contact-phone', 'contact-website'])
-  const headline = allFields(brand.templates).find((field) => field.id === 'headline-line-1')
-  assert.deepEqual(headline.templates, ['social-post', 'presentation-cover'])
+  const fields = allFields(brand.templates)
+  assert.ok(fields.length > 0)
+  for (const field of fields) for (const id of field.templates) assert.ok(brand.templates.some((template) => template.id === id), `${field.id}: ${id}`)
+  const shared = fields.find((field) => field.templates.length > 1)
+  assert.ok(shared, 'some field is shared between templates')
 })
 
 test('a field value replaces the placeholder, escaped', () => {
-  const card = brand.templates.find((template) => template.id === 'business-card-back')
-  const { svg } = renderTemplate({ brand, values: { 'contact-name': 'Ada & Co <ltd>' } }, card)
-  assert.match(svg, /<text id="contact-name"[^>]*>Ada &amp; Co &lt;ltd&gt;<\/text>/)
+  const template = brand.templates.find((entry) => templateFields(entry).length)
+  const [field] = templateFields(template)
+  const { svg } = renderTemplate({ brand, values: { [field.id]: 'Ada & Co <ltd>' } }, template)
+  assert.match(svg, /Ada &amp; Co &lt;ltd&gt;/)
 })
 
 test('millimetre templates with point sizes and line blocks render', () => {
@@ -75,17 +77,18 @@ test('millimetre templates with point sizes and line blocks render', () => {
   assert.match(svg, /<text id="b" x="20" y="13"/, 'an empty line closes up')
 })
 
-test('with fonts loaded, the guide and outlined templates set their text as paths', async () => {
+test('a brand without its own fonts is given the library’s, and the guide and outlined templates set text as paths', async () => {
+  // northwind names the starter's Inter and Space Mono and carries none of them.
+  for (const face of Object.values(brand.fonts)) {
+    assert.ok(!existsSync(`${BRAND_DIR}${face.file}`), `${face.file} is the library's, not northwind's`)
+    assert.ok(findAsset(BRAND_DIR, face.file).includes(`${'/library/'}`), face.file)
+  }
   const fonts = await loadBrandFontsFromDisk(brand, BRAND_DIR)
   assert.deepEqual(fonts.failures, [])
   const pages = guidePages({ brand, fonts })
-  // The original guide's eight pages, and the application system's six before the last.
-  assert.equal(pages.length, 14)
+  assert.ok(pages.length >= 8)
   for (const page of [...pages, ...guideSheets({ brand, fonts })]) assert.ok(!/<text\b/.test(page.render()), `${page.id} has live text`)
   for (const template of brand.templates) assert.ok(!/<text\b/.test(renderTemplate({ brand, fonts, outline: true }, template).svg), `${template.id} has live text`)
-  const post = renderTemplate({ brand, fonts, outline: true }, brand.templates.find((template) => template.id === 'social-post')).svg
-  assert.ok(!/<text\b/.test(post))
-  assert.match(post, /aria-label="From insight"/)
 })
 
 test('the starter makes a complete, valid brand from a few choices', async () => {
@@ -101,9 +104,9 @@ test('the starter makes a complete, valid brand from a few choices', async () =>
 
 test('the kit plan covers every family, layout and colour, and the guide', () => {
   const paths = planKit(brand).map((entry) => entry.path)
-  assert.ok(paths.includes('logos/outlined/ddc-stacked-white.svg'))
-  assert.ok(paths.includes('guidelines/ddcnorth-brand-guide.pdf'))
-  assert.ok(paths.includes('web/DdcNorthLogo.tsx'))
+  assert.ok(paths.some((path) => path.startsWith('logos/')))
+  assert.ok(paths.some((path) => path.startsWith('guidelines/') && path.endsWith('.pdf')))
+  assert.ok(paths.includes('source/brand.json'))
   assert.equal(new Set(paths).size, paths.length, 'no path twice')
 })
 
@@ -125,143 +128,25 @@ test('a composed line fills from shared fields, and goes when one is cleared', (
   assert.deepEqual(templateFields(template, owner).map(({ id, label }) => [id, label]), [['telephone', 'Telephone']])
 })
 
-test('a revision patches the definition, and the kit carries it beside the approved files', async () => {
-  const { withRevision, mergePatch } = await import('../src/engine/revisions.js')
+test('a revision patches the definition without changing the approved one', async () => {
+  const { withRevision, mergePatch, approvedOnly, revisionsOf } = await import('../src/engine/revisions.js')
   assert.deepEqual(mergePatch({ a: { b: 1, c: [1, 2] }, d: 1 }, { a: { c: [3] }, d: null }), { a: { b: 1, c: [3] } })
-  const rising = withRevision(brand, 'rising')
-  assert.equal(rising.version, '2.2-rising')
-  assert.deepEqual(rising.symbol.rows, [1, 2, 3])
-  assert.equal(rising.symbol.radius, brand.symbol.radius, 'untouched keys survive')
-  assert.equal(brand.symbol.rows.join(), '3,2,1', 'the approved definition is not changed')
-  assert.ok(!rising.guide.sheets.some((sheet) => sheet.group === 'revisions'))
-  const paths = planKit(brand).map((entry) => entry.path)
-  for (const path of ['revisions/rising/comparison.svg', 'revisions/rising/brand.json', 'revisions/rising/README.md', 'revisions/rising/logos/ddcnorth-horizontal-black.svg', 'revisions/rising/symbol/ddcnorth-symbol-micro.svg']) assert.ok(paths.includes(path), path)
-  assert.ok(!planKit(rising).some((entry) => entry.path.startsWith('revisions/')), 'a revised kit does not nest revisions')
-  const approved = planKit(brand).find((entry) => entry.path === 'logos/outlined/ddcnorth-horizontal-black.svg').make({ brand })
-  const proposed = planKit(brand).find((entry) => entry.path === 'revisions/rising/logos/ddcnorth-horizontal-black.svg').make({ brand })
-  assert.notEqual(approved, proposed)
+  const proposed = { ...brand, revisions: [{ id: 'teal', title: 'Teal primary', status: 'proposed', version: '1.1', changes: { colours: { primary: '#0F6B6B' } } }] }
+  const revised = withRevision(proposed, 'teal')
+  assert.equal(colour(revised, 'primary'), '#0F6B6B')
+  assert.equal(colour(proposed, 'primary'), '#1F4E46', 'the approved definition is not changed')
+  assert.deepEqual(revisionsOf(approvedOnly(proposed)), [])
 })
 
-test('the approved identity alone carries no revisions, in the guide or the kit', async () => {
-  const { approvedOnly, revisionsOf } = await import('../src/engine/revisions.js')
-  const shared = approvedOnly(brand)
-  assert.deepEqual(revisionsOf(shared), [])
-  assert.ok(!shared.guide.sheets.some((sheet) => sheet.group === 'revisions'))
-  assert.ok(!planKit(shared).some((entry) => entry.path.startsWith('revisions/')))
-  assert.ok(revisionsOf(brand).length, 'the definition it was made from keeps its revisions')
-})
-
-test('the BC example brands validate, and draw every template, signature and guide page', async () => {
-  for (const id of ['bc-province-1977', 'bc-hydro-1983']) {
-    const folder = new URL(`../brands/${id}/`, import.meta.url).pathname
-    const bc = JSON.parse(readFileSync(`${folder}brand.json`, 'utf8'))
-    assert.deepEqual(validateBrand(bc), [], id)
-    const fonts = await loadBrandFontsFromDisk(bc, folder)
-    assert.deepEqual(fonts.failures, [], `${id} fonts`)
-    for (const template of bc.templates) {
-      const { svg } = renderTemplate({ brand: bc, fonts, outline: true }, template)
-      // Historical H23 legitimately says “Service address – undefined”; reject invalid SVG values, not that source wording or its field IDs.
-      assert.ok(svg.includes('</svg>') && !svg.includes('NaN') && !/\b(?:x|y|x1|y1|x2|y2|width|height|viewBox|transform|d|fill|stroke|font-size|stroke-width)="[^"]*\bundefined\b/.test(svg), `${id}/${template.id}`)
-    }
-    for (const page of [...guidePages({ brand: bc, fonts }), ...guideSheets({ brand: bc, fonts })]) assert.ok(!/NaN|undefined/.test(page.render()), `${id}/${page.id}`)
-    const plan = planKit(bc).map((entry) => entry.path)
-    assert.equal(new Set(plan).size, plan.length, `${id}: no path twice`)
-  }
-})
-
-test('a ministry sets into every departmental Province signature, and an empty field drops its line', async () => {
-  const { logoDocument } = await import('../src/engine/artwork.js')
-  const bc = JSON.parse(readFileSync(new URL('../brands/bc-province-1977/brand.json', import.meta.url), 'utf8'))
-  const forests = bc.departments.items.find((item) => item.id === 'forests')
-  assert.equal(forests.values.ministry, 'Ministry of\nForests')
-  const svg = logoDocument({ brand: bc, values: forests.values }, { signature: 'horizontal', colourway: 'positive' })
-  assert.match(svg, />Forests</)
-  assert.match(svg, /fill="#5C462B"/, 'the symbol in brown')
-  assert.doesNotMatch(svg, /stroke-width/, 'no rule without an address')
-  const split = bc.departments.items.find((item) => item.values['ministry-split'] === 'PUBLIC WORKS')
-  assert.match(logoDocument({ brand: bc, values: split.values }, { signature: 'vertical', colourway: 'black' }), />PUBLIC WORKS</)
-  assert.ok(planKit(bc).some((entry) => entry.path === 'logos/ministries/forests/horizontal-positive.svg'))
-})
-
-test('brands/index.json lists every built-in brand by its name', async () => {
-  const { readdirSync, existsSync } = await import('node:fs')
+test('brands/index.json lists every built-in brand by its name', () => {
   const manifest = JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8'))
   const folders = readdirSync(new URL('../brands/', import.meta.url)).filter((id) => existsSync(new URL(`../brands/${id}/brand.json`, import.meta.url)))
   assert.deepEqual(manifest.map(({ id }) => id).sort(), folders.sort())
   for (const { id, name } of manifest) assert.equal(name, JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8')).name, id)
 })
 
-test('every BC template, signature and guide page cites manual pages that exist, and the manifest indexes them back', async () => {
-  const { GUIDE_BOOKS } = await import('../manuals/bc/books.js')
-  const pages = new Set(GUIDE_BOOKS.flatMap((book) => book.pages.map((page) => `${book.id}/${page.id}`)))
-  const manifest = JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8'))
-  for (const id of ['bc-province-1977', 'bc-hydro-1983']) {
-    const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
-    assert.equal(definition.manuals.pack, 'bc')
-    const items = [...definition.templates, ...definition.signatures, ...definition.guide.pages]
-    for (const item of items) {
-      assert.ok(item.sources?.length, `${id}: ${item.id ?? item.title} has no sources`)
-      for (const source of item.sources) assert.ok(pages.has(`${source.book}/${source.page}`), `${id}: ${source.book}/${source.page}`)
-    }
-    const index = manifest.find((entry) => entry.id === id).pages
-    const indexed = Object.values(index).flat().length
-    assert.equal(indexed, items.reduce((sum, item) => sum + item.sources.length, 0), id)
-    for (const key of Object.keys(index)) assert.ok(pages.has(key), key)
+test('every built-in brand has the menu logo scripts/menu-logos.mjs draws', () => {
+  for (const { id } of JSON.parse(readFileSync(new URL('../brands/index.json', import.meta.url), 'utf8'))) {
+    assert.ok(existsSync(new URL(`../brands/${id}/logo-menu.svg`, import.meta.url)), id)
   }
-})
-
-test('every ManualKit drawing is a template with its zones filled, and sits in its manual page', async () => {
-  const manifest = JSON.parse(readFileSync(new URL('../manuals/bc/illustrations/manifest.json', import.meta.url), 'utf8'))
-  const books = { G: 'general', V: 'vehicle', H: 'hydro', S: 'sign' }
-  for (const asset of manifest.assets) {
-    const id = asset.id.startsWith('H') ? 'bc-hydro-1983' : 'bc-province-1977'
-    const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
-    const template = definition.templates.find((entry) => entry.id === `illustrated-${asset.id.toLowerCase()}`)
-    assert.ok(template, asset.id)
-    const { svg } = renderTemplate({ brand: definition }, template)
-    const filled = (svg.match(/data-zone="/g) ?? []).length
-    // A sign fills its identity zone (its face is the whole sign) and sets each line of its wording.
-    const zones = asset.vb ? asset.branding_zones.filter((zone) => zone.kind !== 'process-surface').length : asset.branding_zones.filter((zone) => zone.id === 'identity').length
-    assert.ok(filled >= zones, `${asset.id}: ${filled} of ${zones} zones filled`)
-    if (!asset.vb) {
-      const lines = definition.illustrations[asset.id].lettering.length
-      assert.equal(templateFields(template, definition).filter((field) => field.id.startsWith(asset.id.toLowerCase())).length, lines, `${asset.id}: a field for each line`)
-    }
-    const page = readFileSync(new URL(`../manuals/bc/pages/${books[asset.id[0]]}/${asset.id.split('-')[0]}.svg`, import.meta.url), 'utf8')
-    assert.ok(page.includes(`data-illustration="${asset.id}"`), `${asset.id} is not on its page`)
-  }
-})
-
-test('sets and documents name real templates, and every document makes its Office file', async () => {
-  const { officeFile } = await import('../src/export/office.js')
-  const { unzipSync, strFromU8 } = await import('fflate')
-  // A one-pixel PNG stands in for the browser's renderer.
-  const png = async () => Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64'))
-  for (const id of ['ddcnorth', 'bc-province-1977', 'bc-hydro-1983']) {
-    const definition = JSON.parse(readFileSync(new URL(`../brands/${id}/brand.json`, import.meta.url), 'utf8'))
-    assert.deepEqual(validateBrand(definition), [], id)
-    assert.ok(definition.sets?.length && definition.documents?.length, `${id} has sets and documents`)
-    for (const document of definition.documents) {
-      const file = await officeFile({ brand: definition, values: {} }, document, { png })
-      if (document.format === 'html') {
-        assert.match(strFromU8(file.bytes), /<table[\s\S]*<img[\s\S]*<\/table>/, `${id}/${document.id}`)
-        continue
-      }
-      const parts = unzipSync(file.bytes)
-      if (document.format === 'docx') {
-        const xml = strFromU8(parts['word/document.xml'])
-        assert.ok(parts['word/header1.xml'] && Object.keys(parts).some((name) => name.startsWith('word/media/')), `${id}/${document.id} has its artwork in a header`)
-        assert.match(xml, /<w:pgSz /, `${id}/${document.id}`)
-      } else {
-        const layouts = Object.keys(parts).filter((name) => /slideLayouts\/slideLayout\d+\.xml$/.test(name))
-        assert.ok(layouts.length >= document.layouts.length, `${id}/${document.id}: ${layouts.length} layouts`)
-        assert.ok(Object.keys(parts).some((name) => /ppt\/slides\/slide\d+\.xml$/.test(name)))
-      }
-    }
-  }
-})
-
-test('the business card is one set: its fronts and back', () => {
-  const card = brand.sets.find((set) => set.id === 'business-card')
-  assert.deepEqual(card.variants.map((variant) => variant.template), ['business-card-front', 'business-card-front-light', 'business-card-back'])
 })

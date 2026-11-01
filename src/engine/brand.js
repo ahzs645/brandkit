@@ -1,6 +1,6 @@
 // A brand definition, and the questions every generator asks of it.
 //
-// A brand is one JSON document (see brands/ddcnorth/brand.json and docs/brand-schema.md). Nothing
+// A brand is one JSON document (see brands/northwind/brand.json and docs/brand-schema.md). Nothing
 // in the engine knows a brand by name: colours are asked for by key or by role, faces by role,
 // and every piece of copy comes from the document.
 

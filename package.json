@@ -2,7 +2,7 @@
   "name": "brandkit",
   "version": "0.1.0",
   "private": true,
-  "description": "Brand kits from one brand.json: logos and signatures, stationery, publications, signs, vehicles, a brand guide and web files, generated in the browser. With the 1977 Province of British Columbia and 1983 BC Hydro identities as worked examples, and a viewer for identity manuals.",
+  "description": "Brand kits from one brand.json: logos and signatures, stationery, publications, signs, vehicles, a brand guide and web files, generated in the browser. Brands open from brand packs (one zip each) by link or catalog; one example brand is built in, with a viewer for identity manuals.",
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
@@ -28,12 +28,15 @@
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
     "./consumer": "./src/engine/consumer.js",
-    "./patterns": "./src/engine/pattern-catalog.js"
+    "./patterns": "./src/engine/pattern-catalog.js",
+    "./pack": "./src/pack/format.js",
+    "./pack/node": "./src/pack/build.js"
   },
   "files": [
     "bin",
     "src",
     "brands",
+    "library",
     "manuals",
     "docs"
   ],
@@ -48,29 +51,11 @@
     "test": "node --test \"test/*.test.js\"",
     "build:kit": "node bin/brandkit.mjs build",
     "make:example": "node scripts/make-example-brand.mjs",
-    "import:pofbc": "node scripts/import-pofbc.mjs",
-    "make:ddcnorth": "node scripts/brands/ddcnorth-applications.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",
-    "make:firstform": "node scripts/brands/firstform.mjs",
-    "make:overtheedge": "node scripts/brands/overtheedge.mjs",
-    "make:sparklab": "node scripts/brands/sparklab.mjs",
-    "make:lovefutbol": "node scripts/brands/lovefutbol.mjs",
-    "make:unbc": "node scripts/brands/unbc.mjs",
-    "make:bc": "node scripts/brands/bc-province-1977.mjs && node scripts/brands/bc-hydro-1983.mjs",
-    "make:ddcnorth-v23": "node scripts/brands/ddcnorth-v23.mjs && node scripts/brands/ddcnorth-accept-v23.mjs",
-    "test:browser": "node test/browser/ddcnorth-motion.check.mjs",
-    "test:sparklab:browser": "node test/browser/sparklab.check.mjs",
-    "make:patterns": "node scripts/brands/pattern-collections.mjs",
-    "test:patterns:browser": "node test/browser/pattern-collections.check.mjs",
-    "test:identity": "node test/browser/overtheedge-identity.check.mjs",
     "make:documentation": "node scripts/brands/documentation.mjs",
     "build:documentation": "node scripts/build-documentation.mjs",
-    "test:documents": "node --test test/documentation-model.test.js test/office-documents.test.js test/documentation-exports.test.js",
-    "test:documents:pagination": "node --test test/native-word-pagination.test.js",
-    "test:documents:browser": "node test/browser/documentation.check.mjs",
-    "test:patterns:view:browser": "node test/browser/patterns-view.check.mjs",
-    "test:unbc:browser": "node test/browser/unbc.check.mjs",
-    "test:hydro:browser": "node test/browser/bc-hydro.check.mjs",
-    "audit:hydro": "node scripts/audit-bc-hydro.mjs"
+    "pack": "node scripts/pack.mjs",
+    "test:packs:browser": "node test/browser/packs.check.mjs",
+    "make:patterns": "node scripts/brands/pattern-collections.mjs"
   },
   "peerDependencies": {
     "react": ">=18",

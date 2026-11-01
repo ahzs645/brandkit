@@ -1,16 +1,21 @@
 // Loading a brand's files from disk, for the CLI and tests.
 //
 // A brand's `file` and `files` paths are relative to its folder. A brand made with the starter
-// names the open-licence faces brandkit ships rather than carrying its own copies, so a path that
-// is not in the brand's folder is looked for in the built-in brands' folders too.
+// names the open-licence faces brandkit ships (library/) rather than carrying its own copies, so a
+// path that is not in the brand's folder is looked for in the library, then in the other brand
+// folders: the built-in ones, and those in BRANDKIT_BRANDS (a folder of brands kept outside
+// brandkit, or several separated by the platform's path delimiter).
 
 import { existsSync, readdirSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { delimiter, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadBrandFonts } from './provider.js'
 
-const BRANDS = fileURLToPath(new URL('../../brands/', import.meta.url))
+const LIBRARY = fileURLToPath(new URL('../../library/', import.meta.url))
+const BUILT_IN = fileURLToPath(new URL('../../brands/', import.meta.url))
+/** Every folder of brands this process knows: BRANDKIT_BRANDS first, then brandkit's own. */
+export const brandRoots = () => [...(process.env.BRANDKIT_BRANDS ?? '').split(delimiter).filter(Boolean), BUILT_IN].filter((root) => existsSync(root))
 
 export const toArrayBuffer = (buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength)
 
@@ -18,9 +23,13 @@ export const toArrayBuffer = (buffer) => buffer.buffer.slice(buffer.byteOffset, 
 export const findAsset = (folder, relative) => {
   const own = join(folder, relative)
   if (existsSync(own)) return own
-  for (const entry of readdirSync(BRANDS, { withFileTypes: true })) {
-    const candidate = join(BRANDS, entry.name, relative)
-    if (entry.isDirectory() && existsSync(candidate)) return candidate
+  const shared = join(LIBRARY, relative)
+  if (existsSync(shared)) return shared
+  for (const root of brandRoots()) {
+    for (const entry of readdirSync(root, { withFileTypes: true })) {
+      const candidate = join(root, entry.name, relative)
+      if (entry.isDirectory() && existsSync(candidate)) return candidate
+    }
   }
   return own
 }
