@@ -20,6 +20,28 @@ A quiet, warm basemap keeps project markers and the observed brand colours legib
 
 Labels: Country labels in charcoal, other place labels in a slightly softer charcoal, each with an off-white halo. (`#1D1D1B` and `#3A3A36`, halo `#F5F4EF`).
 
+## Themes
+
+Three basemap themes recolour the same vector style in place. Chalk is the default; Pitch and Night match are playful alternatives for presentations and the map story. All three are atlas choices, not observed brand treatments.
+
+| Theme | Ground | Water | Roads | Labels | Countries reached | Use |
+| --- | --- | --- | --- | --- | --- | --- |
+| Chalk | `#F3F1EA` | `#BFE0EE` | `#FFFFFF` | `#1D1D1B` | `#CFE7D6` → `#88C59B` → `#489D60` | Default reading view: off-white ground like the website’s light pages. |
+| Pitch | `#5DA86F` | `#86CBEA` | `#FFFFFF` | `#FFFFFF` | `#8CC79C` → `#CFE8D5` → `#FFFFFF` | The map as a mown pitch: green ground with white chalk-line roads; countries reached lighten toward white. OSM pitches switch to off-white with green lines. |
+| Night match | `#0E1D17` | `#0B2A38` | `#F5A300` | `#F5F4EF` | `#1F4A31` → `#489D60` → `#88C59B` | A floodlit evening match: forest ground, amber roads like floodlights, light-green country labels. |
+
+An aerial-imagery view (Esri World Imagery) is offered on a selected space as “See the field”, with the nearest OpenStreetMap pitch outlined in source flag red over a green fill.
+
+## Travel time
+
+Walking and cycling isochrones (10, 20 and 30 minutes) from Valhalla on the OpenStreetMap street network, drawn as rings in one hue: darkest closest.
+
+- **10 min:** Dark terracotta `#9A5418`
+- **20 min:** Projects terracotta `#D17F2D`
+- **30 min:** Light terracotta `#EDB98A`
+
+Residents inside each band: US census tracts weighted by area share (ACS 5-year); elsewhere the area times the density of the smallest administrative area (under 3,000 km²) with people and size on record, shown with ≈ as a rough estimate. Never a state-wide density.
+
 ## Neighbourhood lens
 
 A neighbourhood lens shades three kinds of OpenStreetMap land use from about zoom 11, under the roads, so the facilities around a space read at a glance.

@@ -27,6 +27,24 @@ export const lovefutbolAtlas = {
     labels: { colour: 'charcoal', hex: '#1D1D1B', secondaryHex: '#3A3A36', halo: 'off-white', haloHex: '#F5F4EF', note: 'Country labels in charcoal, other place labels in a slightly softer charcoal, each with an off-white halo.' },
     starting: 'The atlas restyles the OpenFreeMap Positron vector style (OpenMapTiles schema).'
   },
+  themes: {
+    note: 'Three basemap themes recolour the same vector style in place. Chalk is the default; Pitch and Night match are playful alternatives for presentations and the map story. All three are atlas choices, not observed brand treatments.',
+    items: [
+      { id: 'chalk', label: 'Chalk', ground: '#F3F1EA', water: '#BFE0EE', roads: '#FFFFFF', labels: '#1D1D1B', choropleth: ['#CFE7D6', '#88C59B', '#489D60'], use: 'Default reading view: off-white ground like the website’s light pages.' },
+      { id: 'pitch', label: 'Pitch', ground: '#5DA86F', water: '#86CBEA', roads: '#FFFFFF', labels: '#FFFFFF', choropleth: ['#8CC79C', '#CFE8D5', '#FFFFFF'], use: 'The map as a mown pitch: green ground with white chalk-line roads; countries reached lighten toward white. OSM pitches switch to off-white with green lines.' },
+      { id: 'night', label: 'Night match', ground: '#0E1D17', water: '#0B2A38', roads: '#F5A300', labels: '#F5F4EF', choropleth: ['#1F4A31', '#489D60', '#88C59B'], use: 'A floodlit evening match: forest ground, amber roads like floodlights, light-green country labels.' }
+    ],
+    satellite: 'An aerial-imagery view (Esri World Imagery) is offered on a selected space as “See the field”, with the nearest OpenStreetMap pitch outlined in source flag red over a green fill.'
+  },
+  travelTime: {
+    note: 'Walking and cycling isochrones (10, 20 and 30 minutes) from Valhalla on the OpenStreetMap street network, drawn as rings in one hue: darkest closest.',
+    bands: [
+      { minutes: 10, hex: '#9A5418', label: 'Dark terracotta' },
+      { minutes: 20, hex: '#D17F2D', label: 'Projects terracotta' },
+      { minutes: 30, hex: '#EDB98A', label: 'Light terracotta' }
+    ],
+    people: 'Residents inside each band: US census tracts weighted by area share (ACS 5-year); elsewhere the area times the density of the smallest administrative area (under 3,000 km²) with people and size on record, shown with ≈ as a rough estimate. Never a state-wide density.'
+  },
   lens: {
     note: 'A neighbourhood lens shades three kinds of OpenStreetMap land use from about zoom 11, under the roads, so the facilities around a space read at a glance.',
     layers: [
@@ -396,6 +414,24 @@ ${a.basemap.note} ${a.basemap.starting}
 ${a.basemap.layers.map(layer => `| ${layer.label} | \`${layer.hex}\` | ${layer.use} |`).join('\n')}
 
 Labels: ${a.basemap.labels.note} (\`${a.basemap.labels.hex}\` and \`${a.basemap.labels.secondaryHex}\`, halo \`${a.basemap.labels.haloHex}\`).
+
+## Themes
+
+${a.themes.note}
+
+| Theme | Ground | Water | Roads | Labels | Countries reached | Use |
+| --- | --- | --- | --- | --- | --- | --- |
+${a.themes.items.map(t => `| ${t.label} | \`${t.ground}\` | \`${t.water}\` | \`${t.roads}\` | \`${t.labels}\` | ${t.choropleth.map(c => `\`${c}\``).join(' → ')} | ${t.use} |`).join('\n')}
+
+${a.themes.satellite}
+
+## Travel time
+
+${a.travelTime.note}
+
+${a.travelTime.bands.map(b => `- **${b.minutes} min:** ${b.label} \`${b.hex}\``).join('\n')}
+
+${a.travelTime.people}
 
 ## Neighbourhood lens
 
