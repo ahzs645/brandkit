@@ -60,7 +60,7 @@ export const pack = (argv) => {
     built.push({ ...result, file, description: definition.description ?? definition.tagline ?? null })
     if (!options.quiet) {
       const { stats } = result
-      const saved = [stats.aliased && `${stats.aliased} duplicate${stats.aliased === 1 ? '' : 's'} aliased (${size(stats.aliasedBytes)})`, stats.library && `${stats.library} library file${stats.library === 1 ? '' : 's'} left out (${size(stats.libraryBytes)})`].filter(Boolean).join(', ')
+      const saved = [stats.aliased && `${stats.aliased} duplicate${stats.aliased === 1 ? '' : 's'} aliased (${size(stats.aliasedBytes)})`, stats.library && `${stats.library} library file${stats.library === 1 ? '' : 's'} left out (${size(stats.libraryBytes)})`, stats.ignored && `${stats.ignored} kept with the source (${size(stats.ignoredBytes)}, .packignore)`].filter(Boolean).join(', ')
       console.log(`${file}: ${stats.files} files, ${size(stats.bytes)} → ${size(stats.zipped)}${saved ? `; ${saved}` : ''}`)
     }
   }

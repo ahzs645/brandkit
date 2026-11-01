@@ -126,3 +126,22 @@ test('the pack command writes each brand’s zip and menu logo, and a catalog of
     assert.throws(() => pack(['--out', out]), /usage/)
   } finally { rmSync(root, { recursive: true, force: true }) }
 })
+
+test('.packignore keeps source material out of the pack, but never a file the kit lists', () => {
+  const { root, folder, brand } = fixture()
+  try {
+    mkdirSync(join(folder, 'reference/scans'), { recursive: true })
+    writeFileSync(join(folder, 'reference/scans/page-1.webp'), 'scan')
+    writeFileSync(join(folder, 'reference/photo.jpg'), 'photo')
+    writeFileSync(join(folder, 'reference/keep.jpg'), 'keep')
+    writeFileSync(join(folder, '.packignore'), '# research, not for users\nreference/scans/\nreference/photo.jpg\n')
+    const { manifest, stats, bytes } = buildPack(folder)
+    const { files } = readPack(bytes)
+    assert.ok(!files.has('reference/scans/page-1.webp') && !files.has('reference/photo.jpg') && !files.has('.packignore'))
+    assert.ok(files.has('reference/keep.jpg'))
+    assert.equal(stats.ignored, 2)
+    assert.equal(manifest.files.count, stats.files, 'the manifest counts what the pack holds')
+    writeFileSync(join(folder, 'brand.json'), JSON.stringify({ ...brand, files: [...(brand.files ?? []), 'reference/photo.jpg'] }))
+    assert.throws(() => buildPack(folder), /kit lists in brand\.json files \(reference\/photo\.jpg\)/)
+  } finally { rmSync(root, { recursive: true, force: true }) }
+})

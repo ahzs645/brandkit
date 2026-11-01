@@ -42,6 +42,11 @@ What a pack leaves out, so it is no bigger than it has to be:
   and Space Mono the starter uses) is served from the app, which every visitor already has.
 - **Duplicates.** A file the brand keeps at several paths is zipped once (`aliases`).
 - **History and repository clutter.** `history/`, dotfiles and `node_modules/`.
+- **Source material.** Paths listed in the brand's `.packignore` (one pattern per line, `#` for
+  comments: `reference/manual/` for a folder, `reference/*.jpg`, `*.psd` for a name anywhere,
+  `**` across folders): research, scans and screenshots a brand is built from but its users do
+  not need. They stay with the brand's source. A file the kit lists in `brand.json` `files` is
+  never left out; packing stops with an error instead.
 
 Images, fonts, PDFs and other compressed formats are stored as they are; text, SVG and JSON are
 deflated at the highest level. Entries are sorted and dated 1980-01-01, so the same folder always

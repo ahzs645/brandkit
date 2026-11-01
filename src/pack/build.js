@@ -28,6 +28,25 @@ const FIXED_DATE = new Date('1980-01-01T00:00:00Z')
 /** What a pack leaves out of a brand's folder: its history and anything that is only for the repository. */
 export const DEFAULT_EXCLUDE = [/^history\//, /(^|\/)\.[^/]+$/, /(^|\/)node_modules\//, /\.pack\.zip$/]
 
+export const PACKIGNORE = '.packignore'
+
+/**
+ * A brand's own exclusions, from `.packignore` in its folder: files kept with the brand's source
+ * (inputs to its generators, research material) that the people using the brand do not need. One
+ * pattern per line, `#` for comments: `reference/manual/` (a folder), `*.psd` (a name anywhere),
+ * `reference/*.jpg`, `docs/**\/draft-*.html` (`*` within a folder, `**` across folders).
+ */
+export const packIgnore = (folder) => {
+  const file = join(folder, PACKIGNORE)
+  if (!existsSync(file)) return []
+  return readFileSync(file, 'utf8').split(/\r?\n/).map((line) => line.trim()).filter((line) => line && !line.startsWith('#')).map((line) => {
+    const pattern = line.replace(/^\//, '').replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*\*\//g, '\u0000').replace(/\*\*/g, '\u0001').replace(/\*/g, '[^/]*').replace(/\?/g, '[^/]').replace(/\u0000/g, '(?:.*/)?').replace(/\u0001/g, '.*')
+    // A folder (trailing /) takes everything in it; a pattern without a / matches a name anywhere.
+    if (line.endsWith('/')) return new RegExp(`^${pattern}`)
+    return line.replace(/^\//, '').includes('/') ? new RegExp(`^${pattern}$`) : new RegExp(`(^|/)${pattern}$`)
+  })
+}
+
 const walk = (folder) => {
   const out = []
   const visit = (dir) => {
@@ -67,10 +86,21 @@ export const buildPack = (folder, { library = libraryIndex(), exclude = DEFAULT_
   const aliases = {}
   const libraryFiles = {}
   const kept = new Map()
-  const stats = { files: 0, bytes: 0, aliased: 0, aliasedBytes: 0, library: 0, libraryBytes: 0, zipped: 0 }
+  const stats = { files: 0, bytes: 0, aliased: 0, aliasedBytes: 0, library: 0, libraryBytes: 0, ignored: 0, ignoredBytes: 0, zipped: 0 }
+  const ignore = packIgnore(folder)
+  // A file the brand's kit lists (brand.json `files`) has to travel, or a kit built from the pack
+  // would be missing it.
+  const listed = new Set((brand.files ?? []).map((entry) => (typeof entry === 'string' ? entry : entry?.from)).filter(Boolean))
+  const needed = []
 
   for (const path of walk(folder)) {
     if (exclude.some((pattern) => pattern.test(path))) continue
+    if (ignore.some((pattern) => pattern.test(path))) {
+      if (listed.has(path)) needed.push(path)
+      stats.ignored += 1
+      stats.ignoredBytes += statSync(join(folder, path)).size
+      continue
+    }
     const clean = cleanPath(path)
     if (!clean || clean === PACK_MANIFEST) continue
     const bytes = readFileSync(join(folder, path))
@@ -103,6 +133,7 @@ export const buildPack = (folder, { library = libraryIndex(), exclude = DEFAULT_
     tree[clean] = [new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength), { level: STORED.test(clean) ? 0 : 9, mtime: FIXED_DATE }]
   }
 
+  if (needed.length) throw new Error(`${brand.id}: .packignore leaves out ${needed.length} file${needed.length === 1 ? '' : 's'} its kit lists in brand.json files (${needed.slice(0, 3).join(', ')}${needed.length > 3 ? ', …' : ''}). Take them off the list, or out of .packignore.`)
   const pages = brand.manuals ? pageIndex(brand) : null
   const manifest = {
     format: PACK_FORMAT,
