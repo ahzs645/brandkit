@@ -10,6 +10,7 @@ import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
 import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack } from './pack-store.js'
 import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
+import { registerPackPages } from './pack-pages.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
@@ -202,6 +203,8 @@ export const App = () => {
   const loadBrand = useCallback(async (id, { notices = [] } = {}) => {
     if (opened[id]) return { ...opened[id], brand: structuredClone(opened[id].brand) }
     let pack = await openInstalled(id).catch(() => null)
+    // Its pages are given real addresses by the pack worker; wait (briefly) for it the first time.
+    if (pack || !BUILT_IN.includes(id)) await registerPackPages()
     // A brand that is already here does not wait long on the catalogs (they only say whether it
     // has an update); one that is not has to, since a catalog is the only place it can come from.
     const here = Boolean(pack || saved[id] || BUILT_IN.includes(id))
@@ -217,14 +220,14 @@ export const App = () => {
     }
     if (pack) {
       const definition = saved[id] ? structuredClone(saved[id]) : pack.brand
-      return { brand: definition, source: blobSource(pack.files, pack.library, pack.record.name), pack: pack.record }
+      return { brand: definition, source: blobSource(pack.files, pack.library, pack.record.name, { id }), pack: pack.record }
     }
     if (saved[id]) return { brand: structuredClone(saved[id]), source: librarySource() }
     if (BUILT_IN.includes(id)) return loadBuiltIn(id)
     if (entry) {
       await downloadPack({ url: entry.url, name: entry.name, catalog: entry.catalog })
       const fresh = await openInstalled(id)
-      if (fresh) return { brand: fresh.brand, source: blobSource(fresh.files, fresh.library, fresh.record.name), pack: fresh.record }
+      if (fresh) return { brand: fresh.brand, source: blobSource(fresh.files, fresh.library, fresh.record.name, { id }), pack: fresh.record }
     }
     return null
   }, [opened, saved, downloadPack])

@@ -8,10 +8,15 @@
 // looked up in brandkit's library/, then in the built-in brands' folders.
 
 import { readPack } from '../pack/format.js'
+import { isPage, packPageUrl } from './pack-pages.js'
 
 // A brand's history (an earlier definition kept for the record) is not served with the app.
 const FILES = import.meta.glob(['../../brands/**/*', '!../../brands/*/history/**'], { query: '?url', import: 'default', eager: true })
-const LIBRARY = import.meta.glob('../../library/**/*', { query: '?url', import: 'default', eager: true })
+// brandkit's library (library/) is served as it is, at <base>library/ (see brandkitLibrary() in
+// src/vite.js), so a pack page served by the pack worker can reach it by path too.
+import LIBRARY_FILES from 'virtual:brandkit-library'
+const LIBRARY = new Set(LIBRARY_FILES)
+const LIBRARY_BASE = `${import.meta.env.BASE_URL}library/`
 const DEFINITIONS = import.meta.glob('../../brands/*/brand.json', { import: 'default' })
 
 const idOf = (path) => path.split('/').at(-2)
@@ -26,7 +31,7 @@ export const menuLogoUrl = (id) => FILES[`../../brands/${id}/logo-menu.svg`] ?? 
 export const BUILT_IN = Object.keys(DEFINITIONS).map(idOf).sort((a, b) => (a === 'ddcnorth' ? -1 : b === 'ddcnorth' ? 1 : a.localeCompare(b)))
 
 const libraryUrl = (relative) => {
-  if (LIBRARY[`../../library/${relative}`]) return LIBRARY[`../../library/${relative}`]
+  if (LIBRARY.has(relative)) return `${LIBRARY_BASE}${relative.split('/').map(encodeURIComponent).join('/')}`
   for (const id of BUILT_IN) {
     const url = FILES[`../../brands/${id}/${relative}`]
     if (url) return url
@@ -89,15 +94,19 @@ export const librarySource = () => urlSource(libraryUrl, 'library')
 
 /**
  * A source over an installed brand's files (path → Blob, from IndexedDB). `library` maps paths the
- * pack left to brandkit's library to the library's path for them.
+ * pack left to brandkit's library to the library's path for them. Given the brand's `id`, its
+ * pages get real addresses from the pack worker (./pack-pages.js) when it is running, so their
+ * relative links resolve; everything else, and every page where the worker cannot run, is a blob:.
  */
-export const blobSource = (files, library, label) => {
+export const blobSource = (files, library, label, { id } = {}) => {
   const urls = new Map()
   const fallback = (relative) => libraryUrl(library.get(relative) ?? relative)
   return {
     label,
     url: (relative) => {
       const blob = files.get(relative)
+      const page = id && blob && isPage(relative) ? packPageUrl(id, relative) : null
+      if (page) return page
       if (!blob) return fallback(relative)
       if (!urls.has(relative)) urls.set(relative, objectUrl(relative, blob))
       return urls.get(relative)

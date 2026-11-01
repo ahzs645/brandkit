@@ -1,7 +1,8 @@
 // Brand packs in the app, end to end: a brand opened from a link (?url=) is kept in the browser and
 // opens again after a reload without being downloaded; a catalog (?catalog=) offers brands to add;
-// brands that share files store them once; a changed pack is offered as an update; removing a
-// brand frees what only it used. Run after `npm run build`:
+// brands that share files store them once; a pack's pages are served at real addresses, so their
+// relative links resolve; a changed pack is offered as an update; removing a brand frees what only
+// it used. Run after `npm run build`:
 //
 //   npm run build && npm run test:packs:browser
 //
@@ -30,6 +31,8 @@ const work = mkdtempSync(join(tmpdir(), 'brandkit-packs-'))
 const brands = join(work, 'brands')
 const out = join(work, 'packs')
 const SHARED_BYTES = Buffer.concat(Array.from({ length: 8000 }, (_, index) => createHash('sha512').update(`${index}`).digest()))
+// A 2 × 2 PNG.
+const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR4nGP4z8DAwMDAwMAAAA4AAf8fGu8AAAAASUVORK5CYII=', 'base64')
 const make = (id, name, primary) => {
   const folder = join(brands, id)
   cpSync(join(root, 'brands/northwind'), folder, { recursive: true })
@@ -38,6 +41,15 @@ const make = (id, name, primary) => {
   mkdirSync(join(folder, 'reference'), { recursive: true })
   writeFileSync(join(folder, 'reference/shared-photo.webp'), SHARED_BYTES)
   writeFileSync(join(folder, 'reference/README.md'), `Reference for ${name}.\n`)
+  // A page that leans on what is around it, as brand-details pages and websites do: an image
+  // beside it, a face from the folder above (one the pack leaves to brandkit's library), and
+  // another page.
+  mkdirSync(join(folder, 'docs/details-assets'), { recursive: true })
+  writeFileSync(join(folder, 'docs/details-assets/mark.png'), PNG)
+  writeFileSync(join(folder, 'docs/details.html'), `<!doctype html><meta charset="utf-8"><title>${name} details</title>
+<style>@font-face{font-family:"Pack Check";src:url('../fonts/desktop/Inter-Regular.ttf')}body{font-family:"Pack Check",serif}</style>
+<h1>${name}</h1><img id="mark" src="details-assets/mark.png" alt="mark"><a id="next" href="more.html">More</a>`)
+  writeFileSync(join(folder, 'docs/more.html'), `<!doctype html><meta charset="utf-8"><title>More</title><p id="more">More about ${name}.</p>`)
   const brand = JSON.parse(readFileSync(join(folder, 'brand.json'), 'utf8'))
   Object.assign(brand, { id, name, tagline: `${name}, for the pack check.` })
   brand.colours.primary = primary
@@ -112,6 +124,28 @@ try {
   await page.reload()
   await waitForBrand('southwind')
   assert.ok(!requests.slice(before).includes('southwind.zip'), 'a reload does not download the pack')
+
+  // 2b. The pack's pages have real addresses, so what they link to relatively resolves: the image
+  // beside a page, a library face from the folder above, and another page.
+  const details = await page.context().newPage()
+  const detailsErrors = []
+  details.on('pageerror', (error) => detailsErrors.push(error.message))
+  details.on('response', (response) => { if (response.status() >= 400) detailsErrors.push(`${response.status()} ${response.url()}`) })
+  await details.goto(`${base}packs/southwind/docs/details.html`, { waitUntil: 'networkidle' })
+  assert.equal(await details.locator('h1').textContent(), 'Southwind')
+  assert.equal(await details.locator('#mark').evaluate((image) => image.complete && image.naturalWidth), 2, 'the image beside the page loads')
+  assert.ok(await details.evaluate(async () => { await document.fonts.ready; return document.fonts.check('16px "Pack Check"') && [...document.fonts].some((face) => face.family.includes('Pack Check') && face.status === 'loaded') }), 'a face from ../fonts/ loads, from brandkit’s library')
+  await details.locator('#next').click()
+  await details.locator('#more').waitFor()
+  assert.deepEqual(detailsErrors, [])
+  assert.equal((await details.goto(`${base}packs/southwind/docs/missing.html`)).status(), 404, 'a path the pack does not have is not found')
+  assert.equal((await details.goto(`${base}packs/nobody/docs/details.html`)).status(), 404, 'nor is a brand that is not installed')
+  await details.close()
+  // In the app, a page from the pack links to that address rather than a blob:.
+  await page.goto(`${base}?brand=southwind&view=patterns`)
+  const explorer = page.locator('.patterns-resources a[data-path$="pattern-explorer.html"]')
+  await explorer.waitFor()
+  assert.match(await explorer.getAttribute('href'), /\/packs\/southwind\/docs\/pattern-explorer\.html$/)
 
   // 3. Following the same link again asks the host, and an unchanged pack is not stored again.
   const firstUpdate = stored.packs[0].updatedAt
@@ -197,7 +231,7 @@ try {
   await page.screenshot({ path: join(screenshotDir, 'brands-view-phone.png'), fullPage: true })
 
   assert.deepEqual(errors, [], errors.join('\n'))
-  console.log(`Pack checks passed: link, reload, revisit, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
+  console.log(`Pack checks passed: link, reload, pack pages, revisit, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
 } catch (error) {
   if (page) await page.screenshot({ path: join(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
   throw error
