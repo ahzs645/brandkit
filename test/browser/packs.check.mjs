@@ -59,6 +59,18 @@ const make = (id, name, primary) => {
 make('southwind', 'Southwind', '#7A3B1F')
 make('eastwind', 'Eastwind', '#1F3B7A')
 const repack = () => pack([brands, '--out', out, '--name', 'Check catalog', '--quiet'])
+// Two more, handed over as files rather than hosted: one chosen with the file picker, one dragged
+// onto the page.
+const loose = join(work, 'loose')
+const looseOut = join(work, 'loose-packs')
+const makeLoose = (id, name, primary) => {
+  const folder = make(id, name, primary)
+  cpSync(folder, join(loose, id), { recursive: true })
+  rmSync(folder, { recursive: true, force: true })
+}
+makeLoose('upwind', 'Upwind', '#2E6B3F')
+makeLoose('downwind', 'Downwind', '#6B2E5A')
+pack([loose, '--out', looseOut, '--quiet'])
 repack()
 
 // The pack host: another origin, CORS for everyone, ETags so a revisit can be answered "unchanged".
@@ -107,7 +119,7 @@ try {
       const tx = open.result.transaction(['blobs', 'packs'])
       const blobs = tx.objectStore('blobs').getAll()
       const records = tx.objectStore('packs').getAll()
-      tx.oncomplete = () => resolve({ blobs: blobs.result.length, stored: blobs.result.reduce((sum, entry) => sum + entry.size, 0), packs: records.result.map((record) => ({ id: record.id, hash: record.packHash, updatedAt: record.updatedAt, logical: record.bytes })) })
+      tx.oncomplete = () => resolve({ blobs: blobs.result.length, stored: blobs.result.reduce((sum, entry) => sum + entry.size, 0), packs: records.result.map((record) => ({ id: record.id, hash: record.packHash, updatedAt: record.updatedAt, logical: record.bytes, url: record.url })) })
     }
   }))
 
@@ -223,6 +235,47 @@ try {
   await page.goto(`${base}?brand=eastwind`)
   await waitForBrand('eastwind')
 
+  // 9b. A pack chosen with the file picker (Open…, or "choose a file" in Brands) is kept like one
+  // from a link, with no address to update from.
+  await page.goto(`${base}?brand=eastwind&view=brands`)
+  await page.getByRole('heading', { name: 'Add a brand' }).waitFor()
+  await page.locator('input[type="file"][accept*=".zip"]').first().setInputFiles(join(looseOut, 'upwind.zip'))
+  await waitForBrand('upwind')
+  const uploaded = (await usage()).packs.find((record) => record.id === 'upwind')
+  assert.ok(uploaded && uploaded.url === null, 'an uploaded pack is kept in this browser, with no address')
+  await page.reload()
+  await waitForBrand('upwind')
+
+  // 9c. A pack dragged onto the page: the overlay shows while it is over the page, and dropping it
+  // opens and keeps it. Dragged images are left alone.
+  await page.goto(`${base}?brand=upwind&view=brands`)
+  await page.getByRole('heading', { name: 'Add a brand' }).waitFor()
+  const dragged = async (name, type, base64) => page.evaluateHandle(({ name, type, base64 }) => {
+    const transfer = new DataTransfer()
+    transfer.items.add(new File([Uint8Array.from(atob(base64), (char) => char.charCodeAt(0))], name, { type }))
+    return transfer
+  }, { name, type, base64 })
+  const image = await dragged('photo.png', 'image/png', PNG.toString('base64'))
+  await page.dispatchEvent('body', 'dragenter', { dataTransfer: image })
+  assert.equal(await page.locator('.drop-overlay').count(), 0, 'an image is not offered as a brand')
+  await page.dispatchEvent('body', 'drop', { dataTransfer: image })
+  const transfer = await dragged('downwind.zip', 'application/zip', readFileSync(join(looseOut, 'downwind.zip')).toString('base64'))
+  await page.dispatchEvent('body', 'dragenter', { dataTransfer: transfer })
+  await page.locator('.drop-overlay').waitFor()
+  await page.screenshot({ path: join(screenshotDir, 'drop-overlay.png') })
+  await page.dispatchEvent('body', 'dragover', { dataTransfer: transfer })
+  await page.dispatchEvent('body', 'drop', { dataTransfer: transfer })
+  await waitForBrand('downwind')
+  assert.equal(await page.locator('.drop-overlay').count(), 0, 'the overlay goes once the brand is dropped')
+  assert.ok((await usage()).packs.some((record) => record.id === 'downwind' && record.url === null), 'a dropped pack is kept, with no address')
+  // A brand.json on its own, dropped, opens for this visit.
+  const definition = JSON.parse(readFileSync(join(loose, 'upwind/brand.json'), 'utf8'))
+  const json = await dragged('brand.json', 'application/json', Buffer.from(JSON.stringify({ ...definition, id: 'jsonwind', name: 'Jsonwind' })).toString('base64'))
+  await page.dispatchEvent('body', 'dragenter', { dataTransfer: json })
+  await page.dispatchEvent('body', 'drop', { dataTransfer: json })
+  await waitForBrand('jsonwind')
+  assert.ok(!(await usage()).packs.some((record) => record.id === 'jsonwind'), 'a brand.json is opened, not stored as a pack')
+
   // 10. At phone width the Brands view fits without scrolling sideways.
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto(`${base}?brand=eastwind&view=brands`)
@@ -231,7 +284,7 @@ try {
   await page.screenshot({ path: join(screenshotDir, 'brands-view-phone.png'), fullPage: true })
 
   assert.deepEqual(errors, [], errors.join('\n'))
-  console.log(`Pack checks passed: link, reload, pack pages, revisit, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
+  console.log(`Pack checks passed: link, reload, pack pages, revisit, file picker, drag and drop, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
 } catch (error) {
   if (page) await page.screenshot({ path: join(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
   throw error

@@ -63,7 +63,7 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
     <div className="view brand-library">
       <header className="view__head">
         <h1>Brands</h1>
-        <p className="muted">brandkit is the engine; brands are packs. A pack is one zip with a brand and every file it needs. Open one from a link (<code>?url=</code>) or a catalog and it is kept in this browser, ready offline, until you remove it.</p>
+        <p className="muted">brandkit is the engine; brands are packs. A pack is one zip with a brand and every file it needs. Drag one onto the page, choose it as a file, open it from a link (<code>?url=</code>) or add it from a catalog, and it is kept in this browser, ready offline, until you remove it.</p>
       </header>
       {problem && <p className="notice notice--error" role="alert">{problem}</p>}
 
@@ -128,12 +128,15 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
 
       <section>
         <h2>Add a brand</h2>
+        <div className="brand-library__dropzone">
+          <p><strong>Drag a brand onto this page</strong>, or <button type="button" className="link" onClick={onOpenFile}>choose a file</button>.</p>
+          <p className="muted">A brand pack (.zip), a brand folder or a downloaded kit zipped, or a brand.json. A zip is kept in this browser; a brand.json on its own opens for this visit.</p>
+        </div>
         <form className="brand-library__form" onSubmit={(event) => { event.preventDefault(); if (link.trim()) run('link', async () => { await onAddUrl(link.trim()); setLink('') }) }}>
           <input type="url" required placeholder="https://…/brand.zip" value={link} onChange={(event) => setLink(event.target.value)} aria-label="A brand pack’s address" />
           <button type="submit" className="button" disabled={busy !== null}>{busy === 'link' ? 'Adding…' : 'Add from link'}</button>
-          <button type="button" className="button button--quiet" onClick={onOpenFile}>Open a file…</button>
         </form>
-        <p className="muted">A pack from a link is fetched from its host, which has to allow cross-origin requests if it is another site. A brand folder or a kit zipped opens the same way.</p>
+        <p className="muted">Or link straight to one: <code>?url=</code> followed by the pack’s address opens it for anyone. A pack on another site has to allow cross-origin requests.</p>
       </section>
 
       <section>

@@ -11,6 +11,7 @@ import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetB
 import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack } from './pack-store.js'
 import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
 import { registerPackPages } from './pack-pages.js'
+import { useBrandDrop } from './drop.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
@@ -401,6 +402,10 @@ export const App = () => {
       setError(problem.message)
     }
   }
+  // A brand dragged onto the page opens as Open… opens it. Not in a shared view (it offers no
+  // other brands), nor in Template Printer, whose zips are card packages rather than brands.
+  const dragging = useBrandDrop({ enabled: !SHARED && view !== 'printer', onFile: open, onReject: setError })
+
   /** Adds a brand from a pack's address, as a ?url= link would. */
   const addFromUrl = async (url) => {
     const record = await downloadPack({ url })
@@ -502,6 +507,12 @@ export const App = () => {
       </header>
       {sharing && base && <ShareDialog brand={base} {...shareTarget(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
 
+      {dragging && <div className="drop-overlay" aria-hidden="true">
+        <div className="drop-overlay__panel">
+          <strong>Drop to add a brand</strong>
+          <span>A brand pack (.zip), a brand folder or kit zipped, or a brand.json. A zip is kept in this browser.</span>
+        </div>
+      </div>}
       {progress && <p className="notice notice--progress" role="status">
         {progress.storing ? `Keeping ${progress.name} in this browser…` : `Downloading ${progress.name}… ${megabytes(progress.received)}${progress.total ? ` of ${megabytes(progress.total)}` : ''}`}
         {progress.total && !progress.storing ? <progress value={progress.received} max={progress.total} /> : null}

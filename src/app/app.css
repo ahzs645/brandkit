@@ -771,3 +771,10 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .notice--progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: var(--track); color: var(--ink); }
 .notice--progress progress { flex: 1 1 160px; max-width: 320px; }
 .menu__item--action { border-top: 1px solid var(--track); margin-top: 4px; }
+
+/* A brand dragged over the page: where it will go. */
+.drop-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: color-mix(in srgb, var(--page) 70%, transparent); pointer-events: none; }
+.drop-overlay__panel { display: grid; gap: 6px; max-width: 420px; padding: 28px 32px; border: 2px dashed var(--ink); border-radius: var(--radius-sm, 12px); background: var(--page); color: var(--ink); text-align: center; font-size: 14px; }
+.drop-overlay__panel strong { font-size: 18px; }
+.brand-library__dropzone { display: grid; gap: 4px; justify-items: start; margin: 10px 0 6px; padding: 18px 20px; border: 2px dashed var(--track); border-radius: 12px; }
+.brand-library__dropzone p { margin: 0; }

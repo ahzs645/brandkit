@@ -70,7 +70,8 @@ brandkit opens a pack from:
 - **a catalog**: a `catalog.json` listing packs. A site built with `VITE_BRANDKIT_CATALOGS`
   offers its catalog's brands in the brand menu (**Available to add**), and `?brand=<id>`
   installs one on the way; `?catalog=<url>` adds another catalog in one browser;
-- **a file**: **Open…** takes a pack, a brand folder or a whole kit zipped, or a `brand.json`.
+- **a file**: drag it onto the page, or choose it with **Open…** (or **Brands → choose a
+  file**): a pack, a brand folder or a whole kit zipped, or a `brand.json`.
 
 A brand opened from a pack is kept in IndexedDB, so it opens again after a reload, offline,
 without being downloaded. Files are stored once by their SHA-256, however many brands (or
@@ -89,8 +90,9 @@ A pack leaves out what it need not carry: files byte for byte the same as brandk
 `library/` (the open-licence Inter and Space Mono every starter brand uses), a second copy of a
 file the brand keeps at two paths (an alias), and the brand's `history/`. Compressed formats are
 stored and text deflated, and packs come out byte for byte the same from the same folder, so an
-unchanged brand keeps its hash. The format, the catalog and hosting are documented in
-[docs/brand-packs.md](docs/brand-packs.md).
+unchanged brand keeps its hash. A brand can keep source material (scans, research) out of its
+pack with a `.packignore`. [docs/brand-packs.md](docs/brand-packs.md) documents the format, every
+way of opening a pack, what happens to it afterwards, catalogs, hosting and the error messages.
 
 The brands made with brandkit so far (ddcnorth, First Form, Over the Edge, SPARK Lab, UNBC,
 love.fútbol, and the 1977 Province of British Columbia and 1983 BC Hydro reconstructions) are
