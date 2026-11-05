@@ -286,7 +286,7 @@ the same pagination as the maintained document. Editing a Word file does not upd
 original JSON; choose Word or the content model as the source for that publication.
 
 CI checks the built-in brand's guide, runs the engine and pack tests and the pack workflow in
-Chromium, and builds northwind's Word/PDF example pairs for review. On main, the
+Chromium, and builds northwind's Word masters for review (no LibreOffice in CI; add `--pdf` locally for PDFs). On main, the
 [published starters](https://projects.ahmadjalil.com/brandkit/documentation/) ship with the site.
 PR runs attach them as an artifact without deploying. See
 [the document model and editing rules](docs/documentation.md) for custom pages, screenshot
