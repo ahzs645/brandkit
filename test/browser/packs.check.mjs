@@ -33,6 +33,7 @@ const out = join(work, 'packs')
 const SHARED_BYTES = Buffer.concat(Array.from({ length: 8000 }, (_, index) => createHash('sha512').update(`${index}`).digest()))
 // A 2 × 2 PNG.
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR4nGP4z8DAwMDAwMAAAA4AAf8fGu8AAAAASUVORK5CYII=', 'base64')
+const FIXTURE_NAMES = ['northwind', 'Southwind', 'Eastwind', 'Upwind', 'Downwind', 'Jsonwind']
 const make = (id, name, primary) => {
   const folder = join(brands, id)
   cpSync(join(root, 'brands/northwind'), folder, { recursive: true })
@@ -110,7 +111,9 @@ try {
     await page.locator('.brand-menu__trigger').click()
     const groups = await page.locator('.menu__panel [role="group"]').evaluateAll((nodes) => nodes.map((node) => [node.getAttribute('aria-label'), [...node.querySelectorAll('.menu__item .visually-hidden, .menu__item .menu-logo__name')].map((label) => label.textContent.trim()).filter(Boolean)]))
     await page.keyboard.press('Escape')
-    return Object.fromEntries(groups)
+    // Only this check's brands: a site built with a catalog (as the deployed site is) lists its
+    // own brands too. Each name once, however many labels carry it.
+    return Object.fromEntries(groups.map(([group, names]) => [group, [...new Set(names.filter((name) => FIXTURE_NAMES.includes(name)))]]).filter(([, names]) => names.length))
   }
   const usage = () => page.evaluate(() => new Promise((resolve, reject) => {
     const open = indexedDB.open('brandkit-packs')
