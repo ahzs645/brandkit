@@ -21,8 +21,10 @@ export const useShared = () => useContext(Shared)
 export const SHARED_VIEWS = ['overview', 'logos', 'colour', 'organization', 'patterns', 'templates', 'web', 'documents', 'guide', 'motion', 'kit']
 const START_LABELS = { overview: 'Overview', logos: 'Logos', colour: 'Colour', organization: 'Departments', patterns: 'Patterns', templates: 'Templates', web: 'Web', documents: 'Documents', guide: 'Guide', motion: 'Motion', kit: 'Download kit' }
 
-export const shareUrl = (brandId, view = 'overview') => {
+export const shareUrl = (brandId, view = 'overview', packUrl = null) => {
   const url = new URL(import.meta.env.BASE_URL, globalThis.location.origin)
+  // A brand that is neither built in nor in the site's catalog travels as its pack's address.
+  if (packUrl) url.searchParams.set('url', packUrl)
   url.searchParams.set('brand', brandId)
   if (view !== 'overview') url.searchParams.set('view', view)
   const current = new URLSearchParams(globalThis.location.search)
@@ -33,18 +35,18 @@ export const shareUrl = (brandId, view = 'overview') => {
 
 /** The shared view's masthead mark: the brand's own logo, and what this is. */
 export const SharedMark = ({ brand, fonts }) => (
-  <a className="shared-mark" href={shareUrl(brand.id)} aria-label={`${brand.name} brand centre`}>
+  <a className="shared-mark" href={shareUrl(brand.id, 'overview', new URLSearchParams(globalThis.location?.search ?? '').get('url'))} aria-label={`${brand.name} brand centre`}>
     <BrandLogo brand={brand} fonts={fonts} />
     <span className="shared-mark__label">Brand centre</span>
   </a>
 )
 
 /** The dialog behind the masthead's Share button: what a viewer will see, and the link to copy. */
-export const ShareDialog = ({ brand, shareable, edited, revision, view, onClose }) => {
+export const ShareDialog = ({ brand, shareable, packUrl, edited, revision, view, onClose }) => {
   const dialog = useRef(null)
   const [start, setStart] = useState(SHARED_VIEWS.includes(view) ? view : 'overview')
   const [copied, setCopied] = useState(false)
-  const link = shareUrl(brand.id, start)
+  const link = shareUrl(brand.id, start, packUrl)
   useEffect(() => {
     const element = dialog.current
     element?.showModal?.()
@@ -104,7 +106,7 @@ export const ShareDialog = ({ brand, shareable, edited, revision, view, onClose 
             </p>
           </>
         ) : (
-          <p className="notice">{brand.name} lives only in this browser, so a link would open nothing for anyone else. Download its <code>brand.json</code> (Download kit → Build sources) and add it to the repository’s <code>brands/</code> folder to share it.</p>
+          <p className="notice">{brand.name} lives only in this browser, so a link would open nothing for anyone else. To share it, make it a pack (<code>node scripts/pack.mjs</code> on its folder, or Download kit → Build sources and pack that), host the zip, and share <code>?url=</code> its address, or list it in a catalog.</p>
         )}
       </div>
     </dialog>

@@ -7,7 +7,11 @@ import { STARTER_FONTS } from '../engine/starter.js'
 import { validateBrand } from '../engine/brand.js'
 import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
-import { BUILT_IN, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
+import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
+import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack } from './pack-store.js'
+import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
+import { registerPackPages } from './pack-pages.js'
+import { useBrandDrop } from './drop.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
@@ -35,6 +39,7 @@ const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({
 const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ default: module.Patterns })))
 const Web = lazy(() => import('./views/Web.jsx').then((module) => ({ default: module.Web })))
 const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
+const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
@@ -55,7 +60,7 @@ const VIEWS = [
   { id: 'kit', label: 'Download kit' }
 ]
 // The workshop's views, in the masthead's buttons (the ⋯ menu on a phone) rather than the tabs.
-const OTHER_VIEWS = [{ id: 'brand', label: 'Edit brand' }, { id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
+const OTHER_VIEWS = [{ id: 'brands', label: 'Brands' }, { id: 'brand', label: 'Edit brand' }, { id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
 const ALL_VIEWS = [...VIEWS, ...OTHER_VIEWS].map((view) => view.id)
 
 // A shared link (see ./share.jsx) is read once, on arrival, and kept in the address from then on.
@@ -85,10 +90,13 @@ const offers = (view, { brand, motionLink, extensionView }) => {
 }
 
 const params = () => new URLSearchParams(globalThis.location?.search ?? '')
+const megabytes = (bytes) => `${(bytes / 1024 / 1024).toFixed(bytes < 10 * 1024 * 1024 ? 1 : 0)} MB`
+const svgDataUrl = (svg) => (svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` : null)
 
 const writeUrl = (changes, { keep = [] } = {}) => {
   const url = new URL(globalThis.location.href)
-  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', 'revision', 'share', ...keep].includes(key)) url.searchParams.delete(key)
+  // A shared link that names its pack (?url=) keeps naming it, so a reload works without storage.
+  for (const key of [...url.searchParams.keys()]) if (!['brand', 'view', 'revision', 'share', ...(SHARED ? ['url'] : []), ...keep].includes(key)) url.searchParams.delete(key)
   for (const [key, value] of Object.entries(changes)) {
     if (value) url.searchParams.set(key, value)
     else url.searchParams.delete(key)
@@ -125,6 +133,11 @@ export const App = () => {
   const [revisionId, setRevisionId] = useState(() => (SHARED ? null : params().get('revision')))
   const [opened, setOpened] = useState({})
   const [saved, setSaved] = useState(savedBrands)
+  // Brands installed in this browser from packs (./pack-store.js), and those catalogs offer.
+  const [installed, setInstalled] = useState([])
+  const [catalog, setCatalog] = useState({ catalogs: [], brands: new Map(), loading: true })
+  const [progress, setProgress] = useState(null)
+  const catalogReady = useRef(null)
   const [current, setCurrent] = useState(null)
   const [fonts, setFonts] = useState(null)
   const [libraryFonts, setLibraryFonts] = useState(null)
@@ -144,17 +157,95 @@ export const App = () => {
     return () => observer.disconnect()
   }, [])
 
-  const brandIds = [...new Set([...BUILT_IN, ...Object.keys(saved), ...Object.keys(opened)])]
+  const refreshInstalled = useCallback(async () => {
+    const list = await installedPacks()
+    setInstalled(list)
+    return list
+  }, [])
+  const refreshCatalog = useCallback(() => {
+    const promise = fetchCatalogs().then((result) => { setCatalog({ ...result, loading: false }); return result })
+    catalogReady.current = promise
+    return promise
+  }, [])
+  useEffect(() => { refreshInstalled() }, [refreshInstalled])
+  if (!catalogReady.current) {
+    // A link can name a catalog to add (?catalog=); it is remembered from then on.
+    const asked = params().get('catalog')
+    if (asked) addCatalog(asked)
+    refreshCatalog()
+  }
+
+  const installedIds = installed.map((record) => record.id)
+  const offered = [...catalog.brands.values()].filter((entry) => !BUILT_IN.includes(entry.id) && !installedIds.includes(entry.id))
+  const brandIds = [...new Set([...BUILT_IN, ...installedIds, ...Object.keys(saved), ...Object.keys(opened), ...offered.map((entry) => entry.id)])]
+
+  /** Downloads a pack and keeps it in this browser, showing progress; returns its record. */
+  const downloadPack = useCallback(async ({ url, name, catalog: from, etag }) => {
+    setProgress({ name: name ?? 'brand', received: 0, total: null })
+    try {
+      const fetched = await fetchPack(url, { etag, onProgress: (received, total) => setProgress({ name: name ?? 'brand', received, total }) })
+      if (fetched.notModified) return null
+      setProgress({ name: name ?? 'brand', received: fetched.bytes.byteLength, total: fetched.bytes.byteLength, storing: true })
+      const record = await installPack(fetched.bytes, { url, catalog: from, etag: fetched.etag })
+      await refreshInstalled()
+      return record
+    } finally {
+      setProgress(null)
+    }
+  }, [refreshInstalled])
+
+  /** A catalog brand whose pack differs from the copy installed here. */
+  const updateFor = (record) => {
+    const entry = catalog.brands.get(record.id)
+    return entry?.sha256 && record.packHash !== entry.sha256 && (!record.catalog || record.catalog === entry.catalog) ? entry : null
+  }
+
+  /** Finds a brand wherever it is: opened, installed, saved, built in, or in a catalog (installed on the way). */
+  const loadBrand = useCallback(async (id, { notices = [] } = {}) => {
+    if (opened[id]) return { ...opened[id], brand: structuredClone(opened[id].brand) }
+    let pack = await openInstalled(id).catch(() => null)
+    // Its pages are given real addresses by the pack worker; wait (briefly) for it the first time.
+    if (pack || !BUILT_IN.includes(id)) await registerPackPages()
+    // A brand that is already here does not wait long on the catalogs (they only say whether it
+    // has an update); one that is not has to, since a catalog is the only place it can come from.
+    const here = Boolean(pack || saved[id] || BUILT_IN.includes(id))
+    const catalogs = catalogReady.current ?? Promise.resolve({ brands: new Map() })
+    const ready = here ? await Promise.race([catalogs, new Promise((resolve) => setTimeout(resolve, 2500, null))]) : await catalogs
+    const entry = ready?.brands.get(id)
+    if (pack && entry?.sha256 && pack.record.packHash !== entry.sha256 && (!pack.record.catalog || pack.record.catalog === entry.catalog)) {
+      // The catalog has a newer pack: fetch it now, and keep the copy here if that fails.
+      try {
+        await downloadPack({ url: entry.url, name: entry.name, catalog: entry.catalog })
+        pack = await openInstalled(id)
+      } catch (problem) { notices.push(`Showing the copy of ${pack.record.name} kept in this browser: the update could not be downloaded (${problem.message}).`) }
+    }
+    if (pack) {
+      const definition = saved[id] ? structuredClone(saved[id]) : pack.brand
+      return { brand: definition, source: blobSource(pack.files, pack.library, pack.record.name, { id }), pack: pack.record }
+    }
+    if (saved[id]) return { brand: structuredClone(saved[id]), source: librarySource() }
+    if (BUILT_IN.includes(id)) return loadBuiltIn(id)
+    if (entry) {
+      await downloadPack({ url: entry.url, name: entry.name, catalog: entry.catalog })
+      const fresh = await openInstalled(id)
+      if (fresh) return { brand: fresh.brand, source: blobSource(fresh.files, fresh.library, fresh.record.name, { id }), pack: fresh.record }
+    }
+    return null
+  }, [opened, saved, downloadPack])
 
   const select = useCallback(async (id, { keepView = false } = {}) => {
     setError(null)
     if (!keepView) setRevisionId(null)
     try {
-      let next
-      if (opened[id]) next = { ...opened[id], brand: structuredClone(opened[id].brand) }
-      else if (saved[id]) next = { brand: structuredClone(saved[id]), source: librarySource() }
-      else next = await loadBuiltIn(BUILT_IN.includes(id) ? id : BUILT_IN[0])
+      const notices = []
+      let next = await loadBrand(id, { notices })
+      if (!next) {
+        if (SHARED) throw new Error(`This link is for a brand that isn’t on this site${id ? ` (${id})` : ''}. Ask whoever sent it for a new one.`)
+        if (id && id !== BUILT_IN[0]) notices.push(`${id} isn’t built in, kept in this browser, or offered by a catalog here.`)
+        next = await loadBuiltIn(BUILT_IN[0])
+      }
       setCurrent({ ...next, original: structuredClone(next.brand) })
+      if (notices.length) setError(notices.join(' '))
       // On arrival the address may point into a guide or manual; a later switch of brand starts fresh.
       // A shared link drops anything it does not offer (a revision, a view of the workshop).
       writeUrl({ brand: next.brand.id, ...(SHARED && { revision: null, view: view === 'overview' ? null : view }) }, { keep: keepView ? ['book', 'page', 'guide', 'template', 'signature', 'study', 'pattern'] : [] })
@@ -164,16 +255,59 @@ export const App = () => {
     }
     // `view` only matters on arrival, for a shared link.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [opened, saved])
+  }, [loadBrand])
 
   useEffect(() => {
-    const wanted = params().get('brand') ?? (() => { try { return localStorage.getItem('brandkit:last') } catch { return null } })()
-    // A shared link names a brand built into the site; one kept in somebody's browser is not there.
-    if (SHARED && !BUILT_IN.includes(wanted)) { setError(`This link is for a brand that isn’t on this site${wanted ? ` (${wanted})` : ''}. Ask whoever sent it for a new one.`); return }
-    select(wanted && (BUILT_IN.includes(wanted) || savedBrands()[wanted]) ? wanted : BUILT_IN[0], { keepView: true })
+    (async () => {
+      // A link to a pack (?url=…zip): download it, keep it, and open it. A revisit with the same
+      // link opens the copy kept here, after asking the host whether it has changed.
+      const packUrl = readPackUrl()
+      if (packUrl) {
+        const kept = (await installedPacks()).find((record) => record.url === packUrl)
+        try {
+          const record = await downloadPack({ url: packUrl, name: kept?.name, etag: kept?.etag })
+          const id = record?.id ?? kept?.id
+          if (!SHARED) { const url = new URL(globalThis.location.href); url.searchParams.delete('url'); globalThis.history.replaceState(null, '', url) }
+          if (id) { await select(id, { keepView: true }); return }
+        } catch (problem) {
+          if (kept) { await select(kept.id, { keepView: true }); setError(`Showing the copy of ${kept.name} kept in this browser: ${problem.message}`); return }
+          setError(problem.message)
+          if (SHARED) return
+        }
+      }
+      const wanted = params().get('brand') ?? (SHARED ? null : (() => { try { return localStorage.getItem('brandkit:last') } catch { return null } })())
+      await select(wanted || BUILT_IN[0], { keepView: true })
+    })()
     // Once, on arrival.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  /** Removes a brand kept in this browser (its pack and any saved edits). */
+  const forget = async (id) => {
+    if (installedIds.includes(id)) await removePack(id)
+    if (saved[id]) forgetBrand(id)
+    setSaved(savedBrands())
+    setOpened(({ [id]: _gone, ...rest }) => rest)
+    await refreshInstalled()
+    if (current?.brand?.id === id) select(BUILT_IN[0])
+  }
+
+  /** Every brand the manual library can link to, with the manual pages it is built from. */
+  const brandIndex = useMemo(() => {
+    const index = new Map(BUILT_IN_INDEX.map((entry) => [entry.id, entry]))
+    for (const record of installed) if (record.pages && !index.has(record.id)) index.set(record.id, { id: record.id, name: record.name, pages: record.pages })
+    for (const entry of catalog.brands.values()) if (entry.pages && !index.has(entry.id)) index.set(entry.id, { id: entry.id, name: entry.name, pages: entry.pages })
+    return [...index.values()]
+  }, [installed, catalog])
+
+  /** Whether a link to a brand would open it for someone else, and the pack it should name. */
+  const shareTarget = (id) => {
+    if (BUILT_IN.includes(id)) return { shareable: true }
+    const entry = catalog.brands.get(id)
+    if (entry && siteCatalogs().includes(entry.catalog)) return { shareable: true }
+    const url = installed.find((record) => record.id === id)?.url ?? entry?.url
+    return url ? { shareable: true, packUrl: url } : { shareable: false }
+  }
 
   // A shared view only ever has the approved identity, so nothing downstream can offer a revision.
   const base = useMemo(() => (SHARED ? approvedOnly(current?.brand) : current?.brand), [current?.brand])
@@ -245,6 +379,21 @@ export const App = () => {
       const result = await openBrandFile(file)
       const problems = validateBrand(result.brand)
       if (problems.length) throw new Error(`That brand.json has problems: ${problems.join(' ')}`)
+      if (BUILT_IN.includes(result.brand.id)) throw new Error(`${result.brand.id} is built into brandkit; give the brand you are opening an id of its own.`)
+      // A zip is kept in this browser, so the brand is still here after a reload; a brand.json on
+      // its own (or a zip the browser will not store) is opened for this visit only.
+      if (result.bytes) {
+        try {
+          await installPack(result.bytes)
+          await refreshInstalled()
+          setOpened(({ [result.brand.id]: _replaced, ...rest }) => rest)
+          await select(result.brand.id)
+          go('overview')
+          return
+        } catch (problem) {
+          setError(`${result.brand.name} is open, but could not be kept in this browser (${problem.message}); it will be gone after a reload.`)
+        }
+      }
       setOpened((all) => ({ ...all, [result.brand.id]: result }))
       setCurrent({ ...result, original: structuredClone(result.brand) })
       writeUrl({ brand: result.brand.id })
@@ -252,6 +401,15 @@ export const App = () => {
     } catch (problem) {
       setError(problem.message)
     }
+  }
+  // A brand dragged onto the page opens as Open… opens it. Not in a shared view (it offers no
+  // other brands), nor in Template Printer, whose zips are card packages rather than brands.
+  const dragging = useBrandDrop({ enabled: !SHARED && view !== 'printer', onFile: open, onReject: setError })
+
+  /** Adds a brand from a pack's address, as a ?url= link would. */
+  const addFromUrl = async (url) => {
+    const record = await downloadPack({ url })
+    if (record) { await select(record.id); go('overview') }
   }
 
   const update = (next) => setCurrent((state) => ({ ...state, brand: next }))
@@ -307,10 +465,17 @@ export const App = () => {
             logo={brand ? <BrandLogo brand={brand} fonts={fonts} /> : <span className="brand-logo" />}
             current={brand?.id}
             brands={brandIds.map((id) => {
-              const name = BUILT_IN.includes(id) ? builtInName(id) : saved[id]?.name ?? opened[id]?.brand?.name ?? id
-              const own = opened[id]?.brand ?? (BUILT_IN.includes(id) ? null : saved[id])
-              return { id, name, note: saved[id] && !BUILT_IN.includes(id) ? 'saved' : opened[id] ? 'opened' : null, logo: <MenuLogo id={id} url={own ? null : menuLogoUrl(id)} brand={own} name={name} /> }
+              const record = installed.find((entry) => entry.id === id)
+              const entry = catalog.brands.get(id)
+              const builtIn = BUILT_IN.includes(id)
+              const name = builtIn ? builtInName(id) : record?.name ?? saved[id]?.name ?? opened[id]?.brand?.name ?? entry?.name ?? id
+              const group = builtIn ? 'Built in' : record || saved[id] || opened[id] ? 'In this browser' : 'Available to add'
+              const own = opened[id]?.brand ?? (builtIn || record ? null : saved[id])
+              const logoUrl = builtIn ? menuLogoUrl(id) : record ? svgDataUrl(record.menuLogoSvg) : entry?.menuLogo ?? null
+              const note = record && updateFor(record) ? 'update' : record ? null : saved[id] && !builtIn ? 'saved' : opened[id] ? 'opened' : entry?.bytes ? megabytes(entry.bytes) : null
+              return { id, name, group, note, logo: <MenuLogo id={id} url={own ? null : logoUrl} brand={own} name={name} /> }
             })}
+            onManage={() => go('brands')}
             onBrand={(id) => select(id)}
             revisions={base && revisions.length ? [{ id: '', label: `Approved v${base.displayVersion ?? base.version}`, note: 'approved' }, ...revisions.map((entry) => ({ id: entry.id, label: entry.title, note: `${entry.status ?? 'proposed'} v${entry.displayVersion ?? entry.version}` }))] : []}
             revision={activeRevision ?? ''}
@@ -340,12 +505,22 @@ export const App = () => {
           {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
         </nav>}
       </header>
-      {sharing && base && <ShareDialog brand={base} shareable={BUILT_IN.includes(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
+      {sharing && base && <ShareDialog brand={base} {...shareTarget(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
 
+      {dragging && <div className="drop-overlay" aria-hidden="true">
+        <div className="drop-overlay__panel">
+          <strong>Drop to add a brand</strong>
+          <span>A brand pack (.zip), a brand folder or kit zipped, or a brand.json. A zip is kept in this browser.</span>
+        </div>
+      </div>}
+      {progress && <p className="notice notice--progress" role="status">
+        {progress.storing ? `Keeping ${progress.name} in this browser…` : `Downloading ${progress.name}… ${megabytes(progress.received)}${progress.total ? ` of ${megabytes(progress.total)}` : ''}`}
+        {progress.total && !progress.storing ? <progress value={progress.received} max={progress.total} /> : null}
+      </p>}
       {error && <p className="notice notice--error" role="alert">{error}</p>}
 
       <main className="main">
-        {!brand ? !error && <p className="muted">Loading…</p> : (
+        {!brand ? !error && !progress && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'colour' && <Colour brand={brand} />}
@@ -380,11 +555,15 @@ export const App = () => {
             {view === 'brand' && <BrandEditor brand={base} onChange={update} onSave={save} saved={Boolean(saved[brand.id]) && !changed}
               canReset={changed} onReset={() => setCurrent((state) => ({ ...state, brand: structuredClone(state.original) }))} />}
             {view === 'new' && <NewBrand fonts={libraryFonts} existing={brandIds} onCreate={create} />}
-            {view === 'manuals' && <Manuals brand={brand} openBuilt={openBuilt} />}
+            {view === 'manuals' && <Manuals brand={brand} openBuilt={openBuilt} brandIndex={brandIndex} />}
+            {view === 'brands' && <BrandLibrary current={brand.id} installed={installed} saved={saved} catalog={catalog} builtIn={BUILT_IN.map((id) => ({ id, name: builtInName(id) }))}
+              updateFor={updateFor} onOpen={(id) => { select(id); go('overview') }} onRemove={forget} onAddUrl={addFromUrl} onOpenFile={() => fileInput.current?.click()}
+              onUpdate={async (entry) => { await downloadPack({ url: entry.url, name: entry.name, catalog: entry.catalog }); if (brand.id === entry.id) select(entry.id) }}
+              onCatalogsChanged={refreshCatalog} />}
           </Suspense>
         )}
-        {view === 'brand' && saved[brand?.id] && !BUILT_IN.includes(brand?.id) && (
-          <p className="muted footnote"><button type="button" className="link" onClick={() => { forgetBrand(brand.id); setSaved(savedBrands()); select(BUILT_IN[0]) }}>Remove {brand.id} from this browser</button></p>
+        {view === 'brand' && (saved[brand?.id] || installedIds.includes(brand?.id)) && !BUILT_IN.includes(brand?.id) && (
+          <p className="muted footnote"><button type="button" className="link" onClick={() => forget(brand.id)}>Remove {brand.id} from this browser</button></p>
         )}
       </main>
     </div>

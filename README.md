@@ -59,62 +59,58 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 
 **[Open brandkit](https://projects.ahmadjalil.com/brandkit/)**
 
-## Brands
+## Brands are packs
 
-| | |
-| --- | --- |
-| [`brands/ddcnorth`](brands/ddcnorth) | The ddcnorth six-dot identity, v2.3. From its v2.1 definition (kept in `history/2.1/brand.json`) the engine reproduces the original kit's 48 vector files (logos, symbols, patterns, icons, templates, favicon, app icon) byte for byte, and its eight guide pages page for page. On top of that, `npm run make:ddcnorth` adds an application system modelled on the BC manuals: 39 templates and 6 guide pages covering stationery, documents, publications, advertising, presentations and video, signs, vehicles and apparel, backgrounds, and incorrect usage. Each one cites the manual pages it follows. **v2.3**, *data, design, connection*, approved 22 October 2026, adds the descriptor "Data · Design · Connection", four dot patterns, eight templates for findings, briefs, workshops and social, five icons, four guide pages, a brand details page, the redesigned website in `site/`, and a motion library of eighteen studies for the Motion tab. `npm run make:ddcnorth-v23` records it as proposed in the v2.1 definition, then `scripts/brands/ddcnorth-accept-v23.mjs` merges it into brand.json with the history: v2.1 superseded, the 2.2 rising proposal archived, v2.3 approved. |
-| [`brands/firstform`](brands/firstform) | First Form, a consulting, design and development practice, from its V1.0 kit. That kit had the logo only as PNGs, so `npm run make:firstform` rebuilds it as vectors: the two-block mark redrawn on its isometric geometry, and the FIRST / FORM wordmark set in Sora Bold. It adds fourteen templates (card, part tag, letterhead, proposal cover, social, link preview, slides), eight icons, a motion library of sixteen studies, a nine-page guide, a brand details page and a redesigned website in `site/`. The original PNGs are kept in `reference/`. |
-| [`brands/overtheedge`](brands/overtheedge) | Over the Edge, UNBC's independent student newspaper, in the team's own "Doodle" identity: Cream, Lichen, Forest and Ink, Anton (standing in for Decalotype), Helvetica Neue and Salted for handwritten accents, one-stroke line doodles (googly eyes, calendar, flame, pencil, paper plane, spark), dashed rules and boxes, tilted day tags, month stickers, crumpled paper and zigzag frames. `npm run make:overtheedge` reads the logo path for path from the SVG its website serves (stacked OVER / THE / EDGE, the O as the symbol) and adds forty-three templates (Instagram posts and schedules in three grounds, stories, a reel cover, slides, a monthly calendar and month stickers, an A4 poster, cards, letterhead and the Staff Card that serves as the press pass), ten icons, fourteen patterns and a ten-page guide. Downsized references from the identity are in `reference/identity/`. Two engine options let a logo be its lettering alone: a wordmark variant's own `height`, and a family's `lockupSymbol: false` with `stackedWordmark`. |
-| [`brands/sparklab`](brands/sparklab) | SPARK Lab, UNBC’s product creation lab, from [sparklab.unbc.ca](https://sparklab.unbc.ca/). `npm run make:sparklab` preserves the original arrow, spark and lettering, with the website’s orange/navy/cream palette, Outfit and Source Serif 4. It adds four logo arrangements and four colourways, thirty templates for stationery, projects, workshops, social, slides and lab materials, editable Word and PowerPoint files and an email signature, ten icons, twenty-one patterns, a fifteen-page guide, sixteen motion studies, a brand details page and an offline website preview. Arrows, Signal, Connections and Layers pair eighteen patterns with twelve applications, including Word lab notes and a project report, three PowerPoint covers, and an interactive comparison board in `docs/patterns-and-templates.html`. `docs/arrow-patterns.html` explores twelve arrow and spark studies, including mixed directions at three scales, loose scatter, cross currents, orbit and constellations, with live scale, density and colour controls and SVG download. Source notes and font licences accompany the kit; layouts and motion are kit extensions. |
-| [`brands/unbc`](brands/unbc) | University of Northern British Columbia. `npm run make:unbc` preserves the complete official vector artwork and records the [February 2020 Graphics Standards Manual](https://www.unbc.ca/sites/default/files/sections/communications-and-marketing/unbc_gsm_feb2020.pdf). Green, black and white are the permitted logo colours; the full logo is at least 38.1 mm wide. The **Departments** view sets a department sub-logo for any of 88 listed units or a typed name, in Helvetica Neue 95 Black on the construction of UNBC's own sub-logos (from the `unbc-logo` submodule), and carries the name into Documents and Templates; the kit includes every listed unit's sub-logo in three colours. Documents, templates and the **Web** components take www.unbc.ca's look (measured from the UNBC chrome and the NHHR Atlas): a gold Helvetica Black title over a warm rule, BC Sans web text, teal links and warm neutrals, with the department's sub-logo on document covers. The Departments view also makes the unit's social-media profile pictures (square and circle, from the UNBC logo package), and a **Door signs** tab runs the [door-sign](https://github.com/ahzs645/door-sign) package's editor, the one the UNBCDoor app uses, opened on the chosen department. The kit adds 22 native templates, ten Word applications, a four-layout PowerPoint, an HTML email signature and nine guide pages. Research report, decision brief and brand portfolio publications have Letter/A4 profiles. Five original university Office templates, the manual and source logo files remain unchanged alongside the local applications, with provenance and hashes. |
-| [`brands/lovefutbol`](brands/lovefutbol) | love.fútbol, researched from official web pages, publications and the supplied website capture. `npm run make:lovefutbol` preserves 13 original vector logo paths from its 2025 U.S. Soccer resource, with black/red and white/red treatments; records observed green/terracotta digital colours and Bahianita/Red Hat Text; and adds 19 local stationery, project-brief, project-profile, slide, social and email layouts, eight native Office/HTML documents and 15 guide pages. Version 1.2 adds 17 map and place icons, four logo-free patterns (pitch lines, training cones, nested boundaries, court pins) and [map and atlas guidance](brands/lovefutbol/docs/ATLAS.md) from an unofficial companion atlas, labelled as local choices. Research, source URLs, font licences, extraction checks and unknown standards remain explicit. See the [research dossier](brands/lovefutbol/docs/RESEARCH.md). |
-| [`brands/northwind`](brands/northwind) | An example made by the starter, to show nothing in the engine is particular to ddcnorth. |
-| [`brands/bc-province-1977`](brands/bc-province-1977) | The Province of British Columbia’s 1977 Visual Identity Program, reconstructed from its four manuals in the manual library: the Provincial and ministerial signatures in nine formats, set for every ministry of 1976–1986; stationery for every rank (Premier, Ministers, Deputy Ministers, Boards and Commissions, General and Special Use); memorandum and news release; publications; advertising; uniform insignia; vehicle markings; signs on the Sign Manual’s grid; and a guide. |
-| [`brands/bc-hydro-1983`](brands/bc-hydro-1983) | BC Hydro’s 1983 Graphic Standards Manual: the four Corporate, Gas Operations, Rail and Formal signatures; two scan-derived BCE route locomotive vectors; stationery; five form layouts; publication covers, backs, spines and interior text; advertising; audio-visual; signs and vehicles. The 48-page source audit provides original/rebuilt overlays, 65 editable examples, 47 toggleable layout-rule layers and six registered template comparisons. See the [audit findings](brands/bc-hydro-1983/docs/manual-audit.md) or open `docs/manual-audit.html` from the kit for the interactive report. |
+brandkit is the engine; a brand is data. One brand ships with it, **northwind**, an example made
+by the starter. Every other brand is a **brand pack**: one zip with the brand's `brand.json` and
+every file it uses (fonts, artwork, references, documents, its website), plus a small manifest.
+brandkit opens a pack from:
 
-The two BC brands are historical reconstructions for reference, not current guidance. Helvetica,
-Times and Courier are set in TeX Gyre Heros, Termes and Cursor (GUST Font License). Their artwork
-comes from [PofBC](https://github.com/ahzs645/PofBC) (`npm run import:pofbc -- /path/to/PofBC`),
-and their definitions are written by `npm run make:bc`, from scripts that keep each manual
-measurement next to the page it comes from.
+- **a link**: `?url=https://…/brand.zip` downloads it, keeps it in the browser and opens it;
+- **a catalog**: a `catalog.json` listing packs. A site built with `VITE_BRANDKIT_CATALOGS`
+  offers its catalog's brands in the brand menu (**Available to add**), and `?brand=<id>`
+  installs one on the way; `?catalog=<url>` adds another catalog in one browser;
+- **a file**: drag it onto the page, or choose it with **Open…** (or **Brands → choose a
+  file**): a pack, a brand folder or a whole kit zipped, or a `brand.json`.
 
-Both carry ManualKit's drawings of the vehicles, uniforms, equipment and signs the manuals show (99
-views, in `manuals/bc/illustrations`): each is a template with the signature, ministry and unit
-number set into its branding zones, or a sign with its wording as fields, and each is in its manual
-page in place of the earlier draft.
+A brand opened from a pack is kept in IndexedDB, so it opens again after a reload, offline,
+without being downloaded. Files are stored once by their SHA-256, however many brands (or
+versions of one brand) hold them: an update stores only what changed, and removing a brand frees
+only the files no other brand uses. A revisit to the same link asks the host whether the pack
+changed, and a catalog entry with a new SHA-256 is offered (and taken) as an update. A pack's own
+pages (brand details, its website, its motion library) open at real addresses,
+`/brandkit/packs/<id>/…`, served from the browser by a service worker, so the images, styles,
+fonts and pages they link to load as they do in a downloaded kit.
+**Brands** in the masthead lists what is kept, what it takes and what sharing saves, the
+catalogs, and what they offer.
 
-Every template, signature and guide page in them cites the manual pages it is built from. In the
-app, those pages show as thumbnails under it that open the page in the manual library; and a page
-in the library lists what is built from it, linking back.
+Packs are made with `node scripts/pack.mjs <brand folders or a folder of brands> --out dist/packs`
+(or `brandkit pack`), which writes `<id>.zip`, `<id>.logo.svg` for the menu, and `catalog.json`.
+A pack leaves out what it need not carry: files byte for byte the same as brandkit's own
+`library/` (the open-licence Inter and Space Mono every starter brand uses), a second copy of a
+file the brand keeps at two paths (an alias), and the brand's `history/`. Compressed formats are
+stored and text deflated, and packs come out byte for byte the same from the same folder, so an
+unchanged brand keeps its hash. A brand can keep source material (scans, research) out of its
+pack with a `.packignore`. [docs/brand-packs.md](docs/brand-packs.md) documents the format, every
+way of opening a pack, what happens to it afterwards, catalogs, hosting and the error messages.
 
-For BC Hydro, **Templates → Manual coverage and fidelity** opens the complete source audit.
-**Show layout rules** draws the manual's construction dimensions and notes in a margin outside
-the trim, measured from the rendered artwork; **Overlay original scan** and its opacity control
-compare the six registered examples. The rules follow edited text and disappear when the field
-they describe is cleared. Standard downloads keep those rules
-hidden; **SVG with rules** exports a visible annotation layer. The BCE route marks are under
-**Logos → BCE route heritage mark**, and are used separately from the Rail signature on its
-letterhead and card. The scan-derived vectors, source crops, ink-mask comparisons and provenance
-travel with the kit. Original master artwork, physical colour swatches, the illustrated cover's
-source image and fabrication drawings remain unavailable; the audit records those limits.
-
-**Revisions** keep a proposed change beside the approved identity: ddcnorth carries one, the
-*rising symbol* (the six dots flipped so they climb to the right). Choosing it in the header shows
-every page, and builds every file, as it would make them; the approved kit includes it, with a
-side-by-side comparison, in `revisions/rising/`.
+The brands made with brandkit so far (ddcnorth, First Form, Over the Edge, SPARK Lab, UNBC,
+love.fútbol, and the 1977 Province of British Columbia and 1983 BC Hydro reconstructions) are
+kept, generated and tested outside this repository and published as packs; the features below
+are described with them as examples.
 
 **Share** in the header gives a link for the people who use a brand rather than make it
-(`?brand=ddcnorth&share=1`, optionally with `&view=templates` and so on). It opens the brand as its
+(`?brand=<id>&share=1`, optionally with `&view=templates` and so on). It opens the brand as its
 own brand centre: the approved identity's overview, logos, templates, guide and kit, under the
 brand's own logo, without revisions, editing, other brands, the manual library or the
-manual pages templates cite. It is a presentation, not access control: the full app is the same
-address without `share`.
+manual pages templates cite. A brand from a pack that is not in the site's catalog travels with
+its pack's address (`&url=`), so the link opens it for anyone. It is a presentation, not access
+control: the full app is the same address without `share`.
 
 **New brand** in the app makes a starting point from a name, a palette, a symbol drawn on a grid
-and a typed wordmark (outlined, so the logo needs no font). **Open…** takes a `brand.json`, a
-brand folder zipped, or a whole kit's zip. **Edit brand** changes colours, roles and copy by form
-and anything else as JSON. Brands made or edited are kept in the browser until downloaded.
+and a typed wordmark (outlined, so the logo needs no font). **Edit brand** changes colours, roles
+and copy by form and anything else as JSON. Brands made or edited are kept in the browser until
+downloaded; **Download kit → Build sources** and `brandkit pack` turn one into a pack to share.
 
 The definition is documented in [docs/brand-schema.md](docs/brand-schema.md).
 
@@ -135,25 +131,11 @@ the UNBCDoor app also uses), opened on the department chosen here.
 
 A brand that composes department sub-logos (departmental `signatures` and a `departments`
 list) gets a sub-logo editor in the same view: pick a listed unit or type a name, see it in each
-colourway and download it. For UNBC, choosing the unit there is also how documents and templates
-are named, so it has no separate naming form; the Province of British Columbia (1977) uses the
-same editor for its ministerial signatures.
-
-UNBC uses the full logo and published colour, size and clear-space rules. Its sub-logos set the
-unit's name under NORTHERN BRITISH COLUMBIA in Helvetica Neue 95 Black, on the construction
-measured from UNBC's own sub-logos. The construction, the 88 listed units and the line breaks
-matched to official artwork come from the [UNBC logo package](https://github.com/ahzs645/unbc-logo)
-(the `vendor/unbc-logo` submodule) that the door-sign generator also uses, and a test holds the
-kit's line breaks to the package's for every name it records. Its 12 pt department and 10.5 pt
-subdepartment document text, 55 mm report logo and 20 mm page margins are local document
-defaults. The brand portfolio links SPARK Lab as a UNBC lab and Over the Edge as an independent
-student newspaper; a relationship is not a claim of sub-logo approval.
+colourway and download it.
 
 Optional `logoPolicy` controls restrict logo paint, disable standalone symbols and enforce a
 minimum physical size in native templates. `web.icons: false` omits favicons and app icons.
-These rules also travel in the portable consumer profile. UNBC's artwork is set in Helvetica
-Neue LT Pro, the faces the UNBC logo package ships; email, web pages and Word files name Arial,
-the documented alternative, since that licence allows preview and print embedding only. See [the schema](docs/brand-schema.md) and
+These rules also travel in the portable consumer profile. See [the schema](docs/brand-schema.md) and
 [consumer contract](docs/consuming-brandkit.md) for the data fields and integration rules.
 
 ## Pattern library
@@ -165,14 +147,9 @@ shows existing artwork and documented relationships without changing the identit
 
 Links from this section also open the existing interactive explorers, including SPARK Lab's
 arrow/spark studies and its pattern/application comparison board. These show additional ways
-to arrange the iconography and adjust scale, density and colour. Six brands have
-[pattern collections](brands/patterns.html) with 45 supporting studies, 12 editable applications,
-individual reference sheets and PowerPoint layouts. Historical BC collections retain their
-source and reconstruction notices.
-
-Rebuild the source collections with `npm run make:patterns`; the per-brand generators also
-install them. `npm run test:patterns:view:browser` checks the dedicated section, and
-`npm run test:patterns:browser` checks the existing explorers, downloads and export packs.
+to arrange the iconography and adjust scale, density and colour. A brand can carry a pattern
+collection (supporting studies, editable applications, reference sheets and PowerPoint layouts);
+northwind's is rebuilt with `npm run make:patterns`.
 
 ## Manual library
 
@@ -247,28 +224,27 @@ git submodule update --init --recursive
 npm install
 npm run setup:printer                          # install the Template Printer component's dependencies
 npm run dev                                    # the app
-npm test                                       # engine, manual pack, and parity (see below)
-npx playwright install chromium && npm run test:browser   # the Motion tab and pages, in Chromium
-node bin/brandkit.mjs build brands/ddcnorth/brand.json --out ddcnorth-kit   # vector and text files from a terminal
+npm test                                       # the engine, packs and manual pack, on northwind
+npm run build && npm run test:packs:browser    # packs in Chromium: link, reload, catalog, update, remove
+node bin/brandkit.mjs build brands/northwind/brand.json --out northwind-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
-npm run make:documentation -- --check           # all brand use guides match their definitions
-npm run test:documents                         # model, Office and cross-brand export checks
-npm run build && npm run test:documents:browser # edit, import and download at desktop/phone widths
-npm run make:unbc                               # rebuild UNBC from its vendored official sources
-npm run build:documentation -- --pdf            # configured brand starters: Word masters + PDFs
+node scripts/pack.mjs path/to/brands --out dist/packs   # brand packs and a catalog
+npm run make:documentation -- --check           # the built-in brand's use guide matches its definition
+npm run build:documentation -- --pdf            # Word masters + PDFs for the built-in brand
 ```
 
-`npm run test:browser` checks ddcnorth v2.3 in the app's Motion tab and its motion and
-brand-details pages, in Chromium at desktop and phone widths (it is not run in CI). Set
-`CHROMIUM_PATH` to use a Chromium you already have.
+`VITE_BRANDKIT_CATALOGS=http://…/catalog.json npm run dev` offers a catalog's brands, as the site
+does. Set `CHROMIUM_PATH` to use a Chromium you already have.
 
-`test/parity.test.js` compares the engine with the original ddcnorth kit, which is not in this
-repository; set `DDCNORTH_KIT` to an unzipped copy to run it. `build` keeps its vector/text
-default. `build --office` and `documents` also render the artwork needed by Office documents in
-Node. Graphic PDF collections use the browser renderer; `documents --pdf` exports the actual
-Word masters with LibreOffice.
+Tools that read brands from disk (the CLI, `src/fonts/node.js`) look for a file a brand does not
+hold in `library/`, then in other brand folders: the built-in ones and any in `BRANDKIT_BRANDS`
+(a folder of brands kept elsewhere). The brands made with brandkit are tested that way, against
+this engine, where they are kept. `build` keeps its vector/text default. `build --office` and
+`documents` also render the artwork needed by Office documents in Node. Graphic PDF collections
+use the browser renderer; `documents --pdf` exports the actual Word masters with LibreOffice.
 
-GitHub Pages builds from `main` (`.github/workflows/pages.yml`).
+GitHub Pages builds from `main` (`.github/workflows/pages.yml`). Set the repository variable
+`BRANDKIT_CATALOGS` to the catalogs the site should offer.
 
 ## Write, review and share documents
 
@@ -286,19 +262,19 @@ retain their reconstruction notices; the new page layouts are identified as mode
 **Download kit** offers task packs for documents, presentations, websites and print, plus the
 complete kit. Office output has its own toggle. Focused packs include an offline index and a
 versioned asset catalog with MIME types, byte sizes and SHA-256 checksums. Each brand also has a
-generated `brands/<id>/USE.md` with artwork provenance and physical specifications.
+generated `USE.md` in its folder with artwork provenance and physical specifications.
 
 ```sh
 # Build one report in both paper sizes; a PDF is exported from each Word master.
-node bin/brandkit.mjs documents brands/firstform/brand.json --purpose report --paper both --pdf --zip --out .documentation/firstform
+node bin/brandkit.mjs documents brands/northwind/brand.json --purpose report --paper both --pdf --zip --out .documentation/northwind
 
 # Supply content values, or use --content for a complete exported publication model.
-node bin/brandkit.mjs documents brands/sparklab/brand.json --purpose product --paper a4 --values my-content.json --out .documentation/sparklab
+node bin/brandkit.mjs documents path/to/brand.json --purpose product --paper a4 --values my-content.json --out .documentation/my-brand
 
 # Refresh the PDF after editing the maintained Word master.
-node bin/brandkit.mjs pdf .documentation/firstform/documents/firstform-publication-report-letter.docx --brand brands/firstform/brand.json
+node bin/brandkit.mjs pdf .documentation/northwind/documents/northwind-publication-report-letter.docx --brand brands/northwind/brand.json
 
-# Publish versioned report examples for every registered brand (requires LibreOffice).
+# Publish versioned report examples for every brand in brands/index.json (requires LibreOffice).
 npm run build:documentation -- --pdf --out dist/documentation
 ```
 
@@ -309,9 +285,9 @@ The browser's print view is useful for review, but use the Word master to produc
 the same pagination as the maintained document. Editing a Word file does not update its
 original JSON; choose Word or the content model as the source for that publication.
 
-CI checks all brand guides, runs the document tests and browser workflow, and builds the configured
-Word/PDF example pairs for review: a report in both paper sizes for the seven earlier brands,
-plus a report, portfolio and brief in both sizes for UNBC, for 20 pairs. On main, the [published starters](https://projects.ahmadjalil.com/brandkit/documentation/)
-ship with the site. PR runs attach them as an artifact without deploying. See
+CI checks the built-in brand's guide, runs the engine and pack tests and the pack workflow in
+Chromium, and builds northwind's Word/PDF example pairs for review. On main, the
+[published starters](https://projects.ahmadjalil.com/brandkit/documentation/) ship with the site.
+PR runs attach them as an artifact without deploying. See
 [the document model and editing rules](docs/documentation.md) for custom pages, screenshot
 provenance, copy conventions and font details.

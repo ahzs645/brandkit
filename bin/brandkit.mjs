@@ -31,11 +31,13 @@ const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
+       brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url]
 
 The documents command creates native Word files, printable HTML, editable content JSON and brand assets.
 --pdf exports each Word master using LibreOffice; set SOFFICE_PATH when it is not on PATH.
 The pdf command refreshes a PDF after a Word master has been edited. --brand supplies its fonts.
-The build command keeps its vector/text default; --office enables generated Office files in Node.`
+The build command keeps its vector/text default; --office enables generated Office files in Node.
+The pack command makes brand packs (one zip per brand) and a catalog.json listing them.`
 
 const load = async (path) => {
   const absolute = resolve(path)
@@ -51,6 +53,7 @@ const load = async (path) => {
 
 const main = async () => {
   if (!command || command === '--help' || command === 'help') { console.log(usage); return }
+  if (command === 'pack') { const { pack } = await import('../src/pack/cli.js'); pack(process.argv.slice(3)); return }
   if (!file || !['build', 'check', 'documents', 'pdf'].includes(command)) throw new Error(usage)
   validateOptions()
   if (command === 'pdf') {

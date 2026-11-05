@@ -40,7 +40,7 @@ const Check = ({ on }) => <span className="menu__check" aria-hidden="true">{on ?
  * with the approved identity as `id: ''`. `tag` marks the trigger on a phone, where the masthead
  * has no room for badges (the revision being shown).
  */
-export const BrandMenu = ({ logo, current, brands, onBrand, revisions = [], revision = '', onRevision, tag }) => {
+export const BrandMenu = ({ logo, current, brands, onBrand, onManage, revisions = [], revision = '', onRevision, tag }) => {
   const { open, setOpen, root, trigger, onKeyDown } = usePopover()
   const id = useId()
   const pick = (action) => { setOpen(false); action(); trigger.current?.focus() }
@@ -54,14 +54,20 @@ export const BrandMenu = ({ logo, current, brands, onBrand, revisions = [], revi
       </button>
       {open && (
         <div id={id} className="menu__panel" role="menu" aria-label="Brands" onKeyDown={onKeyDown}>
-          <p className="menu__heading" role="presentation">Brands</p>
-          {brands.map((entry) => (
-            <button key={entry.id} type="button" role="menuitemradio" aria-checked={entry.id === current} className="menu__item" onClick={() => pick(() => onBrand(entry.id))}>
-              <Check on={entry.id === current} />
-              <span className="menu__label">{entry.logo ?? entry.name}<span className="visually-hidden">{entry.logo ? entry.name : ''}</span></span>
-              {entry.note && <span className="menu__note">{entry.note}</span>}
-            </button>
+          {/* Grouped by where each brand is: built in, kept in this browser, or offered by a catalog. */}
+          {[...new Set(brands.map((entry) => entry.group ?? 'Brands'))].map((group) => (
+            <div key={group} role="group" aria-label={group}>
+              <p className="menu__heading" role="presentation">{group}</p>
+              {brands.filter((entry) => (entry.group ?? 'Brands') === group).map((entry) => (
+                <button key={entry.id} type="button" role="menuitemradio" aria-checked={entry.id === current} className="menu__item" onClick={() => pick(() => onBrand(entry.id))}>
+                  <Check on={entry.id === current} />
+                  <span className="menu__label">{entry.logo ?? entry.name}<span className="visually-hidden">{entry.logo ? entry.name : ''}</span></span>
+                  {entry.note && <span className="menu__note">{entry.note}</span>}
+                </button>
+              ))}
+            </div>
           ))}
+          {onManage && <button type="button" role="menuitem" className="menu__item menu__item--action" onClick={() => pick(onManage)}><Check on={false} /><span className="menu__label">Manage brands…</span></button>}
           {revisions.length > 1 && (
             <>
               <p className="menu__heading" role="presentation">Revision</p>

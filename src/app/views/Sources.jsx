@@ -1,8 +1,9 @@
 // Links between a brand and the manual pages it is built from, both ways: a template, signature
 // or guide page names its `sources` (written into brand.json by the brand's script), and a manual
-// page in the library lists what the built-in brands build from it (brands/index.json).
+// page in the library lists what the brands build from it: those built in (brands/index.json),
+// installed in this browser, or offered by a catalog (each pack and catalog entry carries the same
+// page index).
 
-import MANIFEST from '../../../brands/index.json'
 import { useShared } from '../share.jsx'
 
 // The packs the app serves (see vite.config.js); a source in any other pack is shown as text.
@@ -46,10 +47,10 @@ const KIND = { template: 'Template', signature: 'Signature', guide: 'Guide page'
 
 const builtHref = (brand, kind, id) => `?brand=${brand}&${kind === 'template' ? `view=templates&template=${id}` : kind === 'signature' ? `view=logos&signature=${id}` : `view=guide&book=guide&page=${id}`}`
 
-/** Under a manual page: everything the built-in brands build from it. */
-export const BuiltFrom = ({ book, page, openBuilt }) => {
+/** Under a manual page: everything the known brands (`index`: `[{ id, name, pages }]`) build from it. */
+export const BuiltFrom = ({ book, page, openBuilt, index = [] }) => {
   const key = `${book.id}/${page.id}`
-  const brands = MANIFEST.filter((entry) => entry.pages?.[key]?.length)
+  const brands = index.filter((entry) => entry.pages?.[key]?.length)
   if (!brands.length) return null
   return (
     <div className="sources sources--built">
