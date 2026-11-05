@@ -46,18 +46,23 @@ jobs:
           # The catalogs whose brands the site offers (space-separated): the repository variable
           # BRANDKIT_CATALOGS, or for this repository the brands published with the builds site.
           VITE_BRANDKIT_CATALOGS: ${{ vars.BRANDKIT_CATALOGS || (github.repository == 'ahzs645/brandkit' && 'https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json' || '') }}
-      - name: Install document and browser renderers
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libreoffice-writer fontconfig poppler-utils
-          npx playwright install --with-deps chromium
+      - name: Install Chromium for the browser check
+        # Chromium only: the deploy needs no office suite (LibreOffice took 20 minutes to download
+        # from a slow mirror and held the deploy). Never wait on a package's question, and fail in
+        # minutes rather than hold the job for hours.
+        timeout-minutes: 10
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: npx playwright install --with-deps chromium
       - name: Verify brand packs in the app
         run: npm run test:packs:browser
         env:
           SCREENSHOT_DIR: .documentation/packs-browser
           BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Build Word masters and matching PDF starters for the built-in brand
-        run: npm run build:documentation -- --pdf --out dist/documentation
+      # Word masters, print previews and editable sources. PDFs need LibreOffice; make them
+      # locally with npm run build:documentation -- --pdf.
+      - name: Build Word masters for the built-in brand
+        run: npm run build:documentation -- --out dist/documentation
       - name: Attach reviewable document starters
         uses: actions/upload-artifact@v4
         with:
