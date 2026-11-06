@@ -84,6 +84,13 @@ fonts and pages they link to load as they do in a downloaded kit.
 **Brands** in the masthead lists what is kept, what it takes and what sharing saves, the
 catalogs, and what they offer.
 
+Hosts such as Zoer can call the [data-only host API](docs/zoer-integration.md)
+for bounded ZIP intake, brand selection, alias/dependency handling and catalog
+validation, without embedding the renderer. Existing ZIPs can be indexed with
+`brandkit catalog path/to/packs --out catalog.json --check` (omit `--check` to
+write it). These tools and the general brand-packs skill live here; each host
+keeps its own users, storage and chat workflow.
+
 Packs are made with `node scripts/pack.mjs <brand folders or a folder of brands> --out dist/packs`
 (or `brandkit pack`), which writes `<id>.zip`, `<id>.logo.svg` for the menu, and `catalog.json`.
 A pack leaves out what it need not carry: files byte for byte the same as brandkit's own
@@ -213,6 +220,9 @@ dependencies automatically; a source submodule host installs them itself.
 | `brandkit/vite` | `manualPages()`, the Vite plugin that serves and copies a pack's page files. |
 | `brandkit/printer` | Portable package import/export for native templates and imported card designs, in browsers and Node. |
 | `brandkit/printer/bridge` | Links to a standalone Template Printer website, with a published package. |
+| `brandkit/pack/host` | Typed data-only brand inspection, summaries, aliases and catalog validation. |
+| `brandkit/pack/host-node` | Bounded Node/Bun ZIP intake with CRC, path and expansion checks. |
+| `brandkit/pack/catalog-cli` | Canonical catalog generation/checking for existing pack ZIPs. |
 
 The library components read the host page's custom properties (`--surface`, `--ink`,
 `--radius`…) with neutral fallbacks, so they take on the host's theme.

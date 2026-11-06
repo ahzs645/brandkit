@@ -260,3 +260,11 @@ const { bytes, manifest, sha256, stats } = buildPack('brands/harbour')
 
 `readPack` also opens a brand folder or kit zipped (`manifest` is then `null`). `stats` reports
 what a pack saved: `aliased`, `library` and `ignored` files and bytes, and `zipped`, its size.
+
+## Server and chat integrations
+
+For bounded Node/Bun ZIP intake, explicit brand selection, shared alias/library
+handling, TypeScript declarations, and catalog generation from existing ZIPs, see
+[the host integration contract](zoer-integration.md). Source-folder builds keep
+using `brandkit pack`; existing packs can use `brandkit catalog … --check`.
+The host API is additive and retains pack/catalog format version 1.

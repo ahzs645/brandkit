@@ -30,7 +30,16 @@
     "./consumer": "./src/engine/consumer.js",
     "./patterns": "./src/engine/pattern-catalog.js",
     "./pack": "./src/pack/format.js",
-    "./pack/node": "./src/pack/build.js"
+    "./pack/node": "./src/pack/build.js",
+    "./pack/host": {
+      "types": "./src/pack/host.d.ts",
+      "default": "./src/pack/host.js"
+    },
+    "./pack/host-node": {
+      "types": "./src/pack/archive-node.d.ts",
+      "default": "./src/pack/archive-node.js"
+    },
+    "./pack/catalog-cli": "./src/pack/catalog-cli.js"
   },
   "files": [
     "bin",
@@ -55,7 +64,8 @@
     "build:documentation": "node scripts/build-documentation.mjs",
     "pack": "node scripts/pack.mjs",
     "test:packs:browser": "node test/browser/packs.check.mjs",
-    "make:patterns": "node scripts/brands/pattern-collections.mjs"
+    "make:patterns": "node scripts/brands/pattern-collections.mjs",
+    "catalog": "node scripts/catalog.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
