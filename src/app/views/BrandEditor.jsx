@@ -36,7 +36,7 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
       <section className="panel">
         <div className="panel__head">
           <h2>Colours</h2>
-          <p className="muted">Every logo, template and guide page uses these. Each colour lists the roles it fills; choose a role to give it to another colour, or a colour of its own.</p>
+          <p className="muted">Each colour lists its roles. Choose a role to move it.</p>
         </div>
         <div className="colour-edit">
           {colourEntries(brand).map((entry) => (
@@ -87,7 +87,7 @@ export const BrandEditor = ({ brand, onChange, onSave, saved, onReset, canReset 
       <section className="panel">
         <div className="panel__head">
           <h2>brand.json</h2>
-          <p className="muted">The whole identity. Templates and guide pages are lists of elements; see the schema notes in the repository’s docs/brand-schema.md.</p>
+          <p className="muted">The whole identity. See docs/brand-schema.md.</p>
         </div>
         <textarea className="json" spellCheck={false} value={text} onChange={(event) => setText(event.target.value)} aria-label="brand.json" />
         {parseError && <p className="error" role="alert">Not valid JSON: {parseError}</p>}

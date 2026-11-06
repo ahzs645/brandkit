@@ -30,11 +30,12 @@ const applicationTemplate = (brand, app) => {
   // Letterspaced capitals for the small labels, unless the brand sets its labels as written
   // (B.C.Hydro's manual calls all-capital settings incorrect).
   const spaced = brand.typography?.labels?.textTransform !== 'none'
-  const sourceNote = brand.manuals ? 'New supporting study; sources describe the identifying artwork and palette, not approval of this layout.' : 'Additional supporting study. Existing identifying artwork is preserved.'
+  // A reconstruction says its studies are new: nothing in the source manuals approved them.
+  const sourceNote = brand.manuals ? ' New study; its sources do not approve this layout.' : ''
   const sources = brand.manuals ? structuredClone(brand.guide.pages[0].sources) : undefined
   return {
     id: app.id, label: app.name, group: 'Pattern studies', extension: EXTENSION,
-    title: `{name} / ${app.name}`, description: `${app.description} ${sourceNote}`,
+    title: `{name} / ${app.name}`, description: `${app.description}${sourceNote}`,
     width, height, raster: width, ...(sources ? { sources } : {}),
     elements: [
       { type: 'background', fill: 'paper' },

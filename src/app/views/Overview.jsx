@@ -20,7 +20,7 @@ const Revisions = ({ base, fonts, active, onRevision }) => {
     <section className="panel">
       <div className="panel__head">
         <h2>Logo revisions</h2>
-        <p className="muted">Proposed changes, kept beside the approved identity. Choosing one shows every page of brandkit, and the kit download, as it would make them.</p>
+        <p className="muted">Proposed changes. Showing one applies it everywhere, including the kit.</p>
       </div>
       {revisions.map((revision) => {
         const revised = withRevision(base, revision.id)
@@ -62,7 +62,7 @@ const HistoryEntry = ({ brand, fonts, logo, entry }) => {
         <figure className="history__logo"><div><SvgImage svg={logoDocument({ brand: mergePatch(brand, entry.changes), fonts }, logo)} alt={`${entry.title}, archived`} /></div></figure>
       )}
       {entry.summary && <p className="muted" style={{ margin: 0 }}>{entry.summary}</p>}
-      {entry.note && <p className="caption caption--flush" style={{ paddingTop: 0 }}>{entry.note}</p>}
+      {entry.note && entry.status !== 'approved' && <p className="caption caption--flush" style={{ paddingTop: 0 }}>{entry.note}</p>}
     </article>
   )
 }
@@ -80,7 +80,6 @@ const History = ({ brand, fonts, logo }) => {
     <section className="panel">
       <div className="panel__head">
         <h2>Current version</h2>
-        <p className="muted">{brand.name} v{brand.displayVersion ?? brand.version}, and what it was built from.</p>
       </div>
       {current.map((entry) => <HistoryEntry key={entry.id ?? entry.version} brand={brand} fonts={fonts} logo={logo} entry={entry} />)}
       {archive.length > 0 && (
@@ -156,14 +155,13 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
               {colours.map((key) => <button key={key} type="button" className="chip" aria-label={colourName(brand, key)} aria-pressed={wordmarkColour === key} title={colourName(brand, key)} style={{ background: colour(brand, key) }} onClick={() => setWordmarkColour(key)} />)}
             </div>
           </div>}
-          <Field label="Preview on">
+          <Field label="Background (preview only)">
             <div className="chips">
               {BACKGROUNDS.map((role) => <button key={role} type="button" className="chip" aria-pressed={background === role} title={role} style={{ background: colour(brand, role) }} onClick={() => pickBackground(role)} />)}
             </div>
           </Field>
           <Downloads make={make} name={name} width={2048} />
         </div>
-        <p className="caption">The ground is a preview. Downloaded logos are transparent.</p>
       </section>
       )}
 
@@ -211,7 +209,6 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
       {brand.organization && <section className="panel">
         <h2>One institution with named departments</h2>
         <p>{brand.organization.naming?.note}</p>
-        <p className="muted">Use Departments to set the parent and unit names, see the sizing rules, and carry those names into report, portfolio and stationery templates.</p>
         <a className="button" href={`?brand=${encodeURIComponent(brand.id)}&view=organization${new URLSearchParams(globalThis.location?.search ?? '').has('share') ? '&share=1' : ''}`}>Set department names ↗</a>
       </section>}
       <OrganizationSources brand={brand} />

@@ -40,7 +40,7 @@ shared view. Dropping something that is not a brand says so and changes nothing.
 
 ### Choose a file
 
-**Open…** in the header (on a phone, **⋯ → Open a brand…**), or **Brands → choose a file**, opens
+**⋯ → Open a brand…** in the header, or **Brands → choose a file**, opens
 the system file picker for a `.zip` or `.json`. It is the same as dropping the file.
 
 ### A link

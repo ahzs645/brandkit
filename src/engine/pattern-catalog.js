@@ -54,11 +54,11 @@ const motifsFor = (brand, spec) => {
 
 const resourceMetadata = (path) => {
   const name = path.split('/').at(-1)
-  if (name === 'pattern-explorer.html') return { label: 'Interactive pattern explorer', description: 'Open the existing scale, density and colour controls, with vector and image downloads.', kind: 'explorer' }
+  if (name === 'pattern-explorer.html') return { label: 'Interactive pattern explorer', description: 'Scale, density and colour controls, with vector and image downloads.', kind: 'explorer' }
   if (name === 'arrow-patterns.html') return { label: 'Arrow and spark explorer', description: 'Explore the existing arrow and spark presets with scale, density and colour controls.', kind: 'explorer' }
   if (name === 'patterns-and-templates.html') return { label: 'Patterns and applications', description: 'Compare the existing graphic directions alongside their editable application layouts.', kind: 'applications' }
-  if (name === 'patterns-guide.html') return { label: 'Pattern usage guide', description: 'Read the source guidance for the supporting studies and their applications.', kind: 'guide' }
-  if (name === 'patterns-README.md') return { label: 'Pattern source notes', description: 'Read the source record and rebuilding notes for this collection.', kind: 'source' }
+  if (name === 'patterns-guide.html') return { label: 'Pattern usage guide', description: 'Source guidance for the studies and their applications.', kind: 'guide' }
+  if (name === 'patterns-README.md') return { label: 'Pattern source notes', description: 'Source record and rebuilding notes.', kind: 'source' }
   return { label: humanize(name.replace(/\.[^.]+$/, '')), description: 'Existing supporting graphics reference included in this kit.', kind: 'reference' }
 }
 

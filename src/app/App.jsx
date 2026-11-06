@@ -59,7 +59,7 @@ const VIEWS = [
   { id: 'motion', label: 'Motion' },
   { id: 'kit', label: 'Download kit' }
 ]
-// The workshop's views, in the masthead's buttons (the ⋯ menu on a phone) rather than the tabs.
+// The workshop's views, in the masthead's ⋯ menu rather than the tabs.
 const OTHER_VIEWS = [{ id: 'brands', label: 'Brands' }, { id: 'brand', label: 'Edit brand' }, { id: 'new', label: 'New brand' }, { id: 'manuals', label: 'Manual library' }]
 const ALL_VIEWS = [...VIEWS, ...OTHER_VIEWS].map((view) => view.id)
 
@@ -74,8 +74,11 @@ const OPEN_VIEWS = SHARED ? SHARED_VIEWS : ALL_VIEWS
  * loads, so nothing is decided about its tab until then.
  */
 const hasPatterns = (brand) => { try { return patternLibrary(brand).patterns.length > 0 } catch { return false } }
+// Until the brand arrives only the tabs every brand has are shown, so the row does not fill with
+// tabs the brand turns out not to have and then lose them.
+const ALWAYS = ['overview', 'logos', 'colour', 'templates', 'kit']
 const offers = (view, { brand, motionLink, extensionView }) => {
-  if (!brand) return true
+  if (!brand) return ALWAYS.includes(view)
   switch (view) {
     case 'motion': return Boolean(motionLink)
     case 'organization': return hasDepartments(brand)
@@ -89,6 +92,11 @@ const offers = (view, { brand, motionLink, extensionView }) => {
   }
 }
 
+// The tab takes the brand's own word for its units: the Province has ministries.
+const unitsLabel = (brand) => {
+  const word = brand?.departments?.label ?? 'Department'
+  return /[^aeiou]y$/.test(word) ? `${word.slice(0, -1)}ies` : `${word}s`
+}
 const params = () => new URLSearchParams(globalThis.location?.search ?? '')
 const megabytes = (bytes) => `${(bytes / 1024 / 1024).toFixed(bytes < 10 * 1024 * 1024 ? 1 : 0)} MB`
 const svgDataUrl = (svg) => (svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` : null)
@@ -152,9 +160,18 @@ export const App = () => {
   useEffect(() => {
     const element = masthead.current
     if (!element || typeof ResizeObserver === 'undefined') return undefined
-    const observer = new ResizeObserver(() => document.documentElement.style.setProperty('--masthead-h', `${Math.ceil(element.getBoundingClientRect().height)}px`))
+    // On a phone only the tabs stay: the row above them scrolls away, and --masthead-h is what stays.
+    const phone = globalThis.matchMedia?.('(max-width: 600px)')
+    const measure = () => {
+      const height = Math.ceil(element.getBoundingClientRect().height)
+      const away = phone?.matches ? (tabs.current?.offsetTop ?? 0) : 0
+      document.documentElement.style.setProperty('--masthead-away', `${away}px`)
+      document.documentElement.style.setProperty('--masthead-h', `${height - away}px`)
+    }
+    const observer = new ResizeObserver(measure)
     observer.observe(element)
-    return () => observer.disconnect()
+    phone?.addEventListener('change', measure)
+    return () => { observer.disconnect(); phone?.removeEventListener('change', measure) }
   }, [])
 
   const refreshInstalled = useCallback(async () => {
@@ -485,12 +502,7 @@ export const App = () => {
           {changed && <span className="badge" title="Edited since it was loaded">edited</span>}
           <div className="masthead__actions">
             <button type="button" className="button" disabled={!base} onClick={() => setSharing(true)}>Share</button>
-            <span className="masthead__wide">
-              <button type="button" className="button button--quiet" onClick={() => fileInput.current?.click()}>Open…</button>
-              {OTHER_VIEWS.map((entry) => <button key={entry.id} type="button" className="button button--quiet" aria-pressed={view === entry.id} onClick={() => go(entry.id)}>{entry.label}</button>)}
-              <a className="button button--quiet" href="https://github.com/ahzs645/brandkit">GitHub</a>
-            </span>
-            {/* On a phone the same actions fold into one menu. */}
+            {/* The workshop's actions, one menu at every width: the brand stays the loudest thing here. */}
             <MoreMenu items={[
               { label: 'Open a brand…', onSelect: () => fileInput.current?.click() },
               ...OTHER_VIEWS.map((entry) => ({ label: entry.label, current: view === entry.id, onSelect: () => go(entry.id) })),
@@ -502,7 +514,7 @@ export const App = () => {
         </div>
         )}
         {(!SHARED || brand) && <nav ref={tabs} className="tabs" aria-label="Sections">
-          {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.label}</button>)}
+          {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.id === 'organization' ? unitsLabel(brand) : entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} {...shareTarget(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -510,7 +522,7 @@ export const App = () => {
       {dragging && <div className="drop-overlay" aria-hidden="true">
         <div className="drop-overlay__panel">
           <strong>Drop to add a brand</strong>
-          <span>A brand pack (.zip), a brand folder or kit zipped, or a brand.json. A zip is kept in this browser.</span>
+          <span>A brand pack, a zipped folder or a brand.json.</span>
         </div>
       </div>}
       {progress && <p className="notice notice--progress" role="status">
@@ -525,14 +537,13 @@ export const App = () => {
             {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
             {view === 'colour' && <Colour brand={brand} />}
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
-            {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} onPatterns={() => go('patterns')} />}
+            {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {(view === 'templates' || view === 'documents') && <div className="section-switch">
               <Segmented label="Templates or documents" value={view} onChange={go} options={[
                 { value: 'templates', label: 'Templates', title: 'Cards, stationery, social posts and slides: fill in the fields and download' },
                 { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' }
               ]} />
-              {!SHARED && available.has('printer') && <button type="button" className="button button--quiet" onClick={() => go('printer')}>Template Printer →</button>}
             </div>}
             {view === 'templates' && <div className="view">
               <TemplateStudio key={brand.id} brand={brand} fonts={fonts} resolveAsset={source.url} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}

@@ -61,8 +61,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .app { max-width: 1440px; margin: 0 auto; padding: 0 20px 40px; }
 
 /* Masthead */
-.masthead { position: sticky; top: 0; z-index: 10; margin: 0 -20px 20px; padding: 12px 20px 0; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 44px; }
+.masthead { position: sticky; top: calc(-1 * var(--masthead-away, 0px)); z-index: 10; margin: 0 -20px 20px; padding: 12px 20px 0; background: color-mix(in srgb, var(--page) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.masthead__row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 46px; }
 .brand-logo { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
 /* Its height comes from its proportions (ui.jsx): a long logo a little taller, a near-square one
    shorter, so every brand's logo has about the same presence and the masthead keeps one height. */
@@ -86,8 +86,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .button--large { min-height: 44px; padding: 10px 22px; font-size: 15px; }
 .button:disabled { opacity: 0.45; cursor: default; }
 .button:not(:disabled):hover { filter: brightness(0.95); }
-.segmented { display: inline-flex; max-width: 100%; padding: 3px; gap: 2px; background: var(--track); border-radius: var(--radius-sm); flex-wrap: wrap; }
-.segmented button { border: 0; background: none; padding: 5px 12px; border-radius: 6px; color: var(--ink-muted); font-size: 13px; cursor: pointer; }
+.segmented { display: inline-flex; max-width: 100%; padding: 3px; gap: 2px; background: var(--track); border-radius: var(--radius-sm); overflow-x: auto; scrollbar-width: none; }
+.segmented button { flex: none; border: 0; background: none; padding: 5px 12px; border-radius: 6px; color: var(--ink-muted); font-size: 13px; white-space: nowrap; cursor: pointer; }
 .segmented button[aria-pressed='true'] { background: var(--segment); color: var(--ink); box-shadow: var(--segment-shadow); font-weight: 600; }
 .field { display: grid; gap: 5px; }
 .field__label { font-size: 12px; font-weight: 600; color: var(--ink-muted); }
@@ -135,6 +135,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .organization-table th, .organization-table td { border-bottom: 1px solid var(--line); padding: 12px; vertical-align: top; }
 .organization-table th { font-weight: 600; }
 .organization-resources, .organization-relations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 12px; }
+.organization-resources a { text-decoration: none; }
+.organization-resources a:hover strong { text-decoration: underline; text-underline-offset: 3px; }
 .organization-resources a, .organization-relations article { padding: 16px; background: var(--page); border: 1px solid var(--line); border-radius: var(--radius-sm); color: inherit; overflow-wrap: anywhere; }
 .organization-resources strong, .organization-resources span { display: block; }
 .organization-resources span { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
@@ -155,7 +157,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .documents-actions .button { white-space: normal; }
 }
 .field--inline { grid-template-columns: 90px 1fr; align-items: center; }
-.field input[type='text'], .field select, .json { width: 100%; min-height: 36px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); }
+.field input[type='text'], .field select, .json { width: 100%; min-height: 40px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .chip { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); cursor: pointer; padding: 0; }
 .chip[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 2px; }
@@ -165,7 +167,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .stage-panel .toolbar select { min-height: 40px; min-width: 150px; }
 .downloads { display: inline-flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .downloads__error { color: #c0362c; font-size: 12.5px; }
-.notice { padding: 10px 14px; border-radius: var(--radius-sm); background: #fff6d6; color: #5a4300; font-size: 13.5px; }
+.notice { padding: 10px 14px; border-radius: var(--radius-sm); background: var(--track); color: var(--ink); font-size: 13.5px; }
 .notice--error { background: #fde4e1; color: #7a1c13; }
 .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 .footnote { margin-top: 12px; font-size: 13px; }
@@ -176,7 +178,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* The switch between a tab's parts (Templates and Documents), above the part shown. */
 .section-switch { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; margin-bottom: var(--gap); }
 .section-switch .segmented button { padding: 7px 16px; font-size: 14px; }
-.section-switch > .button { margin-left: auto; }
 /* A wide child (a table that scrolls) must not widen the column it sits in. */
 .view > * { min-width: 0; }
 .printer__hint { margin: 0; font-size: 13px; }
@@ -188,7 +189,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Overview */
 .eyebrow { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-.stage-panel { padding: 0; overflow: hidden; }
+.panel.stage-panel { padding: 0; overflow: hidden; }
 .stage { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; height: clamp(200px, 32vw, 340px); padding: 40px; transition: background-color 150ms; }
 .stage--compact { height: 200px; border-radius: var(--radius-sm); background: var(--page); }
 /* Every brand's logo fitted to the same box, rather than drawn at its file's own size. */
@@ -231,11 +232,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .asset-card .button { min-height: 26px; padding: 3px 9px; font-size: 12px; }
 
 /* All brand patterns and their documented applications. */
-.patterns-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 40px; }
-.patterns-head h1 { margin: 8px 0 14px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.025em; }
-.patterns-head p { margin: 0 0 10px; }
-.patterns-count { color: var(--ink-muted); font-size: 13px; }
-.patterns-notes { color: var(--ink-muted); font-size: 13px; line-height: 1.6; }
+.patterns-head .panel__head { margin-bottom: 8px; }
+.patterns-notes { margin: 0; max-width: 90ch; color: var(--ink-muted); font-size: 13px; line-height: 1.6; }
 .patterns-browser { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(320px, .85fr); gap: var(--gap); align-items: start; }
 .patterns-gallery-panel, .patterns-detail { min-width: 0; }
 .patterns-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -256,7 +254,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .pattern-card__label strong { font-size: 13px; line-height: 1.3; }
 .pattern-card__label > span { font-size: 11.5px; color: var(--ink-muted); }
 .patterns-empty { padding: 20px 0; color: var(--ink-muted); }
-.patterns-detail { position: sticky; top: 120px; scroll-margin-top: 125px; }
+.patterns-detail { position: sticky; top: calc(var(--masthead-h, 116px) + 12px); scroll-margin-top: calc(var(--masthead-h, 116px) + 12px); }
 .patterns-detail h2 { margin: 6px 0 16px; font-size: 23px; }
 .patterns-detail__art { border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: #fff; }
 .patterns-detail__art img { display: block; width: 100%; height: auto; }
@@ -303,15 +301,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .patterns-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 850px) {
-  .patterns-head, .patterns-browser { grid-template-columns: minmax(0, 1fr); }
-  .patterns-head { gap: 12px; }
+  .patterns-browser { grid-template-columns: minmax(0, 1fr); }
   .patterns-detail { position: static; }
   .patterns-gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-  .patterns-notes { font-size: 12.5px; }
 }
 @media (max-width: 430px) {
-  .patterns-filters { grid-template-columns: minmax(0, 1fr); }
-  .patterns-search { grid-column: auto; }
   .patterns-gallery { gap: 10px; }
   .pattern-card__label { padding: 10px; }
 }
@@ -336,10 +330,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .kit-card__description { font-size: 13px; color: var(--ink-muted); }
 .kit-card__count { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--ink-faint); }
 .kit-card:has(input:checked) .kit-card__count { color: var(--ink); font-weight: 600; }
-.kit-everything, .kit-check { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13.5px; cursor: pointer; }
-.kit-everything { justify-self: start; color: var(--ink-muted); }
-.kit-everything span { text-decoration: underline; text-underline-offset: 3px; }
-.kit-everything:has(input:checked) { color: var(--ink); font-weight: 600; }
+.kit-check { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13.5px; cursor: pointer; }
 .kit-unit { display: grid; gap: 4px; max-width: 520px; }
 .kit-named { margin: 0; }
 .kit-action { display: grid; gap: 12px; justify-items: start; }
@@ -419,6 +410,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 @media (max-width: 600px) {
   .toolbar { padding: 14px 12px; }
+  .caption, .stage-sources { padding-inline: 12px; }
   .app { padding: 0 12px 32px; }
   .masthead { margin: 0 -12px 14px; padding: 10px 12px 0; }
   .masthead__row { flex-wrap: nowrap; gap: 8px; }
@@ -635,11 +627,9 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .contrast thead .contrast__dot { display: block; margin: 0 0 4px; }
 
 /* Masthead menus: the brand switcher on the logo, and the overflow menu on a phone. */
-.masthead__wide { display: contents; }
 .menu { position: relative; }
-.more-menu { display: none; }
 .more-menu__trigger { min-width: 38px; font-size: 18px; line-height: 1; }
-.brand-menu__trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 4px 10px 4px 6px; border: 1px solid transparent; border-radius: 12px; background: none; color: var(--ink); cursor: pointer; }
+.brand-menu__trigger { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 2px 10px 2px 6px; border: 1px solid transparent; border-radius: 12px; background: none; color: var(--ink); cursor: pointer; }
 .brand-menu__trigger:hover, .brand-menu__trigger[aria-expanded='true'] { background: var(--surface); border-color: var(--line); }
 .brand-menu__tag { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #dbe8ff; color: #123b7a; font-size: 11px; font-weight: 600; white-space: nowrap; }
 .brand-menu__status { text-transform: capitalize; }
@@ -658,8 +648,6 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .menu__label { overflow-wrap: anywhere; line-height: 1.3; }
 .menu__note { font-size: 11.5px; color: var(--ink-faint); }
 @media (max-width: 600px) {
-  .masthead__wide { display: none; }
-  .more-menu { display: block; }
   .menu__panel { width: calc(100vw - 24px); max-width: none; }
   .menu__panel--end { left: auto; width: min(260px, calc(100vw - 24px)); }
 }
@@ -755,8 +743,6 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .organization-reference h2 { margin-top: 18px; }
 
 /* Brands: what is built in, kept in this browser, and offered by catalogs. */
-.brand-library section { margin-top: 28px; }
-.brand-library h2 { font-size: 17px; margin: 0 0 10px; }
 .brand-library__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--track); }
 .brand-library__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 12px 0; border-bottom: 1px solid var(--track); }
 .brand-library__row > div:first-child { min-width: 0; flex: 1 1 260px; }
@@ -766,6 +752,7 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .brand-library__actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .brand-library__usage { margin-bottom: 10px; font-size: 13.5px; }
 .brand-library__usage p { margin: 0 0 6px; }
+.panel > p.muted:last-child { margin-bottom: 0; }
 .brand-library__form { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 6px; }
 .brand-library__form input { flex: 1 1 260px; min-width: 0; min-height: 34px; padding: 6px 12px; border: 1px solid var(--track); border-radius: 999px; background: var(--page); color: var(--ink); font: inherit; font-size: 13.5px; }
 .notice--progress { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; background: var(--track); color: var(--ink); }
@@ -778,3 +765,54 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 .drop-overlay__panel strong { font-size: 18px; }
 .brand-library__dropzone { display: grid; gap: 4px; justify-items: start; margin: 10px 0 6px; padding: 18px 20px; border: 2px dashed var(--track); border-radius: 12px; }
 .brand-library__dropzone p { margin: 0; }
+
+/* A linked name in running text takes the text's ink, not the browser's blue. */
+.related-marks { margin: 0; }
+.related-marks a { color: inherit; text-underline-offset: 3px; }
+
+/* On a phone logo grids run two across, or a brand's logos are a dozen screens long; each card's
+   formats share its width as plain labels. Wide, motion and profile cards keep their own layout. */
+@media (max-width: 600px) {
+  .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .logo-grid .asset-card__art { height: 104px; padding: 12px; }
+  .logo-grid .asset-card figcaption { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 8px; }
+  .logo-grid .downloads { display: flex; flex-wrap: nowrap; gap: 4px; }
+  .logo-grid .downloads .button { flex: 1 1 0; min-width: 0; padding: 3px 0; }
+  .logo-grid .downloads__arrow { display: none; }
+}
+
+/* A finger needs more than a pointer: one rule for every control, not one per view. */
+@media (pointer: coarse) {
+  .button { min-height: 40px; }
+  .asset-card .button { min-height: 36px; }
+  .segmented button { min-height: 36px; }
+  .chip { width: 36px; height: 36px; }
+  .preset { min-height: 36px; }
+  .select__button.role-chip { min-height: 32px; }
+}
+
+/* Web: the page and each component, picked from a list like templates and motion studies. */
+.web-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; }
+.web-toolbar .field { flex: 0 1 280px; min-width: 0; }
+.web-toolbar .field input { min-height: 40px; }
+.web-toolbar > .button { margin-left: auto; }
+.web-studio { grid-template-columns: 220px minmax(0, 1fr); }
+.web-item { grid-template-columns: minmax(0, 1fr); min-height: 40px; padding: 8px 10px; }
+.web-picker { display: none; margin-bottom: 12px; }
+.web-picker .select { display: flex; width: 100%; }
+@media (max-width: 1100px) { .web-studio { grid-template-columns: 220px minmax(0, 1fr); } .web-studio .studio__list { grid-column: auto; columns: auto; } }
+@media (max-width: 760px) {
+  .web-studio { grid-template-columns: minmax(0, 1fr); }
+  .web-studio .studio__list { display: none; }
+  .web-picker { display: block; }
+  /* The dropdown above already names what is shown. */
+  .web-studio #web-shown { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .web-toolbar .field { flex: 1 1 100%; }
+  .web-toolbar > .button { margin-left: 0; }
+}
+
+/* On a phone profile pictures sit two across too, tall enough for their caption band. */
+@media (max-width: 600px) { .profile-pictures.logo-grid .profile-pictures__art { height: 150px; } }
+
+/* The door-sign editor comes from its own package: here it only gives up what brandkit says already. */
+.door-sign-app.door-signs .archive-nav__hint { display: none; }

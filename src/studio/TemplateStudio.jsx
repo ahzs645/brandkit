@@ -201,7 +201,7 @@ export const TemplateStudio = ({
       {/* On a phone the list, thumbnails and all, would be a sideways scroller with its names cut
           short; a grouped dropdown in its place names every template whole. */}
       <label className="field studio__picker">
-        <span className="field__label">Template</span>
+        <span className="visually-hidden">Template</span>
         <Select aria-label="Template" value={entryOf(template.id)?.key} onChange={(key) => setSelected(entries.flatMap(([, list]) => list).find((entry) => entry.key === key).template.id)}
           options={entries.flatMap(([group, list]) => list.map((entry) => ({ value: entry.key, label: entry.label, group: entries.length > 1 ? group : undefined })))} />
       </label>
@@ -225,14 +225,16 @@ export const TemplateStudio = ({
       </nav>
 
       <div className="studio__stage" {...dock.panel('preview')}>
-        {currentSet && (
-          <div className="studio__variants" role="group" aria-label={`${currentSet.label} variants`}>
+        {/* A few short variants sit side by side; more, or longer, would run off a phone, so they become a list. */}
+        {currentSet && (currentSet.variants.length > 4 || currentSet.variants.reduce((length, variant) => length + variant.label.length, 0) > 32
+          ? <div className="studio__variant-picker"><Select aria-label={`${currentSet.label} variants`} value={template.id} onChange={setSelected} options={currentSet.variants.map((variant) => ({ value: variant.template, label: variant.label }))} /></div>
+          : <div className="studio__variants" role="group" aria-label={`${currentSet.label} variants`}>
             {currentSet.variants.map((variant) => <button key={variant.template} type="button" aria-pressed={variant.template === template.id} onClick={() => setSelected(variant.template)}>{variant.label}</button>)}
           </div>
         )}
         {(hasLayoutRules || template.reference) && (
           <fieldset className="studio__inspection">
-            <legend>Layout inspection</legend>
+            <legend className="visually-hidden">Layout inspection</legend>
             <div className="studio__inspection-controls">
               {hasLayoutRules && <label className="studio__toggle"><input type="checkbox" checked={layoutRules} onChange={(event) => setLayoutRules(event.target.checked)} aria-describedby={`${inspectionId}-rules`} /> Show layout rules</label>}
               {referenceUrl && <label className="studio__toggle"><input type="checkbox" checked={overlay} disabled={referenceError} onChange={(event) => setOverlay(event.target.checked)} aria-describedby={`${inspectionId}-source`} /> Overlay original scan</label>}
@@ -244,9 +246,8 @@ export const TemplateStudio = ({
               <output htmlFor={`${inspectionId}-opacity`}>{overlayOpacity}%</output>
               <button type="button" className="button button--quiet" onClick={() => setOverlayOpacity(50)}>Reset overlay</button>
             </div>}
-            {hasLayoutRules && <div id={`${inspectionId}-rules`} className="studio__inspection-note">
-              <p>Rules appear on the preview and in “SVG with rules”. Standard downloads keep the artwork clean.</p>
-              {layoutRules && template.guides.notes?.length > 0 && <ul>{template.guides.notes.map((entry, index) => <li key={index}>{entry}</li>)}</ul>}
+            {hasLayoutRules && layoutRules && template.guides.notes?.length > 0 && <div id={`${inspectionId}-rules`} className="studio__inspection-note">
+              <ul>{template.guides.notes.map((entry, index) => <li key={index}>{entry}</li>)}</ul>
             </div>}
             {template.reference && <div id={`${inspectionId}-source`} className="studio__inspection-note">
               <p><strong>{template.reference.label ?? 'Original manual scan'}</strong>{template.reference.note ? ` — ${template.reference.note}` : ''}</p>
@@ -312,7 +313,7 @@ export const TemplateStudio = ({
               : <input type="text" value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />}
           </label>
         ))}
-        <p className="studio__note">{filled} of {everyField.length} fields filled across {templates.length} templates. Fields with the same name are shared.</p>
+        <p className="studio__note">{filled > 0 ? `${filled} of ${everyField.length} filled. ` : ''}Fields are shared across {templates.length} templates.</p>
         {filled > 0 && <button type="button" className="button button--quiet" onClick={() => setValues({})}>Clear every field</button>}
       </form>
       {dock.bar}

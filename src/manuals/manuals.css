@@ -22,7 +22,7 @@
 .guides__back:hover { color: var(--ink, #16181c); }
 
 .guides__family { background: var(--surface, #ffffff); border-radius: var(--radius, 14px); padding: 20px; margin-bottom: var(--gap, 16px); }
-.guides__family-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 14px; }
+.guides__family-head { display: grid; gap: 2px; margin-bottom: 14px; }
 .guides__family-head h3 { margin: 0; font-size: 18px; }
 .guides__family-head p { margin: 0; font-size: 13px; color: var(--ink-faint, #80858d); }
 .guides__books { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--gap, 16px); }

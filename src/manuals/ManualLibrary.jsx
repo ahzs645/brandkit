@@ -92,7 +92,7 @@ const Book = ({ book, family, thumbOf, open, focusPage, showBack, backLabel, act
       <div className="guides__intro">
         {showBack && <button type="button" className="guides__back" onClick={() => open({ book: null, page: null })}>← {backLabel}</button>}
         <h2>{book.title}</h2>
-        <p>{[family?.title, book.edition, `${book.pages.length} pages`].filter(Boolean).join(' · ')}</p>
+        <p>{[!book.title.includes(family?.title) && family?.title, book.edition, `${book.pages.length} pages`].filter(Boolean).join(' · ')}</p>
         {actions && <div className="guides__toolbar">{actions}</div>}
       </div>
       <div className="guides__pages">

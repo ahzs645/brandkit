@@ -12,7 +12,7 @@ const escape = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').r
 
 export const profilePictures = {
   label: 'Social media profile pictures',
-  use: 'The UNBC letters on a green panel with the unit’s name in the white band below, as on UNBC’s own accounts. Faculties drop “Faculty of”. Most platforms crop to a circle: use the circle layout there, or check the square’s warning.',
+  use: 'Faculties drop “Faculty of”. Use the circle layout on platforms that crop to a circle.',
   shapes: [{ id: 'square', label: 'Square' }, { id: 'circle', label: 'Circle' }],
   size: 1080,
   caption: (name) => profileCaptionText(name),

@@ -18,7 +18,7 @@ author's are in ahzs645/builds, `brandkit/`) and reach the app as packs.
 | Route | How | Kept? |
 | --- | --- | --- |
 | Drag and drop | Drop a file anywhere on the page (overlay "Drop to add a brand"). Off in Template Printer and shared views; drops onto file inputs and images are left alone. `src/app/drop.js` | zip: yes |
-| File picker | **Open…** in the header (phone: **⋯ → Open a brand…**), or **Brands → choose a file** | zip: yes |
+| File picker | **⋯ → Open a brand…** in the header, or **Brands → choose a file** | zip: yes |
 | Link | `?url=<pack address>`, or **Brands → Add from link**. `url` is removed from the address after install (kept in shared views). | yes |
 | Catalog | Brands from `VITE_BRANDKIT_CATALOGS` (set at build; CI uses repo variable `BRANDKIT_CATALOGS`, default the builds catalog) or `?catalog=<url>` / **Brands → Catalogs**. Listed under **Available to add**; `?brand=<id>` installs on arrival. | yes |
 | Share link | **Share** → `?brand=<id>&share=1`, plus `&url=` when the brand is not in the site's catalog | yes |

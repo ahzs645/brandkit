@@ -38,7 +38,7 @@ export const Manuals = ({ brand, openBuilt, brandIndex }) => {
         heading={filtered ? `${brand.name} manuals` : 'Manual library'}
         intro={filtered
           ? <>The manuals {brand.name} is rebuilt from. <button type="button" className="link" onClick={() => setEverything(true)}>Show every manual</button></>
-          : <>Identity manuals rebuilt page by page as drawings: how the British Columbia government and BC Hydro set out their identities, 1977 to 1983.{own.length > 0 && <> <button type="button" className="link" onClick={() => setEverything(false)}>Only {brand.name}’s</button></>}</>}
+          : <>Identity manuals rebuilt page by page, 1977 to 1983.{own.length > 0 && <> <button type="button" className="link" onClick={() => setEverything(false)}>Only {brand.name}’s</button></>}</>}
         footnote={BC_FOOTNOTE} urlState={{ set: { view: 'manuals' }, book: 'guide', page: 'page' }} label="Manual library"
         pageAside={(book, page) => <BuiltFrom book={book} page={page} openBuilt={openBuilt} index={brandIndex} />} />
     </div>

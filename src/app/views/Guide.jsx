@@ -49,8 +49,8 @@ export const Guide = ({ brand, fonts, openManual }) => {
   return (
     <div className="view">
       {!fonts && <p className="notice">Loading the brand’s fonts: until they arrive, the pages use stand-in type.</p>}
-      <ManualLibrary key={`${brand.id}-${Boolean(fonts)}`} books={books} families={[{ id: 'brand', title: brand.name, kind: 'Generated from brand.json', books: books.map((book) => book.id) }]}
-        heading="Brand guide" intro="Every page is drawn from this brand’s definition, with its text set as outlines." urlState={{ set: { view: 'guide' }, book: 'book', page: 'page' }}
+      <ManualLibrary key={`${brand.id}-${Boolean(fonts)}`} books={books} families={[{ id: 'brand', title: brand.name, books: books.map((book) => book.id) }]}
+        heading="Brand guide" urlState={{ set: { view: 'guide' }, book: 'book', page: 'page' }}
         initialBook="guide" bookActions={actions} label="Brand guide"
         pageAside={(book, page) => <ManualSources brand={brand} sources={page.sources} openManual={openManual} heading="This page sums up" />} />
     </div>
