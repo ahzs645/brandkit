@@ -18,7 +18,7 @@ import { join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { zipSync } from 'fflate'
-import { CATALOG_FORMAT, CATALOG_VERSION, PACK_FORMAT, PACK_MANIFEST, PACK_VERSION, STORED, cleanPath, pageIndex } from './format.js'
+import { PACK_FORMAT, PACK_MANIFEST, PACK_VERSION, STORED, cleanPath, pageIndex } from './format.js'
 
 export const LIBRARY_DIR = fileURLToPath(new URL('../../library/', import.meta.url))
 
@@ -162,26 +162,7 @@ export const brandFolders = (root) => readdirSync(root, { withFileTypes: true })
   .map((entry) => join(root, entry.name))
   .sort()
 
-/**
- * A catalog for some built packs. `url` in each entry is relative to the catalog (the pack's file
- * name), so the folder can be served from anywhere; `baseUrl` makes them absolute instead.
- */
-export const buildCatalog = (packs, { name, baseUrl, description } = {}) => ({
-  format: CATALOG_FORMAT,
-  version: CATALOG_VERSION,
-  ...(name ? { name } : {}),
-  ...(description ? { description } : {}),
-  packs: packs.map(({ manifest, sha256, bytes, file, description: about }) => ({
-    id: manifest.id,
-    name: manifest.name,
-    url: baseUrl ? new URL(file, baseUrl).href : file,
-    sha256,
-    bytes: bytes.byteLength,
-    ...(manifest.brandVersion ? { brandVersion: manifest.brandVersion } : {}),
-    ...(about ? { description: about } : {}),
-    ...(manifest.menuLogo ? { menuLogo: baseUrl ? new URL(`${manifest.id}.logo.svg`, baseUrl).href : `${manifest.id}.logo.svg` } : {}),
-    ...(manifest.pages ? { pages: manifest.pages } : {})
-  }))
-})
+// Keep the established Node API while sharing catalog construction with other hosts.
+export { buildCatalog } from './host.js'
 
 export const isFolder = (path) => existsSync(path) && statSync(path).isDirectory()

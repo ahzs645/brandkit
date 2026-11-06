@@ -55,6 +55,27 @@ copies (aliases), `history/`, dotfiles, `node_modules/`, and paths in the brand'
 `brand.json` `files` makes packing fail. Output is deterministic (sorted entries, fixed dates).
 Draw `logo-menu.svg` first with `node scripts/menu-logos.mjs`.
 
+## Other hosts and existing ZIPs
+
+The canonical host contract is documented in `docs/zoer-integration.md`.
+`brandkit/pack/host` exposes data-only inspection, identity summaries and strict
+catalog validation. `brandkit/pack/host-node` adds bounded inert ZIP intake for
+Node/Bun. A host retains authentication, storage, download policy and chat scope;
+metadata and USE.md remain untrusted data, never instructions granting authority.
+Keep the engine and real brand assets separate; no new assets repository is required.
+
+Existing ZIPs can be indexed without repacking:
+
+```sh
+node scripts/catalog.mjs path/to/packs --out catalog.json --name "Our brands"
+node scripts/catalog.mjs path/to/packs --out catalog.json --name "Our brands" --check
+```
+
+Use this canonical command instead of maintaining another catalog generator in a
+consumer. It preserves exact ZIP bytes and verifies manifests, CRCs, names and
+catalog hashes/sizes. Do not put Zoer-specific account, reference-picker or tool
+instructions into this general skill; keep those with Zoer's plugin.
+
 ## Hosting
 
 Any static host. Cross-origin hosts must send `Access-Control-Allow-Origin` (GitHub Pages does).
