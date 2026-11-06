@@ -26,17 +26,12 @@ const Usage = ({ installed }) => {
   return (
     <div className="brand-library__usage">
       <p>
-        {usage.brands} {usage.brands === 1 ? 'brand takes' : 'brands take'} <strong>{size(usage.stored)}</strong> in this browser, in {usage.files} distinct files
-        {saved > 0 ? <>; files they share are kept once, which saves {size(saved)}.</> : '.'}
-        {estimate?.quota ? <span className="muted"> The browser allows this site about {size(estimate.quota)}.</span> : null}
+        {usage.brands} {usage.brands === 1 ? 'brand takes' : 'brands take'} <strong>{size(usage.stored)}</strong>{estimate?.quota ? ` of about ${size(estimate.quota)}` : ''}
+        {saved > 0 ? `; shared files are kept once, which saves ${size(saved)}.` : '.'}
       </p>
       {persisted === false && navigator.storage?.persist && (
-        <p className="muted">
-          A browser short of space may clear what sites keep.{' '}
-          <button type="button" className="link" onClick={() => navigator.storage.persist().then(setPersisted)}>Ask to keep these brands</button>
-        </p>
+        <p><button type="button" className="link" onClick={() => navigator.storage.persist().then(setPersisted)}>Keep these brands if the browser runs short of space</button></p>
       )}
-      {persisted === true && <p className="muted">This browser will keep these brands until you remove them.</p>}
     </div>
   )
 }
@@ -61,13 +56,13 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
 
   return (
     <div className="view brand-library">
-      <header className="view__head">
-        <h1>Brands</h1>
-        <p className="muted">brandkit is the engine; brands are packs. A pack is one zip with a brand and every file it needs. Drag one onto the page, choose it as a file, open it from a link (<code>?url=</code>) or add it from a catalog, and it is kept in this browser, ready offline, until you remove it.</p>
+      <header className="panel">
+        <h2>Brands</h2>
+        <p className="muted">Each brand is one zip, kept in this browser and ready offline until you remove it.</p>
       </header>
       {problem && <p className="notice notice--error" role="alert">{problem}</p>}
 
-      <section>
+      <section className="panel">
         <h2>In this browser</h2>
         <Usage installed={installed} />
         {installed.length || madeHere.length ? (
@@ -103,10 +98,10 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
               </li>
             ))}
           </ul>
-        ) : <p className="muted">Nothing yet. Add a brand below, or open one from a link.</p>}
+        ) : <p className="muted">Nothing yet.</p>}
       </section>
 
-      <section>
+      <section className="panel">
         <h2>Available to add</h2>
         {catalog.loading ? <p className="muted">Reading the catalogs…</p> : offered.length ? (
           <ul className="brand-library__list">
@@ -126,20 +121,19 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
         ) : <p className="muted">{catalog.catalogs.length ? 'Every brand the catalogs offer is already here.' : 'No catalog is set up for this site. Add one below to see the brands it offers.'}</p>}
       </section>
 
-      <section>
+      <section className="panel">
         <h2>Add a brand</h2>
         <div className="brand-library__dropzone">
           <p><strong>Drag a brand onto this page</strong>, or <button type="button" className="link" onClick={onOpenFile}>choose a file</button>.</p>
-          <p className="muted">A brand pack (.zip), a brand folder or a downloaded kit zipped, or a brand.json. A zip is kept in this browser; a brand.json on its own opens for this visit.</p>
+          <p className="muted">A brand pack, a zipped folder or kit, or a brand.json for this visit.</p>
         </div>
         <form className="brand-library__form" onSubmit={(event) => { event.preventDefault(); if (link.trim()) run('link', async () => { await onAddUrl(link.trim()); setLink('') }) }}>
           <input type="url" required placeholder="https://…/brand.zip" value={link} onChange={(event) => setLink(event.target.value)} aria-label="A brand pack’s address" />
           <button type="submit" className="button" disabled={busy !== null}>{busy === 'link' ? 'Adding…' : 'Add from link'}</button>
         </form>
-        <p className="muted">Or link straight to one: <code>?url=</code> followed by the pack’s address opens it for anyone. A pack on another site has to allow cross-origin requests.</p>
       </section>
 
-      <section>
+      <section className="panel">
         <h2>Catalogs</h2>
         <ul className="brand-library__list">
           {catalog.catalogs.map((entry) => (
@@ -163,7 +157,7 @@ export const BrandLibrary = ({ current, builtIn, installed, saved, catalog, upda
         </form>
       </section>
 
-      <section>
+      <section className="panel">
         <h2>Built in</h2>
         <ul className="brand-library__list">
           {builtIn.map((entry) => (

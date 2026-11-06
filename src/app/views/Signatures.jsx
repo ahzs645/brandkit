@@ -115,7 +115,7 @@ export const RelatedMarks = ({ brand, fonts, openManual }) => (
           <h2 id={`related-mark-${mark.id}-heading`}>{mark.label}</h2>
           {mark.use && <p className="muted">{mark.use}</p>}
         </div>
-        <div className="asset-grid">
+        <div className="asset-grid logo-grid">
           {(mark.variants ?? []).map((variant) => <RelatedMarkCard key={variant.id} brand={brand} fonts={fonts} mark={mark} variant={variant} />)}
         </div>
         <ManualSources brand={brand} sources={mark.sources} openManual={openManual} />
@@ -159,22 +159,21 @@ export const SignatureLogos = ({ brand, fonts, openManual, before, after }) => {
     <div className="view">
       {before}
       {brand.relatedMarks?.length > 0 && (
-        <p className="muted">
+        <p className="muted related-marks">
           Related artwork: {brand.relatedMarks.map((mark, index) => <span key={mark.id}>{index > 0 ? ' · ' : ''}<a href={`#related-mark-${mark.id}`}>{mark.label}</a></span>)}
         </p>
       )}
       {brand.departments?.items?.length > 0 && departmental.length > 0 && (
         <section className="panel toolbar toolbar--panel">
           <DepartmentSelect brand={brand} value={department} onChange={setDepartment} />
-          <p className="muted" style={{ margin: 0, flex: 1 }}>Every departmental signature below is set for the {brand.departments.label?.toLowerCase() ?? 'department'} chosen here.</p>
-          <button type="button" className="button" disabled={busy} onClick={zipAll}>{busy ? 'Setting every one…' : `↓ All ${brand.departments.items.length}, zipped`}</button>
+          <button type="button" className="button" style={{ marginLeft: 'auto' }} disabled={busy} onClick={zipAll}>{busy ? 'Setting every one…' : `↓ All ${brand.departments.items.length}, zipped`}</button>
         </section>
       )}
       {brand.signatures.map((signature) => (
         <section key={signature.id} id={`signature-${signature.id}`} className="panel panel--anchor">
           <h2>{signature.label}</h2>
           {signature.use && <p className="muted" style={{ marginTop: -6 }}>{signature.use}</p>}
-          <div className="asset-grid">
+          <div className="asset-grid logo-grid">
             {colourways.map(([id, spec]) => {
               const make = () => logoDocument({ brand, fonts, values: signature.departmental ? values : undefined }, { signature: signature.id, colourway: id })
               return (

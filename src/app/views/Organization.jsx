@@ -10,7 +10,7 @@ import { SubLogos } from './SubLogos.jsx'
 export const OrganizationSources = ({ brand }) => <>
   {brand.officialResources?.length > 0 && <section className="panel">
     <h2>Official source materials</h2>
-    <p className="muted">{brand.officialResourcesNote ?? 'Original source files and guidance. The editable applications in this kit have their own layout conventions.'}</p>
+    <p className="muted">{brand.officialResourcesNote ?? 'Original files and guidance. This kit’s templates have their own layouts.'}</p>
     <div className="organization-resources">{brand.officialResources.map(resource => <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer">
       <strong>{resource.title ?? resource.label}</strong><span>{resource.format}{resource.note ? ` · ${resource.note}` : ''} ↗</span>
     </a>)}</div>
@@ -54,23 +54,19 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
         <button type="button" className="button" disabled={!name} onClick={() => useName(name, onDocuments)}>Use in documents</button>
         <button type="button" className="button button--quiet" disabled={!name} onClick={() => useName(name, onTemplates)}>Use in templates</button>
       </div>
-      <p className="field__hint">Documents and templates set the name as text under the logo; add a subdepartment there.</p>
     </>} /> : <>
       <section className="panel">
         <h2>Department and subdepartment names</h2>
         <p>{brand.organization?.naming?.note}</p>
-        <p className="muted">Use the unit’s established name. A long name wraps onto another line at the same type size; the logo keeps its original proportions.</p>
       </section>
       <div className="organization-workspace">
         <section className="panel organization-controls" aria-label="Unit settings">
-          <p className="eyebrow">{brand.organization?.name ?? brand.name}</p>
           {['department', 'subdepartment'].map(key => <label className="field" key={key}>
             <span className="field__label">{key === 'department' ? 'Department or faculty' : 'Subdepartment or unit'}</span>
             <input type="text" maxLength={maxCharacters} value={affiliation[key]} placeholder={key === 'department' ? 'Enter the established parent name' : 'Optional unit within that department'} onChange={event => { setAffiliation(current => ({ ...current, [key]: event.target.value })); setMessage(''); setSaveError('') }} />
           </label>)}
           <label className="field"><span className="field__label">Logo artwork width for sizing preview (mm)</span>
             <input type="number" step="0.1" min={brand.logoPolicy?.minimumWidthMm ?? 1} max="160" value={width} onChange={event => setWidth(event.target.value)} />
-            <span className="field__hint">This calculator explains the spacing. Documents use their configured print profile.</span>
           </label>
           {(problem || saveError) && <p className="notice notice--error" role="alert">{problem || saveError}</p>}
           {message && <p className="notice" role="status">{message}</p>}
@@ -92,7 +88,6 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
                 <p style={{ fontSize: `${size.subdepartmentSizePt ?? 10.5}pt` }}>{affiliation.subdepartment || '[Optional subdepartment or unit]'}</p>
               </div>
               <p className="organization-preview-title">Report title</p>
-              <p className="organization-preview-caption">Unit names are editable document text, set at the document’s own sizes.</p>
             </div>
           </div>
         </section>

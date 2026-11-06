@@ -59,7 +59,7 @@ export const NewBrand = ({ fonts, onCreate, existing }) => {
     <div ref={dock.ref} className={`view new-brand ${dock.className}`}>
       <section className="panel new-brand__form" {...dock.panel('edit')}>
         <h2>A new brand</h2>
-        <p className="muted">A starting point with everything in place: logos, templates, a guide and web files. Refine it afterwards in the Brand tab, or by editing its brand.json.</p>
+        <p className="muted">Logos, templates, a guide and web files, ready to refine in Edit brand.</p>
         <Field label="Name"><input type="text" value={options.name} placeholder="yourbrand" onChange={(event) => set({ name: event.target.value })} /></Field>
         <Field label="Wordmark text" hint="Set in Inter Display, then outlined."><input type="text" value={options.wordmark.text} placeholder={name} onChange={(event) => set({ wordmark: { ...options.wordmark, text: event.target.value } })} /></Field>
         <Field label="Weight"><Segmented label="Wordmark weight" value={options.wordmark.font} options={FACES} onChange={(font) => set({ wordmark: { ...options.wordmark, font } })} /></Field>

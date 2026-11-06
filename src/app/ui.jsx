@@ -71,7 +71,7 @@ export const BrandLogo = ({ brand, fonts }) => {
   const aspect = aspectOf(art.svg)
   return (
     <span className="brand-logo" data-brand={brand.id} role="img" aria-label={brand.name}>
-      {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect, '--logo-h': logoHeight(aspect, 4200, [22, 40]) }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
+      {aspect && <span className="brand-logo__art" style={{ aspectRatio: aspect, '--logo-h': logoHeight(aspect, 4200, [22, 38]) }} dangerouslySetInnerHTML={{ __html: art.svg.replace(/<svg[^>]*>/, (tag) => tag.replace(/\s(width|height|role|aria-label)="[^"]*"/g, '').replace('<svg', '<svg aria-hidden="true"')) }} />}
       {(art.named || !aspect) && <span className="brand-logo__name" aria-hidden="true">{brand.name}</span>}
     </span>
   )
@@ -83,7 +83,7 @@ export const BrandLogo = ({ brand, fonts }) => {
  */
 export const Segmented = ({ label, value, options, onChange }) => {
   const items = options.map((option) => (typeof option === 'string' ? { value: option, label: option } : option))
-  if (items.length > 4 || items.reduce((length, item) => length + String(item.label).length, 0) > 44) {
+  if (items.length > 4 || items.reduce((length, item) => length + String(item.label).length, 0) > 32) {
     return <Select aria-label={label} value={value} options={items} onChange={onChange} />
   }
   return <SegmentedButtons label={label} value={value} options={options} onChange={onChange} />
@@ -140,7 +140,7 @@ export const Downloads = ({ make, name, width, rendered, formats = ['svg', 'png'
     <div className="downloads">
       {formats.map((format) => (
         <button key={format} type="button" className="button button--quiet" disabled={Boolean(busy)} onClick={() => go(format)}>
-          {busy === format ? '…' : '↓'} {labels[format] ?? format.toUpperCase()}
+          <span className="downloads__arrow" aria-hidden="true">{busy === format ? '…' : '↓'}</span> {labels[format] ?? format.toUpperCase()}
         </button>
       ))}
       {error && <span className="downloads__error" role="alert">{error}</span>}

@@ -125,22 +125,27 @@ export const Patterns = ({ brand, fonts, source, initialPattern, onSelect, onTem
 
   return <div className="view patterns-view">
     <section className="panel patterns-head">
-      <div><p className="eyebrow">Supporting graphics</p><h1>Patterns for {brand.name}</h1>
-        <p>Browse the brand’s patterns, see how they use its shapes, and open the applications built from them.</p>
-        <p className="patterns-count">{library.patterns.length} patterns · {library.applications.length} applications</p>
+      <div className="panel__head">
+        <h2>Patterns</h2>
+        <p className="muted">{library.patterns.length} patterns · {library.applications.length} applications</p>
       </div>
-      {library.notes.length > 0 && <div className="patterns-notes">{library.notes.map((note, index) => <p key={index}>{note}</p>)}</div>}
+      {/* The first note stays in view: on a reconstruction it says the identity is not current. */}
+      {library.notes.length > 0 && <p className="patterns-notes">{library.notes[0]}</p>}
+      {library.notes.length > 1 && <details className="patterns-source">
+        <summary>About these patterns</summary>
+        {library.notes.slice(1).map((note, index) => <p key={index}>{note}</p>)}
+      </details>}
     </section>
     {library.error && <p className="notice notice--error" role="alert">{library.error}</p>}
 
     <div className="patterns-browser">
       <section className="panel patterns-gallery-panel" aria-label="Pattern library">
         {filterable && <div className="patterns-filters">
-          <label className="field patterns-search"><span className="field__label">Search patterns</span><input type="search" value={query} placeholder="Name, shape or application" onChange={(event) => setQuery(event.target.value)} /></label>
-          <label className="field"><span className="field__label">Collection</span><Select value={group} onChange={setGroup} options={[{ value: 'all', label: 'All collections' }, ...library.groups.map((entry) => ({ value: entry.id, label: `${entry.label} (${entry.count})` }))]} /></label>
-          <label className="field"><span className="field__label">Composition</span><Select value={kind} onChange={setKind} options={[{ value: 'all', label: 'All compositions' }, ...kinds.map(([id, label]) => ({ value: id, label }))]} /></label>
+          <label className="field patterns-search"><span className="visually-hidden">Search patterns</span><input type="search" value={query} placeholder="Search patterns" onChange={(event) => setQuery(event.target.value)} /></label>
+          <label className="field"><span className="visually-hidden">Collection</span><Select value={group} onChange={setGroup} options={[{ value: 'all', label: 'All collections' }, ...library.groups.map((entry) => ({ value: entry.id, label: `${entry.label} (${entry.count})` }))]} /></label>
+          <label className="field"><span className="visually-hidden">Composition</span><Select value={kind} onChange={setKind} options={[{ value: 'all', label: 'All compositions' }, ...kinds.map(([id, label]) => ({ value: id, label }))]} /></label>
         </div>}
-        {filterable && <div className="patterns-results"><p role="status">Showing {visible.length} of {library.patterns.length} patterns</p>{(query || group !== 'all' || kind !== 'all') && <button type="button" className="link" onClick={clear}>Clear filters</button>}</div>}
+        {filterable && (query || group !== 'all' || kind !== 'all') && <div className="patterns-results"><p role="status">Showing {visible.length} of {library.patterns.length} patterns</p><button type="button" className="link" onClick={clear}>Clear filters</button></div>}
         {visible.length ? <ul className="patterns-gallery" aria-label="Patterns">
           {visible.map((entry) => <li className="pattern-card" key={entry.id} data-pattern-id={entry.id}>
             <button type="button" aria-label={`View ${entry.name}`} aria-pressed={selected?.id === entry.id} aria-controls="pattern-detail" onClick={() => choose(entry.id)}>
@@ -172,7 +177,7 @@ export const Patterns = ({ brand, fonts, source, initialPattern, onSelect, onTem
     </div>
 
     {library.applications.length > 0 && <section className="panel patterns-applications" id="patterns-applications" aria-labelledby="patterns-applications-title">
-      <div className="panel__head panel__head--row"><div><h2 id="patterns-applications-title">Patterns in use</h2><p className="muted">Existing templates show the patterns and their documented graphic families in context.</p></div>
+      <div className="panel__head panel__head--row"><div><h2 id="patterns-applications-title">Patterns in use</h2></div>
         {relatedIds.size > 0 && <label className="patterns-related"><input type="checkbox" checked={relatedOnly} onChange={(event) => setRelatedOnly(event.target.checked)} /> Related to {selected.name}</label>}
       </div>
       <div className="patterns-application-grid">{applications.map((item) => <Application key={item.id} brand={brand} fonts={fonts} item={item} relation={selected?.applications.find((relation) => relation.id === item.id)} onTemplate={onTemplate} shared={shared} />)}</div>

@@ -70,7 +70,7 @@ brandkit opens a pack from:
 - **a catalog**: a `catalog.json` listing packs. A site built with `VITE_BRANDKIT_CATALOGS`
   offers its catalog's brands in the brand menu (**Available to add**), and `?brand=<id>`
   installs one on the way; `?catalog=<url>` adds another catalog in one browser;
-- **a file**: drag it onto the page, or choose it with **Open…** (or **Brands → choose a
+- **a file**: drag it onto the page, or choose it with **⋯ → Open a brand…** (or **Brands → choose a
   file**): a pack, a brand folder or a whole kit zipped, or a `brand.json`.
 
 A brand opened from a pack is kept in IndexedDB, so it opens again after a reload, offline,

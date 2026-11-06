@@ -27,7 +27,7 @@ const Palette = ({ brand, entries }) => (
     <div className="panel__head panel__head--row">
       <div>
         <h2>Palette</h2>
-        <p className="muted">Hex and RGB for screens; CMYK and Pantone for print. Click a value to copy it.</p>
+        <p className="muted">Select a value to copy it.</p>
       </div>
       <button type="button" className="button button--quiet" onClick={() => download(paletteCsv(brand, entries), `${brand.id}-colours.csv`)}>↓ CSV</button>
     </div>
@@ -63,7 +63,7 @@ const Roles = ({ brand }) => {
     <section className="panel">
       <div className="panel__head">
         <h2>Text on the brand’s grounds</h2>
-        <p className="muted">The role pairs templates and guide pages set text in. AA needs 4.5 : 1 for body text and 3 : 1 for large text (18 pt, or 14 pt bold).</p>
+        <p className="muted">AA needs 4.5 : 1 for body text and 3 : 1 for large text.</p>
       </div>
       <div className="role-pairs">
         {pairs.map((pair) => (
@@ -102,7 +102,7 @@ const Matrix = ({ entries }) => {
       <div className="panel__head panel__head--row">
         <div>
           <h2>Every pair</h2>
-          <p className="muted"><span className="contrast-intro--table">Each colour as text (rows) on each as a ground (columns).</span><span className="contrast-intro--list">Each colour as a ground, with every colour as text on it.</span></p>
+          <p className="muted"><span className="contrast-intro--table">Text (rows) on grounds (columns).</span><span className="contrast-intro--list">Text on each ground.</span></p>
         </div>
         <Segmented label="Show" value={passing ? 'passing' : 'all'} options={[{ value: 'all', label: 'All pairs' }, { value: 'passing', label: 'AA and better' }]} onChange={(value) => setPassing(value === 'passing')} />
       </div>
@@ -159,7 +159,6 @@ const Tints = ({ brand, entries }) => {
     <section className="panel">
       <div className="panel__head">
         <h2>Tints</h2>
-        <p className="muted">Steps of 20% over white, each with the ink or reverse that reads better on it. Check text on a tint as you would on the colour.</p>
       </div>
       <div className="chips">
         {entries.filter((item) => !item.own).map((item) => <button key={item.key} type="button" className="chip" aria-pressed={item.key === entry.key} title={item.name} style={{ background: item.hex }} onClick={() => setKey(item.key)} />)}

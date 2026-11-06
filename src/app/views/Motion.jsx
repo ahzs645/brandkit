@@ -15,9 +15,8 @@ export { motionUrl }
 /** A study's swatch in the list when its page draws it with a script: the ground it plays on. */
 const groundOf = (brand, study) => (study.background ? colour(brand, study.background) : null)
 
-const capital = (text) => String(text).charAt(0).toUpperCase() + String(text).slice(1)
 const loops = (study) => Boolean(study.loop) || /\bloop\b/.test(study.timing ?? '')
-const kindLabel = (study) => [study.kind && capital(study.kind), loops(study) && 'loops'].filter(Boolean).join(' · ')
+const kindLabel = (study) => (loops(study) ? 'Loops' : null)
 
 const Thumb = ({ brand, library, study }) => {
   if (library?.mode === 'css') return <CssStage library={library} id={study.id} className="motion-thumb__art" design={420} label="" />
@@ -40,7 +39,7 @@ const Tokens = ({ brand, tokens = {}, reduced }) => {
       <div className="panel__head panel__head--row">
         <div>
           <h2>Timing and easing</h2>
-          <p className="muted">Every study runs on these. Copy them as CSS custom properties, or as W3C design tokens for Figma Tokens, Style Dictionary and the like.</p>
+          <p className="muted">Copy as CSS custom properties or W3C design tokens.</p>
         </div>
         <div className="downloads">
           <CopyButton text={tokensCss(tokens, brand.id)}>Copy CSS</CopyButton>
@@ -154,7 +153,7 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
               {group.studies.map((entry) => (
                 <button key={entry.id} type="button" className="studio__item motion-item" aria-pressed={entry.id === study?.id} onClick={() => choose(entry.id)}>
                   <span className="motion-thumb">{library && <Thumb brand={brand} library={library} study={entry} />}</span>
-                  <span>{entry.name}<span className="studio__count">{kindLabel(entry)}</span></span>
+                  <span>{entry.name}{kindLabel(entry) && <span className="studio__count">{kindLabel(entry)}</span>}</span>
                 </button>
               ))}
             </div>
@@ -165,7 +164,7 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
           {/* A phone has no room for the list beside the stage, and a list above it would push the
               stage a screen down: there the studies are a dropdown, grouped as in the list. */}
           <div className="motion-picker">
-            <Field label="Study">
+            <Field label={<span className="visually-hidden">Study</span>}>
               <Select value={study?.id} onChange={choose} options={groups.flatMap((group) => group.studies.map((entry) => ({ value: entry.id, label: entry.name, group: group.label })))} />
             </Field>
           </div>
@@ -196,16 +195,14 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
             <dl className="facts">
               {study.timing && <div><dt>Timing</dt><dd>{study.timing}</dd></div>}
               {study.use && <div><dt>Use</dt><dd>{study.use}</dd></div>}
-              {study.kind && <div><dt>Kind</dt><dd>{kindLabel(study)}</dd></div>}
             </dl>
             {library?.mode === 'css' && library.stages.get(study.id)?.vector && <MotionExport key={study.id} brand={brand} library={library} study={study} />}
             {svgReady && (
               <div className="motion-about__downloads">
                 <button type="button" className="button button--quiet" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-motion-${study.id}.svg`)}>↓ Animated SVG</button>
-                <p className="field__hint">For a web page: plays once in a browser, then holds its last frame.</p>
               </div>
             )}
-            {library?.mode === 'css' && !library.stages.get(study.id)?.vector && <p className="field__hint">This study is drawn with HTML and text, so it plays here and in the library page but does not export as video.</p>}
+            {library?.mode === 'css' && !library.stages.get(study.id)?.vector && <p className="field__hint">Plays here and on the library page; not exported as video.</p>}
           </aside>
         )}
       </div>

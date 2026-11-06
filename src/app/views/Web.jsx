@@ -1,5 +1,5 @@
-// A brand's web components (brand.web.page): each previewed on its own, with its markup and
-// styles to copy or download, then the page they compose, at desktop or phone width. Every
+// A brand's web components (brand.web.page): the page they compose, at desktop or phone width, and
+// each on its own with its markup and styles to copy or download, picked from a list. Every
 // preview is drawn at its full width and scaled to fit, so none scrolls sideways. All of them are
 // set for the department chosen in Departments, or another named here.
 
@@ -7,10 +7,11 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { webComponentDocument, webComponents, webPage, webStylesheet } from '../../engine/webpage.js'
 import { download } from '../../export/render.js'
 import { readAffiliation } from '../affiliation.js'
-import { Field, Segmented } from '../ui.jsx'
+import { Field, Segmented, Select } from '../ui.jsx'
 import { DepartmentSelect } from './Signatures.jsx'
 
 const WIDTHS = { desktop: 1280, phone: 390 }
+const PAGE = 'page'
 
 // A downloaded file carries its fonts, so it renders the same wherever it is opened.
 const embedFonts = async (brand, source) => {
@@ -73,6 +74,7 @@ export const Web = ({ brand, fonts, source }) => {
   const field = brand.departments?.field ?? 'department'
   const [department, setDepartment] = useState(() => readAffiliation(brand.id).department)
   const [width, setWidth] = useState('desktop')
+  const [selected, setSelected] = useState(PAGE)
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
   const ctx = { brand, fonts }
@@ -80,40 +82,50 @@ export const Web = ({ brand, fonts, source }) => {
   const fontUrl = (file) => new URL(source.url(file), location.href).href
   const components = useMemo(() => webComponents(ctx, { department }), [brand, fonts, department])
   const page = useMemo(() => webPage(ctx, { department, fontUrl }), [brand, fonts, source, department])
+  const component = components.find((entry) => entry.id === selected)
   const save = async (name, make) => {
     setBusy(name); setError('')
     try { download(new Blob([make(await embedFonts(brand, source))], { type: 'text/html' }), name) } catch (problem) { setError(problem.message) } finally { setBusy('') }
   }
   return <div className="view">
     <section className="panel">
-      <h2>Web components</h2>
-      <div className="toolbar">
+      <div className="panel__head"><h2>Web</h2></div>
+      <div className="web-toolbar">
         {brand.departments?.items?.length > 0 && <DepartmentSelect brand={brand} value={preset?.id ?? ''} onChange={(id) => setDepartment(brand.departments.items.find((item) => item.id === id)?.values?.[field] ?? '')} />}
         <Field label="Department as set"><input type="text" value={department.replace(/\n/g, ' ')} onChange={(event) => setDepartment(event.target.value)} placeholder="None: the full logo" /></Field>
         <Copy label="Copy all CSS" text={webStylesheet(ctx, { fontUrl })} />
       </div>
       {error && <p className="notice notice--error" role="alert">{error}</p>}
     </section>
-    {components.map((component) => <section key={component.id} className="panel web-component" aria-labelledby={`web-${component.id}`}>
-      <div className="web-component__head">
-        <h3 id={`web-${component.id}`}>{component.label}</h3>
-        <div className="documents-actions">
-          <Copy label="Copy HTML" text={component.html} />
-          <Copy label="Copy CSS" text={component.css} />
-          <button type="button" className="button button--quiet" disabled={Boolean(busy)} onClick={() => save(`${brand.id}-${component.id}.html`, (url) => webComponentDocument(ctx, component.id, { department, fontUrl: url }))}>{busy === `${brand.id}-${component.id}.html` ? '…' : '↓ HTML'}</button>
-        </div>
-      </div>
-      <Frame title={`${component.label} preview`} html={webComponentDocument(ctx, component.id, { department, fontUrl })} />
-    </section>)}
-    <section className="panel web-preview" aria-labelledby="web-page">
-      <div className="web-component__head">
-        <div><h3 id="web-page">Page template</h3><p className="muted">The components composed as a department’s page.</p></div>
-        <div className="documents-actions">
-          <Segmented label="Width" value={width} options={[{ value: 'desktop', label: 'Desktop' }, { value: 'phone', label: 'Phone' }]} onChange={setWidth} />
-          <button type="button" className="button" disabled={Boolean(busy)} onClick={() => save(`${brand.id}-web-page.html`, (url) => webPage(ctx, { department, fontUrl: url }))}>{busy === `${brand.id}-web-page.html` ? '…' : '↓ Page HTML'}</button>
-        </div>
-      </div>
-      <Frame key={width} title={`${brand.name} web page preview`} html={page} width={WIDTHS[width]} exact minHeight={600} />
-    </section>
+    <div className="studio web-studio">
+      <nav className="studio__list" aria-label="Web components">
+        <div className="studio__group"><h3>Page</h3><button type="button" className="studio__item web-item" aria-pressed={selected === PAGE} onClick={() => setSelected(PAGE)}>Page template</button></div>
+        <div className="studio__group"><h3>Components</h3>{components.map((entry) => <button key={entry.id} type="button" className="studio__item web-item" aria-pressed={selected === entry.id} onClick={() => setSelected(entry.id)}>{entry.label}</button>)}</div>
+      </nav>
+      {/* The list above; a phone has the same choices as a dropdown. */}
+      <section className="studio__stage" aria-labelledby="web-shown">
+        <div className="web-picker"><Select aria-label="Web component" value={selected} onChange={setSelected} options={[{ value: PAGE, label: 'Page template', group: 'Page' }, ...components.map((entry) => ({ value: entry.id, label: entry.label, group: 'Components' }))]} /></div>
+        {component ? <>
+          <div className="web-component__head">
+            <h3 id="web-shown">{component.label}</h3>
+            <div className="documents-actions">
+              <Copy label="Copy HTML" text={component.html} />
+              <Copy label="Copy CSS" text={component.css} />
+              <button type="button" className="button button--quiet" disabled={Boolean(busy)} onClick={() => save(`${brand.id}-${component.id}.html`, (url) => webComponentDocument(ctx, component.id, { department, fontUrl: url }))}>{busy === `${brand.id}-${component.id}.html` ? '…' : '↓ HTML'}</button>
+            </div>
+          </div>
+          <Frame key={component.id} title={`${component.label} preview`} html={webComponentDocument(ctx, component.id, { department, fontUrl })} />
+        </> : <>
+          <div className="web-component__head">
+            <h3 id="web-shown">Page template</h3>
+            <div className="documents-actions">
+              <Segmented label="Width" value={width} options={[{ value: 'desktop', label: 'Desktop' }, { value: 'phone', label: 'Phone' }]} onChange={setWidth} />
+              <button type="button" className="button" disabled={Boolean(busy)} onClick={() => save(`${brand.id}-web-page.html`, (url) => webPage(ctx, { department, fontUrl: url }))}>{busy === `${brand.id}-web-page.html` ? '…' : '↓ Page HTML'}</button>
+            </div>
+          </div>
+          <Frame key={width} title={`${brand.name} web page preview`} html={page} width={WIDTHS[width]} exact minHeight={600} />
+        </>}
+      </section>
+    </div>
   </div>
 }

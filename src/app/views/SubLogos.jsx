@@ -37,7 +37,7 @@ const ProfilePictures = ({ brand, fonts, name }) => {
     <h2 id="profile-pictures">{pictures.label}</h2>
     <p className="muted">{pictures.use}</p>
     {clipped.length > 0 && <p className="notice" role="status">A circular crop clips “{clipped.join('”, “')}” from the square. Use the circle layout on platforms that crop.</p>}
-    <div className="asset-grid profile-pictures">
+    <div className="asset-grid logo-grid profile-pictures">
       {pictures.shapes.map((shape) => <ProfilePicture key={shape.id} brand={brand} pictures={pictures} shape={shape} make={() => pictures.render({ fonts }, { name, shape: shape.id })} name={name} />)}
     </div>
   </section>
@@ -82,7 +82,7 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
           <Select value={signature.id} onChange={setSignatureId} options={signatures.map((entry) => ({ value: entry.id, label: entry.label }))} />
         </Field>}
         <DepartmentSelect brand={brand} value={preset} onChange={choose} />
-        <Field label={`${departments.label ?? 'Department'} as set`} hint="Edit the name, or type another. A line break you type is kept; otherwise the name wraps by the signature’s rules.">
+        <Field label={`${departments.label ?? 'Department'} as set`} hint="A line break you type is kept.">
           <textarea rows={3} value={text} onChange={(event) => { setText(event.target.value) }} placeholder="Type the unit’s established name" />
         </Field>
         {chosen?.alternateOf && chosen.values?.[field] === text && <p className="muted">Short form of {chosen.alternateOf}.</p>}
@@ -90,7 +90,7 @@ export const SubLogos = ({ brand, fonts, actions, initialName }) => {
         {actions?.(name)}
       </section>
       <section className="panel organization-preview-panel" aria-label="Sub-logo preview">
-        <div className="asset-grid">
+        <div className="asset-grid logo-grid">
           {colourways.map(([id, spec]) => {
             const make = () => logoDocument({ brand, fonts, values }, { signature: signature.id, colourway: id })
             return <figure key={id} className="asset-card">

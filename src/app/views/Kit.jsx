@@ -137,7 +137,6 @@ const KitView = ({ brand, fonts, source }) => {
       <section className="panel kit">
         <div className="kit-intro">
           <h2>The {brand.name} kit{brand.revision ? `, with the ${brand.revision.title.toLowerCase()} (${brand.revision.status})` : ''}</h2>
-          <p className="muted">Every file is made in this browser from brand.json; nothing is uploaded.</p>
         </div>
 
         <fieldset className="kit-step" disabled={Boolean(progress)}>
@@ -151,11 +150,13 @@ const KitView = ({ brand, fonts, source }) => {
                 <span className="kit-card__count">{counts[item.id]} files</span>
               </label>
             ))}
+            <label className="kit-card">
+              <input type="radio" name="kit-pack" value="complete" checked={everything} onChange={() => choosePack('complete')} />
+              <span className="kit-card__name">{EVERYTHING.label}</span>
+              <span className="kit-card__description">Every file, for designers and archives.</span>
+              <span className="kit-card__count">{counts.complete} files</span>
+            </label>
           </div>
-          <label className="kit-everything">
-            <input type="radio" name="kit-pack" value="complete" checked={everything} onChange={() => choosePack('complete')} />
-            <span>{EVERYTHING.label} ({counts.complete} files, for designers and archives)</span>
-          </label>
         </fieldset>
 
         {subLogos && (
@@ -221,7 +222,7 @@ const KitView = ({ brand, fonts, source }) => {
             </details>
           )
         })}
-        {extras.length > 0 && <p className="muted plan-extras">Plus {extras.length} source and package {extras.length === 1 ? 'file' : 'files'} (index.html, brand.json{extras.some((entry) => entry.path.startsWith('reference/')) ? ', the identity record' : ''}) so the folder opens and explains itself.</p>}
+        {extras.length > 0 && <p className="muted plan-extras">Plus {extras.length} source {extras.length === 1 ? 'file' : 'files'}.</p>}
       </section>
     </div>
   )

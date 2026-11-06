@@ -179,7 +179,6 @@ export const Documents = ({ brand, fonts }) => {
           <button className="button button--quiet" type="button" disabled={!preview.html || Boolean(composed.error)} onClick={() => download(preview.html, `${model.id}.html`)}>Download print view</button>
           <button className="button button--quiet" type="button" disabled={!preview.html || busy || Boolean(composed.error)} onClick={print}>Print or save PDF</button>
         </div>
-        <p className="caption">For a PDF with Word’s pagination, export the edited Word master as PDF. The command-line document build can create the matching pair.</p>
       </section>
       <section className="panel documents-preview" aria-label="Document preview" {...dock.panel('preview')}>
         {(error || composed.error || preview.error) && <p className="notice notice--error" role="alert">{error || composed.error || preview.error}</p>}
