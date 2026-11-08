@@ -2,7 +2,8 @@
 // the brand menu (pre-drawn for the built-in brands by scripts/menu-logos.mjs). A plain module, so
 // that script and Node's tests can use it.
 
-import { logoDocument, symbolDocument } from '../engine/artwork.js'
+import { lockup, logoDocument, svgDocument, symbolDocument } from '../engine/artwork.js'
+import { colour } from '../engine/brand.js'
 
 export const aspectOf = (svg) => {
   // Vite's inlined SVGs use single quotes; generated artwork uses double quotes.
@@ -17,12 +18,16 @@ export const aspectOf = (svg) => {
  */
 export const mastheadArt = (brand, fonts) => {
   if (brand.logoPolicy?.allowInheritedColour === false) {
-    // A brand that forbids inheriting colour still permits its black, monochrome colourway: the
-    // interface draws that one, with its black taking the ink, so it stands with every other
-    // brand's logo in the masthead and the menu (and turns white, also permitted, in the dark).
-    const mono = Object.entries(brand.colourways ?? {}).find(([, spec]) => /^#0{6}$/i.test(brand.colours?.[spec.all] ?? ''))
-    const svg = logoDocument({ brand, fonts }, { signature: brand.signatures[0].id, colourway: mono?.[0] ?? brand.defaultColourway })
-    return { svg: mono ? svg.replace(/(fill|stroke)="#0{6}"/gi, '$1="currentColor"') : svg }
+    // Keep fixed paints fixed. A supplied monochrome colourway with its own ground remains
+    // readable in either interface theme; otherwise use the source's default colourway and
+    // declared ground. Never invent a background or let surrounding UI ink recolour the logo.
+    const mono = Object.entries(brand.colourways ?? {}).find(([, spec]) => spec.ground && /^#0{6}$/i.test(colour(brand, spec.all) ?? ''))
+    const colourway = mono?.[0] ?? brand.defaultColourway
+    const signature = brand.signatures[0]
+    const ctx = { brand, fonts }
+    const { width, height, art } = lockup(ctx, { signature: signature.id, colourway })
+    const background = colour(brand, brand.colourways?.[colourway]?.ground)
+    return { svg: svgDocument(ctx, width, height, art, `${brand.name} / ${signature.label ?? signature.id} / ${colourway}`, { background }) }
   }
   if (brand.families?.length) return { svg: logoDocument({ brand, fonts }, { family: brand.families[0].id, layout: 'horizontal', colourKey: 'currentColor' }) }
   if (brand.id === 'bc-province-1977') {
@@ -39,7 +44,8 @@ export const mastheadArt = (brand, fonts) => {
 
 /**
  * The brand menu's logo: the masthead art, without the size, title or description of a document,
- * drawn in currentColor. A logo near square (a symbol) has the brand's name set beside it in the menu.
+ * inheriting ink only where the brand permits it. A logo near square (a symbol) has the brand's
+ * name set beside it in the menu.
  */
 export const menuLogo = (brand, fonts) => {
   const { svg } = mastheadArt(brand, fonts)

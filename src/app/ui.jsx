@@ -65,7 +65,7 @@ export const MenuLogo = ({ url, brand, name, id = brand?.id }) => {
   return art ? <MenuArt svg={art} name={name} id={id} /> : <span className="menu-logo" data-brand={id}><span className="menu-logo__name">{name}</span></span>
 }
 
-/** The brand's logo in the masthead, drawn inline in currentColor to take the ink of light and dark alike. */
+/** The masthead logo inherits interface ink only where permitted; fixed artwork keeps its declared ground. */
 export const BrandLogo = ({ brand, fonts }) => {
   const art = useMemo(() => { try { return mastheadArt(brand, fonts) } catch { return { named: true } } }, [brand, fonts])
   const aspect = aspectOf(art.svg)
