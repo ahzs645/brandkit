@@ -2,8 +2,8 @@
 
 Use a generated consumer profile when an application needs logos, colours and source font
 metadata. Use the engine or document exporter when it needs to build new branded artifacts.
-These two routes apply to all eight built-in brands and avoid assumptions about one brand's
-symbol geometry.
+These routes work with the built-in Northwind example and brands opened from packs, without
+assuming one brand's symbol geometry.
 
 ## Portable profile
 
@@ -16,7 +16,7 @@ import { readFile } from 'node:fs/promises'
 import { consumerProfile } from 'brandkit/consumer'
 import { loadBrandFontsFromDisk } from 'brandkit/fonts/node'
 
-const folder = './vendor/brandkit/brands/unbc'
+const folder = './vendor/brandkit/brands/northwind'
 const brand = JSON.parse(await readFile(`${folder}/brand.json`, 'utf8'))
 const fonts = await loadBrandFontsFromDisk(brand, folder)
 if (fonts.failures.length) throw new Error('Load the required brand fonts before exporting.')
@@ -61,6 +61,45 @@ uses its bundled document fonts and reports such substitutions explicitly.
 Keep imported presentation data separate from company/legal records. A brand import should
 not replace an organization's name, address, tax registration or contact information. Store
 the profile with issued document snapshots so later brand changes do not restyle past output.
+
+## Application and workspace identity
+
+A consumer profile can also identify a workspace throughout an application. Save a validated
+copy as workspace presentation data, then use one shared logo component for navigation,
+workspace selection, overview cards and settings. In Societyer's companion integration this
+is a dedicated `workspaceBrand` setting; its optional `workspaceBrandUseAccent` setting
+controls interface colours. These are host settings, not additions to the consumer-profile
+schema. Importing a profile previews the light and dark appearances before it is applied.
+
+Keep the actual workspace name beside the artwork and in control labels. For example, a
+workspace called “DDC North — live test workspace” retains that name even when its imported
+brand profile has a different `name`. The profile's name and version describe the artwork;
+they do not rename the workspace or change its legal and contact records.
+
+Use the supplied `logos.primary` for light surfaces and `logos.reverse` for dark surfaces,
+subject to the identity's background rules. Preserve the SVG's complete viewBox and aspect
+ratio, using containment such as `object-fit: contain` for an image. Select the actual supplied
+variant instead of applying a CSS filter, replacing fills with `currentColor`, or reconstructing
+lettering. The `/1` profile has no separate compact-logo or app-icon field. A narrow rail or
+small workspace tile still contains the complete artwork; give a long wordmark more room in
+the expanded sidebar, workspace picker and settings preview. Do not crop it into an inferred
+symbol. If there is no usable brand logo, the host can fall back to an existing workspace
+upload or an initial derived from the workspace name.
+
+An optional interface accent can use `colours.primary` as its starting point. Derive separate
+control colours with readable foregrounds and contrast on the current light or dark surfaces;
+those derived shades are interface tokens, not new logo paints. Scope them to the active
+workspace and restore the application's defaults on workspace changes, removal and sign-out.
+Keep success, warning and error colours independent. Societyer keeps its local interface
+fonts: source typography remains metadata and outlined logo lettering stays intact. Importing
+a profile does not download fonts or fetch its source and resource URLs.
+
+Workspace branding and document designs have separate lifetimes. New designs can explicitly
+adopt the saved workspace brand, and the document designer can copy it into an editable
+template. Saving a different workspace brand does not rewrite saved templates or issued
+document snapshots. A host may also offer an explicit action to copy an existing document
+template's brand into the workspace; it should not silently derive navigation identity from
+whichever financial template happens to be the current default.
 
 ## Respect identity restrictions
 
