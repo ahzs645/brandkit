@@ -72,10 +72,12 @@ const guideSheet = (brand, collection) => {
   }
 }
 
-export const extendBrandPatterns = async (brand, folder) => {
-  if (!BRAND_IDS.includes(brand.id)) return brand
+// `collection` lets a brand kept outside this repository (a pack's own source) supply its module;
+// without it, only the brands in BRAND_IDS are extended.
+export const extendBrandPatterns = async (brand, folder, collection) => {
+  if (!collection && !BRAND_IDS.includes(brand.id)) return brand
   folder = folder instanceof URL ? folder.pathname : folder
-  const collection = await collectionFor(brand.id)
+  collection ??= await collectionFor(brand.id)
   const additional = collection.supportingSymbols(brand)
   brand.symbols = Object.fromEntries(Object.entries(brand.symbols ?? {}).filter(([id]) => !id.startsWith('explore-')))
   Object.assign(brand.symbols, additional)
