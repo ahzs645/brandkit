@@ -25,8 +25,9 @@ function Example() {
   const [name, setName] = useState('Field research team')
   const [format, setFormat] = useState('web')
   const [scope, setScope] = useState('brand')
-  const [saved, setSaved] = useState(false)
+  const [saved, setSaved] = useState(null)
   const [open, setOpen] = useState(false)
+  const hasUnsavedChanges = saved && (saved.name !== name || saved.format !== format)
   return <Theme theme={brandTheme} mode={mode}>
     <main className="example" data-testid="root-theme">
       <header className="masthead">
@@ -49,8 +50,8 @@ function Example() {
           <div className="form">
             <TextInput label="Workspace name" value={name} onChange={setName} />
             <Selector label="Export format" options={[{ value: 'web', label: 'Website kit' }, { value: 'documents', label: 'Documents and slides' }]} value={format} onChange={setFormat} />
-            <div className="actions"><Button label="Save preferences" variant="primary" onClick={() => setSaved(true)} /><Button label="Reset" variant="secondary" onClick={() => { setName('Field research team'); setFormat('web'); setSaved(false) }} /></div>
-            <div role="status" className="save-status">{saved ? `Saved “${name}” with ${format === 'web' ? 'Website kit' : 'Documents and slides'}.` : 'Preferences are kept only for this demo.'}</div>
+            <div className="actions"><Button label="Save preferences" variant="primary" onClick={() => setSaved({ name, format })} /><Button label="Reset" variant="secondary" onClick={() => { setName('Field research team'); setFormat('web'); setSaved(null) }} /></div>
+            <div role="status" className="save-status">{hasUnsavedChanges ? 'Unsaved changes. Save preferences to apply them.' : saved ? `Saved “${saved.name}” with ${saved.format === 'web' ? 'Website kit' : 'Documents and slides'}.` : 'Preferences are kept only for this demo.'}</div>
           </div>
           <Text color="accent" data-testid="root-accent-text">Accent text uses the brand’s readable interface colour.</Text>
         </section>

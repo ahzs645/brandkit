@@ -63,8 +63,9 @@ The check uses Brandkit’s existing Playwright installation. Install Chromium w
 available, or set `CHROMIUM_PATH` to an installed Chromium executable.
 
 It verifies computed component colours against both generated themes, loaded font
-families, nested modal colours, focus return, input/selection/save interactions,
-mobile overflow and dialog bounds, and browser resource/runtime errors. Screenshots
+families, on-accent text, keyboard focus outlines, nested modal colours, focus return,
+input/selection/save interactions, edits after saving, reset, mobile overflow and
+dialog bounds, and browser resource/runtime errors. Screenshots
 and the result are written under `.documentation/astryx-example/` (override with
 `SCREENSHOT_DIR`). These checks cover this example and Astryx version, not every
 component or every possible brand.

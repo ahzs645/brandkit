@@ -105,7 +105,7 @@ for initial HTML mode/theme attributes and hydration.
 | `reverse`, `ink` | Text on accent controls | Prefer the first supplied foreground meeting the target, with white/black fallbacks |
 | Derived accent tint | Selected background | Use an opaque tint that remains readable with both upstream primary and secondary text |
 | Original `primary` | `localTokens.--brandkit-source-accent` | Preserve the original value without inventing an Astryx semantic token |
-| Body/display consumer families | Body/heading typography | Use `consumerFamily` when declared, otherwise `family`; remove the artwork-only face from fallback candidates |
+| Body/display consumer families | Body/heading font-family tokens | Use `consumerFamily` when declared, otherwise `family`; remove the artwork-only face from fallback candidates |
 | Body/headline weights | Explicit weight tokens | Retain Astryx's type scale while mapping supported weights |
 | Existing logo/profile assets | Host artwork | Use complete approved variants; theme tokens do not change their paints |
 
@@ -123,6 +123,10 @@ Typography sizes and tracking intended for print layouts are not transferred
 into component sizing. Brandkit's label font is not assumed to be a code font.
 Variable font-face weight ranges are not single UI text weights: unsupported
 weights leave the upstream default and generate a notice.
+
+Font families are serialized as CSS strings, including names with punctuation.
+Explicit font-family tokens avoid Astryx's automatic family quoting and preserve
+the same consumer font choice without changing its typography scale.
 
 ### Consumer fonts and artwork
 
@@ -166,7 +170,7 @@ consumer, not part of Brandkit's production dependency graph.
 
 ```sh
 # Brandkit engine regression suite
-TZ=UTC npm test
+npm test
 
 # The Brandkit site and its export controls
 npm run build
@@ -175,24 +179,22 @@ npm run test:astryx:browser
 # Follow examples/astryx/README.md for its package-contract and browser checks.
 ```
 
-The existing deterministic brand-pack builder uses the ZIP epoch as a UTC Date;
-running its tests in a timezone west of UTC can yield a local 1979 date and
-fflate's date-range error. `TZ=UTC` makes those existing checks reproducible;
-this integration does not change that unrelated pack-builder behavior.
+Source-pack ZIP timestamps use fixed local DOS clock fields at January 1, 1980.
+This fixes the previous UTC-Date conversion that became 1979 in Canadian timezones.
+A regression verifies identical bytes and hashes in UTC, Vancouver, Tokyo and
+Kiritimati; no timezone override is needed to run the test suite.
 
 ### Acceptance recorded for this change
 
-The adapter's unit tests, the normal application build and the actual published
-Astryx consumer build have been exercised locally. The consumer verification
-checks the real package contract and compiled theme outputs. See the PR for the
-final command results.
+The Pages workflow checks the main site's Astryx export downloads on every build.
+When the adapter, brand inputs, consumer example or test contract changes, it also
+installs the pinned consumer, verifies real package/compiled-theme compatibility,
+builds it and runs its browser journeys. Manual workflow runs include those checks.
+The browser-check artifact retains screenshots and failure reports for review.
 
-Browser acceptance remains outstanding in this managed environment: standalone
-Chromium cannot create its required local sockets, escalation is disallowed,
-and the connected cloud browser cannot reach the executor's local preview.
-The saved browser scripts check direct/shared export routes, actual downloaded
-files, light/dark components, fonts, nested scope, portal behavior and phone
-layout when run on a machine with a working browser.
+The scripts cover direct/shared export routes, actual downloaded files, light/dark
+components, local fonts, nested scope, popup/dialog behavior, keyboard focus and
+phone layout. See the PR and workflow run for results on the candidate commit.
 
 ## Further integration choices
 

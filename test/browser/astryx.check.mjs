@@ -18,7 +18,9 @@ const server = await preview({ root: example, logLevel: 'silent', preview: { hos
 const base = server.resolvedUrls.local[0]
 const args = process.env.CHROMIUM_ARGS ? JSON.parse(process.env.CHROMIUM_ARGS) : ['--no-sandbox', '--disable-dev-shm-usage']
 let browser
+let page
 const results = []
+const errors = []
 
 const hexRgb = (hex) => `rgb(${hex.slice(1).match(/../g).map((part) => parseInt(part, 16)).join(', ')})`
 const token = (theme, name, mode) => {
@@ -30,8 +32,9 @@ const style = (locator, property) => locator.evaluate((element, name) => getComp
 
 try {
   browser = await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args })
-  const page = await browser.newPage({ viewport: { width: 1280, height: 1040 }, reducedMotion: 'reduce' })
-  const errors = []
+  page = await browser.newPage({ viewport: { width: 1280, height: 1040 }, reducedMotion: 'reduce' })
+  page.setDefaultTimeout(15000)
+  page.setDefaultNavigationTimeout(30000)
   page.on('pageerror', (error) => errors.push(error.message))
   page.on('response', (response) => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`) })
   await page.goto(base, { waitUntil: 'networkidle' })
@@ -45,11 +48,21 @@ try {
   for (const mode of ['light', 'dark']) {
     await page.getByRole('button', { name: mode === 'light' ? 'Light' : 'Dark', exact: true }).click()
     await page.waitForFunction((expected) => document.documentElement.getAttribute('data-theme') === expected, mode)
-    assert.equal(await style(page.getByRole('button', { name: 'Save preferences', exact: true }), 'backgroundColor'), token(config, '--color-accent', mode), `${mode}: root primary button uses generated fill`)
+    const save = page.getByRole('button', { name: 'Save preferences', exact: true })
+    assert.equal(await style(save, 'backgroundColor'), token(config, '--color-accent', mode), `${mode}: root primary button uses generated fill`)
+    assert.equal(await style(save, 'color'), token(config, '--color-on-accent', mode), `${mode}: root primary button uses readable content colour`)
     assert.equal(await style(page.getByTestId('root-accent-text'), 'color'), token(config, '--color-text-accent', mode), `${mode}: root accent text uses generated text colour`)
     assert.equal(await style(page.getByRole('button', { name: 'Open scoped dialog', exact: true }), 'backgroundColor'), token(secondary, '--color-accent', mode), `${mode}: nested primary button uses its own fill`)
     assert.equal(await style(page.getByTestId('secondary-accent-text'), 'color'), token(secondary, '--color-text-accent', mode), `${mode}: nested accent text uses its own colour`)
     assert.notEqual(token(config, '--color-accent', mode), token(secondary, '--color-accent', mode), `${mode}: distinct themes remain distinct`)
+    // Move with the keyboard, then back from the adjacent Reset button, so this
+    // exercises :focus-visible rather than only programmatic/pointer focus.
+    await save.focus()
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Shift+Tab')
+    assert.equal(await save.evaluate((button) => button === document.activeElement && button.matches(':focus-visible')), true, `${mode}: keyboard focus reaches the primary button`)
+    assert.equal(await style(save, 'outlineColor'), token(config, '--focus-outline-color', mode), `${mode}: keyboard focus uses the generated focus colour`)
+    assert.notEqual(await style(save, 'outlineStyle'), 'none', `${mode}: the focus outline is visible`)
     await page.screenshot({ path: resolve(captures, `${mode}.png`), fullPage: true })
     await page.getByRole('combobox', { name: 'Scoped selection' }).click()
     const scopedOption = page.getByRole('option', { name: 'Brand files', exact: true })
@@ -64,15 +77,23 @@ try {
     await page.screenshot({ path: resolve(captures, `${mode}-dialog.png`) })
     await dialog.getByRole('button', { name: 'Done', exact: true }).click()
     await dialog.waitFor({ state: 'hidden' })
-    assert.equal(await page.evaluate(() => document.activeElement?.textContent?.trim()), 'Open scoped dialog', 'Closing dialog returns focus to trigger')
-    results.push(`${mode}: buttons, accent text, independent theme scope, selection popup and modal`)
+    await page.waitForFunction(() => document.activeElement?.textContent?.trim() === 'Open scoped dialog')
+    results.push(`${mode}: buttons, on-accent text, keyboard focus, independent theme scope, selection popup and modal`)
   }
   await page.getByLabel('Workspace name').fill('Northern research team')
   await page.getByRole('combobox', { name: 'Export format' }).click()
   await page.getByRole('option', { name: 'Documents and slides', exact: true }).click()
   await page.getByRole('button', { name: 'Save preferences', exact: true }).click()
   await page.getByRole('status').filter({ hasText: 'Saved “Northern research team” with Documents and slides.' }).waitFor()
-  results.push('Controlled input, selector portal and save action')
+  await page.getByLabel('Workspace name').fill('Northern research team — revised')
+  await page.getByRole('status').filter({ hasText: 'Unsaved changes. Save preferences to apply them.' }).waitFor()
+  await page.getByRole('button', { name: 'Save preferences', exact: true }).click()
+  await page.getByRole('status').filter({ hasText: 'Saved “Northern research team — revised” with Documents and slides.' }).waitFor()
+  await page.getByRole('button', { name: 'Reset', exact: true }).click()
+  assert.equal(await page.getByLabel('Workspace name').inputValue(), 'Field research team')
+  assert.match(await page.getByRole('combobox', { name: 'Export format' }).textContent(), /Website kit/)
+  await page.getByRole('status').filter({ hasText: 'Preferences are kept only for this demo.' }).waitFor()
+  results.push('Controlled input, selector portal, save snapshot, edit-after-save and reset')
   await page.setViewportSize({ width: 390, height: 844 })
   await page.screenshot({ path: resolve(captures, 'mobile-dark.png'), fullPage: true })
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), 'Mobile layout does not scroll horizontally')
@@ -80,7 +101,7 @@ try {
   const mobileDialog = page.getByRole('dialog', { name: 'Scoped theme preview' })
   await mobileDialog.waitFor()
   const bounds = await mobileDialog.boundingBox()
-  assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= 390, 'Mobile dialog fits the viewport')
+  assert.ok(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390, 'Mobile dialog fits the viewport')
   await page.screenshot({ path: resolve(captures, 'mobile-dark-dialog.png') })
   await page.keyboard.press('Escape')
   await mobileDialog.waitFor({ state: 'hidden' })
@@ -88,6 +109,10 @@ try {
   assert.deepEqual(errors, [], 'No browser exceptions or failed resources')
   await writeFile(resolve(captures, 'report.json'), `${JSON.stringify({ package: '@astryxdesign/core', version: '0.7.11', passed: results, errors }, null, 2)}\n`)
   console.log(`Astryx 0.7.11: ${results.length} browser journeys passed. Captures: ${captures}`)
+} catch (error) {
+  if (page) await page.screenshot({ path: resolve(captures, 'failure.png'), fullPage: true, timeout: 5000 }).catch(() => {})
+  await writeFile(resolve(captures, 'report.json'), `${JSON.stringify({ package: '@astryxdesign/core', version: '0.7.11', passed: results, errors, failure: error.stack ?? error.message }, null, 2)}\n`)
+  throw error
 } finally {
   await browser?.close()
   await new Promise((done) => server.httpServer.close(done))
