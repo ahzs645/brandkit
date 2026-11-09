@@ -21,7 +21,6 @@ import { Motion } from './views/Motion.jsx'
 import { Colour } from './views/Colour.jsx'
 import { motionUrl, viewOrOverview } from './motion.js'
 import { hasDepartments } from './affiliation.js'
-import { hasWebPage } from '../engine/webpage.js'
 import { patternLibrary } from '../engine/pattern-catalog.js'
 import { loadExtension } from '../extensions/index.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
@@ -76,13 +75,12 @@ const OPEN_VIEWS = SHARED ? SHARED_VIEWS : ALL_VIEWS
 const hasPatterns = (brand) => { try { return patternLibrary(brand).patterns.length > 0 } catch { return false } }
 // Until the brand arrives only the tabs every brand has are shown, so the row does not fill with
 // tabs the brand turns out not to have and then lose them.
-const ALWAYS = ['overview', 'logos', 'colour', 'templates', 'kit']
+const ALWAYS = ['overview', 'logos', 'colour', 'templates', 'web', 'kit']
 const offers = (view, { brand, motionLink, extensionView }) => {
   if (!brand) return ALWAYS.includes(view)
   switch (view) {
     case 'motion': return Boolean(motionLink)
     case 'organization': return hasDepartments(brand)
-    case 'web': return hasWebPage(brand)
     case 'patterns': return hasPatterns(brand)
     case 'guide': return Boolean(brand.guide?.pages?.length)
     // The printer is for card designs: a brand with a printer package (a card set up) has it.
@@ -558,7 +556,7 @@ export const App = () => {
             {view === 'extension' && ExtensionView && <div className="view">
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
             </div>}
-            {view === 'web' && hasWebPage(brand) && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
+            {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

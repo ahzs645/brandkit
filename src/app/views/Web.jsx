@@ -1,10 +1,12 @@
-// A brand's web components (brand.web.page): the page they compose, at desktop or phone width, and
+// Every brand's Astryx theme export, and its optional web components (brand.web.page): the page
+// they compose, at desktop or phone width, and
 // each on its own with its markup and styles to copy or download, picked from a list. Every
 // preview is drawn at its full width and scaled to fit, so none scrolls sideways. All of them are
 // set for the department chosen in Departments, or another named here.
 
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { webComponentDocument, webComponents, webPage, webStylesheet } from '../../engine/webpage.js'
+import { hasWebPage, webComponentDocument, webComponents, webPage, webStylesheet } from '../../engine/webpage.js'
+import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme } from '../../engine/astryx.js'
 import { download } from '../../export/render.js'
 import { readAffiliation } from '../affiliation.js'
 import { Field, Segmented, Select } from '../ui.jsx'
@@ -70,7 +72,53 @@ const Copy = ({ label, text }) => {
   return <button type="button" className="button button--quiet" onClick={copy}>{done ? 'Copied' : label}</button>
 }
 
-export const Web = ({ brand, fonts, source }) => {
+const AstryxExport = ({ brand }) => {
+  const files = useMemo(() => {
+    try {
+      const ctx = { brand }
+      return {
+        theme: astryxThemeModule(ctx),
+        config: `${JSON.stringify(astryxThemeConfig(ctx), null, 2)}\n`,
+        report: `${JSON.stringify(astryxThemeReport(ctx), null, 2)}\n`,
+        readme: astryxReadme(ctx)
+      }
+    } catch (problem) {
+      return { error: problem.message }
+    }
+  }, [brand])
+  const [error, setError] = useState('')
+  const save = (name, content, type) => {
+    setError('')
+    try { download(new Blob([content], { type }), name) } catch (problem) { setError(problem.message) }
+  }
+  return <section className="panel astryx-export" aria-labelledby="astryx-heading">
+    <div className="panel__head"><h2 id="astryx-heading">Astryx theme</h2></div>
+    <p>Use {brand.name}’s accent and typography in an Astryx application. The theme supports light and dark modes.</p>
+    <p className="muted">For the complete handoff, choose <strong>Website</strong> in <strong>Download kit</strong>. It includes the theme and setup guide in <code>web/astryx/</code>, alongside the brand’s fonts, CSS and logo assets.</p>
+    {files.error ? <p className="notice notice--error" role="alert">The Astryx theme could not be generated: {files.error}</p> : <>
+      <div className="documents-actions">
+        <button type="button" className="button" onClick={() => save('theme.js', files.theme, 'text/javascript')}>Download theme</button>
+        <button type="button" className="button button--quiet" onClick={() => save('theme.json', files.config, 'application/json')}>Theme JSON</button>
+        <button type="button" className="button button--quiet" onClick={() => save('README.md', files.readme, 'text/markdown')}>Setup guide</button>
+        <button type="button" className="button button--quiet" onClick={() => save('report.json', files.report, 'application/json')}>Compatibility report</button>
+      </div>
+      <p className="muted">The theme file needs Astryx in your application. Follow the setup guide to load <code>web/brand.css</code> and its font files, and review the report before using the theme.</p>
+      <details className="astryx-export__source">
+        <summary>View theme source</summary>
+        <Copy label="Copy theme" text={files.theme} />
+        <pre tabIndex={0} aria-label="Astryx theme source"><code>{files.theme}</code></pre>
+      </details>
+    </>}
+    {error && <p className="notice notice--error" role="alert">{error}</p>}
+  </section>
+}
+
+export const Web = (props) => <div className="view">
+  <AstryxExport brand={props.brand} />
+  {hasWebPage(props.brand) && <BrandWebPage {...props} />}
+</div>
+
+const BrandWebPage = ({ brand, fonts, source }) => {
   const field = brand.departments?.field ?? 'department'
   const [department, setDepartment] = useState(() => readAffiliation(brand.id).department)
   const [width, setWidth] = useState('desktop')
@@ -89,7 +137,7 @@ export const Web = ({ brand, fonts, source }) => {
   }
   return <div className="view">
     <section className="panel">
-      <div className="panel__head"><h2>Web</h2></div>
+      <div className="panel__head"><h2>Website components</h2></div>
       <div className="web-toolbar">
         {brand.departments?.items?.length > 0 && <DepartmentSelect brand={brand} value={preset?.id ?? ''} onChange={(id) => setDepartment(brand.departments.items.find((item) => item.id === id)?.values?.[field] ?? '')} />}
         <Field label="Department as set"><input type="text" value={department.replace(/\n/g, ' ')} onChange={(event) => setDepartment(event.target.value)} placeholder="None: the full logo" /></Field>

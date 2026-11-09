@@ -28,6 +28,7 @@
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
     "./consumer": "./src/engine/consumer.js",
+    "./astryx": "./src/engine/astryx.js",
     "./patterns": "./src/engine/pattern-catalog.js",
     "./pack": "./src/pack/format.js",
     "./pack/node": "./src/pack/build.js",
@@ -64,6 +65,7 @@
     "build:documentation": "node scripts/build-documentation.mjs",
     "pack": "node scripts/pack.mjs",
     "test:packs:browser": "node test/browser/packs.check.mjs",
+    "test:astryx:browser": "node test/browser/astryx-export.check.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "catalog": "node scripts/catalog.mjs"
   },

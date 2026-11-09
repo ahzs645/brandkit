@@ -14,6 +14,7 @@ export { STARTER_FONTS, STARTER_DEFAULTS, bakeWordmark, createStarterBrand } fro
 export { mergePatch, revisionsOf, findRevision, withRevision, approvedOnly, revisionReadme, additionsOf, changesArtwork } from './revisions.js'
 export { DOCUMENT_PURPOSES, documentProfile, publicationModel, publicationLayouts, validatePublication, documentationGuide, documentationMarkdown, documentationDocumentsFor } from './documentation.js'
 export { CONSUMER_PROFILE_SCHEMA, consumerProfile } from './consumer.js'
+export { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme } from './astryx.js'
 export { KIT_PACKS, inPack } from './packs.js'
 export { patternLibrary } from './pattern-catalog.js'
 export { assertLogoPaint, logoDimensions, identityRules } from './identity.js'

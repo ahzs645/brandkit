@@ -8,7 +8,7 @@ export const KIT_PACKS = [
     options: { rasters: true, pdfs: true, office: false, assets: true, documentation: false, logoWidths: [2048], symbolWidths: [1024] } },
   { id: 'documents', label: 'Documents & slides', description: 'Word starters, PowerPoint, the email signature, one PNG logo and the fonts.',
     options: { rasters: false, pdfs: false, office: true, assets: true, documentation: true } },
-  { id: 'web', label: 'Website', description: 'CSS, design tokens, React assets, icons, fonts and a portable consumer profile.',
+  { id: 'web', label: 'Website', description: 'CSS, design tokens, an Astryx theme, React assets, icons, fonts and a portable consumer profile.',
     options: { rasters: true, pdfs: false, office: false, assets: true, documentation: true } },
   { id: 'print', label: 'Print shop', description: 'Vector artwork, graphic PDFs, physical specifications and font licences.',
     options: { rasters: false, pdfs: true, office: false, assets: true, documentation: true } },
