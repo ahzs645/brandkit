@@ -1,0 +1,26 @@
+{
+  "name": "brandkit-astryx-example",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "prepare:brand": "node prepare.mjs",
+    "verify": "npm run prepare:brand && node verify.mjs",
+    "dev": "npm run prepare:brand && vite --host 127.0.0.1",
+    "build": "npm run prepare:brand && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test:browser": "node ../../test/browser/astryx.check.mjs"
+  },
+  "dependencies": {
+    "@astryxdesign/core": "0.7.11",
+    "@stylexjs/stylex": "0.19.0",
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@astryxdesign/cli": "0.7.11",
+    "@vitejs/plugin-react": "6.1.2",
+    "vite": "8.3.4"
+  }
+}

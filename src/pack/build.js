@@ -23,7 +23,9 @@ import { PACK_FORMAT, PACK_MANIFEST, PACK_VERSION, STORED, cleanPath, pageIndex 
 export const LIBRARY_DIR = fileURLToPath(new URL('../../library/', import.meta.url))
 
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex')
-const FIXED_DATE = new Date('1980-01-01T00:00:00Z')
+// ZIP stores local DOS clock fields, not a UTC instant. Keep those fields at the
+// format's epoch in every timezone; UTC midnight is still 1979 west of UTC.
+const FIXED_DATE = new Date(1980, 0, 1)
 
 /** What a pack leaves out of a brand's folder: its history and anything that is only for the repository. */
 export const DEFAULT_EXCLUDE = [/^history\//, /(^|\/)\.[^/]+$/, /(^|\/)node_modules\//, /\.pack\.zip$/]

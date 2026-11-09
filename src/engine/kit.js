@@ -18,6 +18,7 @@ import { officeFile } from '../export/office.js'
 import { publicationHtml } from '../export/publication.js'
 import { documentProfile, publicationModel, documentationDocumentsFor, documentationMarkdown } from './documentation.js'
 import { consumerProfile } from './consumer.js'
+import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme } from './astryx.js'
 import { assetRecord } from './catalog.js'
 import { inPack, packId } from './packs.js'
 import { readBrandAsset } from '../assets.js'
@@ -220,6 +221,10 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   }
   add({ path: 'web/brand.css', kind: 'text', make: brandCss })
   add({ path: 'web/tokens.json', kind: 'text', make: (ctx) => json(tokens(ctx)) })
+  add({ path: 'web/astryx/theme.json', kind: 'text', make: (ctx) => json(astryxThemeConfig(ctx)) })
+  add({ path: 'web/astryx/theme.js', kind: 'text', make: astryxThemeModule })
+  add({ path: 'web/astryx/report.json', kind: 'text', make: (ctx) => json(astryxThemeReport(ctx)) })
+  add({ path: 'web/astryx/README.md', kind: 'text', make: astryxReadme })
   add({ path: `web/${brand.web?.componentName ?? 'BrandLogo'}.tsx`, kind: 'text', make: reactComponent })
   add({ path: 'web/landing-template.html', kind: 'text', make: landingHtml })
   // The brand's own page anatomy, set for the department chosen in the kit (fonts from ../fonts).

@@ -9,7 +9,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { BrandLogo, Field, Segmented } from './ui.jsx'
 import { hasDepartments } from './affiliation.js'
-import { hasWebPage } from '../engine/webpage.js'
 
 export const isSharedView = () => new URLSearchParams(globalThis.location?.search ?? '').has('share')
 
@@ -92,7 +91,7 @@ export const ShareDialog = ({ brand, shareable, packUrl, edited, revision, view,
         {shareable ? (
           <>
             <Field label="Opens on">
-              <Segmented label="Opens on" value={start} options={SHARED_VIEWS.filter((value) => (value !== 'motion' || brand.motion?.page) && (value !== 'organization' || hasDepartments(brand)) && (value !== 'web' || hasWebPage(brand))).map((value) => ({ value, label: START_LABELS[value] }))} onChange={setStart} />
+              <Segmented label="Opens on" value={start} options={SHARED_VIEWS.filter((value) => (value !== 'motion' || brand.motion?.page) && (value !== 'organization' || hasDepartments(brand))).map((value) => ({ value, label: START_LABELS[value] }))} onChange={setStart} />
             </Field>
             <div className="share-link">
               <input type="text" readOnly value={link} aria-label="Share link" onFocus={(event) => event.target.select()} />

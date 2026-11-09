@@ -23,6 +23,29 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+      - name: Select Astryx consumer checks
+        id: astryx
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          # The export panel is checked on every build. Install the separate pinned
+          # consumer only when its source, inputs or test contract can have changed.
+          base_sha="${PR_BASE_SHA:-$PUSH_BEFORE_SHA}"
+          if [ "$EVENT_NAME" = workflow_dispatch ] || [ -z "$base_sha" ] || [[ "$base_sha" =~ ^0+$ ]]; then
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          elif ! git fetch --no-tags --depth=1 origin "$base_sha"; then
+            # Missing comparison history must run validation, not skip it.
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          else
+            changed_files=$(git diff --name-only "$base_sha" HEAD)
+            if printf '%s\n' "$changed_files" | grep -Eq '^(\.github/workflows/pages\.yml$|src/(engine/|fonts/|assets\.js$)|brands/northwind/|library/|examples/astryx/|test/browser/astryx\.check\.mjs$|package(-lock)?\.json$)'; then
+              echo 'run=true' >> "$GITHUB_OUTPUT"
+            else
+              echo 'run=false' >> "$GITHUB_OUTPUT"
+            fi
+          fi
       - uses: pnpm/action-setup@v4
         with:
           version: 10.11.0
@@ -59,6 +82,24 @@ jobs:
         env:
           SCREENSHOT_DIR: .documentation/packs-browser
           BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Verify Astryx export downloads
+        run: npm run test:astryx:browser
+        env:
+          SCREENSHOT_DIR: .documentation/astryx-browser
+          BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Install pinned Astryx consumer
+        if: steps.astryx.outputs.run == 'true'
+        run: npm ci --prefix examples/astryx
+      - name: Verify and build the Astryx consumer
+        if: steps.astryx.outputs.run == 'true'
+        run: |
+          npm --prefix examples/astryx run verify
+          npm --prefix examples/astryx run build
+      - name: Verify Astryx components in the browser
+        if: steps.astryx.outputs.run == 'true'
+        run: npm --prefix examples/astryx run test:browser
+        env:
+          SCREENSHOT_DIR: ${{ github.workspace }}/.documentation/astryx-example
       # Word masters, print previews and editable sources. PDFs need LibreOffice; make them
       # locally with npm run build:documentation -- --pdf.
       - name: Build Word masters for the built-in brand
@@ -73,7 +114,10 @@ jobs:
         if: always()
         with:
           name: brandkit-browser-checks
-          path: .documentation/packs-browser
+          path: |
+            .documentation/packs-browser
+            .documentation/astryx-browser
+            .documentation/astryx-example
           if-no-files-found: ignore
           include-hidden-files: true
       - uses: actions/upload-pages-artifact@v3

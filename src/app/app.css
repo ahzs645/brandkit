@@ -792,6 +792,11 @@ a.sources__item:hover { border-color: var(--ink-faint); }
 }
 
 /* Web: the page and each component, picked from a list like templates and motion studies. */
+.astryx-export > p { max-width: 78ch; }
+.astryx-export__source { margin-top: 16px; }
+.astryx-export__source > summary { cursor: pointer; font-weight: 600; }
+.astryx-export__source[open] > summary { margin-bottom: 12px; }
+.astryx-export__source pre { max-height: 28rem; overflow: auto; margin: 12px 0 0; padding: 16px; border-radius: var(--radius-sm); background: var(--page); font-size: 12px; line-height: 1.6; }
 .web-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; }
 .web-toolbar .field { flex: 0 1 280px; min-width: 0; }
 .web-toolbar .field input { min-height: 40px; }
