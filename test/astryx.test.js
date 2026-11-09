@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme, ASTRYX_VERSION } from '../src/engine/astryx.js'
-import { planKit } from '../src/engine/kit.js'
+import { buildKit, planKit } from '../src/engine/kit.js'
 
 const brand = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url)))
 const ctx = { brand }
@@ -38,6 +38,9 @@ test('light/dark accent controls, text, selected backgrounds and focus meet thei
     assert.ok(report.contrast.allPassed, seed)
     assert.equal(report.contrast.checks.length, 12)
     for (const check of report.contrast.checks) {
+      const measured = Math.min(...check.backgrounds.map((background) => contrast(check.foreground, background)))
+      assert.ok(check.ratio <= measured + 1e-12 && measured - check.ratio < 1.000001e-6, 'reported ratios are conservative at six decimal places')
+      assert.equal(check.pass, measured >= check.minimum, 'pass uses full precision')
       for (const background of check.backgrounds) {
         assert.ok(contrast(check.foreground, background) >= check.minimum, `${seed}/${check.mode}/${check.purpose}/${background}`)
       }
@@ -78,10 +81,12 @@ test('consumer fonts override artwork fonts and do not accidentally include them
   const sample = structuredClone(brand)
   sample.fonts.body = { family: 'Helvetica Neue LT Pro', consumerFamily: 'Arial', officialFamily: 'Helvetica Neue', stack: 'Helvetica Neue LT Pro, Arial, sans-serif', weight: 400, web: 'fonts/artwork-only.woff2' }
   const report = astryxThemeReport({ brand: sample })
-  assert.equal(report.config.typography.body.family, 'Arial')
-  assert.equal(report.config.typography.body.fallbacks, 'sans-serif')
+  assert.equal(report.typography.body.family, 'Arial')
+  assert.equal(report.typography.body.fallbacks, 'sans-serif')
+  assert.equal(report.config.tokens['--font-family-body'], '"Arial", sans-serif')
   assert.match(report.warnings.join('\n'), /not the bundled Helvetica Neue LT Pro artwork font/)
-  assert.equal(report.config.typography.heading.family, 'Inter Display')
+  assert.equal(report.typography.heading.family, 'Inter Display')
+  assert.equal(report.config.tokens['--font-family-heading'], '"Inter Display", "Inter", sans-serif')
   assert.equal(report.config.tokens['--text-body-weight'], '400')
   assert.equal(report.config.tokens['--text-heading-6-weight'], '500')
 })
@@ -89,24 +94,75 @@ test('consumer fonts override artwork fonts and do not accidentally include them
 test('unrelated surfaces/status/layout and code typography are inherited', () => {
   const config = astryxThemeConfig(ctx)
   assert.equal(config.color, undefined, 'upstream color generator would change neutral surfaces')
-  assert.equal(config.typography.scale, undefined, 'print sizes do not become UI component sizes')
-  assert.equal(config.typography.code, undefined, 'a label face is not necessarily a code face')
+  assert.equal(config.typography, undefined, 'family tokens do not enable upstream typography generation')
+  assert.equal(config.tokens['--font-family-code'], undefined, 'a label face is not necessarily a code face')
+  assert.equal(config.tokens['--text-body-size'], undefined, 'print sizes do not become UI component sizes')
   assert.ok(Object.keys(config.tokens).every((key) => !/success|warning|error|info|background|spacing|radius|motion/.test(key)))
   assert.equal(typeof config.tokens['--shadow-inset-selected'], 'string', 'whole shadow tuples do not form valid light-dark CSS')
 })
 
 test('font family and fallback CSS cannot break out of the generated declaration', () => {
-  for (const key of ['family', 'consumerFamily', 'stack']) {
+  for (const key of ['family', 'consumerFamily']) {
     const sample = structuredClone(brand)
-    sample.fonts.body[key] = 'Fake; color:red; } body {'
-    assert.throws(() => astryxThemeConfig({ brand: sample }), /font (?:family|fallback)/)
+    sample.fonts.body[key] = 'Fake"; color:red; } body { </style>'
+    const value = astryxThemeConfig({ brand: sample }).tokens['--font-family-body']
+    assert.ok(value.startsWith('"Fake\\"; color:red; } body { \\3C /style\\3E "'), 'punctuation stays within one escaped CSS string')
+    assert.doesNotMatch(value, /<|>/, 'copied SSR CSS cannot close a style element')
   }
+  for (const stack of ['Fake; color:red; } body {', 'var(--host-font)', '"Unclosed, sans-serif']) {
+    const sample = structuredClone(brand)
+    sample.fonts.body.stack = stack
+    const report = astryxThemeReport({ brand: sample })
+    assert.equal(report.config.tokens['--font-family-body'], '"Inter", system-ui, sans-serif')
+    assert.match(report.warnings.join('\n'), /fallback stack.*system-ui and sans-serif/)
+  }
+  const malformed = structuredClone(brand)
+  malformed.fonts.body.family = 'Bad\nFamily'
+  const inherited = astryxThemeReport({ brand: malformed })
+  assert.equal(inherited.config.tokens['--font-family-body'], undefined)
+  assert.match(inherited.warnings.join('\n'), /body:.*malformed.*default is retained/)
+})
+
+test('specific family names and quoted or escaped fallback names keep their exact CSS meaning', () => {
+  for (const family of ['M+ 1p', '.SF NS Text', 'DIN Next (Condensed)', '123Font', 'inherit', "O'Reilly", 'Comma, Family']) {
+    const sample = structuredClone(brand)
+    sample.fonts.body.family = family
+    sample.fonts.body.stack = `"${family}", "Fallback, Name", "O'Reilly", sans-serif`
+    const report = astryxThemeReport({ brand: sample })
+    const fallbacks = family === "O'Reilly" ? '"Fallback, Name", sans-serif' : '"Fallback, Name", "O\'Reilly", sans-serif'
+    assert.equal(report.config.tokens['--font-family-body'], `"${family}", ${fallbacks}`, family)
+    assert.ok(!report.warnings.some((warning) => /fallback stack/.test(warning)), family)
+  }
+  const sample = structuredClone(brand)
+  sample.fonts.body = { family: 'Artwork, Limited', consumerFamily: 'Consumer "Sans"', stack: String.raw`"Artwork, Limited", "Consumer \"Sans\"", "Slash\\Face", \31 23Font, "serif", sans-serif` }
+  const report = astryxThemeReport({ brand: sample })
+  assert.equal(report.config.tokens['--font-family-body'], String.raw`"Consumer \"Sans\"", "Slash\\Face", "123Font", "serif", sans-serif`)
+  assert.doesNotMatch(report.config.tokens['--font-family-body'], /Artwork/)
+  assert.match(report.warnings.join('\n'), /not the bundled Artwork, Limited artwork font/)
+})
+
+test('font weight ranges retain the upstream weight with a report warning', () => {
   const sample = structuredClone(brand)
   delete sample.typography.body.weight
   sample.fonts.body.weight = '100 900'
   const report = astryxThemeReport({ brand: sample })
   assert.equal(report.config.tokens['--text-body-weight'], undefined)
   assert.match(report.warnings.join('\n'), /not a single CSS font weight/)
+})
+
+test('Website and Everything still export their Astryx files for names that need CSS quoting', async () => {
+  const sample = structuredClone(brand)
+  sample.fonts.body = { ...sample.fonts.body, family: 'M+ 1p', stack: '"M+ 1p", "Fallback, Name", sans-serif' }
+  for (const pack of ['web', 'complete']) {
+    const { files, skipped } = await buildKit({ brand: sample }, {
+      pack, rasters: false, pdfs: false, office: false, assets: false,
+      filter: (entry) => entry.path.startsWith('web/astryx/')
+    })
+    assert.deepEqual(skipped, [], pack)
+    for (const name of ['theme.js', 'theme.json', 'report.json', 'README.md']) assert.ok(files.has(`web/astryx/${name}`), `${pack}/${name}`)
+    const config = JSON.parse(new TextDecoder().decode(files.get('web/astryx/theme.json')))
+    assert.equal(config.tokens['--font-family-body'], '"M+ 1p", "Fallback, Name", sans-serif')
+  }
 })
 
 test('module and JSON handoffs encode the same configuration without executing brand text', () => {

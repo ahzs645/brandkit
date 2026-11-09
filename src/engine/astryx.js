@@ -56,27 +56,88 @@ const onAccent = (brand, background) => {
   return candidates.find((value) => typeof value === 'string' && /^#[a-f0-9]{6}$/i.test(value) && ratio(value, background) >= 4.5).toUpperCase()
 }
 
-const safeFamily = (family, label) => {
-  if (typeof family !== 'string' || !family.trim() || !/^[\p{L}\p{N} _-]+$/u.test(family)) {
-    throw new Error(`${label} needs a plain font family name (letters, numbers, spaces, underscores or hyphens).`)
+const GENERIC_FAMILIES = new Set(['serif', 'sans-serif', 'monospace', 'cursive', 'fantasy', 'system-ui', 'ui-serif', 'ui-sans-serif', 'ui-monospace', 'ui-rounded', 'emoji', 'math', 'fangsong'])
+const usableFamily = (value) => typeof value === 'string' && value.trim() && !/[\u0000-\u001f\u007f]/.test(value)
+// Family names are data, not CSS. Always quote specific names, including numeric
+// names and CSS-wide keywords; only actual generic-family keywords stay unquoted.
+// Escaping angle brackets also keeps a copied SSR <style> from acquiring markup.
+const familyCss = (family, quoted = false) => !quoted && GENERIC_FAMILIES.has(family.toLowerCase())
+  ? family.toLowerCase()
+  : `"${family.replace(/["\\<>]/g, (character) => ({ '"': '\\"', '\\': '\\\\', '<': '\\3C ', '>': '\\3E ' })[character])}"`
+
+// Parse a plain CSS font stack, preserving quoted commas/apostrophes and escaped
+// code points. Functions/comments are intentionally not evaluated: a dynamic host
+// stack cannot be resolved into this data-only handoff and gets a reported fallback.
+const parseFontStack = (stack) => {
+  if (stack == null || stack === '') return []
+  if (typeof stack !== 'string') throw new Error('not a string')
+  const families = []
+  let index = 0
+  const space = () => { while (/\s/u.test(stack[index] ?? '') && index < stack.length) index++ }
+  const escaped = () => {
+    index++
+    if (index >= stack.length || /[\n\r\f]/.test(stack[index])) throw new Error('incomplete escape')
+    const match = /^[0-9a-f]{1,6}/i.exec(stack.slice(index))
+    if (!match) return stack[index++]
+    index += match[0].length
+    if (/\s/u.test(stack[index] ?? '')) {
+      if (stack[index] === '\r' && stack[index + 1] === '\n') index++
+      index++
+    }
+    const code = parseInt(match[0], 16)
+    if (!code || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) throw new Error('invalid escaped code point')
+    return String.fromCodePoint(code)
   }
-  return family.trim()
+  while (index < stack.length) {
+    space()
+    const quote = ['"', "'"].includes(stack[index]) ? stack[index++] : undefined
+    let family = ''
+    if (quote) {
+      while (index < stack.length && stack[index] !== quote) family += stack[index] === '\\' ? escaped() : stack[index++]
+      if (stack[index++] !== quote) throw new Error('unclosed string')
+      space()
+      if (index < stack.length && stack[index] !== ',') throw new Error('trailing text after string')
+    } else {
+      while (index < stack.length && stack[index] !== ',') {
+        if (stack[index] === '\\') family += escaped()
+        else {
+          if ('"\'(){}[];/<>'.includes(stack[index])) throw new Error('not a plain family list')
+          family += stack[index++]
+        }
+      }
+      family = family.trim().replace(/\s+/gu, ' ')
+    }
+    if (!usableFamily(family)) throw new Error('empty or malformed family')
+    families.push({ family, quoted: Boolean(quote) })
+    if (index < stack.length) {
+      index++
+      space()
+      if (index === stack.length) throw new Error('trailing comma')
+    }
+  }
+  return families
 }
 const fontRole = (brand, key, role, warnings) => {
   const face = brand.fonts?.[key] ?? (key === 'display' ? brand.fonts?.body : undefined)
-  if (!face?.family) return undefined
+  if (!face) return undefined
   // Respect the established downstream font contract. A bundled rendering font
   // can be licensed for artwork/print only; consumerFamily is the host's choice.
-  const family = safeFamily(face.consumerFamily ?? face.family, `Astryx ${role} typography`)
-  const parts = String(face.stack ?? '').split(',').map((part) => part.trim()).filter(Boolean)
-  if (parts.some((part) => !/^(?:[\p{L}\p{N} _-]+|"[\p{L}\p{N} _-]+"|'[\p{L}\p{N} _-]+')$/u.test(part))) {
-    throw new Error(`Astryx ${role} typography has an unsafe font fallback stack.`)
+  const requested = face.consumerFamily ?? face.family
+  if (!usableFamily(requested)) {
+    warnings.push(`${role}: the requested consumer font family is missing or malformed; the Astryx default is retained.`)
+    return undefined
   }
-  const excluded = [family.toLowerCase(), ...(face.consumerFamily ? [face.family.toLowerCase()] : [])]
-  const fallbacks = parts.filter((part) => !excluded.includes(part.replace(/^["']|["']$/g, '').toLowerCase())).join(', ') || 'system-ui, sans-serif'
+  const family = requested.trim()
+  let parts
+  try { parts = parseFontStack(face.stack) } catch {
+    parts = []
+    warnings.push(`${role}: the fallback stack is not a plain font-family list; system-ui and sans-serif are used instead.`)
+  }
+  const excluded = [family.toLowerCase(), ...(face.consumerFamily && typeof face.family === 'string' ? [face.family.trim().toLowerCase()] : [])]
+  const fallbacks = parts.filter((part) => !excluded.includes(part.family.toLowerCase())).map((part) => familyCss(part.family, part.quoted)).join(', ') || 'system-ui, sans-serif'
   if (face.consumerFamily && face.consumerFamily !== face.family) warnings.push(`${role}: uses ${family} as declared for consumers, not the bundled ${face.family} artwork font. The host must provide ${family} or use its fallback.`)
   else if (!face.web) warnings.push(`${role}: ${family} has no web font file; load a licensed font in the host or accept its fallback.`)
-  return { family, fallbacks }
+  return { family, fallbacks, css: `${familyCss(family)}, ${fallbacks}` }
 }
 const fontWeight = (value, label, warnings) => {
   if (value == null) return undefined
@@ -127,10 +188,15 @@ const build = ({ brand } = {}, options = {}) => {
     for (const token of ['--color-accent', '--color-text-accent']) if (values[mode][token] !== seed) {
       adjustments.push({ mode, token, source: seed, value: values[mode][token], reason: token === '--color-accent' ? 'Control boundary contrast on default surfaces' : 'Normal text contrast on default and selected surfaces' })
     }
-    const check = (purpose, foreground, backgroundList, minimum) => checks.push({
-      mode, purpose, foreground, backgrounds: backgroundList, minimum,
-      ratio: minimumRatio(foreground, backgroundList), pass: minimumRatio(foreground, backgroundList) >= minimum
-    })
+    const check = (purpose, foreground, backgroundList, minimum) => {
+      const measured = minimumRatio(foreground, backgroundList)
+      // Math.pow's last bits may differ between browser and Node runtimes. Keep
+      // reports reproducible and conservative; evaluate pass at full precision.
+      checks.push({
+        mode, purpose, foreground, backgrounds: backgroundList, minimum,
+        ratio: Math.floor(measured * 1e6) / 1e6, pass: measured >= minimum
+      })
+    }
     check('Accent control boundary', accent, backgrounds, 3)
     check('Text on accent control', on, [accent], 4.5)
     check('Accent text and icons', text, [...backgrounds, muted], 4.5)
@@ -144,16 +210,15 @@ const build = ({ brand } = {}, options = {}) => {
   const typography = {}
   const body = fontRole(brand, 'body', 'body', warnings)
   const heading = fontRole(brand, 'display', 'heading', warnings)
-  if (body) typography.body = body
-  if (heading) typography.heading = heading
+  if (body) { typography.body = body; tokens['--font-family-body'] = body.css }
+  if (heading) { typography.heading = heading; tokens['--font-family-heading'] = heading.css }
   const bodyWeight = fontWeight(brand.typography?.body?.weight ?? brand.fonts?.body?.weight, 'Body font weight', warnings)
   const headingWeight = fontWeight(brand.typography?.headlines?.weight ?? brand.fonts?.display?.weight, 'Heading font weight', warnings)
   if (bodyWeight) tokens['--text-body-weight'] = bodyWeight
   if (headingWeight) for (let level = 1; level <= 6; level++) tokens[`--text-heading-${level}-weight`] = headingWeight
   const definition = {
     tokens,
-    localTokens: { '--brandkit-source-accent': sourceAccent },
-    ...(Object.keys(typography).length ? { typography } : {})
+    localTokens: { '--brandkit-source-accent': sourceAccent }
   }
   const config = { name: `brandkit-${brand.id.replace(/-+/g, '-').replace(/-$/, '')}-${fingerprint(definition)}`, ...definition }
   const report = {
@@ -164,8 +229,9 @@ const build = ({ brand } = {}, options = {}) => {
     sourceAccentOrigin,
     accentInputs: Object.fromEntries(modes.map((mode) => [mode, checkedColour(brand, options.accent?.[mode] ?? sourceAccent, `The ${mode} accent`)])),
     config,
+    typography,
     adjustments,
-    contrast: { method: 'WCAG 2 relative luminance; normal text 4.5:1, control boundaries and focus 3:1', checks, allPassed: checks.every((check) => check.pass) },
+    contrast: { method: 'WCAG 2 relative luminance; normal text 4.5:1, control boundaries and focus 3:1; reported ratios rounded down to six decimal places', checks, allPassed: checks.every((check) => check.pass) },
     warnings,
     scope: [
       'Accent controls, accent text/icons, selected surfaces, focus outlines and body/heading typography.',
