@@ -5,6 +5,11 @@ metadata. Use the engine or document exporter when it needs to build new branded
 These routes work with the built-in Northwind example and brands opened from packs, without
 assuming one brand's symbol geometry.
 
+For an application using Astryx, the [Astryx adapter](astryx-integration.md) supplies a separate
+`defineTheme` configuration through `brandkit/astryx` or `web/astryx/theme.json` in Website kits.
+It derives light/dark UI accents and maps consumer typography while the portable profile below
+continues to carry the artwork and identity rules. The profile itself is not an Astryx theme.
+
 ## Portable profile
 
 The Documents view has **Export for another app**. The complete, document and website

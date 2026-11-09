@@ -46,7 +46,10 @@ brandkit draws the whole kit from it:
   studies of the logo, loading states and interface) shown in the app's **Motion** tab and carried
   in the kit as `motion/`, with a reusable `motion.css`. First Form has one.
 - **Web files**: CSS variables, design tokens, a typed React component, a landing-page starter,
-  favicon (SVG and multi-size `.ico`) and app icons. A brand that describes its own website
+  favicon (SVG and multi-size `.ico`) and app icons. Every brand's **Web** tab also exports an
+  [Astryx theme](docs/astryx-integration.md): light/dark interface colours and consumer typography,
+  a JSON definition, setup instructions and a report of derived shades and contrast checks.
+  These files travel in Website and Everything kit downloads. A brand that describes its own website
   (`web.page`) also has a **Web** tab: each page component (header, audience tabs, title,
   breadcrumbs, introduction, button, aside, cards, table, note, footer, legal bar) previewed on
   its own with its HTML and CSS to copy or download, and the page they compose, set for a
@@ -223,6 +226,7 @@ dependencies automatically; a source submodule host installs them itself.
 | `brandkit/pack/host` | Typed data-only brand inspection, summaries, aliases and catalog validation. |
 | `brandkit/pack/host-node` | Bounded Node/Bun ZIP intake with CRC, path and expansion checks. |
 | `brandkit/pack/catalog-cli` | Canonical catalog generation/checking for existing pack ZIPs. |
+| `brandkit/astryx` | Optional data-only theme configuration, ES module, contrast report and setup-guide exporters for Astryx 0.7.11. |
 
 The library components read the host page's custom properties (`--surface`, `--ink`,
 `--radius`…) with neutral fallbacks, so they take on the host's theme.
