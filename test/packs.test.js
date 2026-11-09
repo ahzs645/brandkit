@@ -6,6 +6,7 @@ import { cpSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } f
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { spawnSync } from 'node:child_process'
 import { zipSync, strToU8 } from 'fflate'
 import { buildCatalog, buildPack, libraryIndex } from '../src/pack/build.js'
 import { PACK_MANIFEST, PACK_VERSION, cleanPath, readCatalog, readPack } from '../src/pack/format.js'
@@ -66,6 +67,33 @@ test('the same folder always makes the same pack, byte for byte', () => {
     writeFileSync(join(folder, 'notes.md'), '# Changed\n')
     assert.notEqual(buildPack(folder).sha256, first.sha256)
   } finally { rmSync(root, { recursive: true, force: true }) }
+})
+
+test('packs preserve the same ZIP epoch and bytes across timezones', () => {
+  const folder = mkdtempSync(join(tmpdir(), 'brandkit-pack-timezone-'))
+  try {
+    writeFileSync(join(folder, 'brand.json'), JSON.stringify({ id: 'timezone', name: 'Timezone', version: '1' }))
+    writeFileSync(join(folder, 'notes.txt'), 'The same content in every timezone.\n')
+    const moduleUrl = new URL('../src/pack/build.js', import.meta.url).href
+    const script = `
+      import { buildPack } from ${JSON.stringify(moduleUrl)};
+      const built = buildPack(process.argv[1], { library: { byPath: new Map(), byHash: new Map() } });
+      process.stdout.write(JSON.stringify({ sha256: built.sha256, bytes: Buffer.from(built.bytes).toString('base64') }));
+    `
+    const results = ['UTC', 'America/Vancouver', 'Asia/Tokyo', 'Pacific/Kiritimati'].map((zone) => {
+      const child = spawnSync(process.execPath, ['--input-type=module', '--eval', script, folder], {
+        env: { ...process.env, TZ: zone }, encoding: 'utf8', timeout: 15000
+      })
+      assert.equal(child.status, 0, `${zone}: ${child.error?.message ?? child.stderr}`)
+      return JSON.parse(child.stdout)
+    })
+    for (const result of results.slice(1)) assert.deepEqual(result, results[0], 'timezone cannot change a pack hash or its bytes')
+    const bytes = Buffer.from(results[0].bytes, 'base64')
+    assert.equal(bytes.readUInt32LE(0), 0x04034b50, 'first record is a ZIP local file header')
+    assert.equal(bytes.readUInt16LE(10), 0, 'canonical DOS time is midnight')
+    assert.equal(bytes.readUInt16LE(12), 0x0021, 'canonical DOS date stays January 1, 1980')
+    assert.equal(readPack(bytes).brand.id, 'timezone', 'the timezone-independent archive still opens')
+  } finally { rmSync(folder, { recursive: true, force: true }) }
 })
 
 test('northwind packs and reads back with every file it holds', () => {
