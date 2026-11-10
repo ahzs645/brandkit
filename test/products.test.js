@@ -177,6 +177,16 @@ test('arrangements follow the geometry the schema documents', async () => {
   assert.ok(!plain.art.includes('#CD6448') && /data-product-tile="" [^>]*fill="none" stroke="#14171A"/.test(plain.art), 'one colour: an outlined tile')
   // A product with no pictogram takes the brand symbol in its tile.
   assert.ok(productLockup(ctx, { product: 'tide', arrangement: 'product-led', colour: '#14171A' }).art.split('data-brand-symbol').length === 3)
+  // Its app tiles do too: on the accent, or on paper in the brand's own colour over a band of the
+  // accent, so an accent never paints the symbol.
+  const tide = productsOf(brand).find((item) => item.id === 'tide')
+  const onAccent = productTile(ctx, { product: 'tide', style: 'icon' })
+  assert.ok(onAccent.includes(`<rect width="1024" height="1024" fill="${tide.accent}"/>`) && onAccent.includes(`fill="${tide.onAccent}"`) && !onAccent.includes('data-product-icon'))
+  const onPaper = productTile(ctx, { product: 'tide', style: 'paper' })
+  assert.equal(onPaper.split('data-brand-symbol').length, 2, 'the symbol once')
+  assert.ok(onPaper.includes(`data-size="standard" fill="${colour(brand, 'primary')}"`), 'in the primary colour')
+  assert.ok(onPaper.includes(`<rect data-product-rule="" y="901" width="1024" height="123" fill="${tide.accent}"/>`), 'over a band of the accent')
+  assert.ok(!onPaper.includes(tide.accentText) || tide.accentText === tide.accent, 'never painted in the accent’s text tone')
   // Sizes are data.
   const larger = productLockup({ ...ctx, brand: withProducts({ ...PRODUCTS, lockup: { name: { size: 0.9 } } }) }, { product: 'route', arrangement: 'endorsed', colour: '#14171A' })
   assert.ok(larger.width > endorsed.width)

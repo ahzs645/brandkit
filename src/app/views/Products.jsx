@@ -1,6 +1,6 @@
 // A brand's product family (brand.products): each product's name set beside the parent logo, which
 // is embedded exactly as the Logos tab draws it. What changes from product to product is the name,
-// the descriptor, the accent and the pictogram; the arrangement, the colour and the tile style are
+// the descriptor, the accent and (where a family has them) the pictogram; the arrangement, the colour and the tile style are
 // chosen once for the whole family, so every product is seen the same way.
 
 import { useMemo, useState } from 'react'
@@ -17,10 +17,11 @@ const ARRANGEMENT_LABELS = { endorsed: 'Endorsed', label: 'Label', 'product-led'
 const ARRANGEMENT_USES = {
   endorsed: 'The parent logo, a rule in the product’s accent, then the product’s name on the logo’s baseline.',
   label: 'The parent logo with the product named beneath its lettering, in the label face.',
-  'product-led': 'The pictogram and the product’s name lead; the parent logo signs off beneath, at its own size.',
+  'product-led': 'A tile in the product’s accent and the product’s name lead; the parent logo signs off beneath, at its own size.',
   compact: 'The symbol, the rule and the name, for spaces narrower than the full logo’s minimum width.'
 }
-const TILE_LABELS = { symbol: 'Symbol', icon: 'Pictogram', paper: 'Paper' }
+// The `icon` tile carries a product's pictogram; in a family without pictograms it is the symbol on the accent.
+const tileLabels = (brand) => ({ symbol: 'Symbol', icon: productsOf(brand).some((item) => productPictogram(brand, item)) ? 'Pictogram' : 'Accent', paper: 'Paper' })
 
 const slug = (value) => String(value).toLowerCase().replace(/\s+/g, '-')
 const Grade = ({ value }) => <span className={`grade grade--${slug(value)}`}>{value}</span>
@@ -64,7 +65,7 @@ const ProductCard = ({ brand, fonts, item, arrangement, paint, descriptor, tile,
         </div>
         {item.descriptor && <p className="muted">{item.descriptor}</p>}
         <div className="product-card__marks">
-          {showTile && <figure><SvgImage svg={makeTile()} alt={`${item.name} app tile, ${TILE_LABELS[tile].toLowerCase()}`} className="product-card__tile" /><figcaption>Tile</figcaption></figure>}
+          {showTile && <figure><SvgImage svg={makeTile()} alt={`${item.name} app tile, ${tileLabels(brand)[tile].toLowerCase()}`} className="product-card__tile" /><figcaption>Tile</figcaption></figure>}
           {pictogramSvg && <figure><span className="product-card__pictogram" style={{ color: item.accentText }} dangerouslySetInnerHTML={{ __html: pictogramSvg.replace(/<svg /, '<svg aria-hidden="true" ').replace(/\s(width|height)="[^"]*"/g, '') }} /><figcaption>Pictogram</figcaption></figure>}
           <div className="product-card__swatches">
             <Swatch label={item.accentName ?? 'Accent'} hex={item.accent} on={item.onAccent} ratio={contrast(item.onAccent, item.accent)} against="for what is drawn on the accent" />
@@ -127,7 +128,7 @@ export const Products = ({ brand, fonts }) => {
             <h2>{products.label ?? 'Products'} {products.status && <span className="badge">{products.status}</span>}</h2>
             {products.note && <p className="muted">{products.note}</p>}
           </div>
-          <p>Every lockup here embeds the {parent.label} logo as it is: the same artwork as the Logos tab, never redrawn, re-typeset or resized on its own. A product adds its name, a descriptor, an accent and a pictogram, each sized from the logo’s height.</p>
+          <p>Every lockup here embeds the {parent.label} logo as it is: the same artwork as the Logos tab, never redrawn, re-typeset or resized on its own. A product adds its name, a descriptor and an accent{productsOf(brand).some((item) => productPictogram(brand, item)) ? ', and a pictogram' : ''}, each sized from the logo’s height.</p>
           <p className="muted">{chosen ? `Chosen direction: ${chosen.label}. The kit carries that arrangement${arrangements.includes('compact') && chosen.arrangement !== 'compact' ? ' and the compact one' : ''} for every product.` : directions.length ? 'No direction is chosen yet, so the kit carries every arrangement on offer for comparison.' : `The kit carries ${arrangements.length === 1 ? 'the arrangement' : `all ${arrangements.length} arrangements`} for every product.`}</p>
         </div>
         <figure className="asset-card products-intro__parent">
@@ -147,7 +148,7 @@ export const Products = ({ brand, fonts }) => {
           <Segmented label="Logo colour" value={paint.id} options={paints.map((entry) => ({ value: entry.id, label: entry.colourway ? entry.label : colourName(brand, entry.colour) }))} onChange={setPaintId} />
         </Field>}
         {tiles.length > 1 && <Field label="Tile">
-          <Segmented label="Tile" value={tile} options={tiles.map((id) => ({ value: id, label: TILE_LABELS[id] }))} onChange={setTile} />
+          <Segmented label="Tile" value={tile} options={tiles.map((id) => ({ value: id, label: tileLabels(brand)[id] }))} onChange={setTile} />
         </Field>}
         {items.some((item) => item.descriptor) && <label className="wordmark-toggle"><input type="checkbox" checked={descriptor} onChange={(event) => setDescriptor(event.target.checked)} /><span>Descriptor</span></label>}
         <p className="products-controls__about">{direction?.summary ?? ARRANGEMENT_USES[arrangement]}</p>

@@ -341,7 +341,7 @@ Each item:
 | `accentText` | The accent for text on paper. When absent it is the accent itself if that reaches 4.5 : 1 on the `paper` role, otherwise the accent darkened towards `ink` until it does. |
 | `onAccent` | What is drawn on the accent (a pictogram, the symbol). When absent: the `reverse` role if it reaches 3 : 1 on the accent, else `primary` at the same ratio, else whichever of reverse and ink reads better. |
 | `accentOnDark` | The accent beside a reversed logo. A lockup painted in a light colour is on a dark ground, where a deep accent would sink, so its rule or bar takes this tone (a filled tile keeps the accent). When absent it is the accent itself if that reaches 3 : 1 on the darker of `primary` and `ink`, otherwise the accent lightened towards `reverse` until it does. |
-| `icon` | The pictogram: an id in `icons.items`, or `{ content, size?, attrs? }` drawn with `icons.attrs`. |
+| `icon` | Optional. The pictogram: an id in `icons.items`, or `{ content, size?, attrs? }` drawn with `icons.attrs`. A family may have none and use the brand symbol throughout. |
 
 Any other key (`accentName`, `symbol`, `accentOnDark`…) is kept as written and ignored by the engine.
 
@@ -369,7 +369,9 @@ the face's stack when it is not, as wordmarks set from a typeface are. `productD
 { product, arrangement, colourKey | colour | colourway, descriptor })` wraps a lockup as a file,
 and `productTile(ctx, { product, style })` draws a 1024-unit square tile: `symbol` (the symbol
 reversed on the primary colour over a band of the accent), `icon` (the pictogram on the accent,
-the symbol small in the corner) or `paper` (the pictogram in `accentText` on paper).
+the symbol small in the corner) or `paper` (the pictogram in `accentText` on paper). A product
+without an `icon` takes the brand symbol instead: in `onAccent` on the accent for `icon`, and for
+`paper` in the primary colour over a band of the accent, so an accent never paints the symbol.
 
 ### In the app and the kit
 

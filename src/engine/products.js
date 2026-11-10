@@ -355,6 +355,8 @@ export const productDocument = (ctx, { product, arrangement, colour, colourKey, 
  *   symbol  the brand symbol reversed on the primary colour, over a band of the accent
  *   icon    the pictogram on the accent, the brand symbol small in the corner
  *   paper   the pictogram in the accent's text tone on paper, the brand symbol small in the corner
+ * A product with no pictogram takes the brand symbol instead: on the accent for `icon`, and for
+ * `paper` in the primary colour over a band of the accent.
  */
 export const productTile = (ctx, { product, style } = {}) => {
   const { brand } = ctx
@@ -385,8 +387,14 @@ export const productTile = (ctx, { product, style } = {}) => {
     if (pictogram) {
       art += placePictogram(pictogram, (size - main) / 2, (size - main) / 2, main, paint)
       if (symbolAllowed) art += placeSymbol(ctx, size - margin - small, size - margin - small, small, corner, micro)
-    } else if (symbolAllowed) {
+    } else if (symbolAllowed && kind === 'icon') {
       art += placeSymbol(ctx, (size - main) / 2, (size - main) / 2, main, paint)
+    } else if (symbolAllowed) {
+      // No pictogram on paper: the symbol keeps the brand's own colour (an accent never paints
+      // it) and the accent is a band beneath, as on the `symbol` tile.
+      const band = Math.round(size * 0.12)
+      art += `<rect data-product-rule="" y="${size - band}" width="${size}" height="${band}" fill="${item.accent}"/>`
+        + placeSymbol(ctx, (size - main) / 2, (size - band - main) / 2, main, corner)
     }
   }
   return svgDocument(ctx, size, size, art, `${brand.name} / ${item.name} / ${kind} tile`)
