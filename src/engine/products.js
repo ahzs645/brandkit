@@ -287,7 +287,7 @@ export const productLockup = (ctx, { product, arrangement, colour: given, colour
     grow(ruleX + stroke / 2, pad + H)
     const nameX = ruleX + 0.3 * H
     line(item.name, type.name, (type.name.size ?? 0.6) * H, nameX, B)
-    if (describe) line(caps(describe), type.label, (type.label.size ?? 0.115) * H, nameX, B + 0.3 * H)
+    if (describe) line(caps(describe), type.label, 0.115 * H, nameX, B + 0.3 * H)
   }
 
   let placed = null
