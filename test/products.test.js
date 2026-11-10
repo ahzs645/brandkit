@@ -96,6 +96,21 @@ test('accents resolve with a text tone that reads on paper and a colour that rea
   assert.deepEqual(Object.keys(productTokens(brand).chart), ['name', 'fullName', 'descriptor', 'accent', 'accentText', 'onAccent', 'accentOnDark'])
 })
 
+test('the parent may be any of the brand’s families, embedded as that family is drawn', () => {
+  // ddcnorth's products sit beside its parent ddc family rather than the full company logo.
+  const other = brand.families[1].id
+  const short = withProducts({ ...PRODUCTS, parent: { family: other } })
+  assert.deepEqual(validateBrand(short), [])
+  const parent = lockup({ brand: short }, { family: other, layout: 'horizontal', colour: '#14171A' })
+  const first = lockup({ brand: short }, { family: brand.families[0].id, layout: 'horizontal', colour: '#14171A' })
+  assert.notEqual(parent.art, first.art)
+  for (const arrangement of ['endorsed', 'label', 'product-led']) {
+    const drawn = productLockup({ brand: short }, { product: 'chart', arrangement, colour: '#14171A' })
+    assert.ok(drawn.art.includes(`<g data-parent-logo="${other}" transform="translate(${drawn.parent.x} ${drawn.parent.y})">${parent.art}</g>`), arrangement)
+    assert.ok(!drawn.art.includes(first.art), `${arrangement}: not the first family's logo`)
+  }
+})
+
 test('what a family offers follows the brand: arrangements, tiles and directions', () => {
   assert.deepEqual(productArrangements(brand), ALL)
   assert.deepEqual(productTileStyles(brand), ['symbol', 'icon', 'paper'])
