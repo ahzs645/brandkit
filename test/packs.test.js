@@ -173,3 +173,14 @@ test('.packignore keeps source material out of the pack, but never a file the ki
     assert.throws(() => buildPack(folder), /kit lists in brand\.json files \(reference\/photo\.jpg\)/)
   } finally { rmSync(root, { recursive: true, force: true }) }
 })
+
+test('a catalog only replaces installed copies that came from it', async () => {
+  const { updatesFrom } = await import('../src/app/pack-store.js')
+  const entry = { id: 'acme', url: 'https://host/acme.zip', catalog: 'https://host/catalog.json' }
+  // Added from a file: the person's own (often newer) build is never overwritten by a catalog.
+  assert.equal(updatesFrom({ url: null, catalog: null }, entry), false)
+  assert.equal(updatesFrom({ url: null, catalog: entry.catalog }, entry), true)
+  assert.equal(updatesFrom({ url: null, catalog: 'https://other/catalog.json' }, entry), false)
+  assert.equal(updatesFrom({ url: entry.url, catalog: null }, entry), true)
+  assert.equal(updatesFrom({ url: 'https://elsewhere/acme.zip', catalog: null }, entry), false)
+})

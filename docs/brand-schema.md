@@ -9,9 +9,9 @@ are in this repository:
   byte (`test/parity.test.js`).
 - [`brands/northwind/brand.json`](../brands/northwind/brand.json): made by the starter
   (`npm run make:example`), which is also what the app's **New brand** does.
-- [`brands/firstform/brand.json`](../brands/firstform/brand.json): written by
-  `npm run make:firstform` from a kit that had only PNG logos. Its symbol is `paths` (two
-  even-odd blocks, with heavier `microPaths`), and its wordmark is two outlined lines.
+- First Form (`firstform`, made in the 1stform/design-system repository and published as a pack
+  with each release): its symbol is `paths` (the cube-F mark's two polygons, with `microPaths`
+  that widen the channel between them), and its wordmark is two outlined lines.
 - [`brands/bc-province-1977/brand.json`](../brands/bc-province-1977/brand.json) and
   [`brands/bc-hydro-1983/brand.json`](../brands/bc-hydro-1983/brand.json): two historical identity
   programs, written by `npm run make:bc` from scripts that carry each manual measurement with its

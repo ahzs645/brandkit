@@ -8,7 +8,7 @@ import { validateBrand } from '../engine/brand.js'
 import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
-import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack } from './pack-store.js'
+import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack, updatesFrom } from './pack-store.js'
 import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
 import { registerPackPages } from './pack-pages.js'
 import { useBrandDrop } from './drop.js'
@@ -209,10 +209,10 @@ export const App = () => {
     }
   }, [refreshInstalled])
 
-  /** A catalog brand whose pack differs from the copy installed here. */
+  /** A catalog brand whose pack differs from the copy installed here, when that copy came from it. */
   const updateFor = (record) => {
     const entry = catalog.brands.get(record.id)
-    return entry?.sha256 && record.packHash !== entry.sha256 && (!record.catalog || record.catalog === entry.catalog) ? entry : null
+    return entry?.sha256 && record.packHash !== entry.sha256 && updatesFrom(record, entry) ? entry : null
   }
 
   /** Finds a brand wherever it is: opened, installed, saved, built in, or in a catalog (installed on the way). */
@@ -227,7 +227,7 @@ export const App = () => {
     const catalogs = catalogReady.current ?? Promise.resolve({ brands: new Map() })
     const ready = here ? await Promise.race([catalogs, new Promise((resolve) => setTimeout(resolve, 2500, null))]) : await catalogs
     const entry = ready?.brands.get(id)
-    if (pack && entry?.sha256 && pack.record.packHash !== entry.sha256 && (!pack.record.catalog || pack.record.catalog === entry.catalog)) {
+    if (pack && entry?.sha256 && pack.record.packHash !== entry.sha256 && updatesFrom(pack.record, entry)) {
       // The catalog has a newer pack: fetch it now, and keep the copy here if that fails.
       try {
         await downloadPack({ url: entry.url, name: entry.name, catalog: entry.catalog })
