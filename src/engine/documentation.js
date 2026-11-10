@@ -28,7 +28,8 @@ const LAYOUTS = [
 ]
 
 const SOURCE_GENERATORS = {
-  firstform: { command: 'npm run make:firstform', files: ['scripts/brands/firstform.mjs'] },
+  // First Form is made in 1stform/design-system; the builds workspace imports each release.
+  firstform: { command: 'npm run sync:firstform', files: ['scripts/brands/firstform-release.mjs'] },
   ddcnorth: { command: 'npm run make:ddcnorth', files: ['scripts/brands/ddcnorth-applications.mjs', 'scripts/brands/ddcnorth-accept-v23.mjs'] },
   overtheedge: { command: 'npm run make:overtheedge', files: ['scripts/brands/overtheedge.mjs'] },
   sparklab: { command: 'npm run make:sparklab', files: ['scripts/brands/sparklab.mjs'] },
