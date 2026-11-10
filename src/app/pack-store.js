@@ -67,6 +67,15 @@ export const installedPack = async (id) => {
 }
 
 /**
+ * Whether a catalog entry may replace an installed copy: only a copy that came from that catalog,
+ * or from the same link. A pack added from a file (no url, no catalog) is the person's own choice,
+ * often a newer build than the catalog has, so a catalog never overwrites it.
+ */
+export const updatesFrom = (record, entry) => record.catalog
+  ? record.catalog === entry.catalog
+  : Boolean(record.url) && record.url === entry.url
+
+/**
  * Stores a pack (or any zip holding a brand). Returns the brand's record. `origin` says where it
  * came from: `{ url, catalog }` for a link or a catalog entry, nothing for a file from disk.
  */
