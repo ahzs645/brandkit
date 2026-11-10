@@ -55,6 +55,16 @@ export const luminance = (hex) => {
 
 export const isDark = (hex) => luminance(hex) < 0.3
 
+/** The WCAG contrast ratio of two colours, 1 to 21. */
+export const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+  return (hi + 0.05) / (lo + 0.05)
+}
+
+/** How a product family's lockup can be arranged, and how its app tiles can be drawn (./products.js). */
+export const PRODUCT_ARRANGEMENTS = ['endorsed', 'label', 'product-led', 'compact']
+export const PRODUCT_TILE_STYLES = ['symbol', 'icon', 'paper']
+
 /** Values computed from the definition, available to copy as {derived.*}. */
 export const derive = (brand) => {
   const symbol = brand.symbol ?? {}
@@ -155,6 +165,58 @@ export const validateBrand = (brand) => {
   for (const document of brand.documents ?? []) {
     need(['docx', 'pptx', 'html'].includes(document.format), `Document \`${document.id}\` has format \`${document.format}\`; use docx, pptx or html.`)
     for (const id of [...(document.pages ?? []), ...(document.layouts ?? []), ...(document.template ? [document.template] : [])]) need(templateIds.has(id), `Document \`${document.id}\` names template \`${id}\`, which is not defined.`)
+  }
+  // A product family: named products under the unchanged parent logo.
+  if (brand.products != null) {
+    const products = brand.products
+    const known = (value, list, what) => need(list.includes(value), `${what} \`${value}\` is not one of ${list.join(', ')}.`)
+    need(products && typeof products === 'object' && Array.isArray(products.items) && products.items.length > 0, '`products.items` needs at least one product.')
+    const items = Array.isArray(products?.items) ? products.items : []
+    const seen = new Set()
+    for (const item of items) {
+      const id = item?.id
+      need(typeof id === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(id), `Product \`${id ?? '?'}\`: \`id\` must be lower-case letters, digits and hyphens.`)
+      need(!seen.has(id), `Product \`${id}\` is listed twice.`)
+      seen.add(id)
+      need(typeof item?.name === 'string' && item.name.trim(), `Product \`${id ?? '?'}\` needs a name.`)
+      need(/^#[0-9a-f]{6}$/i.test(colour(brand, item?.accent) ?? ''), `Product \`${id ?? '?'}\`: \`accent\` must be a palette colour, a role or a six-digit hex value.`)
+      if (item?.accentText != null) need(/^#[0-9a-f]{6}$/i.test(colour(brand, item.accentText) ?? ''), `Product \`${id ?? '?'}\`: \`accentText\` must be a palette colour, a role or a six-digit hex value.`)
+      if (item?.onAccent != null) need(/^#[0-9a-f]{6}$/i.test(colour(brand, item.onAccent) ?? ''), `Product \`${id ?? '?'}\`: \`onAccent\` must be a palette colour, a role or a six-digit hex value.`)
+      if (item?.accentOnDark != null) need(/^#[0-9a-f]{6}$/i.test(colour(brand, item.accentOnDark) ?? ''), `Product \`${id ?? '?'}\`: \`accentOnDark\` must be a palette colour, a role or a six-digit hex value.`)
+      if (typeof item?.icon === 'string') need(brand.icons?.items?.some((entry) => entry.id === item.icon), `Product \`${id ?? '?'}\` names icon \`${item.icon}\`, which is not in \`icons.items\`.`)
+      else if (item?.icon != null) need(typeof item.icon === 'object' && typeof item.icon.content === 'string' && item.icon.content, `Product \`${id ?? '?'}\`: \`icon\` must be an icon id or { content }.`)
+    }
+    const parent = products?.parent ?? {}
+    if (parent.family != null) need(brand.families?.some((entry) => entry.id === parent.family), `\`products.parent.family\` names family \`${parent.family}\`, which is not defined.`)
+    if (parent.signature != null) need(brand.signatures?.some((entry) => entry.id === parent.signature), `\`products.parent.signature\` names signature \`${parent.signature}\`, which is not defined.`)
+    if (parent.colourway != null) need(brand.colourways?.[parent.colourway], `\`products.parent.colourway\` names colourway \`${parent.colourway}\`, which is not in \`colourways\`.`)
+    const arrangements = products?.lockup?.arrangements
+    if (arrangements != null) {
+      need(Array.isArray(arrangements) && arrangements.length > 0, '`products.lockup.arrangements` needs at least one arrangement.')
+      for (const value of Array.isArray(arrangements) ? arrangements : []) known(value, PRODUCT_ARRANGEMENTS, 'Product arrangement')
+    }
+    for (const key of ['name', 'label']) {
+      const font = products?.lockup?.[key]?.font
+      if (font != null) need(brand.fonts?.[font], `\`products.lockup.${key}.font\` names font \`${font}\`, which is not defined.`)
+      const size = products?.lockup?.[key]?.size
+      if (size != null) need(typeof size === 'number' && Number.isFinite(size) && size > 0, `\`products.lockup.${key}.size\` must be a positive number (a fraction of the parent logo's height).`)
+      const leadSize = key === 'name' ? products?.lockup?.name?.leadSize : null
+      if (leadSize != null) need(typeof leadSize === 'number' && Number.isFinite(leadSize) && leadSize > 0, '`products.lockup.name.leadSize` must be a positive number (a fraction of the parent logo\'s height).')
+    }
+    const styles = products?.tile?.styles
+    if (styles != null) {
+      need(Array.isArray(styles) && styles.length > 0, '`products.tile.styles` needs at least one style.')
+      for (const value of Array.isArray(styles) ? styles : []) known(value, PRODUCT_TILE_STYLES, 'Product tile style')
+    }
+    const directions = new Set()
+    for (const direction of products?.directions ?? []) {
+      need(typeof direction?.id === 'string' && direction.id && typeof direction.label === 'string' && direction.label, `Product direction \`${direction?.id ?? '?'}\` needs an id and a label.`)
+      need(!directions.has(direction?.id), `Product direction \`${direction?.id}\` is listed twice.`)
+      directions.add(direction?.id)
+      known(direction?.arrangement, arrangements ?? PRODUCT_ARRANGEMENTS, `Product direction \`${direction?.id ?? '?'}\`: arrangement`)
+      known(direction?.tile, styles ?? PRODUCT_TILE_STYLES, `Product direction \`${direction?.id ?? '?'}\`: tile style`)
+    }
+    if (products?.direction != null) need(directions.has(products.direction), `\`products.direction\` names direction \`${products.direction}\`, which is not in \`products.directions\`.`)
   }
   // Dots and lines, in patterns and in templates.
   const number = (value) => typeof value === 'number' && Number.isFinite(value)

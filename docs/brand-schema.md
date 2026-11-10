@@ -48,6 +48,7 @@ An unknown placeholder is left as written, so a typo shows on the page.
 | `organization` | Institutional name and separate document-text naming configuration. |
 | `extension` | A package that adds what brand.json cannot describe, by name (`src/extensions/index.js`). It may provide `profilePictures` (shown in Departments) and a `view` (a tab of its own). UNBC's, `unbc`, draws social-media profile pictures with the UNBC logo package and adds a **Door signs** tab from the door-sign package. |
 | `brandArchitecture` | Related brands with explicit relationship labels and notes. |
+| `products` | A product family: named products set beside the unchanged parent logo, each with an accent and a pictogram. See [Product families](#product-families). |
 | `officialResources` | Source-resource metadata and links; supplied local files must also be listed in `files`. |
 
 ### Official faces and rendering substitutes
@@ -285,6 +286,128 @@ no symbol above it. The `wordmark` and `symbol` layouts are unchanged. Over the 
 ([`brands/overtheedge/brand.json`](../brands/overtheedge/brand.json)).
 
 A family with `stackedWordmark` also supports the `wordmark-stacked` layout, which draws only that lettering in its original proportions. The kit includes separately named horizontal and stacked wordmark exports. In the overview, Layout is a dropdown and Wordmark is an independent checkbox.
+
+## Product families
+
+A company whose products share its identity declares them in `products`. The parent logo is a
+locked asset: a product never gets a wordmark of its own, and no lockup redraws, re-typesets or
+rescales the logo. A product varies only by its name, a descriptor, an accent colour and a
+pictogram.
+
+```json
+"products": {
+  "label": "Products", "status": "proposed",
+  "note": "The logo is the fixed parent identity.",
+  "parent": { "family": "ddcnorth" },
+  "lockup": {
+    "arrangements": ["endorsed", "label", "product-led", "compact"],
+    "name": { "font": "display", "tracking": -0.04, "size": 0.6 },
+    "label": { "font": "label", "tracking": 0.12, "caps": true, "size": 0.2 }
+  },
+  "tile": { "styles": ["symbol", "icon", "paper"] },
+  "directions": [
+    { "id": "a", "label": "A · Endorsed", "arrangement": "endorsed", "tile": "symbol", "summary": "The company leads." },
+    { "id": "b", "label": "B · Product-led", "arrangement": "product-led", "tile": "icon" }
+  ],
+  "items": [
+    { "id": "atlas", "name": "Atlas", "fullName": "DDC Atlas", "descriptor": "Shared geospatial workspace",
+      "role": "platform", "status": "proposed", "accent": "#7FA6BA", "accentName": "Slate blue",
+      "accentText": "#56717E", "icon": "layers" }
+  ]
+}
+```
+
+| Key | What it is |
+| --- | --- |
+| `label`, `status`, `note` | The tab's name (default "Products"), a badge such as `proposed`, and a line shown at the top of the view. |
+| `parent` | The logo every lockup embeds: `{ "family": id }` for a fixed family, drawn in its `horizontal` layout (default: the first family), or `{ "signature": id, "colourway": id }` for a brand that composes signatures (default: the first signature in the default colourway). |
+| `lockup.arrangements` | The arrangements on offer, in order. Default all four; `compact` is left out when `logoPolicy.standaloneSymbol` is `false`. |
+| `lockup.name` | How a product's name is set: `font` (a role in `fonts`, default `display`), `tracking` in ems (default `typography.headlines.trackingEm`), `size` as a fraction of the logo's height (default `0.6`), and `leadSize`, the same for the `product-led` name (default `1.05`). |
+| `lockup.label` | How labels and descriptors are set: `font` (default `label`), `tracking` (default `typography.labels.trackingEm`, else `0.12`), `caps` (default `true`), `size` of the `label` arrangement's name as a fraction of the logo's height (default `0.2`). |
+| `lockup.baseline` | Where the logo's lettering sits, as a fraction of its artwork height. Default: the foot of a fixed family's wordmark (`1` where the lettering is as tall as the symbol), or `1` for a signature. |
+| `tile.styles` | The app-tile styles on offer. Default `symbol`, `icon`, `paper`; `symbol` is left out when the symbol may not stand alone, and no tiles are made when `web.icons` is `false`. |
+| `directions` | Named pairs of an arrangement and a tile style, for comparing proposals: `{ id, label, summary?, arrangement, tile }`. |
+| `direction` | The chosen direction's id. Absent while the directions are still being compared. |
+| `items` | The products, in order. |
+
+Each item:
+
+| Key | What it is |
+| --- | --- |
+| `id` | Lower-case slug; names its files and its CSS variables. |
+| `name` | The name set in the lockup ("Atlas"). Required. |
+| `fullName`, `descriptor`, `role`, `status` | The name in running text ("DDC Atlas"), a line set under the name when asked for, and labels the view shows. |
+| `accent` | A palette key, a role or a six-digit hex. Accents are additions to the palette; they never paint the logo. |
+| `accentText` | The accent for text on paper. When absent it is the accent itself if that reaches 4.5 : 1 on the `paper` role, otherwise the accent darkened towards `ink` until it does. |
+| `onAccent` | What is drawn on the accent (a pictogram, the symbol). When absent: the `reverse` role if it reaches 3 : 1 on the accent, else `primary` at the same ratio, else whichever of reverse and ink reads better. |
+| `accentOnDark` | The accent beside a reversed logo. A lockup painted in a light colour is on a dark ground, where a deep accent would sink, so its rule or bar takes this tone (a filled tile keeps the accent). When absent it is the accent itself if that reaches 3 : 1 on the darker of `primary` and `ink`, otherwise the accent lightened towards `reverse` until it does. |
+| `icon` | The pictogram: an id in `icons.items`, or `{ content, size?, attrs? }` drawn with `icons.attrs`. |
+
+Any other key (`accentName`, `symbol`, `accentOnDark`…) is kept as written and ignored by the engine.
+
+### Arrangements
+
+`productLockup(ctx, { product, arrangement, colour, colourway, accent = true, descriptor = false })`
+returns `{ width, height, art, parent }`, on a canvas with `lockup.canvasPadding` round it as
+`lockup()` returns a logo. The parent is drawn by `lockup()` itself and its artwork is embedded
+as it is, in `<g data-parent-logo="…" transform="translate(x y)">`: moved, never scaled.
+`parent` is where its canvas sits (`{ x, y, width, height }`). Everything else is sized from the
+logo: with `pad` the canvas padding, `H` the height of the logo's artwork (its canvas less the
+padding) and `B = pad + H × baseline`:
+
+| Arrangement | Geometry |
+| --- | --- |
+| `endorsed` | The logo at the origin. A vertical rule `0.3 H` past its artwork, from `pad` to `pad + H`, `H / 48` thick (at least 1), in the accent. The name `0.3 H` past the rule, at `0.6 H`, on `B`. A descriptor in the label face at `0.115 H`, `0.3 H` under `B`. |
+| `label` | The logo at the origin. Under its lettering (past the symbol and `lockup.iconGap`, for a family that has one): an accent bar `0.5 H` wide and `H / 24` thick (at least 2) at `B + 0.2 H`, the name in the label face at `0.2 H` on `B + 0.56 H`, and a descriptor at `0.115 H`, `0.22 H` lower. |
+| `product-led` | A tile `K = 1.5 H` square at (`pad`, `pad`), corners `0.16 K`, in the accent, with the pictogram at 60% of it in `onAccent` (the brand symbol, for a product with no pictogram). The name `0.35 H` past the tile at `lockup.name.leadSize` (`1.05 H`), on `pad + 0.74 K`; a descriptor at `0.14 H`, `0.3 H` lower. The logo signs off beneath, its artwork `0.3 H` under the tile. |
+| `compact` | For spaces narrower than the full logo's minimum width: the symbol at height `H`, then the rule and the name as in `endorsed`. It has no parent logo (`parent` is `null`) and is refused where the symbol may not stand alone. |
+
+Lettering takes the logo's colour; only the rule, the bar and the tile take the accent. With
+`accent: false`, or an inherited colour (`currentColor`), they take the logo's colour too, and the
+`product-led` tile is an outline. Lettering is outlined when the face is loaded and live text in
+the face's stack when it is not, as wordmarks set from a typeface are. `productDocument(ctx,
+{ product, arrangement, colourKey | colour | colourway, descriptor })` wraps a lockup as a file,
+and `productTile(ctx, { product, style })` draws a 1024-unit square tile: `symbol` (the symbol
+reversed on the primary colour over a band of the accent), `icon` (the pictogram on the accent,
+the symbol small in the corner) or `paper` (the pictogram in `accentText` on paper).
+
+### In the app and the kit
+
+A brand with `products` has a **Products** tab: the parent logo, the directions, arrangements,
+logo colours and tile styles to switch between, every product at one scale, and each product's
+lockup, tile, pictogram and accents (graded against WCAG 2) with SVG, PNG and PDF downloads.
+
+The kit carries, for every product:
+
+- `logos/products/<product>/<arrangement>-<colour>.svg` in every logo colour (the inherited-colour
+  file has no accent), with `png/<arrangement>-<colour>-2048.png` and `pdf/<arrangement>-<colour>.pdf`
+  for the raster colours;
+- `web/products/<product>-tile-<style>.svg`, with `-512.png` and `-1024.png`;
+- `products` in `web/tokens.json` (`{ id: { name, fullName, descriptor, accent, accentText, onAccent, accentOnDark } }`),
+  and `--<prefix>-product-<id>`, `--<prefix>-product-<id>-text`, `--<prefix>-product-<id>-on` and `--<prefix>-product-<id>-on-dark`
+  in `web/brand.css`;
+- `products` in `source/consumer-profile.json`: each product with its accents and its outlined
+  lockup in the primary colour.
+
+While no `direction` is set, every arrangement and tile style on offer is built, for comparison.
+Once one is set, only its arrangement (with `compact`, where offered) and its tile style are.
+A brand without `products` builds exactly the files it did before.
+
+### Proposing a family
+
+A family that is not yet approved belongs in a [revision](#revisions), so the approved identity
+is untouched and the app's revision switcher shows the proposal everywhere:
+
+```json
+"revisions": [{ "id": "product-family", "title": "Product family", "version": "2.4-product-family",
+  "status": "proposed", "summary": "…",
+  "changes": { "products": { … }, "icons": { "items": { "$append": [ … ] } } } }]
+```
+
+The approved kit then carries the proposal's lockups as vector files in
+`revisions/<id>/logos/products/`, beside the revision's `brand.json` and README. Choosing a
+direction is setting `products.direction`; approving the family is moving `products` (and the
+pictograms it appends) into the definition and recording the revision in `history`.
 
 ## Templates
 

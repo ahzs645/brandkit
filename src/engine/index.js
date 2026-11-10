@@ -2,7 +2,7 @@
 // with no DOM and no framework, so the same code runs in the app, in a host app, and in Node.
 
 export { n, n6, escape, interpolate, humanize, slugify } from './format.js'
-export { COLOUR_ROLES, colour, colourName, rgb, luminance, isDark, derive, copyContext, fill, family, face, validateBrand } from './brand.js'
+export { COLOUR_ROLES, colour, colourName, rgb, luminance, isDark, contrast, derive, copyContext, fill, family, face, validateBrand } from './brand.js'
 export { LAYOUTS, mark, words, lockup, svgDocument, pattern, icon, logoDocument, symbolDocument, signatureDocument } from './artwork.js'
 export { paintFor, paintMarkup, signatureOf, layoutSignature, signatureLockup, colourwaysOf, linesOf, departmentLines } from './signatures.js'
 export { toUnits, scopeIds, wrapLines, placeLogo, motifInBox, renderTemplate, templateFields, allFields, physicalSize } from './templates.js'
@@ -19,3 +19,4 @@ export { KIT_PACKS, inPack } from './packs.js'
 export { patternLibrary } from './pattern-catalog.js'
 export { assertLogoPaint, logoDimensions, identityRules } from './identity.js'
 export { hasWebPage, webComponentDocument, webComponents, webPage, webStylesheet } from './webpage.js'
+export { PRODUCT_ARRANGEMENTS, PRODUCT_TILE_STYLES, hasProducts, productsOf, productOf, productArrangements, productTileStyles, productDirections, productDirection, defaultProductArrangement, defaultProductTile, productParent, productParentLockup, productPictogram, productLockup, productDocument, productTile, productTokens } from './products.js'

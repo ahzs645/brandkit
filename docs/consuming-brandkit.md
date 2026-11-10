@@ -35,6 +35,7 @@ const profile = consumerProfile({ brand, fonts })
 | `colours` | Resolved six-digit hex `ink`, `paper`, `primary`, `muted`, `light`, `reverse`, `line`, `rule` |
 | `typography` | `body`, `heading`, `label` family, weight, style and fallback stack; an explicit consumer family also supplies `renderingFamily`, `officialFamily` and a substitution `note` |
 | `logos` | `primary`, `black`, `reverse`, each with standalone outlined SVG and numeric `viewBox` |
+| `products` | Optional. A product family: `[{ id, name, fullName, descriptor, accent, accentText, onAccent, accentOnDark, logo: { svg, viewBox } }]`. Each `logo` is the product's outlined lockup in the primary colour, with the parent logo embedded unchanged; `accentText` reads on paper at 4.5 : 1, `onAccent` is what to draw on the accent and `accentOnDark` is the accent for a rule or mark on the brand's dark ground |
 | `identity` | Optional logo policy, minimum width, source clear-space rule, organization, related brands and official-resource metadata |
 | `affiliation` | Optional document-text layout defaults for department/subdepartment names; this contains no selected user names |
 | `provenance` | Descriptive source and status; never an approval or rights grant |

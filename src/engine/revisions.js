@@ -123,6 +123,7 @@ ${JSON.stringify(revision.changes ?? {}, null, 2)}
     added.patterns.length && `- \`patterns/\`: the ${count(added.patterns, 'pattern', 'patterns')} it adds: ${ids(added.patterns)}.`,
     added.templates.length && `- \`templates/\`: the ${count(added.templates, 'template', 'templates')} it adds: ${ids(added.templates)}.`,
     added.icons.length && `- \`icons/\`: the ${count(added.icons, 'icon', 'icons')} it adds: ${ids(added.icons)}.`,
+    changes.products?.items?.length && `- \`logos/products/\`: the lockups of the ${count(changes.products.items, 'product', 'products')} it proposes (${changes.products.items.map((item) => item.name ?? item.id).join(', ')}), each around the unchanged logo.`,
     changes.motion && `- \`motion/\`: its motion library of ${count(changes.motion.studies ?? [], 'study', 'studies')}: the page, the CSS, the tokens and a README.`,
     extraFiles.length && `- Also: ${ids(extraFiles)}.`
   ].filter(Boolean).join('\n')
@@ -136,6 +137,7 @@ ${JSON.stringify(revision.changes ?? {}, null, 2)}
   ].filter(Boolean)
   const settings = [
     changes.motion && 'add `motion`',
+    changes.products && 'set `products`',
     changes.copy && `set ${Object.keys(changes.copy).map((key) => `\`copy.${key}\``).join(' and ')}`,
     changes.guide?.frame && `set ${Object.keys(changes.guide.frame).map((key) => `\`guide.frame.${key}\``).join(' and ')}`
   ].filter(Boolean)

@@ -23,6 +23,7 @@ import { assetRecord } from './catalog.js'
 import { inPack, packId } from './packs.js'
 import { readBrandAsset } from '../assets.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
+import { hasProducts, productArrangements, productDirection, productDocument, productTile, productTileStyles, productsOf } from './products.js'
 
 export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Motion', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
 
@@ -112,6 +113,33 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
   }
   for (const [mode, spec] of Object.entries(brand.wordmark?.editable ?? {})) {
     svgEntry(`logos/editable-text/${spec.family ?? brand.families[0].id}-${mode}.svg`, (ctx) => logoDocument(ctx, { family: spec.family ?? brand.families[0].id, layout: 'horizontal', mode, colourKey: brand.rasterColours?.[0] ?? 'black' }))
+  }
+
+  // A product family: each product's lockup in each arrangement and colour, the parent logo
+  // unchanged in every one. Once a direction is chosen only its arrangement is built, with the
+  // compact one for small spaces.
+  const productKit = hasProducts(brand) ? (() => {
+    const chosen = productDirection(brand)
+    const offered = productArrangements(brand)
+    return {
+      items: productsOf(brand),
+      arrangements: chosen ? offered.filter((kind) => kind === chosen.arrangement || kind === 'compact') : offered,
+      tiles: chosen ? productTileStyles(brand).filter((style) => style === chosen.tile) : productTileStyles(brand)
+    }
+  })() : null
+  if (productKit) {
+    for (const item of productKit.items) {
+      const folder = `logos/products/${item.id}`
+      for (const arrangement of productKit.arrangements) {
+        for (const paint of paintOptions(brand)) {
+          const make = (ctx) => productDocument(ctx, { product: item.id, arrangement, colourKey: paint.colour, colourway: paint.colourway })
+          svgEntry(`${folder}/${arrangement}-${paint.id}.svg`, make, { product: item.id })
+          if (!paint.raster) continue
+          if (rasters) add({ path: `${folder}/png/${arrangement}-${paint.id}-2048.png`, kind: 'png', width: 2048, svg: make, product: item.id })
+          if (pdfs) add({ path: `${folder}/pdf/${arrangement}-${paint.id}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))], product: item.id })
+        }
+      }
+    }
   }
 
   // Symbol, and any further symbols (BC Hydro's Gas Operations flame).
@@ -235,6 +263,16 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     add({ path: 'web/components/components.css', kind: 'text', make: (ctx) => webStylesheet(ctx, { fontUrl: (file) => `../../${file}` }) })
     for (const { id } of webComponents({ brand })) add({ path: `web/components/${id}.html`, kind: 'text', make: (ctx) => webComponentDocument(ctx, id, { department: department(ctx), fontUrl: (file) => `../../${file}` }) })
   }
+  // Each product's app tile, in the styles on offer (the chosen direction's alone, once there is one).
+  if (productKit && brand.web?.icons !== false) {
+    for (const item of productKit.items) {
+      for (const style of productKit.tiles) {
+        const make = (ctx) => productTile(ctx, { product: item.id, style })
+        svgEntry(`web/products/${item.id}-tile-${style}.svg`, make, { product: item.id })
+        if (rasters) for (const size of [512, 1024]) add({ path: `web/products/${item.id}-tile-${style}-${size}.png`, kind: 'png', width: size, svg: make, product: item.id })
+      }
+    }
+  }
   if (rasters && brand.web?.icons !== false) {
     for (const size of [512, 1024]) add({ path: `web/app-icon-${size}.png`, kind: 'png', width: size, svg: appIconSvg })
     add({ path: 'web/apple-touch-icon.png', kind: 'png', width: 180, svg: appIconSvg })
@@ -250,6 +288,18 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
       const revised = (ctx) => ({ ...ctx, brand: withRevision(ctx.brand, revision.id) })
       add({ path: `${folder}/brand.json`, kind: 'text', make: (ctx) => json(withRevision(ctx.brand, revision.id)) })
       add({ path: `${folder}/README.md`, kind: 'text', make: (ctx) => revisionReadme(ctx.brand, findRevision(ctx.brand, revision.id)) })
+      // A product family it adds or changes: each product's lockups, as the revision would make them.
+      if (revision.changes?.products) {
+        // A revision that cannot be applied is reported by validateBrand; the plan carries on without it.
+        let proposal = null
+        try { proposal = withRevision(brand, revision.id) } catch { /* nothing to plan */ }
+        const chosen = hasProducts(proposal) ? productDirection(proposal) : null
+        for (const item of hasProducts(proposal) ? productsOf(proposal) : []) {
+          for (const arrangement of productArrangements(proposal).filter((kind) => !chosen || kind === chosen.arrangement || kind === 'compact')) {
+            for (const paint of paintOptions(proposal)) svgEntry(`${folder}/logos/products/${item.id}/${arrangement}-${paint.id}.svg`, (ctx) => productDocument(revised(ctx), { product: item.id, arrangement, colourKey: paint.colour, colourway: paint.colourway }), { product: item.id })
+          }
+        }
+      }
       // A revision that only adds (templates, patterns, a motion library) carries what it adds, as
       // vector and text files; the logos and symbol it would leave unchanged are not copied again.
       if (!changesArtwork(revision)) {

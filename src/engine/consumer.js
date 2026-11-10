@@ -4,6 +4,7 @@
 import { logoDocument } from './artwork.js'
 import { colour, COLOUR_ROLES, logoOptions } from './brand.js'
 import { identityRules } from './identity.js'
+import { defaultProductArrangement, hasProducts, productDocument, productsOf } from './products.js'
 
 export const CONSUMER_PROFILE_SCHEMA = 'brandkit/consumer-profile/1'
 
@@ -41,6 +42,15 @@ export const consumerProfile = (ctx) => {
     }
     return { svg, viewBox: viewBoxOf(svg) }
   }
+  // A product family: each product with its accents and its lockup, the parent logo unchanged in it.
+  const products = hasProducts(brand) ? productsOf(brand).map((item) => {
+    const paint = logo.signature ? { colourway: brand.defaultColourway ?? Object.keys(brand.colourways ?? {})[0] } : { colourKey: 'primary' }
+    const svg = productDocument({ ...ctx, outline: true }, { product: item.id, arrangement: defaultProductArrangement(brand), ...paint })
+    if (/<(?:text|image|script|foreignObject)\b/i.test(svg) || /(?:href|xlink:href)\s*=/i.test(svg)) {
+      throw new Error('A consumer product logo must contain self-contained vector geometry. Load the brand fonts before exporting.')
+    }
+    return { id: item.id, name: item.name, fullName: item.fullName ?? null, descriptor: item.descriptor ?? null, accent: item.accent, accentText: item.accentText, onAccent: item.onAccent, accentOnDark: item.accentOnDark, logo: { svg, viewBox: viewBoxOf(svg) } }
+  }) : null
   return {
     schema: CONSUMER_PROFILE_SCHEMA,
     id: brand.id,
@@ -50,6 +60,7 @@ export const consumerProfile = (ctx) => {
     colours: Object.fromEntries(COLOUR_ROLES.map((role) => [role, colour(brand, brand.roles?.[role] ?? role)])),
     typography: { body: typeRole(brand, 'body', 'body'), heading: typeRole(brand, 'headlines', 'display'), label: typeRole(brand, 'labels', 'label') },
     logos: { primary: make('primary'), black: make('black'), reverse: make('reverse') },
+    ...(products ? { products } : {}),
     ...(brand.organization || brand.logoPolicy ? { identity: identityRules(brand), affiliation: structuredClone(brand.documentation?.affiliation ?? null) } : {}),
     provenance: {
       source: typeof brand.source === 'string' ? brand.source : JSON.stringify(brand.source ?? {}),

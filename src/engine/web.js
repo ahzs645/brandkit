@@ -4,6 +4,7 @@
 import { lockup, mark } from './artwork.js'
 import { colour as resolveColour, colourName, fill, logoOptions, paintOptions } from './brand.js'
 import { escape, n6 } from './format.js'
+import { hasProducts, productTokens } from './products.js'
 
 const webSvg = ({ brand }, width, height, art, title) => `<svg xmlns="http://www.w3.org/2000/svg" width="${n6(width)}" height="${n6(height)}" viewBox="0 0 ${n6(width)} ${n6(height)}" role="img" aria-label="${escape(title)}"><title>${escape(title)}</title>`
   + `<desc>${escape(fill(brand, brand.web?.svgDescription ?? brand.copy?.svgDescription ?? '{name} identity.'))}</desc>${art}</svg>\n`
@@ -49,6 +50,11 @@ const stack = (brand, key, fallback) => {
   return face.stack.split(',').map((part) => part.trim()).map((part) => (/\s/.test(part) && !/^".*"$/.test(part) ? `"${part}"` : part)).join(', ')
 }
 
+/** A product family's accents: each product's colour, its tone for text on paper, and what reads on it. */
+const productCss = (brand, p) => (hasProducts(brand)
+  ? Object.entries(productTokens(brand)).map(([id, item]) => `\n  --${p}-product-${id}: ${item.accent};\n  --${p}-product-${id}-text: ${item.accentText};\n  --${p}-product-${id}-on: ${item.onAccent};\n  --${p}-product-${id}-on-dark: ${item.accentOnDark};`).join('')
+  : '')
+
 export const brandCss = ({ brand }) => {
   const p = prefix(brand)
   const display = brand.typography?.headlines ?? {}
@@ -57,7 +63,7 @@ export const brandCss = ({ brand }) => {
    Included fonts load locally. Logos use outlined lettering and do not depend on installed fonts. */
 ${fontFaces(brand)}
 :root {
-${Object.entries(brand.colours).map(([key, value]) => `  --${p}-${key}: ${value};`).join('\n')}
+${Object.entries(brand.colours).map(([key, value]) => `  --${p}-${key}: ${value};`).join('\n')}${productCss(brand, p)}
   --${p}-font-body: ${stack(brand, 'body', 'system-ui, sans-serif')};
   --${p}-font-display: ${stack(brand, 'display', 'system-ui, sans-serif')};
   --${p}-font-label: ${stack(brand, 'label', 'ui-monospace, monospace')};
@@ -90,7 +96,8 @@ export const tokens = ({ brand }) => ({
   spacing: [4, 8, 12, 16, 24, 32, 48, 64, 96],
   symbol: brand.symbol,
   lockup: brand.lockup,
-  wordmark: { construction: brand.web?.wordmarkConstruction ?? 'Outlined lettering', fontIndependent: true }
+  wordmark: { construction: brand.web?.wordmarkConstruction ?? 'Outlined lettering', fontIndependent: true },
+  ...(hasProducts(brand) ? { products: productTokens(brand) } : {})
 })
 
 const jsx = (art) => {
