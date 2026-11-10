@@ -139,7 +139,7 @@ export const Products = ({ brand, fonts }) => {
 
       <section className="panel toolbar toolbar--panel products-controls" aria-label="How the family is shown">
         {directions.length > 0 && <Field label="Direction">
-          <Segmented label="Direction" value={direction?.id ?? ''} options={directions.map((entry) => ({ value: entry.id, label: entry.label, title: entry.summary }))} onChange={chooseDirection} />
+          <Segmented label="Direction" value={direction?.id ?? ''} options={directions.map((entry) => ({ value: entry.id, label: chosen && entry.id !== chosen.id ? `${entry.label} (archived)` : entry.label, title: entry.summary }))} onChange={chooseDirection} />
         </Field>}
         <Field label="Arrangement">
           <Segmented label="Arrangement" value={arrangement} options={arrangements.map((id) => ({ value: id, label: ARRANGEMENT_LABELS[id], title: ARRANGEMENT_USES[id] }))} onChange={setArrangement} />
