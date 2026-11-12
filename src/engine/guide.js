@@ -22,6 +22,7 @@ import { renderTemplate, scopeIds } from './templates.js'
 import { typesetLine } from './template-guides.js'
 import { withRevision } from './revisions.js'
 import { paintFor } from './signatures.js'
+import { appIconSvg, faviconSvg } from './web.js'
 
 const ROLE = { ink: 'ink', paper: 'paper', muted: 'muted', primary: 'primary', light: 'light', reverse: 'reverse', line: 'line' }
 
@@ -103,6 +104,8 @@ export const createGuideKit = (ctx) => {
     if (kind === 'patterns') return pattern(ctx, brand.patterns.find((entry) => entry.id === id))
     if (kind === 'icons') return icon(ctx, brand.icons.items.find((entry) => entry.id === id))
     if (kind === 'templates') return renderTemplate({ ...ctx, outline: true }, brand.templates.find((entry) => entry.id === id)).svg
+    if (kind === 'web' && id === 'favicon') return faviconSvg(ctx)
+    if (kind === 'web' && id === 'app-icon') return appIconSvg(ctx)
     throw new Error(`Cannot nest ${src}`)
   }
 

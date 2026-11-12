@@ -527,8 +527,9 @@ source-maintenance commands and rendering guidance.
 ```
 
 Guide elements: `label`, `text`, `para` (wrapped), `rect`, `rule`, `path`, `logo` (scaled to
-`width`, or fitted in a `width` × `height` box), `symbol`, `nested` (another kit file, e.g.
-`"templates/social-post"`), and the composite blocks `symbolConstruction`, `specTable`,
+`width`, or fitted in a `width` × `height` box), `symbol` (with `colourway` for a markup symbol),
+`nested` (another kit file: `"templates/social-post"`, `"patterns/repeat"`, `"web/favicon"`,
+`"web/app-icon"`), and the composite blocks `symbolConstruction`, `specTable`,
 `swatches` (`symbol: false` for plain bars), `swatchStrip` and `list`. Text on guide pages is set
 as outlines; a precomposed fraction the face lacks (TeX Gyre Termes has ¼ ½ ¾ but not ⅓ or ⅞) is
 built from small figures, with the other fractions on that line, rather than drawn as nothing.
