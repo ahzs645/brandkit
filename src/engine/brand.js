@@ -124,6 +124,10 @@ export const validateBrand = (brand) => {
       if (element.type === 'symbol' && element.symbol) need(brand.symbols?.[element.symbol], `Signature \`${signature.id}\` uses symbol \`${element.symbol}\`, which is not in \`symbols\`.`)
     }
   }
+  for (const key of ['favicon', 'appIcon']) {
+    const id = brand.web?.[key]?.symbol
+    if (id != null) need(brand.symbols?.[id], `\`web.${key}.symbol\` names \`${id}\`, which is not in \`symbols\`.`)
+  }
   if (brand.signatures?.length) need(brand.colourways && Object.keys(brand.colourways).length, 'A brand with signatures needs `colourways`.')
   for (const entry of brand.families ?? []) {
     need(brand.wordmark?.variants?.[entry.wordmark], `Family \`${entry.id}\` names wordmark \`${entry.wordmark}\`, which is not defined.`)

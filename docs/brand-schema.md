@@ -91,6 +91,7 @@ colourways, then declare the optional controls:
 | `clearSpaceRatio` | Nonnegative ratio of logo width used to calculate surrounding space. Record whether it is an official numeric rule or an implementation measurement of an official visual rule. |
 | `note` | Plain-language restrictions and context, carried to consumers. Background and approval requirements must remain explicit in the source notes. |
 | `web.icons` | `false` omits generated favicon/app-icon files and links. Direct favicon/app-icon render calls reject instead of shrinking the logo into a new mark. |
+| `web.favicon.symbol`, `web.appIcon.symbol` | One of `symbols` to draw instead of the brand symbol, for a brand whose symbol is too wide or detailed to read at 16 pixels. It is fitted by its longer side. |
 
 `logoDimensions(brand, widthMm)` from `brandkit/engine` validates the width and returns
 `widthMm`, `minimumWidthMm`, `clearSpaceMm` and `totalWidthMm`. The reserved space is the larger

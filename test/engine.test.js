@@ -168,3 +168,19 @@ test('a two-colour symbol drawn as markup takes a colourway in its own files, th
   const [page] = guidePages({ brand: { ...brand, guide: { ...brand.guide, pages: [{ title: 'Emblem', elements: [{ type: 'symbol', x: 0, y: 0, height: 10, colourway: 'reverse' }] }] } } })
   assert.match(page.render(), /fill="#FFFFFF"/i, "the guide paints the symbol in its colourway")
 })
+
+test('a favicon and app icon can use a small further symbol instead of the brand symbol', async () => {
+  const { faviconSvg, appIconSvg } = await import('../src/engine/web.js')
+  const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
+  const brand = {
+    ...base,
+    symbols: { ...base.symbols, paw: { name: 'paw', viewBox: [10, 20, 50, 100], paths: ['M10 20H60V120H10Z'] } },
+    web: { ...base.web, favicon: { ...base.web.favicon, symbol: 'paw', size: 60 }, appIcon: { ...base.web.appIcon, symbol: 'paw', size: 800 } }
+  }
+  assert.deepEqual(validateBrand(brand), [])
+  const favicon = faviconSvg({ brand })
+  assert.match(favicon, /M10 20H60V120H10Z/, 'the further symbol is drawn')
+  assert.match(favicon, /scale\(0\.6\) translate\(-10 -20\)/, 'fitted by its longer side, from its own origin')
+  assert.match(appIconSvg({ brand }), /scale\(8\) translate\(-10 -20\)/)
+  assert.ok(validateBrand({ ...brand, web: { ...brand.web, favicon: { symbol: 'missing' } } }).some((problem) => problem.includes('web.favicon.symbol')))
+})
