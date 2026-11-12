@@ -9,6 +9,7 @@ brand arrives as a pack.
 - [What happens to it](#what-happens-to-it): kept, reopened, updated, shared, removed
 - [The format](#the-format): what a pack holds, the manifest, the rules a reader applies
 - [Making packs](#making-packs): the command, what it leaves out, `.packignore`
+- [Bundles](#bundles): several brands in one zip
 - [Catalogs](#catalogs) and [hosting](#hosting)
 - [In the browser](#in-the-browser): storage, and pack pages at real addresses
 - [When something goes wrong](#when-something-goes-wrong)
@@ -21,6 +22,7 @@ Every way in takes the same files:
 | You have | It opens as |
 | --- | --- |
 | A **brand pack** (`<id>.zip`, made by `brandkit pack`) | The brand, with every file. Kept in this browser. |
+| A **brand bundle** (made by `brandkit pack --bundle`) | Every brand in it, each kept in this browser; the first opens (or, by link, the one `?brand=` names). |
 | A **brand folder, zipped** (any zip with a `brand.json`; the shallowest one wins) | The brand, with the files in that folder. Kept in this browser. |
 | A **downloaded kit** (the zip from **Download kit**, whose definition is `source/brand.json`) | The brand, with the kit's files. Kept in this browser. |
 | A **`brand.json`** on its own | The brand, for this visit, with brandkit's own fonts for any it does not carry. **Edit brand → Save** keeps its definition. |
@@ -164,6 +166,30 @@ folder; one without matches a file name anywhere; `*` stays within a folder and 
 A file the brand's kit lists in `brand.json` `files` is never left out: packing stops with an
 error naming it, since a kit built from the pack would be missing it.
 
+## Bundles
+
+A bundle carries several brands in one file: every brand an agency keeps for its clients, or a
+family of brands that are handed over together. It is a catalog and its packs, zipped:
+
+```
+brandkit-bundle.json   { "format": "brandkit-bundle", "version": 1, "name": …, "packs": [{ "id", "name", "file", "sha256", "bytes", "brandVersion"?, "description"?, "menuLogo"? }] }
+<id>.zip               each brand's pack, exactly as brandkit pack writes it (stored, not recompressed)
+<id>.logo.svg          each brand's menu logo
+```
+
+```sh
+node scripts/pack.mjs brands/ --out dist --name "Our brands" --bundle our-brands.zip
+```
+
+`--bundle` writes the bundle beside the packs and the catalog (`brands.bundle.zip` when no name is
+given), from the same packs, so the bundle and the catalog list the same SHA-256s. Opening a
+bundle (dropped, chosen, or `?url=`) checks every pack against its listed size and SHA-256, refuses
+the whole bundle if any brand's id is a built-in brand's, then keeps each pack as if it had been
+opened on its own. Brands from a bundle opened by link keep the bundle's address, so a revisit
+revalidates it once for all of them, and `?url=<bundle>&brand=<id>` opens the one named. A pack
+taken out of a bundle is an ordinary pack. A bundle is held to the same 160 MB as a pack; past
+that, host the packs with a catalog instead.
+
 ## Catalogs
 
 ```json
@@ -247,12 +273,16 @@ Pages from a pack run at the app's origin. Open packs from catalogs and links yo
 | *name* is open, but could not be kept in this browser (…); it will be gone after a reload. | Storage is full or blocked (often a private window). |
 | *name*'s files are no longer in this browser's storage. Remove it and add it again. | The browser cleared part of its storage. |
 | *file* is not a brand. Drop a brand pack (.zip), … | Something other than a zip or JSON was dropped. |
+| This bundle is format 2; this brandkit reads up to 1. … | A bundle made by a newer brandkit. |
+| The bundle lists *x* as *x.zip*, which it does not hold. | The bundle's manifest and its files disagree; rebuild it. |
+| *x* in this bundle does not match its manifest's SHA-256; rebuild the bundle. | A pack in the bundle was changed after it was made (or is damaged). |
+| *x* is built into brandkit; give the brands in this bundle an id of their own. | A brand in the bundle has a built-in brand's id; nothing in the bundle is added. |
 
 ## From code
 
 ```js
-import { readPack, readCatalog, PACK_FORMAT } from 'brandkit/pack'          // browser and Node
-import { buildPack, buildCatalog, packIgnore } from 'brandkit/pack/node'   // Node
+import { readPack, readCatalog, readBundle, verifyBundle, isBundle, PACK_FORMAT } from 'brandkit/pack'  // browser and Node
+import { buildPack, buildCatalog, buildBundle, packIgnore } from 'brandkit/pack/node'               // Node
 
 const { manifest, brand, files, library } = readPack(zipBytes)  // files: Map of path → bytes
 const { bytes, manifest, sha256, stats } = buildPack('brands/harbour')

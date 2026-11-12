@@ -96,6 +96,9 @@ keeps its own users, storage and chat workflow.
 
 Packs are made with `node scripts/pack.mjs <brand folders or a folder of brands> --out dist/packs`
 (or `brandkit pack`), which writes `<id>.zip`, `<id>.logo.svg` for the menu, and `catalog.json`.
+`--bundle` also writes a **brand bundle**: every pack in one zip, which adds all of its brands at
+once when it is dropped, chosen or linked (`?url=`), for handing over a client's or an agency's
+brands as one file.
 A pack leaves out what it need not carry: files byte for byte the same as brandkit's own
 `library/` (the open-licence Inter and Space Mono every starter brand uses), a second copy of a
 file the brand keeps at two paths (an alias), and the brand's `history/`. Compressed formats are

@@ -27,6 +27,7 @@
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
+    "./menu-logo": "./src/app/masthead.js",
     "./consumer": "./src/engine/consumer.js",
     "./astryx": "./src/engine/astryx.js",
     "./patterns": "./src/engine/pattern-catalog.js",

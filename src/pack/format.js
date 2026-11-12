@@ -23,6 +23,9 @@ export const PACK_VERSION = 1
 export const PACK_MANIFEST = 'brandkit-pack.json'
 export const CATALOG_FORMAT = 'brandkit-catalog'
 export const CATALOG_VERSION = 1
+export const BUNDLE_FORMAT = 'brandkit-bundle'
+export const BUNDLE_VERSION = 1
+export const BUNDLE_MANIFEST = 'brandkit-bundle.json'
 
 /** A pack's files are never larger than this, so a bad link cannot exhaust the device. */
 export const MAX_PACK_BYTES = 160 * 1024 * 1024
@@ -183,4 +186,72 @@ export const readCatalog = (catalog, baseUrl) => {
     })
   }
   return { name: typeof catalog.name === 'string' ? catalog.name : null, url: baseUrl, packs }
+}
+
+/**
+ * Brand bundles: several brands in one zip, for a client, an agency or a family of brands that
+ * travel together. A bundle is a catalog and its packs, zipped:
+ *
+ *   brandkit-bundle.json   { format: 'brandkit-bundle', version: 1, name?, description?,
+ *                            packs: [{ id, name, file, sha256, bytes, brandVersion?, description?, menuLogo? }] }
+ *   <id>.zip               each brand's pack, exactly as `brandkit pack` writes it
+ *   <id>.logo.svg          each brand's menu logo
+ *
+ * Each pack inside is an ordinary pack, so opening a bundle is opening each of its packs; a pack
+ * taken out of a bundle opens on its own anywhere.
+ */
+export const isBundle = (bytes) => {
+  const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes)
+  try { return Boolean(unzipSync(data, { filter: (file) => file.name === BUNDLE_MANIFEST })[BUNDLE_MANIFEST]) } catch { return false }
+}
+
+/** Checks a bundle manifest, returning the problems (none for a good one). */
+export const bundleProblems = (manifest) => {
+  if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)) return ['The bundle has no manifest.']
+  const problems = []
+  if (manifest.format !== BUNDLE_FORMAT) problems.push(`Not a brandkit bundle (format ${JSON.stringify(manifest.format)}).`)
+  if (!Number.isInteger(manifest.version) || manifest.version < 1) problems.push('The bundle has no format version.')
+  else if (manifest.version > BUNDLE_VERSION) problems.push(`This bundle is format ${manifest.version}; this brandkit reads up to ${BUNDLE_VERSION}. Update brandkit to open it.`)
+  if (!Array.isArray(manifest.packs) || !manifest.packs.length) problems.push('The bundle lists no brands.')
+  const ids = new Set()
+  for (const entry of Array.isArray(manifest.packs) ? manifest.packs : []) {
+    if (!isBrandId(entry?.id)) problems.push(`The bundle lists a brand id ${JSON.stringify(entry?.id)} that is not a valid id.`)
+    else if (ids.has(entry.id)) problems.push(`The bundle lists ${entry.id} twice.`)
+    ids.add(entry?.id)
+    if (typeof entry?.file !== 'string' || !cleanPath(entry.file)) problems.push(`The bundle gives ${entry?.id ?? 'a brand'} no file.`)
+  }
+  return problems
+}
+
+/**
+ * Reads a bundle into its manifest and the bytes of each brand's pack, in the manifest's order:
+ * `{ manifest, packs: [{ entry, bytes, menuLogo }] }`. The packs are not read here: hand each to
+ * readPack (or installPack). A pack's SHA-256, where listed, is checked by verifyBundle.
+ */
+export const readBundle = (bytes) => {
+  const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes)
+  if (data.byteLength > MAX_PACK_BYTES) throw new Error(`That file is larger than the ${Math.round(MAX_PACK_BYTES / 1024 / 1024)} MB a brand bundle may be.`)
+  let entries
+  try { entries = unzipSync(data) } catch (error) { throw new Error('That file is not a zip brandkit can read.', { cause: error }) }
+  if (!entries[BUNDLE_MANIFEST]) throw new Error('That zip is not a brand bundle.')
+  let manifest
+  try { manifest = JSON.parse(new TextDecoder().decode(entries[BUNDLE_MANIFEST])) } catch { manifest = null }
+  const problems = bundleProblems(manifest)
+  if (problems.length) throw new Error(problems.join(' '))
+  const packs = manifest.packs.map((entry) => {
+    const file = cleanPath(entry.file)
+    if (!entries[file]) throw new Error(`The bundle lists ${entry.id} as ${file}, which it does not hold.`)
+    const logo = entry.menuLogo && cleanPath(entry.menuLogo)
+    return { entry, bytes: entries[file], menuLogo: logo && entries[logo] ? entries[logo] : null }
+  })
+  return { manifest, packs }
+}
+
+/** Checks each pack in a read bundle against the SHA-256 and size its manifest lists. */
+export const verifyBundle = async ({ packs }) => {
+  for (const { entry, bytes } of packs) {
+    if (Number.isFinite(entry.bytes) && entry.bytes !== bytes.byteLength) throw new Error(`${entry.id} in this bundle is not the size its manifest says; rebuild the bundle.`)
+    if (typeof entry.sha256 === 'string' && entry.sha256.toLowerCase() !== await sha256(bytes)) throw new Error(`${entry.id} in this bundle does not match its manifest's SHA-256; rebuild the bundle.`)
+  }
+  return true
 }

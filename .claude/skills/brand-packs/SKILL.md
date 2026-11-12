@@ -11,7 +11,8 @@ brand is a **brand pack**: one zip with the brand's `brand.json`, every file it 
 changing the format or the loading flow.
 
 Do not add brands to this repository. Brands are made, tested and published elsewhere (the
-author's are in ahzs645/builds, `brandkit/`) and reach the app as packs.
+author's are in ahzs645/builds, `brandkit/`; client brands are in 1stform/brands, which packs
+every brand into packs, a catalog and one bundle) and reach the app as packs.
 
 ## Every way a brand gets in
 
@@ -22,6 +23,7 @@ author's are in ahzs645/builds, `brandkit/`) and reach the app as packs.
 | Link | `?url=<pack address>`, or **Brands → Add from link**. `url` is removed from the address after install (kept in shared views). | yes |
 | Catalog | Brands from `VITE_BRANDKIT_CATALOGS` (set at build; CI uses repo variable `BRANDKIT_CATALOGS`, default the builds catalog) or `?catalog=<url>` / **Brands → Catalogs**. Listed under **Available to add**; `?brand=<id>` installs on arrival. | yes |
 | Share link | **Share** → `?brand=<id>&share=1`, plus `&url=` when the brand is not in the site's catalog | yes |
+| Bundle | A zip of several packs (`brandkit-bundle.json` + `<id>.zip`…), by file, drop or `?url=`; every brand is kept, the first (or `?brand=`) opens. `installArchive` in `src/app/pack-store.js` | yes |
 
 Accepted files: a pack, any zip with a `brand.json` (shallowest wins), a downloaded kit
 (`source/brand.json`), or a bare `brand.json` (opened for the visit only; **Edit brand → Save**
@@ -48,7 +50,9 @@ replaced (that is how an update from a file works).
 node scripts/pack.mjs <brand folder | folder of brands>… --out dist/packs [--name "Catalog"] [--base-url https://host/path/]
 ```
 
-Writes `<id>.zip`, `<id>.logo.svg` and `catalog.json`. Imports only fflate and Node. Packs leave
+Writes `<id>.zip`, `<id>.logo.svg` and `catalog.json`; `--bundle [file.zip]` also writes one
+bundle of every pack (`buildBundle` / `readBundle`, format `brandkit-bundle` version 1).
+Imports only fflate and Node. Packs leave
 out: files identical to `library/` (aliased as `library:<path>` when at another path), duplicate
 copies (aliases), `history/`, dotfiles, `node_modules/`, and paths in the brand's `.packignore`
 (`folder/`, `name` anywhere, `dir/*.ext`, `**`). A `.packignore` entry that the kit lists in
@@ -86,14 +90,15 @@ packs from trusted catalogs and links.
 
 - `src/pack/format.js` (browser + Node): `readPack`, `readCatalog`, `manifestProblems`,
   `pageIndex`, `PACK_VERSION` (bump only with a reader for the old version).
-- `src/pack/build.js` (Node): `buildPack`, `buildCatalog`, `packIgnore`, `libraryIndex`.
+- `src/pack/build.js` (Node): `buildPack`, `buildCatalog`, `buildBundle`, `packIgnore`, `libraryIndex`.
+- `readBundle`, `verifyBundle`, `isBundle`, `BUNDLE_VERSION` in `src/pack/format.js`.
 - Exported as `brandkit/pack` and `brandkit/pack/node`.
 
 ## Checks
 
 - `npm test` (engine and pack unit tests, on northwind).
 - `npm run build && npm run test:packs:browser` (Chromium; `CHROMIUM_PATH` to reuse one): link,
-  reload, pack pages, revisit, file picker, drag and drop, catalog, dedupe, share, update, remove,
-  phone width.
+  reload, pack pages, revisit, file picker, drag and drop, bundle, catalog, dedupe, share, update,
+  remove, phone width.
 - When changing loading or the format, update `docs/brand-packs.md` (including its error-message
   table) and this skill.
