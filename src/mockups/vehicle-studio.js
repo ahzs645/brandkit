@@ -442,6 +442,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     if (hit) projectDecal(guide, state.area, hit.point, a.width, a.height, 0, true)
     guide.visible = mode === 'edit'
     container.dataset.decals = String(decals.children.length)
+    // For checks: the selected area when its lettering found the body (see test/browser/vehicles.check.mjs).
+    container.dataset.activeArea = frames.has(state.area) ? state.area : ''
   }
 
   // --- Wrap ----------------------------------------------------------------------------------

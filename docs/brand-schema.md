@@ -685,6 +685,8 @@ The **Vehicles** tab puts a brand on brandkit's vehicles: a work truck with a hi
 `compact`). The vehicles are brandkit's; a brand describes only what goes on them, as
 **liveries** in `vehicles.liveries`. The tab lists them under **Brand designs** and opens a new
 mockup on the first.
+[vehicles.md](vehicles.md) is the full guide: making a brand's vehicle artwork, placing lettering,
+and adding vehicles to brandkit.
 
 ```json
 "vehicles": {

@@ -16,7 +16,7 @@ import { VEHICLE_MODELS, lengthOf } from '../../mockups/vehicle-models.js'
 import { VEHICLE_FILE_TYPES, liveryFiles, liveryProject } from '../../mockups/vehicle-livery.js'
 import '../../mockups/vehicles.css'
 
-const MODEL_OPTIONS = Object.entries(VEHICLE_MODELS).map(([value, model]) => ({ value, label: model.label, title: model.note, group: model.build ? 'Work trucks' : 'Cars' }))
+const MODEL_OPTIONS = Object.entries(VEHICLE_MODELS).map(([value, model]) => ({ value, label: model.label, title: model.note, group: model.group }))
 const KIND_OPTIONS = [
   { value: 'none', label: 'None', title: 'No logo: the wrap alone' },
   { value: 'logo', label: 'Logo', title: 'One of the brand’s logos, as drawn' },

@@ -9,7 +9,7 @@ export const VEHICLE_MODELS = Object.freeze({
   shc: Object.freeze({
     url: new URL('./models/shc-hatchback.glb', import.meta.url).href,
     paint: 'grey_car_paint', glass: 'Main_Glass', rotation: 0,
-    label: 'Four-door hatchback', note: 'A compact four-door car.',
+    group: 'Cars', label: 'Four-door hatchback', note: 'A compact four-door car.',
     title: 'SHC MC Free Promotion Car', creator: 'denniswoo1993 / SHCreations',
     licence: 'CC BY 4.0', licenceUrl: 'https://creativecommons.org/licenses/by/4.0/',
     source: 'https://sketchfab.com/3d-models/shc-mc-free-promotion-car-cfaabdec76a74b68a48ba5657b6d9aee',
@@ -20,7 +20,7 @@ export const VEHICLE_MODELS = Object.freeze({
   suv: Object.freeze({
     url: new URL('./models/suv-original.glb', import.meta.url).href,
     paint: 'green', rotation: -Math.PI / 2,
-    label: 'Lightweight SUV', note: 'A simple SUV that loads quickly.',
+    group: 'Cars', label: 'Lightweight SUV', note: 'A simple SUV that loads quickly.',
     title: 'SUV', creator: 'Innerscene',
     licence: 'CC0', licenceUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
     source: 'https://www.innerscene.com/tools/library/3d-parts/suv-dc972cab',
@@ -30,7 +30,7 @@ export const VEHICLE_MODELS = Object.freeze({
   compact: Object.freeze({
     url: new URL('./models/generic-compact-suv.glb', import.meta.url).href,
     paint: 'paint', rotation: 0,
-    label: 'Compact SUV', note: 'More detailed bodywork; it takes a moment to load.',
+    group: 'Cars', label: 'Compact SUV', note: 'More detailed bodywork; it takes a moment to load.',
     title: 'Generic compact SUV', creator: 'Innerscene',
     licence: 'CC0', licenceUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
     source: 'https://www.innerscene.com/tools/library/3d-parts/generic-compact-suv-9f157ee5',
@@ -39,13 +39,13 @@ export const VEHICLE_MODELS = Object.freeze({
   }),
   'truck-canopy': Object.freeze({
     build: { back: 'canopy' }, paint: 'paint', glass: 'glass', rotation: 0,
-    label: 'Work truck, canopy', note: 'A crew-cab pickup with a high work canopy on the bed.',
+    group: 'Work trucks', label: 'Work truck, canopy', note: 'A crew-cab pickup with a high work canopy on the bed.',
     title: 'Work truck', creator: 'brandkit', licence: 'drawn for brandkit',
     creditRequired: false
   }),
   'truck-service': Object.freeze({
     build: { back: 'service' }, paint: 'paint', glass: 'glass', rotation: 0,
-    label: 'Work truck, service body', note: 'A crew-cab truck with a utility service body and ladder rack.',
+    group: 'Work trucks', label: 'Work truck, service body', note: 'A crew-cab truck with a utility service body and ladder rack.',
     title: 'Work truck', creator: 'brandkit', licence: 'drawn for brandkit',
     creditRequired: false
   })

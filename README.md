@@ -66,7 +66,8 @@ brandkit draws the whole kit from it:
   and redo, a draft kept in the browser, Save and Open (JSON), and a 2400 × 1500 PNG. Three.js
   and the models load only when the tab opens; their sources and licences are in
   [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
-  template for cutting vinyl.
+  template for cutting vinyl. A brand can carry its own vehicle designs (`vehicles.liveries`); see
+  [docs/vehicles.md](docs/vehicles.md), which also covers adding vehicles.
 - **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 
