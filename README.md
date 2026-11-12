@@ -54,17 +54,19 @@ brandkit draws the whole kit from it:
   breadcrumbs, introduction, button, aside, cards, table, note, footer, legal bar) previewed on
   its own with its HTML and CSS to copy or download, and the page they compose, set for a
   department. UNBC's follow www.unbc.ca, with the department's sub-logo in the header.
-- **Vehicles**: the brand's artwork on a car in 3D (a hatchback and two SUVs). Choose a body
-  area (either side, the bonnet or the rear) and drag the artwork on the body: a corner resizes
-  it, a round handle turns it, arrow keys nudge it, and numeric fields do the same. The artwork
-  is any of the brand's logos in any colour it is drawn in, a fleet layout (the logo with a
-  supporting line, a rule and the website, set in the brand's type), or an uploaded SVG, PNG,
-  JPEG or WebP. It is projected onto painted bodywork only, so glass, lights and trim stay
-  clear. Copy to the other side keeps lettering reading front to back. Undo and redo, a draft
-  kept in the browser, Save and Open (JSON), and a 2400 × 1500 PNG. Three.js and the models
-  load only when the tab opens; their sources and licences are in
-  [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup on a car
-  shown 4.7 m long, not a template for cutting vinyl.
+- **Vehicles**: the brand on a vehicle in 3D: a work truck with a high canopy or a service
+  body (drawn for brandkit), a hatchback and two SUVs. A **wrap** covers the painted body (both
+  sides, the rear half (on the truck, its canopy or service body) or the full body, roof and hood
+  included) in a graphic drawn in the brand's colours, one of its patterns, or uploaded artwork,
+  scaled and moved within the panels and mirrored on the right side so the design leads from the
+  front. A **logo or fleet lettering** sits on top: choose an area (doors, canopy, hood, rear) and
+  drag it on the body (a corner resizes it, a round handle turns it, arrow keys nudge it). Both
+  are projected onto painted panels only, so glass, lights and trim stay clear. Studio, dark,
+  brand-tinted and outdoor backdrops, lit so the brand's colours read true on either side. Undo
+  and redo, a draft kept in the browser, Save and Open (JSON), and a 2400 × 1500 PNG. Three.js
+  and the models load only when the tab opens; their sources and licences are in
+  [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
+  template for cutting vinyl.
 - **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 

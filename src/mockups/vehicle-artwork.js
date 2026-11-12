@@ -2,7 +2,7 @@
 // it is drawn in, and a fleet layout (the logo with a supporting line, a rule and a website) set
 // in the brand's own type. Plain functions over the engine, so Node's tests can check them.
 
-import { logoDocument, symbolDocument } from '../engine/artwork.js'
+import { logoDocument, pattern, symbolDocument } from '../engine/artwork.js'
 import { colour, colourName } from '../engine/brand.js'
 import { colourwaysOf } from '../engine/signatures.js'
 
@@ -134,5 +134,81 @@ export const fleetDefaults = (brand) => {
   return {
     tagline: String(brand.copy?.tagline ?? '').slice(0, 100),
     website: String(site).replace(/^https?:\/\//, '').replace(/\/$/, '').slice(0, 80)
+  }
+}
+
+// --- Wraps ---------------------------------------------------------------------------------
+
+export const WRAP_ART = Object.freeze({ width: 3000, height: 1000 })
+const rgbOf = (value) => [1, 3, 5].map((index) => parseInt(value.slice(index, index + 2), 16))
+const hexOf = (channels) => `#${channels.map((channel) => Math.round(Math.max(0, Math.min(255, channel))).toString(16).padStart(2, '0')).join('')}`
+/** `a` mixed towards `b` by `amount` (0 is all `a`). */
+export const mix = (a, b, amount) => hexOf(rgbOf(a).map((channel, index) => channel + (rgbOf(b)[index] - channel) * amount))
+const distance = (a, b) => Math.hypot(...rgbOf(a).map((channel, index) => channel - rgbOf(b)[index]))
+
+/** The brand's colours for a wrap, each once: its primary first. */
+export const brandColours = (brand) => {
+  const out = []
+  const offer = (value) => { if (hex(value) && !out.some((other) => distance(other, value.toLowerCase()) < 28)) out.push(value.toLowerCase()) }
+  offer(colour(brand, 'primary'))
+  for (const key of Object.keys(brand.colours ?? {})) offer(colour(brand, key))
+  return out
+}
+
+/** A wrap's two colours to start from: the primary, and the brand colour most unlike it. */
+export const wrapColours = (brand) => {
+  const colours = brandColours(brand)
+  const first = colours[0] ?? '#d9021c'
+  const rest = colours.slice(1).filter((value) => distance(value, '#ffffff') > 40)
+  const second = rest.sort((a, b) => distance(b, first) - distance(a, first))[0] ?? '#231f20'
+  return [first, second]
+}
+
+/**
+ * The wrap graphics, drawn for the vehicle's left side: its front at the left edge, its rear at
+ * the right, 3000 × 1000. Transparent where the paint shows through, except Two-tone. For a
+ * rear-half wrap only the rear of the drawing is used (1700 × 1000), so the whole design lands on
+ * the rear panel instead of being cropped to fit it.
+ */
+export const WRAP_GRAPHIC_LABELS = Object.freeze({ sweep: 'Sweep', chevrons: 'Chevrons', stripes: 'Stripes', 'two-tone': 'Two-tone' })
+export const REAR_HALF_VIEW = Object.freeze([1300, 0, 1700, 1000])
+export const wrapGraphicSvg = ({ graphic, colours: [a, b], coverage = 'sides' }) => {
+  const poly = (fill, points) => `<polygon fill="${fill}" points="${points.map((point) => point.join(',')).join(' ')}"/>`
+  const rect = (fill, x, y, width, height) => `<rect fill="${fill}" x="${x}" y="${y}" width="${width}" height="${height}"/>`
+  const art = {
+    // A band rising to the rear, with a thinner one ahead of it.
+    sweep: () => poly(b, [[1260, 1000], [2060, 0], [2200, 0], [1400, 1000]]) + poly(a, [[1480, 1000], [2280, 0], [3000, 0], [3000, 1000]]),
+    // Bold strokes rising to a point at the rear, crossed by a bar: a letterform-like mark.
+    chevrons: () => poly(a, [[1640, 1000], [1880, 1000], [2420, 0], [2180, 0]])
+      + poly(b, [[1940, 1000], [2120, 1000], [2660, 0], [2480, 0]])
+      + poly(a, [[2420, 0], [2640, 0], [3000, 640], [3000, 1000], [2960, 1000]])
+      + poly(b, [[2060, 560], [3000, 560], [3000, 680], [1990, 680]]),
+    stripes: () => rect(a, 0, 500, 3000, 120) + rect(b, 0, 650, 3000, 44),
+    'two-tone': () => rect(b, 0, 640, 3000, 360) + rect(a, 0, 590, 3000, 50)
+  }[graphic] ?? (() => '')
+  const [x, y, width, height] = coverage === 'rear' ? REAR_HALF_VIEW : [0, 0, WRAP_ART.width, WRAP_ART.height]
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${x} ${y} ${width} ${height}">${art()}</svg>`
+}
+
+/** The brand's patterns, as wrap artwork: `{ id, label, make() }`. */
+export const wrapPatterns = (brand, fonts) => (brand.patterns ?? [])
+  .filter((spec) => spec.id && spec.width > 0 && spec.height > 0)
+  .map((spec) => ({ id: spec.id, label: spec.name ?? spec.id.replaceAll('-', ' '), make: () => pattern({ brand, fonts }, spec) }))
+
+// --- Backdrops -----------------------------------------------------------------------------
+
+export const BACKDROP_LABELS = Object.freeze({ studio: 'Studio', dark: 'Dark', brand: 'Brand', outdoor: 'Outdoor' })
+
+/**
+ * The stage behind the vehicle: a gradient from `top` to `bottom`, how dark the vehicle's shadow
+ * falls, and for Outdoor a ground colour. Brand is tinted from the brand's primary colour.
+ */
+export const backdrop = (id, brand) => {
+  const primary = hex(colour(brand, 'primary')) ?? '#2f6fde'
+  switch (id) {
+    case 'dark': return { top: '#343a42', bottom: '#0f1114', shadow: 0.55, ground: null, light: 0.85 }
+    case 'brand': return { top: mix(primary, '#ffffff', 0.86), bottom: mix(primary, '#ffffff', 0.58), shadow: 0.24, ground: null, light: 1 }
+    case 'outdoor': return { top: '#9fc3e6', bottom: '#eef3f6', shadow: 0.42, ground: '#8d9196', light: 1.1 }
+    default: return { top: '#f7f8fa', bottom: '#d6dbe1', shadow: 0.22, ground: null, light: 1 }
   }
 }

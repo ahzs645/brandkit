@@ -1,6 +1,9 @@
 // The vehicles a mockup can use. Each names the material its painted body uses (artwork is
 // projected only onto that, so glass, lights and trim stay clear), how to turn it to face the
 // way the prepared areas expect, and the credit its licence asks for. Licences: models/NOTICES.md.
+// The work truck is drawn in code (work-truck.js) rather than loaded, so it has no file.
+
+import { VEHICLES } from './vehicle-layout.js'
 
 export const VEHICLE_MODELS = Object.freeze({
   shc: Object.freeze({
@@ -33,5 +36,20 @@ export const VEHICLE_MODELS = Object.freeze({
     source: 'https://www.innerscene.com/tools/library/3d-parts/generic-compact-suv-9f157ee5',
     creditRequired: false,
     sha256: 'fd08e2f12559e0c49b65a79e8c9fb3d3811b2109475c219af48a9be466612d3b'
+  }),
+  'truck-canopy': Object.freeze({
+    build: { back: 'canopy' }, paint: 'paint', glass: 'glass', rotation: 0,
+    label: 'Work truck, canopy', note: 'A crew-cab pickup with a high work canopy on the bed.',
+    title: 'Work truck', creator: 'brandkit', licence: 'drawn for brandkit',
+    creditRequired: false
+  }),
+  'truck-service': Object.freeze({
+    build: { back: 'service' }, paint: 'paint', glass: 'glass', rotation: 0,
+    label: 'Work truck, service body', note: 'A crew-cab truck with a utility service body and ladder rack.',
+    title: 'Work truck', creator: 'brandkit', licence: 'drawn for brandkit',
+    creditRequired: false
   })
 })
+
+/** The length each vehicle is shown at, and so the scale of its areas and camera. */
+export const lengthOf = (id) => VEHICLES[id]?.length ?? 4.7

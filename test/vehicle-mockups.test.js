@@ -7,8 +7,10 @@ import { readFileSync, statSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
-import { AREAS, SCHEMA, clampPlacement, createPlacement, mirrorPlacement, validateProject } from '../src/mockups/vehicle-layout.js'
-import { FLEET, fleetDefaults, fleetSvg, svgAspect, vehicleLogos } from '../src/mockups/vehicle-artwork.js'
+import * as THREE from 'three'
+import { AREAS, SCHEMA, VEHICLES, areasFor, clampPlacement, createPlacement, defaultWrap, mirrorPlacement, validateProject, wrapWindow } from '../src/mockups/vehicle-layout.js'
+import { FLEET, WRAP_GRAPHIC_LABELS, backdrop, brandColours, fleetDefaults, fleetSvg, svgAspect, vehicleLogos, wrapColours, wrapGraphicSvg, wrapPatterns } from '../src/mockups/vehicle-artwork.js'
+import { buildWorkTruck } from '../src/mockups/work-truck.js'
 import { VEHICLE_MODELS } from '../src/mockups/vehicle-models.js'
 import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
 
@@ -21,8 +23,8 @@ const base = () => ({
   placements: { left: createPlacement('left', aspect) },
   artwork: { kind: 'logo', logo: 'primary/horizontal/primary', tagline: 'Know the land. Plan the work.', website: 'example.com', upload: null }
 })
-const fits = (placement, id, ratio) => {
-  const a = AREAS[id]
+const fits = (placement, id, ratio, areas = AREAS) => {
+  const a = areas[id]
   const r = placement.rotation * Math.PI / 180
   const halfU = placement.width * (Math.abs(Math.cos(r)) + Math.abs(Math.sin(r)) / ratio) / 2
   const halfV = placement.width * (Math.abs(Math.sin(r)) + Math.abs(Math.cos(r)) / ratio) / 2
@@ -30,8 +32,8 @@ const fits = (placement, id, ratio) => {
   assert.ok(Math.abs(placement.v) + halfV <= a.height / 2 + 1e-12)
 }
 
-test('area frames point outward and are orthonormal', () => {
-  for (const a of Object.values(AREAS)) {
+test('every vehicle’s area frames point outward and are orthonormal', () => {
+  for (const a of Object.values(VEHICLES).flatMap((vehicle) => Object.values(vehicle.areas))) {
     const [u, v, n] = [a.uAxis, a.vAxis, a.normal]
     assert.deepEqual([u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]].map((x) => x || 0), n.map((x) => x || 0))
     for (const axis of [u, v, n]) assert.equal(Math.hypot(...axis), 1)
@@ -160,6 +162,7 @@ test('prototype keys at the top level are dropped without touching Object.protot
 
 test('each vehicle model is the file its checksum names', () => {
   for (const [id, model] of Object.entries(VEHICLE_MODELS)) {
+    if (model.build) continue
     const path = fileURLToPath(model.url)
     assert.ok(statSync(path).size > 100_000, id)
     assert.equal(createHash('sha256').update(readFileSync(path)).digest('hex'), model.sha256, id)
@@ -223,3 +226,126 @@ test('the fleet layout starts from the brand’s tagline', () => {
   assert.equal(fleetDefaults(northwind).tagline, northwind.copy.tagline)
   assert.equal(fleetDefaults({ web: { url: 'https://www.example.org/' } }).website, 'www.example.org')
 })
+
+test('a mockup saved before wraps (schema 1) opens with no wrap and the studio backdrop', () => {
+  const old = { ...base(), schema: 'brandkit-vehicle-mockup/1' }
+  const opened = validateProject(old)
+  assert.equal(opened.schema, SCHEMA)
+  assert.equal(opened.wrap.coverage, 'none')
+  assert.equal(opened.backdrop, 'studio')
+})
+
+test('a wrap is checked: coverage, colours, scale, position and its artwork', () => {
+  const withWrap = (changes) => ({ ...base(), wrap: { ...defaultWrap(), coverage: 'full', ...changes } })
+  const ok = validateProject(withWrap({ colours: ['#D9021C', '#231f20'], scale: 2, offsetU: -1, offsetV: 0.5 }))
+  assert.deepEqual(ok.wrap.colours, ['#d9021c', '#231f20'])
+  for (const bad of [{ coverage: 'roof' }, { colours: ['red', '#000000'] }, { colours: ['#000000'] }, { scale: 0.5 }, { scale: 5 }, { offsetU: 1.5 }, { mirror: 'yes' }, { source: 'upload', upload: null }, { graphic: 'flames' }]) {
+    assert.throws(() => validateProject(withWrap(bad)), JSON.stringify(bad))
+  }
+  // A pattern another brand had falls back to this brand's first.
+  assert.equal(validateProject(withWrap({ source: 'pattern', pattern: 'elsewhere' }), { patterns: ['repeat', 'crop'] }).wrap.pattern, 'repeat')
+})
+
+test('a placement on the truck uses the truck’s areas, and a car’s mockup cannot name them', () => {
+  const truck = { ...base(), model: 'truck-canopy', area: 'left-body', placements: { 'left-body': createPlacement('left-body', aspect, areasFor('truck-canopy')) } }
+  assert.equal(validateProject(truck).area, 'left-body')
+  const car = { ...truck, model: 'suv' }
+  assert.throws(() => validateProject(car))
+  const { area, placement } = mirrorPlacement(truck.placements['left-body'], 'left-body', aspect, areasFor('truck-canopy'))
+  assert.equal(area, 'right-body')
+  fits(placement, 'right-body', aspect, areasFor('truck-canopy'))
+})
+
+test('a wrap always covers its face, and mirroring flips it', () => {
+  const inside = ({ repeat: [w, h], offset: [x, y] }) => {
+    const [a, b] = [x, x + w].sort((p, q) => p - q)
+    assert.ok(a >= -1e-9 && b <= 1 + 1e-9 && y >= -1e-9 && y + h <= 1 + 1e-9, JSON.stringify({ w, h, x, y }))
+  }
+  for (const faceAspect of [0.5, 1.2, 3, 6]) {
+    for (const artAspect of [1, 1.6, 3]) {
+      for (const scale of [1, 2.5, 4]) {
+        for (const offsetU of [-1, 0, 1]) {
+          const plain = wrapWindow({ faceAspect, artAspect, scale, offsetU, offsetV: offsetU })
+          inside(plain)
+          // The window keeps the face's proportions: no stretching.
+          assert.ok(Math.abs(plain.repeat[0] * artAspect / plain.repeat[1] - faceAspect) < 1e-9)
+          const mirrored = wrapWindow({ faceAspect, artAspect, scale, offsetU, offsetV: offsetU, mirror: true })
+          inside(mirrored)
+          assert.equal(mirrored.repeat[0], -plain.repeat[0])
+        }
+      }
+    }
+  }
+  // At scale 1 a face as wide as the artwork shows all of it.
+  assert.deepEqual(wrapWindow({ faceAspect: 3, artAspect: 3 }), { repeat: [1, 1], offset: [0, 0] })
+})
+
+test('the wrap graphics draw in the colours given, each a 3:1 side', () => {
+  for (const graphic of Object.keys(WRAP_GRAPHIC_LABELS)) {
+    const svg = wrapGraphicSvg({ graphic, colours: ['#d9021c', '#231f20'] })
+    assert.equal(svgAspect(svg), 3, graphic)
+    assert.ok(svg.includes('#d9021c') && svg.includes('#231f20'), graphic)
+    assert.equal(new Resvg(svg).render().width, 3000, graphic)
+    // A rear-half wrap draws the rear of the same design, uncropped.
+    const rear = wrapGraphicSvg({ graphic, colours: ['#d9021c', '#231f20'], coverage: 'rear' })
+    assert.equal(svgAspect(rear), 1.7, graphic)
+    assert.equal(new Resvg(rear).render().width, 1700, graphic)
+  }
+})
+
+test('wrap colours start from the brand’s primary and the colour most unlike it', () => {
+  const colours = brandColours(northwind)
+  assert.equal(colours[0], northwind.colours[northwind.roles.primary]?.toLowerCase?.() ?? colours[0])
+  assert.equal(new Set(colours).size, colours.length)
+  const [main, second] = wrapColours(northwind)
+  assert.notEqual(main, second)
+  assert.deepEqual(wrapColours({ colours: { red: '#D9021C', charcoal: '#231F20', white: '#FFFFFF' }, roles: { primary: 'red' } }), ['#d9021c', '#231f20'])
+})
+
+test('the brand’s patterns are offered as wrap artwork', () => {
+  const patterns = wrapPatterns(northwind)
+  assert.equal(patterns.length, northwind.patterns.length)
+  assert.ok(svgAspect(patterns[0].make()) > 0)
+})
+
+test('each backdrop has a gradient and a shadow strength; Brand is tinted from the primary', () => {
+  for (const id of ['studio', 'dark', 'brand', 'outdoor']) {
+    const look = backdrop(id, northwind)
+    assert.match(look.top, /^#[0-9a-f]{6}$/i)
+    assert.match(look.bottom, /^#[0-9a-f]{6}$/i)
+    assert.ok(look.shadow > 0 && look.shadow < 1)
+  }
+  assert.notEqual(backdrop('brand', { colours: { red: '#D9021C' }, roles: { primary: 'red' } }).top, backdrop('brand', { colours: { blue: '#0068AC' }, roles: { primary: 'blue' } }).top)
+})
+
+for (const back of ['canopy', 'service']) {
+  test(`the ${back} work truck is drawn at its stated length, centred, and every area is on its paint`, () => {
+    const truck = buildWorkTruck({ back })
+    truck.updateMatrixWorld(true)
+    const bounds = new THREE.Box3().setFromObject(truck)
+    const size = bounds.getSize(new THREE.Vector3())
+    assert.ok(Math.abs(size.x - VEHICLES[`truck-${back}`].length) < 0.01, `length ${size.x}`)
+    assert.ok(Math.abs(bounds.min.x + bounds.max.x) < 0.2, 'centred along')
+    assert.ok(Math.abs(bounds.min.z + bounds.max.z) < 0.01, 'centred across')
+    assert.ok(bounds.min.y > -0.01 && bounds.min.y < 0.02, `on the ground: ${bounds.min.y}`)
+    const paint = []
+    truck.traverse((object) => { if (object.isMesh && object.material.name === 'paint') paint.push(object) })
+    assert.ok(paint.length >= 2)
+    // Each area's centre and corners, cast in from outside, land on painted body.
+    const ray = new THREE.Raycaster()
+    for (const [id, a] of Object.entries(areasFor(`truck-${back}`))) {
+      for (const [du, dv] of [[0, 0], [-0.45, -0.45], [0.45, -0.45], [-0.45, 0.45], [0.45, 0.45]]) {
+        const point = new THREE.Vector3(...a.origin).addScaledVector(new THREE.Vector3(...a.uAxis), du * a.width).addScaledVector(new THREE.Vector3(...a.vAxis), dv * a.height)
+        const normal = new THREE.Vector3(...a.normal)
+        ray.set(point.clone().addScaledVector(normal, 8), normal.clone().negate())
+        const hits = ray.intersectObject(truck, true)
+        const paintHit = hits.find((hit) => hit.object.material.name === 'paint')
+        const where = `${back} ${id} ${du},${dv}`
+        assert.ok(paintHit, `${where}: no paint there`)
+        // A handle or seam may stand in front of the paint; glass may not.
+        assert.notEqual(hits[0].object.material.name, 'glass', `${where}: on glass`)
+        assert.ok(paintHit.distance - hits[0].distance < 0.06, `${where}: behind ${hits[0].object.material.name}`)
+      }
+    }
+  })
+}

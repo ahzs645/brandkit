@@ -1,6 +1,8 @@
 # Vehicle models: sources and licences
 
-The vehicle mockups (the **Vehicles** tab) use these three models. brandkit loads each GLB as
+The work truck (with a canopy or a service body) is drawn in code for brandkit
+(`../work-truck.js`) and has no third-party source or licence. The vehicle mockups also use
+these three models. brandkit loads each GLB as
 stored here; the SHA-256 of each is recorded in `../vehicle-models.js`. The models' licences
 cover the models only: they do not license, and are not licensed by, any brand's artwork placed
 on them.
