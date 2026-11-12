@@ -93,6 +93,7 @@
     "opentype.js": "^2.0.0",
     "pptxgenjs": "^4.0.1",
     "svg2pdf.js": "^2.8.1",
+    "three": "0.187.0",
     "webm-muxer": "^5.1.4"
   },
   "devDependencies": {

@@ -39,6 +39,8 @@ const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ d
 const Web = lazy(() => import('./views/Web.jsx').then((module) => ({ default: module.Web })))
 const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
 const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
+// Three.js and the vehicle models load only when the tab opens.
+const Vehicles = lazy(() => import('./views/Vehicles.jsx').then((module) => ({ default: module.Vehicles })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
@@ -51,6 +53,8 @@ const VIEWS = [
   { id: 'templates', label: 'Templates' },
   { id: 'documents', label: 'Documents', within: 'templates' },
   { id: 'web', label: 'Web' },
+  // The brand's artwork placed on a car in 3D.
+  { id: 'vehicles', label: 'Vehicles' },
   { id: 'printer', label: 'Template Printer' },
   // A brand extension's own tab (UNBC's door signs), named by the extension.
   { id: 'extension', label: 'Extension' },
@@ -86,6 +90,8 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     // The printer is for card designs: a brand with a printer package (a card set up) has it.
     case 'printer': return Boolean(brand.printer?.packages?.length)
     case 'extension': return extensionView !== null
+    // A logo to put on the car: a family, or a signature not set for one department.
+    case 'vehicles': return Boolean(brand.families?.length || brand.signatures?.some((signature) => !signature.departmental))
     default: return true
   }
 }
@@ -557,6 +563,7 @@ export const App = () => {
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
             </div>}
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
+            {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

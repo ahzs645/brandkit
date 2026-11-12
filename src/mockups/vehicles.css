@@ -1,0 +1,56 @@
+/* Vehicles: the stage beside its settings; stacked on a narrow screen. */
+.vehicles { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; }
+.vehicles__stage-panel { padding: 0; overflow: hidden; display: grid; position: sticky; top: calc(var(--masthead-h) + 12px); }
+.vehicles__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px; border-bottom: 1px solid var(--line); }
+.vehicles__history, .vehicles__files { display: flex; gap: 6px; }
+.vehicles__files { margin-left: auto; }
+.vehicles__toolbar .button:disabled, .vehicles__controls .button:disabled { opacity: 0.45; cursor: default; }
+.vehicles__footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: 10px 14px; font-size: 12px; border-top: 1px solid var(--line); }
+.vehicles__credit { color: var(--ink-faint); }
+.vehicles__credit a { color: inherit; }
+
+.vehicle-stage { position: relative; height: min(64vh, 620px); min-height: 340px; background: #eceee9; overflow: hidden; touch-action: none; }
+.vehicle-stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
+.vehicle-stage__canvas:focus-visible { box-shadow: inset 0 0 0 3px var(--focus); }
+.vehicle-stage[data-mode='view'] .vehicle-stage__canvas { cursor: grab; }
+.vehicle-stage__selection { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.vehicle-stage__box { fill: rgba(47, 111, 222, 0.06); stroke: #2f6fde; stroke-width: 1.5; stroke-dasharray: 6 4; pointer-events: all; cursor: move; touch-action: none; }
+.vehicle-stage__stem { stroke: #2f6fde; stroke-width: 1.5; }
+.vehicle-stage__handle { fill: #fff; stroke: #2f6fde; stroke-width: 2; pointer-events: all; cursor: nwse-resize; touch-action: none; }
+.vehicle-stage__handle--rotate { cursor: grab; fill: #2f6fde; stroke: #fff; }
+.vehicle-stage__views { position: absolute; z-index: 1; top: 10px; left: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+.vehicle-stage__views button { border: 0; padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.86); color: #16181c; font-size: 12px; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+.vehicle-stage__views button[aria-pressed='true'] { background: #16181c; color: #fff; }
+.vehicle-stage__status { position: absolute; z-index: 1; left: 10px; right: 10px; bottom: 10px; margin: 0; width: fit-content; max-width: calc(100% - 20px); padding: 6px 12px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.9); color: #16181c; font-size: 12.5px; pointer-events: none; }
+.vehicle-stage__status--error { background: #fde4e1; color: #7a1c13; }
+
+.vehicles__controls { display: grid; gap: 22px; }
+.vehicles__controls section { display: grid; gap: 10px; }
+.vehicles__controls h2 { margin: 0; font-size: 15px; }
+.vehicles__controls .segmented { display: flex; flex-wrap: wrap; overflow: visible; }
+.vehicles__controls .segmented button { flex: 1 1 auto; }
+.vehicles__areas .segmented { display: grid; grid-template-columns: 1fr 1fr; }
+.vehicles__controls input[type='text'], .vehicles__controls input[type='number'] { width: 100%; min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); color: var(--ink); }
+.vehicles__controls input[type='range'] { width: 100%; }
+.vehicles__value { display: flex; justify-content: space-between; }
+.vehicles__value output { font-variant-numeric: tabular-nums; font-weight: 500; }
+.vehicles__offsets { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.vehicles__actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.vehicles__wide { width: 100%; }
+.vehicles__preview { display: grid; place-items: center; height: 96px; padding: 10px; border-radius: var(--radius-sm); background: repeating-conic-gradient(var(--track) 0% 25%, var(--surface) 0% 50%) 50% / 16px 16px; }
+.vehicles__preview img { max-width: 100%; max-height: 100%; }
+.vehicles__paint { display: flex; flex-wrap: wrap; gap: 6px; }
+.vehicles__swatch { width: 28px; height: 28px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--swatch); cursor: pointer; }
+.vehicles__swatch[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.vehicles__swatch--custom { position: relative; overflow: hidden; background: conic-gradient(#e33, #ec3, #3c5, #3ae, #93e, #e33); }
+.vehicles__swatch--custom input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+@media (max-width: 1000px) {
+  .vehicles { grid-template-columns: minmax(0, 1fr); }
+  .vehicles__stage-panel { position: static; }
+  .vehicle-stage { height: 56vh; }
+}
+@media (max-width: 600px) {
+  .vehicles__files { margin-left: 0; }
+  .vehicle-stage { height: 52vh; min-height: 300px; }
+}
