@@ -11,8 +11,8 @@ brand is a **brand pack**: one zip with the brand's `brand.json`, every file it 
 changing the format or the loading flow.
 
 Do not add brands to this repository. Brands are made, tested and published elsewhere (the
-author's are in ahzs645/builds, `brandkit/`; client brands are in 1stform/brands, which packs
-every brand into packs, a catalog and one bundle) and reach the app as packs.
+author's are in ahzs645/builds, `brandkit/`; client brands are kept in private repositories
+that pack every brand into packs, a catalog and one bundle) and reach the app as packs.
 
 ## Every way a brand gets in
 
