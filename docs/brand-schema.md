@@ -125,7 +125,10 @@ A symbol is one of:
 - **circles**: `centres` and `radius` (and `microRadius` for the favicon variant);
 - **paths**: `paths` (strings or `{ d, fillRule?, fill? }`), with optional `microPaths`;
 - **markup**: `markup`, an SVG fragment drawn in the viewBox (for a mark that is artwork, not
-  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour.
+  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour. A
+  multi-colour mark fills its parts with `{role}` placeholders (`fill="{primary}"`): one colour
+  paints every role, and a brand with `colourways` also gets the symbol in each colourway
+  (`symbol/<id>-symbol-<colourway>.svg`, PNG and PDF); a guide `symbol` element takes `colourway`.
 
 ## Wordmark
 

@@ -150,3 +150,21 @@ test('every built-in brand has the menu logo scripts/menu-logos.mjs draws', () =
     assert.ok(existsSync(new URL(`../brands/${id}/logo-menu.svg`, import.meta.url)), id)
   }
 })
+
+test('a two-colour symbol drawn as markup takes a colourway in its own files, the kit and the guide', async () => {
+  const { symbolDocument } = await import('../src/engine/artwork.js')
+  const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
+  const brand = {
+    ...base,
+    symbol: { name: 'two-tone', viewBox: [0, 0, 20, 10], markup: '<path fill="{primary}" d="M0 0H10V10H0Z"/><path fill="{secondary}" d="M10 0H20V10H10Z"/>' },
+    colourways: { 'full-colour': { label: 'Full colour', roles: { primary: '#D9021C', secondary: '#231F20' } }, reverse: { roles: { primary: '#D9021C', secondary: '#FFFFFF' } } }
+  }
+  const svg = symbolDocument({ brand }, { colourway: 'full-colour' })
+  assert.match(svg, /fill="#D9021C"/)
+  assert.match(svg, /fill="#231F20"/)
+  assert.doesNotMatch(symbolDocument({ brand }, { colourKey: 'ink' }), /#D9021C/, 'one colour paints every part')
+  const paths = planKit(brand).map((entry) => entry.path)
+  assert.ok(paths.includes('symbol/northwind-symbol-full-colour.svg') && paths.includes('symbol/northwind-symbol-reverse.svg'), 'each colourway is a symbol file')
+  const [page] = guidePages({ brand: { ...brand, guide: { ...brand.guide, pages: [{ title: 'Emblem', elements: [{ type: 'symbol', x: 0, y: 0, height: 10, colourway: 'reverse' }] }] } } })
+  assert.match(page.render(), /fill="#FFFFFF"/i, "the guide paints the symbol in its colourway")
+})
