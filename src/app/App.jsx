@@ -8,8 +8,9 @@ import { validateBrand } from '../engine/brand.js'
 import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
-import { fetchPack, installPack, installedPacks, openInstalled, readPackUrl, removePack, updatesFrom } from './pack-store.js'
+import { fetchPack, installArchive, installedPacks, openInstalled, readPackUrl, removePack, updatesFrom } from './pack-store.js'
 import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
+import { isBundle } from '../pack/format.js'
 import { registerPackPages } from './pack-pages.js'
 import { useBrandDrop } from './drop.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
@@ -39,6 +40,8 @@ const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ d
 const Web = lazy(() => import('./views/Web.jsx').then((module) => ({ default: module.Web })))
 const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
 const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
+// Three.js and the vehicle models load only when the tab opens.
+const Vehicles = lazy(() => import('./views/Vehicles.jsx').then((module) => ({ default: module.Vehicles })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
@@ -51,6 +54,8 @@ const VIEWS = [
   { id: 'templates', label: 'Templates' },
   { id: 'documents', label: 'Documents', within: 'templates' },
   { id: 'web', label: 'Web' },
+  // The brand's artwork placed on a car in 3D.
+  { id: 'vehicles', label: 'Vehicles' },
   { id: 'printer', label: 'Template Printer' },
   // A brand extension's own tab (UNBC's door signs), named by the extension.
   { id: 'extension', label: 'Extension' },
@@ -86,6 +91,8 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     // The printer is for card designs: a brand with a printer package (a card set up) has it.
     case 'printer': return Boolean(brand.printer?.packages?.length)
     case 'extension': return extensionView !== null
+    // A logo to put on the car: a family, or a signature not set for one department.
+    case 'vehicles': return Boolean(brand.families?.length || brand.signatures?.some((signature) => !signature.departmental))
     default: return true
   }
 }
@@ -201,9 +208,11 @@ export const App = () => {
       const fetched = await fetchPack(url, { etag, onProgress: (received, total) => setProgress({ name: name ?? 'brand', received, total }) })
       if (fetched.notModified) return null
       setProgress({ name: name ?? 'brand', received: fetched.bytes.byteLength, total: fetched.bytes.byteLength, storing: true })
-      const record = await installPack(fetched.bytes, { url, catalog: from, etag: fetched.etag })
+      // A bundle adds several brands; the one asked for (?brand=) or else its first is opened.
+      const records = await installArchive(fetched.bytes, { url, catalog: from, etag: fetched.etag }, { refuse: BUILT_IN })
       await refreshInstalled()
-      return record
+      const wanted = params().get('brand')
+      return records.find((record) => record.id === wanted) ?? records[0]
     } finally {
       setProgress(null)
     }
@@ -278,7 +287,9 @@ export const App = () => {
       // link opens the copy kept here, after asking the host whether it has changed.
       const packUrl = readPackUrl()
       if (packUrl) {
-        const kept = (await installedPacks()).find((record) => record.url === packUrl)
+        // A bundle's brands all share its address; prefer the one the link names.
+        const fromLink = (await installedPacks()).filter((record) => record.url === packUrl)
+        const kept = fromLink.find((record) => record.id === params().get('brand')) ?? fromLink[0]
         try {
           const record = await downloadPack({ url: packUrl, name: kept?.name, etag: kept?.etag })
           const id = record?.id ?? kept?.id
@@ -391,6 +402,19 @@ export const App = () => {
   const open = async (file) => {
     setError(null)
     try {
+      // A bundle (several brands in one zip) adds every brand in it, then opens the first.
+      if (/\.zip$/i.test(file.name) || /zip/i.test(file.type)) {
+        const bytes = new Uint8Array(await file.arrayBuffer())
+        if (isBundle(bytes)) {
+          const records = await installArchive(bytes, {}, { refuse: BUILT_IN })
+          await refreshInstalled()
+          const ids = records.map((record) => record.id)
+          setOpened((all) => Object.fromEntries(Object.entries(all).filter(([id]) => !ids.includes(id))))
+          await select(ids[0])
+          go('overview')
+          return
+        }
+      }
       const result = await openBrandFile(file)
       const problems = validateBrand(result.brand)
       if (problems.length) throw new Error(`That brand.json has problems: ${problems.join(' ')}`)
@@ -399,7 +423,7 @@ export const App = () => {
       // its own (or a zip the browser will not store) is opened for this visit only.
       if (result.bytes) {
         try {
-          await installPack(result.bytes)
+          await installArchive(result.bytes)
           await refreshInstalled()
           setOpened(({ [result.brand.id]: _replaced, ...rest }) => rest)
           await select(result.brand.id)
@@ -557,6 +581,7 @@ export const App = () => {
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
             </div>}
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
+            {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

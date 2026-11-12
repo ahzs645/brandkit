@@ -123,6 +123,16 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     }
     if (!brand.colourways) for (const key of logoColours) svgEntry(`symbol/${id}-symbol-${symbolId}-${colourKey(key)}.svg`, (ctx) => symbolDocument(ctx, { symbolId, colourKey: key }), { furtherSymbol: symbolId })
   }
+  // A symbol drawn as markup with {role} placeholders is also drawn in each colourway (a
+  // two-colour emblem in its full colours), beside the one-colour files above.
+  if (brand.symbol.markup && brand.colourways) {
+    for (const way of Object.keys(brand.colourways).filter((key) => !logoColours.includes(key))) {
+      const make = (ctx) => symbolDocument(ctx, { colourway: way })
+      svgEntry(`symbol/${id}-symbol-${way}.svg`, make)
+      if (rasters) for (const width of symbolWidths ?? [256, 512, 1024]) add({ path: `symbol/${id}-symbol-${way}-${width}.png`, kind: 'png', width, svg: make })
+      if (pdfs) add({ path: `symbol/pdf/${id}-symbol-${way}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))] })
+    }
+  }
   svgEntry(`symbol/${id}-symbol-master.svg`, (ctx) => symbolDocument(ctx, { master: true }))
   if (brand.symbol.microRadius != null || brand.symbol.microPaths || brand.symbol.microMarkup) svgEntry(`symbol/${id}-symbol-micro.svg`, (ctx) => symbolDocument(ctx, { micro: true }))
   for (const key of rasterColours) {

@@ -33,7 +33,7 @@ const out = join(work, 'packs')
 const SHARED_BYTES = Buffer.concat(Array.from({ length: 8000 }, (_, index) => createHash('sha512').update(`${index}`).digest()))
 // A 2 × 2 PNG.
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR4nGP4z8DAwMDAwMAAAA4AAf8fGu8AAAAASUVORK5CYII=', 'base64')
-const FIXTURE_NAMES = ['northwind', 'Southwind', 'Eastwind', 'Upwind', 'Downwind', 'Jsonwind']
+const FIXTURE_NAMES = ['northwind', 'Southwind', 'Eastwind', 'Upwind', 'Downwind', 'Jsonwind', 'Crosswind', 'Tailwind']
 const make = (id, name, primary) => {
   const folder = join(brands, id)
   cpSync(join(root, 'brands/northwind'), folder, { recursive: true })
@@ -72,6 +72,15 @@ const makeLoose = (id, name, primary) => {
 makeLoose('upwind', 'Upwind', '#2E6B3F')
 makeLoose('downwind', 'Downwind', '#6B2E5A')
 pack([loose, '--out', looseOut, '--quiet'])
+// Two more that travel together as one bundle (several packs in one zip).
+const bundled = join(work, 'bundled')
+const bundleOut = join(work, 'bundle')
+for (const [id, name, primary] of [['crosswind', 'Crosswind', '#5A4B1F'], ['tailwind', 'Tailwind', '#1F5A55']]) {
+  const folder = make(id, name, primary)
+  cpSync(folder, join(bundled, id), { recursive: true })
+  rmSync(folder, { recursive: true, force: true })
+}
+pack([bundled, '--out', bundleOut, '--bundle', 'winds.zip', '--quiet'])
 repack()
 
 // The pack host: another origin, CORS for everyone, ETags so a revisit can be answered "unchanged".
@@ -279,6 +288,23 @@ try {
   await waitForBrand('jsonwind')
   assert.ok(!(await usage()).packs.some((record) => record.id === 'jsonwind'), 'a brand.json is opened, not stored as a pack')
 
+  // 9d. A bundle (several brands in one zip), chosen with the file picker: every brand in it is
+  // kept, and the first opens.
+  await page.goto(`${base}?brand=eastwind&view=brands`)
+  await page.getByRole('heading', { name: 'Add a brand' }).waitFor()
+  await page.locator('input[type="file"][accept*=".zip"]').first().setInputFiles(join(bundleOut, 'winds.zip'))
+  await waitForBrand('crosswind')
+  const fromBundle = (await usage()).packs.filter((record) => ['crosswind', 'tailwind'].includes(record.id))
+  assert.equal(fromBundle.length, 2, 'both brands in the bundle are kept')
+  assert.ok((await menu())['In this browser']?.includes('Tailwind'), 'the bundle’s other brand is in the menu')
+  // The same bundle by link, asking for its second brand: that one opens, both keep the address.
+  for (const id of ['crosswind', 'tailwind']) await page.evaluate((id) => new Promise((done) => { const open = indexedDB.open('brandkit-packs'); open.onsuccess = () => { const tx = open.result.transaction('packs', 'readwrite'); tx.objectStore('packs').delete(id); tx.oncomplete = done } }), id)
+  cpSync(join(bundleOut, 'winds.zip'), join(out, 'winds.zip'))
+  await page.goto(`${base}?url=${encodeURIComponent(`${packs}winds.zip`)}&brand=tailwind`)
+  await waitForBrand('tailwind')
+  const linked = (await usage()).packs.filter((record) => ['crosswind', 'tailwind'].includes(record.id))
+  assert.deepEqual(linked.map((record) => record.url), [`${packs}winds.zip`, `${packs}winds.zip`], 'a linked bundle’s brands keep its address')
+
   // 10. At phone width the Brands view fits without scrolling sideways.
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto(`${base}?brand=eastwind&view=brands`)
@@ -287,7 +313,7 @@ try {
   await page.screenshot({ path: join(screenshotDir, 'brands-view-phone.png'), fullPage: true })
 
   assert.deepEqual(errors, [], errors.join('\n'))
-  console.log(`Pack checks passed: link, reload, pack pages, revisit, file picker, drag and drop, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
+  console.log(`Pack checks passed: link, reload, pack pages, revisit, file picker, drag and drop, bundle, catalog, shared storage (${stored.stored} bytes for ${logical}), share link, update, remove, phone. Screenshots in ${screenshotDir}`)
 } catch (error) {
   if (page) await page.screenshot({ path: join(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
   throw error

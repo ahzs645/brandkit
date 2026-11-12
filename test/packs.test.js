@@ -8,8 +8,8 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
 import { zipSync, strToU8 } from 'fflate'
-import { buildCatalog, buildPack, libraryIndex } from '../src/pack/build.js'
-import { PACK_MANIFEST, PACK_VERSION, cleanPath, readCatalog, readPack } from '../src/pack/format.js'
+import { buildBundle, buildCatalog, buildPack, libraryIndex } from '../src/pack/build.js'
+import { BUNDLE_MANIFEST, PACK_MANIFEST, PACK_VERSION, cleanPath, isBundle, readBundle, readCatalog, readPack, verifyBundle } from '../src/pack/format.js'
 import { pack } from '../src/pack/cli.js'
 
 const NORTHWIND = fileURLToPath(new URL('../brands/northwind/', import.meta.url))
@@ -183,4 +183,48 @@ test('a catalog only replaces installed copies that came from it', async () => {
   assert.equal(updatesFrom({ url: null, catalog: 'https://other/catalog.json' }, entry), false)
   assert.equal(updatesFrom({ url: entry.url, catalog: null }, entry), true)
   assert.equal(updatesFrom({ url: 'https://elsewhere/acme.zip', catalog: null }, entry), false)
+})
+
+test('a bundle carries several brands in one zip, each an ordinary pack', async () => {
+  const { root, folder } = fixture()
+  try {
+    const library = libraryIndex()
+    const packs = [folder, NORTHWIND].map((path) => {
+      const built = buildPack(path, { library })
+      return { ...built, file: `${built.manifest.id}.zip`, menuLogoBytes: readFileSync(join(path, 'logo-menu.svg')) }
+    })
+    const bundle = buildBundle(packs, { name: 'Two brands' })
+    assert.deepEqual(buildBundle(packs, { name: 'Two brands' }).sha256, bundle.sha256, 'deterministic')
+    assert.ok(isBundle(bundle.bytes))
+    assert.ok(!isBundle(packs[0].bytes), 'a pack is not a bundle')
+    const read = readBundle(bundle.bytes)
+    assert.equal(read.manifest.name, 'Two brands')
+    assert.deepEqual(read.packs.map(({ entry }) => entry.id), ['southwind', 'northwind'], 'in the order given')
+    assert.ok(await verifyBundle(read))
+    assert.deepEqual(read.packs[0].bytes, packs[0].bytes, 'the pack inside is the pack, byte for byte')
+    assert.equal(readPack(read.packs[1].bytes).brand.id, 'northwind')
+    assert.ok(read.packs[0].menuLogo)
+    assert.throws(() => readPack(bundle.bytes), /no brand\.json/, 'a bundle is not mistaken for one brand')
+
+    // A tampered or malformed bundle is refused.
+    const manifest = { ...read.manifest, packs: read.manifest.packs.map((entry) => ({ ...entry, sha256: '0'.repeat(64) })) }
+    const tampered = zipSync({ [BUNDLE_MANIFEST]: strToU8(JSON.stringify(manifest)), 'southwind.zip': packs[0].bytes, 'northwind.zip': packs[1].bytes })
+    await assert.rejects(verifyBundle(readBundle(tampered)), /SHA-256/)
+    assert.throws(() => readBundle(zipSync({ [BUNDLE_MANIFEST]: strToU8(JSON.stringify({ ...manifest, version: 9 })) })), /format 9/)
+    assert.throws(() => readBundle(zipSync({ [BUNDLE_MANIFEST]: strToU8(JSON.stringify({ format: 'brandkit-bundle', version: 1, packs: [{ id: 'a', file: 'a.zip' }] })) })), /does not hold/)
+    assert.throws(() => readBundle(zipSync({ [BUNDLE_MANIFEST]: strToU8(JSON.stringify({ format: 'brandkit-bundle', version: 1, packs: [{ id: 'a', file: 'a.zip' }, { id: 'a', file: 'a.zip' }] })) })), /twice/)
+  } finally { rmSync(root, { recursive: true, force: true }) }
+})
+
+test('the pack command writes a bundle with --bundle', () => {
+  const { root, folder } = fixture()
+  const out = join(root, 'out')
+  try {
+    const result = pack([folder, NORTHWIND, '--out', out, '--name', 'Clients', '--bundle', 'clients.zip', '--quiet'])
+    const read = readBundle(readFileSync(join(out, 'clients.zip')))
+    assert.equal(read.manifest.name, 'Clients')
+    assert.deepEqual(read.manifest.packs.map((entry) => entry.sha256), result.catalog.packs.map((entry) => entry.sha256), 'the same packs as the catalog lists')
+    pack([folder, '--out', out, '--bundle', '--quiet'])
+    assert.ok(isBundle(readFileSync(join(out, 'brands.bundle.zip'))))
+  } finally { rmSync(root, { recursive: true, force: true }) }
 })

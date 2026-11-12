@@ -54,6 +54,20 @@ brandkit draws the whole kit from it:
   breadcrumbs, introduction, button, aside, cards, table, note, footer, legal bar) previewed on
   its own with its HTML and CSS to copy or download, and the page they compose, set for a
   department. UNBC's follow www.unbc.ca, with the department's sub-logo in the header.
+- **Vehicles**: the brand on a vehicle in 3D: a work truck with a high canopy or a service
+  body (drawn for brandkit), a hatchback and two SUVs. A **wrap** covers the painted body (both
+  sides, the rear half (on the truck, its canopy or service body) or the full body, roof and hood
+  included) in a graphic drawn in the brand's colours, one of its patterns, or uploaded artwork,
+  scaled and moved within the panels and mirrored on the right side so the design leads from the
+  front. A **logo or fleet lettering** sits on top: choose an area (doors, canopy, hood, rear) and
+  drag it on the body (a corner resizes it, a round handle turns it, arrow keys nudge it). Both
+  are projected onto painted panels only, so glass, lights and trim stay clear. Studio, dark,
+  brand-tinted and outdoor backdrops, lit so the brand's colours read true on either side. Undo
+  and redo, a draft kept in the browser, Save and Open (JSON), and a 2400 × 1500 PNG. Three.js
+  and the models load only when the tab opens; their sources and licences are in
+  [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
+  template for cutting vinyl. A brand can carry its own vehicle designs (`vehicles.liveries`); see
+  [docs/vehicles.md](docs/vehicles.md), which also covers adding vehicles.
 - **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 
@@ -96,6 +110,9 @@ keeps its own users, storage and chat workflow.
 
 Packs are made with `node scripts/pack.mjs <brand folders or a folder of brands> --out dist/packs`
 (or `brandkit pack`), which writes `<id>.zip`, `<id>.logo.svg` for the menu, and `catalog.json`.
+`--bundle` also writes a **brand bundle**: every pack in one zip, which adds all of its brands at
+once when it is dropped, chosen or linked (`?url=`), for handing over a client's or an agency's
+brands as one file.
 A pack leaves out what it need not carry: files byte for byte the same as brandkit's own
 `library/` (the open-licence Inter and Space Mono every starter brand uses), a second copy of a
 file the brand keeps at two paths (an alias), and the brand's `history/`. Compressed formats are

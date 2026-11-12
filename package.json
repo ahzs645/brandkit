@@ -27,6 +27,7 @@
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
+    "./menu-logo": "./src/app/masthead.js",
     "./consumer": "./src/engine/consumer.js",
     "./astryx": "./src/engine/astryx.js",
     "./patterns": "./src/engine/pattern-catalog.js",
@@ -66,6 +67,7 @@
     "pack": "node scripts/pack.mjs",
     "test:packs:browser": "node test/browser/packs.check.mjs",
     "test:astryx:browser": "node test/browser/astryx-export.check.mjs",
+    "test:vehicles:browser": "node test/browser/vehicles.check.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "catalog": "node scripts/catalog.mjs"
   },
@@ -93,6 +95,7 @@
     "opentype.js": "^2.0.0",
     "pptxgenjs": "^4.0.1",
     "svg2pdf.js": "^2.8.1",
+    "three": "0.187.0",
     "webm-muxer": "^5.1.4"
   },
   "devDependencies": {

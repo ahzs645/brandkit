@@ -91,6 +91,7 @@ colourways, then declare the optional controls:
 | `clearSpaceRatio` | Nonnegative ratio of logo width used to calculate surrounding space. Record whether it is an official numeric rule or an implementation measurement of an official visual rule. |
 | `note` | Plain-language restrictions and context, carried to consumers. Background and approval requirements must remain explicit in the source notes. |
 | `web.icons` | `false` omits generated favicon/app-icon files and links. Direct favicon/app-icon render calls reject instead of shrinking the logo into a new mark. |
+| `web.favicon.symbol`, `web.appIcon.symbol` | One of `symbols` to draw instead of the brand symbol, for a brand whose symbol is too wide or detailed to read at 16 pixels. It is fitted by its longer side. |
 
 `logoDimensions(brand, widthMm)` from `brandkit/engine` validates the width and returns
 `widthMm`, `minimumWidthMm`, `clearSpaceMm` and `totalWidthMm`. The reserved space is the larger
@@ -125,7 +126,10 @@ A symbol is one of:
 - **circles**: `centres` and `radius` (and `microRadius` for the favicon variant);
 - **paths**: `paths` (strings or `{ d, fillRule?, fill? }`), with optional `microPaths`;
 - **markup**: `markup`, an SVG fragment drawn in the viewBox (for a mark that is artwork, not
-  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour.
+  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour. A
+  multi-colour mark fills its parts with `{role}` placeholders (`fill="{primary}"`): one colour
+  paints every role, and a brand with `colourways` also gets the symbol in each colourway
+  (`symbol/<id>-symbol-<colourway>.svg`, PNG and PDF); a guide `symbol` element takes `colourway`.
 
 ## Wordmark
 
@@ -523,8 +527,9 @@ source-maintenance commands and rendering guidance.
 ```
 
 Guide elements: `label`, `text`, `para` (wrapped), `rect`, `rule`, `path`, `logo` (scaled to
-`width`, or fitted in a `width` × `height` box), `symbol`, `nested` (another kit file, e.g.
-`"templates/social-post"`), and the composite blocks `symbolConstruction`, `specTable`,
+`width`, or fitted in a `width` × `height` box), `symbol` (with `colourway` for a markup symbol),
+`nested` (another kit file: `"templates/social-post"`, `"patterns/repeat"`, `"web/favicon"`,
+`"web/app-icon"`), and the composite blocks `symbolConstruction`, `specTable`,
 `swatches` (`symbol: false` for plain bars), `swatchStrip` and `list`. Text on guide pages is set
 as outlines; a precomposed fraction the face lacks (TeX Gyre Termes has ¼ ½ ¾ but not ⅓ or ⅞) is
 built from small figures, with the other fractions on that line, rather than drawn as nothing.
@@ -672,6 +677,53 @@ with anything uncited).
 - `print`: `{ pantone: { colourKey: "376" }, cmyk: { colourKey: "C50 Y100" }, note }`, the values a
   manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
   recipe gets one converted from its screen value, marked as converted.
+
+## Vehicles
+
+The **Vehicles** tab puts a brand on brandkit's vehicles: a work truck with a high canopy
+(`truck-canopy`) or a service body (`truck-service`), a hatchback (`shc`) and two SUVs (`suv`,
+`compact`). The vehicles are brandkit's; a brand describes only what goes on them, as
+**liveries** in `vehicles.liveries`. The tab lists them under **Brand designs** and opens a new
+mockup on the first.
+[vehicles.md](vehicles.md) is the full guide: making a brand's vehicle artwork, placing lettering,
+and adding vehicles to brandkit.
+
+```json
+"vehicles": {
+  "liveries": [{
+    "id": "service-truck",
+    "label": "Service truck",
+    "description": "Canopy truck as lettered in the fleet.",
+    "model": "truck-canopy",
+    "paint": "white",
+    "backdrop": "outdoor",
+    "wrap": { "coverage": "rear", "file": "artwork/vehicle/canopy-wrap.svg", "mirror": true },
+    "lettering": { "file": "artwork/vehicle/door-lettering.svg" },
+    "placements": {
+      "left": { "u": 0, "v": 0, "width": 1.9, "rotation": 0 },
+      "right": { "u": 0, "v": 0, "width": 1.9, "rotation": 0 }
+    },
+    "area": "left"
+  }]
+}
+```
+
+| Key | What it is |
+| --- | --- |
+| `id`, `label`, `description` | The livery's id (lower-case, digits, hyphens) and how the tab names and describes it. |
+| `model` | `truck-canopy`, `truck-service`, `shc`, `suv` or `compact`. |
+| `paint` | The body colour: a colour key or role of the brand, or `#rrggbb`. Default white. |
+| `backdrop` | `studio` (default), `dark`, `brand` or `outdoor`. |
+| `wrap` | `coverage` (`none`, `sides`, `rear` for the rear half: the canopy or service body on a truck, `full`) and one source: `file` (the brand's own artwork), `graphic` (`sweep`, `chevrons`, `stripes`, `two-tone`) with two `colours`, or `pattern` (an id in `patterns`). Optional `scale` (1–4), `offsetU` and `offsetV` (−1 to 1), `mirror` (default true: the right side mirrors the design so it leads from the front; set it false for artwork built from a logo, which is never flipped). |
+| `lettering` | What sits on top of the wrap: `file`, `logo` (a logo id as the tab lists it, such as `apex-horizontal/full-colour`) or `fleet` (`{ "logo", "tagline", "website" }`). |
+| `placements` | Where the lettering goes, by area: `u` across and `v` up from the area's centre, `width`, all in metres on the vehicle as shown, and `rotation` in degrees. The cars have `left`, `right`, `hood` and `rear`; the trucks have `left` and `right` (the doors), `left-body` and `right-body` (canopy or service body), `hood` and `rear`. A placement too large for its area is made to fit. |
+| `area` | The area selected when the livery opens. |
+
+Wrap artwork is drawn for the vehicle's **left** side: its front at the artwork's left edge, its
+rear at the right. It is fitted to cover each panel it wraps (cropped, never stretched); for
+`rear`, draw it for the rear half alone. Glass, lights and trim stay clear. Artwork files are
+SVG, PNG, JPEG or WebP inside the brand's folder, and are inspected like an upload: no scripts,
+no external references. A livery is checked with the rest of the brand (`brandkit check`).
 
 ## Template Printer packages and imported SVG
 

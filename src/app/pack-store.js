@@ -12,7 +12,7 @@
 // IndexedDB keeps Blobs on disk, so opening a brand does not read its files into memory: each is
 // read when it is first drawn or downloaded.
 
-import { MAX_PACK_BYTES, readPack, sha256 } from '../pack/format.js'
+import { MAX_PACK_BYTES, isBundle, readBundle, readPack, sha256, verifyBundle } from '../pack/format.js'
 
 const DB_NAME = 'brandkit-packs'
 const DB_VERSION = 1
@@ -137,6 +137,24 @@ export const installPack = async (bytes, origin = {}) => {
   if (previous) await collect()
   const { files: _files, library: _library, ...summary } = record
   return summary
+}
+
+/**
+ * Stores a pack, or every brand in a bundle (several packs in one zip; see readBundle). Returns
+ * the brands' records, in the bundle's order: one for a pack. Each brand from a bundle keeps the
+ * bundle's `origin`, so a revisit to a bundle's link revalidates it as it would a pack's.
+ */
+export const installArchive = async (bytes, origin = {}, { refuse = [] } = {}) => {
+  const data = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes instanceof Blob ? await bytes.arrayBuffer() : bytes)
+  if (!isBundle(data)) return [await installPack(data, origin)]
+  const bundle = readBundle(data)
+  await verifyBundle(bundle)
+  // Checked before anything is stored, so a bundle is added whole or not at all.
+  const taken = bundle.packs.map(({ entry }) => entry.id).filter((id) => refuse.includes(id))
+  if (taken.length) throw new Error(`${taken.join(', ')} ${taken.length === 1 ? 'is' : 'are'} built into brandkit; give the brand${taken.length === 1 ? '' : 's'} in this bundle an id of ${taken.length === 1 ? 'its' : 'their'} own.`)
+  const records = []
+  for (const { bytes: pack } of bundle.packs) records.push(await installPack(pack, origin))
+  return records
 }
 
 /** Deletes every stored file that no installed brand names. */

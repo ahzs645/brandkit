@@ -32,13 +32,14 @@ const usage = `usage: brandkit check <brand.json>
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
-       brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url]
+       brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url] [--bundle [file.zip]]
 
 The documents command creates native Word files, printable HTML, editable content JSON and brand assets.
 --pdf exports each Word master using LibreOffice; set SOFFICE_PATH when it is not on PATH.
 The pdf command refreshes a PDF after a Word master has been edited. --brand supplies its fonts.
 The build command keeps its vector/text default; --office enables generated Office files in Node.
-The pack command makes brand packs (one zip per brand) and a catalog.json listing them.`
+The pack command makes brand packs (one zip per brand) and a catalog.json listing them; --bundle
+also writes every pack into one brand bundle that adds all of its brands at once.`
 
 const load = async (path) => {
   const absolute = resolve(path)
