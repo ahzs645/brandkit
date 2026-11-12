@@ -150,3 +150,37 @@ test('every built-in brand has the menu logo scripts/menu-logos.mjs draws', () =
     assert.ok(existsSync(new URL(`../brands/${id}/logo-menu.svg`, import.meta.url)), id)
   }
 })
+
+test('a two-colour symbol drawn as markup takes a colourway in its own files, the kit and the guide', async () => {
+  const { symbolDocument } = await import('../src/engine/artwork.js')
+  const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
+  const brand = {
+    ...base,
+    symbol: { name: 'two-tone', viewBox: [0, 0, 20, 10], markup: '<path fill="{primary}" d="M0 0H10V10H0Z"/><path fill="{secondary}" d="M10 0H20V10H10Z"/>' },
+    colourways: { 'full-colour': { label: 'Full colour', roles: { primary: '#D9021C', secondary: '#231F20' } }, reverse: { roles: { primary: '#D9021C', secondary: '#FFFFFF' } } }
+  }
+  const svg = symbolDocument({ brand }, { colourway: 'full-colour' })
+  assert.match(svg, /fill="#D9021C"/)
+  assert.match(svg, /fill="#231F20"/)
+  assert.doesNotMatch(symbolDocument({ brand }, { colourKey: 'ink' }), /#D9021C/, 'one colour paints every part')
+  const paths = planKit(brand).map((entry) => entry.path)
+  assert.ok(paths.includes('symbol/northwind-symbol-full-colour.svg') && paths.includes('symbol/northwind-symbol-reverse.svg'), 'each colourway is a symbol file')
+  const [page] = guidePages({ brand: { ...brand, guide: { ...brand.guide, pages: [{ title: 'Emblem', elements: [{ type: 'symbol', x: 0, y: 0, height: 10, colourway: 'reverse' }] }] } } })
+  assert.match(page.render(), /fill="#FFFFFF"/i, "the guide paints the symbol in its colourway")
+})
+
+test('a favicon and app icon can use a small further symbol instead of the brand symbol', async () => {
+  const { faviconSvg, appIconSvg } = await import('../src/engine/web.js')
+  const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
+  const brand = {
+    ...base,
+    symbols: { ...base.symbols, paw: { name: 'paw', viewBox: [10, 20, 50, 100], paths: ['M10 20H60V120H10Z'] } },
+    web: { ...base.web, favicon: { ...base.web.favicon, symbol: 'paw', size: 60 }, appIcon: { ...base.web.appIcon, symbol: 'paw', size: 800 } }
+  }
+  assert.deepEqual(validateBrand(brand), [])
+  const favicon = faviconSvg({ brand })
+  assert.match(favicon, /M10 20H60V120H10Z/, 'the further symbol is drawn')
+  assert.match(favicon, /scale\(0\.6\) translate\(-10 -20\)/, 'fitted by its longer side, from its own origin')
+  assert.match(appIconSvg({ brand }), /scale\(8\) translate\(-10 -20\)/)
+  assert.ok(validateBrand({ ...brand, web: { ...brand.web, favicon: { symbol: 'missing' } } }).some((problem) => problem.includes('web.favicon.symbol')))
+})

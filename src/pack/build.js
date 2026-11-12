@@ -18,7 +18,7 @@ import { join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { zipSync } from 'fflate'
-import { PACK_FORMAT, PACK_MANIFEST, PACK_VERSION, STORED, cleanPath, pageIndex } from './format.js'
+import { BUNDLE_FORMAT, BUNDLE_MANIFEST, BUNDLE_VERSION, PACK_FORMAT, PACK_MANIFEST, PACK_VERSION, STORED, cleanPath, pageIndex } from './format.js'
 
 export const LIBRARY_DIR = fileURLToPath(new URL('../../library/', import.meta.url))
 
@@ -168,3 +168,36 @@ export const brandFolders = (root) => readdirSync(root, { withFileTypes: true })
 export { buildCatalog } from './host.js'
 
 export const isFolder = (path) => existsSync(path) && statSync(path).isDirectory()
+
+/**
+ * Zips built packs into one bundle (see `readBundle` in ./format.js): several brands that travel
+ * together as one file. `packs` are buildPack results with the `file` they are written as, and
+ * optionally `description` and `menuLogoBytes`. Deterministic, like a pack: the same packs make
+ * the same bundle.
+ */
+export const buildBundle = (packs, { name, description } = {}) => {
+  if (!packs.length) throw new Error('A bundle needs at least one brand.')
+  const manifest = {
+    format: BUNDLE_FORMAT,
+    version: BUNDLE_VERSION,
+    ...(name ? { name } : {}),
+    ...(description ? { description } : {}),
+    packs: packs.map(({ manifest: pack, sha256, bytes, file, description: about, menuLogoBytes }) => ({
+      id: pack.id,
+      name: pack.name,
+      file,
+      sha256,
+      bytes: bytes.byteLength,
+      ...(pack.brandVersion ? { brandVersion: pack.brandVersion } : {}),
+      ...(about ? { description: about } : {}),
+      ...(menuLogoBytes ? { menuLogo: `${pack.id}.logo.svg` } : {})
+    }))
+  }
+  const tree = { [BUNDLE_MANIFEST]: [new TextEncoder().encode(`${JSON.stringify(manifest, null, 1)}\n`), { level: 9, mtime: FIXED_DATE }] }
+  for (const pack of [...packs].sort((a, b) => a.file.localeCompare(b.file))) {
+    tree[pack.file] = [pack.bytes, { level: 0, mtime: FIXED_DATE }]
+    if (pack.menuLogoBytes) tree[`${pack.manifest.id}.logo.svg`] = [new Uint8Array(pack.menuLogoBytes), { level: 9, mtime: FIXED_DATE }]
+  }
+  const bytes = zipSync(tree)
+  return { bytes, manifest, sha256: hash(bytes) }
+}

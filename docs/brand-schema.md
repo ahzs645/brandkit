@@ -91,6 +91,7 @@ colourways, then declare the optional controls:
 | `clearSpaceRatio` | Nonnegative ratio of logo width used to calculate surrounding space. Record whether it is an official numeric rule or an implementation measurement of an official visual rule. |
 | `note` | Plain-language restrictions and context, carried to consumers. Background and approval requirements must remain explicit in the source notes. |
 | `web.icons` | `false` omits generated favicon/app-icon files and links. Direct favicon/app-icon render calls reject instead of shrinking the logo into a new mark. |
+| `web.favicon.symbol`, `web.appIcon.symbol` | One of `symbols` to draw instead of the brand symbol, for a brand whose symbol is too wide or detailed to read at 16 pixels. It is fitted by its longer side. |
 
 `logoDimensions(brand, widthMm)` from `brandkit/engine` validates the width and returns
 `widthMm`, `minimumWidthMm`, `clearSpaceMm` and `totalWidthMm`. The reserved space is the larger
@@ -125,7 +126,10 @@ A symbol is one of:
 - **circles**: `centres` and `radius` (and `microRadius` for the favicon variant);
 - **paths**: `paths` (strings or `{ d, fillRule?, fill? }`), with optional `microPaths`;
 - **markup**: `markup`, an SVG fragment drawn in the viewBox (for a mark that is artwork, not
-  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour.
+  geometry). Shapes inherit the fill the engine sets, so leave them unfilled to recolour. A
+  multi-colour mark fills its parts with `{role}` placeholders (`fill="{primary}"`): one colour
+  paints every role, and a brand with `colourways` also gets the symbol in each colourway
+  (`symbol/<id>-symbol-<colourway>.svg`, PNG and PDF); a guide `symbol` element takes `colourway`.
 
 ## Wordmark
 
@@ -523,8 +527,9 @@ source-maintenance commands and rendering guidance.
 ```
 
 Guide elements: `label`, `text`, `para` (wrapped), `rect`, `rule`, `path`, `logo` (scaled to
-`width`, or fitted in a `width` × `height` box), `symbol`, `nested` (another kit file, e.g.
-`"templates/social-post"`), and the composite blocks `symbolConstruction`, `specTable`,
+`width`, or fitted in a `width` × `height` box), `symbol` (with `colourway` for a markup symbol),
+`nested` (another kit file: `"templates/social-post"`, `"patterns/repeat"`, `"web/favicon"`,
+`"web/app-icon"`), and the composite blocks `symbolConstruction`, `specTable`,
 `swatches` (`symbol: false` for plain bars), `swatchStrip` and `list`. Text on guide pages is set
 as outlines; a precomposed fraction the face lacks (TeX Gyre Termes has ¼ ½ ¾ but not ⅓ or ⅞) is
 built from small figures, with the other fractions on that line, rather than drawn as nothing.

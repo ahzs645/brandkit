@@ -10,15 +10,26 @@ const webSvg = ({ brand }, width, height, art, title) => `<svg xmlns="http://www
 
 const prefix = (brand) => brand.web?.cssPrefix ?? brand.id
 
+/**
+ * The symbol an icon draws: the brand's symbol, or `spec.symbol`, one of `brand.symbols` (a small
+ * mark for a brand whose symbol is too wide or detailed for 16 pixels). A further symbol is fitted
+ * by its longer side; the brand's own symbol by its width, as it always has been.
+ */
+const iconSymbol = (brand, spec) => {
+  if (spec.symbol && !brand.symbols?.[spec.symbol]) throw new Error(`The icon names symbol ${spec.symbol}, which is not in symbols.`)
+  const [sx, sy, sw, sh] = (spec.symbol ? brand.symbols[spec.symbol] : brand.symbol).viewBox
+  return spec.symbol ? { sx, sy, sw, sh, fit: Math.max(sw, sh) } : { sx: 0, sy: 0, sw, sh, fit: sw }
+}
+
 /** The square app icon: the symbol, centred on the brand colour. */
 export const appIconSvg = (ctx) => {
   const { brand } = ctx
   if (brand.web?.icons === false) throw new Error(`${brand.name} does not provide an approved app icon.`)
   const spec = brand.web?.appIcon ?? {}
-  const [, , sw, sh] = brand.symbol.viewBox
-  const scale = (spec.size ?? 760) / sw
+  const { sx, sy, sw, sh, fit } = iconSymbol(brand, spec)
+  const scale = (spec.size ?? 760) / fit
   const art = `<rect width="1024" height="1024" fill="${resolveColour(brand, spec.background ?? 'primary')}"/>`
-    + `<g transform="translate(${n6((1024 - sw * scale) / 2)} ${n6((1024 - sh * scale) / 2)}) scale(${n6(scale)})">${mark(ctx, resolveColour(brand, spec.colour ?? 'reverse'))}</g>`
+    + `<g transform="translate(${n6((1024 - sw * scale) / 2)} ${n6((1024 - sh * scale) / 2)}) scale(${n6(scale)})${spec.symbol ? ` translate(${n6(-sx)} ${n6(-sy)})` : ''}">${mark(ctx, resolveColour(brand, spec.colour ?? 'reverse'), false, spec.symbol)}</g>`
   return webSvg(ctx, 1024, 1024, art, `${brand.name} app icon`)
 }
 
@@ -27,10 +38,10 @@ export const faviconSvg = (ctx) => {
   const { brand } = ctx
   if (brand.web?.icons === false) throw new Error(`${brand.name} does not provide an approved favicon.`)
   const spec = brand.web?.favicon ?? {}
-  const [, , sw, sh] = brand.symbol.viewBox
-  const scale = (spec.size ?? 56) / sw
+  const { sx, sy, sw, sh, fit } = iconSymbol(brand, spec)
+  const scale = (spec.size ?? 56) / fit
   const style = `<style>svg{color:${spec.light ?? '#000000'}}@media(prefers-color-scheme:dark){svg{color:${spec.dark ?? '#FFFFFF'}}}</style>`
-  const art = style + `<g transform="translate(${n6((64 - sw * scale) / 2)} ${n6((64 - sh * scale) / 2)}) scale(${n6(scale)})">${mark(ctx, 'currentColor', spec.micro !== false)}</g>`
+  const art = style + `<g transform="translate(${n6((64 - sw * scale) / 2)} ${n6((64 - sh * scale) / 2)}) scale(${n6(scale)})${spec.symbol ? ` translate(${n6(-sx)} ${n6(-sy)})` : ''}">${mark(ctx, 'currentColor', !spec.symbol && spec.micro !== false, spec.symbol)}</g>`
   return webSvg(ctx, 64, 64, art, fill(brand, spec.title ?? '{name} favicon'))
 }
 

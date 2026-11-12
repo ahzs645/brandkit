@@ -253,6 +253,8 @@ export const symbolDocument = (ctx, { colourKey, micro = false, master = false, 
   }
   const symbol = brand.symbol
   const { width, height } = symbolViewBox(brand)
+  // A symbol drawn as markup with {role} placeholders (a two-colour mark) takes a colourway's colours.
+  if (colourway && !colourKey) return svgDocument(ctx, width, height, mark(ctx, paintFor(brand, colourway), micro), `${brand.name} / ${symbol.title ?? 'symbol'} / ${colourway}`)
   const art = mark(ctx, colourKey ? (colourKey === 'currentColor' ? 'currentColor' : resolveColour(brand, colourKey)) : 'currentColor', micro)
   if (micro) return svgDocument(ctx, width, height, art, `${brand.name} / micro symbol`, { desc: symbol.microDescription })
   if (master) {
