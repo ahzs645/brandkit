@@ -581,7 +581,7 @@ export const App = () => {
               <ExtensionView key={brand.id} brand={brand} fonts={fonts} />
             </div>}
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
-            {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} />}
+            {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

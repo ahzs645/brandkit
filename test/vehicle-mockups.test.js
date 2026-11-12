@@ -13,6 +13,8 @@ import { FLEET, WRAP_GRAPHIC_LABELS, backdrop, brandColours, fleetDefaults, flee
 import { buildWorkTruck } from '../src/mockups/work-truck.js'
 import { VEHICLE_MODELS } from '../src/mockups/vehicle-models.js'
 import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
+import { colour as brandColour } from '../src/engine/brand.js'
+const colourOf = (brand, key) => brandColour(brand, key).toLowerCase()
 
 const BRAND_DIR = fileURLToPath(new URL('../brands/northwind/', import.meta.url))
 const northwind = JSON.parse(readFileSync(new URL('brand.json', `file://${BRAND_DIR}`), 'utf8'))
@@ -349,3 +351,69 @@ for (const back of ['canopy', 'service']) {
     }
   })
 }
+
+// --- Brand liveries (brand.vehicles.liveries) ----------------------------------------------
+
+const liveryBrand = () => ({
+  ...structuredClone(northwind),
+  colours: { ...northwind.colours, red: '#D9021C', charcoal: '#231F20' },
+  vehicles: {
+    liveries: [{
+      id: 'service-truck', label: 'Service truck', model: 'truck-canopy', paint: 'paper', backdrop: 'outdoor',
+      wrap: { coverage: 'rear', file: 'artwork/vehicle/canopy.svg', mirror: true },
+      lettering: { file: 'artwork/vehicle/doors.svg' },
+      placements: { left: { u: 0.05, v: 0.02, width: 1.9, rotation: 0 }, right: { u: -0.05, v: 0.02, width: 1.9, rotation: 0 } },
+      area: 'left'
+    }, {
+      id: 'car', label: 'Car', model: 'shc', paint: '#ffffff',
+      wrap: { coverage: 'sides', graphic: 'stripes', colours: ['red', 'charcoal'] },
+      lettering: { fleet: { tagline: 'Built for the North', website: 'example.com' } },
+      placements: { left: { u: 0, v: 0, width: 1.2, rotation: 0 } }
+    }]
+  }
+})
+
+test('a brand’s liveries are checked with the rest of the brand', async () => {
+  const { validateBrand } = await import('../src/engine/brand.js')
+  const { liveryProblems } = await import('../src/mockups/vehicle-livery.js')
+  assert.deepEqual(liveryProblems(liveryBrand()), [])
+  assert.deepEqual(validateBrand(liveryBrand()).filter((problem) => /Livery/.test(problem)), [])
+  const broken = liveryBrand()
+  Object.assign(broken.vehicles.liveries[0], { model: 'tank', paint: 'no-such-colour' })
+  broken.vehicles.liveries[0].wrap = { coverage: 'roof', file: '../outside.svg', graphic: 'sweep' }
+  broken.vehicles.liveries[1].id = 'service-truck'
+  broken.vehicles.liveries[1].placements = { 'left-body': { u: 0, v: 0, width: 1, rotation: 0 } }
+  const problems = liveryProblems(broken)
+  for (const pattern of [/model/, /paint/, /coverage/, /exactly one of `file`, `graphic` or `pattern`/, /same `id`/, /left-body/]) {
+    assert.ok(problems.some((problem) => pattern.test(problem)), `${pattern} in ${problems.join(' | ')}`)
+  }
+  assert.ok(validateBrand(broken).some((problem) => /Livery/.test(problem)))
+})
+
+test('a livery becomes a mockup the editor accepts, its colours resolved', async () => {
+  const { liveryFiles, liveryProject } = await import('../src/mockups/vehicle-livery.js')
+  const brand = liveryBrand()
+  const files = liveryFiles(brand)
+  assert.deepEqual(files, ['artwork/vehicle/canopy.svg', 'artwork/vehicle/doors.svg'])
+  const truck = validateProject(liveryProject(brand, brand.vehicles.liveries[0]), { files })
+  assert.equal(truck.model, 'truck-canopy')
+  assert.equal(truck.paint, colourOf(brand, 'paper'))
+  assert.deepEqual([truck.artwork.kind, truck.artwork.file], ['file', 'artwork/vehicle/doors.svg'])
+  assert.deepEqual([truck.wrap.coverage, truck.wrap.source, truck.wrap.file], ['rear', 'file', 'artwork/vehicle/canopy.svg'])
+  assert.deepEqual(Object.keys(truck.placements), ['left', 'right'])
+  assert.equal(truck.livery, 'service-truck')
+  assert.equal(truck.backdrop, 'outdoor')
+  const car = validateProject(liveryProject(brand, brand.vehicles.liveries[1]), { files })
+  assert.deepEqual(car.wrap.colours, ['#d9021c', '#231f20'])
+  assert.deepEqual([car.artwork.kind, car.artwork.tagline], ['fleet', 'Built for the North'])
+})
+
+test('a saved mockup may only name artwork files the open brand’s liveries use', async () => {
+  const { liveryProject } = await import('../src/mockups/vehicle-livery.js')
+  const brand = liveryBrand()
+  const project = liveryProject(brand, brand.vehicles.liveries[0])
+  assert.throws(() => validateProject(project, { files: ['artwork/vehicle/other.svg'] }), /does not have/)
+  for (const path of ['../brand.json', '/etc/passwd', 'https://example.com/a.svg', 'artwork/vehicle/doors.html']) {
+    assert.throws(() => validateProject({ ...project, artwork: { ...project.artwork, file: path } }), path)
+  }
+})

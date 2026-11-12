@@ -60,9 +60,9 @@ export const areasFor = (model) => VEHICLES[model]?.areas ?? AREAS
 export const OPPOSITE = Object.freeze({ left: 'right', right: 'left', 'left-body': 'right-body', 'right-body': 'left-body' })
 export const SCHEMA = 'brandkit-vehicle-mockup/2'
 const OLD_SCHEMA = 'brandkit-vehicle-mockup/1'
-export const ARTWORK_KINDS = Object.freeze(['logo', 'fleet', 'upload', 'none'])
+export const ARTWORK_KINDS = Object.freeze(['logo', 'fleet', 'upload', 'file', 'none'])
 export const WRAP_COVERAGE = Object.freeze(['none', 'sides', 'rear', 'full'])
-export const WRAP_SOURCES = Object.freeze(['graphic', 'pattern', 'upload'])
+export const WRAP_SOURCES = Object.freeze(['graphic', 'pattern', 'upload', 'file'])
 export const WRAP_GRAPHICS = Object.freeze(['sweep', 'chevrons', 'stripes', 'two-tone'])
 export const BACKDROPS = Object.freeze(['studio', 'dark', 'brand', 'outdoor'])
 export const UPLOAD_TYPES = Object.freeze(['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'])
@@ -70,6 +70,12 @@ export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024
 const MAX_DATA_URL_LENGTH = 8 * 1024 * 1024
 const MIN_ASPECT = 0.1
 const MAX_ASPECT = 20
+
+export const VEHICLE_FILE_TYPES = Object.freeze({ svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' })
+
+/** A path inside the brand's folder to an image a vehicle can carry, or null. */
+export const vehicleFile = (path) => typeof path === 'string' && path.length <= 300 && !path.startsWith('/') && !/^[a-z]+:/i.test(path)
+  && !path.split('/').includes('..') && Object.hasOwn(VEHICLE_FILE_TYPES, path.split('.').pop().toLowerCase()) ? path : null
 
 const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key)
 const isRecord = (value) => value !== null && typeof value === 'object' && !Array.isArray(value)
@@ -200,10 +206,21 @@ const uploadData = (input) => {
 /** A wrap that covers nothing, in the brand's colours once it is turned on. */
 export const defaultWrap = (colours = ['#d9021c', '#231f20']) => ({
   coverage: 'none', source: 'graphic', graphic: 'sweep', pattern: '', colours: [...colours],
-  scale: 1, offsetU: 0, offsetV: 0, mirror: true, upload: null
+  scale: 1, offsetU: 0, offsetV: 0, mirror: true, upload: null, file: ''
 })
 
-const wrapData = (input, { patterns } = {}) => {
+/**
+ * One of the brand's own vehicle files, by path. A saved mockup may only name files the open
+ * brand's liveries use (`files`), so it cannot point the editor anywhere else.
+ */
+const brandFile = (input, files) => {
+  const path = own(input, 'file') ? input.file : ''
+  if (path === '') return ''
+  if (!vehicleFile(path) || (files && !files.includes(path))) throw new Error('This mockup names artwork the open brand does not have.')
+  return path
+}
+
+const wrapData = (input, { patterns, files } = {}) => {
   record(input, 'wrap')
   const coverage = choice(input, 'coverage', WRAP_COVERAGE)
   const source = choice(input, 'source', WRAP_SOURCES)
@@ -220,7 +237,9 @@ const wrapData = (input, { patterns } = {}) => {
   const upload = own(input, 'upload') ? uploadData(input.upload) : null
   if (coverage !== 'none' && source === 'upload' && !upload) throw new Error('This mockup is missing its uploaded wrap artwork.')
   if (coverage !== 'none' && source === 'pattern' && !pattern) throw new Error('This brand has no pattern for the wrap.')
-  return { coverage, source, graphic, pattern, colours, scale, offsetU, offsetV, mirror: input.mirror, upload }
+  const file = brandFile(input, files)
+  if (coverage !== 'none' && source === 'file' && !file) throw new Error('This mockup is missing its wrap artwork.')
+  return { coverage, source, graphic, pattern, colours, scale, offsetU, offsetV, mirror: input.mirror, upload, file }
 }
 
 /**
@@ -229,7 +248,7 @@ const wrapData = (input, { patterns } = {}) => {
  * ids the open brand offers; a mockup made with another brand's falls back to the first. A
  * mockup saved before wraps and backdrops existed (schema 1) opens with neither.
  */
-export const validateProject = (input, { logos, patterns } = {}) => {
+export const validateProject = (input, { logos, patterns, files } = {}) => {
   record(input, 'mockup')
   if (!own(input, 'schema') || ![SCHEMA, OLD_SCHEMA].includes(input.schema)) throw new Error('Choose a mockup saved by brandkit’s vehicle mockups.')
   const model = choice(input, 'model', MODEL_IDS)
@@ -241,7 +260,9 @@ export const validateProject = (input, { logos, patterns } = {}) => {
   if (logos?.length && !logos.includes(logo)) logo = logos[0]
   const upload = own(artworkIn, 'upload') ? uploadData(artworkIn.upload) : null
   if (kind === 'upload' && !upload) throw new Error('This mockup is missing its uploaded artwork.')
-  const artwork = { kind, logo, tagline: text(artworkIn, 'tagline', 100), website: text(artworkIn, 'website', 80), upload }
+  const file = brandFile(artworkIn, files)
+  if (kind === 'file' && !file) throw new Error('This mockup is missing its lettering artwork.')
+  const artwork = { kind, logo, tagline: text(artworkIn, 'tagline', 100), website: text(artworkIn, 'website', 80), upload, file }
   const areaId = choice(input, 'area', Object.keys(areas))
   const source = record(input.placements, 'artwork placements')
   if (!own(source, areaId)) throw new Error('The selected area has no artwork placement.')
@@ -252,9 +273,11 @@ export const validateProject = (input, { logos, patterns } = {}) => {
     if (placement.width <= 0) throw new Error('Artwork width must be positive.')
     placements[key] = placement
   }
-  const wrap = input.schema === OLD_SCHEMA || !own(input, 'wrap') ? defaultWrap() : wrapData(input.wrap, { patterns })
+  const wrap = input.schema === OLD_SCHEMA || !own(input, 'wrap') ? defaultWrap() : wrapData(input.wrap, { patterns, files })
   const backdrop = own(input, 'backdrop') ? choice(input, 'backdrop', BACKDROPS) : 'studio'
-  return { schema: SCHEMA, model, paint, area: areaId, placements, artwork, wrap, backdrop }
+  // The brand livery the mockup started from, if any: only a name, for the picker to show.
+  const livery = own(input, 'livery') && typeof input.livery === 'string' && input.livery.length <= 100 ? input.livery : null
+  return { schema: SCHEMA, model, paint, area: areaId, placements, artwork, wrap, backdrop, livery }
 }
 
 /** A deep copy of a project. */

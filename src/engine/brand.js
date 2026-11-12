@@ -6,6 +6,7 @@
 
 import { interpolate } from './format.js'
 import { withRevision } from './revisions.js'
+import { liveryProblems } from '../mockups/vehicle-livery.js'
 
 /** Roles the built-in templates and guide pages ask for. A brand maps each to one of its colours. */
 export const COLOUR_ROLES = ['ink', 'paper', 'muted', 'primary', 'light', 'reverse', 'line', 'rule']
@@ -215,6 +216,8 @@ export const validateBrand = (brand) => {
       }
     }
   }
+  // Vehicle liveries: the brand's own designs for the Vehicles tab.
+  problems.push(...liveryProblems(brand))
   return problems
 }
 

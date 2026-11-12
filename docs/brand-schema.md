@@ -678,6 +678,51 @@ with anything uncited).
   manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
   recipe gets one converted from its screen value, marked as converted.
 
+## Vehicles
+
+The **Vehicles** tab puts a brand on brandkit's vehicles: a work truck with a high canopy
+(`truck-canopy`) or a service body (`truck-service`), a hatchback (`shc`) and two SUVs (`suv`,
+`compact`). The vehicles are brandkit's; a brand describes only what goes on them, as
+**liveries** in `vehicles.liveries`. The tab lists them under **Brand designs** and opens a new
+mockup on the first.
+
+```json
+"vehicles": {
+  "liveries": [{
+    "id": "service-truck",
+    "label": "Service truck",
+    "description": "Canopy truck as lettered in the fleet.",
+    "model": "truck-canopy",
+    "paint": "white",
+    "backdrop": "outdoor",
+    "wrap": { "coverage": "rear", "file": "artwork/vehicle/canopy-wrap.svg", "mirror": true },
+    "lettering": { "file": "artwork/vehicle/door-lettering.svg" },
+    "placements": {
+      "left": { "u": 0, "v": 0, "width": 1.9, "rotation": 0 },
+      "right": { "u": 0, "v": 0, "width": 1.9, "rotation": 0 }
+    },
+    "area": "left"
+  }]
+}
+```
+
+| Key | What it is |
+| --- | --- |
+| `id`, `label`, `description` | The livery's id (lower-case, digits, hyphens) and how the tab names and describes it. |
+| `model` | `truck-canopy`, `truck-service`, `shc`, `suv` or `compact`. |
+| `paint` | The body colour: a colour key or role of the brand, or `#rrggbb`. Default white. |
+| `backdrop` | `studio` (default), `dark`, `brand` or `outdoor`. |
+| `wrap` | `coverage` (`none`, `sides`, `rear` for the rear half: the canopy or service body on a truck, `full`) and one source: `file` (the brand's own artwork), `graphic` (`sweep`, `chevrons`, `stripes`, `two-tone`) with two `colours`, or `pattern` (an id in `patterns`). Optional `scale` (1–4), `offsetU` and `offsetV` (−1 to 1), `mirror` (default true: the right side mirrors the design so it leads from the front; set it false for artwork built from a logo, which is never flipped). |
+| `lettering` | What sits on top of the wrap: `file`, `logo` (a logo id as the tab lists it, such as `apex-horizontal/full-colour`) or `fleet` (`{ "logo", "tagline", "website" }`). |
+| `placements` | Where the lettering goes, by area: `u` across and `v` up from the area's centre, `width`, all in metres on the vehicle as shown, and `rotation` in degrees. The cars have `left`, `right`, `hood` and `rear`; the trucks have `left` and `right` (the doors), `left-body` and `right-body` (canopy or service body), `hood` and `rear`. A placement too large for its area is made to fit. |
+| `area` | The area selected when the livery opens. |
+
+Wrap artwork is drawn for the vehicle's **left** side: its front at the artwork's left edge, its
+rear at the right. It is fitted to cover each panel it wraps (cropped, never stretched); for
+`rear`, draw it for the rear half alone. Glass, lights and trim stay clear. Artwork files are
+SVG, PNG, JPEG or WebP inside the brand's folder, and are inspected like an upload: no scripts,
+no external references. A livery is checked with the rest of the brand (`brandkit check`).
+
 ## Template Printer packages and imported SVG
 
 Native templates keep their existing `elements`. A package import adds a template

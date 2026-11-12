@@ -164,7 +164,7 @@ const groundTexture = (colour) => {
  * - `storageKey`: where this browser keeps the draft, or null.
  * - `onChange(snapshot)`, `onStatus(message, isError)`.
  */
-export const createVehicleStudio = ({ container, project: initial, fallback, artworkUrl, wrapUrl, backdropFor, logos, patterns, storageKey, onChange, onStatus }) => {
+export const createVehicleStudio = ({ container, project: initial, fallback, artworkUrl, wrapUrl, backdropFor, logos, patterns, files, storageKey, onChange, onStatus }) => {
   let state = copyProject(initial ?? fallback)
   let mode = 'edit'
   let view = 'angle'
@@ -310,6 +310,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   }
   const remember = (before) => {
     if (sameProject(before, state)) return
+    // Changed by hand, the mockup is no longer the brand's livery as defined.
+    if (state.livery && before.livery === state.livery) state.livery = null
     history.undo.push(before)
     if (history.undo.length > HISTORY_LIMIT) history.undo.shift()
     history.redo = []
@@ -717,7 +719,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       const upload = state.artwork.kind === 'upload'
       const url = upload ? state.artwork.upload?.dataUrl : await artworkUrl(state.artwork)
       if (!url) throw new Error('Upload artwork first.')
-      const loaded = await loadImage(url, { trusted: !upload })
+      // Drawn here from the brand's definition: trusted. Uploaded, or a file a brand pack carries: inspected.
+      const loaded = await loadImage(url, { trusted: !upload && state.artwork.kind !== 'file' })
       if (token !== artworkToken || disposed) return null
       const next = textureOf(renderer, loaded, 2048)
       clearGroup(decals)
@@ -753,7 +756,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       const url = upload ? state.wrap.upload?.dataUrl : await wrapUrl(state.wrap)
       if (!url) throw new Error('Upload wrap artwork first.')
       const size = Math.min(4096, renderer.capabilities.maxTextureSize)
-      const loaded = await loadImage(url, { trusted: !upload, size })
+      const loaded = await loadImage(url, { trusted: !upload && state.wrap.source !== 'file', size })
       if (token !== wrapToken || disposed) return null
       const next = textureOf(renderer, loaded, size)
       clearGroup(wraps)
@@ -1106,7 +1109,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     async openProject (textContent) {
       try {
         const raw = JSON.parse(textContent)
-        const next = validateProject(raw, { logos, patterns })
+        const next = validateProject(raw, { logos, patterns, files })
         if (raw.modelSha256 && raw.modelSha256 !== VEHICLE_MODELS[next.model].sha256) throw new Error('This mockup was made with a different version of the vehicle.')
         if (next.artwork.upload) await loadImage(next.artwork.upload.dataUrl)
         if (next.wrap.upload) await loadImage(next.wrap.upload.dataUrl)
@@ -1117,6 +1120,22 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
         return true
       } catch (error) {
         status(error instanceof SyntaxError ? 'That file is not a saved mockup.' : error.message, true)
+        return false
+      }
+    },
+    /** Opens a mockup made here (a brand's livery) as one step of undo. */
+    async applyProject (next, message) {
+      try {
+        const checked = validateProject(next, { logos, patterns, files })
+        const before = snapshot()
+        await apply(checked)
+        fitToVehicle()
+        remember(before)
+        changed()
+        status(message ?? 'Mockup opened.')
+        return true
+      } catch (error) {
+        status(error.message, true)
         return false
       }
     },

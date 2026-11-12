@@ -1,7 +1,9 @@
 // Vehicles: the brand on a vehicle in 3D. A wrap covers the body (its sides, its rear half or all
 // of it) and a logo or fleet lettering sits on top, placed directly on the body. The 3D editor is
 // in src/mockups/vehicle-studio.js; this view is its controls. Artwork comes from the open brand:
-// its logos, a fleet layout set in its type, graphics in its colours and its patterns, or uploads.
+// its own vehicle designs (brand.vehicles.liveries, with their artwork files), its logos, a fleet
+// layout set in its type, graphics in its colours and its patterns, or uploads. The vehicles are
+// brandkit's; a brand only says what goes on them.
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { colour } from '../../engine/brand.js'
@@ -11,6 +13,7 @@ import { Field, Segmented } from '../ui.jsx'
 import { OPPOSITE, SCHEMA, areasFor, createPlacement, defaultWrap, validateProject } from '../../mockups/vehicle-layout.js'
 import { BACKDROP_LABELS, FLEET, WRAP_GRAPHIC_LABELS, backdrop, brandColours, fleetDefaults, fleetSvg, vehicleLogos, wrapColours, wrapGraphicSvg, wrapPatterns } from '../../mockups/vehicle-artwork.js'
 import { VEHICLE_MODELS, lengthOf } from '../../mockups/vehicle-models.js'
+import { VEHICLE_FILE_TYPES, liveryFiles, liveryProject } from '../../mockups/vehicle-livery.js'
 import '../../mockups/vehicles.css'
 
 const MODEL_OPTIONS = Object.entries(VEHICLE_MODELS).map(([value, model]) => ({ value, label: model.label, title: model.note, group: model.build ? 'Work trucks' : 'Cars' }))
@@ -48,7 +51,21 @@ const paintSwatches = (brand) => {
   return out.slice(0, 12)
 }
 
+const liveriesOf = (brand) => (Array.isArray(brand.vehicles?.liveries) ? brand.vehicles.liveries : [])
+const fromLivery = (brand, livery, logos) => liveryProject(brand, livery, { logos: logos.map((logo) => logo.id), fleet: fleetDefaults(brand), wrapColours: wrapColours(brand) })
+
+/** A brand file as a data URL, read through the brand's own source (its pack or folder). */
+const fileUrl = async (source, path) => {
+  const bytes = new Uint8Array(await source.read(path))
+  let binary = ''
+  for (let index = 0; index < bytes.length; index += 0x8000) binary += String.fromCharCode(...bytes.subarray(index, index + 0x8000))
+  return `data:${VEHICLE_FILE_TYPES[path.split('.').pop().toLowerCase()]};base64,${btoa(binary)}`
+}
+
+/** A new mockup: the brand's first livery, or the work truck with fleet lettering. */
 const startingProject = (brand, logos) => {
+  const [first] = liveriesOf(brand)
+  if (first) { try { return fromLivery(brand, first, logos) } catch { /* fall through to the default */ } }
   const words = fleetDefaults(brand)
   const model = 'truck-canopy'
   return {
@@ -62,7 +79,7 @@ const startingProject = (brand, logos) => {
 const savedDraft = (brand, logos, patterns) => {
   try {
     const raw = localStorage.getItem(storageKey(brand))
-    return raw ? validateProject(JSON.parse(raw), { logos: logos.map((logo) => logo.id), patterns: patterns.map((entry) => entry.id) }) : null
+    return raw ? validateProject(JSON.parse(raw), { logos: logos.map((logo) => logo.id), patterns: patterns.map((entry) => entry.id), files: liveryFiles(brand) }) : null
   } catch { return null }
 }
 
@@ -84,7 +101,7 @@ const Range = ({ label, value, shown, min, max, step, disabled, onLive, onCommit
   </label>
 )
 
-export const Vehicles = ({ brand, fonts }) => {
+export const Vehicles = ({ brand, fonts, source }) => {
   const logos = useMemo(() => { try { return vehicleLogos(brand, fonts) } catch { return [] } }, [brand, fonts])
   const patterns = useMemo(() => { try { return wrapPatterns(brand, fonts) } catch { return [] } }, [brand, fonts])
   const stage = useRef(null)
@@ -100,12 +117,14 @@ export const Vehicles = ({ brand, fonts }) => {
   // The editor asks for artwork through this ref, so it always draws with the latest fonts.
   draw.current = {
     artwork: (artwork) => {
+      if (artwork.kind === 'file') return fileUrl(source, artwork.file)
       const logo = logos.find((entry) => entry.id === artwork.logo) ?? logos[0]
       if (!logo) throw new Error(`${brand.name} has no logo to place. Upload artwork instead.`)
       const svg = logo.make()
       return svgUrl(artwork.kind === 'fleet' ? fleetSvg({ brand, fonts, logoSvg: svg, ink: logo.ink, tagline: artwork.tagline, website: artwork.website }) : svg)
     },
     wrap: (wrap) => {
+      if (wrap.source === 'file') return fileUrl(source, wrap.file)
       if (wrap.source === 'pattern') {
         const entry = patterns.find((item) => item.id === wrap.pattern) ?? patterns[0]
         if (!entry) throw new Error(`${brand.name} has no patterns. Choose a graphic or upload artwork.`)
@@ -130,6 +149,7 @@ export const Vehicles = ({ brand, fonts }) => {
           backdropFor: (id) => backdrop(id, brand),
           logos: logos.map((logo) => logo.id),
           patterns: patterns.map((entry) => entry.id),
+          files: liveryFiles(brand),
           storageKey: storageKey(brand),
           onChange: setSnap,
           onStatus: (text, error) => setMessage({ text, error })
@@ -155,11 +175,16 @@ export const Vehicles = ({ brand, fonts }) => {
   const swatches = useMemo(() => paintSwatches(brand), [brand])
   const wrapSwatches = useMemo(() => [...brandColours(brand).map((hex) => [hex, hex]), ...NEUTRALS.filter(([hex]) => !brandColours(brand).some((other) => alike(other, hex)))], [brand])
   const logoOptions = logos.map((logo) => ({ value: logo.id, label: logo.label, group: logo.group }))
-  const kindOptions = logos.length ? KIND_OPTIONS : KIND_OPTIONS.filter((option) => ['none', 'upload'].includes(option.value))
+  const liveries = liveriesOf(brand)
+  const letteringFiles = [...new Set(liveries.map((livery) => livery.lettering?.file).filter(Boolean))]
+  const wrapFiles = [...new Set(liveries.map((livery) => livery.wrap?.file).filter(Boolean))]
+  const design = { value: 'file', label: 'Design', title: 'The lettering from the brand’s own vehicle design' }
+  const kindOptions = [...(logos.length ? KIND_OPTIONS : KIND_OPTIONS.filter((option) => ['none', 'upload'].includes(option.value))), ...(letteringFiles.length ? [design] : [])]
   const sourceOptions = [
     { value: 'graphic', label: 'Graphic', title: 'A graphic in the brand’s colours' },
     ...(patterns.length ? [{ value: 'pattern', label: 'Pattern', title: 'One of the brand’s patterns' }] : []),
-    { value: 'upload', label: 'Upload', title: 'Your own wrap artwork, drawn for the left side: front at its left edge' }
+    { value: 'upload', label: 'Upload', title: 'Your own wrap artwork, drawn for the left side: front at its left edge' },
+    ...(wrapFiles.length ? [{ value: 'file', label: 'Design', title: 'The wrap from the brand’s own vehicle design' }] : [])
   ]
   const wrap = project?.wrap
   const setWrap = (changes, options) => studio.current?.setWrap(changes, options)
@@ -167,10 +192,12 @@ export const Vehicles = ({ brand, fonts }) => {
 
   const chooseKind = (next) => {
     if (next === 'upload' && !project?.artwork.upload) { uploadInput.current?.click(); return }
+    if (next === 'file') { studio.current?.setArtwork({ kind: 'file', file: project?.artwork.file || letteringFiles[0] }); return }
     studio.current?.setArtwork({ kind: next })
   }
   const chooseSource = (next) => {
     if (next === 'upload' && !wrap?.upload) { wrapInput.current?.click(); return }
+    if (next === 'file') { setWrap({ source: 'file', file: wrap.file || wrapFiles[0] }); return }
     setWrap({ source: next, ...(next === 'pattern' && !wrap.pattern ? { pattern: patterns[0]?.id ?? '' } : {}) })
   }
   const exportImage = async () => {
@@ -227,6 +254,21 @@ export const Vehicles = ({ brand, fonts }) => {
       </section>
 
       <aside className="panel vehicles__controls" aria-label="Mockup settings">
+        {liveries.length > 0 && (
+          <section>
+            <h2>Brand designs</h2>
+            <div className="vehicles__liveries">
+              {liveries.map((livery) => (
+                <button key={livery.id} type="button" className="vehicles__livery" aria-pressed={project?.livery === livery.id} disabled={!editable}
+                  onClick={() => studio.current?.applyProject(fromLivery(brand, livery, logos), `${livery.label ?? livery.id} applied: ${brand.name}’s own design.`)}>
+                  <strong>{livery.label ?? livery.id}</strong>
+                  {livery.description && <span>{livery.description}</span>}
+                </button>
+              ))}
+            </div>
+            <p className="field__hint">Designs {brand.name} defines for its vehicles. Change anything below to adapt one; Undo goes back.</p>
+          </section>
+        )}
         <section>
           <h2>Vehicle</h2>
           <Field label="Vehicle">
@@ -261,6 +303,11 @@ export const Vehicles = ({ brand, fonts }) => {
               </Field>
             )}
             {wrap.source === 'upload' && <p className="field__hint">{wrap.upload?.name} · drawn for the left side, its front at the artwork’s left edge.</p>}
+            {wrap.source === 'file' && wrapFiles.length > 1 && (
+              <Field label="Design">
+                <Select value={wrap.file} options={wrapFiles.map((path) => ({ value: path, label: path.split('/').pop() }))} onChange={(file) => setWrap({ file })} />
+              </Field>
+            )}
             <button type="button" className="button button--quiet vehicles__wide" onClick={() => wrapInput.current?.click()}>{wrap.upload ? 'Replace wrap artwork…' : 'Upload wrap artwork…'}</button>
             <Range label="Scale" value={wrap.scale} shown={`${Math.round(wrap.scale * 100)}%`} min="1" max="4" step="0.05" disabled={!editable}
               onLive={(scale) => setWrap({ scale }, { live: true })} onCommit={commit} />
@@ -299,6 +346,11 @@ export const Vehicles = ({ brand, fonts }) => {
           <button type="button" className="button button--quiet vehicles__wide" onClick={() => uploadInput.current?.click()}>{project?.artwork.upload ? 'Replace uploaded logo…' : 'Upload a logo…'}</button>
           <input ref={uploadInput} type="file" hidden accept="image/png,image/jpeg,image/webp,image/svg+xml,.svg" onChange={fileChosen((file) => studio.current?.upload(file))} />
           {kind === 'upload' && project.artwork.upload && <p className="field__hint">{project.artwork.upload.name}</p>}
+          {kind === 'file' && letteringFiles.length > 1 && (
+            <Field label="Design">
+              <Select value={project.artwork.file} options={letteringFiles.map((path) => ({ value: path, label: path.split('/').pop() }))} onChange={(file) => studio.current?.setArtwork({ file })} />
+            </Field>
+          )}
 
           {kind !== 'none' && project && <>
             <span className="field__label">Where</span>
