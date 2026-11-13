@@ -1,0 +1,966 @@
+{
+  "id": "open-device-frame",
+  "label": "Open Device Frame",
+  "kind": "image",
+  "source": {
+    "name": "Open Device Frame",
+    "creator": "Sina Karimi and contributors",
+    "url": "https://github.com/SinaKarimi7/open-device-frame",
+    "licence": "MIT",
+    "licenceUrl": "https://github.com/SinaKarimi7/open-device-frame/blob/main/LICENSE",
+    "commit": "0139cec8924dab202591f841403e8596b8fc6b8b"
+  },
+  "note": "Community-drawn illustrations of phones, not manufacturers' artwork.",
+  "frames": [
+    {
+      "id": "odf-apple-iphone-14",
+      "label": "Apple iPhone 14",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-14.webp",
+      "size": [
+        326,
+        655
+      ],
+      "screen": {
+        "x": 24,
+        "y": 19,
+        "width": 279,
+        "height": 610,
+        "radius": 33
+      },
+      "year": 2022
+    },
+    {
+      "id": "odf-apple-iphone-15",
+      "label": "Apple iPhone 15",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-15.webp",
+      "size": [
+        330,
+        669
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 284,
+        "height": 627,
+        "radius": 62
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-apple-iphone-15-plus",
+      "label": "Apple iPhone 15 Plus",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-15-plus.webp",
+      "size": [
+        363,
+        740
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 312,
+        "height": 688,
+        "radius": 65
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-apple-iphone-15-pro",
+      "label": "Apple iPhone 15 Pro",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-15-pro.webp",
+      "size": [
+        332,
+        680
+      ],
+      "screen": {
+        "x": 23,
+        "y": 21,
+        "width": 285,
+        "height": 631,
+        "radius": 39
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-apple-iphone-15-pro-max",
+      "label": "Apple iPhone 15 Pro Max",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-15-pro-max.webp",
+      "size": [
+        375,
+        757
+      ],
+      "screen": {
+        "x": 25,
+        "y": 21,
+        "width": 326,
+        "height": 708,
+        "radius": 37
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-apple-iphone-16",
+      "label": "Apple iPhone 16",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-16.webp",
+      "size": [
+        331,
+        677
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 286,
+        "height": 636,
+        "radius": 38
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-apple-iphone-16-plus",
+      "label": "Apple iPhone 16 Plus",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-16-plus.webp",
+      "size": [
+        368,
+        741
+      ],
+      "screen": {
+        "x": 22,
+        "y": 21,
+        "width": 324,
+        "height": 697,
+        "radius": 40
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-apple-iphone-16-pro",
+      "label": "Apple iPhone 16 Pro",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-16-pro.webp",
+      "size": [
+        337,
+        677
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 288,
+        "height": 637,
+        "radius": 47
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-apple-iphone-16-pro-max",
+      "label": "Apple iPhone 16 Pro Max",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-16-pro-max.webp",
+      "size": [
+        370,
+        753
+      ],
+      "screen": {
+        "x": 22,
+        "y": 20,
+        "width": 325,
+        "height": 710,
+        "radius": 60
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-apple-iphone-16e",
+      "label": "Apple iPhone 16e",
+      "maker": "Apple",
+      "category": "phone",
+      "image": "apple-iphone-16e.webp",
+      "size": [
+        324,
+        648
+      ],
+      "screen": {
+        "x": 23,
+        "y": 20,
+        "width": 277,
+        "height": 606,
+        "radius": 31
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-google-pixel-7a",
+      "label": "Google Pixel 7a",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-7a.webp",
+      "size": [
+        287,
+        582
+      ],
+      "screen": {
+        "x": 26,
+        "y": 22,
+        "width": 235,
+        "height": 527,
+        "radius": 8
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-google-pixel-8",
+      "label": "Google Pixel 8",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-8.webp",
+      "size": [
+        265,
+        576
+      ],
+      "screen": {
+        "x": 16,
+        "y": 21,
+        "width": 229,
+        "height": 525,
+        "radius": 20
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-google-pixel-8-pro",
+      "label": "Google Pixel 8 Pro",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-8-pro.webp",
+      "size": [
+        305,
+        640
+      ],
+      "screen": {
+        "x": 24,
+        "y": 19,
+        "width": 258,
+        "height": 590,
+        "radius": 19
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-google-pixel-8a",
+      "label": "Google Pixel 8a",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-8a.webp",
+      "size": [
+        285,
+        578
+      ],
+      "screen": {
+        "x": 28,
+        "y": 23,
+        "width": 227,
+        "height": 526,
+        "radius": 33
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-google-pixel-9",
+      "label": "Google Pixel 9",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-9.webp",
+      "size": [
+        288,
+        609
+      ],
+      "screen": {
+        "x": 19,
+        "y": 24,
+        "width": 246,
+        "height": 562,
+        "radius": 29
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-google-pixel-9-pro",
+      "label": "Google Pixel 9 Pro",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-9-pro.webp",
+      "size": [
+        300,
+        625
+      ],
+      "screen": {
+        "x": 22,
+        "y": 26,
+        "width": 255,
+        "height": 573,
+        "radius": 33
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-google-pixel-9-pro-fold",
+      "label": "Google Pixel 9 Pro Fold",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-9-pro-fold.webp",
+      "size": [
+        654,
+        606
+      ],
+      "screen": {
+        "x": 29,
+        "y": 23,
+        "width": 599,
+        "height": 557,
+        "radius": 33
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-google-pixel-9-pro-xl",
+      "label": "Google Pixel 9 Pro XL",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-9-pro-xl.webp",
+      "size": [
+        319,
+        669
+      ],
+      "screen": {
+        "x": 17,
+        "y": 19,
+        "width": 282,
+        "height": 626,
+        "radius": 36
+      },
+      "year": 2024
+    },
+    {
+      "id": "odf-google-pixel-9a",
+      "label": "Google Pixel 9a",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-9a.webp",
+      "size": [
+        280,
+        602
+      ],
+      "screen": {
+        "x": 21,
+        "y": 29,
+        "width": 236,
+        "height": 544,
+        "radius": 28
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-google-pixel-fold",
+      "label": "Google Pixel Fold",
+      "maker": "Google",
+      "category": "phone",
+      "image": "google-pixel-fold.webp",
+      "size": [
+        593,
+        561
+      ],
+      "screen": {
+        "x": 27,
+        "y": 32,
+        "width": 535,
+        "height": 490,
+        "radius": 18
+      },
+      "year": 2023
+    },
+    {
+      "id": "odf-huawei-enjoy-70x",
+      "label": "Huawei Enjoy 70X",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-enjoy-70x.webp",
+      "size": [
+        325,
+        694
+      ],
+      "screen": {
+        "x": 25,
+        "y": 18,
+        "width": 281,
+        "height": 649,
+        "radius": 11
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-enjoy-80",
+      "label": "Huawei Enjoy 80",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-enjoy-80.webp",
+      "size": [
+        323,
+        689
+      ],
+      "screen": {
+        "x": 21,
+        "y": 20,
+        "width": 279,
+        "height": 642,
+        "radius": 27
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-nova-14",
+      "label": "Huawei Nova 14",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-nova-14.webp",
+      "size": [
+        312,
+        689
+      ],
+      "screen": {
+        "x": 21,
+        "y": 22,
+        "width": 270,
+        "height": 639,
+        "radius": 29
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-nova-14-pro",
+      "label": "Huawei Nova 14 Pro",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-nova-14-pro.webp",
+      "size": [
+        336,
+        691
+      ],
+      "screen": {
+        "x": 19,
+        "y": 18,
+        "width": 294,
+        "height": 650,
+        "radius": 30
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-nova-y63",
+      "label": "Huawei Nova Y63",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-nova-y63.webp",
+      "size": [
+        315,
+        689
+      ],
+      "screen": {
+        "x": 24,
+        "y": 26,
+        "width": 268,
+        "height": 622,
+        "radius": 24
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-nova-y72s",
+      "label": "Huawei Nova Y72S",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-nova-y72s.webp",
+      "size": [
+        354,
+        772
+      ],
+      "screen": {
+        "x": 24,
+        "y": 24,
+        "width": 304,
+        "height": 708,
+        "radius": 27
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-pura-80",
+      "label": "Huawei Pura 80",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-pura-80.webp",
+      "size": [
+        357,
+        773
+      ],
+      "screen": {
+        "x": 21,
+        "y": 24,
+        "width": 307,
+        "height": 728,
+        "radius": 35
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-pura-80-pro",
+      "label": "Huawei Pura 80 Pro",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-pura-80-pro.webp",
+      "size": [
+        363,
+        776
+      ],
+      "screen": {
+        "x": 26,
+        "y": 20,
+        "width": 313,
+        "height": 735,
+        "radius": 37
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-pura-80-pro-plus",
+      "label": "Huawei Pura 80 Pro Plus",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-pura-80-pro-plus.webp",
+      "size": [
+        360,
+        778
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 312,
+        "height": 739,
+        "radius": 45
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-huawei-pura-80-ultra",
+      "label": "Huawei Pura 80 Ultra",
+      "maker": "Huawei",
+      "category": "phone",
+      "image": "huawei-pura-80-ultra.webp",
+      "size": [
+        370,
+        777
+      ],
+      "screen": {
+        "x": 28,
+        "y": 19,
+        "width": 315,
+        "height": 738,
+        "radius": 37
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-a16",
+      "label": "Samsung Galaxy A16",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-a16.webp",
+      "size": [
+        350,
+        736
+      ],
+      "screen": {
+        "x": 22,
+        "y": 24,
+        "width": 303,
+        "height": 668,
+        "radius": 27
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-a16-5g",
+      "label": "Samsung Galaxy A16 5G",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-a16-5g.webp",
+      "size": [
+        347,
+        734
+      ],
+      "screen": {
+        "x": 23,
+        "y": 24,
+        "width": 302,
+        "height": 667,
+        "radius": 28
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-a26",
+      "label": "Samsung Galaxy A26",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-a26.webp",
+      "size": [
+        358,
+        727
+      ],
+      "screen": {
+        "x": 30,
+        "y": 22,
+        "width": 305,
+        "height": 673,
+        "radius": 31
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-a36",
+      "label": "Samsung Galaxy A36",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-a36.webp",
+      "size": [
+        351,
+        733
+      ],
+      "screen": {
+        "x": 23,
+        "y": 21,
+        "width": 303,
+        "height": 682,
+        "radius": 32
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-a56",
+      "label": "Samsung Galaxy A56",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-a56.webp",
+      "size": [
+        352,
+        748
+      ],
+      "screen": {
+        "x": 20,
+        "y": 23,
+        "width": 311,
+        "height": 699,
+        "radius": 28
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-f06-5g",
+      "label": "Samsung Galaxy F06 5G",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-f06-5g.webp",
+      "size": [
+        316,
+        687
+      ],
+      "screen": {
+        "x": 18,
+        "y": 21,
+        "width": 278,
+        "height": 631,
+        "radius": 25
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-f16",
+      "label": "Samsung Galaxy F16",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-f16.webp",
+      "size": [
+        317,
+        688
+      ],
+      "screen": {
+        "x": 23,
+        "y": 18,
+        "width": 270,
+        "height": 634,
+        "radius": 25
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-f36",
+      "label": "Samsung Galaxy F36",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-f36.webp",
+      "size": [
+        320,
+        703
+      ],
+      "screen": {
+        "x": 23,
+        "y": 21,
+        "width": 276,
+        "height": 633,
+        "radius": 27
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-f56",
+      "label": "Samsung Galaxy F56",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-f56.webp",
+      "size": [
+        319,
+        691
+      ],
+      "screen": {
+        "x": 22,
+        "y": 18,
+        "width": 273,
+        "height": 638,
+        "radius": 29
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-samsung-galaxy-m06",
+      "label": "Samsung Galaxy M06",
+      "maker": "Samsung",
+      "category": "phone",
+      "image": "samsung-galaxy-m06.webp",
+      "size": [
+        317,
+        686
+      ],
+      "screen": {
+        "x": 19,
+        "y": 21,
+        "width": 275,
+        "height": 629,
+        "radius": 27
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-15-ultra",
+      "label": "Xiaomi 15 Ultra",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-15-ultra.webp",
+      "size": [
+        338,
+        695
+      ],
+      "screen": {
+        "x": 20,
+        "y": 17,
+        "width": 297,
+        "height": 652,
+        "radius": 65
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-15s-pro",
+      "label": "Xiaomi 15S Pro",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-15s-pro.webp",
+      "size": [
+        323,
+        672
+      ],
+      "screen": {
+        "x": 17,
+        "y": 17,
+        "width": 285,
+        "height": 631,
+        "radius": 32
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-civi-5-pro",
+      "label": "Xiaomi Civi 5 Pro",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-civi-5-pro.webp",
+      "size": [
+        307,
+        648
+      ],
+      "screen": {
+        "x": 19,
+        "y": 16,
+        "width": 268,
+        "height": 612,
+        "radius": 50
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-c71",
+      "label": "Xiaomi Poco C71",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-c71.webp",
+      "size": [
+        313,
+        652
+      ],
+      "screen": {
+        "x": 22,
+        "y": 27,
+        "width": 265,
+        "height": 586,
+        "radius": 22
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-f7",
+      "label": "Xiaomi Poco F7",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-f7.webp",
+      "size": [
+        327,
+        695
+      ],
+      "screen": {
+        "x": 19,
+        "y": 19,
+        "width": 284,
+        "height": 647,
+        "radius": 26
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-f7-pro",
+      "label": "Xiaomi Poco F7 Pro",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-f7-pro.webp",
+      "size": [
+        365,
+        740
+      ],
+      "screen": {
+        "x": 25,
+        "y": 18,
+        "width": 314,
+        "height": 694,
+        "radius": 29
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-f7-ultra",
+      "label": "Xiaomi Poco F7 Ultra",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-f7-ultra.webp",
+      "size": [
+        363,
+        738
+      ],
+      "screen": {
+        "x": 18,
+        "y": 18,
+        "width": 327,
+        "height": 694,
+        "radius": 22
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-m7",
+      "label": "Xiaomi Poco M7",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-m7.webp",
+      "size": [
+        360,
+        742
+      ],
+      "screen": {
+        "x": 24,
+        "y": 21,
+        "width": 309,
+        "height": 679,
+        "radius": 32
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-x7",
+      "label": "Xiaomi Poco X7",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-x7.webp",
+      "size": [
+        359,
+        740
+      ],
+      "screen": {
+        "x": 23,
+        "y": 19,
+        "width": 304,
+        "height": 693,
+        "radius": 28
+      },
+      "year": 2025
+    },
+    {
+      "id": "odf-xiaomi-poco-x7-pro",
+      "label": "Xiaomi Poco X7 Pro",
+      "maker": "Xiaomi",
+      "category": "phone",
+      "image": "xiaomi-poco-x7-pro.webp",
+      "size": [
+        362,
+        742
+      ],
+      "screen": {
+        "x": 29,
+        "y": 21,
+        "width": 308,
+        "height": 690,
+        "radius": 24
+      },
+      "year": 2025
+    }
+  ]
+}

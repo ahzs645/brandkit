@@ -69,6 +69,7 @@
     "test:astryx:browser": "node test/browser/astryx-export.check.mjs",
     "test:vehicles:browser": "node test/browser/vehicles.check.mjs",
     "test:devices:browser": "node test/browser/devices.check.mjs",
+    "devices:frames": "node scripts/device-frames.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "catalog": "node scripts/catalog.mjs"
   },

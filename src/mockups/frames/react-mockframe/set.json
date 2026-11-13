@@ -1,0 +1,553 @@
+{
+  "id": "react-mockframe",
+  "label": "React MockFrame",
+  "kind": "css",
+  "stylesheet": "mockframe.css",
+  "source": {
+    "name": "React MockFrame",
+    "creator": "Mohammed Banani; frame styles adapted from Marvel devices.css (MIT, 2014 Marvelapp)",
+    "url": "https://github.com/mbdev3/react-mockframe",
+    "licence": "MIT",
+    "licenceUrl": "https://github.com/mbdev3/react-mockframe/blob/main/LICENSE",
+    "commit": "d1e7e272ea94928409b7b7e992feb907129d082f"
+  },
+  "note": "Frames drawn in CSS, rendered here once to plain markup. They show in the tab and in PNG exports from a Chromium or Firefox browser.",
+  "frames": [
+    {
+      "id": "rmf-iphone-x",
+      "label": "iPhone X",
+      "category": "phone",
+      "colours": [],
+      "markup": "<div class=\"mockframe iphone-x{{colour}}\"><div class=\"inner\"></div><div class=\"notch\"><div class=\"camera\"></div><div class=\"speaker\"></div></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"overflow\"><div class=\"shadow shadow--tl\"></div><div class=\"shadow shadow--tr\"></div><div class=\"shadow shadow--bl\"></div><div class=\"shadow shadow--br\"></div></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        483,
+        920
+      ],
+      "offset": [
+        28,
+        28
+      ],
+      "box": [
+        427,
+        864
+      ],
+      "screen": {
+        "x": 54,
+        "y": 54,
+        "width": 375,
+        "height": 812,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe iphone-x{{colour}} landscape\"><div class=\"inner\"></div><div class=\"notch\"><div class=\"camera\"></div><div class=\"speaker\"></div></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"overflow\"><div class=\"shadow shadow--tl\"></div><div class=\"shadow shadow--tr\"></div><div class=\"shadow shadow--bl\"></div><div class=\"shadow shadow--br\"></div></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          920,
+          483
+        ],
+        "offset": [
+          28,
+          28
+        ],
+        "box": [
+          864,
+          427
+        ],
+        "screen": {
+          "x": 54,
+          "y": 54,
+          "width": 812,
+          "height": 375,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-iphone-8",
+      "label": "iPhone 8",
+      "category": "phone",
+      "colours": [
+        "black",
+        "silver",
+        "gold"
+      ],
+      "markup": "<div class=\"mockframe iphone8{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        447,
+        893
+      ],
+      "offset": [
+        12,
+        8
+      ],
+      "box": [
+        423,
+        877
+      ],
+      "screen": {
+        "x": 36,
+        "y": 113,
+        "width": 375,
+        "height": 667,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe iphone8{{colour}} landscape\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          893,
+          447
+        ],
+        "offset": [
+          8,
+          12
+        ],
+        "box": [
+          877,
+          423
+        ],
+        "screen": {
+          "x": 113,
+          "y": 36,
+          "width": 667,
+          "height": 375,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-iphone-8-plus",
+      "label": "iPhone 8 Plus",
+      "category": "phone",
+      "colours": [
+        "black",
+        "silver",
+        "gold"
+      ],
+      "markup": "<div class=\"mockframe iphone8plus{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        490,
+        976
+      ],
+      "offset": [
+        12,
+        8
+      ],
+      "box": [
+        466,
+        960
+      ],
+      "screen": {
+        "x": 38,
+        "y": 120,
+        "width": 414,
+        "height": 736,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe iphone8plus{{colour}} landscape\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          976,
+          490
+        ],
+        "offset": [
+          8,
+          12
+        ],
+        "box": [
+          960,
+          466
+        ],
+        "screen": {
+          "x": 120,
+          "y": 38,
+          "width": 736,
+          "height": 414,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-iphone-17",
+      "label": "iPhone 17",
+      "category": "phone",
+      "colours": [
+        "black",
+        "white",
+        "mist-blue",
+        "sage",
+        "lavender",
+        "cosmic-orange",
+        "deep-blue"
+      ],
+      "markup": "<div class=\"mockframe iphone17{{colour}}\"><div class=\"inner\"></div><div class=\"dynamic-island\"><div class=\"camera\"></div></div><div class=\"action\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        452.97,
+        918.66
+      ],
+      "offset": [
+        11,
+        8
+      ],
+      "box": [
+        431.31,
+        902.66
+      ],
+      "screen": {
+        "x": 25.66,
+        "y": 22.33,
+        "width": 402,
+        "height": 874,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe iphone17{{colour}} landscape\"><div class=\"inner\"></div><div class=\"dynamic-island\"><div class=\"camera\"></div></div><div class=\"action\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          918.66,
+          452.97
+        ],
+        "offset": [
+          8,
+          10.66
+        ],
+        "box": [
+          902.66,
+          431.31
+        ],
+        "screen": {
+          "x": 22.33,
+          "y": 25.31,
+          "width": 874,
+          "height": 402,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-iphone-18-pro",
+      "label": "iPhone 18 Pro",
+      "category": "phone",
+      "colours": [
+        "black",
+        "silver",
+        "glacier",
+        "burgundy",
+        "gold",
+        "natural-titanium"
+      ],
+      "markup": "<div class=\"mockframe iphone18pro{{colour}}\"><div class=\"inner\"></div><div class=\"dynamic-island\"><div class=\"camera\"></div></div><div class=\"action\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        455.31,
+        921.31
+      ],
+      "offset": [
+        11,
+        8
+      ],
+      "box": [
+        433.66,
+        905.31
+      ],
+      "screen": {
+        "x": 26.83,
+        "y": 23.66,
+        "width": 402,
+        "height": 874,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe iphone18pro{{colour}} landscape\"><div class=\"inner\"></div><div class=\"dynamic-island\"><div class=\"camera\"></div></div><div class=\"action\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          921.31,
+          455.31
+        ],
+        "offset": [
+          8,
+          10.66
+        ],
+        "box": [
+          905.31,
+          433.66
+        ],
+        "screen": {
+          "x": 23.66,
+          "y": 26.48,
+          "width": 874,
+          "height": 402,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-pixel-10",
+      "label": "Pixel 10",
+      "category": "phone",
+      "colours": [
+        "obsidian",
+        "frost",
+        "indigo",
+        "lemongrass",
+        "porcelain",
+        "mint",
+        "rose"
+      ],
+      "markup": "<div class=\"mockframe pixel10{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        474,
+        983
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        455,
+        967
+      ],
+      "screen": {
+        "x": 29.5,
+        "y": 29.5,
+        "width": 412,
+        "height": 924,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe pixel10{{colour}} landscape\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          983,
+          474
+        ],
+        "offset": [
+          8,
+          11
+        ],
+        "box": [
+          967,
+          455
+        ],
+        "screen": {
+          "x": 29.5,
+          "y": 32.5,
+          "width": 924,
+          "height": 412,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-galaxy-s25",
+      "label": "Galaxy S25",
+      "category": "phone",
+      "colours": [
+        "blue-black",
+        "icy-blue",
+        "navy",
+        "mint",
+        "silver-shadow",
+        "coral-red",
+        "pink-gold",
+        "phantom-black",
+        "silver"
+      ],
+      "markup": "<div class=\"mockframe galaxy-s25{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        403.5,
+        821
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        385,
+        805
+      ],
+      "screen": {
+        "x": 20.5,
+        "y": 20.5,
+        "width": 360,
+        "height": 780,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe galaxy-s25{{colour}} landscape\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          821,
+          403.5
+        ],
+        "offset": [
+          8,
+          10.5
+        ],
+        "box": [
+          805,
+          385
+        ],
+        "screen": {
+          "x": 20.5,
+          "y": 23,
+          "width": 780,
+          "height": 360,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-ipad-mini",
+      "label": "iPad Mini",
+      "category": "tablet",
+      "colours": [
+        "black",
+        "silver"
+      ],
+      "markup": "<div class=\"mockframe ipad{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        642,
+        964
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        626,
+        948
+      ],
+      "screen": {
+        "x": 33,
+        "y": 98,
+        "width": 576,
+        "height": 768,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe ipad{{colour}} landscape\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          964,
+          642
+        ],
+        "offset": [
+          8,
+          8
+        ],
+        "box": [
+          948,
+          626
+        ],
+        "screen": {
+          "x": 98,
+          "y": 33,
+          "width": 768,
+          "height": 576,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-ipad-pro",
+      "label": "iPad Pro",
+      "category": "tablet",
+      "colours": [
+        "space-black",
+        "space-gray",
+        "silver"
+      ],
+      "markup": "<div class=\"mockframe ipad-pro{{colour}}\"><div class=\"inner\"></div><div class=\"volume-up\"></div><div class=\"volume-down\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        574.16,
+        745.16
+      ],
+      "offset": [
+        8,
+        9.5
+      ],
+      "box": [
+        556.66,
+        727.66
+      ],
+      "screen": {
+        "x": 30.33,
+        "y": 31.83,
+        "width": 512,
+        "height": 683,
+        "radius": 0
+      },
+      "turned": {
+        "markup": "<div class=\"mockframe ipad-pro{{colour}} landscape\"><div class=\"inner\"></div><div class=\"volume-up\"></div><div class=\"volume-down\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+        "size": [
+          745.16,
+          574.16
+        ],
+        "offset": [
+          9.5,
+          9.5
+        ],
+        "box": [
+          727.66,
+          556.66
+        ],
+        "screen": {
+          "x": 31.83,
+          "y": 31.83,
+          "width": 683,
+          "height": 512,
+          "radius": 0
+        }
+      }
+    },
+    {
+      "id": "rmf-macbook-pro-2020",
+      "label": "MacBook Pro 2020",
+      "category": "laptop",
+      "colours": [],
+      "markup": "<div class=\"mockframe macbook{{colour}}\"><div class=\"inner\"></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        1204,
+        736
+      ],
+      "offset": [
+        78,
+        8
+      ],
+      "box": [
+        1048,
+        720
+      ],
+      "screen": {
+        "x": 122,
+        "y": 52,
+        "width": 960,
+        "height": 600,
+        "radius": 0
+      }
+    },
+    {
+      "id": "rmf-macbook-pro",
+      "label": "MacBook Pro",
+      "category": "laptop",
+      "colours": [
+        "space-black",
+        "space-gray",
+        "silver"
+      ],
+      "markup": "<div class=\"mockframe macbook-pro{{colour}}\"><div class=\"inner\"></div><div class=\"notch\"><div class=\"camera\"></div></div><div class=\"top-bar\"></div><div class=\"sleep\"></div><div class=\"bottom-bar\"></div><div class=\"volume\"></div><div class=\"camera\"></div><div class=\"sensor\"></div><div class=\"speaker\"></div><div class=\"sensors\"></div><div class=\"more-sensors\"></div><div class=\"inner-shadow\"></div><div class=\"screen\"><img class=\"bk-screen\" src=\"{{screen}}\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:top\"/></div><div class=\"home\"></div></div>",
+      "size": [
+        1223.19,
+        744.39
+      ],
+      "offset": [
+        114,
+        8
+      ],
+      "box": [
+        995.19,
+        686.89
+      ],
+      "screen": {
+        "x": 131.59,
+        "y": 25.5,
+        "width": 960,
+        "height": 624,
+        "radius": 0
+      }
+    }
+  ]
+}

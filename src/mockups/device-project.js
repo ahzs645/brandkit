@@ -25,6 +25,8 @@
 // what licence, because a frame's artwork is licensed apart from the code that draws it.
 
 import { CANVASES, CATEGORIES, DEVICES, FINISHES, PRESETS, SCHEMA } from './device-catalog.js'
+import { SET_DEVICES } from './device-sets.js'
+import { hasStatusBar } from './device-screen.js'
 
 export { SCHEMA } from './device-catalog.js'
 
@@ -54,7 +56,7 @@ const mockupsOf = (brand) => (Array.isArray(brand?.devices?.mockups) ? brand.dev
 const frameProblem = (frame, taken) => {
   if (!isRecord(frame)) return 'must be an object.'
   if (!isId(frame.id)) return 'needs an `id` of lowercase letters, digits and hyphens.'
-  if (Object.hasOwn(DEVICES, frame.id)) return 'has the `id` of a device brandkit already has.'
+  if (Object.hasOwn(DEVICES, frame.id) || Object.hasOwn(SET_DEVICES, frame.id)) return 'has the `id` of a device brandkit already has.'
   if (taken.has(frame.id)) return 'has the same `id` as another frame.'
   if (typeof frame.label !== 'string' || !frame.label.trim()) return 'needs a `label`.'
   if (!Object.hasOwn(CATEGORIES, frame.category)) return `needs a \`category\`: one of ${Object.keys(CATEGORIES).join(', ')}.`
@@ -81,9 +83,12 @@ const frameDevice = (frame) => ({
   source: { name: frame.source.name, licence: frame.source.licence, url: frame.source.url ?? null, licenceUrl: frame.source.licenceUrl ?? null, credit: frame.source.credit ?? null }
 })
 
-/** Every device a brand can use: brandkit's, then the brand's own frames that pass the checks. */
+/** brandkit's own drawn devices and every frame of the sets that ship with it. */
+export const CATALOG = Object.freeze({ ...DEVICES, ...SET_DEVICES })
+
+/** Every device a brand can use: brandkit's, the sets', then the brand's own frames that pass the checks. */
 export const catalogFor = (brand) => {
-  const catalog = { ...DEVICES }
+  const catalog = { ...CATALOG }
   const taken = new Set()
   for (const frame of framesOf(brand)) {
     if (frameProblem(frame, taken)) continue
@@ -97,14 +102,20 @@ const slotFrom = (input, catalog, fallback) => {
   const id = Object.hasOwn(catalog, input?.device) ? input.device : fallback
   const device = catalog[id]
   const finish = device.finishes?.includes(input?.finish) ? input.finish : device.finishes?.[0] ?? null
-  return { device: id, finish, turned: Boolean(input?.turned) && Boolean(device.rotates), screen: { kind: 'brand', fit: 'cover', upload: null, file: null } }
+  // A phone or tablet shows its status bar unless the mockup says not to.
+  return { device: id, finish, turned: Boolean(input?.turned) && Boolean(device.rotates), status: hasStatusBar(device) && input?.status !== false, screen: { kind: 'brand', fit: 'cover', upload: null, file: null } }
 }
 
+const text = (value, limit, fallback) => (typeof value === 'string' ? value.replace(/[\u0000-\u001f]/g, '').slice(0, limit) : fallback)
+/** The time and date the status bars show: one clock for the scene. */
+const clockFrom = (input, fallback = { time: '9:41', date: '' }) => ({ time: text(input?.time, 8, fallback.time), date: text(input?.date, 24, fallback.date) })
+
 /** A new mockup of a preset. Screens carry over from `previous` by position. */
-export const createProject = (preset = 'three-screens', { catalog = DEVICES, previous = null } = {}) => {
+export const createProject = (preset = 'three-screens', { catalog = CATALOG, previous = null, clock = null } = {}) => {
   const id = Object.hasOwn(PRESETS, preset) ? preset : 'three-screens'
   return {
     schema: SCHEMA, preset: id, canvas: previous?.canvas ?? '16:9', background: previous?.background ?? { kind: 'colour', value: '#ffffff' }, shadow: previous?.shadow ?? true, mockup: null,
+    clock: clockFrom(previous?.clock ?? clock),
     slots: PRESETS[id].slots.map((device, index) => ({ ...slotFrom({ device }, catalog, device), screen: previous?.slots[index]?.screen ?? { kind: 'brand', fit: 'cover', upload: null, file: null } }))
   }
 }
@@ -117,7 +128,7 @@ const UPLOAD = /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+=*$/
  * not a mockup, names a device or a brand file that is not there, or carries an upload that is
  * not a PNG, JPEG or WebP. `files` are the brand's files a mockup may name.
  */
-export const validateProject = (input, { catalog = DEVICES, files = [] } = {}) => {
+export const validateProject = (input, { catalog = CATALOG, files = [] } = {}) => {
   if (!isRecord(input) || input.schema !== SCHEMA) throw new Error('This file is not a device mockup made here.')
   if (!Object.hasOwn(PRESETS, input.preset)) throw new Error('This mockup uses a scene brandkit does not have.')
   const wanted = PRESETS[input.preset].slots.length
@@ -133,7 +144,7 @@ export const validateProject = (input, { catalog = DEVICES, files = [] } = {}) =
       const upload = screen.upload
       if (!isRecord(upload) || typeof upload.dataUrl !== 'string' || upload.dataUrl.length > MAX_UPLOAD * 1.4 || !UPLOAD.test(upload.dataUrl)) throw new Error(`The screenshot on device ${index + 1} is not a PNG, JPEG or WebP image.`)
       out.screen.kind = 'upload'
-      out.screen.upload = { name: typeof upload.name === 'string' ? upload.name.slice(0, 120) : 'screenshot', dataUrl: upload.dataUrl, ...(positive(upload.width) && positive(upload.height) ? { width: Math.round(upload.width), height: Math.round(upload.height) } : {}) }
+      out.screen.upload = { name: typeof upload.name === 'string' ? upload.name.slice(0, 120) : 'screenshot', dataUrl: upload.dataUrl, ...(positive(upload.width) && positive(upload.height) ? { width: Math.round(upload.width), height: Math.round(upload.height) } : {}), ...(/^#[0-9a-f]{6}$/i.test(upload.edge ?? '') ? { edge: upload.edge.toLowerCase() } : {}) }
     } else if (screen.kind === 'file') {
       if (!deviceFile(screen.file) || !files.includes(screen.file)) throw new Error('This mockup names a screenshot the open brand does not have.')
       out.screen.kind = 'file'
@@ -143,7 +154,7 @@ export const validateProject = (input, { catalog = DEVICES, files = [] } = {}) =
   })
   return {
     schema: SCHEMA, preset: input.preset, canvas: Object.hasOwn(CANVASES, input.canvas) ? input.canvas : 'fit', background, shadow: input.shadow !== false,
-    mockup: isId(input.mockup) ? input.mockup : null, slots
+    mockup: isId(input.mockup) ? input.mockup : null, clock: clockFrom(input.clock), slots
   }
 }
 
@@ -173,6 +184,7 @@ export const deviceProblems = (brand) => {
     if (!Object.hasOwn(PRESETS, mockup.preset)) { need(false, `names a \`preset\` brandkit does not have (${Object.keys(PRESETS).join(', ')}).`); continue }
     need(mockup.canvas == null || Object.hasOwn(CANVASES, mockup.canvas), `has a \`canvas\` that is not one of ${Object.keys(CANVASES).join(', ')}.`)
     need(mockup.background == null || mockup.background === 'transparent' || resolveColour(brand, mockup.background), 'has a `background` that is not `transparent`, a colour of the brand or #rrggbb.')
+    need(mockup.clock == null || (isRecord(mockup.clock) && ['time', 'date'].every((key) => mockup.clock[key] == null || typeof mockup.clock[key] === 'string')), 'has a `clock` that is not `{ "time", "date" }` as text.')
     const wanted = PRESETS[mockup.preset].slots.length
     if (!Array.isArray(mockup.slots) || mockup.slots.length !== wanted) { need(false, `needs ${wanted} \`slots\` for the ${mockup.preset} scene.`); continue }
     for (const [at, slot] of mockup.slots.entries()) {
@@ -182,6 +194,7 @@ export const deviceProblems = (brand) => {
       need(slot.finish == null || device.finishes?.includes(slot.finish), `asks for a finish the ${slot.device} does not come in (${(device.finishes ?? []).join(', ') || 'it has one'}).`)
       need(slot.screen?.file == null || deviceFile(slot.screen.file), `has a screen \`file\` in slot ${at + 1} that is not a PNG, JPEG or WebP inside the brand.`)
       need(slot.screen?.fit == null || ['cover', 'contain'].includes(slot.screen.fit), 'has a screen `fit` that is not `cover` or `contain`.')
+      need(slot.status == null || typeof slot.status === 'boolean', 'has a `status` that is not true or false.')
     }
   }
   return problems
@@ -205,7 +218,7 @@ export const brandMockups = (brand) => {
 export const mockupProject = (brand, mockup, catalog = catalogFor(brand)) => {
   const background = mockup.background === 'transparent' ? { kind: 'transparent' } : { kind: 'colour', value: resolveColour(brand, mockup.background ?? '#ffffff') ?? '#ffffff' }
   return {
-    schema: SCHEMA, preset: mockup.preset, canvas: mockup.canvas ?? '16:9', background, shadow: mockup.shadow !== false, mockup: mockup.id,
+    schema: SCHEMA, preset: mockup.preset, canvas: mockup.canvas ?? '16:9', background, shadow: mockup.shadow !== false, mockup: mockup.id, clock: clockFrom(mockup.clock),
     slots: mockup.slots.map((slot) => {
       const out = slotFrom(slot, catalog, slot.device)
       out.screen = slot.screen?.file ? { kind: 'file', fit: slot.screen.fit === 'contain' ? 'contain' : 'cover', upload: null, file: slot.screen.file } : { kind: 'brand', fit: 'cover', upload: null, file: null }
@@ -215,14 +228,15 @@ export const mockupProject = (brand, mockup, catalog = catalogFor(brand)) => {
 }
 
 /** Where the frames in a mockup come from, for the credit under it: one line per outside source. */
-export const creditsOf = (project, catalog = DEVICES) => {
+export const creditsOf = (project, catalog = CATALOG) => {
   const seen = new Map()
   for (const slot of project.slots) {
-    const source = catalog[slot.device]?.source
-    if (!catalog[slot.device]?.brand || !source) continue
+    const device = catalog[slot.device]
+    const source = device?.source
+    if (!source || !(device.brand || device.set)) continue
     seen.set(`${source.name}|${source.licence}`, source)
   }
   return [...seen.values()]
 }
 
-export const finishLabel = (id) => FINISHES[id]?.label ?? id
+export const finishLabel = (id, device) => device?.colourNames?.[id] ?? FINISHES[id]?.label ?? (id === '' ? 'Standard' : id)

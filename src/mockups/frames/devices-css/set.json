@@ -1,0 +1,598 @@
+{
+  "id": "devices-css",
+  "label": "Devices.css",
+  "kind": "css",
+  "stylesheet": "devices.min.css",
+  "source": {
+    "name": "Devices.css",
+    "creator": "Yan Zhu",
+    "url": "https://github.com/picturepan2/devices.css",
+    "licence": "MIT",
+    "licenceUrl": "https://github.com/picturepan2/devices.css/blob/master/LICENSE",
+    "commit": "11846244977a4905a4fb9ac12bb2121e068d6147"
+  },
+  "note": "Frames drawn in CSS. They show in the tab and in PNG exports from a Chromium or Firefox browser.",
+  "frames": [
+    {
+      "id": "dcss-iphone-14-pro",
+      "label": "iPhone 14 Pro",
+      "category": "phone",
+      "className": "device-iphone-14-pro",
+      "colours": [
+        "silver",
+        "black",
+        "gold"
+      ],
+      "markup": "<div class=\"device device-iphone-14-pro{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        448,
+        884
+      ],
+      "offset": [
+        10,
+        8
+      ],
+      "box": [
+        428,
+        868
+      ],
+      "screen": {
+        "x": 30,
+        "y": 28,
+        "width": 390,
+        "height": 830,
+        "radius": 49
+      }
+    },
+    {
+      "id": "dcss-iphone-14",
+      "label": "iPhone 14",
+      "category": "phone",
+      "className": "device-iphone-14",
+      "colours": [
+        "purple",
+        "starlight",
+        "red",
+        "blue"
+      ],
+      "markup": "<div class=\"device device-iphone-14{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        448,
+        884
+      ],
+      "offset": [
+        10,
+        8
+      ],
+      "box": [
+        428,
+        868
+      ],
+      "screen": {
+        "x": 30,
+        "y": 28,
+        "width": 390,
+        "height": 830,
+        "radius": 49
+      }
+    },
+    {
+      "id": "dcss-iphone-x",
+      "label": "iPhone X",
+      "category": "phone",
+      "className": "device-iphone-x",
+      "colours": [],
+      "markup": "<div class=\"device device-iphone-x{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        450,
+        884
+      ],
+      "offset": [
+        11,
+        8
+      ],
+      "box": [
+        428,
+        868
+      ],
+      "screen": {
+        "x": 39,
+        "y": 36,
+        "width": 375,
+        "height": 812,
+        "radius": 40
+      }
+    },
+    {
+      "id": "dcss-iphone-8",
+      "label": "iPhone 8",
+      "category": "phone",
+      "className": "device-iphone-8",
+      "colours": [
+        "gold",
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-iphone-8{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        440,
+        887
+      ],
+      "offset": [
+        11,
+        8
+      ],
+      "box": [
+        419,
+        871
+      ],
+      "screen": {
+        "x": 33,
+        "y": 110,
+        "width": 375,
+        "height": 667,
+        "radius": 4
+      }
+    },
+    {
+      "id": "dcss-the-iphone",
+      "label": "iPhone",
+      "category": "phone",
+      "className": "device-the-iphone",
+      "colours": [],
+      "markup": "<div class=\"device device-the-iphone{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        338,
+        628
+      ],
+      "offset": [
+        10,
+        10
+      ],
+      "box": [
+        320,
+        610
+      ],
+      "screen": {
+        "x": 33,
+        "y": 111,
+        "width": 276,
+        "height": 410,
+        "radius": 4
+      }
+    },
+    {
+      "id": "dcss-google-pixel-6-pro",
+      "label": "Google Pixel 6 Pro",
+      "category": "phone",
+      "className": "device-google-pixel-6-pro",
+      "colours": [
+        "gold",
+        "black"
+      ],
+      "markup": "<div class=\"device device-google-pixel-6-pro{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        420,
+        878
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        404,
+        862
+      ],
+      "screen": {
+        "x": 22,
+        "y": 28,
+        "width": 376,
+        "height": 816,
+        "radius": 27
+      }
+    },
+    {
+      "id": "dcss-google-pixel-2-xl",
+      "label": "Google Pixel 2 XL",
+      "category": "phone",
+      "className": "device-google-pixel-2-xl",
+      "colours": [],
+      "markup": "<div class=\"device device-google-pixel-2-xl{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        423,
+        848
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        404,
+        832
+      ],
+      "screen": {
+        "x": 30,
+        "y": 64,
+        "width": 360,
+        "height": 720,
+        "radius": 27
+      }
+    },
+    {
+      "id": "dcss-google-pixel",
+      "label": "Google Pixel",
+      "category": "phone",
+      "className": "device-google-pixel",
+      "colours": [
+        "black",
+        "blue"
+      ],
+      "markup": "<div class=\"device device-google-pixel{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        378,
+        760
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        360,
+        744
+      ],
+      "screen": {
+        "x": 26,
+        "y": 90,
+        "width": 324,
+        "height": 576,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-galaxy-s8",
+      "label": "Samsung Galaxy S8",
+      "category": "phone",
+      "className": "device-galaxy-s8",
+      "colours": [
+        "blue"
+      ],
+      "markup": "<div class=\"device device-galaxy-s8{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        402,
+        844
+      ],
+      "offset": [
+        11,
+        8
+      ],
+      "box": [
+        380,
+        828
+      ],
+      "screen": {
+        "x": 21,
+        "y": 61,
+        "width": 360,
+        "height": 740,
+        "radius": 34
+      }
+    },
+    {
+      "id": "dcss-ipad-pro",
+      "label": "iPad Pro",
+      "category": "tablet",
+      "className": "device-ipad-pro",
+      "colours": [
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-ipad-pro{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        576,
+        794
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        560,
+        778
+      ],
+      "screen": {
+        "x": 35,
+        "y": 35,
+        "width": 506,
+        "height": 724,
+        "radius": 11
+      }
+    },
+    {
+      "id": "dcss-ipad-pro-2017",
+      "label": "iPad Pro (2017)",
+      "category": "tablet",
+      "className": "device-ipad-pro-2017",
+      "colours": [
+        "gold",
+        "rosegold",
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-ipad-pro-2017{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        576,
+        820
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        560,
+        804
+      ],
+      "screen": {
+        "x": 33,
+        "y": 70,
+        "width": 510,
+        "height": 680,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-surface-pro-2017",
+      "label": "Surface Pro",
+      "category": "tablet",
+      "className": "device-surface-pro-2017",
+      "colours": [],
+      "markup": "<div class=\"device device-surface-pro-2017{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        577,
+        410
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        561,
+        394
+      ],
+      "screen": {
+        "x": 32,
+        "y": 34,
+        "width": 513,
+        "height": 342,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-macbook-pro",
+      "label": "MacBook Pro",
+      "category": "laptop",
+      "className": "device-macbook-pro",
+      "colours": [
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-macbook-pro{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        756,
+        450
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        740,
+        434
+      ],
+      "screen": {
+        "x": 78,
+        "y": 17,
+        "width": 600,
+        "height": 375,
+        "radius": 10
+      }
+    },
+    {
+      "id": "dcss-imac",
+      "label": "iMac",
+      "category": "desktop",
+      "className": "device-imac",
+      "colours": [
+        "blue",
+        "green",
+        "pink",
+        "yellow",
+        "orange",
+        "purple"
+      ],
+      "markup": "<div class=\"device device-imac{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        656,
+        556
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        640,
+        540
+      ],
+      "screen": {
+        "x": 24,
+        "y": 24,
+        "width": 608,
+        "height": 342,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-macbook-pro-2018",
+      "label": "MacBook Pro (2018)",
+      "category": "laptop",
+      "className": "device-macbook-pro-2018",
+      "colours": [
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-macbook-pro-2018{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        756,
+        460
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        740,
+        444
+      ],
+      "screen": {
+        "x": 90,
+        "y": 37,
+        "width": 576,
+        "height": 360,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-macbook",
+      "label": "MacBook",
+      "category": "laptop",
+      "className": "device-macbook",
+      "colours": [
+        "gold",
+        "rosegold",
+        "spacegray"
+      ],
+      "markup": "<div class=\"device device-macbook{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        756,
+        448
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        740,
+        432
+      ],
+      "screen": {
+        "x": 90,
+        "y": 37,
+        "width": 576,
+        "height": 360,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-surface-book",
+      "label": "Surface Book",
+      "category": "laptop",
+      "className": "device-surface-book",
+      "colours": [],
+      "markup": "<div class=\"device device-surface-book{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        744,
+        444
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        728,
+        424
+      ],
+      "screen": {
+        "x": 102,
+        "y": 32,
+        "width": 540,
+        "height": 360,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-surface-studio",
+      "label": "Surface Studio",
+      "category": "desktop",
+      "className": "device-surface-studio",
+      "colours": [],
+      "markup": "<div class=\"device device-surface-studio{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        656,
+        522
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        640,
+        506
+      ],
+      "screen": {
+        "x": 28,
+        "y": 28,
+        "width": 600,
+        "height": 400,
+        "radius": 2
+      }
+    },
+    {
+      "id": "dcss-apple-watch-ultra",
+      "label": "Apple Watch Ultra",
+      "category": "watch",
+      "className": "device-apple-watch-ultra",
+      "colours": [],
+      "markup": "<div class=\"device device-apple-watch-ultra{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        376,
+        396
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        360,
+        380
+      ],
+      "screen": {
+        "x": 66,
+        "y": 46,
+        "width": 244,
+        "height": 304,
+        "radius": 62
+      }
+    },
+    {
+      "id": "dcss-apple-watch-s8",
+      "label": "Apple Watch Series 8",
+      "category": "watch",
+      "className": "device-apple-watch-s8",
+      "colours": [],
+      "markup": "<div class=\"device device-apple-watch-s8{{colour}}\"><div class=\"device-frame\"><img class=\"device-screen\" src=\"{{screen}}\" alt=\"\"/></div><div class=\"device-stripe\"></div><div class=\"device-header\"></div><div class=\"device-sensors\"></div><div class=\"device-btns\"></div><div class=\"device-power\"></div><div class=\"device-home\"></div></div>",
+      "size": [
+        376,
+        396
+      ],
+      "offset": [
+        8,
+        8
+      ],
+      "box": [
+        360,
+        380
+      ],
+      "screen": {
+        "x": 54,
+        "y": 36,
+        "width": 268,
+        "height": 324,
+        "radius": 62
+      }
+    }
+  ]
+}

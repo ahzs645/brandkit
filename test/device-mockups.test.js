@@ -4,11 +4,13 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { Resvg } from '@resvg/resvg-js'
 import { CANVASES, CATEGORIES, DEVICES, FINISHES, PRESETS, SCHEMA, bezelOf, variantsOf } from '../src/mockups/device-catalog.js'
 import { deviceArt, deviceSvg, finishOf, sceneLayout, sceneSvg, svgDataUrl } from '../src/mockups/device-frame.js'
-import { MAX_UPLOAD, brandMockups, catalogFor, createProject, creditsOf, deviceFile, deviceFiles, deviceProblems, mockupProject, validateProject } from '../src/mockups/device-project.js'
+import { CATALOG, MAX_UPLOAD, brandMockups, catalogFor, createProject, creditsOf, deviceFile, deviceFiles, deviceProblems, mockupProject, validateProject } from '../src/mockups/device-project.js'
+import { FRAME_SETS, SET_DEVICES, SET_STYLESHEETS, setOf } from '../src/mockups/device-sets.js'
+import { contentSize, hasStatusBar, insetOf, screenHref, screenSvg } from '../src/mockups/device-screen.js'
 import { brandScreen, logoFor } from '../src/mockups/device-artwork.js'
 import { validateBrand as validate } from '../src/engine/brand.js'
 
@@ -175,7 +177,7 @@ test('a brand\'s own mockups and frames', () => {
   assert.deepEqual(validate(brand), validate(northwind), 'a brand with devices passes the brand\'s own checks')
   assert.deepEqual(deviceProblems(northwind), [], 'and a brand without says nothing')
   const catalog = catalogFor(brand)
-  assert.equal(Object.keys(catalog).length, Object.keys(DEVICES).length + 1)
+  assert.equal(Object.keys(catalog).length, Object.keys(DEVICES).length + Object.keys(SET_DEVICES).length + 1)
   const added = catalog['rugged-handheld']
   assert.deepEqual([added.screen, added.frame.x, added.rotates, added.brand, added.source.licence], [[400, 760], 60, true, true, 'Owned by the brand'])
   assert.deepEqual(deviceFiles(brand).sort(), ['devices/rugged-handheld.png', 'screens/desktop.png', 'screens/tablet.webp'])
@@ -189,6 +191,8 @@ test('a brand\'s own mockups and frames', () => {
   assert.throws(() => validateProject(JSON.parse(JSON.stringify(project)), { catalog: DEVICES, files: deviceFiles(brand) }), /not available here/, 'but not in a brand without that frame')
   assert.deepEqual(creditsOf(project, catalog).map((source) => source.name), ['Photographed in house'], 'an outside frame is credited')
   assert.deepEqual(creditsOf(createProject('single')), [], 'brandkit\'s own are not')
+  assert.deepEqual(project.clock, { time: '9:41', date: '' })
+  assert.deepEqual(project.slots.map((slot) => slot.status), [false, true, true], 'a phone or tablet shows its status bar; a monitor has none')
 
   // A frame the brand supplies is drawn from its image, over the screen.
   const art = deviceArt(added, { frameHref: PNG })
@@ -228,4 +232,120 @@ test('what is wrong with a brand\'s devices is said in sentences', () => {
   assert.deepEqual(brandMockups(mixed).map((entry) => entry.id), ['desk'])
   assert.ok(!Object.hasOwn(catalogFor(mixed), 'rugged-handheld'))
   assert.ok(validate(mixed).some((sentence) => /Device frame `rugged-handheld`/.test(sentence)), 'and the brand\'s own checks say so')
+})
+
+const frameFile = (path) => new URL(`../src/mockups/frames/${path}`, import.meta.url)
+
+test('the frame sets that ship: every frame measured, every file there, every licence stated', () => {
+  assert.deepEqual(FRAME_SETS.map((set) => [set.id, set.kind, set.frames.length]), [['open-device-frame', 'image', 50], ['devices-css', 'css', 20], ['react-mockframe', 'css', 11]])
+  const ids = new Set(Object.keys(DEVICES))
+  for (const set of FRAME_SETS) {
+    assert.equal(set.source.licence, 'MIT', set.id)
+    assert.match(set.source.url, /^https:\/\/github\.com\//)
+    assert.match(set.source.commit, /^[0-9a-f]{40}$/, `${set.id}: made from a known commit`)
+    assert.ok(readFileSync(frameFile(`${set.id}/LICENSE`), 'utf8').includes('MIT License'), `${set.id}: the project's licence ships with it`)
+    assert.ok(readFileSync(frameFile('NOTICES.md'), 'utf8').includes(`${set.id}/`), `${set.id}: listed in NOTICES.md`)
+    if (set.kind === 'css') assert.ok(readFileSync(frameFile(SET_STYLESHEETS[set.id]), 'utf8').length > 20000, `${set.id}: its stylesheet`)
+    for (const frame of set.frames) {
+      assert.ok(!ids.has(frame.id), `${frame.id} is its own id`)
+      ids.add(frame.id)
+      const device = SET_DEVICES[frame.id]
+      assert.deepEqual([setOf(device), device.source.name, device.source.licence], [set.id, set.source.name, 'MIT'])
+      assert.ok(device.label && Object.hasOwn(CATEGORIES, device.category) && device.stature > 0, frame.id)
+      const { x, y, width, height } = frame.screen
+      assert.ok(x > 0 && y > 0 && width > 100 && height > 100 && x + width < frame.size[0] && y + height < frame.size[1], `${frame.id}: its screen is inside it`)
+      if (set.kind === 'image') {
+        assert.ok(existsSync(frameFile(device.frame.image)), `${frame.id}: its image`)
+        assert.equal(device.rotates, true)
+      } else {
+        for (const pose of [frame, frame.turned].filter(Boolean)) {
+          assert.equal(pose.markup.split('{{screen}}').length, 2, `${frame.id}: one place for the screen`)
+          assert.ok(pose.markup.includes('{{colour}}') && !/<script|\bon[a-z]+=|javascript:|<link|<iframe|url\(/i.test(pose.markup), `${frame.id}: markup is elements and classes only`)
+          assert.ok(!/<img[^>]*[^/]>/.test(pose.markup), `${frame.id}: well-formed inside an SVG`)
+        }
+        assert.equal(device.rotates, Boolean(frame.turned))
+        assert.ok(device.finishes.length >= 1)
+      }
+    }
+  }
+  assert.equal(Object.keys(CATALOG).length, 21 + 81)
+  assert.equal(setOf(DEVICES.browser), 'drawn')
+})
+
+test('an image frame and a CSS frame are drawn by their own means', () => {
+  const pixel9 = SET_DEVICES['odf-google-pixel-9']
+  const art = deviceArt(pixel9, { frameHref: PNG })
+  assert.deepEqual([art.width, art.height], [pixel9.frame.width, pixel9.frame.height])
+  const image = render(deviceSvg(pixel9, { frameHref: PNG, href: PNG }), art.width)
+  assert.deepEqual(pixel(image, art.screen.x + art.screen.width / 2, art.screen.y + art.screen.height / 2), [255, 0, 0, 255])
+
+  const css = SET_DEVICES['dcss-iphone-14-pro']
+  const cssArt = deviceArt(css, { finish: 'gold' })
+  assert.deepEqual([cssArt.finish.id, cssArt.turned, Boolean(cssArt.css)], ['gold', false, true])
+  assert.equal(deviceArt(css, { turned: true }).turned, false, 'Devices.css has no pose on its side')
+  const sheet = 'p{color:red}/* a ]]> inside */'
+  const svg = sceneSvg({ slots: [{ device: css, finish: 'gold', href: PNG }, { device: SET_DEVICES['dcss-iphone-14'], href: PNG }, { device: DEVICES['phone-punch'], href: PNG }], styles: { 'devices-css': sheet } })
+  assert.equal((svg.match(/<foreignObject /g) ?? []).length, 2)
+  assert.equal((svg.match(/<style>/g) ?? []).length, 1, 'one stylesheet for the set, however many of its frames')
+  assert.ok(svg.includes('class="device device-iphone-14-pro gold"') && svg.includes(`src="${PNG}"`) && !svg.includes('{{'))
+  assert.ok(!svg.includes('a ]]> inside'), 'a stylesheet cannot close its own CDATA')
+  assert.ok(render(svg, 300).width === 300, 'the scene is still well-formed SVG')
+  // React MockFrame has its own pose on its side.
+  const rmf = SET_DEVICES['rmf-iphone-17']
+  const side = deviceArt(rmf, { turned: true, finish: 'lavender' })
+  assert.ok(side.turned && side.width > side.height && side.css.markup.includes('landscape'))
+  assert.deepEqual(creditsOf({ slots: [{ device: 'rmf-iphone-17' }, { device: 'odf-google-pixel-9' }, { device: 'phone-punch' }] }).map((source) => source.name), ['React MockFrame', 'Open Device Frame'])
+})
+
+test('a status bar sits over the screenshot, which starts below it, clear of the camera', () => {
+  assert.ok(hasStatusBar(DEVICES['phone-island']) && hasStatusBar(DEVICES['tablet-11']) && !hasStatusBar(DEVICES['laptop-14']) && !hasStatusBar(DEVICES['watch-round']))
+  assert.deepEqual(insetOf(DEVICES['phone-island']), { top: 59, left: 0 })
+  assert.deepEqual(insetOf(DEVICES['phone-island'], true), { top: 0, left: 59 }, 'on its side the cutout\'s side is kept clear instead')
+  assert.deepEqual(insetOf(DEVICES['phone-classic'], true), { top: 0, left: 0 }, 'a phone without a cutout keeps nothing')
+  assert.deepEqual(insetOf(DEVICES['tablet-11'], true), { top: 24, left: 0 }, 'a tablet keeps its bar either way')
+  assert.deepEqual(insetOf(DEVICES['monitor-27']), { top: 0, left: 0 })
+  assert.ok(insetOf(SET_DEVICES['odf-google-pixel-9']).top > 20, 'a set\'s phone gets a bar in proportion')
+  assert.deepEqual(contentSize(DEVICES['phone-island']), [393, 793])
+  assert.deepEqual(contentSize(DEVICES['phone-island'], { status: false }), [393, 852])
+  assert.deepEqual(contentSize(DEVICES['phone-island'], { turned: true }), [793, 393])
+
+  const device = DEVICES['phone-island']
+  const svg = screenSvg({ device, href: PNG, status: { colour: '#ffffff', time: '9:41', date: 'Fri 13 Nov' } })
+  assert.ok(svg.includes('>9:41</text>') && !svg.includes('Fri 13 Nov'), 'a phone shows the time')
+  const image = render(svg, 393)
+  assert.deepEqual(pixel(image, 40, 6), [255, 255, 255, 255], 'the bar')
+  assert.deepEqual(pixel(image, 196, 30), [255, 255, 255, 255], 'nothing of the screenshot where the island is')
+  assert.deepEqual(pixel(image, 196, 70), [255, 0, 0, 255], 'the screenshot below it')
+  assert.deepEqual(pixel(image, 347, 33).slice(0, 3).every((channel) => channel < 90), true, 'the battery, in ink')
+  // The ink follows the bar: light on dark.
+  assert.ok(screenSvg({ device, href: PNG, status: { colour: '#0b2b4a', time: '9:41' } }).includes('fill="#ffffff">9:41'))
+  assert.ok(screenSvg({ device: DEVICES['tablet-11'], href: PNG, status: { colour: '#ffffff', time: '9:41', date: 'Fri 13 Nov' } }).includes('9:41   Fri 13 Nov'), 'a tablet shows the date too')
+  const outlined = screenSvg({ device, href: PNG, status: { time: '9:41' }, type: ({ text, anchor }) => `<path data-text="${text}" data-anchor="${anchor}"/>` })
+  assert.ok(outlined.includes('data-text="9:41" data-anchor="middle"') && !outlined.includes('<text'), 'the app can outline the time in the brand\'s face')
+  // On its side: no bar, the screenshot starts beside the cutout.
+  const turned = render(screenSvg({ device, turned: true, href: PNG, status: { colour: '#ffffff', time: '9:41' } }), 852)
+  assert.deepEqual([pixel(turned, 20, 200), pixel(turned, 100, 200)], [[255, 255, 255, 255], [255, 0, 0, 255]])
+  // Without a status bar, and on a device that has none, the screenshot is used as it is.
+  assert.deepEqual(screenHref({ device, href: PNG, fit: 'contain', status: null }), { href: PNG, fit: 'contain' })
+  assert.deepEqual(screenHref({ device: DEVICES['monitor-27'], href: PNG, status: { time: '9:41' } }), { href: PNG, fit: 'cover' })
+  const composed = screenHref({ device, href: PNG, status: { time: '9:41' } })
+  assert.deepEqual([composed.href, composed.inline.width, composed.inline.height], [undefined, 393, 852], 'a composed screen is set into the scene as markup')
+  assert.match(screenHref({ device: SET_DEVICES['dcss-macbook-pro'], href: PNG, status: null }).href, /^data:image\/svg\+xml/, 'a CSS frame always gets a composed screen')
+  // In a scene: the composed screen is what the device shows.
+  const scene = render(deviceSvg(device, { inline: screenHref({ device, href: PNG, status: { colour: '#ffffff', time: '9:41' } }).inline }), deviceArt(device).width)
+  const art = deviceArt(device)
+  assert.deepEqual(pixel(scene, art.screen.x + 40, art.screen.y + 6), [255, 255, 255, 255])
+  assert.deepEqual(pixel(scene, art.screen.x + 196, art.screen.y + 400), [255, 0, 0, 255])
+})
+
+test('a mockup remembers its clock and which devices show a status bar', () => {
+  const project = createProject('three-screens', { clock: { time: '14:05', date: 'Mon 2 Mar' } })
+  assert.deepEqual([project.clock, project.slots.map((slot) => slot.status)], [{ time: '14:05', date: 'Mon 2 Mar' }, [false, true, true]])
+  const off = { ...project, slots: project.slots.map((slot, index) => (index === 2 ? { ...slot, status: false } : slot)) }
+  assert.deepEqual(validateProject(JSON.parse(JSON.stringify(off))).slots.map((slot) => slot.status), [false, true, false])
+  const odd = validateProject({ ...JSON.parse(JSON.stringify(project)), clock: { time: '9:41\n<script>', date: 42 }, slots: project.slots.map((slot) => ({ ...slot, status: 'yes' })) })
+  assert.deepEqual(odd.clock, { time: '9:41<scr', date: '' }, 'the clock is short plain text')
+  assert.deepEqual(odd.slots.map((slot) => slot.status), [false, true, true], 'a monitor never has a bar')
+  assert.equal(createProject('single', { previous: project }).clock.time, '14:05', 'changing the scene keeps the clock')
+  assert.match(deviceProblems({ ...northwind, devices: { mockups: [{ id: 'a', preset: 'single', clock: '9:41', slots: [{ device: 'phone-punch', status: 'no' }] }] } }).join(' '), /has a `clock`.*has a `status`|has a `status`.*has a `clock`/)
 })

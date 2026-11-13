@@ -766,7 +766,8 @@ opens on the first. [devices.md](devices.md) is the full guide.
 | `canvas` | `fit`, `16:9` (default), `4:3`, `1:1` or `4:5`. |
 | `background` | `transparent`, a colour key or role of the brand, or `#rrggbb`. Default white. |
 | `shadow` | Whether each device has a soft shadow. Default true. |
-| `slots` | One per device of the scene, in order: `device` (a device id, or one of the brand's frames), `finish` (one the device comes in), `turned` (a phone or tablet on its side) and `screen` with a `file` and `fit` (`cover`, the default, or `contain`). A slot without a file shows a brand screen. |
+| `clock` | `{ "time", "date" }` as text, for the status bars. Default `9:41` and no date. |
+| `slots` | One per device of the scene, in order: `device` (a device id from any source, or one of the brand's frames), `finish` (one the device comes in), `turned` (a phone or tablet on its side), `status` (false to leave a phone or tablet without its status bar) and `screen` with a `file` and `fit` (`cover`, the default, or `contain`). A slot without a file shows a brand screen. |
 | `frames[].image`, `size`, `screen` | A PNG or WebP inside the brand with a transparent screen opening, its size in pixels, and the opening's `x`, `y`, `width`, `height` and corner `radius`. |
 | `frames[].category`, `stature`, `rotates` | `phone`, `tablet`, `laptop`, `desktop`, `browser`, `watch` or `tv`; how tall it stands beside the others (a monitor is 1); whether it can turn on its side. |
 | `frames[].source` | Required: `name` and `licence` of the frame's artwork, and optionally `url`, `licenceUrl` (https) and a `credit` line drawn into exports. |

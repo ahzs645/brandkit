@@ -38,3 +38,6 @@
   .devices__stage-panel { position: static; }
 }
 @media (max-width: 600px) { .devices__files { margin-left: 0; } }
+.devices__clock { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.devices__controls input[type='text'] { width: 100%; min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); color: var(--ink); }
+.devices__credits { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: flex-end; }

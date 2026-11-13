@@ -9,7 +9,9 @@ drawn in the browser; no screenshot leaves the machine.
 - [How it fits together](#how-it-fits-together)
 - [Using the tab](#using-the-tab)
 - [Giving a brand its own mockups](#giving-a-brand-its-own-mockups)
-- [Frames from elsewhere, and their licences](#frames-from-elsewhere-and-their-licences)
+- [Where the frames come from](#where-the-frames-come-from)
+- [The status bar](#the-status-bar)
+- [A brand's own frames, and their licences](#a-brands-own-frames-and-their-licences)
 - [Adding a device or a scene to brandkit](#adding-a-device-or-a-scene-to-brandkit)
 - [Limits, and what could come next](#limits-and-what-could-come-next)
 - [Files](#files)
@@ -18,11 +20,12 @@ drawn in the browser; no screenshot leaves the machine.
 
 | | |
 | --- | --- |
-| **Devices** | 21 frames in seven kinds: six phones (island, punch-hole, notch, compact, classic bezel, an open foldable), four tablets, three laptops, two monitors and an all-in-one, a browser window and a plain window, two watches and a television. |
-| **Finishes** | Graphite, silver, black, white and the brand's own colour for hardware; light and dark for windows. With orientation that is 147 distinct mockups of a single device. |
+| **Devices** | 102 frames from four sources, chosen per device under **Frames from**: brandkit's own 21 drawn frames (six phones, four tablets, three laptops, two monitors and an all-in-one, a browser window and a plain window, two watches, a television), 50 phones from Open Device Frame, 20 frames from Devices.css and 11 from React MockFrame. |
+| **Finishes** | Drawn frames: graphite, silver, black, white and the brand's own colour for hardware; light and dark for windows. CSS frames: the colours their stylesheet has (gold, lavender, indigo and so on). Image frames come as drawn. |
 | **Orientation** | Phones and tablets stand upright or on their side. A turned phone is the same phone: its size in the scene does not change. |
 | **Scenes** | One device; desktop and phone; desktop, tablet and phone; a laptop with a phone in front; a laptop with a tablet and a phone in front; two side by side; three phones. |
 | **Screens** | A screenshot (PNG, JPEG or WebP, up to 12 MB), a file from the brand's own mockup, a **brand screen** (the logo that reads best on the brand's primary colour), or empty. A screenshot fills the screen from the top, or fits whole. |
+| **Status bar** | On a phone or tablet, the time, signal and battery are drawn above the screenshot, which starts below them, clear of the camera cutout. One clock for the scene, which you can set. |
 | **Picture** | Transparent, white, or any of the brand's colours behind; a soft shadow under each device; a canvas that fits the devices or is 16:9, 4:3, square or 4:5. |
 | **Keeping work** | A draft kept in the browser for each brand, **Save mockup** and **Open…** as a JSON file, **Export PNG** at 1600, 2400 or 3840 px wide and **Export SVG**. |
 | **Brand mockups** | A brand can define its own mockups in `brand.json`, with its own screenshots. The tab lists them and opens on the first. |
@@ -53,17 +56,62 @@ The same three things as [Vehicles](vehicles.md), kept separate for the same rea
   the saved file), and may only name brand files the brand's mockups use.
 
 A model, its finish, its orientation and the scene it stands in are separate choices. That keeps
-"how many options" honest: 21 devices, not 147, with 147 ways to show one.
+"how many options" honest: 102 devices, each in its finishes and orientations.
 
-### Why the frames are drawn, not downloaded
+## Where the frames come from
 
-There are good open collections of device frames (see the next section), but their artwork
-comes from several sources under several terms, and the best-known hardware is the most
-restricted: Apple's marketing guidelines, for one, do not allow its product images to be shown
-beside competing products or altered. A scene that puts a phone, a tablet and a Windows laptop
-together is exactly that case. So the built-in frames are brandkit's own drawings of generic
-hardware, which can be mixed, recoloured and turned freely, and outside artwork comes in through
-a brand, with its licence recorded.
+Each device in a mockup says where its frame is from, under **Frames from**, and a scene can mix
+them.
+
+| Source | Frames | How they are drawn | Good for |
+| --- | --- | --- | --- |
+| **brandkit** | 21: phones, tablets, laptops, desktops, windows, watches, a television | In code, from a few numbers. Generic hardware: no maker's product. | Any scene, above all one that mixes kinds of device. Five finishes, turns on its side, draws everywhere. |
+| **[Open Device Frame](https://github.com/SinaKarimi7/open-device-frame)** (MIT) | 50 phones: Apple, Google, Huawei, Samsung, Xiaomi | A transparent image of the phone over the screen. | A named phone, especially Android. Turns on its side. |
+| **[Devices.css](https://github.com/picturepan2/devices.css)** (MIT) | 20: iPhones, Pixels, a Galaxy, iPads, a Surface Pro, MacBooks, iMac, Surface Book and Studio, Apple Watches | A stylesheet, placed in the scene as HTML. | Its Surface and watch frames, and its colours. |
+| **[React MockFrame](https://github.com/mbdev3/react-mockframe)** (MIT) | 11: iPhones, Pixel 10, Galaxy S25, iPads, MacBook Pros | A stylesheet, each device rendered once to plain markup (the app does not load React for it). | Recent phones in their real colours, with their own pose on their side. |
+
+The three outside sets are in [`src/mockups/frames/`](../src/mockups/frames/), each with its
+project's licence; [`NOTICES.md`](../src/mockups/frames/NOTICES.md) there says what each licence
+covers. In short: the licences cover the frames' artwork and code, which is why they can ship
+here; the products the frames depict belong to their makers. A picture that sets one maker's
+device beside another's is the case brandkit's own frames are for, since they depict no one's
+product. The tab credits each outside source under the picture.
+
+**CSS frames** are HTML inside the picture. They show in the tab and export as PNG from Chrome,
+Edge and Firefox; a browser that will not hand back such a picture says so, and a render outside
+a browser (Node) leaves them out. Use a drawn or image frame where that matters.
+
+Two broad collections are not included: **MockUPhone** and **HTML5 Device Mockups**. Their frame
+artwork comes from many makers under their own terms (Apple's and Meta's design resources among
+them), and each repository is about half a gigabyte. Their frames can still be used, one at a
+time, through a brand (see [below](#a-brands-own-frames-and-their-licences)).
+
+To rebuild the sets from their projects, or after one of them adds devices:
+
+```sh
+npm run devices:frames -- --from <folder holding the three checkouts>
+```
+
+It measures every frame in a browser: an image frame's screen opening from its transparency, a
+CSS frame's size and screen from how the browser lays it out.
+
+## The status bar
+
+A screenshot of an app or a page is the page alone. On a real phone the top of the screen is the
+device's: the time, the signal, the battery, and the camera cutout. So on a phone or tablet the
+tab draws a status bar and sets the screenshot **below** it; nothing in the screenshot sits under
+the camera.
+
+- The bar takes the colour along the top edge of the screenshot, so it reads as part of the page,
+  and its lettering is dark or light to suit. On a brand screen it is the brand's colour.
+- The time is set in the brand's own face where it has the figures. **Time in the status bar**
+  and **Date** in the Scene settings change it; a phone shows the time, a tablet the time and date.
+- A phone on its side has no bar: the side the camera is on is kept clear instead.
+- Untick **Status bar** on a device to use the whole screen, for a screenshot that already
+  includes one.
+
+The tab says what size of screenshot fills the screen as it stands: 393 × 793 for the island
+phone with its bar, 393 × 852 without.
 
 ## Using the tab
 
@@ -103,9 +151,9 @@ full format is in [brand-schema.md → Devices](brand-schema.md#devices). Captur
 at the device's screen size where you can: the sizes are in the table under
 [Adding a device](#adding-a-device-or-a-scene-to-brandkit) and beside each device in the tab.
 
-## Frames from elsewhere, and their licences
+## A brand's own frames, and their licences
 
-A brand can add frames of its own: a PNG or WebP of the device with a **transparent screen
+Beyond the sets above, a brand can add frames of its own: a PNG or WebP of the device with a **transparent screen
 opening**, and where that opening is.
 
 ```json
@@ -130,16 +178,9 @@ ships it is the one that has to be able to say where it came from. `url` and `li
 make the tab's credit a link; `credit` is a line drawn into the exported picture, for licences
 that ask for attribution on the image itself.
 
-Collections worth knowing, with what to check before using each:
-
-| Collection | What it has | Check |
-| --- | --- | --- |
-| [Open Device Frame](https://github.com/SinaKarimi7/open-device-frame) | About 50 phone frames (Apple, Google, Huawei, Samsung, Xiaomi) as transparent WebP; MIT | The screen opening has to be measured for each frame. The frames depict real products. |
-| [MockUPhone](https://github.com/oursky/mockuphone.com) | A broad catalogue: phones, tablets, Windows laptops, watches, televisions | Code is Apache-2.0; the frame artwork comes from several makers under their own terms. Check each frame. |
-| [Devices.css](https://github.com/picturepan2/devices.css), [React MockFrame](https://github.com/mbdev3/react-mockframe) | Frames drawn in CSS; MIT | These are code, not images: they are the same idea as brandkit's own drawn frames and are not needed here. |
-| [PommePlate](https://github.com/ephread/PommePlate) | Apple devices as SVG and PNG; CC0; archived in 2023 | Apple-only: do not mix with other makers' hardware in one scene. |
-
-For a scene that mixes kinds of device, use the built-in frames.
+For frames from MockUPhone, HTML5 Device Mockups or PommePlate, check the terms of the one frame
+you want (they differ within each collection), make sure its screen is transparent, and add it
+this way with its source and licence.
 
 ## Adding a device or a scene to brandkit
 
@@ -163,8 +204,8 @@ A device is one entry in `DEVICES` in [`device-catalog.js`](../src/mockups/devic
 A scene is one entry in `PRESETS`: a label, `row` or `cluster`, and the devices it opens with.
 
 After either: `npm test`, then `npm run build && npm run test:devices:browser`, which opens the
-tab, draws every device upright and turned with a screenshot on its screen, draws every scene,
-and checks the exports. Its screenshots go to `.documentation/devices-browser`.
+tab, draws every device from every source upright and turned with a screenshot on its screen,
+draws every scene, and checks the status bar and the exports. Its screenshots go to `.documentation/devices-browser`.
 
 Built-in screens:
 
@@ -186,9 +227,10 @@ Built-in screens:
 - **Screenshots, not live pages.** A screen shows an image. Showing a live site would need the
   site to allow being framed, and a browser cannot export a picture of another site's page.
 - **Fixed scenes.** A scene has one to three devices in set positions; devices cannot be dragged.
-- **No frames are bundled from outside collections.** The catalogue format takes them through a
-  brand; none ship with brandkit, for the licence reasons above.
-- **Generic hardware.** The built-in frames are not any manufacturer's exact device.
+- **CSS frames need a browser.** They do not draw in a Node render, and do not export from a
+  browser that will not read back a picture with HTML in it.
+- **The status bar is a likeness.** It is drawn the same on every phone; it is not a copy of any
+  system's exact icons.
 
 ## Files
 
@@ -198,6 +240,9 @@ Built-in screens:
 | [`src/mockups/device-frame.js`](../src/mockups/device-frame.js) | Drawing a device and a scene as SVG |
 | [`src/mockups/device-project.js`](../src/mockups/device-project.js) | A mockup as data: new, checked on open, and a brand's `devices` |
 | [`src/mockups/device-artwork.js`](../src/mockups/device-artwork.js) | The brand screen |
+| [`src/mockups/device-screen.js`](../src/mockups/device-screen.js) | The status bar, and the screenshot set below it |
+| [`src/mockups/device-sets.js`](../src/mockups/device-sets.js), [`src/mockups/frames/`](../src/mockups/frames/) | The frame sets from other projects, their files and licences |
+| [`scripts/device-frames.mjs`](../scripts/device-frames.mjs) | Rebuilds the sets from their projects, measuring each frame |
 | [`src/app/views/Devices.jsx`](../src/app/views/Devices.jsx), [`src/mockups/devices.css`](../src/mockups/devices.css) | The tab |
 | [`test/device-mockups.test.js`](../test/device-mockups.test.js) | Catalogue, drawing, scenes, saved mockups, brand mockups and frames |
 | [`test/browser/devices.check.mjs`](../test/browser/devices.check.mjs) | Browser check of every device, every scene and the exports |

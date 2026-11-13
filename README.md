@@ -68,9 +68,11 @@ brandkit draws the whole kit from it:
   [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
   template for cutting vinyl. A brand can carry its own vehicle designs (`vehicles.liveries`); see
   [docs/vehicles.md](docs/vehicles.md), which also covers adding vehicles.
-- **Devices**: the brand's screens in device frames: 21 phones, tablets, laptops, monitors,
-  windows, watches and a television, drawn in code so a scene can mix them freely, in five
-  finishes and two orientations. Choose a scene (one device, desktop with tablet and phone, a
+- **Devices**: the brand's screens in device frames: 102 to choose from. 21 are brandkit's own
+  (phones, tablets, laptops, monitors, windows, watches and a television, drawn in code so a
+  scene can mix them freely, in five finishes and two orientations); the rest are named devices
+  from Open Device Frame, Devices.css and React MockFrame. Phones and tablets get a status bar,
+  with the screenshot set below it, clear of the camera. Choose a scene (one device, desktop with tablet and phone, a
   laptop with a phone in front, three phones), put a screenshot or a brand screen on each, and
   export a PNG or SVG. Drawn in the browser; nothing is uploaded. A brand can carry its own
   mockups and frames (`devices.mockups`, `devices.frames`); see [docs/devices.md](docs/devices.md).

@@ -7,3 +7,4 @@ test/browser/report.json
 test/browser/overtheedge-report.json
 .documentation/
 test/browser/documentation-report.json
+.device-frames-tmp/

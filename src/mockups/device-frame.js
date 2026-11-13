@@ -114,6 +114,16 @@ const chrome = (device, finish, { x, y, W, bt }) => {
  */
 export const deviceArt = (device, { finish: finishId, brandColour, turned = false, frameHref } = {}) => {
   const [sw, sh] = device.screen
+  if (device.css) {
+    // A frame a stylesheet draws: its markup, measured when the set was made. It has its own
+    // pose on its side where its project drew one; otherwise it stays upright.
+    const side = Boolean(turned && device.css.turned)
+    const pose = side ? device.css.turned : device.css.upright
+    const colour = device.finishes.includes(finishId) ? finishId : device.finishes[0] ?? ''
+    return { width: pose.width, height: pose.height, turned: side, finish: { id: colour }, under: '', over: '',
+      screen: { x: pose.screen.x, y: pose.screen.y, width: pose.screen.width, height: pose.screen.height, radii: [0, 0, 0, 0] },
+      css: { markup: pose.markup, offset: pose.offset, colour } }
+  }
   const finish = finishOf(device, finishId, brandColour)
   let art
   if (device.frame) {
@@ -152,18 +162,35 @@ export const deviceArt = (device, { finish: finishId, brandColour, turned = fals
 }
 
 /** A device with its screen filled, as a group in its own pixels. `id` keeps its clip path its own. */
-const deviceGroup = (art, { id, href, fit = 'cover', ground = '#000000' }) => {
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+const deviceGroup = (art, { id, href, inline, fit = 'cover', ground = '#000000' }) => {
+  if (art.css) {
+    // HTML inside the SVG: the stylesheet (see sceneSvg) draws the device round the image.
+    const markup = art.css.markup.replace('{{screen}}', esc(href ?? BLANK)).replace('{{colour}}', art.css.colour ? ` ${esc(art.css.colour)}` : '')
+    return `<foreignObject width="${n(art.width)}" height="${n(art.height)}"><div xmlns="http://www.w3.org/1999/xhtml" style="position:relative;width:${n(art.width)}px;height:${n(art.height)}px"><div style="position:absolute;left:${n(art.css.offset[0])}px;top:${n(art.css.offset[1])}px">${markup}</div></div></foreignObject>`
+  }
   const { x, y, width, height, radii } = art.screen
   const shape = roundedPath(x, y, width, height, radii)
-  const image = href ? `<image href="${esc(href)}" x="${n(x)}" y="${n(y)}" width="${n(width)}" height="${n(height)}" preserveAspectRatio="${fit === 'contain' ? 'xMidYMid meet' : 'xMidYMin slice'}" clip-path="url(#${id})"/>` : ''
+  // A composed screen (a status bar over the screenshot) is set in as markup, at the screen's own
+  // size; a plain screenshot as an image.
+  const image = inline ? `<g clip-path="url(#${id})"><svg x="${n(x)}" y="${n(y)}" width="${n(width)}" height="${n(height)}" viewBox="0 0 ${inline.width} ${inline.height}" preserveAspectRatio="none">${inline.inner}</svg></g>`
+    : href ? `<image href="${esc(href)}" x="${n(x)}" y="${n(y)}" width="${n(width)}" height="${n(height)}" preserveAspectRatio="${fit === 'contain' ? 'xMidYMid meet' : 'xMidYMin slice'}" clip-path="url(#${id})"/>` : ''
   return `<clipPath id="${id}"><path d="${shape}"/></clipPath>${art.under}<path d="${shape}" fill="${ground}"/>${image}${art.over}`
 }
 
 /** One device on its own, as an SVG document. */
-export const deviceSvg = (device, { finish, brandColour, turned, frameHref, href, fit, title } = {}) => {
+export const deviceSvg = (device, { finish, brandColour, turned, frameHref, href, inline, fit, title, styles } = {}) => {
   const art = deviceArt(device, { finish, brandColour, turned, frameHref })
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n(art.width)} ${n(art.height)}" width="${n(art.width)}" height="${n(art.height)}" role="img"><title>${esc(title ?? device.label)}</title>${deviceGroup(art, { id: 'screen', href, fit })}</svg>`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n(art.width)} ${n(art.height)}" width="${n(art.width)}" height="${n(art.height)}" role="img"><title>${esc(title ?? device.label)}</title>${styleSheets([device], styles)}${deviceGroup(art, { id: 'screen', href, inline, fit })}</svg>`
 }
+
+/**
+ * The stylesheets the CSS frames among `devices` need, once each. `styles` gives each set's
+ * stylesheet text by set id; a set whose stylesheet has not arrived yet is left out, and its
+ * frames show as their bare elements until it has.
+ */
+const styleSheets = (devices, styles = {}) => [...new Set(devices.map((device) => device.css?.set).filter(Boolean))]
+  .map((set) => (styles[set] ? `<style>/* ${esc(set)} */<![CDATA[${styles[set].replaceAll(']]>', ']] >')}]]></style>` : '')).join('')
 
 const UNIT = 1000
 
@@ -199,10 +226,10 @@ export const sceneLayout = (arts, statures, layout = 'row') => {
 }
 
 /**
- * A scene as an SVG document. `slots` are `{ device, finish, turned, href, fit, frameHref }`
+ * A scene as an SVG document. `slots` are `{ device, finish, turned, href | inline, fit, frameHref }`
  * with `device` a catalogue entry; `background` is a colour or null for none.
  */
-export const sceneSvg = ({ slots, layout = 'row', canvas = 'fit', background = null, shadow = true, brandColour, title = 'Device mockup', credit = '' }) => {
+export const sceneSvg = ({ slots, layout = 'row', canvas = 'fit', background = null, shadow = true, brandColour, title = 'Device mockup', credit = '', styles }) => {
   if (!slots?.length) throw new Error('A mockup needs at least one device.')
   const arts = slots.map((slot) => deviceArt(slot.device, { finish: slot.finish, brandColour, turned: slot.turned, frameHref: slot.frameHref }))
   const { items, box } = sceneLayout(arts, slots.map((slot) => slot.device.stature ?? 0.5), layout)
@@ -219,11 +246,11 @@ export const sceneSvg = ({ slots, layout = 'row', canvas = 'fit', background = n
   }).join('') : ''
   const groups = items.map((item, index) => ({ item, index })).sort((a, b) => a.item.order - b.item.order).map(({ item, index }) => {
     const slot = slots[index]
-    return `<g transform="translate(${n(item.x + dx)} ${n(item.y + dy)}) scale(${Number(item.k.toFixed(5))})">${deviceGroup(arts[index], { id: `screen-${index}`, href: slot.href, fit: slot.fit, ground: slot.ground })}</g>`
+    return `<g transform="translate(${n(item.x + dx)} ${n(item.y + dy)}) scale(${Number(item.k.toFixed(5))})">${deviceGroup(arts[index], { id: `screen-${index}`, href: slot.href, inline: slot.inline, fit: slot.fit, ground: slot.ground })}</g>`
   }).join('')
   const note = credit ? `<text x="${n(pad * 0.4)}" y="${n(height - pad * 0.3)}" font-family="system-ui, Arial, sans-serif" font-size="${n(UNIT * 0.018)}" fill="${dark ? '#ffffff' : '#000000'}" fill-opacity="0.6">${esc(credit)}</text>` : ''
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n(width)} ${n(height)}" width="${n(width)}" height="${n(height)}" role="img"><title>${esc(title)}</title>`
-    + `<defs><filter id="soft" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="${n(UNIT * 0.014)}"/></filter></defs>`
+    + `<defs><filter id="soft" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="${n(UNIT * 0.014)}"/></filter></defs>${styleSheets(slots.map((slot) => slot.device), styles)}`
     + `${isHex(background) ? `<rect width="${n(width)}" height="${n(height)}" fill="${background}"/>` : ''}${shadows}${groups}${note}</svg>`
 }
 
