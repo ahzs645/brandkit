@@ -42,6 +42,7 @@ const Organization = lazy(() => import('./views/Organization.jsx').then((module)
 const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
 // Three.js and the vehicle models load only when the tab opens.
 const Vehicles = lazy(() => import('./views/Vehicles.jsx').then((module) => ({ default: module.Vehicles })))
+const Devices = lazy(() => import('./views/Devices.jsx').then((module) => ({ default: module.Devices })))
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
@@ -56,6 +57,8 @@ const VIEWS = [
   { id: 'web', label: 'Web' },
   // The brand's artwork placed on a car in 3D.
   { id: 'vehicles', label: 'Vehicles' },
+  // The brand's screens in device frames: phones, tablets, laptops, monitors, windows.
+  { id: 'devices', label: 'Devices' },
   { id: 'printer', label: 'Template Printer' },
   // A brand extension's own tab (UNBC's door signs), named by the extension.
   { id: 'extension', label: 'Extension' },
@@ -582,6 +585,7 @@ export const App = () => {
             </div>}
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
+            {view === 'devices' && <Devices key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

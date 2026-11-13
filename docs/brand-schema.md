@@ -725,6 +725,56 @@ rear at the right. It is fitted to cover each panel it wraps (cropped, never str
 SVG, PNG, JPEG or WebP inside the brand's folder, and are inspected like an upload: no scripts,
 no external references. A livery is checked with the rest of the brand (`brandkit check`).
 
+
+## Devices
+
+The **Devices** tab shows a brand's screens in device frames. The devices are brandkit's; a
+brand says which to use and with which screenshots, as **mockups** in `devices.mockups`, and may
+add frames of its own in `devices.frames`. The tab lists the mockups under **Brand mockups** and
+opens on the first. [devices.md](devices.md) is the full guide.
+
+```json
+"devices": {
+  "mockups": [{
+    "id": "field-app",
+    "label": "Field app",
+    "description": "The same project on a desktop, a tablet and a phone.",
+    "preset": "three-screens",
+    "canvas": "16:9",
+    "background": "primary",
+    "shadow": true,
+    "slots": [
+      { "device": "browser", "finish": "light", "screen": { "file": "screens/desktop.png" } },
+      { "device": "tablet-11", "screen": { "file": "screens/tablet.png" } },
+      { "device": "phone-notch", "turned": false, "screen": { "file": "screens/phone.png", "fit": "cover" } }
+    ]
+  }],
+  "frames": [{
+    "id": "rugged-handheld", "label": "Rugged handheld", "category": "phone",
+    "image": "devices/rugged-handheld.png", "size": [520, 1040],
+    "screen": { "x": 60, "y": 150, "width": 400, "height": 760, "radius": 12 },
+    "stature": 0.42, "rotates": true,
+    "source": { "name": "Photographed in house", "licence": "Owned by the brand" }
+  }]
+}
+```
+
+| Key | What it is |
+| --- | --- |
+| `mockups[].id`, `label`, `description` | The mockup's id (lower-case, digits, hyphens) and how the tab names and describes it. |
+| `preset` | The scene: `single`, `desktop-phone`, `three-screens`, `laptop-phone`, `family`, `side-by-side` or `three-phones`. |
+| `canvas` | `fit`, `16:9` (default), `4:3`, `1:1` or `4:5`. |
+| `background` | `transparent`, a colour key or role of the brand, or `#rrggbb`. Default white. |
+| `shadow` | Whether each device has a soft shadow. Default true. |
+| `slots` | One per device of the scene, in order: `device` (a device id, or one of the brand's frames), `finish` (one the device comes in), `turned` (a phone or tablet on its side) and `screen` with a `file` and `fit` (`cover`, the default, or `contain`). A slot without a file shows a brand screen. |
+| `frames[].image`, `size`, `screen` | A PNG or WebP inside the brand with a transparent screen opening, its size in pixels, and the opening's `x`, `y`, `width`, `height` and corner `radius`. |
+| `frames[].category`, `stature`, `rotates` | `phone`, `tablet`, `laptop`, `desktop`, `browser`, `watch` or `tv`; how tall it stands beside the others (a monitor is 1); whether it can turn on its side. |
+| `frames[].source` | Required: `name` and `licence` of the frame's artwork, and optionally `url`, `licenceUrl` (https) and a `credit` line drawn into exports. |
+
+Screenshots are PNG, JPEG or WebP inside the brand's folder. A saved mockup may only name files
+the brand's mockups and frames use. Devices are checked with the rest of the brand
+(`brandkit check`).
+
 ## Template Printer packages and imported SVG
 
 Native templates keep their existing `elements`. A package import adds a template

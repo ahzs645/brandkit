@@ -68,6 +68,12 @@ brandkit draws the whole kit from it:
   [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
   template for cutting vinyl. A brand can carry its own vehicle designs (`vehicles.liveries`); see
   [docs/vehicles.md](docs/vehicles.md), which also covers adding vehicles.
+- **Devices**: the brand's screens in device frames: 21 phones, tablets, laptops, monitors,
+  windows, watches and a television, drawn in code so a scene can mix them freely, in five
+  finishes and two orientations. Choose a scene (one device, desktop with tablet and phone, a
+  laptop with a phone in front, three phones), put a screenshot or a brand screen on each, and
+  export a PNG or SVG. Drawn in the browser; nothing is uploaded. A brand can carry its own
+  mockups and frames (`devices.mockups`, `devices.frames`); see [docs/devices.md](docs/devices.md).
 - **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 
