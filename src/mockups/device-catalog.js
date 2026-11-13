@@ -6,7 +6,8 @@
 //
 // A screen is given in CSS pixels in the device's natural orientation (upright for a phone,
 // tablet or watch; wide for the rest). `inset` is the height of the status bar a phone or tablet
-// draws over the top of it: a screenshot is set below that, clear of the camera cutout.
+// draws over the top of it, and `foot` the strip its home bar takes at the bottom: a screenshot
+// is set between them, clear of the camera cutout and the bar.
 // `stature` is how tall the device stands in a scene beside the others (a 27 inch monitor on its
 // stand is 1), so a phone is not drawn the size of a laptop.
 //
@@ -38,17 +39,17 @@ const WINDOW = ['light', 'dark']
 const DRAWN = Object.freeze({ name: 'Drawn for brandkit', licence: 'Part of brandkit' })
 
 const phone = (label, note, screen, { radius, bezel, corner, cutout, stature = 0.42, ...rest }) => ({ label, note, category: 'phone', screen, radius, bezel, corner, cutout, stature, rotates: true, buttons: true, finishes: HARDWARE, source: DRAWN, ...rest })
-const tablet = (label, note, screen, { radius = 18, bezel = 28, corner = 40, stature, ...rest }) => ({ label, note, category: 'tablet', screen, radius, bezel, corner, cutout: 'camera', inset: 24, stature, rotates: true, finishes: HARDWARE, source: DRAWN, ...rest })
+const tablet = (label, note, screen, { radius = 18, bezel = 28, corner = 40, stature, ...rest }) => ({ label, note, category: 'tablet', screen, radius, bezel, corner, cutout: 'camera', inset: 24, foot: 20, stature, rotates: true, finishes: HARDWARE, source: DRAWN, ...rest })
 const laptop = (label, note, screen, { bezel, stature, ...rest }) => ({ label, note, category: 'laptop', screen, radius: 8, bezel, corner: 18, cutout: 'camera', base: 'laptop', stature, finishes: HARDWARE, source: DRAWN, ...rest })
 const desktop = (label, note, screen, { base, stature, bezel = 14, ...rest }) => ({ label, note, category: 'desktop', screen, radius: 4, bezel, corner: 14, base, stature, finishes: HARDWARE, source: DRAWN, ...rest })
 
 export const DEVICES = Object.freeze({
-  'phone-island': phone('Phone, island cutout', 'A tall phone with a pill-shaped camera cutout', [393, 852], { radius: 48, bezel: 14, corner: 62, cutout: 'island', inset: 59 }),
-  'phone-punch': phone('Phone, punch-hole camera', 'A tall phone with a single centred camera', [412, 915], { radius: 36, bezel: 10, corner: 46, cutout: 'punch', stature: 0.43, inset: 44 }),
-  'phone-notch': phone('Phone, notch', 'A phone with a notch at the top of the screen', [390, 844], { radius: 42, bezel: 16, corner: 58, cutout: 'notch', inset: 47 }),
-  'phone-compact': phone('Phone, compact', 'A smaller phone with a punch-hole camera', [360, 780], { radius: 30, bezel: 12, corner: 42, cutout: 'punch', stature: 0.38, inset: 40 }),
+  'phone-island': phone('Phone, island cutout', 'A tall phone with a pill-shaped camera cutout', [393, 852], { radius: 48, bezel: 14, corner: 62, cutout: 'island', inset: 59, foot: 34 }),
+  'phone-punch': phone('Phone, punch-hole camera', 'A tall phone with a single centred camera', [412, 915], { radius: 36, bezel: 10, corner: 46, cutout: 'punch', stature: 0.43, inset: 44, foot: 24 }),
+  'phone-notch': phone('Phone, notch', 'A phone with a notch at the top of the screen', [390, 844], { radius: 42, bezel: 16, corner: 58, cutout: 'notch', inset: 47, foot: 34 }),
+  'phone-compact': phone('Phone, compact', 'A smaller phone with a punch-hole camera', [360, 780], { radius: 30, bezel: 12, corner: 42, cutout: 'punch', stature: 0.38, inset: 40, foot: 24 }),
   'phone-classic': phone('Phone, classic bezel', 'Bezels above and below a square-cornered screen, with a home button', [375, 667], { radius: 0, bezel: [92, 16, 92, 16], corner: 56, cutout: 'home', stature: 0.4, inset: 20 }),
-  'phone-fold': phone('Foldable, open', 'A folding phone opened flat, with its hinge down the middle', [884, 1104], { radius: 26, bezel: 12, corner: 38, cutout: 'punch-corner', hinge: true, stature: 0.43, inset: 52 }),
+  'phone-fold': phone('Foldable, open', 'A folding phone opened flat, with its hinge down the middle', [884, 1104], { radius: 26, bezel: 12, corner: 38, cutout: 'punch-corner', hinge: true, stature: 0.43, inset: 52, foot: 24 }),
 
   'tablet-11': tablet('Tablet, 11 inch', 'An even bezel all round', [834, 1194], { stature: 0.6 }),
   'tablet-13': tablet('Tablet, 13 inch', 'The large tablet', [1024, 1366], { bezel: 30, corner: 42, stature: 0.68 }),

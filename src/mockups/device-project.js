@@ -144,7 +144,7 @@ export const validateProject = (input, { catalog = CATALOG, files = [] } = {}) =
       const upload = screen.upload
       if (!isRecord(upload) || typeof upload.dataUrl !== 'string' || upload.dataUrl.length > MAX_UPLOAD * 1.4 || !UPLOAD.test(upload.dataUrl)) throw new Error(`The screenshot on device ${index + 1} is not a PNG, JPEG or WebP image.`)
       out.screen.kind = 'upload'
-      out.screen.upload = { name: typeof upload.name === 'string' ? upload.name.slice(0, 120) : 'screenshot', dataUrl: upload.dataUrl, ...(positive(upload.width) && positive(upload.height) ? { width: Math.round(upload.width), height: Math.round(upload.height) } : {}), ...(/^#[0-9a-f]{6}$/i.test(upload.edge ?? '') ? { edge: upload.edge.toLowerCase() } : {}) }
+      out.screen.upload = { name: typeof upload.name === 'string' ? upload.name.slice(0, 120) : 'screenshot', dataUrl: upload.dataUrl, ...(positive(upload.width) && positive(upload.height) ? { width: Math.round(upload.width), height: Math.round(upload.height) } : {}), ...(/^#[0-9a-f]{6}$/i.test(upload.edge ?? '') ? { edge: upload.edge.toLowerCase() } : {}), ...(/^#[0-9a-f]{6}$/i.test(upload.foot ?? '') ? { foot: upload.foot.toLowerCase() } : {}) }
     } else if (screen.kind === 'file') {
       if (!deviceFile(screen.file) || !files.includes(screen.file)) throw new Error('This mockup names a screenshot the open brand does not have.')
       out.screen.kind = 'file'

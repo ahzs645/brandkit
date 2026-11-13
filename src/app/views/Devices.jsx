@@ -38,18 +38,29 @@ const fileUrl = async (source, path) => blobUrl(new Blob([await source.read(path
 
 const loadImage = (url) => new Promise((resolve, reject) => { const image = new Image(); image.onerror = () => reject(new Error('The browser could not open that image.')); image.onload = () => resolve(image); image.src = url })
 
-/** The colour along the top edge of an image: what a status bar above it should continue. */
-const edgeColour = (image) => {
+/**
+ * The colour of an image just inside its top edge (`edge`) and its bottom edge (`foot`): what
+ * the strips above and below it should continue. It is the commonest colour in a thin band a
+ * little in from the edge, not an average, so a hairline along the edge or a few icons do not
+ * tint it.
+ */
+const edgeColours = (image) => {
   try {
+    const w = 96, h = Math.max(120, Math.round(96 * image.naturalHeight / image.naturalWidth))
     const canvas = document.createElement('canvas')
-    canvas.width = 64; canvas.height = 2
-    const context = canvas.getContext('2d')
-    context.drawImage(image, 0, 0, image.naturalWidth, Math.max(1, image.naturalHeight * 0.006), 0, 0, 64, 2)
-    const { data } = context.getImageData(0, 0, 64, 2)
-    const sum = [0, 0, 0]
-    for (let at = 0; at < data.length; at += 4) for (let channel = 0; channel < 3; channel += 1) sum[channel] += data[at + channel]
-    return `#${sum.map((value) => Math.round(value / (data.length / 4)).toString(16).padStart(2, '0')).join('')}`
-  } catch { return null }
+    canvas.width = w; canvas.height = h
+    const context = canvas.getContext('2d', { willReadFrequently: true })
+    context.drawImage(image, 0, 0, w, h)
+    const commonest = (from, to) => {
+      const { data } = context.getImageData(0, from, w, to - from)
+      const counts = new Map()
+      for (let at = 0; at < data.length; at += 4) { const key = (data[at] >> 2 << 12) | (data[at + 1] >> 2 << 6) | (data[at + 2] >> 2); counts.set(key, (counts.get(key) ?? 0) + 1) }
+      const [key] = [...counts].sort((a, b) => b[1] - a[1])[0]
+      return `#${[key >> 12, (key >> 6) & 63, key & 63].map((value) => Math.min(255, (value << 2) + (value >= 62 ? 3 : 2)).toString(16).padStart(2, '0')).join('')}`
+    }
+    const band = Math.max(3, Math.round(h * 0.03))
+    return { edge: commonest(2, 2 + band), foot: commonest(h - 2 - band, h - 2) }
+  } catch { return {} }
 }
 
 /**
@@ -72,8 +83,7 @@ const readUpload = async (file) => {
   if (file.size > MAX_UPLOAD) throw new Error('That image is over 12 MB. Export it smaller and try again.')
   const dataUrl = await blobUrl(file).catch(() => { throw new Error('The image could not be read.') })
   const image = await loadImage(dataUrl)
-  const edge = edgeColour(image)
-  return { name: file.name.slice(0, 120), dataUrl, width: image.naturalWidth, height: image.naturalHeight, ...(edge ? { edge } : {}) }
+  return { name: file.name.slice(0, 120), dataUrl, width: image.naturalWidth, height: image.naturalHeight, ...edgeColours(image) }
 }
 
 const Swatches = ({ label, colours, value, onPick, none }) => (
@@ -138,7 +148,7 @@ export const Devices = ({ brand, fonts, source }) => {
       read.then(async (url) => {
         if (!live) return
         setLoaded((state) => ({ ...state, [key]: url }))
-        if (key.startsWith('brand:') && !/^devices\//.test(path)) { try { const edge = edgeColour(await loadImage(url)); if (live && edge) setEdges((state) => ({ ...state, [path]: edge })) } catch { /* the bar stays white */ } }
+        if (key.startsWith('brand:') && !/^devices\//.test(path)) { try { const found = edgeColours(await loadImage(url)); if (live && found.edge) setEdges((state) => ({ ...state, [path]: found })) } catch { /* the bar stays white */ } }
       }, () => live && setLoaded((state) => ({ ...state, [key]: null })))
     }
     return () => { live = false }
@@ -185,9 +195,9 @@ export const Devices = ({ brand, fonts, source }) => {
           const raw = slot.screen.kind === 'upload' ? slot.screen.upload?.dataUrl
             : slot.screen.kind === 'file' ? loaded[`brand:${slot.screen.file}`]
               : slot.screen.kind === 'brand' ? brandScreen({ logos, ground: primary, width: w, height: h }) : null
-          const edge = slot.screen.kind === 'upload' ? slot.screen.upload?.edge : slot.screen.kind === 'file' ? edges[slot.screen.file] : slot.screen.kind === 'brand' ? primary : '#101114'
+          const strips = slot.screen.kind === 'upload' ? slot.screen.upload : slot.screen.kind === 'file' ? edges[slot.screen.file] : slot.screen.kind === 'brand' ? { edge: primary, foot: primary } : { edge: '#101114', foot: '#101114' }
           const screen = screenHref({ device, turned, href: raw, fit: slot.screen.fit, ground: slot.screen.fit === 'contain' ? '#000000' : '#101114', type,
-            status: barred ? { colour: edge ?? '#ffffff', time: project.clock.time, date: project.clock.date } : null })
+            status: barred ? { colour: strips?.edge ?? '#ffffff', foot: strips?.foot ?? strips?.edge ?? '#ffffff', time: project.clock.time, date: project.clock.date } : null })
           return { device, finish: slot.finish, turned: slot.turned, href: screen.href, inline: screen.inline, fit: screen.fit, ground: '#101114', frameHref: device.frame ? loaded[`${device.brand ? 'brand' : 'set'}:${device.frame.image}`] : undefined }
         })
       })
@@ -317,6 +327,9 @@ export const Devices = ({ brand, fonts, source }) => {
             const turned = slot.turned && Boolean(device.rotates)
             const barred = slot.status && hasStatusBar(device)
             const [w, h] = contentSize(device, { turned, status: barred })
+            const shot = slot.screen.kind === 'upload' ? slot.screen.upload : null
+            // A screenshot the shape of the whole screen does not fit between the bars: say what is lost.
+            const lost = barred && shot?.width && slot.screen.fit === 'cover' ? Math.round(shot.height * (w / shot.width) - h) : 0
             const set = setOf(device)
             const options = Object.entries(catalog).filter(([, entry]) => setOf(entry) === set)
               .map(([value, entry]) => ({ value, label: entry.label, title: entry.note, group: entry.maker ?? CATEGORIES[entry.category], order: Object.keys(CATEGORIES).indexOf(entry.category) }))
@@ -355,11 +368,12 @@ export const Devices = ({ brand, fonts, source }) => {
                   options={[{ value: 'cover', label: 'Fill', title: 'Fills the screen from the top; anything beyond it is cropped' }, { value: 'contain', label: 'Fit', title: 'Shows the whole image, with bars where it does not reach' }]} />}
                 {hasStatusBar(device) && <label className="devices__check">
                   <input type="checkbox" checked={slot.status} onChange={(event) => changeSlot(index, { status: event.target.checked })} />
-                  <span>Status bar: the time, signal and battery above the screenshot, clear of the camera</span>
+                  <span>Status bar: the time, signal and battery above the screenshot, and the home bar below it</span>
                 </label>}
                 <p className="field__hint">{slot.screen.kind === 'upload' && slot.screen.upload
                   ? `${slot.screen.upload.name}${slot.screen.upload.width ? ` · ${slot.screen.upload.width} × ${slot.screen.upload.height}` : ''}. `
-                  : ''}A screenshot taken at {w} × {h}, or the same shape, fills {barred ? 'the screen below the status bar' : 'this screen'} exactly.{device.css ? ' This frame is drawn in CSS: it exports as PNG from Chrome, Edge or Firefox.' : ''}</p>
+                  : ''}A screenshot taken at {w} × {h}, or the same shape, fills {barred ? 'the screen between the status bar and the bar at its foot' : 'this screen'} exactly.{device.css ? ' This frame is drawn in CSS: it exports as PNG from Chrome, Edge or Firefox.' : ''}</p>
+                {lost > 12 && <p className="notice devices__lost" role="status">This screenshot is taller than the space between the bars, so its bottom {lost} px are cropped. Take it at {w} × {h}, choose <strong>Fit</strong>, or untick the status bar.</p>}
               </div>
             )
           })}

@@ -299,15 +299,16 @@ test('an image frame and a CSS frame are drawn by their own means', () => {
 
 test('a status bar sits over the screenshot, which starts below it, clear of the camera', () => {
   assert.ok(hasStatusBar(DEVICES['phone-island']) && hasStatusBar(DEVICES['tablet-11']) && !hasStatusBar(DEVICES['laptop-14']) && !hasStatusBar(DEVICES['watch-round']))
-  assert.deepEqual(insetOf(DEVICES['phone-island']), { top: 59, left: 0 })
-  assert.deepEqual(insetOf(DEVICES['phone-island'], true), { top: 0, left: 59 }, 'on its side the cutout\'s side is kept clear instead')
-  assert.deepEqual(insetOf(DEVICES['phone-classic'], true), { top: 0, left: 0 }, 'a phone without a cutout keeps nothing')
-  assert.deepEqual(insetOf(DEVICES['tablet-11'], true), { top: 24, left: 0 }, 'a tablet keeps its bar either way')
-  assert.deepEqual(insetOf(DEVICES['monitor-27']), { top: 0, left: 0 })
+  assert.deepEqual(insetOf(DEVICES['phone-island']), { top: 59, left: 0, bottom: 34 })
+  assert.deepEqual(insetOf(DEVICES['phone-island'], true), { top: 0, left: 59, bottom: 21 }, 'on its side the cutout\'s side is kept clear instead')
+  assert.deepEqual(insetOf(DEVICES['phone-classic'], true), { top: 0, left: 0, bottom: 0 }, 'a phone with a home button keeps nothing')
+  assert.deepEqual(insetOf(DEVICES['phone-classic']), { top: 20, left: 0, bottom: 0 }, 'and has no bar at its foot')
+  assert.deepEqual(insetOf(DEVICES['tablet-11'], true), { top: 24, left: 0, bottom: 20 }, 'a tablet keeps its bars either way')
+  assert.deepEqual(insetOf(DEVICES['monitor-27']), { top: 0, left: 0, bottom: 0 })
   assert.ok(insetOf(SET_DEVICES['odf-google-pixel-9']).top > 20, 'a set\'s phone gets a bar in proportion')
-  assert.deepEqual(contentSize(DEVICES['phone-island']), [393, 793])
+  assert.deepEqual(contentSize(DEVICES['phone-island']), [393, 759])
   assert.deepEqual(contentSize(DEVICES['phone-island'], { status: false }), [393, 852])
-  assert.deepEqual(contentSize(DEVICES['phone-island'], { turned: true }), [793, 393])
+  assert.deepEqual(contentSize(DEVICES['phone-island'], { turned: true }), [793, 372])
 
   const device = DEVICES['phone-island']
   const svg = screenSvg({ device, href: PNG, status: { colour: '#ffffff', time: '9:41', date: 'Fri 13 Nov' } })
@@ -316,6 +317,11 @@ test('a status bar sits over the screenshot, which starts below it, clear of the
   assert.deepEqual(pixel(image, 40, 6), [255, 255, 255, 255], 'the bar')
   assert.deepEqual(pixel(image, 196, 30), [255, 255, 255, 255], 'nothing of the screenshot where the island is')
   assert.deepEqual(pixel(image, 196, 70), [255, 0, 0, 255], 'the screenshot below it')
+  assert.deepEqual(pixel(image, 196, 59), [255, 255, 255, 255], 'the bar reaches a pixel into the screenshot, so no line shows between them')
+  assert.deepEqual([pixel(image, 196, 810), pixel(image, 40, 835)], [[255, 0, 0, 255], [255, 255, 255, 255]], 'and the screenshot stops above the strip at the foot')
+  assert.ok(pixel(image, 196, 835).slice(0, 3).every((channel) => channel < 140), 'where the home bar is, on its own')
+  const footed = render(screenSvg({ device, href: PNG, status: { colour: '#ffffff', foot: '#0b2b4a', time: '9:41' } }), 393)
+  assert.deepEqual(pixel(footed, 40, 835), [11, 43, 74, 255], 'the foot takes its own colour')
   assert.deepEqual(pixel(image, 347, 33).slice(0, 3).every((channel) => channel < 90), true, 'the battery, in ink')
   // The ink follows the bar: light on dark.
   assert.ok(screenSvg({ device, href: PNG, status: { colour: '#0b2b4a', time: '9:41' } }).includes('fill="#ffffff">9:41'))

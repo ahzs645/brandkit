@@ -1,7 +1,8 @@
 // What is on a device's screen, as one image the size of the screen: the screenshot, and, on a
 // phone or tablet, the status bar a real device would draw over it (the time, signal, battery).
 // The screenshot is set below the status bar, so nothing in it sits under a camera cutout; on a
-// phone turned on its side the bar goes and the cutout's side is kept clear instead.
+// phone turned on its side the bar goes and the cutout's side is kept clear instead. The bar at
+// the foot of a gesture phone or tablet has a strip of its own below the screenshot.
 //
 // A screenshot of a web page or an app is the page alone: the bar above it is the device's, and
 // a mockup without it reads as a picture pasted onto glass.
@@ -19,23 +20,30 @@ const luminance = (value) => {
 /** Whether a device has a status bar to show: phones and tablets do. */
 export const hasStatusBar = (device) => device.category === 'phone' || device.category === 'tablet'
 
+const NONE = Object.freeze({ top: 0, left: 0, bottom: 0 })
+
 /**
- * The part of a screen its device keeps for itself, in the screen's own pixels: `top` for the
- * status bar, or, for a phone on its side, `left` for the camera cutout.
+ * The parts of a screen its device keeps for itself, in the screen's own pixels: `top` for the
+ * status bar, `bottom` for the bar a gesture phone or tablet draws at the foot of the screen,
+ * and, for a phone on its side, `left` for the camera cutout. The screenshot goes in what is
+ * left, so neither bar sits on top of it.
  */
 export const insetOf = (device, turned = false) => {
-  if (!hasStatusBar(device)) return { top: 0, left: 0 }
+  if (!hasStatusBar(device)) return NONE
   const [width] = device.screen
-  const top = device.inset ?? Math.round(width * (device.category === 'phone' ? 0.125 : 0.03))
-  if (turned && device.rotates && device.category === 'phone') return { top: 0, left: ['home', undefined, null].includes(device.cutout) && !device.frame && !device.css ? 0 : top }
-  return { top, left: 0 }
+  const phone = device.category === 'phone'
+  const buttoned = device.cutout === 'home'
+  const top = device.inset ?? Math.round(width * (phone ? 0.125 : 0.03))
+  const bottom = device.foot ?? (buttoned ? 0 : phone ? Math.round(width * 0.087) : 20)
+  if (turned && device.rotates && phone) return { top: 0, left: buttoned ? 0 : top, bottom: Math.round(bottom * 0.62) }
+  return { top, left: 0, bottom }
 }
 
 /** The size a screenshot should be to fill what is left of the screen. */
 export const contentSize = (device, { turned = false, status = true } = {}) => {
   const [w, h] = turned && device.rotates ? [device.screen[1], device.screen[0]] : device.screen
-  const inset = status ? insetOf(device, turned) : { top: 0, left: 0 }
-  return [w - inset.left, h - inset.top]
+  const inset = status ? insetOf(device, turned) : NONE
+  return [w - inset.left, h - inset.top - inset.bottom]
 }
 
 const liveText = ({ text, x, baseline, size, anchor, fill, weight }) => `<text x="${n(x)}" y="${n(baseline)}" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-weight="${weight}" font-size="${n(size)}" text-anchor="${anchor}" fill="${fill}">${esc(text)}</text>`
@@ -52,7 +60,8 @@ const indicators = (x, cy, s, ink) => {
 
 /**
  * A screen as an SVG document: `href` (the screenshot) under a status bar. `status` is null for
- * a plain screen, or `{ colour, time, date }`; `type` draws a line of text (the app passes one
+ * a plain screen, or `{ colour, foot, time, date }` (the colours of the strips above and below
+ * the screenshot); `type` draws a line of text (the app passes one
  * that outlines it in the brand's face) and defaults to live text in the system face.
  */
 export const screenSvg = (options) => {
@@ -63,10 +72,11 @@ export const screenSvg = (options) => {
 /** The same screen as its size and the markup inside it, to set straight into a scene. */
 export const screenParts = ({ device, turned = false, href, fit = 'cover', ground = '#101114', status = null, type = liveText }) => {
   const [width, height] = turned && device.rotates ? [device.screen[1], device.screen[0]] : device.screen
-  const inset = status ? insetOf(device, turned) : { top: 0, left: 0 }
+  const inset = status ? insetOf(device, turned) : NONE
   const bar = isHex(status?.colour) ? status.colour : '#ffffff'
+  const foot = isHex(status?.foot) ? status.foot : bar
   const ink = luminance(bar) > 0.4 ? '#000000' : '#ffffff'
-  const image = href ? `<image href="${esc(href)}" x="${n(inset.left)}" y="${n(inset.top)}" width="${n(width - inset.left)}" height="${n(height - inset.top)}" preserveAspectRatio="${fit === 'contain' ? 'xMidYMid meet' : 'xMidYMin slice'}"/>` : ''
+  const image = href ? `<image href="${esc(href)}" x="${n(inset.left)}" y="${n(inset.top)}" width="${n(width - inset.left)}" height="${n(height - inset.top - inset.bottom)}" preserveAspectRatio="${fit === 'contain' ? 'xMidYMid meet' : 'xMidYMin slice'}"/>` : ''
   let over = ''
   if (status && inset.top) {
     const phone = device.category === 'phone'
@@ -76,13 +86,22 @@ export const screenParts = ({ device, turned = false, href, fit = 'cover', groun
     const baseline = cy + size * 0.36
     const pad = Math.max(12, width * 0.04)
     const words = phone ? status.time ?? '' : [status.time, status.date].filter(Boolean).join('   ')
-    if (words) over += type(eared ? { text: words, x: width * 0.17, baseline, size, anchor: 'middle', fill: ink, weight: 600 } : { text: words, x: pad, baseline, size, anchor: 'start', fill: ink, weight: 600 })
-    over += indicators(eared ? width * 0.83 + 35 * (size / 17) : width - pad, cy, size / 17, ink)
-    // The bar a gesture phone draws at the foot of the screen, over the page.
-    if (phone && device.cutout !== 'home') over += `<rect x="${n(width / 2 - Math.min(70, width * 0.18))}" y="${n(height - 9)}" width="${n(Math.min(140, width * 0.36))}" height="5" rx="2.5" fill="${ink === '#000000' ? '#000000' : '#ffffff'}" fill-opacity="0.55"/>`
+    // Beside a cutout the time and the indicators sit in the middle of what is left on each side:
+    // a notch is wider than an island, so they sit further out.
+    const ear = device.cutout === 'notch' ? 0.145 : 0.17
+    if (words) over += type(eared ? { text: words, x: width * ear, baseline, size, anchor: 'middle', fill: ink, weight: 600 } : { text: words, x: pad, baseline, size, anchor: 'start', fill: ink, weight: 600 })
+    over += indicators(eared ? width * (1 - ear) + 35 * (size / 17) : width - pad, cy, size / 17, ink)
   }
-  const kept = status ? `${inset.top ? `<rect width="${n(width)}" height="${n(inset.top)}" fill="${bar}"/>` : ''}${inset.left ? `<rect width="${n(inset.left)}" height="${n(height)}" fill="${bar}"/>` : ''}` : ''
-  return { width, height, inner: `<rect width="${width}" height="${height}" fill="${ground}"/>${kept}${image}${over}` }
+  // The bar at the foot of the screen, in its own strip below the screenshot.
+  if (status && inset.bottom) {
+    const footInk = luminance(foot) > 0.4 ? '#000000' : '#ffffff'
+    const long = Math.min(140, width * (device.category === 'phone' && !turned ? 0.36 : 0.22))
+    over += `<rect x="${n((width + inset.left) / 2 - long / 2)}" y="${n(height - inset.bottom / 2 - 2.5)}" width="${n(long)}" height="5" rx="2.5" fill="${footInk}" fill-opacity="0.6"/>`
+  }
+  // The device's own strips are drawn over the screenshot and a pixel into it, so no line shows
+  // where they meet: not a seam, and not a stray edge the screenshot came with.
+  const kept = status ? `${inset.top ? `<rect width="${n(width)}" height="${n(inset.top + 1)}" fill="${bar}"/>` : ''}${inset.left ? `<rect width="${n(inset.left + 1)}" height="${n(height)}" fill="${bar}"/>` : ''}${inset.bottom ? `<rect y="${n(height - inset.bottom - 1)}" width="${n(width)}" height="${n(inset.bottom + 1)}" fill="${foot}"/>` : ''}` : ''
+  return { width, height, inner: `<rect width="${width}" height="${height}" fill="${ground}"/>${image}${kept}${over}` }
 }
 
 /**
@@ -92,7 +111,7 @@ export const screenParts = ({ device, turned = false, href, fit = 'cover', groun
  */
 export const screenHref = (options) => {
   const { device, turned = false, href, status } = options
-  const inset = status ? insetOf(device, turned) : { top: 0, left: 0 }
+  const inset = status ? insetOf(device, turned) : NONE
   if (device.css) return { href: svgDataUrl(screenSvg(options)), fit: 'cover' }
   if (!inset.top && !inset.left) return { href, fit: options.fit ?? 'cover' }
   return { inline: screenParts(options), fit: 'cover' }

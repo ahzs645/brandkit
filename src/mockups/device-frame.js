@@ -41,7 +41,7 @@ const cutouts = (device, finish, { sx, sy, sw, sh, bt, bb }) => {
     case 'island': out += `<rect x="${n(mid - sw * 0.16)}" y="${n(sy + 12)}" width="${n(sw * 0.32)}" height="36" rx="18" fill="#000000"/>`; break
     case 'punch': out += lens(mid, sy + 24, 9); break
     case 'punch-corner': out += lens(sx + sw - 40, sy + 30, 9); break
-    case 'notch': out += `<path d="${roundedPath(mid - sw * 0.26, sy - 1, sw * 0.52, 32, [0, 0, 18, 18])}" fill="${finish.bezel}"/>`; break
+    case 'notch': out += `<path d="${roundedPath(mid - sw * 0.21, sy - 1, sw * 0.42, 32, [0, 0, 18, 18])}" fill="${finish.bezel}"/>`; break
     case 'camera': out += `<circle cx="${n(mid)}" cy="${n(sy - bt / 2)}" r="3.5" fill="${finish.id === 'white' ? '#3a3c40' : '#23262b'}"/>`; break
     case 'home': out += `<circle cx="${n(mid)}" cy="${n(sy + sh + bb / 2)}" r="26" fill="none" stroke="${finish.detail}" stroke-width="3"/><rect x="${n(mid - 32)}" y="${n(sy - bt / 2 - 3)}" width="64" height="6" rx="3" fill="${finish.detail}"/>`; break
     default:

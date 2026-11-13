@@ -41,3 +41,4 @@
 .devices__clock { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .devices__controls input[type='text'] { width: 100%; min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); color: var(--ink); }
 .devices__credits { display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: flex-end; }
+.devices__lost { margin: 0; padding: 8px 10px; font-size: 12px; border-radius: var(--radius-sm); }

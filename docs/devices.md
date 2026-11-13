@@ -25,7 +25,7 @@ drawn in the browser; no screenshot leaves the machine.
 | **Orientation** | Phones and tablets stand upright or on their side. A turned phone is the same phone: its size in the scene does not change. |
 | **Scenes** | One device; desktop and phone; desktop, tablet and phone; a laptop with a phone in front; a laptop with a tablet and a phone in front; two side by side; three phones. |
 | **Screens** | A screenshot (PNG, JPEG or WebP, up to 12 MB), a file from the brand's own mockup, a **brand screen** (the logo that reads best on the brand's primary colour), or empty. A screenshot fills the screen from the top, or fits whole. |
-| **Status bar** | On a phone or tablet, the time, signal and battery are drawn above the screenshot, which starts below them, clear of the camera cutout. One clock for the scene, which you can set. |
+| **Status bar** | On a phone or tablet, the time, signal and battery are drawn above the screenshot and the home bar below it, each in a strip of its own, so neither sits on the screenshot and nothing in it is under the camera. One clock for the scene, which you can set. |
 | **Picture** | Transparent, white, or any of the brand's colours behind; a soft shadow under each device; a canvas that fits the devices or is 16:9, 4:3, square or 4:5. |
 | **Keeping work** | A draft kept in the browser for each brand, **Save mockup** and **Open…** as a JSON file, **Export PNG** at 1600, 2400 or 3840 px wide and **Export SVG**. |
 | **Brand mockups** | A brand can define its own mockups in `brand.json`, with its own screenshots. The tab lists them and opens on the first. |
@@ -98,20 +98,25 @@ CSS frame's size and screen from how the browser lays it out.
 ## The status bar
 
 A screenshot of an app or a page is the page alone. On a real phone the top of the screen is the
-device's: the time, the signal, the battery, and the camera cutout. So on a phone or tablet the
-tab draws a status bar and sets the screenshot **below** it; nothing in the screenshot sits under
-the camera.
+device's: the time, the signal, the battery, and the camera cutout; on a phone without a home
+button, so is a strip at the foot, for the home bar. So on a phone or tablet the tab draws both
+and sets the screenshot **between** them: nothing in it sits under the camera, and the home bar
+does not lie across the app's own controls.
 
-- The bar takes the colour along the top edge of the screenshot, so it reads as part of the page,
-  and its lettering is dark or light to suit. On a brand screen it is the brand's colour.
+- Each strip takes the colour just inside the screenshot's edge beside it (the commonest colour
+  there, so a hairline or a few icons do not tint it), and reaches a pixel into the screenshot,
+  so no line shows where they meet. Lettering is dark or light to suit. On a brand screen the
+  strips are the brand's colour.
 - The time is set in the brand's own face where it has the figures. **Time in the status bar**
   and **Date** in the Scene settings change it; a phone shows the time, a tablet the time and date.
 - A phone on its side has no bar: the side the camera is on is kept clear instead.
 - Untick **Status bar** on a device to use the whole screen, for a screenshot that already
   includes one.
 
-The tab says what size of screenshot fills the screen as it stands: 393 × 793 for the island
-phone with its bar, 393 × 852 without.
+The tab says what size of screenshot fills the space as it stands: 393 × 759 for the island phone
+between its bars, 393 × 852 without them. A screenshot the shape of the whole screen is taller
+than that space; the tab says how much of its foot is cropped, and offers the three ways out:
+take it at the size shown, choose **Fit**, or untick the status bar.
 
 ## Using the tab
 
