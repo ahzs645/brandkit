@@ -112,7 +112,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   const profile = profileOf(ctx, publication)
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
   const d = await import('docx')
-  const { Document, Packer, Paragraph, TextRun, Header, Footer, ImageRun, Table, TableRow, TableCell, TableLayoutType, WidthType, BorderStyle, AlignmentType, PageNumber, Tab, TabStopType, SectionType, LevelFormat, HeightRule, VerticalAlignTable } = d
+  const { Document, Packer, Paragraph, TextRun, Header, Footer, ImageRun, Table, TableRow, TableCell, TableLayoutType, WidthType, BorderStyle, AlignmentType, PageNumber, Tab, TabStopType, SectionType, LevelFormat, HeightRule, VerticalAlignTable , LineRuleType } = d
   const logo = publication.pages[0]?.cover ? null : logoOf(ctx, profile, publication.affiliation)
   if (logo && typeof png !== 'function') throw new Error('A PNG renderer is required to put the brand logo in Word.')
   const logoBytes = logo ? await png(logo.svg, Math.round(logo.width * 200 / 25.4)) : null
@@ -157,13 +157,16 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
           left: column === 0 ? line(look.frame?.outer) : line(look.frame?.vertical),
           right: column === last ? line(look.frame?.outer) : none
         },
-        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), runOf(isHeader ? look.header : column === 0 ? look.first : null)) })]
+        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), { ...runOf(isHeader ? look.header : column === 0 ? look.first : null),
+          // A value still to confirm reads as a gap, not as an answer.
+          ...(!isHeader && column > 0 && block.pending && textOf(row[column]).trim() === block.pending ? { color: hex(profile.colours.muted) } : {}) }) })]
       })
     }) })
-    const rows = [...(headers.length ? [headers] : []), ...block.rows]
+    const printed = block.showHeaders === false ? [] : headers
+    const rows = [...(printed.length ? [printed] : []), ...block.rows]
     return [new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(printableWidth), type: WidthType.DXA }, columnWidths: widths,
       borders: { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none },
-      rows: rows.map((row, i) => rowOf(row, Boolean(headers.length) && i === 0, headers.length ? i - 1 : i, i === 0, i === rows.length - 1))
+      rows: rows.map((row, i) => rowOf(row, Boolean(printed.length) && i === 0, printed.length ? i - 1 : i, i === 0, i === rows.length - 1))
     }), ...(block.caption ? [captionParagraph(block.caption)] : [paragraph('', 'BodyText', { spacing: { after: 80 } })])]
   }
   const blockChildren = async (block, listId) => {
@@ -192,7 +195,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     }
     const bytes = image.bytes
     const alt = block.alt || caption || (block.placeholder ? 'Screenshot placeholder' : 'Publication figure')
-    return [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: Boolean(caption), spacing: { before: 80, after: 0 }, children: [new ImageRun({ type: image.type, data: bytes,
+    return [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: Boolean(caption), spacing: { before: 80, after: 0, line: 240, lineRule: LineRuleType.AUTO }, children: [new ImageRun({ type: image.type, data: bytes,
       transformation: { width: Math.round(size.width * 96 / 25.4), height: Math.round(size.height * 96 / 25.4) }, altText: { name: alt, title: caption || alt, description: alt } })] }),
     ...(caption ? [captionParagraph(caption)] : [])]
   }
@@ -200,7 +203,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   const sections = []
   for (const [index, page] of publication.pages.entries()) {
     const children = []
-    if (index === 0 && logo) children.push(new Paragraph({ keepNext: true, spacing: { after: mmTwips(logo.clearSpaceMm) }, children: [new ImageRun({ type: 'png', data: logoBytes,
+    if (index === 0 && logo) children.push(new Paragraph({ keepNext: true, spacing: { after: mmTwips(logo.clearSpaceMm), line: 240, lineRule: LineRuleType.AUTO }, children: [new ImageRun({ type: 'png', data: logoBytes,
       transformation: { width: Math.round(logo.width * 96 / 25.4), height: Math.round(logo.height * 96 / 25.4) }, altText: { name: logo.alt, title: logo.alt, description: logo.alt } })] }))
     if (index === 0 && !page.cover && publication.affiliation?.department) {
       const { department, subdepartment } = publication.affiliation
@@ -271,7 +274,11 @@ export const publicationHtml = (ctx, publication) => {
     if (block.type === 'table') {
       const total = block.widths?.reduce((sum, width) => sum + width, 0)
       const columns = total ? `<colgroup>${block.widths.map((width) => `<col style="width:${100 * width / total}%">`).join('')}</colgroup>` : ''
-      return `<table class="s-TableText t-${tableStyle}">${block.caption ? `<caption class="s-Caption">${escapeHtml(block.caption)}</caption>` : ''}${columns}${block.headers?.length ? `<thead><tr>${block.headers.map((cell) => `<th scope="col">${escapeHtml(textOf(cell))}</th>`).join('')}</tr></thead>` : ''}<tbody>${block.rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(textOf(cell)).replace(/\n/g, '<br>')}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+      return `<table class="s-TableText t-${tableStyle}">${block.caption ? `<caption class="s-Caption">${escapeHtml(block.caption)}</caption>` : ''}${columns}${block.headers?.length && block.showHeaders !== false ? `<thead><tr>${block.headers.map((cell) => `<th scope="col">${escapeHtml(textOf(cell))}</th>`).join('')}</tr></thead>` : ''}<tbody>${block.rows.map((row) => `<tr>${row.map((cell, column) => {
+        const content = escapeHtml(textOf(cell)).replace(/\n/g, '<br>')
+        if (column === 0 && block.rowHeaders) return `<th scope="row">${content}</th>`
+        return `<td${column > 0 && block.pending && textOf(cell).trim() === block.pending ? ' class="pending"' : ''}>${content}</td>`
+      }).join('')}</tr>`).join('')}</tbody></table>`
     }
     const image = block.placeholder ? null : imageSource(block.src)
     const size = figureSize(profile, block, image)

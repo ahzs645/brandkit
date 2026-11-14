@@ -510,6 +510,9 @@ export const validatePublication = (publication) => {
         const columns = Array.isArray(block.headers) ? block.headers.length : 0
         need(columns > 0 && block.headers.every((cell) => typeof cell === 'string'), `${where} table needs text headers.`)
         need(Array.isArray(block.rows) && block.rows.every((row) => Array.isArray(row) && row.length === columns && row.every((cell) => typeof cell === 'string' || (typeof cell === 'number' && Number.isFinite(cell)))), `${where} table rows must match the headers and contain text or finite numbers.`)
+        if (block.showHeaders != null) need(typeof block.showHeaders === 'boolean', `${where} table showHeaders must be true or false.`)
+        if (block.rowHeaders != null) need(typeof block.rowHeaders === 'boolean', `${where} table rowHeaders must be true or false.`)
+        if (block.pending != null) need(typeof block.pending === 'string' && block.pending.trim() && block.pending.length <= 60, `${where} table pending must be a short text.`)
         if (block.widths != null) need(Array.isArray(block.widths) && block.widths.length === columns && block.widths.every((value) => finite(value, 0.001, 10000)), `${where} table widths must be positive relative weights matching the columns.`)
       } else if (block.type === 'figure') {
         for (const key of ['alt', 'caption', 'provenance']) if (block[key] != null) need(typeof block[key] === 'string', `${where} figure ${key} must be text.`)

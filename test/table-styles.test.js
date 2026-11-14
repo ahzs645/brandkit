@@ -98,3 +98,38 @@ test('a handover build can try a table style on every publication, and refuses a
   for (const publication of Object.values(built)) assert.equal(publication.profile.tables.style, 'ledger')
   assert.throws(() => handoverPublications(record, { ...options, tableStyle: 'zebra' }), /Unknown table style/)
 })
+
+test('a list of facts prints no header row, sets its labels as row headers and greys what is still to confirm', async () => {
+  const facts = model('ruled')
+  facts.pages[0].blocks = [{ type: 'table', headers: ['Item', 'Detail'], rows: [['Website', 'https://example.org'], ['Renewal', 'To confirm']], showHeaders: false, rowHeaders: true, pending: 'To confirm' }]
+  assert.deepEqual(validatePublication(facts), [])
+  const document = parse(unzipSync(await publicationDocx(ctx, facts, renderer))['word/document.xml'])
+  const rows = elements(elements(document, 'tbl')[0], 'tr')
+  assert.equal(rows.length, 2, 'no header row in Word')
+  const muted = documentProfile(brand).colours.muted.slice(1)
+  const colourOf = (row, column) => { const props = elements(elements(rows[row], 'tc')[column], 'rPr')[0]; return props ? attr(elements(props, 'color')[0], 'val') : undefined }
+  assert.equal(colourOf(1, 1), muted, 'a value to confirm is muted')
+  assert.notEqual(colourOf(0, 1), muted)
+  const html = publicationHtml(ctx, facts)
+  assert.doesNotMatch(html, /<thead>/)
+  assert.match(html, /<th scope="row">Website<\/th>/)
+  assert.match(html, /<td class="pending">To confirm<\/td>/)
+  for (const [key, value] of [['showHeaders', 'no'], ['rowHeaders', 1], ['pending', '']]) {
+    const bad = structuredClone(facts)
+    bad.pages[0].blocks[0][key] = value
+    assert.match(validatePublication(bad).join('\n'), new RegExp(`table ${key}`))
+  }
+})
+
+test('the handover sets its services as one table, a column per service', () => {
+  const record = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+  const { welcome } = handoverPublications(record, { providerBrand: { ...brand, id: record.provider.brandId }, clientBrand: { ...brand, id: record.client.brandId } })
+  const services = welcome.pages.filter(page => page.id.startsWith('services-'))
+  const tables = services.flatMap(page => page.blocks.filter(block => block.type === 'table'))
+  assert.equal(tables.length, services.length, 'one table per page')
+  assert.deepEqual(tables[0].headers, ['Responsibility', ...record.services.slice(0, 2).map(service => service.name)])
+  assert.deepEqual(tables[0].rows.map(row => row[0]), ['Account owner', 'Managed by', 'Your access', 'Billed by', 'Cost', 'Renews'])
+  const details = welcome.pages.find(page => page.id === 'welcome').blocks.find(block => block.type === 'table')
+  assert.equal(details.showHeaders, false)
+  assert.equal(details.pending, 'To confirm')
+})

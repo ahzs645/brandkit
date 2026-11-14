@@ -109,10 +109,12 @@ export const tableCss = (profile, brand, cssFont) => {
   const out = [
     `${t}{border-collapse:${look.radiusMm ? 'separate' : 'collapse'};border-spacing:0;width:100%;margin:4mm 0;${look.radiusMm ? `border-radius:${look.radiusMm}mm;overflow:hidden;background:${look.ground};` : ''}border-top:${rule(look.frame?.top ?? look.frame?.outer)};border-bottom:${rule(look.frame?.bottom ?? look.frame?.outer)};${look.frame?.outer ? `border-left:${rule(look.frame.outer)};border-right:${rule(look.frame.outer)};` : ''}}`,
     `${t} td,${t} th{padding:${p.y}mm ${p.x}mm;text-align:left;vertical-align:top;border:0;border-bottom:${rule(look.body.rule)};${look.frame?.vertical ? `border-left:${rule(look.frame.vertical)};` : ''}${look.body.fill ? `background:${look.body.fill};` : ''}}`,
-    `${t} th{${text(look.header)};${look.header.fill ? `background:${look.header.fill};` : ''}border-bottom:${rule(look.header.rule ?? look.body.rule)}}`,
-    `${t} tbody tr:last-child td{border-bottom:${look.frame?.bottom || look.radiusMm ? '0' : rule(look.body.rule)}}`,
-    ...(look.body.band ? [`${t} tbody tr:nth-child(even) td{background:${look.body.band}}`] : []),
-    ...(look.first ? [`${t} tbody td:first-child{${text(look.first)}}`] : []),
+    `${t} thead th{${text(look.header)};${look.header.fill ? `background:${look.header.fill};` : ''}border-bottom:${rule(look.header.rule ?? look.body.rule)}}`,
+    `${t} tbody tr:last-child>*{border-bottom:${look.frame?.bottom || look.radiusMm ? '0' : rule(look.body.rule)}}`,
+    ...(look.body.band ? [`${t} tbody tr:nth-child(even)>*{background:${look.body.band}}`] : []),
+    `${t} tbody th{font-weight:inherit}`,
+    ...(look.first ? [`${t} tbody tr>:first-child{${text(look.first)}}`] : []),
+    `${t} td.pending{color:${profile.colours.muted}}`,
     ...(p.flush ? [`${t} td:first-child,${t} th:first-child{padding-left:0}`, `${t} td:last-child,${t} th:last-child{padding-right:0}`] : []),
     `${t} caption{caption-side:bottom;text-align:left;margin-top:3mm!important}`,
     `${t} thead{display:table-header-group}${t} tr{break-inside:avoid}`

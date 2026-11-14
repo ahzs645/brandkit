@@ -158,7 +158,7 @@ print the metadata title a second time.
 | `heading` | `text`, optional `level` 1–3, optional style such as `title` |
 | `paragraph` | `text`, optional style such as `subtitle`, `label` or `caption` |
 | `list` | `items` as text, optional `ordered` boolean |
-| `table` | `headers`, rectangular `rows`, optional positive relative `widths`, optional `caption` |
+| `table` | `headers`, rectangular `rows`, optional positive relative `widths`, optional `caption`; `showHeaders: false` keeps the headers in the source but prints none (a list of facts), `rowHeaders: true` sets the first column as row headers, `pending` (such as `"To confirm"`) sets cells with exactly that text in the muted colour |
 | `figure` | Embedded PNG/JPEG `src` or `placeholder: true`, `alt`, `caption`, optional `provenance`, `widthMm`, `heightMm` |
 
 Source models may add, remove or reorder pages using these six page kinds. The six-page example

@@ -8,7 +8,10 @@ const value = (text, fallback = 'To confirm') => String(text ?? '').trim() || fa
 const h = (text, level = 1, style) => ({ type: 'heading', text, level, ...(style ? { style } : {}) })
 const p = (text, style) => ({ type: 'paragraph', text, ...(style ? { style } : {}) })
 const list = (items, ordered = false) => ({ type: 'list', items: [...items], ordered })
-const table = (headers, rows, widths) => ({ type: 'table', headers, rows, ...(widths ? { widths } : {}) })
+const PENDING = 'To confirm'
+const table = (headers, rows, widths) => ({ type: 'table', headers, rows, ...(widths ? { widths } : {}), pending: PENDING })
+/** A list of facts: a label and its value per row. Its column names stay in the source unprinted. */
+const facts = (headers, rows, widths) => ({ ...table(headers, rows, widths), showHeaders: false, rowHeaders: true })
 const page = (id, title, blocks, kind = 'content') => ({ id, title, kind, blocks })
 const chunks = (items, size) => Array.from({ length: Math.ceil(items.length / size) }, (_, i) => items.slice(i * size, (i + 1) * size))
 const accessNames = { invitation: 'Account invitation', password: 'Password sign-in', sso: 'Organization sign-in (SSO)', passwordless: 'Passwordless sign-in', 'managed-only': 'Changes requested through your provider', unconfirmed: 'To confirm' }
@@ -66,7 +69,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     p(`${client} · managed website welcome guide`, 'subtitle'),
     p('Keep this guide with your business records. It explains access, everyday requests, service responsibilities and where to get help.'),
     ...(draft ? [p(draftNote, 'caption')] : []),
-    table(['Your website', 'Details'], [
+    facts(['Your website', 'Details'], [
       ['Website address', value(record.site.url)],
       ['Website name', value(record.site.name)],
       ...(record.site.launchDate || draft ? [['Launch date', value(record.site.launchDate)]] : []),
@@ -81,7 +84,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
   welcome.pages.push(page('access', 'Getting started', [
     h('01 / Getting started'),
     p(managedOnly ? 'Your agreed access is through the managed service. Use the support route below for website changes.' : 'Use the permanent sign-in address below. Your account should belong to the named person who will use it.'),
-    table(['Access detail', 'Your information'], [
+    facts(['Access detail', 'Your information'], [
       ['Access method', accessNames[record.access.method]],
       ...(!managedOnly ? [['Sign-in address', value(record.site.loginUrl)], ['Username / account email', value(record.access.accountLabel)], ['Account role', value(record.access.role)]] : []),
       ...(record.access.method === 'invitation' ? [['Invitation sender', value(record.access.invitationSender)], ['Invitation expires', value(record.access.invitationExpiry)]] : []),
@@ -112,21 +115,24 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
   serviceGroups.forEach((group, i) => welcome.pages.push(page(`services-${i + 1}`, 'Services and responsibilities', [
     h(`03 / Services & responsibilities${i ? ' — continued' : ''}`),
     ...(!i ? [p('Keep account ownership, day-to-day management and billing clear. A blank fee or renewal entry means it still needs to be confirmed.')] : []),
-    ...(group.length ? group.flatMap(service => [
-      h(service.name, 2),
-      table(['Responsibility', 'Details'], [
-        ['Account owner / manager', `${value(service.accountOwner)} / ${value(service.managedBy)}`],
-        ['Client access', value(service.clientAccess)],
-        ['Billing / cost', `${value(service.billedBy)} / ${value(service.costText)}`],
-        ['Renewal', value(service.renewalDate)]
-      ], [1, 2.2]),
-      p(value(service.scope), 'caption')
-    ]) : [p('List the domain, hosting, website platform and any other services actually supplied.')])
+    // One table per page: a column for each service, a row for each responsibility, so who owns,
+    // runs and pays for what reads across and down.
+    ...(group.length ? [
+      { ...table(['Responsibility', ...group.map(service => value(service.name))], [
+        ['Account owner', ...group.map(service => value(service.accountOwner))],
+        ['Managed by', ...group.map(service => value(service.managedBy))],
+        ['Your access', ...group.map(service => value(service.clientAccess))],
+        ['Billed by', ...group.map(service => value(service.billedBy))],
+        ['Cost', ...group.map(service => value(service.costText))],
+        ['Renews', ...group.map(service => value(service.renewalDate))]
+      ], [1, ...group.map(() => 1.6)]), rowHeaders: true },
+      ...group.flatMap(service => [h(value(service.name), 3), p(value(service.scope), 'caption')])
+    ] : [p('List the domain, hosting, website platform and any other services actually supplied.')])
   ], 'comparison')))
 
   welcome.pages.push(page('support', 'Help and ongoing care', [
     h('04 / Help & ongoing care'),
-    table(['Contact', 'Details'], [
+    facts(['Contact', 'Details'], [
       ['Support', help], ...(record.provider.supportEmail || draft ? [['Support email', value(record.provider.supportEmail)]] : []),
       ['Hours', value(record.provider.hours)], ['Response target', value(record.provider.responseTarget)],
       ['Urgent issue', value(record.provider.urgentRoute)]
@@ -159,7 +165,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     h('Your website at a glance', 1, 'title'),
     p(`${client} · managed by ${provider}`, 'subtitle'),
     ...(draft ? [p(`${record.kind === 'example' ? 'EXAMPLE / ' : ''}DRAFT — confirm these details before use.`, 'caption')] : []),
-    table(['Keep handy', 'Your information'], [
+    facts(['Keep handy', 'Your information'], [
       ['Website', value(record.site.url)],
       ...(!managedOnly ? [['Sign in', value(record.site.loginUrl)], ['Username / email', value(record.access.accountLabel)]] : []),
       ['Access method', accessNames[record.access.method]],
@@ -187,7 +193,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
       p('A practical reference for your website, documents and print.', 'subtitle'),
       p(`Prepared by ${provider} for ${client}. This companion guide draws its artwork, palette and type roles from the supplied ${clientBrand.name} brand kit.`),
       ...(draft ? [p('Draft companion reference. Review it with the source brand kit before issue.', 'caption')] : []),
-      table(['Reference', 'Details'], [
+      facts(['Reference', 'Details'], [
         ['Brand', clientBrand.name], ['Identity version', value(brandVersion)],
         ['Prepared for', client], ['Prepared by', provider], ['Document edition', record.version || '1']
       ], [1, 2]),
@@ -198,7 +204,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
       ...suppliedFigure(brandFigures.logoVariants),
       h('Keep the artwork intact', 2),
       list(['Use the supplied vector or raster file; do not retype the wordmark.', 'Keep the artwork in proportion and leave all of the symbol and lettering visible.', 'Choose the supplied variant that remains clear against its background.']),
-      table(['Source rule', 'Requirement'], [
+      facts(['Source rule', 'Requirement'], [
         ['Clear space', value(clientBrand.lockup?.clearspaceRecommendation, 'Consult the source brand kit.')],
         ['Complete horizontal logo', (clientBrand.logoPolicy?.minimumWidthMm ?? clientBrand.lockup?.minimumHorizontalWidthMm) ? `At least ${clientBrand.logoPolicy?.minimumWidthMm ?? clientBrand.lockup.minimumHorizontalWidthMm} mm wide in print${clientBrand.lockup?.minimumHorizontalWidthPx ? ` / ${clientBrand.lockup.minimumHorizontalWidthPx} px on screen` : ''}.` : 'Consult the source brand kit.'],
         ['Symbol', clientBrand.logoPolicy?.standaloneSymbol === false ? 'Use only as part of the complete supplied logo.' : clientBrand.lockup?.minimumSymbolHeightMm ? `At least ${clientBrand.lockup.minimumSymbolHeightMm} mm high in print${clientBrand.lockup.minimumSymbolHeightPx ? ` / ${clientBrand.lockup.minimumSymbolHeightPx} px on screen` : ''}.` : 'Consult the source brand kit.']
@@ -208,7 +214,7 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     page('brand-colours', 'Colour and typography', [
       h('02 / Colour & typography'),
       ...suppliedFigure(brandFigures.palette),
-      table(['Colour', 'Digital value'], colours.map(([key, hex]) => [colourName(key), hex.toUpperCase()]), [1.5, 1]),
+      facts(['Colour', 'Digital value'], colours.map(([key, hex]) => [colourName(key), hex.toUpperCase()]), [1.5, 1]),
       p('These are the supplied digital colour values. Confirm a print proof with your printer for colour-critical work.', 'caption'),
       h('The type system', 2),
       table(['Use', 'Family', 'Weight', 'Tracking'], typeRows, [1, 1.4, .7, .8]),
