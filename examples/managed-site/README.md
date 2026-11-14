@@ -7,7 +7,7 @@ client can use the same document workflow with its own identity and service arra
 | File | Use |
 | --- | --- |
 | [`template.json`](template.json) | A blank record with `kind: "template"`, `status: "draft"` and unconfirmed access. Copy it for a new client. |
-| [`ddc-north.json`](ddc-north.json) | An illustrative First Form provider / DDC North client example, with `kind: "example"` and `status: "draft"`. |
+| [`ddc-north.json`](ddc-north.json) | Edition 2 of the illustrative First Form provider / DDC North client example, dated `2026-11-13` in the client's local date, with `kind: "example"` and `status: "draft"`. |
 
 The DDC North record uses `.example` URLs and email addresses. They are not working login or
 support destinations. Costs, account ownership, service hours, response commitments, care,
@@ -17,32 +17,48 @@ client delivery.
 
 ## Build the example
 
-Obtain the published First Form and DDC North packs from the
-[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json). Keep their
-definitions and assets together. The main [handover documentation](../../docs/managed-site-handover.md#sources-for-the-supplied-example)
-records the exact input versions and hashes used for this example.
+Use the First Form 2.0 pack built locally from the uploaded `design-system-main.zip`, together
+with the published DDC North 2.3 pack from the
+[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json). First Form
+2.0 is the identity version; `0.5.0` is the design-system package version. Keep each definition
+and its assets together.
+
+For First Form, select either the uploaded source's built `dist/brand.json` or the root
+`brand.json` in the extracted locally built `firstform.zip`. Do not select
+`source/kit/brand.json`, which contains the archived 1.0 identity. The main
+[handover documentation](../../docs/managed-site-handover.md#sources-for-the-supplied-example)
+records the source-upload and local-pack hashes, the 21 passing source-package checks and
+the DDC North pack provenance. The upload has no verified Git HEAD; its build records
+`sourceCommit: "uncommitted"` and is not presented as a published GitHub release.
 
 From the repository root, replace the input paths below with the extracted pack locations:
 
 ```sh
 node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
-  --provider /path/to/firstform/brand.json \
+  --provider /path/to/firstform-2.0/brand.json \
   --client /path/to/ddcnorth/brand.json \
   --out .handover/ddc-north \
   --paper letter \
-  --pdf \
-  --provider-logo /path/to/firstform/docs/brand-details-assets/logo-black.png
+  --cover \
+  --pdf
 ```
 
 The three publications are `welcome-guide`, `quick-start` and `brand-reference`. Each is
 exported as a `.publication.json` source model, printable `.html` and editable `.docx`.
-`--pdf` adds corresponding PDFs. The output also contains `index.html`, source snapshots and
-`manifest.json`.
+`--cover` adds a designed opening page to the welcome guide and a standalone `front-cover`
+publication in the same formats. `--pdf` adds corresponding PDFs, including `front-cover.pdf`.
+The output also contains `index.html`, source snapshots and `manifest.json`.
 
 First Form styles the welcome guide and quick-start sheet. DDC North styles the client brand
-reference. The supplied original First Form PNG is used because the published pack labels its
-vector wordmark as an approximation. This does not alter the provider's `brand.json` or redraw
-either logo.
+reference. The current First Form horizontal vector logo follows the supplied 2.0 master;
+the original 1.0 PNG override is no longer needed.
+
+The optional cover combines an Ash band, the exact horizontal First Form logo, a Black hero
+area, editable Sora wording, one supplied cube-F crop and the DDC North logo on a White plate.
+It is a new composition for review, not a previously approved brand application. It uses
+neither the derived stacked logo nor the micro mark. In Word, the title, subtitle, client name,
+date and edition remain native editable text; the artwork is separate. Keep Sora installed
+and check the page after editing.
 
 Open the output `index.html` to review the package. Print the quick-start sheet separately if
 the client would benefit from a desk reference. Check the Word and PDF pagination before

@@ -113,6 +113,40 @@ test('a real managed-site build preserves snapshots and safe assets without over
     await assert.rejects(buildHandover({ ...options, outDir: issueOut, issue: true }), /Only a client record/)
     await assert.rejects(access(issueOut), { code: 'ENOENT' })
   })
+
+  await t.test('the cover CLI exports a standalone native publication with traceable source metadata', async () => {
+    const coverOut = join(folder, 'delivery-with-cover')
+    const result = spawnSync(process.execPath, [join(root, 'bin/brandkit.mjs'), 'handover', recordPath,
+      '--provider', providerPath, '--client', clientPath, '--out', coverOut,
+      '--paper', 'letter', '--source-revision', 'cover-test-revision', '--cover'
+    ], { encoding: 'utf8', cwd: root, timeout: 60000 })
+    assert.equal(result.status, 0, result.stderr || result.error?.message)
+    const built = JSON.parse(await readFile(join(coverOut, 'manifest.json'), 'utf8'))
+    assert.equal(built.cover, 'brandkit/welcome-cover/1')
+    assert.equal(built.status, 'draft')
+    assert.equal(built.sourceRevision, 'cover-test-revision')
+    assert.equal(built.provider.sha256, digest(providerBytes))
+    assert.equal(built.client.sha256, digest(clientBytes))
+    assert.equal(built.provider.originalLogo, null, 'the selected provider definition supplies its primary artwork')
+    for (const path of ['front-cover.publication.json', 'front-cover.html', 'front-cover.docx', 'assets/cover-graphic.svg', 'assets/provider-logo-primary.svg']) {
+      const entry = built.files.find(file => file.path === path)
+      assert.ok(entry, path)
+      const bytes = await readFile(join(coverOut, path))
+      assert.equal(digest(bytes), entry.sha256, path)
+    }
+    const welcome = JSON.parse(await readFile(join(coverOut, 'welcome-guide.publication.json'), 'utf8'))
+    const front = JSON.parse(await readFile(join(coverOut, 'front-cover.publication.json'), 'utf8'))
+    assert.equal(front.pages.length, 1)
+    assert.deepEqual(front.pages[0], welcome.pages[0])
+    assert.equal(front.pages[0].cover.preparedBy, provider.name)
+    assert.match(front.pages[0].cover.status, /EXAMPLE · DRAFT/)
+    const page = await readFile(join(coverOut, 'front-cover.html'), 'utf8')
+    assert.match(page, /name="brandkit-source-revision" content="cover-test-revision"/)
+    assert.match(page, /Your website\.<br>Start here\./)
+    assert.doesNotMatch(page, /<img src=x|Prepared by Managed by/i)
+    assert.deepEqual(await readFile(join(coverOut, 'sources/provider-brand.json')), providerBytes)
+    assert.deepEqual(JSON.parse(await readFile(join(coverOut, 'sources/handover.json'), 'utf8')), record)
+  })
 })
 
 test('handover CLI explains usage and refuses duplicate or incomplete options', () => {
@@ -121,9 +155,13 @@ test('handover CLI explains usage and refuses duplicate or incomplete options', 
   const help = run(['--help'])
   assert.equal(help.status, 0)
   assert.match(help.stdout, /brandkit handover/)
+  assert.match(help.stdout, /--cover/)
   const duplicate = run(['record.json', '--pdf', '--pdf'])
   assert.notEqual(duplicate.status, 0)
   assert.match(duplicate.stderr, /Duplicate option: --pdf/)
+  const duplicateCover = run(['record.json', '--cover', '--cover'])
+  assert.notEqual(duplicateCover.status, 0)
+  assert.match(duplicateCover.stderr, /Duplicate option: --cover/)
   const incomplete = run(['record.json', '--provider'])
   assert.notEqual(incomplete.status, 0)
   assert.match(incomplete.stderr, /--provider needs a value/)

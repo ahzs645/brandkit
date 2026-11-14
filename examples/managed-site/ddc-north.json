@@ -3,8 +3,8 @@
   "id": "ddc-north-managed-site-example",
   "kind": "example",
   "status": "draft",
-  "version": "1",
-  "preparedAt": "2026-11-14",
+  "version": "2",
+  "preparedAt": "2026-11-13",
   "provider": {
     "name": "First Form",
     "brandId": "firstform",

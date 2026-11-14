@@ -3,6 +3,7 @@
 // document applications; a historical identity remains explicitly identified as a reconstruction.
 
 import { colour, fill, logoOptions, paintOptions } from './brand.js'
+import { validateWelcomeCover } from '../export/welcome-cover.js'
 
 export const DOCUMENTATION_VERSION = '1.1'
 
@@ -479,6 +480,11 @@ export const validatePublication = (publication) => {
     need(typeof page.id === 'string' && page.id && !pageIds.has(page.id), `${at} needs a unique id.`)
     pageIds.add(page.id)
     need(LAYOUTS.some((layout) => layout.id === page.kind), `${at} has an unknown layout kind.`)
+    if (page.cover != null) {
+      need(pageIndex === 0 && page.kind === 'cover', `${at} welcome cover must be the first page and use the cover layout.`)
+      need(Array.isArray(page.blocks) && page.blocks.length === 0, `${at} welcome cover must not also contain body blocks.`)
+      problems.push(...validateWelcomeCover(page.cover, profile).map(problem => `${at}: ${problem}`))
+    }
     need(Array.isArray(page.blocks), `${at} needs a blocks array.`)
     if (!Array.isArray(page.blocks)) return
     page.blocks.forEach((block, blockIndex) => {

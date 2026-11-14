@@ -6,6 +6,7 @@ import { officeFont } from '../engine/office.js'
 import { documentProfile, validatePublication } from '../engine/documentation.js'
 import { embeddedFonts, fontEmbeddingPermission, officeFontRequirements, officeStyleFonts, officeStyles } from './office.js'
 import { sanitizeSvg } from '../printer/svg.js'
+import { welcomeCoverDocx, welcomeCoverHtml } from './welcome-cover.js'
 
 const MM_PT = 72 / 25.4
 const mmTwips = (value) => Math.round(value * MM_PT * 20)
@@ -111,7 +112,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
   const d = await import('docx')
   const { Document, Packer, Paragraph, TextRun, Header, Footer, ImageRun, Table, TableRow, TableCell, TableLayoutType, WidthType, BorderStyle, AlignmentType, PageNumber, Tab, TabStopType, SectionType, LevelFormat, HeightRule, VerticalAlignTable } = d
-  const logo = logoOf(ctx, profile, publication.affiliation)
+  const logo = publication.pages[0]?.cover ? null : logoOf(ctx, profile, publication.affiliation)
   if (logo && typeof png !== 'function') throw new Error('A PNG renderer is required to put the brand logo in Word.')
   const logoBytes = logo ? await png(logo.svg, Math.round(logo.width * 200 / 25.4)) : null
   const printableWidth = contentWidth(profile)
@@ -177,16 +178,18 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     const children = []
     if (index === 0 && logo) children.push(new Paragraph({ keepNext: true, spacing: { after: mmTwips(logo.clearSpaceMm) }, children: [new ImageRun({ type: 'png', data: logoBytes,
       transformation: { width: Math.round(logo.width * 96 / 25.4), height: Math.round(logo.height * 96 / 25.4) }, altText: { name: logo.alt, title: logo.alt, description: logo.alt } })] }))
-    if (index === 0 && publication.affiliation?.department) {
+    if (index === 0 && !page.cover && publication.affiliation?.department) {
       const { department, subdepartment } = publication.affiliation
       if (!logo?.unit) children.push(paragraph(department, 'AffiliationDepartment', { keepNext: true, ...(!subdepartment ? { spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } } : {}) }))
       if (subdepartment) children.push(paragraph(subdepartment, 'AffiliationSubdepartment', { keepNext: true, spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } }))
     }
-    for (const block of pageBlocks(page)) children.push(...await blockChildren(block, ++listId))
+    if (page.cover) children.push(...await welcomeCoverDocx(ctx, profile, page.cover))
+    else for (const block of pageBlocks(page)) children.push(...await blockChildren(block, ++listId))
     sections.push({ properties: { type: SectionType.NEXT_PAGE,
       page: { size: { width: mmTwips(profile.paper.widthMm), height: mmTwips(profile.paper.heightMm) },
         margin: { top: mmTwips(profile.margins.topMm), right: mmTwips(profile.margins.rightMm), bottom: mmTwips(profile.margins.bottomMm), left: mmTwips(profile.margins.leftMm), header: mmTwips(8), footer: mmTwips(8) } } },
-      headers: { default: header(index === 0) }, footers: { default: footer() }, children: children.length ? children : [paragraph('')]
+      headers: { default: page.cover ? new Header({ children: [paragraph('', 'Header', { spacing: { after: 0 } })] }) : header(index === 0) },
+      footers: { default: page.cover ? new Footer({ children: [paragraph('', 'Footer', { spacing: { after: 0 } })] }) : footer() }, children: children.length ? children : [paragraph('')]
     })
   }
   const document = new Document({ creator: ctx.brand.name, title: publication.title ?? ctx.brand.name, subject: publication.subtitle ?? publication.purpose,
@@ -244,7 +247,7 @@ export const publicationHtml = (ctx, publication) => {
     const caption = captionOf(block)
     return `<figure>${block.placeholder ? `<div class="figure-placeholder" role="img" aria-label="${escapeHtml(block.alt ?? 'Screenshot placeholder')}" style="min-height:${size.height}mm">${escapeHtml(block.label ?? 'Screenshot placeholder')}<small>Replace with an actual image</small></div>` : `<img src="${image.src}" alt="${escapeHtml(block.alt || caption || 'Publication figure')}" style="width:${size.width}mm;height:${size.height}mm;object-fit:contain">`}${caption ? `<figcaption class="s-Caption">${escapeHtml(caption)}</figcaption>` : ''}</figure>`
   }
-  const pages = publication.pages.map((page, index) => `<article class="page ${index ? 'continuation' : 'first-page'}" data-page-id="${escapeHtml(page.id ?? index)}">
+  const pages = publication.pages.map((page, index) => page.cover ? `<article class="page first-page welcome-cover-page" data-page-id="${escapeHtml(page.id ?? index)}"><main>${welcomeCoverHtml(profile, page.cover)}</main></article>` : `<article class="page ${index ? 'continuation' : 'first-page'}" data-page-id="${escapeHtml(page.id ?? index)}">
 <header><p class="s-Header">${escapeHtml(index ? publication.title : profile.header?.text ?? ctx.brand.name)}</p></header>
 <main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department && !(logo?.unit && !publication.affiliation.subdepartment) ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm">${logo?.unit ? '' : `<p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>`}${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
 <footer class="s-Footer"><span>${escapeHtml([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  '))}</span><span>${index + 1}</span></footer>

@@ -16,7 +16,7 @@ exporters. It does not introduce a second document layout engine. See
 | Handover record | Client and provider names, website links, the confirmed access method, everyday tasks, service responsibilities, support, renewals, care, rights and review details. |
 | Provider `brand.json` | The provider's existing logo, colours, fonts and document profile. |
 | Client `brand.json` | The client's existing identity and its asset-use guidance. |
-| Optional provider logo | A supplied original PNG or JPEG when it should be used instead of the provider definition's reconstructed logo. |
+| Optional provider logo | A supplied original PNG or JPEG when a provider needs a specific artwork override. First Form 2.0 uses its master-derived definition without this option. |
 
 The record schema is `brandkit/managed-site-handover/1`. Start with
 [`examples/managed-site/template.json`](../examples/managed-site/template.json), or use
@@ -35,25 +35,52 @@ intend to use:
 
 ```sh
 node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
-  --provider /path/to/firstform/brand.json \
+  --provider /path/to/firstform-2.0/brand.json \
   --client /path/to/ddcnorth/brand.json \
   --out .handover/ddc-north \
   --paper letter \
-  --pdf \
-  --provider-logo /path/to/firstform/docs/brand-details-assets/logo-black.png
+  --cover \
+  --pdf
 ```
+
+For the uploaded First Form design-system source, use `dist/brand.json` after building it,
+or `brand.json` at the root of the extracted locally built `firstform.zip`. Keep its fonts and
+assets beside the definition. Do not use `source/kit/brand.json`: that is the archived 1.0
+identity, not the current 2.0 definition.
 
 The installed CLI form is:
 
 ```text
 brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <dir>
-  [--paper letter|a4] [--pdf] [--issue] [--provider-logo <original PNG>]
+  [--paper letter|a4] [--cover] [--pdf] [--issue] [--provider-logo <original PNG>]
+  [--source-revision <revision>]
 ```
 
 US Letter is the default. `--pdf` requests a PDF alongside the editable Word document and
 printable HTML for each publication. Omit the logo option to use the provider brand's normal
-artwork. A supplied logo changes its placement in these service documents; it does not replace
+artwork. First Form 2.0 no longer needs the old 1.0 PNG override: its current horizontal
+artwork follows the supplied master. A supplied logo changes its placement in these service
+documents; it does not replace
 the logo in either source brand definition.
+When combining an original-logo override with `--cover`, supply a PNG; JPEG overrides are
+supported by the standard document layout only.
+
+## Optional designed cover
+
+`--cover` adds a designed front cover to the welcome guide and exports the same cover as a
+standalone `front-cover` publication. The practical information from the standard opening
+page remains in the guide. Without this flag, the existing standard cover is used.
+
+For First Form 2.0, the design uses an Ash band, the exact horizontal First Form logo, a Black
+hero area, native Sora title text, one supplied large-crop cube-F supporting graphic, and the
+client's logo on a White plate. The identifying logos remain intact. The composition is new
+work for review; it is not represented as a previously approved brand application. It does
+not use the derived stacked or micro logo variants.
+
+The Word cover's headings, subtitle, client name, date and edition are native, editable text.
+Logos and the supporting graphic are images; the cover is not one flattened page image.
+Keep Sora available when editing and recheck the rendered page after changing its wording.
+The publication model also retains the cover wording for rebuilding the outputs.
 
 ## Output package
 
@@ -62,6 +89,7 @@ the logo in either source brand definition.
 | `welcome-guide.publication.json`, `.html`, `.docx` | The complete website handover, with the provider's document styling. |
 | `quick-start.publication.json`, `.html`, `.docx` | A short reference for the main website links, access and support. |
 | `brand-reference.publication.json`, `.html`, `.docx` | The client's identity, supplied artwork, colours, type and use guidance. |
+| `front-cover.publication.json`, `.html`, `.docx` | The standalone designed cover, when `--cover` is requested; the same cover also opens the welcome guide. |
 | Matching `.pdf` files | Shared print snapshots, when `--pdf` is requested. |
 | `index.html` | A local entry page for the package's documents. |
 | Source snapshots | The operational record and provider/client definitions used for this build. |
@@ -167,7 +195,9 @@ const publications = handoverPublications(record, {
 record or throws. `handoverPublications()` returns `{ welcome, quickStart, brandGuide }`;
 each value uses `brandkit/publication/1`. Its optional `providerLogo` is an embedded PNG/JPEG
 figure. Optional `brandFigures.logoVariants` and `brandFigures.palette` supply corresponding
-figures for the client brand reference. Existing publication image rules still apply.
+figures for the client brand reference. The optional `welcomeCover` value uses
+`brandkit/welcome-cover/1` and supplies the native cover text and artwork. Existing publication
+image rules still apply.
 
 The Node build interface is available from `brandkit/handover/node`:
 
@@ -176,13 +206,13 @@ import { buildHandover } from 'brandkit/handover/node'
 
 const manifest = await buildHandover({
   recordPath: 'examples/managed-site/ddc-north.json',
-  providerPath: '/path/to/firstform/brand.json',
+  providerPath: '/path/to/firstform-2.0/brand.json',
   clientPath: '/path/to/ddcnorth/brand.json',
   outDir: '.handover/ddc-north',
   paper: 'letter',
+  cover: true,
   pdf: true,
-  issue: false,
-  providerLogoPath: '/path/to/firstform/docs/brand-details-assets/logo-black.png'
+  issue: false
 })
 ```
 
@@ -192,31 +222,46 @@ current commit.
 
 ## Sources for the supplied example
 
-The example's identities come from the published
-[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json), not from
-an invented First Form style. The retrieved pack bytes matched the catalog:
+Edition 2 of the DDC North example is dated `2026-11-13`, the client's local preparation date.
+Its provider identity comes from the uploaded `design-system-main.zip` source snapshot for
+`1stform/design-system`. The upload supplies the current First Form 2.0 definition and its
+master-artwork provenance. It supersedes the earlier 1.0 published-pack fallback used for the
+first draft. The client's DDC North identity remains the published 2.3 pack.
 
-| Identity | Published pack | Bytes | SHA256 |
+| Input | Origin | Bytes | SHA256 |
 | --- | --- | ---: | --- |
-| First Form 1.0 | [firstform.zip](https://projects.ahmadjalil.com/builds/configs/brandkit/firstform.zip) | 1,256,812 | `33da87dce6b4989d31132a0dd7a681fb2caa7a5debe313633135a79aaf48e30f` |
-| DDC North 2.3 | [ddcnorth.zip](https://projects.ahmadjalil.com/builds/configs/brandkit/ddcnorth.zip) | 3,361,894 | `6e2704d184707bac7f3e88b072fc76ddc24d8aed15cfd0044d9bea8a3e2a88e7` |
+| First Form source snapshot | Uploaded `design-system-main.zip` | 4,223,586 | `023a26fd57414dd20cbd13b00c88d688865e88fa2bc9e24aa10f185347f4ab66` |
+| First Form 2.0 asset pack | Locally built `release/firstform.zip` from that upload | 2,911,364 | `73d09a1561bf81f1fb7d78a6c0a3266db1d1bfb2a1d94cf0b7391a747508167a` |
+| DDC North 2.3 asset pack | [Published ddcnorth.zip](https://projects.ahmadjalil.com/builds/configs/brandkit/ddcnorth.zip) | 3,361,894 | `6e2704d184707bac7f3e88b072fc76ddc24d8aed15cfd0044d9bea8a3e2a88e7` |
 
-The retrieved catalog itself had SHA256
-`3b8362dc55fd4dc8ec920293f02cbe36edcb992d06718b198ec78dbcb7448cda`. These hashes identify
-the input snapshot; a later catalog or pack may legitimately differ.
+The DDC North pack matched its entry in the retrieved
+[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json). These
+hashes identify the inputs used here; later source snapshots and packs may differ.
 
-Brandkit's source documentation identifies `1stform/design-system` as First Form's authoring
-repository. Direct access to that repository was unavailable during preparation, so its
-current `main` revision and instructions were not verified. The published pack is the source
-used here.
+The uploaded source has no verified Git HEAD. Its local build correctly records
+`sourceCommit: "uncommitted"`; that marker is not a commit SHA. This is a local build from the
+upload, not a published GitHub release. The design-system package version is `0.5.0`, while
+the canonical identity version in `brand.json` is `2.0`; those version numbers describe
+different things. Do not use the upload hash or asset-pack hash as `--source-revision` for
+Brandkit itself.
 
-First Form's pack explains that its generated vector wordmark uses Sora Bold as an
-approximation of the original lettering. The example therefore supplies the original
-`docs/brand-details-assets/logo-black.png` for the provider's logo placement. That 372 × 226 px
-PNG has SHA256 `c5f73403ac5113e1ec03f1922311a82be59d265440a0dc4e50a16809a9fffd08`, matching
-the pack's `reference/PROVENANCE.json`. Keep its displayed size appropriate for its resolution.
-This choice preserves the supplied original appearance without silently claiming that the
-reconstructed vector is the original master.
+The local asset pack was built using the source's pinned dependencies and `npm run check`.
+All 21 source-package tests passed, including master geometry, archive integrity, font and
+licence hashes, local links, TypeScript consumer compilation and deterministic re-archiving.
+The pack includes the First Form licence and Sora OFL notice. The non-release Illustrator
+master and Gilroy font files are excluded. These source-package checks do not verify client
+access or complete the handover's issue-readiness review.
+
+First Form 2.0 uses the supplied cube-F mark and lowercase `first / form` wordmark outlined
+from the master. The horizontal vector artwork is exact to that source; Sora remains the
+document typeface. Use `dist/brand.json` or the extracted built pack's root `brand.json` with
+its companion assets. The 1.0 two-block identity is retained only under the source kit and
+release's `legacy/1.0/` archive. Do not select it for this example or apply its old logo override.
+
+The source marks the stacked lockup and small-size mark as derived and awaiting approval.
+Its supporting studies have their own review status. The new cover uses the primary
+horizontal logo and the supplied large-crop graphic; it does not change those source
+approval records.
 
 DDC North's current `brand.json` retains the supplied custom wordmark and the six-dot symbol.
 Use that artwork and its current palette and typography. Its copied README retains older

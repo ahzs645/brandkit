@@ -10,6 +10,20 @@ export interface HandoverFigure {
   heightMm?: number
 }
 
+export interface WelcomeCover {
+  schema: 'brandkit/welcome-cover/1'
+  providerLogo: HandoverFigure
+  clientLogo?: HandoverFigure
+  graphic: HandoverFigure
+  kicker: string
+  title: string
+  subtitle: string
+  clientName: string
+  preparedBy: string
+  dateText: string
+  status: string
+}
+
 /** Brandkit's existing publication/1 JSON, editable in its Documents view. */
 export interface HandoverPublication {
   schema: 'brandkit/publication/1'
@@ -30,6 +44,7 @@ export function handoverPublications(record: HandoverRecord, options: {
   clientBrand: Record<string, any>
   paper?: 'letter' | 'a4'
   providerLogo?: HandoverFigure
+  welcomeCover?: WelcomeCover
   brandFigures?: { logoVariants?: HandoverFigure; palette?: HandoverFigure }
   forIssue?: boolean
 }): { welcome: HandoverPublication; quickStart: HandoverPublication; brandGuide: HandoverPublication }

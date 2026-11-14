@@ -31,7 +31,7 @@ function model(brand, record, title, purpose, paper, forIssue) {
  * `forIssue` is an explicit data-quality gate, never an assertion that claims are verified.
  * Inspect Word/PDF pagination after filling a record: arbitrary prose can extend a page.
  */
-export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, forIssue = false } = {}) {
+export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, welcomeCover, forIssue = false } = {}) {
   assertHandover(record, { forIssue })
   if (!providerBrand?.id || !clientBrand?.id) throw new TypeError('Provider and client brand definitions are required.')
   if (record.provider.brandId && record.provider.brandId !== providerBrand.id) throw new Error('Provider brandId does not match the provider brand.')
@@ -49,6 +49,9 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
   const welcome = model(providerBrand, record, 'Website welcome guide', 'report', paper, forIssue)
   const quickStart = model(providerBrand, record, 'Website quick start', 'brief', paper, forIssue)
   const brandGuide = model(clientBrand, record, 'Brand reference', 'portfolio', paper, forIssue)
+  // A small sizing allowance keeps the reference logo comfortably above its minimum;
+  // source SVGs may include transparent space outside the visible artwork.
+  brandGuide.profile.logo.widthMm = Math.max(brandGuide.profile.logo.widthMm, brandGuide.profile.logo.minimumWidthMm * 1.1)
   if (providerLogo) {
     welcome.profile.logo.hidden = true
     quickStart.profile.logo.hidden = true
@@ -227,6 +230,19 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
       p(`Source: ${value(clientBrand.source, `${clientBrand.name} brand kit`)} · identity v${value(brandVersion)}.`, 'caption')
     ], 'closing')
   ]
+  if (welcomeCover) {
+    const supplied = structuredClone(welcomeCover)
+    supplied.clientName = client
+    supplied.preparedBy = provider
+    supplied.status = `${forIssue ? 'ISSUED' : record.kind === 'example' ? 'EXAMPLE · DRAFT' : record.kind === 'template' ? 'TEMPLATE · DRAFT' : 'DRAFT'} · EDITION ${record.version || '1'}`
+    const overview = welcome.pages[0]
+    overview.kind = 'content'
+    overview.title = 'Your website details'
+    // Keep the practical information formerly on the first page after the new front cover.
+    const firstParagraph = overview.blocks.findIndex(block => block.type === 'paragraph' && !block.style)
+    overview.blocks = [h('Your website details'), ...overview.blocks.slice(firstParagraph)]
+    welcome.pages.unshift({ id: 'front-cover', title: 'Website welcome pack', kind: 'cover', cover: supplied, blocks: [] })
+  }
   for (const publication of [welcome, quickStart, brandGuide]) {
     const problems = validatePublication(publication)
     if (problems.length) throw new Error(`Invalid handover publication: ${problems.join('; ')}`)

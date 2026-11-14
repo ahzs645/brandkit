@@ -7,6 +7,7 @@ export interface HandoverDeliveryManifest {
   generatedAt: string
   sourceRevision: string | null
   paper: 'letter' | 'a4'
+  cover: 'brandkit/welcome-cover/1' | null
   provider: { id: string; version: string; sha256: string; originalLogo: { sha256: string; format: string } | null }
   client: { id: string; version: string; sha256: string }
   review: { checkedBy: string; checkedOn: string }
@@ -21,6 +22,7 @@ export function buildHandover(options: {
   outDir: string
   paper?: 'letter' | 'a4'
   pdf?: boolean
+  cover?: boolean
   issue?: boolean
   providerLogoPath?: string
   sourceRevision?: string
