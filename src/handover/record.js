@@ -3,11 +3,13 @@
  * separate Brandkit profiles. Validation checks data, not whether its claims are true.
  * This record must never contain credentials or account recovery material.
  */
+import { WELCOME_COVER_VARIANTS } from './cover-variants.js'
+
 export const HANDOVER_SCHEMA = 'brandkit/managed-site-handover/1'
 
 const text = (max = 2000, extra = {}) => ({ type: 'text', max, ...extra })
 const list = (item, max = 30) => ({ type: 'list', item, max })
-const object = fields => ({ type: 'object', fields })
+const object = (fields, extra = {}) => ({ type: 'object', fields, ...extra })
 const url = (contact = false) => text(2048, { url: contact ? 'contact' : 'https' })
 const email = () => text(254, { email: true })
 const date = () => text(40, { date: true })
@@ -45,7 +47,13 @@ const SHAPE = object({
   assets: list(object({ name: text(200), url: url(), note: text(2000) }), 50),
   nextSteps: list(text(2000), 30),
   notes: list(text(2000), 30),
-  review: object({ checkedBy: text(200), checkedOn: date() })
+  review: object({ checkedBy: text(200), checkedOn: date() }),
+  // Optional cover wording and design. Omitted fields keep the welcome pack's defaults.
+  cover: object({
+    variant: text(20, { values: ['', ...WELCOME_COVER_VARIANTS.map(item => item.id)], optional: true }),
+    kicker: text(60, { optional: true }), title: text(80, { optional: true }), subtitle: text(220, { optional: true }),
+    sections: { ...list(object({ title: text(24), description: text(100) }), 4), optional: true }
+  }, { optional: true })
 })
 
 const SECRET_KEY = /(?:password|passphrase|secret|token|credential|privatekey|apikey|recoverycode|backupcode|authenticatorseed|otp|totp)/i
@@ -152,7 +160,7 @@ export function handoverProblems(record, { forIssue = false } = {}) {
             : `${path} contains an unsupported field ${key}`)
         }
       }
-      for (const [key, child] of Object.entries(spec.fields)) check(value[key], child, `${path}.${key}`)
+      for (const [key, child] of Object.entries(spec.fields)) if (!(child.optional && value[key] === undefined)) check(value[key], child, `${path}.${key}`)
       return
     }
     if (spec.type === 'list') {

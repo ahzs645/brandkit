@@ -1,14 +1,16 @@
-// Cover applications are proposals, not new logo masters or approved identity variants.
+// Cover designs are document applications, not new logo masters or approved identity variants.
+// Each follows the provider's published rules (First Form's DESIGN.md): see cover-designs.js.
 export const WELCOME_COVER_VARIANTS = Object.freeze([
-  { id: 'complete-mark', label: 'Complete mark', description: 'One complete white symbol with generous space on a Black field.', status: 'proposed' },
-  { id: 'inset-frame', label: 'Inset frame', description: 'A complete black symbol centred on a contained Ash plate.', status: 'proposed' },
-  { id: 'mark-pattern', label: 'Mark pattern', description: 'Three complete standard symbols in a finite, evenly spaced row.', status: 'proposed' },
-  { id: 'type-only', label: 'Type only', description: 'An editable three-part contents index with no decorative symbol.', status: 'proposed' },
-  { id: 'legacy-crop', label: 'Legacy crop', description: 'The original cropped supporting artwork, retained for reproducible earlier builds.', status: 'legacy' }
+  { id: 'hero', label: 'Hero', description: 'The website on paper: the Ash bar, one rounded Black panel with the large-crop mark in Hairline, the headline at its foot, and a closing Ash panel with the client’s plate.', status: 'recommended' },
+  { id: 'blocks', label: 'Stacked blocks', description: 'Full-bleed Ink with a flight of stacked blocks on the mark’s 30° axis and the logo on its Ash plate.', status: 'proposed' },
+  { id: 'grid', label: 'Isometric grid', description: 'A construction drawing: Ash with the isometric grid in White and the complete mark set on it in Black.', status: 'proposed' },
+  { id: 'index', label: 'Index', description: 'Type alone: the headline and the document’s contents as a ruled list, between the Ash bar and a closing Ash panel.', status: 'proposed' }
 ].map(Object.freeze))
 
-export const welcomeCoverVariant = (id = 'legacy-crop') => {
+export const DEFAULT_COVER_VARIANT = 'hero'
+
+export const welcomeCoverVariant = (id = DEFAULT_COVER_VARIANT) => {
   const variant = WELCOME_COVER_VARIANTS.find(item => item.id === id)
-  if (!variant) throw new Error(`Unknown welcome cover variant: ${String(id)}. Choose ${WELCOME_COVER_VARIANTS.map(item => item.id).join(', ')}.`)
+  if (!variant) throw new Error(`Unknown cover variant: ${String(id)}. Choose ${WELCOME_COVER_VARIANTS.map(item => item.id).join(', ')}.`)
   return variant
 }

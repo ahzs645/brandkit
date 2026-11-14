@@ -1,5 +1,6 @@
 // Managed-site content projected into Brandkit's existing editable publication format.
 // Operational records never change either organization's identity definition.
+import { coverStatus } from './cover.js'
 import { publicationModel, validatePublication } from '../engine/documentation.js'
 import { assertHandover } from './record.js'
 
@@ -234,14 +235,14 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     const supplied = structuredClone(welcomeCover)
     supplied.clientName = client
     supplied.preparedBy = provider
-    supplied.status = `${forIssue ? 'ISSUED' : record.kind === 'example' ? 'EXAMPLE · DRAFT' : record.kind === 'template' ? 'TEMPLATE · DRAFT' : 'DRAFT'} · EDITION ${record.version || '1'}`
+    supplied.status = coverStatus(record, forIssue)
     const overview = welcome.pages[0]
     overview.kind = 'content'
     overview.title = 'Your website details'
     // Keep the practical information formerly on the first page after the new front cover.
     const firstParagraph = overview.blocks.findIndex(block => block.type === 'paragraph' && !block.style)
     overview.blocks = [h('Your website details'), ...overview.blocks.slice(firstParagraph)]
-    welcome.pages.unshift({ id: 'front-cover', title: 'Website welcome pack', kind: 'cover', cover: supplied, blocks: [] })
+    welcome.pages.unshift({ id: 'front-cover', title: supplied.kicker || 'Cover', kind: 'cover', cover: supplied, blocks: [] })
   }
   for (const publication of [welcome, quickStart, brandGuide]) {
     const problems = validatePublication(publication)

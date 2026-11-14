@@ -94,6 +94,14 @@ export interface HandoverRecord {
   nextSteps: string[]
   notes: string[]
   review: { checkedBy: string; checkedOn: string }
+  /** Optional cover wording and design; omitted fields keep the welcome pack's. */
+  cover?: {
+    variant?: '' | 'hero' | 'blocks' | 'grid' | 'index'
+    kicker?: string
+    title?: string
+    subtitle?: string
+    sections?: Array<{ title: string; description: string }>
+  }
 }
 
 export interface HandoverValidationOptions {

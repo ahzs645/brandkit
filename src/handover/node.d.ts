@@ -9,7 +9,7 @@ export interface HandoverDeliveryManifest {
   generatedAt: string
   sourceRevision: string | null
   paper: 'letter' | 'a4'
-  cover: 'brandkit/welcome-cover/1' | null
+  cover: 'brandkit/welcome-cover/2' | null
   coverVariant: WelcomeCoverVariant | null
   provider: { id: string; version: string; sha256: string; originalLogo: { sha256: string; format: string } | null }
   client: { id: string; version: string; sha256: string }
@@ -25,7 +25,7 @@ export function buildHandover(options: {
   outDir: string
   paper?: 'letter' | 'a4'
   pdf?: boolean
-  /** Enables legacy-crop when no explicit coverVariant is supplied. */
+  /** Adds a cover: the record's cover.variant, or the recommended hero design. */
   cover?: boolean
   /** Selects and enables a cover, including when cover is omitted. */
   coverVariant?: WelcomeCoverVariant

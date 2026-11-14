@@ -11,7 +11,7 @@ import { buildHandover } from '../src/handover/node.js'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const brandFolder = join(root, 'brands', 'northwind')
-const coverVariants = ['complete-mark', 'inset-frame', 'mark-pattern', 'type-only', 'legacy-crop']
+const coverVariants = ['hero', 'blocks', 'grid', 'index']
 const digest = bytes => createHash('sha256').update(bytes).digest('hex')
 const pixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64')
 
@@ -127,14 +127,14 @@ test('a real managed-site build preserves snapshots and safe assets without over
     ], { encoding: 'utf8', cwd: root, timeout: 60000 })
     assert.equal(result.status, 0, result.stderr || result.error?.message)
     const built = JSON.parse(await readFile(join(coverOut, 'manifest.json'), 'utf8'))
-    assert.equal(built.cover, 'brandkit/welcome-cover/1')
-    assert.equal(built.coverVariant, 'legacy-crop', '--cover retains its original composition')
+    assert.equal(built.cover, 'brandkit/welcome-cover/2')
+    assert.equal(built.coverVariant, 'hero', '--cover alone takes the recommended design')
     assert.equal(built.status, 'draft')
     assert.equal(built.sourceRevision, 'cover-test-revision')
     assert.equal(built.provider.sha256, digest(providerBytes))
     assert.equal(built.client.sha256, digest(clientBytes))
     assert.equal(built.provider.originalLogo, null, 'the selected provider definition supplies its primary artwork')
-    for (const path of ['front-cover.publication.json', 'front-cover.html', 'front-cover.docx', 'assets/cover-graphic.svg', 'assets/provider-logo-primary.svg']) {
+    for (const path of ['front-cover.publication.json', 'front-cover.html', 'front-cover.docx', 'assets/cover-artwork.svg', 'assets/provider-logo-primary.svg']) {
       const entry = built.files.find(file => file.path === path)
       assert.ok(entry, path)
       const bytes = await readFile(join(coverOut, path))
@@ -144,9 +144,9 @@ test('a real managed-site build preserves snapshots and safe assets without over
     const front = JSON.parse(await readFile(join(coverOut, 'front-cover.publication.json'), 'utf8'))
     assert.equal(front.pages.length, 1)
     assert.deepEqual(front.pages[0], welcome.pages[0])
-    assert.equal(front.pages[0].cover.variant, 'legacy-crop')
+    assert.equal(front.pages[0].cover.variant, 'hero')
     assert.equal(front.pages[0].cover.preparedBy, provider.name)
-    assert.match(front.pages[0].cover.status, /EXAMPLE · DRAFT/)
+    assert.match(front.pages[0].cover.status, /Example · draft/)
     const page = await readFile(join(coverOut, 'front-cover.html'), 'utf8')
     assert.match(page, /name="brandkit-source-revision" content="cover-test-revision"/)
     assert.match(page, /Your website\.<br>Start here\./)
@@ -155,35 +155,34 @@ test('a real managed-site build preserves snapshots and safe assets without over
     assert.deepEqual(JSON.parse(await readFile(join(coverOut, 'sources/handover.json'), 'utf8')), record)
   })
 
-  await t.test('a variant alone enables a type-only cover throughout the delivery', async () => {
-    const coverOut = join(folder, 'delivery-type-only')
+  await t.test('a variant alone enables an index cover throughout the delivery', async () => {
+    const coverOut = join(folder, 'delivery-index')
     const result = spawnSync(process.execPath, [join(root, 'bin/brandkit.mjs'), 'handover', recordPath,
       '--provider', providerPath, '--client', clientPath, '--out', coverOut,
-      '--cover-variant', 'type-only'
+      '--cover-variant', 'index'
     ], { encoding: 'utf8', cwd: root, timeout: 60000 })
     assert.equal(result.status, 0, result.stderr || result.error?.message)
     const built = JSON.parse(await readFile(join(coverOut, 'manifest.json'), 'utf8'))
-    assert.equal(built.cover, 'brandkit/welcome-cover/1')
-    assert.equal(built.coverVariant, 'type-only')
+    assert.equal(built.cover, 'brandkit/welcome-cover/2')
+    assert.equal(built.coverVariant, 'index')
     assert.equal(built.status, 'draft')
     const welcome = JSON.parse(await readFile(join(coverOut, 'welcome-guide.publication.json'), 'utf8'))
     const front = JSON.parse(await readFile(join(coverOut, 'front-cover.publication.json'), 'utf8'))
     assert.equal(front.pages.length, 1)
     assert.deepEqual(front.pages[0], welcome.pages[0])
-    assert.equal(front.pages[0].cover.variant, 'type-only')
-    assert.ok(!Object.hasOwn(front.pages[0].cover, 'graphic'), 'type-only omits the decorative graphic')
+    assert.equal(front.pages[0].cover.variant, 'index')
+    assert.equal(front.pages[0].cover.sections.length, 3, 'the index lists the pack’s contents')
     assert.equal(front.pages[0].cover.clientName, record.client.name)
     assert.equal(front.pages[0].cover.preparedBy, provider.name)
-    assert.match(front.pages[0].cover.status, /EXAMPLE · DRAFT/)
-    assert.ok(!built.files.some(file => file.path === 'assets/cover-graphic.svg'))
-    await assert.rejects(access(join(coverOut, 'assets/cover-graphic.svg')), { code: 'ENOENT' })
-    for (const path of ['front-cover.publication.json', 'front-cover.html', 'front-cover.docx', 'assets/provider-logo-primary.svg']) {
+    assert.match(front.pages[0].cover.status, /Example · draft/)
+    for (const path of ['front-cover.publication.json', 'front-cover.html', 'front-cover.docx', 'assets/cover-artwork.svg', 'assets/provider-logo-primary.svg']) {
       const entry = built.files.find(file => file.path === path)
       assert.ok(entry, path)
       assert.equal(digest(await readFile(join(coverOut, path))), entry.sha256, path)
     }
     const page = await readFile(join(coverOut, 'front-cover.html'), 'utf8')
     assert.match(page, /Your website\.<br>Start here\./)
+    assert.match(page, />Your brand</, 'contents entries are native text')
     assert.doesNotMatch(page, /<img src=x|<script/i)
     const index = await readFile(join(coverOut, 'index.html'), 'utf8')
     assert.match(index, /href="front-cover\.html"/)
@@ -191,27 +190,27 @@ test('a real managed-site build preserves snapshots and safe assets without over
     assert.doesNotMatch(index, /href="front-cover\.pdf"/)
   })
 
-  await t.test('an explicit complete-mark selection takes precedence when --cover is also supplied', async () => {
-    const coverOut = join(folder, 'delivery-complete-mark')
+  await t.test('an explicit grid selection takes precedence when --cover is also supplied', async () => {
+    const coverOut = join(folder, 'delivery-grid')
     const result = spawnSync(process.execPath, [join(root, 'bin/brandkit.mjs'), 'handover', recordPath,
       '--provider', providerPath, '--client', clientPath, '--out', coverOut,
-      '--cover', '--cover-variant', 'complete-mark'
+      '--cover', '--cover-variant', 'grid'
     ], { encoding: 'utf8', cwd: root, timeout: 60000 })
     assert.equal(result.status, 0, result.stderr || result.error?.message)
     const built = JSON.parse(await readFile(join(coverOut, 'manifest.json'), 'utf8'))
-    assert.equal(built.cover, 'brandkit/welcome-cover/1')
-    assert.equal(built.coverVariant, 'complete-mark')
+    assert.equal(built.cover, 'brandkit/welcome-cover/2')
+    assert.equal(built.coverVariant, 'grid')
     const welcome = JSON.parse(await readFile(join(coverOut, 'welcome-guide.publication.json'), 'utf8'))
     const front = JSON.parse(await readFile(join(coverOut, 'front-cover.publication.json'), 'utf8'))
     assert.deepEqual(front.pages[0], welcome.pages[0])
-    assert.equal(front.pages[0].cover.variant, 'complete-mark')
-    assert.match(front.pages[0].cover.graphic.src, /^data:image\/png;base64,/)
-    const entry = built.files.find(file => file.path === 'assets/cover-graphic.svg')
+    assert.equal(front.pages[0].cover.variant, 'grid')
+    assert.match(front.pages[0].cover.artwork.src, /^data:image\/png;base64,/)
+    const entry = built.files.find(file => file.path === 'assets/cover-artwork.svg')
     assert.ok(entry)
     const graphic = await readFile(join(coverOut, entry.path), 'utf8')
     assert.equal(digest(Buffer.from(graphic)), entry.sha256)
     assert.doesNotMatch(graphic, /onload|onerror|@import|<script/i)
-    assert.notEqual(graphic, await readFile(join(folder, 'delivery-with-cover/assets/cover-graphic.svg'), 'utf8'), 'the explicit selection produces different artwork from the legacy crop')
+    assert.notEqual(graphic, await readFile(join(folder, 'delivery-with-cover/assets/cover-artwork.svg'), 'utf8'), 'the explicit selection produces different artwork from the default')
     assert.match(await readFile(join(coverOut, 'index.html'), 'utf8'), /href="front-cover\.html"/)
   })
 })
@@ -242,7 +241,7 @@ test('cover selection rejects invalid values before reading sources or creating 
   for (const [args, expected] of [
     [['--cover-variant', 'unknown-cover'], /cover.?variant|welcome cover variant/i],
     [['--cover-variant'], /--cover-variant needs a value/],
-    [['--cover-variant', 'type-only', '--cover-variant', 'complete-mark'], /Duplicate option: --cover-variant/]
+    [['--cover-variant', 'index', '--cover-variant', 'grid'], /Duplicate option: --cover-variant/]
   ]) {
     const result = spawnSync(process.execPath, [...baseArgs, ...args], { encoding: 'utf8', cwd: root })
     assert.notEqual(result.status, 0)

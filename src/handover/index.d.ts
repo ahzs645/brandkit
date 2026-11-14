@@ -10,53 +10,59 @@ export interface HandoverFigure {
   heightMm?: number
 }
 
-export type WelcomeCoverVariant = 'complete-mark' | 'inset-frame' | 'mark-pattern' | 'type-only' | 'legacy-crop'
+export type WelcomeCoverVariant = 'hero' | 'blocks' | 'grid' | 'index'
 
 export interface WelcomeCoverVariantMetadata {
   readonly id: WelcomeCoverVariant
   readonly label: string
   readonly description: string
-  readonly status: 'proposed' | 'legacy'
+  readonly status: 'recommended' | 'proposed'
 }
 
 export const WELCOME_COVER_VARIANTS: readonly Readonly<WelcomeCoverVariantMetadata>[]
-/** Omitted selection preserves legacy-crop; unsupported IDs throw. */
+export const DEFAULT_COVER_VARIANT: 'hero'
+/** Omitted selection is the recommended design; unsupported IDs throw. */
 export function welcomeCoverVariant(id?: WelcomeCoverVariant): Readonly<WelcomeCoverVariantMetadata>
 
-export interface WelcomeCoverImage {
-  /** Embedded PNG data URL. */
-  src: string
-  alt: string
-}
-
-export interface WelcomeCoverLogo extends WelcomeCoverImage {
-  /** Maximum width; the renderer preserves the image's proportions. */
-  widthMm?: number
-}
-
 export interface WelcomeCoverSection {
-  number: string
   title: string
   description: string
 }
 
+/** Where one piece of cover wording is set: page millimetres from the top left. */
+export interface WelcomeCoverFrame {
+  key: 'kicker' | 'title' | 'subtitle' | 'clientName' | 'preparedFor' | 'preparedBy' | 'dateText' | 'barDate' | 'status' | `section${1 | 2 | 3 | 4}${'Title' | 'Description'}`
+  x: number
+  /** Top of the first line's box. */
+  y: number
+  width: number
+  sizePt: number
+  leadingPt: number
+  role: 'title' | 'body' | 'label'
+  colour: string
+  caps: boolean
+  trackingEm: number
+  align: 'left' | 'right' | 'center'
+  heading?: 1 | 2
+}
+
 export interface WelcomeCover {
-  schema: 'brandkit/welcome-cover/1'
-  /** Missing in older saved publications; interpreted as legacy-crop. */
-  variant?: WelcomeCoverVariant
-  providerLogo: WelcomeCoverLogo
-  clientLogo?: WelcomeCoverLogo
-  /** Required for graphic variants; omitted for type-only. */
-  graphic?: WelcomeCoverImage
-  /** Native editable rows for type-only; validated by the cover renderer. */
+  schema: 'brandkit/welcome-cover/2'
+  variant: WelcomeCoverVariant
+  paper: 'letter' | 'a4'
+  /** The whole page without its text, as an embedded PNG data URL. */
+  artwork: { src: string; alt: string }
+  /** The frames name the fields below; the fields stay the source of the wording. */
+  frames: WelcomeCoverFrame[]
+  /** The contents of an index cover, one to four entries. */
   sections?: WelcomeCoverSection[]
   kicker: string
   title: string
-  subtitle: string
+  subtitle?: string
   clientName: string
-  preparedBy: string
-  dateText: string
-  status: string
+  preparedBy?: string
+  dateText?: string
+  status?: string
 }
 
 /** Brandkit's existing publication/1 JSON, editable in its Documents view. */
@@ -83,3 +89,17 @@ export function handoverPublications(record: HandoverRecord, options: {
   brandFigures?: { logoVariants?: HandoverFigure; palette?: HandoverFigure }
   forIssue?: boolean
 }): { welcome: HandoverPublication; quickStart: HandoverPublication; brandGuide: HandoverPublication }
+
+export const WELCOME_COVER_SCHEMA: 'brandkit/welcome-cover/2'
+export const WELCOME_COVER_TEXT: Readonly<{ kicker: string; title: string; subtitle: string; sections: readonly Readonly<WelcomeCoverSection>[] }>
+
+/**
+ * Draws a cover from the provider's and client's loaded brands ({ brand, fonts }) and a
+ * handover record (its client, provider, preparedAt, kind, version and optional cover).
+ */
+export function createWelcomeCover(provider: { brand: Record<string, any>; fonts?: unknown }, client: { brand: Record<string, any>; fonts?: unknown }, record: HandoverRecord, options: {
+  png: (svg: string, width: number) => Promise<Uint8Array>
+  paper?: 'letter' | 'a4'
+  issue?: boolean
+  variant?: WelcomeCoverVariant
+}): Promise<{ cover: WelcomeCover; svg: { artwork: string; providerLogo: string; clientLogo: string }; profile: Record<string, unknown> }>

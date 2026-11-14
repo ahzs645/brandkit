@@ -1,6 +1,6 @@
 import { buildHandover } from './node.js'
 
-const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant complete-mark|inset-frame|mark-pattern|type-only|legacy-crop] [--pdf] [--issue]\n--cover preserves the legacy-crop design. --cover-variant selects and enables a cover; new variants are proposals for review.'
+const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant hero|blocks|grid|index] [--pdf] [--issue]\n--cover adds the designed cover: the record’s cover.variant, or hero. --cover-variant chooses the design.'
 
 export async function handover(args) {
   if (!args.length || args[0] === '--help') { console.log(usage); return }

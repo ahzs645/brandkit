@@ -45,35 +45,35 @@ node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
 
 The three publications are `welcome-guide`, `quick-start` and `brand-reference`. Each is
 exported as a `.publication.json` source model, printable `.html` and editable `.docx`.
-`--cover` adds the original `legacy-crop` opening page to the welcome guide and a standalone
+`--cover` adds a designed cover (the recommended `hero`) to the welcome guide and a standalone
 `front-cover` publication in the same formats. `--pdf` adds corresponding PDFs, including
 `front-cover.pdf`. The output also contains `index.html`, source snapshots and `manifest.json`.
 
 To review a different cover, replace `--cover` with `--cover-variant <id>` and use a new output
 directory. The variant option enables the cover itself; it can also be used with `--cover`.
 
-| Stable ID | Design direction |
+| Stable ID | Design |
 | --- | --- |
-| `complete-mark` | Proposed: one complete supplied mark contained within the artwork area. |
-| `inset-frame` | Proposed: a complete mark on an inset Ash tile. |
-| `mark-pattern` | Proposed: a contained arrangement of complete marks. |
-| `type-only` | Proposed: an editable Access, Support and Brand index, with no supporting graphic. |
-| `legacy-crop` | The original large-crop graphic, retained by plain `--cover`. |
+| `hero` | Recommended: the website's home page on paper. Ash bar, rounded Black panel with the large-crop mark, closing Ash panel with the client's plate. |
+| `blocks` | Full-bleed Ink with a flight of stacked blocks on the 30° axis. |
+| `grid` | Ash construction drawing: the complete mark on its isometric grid. |
+| `index` | Type alone: the headline and the pack's contents as a ruled list. |
 
-No proposed direction is selected by default. Each build records its explicit choice in
-`manifest.coverVariant` and in the cover's publication model. Without either cover option,
+A record can choose its own with `cover.variant`, and change the cover's wording with
+`cover.kicker`, `cover.title`, `cover.subtitle` and `cover.sections` (see
+[docs/managed-site-handover.md](../../docs/managed-site-handover.md#cover-wording-and-other-documents)).
+Each build records its choice in `manifest.coverVariant` and in the cover's publication model. Without either cover option,
 the standard document opening remains in use and the manifest's cover fields are `null`.
 
 First Form styles the welcome guide and quick-start sheet. DDC North styles the client brand
 reference. The current First Form horizontal vector logo follows the supplied 2.0 master;
 the original 1.0 PNG override is no longer needed.
 
-The optional covers combine an Ash band, the exact horizontal First Form logo, a Black hero
-area, editable Sora wording and the DDC North logo on a White plate. They are document
-compositions for review, not previously approved brand applications. They use neither the
-derived stacked logo nor the micro mark. In Word, the title, subtitle, client name, date and
-edition remain native editable text, as does the `type-only` index. Any supporting artwork
-is separate. Keep Sora installed and check the page after editing.
+The covers are full pages in First Form 2.0's own rules, with the DDC North logo on its White
+plate (widened slightly to keep it above its 55 mm minimum). They are document compositions
+for review, not previously approved brand applications, and use neither the derived stacked
+logo nor the micro mark. In Word every word on the cover is native editable text over one
+image of the page's artwork. Keep Sora installed and check the page after editing.
 
 Open the output `index.html` to review the package. Print the quick-start sheet separately if
 the client would benefit from a desk reference. Check the Word and PDF pagination before
