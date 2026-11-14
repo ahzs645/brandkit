@@ -76,6 +76,27 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 
 **[Open brandkit](https://projects.ahmadjalil.com/brandkit/)**
 
+## Managed website welcome packs
+
+Generate a provider-branded welcome guide and quick-start sheet alongside a client-branded
+reference, using the existing editable publication engine. Each client has a separate operational
+record for access instructions, responsibilities, renewals and support; identity stays in the two
+brand definitions. No password or setup token belongs in that record.
+
+```sh
+node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
+  --provider /path/to/firstform/brand.json --client /path/to/ddcnorth/brand.json \
+  --provider-logo /path/to/firstform/docs/brand-details-assets/logo-black.png \
+  --out /path/to/new-delivery --pdf
+```
+
+The output includes editable Word, print HTML, publication JSON, optional PDF, a local document
+index, logo assets and versioned source snapshots. Builds remain drafts unless `--issue` passes
+the explicit client-record completeness gate. Review the facts and final pagination before issue.
+See [managed-site handover](docs/managed-site-handover.md) for the CLI and integration API, and
+[the examples](examples/managed-site/README.md) for a blank template and the labelled First Form /
+DDC North example. Keep operational packs private; public brand sharing is not access control.
+
 ## Brands are packs
 
 brandkit is the engine; a brand is data. One brand ships with it, **northwind**, an example made

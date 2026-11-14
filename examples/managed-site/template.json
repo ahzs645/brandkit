@@ -1,0 +1,58 @@
+{
+  "schema": "brandkit/managed-site-handover/1",
+  "id": "",
+  "kind": "template",
+  "status": "draft",
+  "version": "1",
+  "preparedAt": "",
+  "provider": {
+    "name": "",
+    "brandId": "",
+    "supportEmail": "",
+    "supportUrl": "",
+    "hours": "",
+    "responseTarget": "",
+    "urgentRoute": ""
+  },
+  "client": {
+    "name": "",
+    "brandId": "",
+    "contactName": "",
+    "contactEmail": ""
+  },
+  "site": {
+    "name": "",
+    "url": "",
+    "loginUrl": "",
+    "helpUrl": "",
+    "launchDate": ""
+  },
+  "access": {
+    "method": "unconfirmed",
+    "role": "",
+    "accountLabel": "",
+    "invitationSender": "",
+    "invitationExpiry": "",
+    "setupInstructions": [],
+    "recoveryInstructions": "",
+    "mfaInstructions": ""
+  },
+  "tasks": [],
+  "services": [],
+  "care": {
+    "included": [],
+    "requests": "",
+    "backups": "",
+    "restore": "",
+    "dataExport": "",
+    "agreementRef": "",
+    "rights": ""
+  },
+  "assets": [],
+  "nextSteps": [],
+  "notes": [],
+  "review": {
+    "checkedBy": "",
+    "checkedOn": ""
+  }
+}

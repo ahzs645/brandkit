@@ -31,6 +31,7 @@ const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
+       brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--pdf] [--issue]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
        brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url] [--bundle [file.zip]]
 
@@ -57,6 +58,7 @@ const main = async () => {
   if (!command || command === '--help' || command === 'help') { console.log(usage); return }
   if (command === 'catalog') { const { catalog } = await import('../src/pack/catalog-cli.js'); catalog(process.argv.slice(3)); return }
   if (command === 'pack') { const { pack } = await import('../src/pack/cli.js'); pack(process.argv.slice(3)); return }
+  if (command === 'handover') { const { handover } = await import('../src/handover/cli.js'); await handover(process.argv.slice(3)); return }
   if (!file || !['build', 'check', 'documents', 'pdf'].includes(command)) throw new Error(usage)
   validateOptions()
   if (command === 'pdf') {

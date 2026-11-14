@@ -1,0 +1,149 @@
+{
+  "schema": "brandkit/managed-site-handover/1",
+  "id": "ddc-north-managed-site-example",
+  "kind": "example",
+  "status": "draft",
+  "version": "1",
+  "preparedAt": "2026-11-14",
+  "provider": {
+    "name": "First Form",
+    "brandId": "firstform",
+    "supportEmail": "support@firstform.example",
+    "supportUrl": "https://firstform.example/support",
+    "hours": "",
+    "responseTarget": "",
+    "urgentRoute": ""
+  },
+  "client": {
+    "name": "DDC North",
+    "brandId": "ddcnorth",
+    "contactName": "",
+    "contactEmail": "owner@ddcnorth.example"
+  },
+  "site": {
+    "name": "DDC North managed website example",
+    "url": "https://ddcnorth.example",
+    "loginUrl": "https://portal.firstform.example/ddc-north/login",
+    "helpUrl": "https://firstform.example/help",
+    "launchDate": ""
+  },
+  "access": {
+    "method": "unconfirmed",
+    "role": "",
+    "accountLabel": "owner@ddcnorth.example",
+    "invitationSender": "",
+    "invitationExpiry": "",
+    "setupInstructions": [
+      "Confirm the sign-in method and your account role with First Form before using this guide.",
+      "Use the confirmed permanent login address and the setup instructions supplied for your account.",
+      "Practise one agreed website task together during the handover."
+    ],
+    "recoveryInstructions": "",
+    "mfaInstructions": ""
+  },
+  "tasks": [
+    {
+      "title": "Request a content update",
+      "steps": [
+        "Illustrative task: identify the page and describe the change you need.",
+        "Prepare the approved wording and any image files you are permitted to use.",
+        "Use the support route agreed for your service and confirm whether the work is included before it starts."
+      ],
+      "confirmation": "Review the agreed change on the website when First Form tells you it is ready.",
+      "tutorialUrl": ""
+    },
+    {
+      "title": "Choose a brand asset",
+      "steps": [
+        "Illustrative task: open the DDC North brand kit supplied with the handover.",
+        "Choose the supplied logo variant for the background and intended use.",
+        "Keep its proportions and follow the clear-space and minimum-size guidance in the kit."
+      ],
+      "confirmation": "Check that the complete logo is visible and the supplied colours are preserved.",
+      "tutorialUrl": ""
+    },
+    {
+      "title": "Check a form if included",
+      "steps": [
+        "Illustrative task for a website with a form: confirm whether this feature is included.",
+        "Send an agreed test enquiry using non-sensitive sample text.",
+        "Check the agreed delivery destination and confirm who will respond to enquiries."
+      ],
+      "confirmation": "Replace this example with the actual form and delivery instructions after the workflow is confirmed.",
+      "tutorialUrl": ""
+    }
+  ],
+  "services": [
+    {
+      "name": "Managed website platform",
+      "accountOwner": "",
+      "managedBy": "First Form in this illustrative example",
+      "clientAccess": "",
+      "billedBy": "",
+      "renewalDate": "",
+      "costText": "",
+      "scope": "Illustrative managed service: First Form operates the platform and the client receives the access agreed for this website. Actual capabilities and terms remain to be confirmed."
+    },
+    {
+      "name": "Domain and DNS",
+      "accountOwner": "",
+      "managedBy": "",
+      "clientAccess": "",
+      "billedBy": "",
+      "renewalDate": "",
+      "costText": "",
+      "scope": "Record domain registration, DNS management and renewal responsibilities separately from the managed website platform."
+    },
+    {
+      "name": "Content changes",
+      "accountOwner": "",
+      "managedBy": "",
+      "clientAccess": "",
+      "billedBy": "",
+      "renewalDate": "",
+      "costText": "",
+      "scope": "Record which edits the client can make, which changes First Form handles, and how additional work is agreed."
+    },
+    {
+      "name": "Website enquiries if included",
+      "accountOwner": "",
+      "managedBy": "",
+      "clientAccess": "",
+      "billedBy": "",
+      "renewalDate": "",
+      "costText": "",
+      "scope": "Optional example service. Confirm whether forms are included, where enquiries go and who manages their data."
+    }
+  ],
+  "care": {
+    "included": [],
+    "requests": "",
+    "backups": "",
+    "restore": "",
+    "dataExport": "",
+    "agreementRef": "",
+    "rights": ""
+  },
+  "assets": [
+    {
+      "name": "DDC North brand kit",
+      "url": "https://ddcnorth.example/brand-kit",
+      "note": "Example delivery address. The client artwork is separate from First Form's provider identity. Use the actual supplied kit and its asset catalogue when issuing."
+    }
+  ],
+  "nextSteps": [
+    "Confirm the site address, account role and supported sign-in method.",
+    "Record the agreed service scope, support arrangements, costs and renewal responsibilities.",
+    "Record the content, data and brand rights and the available export arrangements from the agreement.",
+    "Replace demonstration addresses, check the actual client workflow and review the completed pack before issuing."
+  ],
+  "notes": [
+    "Illustrative example only. First Form and DDC North identify the provider and client brands used to demonstrate this reusable pack; this document does not establish a client relationship or completed delivery.",
+    "All .example addresses are deliberately non-operational. Empty values are unconfirmed, not free services, guarantees or included features.",
+    "Keep credentials, activation links and recovery codes outside the handover record."
+  ],
+  "review": {
+    "checkedBy": "",
+    "checkedOn": ""
+  }
+}
