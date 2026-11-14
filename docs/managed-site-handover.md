@@ -53,7 +53,7 @@ The installed CLI form is:
 ```text
 brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <dir>
   [--paper letter|a4] [--cover] [--pdf] [--issue] [--provider-logo <original PNG>]
-  [--cover-variant hero|blocks|grid|index]
+  [--cover-variant hero|blocks|grid|index] [--table-style grid|ruled|ledger|panel|accent]
   [--source-revision <revision>]
 ```
 
@@ -114,6 +114,13 @@ in Documents) with one of these covers, make it with `createWelcomeCover` from
 four) are used by `index` only. The client's name, the provider's name, the date and the
 edition always come from the record, so a cover cannot claim a different client or an issued
 status.
+
+### Tables
+
+Each publication draws its tables in its brand's `documentation.tables.style` (see the brand
+schema): the welcome guide and quick-start sheet in the provider's, the brand reference in the
+client's. `--table-style <style>` (or `tableStyle` in `buildHandover`) sets one style for every
+publication in a build, to compare them before choosing one for a brand.
 
 ### How a cover is made
 

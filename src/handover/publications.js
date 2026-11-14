@@ -1,7 +1,7 @@
 // Managed-site content projected into Brandkit's existing editable publication format.
 // Operational records never change either organization's identity definition.
 import { coverStatus } from './cover.js'
-import { publicationModel, validatePublication } from '../engine/documentation.js'
+import { TABLE_STYLES, publicationModel, validatePublication } from '../engine/documentation.js'
 import { assertHandover } from './record.js'
 
 const value = (text, fallback = 'To confirm') => String(text ?? '').trim() || fallback
@@ -32,7 +32,7 @@ function model(brand, record, title, purpose, paper, forIssue) {
  * `forIssue` is an explicit data-quality gate, never an assertion that claims are verified.
  * Inspect Word/PDF pagination after filling a record: arbitrary prose can extend a page.
  */
-export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, welcomeCover, forIssue = false } = {}) {
+export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, welcomeCover, forIssue = false, tableStyle } = {}) {
   assertHandover(record, { forIssue })
   if (!providerBrand?.id || !clientBrand?.id) throw new TypeError('Provider and client brand definitions are required.')
   if (record.provider.brandId && record.provider.brandId !== providerBrand.id) throw new Error('Provider brandId does not match the provider brand.')
@@ -243,6 +243,11 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     const firstParagraph = overview.blocks.findIndex(block => block.type === 'paragraph' && !block.style)
     overview.blocks = [h('Your website details'), ...overview.blocks.slice(firstParagraph)]
     welcome.pages.unshift({ id: 'front-cover', title: supplied.kicker || 'Cover', kind: 'cover', cover: supplied, blocks: [] })
+  }
+  // A table style for this build replaces each brand's own (documentation.tables.style).
+  if (tableStyle !== undefined) {
+    if (!TABLE_STYLES.includes(tableStyle)) throw new Error(`Unknown table style: ${String(tableStyle)}. Choose ${TABLE_STYLES.join(', ')}.`)
+    for (const publication of [welcome, quickStart, brandGuide]) publication.profile.tables = { style: tableStyle }
   }
   for (const publication of [welcome, quickStart, brandGuide]) {
     const problems = validatePublication(publication)

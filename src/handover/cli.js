@@ -1,11 +1,11 @@
 import { buildHandover } from './node.js'
 
-const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant hero|blocks|grid|index] [--pdf] [--issue]\n--cover adds the designed cover: the record’s cover.variant, or hero. --cover-variant chooses the design.'
+const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant hero|blocks|grid|index] [--table-style grid|ruled|ledger|panel|accent] [--pdf] [--issue]\n--cover adds the designed cover: the record’s cover.variant, or hero. --cover-variant chooses the design. --table-style replaces each brand’s own table design for this build.'
 
 export async function handover(args) {
   if (!args.length || args[0] === '--help') { console.log(usage); return }
   const [recordPath, ...rest] = args
-  const valued = { '--provider': 'providerPath', '--client': 'clientPath', '--out': 'outDir', '--paper': 'paper', '--provider-logo': 'providerLogoPath', '--source-revision': 'sourceRevision', '--cover-variant': 'coverVariant' }
+  const valued = { '--provider': 'providerPath', '--client': 'clientPath', '--out': 'outDir', '--paper': 'paper', '--provider-logo': 'providerLogoPath', '--source-revision': 'sourceRevision', '--cover-variant': 'coverVariant', '--table-style': 'tableStyle' }
   const flags = { '--pdf': 'pdf', '--issue': 'issue', '--cover': 'cover' }
   const options = { recordPath }
   const seen = new Set()

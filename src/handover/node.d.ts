@@ -29,6 +29,8 @@ export function buildHandover(options: {
   cover?: boolean
   /** Selects and enables a cover, including when cover is omitted. */
   coverVariant?: WelcomeCoverVariant
+  /** One table design for every publication in this build, in place of each brand's own. */
+  tableStyle?: 'grid' | 'ruled' | 'ledger' | 'panel' | 'accent'
   issue?: boolean
   providerLogoPath?: string
   sourceRevision?: string

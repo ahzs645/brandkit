@@ -4,7 +4,7 @@ import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, writeFile } from 
 import { basename, dirname, join, resolve } from 'node:path'
 import { validateBrand } from '../engine/brand.js'
 import { consumerProfile } from '../engine/consumer.js'
-import { documentProfile } from '../engine/documentation.js'
+import { TABLE_STYLES, documentProfile } from '../engine/documentation.js'
 import { loadBrandFontsFromDisk } from '../fonts/node.js'
 import { publicationDocx, publicationHtml } from '../export/publication.js'
 import { createNodeRenderer, pdfFromDocx } from '../export/node.js'
@@ -60,12 +60,13 @@ ${fontRules}
 }
 
 /** Build into a new or empty directory; no existing delivery is overwritten. */
-export async function buildHandover({ recordPath, providerPath, clientPath, outDir, paper = 'letter', pdf = false, issue = false, cover = false, coverVariant, providerLogoPath, sourceRevision } = {}) {
+export async function buildHandover({ recordPath, providerPath, clientPath, outDir, paper = 'letter', pdf = false, issue = false, cover = false, coverVariant, tableStyle, providerLogoPath, sourceRevision } = {}) {
   if (!recordPath || !providerPath || !clientPath || !outDir) throw new Error('recordPath, providerPath, clientPath and outDir are required.')
   if (!['letter', 'a4'].includes(paper)) throw new Error('paper must be letter or a4.')
   if (typeof cover !== 'boolean') throw new TypeError('cover must be a boolean; use coverVariant to select a design.')
   // An explicit selection enables the cover; it is checked before any source is read.
   let selectedCover = coverVariant !== undefined ? welcomeCoverVariant(coverVariant) : null
+  if (tableStyle !== undefined && !TABLE_STYLES.includes(tableStyle)) throw new Error(`Unknown table style: ${String(tableStyle)}. Choose ${TABLE_STYLES.join(', ')}.`)
   const recordBytes = await readFile(resolve(recordPath))
   if (recordBytes.length > 2 * 1024 * 1024) throw new Error('A handover record must be smaller than 2 MB.')
   const record = JSON.parse(recordBytes)
@@ -109,7 +110,7 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     ...(clientDocument.logo.minimumWidthMm <= figureWidth * variantWidth / 840 ? { logoVariants: { src: data(await renderer.png(variantsSvg, 2100), 'image/png'), alt: 'Supplied primary and reverse logos on contrasting backgrounds', caption: 'Primary on a light background · reverse on the primary background.', widthMm: figureWidth, heightMm: stackVariants ? 88 : 44 } } : {})
   }
   const coverAssets = coverEnabled ? await createWelcomeCover(providerCtx, clientCtx, record, { ...renderer, paper, issue, variant: selectedCover.id }) : null
-  const publications = handoverPublications(record, { providerBrand: provider.brand, clientBrand: client.brand, paper, providerLogo, brandFigures, welcomeCover: coverAssets?.cover, forIssue: issue })
+  const publications = handoverPublications(record, { providerBrand: provider.brand, clientBrand: client.brand, paper, providerLogo, brandFigures, welcomeCover: coverAssets?.cover, forIssue: issue, ...(tableStyle !== undefined ? { tableStyle } : {}) })
   if (coverAssets) publications.frontCover = { ...structuredClone(publications.welcome), id: `${record.id}-front-cover`, title: `${publications.welcome.pages[0].title} cover`, pages: [structuredClone(publications.welcome.pages[0])] }
   const target = resolve(outDir)
   const existing = await lstat(target).catch(error => { if (error.code === 'ENOENT') return null; throw error })

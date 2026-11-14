@@ -88,6 +88,8 @@ export function handoverPublications(record: HandoverRecord, options: {
   welcomeCover?: WelcomeCover
   brandFigures?: { logoVariants?: HandoverFigure; palette?: HandoverFigure }
   forIssue?: boolean
+  /** One table design for every publication, in place of each brand's own. */
+  tableStyle?: 'grid' | 'ruled' | 'ledger' | 'panel' | 'accent'
 }): { welcome: HandoverPublication; quickStart: HandoverPublication; brandGuide: HandoverPublication }
 
 export const WELCOME_COVER_SCHEMA: 'brandkit/welcome-cover/2'

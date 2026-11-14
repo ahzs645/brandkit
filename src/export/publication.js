@@ -7,6 +7,7 @@ import { documentProfile, validatePublication } from '../engine/documentation.js
 import { embeddedFonts, fontEmbeddingPermission, officeFontRequirements, officeStyleFonts, officeStyles } from './office.js'
 import { sanitizeSvg } from '../printer/svg.js'
 import { welcomeCoverDocx, welcomeCoverHtml } from './welcome-cover.js'
+import { tableCss, tableFonts, tableLook } from './table-styles.js'
 
 const MM_PT = 72 / 25.4
 const mmTwips = (value) => Math.round(value * MM_PT * 20)
@@ -124,6 +125,7 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     new TextRun({ children: [new Tab(), PageNumber.CURRENT] })
   ] })] })
   const header = (first) => new Header({ children: [paragraph(first ? profile.header?.text ?? ctx.brand.name : publication.title ?? profile.header?.text ?? ctx.brand.name, 'Header')] })
+  const look = tableLook(profile, ctx.brand)
   const table = (block) => {
     const headers = block.headers ?? []
     const count = Math.max(headers.length, ...block.rows.map((row) => row.length))
@@ -131,15 +133,37 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
     const ratios = block.widths?.length === count ? block.widths.map(Number) : Array(count).fill(1)
     const total = ratios.reduce((sum, n) => sum + (n > 0 ? n : 1), 0)
     const widths = ratios.map((n) => Math.round(mmTwips(printableWidth) * (n > 0 ? n : 1) / total))
-    const border = { style: BorderStyle.SINGLE, size: 4, color: hex(profile.colours.line, 'D9D9D9') }
-    const rowOf = (row, isHeader, index) => new TableRow({ tableHeader: isHeader, cantSplit: true, children: widths.map((width, column) => new TableCell({
-      width: { size: width, type: WidthType.DXA }, margins: { top: 100, bottom: 100, left: 110, right: 110 },
-      shading: { fill: isHeader ? hex(profile.colours.tableHeader ?? profile.colours.ink) : index % 2 ? hex(profile.colours.light, 'F5F5F5') : hex(profile.colours.paper, 'FFFFFF') },
-      children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), isHeader ? { bold: true, color: hex(profile.colours.tableHeaderText ?? profile.colours.reverse, 'FFFFFF') } : {}) })]
-    })) })
+    // The columns fill the table exactly, or a reader shows the gap as a seam in a filled table.
+    widths[widths.length - 1] += mmTwips(printableWidth) - widths.reduce((sum, n) => sum + n, 0)
+    const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' }
+    // Word measures a cell border in eighths of a point.
+    const line = (rule) => rule ? { style: BorderStyle.SINGLE, size: Math.max(2, Math.round(rule.pt * 8)), color: hex(rule.colour) } : none
+    const runOf = (spec) => spec ? {
+      ...(spec.face ? { font: spec.face.name, bold: spec.face.bold, italics: spec.face.italic } : {}), ...(spec.bold ? { bold: true } : {}),
+      ...(spec.colour ? { color: hex(spec.colour) } : {}), ...(spec.caps ? { allCaps: true } : {}),
+      ...(spec.sizePt ? { size: Math.round(spec.sizePt * 2) } : {}), ...(spec.trackingEm ? { characterSpacing: Math.round(spec.trackingEm * (spec.sizePt ?? typeOf(profile, 'table').sizePt ?? 9.5) * 20) } : {})
+    } : {}
+    const pad = look.padding
+    const last = count - 1
+    const rowOf = (row, isHeader, index, isFirst, isLast) => new TableRow({ tableHeader: isHeader, cantSplit: true, children: widths.map((width, column) => {
+      const fill = isHeader ? look.header.fill : look.body.band && index % 2 ? look.body.band : look.body.fill
+      return new TableCell({
+        width: { size: width, type: WidthType.DXA },
+        margins: { top: mmTwips(pad.y), bottom: mmTwips(pad.y), left: pad.flush && column === 0 ? 0 : mmTwips(pad.x), right: pad.flush && column === last ? 0 : mmTwips(pad.x) },
+        ...(fill ? { shading: { fill: hex(fill) } } : {}),
+        borders: {
+          top: isFirst ? line(look.frame?.top ?? look.frame?.outer) : none,
+          bottom: isHeader ? line(look.header.rule ?? look.body.rule) : isLast ? (look.frame?.bottom || look.frame?.outer ? line(look.frame.bottom ?? look.frame.outer) : look.radiusMm ? none : line(look.body.rule)) : line(look.body.rule),
+          left: column === 0 ? line(look.frame?.outer) : line(look.frame?.vertical),
+          right: column === last ? line(look.frame?.outer) : none
+        },
+        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), runOf(isHeader ? look.header : column === 0 ? look.first : null)) })]
+      })
+    }) })
+    const rows = [...(headers.length ? [headers] : []), ...block.rows]
     return [new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(printableWidth), type: WidthType.DXA }, columnWidths: widths,
-      borders: { top: border, bottom: border, left: border, right: border, insideHorizontal: border, insideVertical: border },
-      rows: [...(headers.length ? [rowOf(headers, true, 0)] : []), ...block.rows.map((row, index) => rowOf(row, false, index))]
+      borders: { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none },
+      rows: rows.map((row, i) => rowOf(row, Boolean(headers.length) && i === 0, headers.length ? i - 1 : i, i === 0, i === rows.length - 1))
     }), ...(block.caption ? [captionParagraph(block.caption)] : [paragraph('', 'BodyText', { spacing: { after: 80 } })])]
   }
   const blockChildren = async (block, listId) => {
@@ -200,10 +224,10 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
   }
   const document = new Document({ creator: ctx.brand.name, title: publication.title ?? ctx.brand.name, subject: publication.subtitle ?? publication.purpose,
     description: `${ctx.brand.name} editable ${publication.purpose ?? 'publication'} · ${publication.edition ?? ctx.brand.version ?? ''}`,
-    customProperties: [{ name: 'brandkit.publicationId', value: publication.id ?? '' }, { name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, officeStyleFonts(ctx.brand, profile))) },
+    customProperties: [{ name: 'brandkit.publicationId', value: publication.id ?? '' }, { name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)])) },
       ...(publication.affiliation?.department ? [{ name: 'brandkit.affiliation', value: JSON.stringify(publication.affiliation) }] : []),
       ...(sourceRevision ? [{ name: 'brandkit.sourceRevision', value: sourceRevision }] : [])],
-    styles: officeStyles(ctx.brand, profile), fonts: embeddedFonts(ctx, officeStyleFonts(ctx.brand, profile)),
+    styles: officeStyles(ctx.brand, profile), fonts: embeddedFonts(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)]),
     numbering: { config: [{ reference: 'publication-numbering', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.START, style: { paragraph: { indent: { left: 360, hanging: 260 } } } }] }] },
     sections
   })
@@ -215,10 +239,11 @@ export const publicationHtml = (ctx, publication) => {
   validate(ctx, publication)
   const profile = profileOf(ctx, publication)
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
+  const tableStyle = tableLook(profile, ctx.brand).style
   const logo = logoOf(ctx, profile, publication.affiliation)
   const fontRules = []
   const seen = new Set()
-  for (const item of officeStyleFonts(ctx.brand, profile)) {
+  for (const item of [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)]) {
     const spec = ctx.brand.fonts?.[item.key]
     const bytes = ctx.fonts?.faces?.[item.key]?.bytes
     const signature = `${item.font}|${item.bold}|${item.italic}`
@@ -246,7 +271,7 @@ export const publicationHtml = (ctx, publication) => {
     if (block.type === 'table') {
       const total = block.widths?.reduce((sum, width) => sum + width, 0)
       const columns = total ? `<colgroup>${block.widths.map((width) => `<col style="width:${100 * width / total}%">`).join('')}</colgroup>` : ''
-      return `<table class="s-TableText">${block.caption ? `<caption class="s-Caption">${escapeHtml(block.caption)}</caption>` : ''}${columns}${block.headers?.length ? `<thead><tr>${block.headers.map((cell) => `<th scope="col">${escapeHtml(textOf(cell))}</th>`).join('')}</tr></thead>` : ''}<tbody>${block.rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(textOf(cell)).replace(/\n/g, '<br>')}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+      return `<table class="s-TableText t-${tableStyle}">${block.caption ? `<caption class="s-Caption">${escapeHtml(block.caption)}</caption>` : ''}${columns}${block.headers?.length ? `<thead><tr>${block.headers.map((cell) => `<th scope="col">${escapeHtml(textOf(cell))}</th>`).join('')}</tr></thead>` : ''}<tbody>${block.rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(textOf(cell)).replace(/\n/g, '<br>')}</td>`).join('')}</tr>`).join('')}</tbody></table>`
     }
     const image = block.placeholder ? null : imageSource(block.src)
     const size = figureSize(profile, block, image)
@@ -258,10 +283,11 @@ export const publicationHtml = (ctx, publication) => {
 <main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department && !(logo?.unit && !publication.affiliation.subdepartment) ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm">${logo?.unit ? '' : `<p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>`}${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
 <footer class="s-Footer"><span>${escapeHtml([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  '))}</span><span>${index + 1}</span></footer>
 </article>`).join('\n')
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="${escapeHtml(ctx.brand.name)}">${sourceRevision ? `<meta name="brandkit-source-revision" content="${escapeHtml(sourceRevision)}">` : ''}<meta name="brandkit-font-requirements" content="${escapeHtml(JSON.stringify(officeFontRequirements(ctx, officeStyleFonts(ctx.brand, profile), { format: 'html' })))}"><title>${escapeHtml(publication.title ?? ctx.brand.name)}</title><style>
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="${escapeHtml(ctx.brand.name)}">${sourceRevision ? `<meta name="brandkit-source-revision" content="${escapeHtml(sourceRevision)}">` : ''}<meta name="brandkit-font-requirements" content="${escapeHtml(JSON.stringify(officeFontRequirements(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)], { format: 'html' })))}"><title>${escapeHtml(publication.title ?? ctx.brand.name)}</title><style>
 ${fontRules.join('\n')}
 ${typographyCss}
 .affiliation{break-inside:avoid;break-after:avoid;overflow-wrap:anywhere}
-*{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}table{border-collapse:collapse;width:100%;margin:4mm 0}caption{caption-side:bottom;text-align:left;margin-top:3mm!important}td,th{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};padding:2mm;text-align:left;vertical-align:top}th{background:#${hex(profile.colours.tableHeader ?? profile.colours.ink)};color:#${hex(profile.colours.tableHeaderText ?? profile.colours.reverse, 'FFFFFF')};font-weight:700}tbody tr:nth-child(even){background:#${hex(profile.colours.light, 'F5F5F5')}}thead{display:table-header-group}tr{break-inside:avoid}.page.welcome-cover-page{padding:0!important;min-height:0!important;height:auto;display:block;overflow:hidden}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
+*{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}${tableCss(profile, ctx.brand, cssString)}
+.page.welcome-cover-page{padding:0!important;min-height:0!important;height:auto;display:block;overflow:hidden}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
 </style></head><body>${pages}</body></html>`
 }
