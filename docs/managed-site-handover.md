@@ -53,6 +53,7 @@ The installed CLI form is:
 ```text
 brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <dir>
   [--paper letter|a4] [--cover] [--pdf] [--issue] [--provider-logo <original PNG>]
+  [--cover-variant complete-mark|inset-frame|mark-pattern|type-only|legacy-crop]
   [--source-revision <revision>]
 ```
 
@@ -62,25 +63,40 @@ artwork. First Form 2.0 no longer needs the old 1.0 PNG override: its current ho
 artwork follows the supplied master. A supplied logo changes its placement in these service
 documents; it does not replace
 the logo in either source brand definition.
-When combining an original-logo override with `--cover`, supply a PNG; JPEG overrides are
-supported by the standard document layout only.
+When combining an original-logo override with either cover option, supply a PNG; JPEG
+overrides are supported by the standard document layout only.
 
 ## Optional designed cover
 
 `--cover` adds a designed front cover to the welcome guide and exports the same cover as a
-standalone `front-cover` publication. The practical information from the standard opening
-page remains in the guide. Without this flag, the existing standard cover is used.
+standalone `front-cover` publication. It preserves the original `legacy-crop` composition.
+`--cover-variant <id>` selects and enables a particular composition without requiring
+`--cover` as well. If both options are present, the explicit variant takes precedence. With
+neither option, the existing standard document opening is used. The practical information
+from that opening remains in the guide after a designed cover is added.
 
-For First Form 2.0, the design uses an Ash band, the exact horizontal First Form logo, a Black
-hero area, native Sora title text, one supplied large-crop cube-F supporting graphic, and the
-client's logo on a White plate. The identifying logos remain intact. The composition is new
-work for review; it is not represented as a previously approved brand application. It does
-not use the derived stacked or micro logo variants.
+| Stable ID | Composition | Status |
+| --- | --- | --- |
+| `complete-mark` | One complete supplied mark, contained within the supporting artwork area. | Proposed |
+| `inset-frame` | A complete mark on an inset Ash tile within the Black area. | Proposed |
+| `mark-pattern` | A contained arrangement of complete supplied marks. | Proposed |
+| `type-only` | An editable numbered index for Access, Support and Brand, without a supporting artwork image. | Proposed |
+| `legacy-crop` | The original large-crop supporting graphic; also selected by plain `--cover`. | Legacy |
+
+The four proposed variants are alternatives for review. No new direction is selected as a
+default or represented as an approved brand application. Build alternatives into separate
+output directories so each keeps its own manifest and source model. Unknown IDs, missing
+values and duplicate options are rejected.
+
+For First Form 2.0, the cover retains an Ash band, the exact horizontal First Form logo, a
+Black hero area, native Sora title text and the client's logo on a White plate. The identifying
+logos remain intact; the derived stacked and micro logo variants are not used.
 
 The Word cover's headings, subtitle, client name, date and edition are native, editable text.
-Logos and the supporting graphic are images; the cover is not one flattened page image.
-Keep Sora available when editing and recheck the rendered page after changing its wording.
-The publication model also retains the cover wording for rebuilding the outputs.
+The `type-only` index is editable text too. Logos and any supporting graphic remain separate
+images. Keep Sora available when editing and recheck the rendered page after changing its
+wording. The publication model records the variant and wording for rebuilding; older cover
+models without a `variant` field are interpreted as `legacy-crop`.
 
 ## Output package
 
@@ -89,11 +105,11 @@ The publication model also retains the cover wording for rebuilding the outputs.
 | `welcome-guide.publication.json`, `.html`, `.docx` | The complete website handover, with the provider's document styling. |
 | `quick-start.publication.json`, `.html`, `.docx` | A short reference for the main website links, access and support. |
 | `brand-reference.publication.json`, `.html`, `.docx` | The client's identity, supplied artwork, colours, type and use guidance. |
-| `front-cover.publication.json`, `.html`, `.docx` | The standalone designed cover, when `--cover` is requested; the same cover also opens the welcome guide. |
+| `front-cover.publication.json`, `.html`, `.docx` | The standalone designed cover, when either cover option is requested; the same cover also opens the welcome guide. |
 | Matching `.pdf` files | Shared print snapshots, when `--pdf` is requested. |
 | `index.html` | A local entry page for the package's documents. |
 | Source snapshots | The operational record and provider/client definitions used for this build. |
-| `manifest.json` | The build record and output inventory. |
+| `manifest.json` | The build record and output inventory, with the existing `cover` schema field and a separate `coverVariant` ID; both are `null` for a standard opening. |
 
 Keep the record and source snapshots with the maintained document files so the next edition
 can be rebuilt. Make operational changes in the handover record. Make identity changes in the
@@ -196,8 +212,12 @@ record or throws. `handoverPublications()` returns `{ welcome, quickStart, brand
 each value uses `brandkit/publication/1`. Its optional `providerLogo` is an embedded PNG/JPEG
 figure. Optional `brandFigures.logoVariants` and `brandFigures.palette` supply corresponding
 figures for the client brand reference. The optional `welcomeCover` value uses
-`brandkit/welcome-cover/1` and supplies the native cover text and artwork. Existing publication
-image rules still apply.
+`brandkit/welcome-cover/1` and supplies the native cover text and artwork. Its optional
+`variant` field uses one of the stable IDs above. Graphic variants require `graphic`; the
+`type-only` variant instead supplies `sections` containing `number`, `title` and `description`
+text. Cover images must be embedded PNGs. `WELCOME_COVER_VARIANTS` and
+`welcomeCoverVariant(id)` are exported from `brandkit/handover` for catalog access and exact
+ID validation; omitted selection resolves to `legacy-crop`.
 
 The Node build interface is available from `brandkit/handover/node`:
 
@@ -210,11 +230,15 @@ const manifest = await buildHandover({
   clientPath: '/path/to/ddcnorth/brand.json',
   outDir: '.handover/ddc-north',
   paper: 'letter',
-  cover: true,
+  coverVariant: 'complete-mark',
   pdf: true,
   issue: false
 })
 ```
+
+This example explicitly selects one proposal. `cover: true` without `coverVariant` preserves
+`legacy-crop`; `coverVariant` alone enables the selected cover. The returned manifest records
+that choice separately from its cover schema version.
 
 `sourceRevision` may also identify the code revision used for the build. It must describe the
 actual source being run; a published brand-pack hash does not establish a source repository's
@@ -259,9 +283,10 @@ its companion assets. The 1.0 two-block identity is retained only under the sour
 release's `legacy/1.0/` archive. Do not select it for this example or apply its old logo override.
 
 The source marks the stacked lockup and small-size mark as derived and awaiting approval.
-Its supporting studies have their own review status. The new cover uses the primary
-horizontal logo and the supplied large-crop graphic; it does not change those source
-approval records.
+Its supporting studies have their own review status. The covers retain the primary
+horizontal logo. `legacy-crop` uses the supplied large-crop graphic; the proposed alternatives
+use contained mark arrangements or native type. These document compositions do not change
+the source approval records.
 
 DDC North's current `brand.json` retains the supplied custom wordmark and the six-dot symbol.
 Use that artwork and its current palette and typography. Its copied README retains older

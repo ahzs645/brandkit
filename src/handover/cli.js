@@ -1,11 +1,11 @@
 import { buildHandover } from './node.js'
 
-const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--pdf] [--issue]'
+const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant complete-mark|inset-frame|mark-pattern|type-only|legacy-crop] [--pdf] [--issue]\n--cover preserves the legacy-crop design. --cover-variant selects and enables a cover; new variants are proposals for review.'
 
 export async function handover(args) {
   if (!args.length || args[0] === '--help') { console.log(usage); return }
   const [recordPath, ...rest] = args
-  const valued = { '--provider': 'providerPath', '--client': 'clientPath', '--out': 'outDir', '--paper': 'paper', '--provider-logo': 'providerLogoPath', '--source-revision': 'sourceRevision' }
+  const valued = { '--provider': 'providerPath', '--client': 'clientPath', '--out': 'outDir', '--paper': 'paper', '--provider-logo': 'providerLogoPath', '--source-revision': 'sourceRevision', '--cover-variant': 'coverVariant' }
   const flags = { '--pdf': 'pdf', '--issue': 'issue', '--cover': 'cover' }
   const options = { recordPath }
   const seen = new Set()

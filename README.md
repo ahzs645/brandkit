@@ -93,7 +93,10 @@ The output includes editable Word, print HTML, publication JSON, optional PDF, a
 index, logo assets and versioned source snapshots. Builds remain drafts unless `--issue` passes
 the explicit client-record completeness gate. Review the facts and final pagination before issue.
 The optional designed cover keeps its wording editable in Word and adds standalone `front-cover`
-exports. The example uses First Form identity 2.0 from the uploaded source's built `dist/brand.json`
+exports. Use `--cover-variant complete-mark`, `inset-frame`, `mark-pattern` or `type-only` to
+review the four proposed alternatives. The variant option also enables the cover. Plain `--cover`
+retains `legacy-crop`; no new direction is selected by default.
+The example uses First Form identity 2.0 from the uploaded source's built `dist/brand.json`
 or the extracted pack root; `source/kit/brand.json` is the archived 1.0 identity.
 See [managed-site handover](docs/managed-site-handover.md) for the CLI and integration API, and
 [the examples](examples/managed-site/README.md) for a blank template and the labelled First Form /

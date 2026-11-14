@@ -31,7 +31,7 @@ const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
-       brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--cover] [--pdf] [--issue]
+       brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--cover] [--cover-variant <id>] [--pdf] [--issue]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
        brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url] [--bundle [file.zip]]
 

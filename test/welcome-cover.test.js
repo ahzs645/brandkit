@@ -200,3 +200,45 @@ test('supplied cover status and names cannot override the handover record or mar
   assert.match(readyDraft.welcome.pages[0].cover.status, /^DRAFT · EDITION/)
   assert.doesNotMatch(readyDraft.welcome.pages[0].cover.status, /ISSUED|APPROVED/)
 })
+
+test('the type-only cover keeps its contents index editable and omits decorative artwork in Word and HTML', async () => {
+  const value = cover()
+  value.variant = 'type-only'
+  delete value.graphic
+  value.sections = [
+    { number: '01', title: 'Access', description: 'Sign in and find your way around.' },
+    { number: '02', title: 'Support', description: 'Know who to contact.' },
+    { number: '03', title: 'Your brand', description: 'Use your logo, colours and type.' }
+  ]
+  assert.deepEqual(validateWelcomeCover(value, profile), [])
+  const files = unzipSync(await publicationDocx(ctx, publication(value)))
+  const document = parse(files['word/document.xml'])
+  const native = wordText(files['word/document.xml'])
+  for (const section of value.sections) for (const text of Object.values(section)) assert.ok(native.includes(text), `${text} remains editable`)
+  assert.equal(elements(document, WORD, 'drawing').length, 2, 'only the two identifying logos are images')
+  const html = welcomeCoverHtml(profile, value)
+  assert.equal((html.match(/<img\b/g) || []).length, 2)
+  assert.match(html, /class="bk-welcome-cover__contents"/)
+  assert.doesNotMatch(html, /<img[^>]*bk-welcome-cover__art/)
+
+  value.sections[1].description = '<script>bad()</script> & text'
+  assert.match(welcomeCoverHtml(profile, value), /&lt;script&gt;bad\(\)&lt;\/script&gt; &amp; text/)
+  value.graphic = cover().graphic
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /must not include decorative graphic/)
+})
+
+test('cover variants reject ambiguous or incomplete index data while preserving schema-1 covers without a selector', () => {
+  assert.deepEqual(validateWelcomeCover(cover(), profile), [])
+  const value = cover()
+  value.variant = 'unknown-variant'
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /Unknown welcome cover variant/)
+  value.variant = 'type-only'
+  delete value.graphic
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /exactly three/)
+  value.sections = Array.from({ length: 3 }, () => ({ number: '1', title: 'Access', description: 'First line\nHidden line' }))
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /two digits/)
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /single-line text/)
+  value.variant = 'complete-mark'
+  value.graphic = cover().graphic
+  assert.match(validateWelcomeCover(value, profile).join('\n'), /sections are supported only/)
+})

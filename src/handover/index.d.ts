@@ -10,11 +10,46 @@ export interface HandoverFigure {
   heightMm?: number
 }
 
+export type WelcomeCoverVariant = 'complete-mark' | 'inset-frame' | 'mark-pattern' | 'type-only' | 'legacy-crop'
+
+export interface WelcomeCoverVariantMetadata {
+  readonly id: WelcomeCoverVariant
+  readonly label: string
+  readonly description: string
+  readonly status: 'proposed' | 'legacy'
+}
+
+export const WELCOME_COVER_VARIANTS: readonly Readonly<WelcomeCoverVariantMetadata>[]
+/** Omitted selection preserves legacy-crop; unsupported IDs throw. */
+export function welcomeCoverVariant(id?: WelcomeCoverVariant): Readonly<WelcomeCoverVariantMetadata>
+
+export interface WelcomeCoverImage {
+  /** Embedded PNG data URL. */
+  src: string
+  alt: string
+}
+
+export interface WelcomeCoverLogo extends WelcomeCoverImage {
+  /** Maximum width; the renderer preserves the image's proportions. */
+  widthMm?: number
+}
+
+export interface WelcomeCoverSection {
+  number: string
+  title: string
+  description: string
+}
+
 export interface WelcomeCover {
   schema: 'brandkit/welcome-cover/1'
-  providerLogo: HandoverFigure
-  clientLogo?: HandoverFigure
-  graphic: HandoverFigure
+  /** Missing in older saved publications; interpreted as legacy-crop. */
+  variant?: WelcomeCoverVariant
+  providerLogo: WelcomeCoverLogo
+  clientLogo?: WelcomeCoverLogo
+  /** Required for graphic variants; omitted for type-only. */
+  graphic?: WelcomeCoverImage
+  /** Native editable rows for type-only; validated by the cover renderer. */
+  sections?: WelcomeCoverSection[]
   kicker: string
   title: string
   subtitle: string
@@ -35,7 +70,7 @@ export interface HandoverPublication {
   paper: 'letter' | 'a4'
   example: boolean
   profile: Record<string, unknown>
-  pages: Array<{ id: string; title: string; kind: string; blocks: Array<Record<string, unknown>> }>
+  pages: Array<{ id: string; title: string; kind: string; cover?: WelcomeCover; blocks: Array<Record<string, unknown>> }>
   [key: string]: unknown
 }
 

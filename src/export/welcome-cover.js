@@ -1,6 +1,7 @@
 // Optional native cover for managed-site welcome publications. Only the supplied
 // logo and supporting artwork are images; every label and heading stays editable.
 import { officeFont } from '../engine/office.js'
+import { welcomeCoverVariant } from '../handover/cover-variants.js'
 
 const SCHEMA = 'brandkit/welcome-cover/1'
 const MAX_IMAGE_BYTES = 25 * 1024 * 1024
@@ -57,9 +58,11 @@ const pngSource = (source) => {
 const inspect = (cover, profile) => {
   const problems = [], images = {}
   if (!plain(cover)) return { problems: ['Welcome cover must be an object.'] }
-  const keys = new Set(['schema', 'providerLogo', 'graphic', 'clientLogo', 'kicker', 'title', 'subtitle', 'clientName', 'preparedBy', 'dateText', 'status'])
+  const keys = new Set(['schema', 'variant', 'providerLogo', 'graphic', 'sections', 'clientLogo', 'kicker', 'title', 'subtitle', 'clientName', 'preparedBy', 'dateText', 'status'])
   for (const key of Object.keys(cover)) if (!keys.has(key)) problems.push(`Welcome cover has an unsupported field: ${key}.`)
   if (cover.schema !== SCHEMA) problems.push(`Welcome cover schema must be ${SCHEMA}.`)
+  try { welcomeCoverVariant(cover.variant) } catch (error) { problems.push(error.message) }
+  const isType = cover.variant === 'type-only'
   const text = (key, max, maxLines = 1, required = false) => {
     const value = cover[key]
     if (typeof value !== 'string') return problems.push(`Welcome cover ${key} must be text.`)
@@ -74,6 +77,19 @@ const inspect = (cover, profile) => {
   text('preparedBy', 120)
   text('dateText', 80)
   text('status', 120)
+  if (isType) {
+    if (cover.graphic !== undefined) problems.push('A type-only welcome cover must not include decorative graphic artwork.')
+    if (!Array.isArray(cover.sections) || cover.sections.length !== 3) problems.push('A type-only welcome cover needs exactly three contents sections.')
+    else for (const [i, section] of cover.sections.entries()) {
+      if (!plain(section)) { problems.push(`Welcome cover section ${i + 1} must be an object.`); continue }
+      for (const key of Object.keys(section)) if (!['number', 'title', 'description'].includes(key)) problems.push(`Welcome cover section ${i + 1} has an unsupported field: ${key}.`)
+      for (const [key, max] of [['number', 2], ['title', 24], ['description', 100]]) {
+        const value = section[key]
+        if (typeof value !== 'string' || !value.trim() || value.length > max || /[\u0000-\u001f\u007f]/.test(value)) problems.push(`Welcome cover section ${i + 1}.${key} must be non-empty single-line text of at most ${max} characters.`)
+      }
+      if (typeof section.number === 'string' && !/^\d{2}$/.test(section.number)) problems.push(`Welcome cover section ${i + 1}.number must contain two digits.`)
+    }
+  } else if (cover.sections !== undefined) problems.push('Welcome cover sections are supported only by the type-only variant.')
 
   const width = profile?.paper?.widthMm, height = profile?.paper?.heightMm
   const margins = profile?.margins
@@ -101,7 +117,7 @@ const inspect = (cover, profile) => {
     try { images[key] = pngSource(value.src) } catch (error) { problems.push(`Welcome cover ${key} ${error.message}`) }
   }
   image('providerLogo', true, finite(contentWidth) ? contentWidth * 0.55 - 16 : 50)
-  image('graphic', true)
+  image('graphic', !isType)
   image('clientLogo', false, 60)
   if (images.graphic && Math.abs(images.graphic.width - images.graphic.height * 3) > Math.max(2, images.graphic.height * 0.01)) problems.push('Welcome cover graphic must have a 3:1 aspect ratio; supply artwork without cover text.')
   return { problems, images, contentWidth }
@@ -120,7 +136,7 @@ const prepare = (cover, profile) => {
   return {
     width: result.contentWidth,
     provider: fit(result.images.providerLogo, cover.providerLogo.widthMm ?? 42, 22),
-    graphic: fit(result.images.graphic, result.contentWidth - 16, Infinity),
+    graphic: result.images.graphic ? fit(result.images.graphic, result.contentWidth - 16, Infinity) : null,
     client: result.images.clientLogo ? fit(result.images.clientLogo, cover.clientLogo.widthMm ?? 60, 36) : null
   }
 }
@@ -157,7 +173,7 @@ export const welcomeCoverDocx = async (ctx, profile, cover) => {
   const cell = (width, fill, children, padding = {}, center = false) => new TableCell({ width: { size: mmTwips(width), type: WidthType.DXA }, shading: { fill },
     margins: Object.fromEntries(['top', 'bottom', 'left', 'right'].map((side) => [side, mmTwips(padding[side] ?? 0)])),
     borders, verticalAlign: center ? VerticalAlignTable.CENTER : VerticalAlignTable.TOP, children })
-  const table = (widths, cells, height) => new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(layout.width), type: WidthType.DXA },
+  const table = (widths, cells, height) => new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(widths.reduce((a, b) => a + b, 0)), type: WidthType.DXA },
     columnWidths: widths.map(mmTwips), borders, rows: [new TableRow({ cantSplit: true, keepNext: false, ...(height ? { height: { value: mmTwips(height), rule: HeightRule.ATLEAST } } : {}), children: cells })] })
   const columns = [layout.width * 0.55, layout.width * 0.45]
   // LibreOffice adds vertical cell padding to an ATLEAST row minimum. Supply
@@ -166,10 +182,18 @@ export const welcomeCoverDocx = async (ctx, profile, cover) => {
     cell(columns[0], 'DFDFDF', [picture(layout.provider, cover.providerLogo.alt)], { top: 8, bottom: 8, left: 8, right: 8 }, true),
     cell(columns[1], 'DFDFDF', [paragraph(cover.kicker, 'label', 9, '000000', { caps: true, align: AlignmentType.RIGHT })], { top: 8, bottom: 8, left: 8, right: 8 }, true)
   ], 35 - 8 - 8)
+  const sectionWidth = (layout.width - 16) / 3
+  const contents = cover.variant === 'type-only' ? table([sectionWidth, sectionWidth, sectionWidth], cover.sections.map((section, i) =>
+    cell(sectionWidth, '000000', [
+      paragraph(section.number, 'title', 26, 'C8C8C8', { after: 4, lineHeight: 1.1 }),
+      paragraph(section.title, 'title', 14, 'FFFFFF', { after: 3, lineHeight: 1.15 }),
+      paragraph(section.description, 'body', 10, 'C8C8C8', { lineHeight: 1.4 })
+    ], { top: 4, bottom: 4, right: i < 2 ? 6 : 0 })
+  ), (layout.width - 16) / 3 - 8) : null
   const hero = table([layout.width], [cell(layout.width, '000000', [
     paragraph(cover.title, 'title', 38, 'FFFFFF', { after: 4, lineHeight: 1.1, outlineLevel: 0 }),
     ...(cover.subtitle ? [paragraph(cover.subtitle, 'body', 11, 'C8C8C8', { after: 8, lineHeight: 1.35 })] : [spacer(4)]),
-    picture(layout.graphic, cover.graphic.alt)
+    ...(contents ? [contents, spacer(0.1)] : [picture(layout.graphic, cover.graphic.alt)])
   ], { top: 8, bottom: 6, left: 8, right: 8 })])
   const metadata = [
     paragraph('Prepared for', 'label', 8.5, '484848', { after: 2, caps: true }),
@@ -207,6 +231,12 @@ export const welcomeCoverHtml = (profile, cover) => {
 .bk-welcome-cover .bk-welcome-cover__title{font-family:var(--bk-cover-title-font),sans-serif;font-weight:var(--bk-cover-title-weight);font-style:var(--bk-cover-title-style);font-size:38pt;line-height:1.1;letter-spacing:-.02em;margin:0 0 4mm;color:#FFF}
 .bk-welcome-cover .bk-welcome-cover__subtitle{font-size:11pt;line-height:1.35;margin:0 0 8mm;color:#C8C8C8}
 .bk-welcome-cover .bk-welcome-cover__art{margin:0}
+.bk-welcome-cover .bk-welcome-cover__contents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));min-height:calc((var(--bk-cover-width) - 16mm)/3)}
+.bk-welcome-cover .bk-welcome-cover__section{padding:4mm 6mm 4mm 0;min-width:0}
+.bk-welcome-cover .bk-welcome-cover__section:last-child{padding-right:0}
+.bk-welcome-cover .bk-welcome-cover__number{font-family:var(--bk-cover-title-font),sans-serif;font-size:26pt;line-height:1.1;letter-spacing:-.02em;color:#C8C8C8;margin:0 0 4mm}
+.bk-welcome-cover .bk-welcome-cover__section-title{font-family:var(--bk-cover-title-font),sans-serif;font-weight:var(--bk-cover-title-weight);font-size:14pt;line-height:1.15;letter-spacing:-.02em;color:#FFF;margin:0 0 3mm}
+.bk-welcome-cover .bk-welcome-cover__section-description{font-size:10pt;line-height:1.4;color:#C8C8C8}
 .bk-welcome-cover .bk-welcome-cover__hero--no-subtitle .bk-welcome-cover__art{margin-top:4mm}
 .bk-welcome-cover .bk-welcome-cover__client{display:grid;grid-template-columns:72mm minmax(0,1fr);min-height:48mm;margin-top:5mm;background:#FFF;align-items:center}
 .bk-welcome-cover .bk-welcome-cover__plate{width:72mm;height:48mm;padding:6mm;display:flex;justify-content:center;align-items:center;background:#FFF}
@@ -223,7 +253,7 @@ export const welcomeCoverHtml = (profile, cover) => {
 </style>
 <section class="bk-welcome-cover" aria-label="Website welcome cover" style="${escapeHtml(vars)}">
   <div class="bk-welcome-cover__masthead"><div>${image(layout.provider, cover.providerLogo.alt, 'bk-welcome-cover__provider-logo')}</div><div><p class="bk-welcome-cover__kicker">${text(cover.kicker)}</p></div></div>
-  <div class="bk-welcome-cover__hero${cover.subtitle ? '' : ' bk-welcome-cover__hero--no-subtitle'}"><h1 class="bk-welcome-cover__title">${text(cover.title)}</h1>${cover.subtitle ? `<p class="bk-welcome-cover__subtitle">${text(cover.subtitle)}</p>` : ''}${image(layout.graphic, cover.graphic.alt, 'bk-welcome-cover__art')}</div>
+  <div class="bk-welcome-cover__hero${cover.subtitle ? '' : ' bk-welcome-cover__hero--no-subtitle'}"><h1 class="bk-welcome-cover__title">${text(cover.title)}</h1>${cover.subtitle ? `<p class="bk-welcome-cover__subtitle">${text(cover.subtitle)}</p>` : ''}${cover.variant === 'type-only' ? `<div class="bk-welcome-cover__contents">${cover.sections.map(section => `<div class="bk-welcome-cover__section"><p class="bk-welcome-cover__number">${text(section.number)}</p><h2 class="bk-welcome-cover__section-title">${text(section.title)}</h2><p class="bk-welcome-cover__section-description">${text(section.description)}</p></div>`).join('')}</div>` : image(layout.graphic, cover.graphic.alt, 'bk-welcome-cover__art')}</div>
   <div class="bk-welcome-cover__client${layout.client ? '' : ' bk-welcome-cover__client--no-logo'}">${layout.client ? `<div class="bk-welcome-cover__plate">${image(layout.client, cover.clientLogo.alt, 'bk-welcome-cover__client-logo')}</div>` : ''}<div class="bk-welcome-cover__metadata"><p class="bk-welcome-cover__prepared-for">Prepared for</p><h2 class="bk-welcome-cover__client-name">${text(cover.clientName)}</h2>${cover.preparedBy ? `<p class="bk-welcome-cover__detail">Prepared by ${text(cover.preparedBy)}</p>` : ''}${cover.dateText ? `<p class="bk-welcome-cover__detail bk-welcome-cover__date">${text(cover.dateText)}</p>` : ''}${cover.status ? `<p class="bk-welcome-cover__status">${text(cover.status)}</p>` : ''}</div></div>
 </section>`
 }

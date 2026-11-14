@@ -13,6 +13,7 @@ import { sanitizeSvg } from '../printer/svg.js'
 import { assertHandover } from './record.js'
 import { handoverPublications } from './publications.js'
 import { createWelcomeCover } from './cover.js'
+import { welcomeCoverVariant } from './cover-variants.js'
 
 const json = value => `${JSON.stringify(value, null, 2)}\n`
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
@@ -59,9 +60,14 @@ ${fontRules}
 }
 
 /** Build into a new or empty directory; no existing delivery is overwritten. */
-export async function buildHandover({ recordPath, providerPath, clientPath, outDir, paper = 'letter', pdf = false, issue = false, cover = false, providerLogoPath, sourceRevision } = {}) {
+export async function buildHandover({ recordPath, providerPath, clientPath, outDir, paper = 'letter', pdf = false, issue = false, cover = false, coverVariant, providerLogoPath, sourceRevision } = {}) {
   if (!recordPath || !providerPath || !clientPath || !outDir) throw new Error('recordPath, providerPath, clientPath and outDir are required.')
   if (!['letter', 'a4'].includes(paper)) throw new Error('paper must be letter or a4.')
+  if (typeof cover !== 'boolean') throw new TypeError('cover must be a boolean; use coverVariant to select a design.')
+  // An explicit selection enables the cover. The original flag retains its
+  // existing appearance, independent of the order of proposed catalog entries.
+  const selectedCover = coverVariant !== undefined ? welcomeCoverVariant(coverVariant) : cover ? welcomeCoverVariant('legacy-crop') : null
+  const coverEnabled = selectedCover !== null
   const recordBytes = await readFile(resolve(recordPath))
   if (recordBytes.length > 2 * 1024 * 1024) throw new Error('A handover record must be smaller than 2 MB.')
   const record = JSON.parse(recordBytes)
@@ -80,7 +86,7 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     originalMime = originalBytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) ? 'image/png'
       : originalBytes[0] === 255 && originalBytes[1] === 216 && originalBytes[2] === 255 ? 'image/jpeg' : null
     if (!originalMime) throw new Error('Provider logo must be an original PNG or JPEG image.')
-    if (cover && originalMime !== 'image/png') throw new Error('The designed cover needs a PNG provider-logo override; omit the override to use the brand artwork.')
+    if (coverEnabled && originalMime !== 'image/png') throw new Error('The designed cover needs a PNG provider-logo override; omit the override to use the brand artwork.')
     providerLogo = { src: data(originalBytes, originalMime), alt: `${provider.brand.name} supplied logo`, widthMm: Math.max(40, provider.brand.logoPolicy?.minimumWidthMm ?? provider.brand.lockup?.minimumHorizontalWidthMm ?? 0), heightMm: 45 }
   }
   const clientDocument = documentProfile(client.brand, { paper })
@@ -102,7 +108,7 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     palette: { src: data(await renderer.png(paletteSvg, 1800), 'image/png'), alt: 'Brand palette in the same order as the table below', widthMm: figureWidth, heightMm: Math.min(50, figureWidth * paletteHeight / 900) },
     ...(clientDocument.logo.minimumWidthMm <= figureWidth * variantWidth / 840 ? { logoVariants: { src: data(await renderer.png(variantsSvg, 2100), 'image/png'), alt: 'Supplied primary and reverse logos on contrasting backgrounds', caption: 'Primary on a light background · reverse on the primary background.', widthMm: figureWidth, heightMm: stackVariants ? 88 : 44 } } : {})
   }
-  const coverAssets = cover ? await createWelcomeCover(providerCtx, clientCtx, record, { ...renderer, paper, issue, originalLogo: providerLogo }) : null
+  const coverAssets = coverEnabled ? await createWelcomeCover(providerCtx, clientCtx, record, { ...renderer, paper, issue, originalLogo: providerLogo, variant: selectedCover.id }) : null
   const publications = handoverPublications(record, { providerBrand: provider.brand, clientBrand: client.brand, paper, providerLogo, brandFigures, welcomeCover: coverAssets?.cover, forIssue: issue })
   if (coverAssets) publications.frontCover = { ...structuredClone(publications.welcome), id: `${record.id}-front-cover`, title: 'Website welcome cover', pages: [structuredClone(publications.welcome.pages[0])] }
   const target = resolve(outDir)
@@ -119,7 +125,7 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     await writeFile(join(work, 'sources', 'provider-consumer.json'), json(providerProfile))
     await writeFile(join(work, 'sources', 'client-consumer.json'), json(clientProfile))
     if (coverAssets) {
-      await writeFile(join(work, 'assets', 'cover-graphic.svg'), coverAssets.svg.graphic)
+      if (coverAssets.svg.graphic) await writeFile(join(work, 'assets', 'cover-graphic.svg'), coverAssets.svg.graphic)
       await writeFile(join(work, 'assets', 'provider-logo-primary.svg'), coverAssets.svg.providerLogo)
     }
     if (originalBytes) await writeFile(join(work, 'assets', `provider-logo-original${originalMime === 'image/png' ? '.png' : '.jpg'}`), originalBytes)
@@ -136,8 +142,8 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
       await writeFile(docxPath, await publicationDocx(ctx, publication, renderer))
       if (pdf) await pdfFromDocx(docxPath, { outDir: work, ctx })
     }
-    await writeFile(join(work, 'index.html'), viewer(record, providerCtx, clientProfile, providerLogo?.src, { pdf, issue, cover }))
-    await writeFile(join(work, 'READ-ME.txt'), `MANAGED WEBSITE DELIVERY\n\nOpen index.html to browse the documents locally. Print the PDF files; edit the Word masters and re-export after changes. ${cover ? "The welcome guide includes a designed front cover, also exported separately as front-cover. Cover text remains editable; only logos and supporting artwork are images. The cover is a new document composition for review, not a previously approved brand master. " : ""} The publication JSON files can be imported in Brandkit Documents with the matching provider or client brand open.\n\nStatus: ${issue ? 'Issued from a reviewed client record' : 'DRAFT — not issued'}. This is a document pack, not a sign-in system or service agreement. Confirm operational facts, access steps, fees, rights and support terms with the client. No password or setup token belongs in these files.\n\nThe sources folder is an immutable snapshot of this build's records and brand definitions. It can include private client information. Deliver it through the agreed private channel; a public Brandkit share link is not access control. Rebuilding requires Brandkit and the original brand packs, including their fonts and licences. The assets folder contains derived client logo files; use the original kit for its full production assets and licence terms.\n\nProvider source: ${provider.brand.source || 'See source brand definition'}\nProvider artwork status: ${provider.brand.status || 'See source brand definition'}\n${originalBytes ? 'Visible provider logo: supplied original raster file, preserved without modification. The provider consumer profile separately retains the generated artwork and its source status.\n' : ''}Client source: ${client.brand.source || 'See source brand definition'}\nClient artwork status: ${client.brand.status || 'See source brand definition'}\n\nSource revision: ${source || 'Not supplied'}\nReview layout in Word/PDF after edits. File hashes in manifest.json identify this snapshot, not its factual correctness or legal approval.\n`)
+    await writeFile(join(work, 'index.html'), viewer(record, providerCtx, clientProfile, providerLogo?.src, { pdf, issue, cover: Boolean(coverAssets) }))
+    await writeFile(join(work, 'READ-ME.txt'), `MANAGED WEBSITE DELIVERY\n\nOpen index.html to browse the documents locally. Print the PDF files; edit the Word masters and re-export after changes. ${coverAssets ? `The welcome guide includes a designed front cover, also exported separately as front-cover. Cover selection: ${selectedCover.id} (${selectedCover.label}; ${selectedCover.status}). Cover text remains editable; only logos and any supporting artwork are images. The cover is a document composition for review, not a previously approved brand master. ` : ""} The publication JSON files can be imported in Brandkit Documents with the matching provider or client brand open.\n\nStatus: ${issue ? 'Issued from a reviewed client record' : 'DRAFT — not issued'}. This is a document pack, not a sign-in system or service agreement. Confirm operational facts, access steps, fees, rights and support terms with the client. No password or setup token belongs in these files.\n\nThe sources folder is an immutable snapshot of this build's records and brand definitions. It can include private client information. Deliver it through the agreed private channel; a public Brandkit share link is not access control. Rebuilding requires Brandkit and the original brand packs, including their fonts and licences. The assets folder contains derived client logo files; use the original kit for its full production assets and licence terms.\n\nProvider source: ${provider.brand.source || 'See source brand definition'}\nProvider artwork status: ${provider.brand.status || 'See source brand definition'}\n${originalBytes ? 'Visible provider logo: supplied original raster file, preserved without modification. The provider consumer profile separately retains the generated artwork and its source status.\n' : ''}Client source: ${client.brand.source || 'See source brand definition'}\nClient artwork status: ${client.brand.status || 'See source brand definition'}\n\nSource revision: ${source || 'Not supplied'}\nReview layout in Word/PDF after edits. File hashes in manifest.json identify this snapshot, not its factual correctness or legal approval.\n`)
     const files = []
     async function inventory(folder, prefix = '') {
       for (const entry of (await readdir(folder, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -147,7 +153,7 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
       }
     }
     await inventory(work)
-    const manifest = { schema: 'brandkit/managed-site-delivery/1', recordId: record.id, kind: record.kind, status: issue ? 'issued' : 'draft', version: record.version, generatedAt: new Date().toISOString(), sourceRevision: source || null, paper, cover: coverAssets ? 'brandkit/welcome-cover/1' : null,
+    const manifest = { schema: 'brandkit/managed-site-delivery/1', recordId: record.id, kind: record.kind, status: issue ? 'issued' : 'draft', version: record.version, generatedAt: new Date().toISOString(), sourceRevision: source || null, paper, cover: coverAssets ? 'brandkit/welcome-cover/1' : null, coverVariant: selectedCover?.id ?? null,
       provider: { id: provider.brand.id, version: provider.brand.version, sha256: hash(provider.bytes), originalLogo: originalBytes ? { sha256: hash(originalBytes), format: originalMime } : null },
       client: { id: client.brand.id, version: client.brand.version, sha256: hash(client.bytes) },
       review: record.review, note: 'Validation checks the record structure and issue prerequisites. The preparer remains responsible for facts, agreements, artwork approval and final pagination.', files }
