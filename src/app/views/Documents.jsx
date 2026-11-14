@@ -14,7 +14,7 @@ const asJson = (value) => `${JSON.stringify(value, null, 2)}\n`
 // to a phone's width; anything still wider (a wide table) is scaled down to fit rather than cut.
 // Its height is the root element's box, not its scrollHeight, which never drops below the frame's
 // own height and so would only ever grow.
-const DocumentFrame = ({ frame, title, html }) => {
+export const DocumentFrame = ({ frame, title, html }) => {
   const box = useRef(null)
   const [fit, setFit] = useState({ height: 640, width: 0, scale: 1 })
   const measure = () => {

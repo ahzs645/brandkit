@@ -25,6 +25,12 @@ brandkit draws the whole kit from it:
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's
   fronts and back, a letterhead in each size or rank, with a PDF of every variant.
+- **Client packs**: under Templates, a welcome guide, quick-start sheet and brand reference for a
+  client, set in a provider's brand (First Form) and the client's. Tick which documents and
+  sections go in, choose the cover and table style, fill in the facts, and the preview rebuilds
+  as you go; **Download pack** zips Word, print HTML and sources. The command line (`brandkit
+  handover`) builds the same pack from the same record. See
+  [docs/managed-site-handover.md](docs/managed-site-handover.md).
 - **Office documents**: the documents people type, as Word templates (letterheads with their
   continuation sheet, memoranda, releases, invoices, reports, envelopes), the slides as a
   PowerPoint template with a layout for each slide type, and the email signature as HTML ready to

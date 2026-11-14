@@ -40,7 +40,7 @@ const roleKeys = (profile) => ({ title: profile.typography.title.font, body: pro
  * The cover's artwork (one page-sized PNG: grounds, supporting graphic, both logos) and its text
  * frames. Every word on the cover is a field of the returned object, set as native text.
  */
-export async function createWelcomeCover(provider, client, record, { png, paper = 'letter', issue = false, variant = record.cover?.variant || DEFAULT_COVER_VARIANT } = {}) {
+export async function createWelcomeCover(provider, client, record, { png, paper = 'letter', issue = false, variant = record.cover?.variant || DEFAULT_COVER_VARIANT, dpi = 300 } = {}) {
   if (typeof png !== 'function') throw new TypeError('A PNG renderer is required for the designed cover.')
   const choice = welcomeCoverVariant(variant)
   const providerProfile = documentProfile(provider.brand, { paper })
@@ -56,7 +56,8 @@ export async function createWelcomeCover(provider, client, record, { png, paper 
     preparedBy: record.provider.name || provider.brand.name,
     dateText: coverDate(record),
     status: coverStatus(record, issue),
-    ...(variant === 'index' ? { sections: wording.sections.map(({ title, description }) => ({ title, description })) } : {})
+    // An entry left blank keeps the default in its place.
+    ...(variant === 'index' ? { sections: wording.sections.map(({ title, description }, i) => ({ title: title?.trim() || WELCOME_COVER_TEXT.sections[i]?.title || 'Section', description: description?.trim() || WELCOME_COVER_TEXT.sections[i]?.description || 'More inside.' })) } : {})
   }
   const layout = coverLayout({
     variant, paper, provider,
@@ -66,8 +67,9 @@ export async function createWelcomeCover(provider, client, record, { png, paper 
     measure: coverMeasure(provider.fonts, roleKeys(providerProfile))
   })
   const artwork = sanitizeSvg(layout.svg)
-  // 300 dpi across the page: sharp in print, small for flat colour.
-  const pixels = Math.round(layout.widthMm / 25.4 * 300)
+  // 300 dpi across the page by default: sharp in print, small for flat colour. A live preview
+  // can ask for less.
+  const pixels = Math.round(layout.widthMm / 25.4 * Math.max(72, Math.min(600, dpi)))
   const cover = {
     schema: WELCOME_COVER_SCHEMA,
     variant,

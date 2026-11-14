@@ -105,3 +105,49 @@ export function createWelcomeCover(provider: { brand: Record<string, any>; fonts
   issue?: boolean
   variant?: WelcomeCoverVariant
 }): Promise<{ cover: WelcomeCover; svg: { artwork: string; providerLogo: string; clientLogo: string }; profile: Record<string, unknown> }>
+
+export type PackDocument = 'welcome' | 'quickStart' | 'brandGuide' | 'frontCover'
+export type WelcomeSection = 'access' | 'tasks' | 'services' | 'support' | 'continuity' | 'resources'
+export type BrandSection = 'logo' | 'colour' | 'files'
+export type TableStyle = 'grid' | 'ruled' | 'ledger' | 'panel' | 'accent'
+interface Choice<Id> { readonly id: Id; readonly label: string; readonly description: string }
+export const PACK_DOCUMENTS: readonly (Choice<PackDocument> & { readonly file: string; readonly eyebrow: string })[]
+export const WELCOME_SECTIONS: readonly Choice<WelcomeSection>[]
+export const BRAND_SECTIONS: readonly Choice<BrandSection>[]
+export const PACK_SCHEMA: 'brandkit/managed-site-delivery/1'
+
+/** Choices for one pack; each overrides the record's `pack`, which overrides the defaults. */
+export interface PackChoices {
+  documents?: PackDocument[]
+  sections?: WelcomeSection[]
+  brandSections?: BrandSection[]
+  cover?: boolean
+  coverVariant?: WelcomeCoverVariant
+  tableStyle?: TableStyle
+  paper?: 'letter' | 'a4'
+  issue?: boolean
+}
+export interface LoadedBrand { brand: Record<string, any>; fonts?: unknown; bytes?: Uint8Array }
+export interface PackArgs {
+  record: HandoverRecord
+  provider: LoadedBrand
+  client: LoadedBrand
+  options?: PackChoices
+  png: (svg: string, width: number) => Promise<Uint8Array>
+  /** The cover artwork's resolution; 300 for print, less for a live preview. */
+  dpi?: number
+  sourceRevision?: string
+}
+export interface PreparedPack {
+  record: HandoverRecord
+  choices: Required<Omit<PackChoices, 'cover' | 'tableStyle'>> & { coverVariant: WelcomeCoverVariant | null; tableStyle?: TableStyle }
+  publications: Partial<Record<PackDocument, HandoverPublication>>
+  cover: { cover: WelcomeCover; svg: { artwork: string; providerLogo: string; clientLogo: string } } | null
+}
+export function packOptions(record: HandoverRecord, overrides?: PackChoices): PreparedPack['choices']
+export function preparePack(args: PackArgs): Promise<PreparedPack>
+/** Print views by document id, for a preview. */
+export function packHtml(prepared: PreparedPack, brands: { provider: LoadedBrand; client: LoadedBrand; sourceRevision?: string }): Partial<Record<PackDocument, string>>
+/** The whole pack in memory: `[path, bytes]` pairs, manifest included. */
+export function composePack(args: PackArgs): Promise<{ prepared: PreparedPack; manifest: Record<string, unknown>; files: [string, Uint8Array][] }>
+export function sha256(value: string | Uint8Array): Promise<string>

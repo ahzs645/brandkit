@@ -4,6 +4,12 @@
  * This record must never contain credentials or account recovery material.
  */
 import { WELCOME_COVER_VARIANTS } from './cover-variants.js'
+import { TABLE_STYLES } from '../engine/documentation.js'
+
+// What a pack can hold; pack.js and publications.js describe each.
+const PACK_DOCUMENT_IDS = ['welcome', 'quickStart', 'brandGuide', 'frontCover']
+const WELCOME_SECTION_IDS = ['access', 'tasks', 'services', 'support', 'continuity', 'resources']
+const BRAND_SECTION_IDS = ['logo', 'colour', 'files']
 
 export const HANDOVER_SCHEMA = 'brandkit/managed-site-handover/1'
 
@@ -53,6 +59,16 @@ const SHAPE = object({
     variant: text(20, { values: ['', ...WELCOME_COVER_VARIANTS.map(item => item.id)], optional: true }),
     kicker: text(60, { optional: true }), title: text(80, { optional: true }), subtitle: text(220, { optional: true }),
     sections: { ...list(object({ title: text(24), description: text(100) }), 4), optional: true }
+  }, { optional: true }),
+  // Optional choices for the pack built from this record: which documents and sections it holds,
+  // the cover on or off, the table style and the paper. Omitted, every document and section is in.
+  pack: object({
+    documents: { ...list(text(20, { values: PACK_DOCUMENT_IDS }), 4), optional: true },
+    sections: { ...list(text(20, { values: WELCOME_SECTION_IDS }), 6), optional: true },
+    brandSections: { ...list(text(20, { values: BRAND_SECTION_IDS }), 3), optional: true },
+    cover: text(3, { values: ['', 'on', 'off'], optional: true }),
+    tableStyle: text(10, { values: ['', ...TABLE_STYLES], optional: true }),
+    paper: text(6, { values: ['', 'letter', 'a4'], optional: true })
   }, { optional: true })
 })
 

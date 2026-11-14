@@ -2,3 +2,5 @@ export { HANDOVER_SCHEMA, createHandoverTemplate, handoverProblems, assertHandov
 export { handoverPublications } from './publications.js'
 export { DEFAULT_COVER_VARIANT, WELCOME_COVER_VARIANTS, welcomeCoverVariant } from './cover-variants.js'
 export { WELCOME_COVER_SCHEMA, WELCOME_COVER_TEXT, createWelcomeCover } from './cover.js'
+export { BRAND_SECTIONS, WELCOME_SECTIONS } from './publications.js'
+export { PACK_DOCUMENTS, PACK_SCHEMA, composePack, documentBrand, packFiles, packHtml, packIndex, packManifest, packOptions, preparePack, sha256 } from './pack.js'

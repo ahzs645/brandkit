@@ -11,6 +11,10 @@ export interface HandoverDeliveryManifest {
   paper: 'letter' | 'a4'
   cover: 'brandkit/welcome-cover/2' | null
   coverVariant: WelcomeCoverVariant | null
+  documents: Array<'welcome' | 'quickStart' | 'brandGuide' | 'frontCover'>
+  sections: string[]
+  brandSections: string[]
+  tableStyle: 'grid' | 'ruled' | 'ledger' | 'panel' | 'accent' | null
   provider: { id: string; version: string; sha256: string; originalLogo: { sha256: string; format: string } | null }
   client: { id: string; version: string; sha256: string }
   review: { checkedBy: string; checkedOn: string }
@@ -31,6 +35,9 @@ export function buildHandover(options: {
   coverVariant?: WelcomeCoverVariant
   /** One table design for every publication in this build, in place of each brand's own. */
   tableStyle?: 'grid' | 'ruled' | 'ledger' | 'panel' | 'accent'
+  documents?: Array<'welcome' | 'quickStart' | 'brandGuide' | 'frontCover'>
+  sections?: Array<'access' | 'tasks' | 'services' | 'support' | 'continuity' | 'resources'>
+  brandSections?: Array<'logo' | 'colour' | 'files'>
   issue?: boolean
   providerLogoPath?: string
   sourceRevision?: string

@@ -35,7 +35,37 @@ function model(brand, record, title, purpose, paper, forIssue) {
  * `forIssue` is an explicit data-quality gate, never an assertion that claims are verified.
  * Inspect Word/PDF pagination after filling a record: arbitrary prose can extend a page.
  */
-export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, welcomeCover, forIssue = false, tableStyle } = {}) {
+/** The welcome guide's sections after its opening page, in order. Each can be left out of a pack. */
+export const WELCOME_SECTIONS = Object.freeze([
+  { id: 'access', label: 'Getting started', description: 'How to sign in, and the first session together.' },
+  { id: 'tasks', label: 'Everyday tasks', description: 'The tasks the client does, step by step.' },
+  { id: 'services', label: 'Services & responsibilities', description: 'Who owns, runs and pays for each service.' },
+  { id: 'support', label: 'Help & ongoing care', description: 'Support contacts, hours and how to ask for a change.' },
+  { id: 'continuity', label: 'Keeping things current', description: 'Backups, restoring, rights and moving the site.' },
+  { id: 'resources', label: 'Useful files & notes', description: 'Asset links and notes, when the record has any.' }
+].map(Object.freeze))
+/** The brand reference's sections after its opening page. */
+export const BRAND_SECTIONS = Object.freeze([
+  { id: 'logo', label: 'Using the logo', description: 'Logo variants, clear space and minimum sizes.' },
+  { id: 'colour', label: 'Colour & typography', description: 'The palette and the type system.' },
+  { id: 'files', label: 'Choose the right file', description: 'Which format for which job, and what to keep together.' }
+].map(Object.freeze))
+const sectionOf = (id) => id.replace(/^brand-/, '').replace(/-\d+$/, '').replace(/^colours$/, 'colour')
+
+/**
+ * Keeps the opening page and the chosen sections, numbering what remains 01, 02 … in order, so a
+ * guide with a section left out does not skip a number.
+ */
+const choose = (pages, chosen, known) => {
+  if (!chosen) return pages
+  const optional = (page) => known.some((item) => item.id === sectionOf(page.id))
+  const kept = pages.filter((page) => !optional(page) || chosen.includes(sectionOf(page.id)))
+  const numbers = new Map()
+  for (const page of kept.filter(optional)) if (!numbers.has(sectionOf(page.id))) numbers.set(sectionOf(page.id), String(numbers.size + 1).padStart(2, '0'))
+  return kept.map((page) => !optional(page) ? page : { ...page, blocks: page.blocks.map((block) => block.type === 'heading' && /^\d{2} \/ /.test(block.text) ? { ...block, text: block.text.replace(/^\d{2}/, numbers.get(sectionOf(page.id))) } : block) })
+}
+
+export function handoverPublications(record, { providerBrand, clientBrand, paper = 'letter', providerLogo, brandFigures = {}, welcomeCover, forIssue = false, tableStyle, sections, brandSections } = {}) {
   assertHandover(record, { forIssue })
   if (!providerBrand?.id || !clientBrand?.id) throw new TypeError('Provider and client brand definitions are required.')
   if (record.provider.brandId && record.provider.brandId !== providerBrand.id) throw new Error('Provider brandId does not match the provider brand.')
@@ -250,6 +280,11 @@ export function handoverPublications(record, { providerBrand, clientBrand, paper
     overview.blocks = [h('Your website details'), ...overview.blocks.slice(firstParagraph)]
     welcome.pages.unshift({ id: 'front-cover', title: supplied.kicker || 'Cover', kind: 'cover', cover: supplied, blocks: [] })
   }
+  for (const [name, list, known] of [['sections', sections, WELCOME_SECTIONS], ['brandSections', brandSections, BRAND_SECTIONS]]) {
+    if (list !== undefined && (!Array.isArray(list) || list.some((id) => !known.some((item) => item.id === id)))) throw new Error(`${name} must list only ${known.map((item) => item.id).join(', ')}.`)
+  }
+  welcome.pages = choose(welcome.pages, sections, WELCOME_SECTIONS)
+  brandGuide.pages = choose(brandGuide.pages, brandSections, BRAND_SECTIONS)
   // A table style for this build replaces each brand's own (documentation.tables.style).
   if (tableStyle !== undefined) {
     if (!TABLE_STYLES.includes(tableStyle)) throw new Error(`Unknown table style: ${String(tableStyle)}. Choose ${TABLE_STYLES.join(', ')}.`)

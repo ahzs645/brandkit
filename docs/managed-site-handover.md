@@ -66,6 +66,56 @@ the logo in either source brand definition.
 The designed cover always draws the provider's own vector artwork; an original-logo override
 applies to the standard document layout.
 
+## Build a pack in the app
+
+Open the client's brand in brandkit and choose **Templates → Client pack**. The open brand is the
+client; choose the provider (First Form) under **Prepared by** from the brands kept in the browser.
+Both brands' packs must be added first (drop them on the page, or **⋯ → Open a brand…**).
+
+On the left are the choices and the facts:
+
+| Choice | What it does |
+| --- | --- |
+| Documents | Quick start, welcome guide, brand reference, and the cover on its own: each in or out. |
+| Cover | On or off; its design (`hero`, `blocks`, `grid`, `index`) and its wording; the index cover's contents. |
+| Welcome guide sections | Getting started, everyday tasks, services, help, keeping things current, files and notes: each shown or hidden. Those kept are numbered 01, 02 … in order. |
+| Brand reference sections | The logo, colour and type, and file formats: each shown or hidden. |
+| Tables | Each brand's own style (see the brand schema), or one style for every document in the pack. |
+| Paper, final | US Letter or A4; **Final, to issue** checks that every fact is filled in and drops the draft notes. |
+
+Below them, the record's facts: the client and website, access, everyday tasks, services, support
+and care, next steps and review, with tasks and services added and removed as a list. The preview
+on the right rebuilds a moment after each change, with a tab for each document and the pack's
+index. **Download pack** zips the whole delivery (Word, print HTML and source for each document,
+assets, sources and a manifest with every file's hash), made in the browser; print a document to
+PDF from its preview, or build with `--pdf` on the command line for PDFs from the Word masters.
+
+The record, choices included, is kept in that browser for the client brand. **Download record**
+saves it as JSON and **Open record** loads one, so the same record builds the same pack with
+`brandkit handover`: the app and the command line share one composer (`src/handover/pack.js`,
+exported from `brandkit/handover` as `preparePack`, `packHtml` and `composePack`).
+
+### Pack choices in a record
+
+A record's optional `pack` object holds the choices; any left out take their default (every
+document and section, each brand's own tables, US Letter):
+
+```json
+"pack": {
+  "documents": ["quickStart", "welcome", "brandGuide", "frontCover"],
+  "sections": ["access", "services", "support", "continuity"],
+  "brandSections": ["logo", "colour", "files"],
+  "cover": "on",
+  "tableStyle": "ruled",
+  "paper": "letter"
+}
+```
+
+`cover` is `on` (the record's `cover.variant`, or `hero`), `off`, or left out (a cover when the
+record names a design). The command line's options win over the record's: `--documents`,
+`--sections` and `--brand-sections` take comma-separated lists, and `--cover`, `--cover-variant`,
+`--table-style` and `--paper` as before.
+
 ## Optional designed cover
 
 `--cover` adds a designed front cover to the welcome guide and exports the same cover as a

@@ -36,6 +36,8 @@ const Guide = lazy(() => import('./views/Guide.jsx').then((module) => ({ default
 const Manuals = lazy(() => import('./views/Manuals.jsx').then((module) => ({ default: module.Manuals })))
 const TemplatePrinter = lazy(() => import('./views/TemplatePrinter.jsx').then((module) => ({ default: module.TemplatePrinter })))
 const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({ default: module.Documents })))
+// A client pack: this brand as the client, another (First Form) as the provider.
+const ClientPack = lazy(() => import('./views/ClientPack.jsx').then((module) => ({ default: module.ClientPack })))
 const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ default: module.Patterns })))
 const Web = lazy(() => import('./views/Web.jsx').then((module) => ({ default: module.Web })))
 const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
@@ -53,6 +55,7 @@ const VIEWS = [
   // so a link to it still opens there, and shown under the Templates tab.
   { id: 'templates', label: 'Templates' },
   { id: 'documents', label: 'Documents', within: 'templates' },
+  { id: 'pack', label: 'Client pack', within: 'templates' },
   { id: 'web', label: 'Web' },
   // The brand's artwork placed on a car in 3D.
   { id: 'vehicles', label: 'Vehicles' },
@@ -200,6 +203,7 @@ export const App = () => {
   const installedIds = installed.map((record) => record.id)
   const offered = [...catalog.brands.values()].filter((entry) => !BUILT_IN.includes(entry.id) && !installedIds.includes(entry.id))
   const brandIds = [...new Set([...BUILT_IN, ...installedIds, ...Object.keys(saved), ...Object.keys(opened), ...offered.map((entry) => entry.id)])]
+  const brandName = (id) => BUILT_IN.includes(id) ? builtInName(id) : installed.find((entry) => entry.id === id)?.name ?? saved[id]?.name ?? opened[id]?.brand?.name ?? catalog.brands.get(id)?.name ?? id
 
   /** Downloads a pack and keeps it in this browser, showing progress; returns its record. */
   const downloadPack = useCallback(async ({ url, name, catalog: from, etag }) => {
@@ -507,7 +511,7 @@ export const App = () => {
               const record = installed.find((entry) => entry.id === id)
               const entry = catalog.brands.get(id)
               const builtIn = BUILT_IN.includes(id)
-              const name = builtIn ? builtInName(id) : record?.name ?? saved[id]?.name ?? opened[id]?.brand?.name ?? entry?.name ?? id
+              const name = brandName(id)
               const group = builtIn ? 'Built in' : record || saved[id] || opened[id] ? 'In this browser' : 'Available to add'
               const own = opened[id]?.brand ?? (builtIn || record ? null : saved[id])
               const logoUrl = builtIn ? menuLogoUrl(id) : record ? svgDataUrl(record.menuLogoSvg) : entry?.menuLogo ?? null
@@ -561,10 +565,11 @@ export const App = () => {
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
-            {(view === 'templates' || view === 'documents') && <div className="section-switch">
+            {(view === 'templates' || view === 'documents' || view === 'pack') && <div className="section-switch">
               <Segmented label="Templates or documents" value={view} onChange={go} options={[
                 { value: 'templates', label: 'Templates', title: 'Cards, stationery, social posts and slides: fill in the fields and download' },
-                { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' }
+                { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' },
+                ...(available.has('pack') ? [{ value: 'pack', label: 'Client pack', title: 'A welcome guide, quick-start sheet and brand reference for a client, built as you choose' }] : [])
               ]} />
             </div>}
             {view === 'templates' && <div className="view">
@@ -583,6 +588,7 @@ export const App = () => {
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
+            {view === 'pack' && <ClientPack key={brand.id} brand={brand} fonts={fonts} brands={brandIds.map((id) => ({ id, name: brandName(id) }))} loadBrand={loadBrand} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}
             {view === 'kit' && <Kit brand={brand} fonts={fonts} source={source} />}
