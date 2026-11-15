@@ -3,6 +3,7 @@
 // document applications; a historical identity remains explicitly identified as a reconstruction.
 
 import { colour, fill, logoOptions, paintOptions } from './brand.js'
+import { validateWelcomeCover } from '../export/welcome-cover.js'
 
 export const DOCUMENTATION_VERSION = '1.1'
 
@@ -185,6 +186,14 @@ export const publicationAffiliation = (values = {}) => {
  * brand; optional brand.documentation overrides select roles and adjust document measurements.
  * This function does not mutate the brand or introduce templates into its identity definition.
  */
+/** Table designs a document can use; see src/export/table-styles.js. `grid` is the default. */
+export const TABLE_STYLES = Object.freeze(['grid', 'ruled', 'ledger', 'panel', 'accent'])
+const tableStyleOf = (style) => {
+  if (style == null) return 'grid'
+  if (!TABLE_STYLES.includes(style)) throw new RangeError(`Unknown table style: ${style}. Choose ${TABLE_STYLES.join(', ')}.`)
+  return style
+}
+
 export const documentProfile = (brand, { paper = 'letter' } = {}) => {
   assertBrand(brand)
   if (!PAPERS[paper]) throw new RangeError(`Unknown paper size: ${paper}. Choose letter or a4.`)
@@ -214,6 +223,7 @@ export const documentProfile = (brand, { paper = 'letter' } = {}) => {
   const status = statusOf(brand)
   return {
     id: `${brand.id}-${paper}`, brandId: brand.id, brandName: brand.name, paper: paperSize, margins, typography, colours,
+    tables: { style: tableStyleOf(override.tables?.style) },
     header: { text: text(override.header?.text, brand.name) },
     footer: { text: text(override.footer?.text, status.historical ? 'Historical reconstruction · Modern document layout' : brand.name) },
     affiliation: affiliationProfile(override.affiliation),
@@ -451,6 +461,7 @@ export const validatePublication = (publication) => {
         if (style.trackingEm != null) need(finite(style.trackingEm, -0.25, 1), `Typography ${key} tracking must be between -0.25 and 1 em.`)
       }
     }
+    if (profile.tables != null) need(object(profile.tables) && TABLE_STYLES.includes(profile.tables.style ?? 'grid'), `Profile table style must be one of ${TABLE_STYLES.join(', ')}.`)
     need(object(profile.colours), 'The document profile needs colours.')
     if (object(profile.colours)) for (const key of ['ink', 'muted', 'accent', 'paper', 'light', 'line', 'reverse']) need(/^#[0-9a-f]{6}$/i.test(profile.colours[key] ?? ''), `Profile colour ${key} must be a six-digit hex colour.`)
     need(object(profile.logo) && object(profile.logo?.options), 'The document profile needs preferred logo options.')
@@ -479,6 +490,11 @@ export const validatePublication = (publication) => {
     need(typeof page.id === 'string' && page.id && !pageIds.has(page.id), `${at} needs a unique id.`)
     pageIds.add(page.id)
     need(LAYOUTS.some((layout) => layout.id === page.kind), `${at} has an unknown layout kind.`)
+    if (page.cover != null) {
+      need(pageIndex === 0 && page.kind === 'cover', `${at} welcome cover must be the first page and use the cover layout.`)
+      need(Array.isArray(page.blocks) && page.blocks.length === 0, `${at} welcome cover must not also contain body blocks.`)
+      problems.push(...validateWelcomeCover(page.cover, profile).map(problem => `${at}: ${problem}`))
+    }
     need(Array.isArray(page.blocks), `${at} needs a blocks array.`)
     if (!Array.isArray(page.blocks)) return
     page.blocks.forEach((block, blockIndex) => {
@@ -494,6 +510,9 @@ export const validatePublication = (publication) => {
         const columns = Array.isArray(block.headers) ? block.headers.length : 0
         need(columns > 0 && block.headers.every((cell) => typeof cell === 'string'), `${where} table needs text headers.`)
         need(Array.isArray(block.rows) && block.rows.every((row) => Array.isArray(row) && row.length === columns && row.every((cell) => typeof cell === 'string' || (typeof cell === 'number' && Number.isFinite(cell)))), `${where} table rows must match the headers and contain text or finite numbers.`)
+        if (block.showHeaders != null) need(typeof block.showHeaders === 'boolean', `${where} table showHeaders must be true or false.`)
+        if (block.rowHeaders != null) need(typeof block.rowHeaders === 'boolean', `${where} table rowHeaders must be true or false.`)
+        if (block.pending != null) need(typeof block.pending === 'string' && block.pending.trim() && block.pending.length <= 60, `${where} table pending must be a short text.`)
         if (block.widths != null) need(Array.isArray(block.widths) && block.widths.length === columns && block.widths.every((value) => finite(value, 0.001, 10000)), `${where} table widths must be positive relative weights matching the columns.`)
       } else if (block.type === 'figure') {
         for (const key of ['alt', 'caption', 'provenance']) if (block[key] != null) need(typeof block[key] === 'string', `${where} figure ${key} must be text.`)

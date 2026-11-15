@@ -119,6 +119,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .documents-preview .notice { margin: 10px; }
 .documents-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
 .documents-guidance { margin-top: 16px; }
+.pack-checks { display: grid; gap: 10px; }
+.pack-check { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 10px; cursor: pointer; }
+.pack-check input { margin-top: 3px; }
+.pack-check span { display: grid; gap: 2px; }
+.pack-check small { color: var(--ink-faint); font-size: 12.5px; line-height: 1.4; }
+.pack-check:has(input:disabled) { opacity: .55; cursor: default; }
+.pack-item { display: grid; gap: 12px; margin: 0; padding: 12px; border: 1px solid var(--line); border-radius: 12px; min-width: 0; }
+.pack-item legend { padding: 0 6px; font-weight: 600; font-size: 14px; }
+.pack-item .link { justify-self: start; }
+.pack-pair { display: grid; gap: 8px; padding-left: 10px; border-left: 2px solid var(--line); }
+.pack-tabs { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 4px 10px; }
+.pack-summary { padding: 0 6px 8px; font-size: 13px; }
+.documents-preview .notice ul { margin: 6px 0 0; padding-left: 18px; }
 .organization-workspace { display: grid; grid-template-columns: minmax(260px, 350px) minmax(0, 1fr); gap: 16px; align-items: start; }
 .organization-controls { display: grid; gap: 18px; }
 .organization-controls p { margin: 0; }

@@ -480,6 +480,7 @@ product detail, screenshot/evidence, comparison and closing page kinds.
     "maxCharacters": 180,
     "note": "Local document hierarchy; not a departmental-logo specification."
   },
+  "tables": { "style": "ruled" },
   "defaultPurpose": "report",
   "publishedPurposes": ["report", "portfolio", "brief"]
 }
@@ -492,6 +493,18 @@ gapPt }`; Word styles and the print view both carry them. UNBC sets its title as
 page title: `{ "font": "display", "colour": "gold-text", "ruleBelow": { "widthPt": 4.5, "colour":
 "line" } }`, with running heads as small tracked capitals. `colours.tableHeader` and
 `colours.tableHeaderText` colour table header rows (default: ink and reverse).
+`tables.style` chooses how every table in the brand's documents is drawn, in Word and HTML alike
+([`src/export/table-styles.js`](../src/export/table-styles.js)):
+
+| Style | Look |
+| --- | --- |
+| `grid` (default) | Every cell boxed, a filled header row (`colours.tableHeader`) and banded rows. |
+| `ruled` | No boxes or fills: the header in small capitals over a 1 pt ink rule, a 0.5 pt line under each row, the first column in the brand's semibold face, columns flush with the text edges. |
+| `ledger` | A specification sheet: 1.5 pt ink rules above and below, the header and the first column set as labels. |
+| `panel` | The table on one tinted ground (the light role, or the line role where light is all but white), rows parted by lines of paper; rounded in HTML. |
+| `accent` | A header row in the accent colour with labels in reverse (or ink, where reverse would fall below 4.5:1), ruled rows, an accent rule to close. |
+
+Header labels take the label face and its tracking (at least 0.06 em).
 Logo `options` may select an existing family/layout or signature/colourway; `logo.departmental`
 names a departmental signature to put on the cover when the document names a department, in
 place of the plain logo with the department as text (UNBC: `"sub-logo"`). Its width cannot

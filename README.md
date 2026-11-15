@@ -25,6 +25,12 @@ brandkit draws the whole kit from it:
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's
   fronts and back, a letterhead in each size or rank, with a PDF of every variant.
+- **Client packs**: under Templates, a welcome guide, quick-start sheet and brand reference for a
+  client, set in a provider's brand (First Form) and the client's. Tick which documents and
+  sections go in, choose the cover and table style, fill in the facts, and the preview rebuilds
+  as you go; **Download pack** zips Word, print HTML and sources. The command line (`brandkit
+  handover`) builds the same pack from the same record. See
+  [docs/managed-site-handover.md](docs/managed-site-handover.md).
 - **Office documents**: the documents people type, as Word templates (letterheads with their
   continuation sheet, memoranda, releases, invoices, reports, envelopes), the slides as a
   PowerPoint template with a layout for each slide type, and the email signature as HTML ready to
@@ -83,6 +89,31 @@ Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf
 (fflate) are all made in the page.
 
 **[Open brandkit](https://projects.ahmadjalil.com/brandkit/)**
+
+## Managed website welcome packs
+
+Generate a provider-branded welcome guide and quick-start sheet alongside a client-branded
+reference, using the existing editable publication engine. Each client has a separate operational
+record for access instructions, responsibilities, renewals and support; identity stays in the two
+brand definitions. No password or setup token belongs in that record.
+
+```sh
+node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
+  --provider /path/to/firstform/dist/brand.json --client /path/to/ddcnorth/brand.json \
+  --out /path/to/new-delivery --cover --pdf
+```
+
+The output includes editable Word, print HTML, publication JSON, optional PDF, a local document
+index, logo assets and versioned source snapshots. Builds remain drafts unless `--issue` passes
+the explicit client-record completeness gate. Review the facts and final pagination before issue.
+The optional designed cover (`--cover`, or `--cover-variant hero`, `blocks`, `grid` or `index`)
+is a full page in the provider's design system with every word editable in Word, and adds
+standalone `front-cover` exports. A record's optional `cover` object sets its wording and design.
+The example uses First Form identity 2.0 from the uploaded source's built `dist/brand.json`
+or the extracted pack root; `source/kit/brand.json` is the archived 1.0 identity.
+See [managed-site handover](docs/managed-site-handover.md) for the CLI and integration API, and
+[the examples](examples/managed-site/README.md) for a blank template and the labelled First Form /
+DDC North example. Keep operational packs private; public brand sharing is not access control.
 
 ## Brands are packs
 

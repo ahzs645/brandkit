@@ -27,6 +27,14 @@
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
     "./documentation": "./src/engine/documentation.js",
+    "./handover": {
+      "types": "./src/handover/index.d.ts",
+      "default": "./src/handover/index.js"
+    },
+    "./handover/node": {
+      "types": "./src/handover/node.d.ts",
+      "default": "./src/handover/node.js"
+    },
     "./menu-logo": "./src/app/masthead.js",
     "./consumer": "./src/engine/consumer.js",
     "./astryx": "./src/engine/astryx.js",
@@ -49,7 +57,8 @@
     "brands",
     "library",
     "manuals",
-    "docs"
+    "docs",
+    "examples/managed-site"
   ],
   "sideEffects": [
     "*.css"
