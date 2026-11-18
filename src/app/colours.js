@@ -2,7 +2,7 @@
 // holds a colour of its own), and what a colour page shows about them: contrast, print values and
 // tints. In a plain module so Node's test runner can import it.
 
-import { colour, colourName, luminance, rgb } from '../engine/brand.js'
+import { colour, colourName, contrast, rgb } from '../engine/brand.js'
 
 const isHex = (value) => /^#[0-9a-f]{3,8}$/i.test(String(value))
 
@@ -23,11 +23,8 @@ export const editableRoles = (brand) => Object.keys(brand.roles ?? {}).filter((r
 
 // --- Contrast, print values and tints ------------------------------------------------------------
 
-/** The WCAG contrast ratio of two colours, 1 to 21. */
-export const contrast = (a, b) => {
-  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
-  return (hi + 0.05) / (lo + 0.05)
-}
+// The WCAG contrast ratio of two colours, 1 to 21, is the engine's (it sets product accents by it).
+export { contrast }
 
 /** The WCAG 2 grade a ratio earns for text: AAA, AA, AA large (18 pt, or 14 pt bold), or none. */
 export const grade = (ratio) => (ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : ratio >= 3 ? 'AA large' : 'Fail')

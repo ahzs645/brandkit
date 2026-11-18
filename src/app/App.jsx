@@ -23,6 +23,7 @@ import { Colour } from './views/Colour.jsx'
 import { motionUrl, viewOrOverview } from './motion.js'
 import { hasDepartments } from './affiliation.js'
 import { patternLibrary } from '../engine/pattern-catalog.js'
+import { hasProducts } from '../engine/products.js'
 import { loadExtension } from '../extensions/index.js'
 import { BrandEditor } from './views/BrandEditor.jsx'
 import { NewBrand } from './views/NewBrand.jsx'
@@ -39,6 +40,7 @@ const Documents = lazy(() => import('./views/Documents.jsx').then((module) => ({
 // A client pack: this brand as the client, another (First Form) as the provider.
 const ClientPack = lazy(() => import('./views/ClientPack.jsx').then((module) => ({ default: module.ClientPack })))
 const Patterns = lazy(() => import('./views/Patterns.jsx').then((module) => ({ default: module.Patterns })))
+const Products = lazy(() => import('./views/Products.jsx').then((module) => ({ default: module.Products })))
 const Web = lazy(() => import('./views/Web.jsx').then((module) => ({ default: module.Web })))
 const Organization = lazy(() => import('./views/Organization.jsx').then((module) => ({ default: module.Organization })))
 const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
@@ -49,6 +51,8 @@ const Devices = lazy(() => import('./views/Devices.jsx').then((module) => ({ def
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
   { id: 'logos', label: 'Logos' },
+  // A product family (brand.products): named products under the unchanged parent logo.
+  { id: 'products', label: 'Products' },
   { id: 'colour', label: 'Colour' },
   { id: 'organization', label: 'Departments' },
   { id: 'patterns', label: 'Patterns' },
@@ -93,6 +97,7 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     case 'motion': return Boolean(motionLink)
     case 'organization': return hasDepartments(brand)
     case 'patterns': return hasPatterns(brand)
+    case 'products': return hasProducts(brand)
     case 'guide': return Boolean(brand.guide?.pages?.length)
     // The printer is for card designs: a brand with a printer package (a card set up) has it.
     case 'printer': return Boolean(brand.printer?.packages?.length)
@@ -543,7 +548,7 @@ export const App = () => {
         </div>
         )}
         {(!SHARED || brand) && <nav ref={tabs} className="tabs" aria-label="Sections">
-          {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.id === 'organization' ? unitsLabel(brand) : entry.label}</button>)}
+          {TABS.filter((entry) => !entry.within && available.has(entry.id) && (entry.id !== 'extension' || extensionView)).map((entry) => <button key={entry.id} type="button" aria-current={view === entry.id || TABS.find((other) => other.id === view)?.within === entry.id ? 'page' : undefined} onClick={() => go(entry.id)}>{entry.id === 'extension' ? extensionView.label : entry.id === 'organization' ? unitsLabel(brand) : entry.id === 'products' ? brand.products?.label ?? entry.label : entry.label}</button>)}
         </nav>}
       </header>
       {sharing && base && <ShareDialog brand={base} {...shareTarget(base.id)} edited={changed} revision={brand?.revision} view={view} onClose={() => setSharing(false)} />}
@@ -567,6 +572,7 @@ export const App = () => {
             {view === 'colour' && <Colour brand={brand} />}
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
+            {view === 'products' && hasProducts(brand) && <Products key={`${brand.id}-${brand.revision?.id ?? ''}`} brand={brand} fonts={fonts} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {(view === 'templates' || view === 'documents' || view === 'pack') && <div className="section-switch">
               <Segmented label="Templates or documents" value={view} onChange={go} options={[

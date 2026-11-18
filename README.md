@@ -11,6 +11,12 @@ brandkit draws the whole kit from it:
   signatures, every signature in every colourway, set for every department (a ministry, a
   division) it defines. A brand with a motion library also has its logo animations here, playing
   in place, each downloadable as an animated SVG.
+- **Products**: for a brand with a product family (`products`), every product's name set beside
+  the parent logo, which is embedded exactly as it is and never redrawn. A product differs only by
+  its name, descriptor, accent and pictogram; the lockup arrangement (endorsed, label, product-led,
+  compact) and the app-tile style are chosen once for the whole family, with named directions to
+  compare while it is still a proposal. Lockups and tiles download as SVG, PNG and PDF, and the
+  accents travel in the CSS, the tokens and the consumer profile.
 - **Colour**: every colour with hex, RGB, CMYK and Pantone (the manual's recipe where it gives
   one, otherwise converted and marked so), the role pairs text is set in graded against WCAG 2,
   every text-on-ground pair, and tints in 20% steps. Edit brand warns as a role change drops a

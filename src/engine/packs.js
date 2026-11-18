@@ -42,7 +42,7 @@ export const inPack = (entry, pack = 'complete') => {
   // pages, and further symbols (doodles, explorations, supporting graphics) for designers. A
   // departmental signature comes from the department folder, set for a real unit, rather than
   // here with placeholders or as a second copy of the chosen one.
-  if (pack === 'logos') return (/^(logos\/(outlined|png|pdf)|symbol)\//.test(path) && !/-(currentcolor|master)\.svg$/.test(path) && !entry.furtherSymbol && !entry.departmental) || /^guidelines\/(COLOURS\.json|[^/]+\.gpl)$/.test(path)
+  if (pack === 'logos') return (/^(logos\/(outlined|png|pdf|products)|symbol)\//.test(path) && !/-(currentcolor|master)\.svg$/.test(path) && !entry.furtherSymbol && !entry.departmental) || /^guidelines\/(COLOURS\.json|[^/]+\.gpl)$/.test(path)
   // Every other pack is used to make something, so it brings the fonts, profiles and originals.
   if (/^(source\/|fonts\/)/.test(path) || entry.identityReference) return true
   if (pack === 'documents') return entry.preferred === true || entry.presentation === true || /^(documents\/|official-templates\/|guidelines\/documentation)/.test(path) || /templates\/(?:png\/|pdf\/)?(?:slide|presentation)/.test(path)
