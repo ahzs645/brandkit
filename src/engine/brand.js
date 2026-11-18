@@ -66,6 +66,7 @@ export const contrast = (a, b) => {
 /** How a product family's lockup can be arranged, and how its app tiles can be drawn (./products.js). */
 export const PRODUCT_ARRANGEMENTS = ['endorsed', 'label', 'product-led', 'compact']
 export const PRODUCT_TILE_STYLES = ['symbol', 'icon', 'paper']
+export const PRODUCT_SEPARATORS = ['rule', 'neutral', 'space']
 
 /** Values computed from the definition, available to copy as {derived.*}. */
 export const derive = (brand) => {
@@ -223,6 +224,36 @@ export const validateBrand = (brand) => {
       known(direction?.tile, styles ?? PRODUCT_TILE_STYLES, `Product direction \`${direction?.id ?? '?'}\`: tile style`)
     }
     if (products?.direction != null) need(directions.has(products.direction), `\`products.direction\` names direction \`${products.direction}\`, which is not in \`products.directions\`.`)
+    // Lockup variants: named settings over `lockup`, and what they may set.
+    const lockupProblems = (spec, where, { sizes = true } = {}) => {
+      if (spec == null) return
+      if (typeof spec !== 'object') { need(false, `\`${where}\` must be an object.`); return }
+      if (spec.separator != null) known(spec.separator, PRODUCT_SEPARATORS, `\`${where}.separator\``)
+      if (spec.stack != null) need(typeof spec.stack === 'boolean', `\`${where}.stack\` must be true or false.`)
+      if (spec.name?.colour != null) known(spec.name.colour, ['logo', 'accent'], `\`${where}.name.colour\``)
+      for (const key of sizes ? ['name', 'label'] : []) {
+        const font = spec[key]?.font
+        if (font != null) need(brand.fonts?.[font], `\`${where}.${key}.font\` names font \`${font}\`, which is not defined.`)
+        for (const size of ['size', 'leadSize', 'tracking']) {
+          const value = spec[key]?.[size]
+          if (value != null) need(typeof value === 'number' && Number.isFinite(value) && (size === 'tracking' || value > 0), `\`${where}.${key}.${size}\` must be ${size === 'tracking' ? 'a number (ems)' : 'a positive number (a fraction of the parent logo\'s height)'}.`)
+        }
+      }
+    }
+    lockupProblems(products?.lockup, 'products.lockup', { sizes: false })
+    const variants = new Set()
+    for (const variant of products?.variants ?? []) {
+      need(typeof variant?.id === 'string' && variant.id && typeof variant.label === 'string' && variant.label, `Product variant \`${variant?.id ?? '?'}\` needs an id and a label.`)
+      need(!variants.has(variant?.id), `Product variant \`${variant?.id}\` is listed twice.`)
+      variants.add(variant?.id)
+      lockupProblems(variant?.lockup, `products.variants.${variant?.id ?? '?'}.lockup`)
+    }
+    if (products?.variant != null) need(variants.has(products.variant), `\`products.variant\` names variant \`${products.variant}\`, which is not in \`products.variants\`.`)
+    for (const direction of products?.directions ?? []) {
+      if (direction?.variant != null) need(variants.has(direction.variant), `Product direction \`${direction.id}\` names variant \`${direction.variant}\`, which is not in \`products.variants\`.`)
+    }
+    if (products?.naming?.fullName != null) need(typeof products.naming.fullName === 'string' && products.naming.fullName.includes('{name}'), '`products.naming.fullName` must be text containing {name}.')
+    if (products?.positioning != null) need(typeof products.positioning?.line === 'string', '`products.positioning.line` must be text.')
   }
   // Dots and lines, in patterns and in templates.
   const number = (value) => typeof value === 'number' && Number.isFinite(value)

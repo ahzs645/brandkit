@@ -15,8 +15,12 @@ brandkit draws the whole kit from it:
   the parent logo, which is embedded exactly as it is and never redrawn. A product differs only by
   its name, descriptor, accent and pictogram; the lockup arrangement (endorsed, label, product-led,
   compact) and the app-tile style are chosen once for the whole family, with named directions to
-  compare while it is still a proposal. Lockups and tiles download as SVG, PNG and PDF, and the
-  accents travel in the CSS, the tokens and the consumer profile.
+  compare while it is still a proposal, and endorsed variants (rule, matched, plain, accent name,
+  mono, stacked) for how the name is set. Lockups, tiles and the family key download as SVG, PNG
+  and PDF, and the accents travel in the CSS, the tokens and the consumer profile. Any brand can
+  start a family from a template (four built in, or one saved from another brand's family), edit
+  it in the tab, and save it with the brand or into the revision that proposes it. See
+  [Product families](docs/brand-schema.md#product-families).
 - **Colour**: every colour with hex, RGB, CMYK and Pantone (the manual's recipe where it gives
   one, otherwise converted and marked so), the role pairs text is set in graded against WCAG 2,
   every text-on-ground pair, and tints in 20% steps. Edit brand warns as a role change drops a

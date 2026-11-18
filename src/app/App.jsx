@@ -97,7 +97,8 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     case 'motion': return Boolean(motionLink)
     case 'organization': return hasDepartments(brand)
     case 'patterns': return hasPatterns(brand)
-    case 'products': return hasProducts(brand)
+    // A family can be started on any brand that can be edited here; a shared view shows one that exists.
+    case 'products': return hasProducts(brand) || (!SHARED && Boolean(brand))
     case 'guide': return Boolean(brand.guide?.pages?.length)
     // The printer is for card designs: a brand with a printer package (a card set up) has it.
     case 'printer': return Boolean(brand.printer?.packages?.length)
@@ -491,6 +492,12 @@ export const App = () => {
     setSaved(savedBrands())
     setCurrent((state) => ({ ...state, original: structuredClone(state.brand) }))
   }
+  /** Saves a changed definition (the Products editor's) as Save does an edit. */
+  const saveWith = (next) => {
+    saveBrand(next)
+    setSaved(savedBrands())
+    setCurrent((state) => ({ ...state, brand: next, original: structuredClone(next) }))
+  }
   const create = (made) => {
     saveBrand(made)
     setSaved(savedBrands())
@@ -572,7 +579,7 @@ export const App = () => {
             {view === 'colour' && <Colour brand={brand} />}
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
-            {view === 'products' && hasProducts(brand) && <Products key={`${brand.id}-${brand.revision?.id ?? ''}`} brand={brand} fonts={fonts} />}
+            {view === 'products' && <Products key={`${brand.id}-${brand.revision?.id ?? ''}`} brand={brand} base={base} revision={activeRevision} fonts={fonts} editable={!SHARED} onSave={saveWith} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
             {(view === 'templates' || view === 'documents' || view === 'pack') && <div className="section-switch">
               <Segmented label="Templates or documents" value={view} onChange={go} options={[

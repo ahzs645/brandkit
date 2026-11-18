@@ -377,11 +377,83 @@ the symbol small in the corner) or `paper` (the pictogram in `accentText` on pap
 without an `icon` takes the brand symbol instead: in `onAccent` on the accent for `icon`, and for
 `paper` in the primary colour over a band of the accent, so an accent never paints the symbol.
 
+### Variants, naming and the rest of a family
+
+Directions compare whole arrangements; **variants** compare ways of setting one lockup. A variant
+is a few settings laid over `lockup` (deep-merged), applied to the `endorsed` and `compact`
+arrangements (and the name of `product-led`):
+
+```json
+"variants": [
+  { "id": "rule", "label": "A1 · Rule", "status": "chosen", "lockup": {} },
+  { "id": "matched", "label": "A2 · Matched", "lockup": { "name": { "font": "displayRegular", "size": 1.353, "tracking": -0.016 } } },
+  { "id": "plain", "label": "A3 · Plain", "lockup": { "separator": "space" } },
+  { "id": "accent", "label": "A4 · Accent name", "lockup": { "separator": "neutral", "name": { "colour": "accent" } } },
+  { "id": "mono", "label": "A5 · Mono", "lockup": { "name": { "font": "label", "caps": true, "size": 0.36, "tracking": 0.12 } } },
+  { "id": "stacked", "label": "A6 · Stacked", "lockup": { "stack": true, "name": { "size": 0.8 } } }
+],
+"variant": "rule",
+"directions": [{ "id": "a", "label": "A · Endorsed", "arrangement": "endorsed", "tile": "symbol", "variant": "rule" }]
+```
+
+| Key | What it is |
+| --- | --- |
+| `lockup.separator` | Between the logo and the name: `rule` (the accent, default), `neutral` (the brand's `rule` or `line` role on a light ground, the logo's colour at 32% on a dark one) or `space` (no rule; the name stands `0.42 H` off). |
+| `lockup.stack` | `true` sets the name under the logo: a horizontal rule across the logo's artwork `0.2 H` below it, the name `0.2 H` under the rule, at `name.size`. |
+| `lockup.name.colour` | `logo` (default) or `accent`: the accent's text tone on a light ground, its dark-ground tone on a dark one. |
+| `lockup.name.caps` | `true` sets the name in capitals. |
+| `variants`, `variant` | The variants, `{ id, label, summary?, status?, lockup }`, and the one in use. Without `variant`, the chosen direction's `variant` is used; without either, the family's own settings. |
+| `naming.fullName` | A pattern for a product's name in running text when it has no `fullName`: `{parent}` (the parent logo's label), `{brand}` and `{name}`. |
+| `positioning` | `{ line, status? }`: a line for the whole family, shown in the Products tab. |
+| `decision` | `{ date?, summary? }`: what was decided, shown beside the family key. `status` on a direction or variant (`chosen`, `archived`) labels it in the tab. |
+| `template` | The id of the template the family was started from (informational). |
+
+`productFamilyKey(ctx, { bar, height, gap })` draws the **family key**: every product's accent as a
+short bar, in product order, for where the whole family is meant (the back of a business card).
+
+### Templates of a family
+
+A family's system (lettering, variants, directions, tile styles, naming, positioning) can be kept
+apart from any brand as a **template** and applied to another; the brand it is applied to supplies
+the parent logo, the colours and the faces.
+
+```json
+{ "format": "brandkit-product-family-template", "version": 1, "id": "endorsed-rule", "label": "Endorsed family, decided",
+  "family": { "lockup": { … }, "variants": [ … ], "variant": "rule", "directions": [ … ], "direction": "a", "naming": { "fullName": "{parent} {name}" } },
+  "products": [{ "name": "Atlas", "descriptor": "Shared geospatial workspace", "accent": "#7FA6BA" }] }
+```
+
+`products` are optional starters (accents as hex). brandkit has four built in
+(`BUILT_IN_PRODUCT_TEMPLATES`): *Endorsed family, compared* (directions A to C and variants A1 to
+A6, undecided), *Endorsed family, decided* (A1 chosen, the rest archived), *Product-led family* and
+*Modules of the company*. From `brandkit/engine`:
+
+- `applyProductTemplate(brand, template, { items?, keepProducts = true })` returns a `products`
+  object for the brand: its existing products are kept, else the template's starters, else three
+  placeholders; faces the brand lacks are dropped so its defaults apply, and `compact` and the
+  `symbol` tile are left out where the symbol may not stand alone.
+- `productTemplateFrom(brand, { id?, label?, summary?, products? })` makes a template of a brand's family.
+- `validateProductTemplate(template)` lists a template's problems.
+- `withProductFamily(brand, products, { revision? })` returns the brand with the family saved in
+  `products`, or in that revision's `changes.products`; `null` removes it.
+  `productFamilyHome(brand, revisionId)` says which: the shown revision when it carries the family
+  or the definition has none, else the definition.
+
 ### In the app and the kit
 
 A brand with `products` has a **Products** tab: the parent logo, the directions, arrangements,
 logo colours and tile styles to switch between, every product at one scale, and each product's
 lockup, tile, pictogram and accents (graded against WCAG 2) with SVG, PNG and PDF downloads.
+
+The tab also shows the endorsed variants (as a choice beside the arrangement), the family key, the
+positioning line and the decision. Outside a shared view every brand has the tab: a brand with no
+family is offered the templates (built in, kept in this browser, or opened from a
+`.product-family.json` file) to start one. **Edit the family** opens an editor for the family's
+settings, its products (names, descriptors, accents and their tones, graded as they change), its
+variants, its directions and the decision; the view previews the draft. **Save with the brand**
+keeps it in the brand's definition in this browser, as any edit is kept, or in the revision being
+shown when the family is proposed there. The editor also keeps the family as a template in this
+browser, exports it as a file, and downloads the family's JSON.
 
 The kit carries, for every product:
 
@@ -389,6 +461,8 @@ The kit carries, for every product:
   file has no accent), with `png/<arrangement>-<colour>-2048.png` and `pdf/<arrangement>-<colour>.pdf`
   for the raster colours;
 - `web/products/<product>-tile-<style>.svg`, with `-512.png` and `-1024.png`;
+- `logos/products/family-key.svg`, and while no variant is chosen each endorsed variant as
+  `logos/products/<product>/variants/<variant>-<colour>.svg`;
 - `products` in `web/tokens.json` (`{ id: { name, fullName, descriptor, accent, accentText, onAccent, accentOnDark } }`),
   and `--<prefix>-product-<id>`, `--<prefix>-product-<id>-text`, `--<prefix>-product-<id>-on` and `--<prefix>-product-<id>-on-dark`
   in `web/brand.css`;

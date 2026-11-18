@@ -23,7 +23,7 @@ import { assetRecord } from './catalog.js'
 import { inPack, packId } from './packs.js'
 import { readBrandAsset } from '../assets.js'
 import { appIconSvg, brandCss, coloursJson, faviconSvg, gimpPalette, indexHtml, landingHtml, reactComponent, tokens } from './web.js'
-import { hasProducts, productArrangements, productDirection, productDocument, productTile, productTileStyles, productsOf } from './products.js'
+import { hasProducts, productArrangements, productDirection, productDocument, productFamilyKey, productTile, productTileStyles, productVariant, productVariants, productsOf } from './products.js'
 
 export const GROUPS = ['Logos', 'Symbols', 'Templates', 'Office documents', 'Patterns', 'Supporting icons', 'Web assets', 'Guidelines', 'Motion', 'Revisions', 'Fonts', 'Build sources', 'References', 'Package files']
 
@@ -124,7 +124,9 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     return {
       items: productsOf(brand),
       arrangements: chosen ? offered.filter((kind) => kind === chosen.arrangement || kind === 'compact') : offered,
-      tiles: chosen ? productTileStyles(brand).filter((style) => style === chosen.tile) : productTileStyles(brand)
+      tiles: chosen ? productTileStyles(brand).filter((style) => style === chosen.tile) : productTileStyles(brand),
+      variants: productVariants(brand),
+      variant: productVariant(brand)
     }
   })() : null
   if (productKit) {
@@ -134,6 +136,10 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
         for (const paint of paintOptions(brand)) {
           const make = (ctx) => productDocument(ctx, { product: item.id, arrangement, colourKey: paint.colour, colourway: paint.colourway })
           svgEntry(`${folder}/${arrangement}-${paint.id}.svg`, make, { product: item.id })
+          // While no variant is settled, every endorsed variant is drawn too, as vectors, for comparison.
+          if (arrangement === 'endorsed' && !productKit.variant) {
+            for (const variant of productKit.variants) svgEntry(`${folder}/variants/${variant.id}-${paint.id}.svg`, (ctx) => productDocument(ctx, { product: item.id, arrangement, colourKey: paint.colour, colourway: paint.colourway, variant: variant.id }), { product: item.id })
+          }
           if (!paint.raster) continue
           if (rasters) add({ path: `${folder}/png/${arrangement}-${paint.id}-2048.png`, kind: 'png', width: 2048, svg: make, product: item.id })
           if (pdfs) add({ path: `${folder}/pdf/${arrangement}-${paint.id}.pdf`, kind: 'pdf', pages: (ctx) => [pageOf(make(ctx))], product: item.id })
@@ -273,6 +279,8 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     add({ path: 'web/components/components.css', kind: 'text', make: (ctx) => webStylesheet(ctx, { fontUrl: (file) => `../../${file}` }) })
     for (const { id } of webComponents({ brand })) add({ path: `web/components/${id}.html`, kind: 'text', make: (ctx) => webComponentDocument(ctx, id, { department: department(ctx), fontUrl: (file) => `../../${file}` }) })
   }
+  // The family key: every accent as a short bar, where the whole family is meant.
+  if (productKit) svgEntry('logos/products/family-key.svg', (ctx) => productFamilyKey(ctx), { product: '*' })
   // Each product's app tile, in the styles on offer (the chosen direction's alone, once there is one).
   if (productKit && brand.web?.icons !== false) {
     for (const item of productKit.items) {

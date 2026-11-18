@@ -10,9 +10,14 @@
 //     parent?: { family } | { signature, colourway },
 //     lockup?: { arrangements?, name?: { font, tracking, size, leadSize }, label?: { font, tracking, caps, size }, baseline? },
 //     tile?: { styles? },
-//     directions?: [{ id, label, summary?, arrangement, tile }], direction?,
+//     directions?: [{ id, label, summary?, arrangement, tile, variant?, status? }], direction?,
+//     variants?: [{ id, label, summary?, status?, lockup }], variant?,
+//     naming?: { fullName }, positioning?: { line, status? }, decision?: { date?, summary? },
 //     items: [{ id, name, fullName?, descriptor?, role?, status?, accent, accentName?, accentText?, onAccent?, icon? }]
 //   }
+//
+// A variant is a named set of lockup settings over `lockup` (how the name is set, the separator,
+// whether the name stacks under the logo): the endorsed lockups being compared, A1 to A6.
 //
 // Arrangements, with H the height of the parent's artwork (its canvas less the padding):
 //   endorsed     the parent, a rule in the accent, the product name beside it
@@ -20,17 +25,54 @@
 //   product-led  a pictogram tile in the accent and the name, large; the parent signs off beneath
 //   compact      the symbol alone, the rule and the name: for widths below the full logo's minimum
 
-import { PRODUCT_ARRANGEMENTS, PRODUCT_TILE_STYLES, colour as resolveColour, contrast, face as faceOf, family as findFamily, luminance, rgb } from './brand.js'
+import { PRODUCT_ARRANGEMENTS, PRODUCT_SEPARATORS, PRODUCT_TILE_STYLES, colour as resolveColour, contrast, face as faceOf, family as findFamily, luminance, rgb } from './brand.js'
 import { lockup, mark, svgDocument } from './artwork.js'
 import { attrs, escape, n } from './format.js'
 import { paintFor } from './signatures.js'
 
-export { PRODUCT_ARRANGEMENTS, PRODUCT_TILE_STYLES }
+// What sits between the logo and the name: the accent rule, a quiet neutral rule, or space alone.
+export { PRODUCT_ARRANGEMENTS, PRODUCT_SEPARATORS, PRODUCT_TILE_STYLES }
 
 const HEX = /^#[0-9a-f]{6}$/i
 const DEFAULT_ICON_ATTRS = { fill: 'none', stroke: 'currentColor', 'stroke-width': '2' }
 
 export const hasProducts = (brand) => Boolean(brand?.products?.items?.length)
+
+
+const isObject = (value) => value && typeof value === 'object' && !Array.isArray(value)
+const merge = (base, over) => {
+  if (!isObject(over)) return over === undefined ? base : over
+  const out = { ...(isObject(base) ? base : {}) }
+  for (const [key, value] of Object.entries(over)) out[key] = isObject(value) ? merge(out[key], value) : value
+  return out
+}
+
+/** The named lockup variants, in order: `{ id, label, summary?, status?, lockup }`. */
+export const productVariants = (brand) => (brand?.products?.variants ?? []).filter((entry) => entry && typeof entry.id === 'string')
+
+/** The variant in force: the one asked for, else `products.variant`, else the chosen direction's, else none. */
+export const productVariant = (brand, id) => {
+  const variants = productVariants(brand)
+  if (id === null) return null
+  const wanted = id ?? brand?.products?.variant ?? productDirection(brand)?.variant
+  return variants.find((entry) => entry.id === wanted) ?? null
+}
+
+/** `products.lockup` with a variant's settings over it. */
+export const productLockupSpec = (brand, variant) => {
+  const chosen = typeof variant === 'object' && variant ? variant : productVariant(brand, variant)
+  return merge(brand?.products?.lockup ?? {}, chosen?.lockup ?? {})
+}
+
+/** A product's name in running text: its own `fullName`, else `naming.fullName` filled in ({brand}, {parent}, {name}). */
+const fullNameOf = (brand, item) => {
+  if (item.fullName) return item.fullName
+  const pattern = brand?.products?.naming?.fullName
+  if (typeof pattern !== 'string' || !pattern) return undefined
+  let parent = brand.name
+  try { parent = productParent(brand).label } catch { /* the brand's name */ }
+  return pattern.replaceAll('{name}', item.name ?? '').replaceAll('{brand}', brand.name ?? '').replaceAll('{parent}', parent ?? '')
+}
 
 const standaloneSymbol = (brand) => brand.logoPolicy?.standaloneSymbol !== false
 
@@ -92,8 +134,10 @@ export const productsOf = (brand) => {
     const own = item.accentText != null ? resolveColour(brand, item.accentText) : null
     const on = item.onAccent != null ? resolveColour(brand, item.onAccent) : null
     const dark = item.accentOnDark != null ? resolveColour(brand, item.accentOnDark) : null
+    const fullName = fullNameOf(brand, item)
     return {
       ...item,
+      ...(fullName && { fullName }),
       accent,
       accentText: HEX.test(own ?? '') ? own : textTone(accent, paper, ink),
       onAccent: HEX.test(on ?? '') ? on : onTone(accent, { reverse, primary, ink }),
@@ -202,10 +246,9 @@ const placeSymbol = (ctx, x, y, box, colour, micro = false) => {
 
 // --- Lockups -------------------------------------------------------------------------------------
 
-const lettering = (brand) => {
-  const spec = brand.products?.lockup ?? {}
+const lettering = (brand, spec = brand.products?.lockup ?? {}) => {
   return {
-    name: { font: fontKey(brand, spec.name?.font ?? 'display', 'display'), tracking: spec.name?.tracking ?? brand.typography?.headlines?.trackingEm ?? 0, size: spec.name?.size, leadSize: spec.name?.leadSize },
+    name: { font: fontKey(brand, spec.name?.font ?? 'display', 'display'), tracking: spec.name?.tracking ?? brand.typography?.headlines?.trackingEm ?? 0, size: spec.name?.size, leadSize: spec.name?.leadSize, caps: spec.name?.caps === true, colour: spec.name?.colour === 'accent' ? 'accent' : 'logo' },
     label: { font: fontKey(brand, spec.label?.font ?? 'label', 'label'), tracking: spec.label?.tracking ?? brand.typography?.labels?.trackingEm ?? 0.12, caps: spec.label?.caps !== false, size: spec.label?.size }
   }
 }
@@ -240,7 +283,7 @@ const letteringLeft = (brand, parent, pad) => {
  * `colour` paints the logo and the lettering (a signature brand may name a `colourway` instead);
  * `accent: false`, or an inherited colour, draws the rule, bar and tile in that colour too.
  */
-export const productLockup = (ctx, { product, arrangement, colour: given, colourway, accent = true, descriptor = false } = {}) => {
+export const productLockup = (ctx, { product, arrangement, colour: given, colourway, accent = true, descriptor = false, variant } = {}) => {
   const { brand } = ctx
   const item = productOf(brand, product)
   const offered = productArrangements(brand)
@@ -262,8 +305,18 @@ export const productLockup = (ctx, { product, arrangement, colour: given, colour
   // the accent's dark-ground tone there. A filled tile keeps the accent itself.
   const reversed = coloured && HEX.test(ink) && luminance(ink) > 0.5
   const tone = coloured ? (reversed ? item.accentOnDark : item.accent) : ink
-  const type = lettering(brand)
+  const spec = productLockupSpec(brand, variant)
+  const type = lettering(brand, spec)
+  const separator = PRODUCT_SEPARATORS.includes(spec.separator) ? spec.separator : 'rule'
+  // A neutral rule: the brand's rule colour on a light ground, the logo's colour faded on a dark one.
+  const neutral = (() => {
+    if (!coloured) return { stroke: ink, opacity: '' }
+    const named = !reversed && (brand.roles?.rule ?? brand.roles?.line) ? resolveColour(brand, brand.roles.rule ? 'rule' : 'line') : null
+    return HEX.test(named ?? '') ? { stroke: named, opacity: '' } : { stroke: ink, opacity: ' stroke-opacity="0.32"' }
+  })()
+  const nameFill = type.name.colour === 'accent' && coloured ? (reversed ? item.accentOnDark : item.accentText) : ink
   const caps = (text) => (type.label.caps ? String(text).toUpperCase() : String(text))
+  const nameText = type.name.caps ? String(item.name).toUpperCase() : String(item.name)
   const describe = descriptor && item.descriptor ? String(item.descriptor) : ''
   const parts = []
   let right = 0
@@ -280,18 +333,36 @@ export const productLockup = (ctx, { product, arrangement, colour: given, colour
     grow(x + PW - pad, y + PH - pad)
     return { x, y, width: PW, height: PH }
   }
+  const stroke = Math.max(1, H / 48)
+  const rule = (d) => {
+    if (separator === 'space') return
+    const [paint, opacity] = separator === 'neutral' ? [neutral.stroke, neutral.opacity] : [tone, '']
+    parts.push(`<path data-product-rule="${separator === 'rule' ? '' : separator}" d="${d}" fill="none" stroke="${paint}"${opacity} stroke-width="${n(stroke)}"/>`)
+  }
   const ruleAndName = (x) => {
-    const stroke = Math.max(1, H / 48)
+    // Without a rule the name stands 0.42 H off, as far as the rule and its two gaps would have.
     const ruleX = x + 0.3 * H
-    parts.push(`<path data-product-rule="" d="M${n(ruleX)} ${n(pad)}V${n(pad + H)}" fill="none" stroke="${tone}" stroke-width="${n(stroke)}"/>`)
-    grow(ruleX + stroke / 2, pad + H)
-    const nameX = ruleX + 0.3 * H
-    line(item.name, type.name, (type.name.size ?? 0.6) * H, nameX, B)
+    rule(`M${n(ruleX)} ${n(pad)}V${n(pad + H)}`)
+    if (separator !== 'space') grow(ruleX + stroke / 2, pad + H)
+    const nameX = separator === 'space' ? x + 0.42 * H : ruleX + 0.3 * H
+    line(nameText, type.name, (type.name.size ?? 0.6) * H, nameX, B, nameFill)
     if (describe) line(caps(describe), type.label, 0.115 * H, nameX, B + 0.3 * H)
+  }
+  /** The name under the logo, the rule between them, across the logo's width. */
+  const stackedName = (left, right, top) => {
+    const ruleY = top + 0.2 * H
+    rule(`M${n(left)} ${n(ruleY)}H${n(right)}`)
+    if (separator !== 'space') grow(right, ruleY + stroke / 2)
+    const size = (type.name.size ?? 0.6) * H
+    const set = line(nameText, type.name, size, left, ruleY + 0.2 * H + 0.73 * size, nameFill)
+    if (describe) line(caps(describe), type.label, 0.115 * H, left, set.bottom + 0.3 * H)
   }
 
   let placed = null
-  if (kind === 'endorsed') {
+  if (kind === 'endorsed' && spec.stack === true) {
+    placed = placeParent(0, 0)
+    stackedName(pad, PW - pad, pad + H)
+  } else if (kind === 'endorsed') {
     placed = placeParent(0, 0)
     ruleAndName(PW - pad)
   } else if (kind === 'label') {
@@ -318,7 +389,7 @@ export const productLockup = (ctx, { product, arrangement, colour: given, colour
       grow(pad + K, pad + K)
     }
     const nameX = tile ? pad + K + 0.35 * H : pad
-    line(item.name, type.name, (type.name.leadSize ?? 1.05) * H, nameX, pad + 0.74 * K)
+    line(nameText, type.name, (type.name.leadSize ?? 1.05) * H, nameX, pad + 0.74 * K, nameFill)
     if (describe) line(caps(describe), type.label, 0.14 * H, nameX, pad + 0.74 * K + 0.3 * H)
     // The parent signs off beneath, its artwork 0.3 H under the tile.
     placed = placeParent(0, K + 0.3 * H)
@@ -338,14 +409,15 @@ export const productLockup = (ctx, { product, arrangement, colour: given, colour
 }
 
 /** A product lockup as a file: on a transparent canvas, as logoDocument() makes a logo. */
-export const productDocument = (ctx, { product, arrangement, colour, colourKey, colourway, accent, descriptor } = {}) => {
+export const productDocument = (ctx, { product, arrangement, colour, colourKey, colourway, accent, descriptor, variant } = {}) => {
   const { brand } = ctx
   const item = productOf(brand, product)
   const kind = arrangement ?? defaultProductArrangement(brand)
   const resolved = colour ?? (colourKey == null ? undefined : colourKey === 'currentColor' ? 'currentColor' : resolveColour(brand, colourKey))
-  const { width, height, art } = productLockup(ctx, { product: item.id, arrangement: kind, colour: resolved, colourway, accent: accent ?? resolved !== 'currentColor', descriptor })
+  const { width, height, art } = productLockup(ctx, { product: item.id, arrangement: kind, colour: resolved, colourway, accent: accent ?? resolved !== 'currentColor', descriptor, variant })
   const paint = colourway ?? (colourKey === 'currentColor' || resolved === 'currentColor' ? 'currentcolor' : colourKey ?? resolved ?? 'currentcolor')
-  return svgDocument(ctx, width, height, art, `${brand.name} / ${item.name} / ${kind} / ${paint}`)
+  const named = variant === null ? null : productVariant(brand, variant)
+  return svgDocument(ctx, width, height, art, `${brand.name} / ${item.name} / ${kind}${named && kind === 'endorsed' ? ` (${named.label ?? named.id})` : ''} / ${paint}`)
 }
 
 // --- App tiles -----------------------------------------------------------------------------------
@@ -398,6 +470,19 @@ export const productTile = (ctx, { product, style } = {}) => {
     }
   }
   return svgDocument(ctx, size, size, art, `${brand.name} / ${item.name} / ${kind} tile`)
+}
+
+/**
+ * The family key: every product's accent as a short bar, in product order, for where the whole
+ * family is meant rather than one product (the back of a business card, a footer).
+ * `{ bar, height, gap }` in px; the bars sit on a transparent canvas.
+ */
+export const productFamilyKey = (ctx, { bar = 48, height = 8, gap = 6, radius = 0 } = {}) => {
+  const { brand } = ctx
+  const items = productsOf(brand)
+  const width = items.length * bar + Math.max(0, items.length - 1) * gap
+  const art = items.map((item, index) => `<rect data-product="${escape(item.id)}" x="${n(index * (bar + gap))}" y="0" width="${n(bar)}" height="${n(height)}"${radius ? ` rx="${n(radius)}"` : ''} fill="${item.accent}"/>`).join('')
+  return svgDocument(ctx, width, height, art, `${brand.name} / ${brand.products?.label ?? 'Products'} / family key`)
 }
 
 /** The family as data, for tokens and for applications that do not run the engine. */
