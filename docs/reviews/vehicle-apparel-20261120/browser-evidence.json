@@ -1,0 +1,71 @@
+{
+  "checkedAt": "2026-11-20T22:15:23.345Z",
+  "environment": "Managed Chromium, WebGL disabled; real editable SVG fallback",
+  "vehicle": {
+    "searchTruckResults": 2,
+    "lockedPlacementDisabled": true,
+    "independentLayers": 3,
+    "removedCanopyRetainedLayers": 2,
+    "allOriginalPlacementsPreserved": true,
+    "restoredLayersExactlyMatchBaseline": true,
+    "namedProjectReopened": true,
+    "jsonImportDetachedSavedBinding": true,
+    "rapidTextTypingPreserved": true,
+    "png": [
+      2400,
+      1500
+    ],
+    "reviewViews": [
+      "Left side",
+      "Right side",
+      "Front",
+      "Rear"
+    ]
+  },
+  "clothing": {
+    "size": "XL",
+    "widthsMm": [
+      80,
+      220
+    ],
+    "independentOriginalLogos": [
+      "northwind/horizontal/white",
+      "northwind/stacked/white"
+    ],
+    "lockedEditsDisabled": true,
+    "namedProjectRevision": 2,
+    "staleTabUpdateRejected": true,
+    "jsonImportDetachedSavedBinding": true,
+    "png": [
+      2320,
+      1514
+    ],
+    "reviewSheetMethods": true
+  },
+  "responsive": {
+    "frameWidth": 390,
+    "frameHeight": 844,
+    "documentClientWidth": 375,
+    "documentScrollWidth": 375,
+    "clothingNumericEdit": true,
+    "vehicleInspectorAccessible": true,
+    "phoneHardwareTested": false
+  },
+  "runtime": {
+    "vehicleAppErrorMessages": [
+      "THREE.WebGLRenderer: A WebGL context could not be created. Reason:  Could not create a WebGL context, VENDOR = 0xffff, DEVICE = 0xffff, GL_VENDOR = Disabled, GL_RENDERER = Disabled, Sandboxed = yes, Optimus = no, AMD switchable = no, Reset notification strategy = 0x0000, ErrorMessage = BindToCurrentSequence failed: .",
+      "THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context."
+    ],
+    "clothingAppErrorMessages": [
+      "THREE.WebGLRenderer: A WebGL context could not be created. Reason:  Could not create a WebGL context, VENDOR = 0xffff, DEVICE = 0xffff, GL_VENDOR = Disabled, GL_RENDERER = Disabled, Sandboxed = yes, Optimus = no, AMD switchable = no, Reset notification strategy = 0x0000, ErrorMessage = BindToCurrentSequence failed: .",
+      "THREE.WebGLRenderer: THREE.WebGLRenderer: Error creating WebGL context."
+    ],
+    "extensionMessagesExcluded": true
+  },
+  "notRun": [
+    "Full Playwright WebGL browser suites",
+    "3D visual acceptance",
+    "Real mobile device and touch gestures",
+    "GPU frame-rate qualification"
+  ]
+}

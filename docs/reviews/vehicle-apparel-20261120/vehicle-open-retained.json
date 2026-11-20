@@ -1,0 +1,157 @@
+{
+  "schema": "brandkit-vehicle-mockup/3",
+  "assetVersion": "vehicle-assets/1",
+  "surfaceVersion": "vehicle-surfaces/2",
+  "model": "truck-canopy",
+  "configuration": {
+    "cover": "open",
+    "sides": "solid",
+    "rack": false,
+    "canopyPaint": "#30383e"
+  },
+  "paint": "#ffffff",
+  "wrap": {
+    "coverage": "none",
+    "source": "graphic",
+    "graphic": "sweep",
+    "pattern": "repeat",
+    "colours": [
+      "#1f4e46",
+      "#cfe4dc"
+    ],
+    "scale": 1,
+    "offsetU": 0,
+    "offsetV": 0,
+    "mirror": true,
+    "upload": null,
+    "file": ""
+  },
+  "backdrop": "studio",
+  "livery": null,
+  "layers": [
+    {
+      "id": "legacy-left",
+      "name": "Door identity",
+      "model": "truck-canopy",
+      "area": "left",
+      "targetConfiguration": {
+        "cover": "raised",
+        "sides": "solid",
+        "rack": false,
+        "canopyPaint": null
+      },
+      "artwork": {
+        "kind": "logo",
+        "logo": "northwind/horizontal/ink",
+        "tagline": "Steady progress, clearly made.",
+        "website": "",
+        "upload": null,
+        "file": ""
+      },
+      "placement": {
+        "u": 0,
+        "v": 0,
+        "width": 1.1,
+        "rotation": 0
+      },
+      "visible": true,
+      "locked": true,
+      "aspect": 3.8635378386842105,
+      "component": "cab",
+      "variant": "raised",
+      "unplaced": false,
+      "unplacedReason": ""
+    },
+    {
+      "id": "layer-2",
+      "name": "Canopy field services",
+      "model": "truck-canopy",
+      "area": "left-body",
+      "targetConfiguration": {
+        "cover": "raised",
+        "sides": "solid",
+        "rack": false,
+        "canopyPaint": null
+      },
+      "artwork": {
+        "kind": "fleet",
+        "logo": "northwind/horizontal/white",
+        "tagline": "Field services",
+        "website": "northwind.example",
+        "upload": null,
+        "file": ""
+      },
+      "placement": {
+        "u": 0,
+        "v": 0,
+        "width": 2.4,
+        "rotation": 0
+      },
+      "visible": true,
+      "locked": false,
+      "aspect": 3.3333333333333335,
+      "component": "canopy",
+      "variant": "raised",
+      "unplaced": true,
+      "unplacedReason": "Its component is removed. Restore the component or choose another surface."
+    },
+    {
+      "id": "layer-1",
+      "name": "Canopy field services · opposite",
+      "model": "truck-canopy",
+      "area": "right-body",
+      "targetConfiguration": {
+        "cover": "raised",
+        "sides": "solid",
+        "rack": false,
+        "canopyPaint": null
+      },
+      "artwork": {
+        "kind": "fleet",
+        "logo": "northwind/horizontal/white",
+        "tagline": "Field services",
+        "website": "northwind.example",
+        "upload": null,
+        "file": ""
+      },
+      "placement": {
+        "u": 0,
+        "v": 0,
+        "width": 2.4,
+        "rotation": 0
+      },
+      "visible": true,
+      "locked": false,
+      "aspect": 3.3333333333333335,
+      "component": "canopy",
+      "variant": "raised",
+      "unplaced": true,
+      "unplacedReason": "Its component is removed. Restore the component or choose another surface."
+    }
+  ],
+  "selectedLayerId": "layer-1",
+  "area": "left",
+  "assetReferences": {
+    "truck-canopy": {
+      "assetVersion": "generic-work-truck/1",
+      "surfaceVersion": "generic-work-truck/1",
+      "sha256": null
+    }
+  },
+  "artwork": {
+    "kind": "fleet",
+    "logo": "northwind/horizontal/white",
+    "tagline": "Field services",
+    "website": "northwind.example",
+    "upload": null,
+    "file": ""
+  },
+  "placements": {
+    "left": {
+      "u": 0,
+      "v": 0,
+      "width": 1.1,
+      "rotation": 0
+    }
+  }
+}

@@ -46,6 +46,7 @@ const Organization = lazy(() => import('./views/Organization.jsx').then((module)
 const BrandLibrary = lazy(() => import('./views/BrandLibrary.jsx').then((module) => ({ default: module.BrandLibrary })))
 // Three.js and the vehicle models load only when the tab opens.
 const Vehicles = lazy(() => import('./views/Vehicles.jsx').then((module) => ({ default: module.Vehicles })))
+const Clothing = lazy(() => import('./views/Clothing.jsx').then((module) => ({ default: module.Clothing })))
 const Devices = lazy(() => import('./views/Devices.jsx').then((module) => ({ default: module.Devices })))
 
 const VIEWS = [
@@ -64,6 +65,7 @@ const VIEWS = [
   { id: 'web', label: 'Web' },
   // The brand's artwork placed on a car in 3D.
   { id: 'vehicles', label: 'Vehicles' },
+  { id: 'clothing', label: 'Clothing' },
   // The brand's screens in device frames: phones, tablets, laptops, monitors, windows.
   { id: 'devices', label: 'Devices' },
   { id: 'printer', label: 'Template Printer' },
@@ -104,7 +106,8 @@ const offers = (view, { brand, motionLink, extensionView }) => {
     case 'printer': return Boolean(brand.printer?.packages?.length)
     case 'extension': return extensionView !== null
     // A logo to put on the car: a family, or a signature not set for one department.
-    case 'vehicles': return Boolean(brand.families?.length || brand.signatures?.some((signature) => !signature.departmental))
+    case 'vehicles':
+    case 'clothing': return Boolean(brand.families?.length || brand.signatures?.some((signature) => !signature.departmental))
     default: return true
   }
 }
@@ -603,6 +606,7 @@ export const App = () => {
             </div>}
             {view === 'web' && <Web key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
+            {view === 'clothing' && <Clothing key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'devices' && <Devices key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
             {view === 'pack' && <ClientPack key={brand.id} brand={brand} fonts={fonts} brands={brandIds.map((id) => ({ id, name: brandName(id) }))} loadBrand={loadBrand} />}
