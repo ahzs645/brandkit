@@ -70,20 +70,23 @@ brandkit draws the whole kit from it:
   breadcrumbs, introduction, button, aside, cards, table, note, footer, legal bar) previewed on
   its own with its HTML and CSS to copy or download, and the page they compose, set for a
   department. UNBC's follow www.unbc.ca, with the department's sub-logo in the header.
-- **Vehicles**: the brand on a vehicle in 3D: a work truck with a high canopy or a service
-  body (drawn for brandkit), a hatchback and two SUVs. A **wrap** covers the painted body (both
-  sides, the rear half (on the truck, its canopy or service body) or the full body, roof and hood
-  included) in a graphic drawn in the brand's colours, one of its patterns, or uploaded artwork,
-  scaled and moved within the panels and mirrored on the right side so the design leads from the
-  front. A **logo or fleet lettering** sits on top: choose an area (doors, canopy, hood, rear) and
-  drag it on the body (a corner resizes it, a round handle turns it, arrow keys nudge it). Both
-  are projected onto painted panels only, so glass, lights and trim stay clear. Studio, dark,
-  brand-tinted and outdoor backdrops, lit so the brand's colours read true on either side. Undo
-  and redo, a draft kept in the browser, Save and Open (JSON), and a 2400 × 1500 PNG. Three.js
-  and the models load only when the tab opens; their sources and licences are in
-  [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md). A visual mockup, not a
-  template for cutting vinyl. A brand can carry its own vehicle designs (`vehicles.liveries`); see
-  [docs/vehicles.md](docs/vehicles.md), which also covers adding vehicles.
+- **Vehicles**: four imported 3D assets for new designs—a crew-cab pickup, hatchback and two
+  SUVs—with catalogue thumbnails rendered from their source models. The pickup's **Open bed**
+  and **Tonneau cover** choices hide or show its original cover components. **3D** and **2D
+  elevations** share the same meshes and artwork; the latter uses an orthographic camera. When
+  WebGL is unavailable, a software 3D renderer draws that same scene with simpler lighting.
+  Independent artwork layers support original brand logos, fleet lettering, brand files and
+  uploads, with placement, rotation, visibility and locking. A **wrap** covers the painted body
+  using brand graphics, patterns or artwork; glass, lights and trim remain outside decal targets.
+  The Product, Configure, Artwork and Review tasks include undo/redo, retained artwork when
+  changing vehicles, named browser projects with revision checks, portable JSON, a 2400 × 1500
+  PNG and a four-view review sheet. Sources, licences and checksums are recorded in
+  [`src/mockups/models/NOTICES.md`](src/mockups/models/NOTICES.md); pickup tests check actual mesh
+  surfaces with raycasts and preserve geometry through cover changes. Older procedural canopy
+  and service trucks remain readable in saved projects but are excluded from new selection.
+  These are generic visualization assets, with no qualified F-150, Tacoma or canopy SKU and no
+  production cutting template. A brand can carry `vehicles.liveries`; see
+  [docs/vehicles.md](docs/vehicles.md) for the workflow, compatibility and asset intake.
 - **Devices**: the brand's screens in device frames: 102 to choose from. 21 are brandkit's own
   (phones, tablets, laptops, monitors, windows, watches and a television, drawn in code so a
   scene can mix them freely, in five finishes and two orientations); the rest are named devices

@@ -1,13 +1,28 @@
 // The vehicles a mockup can use. Each names the material its painted body uses (artwork is
 // projected only onto that, so glass, lights and trim stay clear), how to turn it to face the
 // way the prepared areas expect, and the credit its licence asks for. Licences: models/NOTICES.md.
-// The work truck is drawn in code (work-truck.js) rather than loaded, so it has no file.
+// Older procedural trucks remain addressable for saved-project recovery, but are not offered
+// for new designs. Catalogue images are rendered from the corresponding imported GLB.
 
 import { VEHICLES } from './vehicle-layout.js'
 
 export const VEHICLE_MODELS = Object.freeze({
+  pickup: Object.freeze({
+    url: new URL('./models/crew-cab-pickup.glb', import.meta.url).href,
+    thumbnail: new URL('./models/previews/pickup/angle.png', import.meta.url).href,
+    paint: 'paint', glass: 'glass.001', rotation: 0,
+    group: 'Pickups', label: 'Crew-cab pickup', note: 'An imported pickup with its original open bed and retractable tonneau components.',
+    category: 'Pickup', cab: 'Crew cab', fidelity: 'generic', configurable: true,
+    assetVersion: 'innerscene-crew-cab-tonneau/1', surfaceVersion: 'innerscene-crew-cab/1',
+    title: 'Crew cab pickup with tonneau cover', creator: 'Innerscene',
+    licence: 'CC0', licenceUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    source: 'https://www.innerscene.com/tools/library/3d-parts/crew-cab-pickup-with-tonneau-cover-059c14f0',
+    creditRequired: false,
+    sha256: 'faa7a63c8cde051e41b3c90d3d9afc1afb25e60735f5b4508c401554eaa84fb2'
+  }),
   shc: Object.freeze({
     url: new URL('./models/shc-hatchback.glb', import.meta.url).href,
+    thumbnail: new URL('./models/previews/shc/angle.png', import.meta.url).href,
     paint: 'grey_car_paint', glass: 'Main_Glass', rotation: 0,
     group: 'Cars', label: 'Four-door hatchback', note: 'A compact four-door car.',
     category: 'Car', fidelity: 'generic', assetVersion: 'shc/1', surfaceVersion: 'generic-car/1',
@@ -20,6 +35,7 @@ export const VEHICLE_MODELS = Object.freeze({
   }),
   suv: Object.freeze({
     url: new URL('./models/suv-original.glb', import.meta.url).href,
+    thumbnail: new URL('./models/previews/suv/angle.png', import.meta.url).href,
     paint: 'green', rotation: -Math.PI / 2,
     group: 'Cars', label: 'Lightweight SUV', note: 'A simple SUV that loads quickly.',
     category: 'SUV', fidelity: 'generic', assetVersion: 'suv/1', surfaceVersion: 'generic-car/1',
@@ -31,6 +47,7 @@ export const VEHICLE_MODELS = Object.freeze({
   }),
   compact: Object.freeze({
     url: new URL('./models/generic-compact-suv.glb', import.meta.url).href,
+    thumbnail: new URL('./models/previews/compact/angle.png', import.meta.url).href,
     paint: 'paint', rotation: 0,
     group: 'Cars', label: 'Compact SUV', note: 'More detailed bodywork; it takes a moment to load.',
     category: 'SUV', fidelity: 'generic', assetVersion: 'compact/1', surfaceVersion: 'generic-car/1',
@@ -41,6 +58,7 @@ export const VEHICLE_MODELS = Object.freeze({
     sha256: 'fd08e2f12559e0c49b65a79e8c9fb3d3811b2109475c219af48a9be466612d3b'
   }),
   'truck-canopy': Object.freeze({
+    legacy: true,
     build: { back: 'canopy' }, paint: 'paint', glass: 'glass', rotation: 0,
     group: 'Work trucks', label: 'Work truck, canopy', note: 'A crew-cab pickup with a high work canopy on the bed.',
     category: 'Pickup', cab: 'Crew cab', fidelity: 'generic', configurable: true,
@@ -49,6 +67,7 @@ export const VEHICLE_MODELS = Object.freeze({
     creditRequired: false
   }),
   'truck-service': Object.freeze({
+    legacy: true,
     build: { back: 'service' }, paint: 'paint', glass: 'glass', rotation: 0,
     group: 'Work trucks', label: 'Work truck, service body', note: 'A crew-cab truck with a utility service body and ladder rack.',
     category: 'Service vehicle', cab: 'Crew cab', fidelity: 'generic', configurable: true,

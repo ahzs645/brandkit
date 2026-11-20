@@ -1,13 +1,21 @@
 # Vehicles
 
-The **Vehicles** tab combines a searchable vehicle library, configurable generic pickup
-components, independent artwork layers and saved projects. A wrap covers the painted body;
-separate logos, contact details and other artwork can sit on different surfaces. Export the
-current view as a PNG or create a four-view review sheet with the configuration and layer sizes.
+The **Vehicles** tab offers four imported 3D assets for new designs: a crew-cab pickup, a
+hatchback and two SUVs. Their catalogue thumbnails are rendered from the source GLBs. **3D**
+and **2D elevations** use the same loaded meshes, configuration, original artwork and decal
+geometry; changing to elevations selects an orthographic camera. When WebGL is unavailable,
+a software 3D renderer draws the same scene with simpler lighting.
 
-All current vehicles are **generic previews**. This expansion does not import a model-matched
-Ford, Toyota or other manufacturer's truck. The [asset intake guide](vehicle-asset-intake.md)
-describes how the first actual vehicle and compatible canopy should be prepared and verified.
+The pickup supports its original **Open bed** and **Tonneau cover** configurations. Independent
+logos, contact details and other artwork can sit on its cab, bed sides, hood and tailgate, over
+an optional body wrap. Export the current view as a PNG or create a four-view review sheet with
+configuration and layer sizes.
+
+These are downloaded **generic visualization models**, not manufacturer-qualified vehicles.
+No Ford F-150, Toyota Tacoma or compatible canopy SKU has been qualified. The older procedural
+canopy and service trucks remain addressable for saved-project recovery but are excluded from
+new selection. The [asset intake guide](vehicle-asset-intake.md) describes the additional
+evidence needed for a named vehicle and fitted accessory.
 
 - [What it can do](#what-it-can-do)
 - [How it fits together](#how-it-fits-together)
@@ -22,21 +30,23 @@ describes how the first actual vehicle and compatible canopy should be prepared 
 
 | Feature | Behavior |
 | --- | --- |
-| **Vehicle library** | Search, category filters, favourites and recently used entries for the five existing vehicles: a generic pickup, service truck, hatchback and two SUVs. The selected model and configuration remain above the preview. |
-| **Pickup configuration** | Open bed, tonneau, cab-high canopy, raised canopy or commercial canopy. Canopies have solid sides, windows or access hatches. A ladder rack is independently selectable, including on the service truck. |
-| **Paint** | Body colour plus a separate canopy/component finish, or a finish matched to the body. Neutral and brand swatches are available. |
+| **Vehicle library** | Search, category filters, favourites and recently used entries for four imported models: crew-cab pickup, four-door hatchback, lightweight SUV and compact SUV. Each card uses a render of its source model. |
+| **Pickup configuration** | Open bed or the original retractable tonneau. The adapter hides or shows exactly 19 existing source nodes; it does not generate a bed, canopy, rack or alternative body. |
+| **Paint** | Body colour with neutral and brand swatches. The imported tonneau retains its original dark cover and metal slats. Separate canopy/service-body finishes remain available only when reopening legacy projects. |
 | **Artwork layers** | Up to 32 independently named layers, each with its own artwork, surface, dimensions, rotation, visibility and lock. Add, duplicate, reorder, remove, centre, fit, and copy to the other side without reversing lettering. |
-| **Artwork recovery** | Layers retain their original model, component configuration and placement. Removing a canopy or changing a surface moves affected layers into **Unplaced artwork**. Restoring the same surface restores them; explicit remapping places them on a different surface. |
+| **Artwork recovery** | Layers retain their original model, component configuration and placement. Changing vehicle or removing a legacy surface moves affected layers into **Unplaced artwork**. Restoring the same surface restores them; explicit remapping places them on a different surface. Open/tonneau uses the same six painted pickup areas. |
 | **Wrap** | **Sides**, **Rear half** or **Full body** coverage, using brand graphics, patterns, brand files or uploads. Scale, offsets and mirroring remain separate from the independent lettering layers. |
-| **Brand designs** | Existing `brand.vehicles.liveries` definitions still open. Their shared lettering is migrated into independently editable layers, one for each saved placement. |
-| **Scene and interaction** | Studio, dark, brand and outdoor backdrops; perspective, side, front, rear and above cameras. Drag artwork, resize or rotate with handles, use arrow keys to nudge, or enter position values. Switch to **Rotate** to orbit the vehicle. |
+| **Brand designs** | Current imported-model liveries can start a new design. Existing `brand.vehicles.liveries` definitions remain compatible, and shared lettering migrates into independently editable layers, one per saved placement. Legacy procedural liveries are excluded from the new-design picker. |
+| **Scene and interaction** | Studio, dark, brand and outdoor backdrops. Choose **3D** for perspective/orbit or **2D elevations** for parallel left, right, front, rear and above views of the same model. Drag artwork, use resize/rotation handles, nudge with arrow keys or enter numbers. |
+| **Renderer fallback** | WebGL and the software 3D renderer share the loaded scene, camera, mesh transforms, depth, texture coordinates and decals. The software renderer uses simpler lighting without environment reflections or shadow maps. |
 | **Saved projects** | Named projects in the browser, explicit **Save as new** and **Update saved**, revision checks against stale updates, undo/redo, per-brand draft recovery, and portable JSON import/export. |
-| **Review exports** | A 2400 × 1500 PNG without editor guides, or a self-contained SVG sheet containing perspective, left, right and rear PNG views plus layer dimensions. Required model credit remains in exported renders. |
+| **Review exports** | A 2400 × 1500 PNG without editor guides, or an SVG sheet containing four rendered PNGs and layer dimensions. Perspective review includes perspective, left, right and rear; elevation review includes left, right, front and rear. Required model credit remains in exported renders. |
 | **Artwork handling** | SVG, PNG, JPEG and WebP uploads. SVGs are checked for scripts, event handlers and external references before image loading. Brand files must be declared by the open brand. |
 
-Dimensions describe the generic vehicle as displayed. They help judge proportion and placement;
-they do not establish a production template for cutting vinyl. Windows and hatch hardware also
-reduce the available artwork regions. The configuration resolver supplies those different bounds.
+Dimensions describe the source model at its declared display length. They help judge proportion
+and placement; they do not establish a production cutting template. The imported pickup's six
+prepared rectangles are raycast-checked against its original painted meshes, clear of glazing,
+door handles and the rear number plate recess.
 
 ## How it fits together
 
@@ -56,12 +66,14 @@ the product adapter.
 
 ## Using the tab
 
-1. **Product:** search the vehicle library, choose a body, or start from one of the brand's
-   existing liveries. New drafts use the first livery where available, otherwise the raised
-   canopy truck with fleet lettering. Favourites and recently used vehicles help find it again.
-2. **Configure:** choose the pickup cover, canopy sides, rack and finish. Set the overall body
-   paint and any wrap. The stage heading identifies the selected configuration. If a component
-   change makes a layer unavailable, the retained-artwork notice links to **Artwork**.
+1. **Product:** search the four-model library, choose a vehicle, or start from one of the brand's
+   imported-model liveries. New drafts use the first eligible livery, otherwise the imported
+   pickup with an open bed and fleet lettering. Favourites and recently used vehicles help find
+   it again. Use **3D** or **2D elevations** above the stage to choose the projection.
+2. **Configure:** choose **Open bed** or **Tonneau cover** for the pickup, then set body paint and
+   any wrap. Both choices use the same source asset; its existing bed floor, walls and tailgate
+   stay in place. Canopy sides, racks and separate canopy paint are legacy controls, shown only
+   for a previously saved procedural truck.
 3. **Artwork:** choose a layer or select **Add layer**. Set its source, name, visibility and lock;
    choose its surface and adjust the placement. A layer can use a brand logo, the fleet layout,
    a declared brand file, an upload or no lettering. **Duplicate** creates another independent
@@ -69,8 +81,8 @@ the product adapter.
    independently editable artwork there.
 4. **Unplaced artwork:** restore the original vehicle/configuration to recover an existing layer
    at its original placement, or choose **New surface → Place on selected surface** to remap it.
-   A changed canopy side is reviewed explicitly rather than silently squeezing an old design
-   into a smaller rectangle. Locked layers cannot be repositioned until unlocked.
+   A different surface is reviewed explicitly before changing an existing placement. Locked
+   layers cannot be repositioned until unlocked.
 5. **Review:** choose a backdrop, name and save the design, reopen an alternative, or export a
    review sheet. **Update saved** replaces the selected saved revision; **Save as new** keeps a
    separate alternative. A stale update from another tab is rejected, with instructions to
@@ -87,7 +99,12 @@ on the next page load in place of the current draft.
 A livery is a few lines of `brand.json` plus, usually, one or two artwork files. The full format
 is in [brand-schema.md → Vehicles](brand-schema.md#vehicles); this section is the how-to.
 
-### The Apex example
+### The Apex example: legacy livery compatibility
+
+This existing `truck-canopy` example documents the supported livery format and migration path.
+Its procedural vehicle is retained for previously saved work; new catalogue designs use the
+imported models. Keep the original model ID when recovering an existing design. A new pickup
+livery should use `model: "pickup"` and the measured pickup areas below.
 
 Apex Site Services' service trucks are lettered with the logo and contact details on the doors and
 the emblem across the canopy. In the [1stform/Brands](https://github.com/1stform/Brands)
@@ -169,47 +186,48 @@ numbers mirrored (`u` negated) put lettering in the same place on the other side
 
 | Vehicle | Areas (width × height, metres) |
 | --- | --- |
+| Imported crew-cab pickup, open or tonneau (shown 5.69 m long) | `left`, `right` cab 1.70 × 0.30 · `left-bed`, `right-bed` 1.25 × 0.30 · `hood` 1.30 × 0.60 · `rear` 1.40 × 0.20 |
 | Hatchback, SUVs (shown 4.7 m long) | `left`, `right` 2.8 × 0.70 (the doors' lower half) · `hood` 1.38 × 0.72 · `rear` 1.4 × 0.60 |
 | Raised solid canopy, legacy configuration (6.77 m) | `left`, `right` doors 2.0 × 0.72 · `left-body`, `right-body` canopy 2.4 × 1.0 · `hood` 1.6 × 1.0 · `rear` 1.7 × 1.45 |
-| Service-body truck (6.83 m) | doors as above · `left-body`, `right-body` service body 2.4 × 1.15 · `hood` 1.6 × 1.0 · `rear` 1.7 × 1.15 |
+| Service-body truck, legacy configuration (6.83 m) | doors as above · `left-body`, `right-body` service body 2.4 × 1.15 · `hood` 1.6 × 1.0 · `rear` 1.7 × 1.15 |
 
-Those are the legacy/default frames. Configured pickups also offer `left-bed`, `right-bed`,
-`canopy-rear` and, without a rack, `canopy-roof`. Open and tonneau beds omit all canopy surfaces.
-The tailgate and canopy-side bounds change for other cover/side configurations. Always obtain the
-current areas through `areasFor(model, configuration)`; do not reuse the legacy dimensions for a
-windowed canopy. See [`vehicle-configuration.js`](../src/mockups/vehicle-configuration.js) for the
-actual origins, dimensions and permitted combinations.
+The imported pickup's cab rectangle is centred at x = −0.55, y = 0.86; bed sides at x = 1.90,
+y = 1.00; hood at x = −1.90; and tailgate at y = 1.01. These positions avoid the source model's
+handles, glass and plate recess. The six frames remain identical between open and tonneau.
+
+Legacy canopy configurations retain their additional `canopy-rear` and `canopy-roof` surfaces
+and configuration-dependent bounds. Always obtain current areas through
+`areasFor(model, configuration)`; never transfer another model's rectangles by assumption.
+See [`vehicle-layout.js`](../src/mockups/vehicle-layout.js) and
+[`vehicle-configuration.js`](../src/mockups/vehicle-configuration.js).
 
 ## Adding a vehicle to brandkit
 
-A vehicle is added once, in this repository, and every brand gets it. There are two ways.
-For a named actual vehicle, follow the [asset intake guide](vehicle-asset-intake.md) as well as the
-registration steps here. A detailed mesh alone does not establish an exact body variant or
-accessory fitment.
+A vehicle is added once, in this repository, and every brand gets it. New vehicles use imported
+source models and views rendered from those models. Follow the
+[asset intake guide](vehicle-asset-intake.md) as well as the registration steps below. A detailed
+mesh alone does not establish an exact manufacturer, body variant or accessory fitment.
 
-| | A downloaded model (GLB) | A vehicle drawn in code |
-| --- | --- | --- |
-| Good for | A realistic car, van or truck that exists under a usable licence | Simple bodies with big flat panels: box trucks, service bodies, trailers, vans |
-| Looks | As detailed as the model | Clean and simplified |
-| Panels | Whatever the model's author made | Exactly the surfaces wraps and lettering need |
-| Licence | The model's (must allow use and adaptation; credit if it asks) | None of its own |
-| Size | Megabytes per model, loaded on demand | A few kilobytes of code |
-| Example | `shc`, `suv`, `compact` | `truck-canopy`, `truck-service` ([`work-truck.js`](../src/mockups/work-truck.js)) |
+The current pickup is Innerscene's **Crew-cab pickup with tonneau cover**, stored unchanged as
+`crew-cab-pickup.glb`. Its source and download address are in
+[`models/NOTICES.md`](../src/mockups/models/NOTICES.md). The other selectable source assets are
+SHCreations' hatchback and Innerscene's two SUVs. New vehicle views must come from those actual
+meshes; the legacy procedural builders are compatibility implementations.
 
 ### Licences for downloaded models
 
-Only use a model whose licence allows use, adaptation and redistribution in a private tool:
-**CC0** (no conditions) or **CC BY 4.0** (credit the author). Avoid "editorial", "non-commercial"
-(CC BY-NC), "no derivatives" (CC BY-ND) and store licences that forbid redistribution, and check
-that the model is not a manufacturer's trademarked design sold as a likeness. Sources that worked:
-Innerscene's library (CC0) and Sketchfab's downloadable CC-licensed models. Record the creator,
-source, licence and download address in [`src/mockups/models/NOTICES.md`](../src/mockups/models/NOTICES.md).
+The current Innerscene files carry **CC0** dedications; the SHCreations hatchback is **CC BY 4.0**
+and requires credit. Record the actual creator, source page, licence, download address and any
+conversion or geometry changes in [`src/mockups/models/NOTICES.md`](../src/mockups/models/NOTICES.md).
+Keep required attribution in the stage and exports. Licence records describe provenance; they
+do not establish manufacturer fitment or production dimensions.
 
 ### A downloaded model, step by step
 
 1. **Get a GLB** (binary glTF). A `.gltf` with separate files can be packed into one GLB with
    gltf-transform (`gltf-transform copy model.gltf model.glb`) without changing its geometry.
-   Keep it small: under 5 MB loads comfortably.
+   Record the file size and geometry complexity, then check loading and interaction on the
+   intended devices. The current pickup is about 5.7 MB before transfer compression.
 2. **Inspect it:**
 
    ```bash
@@ -231,6 +249,7 @@ source, licence and download address in [`src/mockups/models/NOTICES.md`](../src
    | Field | What it is |
    | --- | --- |
    | `url` | `new URL('./models/<file>.glb', import.meta.url).href`, so the build bundles it. |
+   | `thumbnail` | A bundled render of this same source model. Keep the render's source checksum alongside the preview. |
    | `paint` | The paint material's name. |
    | `glass` | The glass material's name, made opaque dark glass (optional). |
    | `rotation` | Radians about the vertical axis to turn the model so its length runs along x with its **front towards −x** and its left side towards +z. `0`, `±Math.PI / 2` or `Math.PI`. |
@@ -245,8 +264,8 @@ source, licence and download address in [`src/mockups/models/NOTICES.md`](../src
    imported model is uniformly scaled to it),
    and `rearHalf` (the x where a rear-half wrap starts; 0 is the middle, front is negative).
    `MODEL_IDS` and the vehicle list use these tables. If adding another category or configurable
-   body, update its catalogue classification and component resolver too. The generic pickup
-   configuration resolver does not automatically fit accessories to an arbitrary GLB.
+   body, update its catalogue classification and component resolver too. An accessory must come
+   from qualified source geometry; a configuration key does not establish a compatible fit.
 5. **Tune the areas in the app.** `npm run dev`, choose the vehicle, and select each area: the
    tinted rectangle shows where it is. Move `origin` (its centre) and change `width` and `height`
    until each sits on flat painted panel, clear of windows, handles and arches.
@@ -254,72 +273,76 @@ source, licence and download address in [`src/mockups/models/NOTICES.md`](../src
 
    ```bash
    npm test
-   npm run build && npm run test:vehicles:browser
+   npm run build
+   npm run test:vehicles:browser
+   npm run test:vehicle-layers:browser
    ```
 
-   `npm test` checks area frames, model checksums, configuration geometry, layer migration and
+   `npm test` checks area frames, model checksums, source geometry, layer migration and
    retained-placement behavior. The vehicle browser check loads models, places lettering,
    exercises wrap coverage and captures renders in `.documentation/vehicles-browser/`.
-   `VEHICLES=<id>` limits it to selected models; where Playwright's browser is not installed,
+   `VEHICLES=<id>` limits it to selected imported models; legacy recovery uses an explicit JSON
+   fixture in the layer journey. `EXPECTED_RENDERER=webgl` or `software3d` can require a specific
+   rendering path. Where Playwright's browser is not installed,
    `CHROMIUM_PATH` can name a compatible installed Chromium. Add acceptance cases for the new
    vehicle/configuration, including surface fit, save/reload and exported appearance. A nonzero
-   decal count by itself is not sufficient visual qualification.
-7. **Record the licence** in `NOTICES.md`, and add the vehicle to the table at the top of this
-   guide.
+   decal count by itself is not sufficient visual qualification. Record the renderer used: a
+   software 3D browser check does not establish WebGL lighting or GPU performance.
+7. **Render source previews** with [`scripts/render-model-previews.py`](../scripts/render-model-previews.py).
+   This Blender script imports the GLB and renders perspective/elevation views; its generated
+   `source.json` records the source checksum, geometry and camera setup. Catalogue cards use
+   these renders, while the editor itself renders live geometry.
+8. **Record the source and licence** in `NOTICES.md`, and update this guide's areas and model list.
 
-### A vehicle drawn in code
+### Imported pickup component adapter
 
-[`work-truck.js`](../src/mockups/work-truck.js) is the pattern. A body is a few **side profiles**
-(THREE.Shape: the outline seen from the side, with arcs for the wheel arches) **extruded across
-the width** with rounded edges, which gives flat, clean side panels; details (windows, seams,
-handles, lamps, bumpers, mirrors, wheels, flares, a ladder rack) are small meshes added on top.
+[`imported-pickup.js`](../src/mockups/imported-pickup.js) recognises exactly the source's
+`Seated retractable tonneau` and eighteen `Tonneau slat` nodes. It validates the complete node
+inventory before changing visibility. **Open bed** hides those nodes; **Tonneau cover** shows
+them. Geometry, materials, node transforms, the bed floor, bed sides and tailgate remain the
+same. No replacement mesh or accessory is generated.
 
-- Work in metres, front towards −x, left side towards +z, wheels on y = 0, centred on x and z:
-  a drawn vehicle is shown exactly as built (it is not rescaled), so its areas are in its own
-  coordinates.
-- Name materials as the editor expects: the painted body `paint`, glass `glass`; anything else
-  (trim, chrome, tyres, lamps) is left as it is and stays clear of artwork.
-- Keep glazing and its frame out of the permitted print region. New windowed canopy variants
-  have holes in their side-panel geometry and narrower branding areas below the windows.
-- Export a `build…` function and give the vehicle a `build: { … }` entry in `VEHICLE_MODELS`
-  (instead of `url`) and its areas and length in `VEHICLES`. The `back: 'canopy' | 'service'`
-  option selects the structural pickup/service-body variant. Pickup covers are configured
-  separately; do not invent another `back` value.
-- The Node test for the truck casts rays at each area's centre and corners and fails if one hits
-  glass or misses paint; copy it for a new drawn vehicle.
+The source file has 146,508 triangles; hiding the original cover exposes 145,816. The adapter
+and file checksum are tested together. Both configurations use identical prepared paint
+surfaces; [`test/imported-pickup.test.js`](../test/imported-pickup.test.js) casts 325 rays across
+each of the six areas in each configuration, checking paint, orientation and intervening
+glass or fittings. It also checks source bounds, the existing bed floor, unchanged geometry
+references and restoration of the original cover.
 
-The generic pickup's supported builder contract is:
+### Legacy procedural projects
 
-```js
-buildWorkTruck({
-  back: 'canopy',
-  configuration: {
-    cover: 'open', // open | tonneau | cab-high | raised | commercial
-    sides: 'solid', // solid | windows | hatches; normalized to solid without a canopy
-    rack: false,
-    canopyPaint: null // null follows body paint, otherwise a six-digit hex colour
-  }
-})
-```
-
-`back: 'service'` selects the service body and defaults to its legacy ladder rack. Unknown `back`
-values throw. Named component groups and `userData.paintRole` let the studio colour the canopy
-or service body independently from the cab. The current generic geometry has no manufacturer
-fitment claim.
-
-Further geometry candidates include a cargo van, box truck and enclosed trailer. A model-matched
-pickup needs the asset and dimensional evidence described in the intake guide.
+`truck-canopy` and `truck-service` remain in the model registry with `legacy: true` so existing
+drafts and JSON projects can reopen without losing their artwork or changing geometry. Their
+[`work-truck.js`](../src/mockups/work-truck.js) builder and configuration rules preserve the old
+canopy, side-panel and rack states. They are excluded from catalogue cards and new livery
+selection. Maintain these contracts for recovery; use imported source geometry for new assets.
 
 ### Checklist
 
 - [ ] Licence allows use and adaptation; credit recorded (`NOTICES.md`, `creditRequired`)
 - [ ] `VEHICLE_MODELS` entry: paint and glass names, rotation (front towards −x), group and label
 - [ ] `VEHICLES` entry: areas on flat painted panels, length, rear-half start
+- [ ] Asset/surface versions, source checksum and source-rendered preview recorded
+- [ ] Source-node configuration preserves geometry; raycasts qualify the available areas
 - [ ] `npm test` and `npm run test:vehicles:browser` pass; screenshots look right from every side
 - [ ] Wraps checked at each coverage, with a graphic and with a pattern
 - [ ] This guide's tables updated, and the vehicle list in [brand-schema.md → Vehicles](brand-schema.md#vehicles)
 
 ## How it works inside
+
+**One model, two projections.** `vehicle-studio.js` loads the source GLB once, applies its source
+component configuration and normalises the display size. **3D** uses a perspective camera;
+**2D elevations** uses an orthographic camera over that same scene. Paint, wraps, original
+artwork textures, decal meshes and placement coordinates remain shared. Side, opposite, front,
+rear and above are camera directions, not separately drawn vehicle assets.
+
+**Software 3D rendering.** If the browser cannot create a WebGL context,
+[`model-preview.js`](../src/mockups/model-preview.js) rasterises the same Three.js scene to a
+canvas on the CPU. It uses the loaded mesh vertices and transforms, a depth buffer, camera
+projection, UV textures and existing `DecalGeometry`. It keeps orbit, elevations, editing and
+PNG export available. Lighting is simpler, without environment reflections or shadow maps;
+performance depends on geometry and output size. The prior SVG schematic implementation is
+an internal legacy path and is not used by the current vehicle tab.
 
 **Lettering** is a decal: the artwork is projected along the area's normal onto the painted meshes
 (three.js `DecalGeometry`), keeping only triangles that face out of the area, so it follows curves
@@ -334,11 +357,10 @@ artwork's visible window on each face ([`wrapWindow`](../src/mockups/vehicle-lay
 at the face's own proportions: scale and position move only that window, without rebuilding
 geometry. Wraps render under the lettering.
 
-**Colour.** Rendering uses neutral tone mapping (filmic tone mapping shifts saturated brand colours),
-lights mirrored on both sides, an environment turned so neither side is favoured, satin vinyl
-without a clear coat, and clear-coated paint. Measured on a side panel, Apex red `#D9021C`
-(217, 2, 28) renders as 210–216 on either side (it was 248, 92, 96 before calibration), and a
-white body at about 235.
+**Colour.** The WebGL scene uses neutral tone mapping, lights on both sides, satin vinyl and
+clear-coated paint. The software renderer uses simpler diffuse/specular shading. Both preserve
+the same artwork textures and paint choices, but their lighting is not interchangeable colour
+proofing; inspect brand artwork and production colour specifications separately.
 
 **Saved mockups** use `brandkit-vehicle-mockup/3`. Version 1 and 2 projects migrate deterministically:
 each old placement becomes an independent layer with the original artwork reference and
@@ -356,6 +378,13 @@ and retained vehicles. Imported GLBs also carry their checksum. Opening a file o
 checks those references before accepting it. Replacing geometry or surface definitions therefore
 requires retaining the older asset or supplying an explicit migration.
 
+The imported pickup is pinned as `innerscene-crew-cab-tonneau/1` with surface version
+`innerscene-crew-cab/1`. Its SHA-256 is recorded in the registry and source notice, and the
+binary test verifies it. Preview `source.json` records identify the exact GLB used to make the
+catalogue images. Renderer tests exercise actual imported meshes, depth ordering, camera
+projection, texture orientation and cover visibility; a screenshot alone cannot establish
+those invariants.
+
 Drafts remain per brand in `localStorage` under `brandkit-vehicle-mockup:<brand id>`. Named
 projects use IndexedDB through [`mockup-project-store.js`](../src/mockups/mockup-project-store.js).
 The store namespaces records by brand and category, copies serializable project snapshots,
@@ -371,9 +400,13 @@ resolution pass. This cache is bounded by entry count, not a measured memory bud
 
 ## Limits, and what could come next
 
-- **Generic vehicles.** The current five entries are generic. Actual-model pickups, compatible
-  branded canopies, make/model/year filters and manufacturer dimension evidence require a
-  separate asset intake. No marketplace vehicle has been acquired by this expansion.
+- **Generic imported vehicles.** Four source models are selectable for new designs. The pickup
+  is a downloaded Innerscene asset with its original tonneau, not a qualified F-150, Tacoma or
+  another manufacturer SKU. A fitted canopy, racks, make/model/year filters and manufacturer
+  dimension evidence require further intake. Legacy procedural trucks remain for recovery.
+- **Renderer qualification.** The software path renders real 3D geometry with reduced lighting.
+  Its successful browser workflow is separate evidence from a WebGL run. Physical-device
+  performance and full GPU appearance still need checks on their intended environments.
 - **Broad areas.** Door regions still cover a pair of doors. A qualified vehicle can add individual
   front/rear-door, quarter-panel and other surface definitions; it needs its own fit checks.
 - **Fleet composition.** Each layer is independent, but the built-in fleet layout's logo,
@@ -399,11 +432,13 @@ resolution pass. This cache is bounded by entry count, not a measured memory bud
 | File | What it is |
 | --- | --- |
 | [`src/app/views/Vehicles.jsx`](../src/app/views/Vehicles.jsx) | The tab: controls, brand designs, reading brand files |
-| [`src/mockups/vehicle-studio.js`](../src/mockups/vehicle-studio.js) | The 3D editor: scene, projection, wraps, gestures, undo, export |
+| [`src/mockups/vehicle-studio.js`](../src/mockups/vehicle-studio.js) | Shared scene, perspective/orthographic cameras, decals, wraps, gestures, undo and export |
+| [`src/mockups/model-preview.js`](../src/mockups/model-preview.js) | Software 3D rasterizer for the same scene when WebGL is unavailable |
 | [`src/mockups/vehicle-layout.js`](../src/mockups/vehicle-layout.js) | Vehicles' areas and lengths, placement math, wrap window, mockup validation |
-| [`src/mockups/vehicle-models.js`](../src/mockups/vehicle-models.js) | The vehicle list: files or drawings, paint material, credit |
-| [`src/mockups/work-truck.js`](../src/mockups/work-truck.js) | Generic pickup/service geometry with named components |
-| [`src/mockups/vehicle-configuration.js`](../src/mockups/vehicle-configuration.js) | Cover/side/rack validation and configuration-dependent printable surfaces |
+| [`src/mockups/vehicle-models.js`](../src/mockups/vehicle-models.js) | Imported assets, source renders, material names, credits and version/checksum pins; legacy records for recovery |
+| [`src/mockups/imported-pickup.js`](../src/mockups/imported-pickup.js) | Visibility-only adapter for the 19 original tonneau nodes |
+| [`src/mockups/work-truck.js`](../src/mockups/work-truck.js) | Legacy procedural pickup/service geometry retained for saved projects |
+| [`src/mockups/vehicle-configuration.js`](../src/mockups/vehicle-configuration.js) | Imported open/tonneau choices and legacy configuration/surface compatibility |
 | [`src/mockups/VehicleCatalog.jsx`](../src/mockups/VehicleCatalog.jsx) | Search, category, favourites and recently used catalogue controls |
 | [`src/mockups/MockupProjects.jsx`](../src/mockups/MockupProjects.jsx) | Shared named-project library UI for vehicles and clothing |
 | [`src/mockups/mockup-project-store.js`](../src/mockups/mockup-project-store.js) | Transactional IndexedDB snapshots with revision checks |
@@ -412,9 +447,13 @@ resolution pass. This cache is bounded by entry count, not a measured memory bud
 | [`src/mockups/vehicle-livery.js`](../src/mockups/vehicle-livery.js) | Brand liveries: checks (run by `validateBrand`) and livery → mockup |
 | [`src/mockups/models/`](../src/mockups/models/) | The downloaded models and `NOTICES.md` |
 | [`scripts/vehicle-model.mjs`](../scripts/vehicle-model.mjs) | Inspects a GLB before adding it |
+| [`scripts/render-model-previews.py`](../scripts/render-model-previews.py) | Blender source-model renders and checksum provenance for catalogue previews |
+| [`test/imported-pickup.test.js`](../test/imported-pickup.test.js) | Original GLB checksum/bounds, source-node preservation, bed floor and six-surface raycast checks |
+| [`test/model-preview.test.js`](../test/model-preview.test.js) | Actual-mesh software rendering, depth, projection, UVs, decals and pickup cover restoration |
 | [`test/vehicle-mockups.test.js`](../test/vehicle-mockups.test.js) | Existing placement, validation, artwork, livery and legacy geometry tests |
-| [`test/vehicle-configuration.test.js`](../test/vehicle-configuration.test.js) | Component options, cavity geometry and raycasts for permitted artwork areas |
+| [`test/vehicle-configuration.test.js`](../test/vehicle-configuration.test.js) | Legacy component options, cavity geometry and retained surface contracts |
 | [`test/vehicle-layers.test.js`](../test/vehicle-layers.test.js) | Layer migration, retention, independent edits, versions and recovery |
 | [`test/mockup-project-store.test.js`](../test/mockup-project-store.test.js) | Metadata and failure handling; real persistence is exercised in browser acceptance |
 | [`docs/vehicle-asset-intake.md`](vehicle-asset-intake.md) | Preparation and acceptance requirements for an actual vehicle asset |
-| [`test/browser/vehicles.check.mjs`](../test/browser/vehicles.check.mjs) | Browser check of every vehicle's areas and wraps |
+| [`test/browser/vehicles.check.mjs`](../test/browser/vehicles.check.mjs) | Browser check of the imported catalogue's areas and wraps, with source and renderer evidence |
+| [`test/browser/vehicle-layers.check.mjs`](../test/browser/vehicle-layers.check.mjs) | Source cover/elevation workflow, layer preservation, real project conflicts, exports and explicit legacy JSON recovery |

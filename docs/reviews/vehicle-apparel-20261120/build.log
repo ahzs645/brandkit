@@ -1,0 +1,162 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> brandkit@0.1.0 build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 963 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         2.27 kB │ gzip:   0.81 kB
+dist/assets/logo-menu-CjgGkhim.svg                      4.47 kB │ gzip:   1.67 kB
+dist/assets/USE-Cld1N32i.md                             7.20 kB
+dist/assets/google-pixel-9a-D0rrb9bL.webp              24.18 kB
+dist/assets/google-pixel-8-C773PBQw.webp               24.89 kB
+dist/assets/apple-iphone-16e-BDTxI89P.webp             24.92 kB
+dist/assets/google-pixel-9-CRUXkuQK.webp               25.10 kB
+dist/assets/google-pixel-9-pro-DzZ9dTma.webp           25.21 kB
+dist/assets/google-pixel-8a-asxs5b0k.webp              25.42 kB
+dist/assets/samsung-galaxy-f56-CfRzBBgf.webp           25.99 kB
+dist/assets/google-pixel-9-pro-xl-DUK5rIt9.webp        26.87 kB
+dist/assets/samsung-galaxy-f06-5g-CAq_Vg8x.webp        27.16 kB
+dist/assets/apple-iphone-16-pro-Bwjtsxty.webp          27.77 kB
+dist/assets/apple-iphone-16-yf1915OD.webp              27.90 kB
+dist/assets/xiaomi-15s-pro-Dtf7gH-8.webp               28.06 kB
+dist/assets/apple-iphone-14-C0QoWQ5Z.webp              28.36 kB
+dist/assets/google-pixel-7a-CB3c625j.webp              28.55 kB
+dist/assets/xiaomi-poco-c71-lzjpZFU7.webp              28.58 kB
+dist/assets/xiaomi-poco-f7-Dkll87kX.webp               28.62 kB
+dist/assets/xiaomi-civi-5-pro-BUvKBbOy.webp            28.70 kB
+dist/assets/apple-iphone-15-CA3Jxh_1.webp              28.72 kB
+dist/assets/samsung-galaxy-m06-CLai14WZ.webp           29.01 kB
+dist/assets/huawei-nova-14-C1vhf3P1.webp               29.51 kB
+dist/assets/huawei-nova-14-pro-CE5LRDXX.webp           29.64 kB
+dist/assets/google-pixel-8-pro-BtqmzWt3.webp           30.00 kB
+dist/assets/apple-iphone-15-pro-UfxoGzmg.webp          30.10 kB
+dist/assets/samsung-galaxy-a36-BHRekRFJ.webp           30.31 kB
+dist/assets/apple-iphone-16-pro-max-CcT_qo2Z.webp      30.39 kB
+dist/assets/apple-iphone-16-plus-D00xGSFH.webp         30.48 kB
+dist/assets/huawei-enjoy-80-BwTN7AD1.webp              30.50 kB
+dist/assets/xiaomi-15-ultra-DVAmpGIU.webp              30.53 kB
+dist/assets/huawei-nova-y63-CmUtpqzP.webp              30.59 kB
+dist/assets/samsung-galaxy-f36-Cvl1jgV_.webp           32.68 kB
+dist/assets/samsung-galaxy-a16-Bd47Hukd.webp           32.80 kB
+dist/assets/apple-iphone-15-pro-max-BagyGILo.webp      33.66 kB
+dist/assets/apple-iphone-15-plus-SpyiSaas.webp         34.14 kB
+dist/assets/samsung-galaxy-a26-a9rRiGnA.webp           34.65 kB
+dist/assets/HelveticaNeueLTPro-Roman-C8wG6xKT.otf      34.80 kB
+dist/assets/samsung-galaxy-a16-5g-BORj-JQo.webp        34.88 kB
+dist/assets/HelveticaNeueLTPro-Italic-CdQiX1z0.otf     34.89 kB
+dist/assets/xiaomi-poco-f7-ultra-BJKls1Hf.webp         34.99 kB
+dist/assets/HelveticaNeueLTPro-Bold-vjkxaytR.otf       35.52 kB
+dist/assets/google-pixel-fold-aHpwMzHg.webp            35.63 kB
+dist/assets/HelveticaNeueLTPro-Black-M2H_OYLE.otf      37.28 kB
+dist/assets/HelveticaNeueLTPro-Black-_BBduKcZ.otf      37.28 kB
+dist/assets/samsung-galaxy-f16-Bh5o92Sy.webp           38.49 kB
+dist/assets/huawei-pura-80-GxgXhfde.webp               39.58 kB
+dist/assets/huawei-pura-80-pro-plus-DZm4klgH.webp      42.17 kB
+dist/assets/huawei-pura-80-ultra-CRz97OZ6.webp         42.62 kB
+dist/assets/huawei-pura-80-pro-qVRoqt1R.webp           42.68 kB
+dist/assets/samsung-galaxy-a56-CgrxY-N3.webp           42.98 kB
+dist/assets/xiaomi-poco-f7-pro-Crl9ad1U.webp           43.06 kB
+dist/assets/ctaan-logo-BAOG2HIq.png                    43.12 kB
+dist/assets/huawei-enjoy-70x-B3YVjrID.webp             43.80 kB
+dist/assets/huawei-nova-y72s-Df2a63uX.webp             46.72 kB
+dist/assets/xiaomi-poco-x7-pro-D8kPKy1W.webp           49.75 kB
+dist/assets/xiaomi-poco-m7-D_bQHH_g.webp               49.90 kB
+dist/assets/google-pixel-9-pro-fold-ip725ffa.webp      53.97 kB
+dist/assets/xiaomi-poco-x7-ZAbQIe2B.webp               54.91 kB
+dist/assets/HelveticaNeueLTPro-Bold-hTQldD_m.ttf       54.96 kB
+dist/assets/HelveticaNeueLTPro-Italic-BymTB9ck.ttf     57.98 kB
+dist/assets/HelveticaNeueLTPro-Black-BjA0s22J.ttf      58.41 kB
+dist/assets/brand-uANSNrW2.json                       172.29 kB │ gzip:  21.98 kB
+dist/assets/HelveticaNeueItalic-DKx4JyHi.ttf          265.72 kB
+dist/assets/angle-D7f3exfl.png                        315.18 kB
+dist/assets/HelveticaNeueBold-DA2es-3R.ttf            329.46 kB
+dist/assets/HelveticaNeueBlack-CIh00e56.ttf           339.51 kB
+dist/assets/angle-CTd52vmN.png                        342.87 kB
+dist/assets/angle-CoNK0J4w.png                        376.99 kB
+dist/assets/angle-CYVQCQFU.png                        399.41 kB
+dist/assets/patterns-guide-B8zp5Eid.html              544.59 kB │ gzip: 224.05 kB
+dist/assets/HelveticaNeueBold-CvSAbIAR.otf            609.90 kB
+dist/assets/HelveticaNeueBlack-9FyT5aCw.otf           621.47 kB
+dist/assets/HelveticaNeueRoman-CSpBGpqm.otf           630.40 kB
+dist/assets/suv-original-vmg6uTw9.glb                 638.56 kB
+dist/assets/pattern-explorer-Dom63uJz.html            697.17 kB │ gzip: 241.06 kB
+dist/assets/shc-hatchback-COn0q3y2.glb              4,043.62 kB
+dist/assets/generic-compact-suv-DTd4p3RG.glb        4,782.93 kB
+dist/assets/crew-cab-pickup-DlgEdh2Q.glb            5,661.98 kB
+dist/assets/mockup-draft-ICM2l7KX.css                   1.05 kB │ gzip:   0.44 kB
+dist/assets/ui-CW1N-szZ.css                             2.41 kB │ gzip:   1.00 kB
+dist/assets/Devices-8WLnKPX8.css                        3.42 kB │ gzip:   1.11 kB
+dist/assets/ManualLibrary-D1uzbzXD.css                  4.46 kB │ gzip:   1.36 kB
+dist/assets/Clothing-Dly5sztl.css                      10.20 kB │ gzip:   2.69 kB
+dist/assets/Vehicles-7r1bmiKu.css                      10.42 kB │ gzip:   2.66 kB
+dist/assets/index-DHIB92UN.css                         69.10 kB │ gzip:  13.64 kB
+dist/assets/DoorSigns-BAm_s2vQ.css                     80.69 kB │ gzip:  13.40 kB
+dist/assets/purify.es-3YqabFJ0.js                       0.05 kB │ gzip:   0.07 kB
+dist/assets/__vite-browser-external-wwA6K3d-.js         0.09 kB │ gzip:   0.10 kB
+dist/assets/rolldown-runtime-COiEfhsA.js                1.11 kB │ gzip:   0.62 kB
+dist/assets/affiliation-B-Zt-YTx.js                     1.29 kB │ gzip:   0.61 kB
+dist/assets/preload-helper-3QQuNM24.js                  1.52 kB │ gzip:   0.80 kB
+dist/assets/Sources-DhJ0v-I9.js                         2.12 kB │ gzip:   0.90 kB
+dist/assets/Guide-DT_GBLPv.js                           2.69 kB │ gzip:   1.29 kB
+dist/assets/render-DO2ITrHe.js                          3.80 kB │ gzip:   1.84 kB
+dist/assets/share-Drq9HXm0.js                           5.15 kB │ gzip:   2.03 kB
+dist/assets/vehicle-artwork-CSFN7oa7.js                 5.48 kB │ gzip:   2.65 kB
+dist/assets/motion-export-1vykxnbA.js                   6.32 kB │ gzip:   3.00 kB
+dist/assets/ManualLibrary-BFmLfV7x.js                   7.40 kB │ gzip:   2.68 kB
+dist/assets/Web-CPWptlFp.js                             7.85 kB │ gzip:   2.78 kB
+dist/assets/jsx-runtime-D6nV7gK2.js                     7.89 kB │ gzip:   2.99 kB
+dist/assets/BrandLibrary-uMwEfeZi.js                    8.21 kB │ gzip:   2.37 kB
+dist/assets/mockup-draft-DCA44NAd.js                    8.68 kB │ gzip:   3.22 kB
+dist/assets/gifenc-DJIWuR47.js                          8.97 kB │ gzip:   3.93 kB
+dist/assets/ui-DE38wFHa.js                              9.46 kB │ gzip:   3.83 kB
+dist/assets/Patterns-Bq8EOMJp.js                       10.44 kB │ gzip:   3.40 kB
+dist/assets/products-BSpjzg7P.js                       11.05 kB │ gzip:   4.54 kB
+dist/assets/Documents-DoK41okF.js                      11.21 kB │ gzip:   3.78 kB
+dist/assets/apparel-studio-CccMpJaq.js                 11.52 kB │ gzip:   5.29 kB
+dist/assets/vehicle-layout-gmrVNLt0.js                 16.76 kB │ gzip:   6.20 kB
+dist/assets/browser-CDmll_QM.js                        17.20 kB │ gzip:   8.06 kB
+dist/assets/unbc-DN5xZZ7I.js                           22.16 kB │ gzip:   8.67 kB
+dist/assets/Devices-CSh1WJuT.js                        24.41 kB │ gzip:   8.24 kB
+dist/assets/Clothing-ZRX2frzB.js                       25.87 kB │ gzip:   8.16 kB
+dist/assets/webm-muxer-Lik_tpbL.js                     28.96 kB │ gzip:   8.14 kB
+dist/assets/purify.es-BZxk_wWO.js                      29.02 kB │ gzip:  11.45 kB
+dist/assets/mp4-muxer-BIRIRV5P.js                      30.78 kB │ gzip:   8.96 kB
+dist/assets/Vehicles-DF6VEmcJ.js                       38.09 kB │ gzip:  11.64 kB
+dist/assets/Products-CGaz3GIq.js                       40.01 kB │ gzip:  11.38 kB
+dist/assets/vehicle-studio-CXeE_Ll6.js                 44.08 kB │ gzip:  17.21 kB
+dist/assets/devices.min-fHkqvv_7.js                    50.53 kB │ gzip:   7.26 kB
+dist/assets/mockframe-CqJ1weO3.js                      58.08 kB │ gzip:  12.89 kB
+dist/assets/ClientPack-CSpYQmu0.js                     63.55 kB │ gzip:  22.08 kB
+dist/assets/Manuals-CwYPXImr.js                        68.14 kB │ gzip:   7.29 kB
+dist/assets/brand-DWKsOI6H.js                          77.96 kB │ gzip:  19.77 kB
+dist/assets/svg2pdf.es.min-DnskQDqJ.js                 86.21 kB │ gzip:  25.02 kB
+dist/assets/artwork-BUgzan5u.js                       106.15 kB │ gzip:  29.22 kB
+dist/assets/index.es-vwnwynH3.js                      151.05 kB │ gzip:  48.79 kB
+dist/assets/index.es-DvqWt0Fx.js                      151.43 kB │ gzip:  48.92 kB
+dist/assets/DoorSigns-BdUvoohI.js                     178.44 kB │ gzip:  59.47 kB
+dist/assets/html2canvas-CEVQDJlC.js                   199.47 kB │ gzip:  46.77 kB
+dist/assets/html2canvas-zixcNqPc.js                   199.47 kB │ gzip:  46.77 kB
+dist/assets/templates-G-RFXzy3.js                     321.05 kB │ gzip: 114.45 kB
+dist/assets/pptxgen.es-DJ3cH2xG.js                    368.44 kB │ gzip: 123.26 kB
+dist/assets/jspdf.es.min-CNGUYTD7.js                  391.97 kB │ gzip: 126.15 kB
+dist/assets/dist-SIDJYw_i.js                          476.74 kB │ gzip: 138.19 kB
+dist/assets/model-preview-DXau7BeP.js                 686.88 kB │ gzip: 174.23 kB
+dist/assets/index-EyoNAiac.js                         793.02 kB │ gzip: 251.45 kB
+dist/assets/TemplatePrinter-NQpinYE-.js             2,116.02 kB │ gzip: 678.04 kB
+
+[INEFFECTIVE_DYNAMIC_IMPORT] src/app/views/Organization.jsx is dynamically imported by src/app/App.jsx but also statically imported by src/app/views/Overview.jsx, dynamic import will not move module into another chunk.
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 1200 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[INEFFECTIVE_DYNAMIC_IMPORT] src/export/publication.js is dynamically imported by src/export/office.js but also statically imported by src/app/views/Documents.jsx, src/engine/kit.js, src/handover/pack.js, dynamic import will not move module into another chunk.
+
+[INEFFECTIVE_DYNAMIC_IMPORT] vendor/template-printer/frontend/node_modules/.pnpm/jspdf@3.0.4/node_modules/jspdf/dist/jspdf.es.min.js is dynamically imported by vendor/template-printer/frontend/src/lib/calibration/exportUtils.ts but also statically imported by vendor/template-printer/frontend/node_modules/.pnpm/svg2pdf.js@2.7.0_jspdf@3.0.4/node_modules/svg2pdf.js/dist/svg2pdf.es.min.js, vendor/template-printer/frontend/src/lib/exporter.ts, dynamic import will not move module into another chunk.
+
+✓ built in 4.16s

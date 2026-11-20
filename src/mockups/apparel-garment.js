@@ -1,150 +1,118 @@
-// Static, softly draped generic garments. A texture coordinate is tied to millimetres on a
-// panel, so decoration size is stable as a different garment size is selected.
+// Loads an actual third-party garment. No procedural garment geometry is used.
 import * as THREE from 'three'
-import { APPAREL_SIZES } from './apparel-layout.js'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js'
+import { APPAREL_ASSET, APPAREL_SIZES, apparelPlacement } from './apparel-layout.js'
 
-const mesh = (geometry, material, name) => {
-  const object = new THREE.Mesh(geometry, material)
-  object.name = name
-  object.castShadow = true
-  object.receiveShadow = true
-  return object
+/** Keep the author's textile detail while allowing a colour preview. The original
+ * diffuse and normal files remain embedded in the distributed source GLB. */
+const tintableMap = (texture) => {
+  if (!texture?.image) return texture
+  const source = texture.image
+  const canvas = document.createElement('canvas')
+  canvas.width = source.width; canvas.height = source.height
+  const context = canvas.getContext('2d', { willReadFrequently: true })
+  context.drawImage(source, 0, 0)
+  const pixels = context.getImageData(0, 0, canvas.width, canvas.height)
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    // This source's cloth is very dark blue; desaturate and expose existing detail.
+    // No cloth pattern, seam, pocket, cord or garment contour is drawn here.
+    const value = Math.min(255, Math.max(pixels.data[i], pixels.data[i + 1], pixels.data[i + 2]) * 13)
+    pixels.data[i] = pixels.data[i + 1] = pixels.data[i + 2] = value
+  }
+  context.putImageData(pixels, 0, 0)
+  const map = new THREE.CanvasTexture(canvas)
+  map.flipY = texture.flipY
+  map.colorSpace = THREE.SRGBColorSpace
+  map.wrapS = texture.wrapS; map.wrapT = texture.wrapT
+  texture.dispose()
+  return map
 }
-const grid = (columns, rows, point, reverse = false) => {
-  const positions = [], uv = [], indices = []
-  for (let j = 0; j <= rows; j++) for (let i = 0; i <= columns; i++) {
-    const next = point(i / columns, j / rows)
-    positions.push(...next.position)
-    uv.push(...next.uv)
-  }
-  for (let j = 0; j < rows; j++) for (let i = 0; i < columns; i++) {
-    const a = j * (columns + 1) + i, b = a + 1, c = a + columns + 1, d = c + 1
-    indices.push(...(reverse ? [a, c, b, b, c, d] : [a, b, c, b, d, c]))
-  }
-  const geometry = new THREE.BufferGeometry()
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
-  geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2))
-  geometry.setIndex(indices)
-  geometry.computeVertexNormals()
-  return geometry
-}
 
-/** Build with independent front/back/sleeve texture materials and a plain ribbing material. */
-export const buildApparelGarment = (project, materials) => {
-  const root = new THREE.Group()
-  root.name = `generic-${project.product}-${project.size}`
-  const dimensions = APPAREL_SIZES[project.size]
-  const width = dimensions.width / 1000, height = dimensions.height / 1000
-  const half = width / 2
-  const bodyPoint = (u, v, sign) => {
-    const taper = 0.91 + 0.09 * Math.sin(v * Math.PI / 2)
-    const x = (u - 0.5) * width * taper
-    const neck = Math.max(0, 1 - (x / 0.093) ** 2)
-    const cut = neck * (sign > 0 ? 0.072 : 0.034)
-    const shoulder = 0.02 * Math.max(0, (Math.abs(x) - 0.12) / Math.max(0.01, half - 0.12))
-    const y = v * (height - cut - shoulder)
-    const fullness = Math.sin(Math.PI * u) ** 0.58
-    const folds = Math.sin(u * Math.PI * 9 + v * 3.2) * 0.0055 * (0.2 + (1 - v) * 0.8)
-      + Math.sin(v * 21 + u * 4) * 0.003 * Math.sin(Math.PI * u)
-    const z = sign * (0.029 + fullness * (0.077 + 0.012 * Math.sin(v * Math.PI)) + folds)
-    return { position: [x, y, z], uv: [0.5 + sign * x / width, y / height] }
-  }
-  root.add(mesh(grid(56, 64, (u, v) => bodyPoint(u, v, 1)), materials.front, 'front-panel'))
-  root.add(mesh(grid(56, 64, (u, v) => bodyPoint(u, v, -1), true), materials.back, 'back-panel'))
-  // Soft side seams join the two broad panels without creating decoration surfaces.
-  for (const side of [0, 1]) root.add(mesh(grid(4, 48, (u, v) => {
-    const front = bodyPoint(side, v, 1).position, back = bodyPoint(side, v, -1).position
-    return { position: [front[0], front[1], back[2] + u * (front[2] - back[2])], uv: [u, v] }
-  }, side === 1), materials.plain, 'side-seam'))
-  // Close each shoulder while leaving the actual neck opening unobstructed.
-  for (const sign of [-1, 1]) root.add(mesh(grid(24, 6, (u, v) => {
-    const x = sign * (0.095 + u * (half - 0.095))
-    const front = bodyPoint(x / width + 0.5, 1, 1).position
-    const back = bodyPoint(x / width + 0.5, 1, -1).position
-    return { position: [x, front[1] + v * (back[1] - front[1]), front[2] + v * (back[2] - front[2])], uv: [u, v] }
-  }, sign < 0), materials.plain, sign > 0 ? 'left-shoulder' : 'right-shoulder'))
-
-  // Rounded hem ribbing, with no arbitrary uniform scaling of the artwork textures.
-  const hem = mesh(new THREE.CylinderGeometry(1, 0.99, 0.054, 64, 1, true), materials.rib, 'ribbed-hem')
-  hem.position.y = 0.024
-  hem.scale.set(half * 0.91, 1, 0.104)
-  root.add(hem)
-
-  const sleeveLength = 0.56
-  for (const sign of [-1, 1]) {
-    const name = sign > 0 ? 'left-sleeve' : 'right-sleeve'
-    const from = new THREE.Vector3(sign * (half - 0.018), height - 0.074, 0)
-    const to = new THREE.Vector3(sign * (half + 0.245), height - 0.56, 0.018)
-    const axis = to.clone().sub(from).normalize()
-    const across = new THREE.Vector3(-axis.y, axis.x, 0).normalize()
-    const geometry = grid(40, 44, (u, v) => {
-      const angle = u * Math.PI * 2
-      const radius = 0.098 - v * 0.049
-      const ripple = Math.sin(v * 35 + u * 7) * 0.0045 * Math.sin(v * Math.PI)
-      const point = from.clone().lerp(to, v).addScaledVector(across, Math.sin(angle) * (radius + ripple))
-      point.z -= Math.cos(angle) * (radius * 0.77 + ripple)
-      // At the front of the sleeve, increasing texture U must read left to right as seen
-      // from outside. The cylinder's increasing angle runs the opposite way here.
-      return { position: point.toArray(), uv: [1 - u, 1 - v] }
-    })
-    root.add(mesh(geometry, materials[name], name))
-    const cuff = mesh(new THREE.CylinderGeometry(0.049, 0.046, 0.065, 36, 1, true), materials.rib, `${name}-cuff`)
-    cuff.position.copy(to).addScaledVector(axis, -0.014)
-    cuff.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), axis)
-    root.add(cuff)
-  }
-
-  const neckPoints = Array.from({ length: 65 }, (_, i) => {
-    const angle = i / 64 * Math.PI * 2
-    return new THREE.Vector3(Math.cos(angle) * 0.094, height - 0.031 - Math.max(0, Math.sin(angle)) * 0.037, Math.sin(angle) * 0.076)
+export const loadApparelGarment = async () => {
+  const { scene } = await new GLTFLoader().loadAsync(APPAREL_ASSET.url)
+  scene.name = APPAREL_ASSET.id
+  scene.traverse((object) => {
+    if (!object.isMesh) return
+    object.castShadow = true; object.receiveShadow = true
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      material.map = tintableMap(material.map)
+      material.side = THREE.DoubleSide
+      material.roughness = 0.94
+      material.metalness = 0
+    }
   })
-  root.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(neckPoints, true), 96, 0.013, 10, true), materials.rib, 'neck-ribbing'))
+  return scene
+}
 
-  if (project.product === 'hoodie') {
-    // A collapsed hood sits behind the neck. Its open edge is part of the model, not a print area.
-    const hood = mesh(new THREE.SphereGeometry(1, 48, 28, 0, Math.PI * 2, 0, Math.PI * 0.84), materials.plain, 'hood')
-    hood.scale.set(0.147, 0.176, 0.098)
-    hood.position.set(0, height - 0.021, -0.062)
-    hood.rotation.x = -0.7
-    root.add(hood)
-    const hoodInside = mesh(new THREE.SphereGeometry(1, 36, 24, 0, Math.PI * 2, 0, Math.PI * 0.6), materials.rib, 'hood-lining')
-    hoodInside.scale.set(0.125, 0.145, 0.075)
-    hoodInside.position.set(0, height + 0.007, -0.043)
-    hoodInside.rotation.x = -0.95
-    root.add(hoodInside)
+export const configureApparelGarment = (garment, project) => {
+  garment.scale.setScalar(APPAREL_SIZES[project.size].scale)
+  garment.traverse((object) => {
+    if (object.isMesh) for (const material of Array.isArray(object.material) ? object.material : [object.material]) material.color.set(project.colour)
+  })
+  garment.updateMatrixWorld(true)
+}
 
-    const pocketShape = new THREE.Shape()
-    pocketShape.moveTo(-0.17, 0.08)
-    pocketShape.lineTo(0.17, 0.08)
-    pocketShape.quadraticCurveTo(0.178, 0.08, 0.178, 0.095)
-    pocketShape.lineTo(0.14, 0.245)
-    pocketShape.quadraticCurveTo(0.135, 0.26, 0.12, 0.26)
-    pocketShape.lineTo(-0.12, 0.26)
-    pocketShape.quadraticCurveTo(-0.135, 0.26, -0.14, 0.245)
-    pocketShape.lineTo(-0.178, 0.095)
-    pocketShape.closePath()
-    const pocketGeometry = new THREE.ShapeGeometry(pocketShape, 16)
-    const points = pocketGeometry.attributes.position
-    for (let i = 0; i < points.count; i++) {
-      const x = points.getX(i), y = points.getY(i)
-      points.setZ(i, 0.105 + 0.012 * Math.sin((y - 0.08) / 0.18 * Math.PI) - 0.018 * (Math.abs(x) / 0.18) ** 2)
-    }
-    pocketGeometry.computeVertexNormals()
-    root.add(mesh(pocketGeometry, materials.plain, 'kangaroo-pocket'))
-    const seamMaterial = materials.seam
-    const stitchPath = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-0.167, 0.096, 0.093), new THREE.Vector3(0, 0.096, 0.115), new THREE.Vector3(0.167, 0.096, 0.093)
-    ])
-    root.add(mesh(new THREE.TubeGeometry(stitchPath, 40, 0.0018, 6, false), seamMaterial, 'pocket-seam'))
-    for (const sign of [-1, 1]) {
-      const cordPath = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(sign * 0.05, height - 0.05, 0.08),
-        new THREE.Vector3(sign * 0.055, height - 0.14, 0.12),
-        new THREE.Vector3(sign * 0.047, height - 0.2, 0.118)
-      ])
-      root.add(mesh(new THREE.TubeGeometry(cordPath, 28, 0.003, 8, false), materials.rib, 'drawcord'))
+/** A projection basis viewed from outside. Back and sleeve local X stay readable. */
+export const apparelProjection = (project, layer) => {
+  const placement = apparelPlacement(project, layer)
+  const height = APPAREL_SIZES[project.size].height / 1000
+  const normal = new THREE.Vector3(...({ front: [0, 0, 1], back: [0, 0, -1], 'left-sleeve': [1, 0, 0], 'right-sleeve': [-1, 0, 0] }[placement.surface]))
+  const quaternion = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), normal)
+  const horizontal = new THREE.Vector3(1, 0, 0).applyQuaternion(quaternion)
+  const centre = new THREE.Vector3(0, height - placement.y / 1000, placement.surface.endsWith('sleeve') ? 0.02 * APPAREL_SIZES[project.size].scale : 0)
+  centre.addScaledVector(horizontal, placement.x / 1000)
+  const rotation = quaternion.clone().multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), -layer.rotation * Math.PI / 180))
+  return { centre, normal, horizontal, orientation: new THREE.Euler().setFromQuaternion(rotation), width: placement.width / 1000, height: placement.height / 1000 }
+}
+
+/** Clip the logo projection against the imported triangles. No floating sticker
+ * plane or replacement garment surface is created. */
+export const projectApparelDecal = (garment, project, layer, material) => {
+  const projection = apparelProjection(project, layer)
+  const ray = new THREE.Raycaster(projection.centre.clone().addScaledVector(projection.normal, 1.5), projection.normal.clone().negate(), 0, 3)
+  garment.updateMatrixWorld(true)
+  const intersection = ray.intersectObject(garment, true)[0]
+  if (!intersection) return null
+  const padded = layer.method === 'patch' ? 0.01 : 0
+  const size = new THREE.Vector3(projection.width + padded, projection.height + padded, projection.normal.x ? 0.12 : 0.16)
+  const geometry = new DecalGeometry(intersection.object, intersection.point, projection.orientation, size)
+  if (!geometry.attributes.position.count) { geometry.dispose(); return null }
+  // Source garment is an open fabric shell. Discard back-facing triangles so a
+  // projection cannot stamp the inside of the hood or reverse side of a sleeve.
+  const position = geometry.attributes.position, normals = geometry.attributes.normal, uv = geometry.attributes.uv
+  const keptPosition = [], keptNormal = [], keptUv = []
+  for (let i = 0; i < position.count; i += 3) {
+    const normal = new THREE.Vector3().fromBufferAttribute(normals, i).add(new THREE.Vector3().fromBufferAttribute(normals, i + 1)).add(new THREE.Vector3().fromBufferAttribute(normals, i + 2))
+    if (normal.normalize().dot(projection.normal) < 0.1) continue
+    for (let j = i; j < i + 3; j++) {
+      keptPosition.push(position.getX(j), position.getY(j), position.getZ(j))
+      keptNormal.push(normals.getX(j), normals.getY(j), normals.getZ(j))
+      keptUv.push(uv.getX(j), uv.getY(j))
     }
   }
-  root.userData = { generic: true, dimensions, sleeveLengthMm: sleeveLength * 1000 }
-  return root
+  geometry.dispose()
+  if (!keptPosition.length) return null
+  const clipped = new THREE.BufferGeometry()
+  clipped.setAttribute('position', new THREE.Float32BufferAttribute(keptPosition, 3))
+  clipped.setAttribute('normal', new THREE.Float32BufferAttribute(keptNormal, 3))
+  clipped.setAttribute('uv', new THREE.Float32BufferAttribute(keptUv, 2))
+  const mesh = new THREE.Mesh(clipped, material)
+  mesh.name = `artwork-${layer.id}`
+  mesh.userData.layerId = layer.id
+  return mesh
+}
+
+export const disposeApparelGarment = (garment) => {
+  const textures = new Set(), materials = new Set(), geometries = new Set()
+  garment?.traverse((object) => {
+    if (object.geometry) geometries.add(object.geometry)
+    for (const material of object.material ? Array.isArray(object.material) ? object.material : [object.material] : []) materials.add(material)
+  })
+  for (const material of materials) {
+    for (const value of Object.values(material)) if (value?.isTexture) textures.add(value)
+    material.dispose()
+  }
+  for (const texture of textures) texture.dispose()
+  for (const geometry of geometries) geometry.dispose()
 }

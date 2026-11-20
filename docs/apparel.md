@@ -1,46 +1,45 @@
-# Clothing studio
+# Clothing studio: imported garment pilot
 
-Open **Clothing** in a brand that has logo artwork, or use `?brand=northwind&view=clothing`.
+The Clothing view uses **Elvaerwyn's original fitted women's zip hoodie**, obtained from MakeHuman's official `shirts02` asset pack. The hood is down and the zip is closed. The garment is an authored third-party mesh, not a garment shape made for Brandkit. Only that qualified model is offered. Crewnecks, pullover hoodies, quarter-zips, supplier SKUs and supplier integrations are not implemented.
 
-The first clothing adapter contains a generic crewneck sweatshirt and pullover hoodie. Both have a static drape, independent front/back/sleeve texture maps, five illustrative sizes, ribbing and fabric shading. The hoodie also has separate hood, lining, pocket and drawcord geometry. These are procedural preview garments, not matched Gildan/ATC assets or supplier patterns.
+## Asset and provenance
 
-## User workflow
+The original `ladieshoodiedown1.obj` contains 9,935 vertices and 9,787 quads. Its GLB contains 19,574 triangles, 13,280 exported vertices (UV seam splits), the original texture coordinates, and embedded original 1,024-pixel diffuse and normal maps. The complete 1,045,176-byte GLB lives at `public/models/apparel/elvaerwyn-zip-hoodie.glb`.
 
-1. **Product:** search and select the crewneck or hoodie.
-2. **Configure:** select garment colour and size. Size changes keep every artwork dimension and offset unchanged in millimetres.
-3. **Artwork:** add independent layers using original logo variants from the open brand. Select a region, change width and position numerically, preserve the artwork aspect ratio, choose a decoration method, duplicate, reorder, hide or lock a layer.
-4. **Review:** save a named project, download portable JSON, export the current 3D/flat preview as PNG, or download an SVG review sheet with front/back views and per-layer dimensions.
+The creator is Elvaerwyn. The original `.mhclo` and official pack specify **CC-BY** without a version; Brandkit preserves that exact designation. See [the official asset catalog](https://static.makehumancommunity.org/assets/assetpacks/shirts02.html), the original metadata/source files in `assets/apparel/elvaerwyn-zip-hoodie/`, and `public/models/apparel/NOTICES.md`. The catalog card uses the creator's actual thumbnail.
 
-The preview offers perspective, front, back and both upper-sleeve camera views. Mouse or touch orbit is enabled on the 3D stage; numerical placement controls remain available on narrow screens. If the browser cannot create a WebGL renderer, the studio opens the editable flat layout automatically and disables the unavailable 3D toggle. Mobile layout uses stacked preview and inspector sections. Actual phone GPU/touch qualification is separate from emulated viewport testing.
+Run `blender --background --python scripts/convert-apparel-asset.py` to reproduce the conversion from the tracked source. It imports the original OBJ, converts its decimetre units to metres, centres it at the hem, smooths normals, and exports GLB. There is no new garment geometry. At runtime the dark-blue source diffuse map is desaturated and exposed to make a tintable colour preview; its original textile detail is retained. The original maps remain unchanged in the source GLB and tracked source folder.
 
-## Data and geometry
+## One scene for 3D and 2D
 
-`apparel-layout.js` owns the `brandkit-apparel-mockup/1` schema. Projects pin asset and surface version 1. Layers contain their own stable ID, original brand-artwork ID, area, physical width, aspect ratio, offsets, rotation, decoration method, visibility and lock state. The selected garment size changes its geometry and texture-to-millimetre scale; it does not change saved artwork coordinates.
+`apparel-garment.js` loads the real GLB through Three.js `GLTFLoader`. `apparel-studio.js` owns a single scene containing that garment and the visible artwork meshes.
 
-`apparel-garment.js` produces the static geometry. `apparel-studio.js` uses UV textures composited from the original brand SVGs, so prints inherit the mesh’s drape and fabric lighting. It does not change a logo’s lettering or proportions. The stage renders on demand, caps display pixel ratio at 1.5, bounds the image cache, and disposes replaced geometry and textures.
+The **3D preview** uses a perspective camera and OrbitControls. **2D views** use an orthographic camera looking at the exact same mesh, textures, layer visibility and physical placements. There is no separate drawn sweatshirt silhouette, photograph substitute or SVG garment fallback.
 
-`apparel-flat.js` draws the same physical placements in a flat review sheet. One common scale fits the complete garment and sleeve bounds for all five sizes, with separate front/back panels and a gutter. A 3D PNG is exported at 2000 × 1600; flat PNG is rendered at 2320 pixels wide. PNG and SVG review exports omit the editor’s region guides and selected-artwork box. The SVG sheet includes every visible layer’s dimensions and method, including retained unplaced layers identified for review.
+When WebGL cannot initialize, `model-preview.js` rasterizes that same Three scene to Canvas2D. It preserves geometry, depth, UV textures and projected decals and supports orbit/view changes. Its lighting is approximate; PBR environment reflections, texture normal/bump effects and cast shadows are not reproduced. The UI reports “software 3D” when it is in use. Both modes render on demand, cap interactive work, and dispose geometry, materials, textures, controls and resize observers when the view closes.
 
-The left-chest, front, back and upper-sleeve regions have deliberately conservative generic dimensions. A hoodie’s front region ends above its pocket, and its back region starts below the hood. If switching products makes artwork unsuitable, its physical data is retained and the layer is marked unplaced. Returning to the original garment restores its availability. An explicit size/position edit fits the complete rotated footprint; a patch preview includes its backing margin in that calculation.
+## Original artwork and physical placement
 
-## Persistence and portability
+The artwork selector uses `vehicleLogos(brand, fonts)`, so it receives the open brand's original approved logo variants and lockups. The logo is rasterized without changing its proportions, then `DecalGeometry` clips its projection against the imported garment triangles. No floating rectangular logo plane substitutes for the fabric.
 
-The small current draft is stored per brand in browser storage. Named designs use the shared `MockupProjects` component and IndexedDB project store, with explicit revision updates. The Review section remains mounted when another inspector tab is selected, preserving the active saved project and revision. Editing is disabled while a PNG export captures the selected project. Imported JSON is validated before it can replace the current design. Unknown garments, asset versions, layer IDs, artwork references, methods, invalid booleans and nonfinite dimensions are rejected.
+Each independent layer stores an original artwork reference, name, width in millimetres, aspect ratio, offsets, rotation, decoration method, visibility and lock state. There are chest regions on either side of the centre zip, a back region below the hood, and left/right outer sleeve regions. Rotated artwork and patch backing are constrained to their preview regions. Logo projection uses an outward-facing basis, so back and sleeve lettering reads correctly from outside the garment.
 
-Opening an external JSON file detaches the previous named project, so **Update saved** cannot accidentally target the design that was open before import. Unreadable or unsupported local drafts are copied verbatim to unique browser recovery keys and verified before the new draft may autosave. If that backup fails, the original slot remains protected and autosave is paused; the recovery notice offers the original data as a download.
+The five **preview sizes** scale the one reference mesh: S 0.96, M 1.00, L 1.04, XL 1.08 and XXL 1.12. They are explicitly labelled visual scales, not supplier grading. The M reference model is 625.16 mm high including its hood. Changing the mesh scale preserves each artwork's millimetre dimensions and offsets. These dimensions describe the calibrated reference mesh, not a measured real blank.
 
-Artwork references belong to the open brand. Portable JSON does not bundle the brand pack; reopen the matching brand before loading the mockup. Named designs are browser-local. Download JSON to keep a portable copy.
+Screen print and DTF/DTG are appearance previews. Embroidery adds a light relief cue, and patch adds a backing/edge. They do not create machine stitches, digitization, cut patterns or manufacturing instructions.
 
-## Decoration and production limits
+## Persistence, recovery and exports
 
-Screen print and DTF/DTG share the cloth-shaded artwork preview. Embroidery adds a modest relief appearance; patch preview adds a backing and border. These modes record design intent and do not generate stitch files, print-provider jobs, separations or production templates. No universal embroidery limits are imposed. Confirm actual garment construction, supplier print areas, thread details and digitization separately.
+`brandkit-apparel-mockup/2` includes asset ID `elvaerwyn-zip-hoodie-2018-v1`, asset version 1 and placement version 2. Strict JSON validation rejects unsupported assets, unknown artwork references, duplicate layer IDs and invalid numeric values.
 
-This pilot does not yet include SKU-matched garment scans/photos, knitted-in designs, all-over pattern-piece layouts, full-zip/quarter-zip geometry, uploaded garment models or supplier catalogue adapters. Those can be added through the same physical artwork model after the source assets and surface definitions are qualified.
+The retired v1 procedural garments are not silently remapped onto this different shape. `readMockupDraft` preserves their exact original JSON in a verified unique browser recovery copy, or disables draft overwrites if that copy cannot be stored. Clothing exposes **Download recovered draft**. Saved named records remain in IndexedDB, and their per-record **JSON ↓** button downloads the original project even if the current editor cannot open its old asset version. A failed open or a raw backup download does not change the active design or its saved-project binding.
+
+Named project storage is shared with Vehicles. Saves are explicit and revision-checked. The Review inspector remains mounted across inspector navigation, preserving the revision binding; external JSON imports detach that binding. Browser storage is local to the device; JSON is the portable backup.
+
+**Export PNG** captures the current model camera. **Download review sheet** renders front and back orthographic images from the same scene and embeds those PNGs in an SVG with artwork dimensions, methods, creator and asset ID. `apparel-review-sheet.js` only composes the page; it requires those real model images. It cannot manufacture a substitute garment drawing. Review sheets are not supplier production patterns.
 
 ## Verification
 
-- `node --test test/apparel.test.js`: physical dimension round trips; all-size preservation; retained crewneck/hoodie placements; rotated region bounds; independent source references; duplicate identity; malformed import rejection; review-sheet artwork/dimensions; distinct UV garment components.
-- `node --test test/mockup-draft.test.js`: untouched valid drafts, exact malformed/newer-format preservation, collision handling, failed-copy protection and unavailable storage.
-- `npm run build` followed by `CHROMIUM_PATH=/usr/bin/chromium node test/browser/apparel.check.mjs`: built-app controls, layer lock/visibility, separate logo selection, hoodie/size switching, named save and reload, portable JSON, PNG dimensions, SVG review download and a 390-pixel viewport. `SCREENSHOT_DIR` sets the output directory.
+`node --test test/apparel.test.js` verifies source-vertex preservation, source credits and triangle count; schema/physical-size round trips; legacy rejection without mutation; rotated and patch bounds; actual source-mesh decal coverage in every region at all preview sizes; readable front/back UV orientation through the software renderer; and perspective/orthographic rendering of the same binary mesh. Recovery/store tests are separate.
 
-The browser check must actually complete before its results are reported as passing. The mere presence of the script is not evidence of visual or mobile acceptance.
+`npm run test:apparel:browser` is the reproducible built-app interaction runner. It covers independent artwork, locking and visibility, preview sizes, named updates across inspector navigation, legacy named-record JSON recovery, reload, JSON/PNG/review exports, 2D front/back and mobile overflow. Its presence is not a claim that it ran in a given environment. Actual browser screenshot evidence is reported separately.

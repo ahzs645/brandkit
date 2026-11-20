@@ -103,15 +103,16 @@
 .vehicle-catalog__card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--page); }
 .vehicle-catalog__card[data-selected='true'] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
 .vehicle-catalog__choose { padding: 13px 10px 12px; width: 100%; height: 100%; text-align: left; border: 0; background: transparent; color: var(--ink); cursor: pointer; display: grid; align-content: start; gap: 5px; }
-.vehicle-catalog__choose svg { width: 100%; margin: 10px 0 5px; }
+.vehicle-catalog__choose img { width: calc(100% + 20px); max-width: none; margin: -13px -10px 5px; aspect-ratio: 1.6; object-fit: cover; background: #e1e4e7; }
 .vehicle-catalog__choose strong { font-size: 12px; line-height: 1.4; }
 .vehicle-catalog__choose span { font-size: 10px; color: var(--ink-muted); line-height: 1.5; }
 .vehicle-catalog__choose small { font-size: 9px; text-transform: uppercase; letter-spacing: .035em; color: var(--ink-faint); }
 .vehicle-catalog__favourite { position: absolute; right: 4px; top: 2px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-muted); cursor: pointer; width: 30px; height: 30px; font-size: 20px; }
 .vehicle-catalog__favourite[aria-pressed='true'] { color: #977324; }
 .vehicles__brand-designs { margin-top: 22px; }
-.vehicles__flat-label { font-size: 12px; color: var(--ink-muted); }
-.vehicle-stage[data-preview='flat'] > svg.vehicle-flat { position: absolute; inset: 0; width: 100%; height: 100%; }
+.vehicles__projection { min-width: 0; border: 0; padding: 0; margin: 0; }
+.vehicles__projection:disabled { opacity: .5; }
+.vehicles__projection-note { font-size: 12px; color: var(--ink-muted); }
 @media (min-width: 1001px) { .vehicles__controls { max-height: calc(100vh - var(--masthead-h) - 36px); overflow: auto; } .vehicles__tabs { position: sticky; top: 0; z-index: 3; } }
 @media (max-width: 1000px) { .vehicles { grid-template-columns: minmax(0, 1fr); } .vehicle-catalog__cards { grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); } }
 @media (max-width: 600px) {

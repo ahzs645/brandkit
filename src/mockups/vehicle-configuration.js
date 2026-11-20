@@ -1,5 +1,5 @@
-// Configuration for Brandkit's drawn work trucks. These dimensions describe the generic
-// preview, not a measured vehicle or a manufacturer's canopy fitment. This module deliberately
+// Configuration for imported pickups and retained legacy work-truck projects. These dimensions
+// describe the visual preview, not manufacturer fitment. This module deliberately
 // has no Three.js, model-loader or layout dependency so projects can be checked before loading.
 
 export const CONFIGURATION_VERSION = 'generic-work-truck/1'
@@ -15,11 +15,15 @@ export const SIDE_OPTIONS = Object.freeze([
   { value: 'windows', label: 'Side windows' },
   { value: 'hatches', label: 'Access hatches' }
 ].map(Object.freeze))
+export const coverOptionsFor = (model) => model === 'pickup'
+  ? COVER_OPTIONS.filter(({ value }) => value === 'open' || value === 'tonneau') : COVER_OPTIONS
 
-export const isConfigurable = (model) => model === 'truck-canopy' || model === 'truck-service'
+export const isConfigurable = (model) => ['pickup', 'truck-canopy', 'truck-service'].includes(model)
 export const hasCanopy = (configuration) => ['cab-high', 'raised', 'commercial'].includes(configuration?.cover)
 
-export const defaultConfiguration = (model) => model === 'truck-canopy'
+export const defaultConfiguration = (model) => model === 'pickup'
+  ? { cover: 'open', sides: 'solid', rack: false, canopyPaint: null }
+  : model === 'truck-canopy'
   ? { cover: 'raised', sides: 'solid', rack: false, canopyPaint: null }
   : model === 'truck-service' ? { cover: 'service', sides: 'solid', rack: true, canopyPaint: null } : null
 
@@ -30,12 +34,15 @@ export const normalizeConfiguration = (model, input) => {
   if (input == null) return defaults
   if (typeof input !== 'object' || Array.isArray(input)) throw new Error('Invalid vehicle configuration.')
   const result = { ...defaults, ...input }
-  const covers = model === 'truck-service' ? ['service'] : COVER_OPTIONS.map((entry) => entry.value)
+  const covers = model === 'truck-service' ? ['service'] : coverOptionsFor(model).map((entry) => entry.value)
   if (!covers.includes(result.cover)) throw new Error('This rear body does not support that cover.')
   if (!SIDE_OPTIONS.some((entry) => entry.value === result.sides)) throw new Error('Unknown canopy side option.')
   if (typeof result.rack !== 'boolean') throw new Error('Invalid rack option.')
   if (result.canopyPaint !== null && (typeof result.canopyPaint !== 'string' || !/^#[0-9a-f]{6}$/i.test(result.canopyPaint))) {
     throw new Error('Choose a valid component paint colour.')
+  }
+  if (model === 'pickup' && (result.rack || result.canopyPaint !== null || result.sides !== 'solid')) {
+    throw new Error('This imported pickup supports its original open bed and tonneau cover only.')
   }
   return {
     cover: result.cover,
@@ -65,7 +72,7 @@ export const canopyTop = (configuration) => configuration?.cover === 'cab-high' 
 export const configuredAreas = (model, baseAreas, input) => {
   if (!isConfigurable(model)) return baseAreas
   const configuration = normalizeConfiguration(model, input)
-  if (model === 'truck-service') return baseAreas
+  if (model === 'truck-service' || model === 'pickup') return baseAreas
   const areas = { ...baseAreas }
   areas['left-bed'] = side(1, 'Left bed rail', 1.91, 1.17, 2.30, 0.16, 'bed')
   areas['right-bed'] = side(-1, 'Right bed rail', 1.91, 1.17, 2.30, 0.16, 'bed')
@@ -98,6 +105,7 @@ export const configuredAreas = (model, baseAreas, input) => {
 }
 
 export const componentForArea = (model, area) => {
+  if (model === 'pickup' && (area.endsWith('-bed') || area === 'rear')) return 'bed'
   if (model === 'truck-service' && ['left-body', 'right-body', 'rear'].includes(area)) return 'service'
   if (model === 'truck-canopy' && (['left-body', 'right-body'].includes(area) || area.startsWith('canopy-'))) return 'canopy'
   if (model === 'truck-canopy' && (area.endsWith('-bed') || area === 'rear')) return 'bed'

@@ -13,7 +13,7 @@ import { Field, Segmented } from '../ui.jsx'
 import { OPPOSITE, SCHEMA, areasFor, createPlacement, defaultWrap, validateProject } from '../../mockups/vehicle-layout.js'
 import { BACKDROP_LABELS, FLEET, WRAP_GRAPHIC_LABELS, backdrop, brandColours, fleetDefaults, fleetSvg, vehicleLogos, wrapColours, wrapGraphicSvg, wrapPatterns } from '../../mockups/vehicle-artwork.js'
 import { VEHICLE_MODELS, lengthOf } from '../../mockups/vehicle-models.js'
-import { COVER_OPTIONS, SIDE_OPTIONS, configurationSummary } from '../../mockups/vehicle-configuration.js'
+import { coverOptionsFor, SIDE_OPTIONS, configurationSummary } from '../../mockups/vehicle-configuration.js'
 import { VehicleCatalog } from '../../mockups/VehicleCatalog.jsx'
 import { MockupProjects } from '../../mockups/MockupProjects.jsx'
 import { readMockupDraft } from '../../mockups/mockup-draft.js'
@@ -66,12 +66,12 @@ const fileUrl = async (source, path) => {
   return `data:${VEHICLE_FILE_TYPES[path.split('.').pop().toLowerCase()]};base64,${btoa(binary)}`
 }
 
-/** A new mockup: the brand's first livery, or the work truck with fleet lettering. */
+/** A new mockup uses an imported model; procedural designs remain available in saved projects. */
 const startingProject = (brand, logos) => {
-  const [first] = liveriesOf(brand)
+  const first = liveriesOf(brand).find((livery) => !VEHICLE_MODELS[livery.model]?.legacy)
   if (first) { try { return fromLivery(brand, first, logos) } catch { /* fall through to the default */ } }
   const words = fleetDefaults(brand)
-  const model = 'truck-canopy'
+  const model = 'pickup'
   return {
     schema: SCHEMA, model, paint: '#ffffff', area: 'left', backdrop: 'studio',
     placements: { left: createPlacement('left', FLEET.width / FLEET.height, areasFor(model)) },
@@ -164,12 +164,7 @@ export const Vehicles = ({ brand, fonts, source }) => {
           onChange: setSnap,
           onStatus: (text, error) => setMessage({ text, error })
         }
-        try { editor = createVehicleStudio(options) } catch (error) {
-          if (!/WebGL/.test(error.message)) throw error
-          const { createVehicleFlatStudio } = await import('../../mockups/vehicle-flat-studio.js')
-          if (!live) return
-          editor = createVehicleFlatStudio(options)
-        }
+        editor = createVehicleStudio(options)
         studio.current = editor
       } catch (error) {
         setFailed(error.message)
@@ -193,9 +188,10 @@ export const Vehicles = ({ brand, fonts, source }) => {
   const swatches = useMemo(() => paintSwatches(brand), [brand])
   const wrapSwatches = useMemo(() => [...brandColours(brand).map((hex) => [hex, hex]), ...NEUTRALS.filter(([hex]) => !brandColours(brand).some((other) => alike(other, hex)))], [brand])
   const logoOptions = logos.map((logo) => ({ value: logo.id, label: logo.label, group: logo.group }))
-  const liveries = liveriesOf(brand)
-  const letteringFiles = [...new Set(liveries.map((livery) => livery.lettering?.file).filter(Boolean))]
-  const wrapFiles = [...new Set(liveries.map((livery) => livery.wrap?.file).filter(Boolean))]
+  const allLiveries = liveriesOf(brand)
+  const liveries = allLiveries.filter((livery) => !VEHICLE_MODELS[livery.model]?.legacy)
+  const letteringFiles = [...new Set(allLiveries.map((livery) => livery.lettering?.file).filter(Boolean))]
+  const wrapFiles = [...new Set(allLiveries.map((livery) => livery.wrap?.file).filter(Boolean))]
   const design = { value: 'file', label: 'Design', title: 'The lettering from the brand’s own vehicle design' }
   const kindOptions = [...(logos.length ? KIND_OPTIONS : KIND_OPTIONS.filter((option) => ['none', 'upload'].includes(option.value))), ...(letteringFiles.length ? [design] : [])]
   const sourceOptions = [
@@ -229,7 +225,7 @@ export const Vehicles = ({ brand, fonts, source }) => {
     setReviewBusy(true)
     try {
       const images = []
-      const reviewViews = snap.flat ? [['side', 'Left side'], ['opposite', 'Right side'], ['front', 'Front'], ['rear', 'Rear']] : [['angle', 'Perspective'], ['side', 'Left side'], ['opposite', 'Right side'], ['rear', 'Rear']]
+      const reviewViews = snap.projection === 'orthographic' ? [['side', 'Left side'], ['opposite', 'Right side'], ['front', 'Front'], ['rear', 'Rear']] : [['angle', 'Perspective'], ['side', 'Left side'], ['opposite', 'Right side'], ['rear', 'Rear']]
       for (const [view, label] of reviewViews) {
         studio.current.cameraView(view)
         const blob = await studio.current.exportPng()
@@ -259,13 +255,17 @@ export const Vehicles = ({ brand, fonts, source }) => {
   return (
     <div className="view vehicles">
       <section className="panel vehicles__stage-panel" aria-label="Vehicle mockup">
-        <header className="vehicles__summary"><div><span className="vehicles__eyebrow">VEHICLE STUDIO</span><h1>{project ? VEHICLE_MODELS[project.model]?.label : 'Your brand, on the road'}</h1><p>{project ? configurationSummary(project.model, project.configuration) : 'Preparing your design…'}</p></div><span className="vehicles__fidelity">Generic preview</span></header>
+        <header className="vehicles__summary"><div><span className="vehicles__eyebrow">VEHICLE STUDIO</span><h1>{project ? VEHICLE_MODELS[project.model]?.label : 'Your brand, on the road'}</h1><p>{project ? configurationSummary(project.model, project.configuration) : 'Preparing your design…'}</p></div><span className="vehicles__fidelity">{project && VEHICLE_MODELS[project.model]?.legacy ? 'Legacy asset' : 'Imported 3D model'}</span></header>
         {recovery && <div className="notice" role="status"><p>{recovery.message}</p>{recovery.raw !== null && <button type="button" className="button button--quiet" onClick={() => download(recovery.raw, `${brand.id}-vehicle-recovered-draft.json`, 'application/json')}>Download recovered draft</button>}</div>}
         <div className="vehicles__toolbar">
-          {snap?.flat ? <span className="vehicles__flat-label">Flat layout · edit placement in Artwork</span> : <Segmented label="What dragging does" value={snap?.mode ?? 'edit'} onChange={run('setMode')} options={[
+          <fieldset className="vehicles__projection" disabled={!editable}><Segmented label="Model projection" value={snap?.projection ?? 'perspective'} onChange={run('setProjection')} options={[
+            { value: 'perspective', label: '3D', title: 'Rotate the imported three-dimensional model' },
+            { value: 'orthographic', label: '2D elevations', title: 'Parallel views of the same 3D geometry and artwork' }
+          ]} /></fieldset>
+          {snap?.projection === 'orthographic' ? <span className="vehicles__projection-note">Same model · parallel views</span> : <fieldset className="vehicles__projection" disabled={!editable}><Segmented label="What dragging does" value={snap?.mode ?? 'edit'} onChange={run('setMode')} options={[
             { value: 'edit', label: 'Edit artwork', title: 'Drag the logo; corners resize it, the round handle turns it' },
             { value: 'view', label: 'Rotate', title: 'Drag to turn the vehicle; scroll or pinch to zoom' }
-          ]} />}
+          ]} /></fieldset>}
           <div className="vehicles__history">
             <button type="button" className="button button--quiet" onClick={run('undo')} disabled={!snap?.canUndo || snap?.busy || reviewBusy} title="Undo (Ctrl+Z)">Undo</button>
             <button type="button" className="button button--quiet" onClick={run('redo')} disabled={!snap?.canRedo || snap?.busy || reviewBusy} title="Redo (Ctrl+Shift+Z)">Redo</button>
@@ -280,14 +280,14 @@ export const Vehicles = ({ brand, fonts, source }) => {
             <button type="button" className="button" onClick={exportImage} disabled={!editable}>Export PNG</button>
           </div>
         </div>
-        <div ref={stage} className="vehicle-stage" data-mode={snap?.mode ?? 'edit'} data-backdrop={project?.backdrop ?? 'studio'}>
+        <div ref={stage} className="vehicle-stage" data-mode={snap?.mode ?? 'edit'} data-projection={snap?.projection} data-renderer={snap?.renderer} data-backdrop={project?.backdrop ?? 'studio'}>
           <div className="vehicle-stage__views" role="group" aria-label="Camera">
-            {VIEWS.filter(([id]) => !snap?.flat || id !== 'angle').map(([id, label]) => <button key={id} type="button" disabled={!editable} aria-pressed={snap?.view === id} onClick={() => run('cameraView')(id)}>{label}</button>)}
+            {VIEWS.filter(([id]) => snap?.projection !== 'orthographic' || id !== 'angle').map(([id, label]) => <button key={id} type="button" disabled={!editable} aria-pressed={snap?.view === id} onClick={() => run('cameraView')(id)}>{label}</button>)}
           </div>
           <p className={`vehicle-stage__status${message.error ? ' vehicle-stage__status--error' : ''}`} role={message.error ? 'alert' : 'status'}>{message.text}</p>
         </div>
         <div className="vehicles__footer">
-          <span className="muted">{snap?.flat ? 'Generic flat elevation · original artwork and physical placement · 3D needs WebGL' : snap?.mode === 'view' ? 'Drag to turn the vehicle · scroll or pinch to zoom' : 'Drag the logo · corners resize · the round handle turns it (Shift: 15° steps) · arrow keys nudge'}</span>
+          <span className="muted">{snap?.projection === 'orthographic' ? 'Parallel elevations from the same 3D model · select a view to place artwork' : snap?.mode === 'view' ? 'Drag to turn the vehicle · scroll or pinch to zoom' : 'Drag the logo · corners resize · the round handle turns it (Shift: 15° steps) · arrow keys nudge'}</span>
           {snap?.model && (snap.model.source
             ? <span className="vehicles__credit">Model: <a href={snap.model.source} target="_blank" rel="noopener noreferrer">{snap.model.title}</a>, {snap.model.creator} · <a href={snap.model.licenceUrl} target="_blank" rel="noopener noreferrer">{snap.model.licence}</a></span>
             : <span className="vehicles__credit">{snap.model.label}: drawn for brandkit</span>)}
@@ -297,7 +297,7 @@ export const Vehicles = ({ brand, fonts, source }) => {
       <aside className="panel vehicles__controls" aria-label="Mockup settings">
         <div className="vehicles__tabs" role="tablist" aria-label="Vehicle tasks">{[['product', 'Product'], ['configure', 'Configure'], ['artwork', 'Artwork'], ['review', 'Review']].map(([id, label]) => <button key={id} type="button" role="tab" id={`vehicle-tab-${id}`} aria-controls={`vehicle-panel-${id}`} aria-selected={panel === id} tabIndex={panel === id ? 0 : -1} onKeyDown={(event) => { const ids = ['product', 'configure', 'artwork', 'review']; const index = ids.indexOf(id); const next = event.key === 'ArrowRight' ? ids[(index + 1) % 4] : event.key === 'ArrowLeft' ? ids[(index + 3) % 4] : event.key === 'Home' ? ids[0] : event.key === 'End' ? ids[3] : null; if (next) { event.preventDefault(); setPanel(next); document.getElementById(`vehicle-tab-${next}`)?.focus() } }} onClick={() => setPanel(id)}>{label}{id === 'artwork' && Boolean(snap?.unplacedCount) && <span className="vehicles__count">{snap.unplacedCount}</span>}</button>)}</div>
         <div role="tabpanel" id="vehicle-panel-product" aria-labelledby="vehicle-tab-product" hidden={panel !== 'product'}>
-          <section><h2>Vehicle library</h2><p className="field__hint">Choose a body, then configure its components. Your artwork stays with its original surfaces when you switch.</p><VehicleCatalog value={project?.model} disabled={!editable} onChange={run('setModel')} /></section>
+          <section><h2>Vehicle library</h2><p className="field__hint">Original 3D assets, with model-rendered previews. Switch between 3D and 2D elevations while keeping the same artwork.</p><VehicleCatalog value={project?.model} disabled={!editable} onChange={run('setModel')} /></section>
         {liveries.length > 0 && (
           <section className="vehicles__brand-designs">
             <h2>Brand designs</h2>
@@ -320,11 +320,12 @@ export const Vehicles = ({ brand, fonts, source }) => {
         <section>
           <h2>Components and finish</h2>
           {project?.configuration && <>
-            {project.model === 'truck-canopy' && <Field label="Bed cover"><Select value={project.configuration.cover} options={COVER_OPTIONS} onChange={(cover) => run('setConfiguration')({ cover })} disabled={!editable} /></Field>}
+            {['pickup', 'truck-canopy'].includes(project.model) && <Field label="Bed cover"><Select value={project.configuration.cover} options={coverOptionsFor(project.model)} onChange={(cover) => run('setConfiguration')({ cover })} disabled={!editable} /></Field>}
             {!['open', 'tonneau', 'service'].includes(project.configuration.cover) && <Field label="Canopy sides"><Select value={project.configuration.sides} options={SIDE_OPTIONS} onChange={(sides) => run('setConfiguration')({ sides })} disabled={!editable} /></Field>}
-            <label className="vehicles__check"><input type="checkbox" checked={project.configuration.rack} onChange={(event) => run('setConfiguration')({ rack: event.target.checked })} /><span>{project.configuration.cover === 'open' ? 'Bed-mounted ladder rack' : 'Roof / ladder rack'}</span></label>
+            {project.model !== 'pickup' && <label className="vehicles__check"><input type="checkbox" checked={project.configuration.rack} onChange={(event) => run('setConfiguration')({ rack: event.target.checked })} /><span>{project.configuration.cover === 'open' ? 'Bed-mounted ladder rack' : 'Roof / ladder rack'}</span></label>}
             {!['open', 'tonneau'].includes(project.configuration.cover) && <><label className="vehicles__check"><input type="checkbox" checked={!project.configuration.canopyPaint} onChange={(event) => run('setConfiguration')({ canopyPaint: event.target.checked ? null : '#30383e' })} /><span>Match {project.configuration.cover === 'service' ? 'service body' : 'canopy'} to body paint</span></label>{project.configuration.canopyPaint && <><span className="field__label">{project.configuration.cover === 'service' ? 'Service body' : 'Canopy'} paint</span><Swatches label="Component paint" colours={swatches} value={project.configuration.canopyPaint} onPick={(canopyPaint) => run('setConfiguration')({ canopyPaint })} onLive={(canopyPaint) => run('setConfiguration')({ canopyPaint })} onCommit={() => {}} /></>}</>}
           </>}
+          {project?.model === 'pickup' && <p className="field__hint">Open bed and retractable tonneau use the original model’s components.</p>}
           <span className="field__label">Paint</span>
           <Swatches label="Body paint" colours={swatches} value={project?.paint} onPick={(value) => run('setPaint')(value)} onLive={(value) => run('setPaint')(value, { live: true })} onCommit={commit} />
           {Boolean(snap?.unplacedCount) && <div className="vehicles__retained"><strong>{snap.unplacedCount} artwork {snap.unplacedCount === 1 ? 'layer retained' : 'layers retained'}</strong><p>Restore its original component or choose a new surface in Artwork.</p><button type="button" className="button button--quiet" onClick={() => setPanel('artwork')}>Review unplaced artwork</button></div>}

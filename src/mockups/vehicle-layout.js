@@ -50,6 +50,14 @@ const truckAreas = (back) => {
  * the vehicle; the truck's starts where its canopy or service body does).
  */
 export const VEHICLES = Object.freeze({
+  pickup: Object.freeze({ areas: Object.freeze({
+    left: side(LEFT, 'Left doors', -0.55, 0.86, 1.7, 0.30),
+    right: side(RIGHT, 'Right doors', -0.55, 0.86, 1.7, 0.30),
+    'left-bed': side(LEFT, 'Left bed side', 1.9, 1.0, 1.25, 0.3),
+    'right-bed': side(RIGHT, 'Right bed side', 1.9, 1.0, 1.25, 0.3),
+    hood: area('Hood', ...HOOD, [-1.9, 0, 0], 1.30, 0.60),
+    rear: area('Tailgate', ...REAR, [0, 1.01, 0], 1.40, 0.20)
+  }), length: 5.69, rearHalf: 1.10 }),
   shc: Object.freeze({ areas: AREAS, length: 4.7, rearHalf: -0.1 }),
   suv: Object.freeze({ areas: AREAS, length: 4.7, rearHalf: -0.1 }),
   compact: Object.freeze({ areas: AREAS, length: 4.7, rearHalf: -0.1 }),

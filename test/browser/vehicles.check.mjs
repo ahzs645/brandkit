@@ -2,7 +2,8 @@
 //   npm run build && npm run test:vehicles:browser
 // Optional: BASE_URL=https://preview.example/brandkit/ CDP_URL=http://localhost:9222
 // CHROMIUM_PATH/CHROMIUM_ARGS configure a local browser; SCREENSHOT_DIR saves captures.
-// VEHICLES=truck-canopy,shc selects a subset. Browser contexts are isolated from user sessions.
+// VEHICLES=pickup,shc selects imported models. Legacy recovery is covered by vehicle-layers.check.mjs.
+// EXPECTED_RENDERER=webgl|software3d optionally pins the renderer. Contexts are isolated.
 
 import assert from 'node:assert/strict'
 import { mkdirSync, writeFileSync } from 'node:fs'
@@ -19,7 +20,13 @@ const screenshotDir = resolve(process.env.SCREENSHOT_DIR ?? '.documentation/vehi
 mkdirSync(screenshotDir, { recursive: true })
 const args = process.env.CHROMIUM_ARGS ? JSON.parse(process.env.CHROMIUM_ARGS) : ['--no-sandbox', '--disable-dev-shm-usage', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']
 const only = process.env.VEHICLES?.split(',').filter(Boolean)
-const models = Object.keys(VEHICLE_MODELS).filter((id) => !only || only.includes(id))
+const expectedRenderer = process.env.EXPECTED_RENDERER ?? null
+assert.ok(expectedRenderer === null || ['webgl', 'software3d'].includes(expectedRenderer), 'EXPECTED_RENDERER must be webgl or software3d')
+if (only) for (const id of only) {
+  assert.ok(Object.hasOwn(VEHICLE_MODELS, id), `Unknown vehicle: ${id}`)
+  assert.ok(!VEHICLE_MODELS[id].legacy, `${id} is retained for saved work only. Use the explicit JSON recovery test in vehicle-layers.check.mjs.`)
+}
+const models = Object.keys(VEHICLE_MODELS).filter((id) => !VEHICLE_MODELS[id].legacy && (!only || only.includes(id)))
 assert.ok(models.length, 'VEHICLES must select at least one known model')
 let server, browser, context, page
 const failures = []
@@ -35,13 +42,15 @@ try {
     ? await chromium.connectOverCDP(process.env.CDP_URL)
     : await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args })
   context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
+  context.setDefaultTimeout(90000)
   page = await context.newPage()
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto(url.href)
   const stage = page.locator('.vehicle-stage')
   const ready = async () => { await page.waitForFunction(() => {
     const save = [...document.querySelectorAll('.vehicles__files button')].find((button) => button.textContent === 'Save JSON')
-    return Boolean(document.querySelector('.vehicle-stage canvas') && save && !save.disabled)
+    const element = document.querySelector('.vehicle-stage')
+    return Boolean(element?.dataset.preview === 'model' && ['webgl', 'software3d'].includes(element.dataset.renderer) && element.querySelector('canvas') && save && !save.disabled)
   }, null, { timeout: 180000 }); await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)))) }
   const choose = async (label, option) => {
     const combobox = page.getByRole('combobox', { name: label, exact: true })
@@ -53,6 +62,8 @@ try {
   const task = (id) => page.locator(`#vehicle-tab-${id}`).click()
   const waitLanded = (area) => page.waitForFunction((id) => document.querySelector('.vehicle-stage')?.dataset.activeArea === id, area, { timeout: 60000 })
   await ready()
+  const renderer = await stage.getAttribute('data-renderer')
+  if (expectedRenderer) assert.equal(renderer, expectedRenderer)
   for (const id of models) {
     const label = VEHICLE_MODELS[id].label
     await task('product')
@@ -87,7 +98,7 @@ try {
     await stage.screenshot({ path: resolve(screenshotDir, `${id}.png`) })
     await choose('Wrap coverage', 'None')
     await page.waitForFunction(() => Number(document.querySelector('.vehicle-stage')?.dataset.wraps) === 0)
-    checked.push({ model: id, surfaces, wraps })
+    checked.push({ model: id, renderer: await stage.getAttribute('data-renderer'), source: VEHICLE_MODELS[id].source, sha256: VEHICLE_MODELS[id].sha256, surfaces, wraps })
   }
   assert.deepEqual(errors, [], `page errors: ${errors.join(' | ')}`)
   assert.deepEqual(failures, [], failures.join('\n'))
@@ -97,7 +108,7 @@ try {
   if (page) await page.screenshot({ path: resolve(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
   throw error
 } finally {
-  writeFileSync(resolve(screenshotDir, 'results.json'), JSON.stringify({ checked, failures, pageErrors: errors }, null, 2))
+  writeFileSync(resolve(screenshotDir, 'results.json'), JSON.stringify({ expectedRenderer, qualification: 'UI source-model checks; software3d results do not establish WebGL lighting or GPU performance', checked, failures, pageErrors: errors }, null, 2))
   await context?.close()
   await browser?.close()
   if (server) await new Promise((done) => server.httpServer.close(done))

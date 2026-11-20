@@ -1,0 +1,20 @@
+{
+  "title": "elvs_hooded_sweat_jacket1",
+  "author": "Elvaerwyn",
+  "created": "2018-04-17",
+  "license": "CC-BY (label supplied by creator and official pack; no license version is asserted)",
+  "original_source": "http://www.makehumancommunity.org/node/1450",
+  "official_distribution": "https://static.makehumancommunity.org/assets/assetpacks/shirts02.html",
+  "archive": "https://files.makehumancommunity.org/asset_packs/shirts02/shirts02_ccby.zip",
+  "archive_member_prefix": "clothes/elvs_hooded_sweat_jacket1/",
+  "description": "A hooded sweat jacket with zip front for female MakeHuman models. Hood is down and zip is up. Fits with a tight-fitting shirt underneath.",
+  "acquired": "2026-11-20",
+  "source_files": {
+    "elvs_hooded_sweat_jacket1.mhclo": "0bcba0098a56c32f66b9f22ae37e8d0329e1cd515c44ce384edbaf848ef6fcb0",
+    "hoodietex1.png": "8c186f1c37094c46b8fcc84aa9d3896b91b863093df084056dd676ca6d3302b0",
+    "ladieshoodiedown1.mhmat": "b3a4cc7eaa937e26d36230de0684c1e18b95b15e7faa9e4020db7baafb158ce0",
+    "ladieshoodiedown1.obj": "e53204f19be28c005c920748322fc2aa42e7ebdb84a4ab72f48e7a244b71aa64",
+    "normalshoodie.png": "ef106c733e71e5c262b128748a212358b3402d402bc8bb6786d7ab0dca6a4876"
+  },
+  "conversion": "Original mesh and UV coordinates retained; decimetres to metres, centered at hem, quads triangulated and UV seam vertices split by glTF exporter, smooth normals. Original diffuse and normal textures embedded; material converted to PBR. Runtime recoloring desaturates/exposes original diffuse pixels and applies a colour tint. No garment mesh, silhouette or textile pattern was authored for Brandkit."
+}

@@ -1,0 +1,41 @@
+{
+  "schema": "brandkit-apparel-mockup/1",
+  "assetVersion": 1,
+  "surfaceVersion": 1,
+  "product": "hoodie",
+  "size": "XL",
+  "colour": "#162a49",
+  "layers": [
+    {
+      "id": "f8cfa2a3-fbe3-4714-93fa-a00bcfff8bf8",
+      "name": "Chest lockup",
+      "logo": "northwind/horizontal/white",
+      "area": "left-chest",
+      "aspect": 3.8635378386842105,
+      "widthMm": 80,
+      "xMm": 0,
+      "yMm": 0,
+      "rotation": 0,
+      "method": "embroidery",
+      "visible": true,
+      "locked": true
+    },
+    {
+      "id": "78b1fac5-9857-46fd-9c2e-1a6d26deb9cb",
+      "name": "Back lockup",
+      "logo": "northwind/stacked/white",
+      "area": "back",
+      "aspect": 1.429327987418033,
+      "widthMm": 220,
+      "xMm": 0,
+      "yMm": 0,
+      "rotation": 0,
+      "method": "print",
+      "visible": true,
+      "locked": false
+    }
+  ],
+  "selectedLayerId": "78b1fac5-9857-46fd-9c2e-1a6d26deb9cb",
+  "view": "back",
+  "mode": "flat"
+}

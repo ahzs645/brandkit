@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { deleteProject, listProjects, loadProject, saveProject } from './mockup-project-store.js'
+import { download } from '../export/render.js'
 import './mockup-projects.css'
 
 /** A shared library UI. Product adapters validate incoming data before accepting onOpen. */
@@ -43,6 +44,17 @@ export const MockupProjects = ({ brandId, kind, project, onOpen, disabled = fals
     if (accepted === false) throw new Error('This saved project could not be opened. Your current work is unchanged.')
     setCurrent(record); setName(record.name); onStatus?.(`“${record.name}” opened.`, false)
   })
+  // Raw saved data can always be recovered, including records whose old asset
+  // schema the current editor cannot open. Downloading never binds/changes work.
+  const backup = (id) => perform(async (isCurrent) => {
+    const record = await loadProject(id)
+    if (!isCurrent()) return
+    if (!record) throw new Error('That saved project was removed. Refresh the list to see current projects.')
+    if (record.brandId !== brandId || record.kind !== kind) throw new Error('That project belongs to another brand or category.')
+    const filename = `${brandId}-${kind}-${record.name}`.normalize('NFKD').replace(/[^a-z0-9._-]+/gi, '-').slice(0, 150)
+    download(JSON.stringify(record.project, null, 2), `${filename}-saved.json`, 'application/json')
+    onStatus?.(`Saved JSON for “${record.name}” downloaded. Your current design is unchanged.`, false)
+  })
   return <section className="mockup-projects" aria-label="Saved projects">
     <div className="mockup-projects__heading"><h2>Saved projects</h2><button type="button" className="button button--quiet" disabled={busy || disabled} onClick={() => perform(refresh)}>Refresh</button></div>
     <label className="field"><span className="field__label">Project name</span><input aria-label="Project name" value={name} maxLength={100} disabled={busy || disabled} onChange={(event) => setName(event.target.value)} /></label>
@@ -55,6 +67,7 @@ export const MockupProjects = ({ brandId, kind, project, onOpen, disabled = fals
     <div className="mockup-projects__list">
       {records.map((record) => <div key={record.id} className="mockup-projects__record" data-project-id={record.id}>
         <button type="button" className="mockup-projects__open" disabled={busy || disabled} onClick={() => open(record.id)}><strong>{record.name}</strong><span>Revision {record.revision} · {new Date(record.updatedAt).toLocaleDateString()}</span></button>
+        <button type="button" className="button button--quiet" aria-label={`Download ${record.name} JSON`} disabled={busy || disabled} onClick={() => backup(record.id)}>JSON ↓</button>
         {removeId === record.id ? <div className="mockup-projects__remove"><span>Remove saved copy?</span><button type="button" disabled={busy || disabled} onClick={() => perform(async (isCurrent) => { await deleteProject(record.id, record.revision); if (!isCurrent()) return; if (current?.id === record.id) setCurrent(null); setRemoveId(null); await refresh(isCurrent) })}>Remove</button><button type="button" disabled={busy || disabled} onClick={() => setRemoveId(null)}>Keep</button></div>
           : <button type="button" className="button button--quiet" aria-label={`Remove ${record.name}`} disabled={busy || disabled} onClick={() => setRemoveId(record.id)}>×</button>}
       </div>)}

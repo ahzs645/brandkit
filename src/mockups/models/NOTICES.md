@@ -1,11 +1,41 @@
 # Vehicle models: sources and licences
 
-The work truck (with a canopy or a service body) is drawn in code for brandkit
+The legacy work truck (with a canopy or a service body) is drawn in code for brandkit
 (`../work-truck.js`) and has no third-party source or licence. The vehicle mockups also use
-these three models. brandkit loads each GLB as
+the imported models below. brandkit loads each GLB as
 stored here; the SHA-256 of each is recorded in `../vehicle-models.js`. The models' licences
 cover the models only: they do not license, and are not licensed by, any brand's artwork placed
 on them.
+
+## Crew-cab pickup (`crew-cab-pickup.glb`)
+
+Title: Crew-cab pickup with tonneau cover
+Creator: Innerscene Corp
+Source: https://www.innerscene.com/tools/library/3d-parts/crew-cab-pickup-with-tonneau-cover-059c14f0
+Download source: https://files.innerscene.com/library/crew-cab-pickup-with-tonneau-cover-059c14f0/45fab96253a89fc6adf1/crew-cab-pickup-with-tonneau-cover.glb
+Downloaded: 2026-11-20
+Licence: CC0 1.0 Universal
+Licence URL: https://creativecommons.org/publicdomain/zero/1.0/
+SHA-256: `faa7a63c8cde051e41b3c90d3d9afc1afb25e60735f5b4508c401554eaa84fb2`
+
+This file is the original downloaded GLB, renamed without changing its bytes or mesh geometry.
+The GLB's copyright field identifies Innerscene Corp and includes its CC0 dedication. It
+contains 364 meshes, 146,508 triangles and embedded materials and textures. The native mesh
+uses metres with Y up and the front facing negative X. Inspection of its transformed vertices
+gives an overall envelope of approximately 5.691 m long, 2.320 m wide (including mirrors) and
+1.960 m high (including the antenna). These measured visualization bounds differ from the
+rounded dimensions on the source page; neither is a manufacturer specification or a fitted
+wrap template. The asset is an unbranded pickup, not a Ford F-150 or Toyota Tacoma model.
+
+The application normalises its display orientation and size, changes the body paint and
+glazing materials, and adds separate artwork decals. Its open-bed configuration hides only
+the source's `Seated retractable tonneau` and eighteen `Tonneau slat` mesh nodes through
+`../imported-pickup.js`; showing them restores the original tonneau configuration. The bed
+floor, walls and tailgate are original source geometry in both configurations. No canopy,
+rack, alternative side panels or substitute vehicle geometry are generated for this asset.
+Any derived orthographic views and
+thumbnails are renders of this same source mesh, with no substitute drawn vehicle silhouette.
+Preserve this source record when redistributing the file or its derived views.
 
 ## Four-door hatchback (`shc-hatchback.glb`)
 

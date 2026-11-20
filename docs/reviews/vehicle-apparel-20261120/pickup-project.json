@@ -2,12 +2,12 @@
   "schema": "brandkit-vehicle-mockup/3",
   "assetVersion": "vehicle-assets/1",
   "surfaceVersion": "vehicle-surfaces/2",
-  "model": "truck-canopy",
+  "model": "pickup",
   "configuration": {
-    "cover": "open",
+    "cover": "tonneau",
     "sides": "solid",
     "rack": false,
-    "canopyPaint": "#30383e"
+    "canopyPaint": null
   },
   "paint": "#ffffff",
   "wrap": {
@@ -59,8 +59,8 @@
       "aspect": 3.8635378386842105,
       "component": "cab",
       "variant": "raised",
-      "unplaced": false,
-      "unplacedReason": ""
+      "unplaced": true,
+      "unplacedReason": "Saved on another vehicle. Switch back to restore it, or place it on this vehicle."
     },
     {
       "id": "layer-2",
@@ -93,7 +93,7 @@
       "component": "canopy",
       "variant": "raised",
       "unplaced": true,
-      "unplacedReason": "Its component is removed. Restore the component or choose another surface."
+      "unplacedReason": "Saved on another vehicle. Switch back to restore it, or place it on this vehicle."
     },
     {
       "id": "layer-1",
@@ -126,21 +126,92 @@
       "component": "canopy",
       "variant": "raised",
       "unplaced": true,
-      "unplacedReason": "Its component is removed. Restore the component or choose another surface."
+      "unplacedReason": "Saved on another vehicle. Switch back to restore it, or place it on this vehicle."
+    },
+    {
+      "id": "layer-3",
+      "name": "Door identity · sourced pickup",
+      "model": "pickup",
+      "area": "left",
+      "targetConfiguration": {
+        "cover": "open",
+        "sides": "solid",
+        "rack": false,
+        "canopyPaint": null
+      },
+      "artwork": {
+        "kind": "fleet",
+        "logo": "northwind/horizontal/ink",
+        "tagline": "Field services",
+        "website": "northwind.example",
+        "upload": null,
+        "file": ""
+      },
+      "placement": {
+        "u": 0,
+        "v": 0,
+        "width": 1,
+        "rotation": 0
+      },
+      "visible": true,
+      "locked": false,
+      "aspect": 3.3333333333333335,
+      "component": "cab",
+      "variant": "open",
+      "unplaced": false,
+      "unplacedReason": ""
+    },
+    {
+      "id": "layer-4",
+      "name": "Door identity · sourced pickup · opposite",
+      "model": "pickup",
+      "area": "right",
+      "targetConfiguration": {
+        "cover": "open",
+        "sides": "solid",
+        "rack": false,
+        "canopyPaint": null
+      },
+      "artwork": {
+        "kind": "fleet",
+        "logo": "northwind/horizontal/ink",
+        "tagline": "Field services",
+        "website": "northwind.example",
+        "upload": null,
+        "file": ""
+      },
+      "placement": {
+        "u": 0,
+        "v": 0,
+        "width": 1,
+        "rotation": 0
+      },
+      "visible": true,
+      "locked": false,
+      "aspect": 3.3333333333333335,
+      "component": "cab",
+      "variant": "open",
+      "unplaced": false,
+      "unplacedReason": ""
     }
   ],
-  "selectedLayerId": "layer-1",
+  "selectedLayerId": "layer-3",
   "area": "left",
   "assetReferences": {
     "truck-canopy": {
       "assetVersion": "generic-work-truck/1",
       "surfaceVersion": "generic-work-truck/1",
       "sha256": null
+    },
+    "pickup": {
+      "assetVersion": "innerscene-crew-cab-tonneau/1",
+      "surfaceVersion": "innerscene-crew-cab/1",
+      "sha256": "faa7a63c8cde051e41b3c90d3d9afc1afb25e60735f5b4508c401554eaa84fb2"
     }
   },
   "artwork": {
     "kind": "fleet",
-    "logo": "northwind/horizontal/white",
+    "logo": "northwind/horizontal/ink",
     "tagline": "Field services",
     "website": "northwind.example",
     "upload": null,
@@ -150,8 +221,15 @@
     "left": {
       "u": 0,
       "v": 0,
-      "width": 1.1,
+      "width": 1,
+      "rotation": 0
+    },
+    "right": {
+      "u": 0,
+      "v": 0,
+      "width": 1,
       "rotation": 0
     }
-  }
+  },
+  "modelSha256": "faa7a63c8cde051e41b3c90d3d9afc1afb25e60735f5b4508c401554eaa84fb2"
 }

@@ -14,12 +14,15 @@ import { VEHICLE_MODELS, lengthOf } from './vehicle-models.js'
 import { readMockupDraft } from './mockup-draft.js'
 import { buildWorkTruck } from './work-truck.js'
 import { defaultConfiguration, normalizeConfiguration } from './vehicle-configuration.js'
+import { createModelPreviewRenderer, fitModelPerspectiveCamera } from './model-preview.js'
+import { configureImportedPickup } from './imported-pickup.js'
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 const HISTORY_LIMIT = 30
 const EXPORT_SIZE = { width: 2400, height: 1500 }
 // Camera positions for a car 4.7 m long; a longer vehicle's are scaled to match.
 const CAMERA_VIEWS = { angle: [-5.8, 2.8, 6.8], side: [0, 1.25, 8.5], opposite: [0, 1.25, -8.5], front: [-8.5, 2, 0], rear: [8.5, 1.8, 0], hood: [-4.5, 6, 3.5] }
+const ORTHOGRAPHIC_VIEWS = { angle: CAMERA_VIEWS.angle, side: [0, 0.8, 8.5], opposite: [0, 0.8, -8.5], front: [-8.5, 0.8, 0], rear: [8.5, 0.8, 0], hood: [0, 8.5, 0] }
 const VIEW_FOR_AREA = { left: 'side', 'left-body': 'side', 'left-bed': 'side', right: 'opposite', 'right-body': 'opposite', 'right-bed': 'opposite', hood: 'hood', rear: 'rear', 'canopy-rear': 'rear', 'canopy-roof': 'hood' }
 // The faces a wrap covers: each looks out along `n`, with the artwork across `u` and up `v`
 // (each frame right-handed, so it is a rotation the projector can take). The left side's u runs
@@ -172,10 +175,13 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   let state = validateProject(initial ?? fallback, { logos, patterns, files, assets: ASSET_REFERENCES })
   let mode = 'edit'
   let view = 'angle'
+  let projection = 'perspective'
+  let viewportAspect = 1
   let ready = false
   let busy = false
   let disposed = false
   let root = null
+  let modelBounds = null
   let body = []
   let faceBounds = null
   let texture = null
@@ -223,7 +229,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     if (disposed) return
     syncSelection()
     onChange?.({
-      renderer: 'webgl', flat: false,
+      renderer: renderer.isModelPreviewRenderer ? 'software3d' : 'webgl', flat: false, projection,
       selectedLayer: selection() ? { ...selection() } : null, unplacedCount: state.layers.filter((layer) => layer.unplaced).length,
       project: copyProject(state), mode, view, ready, busy, aspect, preview, wrapPreview,
       canUndo: history.undo.length > 0, canRedo: history.redo.length > 0, model: VEHICLE_MODELS[state.model]
@@ -234,8 +240,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   let renderer
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: false })
-  } catch (error) {
-    throw new Error('Vehicle mockups need WebGL. Try a browser with hardware graphics turned on.', { cause: error })
+  } catch {
+    // The renderer changes; the loaded model, camera, raycasts and decals do not.
+    renderer = createModelPreviewRenderer()
   }
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, 1.5))
   renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -253,7 +260,19 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   container.prepend(canvas)
 
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(33, 1, 0.05, 200)
+  let camera = new THREE.PerspectiveCamera(33, 1, 0.05, 200)
+  const updateProjection = (nextAspect = viewportAspect) => {
+    viewportAspect = nextAspect
+    if (camera.isPerspectiveCamera) camera.aspect = nextAspect
+    else {
+      const height = Math.max(3.2 * scale(), lengthOf(state.model) * 1.28 / nextAspect)
+      camera.left = -height * nextAspect / 2
+      camera.right = height * nextAspect / 2
+      camera.top = height / 2
+      camera.bottom = -height / 2
+    }
+    camera.updateProjectionMatrix()
+  }
   const controls = new OrbitControls(camera, canvas)
   controls.target.set(0, 0.8, 0)
   controls.enabled = false
@@ -261,14 +280,20 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   controls.maxPolarAngle = Math.PI / 2 - 0.02
   controls.addEventListener('change', () => requestRender())
 
-  const pmrem = new THREE.PMREMGenerator(renderer)
-  const room = new RoomEnvironment()
-  const environment = pmrem.fromScene(room, 0.04)
-  scene.environment = environment.texture
-  // The room's bright panels face the vehicle's front and rear, so its sides are lit alike.
-  scene.environmentRotation.set(0, Math.PI / 2, 0)
-  room.dispose()
-  pmrem.dispose()
+  let environment = null
+  if (!renderer.isModelPreviewRenderer) {
+    const pmrem = new THREE.PMREMGenerator(renderer)
+    const room = new RoomEnvironment()
+    environment = pmrem.fromScene(room, 0.04)
+    scene.environment = environment.texture
+    // The room's bright panels face the vehicle's front and rear, so its sides are lit alike.
+    scene.environmentRotation.set(0, Math.PI / 2, 0)
+    room.dispose()
+    pmrem.dispose()
+  }
+  container.dataset.renderer = renderer.isModelPreviewRenderer ? 'software3d' : 'webgl'
+  container.dataset.preview = 'model'
+  container.dataset.projection = projection
   const hemisphere = new THREE.HemisphereLight(0xffffff, 0x8a929c, 0.55)
   scene.add(hemisphere)
   const sun = new THREE.DirectionalLight(0xfffaf2, 3.4)
@@ -624,13 +649,45 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     cancelGesture()
     view = CAMERA_VIEWS[next] ? next : 'angle'
     const k = scale()
-    camera.position.fromArray(CAMERA_VIEWS[view].map((value) => value * k))
+    const views = projection === 'orthographic' ? ORTHOGRAPHIC_VIEWS : CAMERA_VIEWS
+    camera.position.fromArray(views[view].map((value) => value * k))
+    const overhead = projection === 'orthographic' && view === 'hood'
+    camera.up.set(0, overhead ? 0 : 1, overhead ? -1 : 0)
+    camera.zoom = 1
+    updateProjection()
     controls.target.set(0, 0.8 * k, 0)
+    if (modelBounds) {
+      const centre = modelBounds.getCenter(new THREE.Vector3())
+      camera.position.add(centre.clone().sub(controls.target))
+      controls.target.copy(centre)
+    }
+    controls.maxPolarAngle = projection === 'orthographic' ? Math.PI : Math.PI / 2 - 0.02
     controls.minDistance = 4.5 * k
     controls.maxDistance = 14 * k
-    controls.update()
+    if (projection === 'orthographic') {
+      // Fixed elevations do not pass through OrbitControls' polar-angle epsilon. In particular,
+      // Above looks exactly down Y, with -Z as screen-up instead of a parallel up vector.
+      camera.lookAt(controls.target)
+      camera.updateMatrixWorld(true)
+    } else {
+      controls.update()
+      fitModelPerspectiveCamera(camera, modelBounds, controls.target)
+    }
     emit()
     requestRender()
+  }
+
+  const setProjection = (next) => {
+    if (!['perspective', 'orthographic'].includes(next) || projection === next || disposed || busy) return
+    cancelGesture()
+    projection = next
+    mode = 'edit'
+    controls.enabled = false
+    guide.visible = true
+    camera = next === 'orthographic' ? new THREE.OrthographicCamera(-1, 1, 1, -1, 0.05, 200) : new THREE.PerspectiveCamera(33, viewportAspect, 0.05, 200)
+    controls.object = camera
+    container.dataset.projection = projection
+    cameraView(next === 'orthographic' ? 'side' : 'angle')
   }
 
   // --- Model and artwork ---------------------------------------------------------------------
@@ -639,6 +696,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   /** The scene of a model: a drawn one built here, a file downloaded once and parsed. */
   const modelScene = async (info, token) => {
     if (info.build) return buildWorkTruck({ ...info.build, configuration: state.configuration })
+    const modelId = state.model
+    const configuration = state.configuration
     let bytes = modelBytes.get(info.url)
     if (!bytes) {
       const response = await fetch(info.url, { signal: fetchController.signal })
@@ -648,7 +707,14 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       while (modelBytes.size > MODEL_CACHE_LIMIT) modelBytes.delete(modelBytes.keys().next().value)
     }
     if (token !== modelToken) return null
-    return (await new GLTFLoader().parseAsync(bytes, '')).scene
+    const loaded = (await new GLTFLoader().parseAsync(bytes, '')).scene
+    try {
+      if (modelId === 'pickup') configureImportedPickup(loaded, configuration)
+    } catch (error) {
+      disposeModel(loaded)
+      throw error
+    }
+    return loaded
   }
 
   /** Keeps each placement and the selected area valid for the vehicle's own areas. */
@@ -693,7 +759,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       }
       next.updateMatrixWorld(true)
       const paintable = []
-      next.traverse((object) => {
+      next.traverseVisible((object) => {
         if (!object.isMesh) return
         object.castShadow = true
         object.receiveShadow = true
@@ -722,6 +788,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       body = paintable
       scene.add(root)
       root.updateMatrixWorld(true)
+      modelBounds = new THREE.Box3().setFromObject(root)
       faceBounds = measureFaces()
       const k = scale()
       Object.assign(sun.shadow.camera, { left: -5 * k, right: 5 * k, top: 5 * k, bottom: -5 * k, near: 0.5, far: 30 * k })
@@ -967,8 +1034,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     const height = container.clientHeight
     if (!width || !height) return
     renderer.setSize(width, height, false)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
+    updateProjection(width / height)
+    fitModelPerspectiveCamera(camera, modelBounds, controls.target)
     requestRender()
   })
   resize.observe(container)
@@ -1042,7 +1109,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   }
   function setMode (next) {
     cancelGesture()
-    mode = next === 'view' ? 'view' : 'edit'
+    mode = next === 'view' && projection === 'perspective' ? 'view' : 'edit'
     controls.enabled = mode === 'view'
     guide.visible = mode === 'edit'
     emit()
@@ -1065,7 +1132,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     cancelGesture()
     const oldSize = renderer.getSize(new THREE.Vector2())
     const oldRatio = renderer.getPixelRatio()
-    const oldAspect = camera.aspect
+    const oldAspect = viewportAspect
+    const oldPosition = camera.position.clone()
+    const oldQuaternion = camera.quaternion.clone()
     const oldGuide = guide.visible
     try {
       setBusy(true)
@@ -1074,9 +1143,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       guide.visible = false
       renderer.setPixelRatio(1)
       renderer.setSize(EXPORT_SIZE.width, EXPORT_SIZE.height, false)
-      camera.aspect = EXPORT_SIZE.width / EXPORT_SIZE.height
-      camera.updateProjectionMatrix()
-      renderer.render(scene, camera)
+      updateProjection(EXPORT_SIZE.width / EXPORT_SIZE.height)
+      fitModelPerspectiveCamera(camera, modelBounds, controls.target)
+      renderer.render(scene, camera, { quality: 'export' })
       const out = document.createElement('canvas')
       out.width = EXPORT_SIZE.width
       out.height = EXPORT_SIZE.height
@@ -1100,8 +1169,10 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       guide.visible = oldGuide
       renderer.setPixelRatio(oldRatio)
       renderer.setSize(oldSize.x, oldSize.y, false)
-      camera.aspect = oldAspect
-      camera.updateProjectionMatrix()
+      updateProjection(oldAspect)
+      camera.position.copy(oldPosition)
+      camera.quaternion.copy(oldQuaternion)
+      camera.updateMatrixWorld(true)
       setBusy(false)
     }
   }
@@ -1111,6 +1182,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     get project () { return copyProject(state) },
     setMode,
     cameraView,
+    setProjection,
     selectArea,
     undo: () => restore('undo'),
     redo: () => restore('redo'),
@@ -1404,7 +1476,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       disposeModel(root)
       for (const mesh of [shadowFloor, ground]) { mesh.geometry.dispose(); mesh.material.map?.dispose(); mesh.material.dispose() }
       scene.background?.dispose?.()
-      environment.texture.dispose()
+      environment?.texture.dispose()
       controls.dispose()
       renderer.dispose()
       renderer.forceContextLoss?.()

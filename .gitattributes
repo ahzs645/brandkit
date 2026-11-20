@@ -10,3 +10,7 @@ brands/unbc/reference/*.eps binary
 brands/unbc/reference/logo-website.svg -text
 # Preserve original upstream font licence bytes, including upstream whitespace.
 brands/lovefutbol/fonts/*-OFL.txt -whitespace -text
+# Original third-party garment files are checksum-pinned, including upstream whitespace.
+assets/apparel/elvaerwyn-zip-hoodie/*.mhclo -whitespace -text
+assets/apparel/elvaerwyn-zip-hoodie/*.obj -text
+assets/apparel/elvaerwyn-zip-hoodie/*.mhmat -text

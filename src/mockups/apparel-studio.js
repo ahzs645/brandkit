@@ -1,36 +1,17 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
-import { buildApparelGarment } from './apparel-garment.js'
-import { APPAREL_SIZES, apparelLayerStatus, apparelPlacement } from './apparel-layout.js'
-
-const SURFACES = ['front', 'back', 'left-sleeve', 'right-sleeve']
-const mix = (hex, amount) => `#${[1, 3, 5].map((i) => Math.round(parseInt(hex.slice(i, i + 2), 16) * (1 - amount)).toString(16).padStart(2, '0')).join('')}`
-const disposeTree = (object) => object?.traverse((child) => child.geometry?.dispose())
-
-const fabricTexture = () => {
-  const canvas = document.createElement('canvas')
-  canvas.width = canvas.height = 64
-  const context = canvas.getContext('2d')
-  context.fillStyle = '#888888'; context.fillRect(0, 0, 64, 64)
-  for (let y = 0; y < 64; y += 4) for (let x = 0; x < 64; x += 4) {
-    context.fillStyle = (x + y) % 8 ? '#9c9c9c' : '#6c6c6c'
-    context.fillRect(x, y, 2, 3)
-  }
-  const texture = new THREE.CanvasTexture(canvas)
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping
-  texture.repeat.set(18, 22)
-  return texture
-}
+import { loadApparelGarment, configureApparelGarment, projectApparelDecal, disposeApparelGarment } from './apparel-garment.js'
+import { APPAREL_ASSET, APPAREL_SIZES, apparelLayerStatus } from './apparel-layout.js'
+import { apparelReviewSvg } from './apparel-review-sheet.js'
+import { createModelPreviewRenderer } from './model-preview.js'
 
 const logoImage = async (svg) => {
-  const doc = new DOMParser().parseFromString(svg, 'image/svg+xml')
-  const element = doc.documentElement
-  const viewBox = element.getAttribute('viewBox')?.split(/[ ,]+/).map(Number)
-  if (viewBox?.length === 4 && viewBox[2] > 0 && viewBox[3] > 0) {
-    const scale = 1400 / Math.max(viewBox[2], viewBox[3])
-    element.setAttribute('width', String(viewBox[2] * scale))
-    element.setAttribute('height', String(viewBox[3] * scale))
+  const doc = new DOMParser().parseFromString(svg, 'image/svg+xml'), element = doc.documentElement
+  const box = element.getAttribute('viewBox')?.split(/[ ,]+/).map(Number)
+  if (box?.length === 4 && box[2] > 0 && box[3] > 0) {
+    const scale = 1600 / Math.max(box[2], box[3])
+    element.setAttribute('width', String(box[2] * scale)); element.setAttribute('height', String(box[3] * scale))
   }
   const image = new Image()
   image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(element))}`
@@ -38,181 +19,199 @@ const logoImage = async (svg) => {
   return image
 }
 
-/** A demand-rendered garment preview; its owner keeps project state and undo history. */
-export const createApparelStudio = ({ container, onStatus }) => {
-  let disposed = false, renderFrame = 0, token = 0, current = null, root = null, geometryKey = '', lastView = ''
-  const images = new Map()
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+/** Demand-rendered 3D and orthographic cameras share one imported garment and the
+ * same projected logo meshes. The software renderer uses that exact scene too. */
+export const createApparelStudio = ({ container, onStatus, onReady }) => {
+  let disposed = false, renderFrame = 0, token = 0, current = null, garment = null, lastView = '', ready = false, exporting = false
+  let renderer, environment
+  const images = new Map(), decals = new THREE.Group()
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }) } catch { renderer = createModelPreviewRenderer() }
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5))
   renderer.outputColorSpace = THREE.SRGBColorSpace
   renderer.toneMapping = THREE.NeutralToneMapping
-  renderer.toneMappingExposure = 1.15
-  renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap
-  renderer.domElement.setAttribute('aria-label', 'Interactive generic garment. Drag to rotate; scroll or pinch to zoom.')
+  renderer.toneMappingExposure = 1.1
+  renderer.shadowMap.enabled = false
+  renderer.domElement.setAttribute('aria-label', 'Imported Elvaerwyn hoodie model. Drag to rotate in 3D; choose 2D for orthographic views.')
   renderer.domElement.setAttribute('role', 'img')
   container.append(renderer.domElement)
+  container.dataset.renderer = renderer.isModelPreviewRenderer ? 'software' : 'webgl'
+  container.dataset.assetId = APPAREL_ASSET.id
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.01, 20)
-  const controls = new OrbitControls(camera, renderer.domElement)
-  controls.target.set(0, 0.37, 0)
-  controls.minDistance = 0.7
-  controls.maxDistance = 3.5
-  controls.maxPolarAngle = Math.PI * 0.74
-  controls.minPolarAngle = Math.PI * 0.2
+  scene.background = new THREE.Color('#f4f3ef')
+  const perspective = new THREE.PerspectiveCamera(34, 1, 0.01, 20)
+  const orthographic = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.01, 20)
+  let camera = perspective
+  const controls = new OrbitControls(perspective, renderer.domElement)
+  controls.target.set(0, 0.33, 0.04)
+  controls.minDistance = 0.8; controls.maxDistance = 3.6
+  controls.maxPolarAngle = Math.PI * 0.8; controls.minPolarAngle = Math.PI * 0.15
   controls.enablePan = false
-  const pmrem = new THREE.PMREMGenerator(renderer)
-  const room = new RoomEnvironment()
-  const environment = pmrem.fromScene(room, 0.04)
-  room.dispose()
-  pmrem.dispose()
-  scene.environment = environment.texture
-  const keyLight = new THREE.DirectionalLight('#fff8ed', 3.4)
-  keyLight.position.set(-1.8, 2.7, 2.1)
-  keyLight.castShadow = true
-  keyLight.shadow.mapSize.set(1024, 1024)
-  keyLight.shadow.camera.left = keyLight.shadow.camera.bottom = -1.3
-  keyLight.shadow.camera.right = keyLight.shadow.camera.top = 1.3
-  keyLight.shadow.bias = -0.0004
-  keyLight.shadow.normalBias = 0.003
-  scene.add(keyLight, new THREE.HemisphereLight('#ebf3ff', '#9a8c7a', 1.9))
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.ShadowMaterial({ color: '#283340', opacity: 0.14 }))
-  floor.rotation.x = -Math.PI / 2
-  floor.position.y = -0.025
-  floor.receiveShadow = true
-  scene.add(floor)
-  const bump = fabricTexture()
-  const materials = Object.fromEntries([...SURFACES, 'plain', 'rib', 'seam'].map((surface) => [surface, new THREE.MeshStandardMaterial({ name: `fabric-${surface}`, color: '#ffffff', roughness: 0.95, metalness: 0, bumpMap: bump, bumpScale: surface === 'rib' ? 0.0015 : 0.00065, side: THREE.DoubleSide })]))
+  if (!renderer.isModelPreviewRenderer) {
+    const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment()
+    environment = pmrem.fromScene(room, 0.04)
+    scene.environment = environment.texture
+    room.dispose(); pmrem.dispose()
+  }
+  const light = new THREE.DirectionalLight('#fff8ee', 3.2)
+  light.position.set(-1.4, 2.6, 2.5)
+  const fill = new THREE.DirectionalLight('#eef4ff', 1.9)
+  fill.position.set(1.7, 1.2, -2.5)
+  scene.add(light, fill, new THREE.HemisphereLight('#eff5ff', '#afa99e', 1.7), decals)
+
   const render = () => {
     renderFrame = 0
-    if (!disposed) { renderer.render(scene, camera); container.dataset.rendered = 'true' }
+    if (disposed || exporting) return
+    renderer.render(scene, camera)
+    container.dataset.rendered = 'true'
   }
   const invalidate = () => { if (!disposed && !renderFrame) renderFrame = requestAnimationFrame(render) }
   controls.addEventListener('change', invalidate)
-  const resize = () => {
-    const width = Math.max(1, container.clientWidth), height = Math.max(1, container.clientHeight)
-    renderer.setSize(width, height)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
+  const frameCamera = (view, mode, width, height) => {
+    const size = APPAREL_SIZES[current?.size ?? 'M'], modelHeight = size.height / 1000
+    const aspect = width / height
+    perspective.aspect = aspect; perspective.updateProjectionMatrix()
+    const bounds = garment ? new THREE.Box3().setFromObject(garment) : new THREE.Box3(new THREE.Vector3(-0.46, 0, -0.14), new THREE.Vector3(0.46, modelHeight, 0.22))
+    const target = bounds.getCenter(new THREE.Vector3())
+    const dimension = bounds.getSize(new THREE.Vector3())
+    const directions = { angle: new THREE.Vector3(0.48, 0.18, 1), front: new THREE.Vector3(0, 0, 1), back: new THREE.Vector3(0, 0, -1), left: new THREE.Vector3(1, 0, 0), right: new THREE.Vector3(-1, 0, 0) }
+    const direction = (directions[view] ?? directions.front).clone().normalize()
+    if (mode === 'flat') {
+      camera = orthographic
+      const visibleWidth = view === 'left' || view === 'right' ? dimension.z : dimension.x
+      const half = Math.max(dimension.y * 0.58, visibleWidth / (2 * aspect) * 1.14)
+      orthographic.left = -half * aspect; orthographic.right = half * aspect
+      orthographic.top = half; orthographic.bottom = -half
+      orthographic.position.copy(target).addScaledVector(direction, 2)
+      orthographic.lookAt(target); orthographic.updateProjectionMatrix()
+      controls.enabled = false
+    } else {
+      camera = perspective
+      const radius = Math.max(dimension.y * 0.5, dimension.x / (2 * aspect))
+      const distance = radius / Math.tan(THREE.MathUtils.degToRad(perspective.fov / 2)) * 1.22
+      perspective.position.copy(target).addScaledVector(direction, distance)
+      controls.target.copy(target); controls.enabled = true; controls.update()
+    }
+    camera.updateMatrixWorld(true)
+  }
+  const setView = (view = current?.view ?? 'angle', mode = current?.mode ?? '3d') => {
+    const actualView = mode === 'flat' && view === 'angle' ? 'front' : view
+    frameCamera(actualView, mode, Math.max(1, container.clientWidth), Math.max(1, container.clientHeight))
+    lastView = `${view}/${mode}/${current?.size}`
+    container.dataset.view = actualView; container.dataset.mode = mode
     invalidate()
+  }
+  const resize = () => {
+    if (disposed || exporting) return
+    renderer.setSize(Math.max(1, container.clientWidth), Math.max(1, container.clientHeight))
+    setView()
   }
   const observer = new ResizeObserver(resize)
   observer.observe(container)
-
-  const setView = (view) => {
-    const height = current ? APPAREL_SIZES[current.size].height / 1000 : 0.7
-    controls.target.set(0, height * 0.51, 0)
-    const positions = { angle: [0.78, height * 0.86, 1.65], front: [0, height * 0.53, 1.8], back: [0, height * 0.53, -1.8], left: [1.6, height * 0.65, 0.55], right: [-1.6, height * 0.65, 0.55] }
-    camera.position.set(...(positions[view] ?? positions.angle))
-    controls.update()
-    lastView = view
-    invalidate()
-  }
+  const loaded = loadApparelGarment().then((object) => {
+    if (disposed) { disposeApparelGarment(object); return null }
+    garment = object; scene.add(garment); return garment
+  })
+  // update() reports the failure, including during first load.
+  loaded.catch(() => {})
   const imageFor = (entry) => {
     const svg = entry.make()
     if (!images.has(svg)) images.set(svg, logoImage(svg))
     while (images.size > 30) images.delete(images.keys().next().value)
     return images.get(svg)
   }
-  const textureFor = async (project, surface, logos) => {
+  const materialFor = async (layer, entry) => {
+    const image = await imageFor(entry), padding = layer.method === 'patch' ? 10 : 0
+    const width = layer.widthMm + padding, height = layer.widthMm / layer.aspect + padding
+    const scale = 1400 / Math.max(width, height)
     const canvas = document.createElement('canvas')
-    const sleeve = surface.endsWith('sleeve')
-    const mmWidth = sleeve ? 480 : APPAREL_SIZES[project.size].width
-    const mmHeight = sleeve ? 560 : APPAREL_SIZES[project.size].height
-    canvas.width = sleeve ? 768 : 1024
-    canvas.height = 1280
+    canvas.width = Math.max(1, Math.round(width * scale)); canvas.height = Math.max(1, Math.round(height * scale))
     const context = canvas.getContext('2d')
-    context.fillStyle = project.colour
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    context.scale(canvas.width / mmWidth, canvas.height / mmHeight)
-    for (const layer of project.layers) {
-      if (!layer.visible || !apparelLayerStatus(project, layer).placed || !layer.logo) continue
-      const placement = apparelPlacement(project, layer)
-      if (placement.surface !== surface) continue
-      const entry = logos.find((logo) => logo.id === layer.logo)
-      if (!entry) continue
-      const image = await imageFor(entry)
-      context.save()
-      context.translate(mmWidth / 2 + placement.x, placement.y)
-      context.rotate(layer.rotation * Math.PI / 180)
-      if (layer.method === 'patch') {
-        context.fillStyle = '#f1efdf'
-        context.beginPath()
-        context.roundRect(-placement.width / 2 - 5, -placement.height / 2 - 5, placement.width + 10, placement.height + 10, 4)
-        context.fill()
-        context.strokeStyle = '#a8a58f'; context.lineWidth = 1; context.setLineDash([2, 1.5]); context.stroke()
-      }
-      if (layer.method === 'embroidery') {
-        context.shadowColor = 'rgba(0,0,0,.45)'; context.shadowBlur = 1.4; context.shadowOffsetY = 0.55
-      }
-      context.drawImage(image, -placement.width / 2, -placement.height / 2, placement.width, placement.height)
-      context.restore()
+    context.scale(canvas.width / width, canvas.height / height)
+    if (padding) {
+      context.fillStyle = '#eeeade'; context.beginPath(); context.roundRect(0, 0, width, height, 4); context.fill()
+      context.strokeStyle = '#a8a38e'; context.lineWidth = 0.8; context.setLineDash([2, 1.5]); context.stroke()
     }
+    if (layer.method === 'embroidery') { context.shadowColor = '#0008'; context.shadowBlur = 1.5; context.shadowOffsetY = 0.4 }
+    context.drawImage(image, padding / 2, padding / 2, layer.widthMm, layer.widthMm / layer.aspect)
     const texture = new THREE.CanvasTexture(canvas)
     texture.colorSpace = THREE.SRGBColorSpace
     texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy())
-    return texture
+    return new THREE.MeshStandardMaterial({ map: texture, color: '#ffffff', transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4, roughness: layer.method === 'dtf' ? 0.65 : 0.95, metalness: 0, side: THREE.FrontSide })
   }
+  const clearDecals = () => { for (const decal of [...decals.children]) { decals.remove(decal); disposeApparelGarment(decal) } }
   const update = async (project, logos) => {
+    if (exporting || disposed) return
     const request = ++token
-    current = project
-    container.dataset.ready = 'false'
+    current = project; ready = false; container.dataset.ready = 'false'; onReady?.(false)
     try {
-      const results = await Promise.allSettled(SURFACES.map((surface) => textureFor(project, surface, logos)))
-      const textures = results.filter((result) => result.status === 'fulfilled').map((result) => result.value)
+      const object = await loaded
+      if (!object || disposed || request !== token) return
+      const layers = project.layers.filter((layer) => layer.visible && layer.logo && apparelLayerStatus(project, layer).placed)
+      const results = await Promise.allSettled(layers.map(async (layer) => {
+        const entry = logos.find((logo) => logo.id === layer.logo)
+        if (!entry) return null
+        return { layer, material: await materialFor(layer, entry) }
+      }))
+      const prepared = results.filter((result) => result.status === 'fulfilled' && result.value).map((result) => result.value)
       const failed = results.find((result) => result.status === 'rejected')
-      if (failed) { for (const texture of textures) texture.dispose(); throw failed.reason }
-      if (disposed || request !== token) { for (const texture of textures) texture.dispose(); return }
-      SURFACES.forEach((surface, index) => { materials[surface].map?.dispose(); materials[surface].map = textures[index]; materials[surface].needsUpdate = true })
-      materials.plain.color.set(project.colour)
-      materials.rib.color.set(mix(project.colour, 0.12))
-      materials.seam.color.set(mix(project.colour, 0.27))
-      const nextKey = `${project.product}/${project.size}`
-      const geometryChanged = geometryKey !== nextKey
-      if (geometryChanged) {
-        if (root) { scene.remove(root); disposeTree(root) }
-        root = buildApparelGarment(project, materials)
-        scene.add(root)
-        geometryKey = nextKey
+      if (disposed || request !== token || failed) {
+        for (const { material } of prepared) { material.map?.dispose(); material.dispose() }
+        if (failed) throw failed.reason
+        return
       }
-      if (geometryChanged || lastView !== project.view) setView(project.view)
-      container.dataset.ready = 'true'
-      container.dataset.product = project.product
-      container.dataset.size = project.size
-      container.dataset.layers = String(project.layers.filter((layer) => layer.visible && apparelLayerStatus(project, layer).placed).length)
-      onStatus?.('Preview ready. Drag to rotate, or choose a view.', false)
+      configureApparelGarment(object, project)
+      clearDecals()
+      let missed = 0
+      prepared.forEach(({ layer, material }, index) => {
+        const decal = projectApparelDecal(object, project, layer, material)
+        if (decal) { decal.renderOrder = 10 + index; decals.add(decal) }
+        else { material.map?.dispose(); material.dispose(); missed++ }
+      })
+      if (lastView !== `${project.view}/${project.mode}/${project.size}`) setView(project.view, project.mode)
+      ready = true; container.dataset.ready = 'true'; container.dataset.layers = String(decals.children.length)
+      container.dataset.size = project.size; container.dataset.product = project.product
+      onReady?.(true)
+      onStatus?.(missed ? `${missed} artwork layer could not reach the model surface. Adjust its placement.` : `Imported model ready · ${renderer.isModelPreviewRenderer ? 'software 3D' : 'WebGL'} · ${project.mode === 'flat' ? 'orthographic view' : 'drag to rotate'}.`, missed > 0)
       invalidate()
-    } catch (error) { if (request === token && !disposed) onStatus?.(`The garment preview could not update: ${error.message}`, true) }
-  }
-  const exportPng = async () => {
-    if (disposed || container.dataset.ready !== 'true') throw new Error('Wait for the garment preview to finish.')
-    const size = renderer.getSize(new THREE.Vector2()), ratio = renderer.getPixelRatio(), aspect = camera.aspect
-    try {
-      renderer.setPixelRatio(1)
-      renderer.setSize(2000, 1600, false)
-      camera.aspect = 1.25
-      camera.updateProjectionMatrix()
-      scene.background = new THREE.Color('#f3f2ee')
-      renderer.render(scene, camera)
-      return await new Promise((resolve, reject) => renderer.domElement.toBlob((blob) => blob ? resolve(blob) : reject(new Error('PNG export failed.')), 'image/png'))
-    } finally {
-      scene.background = null
-      renderer.setPixelRatio(ratio)
-      renderer.setSize(size.x, size.y, false)
-      camera.aspect = aspect
-      camera.updateProjectionMatrix()
-      invalidate()
+    } catch (error) {
+      if (request === token && !disposed) { onReady?.(false); onStatus?.(`The imported garment could not load: ${error.message}`, true) }
     }
   }
-  setView('angle')
-  resize()
+  const capture = async ({ width = 1600, height = Math.round(1600 * container.clientHeight / Math.max(1, container.clientWidth)), view, mode, dataUrl = false } = {}) => {
+    if (!ready || disposed) throw new Error('Wait for the imported garment and artwork to finish loading.')
+    const oldSize = renderer.getSize(new THREE.Vector2()), ratio = renderer.getPixelRatio()
+    const oldCamera = camera, position = camera.position.clone(), quaternion = camera.quaternion.clone(), target = controls.target.clone()
+    const oldAspect = perspective.aspect, oldOrtho = [orthographic.left, orthographic.right, orthographic.top, orthographic.bottom]
+    exporting = true
+    try {
+      renderer.setPixelRatio(1); renderer.setSize(width, height, false)
+      if (view || mode) frameCamera(view ?? current.view, mode ?? current.mode, width, height)
+      else if (camera.isPerspectiveCamera) { perspective.aspect = width / height; perspective.updateProjectionMatrix() }
+      else frameCamera(current.view === 'angle' ? 'front' : current.view, 'flat', width, height)
+      renderer.render(scene, camera, { quality: 'export' })
+      if (dataUrl) return renderer.domElement.toDataURL('image/png')
+      return await new Promise((resolve, reject) => renderer.domElement.toBlob((blob) => blob ? resolve(blob) : reject(new Error('PNG export failed.')), 'image/png'))
+    } finally {
+      renderer.setPixelRatio(ratio); renderer.setSize(oldSize.x, oldSize.y, false)
+      perspective.aspect = oldAspect; perspective.updateProjectionMatrix()
+      ;[orthographic.left, orthographic.right, orthographic.top, orthographic.bottom] = oldOrtho
+      orthographic.updateProjectionMatrix()
+      camera = oldCamera; camera.position.copy(position); camera.quaternion.copy(quaternion); controls.target.copy(target)
+      controls.enabled = current.mode === '3d'; camera.updateMatrixWorld(true)
+      exporting = false; invalidate()
+    }
+  }
+  const exportReview = async (brandName) => {
+    const front = await capture({ width: 1120, height: 920, view: 'front', mode: 'flat', dataUrl: true })
+    const back = await capture({ width: 1120, height: 920, view: 'back', mode: 'flat', dataUrl: true })
+    return apparelReviewSvg(current, { brandName, views: { front, back } })
+  }
+  setView('angle', '3d'); resize()
   return {
-    update, setView, exportPng,
+    update, setView, exportPng: () => capture(), exportReview,
     dispose () {
       disposed = true; token++; cancelAnimationFrame(renderFrame); observer.disconnect(); controls.dispose()
-      disposeTree(root); floor.geometry.dispose(); floor.material.dispose(); keyLight.shadow.map?.dispose()
-      for (const material of Object.values(materials)) { material.map?.dispose(); material.dispose() }
-      bump.dispose(); environment.dispose(); images.clear(); renderer.dispose(); renderer.domElement.remove()
+      clearDecals(); disposeApparelGarment(garment); environment?.dispose(); images.clear(); renderer.dispose(); renderer.domElement.remove()
     }
   }
 }
