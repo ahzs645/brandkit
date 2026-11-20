@@ -1,0 +1,239 @@
+{
+  "date": "2026-11-20",
+  "status": "replaces earlier authored-flat-preview evidence",
+  "browser": "Managed Chrome, real application at 127.0.0.1:4173",
+  "renderer": "software3d: CPU projection of original GLTF meshes, original UV artwork and depth",
+  "webgl": "Browser explicitly reports GL_VENDOR and GL_RENDERER Disabled; no GPU acceptance claim",
+  "observedChecks": [
+    "Four imported vehicle catalogue entries use source-rendered thumbnails; legacy procedural entries are absent.",
+    "Actual canvas drag rotates the imported car to the opposite front side, with readable independent artwork.",
+    "2D elevations use the same source car and artwork; perspective and orthographic snapshots are captured.",
+    "Open/tonneau UI changes the original source pickup cover; both above-view screenshots captured.",
+    "Independent imported-car and pickup door layers coexist with retained legacy layers.",
+    "Garment shows the original Elvaerwyn mesh in perspective and orthographic views, with 80 mm chest and 220 mm back artwork.",
+    "Saved legacy garment JSON was downloaded without opening/remapping it; rejected opening retained the active imported design.",
+    "PNG/JSON/review exports downloaded successfully; vehicle review has 4 distinct model renders and garment review has 2.",
+    "Canvas still displays geometry after full-page screenshot resizing and after PNG export restoration."
+  ],
+  "unchangedCarProjectAfterOrbitAnd2D": {
+    "byteIdentical": true,
+    "sha256": "6b0c10249487bf7ece5d36579a5abce5bbb54ff5de8ef5f74c3de0a8477145c2",
+    "layers": 7
+  },
+  "narrowLayouts": {
+    "frame": [
+      390,
+      844
+    ],
+    "vehicle": {
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "renderer": "software3d"
+    },
+    "apparel": {
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "renderer": "software3d"
+    },
+    "physicalPhoneTested": false
+  },
+  "garment": {
+    "schema": "brandkit-apparel-mockup/2",
+    "assetId": "elvaerwyn-zip-hoodie-2018-v1",
+    "size": "M",
+    "widthsMm": [
+      80,
+      220
+    ],
+    "legacyBackupSchema": "brandkit-apparel-mockup/1"
+  },
+  "playwrightRunners": "Syntax checked and updated, not executed in this environment",
+  "files": {
+    "README.md": {
+      "bytes": 11588,
+      "sha256": "9074288fa0e084cddfa9ff46988a0cf639a833554cc933e5af6c567cfef78a2b"
+    },
+    "car-2d.jpg": {
+      "bytes": 114183,
+      "sha256": "1b2154273fbc73c04c1fc0e9c37d88dae4d8782eeb4392ecef9d6ca1196b6349",
+      "pixels": [
+        1348,
+        993
+      ]
+    },
+    "car-390px.jpg": {
+      "bytes": 46365,
+      "sha256": "da4855d9cfc3ad2edbe27f2e3e0a15a1a0dbe3555e2cd1015e4a1c762d656210",
+      "pixels": [
+        410,
+        921
+      ]
+    },
+    "car-3d.jpg": {
+      "bytes": 111300,
+      "sha256": "18a23a4282d71635b8c99f6d48f39198facf7c0515d505e7be740d3e46be7d18",
+      "pixels": [
+        1348,
+        993
+      ]
+    },
+    "car-3d.png": {
+      "bytes": 383164,
+      "sha256": "c68d8b1d60807157d01b82c44e82157c43c3dd0c2b18509ae935080b02be7394",
+      "pixels": [
+        2400,
+        1500
+      ]
+    },
+    "car-orbit.jpg": {
+      "bytes": 102680,
+      "sha256": "771d948fa0c39998de9fdb71aba4b25a2f5a1fd533930d7eecdb9b241f6d803c",
+      "pixels": [
+        1348,
+        926
+      ]
+    },
+    "car-project.json": {
+      "bytes": 7275,
+      "sha256": "6b0c10249487bf7ece5d36579a5abce5bbb54ff5de8ef5f74c3de0a8477145c2"
+    },
+    "hoodie-2d-back.jpg": {
+      "bytes": 78573,
+      "sha256": "f118990956e70a6fb77b47f4e9522583184577d1c139951de42029b7d3f8ae3e",
+      "pixels": [
+        1348,
+        926
+      ]
+    },
+    "hoodie-390px.jpg": {
+      "bytes": 39820,
+      "sha256": "0b907c95abfc287a6ec23c9674558c5d058a2d10da85943e0df79a2629b26e59",
+      "pixels": [
+        410,
+        921
+      ]
+    },
+    "hoodie-3d.jpg": {
+      "bytes": 91412,
+      "sha256": "3f2271d6d4a5dfcc8a9d0b3f33af93893e73fef94ea20d907ecc3de365fe1ca9",
+      "pixels": [
+        1363,
+        1115
+      ]
+    },
+    "hoodie-back.png": {
+      "bytes": 369670,
+      "sha256": "7b9fadcf78826e878025d8dfbd446564aecbeccbef97b4fd663d4a7ab0c4cd05",
+      "pixels": [
+        1600,
+        1400
+      ]
+    },
+    "hoodie-project.json": {
+      "bytes": 998,
+      "sha256": "c66147a21f58d1fcdca5119644206c42b92f4f8f43936ee930008f255abacf8b"
+    },
+    "hoodie-review.svg": {
+      "bytes": 731466,
+      "sha256": "de7b0a34c2e7ec330cdb4204e7f423c2a64681232de6606445ffa14703557e0b",
+      "embeddedViews": [
+        {
+          "pixels": [
+            1120,
+            920
+          ],
+          "sha256": "618c48ad4272aa5fff06b3a428f091246d74200fd18b3c673a3bd53d011aacfb"
+        },
+        {
+          "pixels": [
+            1120,
+            920
+          ],
+          "sha256": "32bdef304261eb77a38ae8ea7f53064555d08ccb84201978b5a8de17df78faaf"
+        }
+      ]
+    },
+    "legacy-hoodie-backup.json": {
+      "bytes": 952,
+      "sha256": "d9033cf025f553c0744ac4681624e76dff835947fae22c1116b2f668dfd026f4"
+    },
+    "pickup-2d-elevation.jpg": {
+      "bytes": 92257,
+      "sha256": "a93dc867c4d75d797222fc432aec6442c0e5dce3580a76733df5a6505ff6e61a",
+      "pixels": [
+        1348,
+        1012
+      ]
+    },
+    "pickup-3d.jpg": {
+      "bytes": 100250,
+      "sha256": "11358f1bcb83053fa76eacb22d47970508757f7b894010c90f28b8bc021cb558",
+      "pixels": [
+        1348,
+        926
+      ]
+    },
+    "pickup-3d.png": {
+      "bytes": 538539,
+      "sha256": "2f72b72bbdeec5c92d3e9840c2e1d053b1b8c0bb2ed82fd47ca95328188f8786",
+      "pixels": [
+        2400,
+        1500
+      ]
+    },
+    "pickup-open-above.jpg": {
+      "bytes": 85035,
+      "sha256": "dc65f77adac7e3c135aa3bad85b2b2f4b142f89ee1daf248373e3e60c80e333b",
+      "pixels": [
+        1348,
+        926
+      ]
+    },
+    "pickup-project.json": {
+      "bytes": 5703,
+      "sha256": "6e8d5c5e3e0be2a93c71b78e9be1c1a931f2451ecfe2fef6b1a25b4cf369025f"
+    },
+    "pickup-review.svg": {
+      "bytes": 2133411,
+      "sha256": "5426786cf5939d5c0197906506256d1fb841cf60e7ff89c66a5cdc3ab60baa8a",
+      "embeddedViews": [
+        {
+          "pixels": [
+            2400,
+            1500
+          ],
+          "sha256": "2f72b72bbdeec5c92d3e9840c2e1d053b1b8c0bb2ed82fd47ca95328188f8786"
+        },
+        {
+          "pixels": [
+            2400,
+            1500
+          ],
+          "sha256": "a2fe770197d3243f4f3cacbedc617cf93826dfa1e6214529527ede839ad60041"
+        },
+        {
+          "pixels": [
+            2400,
+            1500
+          ],
+          "sha256": "fa9d7211e9f9673f6c428537738b0a5ff0c791154cd96ad2c6d0e7ddd49b4234"
+        },
+        {
+          "pixels": [
+            2400,
+            1500
+          ],
+          "sha256": "50e25cbfa32233bdd18b49903577505eaf8dd36caddeb462f17a8d8be054f9e7"
+        }
+      ]
+    },
+    "pickup-tonneau-above.jpg": {
+      "bytes": 87837,
+      "sha256": "0f3fb667c85606cd3f636e2c5b7cfbf21d4c431fb0478978321c40476f90f5b5",
+      "pixels": [
+        1348,
+        926
+      ]
+    }
+  }
+}

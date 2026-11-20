@@ -1,0 +1,36 @@
+{
+  "source": "src/mockups/models/suv-original.glb",
+  "sha256": "e6a2b224460aeffec6fe87d549251ccb68f8febc19fa80465a39735ed342fd9c",
+  "renderer": "Blender 4.3.2 / Cycles CPU",
+  "geometry": "Imported from the supplied GLB; no vehicle mesh was authored by this script.",
+  "meshes": 72,
+  "triangles": 16228,
+  "displayLengthMetres": 4.7,
+  "rotationY": -1.5707963267948966,
+  "paint": {
+    "material": "green",
+    "colour": "#60758a"
+  },
+  "render": {
+    "width": 640,
+    "samples": 64
+  },
+  "bounds": {
+    "low": [
+      -2.3499999046325684,
+      -1.1590628623962402,
+      0.0
+    ],
+    "high": [
+      2.3499999046325684,
+      1.1590628623962402,
+      1.6901817321777344
+    ]
+  },
+  "views": {
+    "angle": {
+      "projection": "perspective",
+      "file": "angle.png"
+    }
+  }
+}

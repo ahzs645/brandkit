@@ -9,16 +9,21 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
-import { MAX_UPLOAD_BYTES, OPPOSITE, SCHEMA, UPLOAD_TYPES, VEHICLES, areasFor, clampPlacement, copyProject, createPlacement, mirrorPlacement, validAspect, validateProject, wrapWindow } from './vehicle-layout.js'
+import { MAX_UPLOAD_BYTES, OPPOSITE, SCHEMA, UPLOAD_TYPES, VEHICLES, areasFor, clampPlacement, copyProject, createPlacement, mirrorPlacement, validAspect, validateProject, wrapWindow, createVehicleLayer, reconcileLayers, selectedLayer, canEditLayer, MAX_LAYERS } from './vehicle-layout.js'
 import { VEHICLE_MODELS, lengthOf } from './vehicle-models.js'
+import { readMockupDraft } from './mockup-draft.js'
 import { buildWorkTruck } from './work-truck.js'
+import { defaultConfiguration, normalizeConfiguration } from './vehicle-configuration.js'
+import { createModelPreviewRenderer, fitModelPerspectiveCamera } from './model-preview.js'
+import { configureImportedPickup } from './imported-pickup.js'
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 const HISTORY_LIMIT = 30
 const EXPORT_SIZE = { width: 2400, height: 1500 }
 // Camera positions for a car 4.7 m long; a longer vehicle's are scaled to match.
 const CAMERA_VIEWS = { angle: [-5.8, 2.8, 6.8], side: [0, 1.25, 8.5], opposite: [0, 1.25, -8.5], front: [-8.5, 2, 0], rear: [8.5, 1.8, 0], hood: [-4.5, 6, 3.5] }
-const VIEW_FOR_AREA = { left: 'side', 'left-body': 'side', right: 'opposite', 'right-body': 'opposite', hood: 'hood', rear: 'rear' }
+const ORTHOGRAPHIC_VIEWS = { angle: CAMERA_VIEWS.angle, side: [0, 0.8, 8.5], opposite: [0, 0.8, -8.5], front: [-8.5, 0.8, 0], rear: [8.5, 0.8, 0], hood: [0, 8.5, 0] }
+const VIEW_FOR_AREA = { left: 'side', 'left-body': 'side', 'left-bed': 'side', right: 'opposite', 'right-body': 'opposite', 'right-bed': 'opposite', hood: 'hood', rear: 'rear', 'canopy-rear': 'rear', 'canopy-roof': 'hood' }
 // The faces a wrap covers: each looks out along `n`, with the artwork across `u` and up `v`
 // (each frame right-handed, so it is a rotation the projector can take). The left side's u runs
 // front to back, so the artwork's left edge is the front; the right side's runs back to front,
@@ -34,6 +39,8 @@ const COVERAGE_FACES = { sides: ['left', 'right'], rear: ['left', 'right'], full
 // The models' bytes, kept while the page is open, so switching back and forth (or brands) does
 // not download them again.
 const modelBytes = new Map()
+const MODEL_CACHE_LIMIT = 3
+const ASSET_REFERENCES = Object.fromEntries(Object.entries(VEHICLE_MODELS).map(([id, model]) => [id, { assetVersion: model.assetVersion, surfaceVersion: model.surfaceVersion, sha256: model.sha256 ?? null }]))
 
 const vec = (values) => new THREE.Vector3(...values)
 const toRadians = (degrees) => degrees * Math.PI / 180
@@ -164,17 +171,21 @@ const groundTexture = (colour) => {
  * - `storageKey`: where this browser keeps the draft, or null.
  * - `onChange(snapshot)`, `onStatus(message, isError)`.
  */
-export const createVehicleStudio = ({ container, project: initial, fallback, artworkUrl, wrapUrl, backdropFor, logos, patterns, files, storageKey, onChange, onStatus }) => {
-  let state = copyProject(initial ?? fallback)
+export const createVehicleStudio = ({ container, project: initial, fallback, artworkUrl, wrapUrl, backdropFor, logos, patterns, files, storageKey, onChange, onStatus, onRecovery }) => {
+  let state = validateProject(initial ?? fallback, { logos, patterns, files, assets: ASSET_REFERENCES })
   let mode = 'edit'
   let view = 'angle'
+  let projection = 'perspective'
+  let viewportAspect = 1
   let ready = false
   let busy = false
   let disposed = false
   let root = null
+  let modelBounds = null
   let body = []
   let faceBounds = null
   let texture = null
+  const layerTextures = new Map()
   let aspect = 1
   let preview = null
   let wrapTexture = null
@@ -188,16 +199,38 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   let modelToken = 0
   let artworkToken = 0
   let wrapToken = 0
+  let pendingArtwork = null
+  let pendingWrap = null
   let fetchController = null
   const history = { undo: [], redo: [] }
   const frames = new Map()
-  const areas = () => areasFor(state.model)
+  const areas = () => areasFor(state.model, state.configuration)
   const scale = () => lengthOf(state.model) / 4.7
+
+  const selection = () => selectedLayer(state)
+  const syncSelection = () => {
+    reconcileLayers(state)
+    state.assetReferences ??= {}
+    for (const id of new Set([state.model, ...state.layers.map((layer) => layer.model)])) state.assetReferences[id] ??= { ...ASSET_REFERENCES[id] }
+    const layer = selection()
+    const loaded = layerTextures.get(layer?.id)
+    texture = loaded?.texture ?? null
+    aspect = loaded?.aspect ?? layer?.aspect ?? 1
+    preview = loaded?.preview ?? null
+  }
+  const putPlacement = (placement) => {
+    const layer = selection()
+    if (layer) layer.placement = { ...placement }
+    syncSelection()
+  }
 
   const status = (message, error = false) => { if (!disposed) onStatus?.(message, error) }
   const emit = () => {
     if (disposed) return
+    syncSelection()
     onChange?.({
+      renderer: renderer.isModelPreviewRenderer ? 'software3d' : 'webgl', flat: false, projection,
+      selectedLayer: selection() ? { ...selection() } : null, unplacedCount: state.layers.filter((layer) => layer.unplaced).length,
       project: copyProject(state), mode, view, ready, busy, aspect, preview, wrapPreview,
       canUndo: history.undo.length > 0, canRedo: history.redo.length > 0, model: VEHICLE_MODELS[state.model]
     })
@@ -207,8 +240,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   let renderer
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: false })
-  } catch (error) {
-    throw new Error('Vehicle mockups need WebGL. Try a browser with hardware graphics turned on.', { cause: error })
+  } catch {
+    // The renderer changes; the loaded model, camera, raycasts and decals do not.
+    renderer = createModelPreviewRenderer()
   }
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, 1.5))
   renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -226,7 +260,19 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   container.prepend(canvas)
 
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(33, 1, 0.05, 200)
+  let camera = new THREE.PerspectiveCamera(33, 1, 0.05, 200)
+  const updateProjection = (nextAspect = viewportAspect) => {
+    viewportAspect = nextAspect
+    if (camera.isPerspectiveCamera) camera.aspect = nextAspect
+    else {
+      const height = Math.max(3.2 * scale(), lengthOf(state.model) * 1.28 / nextAspect)
+      camera.left = -height * nextAspect / 2
+      camera.right = height * nextAspect / 2
+      camera.top = height / 2
+      camera.bottom = -height / 2
+    }
+    camera.updateProjectionMatrix()
+  }
   const controls = new OrbitControls(camera, canvas)
   controls.target.set(0, 0.8, 0)
   controls.enabled = false
@@ -234,14 +280,20 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   controls.maxPolarAngle = Math.PI / 2 - 0.02
   controls.addEventListener('change', () => requestRender())
 
-  const pmrem = new THREE.PMREMGenerator(renderer)
-  const room = new RoomEnvironment()
-  const environment = pmrem.fromScene(room, 0.04)
-  scene.environment = environment.texture
-  // The room's bright panels face the vehicle's front and rear, so its sides are lit alike.
-  scene.environmentRotation.set(0, Math.PI / 2, 0)
-  room.dispose()
-  pmrem.dispose()
+  let environment = null
+  if (!renderer.isModelPreviewRenderer) {
+    const pmrem = new THREE.PMREMGenerator(renderer)
+    const room = new RoomEnvironment()
+    environment = pmrem.fromScene(room, 0.04)
+    scene.environment = environment.texture
+    // The room's bright panels face the vehicle's front and rear, so its sides are lit alike.
+    scene.environmentRotation.set(0, Math.PI / 2, 0)
+    room.dispose()
+    pmrem.dispose()
+  }
+  container.dataset.renderer = renderer.isModelPreviewRenderer ? 'software3d' : 'webgl'
+  container.dataset.preview = 'model'
+  container.dataset.projection = projection
   const hemisphere = new THREE.HemisphereLight(0xffffff, 0x8a929c, 0.55)
   scene.add(hemisphere)
   const sun = new THREE.DirectionalLight(0xfffaf2, 3.4)
@@ -303,8 +355,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   container.append(overlay)
 
   // --- History and storage -------------------------------------------------------------------
-  const snapshot = () => copyProject(state)
+  const snapshot = () => { syncSelection(); return copyProject(state) }
   const persist = () => {
+    syncSelection()
     if (!storageKey) return
     try { localStorage.setItem(storageKey, JSON.stringify(state)) } catch { status('This mockup is too large to keep in the browser. Use Save mockup to keep a copy.') }
   }
@@ -323,7 +376,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   const clearGroup = (group) => {
     for (const item of [...group.children]) {
       item.geometry?.dispose()
-      if (item.material?.map && item.material.map !== texture && item.material.map !== wrapTexture) item.material.map.dispose()
+      if (group !== decals && item.material?.map && item.material.map !== wrapTexture) item.material.map.dispose()
       item.material?.dispose()
       group.remove(item)
     }
@@ -408,7 +461,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     return result
   }
 
-  const projectDecal = (group, areaId, point, width, height, rotation, highlight = false) => {
+  const projectDecal = (group, areaId, point, width, height, rotation, highlight = false, artTexture = texture, order = 4) => {
     const normal = vec(areas()[areaId].normal)
     const orientation = new THREE.Euler().setFromQuaternion(basis(areaId, rotation))
     const reach = width + height + 0.4
@@ -419,9 +472,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       if (!geometry.attributes.position.count) { geometry.dispose(); continue }
       const material = highlight
         ? new THREE.MeshBasicMaterial({ color: '#3eaf96', transparent: true, opacity: 0.12, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, side: THREE.FrontSide, toneMapped: false })
-        : new THREE.MeshStandardMaterial({ map: texture, transparent: true, depthWrite: false, roughness: 0.6, metalness: 0, envMapIntensity: 0.25, polygonOffset: true, polygonOffsetFactor: -6, polygonOffsetUnits: -6, side: THREE.FrontSide })
+        : new THREE.MeshStandardMaterial({ map: artTexture, transparent: true, depthWrite: false, roughness: 0.6, metalness: 0, envMapIntensity: 0.25, polygonOffset: true, polygonOffsetFactor: -order - 2, polygonOffsetUnits: -order - 2, side: THREE.FrontSide })
       const item = new THREE.Mesh(geometry, material)
-      item.renderOrder = highlight ? 1 : 4
+      item.renderOrder = highlight ? 1 : order
       group.add(item)
     }
   }
@@ -429,21 +482,27 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     clearGroup(decals)
     clearGroup(guide)
     frames.clear()
-    if (!ready || !texture) return
-    for (const [id, placement] of Object.entries(state.placements)) {
-      if (!areas()[id]) continue
-      const hit = surfaceHit(id, placement.u, placement.v)
+    syncSelection()
+    if (!ready) return
+    for (const [index, layer] of state.layers.entries()) {
+      const loaded = layerTextures.get(layer.id)
+      if (layer.unplaced || !layer.visible || !loaded?.texture || !areas()[layer.area]) continue
+      const p = layer.placement
+      const hit = surfaceHit(layer.area, p.u, p.v)
       if (!hit) continue
-      projectDecal(decals, id, hit.point, placement.width, placement.width / aspect, placement.rotation)
-      frames.set(id, { point: hit.point.clone(), q: basis(id, placement.rotation) })
+      projectDecal(decals, layer.area, hit.point, p.width, p.width / loaded.aspect, p.rotation, false, loaded.texture, 4 + index)
+      frames.set(layer.id, { point: hit.point.clone(), q: basis(layer.area, p.rotation) })
     }
+    const selected = selection()
     const a = areas()[state.area]
-    const hit = surfaceHit(state.area)
+    const hit = a && canEditLayer(state) ? surfaceHit(state.area) : null
     if (hit) projectDecal(guide, state.area, hit.point, a.width, a.height, 0, true)
     guide.visible = mode === 'edit'
     container.dataset.decals = String(decals.children.length)
-    // For checks: the selected area when its lettering found the body (see test/browser/vehicles.check.mjs).
-    container.dataset.activeArea = frames.has(state.area) ? state.area : ''
+    container.dataset.layers = String(state.layers.length)
+    container.dataset.unplaced = String(state.layers.filter((layer) => layer.unplaced).length)
+    container.dataset.selectedLayer = selected?.id ?? ''
+    container.dataset.activeArea = frames.has(selected?.id) ? selected.area : ''
   }
 
   // --- Wrap ----------------------------------------------------------------------------------
@@ -506,6 +565,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   /** Projects the wrap onto every face its coverage includes. */
   const rebuildWrap = () => {
     clearGroup(wraps)
+    container.dataset.wraps = '0'
     wrapDirty = false
     if (!ready || !wrapTexture || state.wrap.coverage === 'none' || !faceBounds) return
     const split = VEHICLES[state.model]?.rearHalf ?? 0
@@ -548,11 +608,11 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     return { x: (p.x + 1) * container.clientWidth / 2, y: (1 - p.y) * container.clientHeight / 2 }
   }
   const updateOverlay = () => {
-    const frame = frames.get(state.area)
+    const frame = frames.get(state.selectedLayerId)
     const placement = state.placements[state.area]
     const a = areas()[state.area]
     const facingCamera = frame && a && vec(a.normal).dot(camera.position.clone().sub(frame.point).normalize()) > 0.16
-    const visible = ready && !busy && mode === 'edit' && placement && facingCamera
+    const visible = ready && !busy && mode === 'edit' && canEditLayer(state) && placement && facingCamera
     overlay.style.display = visible ? 'block' : 'none'
     if (!visible) return
     overlay.setAttribute('viewBox', `0 0 ${container.clientWidth} ${container.clientHeight}`)
@@ -589,41 +649,81 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     cancelGesture()
     view = CAMERA_VIEWS[next] ? next : 'angle'
     const k = scale()
-    camera.position.fromArray(CAMERA_VIEWS[view].map((value) => value * k))
+    const views = projection === 'orthographic' ? ORTHOGRAPHIC_VIEWS : CAMERA_VIEWS
+    camera.position.fromArray(views[view].map((value) => value * k))
+    const overhead = projection === 'orthographic' && view === 'hood'
+    camera.up.set(0, overhead ? 0 : 1, overhead ? -1 : 0)
+    camera.zoom = 1
+    updateProjection()
     controls.target.set(0, 0.8 * k, 0)
+    if (modelBounds) {
+      const centre = modelBounds.getCenter(new THREE.Vector3())
+      camera.position.add(centre.clone().sub(controls.target))
+      controls.target.copy(centre)
+    }
+    controls.maxPolarAngle = projection === 'orthographic' ? Math.PI : Math.PI / 2 - 0.02
     controls.minDistance = 4.5 * k
     controls.maxDistance = 14 * k
-    controls.update()
+    if (projection === 'orthographic') {
+      // Fixed elevations do not pass through OrbitControls' polar-angle epsilon. In particular,
+      // Above looks exactly down Y, with -Z as screen-up instead of a parallel up vector.
+      camera.lookAt(controls.target)
+      camera.updateMatrixWorld(true)
+    } else {
+      controls.update()
+      fitModelPerspectiveCamera(camera, modelBounds, controls.target)
+    }
     emit()
     requestRender()
   }
 
+  const setProjection = (next) => {
+    if (!['perspective', 'orthographic'].includes(next) || projection === next || disposed || busy) return
+    cancelGesture()
+    projection = next
+    mode = 'edit'
+    controls.enabled = false
+    guide.visible = true
+    camera = next === 'orthographic' ? new THREE.OrthographicCamera(-1, 1, 1, -1, 0.05, 200) : new THREE.PerspectiveCamera(33, viewportAspect, 0.05, 200)
+    controls.object = camera
+    container.dataset.projection = projection
+    cameraView(next === 'orthographic' ? 'side' : 'angle')
+  }
+
   // --- Model and artwork ---------------------------------------------------------------------
-  const paintBody = (value) => { for (const mesh of body) mesh.material.color.set(value) }
+  const paintBody = (value) => { for (const mesh of body) mesh.material.color.set(mesh.userData.paintRole === 'canopy' ? state.configuration?.canopyPaint ?? value : value) }
 
   /** The scene of a model: a drawn one built here, a file downloaded once and parsed. */
   const modelScene = async (info, token) => {
-    if (info.build) return buildWorkTruck(info.build)
+    if (info.build) return buildWorkTruck({ ...info.build, configuration: state.configuration })
+    const modelId = state.model
+    const configuration = state.configuration
     let bytes = modelBytes.get(info.url)
     if (!bytes) {
       const response = await fetch(info.url, { signal: fetchController.signal })
       if (!response.ok) throw new Error('The vehicle could not be downloaded. Try again.')
       bytes = await response.arrayBuffer()
       modelBytes.set(info.url, bytes)
+      while (modelBytes.size > MODEL_CACHE_LIMIT) modelBytes.delete(modelBytes.keys().next().value)
     }
     if (token !== modelToken) return null
-    return (await new GLTFLoader().parseAsync(bytes, '')).scene
+    const loaded = (await new GLTFLoader().parseAsync(bytes, '')).scene
+    try {
+      if (modelId === 'pickup') configureImportedPickup(loaded, configuration)
+    } catch (error) {
+      disposeModel(loaded)
+      throw error
+    }
+    return loaded
   }
 
   /** Keeps each placement and the selected area valid for the vehicle's own areas. */
   const fitToVehicle = () => {
-    const known = areas()
-    for (const id of Object.keys(state.placements)) {
-      if (known[id]) state.placements[id] = clampPlacement(state.placements[id], id, aspect, known)
-      else delete state.placements[id]
+    reconcileLayers(state)
+    for (const layer of state.layers) {
+      if (!layer.unplaced) layer.placement = clampPlacement(layer.placement, layer.area, layer.aspect, areas())
     }
-    if (!known[state.area]) state.area = 'left'
-    state.placements[state.area] ??= createPlacement(state.area, aspect, known)
+    syncSelection()
   }
 
   const loadModel = async () => {
@@ -638,7 +738,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     let next = null
     try {
       const loaded = await modelScene(info, token)
-      if (!loaded || token !== modelToken || disposed) return
+      if (!loaded) return null
+      if (token !== modelToken || disposed) { disposeModel(loaded); return null }
       next = new THREE.Group()
       next.userData.originalMaterials = []
       next.add(loaded)
@@ -658,7 +759,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       }
       next.updateMatrixWorld(true)
       const paintable = []
-      next.traverse((object) => {
+      next.traverseVisible((object) => {
         if (!object.isMesh) return
         object.castShadow = true
         object.receiveShadow = true
@@ -667,7 +768,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
           if (Array.isArray(object.material)) throw new Error('This model’s paint is not a separate surface.')
           next.userData.originalMaterials.push(object.material)
           // Paint with a clear coat: a gloss over the colour, as on a real vehicle.
-          object.material = new THREE.MeshPhysicalMaterial({ name: info.paint, color: state.paint, roughness: 0.38, metalness: 0.06, clearcoat: 1, clearcoatRoughness: 0.08 })
+          const source = object.material
+          object.material = new THREE.MeshPhysicalMaterial({ name: info.paint, color: object.userData.paintRole === 'canopy' ? state.configuration?.canopyPaint ?? state.paint : state.paint, roughness: 0.38, metalness: 0.06, clearcoat: 1, clearcoatRoughness: 0.08, normalMap: source.normalMap, roughnessMap: source.roughnessMap, metalnessMap: source.metalnessMap, bumpMap: source.bumpMap })
           object.userData.worldBounds = new THREE.Box3().setFromObject(object)
           paintable.push(object)
         } else if (info.glass && materials.some((material) => material.name === info.glass) && !info.build) {
@@ -686,6 +788,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       body = paintable
       scene.add(root)
       root.updateMatrixWorld(true)
+      modelBounds = new THREE.Box3().setFromObject(root)
       faceBounds = measureFaces()
       const k = scale()
       Object.assign(sun.shadow.camera, { left: -5 * k, right: 5 * k, top: 5 * k, bottom: -5 * k, near: 0.5, far: 30 * k })
@@ -694,59 +797,84 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       ready = true
       wrapDirty = true
       setBusy(false)
-      cameraView(['left', 'left-body'].includes(state.area) ? 'angle' : VIEW_FOR_AREA[state.area])
+      cameraView(view)
       changed()
       status('Select a body area, then drag the artwork.')
+      return true
     } catch (error) {
       disposeModel(next)
-      if (token !== modelToken || disposed || error.name === 'AbortError') return
+      if (token !== modelToken || disposed || error.name === 'AbortError') return null
       ready = false
       setBusy(false)
       status(error.message, true)
-    }
-  }
-
-  /** Draws the logo artwork into its texture. Resolves true when it changed, false on failure. */
-  const updateArtwork = async () => {
-    const token = ++artworkToken
-    try {
-      if (state.artwork.kind === 'none') {
-        clearGroup(decals)
-        texture?.dispose()
-        texture = null
-        preview = null
-        changed()
-        return true
-      }
-      const upload = state.artwork.kind === 'upload'
-      const url = upload ? state.artwork.upload?.dataUrl : await artworkUrl(state.artwork)
-      if (!url) throw new Error('Upload artwork first.')
-      // Drawn here from the brand's definition: trusted. Uploaded, or a file a brand pack carries: inspected.
-      const loaded = await loadImage(url, { trusted: !upload && state.artwork.kind !== 'file' })
-      if (token !== artworkToken || disposed) return null
-      const next = textureOf(renderer, loaded, 2048)
-      clearGroup(decals)
-      texture?.dispose()
-      texture = next
-      aspect = loaded.aspect
-      preview = loaded.url
-      for (const [id, placement] of Object.entries(state.placements)) {
-        if (areas()[id]) state.placements[id] = clampPlacement(placement, id, aspect, areas())
-      }
-      changed()
-      return true
-    } catch (error) {
-      if (token === artworkToken) status(error.message, true)
       return false
     }
   }
 
+  /** Independent, bounded texture records; stale async loads never overwrite newer edits. */
+  const prepareArtwork = async ({ force = false } = {}) => {
+    const token = ++artworkToken
+    const pendingTextures = new Map()
+    try {
+      for (const layer of state.layers) {
+        const key = JSON.stringify(layer.artwork)
+        const existing = layerTextures.get(layer.id)
+        if (!force && existing?.key === key) continue
+        if (layer.artwork.kind === 'none') { pendingTextures.set(layer.id, { key, texture: null, aspect: layer.aspect, preview: null }); continue }
+        const upload = layer.artwork.kind === 'upload'
+        const url = upload ? layer.artwork.upload?.dataUrl : await artworkUrl(layer.artwork)
+        if (!url) throw new Error('Upload artwork first.')
+        const loaded = await loadImage(url, { trusted: !upload && layer.artwork.kind !== 'file' })
+        if (token !== artworkToken || disposed) {
+          for (const record of pendingTextures.values()) record.texture?.dispose()
+          return null
+        }
+        pendingTextures.set(layer.id, { key, texture: textureOf(renderer, loaded, Math.min(2048, renderer.capabilities.maxTextureSize)), aspect: loaded.aspect, preview: loaded.url })
+      }
+      if (token !== artworkToken || disposed) {
+        for (const record of pendingTextures.values()) record.texture?.dispose()
+        return null
+      }
+      clearGroup(decals)
+      const ids = new Set(state.layers.map((layer) => layer.id))
+      for (const [id, record] of layerTextures) {
+        if (!ids.has(id) || pendingTextures.has(id)) { record.texture?.dispose(); layerTextures.delete(id) }
+      }
+      for (const [id, record] of pendingTextures) layerTextures.set(id, record)
+      reconcileLayers(state)
+      for (const layer of state.layers) {
+        const loaded = layerTextures.get(layer.id)
+        if (loaded) {
+          layer.aspect = loaded.aspect
+          if (!layer.unplaced) layer.placement = clampPlacement(layer.placement, layer.area, layer.aspect, areas())
+        }
+      }
+      syncSelection()
+      changed()
+      return true
+    } catch (error) {
+      for (const record of pendingTextures.values()) record.texture?.dispose()
+      if (token !== artworkToken || disposed) return null
+      status(error.message, true)
+      return false
+    }
+  }
+
+  const updateArtwork = (options) => {
+    const task = prepareArtwork(options)
+    pendingArtwork = task
+    const settled = () => { if (pendingArtwork === task) pendingArtwork = null }
+    task.then(settled, settled)
+    return task
+  }
+
   /** Draws the wrap artwork into its texture. Resolves true when it changed, false on failure. */
-  const updateWrap = async () => {
+  const prepareWrap = async () => {
     const token = ++wrapToken
     try {
       if (state.wrap.coverage === 'none') {
         clearGroup(wraps)
+        container.dataset.wraps = '0'
         wrapTexture?.dispose()
         wrapTexture = null
         wrapPreview = null
@@ -771,9 +899,18 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       requestRender()
       return true
     } catch (error) {
-      if (token === wrapToken) status(error.message, true)
+      if (token !== wrapToken || disposed) return null
+      status(error.message, true)
       return false
     }
+  }
+
+  const updateWrap = () => {
+    const task = prepareWrap()
+    pendingWrap = task
+    const settled = () => { if (pendingWrap === task) pendingWrap = null }
+    task.then(settled, settled)
+    return task
   }
 
   // --- Gestures ------------------------------------------------------------------------------
@@ -793,8 +930,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     return { u: hit.dot(vec(a.uAxis)), v: hit.dot(vec(a.vAxis)) }
   }
   const startGesture = (event) => {
-    if (mode !== 'edit' || busy || !ready || gesture || event.button !== 0) return
-    const frame = frames.get(state.area)
+    if (mode !== 'edit' || busy || !ready || gesture || !canEditLayer(state) || event.button !== 0) return
+    const frame = frames.get(state.selectedLayerId)
     if (!frame) return
     const local = pointerLocal(event, state.area, frame.point)
     if (!local) return
@@ -826,7 +963,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     }
     const clamped = clampPlacement(next, g.area, aspect, areas())
     if (!surfaceHit(g.area, clamped.u, clamped.v)) return
-    state.placements[g.area] = clamped
+    putPlacement(clamped)
     changed()
   }
   const endGesture = (event, cancel = false) => {
@@ -866,7 +1003,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   }
   const onCanvasKey = (event) => {
     if (event.key === 'Escape') { cancelGesture(); return }
-    if (!ready || busy || mode !== 'edit' || !texture || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
+    if (!ready || busy || mode !== 'edit' || !canEditLayer(state) || !texture || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
     event.preventDefault()
     const before = snapshot()
     const step = event.shiftKey ? 0.05 : 0.01
@@ -875,7 +1012,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     if (event.key === 'ArrowRight') next.u += step
     if (event.key === 'ArrowUp') next.v += step
     if (event.key === 'ArrowDown') next.v -= step
-    state.placements[state.area] = clampPlacement(next, state.area, aspect, areas())
+    putPlacement(clampPlacement(next, state.area, aspect, areas()))
     remember(before)
     changed()
   }
@@ -897,8 +1034,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     const height = container.clientHeight
     if (!width || !height) return
     renderer.setSize(width, height, false)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
+    updateProjection(width / height)
+    fitModelPerspectiveCamera(camera, modelBounds, controls.target)
     requestRender()
   })
   resize.observe(container)
@@ -907,64 +1044,97 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   const apply = async (next) => {
     cancelGesture()
     const old = state
+    const wasReady = ready
     state = copyProject(next)
     setBusy(true)
     applyBackdrop()
-    await updateArtwork()
-    if (!sameProject(old.wrap, state.wrap)) await updateWrap()
-    if (old.model !== state.model || !ready) await loadModel()
-    else {
+    try {
+      if (await updateArtwork() === false) throw new Error('The artwork could not be loaded.')
+      if (!sameProject(old.wrap, state.wrap) && await updateWrap() === false) throw new Error('The wrap could not be loaded.')
+      if (old.model !== state.model || !sameProject(old.configuration, state.configuration) || !ready) {
+        if (await loadModel() === false) throw new Error('The selected vehicle could not be loaded.')
+      } else {
+        paintBody(state.paint)
+        wrapDirty = true
+        setBusy(false)
+        changed()
+      }
+      persist()
+    } catch (error) {
+      state = old
+      ready = wasReady
+      applyBackdrop()
+      await updateArtwork()
+      await updateWrap()
       paintBody(state.paint)
-      wrapDirty = true
       setBusy(false)
       changed()
+      throw new Error(`${error.message} The previous design has been retained.`)
     }
-    persist()
   }
   async function restore (direction) {
-    if (busy) return
+    if (busy) return false
     const list = history[direction]
-    if (!list.length) return
-    const next = list.pop()
-    history[direction === 'undo' ? 'redo' : 'undo'].push(snapshot())
-    await apply(next)
-    emit()
+    if (!list.length) return false
+    const next = list[list.length - 1]
+    const before = snapshot()
+    try {
+      await apply(next)
+      list.pop()
+      history[direction === 'undo' ? 'redo' : 'undo'].push(before)
+      emit()
+      return true
+    } catch (error) { status(error.message, true); return false }
   }
   function selectArea (id, moveCamera = true) {
     if (!ready || busy || !areas()[id]) return
     cancelGesture()
     const before = snapshot()
-    state.area = id
-    state.placements[id] ??= createPlacement(id, aspect, areas())
+    const existing = state.layers.find((layer) => !layer.unplaced && layer.area === id)
+    if (existing) state.selectedLayerId = existing.id
+    else {
+      try {
+        const layer = createVehicleLayer(state, id, state.artwork, { aspect })
+        state.layers.push(layer)
+        state.selectedLayerId = layer.id
+      } catch (error) { status(error.message, true); return }
+    }
+    syncSelection()
     setMode('edit')
     if (moveCamera) cameraView(VIEW_FOR_AREA[id])
     remember(before)
+    updateArtwork()
     changed()
     status(`${areas()[id].label} selected. Drag the artwork or use its handles.`)
   }
   function setMode (next) {
     cancelGesture()
-    mode = next === 'view' ? 'view' : 'edit'
+    mode = next === 'view' && projection === 'perspective' ? 'view' : 'edit'
     controls.enabled = mode === 'view'
     guide.visible = mode === 'edit'
     emit()
     requestRender()
   }
   const placementEdit = (modify, { live = false } = {}) => {
-    if (!ready || busy) return
+    if (!ready || busy || !canEditLayer(state)) return
     if (!live) cancelGesture()
     const before = live ? (fieldStart ??= snapshot()) : snapshot()
-    state.placements[state.area] = clampPlacement(modify(state.placements[state.area]), state.area, aspect, areas())
+    putPlacement(clampPlacement(modify(state.placements[state.area]), state.area, aspect, areas()))
     if (!live) remember(before)
     changed()
   }
 
   const exportPng = async () => {
-    if (!ready || busy) return null
+    if (!ready || busy || disposed) return null
+    try { while (pendingArtwork || pendingWrap) await Promise.all([pendingArtwork, pendingWrap].filter(Boolean)) }
+    catch (error) { status(error.message, true); return null }
+    if (!ready || busy || disposed) return null
     cancelGesture()
     const oldSize = renderer.getSize(new THREE.Vector2())
     const oldRatio = renderer.getPixelRatio()
-    const oldAspect = camera.aspect
+    const oldAspect = viewportAspect
+    const oldPosition = camera.position.clone()
+    const oldQuaternion = camera.quaternion.clone()
     const oldGuide = guide.visible
     try {
       setBusy(true)
@@ -973,9 +1143,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       guide.visible = false
       renderer.setPixelRatio(1)
       renderer.setSize(EXPORT_SIZE.width, EXPORT_SIZE.height, false)
-      camera.aspect = EXPORT_SIZE.width / EXPORT_SIZE.height
-      camera.updateProjectionMatrix()
-      renderer.render(scene, camera)
+      updateProjection(EXPORT_SIZE.width / EXPORT_SIZE.height)
+      fitModelPerspectiveCamera(camera, modelBounds, controls.target)
+      renderer.render(scene, camera, { quality: 'export' })
       const out = document.createElement('canvas')
       out.width = EXPORT_SIZE.width
       out.height = EXPORT_SIZE.height
@@ -999,8 +1169,10 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       guide.visible = oldGuide
       renderer.setPixelRatio(oldRatio)
       renderer.setSize(oldSize.x, oldSize.y, false)
-      camera.aspect = oldAspect
-      camera.updateProjectionMatrix()
+      updateProjection(oldAspect)
+      camera.position.copy(oldPosition)
+      camera.quaternion.copy(oldQuaternion)
+      camera.updateMatrixWorld(true)
       setBusy(false)
     }
   }
@@ -1010,20 +1182,149 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     get project () { return copyProject(state) },
     setMode,
     cameraView,
+    setProjection,
     selectArea,
     undo: () => restore('undo'),
     redo: () => restore('redo'),
+    selectLayer (id) {
+      if (busy || !state.layers.some((layer) => layer.id === id)) return false
+      cancelGesture()
+      state.selectedLayerId = id
+      syncSelection()
+      if (!selection().unplaced) cameraView(VIEW_FOR_AREA[selection().area])
+      changed()
+      persist()
+      return true
+    },
+    async addLayer (area = state.area) {
+      if (!ready || busy || !areas()[area]) return false
+      cancelGesture()
+      const before = snapshot()
+      try {
+        const layer = createVehicleLayer(state, area, selection()?.artwork ?? fallback.artwork, { aspect })
+        state.layers.push(layer)
+        state.selectedLayerId = layer.id
+        syncSelection()
+        const result = await updateArtwork()
+        if (result === false) { state = before; changed(); return false }
+        remember(before)
+        cameraView(VIEW_FOR_AREA[area])
+        status('Artwork layer added. Its design and dimensions can be edited independently.')
+        return layer.id
+      } catch (error) { state = before; changed(); status(error.message, true); return false }
+    },
+    async duplicateLayer (id = state.selectedLayerId) {
+      if (busy || state.layers.length >= MAX_LAYERS) return false
+      const original = state.layers.find((layer) => layer.id === id)
+      if (!original) return false
+      cancelGesture()
+      const before = snapshot()
+      let n = 1
+      while (state.layers.some((layer) => layer.id === `layer-${n}`)) n++
+      const copy = copyProject(state).layers.find((layer) => layer.id === id)
+      copy.id = `layer-${n}`
+      copy.name = `${copy.name.slice(0, 93)} · copy`
+      copy.locked = false
+      state.layers.push(copy)
+      state.selectedLayerId = copy.id
+      syncSelection()
+      const result = await updateArtwork()
+      if (result === false) { state = before; changed(); return false }
+      remember(before)
+      changed()
+      return copy.id
+    },
+    removeLayer (id = state.selectedLayerId) {
+      if (busy || !state.layers.some((layer) => layer.id === id)) return false
+      cancelGesture()
+      const before = snapshot()
+      state.layers = state.layers.filter((layer) => layer.id !== id)
+      syncSelection()
+      remember(before)
+      updateArtwork()
+      changed()
+      return true
+    },
+    updateLayer (changes) {
+      if (busy || !selection()) return false
+      cancelGesture()
+      const before = snapshot()
+      const layer = selection()
+      if (typeof changes.name === 'string') layer.name = changes.name.slice(0, 100)
+      if (typeof changes.visible === 'boolean') layer.visible = changes.visible
+      if (typeof changes.locked === 'boolean') layer.locked = changes.locked
+      remember(before)
+      changed()
+      return true
+    },
+    moveLayer (direction) {
+      if (busy || ![-1, 1].includes(direction)) return false
+      const index = state.layers.findIndex((layer) => layer.id === state.selectedLayerId)
+      const next = index + direction
+      if (index < 0 || next < 0 || next >= state.layers.length) return false
+      const before = snapshot()
+      ;[state.layers[index], state.layers[next]] = [state.layers[next], state.layers[index]]
+      remember(before)
+      changed()
+      return true
+    },
+    remapLayer (id, area) {
+      const layer = state.layers.find((item) => item.id === id)
+      if (!ready || busy || !layer || layer.locked || !areas()[area]) return false
+      cancelGesture()
+      const before = snapshot()
+      layer.model = state.model
+      layer.area = area
+      layer.targetConfiguration = state.configuration ? { ...state.configuration } : null
+      layer.placement = clampPlacement(layer.placement, area, layer.aspect, areas())
+      state.selectedLayerId = layer.id
+      syncSelection()
+      remember(before)
+      changed()
+      cameraView(VIEW_FOR_AREA[area])
+      status('Layer placed on the selected surface. Check its size and position for this configuration.')
+      return true
+    },
+    async setConfiguration (changes) {
+      if (!ready || busy || !state.configuration) return false
+      cancelGesture()
+      const before = snapshot()
+      try {
+        state.configuration = normalizeConfiguration(state.model, { ...state.configuration, ...changes })
+        if (sameProject(state.configuration, before.configuration)) return true
+        syncSelection()
+        const geometryChanged = ['cover', 'sides', 'rack'].some((key) => state.configuration[key] !== before.configuration[key])
+        if (geometryChanged) {
+          if (await loadModel() === false) { state = before; ready = Boolean(root); paintBody(state.paint); changed(); status('The configuration could not be loaded. The previous design has been retained.', true); return false }
+        } else { paintBody(state.paint); changed() }
+        remember(before)
+        persist()
+        const count = state.layers.filter((layer) => layer.unplaced).length
+        status(count ? `${count} artwork ${count === 1 ? 'layer retained' : 'layers retained'} under Unplaced artwork.` : 'Vehicle configuration updated.')
+        return true
+      } catch (error) { state = before; changed(); status(error.message, true); return false }
+    },
     async setModel (id) {
-      if (!VEHICLE_MODELS[id] || id === state.model || busy) return
+      if (!VEHICLE_MODELS[id] || id === state.model || busy) return false
+      cancelGesture()
       const before = snapshot()
       state.model = id
+      state.configuration = defaultConfiguration(id)
+      syncSelection()
+      if (await loadModel() === false) {
+        state = before
+        ready = Boolean(root)
+        changed()
+        status('The vehicle could not be loaded. The previous design has been retained.', true)
+        return false
+      }
       remember(before)
-      await loadModel()
       persist()
+      return true
     },
     /** Paint: `live` while a colour picker moves, then `commit()` once it settles. */
     setPaint (value, { live = false } = {}) {
-      if (!/^#[0-9a-f]{6}$/i.test(value)) return
+      if (busy || !/^#[0-9a-f]{6}$/i.test(value)) return
       const before = live ? (fieldStart ??= snapshot()) : snapshot()
       state.paint = value.toLowerCase()
       paintBody(state.paint)
@@ -1032,6 +1333,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       requestRender()
     },
     setBackdrop (id) {
+      if (busy) return false
       const before = snapshot()
       state.backdrop = id
       applyBackdrop()
@@ -1040,9 +1342,11 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     },
     /** Logo settings (kind, logo, tagline, website). Text fields pass `live` while typing. */
     async setArtwork (changes, { live = false } = {}) {
+      if (busy || !canEditLayer(state)) return false
       cancelGesture()
       const before = live ? (fieldStart ??= snapshot()) : snapshot()
-      state.artwork = { ...state.artwork, ...changes }
+      selection().artwork = { ...selection().artwork, ...changes }
+      syncSelection()
       emit()
       const result = await updateArtwork()
       if (result === false && !live) { state = before; emit(); return false }
@@ -1051,6 +1355,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     },
     /** Wrap settings. Scale, position and mirroring move the artwork; the rest redraw it. */
     async setWrap (changes, { live = false } = {}) {
+      if (busy) return false
       const before = live ? (fieldStart ??= snapshot()) : snapshot()
       const old = state.wrap
       state.wrap = { ...state.wrap, ...changes, colours: [...(changes.colours ?? state.wrap.colours)] }
@@ -1067,8 +1372,10 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     },
     async upload (file, { target = 'artwork' } = {}) {
       try {
-        if (!file) return false
+        if (!file || busy || (target !== 'wrap' && !canEditLayer(state))) return false
+        const selectedId = state.selectedLayerId
         const upload = await checkUpload(file)
+        if (disposed || busy || (target !== 'wrap' && (state.selectedLayerId !== selectedId || !canEditLayer(state)))) return false
         const before = snapshot()
         if (target === 'wrap') {
           state.wrap = { ...state.wrap, source: 'upload', upload, coverage: state.wrap.coverage === 'none' ? 'sides' : state.wrap.coverage }
@@ -1076,7 +1383,8 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
           if (result === true) { remember(before); status('Wrap artwork added.') } else if (result === false) { state = before; emit() }
           return result
         }
-        state.artwork = { ...state.artwork, kind: 'upload', upload }
+        selection().artwork = { ...selection().artwork, kind: 'upload', upload }
+        syncSelection()
         const result = await updateArtwork()
         if (result === true) { remember(before); status('Artwork added. Drag it into place.') } else if (result === false) { state = before; emit() }
         return result
@@ -1096,24 +1404,32 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       fieldStart = null
       remember(before)
     },
-    copyToOtherSide () {
-      if (!OPPOSITE[state.area] || !areas()[OPPOSITE[state.area]] || busy || !ready) return
+    copyToOtherSide: () => api.copyOpposite(),
+    copyOpposite () {
+      if (!OPPOSITE[state.area] || !areas()[OPPOSITE[state.area]] || busy || !ready || !canEditLayer(state)) return false
       cancelGesture()
       const before = snapshot()
-      const { area: other, placement } = mirrorPlacement(state.placements[state.area], state.area, aspect, areas())
-      state.placements[other] = placement
-      remember(before)
-      changed()
-      status('Copied to the other side. The lettering still reads front to back.')
+      try {
+        const current = selection()
+        const { area, placement } = mirrorPlacement(current.placement, current.area, aspect, areas())
+        const layer = createVehicleLayer(state, area, current.artwork, { placement, aspect, name: `${current.name} · opposite` })
+        state.layers.push(layer)
+        remember(before)
+        updateArtwork()
+        changed()
+        status('Copied to the other side as an independent layer. Lettering remains readable.')
+        return true
+      } catch (error) { status(error.message, true); return false }
     },
     exportPng,
-    saveProject: () => JSON.stringify({ ...state, ...(VEHICLE_MODELS[state.model].sha256 ? { modelSha256: VEHICLE_MODELS[state.model].sha256 } : {}) }, null, 2),
+    saveProject: () => JSON.stringify({ ...snapshot(), ...(VEHICLE_MODELS[state.model].sha256 ? { modelSha256: VEHICLE_MODELS[state.model].sha256 } : {}) }, null, 2),
     async openProject (textContent) {
+      if (busy || disposed) { status('Wait for the current vehicle operation to finish before opening a project.', true); return false }
       try {
         const raw = JSON.parse(textContent)
-        const next = validateProject(raw, { logos, patterns, files })
+        const next = validateProject(raw, { logos, patterns, files, assets: ASSET_REFERENCES })
         if (raw.modelSha256 && raw.modelSha256 !== VEHICLE_MODELS[next.model].sha256) throw new Error('This mockup was made with a different version of the vehicle.')
-        if (next.artwork.upload) await loadImage(next.artwork.upload.dataUrl)
+        for (const layer of next.layers) if (layer.artwork.upload) await loadImage(layer.artwork.upload.dataUrl)
         if (next.wrap.upload) await loadImage(next.wrap.upload.dataUrl)
         const before = snapshot()
         await apply(next)
@@ -1127,8 +1443,9 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
     },
     /** Opens a mockup made here (a brand's livery) as one step of undo. */
     async applyProject (next, message) {
+      if (busy || disposed) { status('Wait for the current vehicle operation to finish before opening a project.', true); return false }
       try {
-        const checked = validateProject(next, { logos, patterns, files })
+        const checked = validateProject(next, { logos, patterns, files, assets: ASSET_REFERENCES })
         const before = snapshot()
         await apply(checked)
         fitToVehicle()
@@ -1142,7 +1459,7 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       }
     },
     /** Redraws the brand artwork when the brand's fonts arrive. */
-    refreshArtwork: async () => { await updateArtwork(); if (state.wrap.source !== 'upload') await updateWrap() },
+    refreshArtwork: async () => { await updateArtwork({ force: true }); if (state.wrap.source !== 'upload') await updateWrap() },
     dispose () {
       if (disposed) return
       disposed = true
@@ -1153,12 +1470,13 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
       clearGroup(wraps)
       clearGroup(decals)
       clearGroup(guide)
-      texture?.dispose()
+      for (const record of layerTextures.values()) record.texture?.dispose()
+      layerTextures.clear()
       wrapTexture?.dispose()
       disposeModel(root)
       for (const mesh of [shadowFloor, ground]) { mesh.geometry.dispose(); mesh.material.map?.dispose(); mesh.material.dispose() }
       scene.background?.dispose?.()
-      environment.texture.dispose()
+      environment?.texture.dispose()
       controls.dispose()
       renderer.dispose()
       renderer.forceContextLoss?.()
@@ -1170,9 +1488,19 @@ export const createVehicleStudio = ({ container, project: initial, fallback, art
   ;(async () => {
     applyBackdrop()
     emit()
-    for (const [part, key] of [['artwork', 'upload'], ['wrap', 'upload']]) {
-      const upload = state[part][key]
-      if (upload) { try { await loadImage(upload.dataUrl) } catch { state = copyProject(fallback) } }
+    for (const upload of [...state.layers.map((layer) => layer.artwork.upload), state.wrap.upload].filter(Boolean)) {
+      try { await loadImage(upload.dataUrl) }
+      catch (error) {
+        let recovery = null
+        if (storageKey) {
+          const recovered = readMockupDraft({ key: storageKey, validate: () => { throw error } })
+          storageKey = recovered.storageKey; recovery = recovered.recovery
+          if (recovery) onRecovery?.(recovery)
+        }
+        state = validateProject(fallback, { logos, patterns, files, assets: ASSET_REFERENCES })
+        status(recovery?.message ?? 'The saved artwork could not be decoded. The starting design has been restored.', true)
+        break
+      }
     }
     await updateArtwork()
     await updateWrap()

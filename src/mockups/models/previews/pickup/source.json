@@ -1,0 +1,36 @@
+{
+  "source": "src/mockups/models/crew-cab-pickup.glb",
+  "sha256": "faa7a63c8cde051e41b3c90d3d9afc1afb25e60735f5b4508c401554eaa84fb2",
+  "renderer": "Blender 4.3.2 / Cycles CPU",
+  "geometry": "Imported from the supplied GLB; no vehicle mesh was authored by this script.",
+  "meshes": 364,
+  "triangles": 146508,
+  "displayLengthMetres": 5.69,
+  "rotationY": 0.0,
+  "paint": {
+    "material": "paint",
+    "colour": "#60758a"
+  },
+  "render": {
+    "width": 640,
+    "samples": 64
+  },
+  "bounds": {
+    "low": [
+      -2.8450000286102295,
+      -1.1598724126815796,
+      0.0
+    ],
+    "high": [
+      2.8450000286102295,
+      1.1598724126815796,
+      1.9598069190979004
+    ]
+  },
+  "views": {
+    "angle": {
+      "projection": "perspective",
+      "file": "angle.png"
+    }
+  }
+}

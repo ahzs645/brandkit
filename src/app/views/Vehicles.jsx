@@ -13,10 +13,14 @@ import { Field, Segmented } from '../ui.jsx'
 import { OPPOSITE, SCHEMA, areasFor, createPlacement, defaultWrap, validateProject } from '../../mockups/vehicle-layout.js'
 import { BACKDROP_LABELS, FLEET, WRAP_GRAPHIC_LABELS, backdrop, brandColours, fleetDefaults, fleetSvg, vehicleLogos, wrapColours, wrapGraphicSvg, wrapPatterns } from '../../mockups/vehicle-artwork.js'
 import { VEHICLE_MODELS, lengthOf } from '../../mockups/vehicle-models.js'
+import { coverOptionsFor, SIDE_OPTIONS, configurationSummary } from '../../mockups/vehicle-configuration.js'
+import { VehicleCatalog } from '../../mockups/VehicleCatalog.jsx'
+import { MockupProjects } from '../../mockups/MockupProjects.jsx'
+import { readMockupDraft } from '../../mockups/mockup-draft.js'
+import { vehicleReviewSheet } from '../../mockups/vehicle-review-sheet.js'
 import { VEHICLE_FILE_TYPES, liveryFiles, liveryProject } from '../../mockups/vehicle-livery.js'
 import '../../mockups/vehicles.css'
 
-const MODEL_OPTIONS = Object.entries(VEHICLE_MODELS).map(([value, model]) => ({ value, label: model.label, title: model.note, group: model.group }))
 const KIND_OPTIONS = [
   { value: 'none', label: 'None', title: 'No logo: the wrap alone' },
   { value: 'logo', label: 'Logo', title: 'One of the brand’s logos, as drawn' },
@@ -62,12 +66,12 @@ const fileUrl = async (source, path) => {
   return `data:${VEHICLE_FILE_TYPES[path.split('.').pop().toLowerCase()]};base64,${btoa(binary)}`
 }
 
-/** A new mockup: the brand's first livery, or the work truck with fleet lettering. */
+/** A new mockup uses an imported model; procedural designs remain available in saved projects. */
 const startingProject = (brand, logos) => {
-  const [first] = liveriesOf(brand)
+  const first = liveriesOf(brand).find((livery) => !VEHICLE_MODELS[livery.model]?.legacy)
   if (first) { try { return fromLivery(brand, first, logos) } catch { /* fall through to the default */ } }
   const words = fleetDefaults(brand)
-  const model = 'truck-canopy'
+  const model = 'pickup'
   return {
     schema: SCHEMA, model, paint: '#ffffff', area: 'left', backdrop: 'studio',
     placements: { left: createPlacement('left', FLEET.width / FLEET.height, areasFor(model)) },
@@ -76,12 +80,10 @@ const startingProject = (brand, logos) => {
   }
 }
 
-const savedDraft = (brand, logos, patterns) => {
-  try {
-    const raw = localStorage.getItem(storageKey(brand))
-    return raw ? validateProject(JSON.parse(raw), { logos: logos.map((logo) => logo.id), patterns: patterns.map((entry) => entry.id), files: liveryFiles(brand) }) : null
-  } catch { return null }
-}
+const savedDraft = (brand, logos, patterns) => readMockupDraft({
+  key: storageKey(brand),
+  validate: (raw) => validateProject(raw, { logos: logos.map((logo) => logo.id), patterns: patterns.map((entry) => entry.id), files: liveryFiles(brand) })
+})
 
 /** A row of colour swatches with a picker for any other colour. */
 const Swatches = ({ label, colours, value, onPick, onLive, onCommit }) => (
@@ -113,6 +115,11 @@ export const Vehicles = ({ brand, fonts, source }) => {
   const [snap, setSnap] = useState(null)
   const [message, setMessage] = useState({ text: 'Preparing the vehicle…', error: false })
   const [failed, setFailed] = useState(null)
+  const [panel, setPanel] = useState('product')
+  const [reviewBusy, setReviewBusy] = useState(false)
+  const [remapArea, setRemapArea] = useState('left')
+  const [recovery, setRecovery] = useState(null)
+  const [projectsResetKey, setProjectsResetKey] = useState(0)
 
   // The editor asks for artwork through this ref, so it always draws with the latest fonts.
   draw.current = {
@@ -137,12 +144,14 @@ export const Vehicles = ({ brand, fonts, source }) => {
   useEffect(() => {
     let live = true
     let editor = null
-    import('../../mockups/vehicle-studio.js').then(({ createVehicleStudio }) => {
+    import('../../mockups/vehicle-studio.js').then(async ({ createVehicleStudio }) => {
       if (!live) return
       try {
-        editor = createVehicleStudio({
+        const draft = savedDraft(brand, logos, patterns)
+        setRecovery(draft.recovery)
+        const options = {
           container: stage.current,
-          project: savedDraft(brand, logos, patterns),
+          project: draft.project,
           fallback: startingProject(brand, logos),
           artworkUrl: (artwork) => draw.current.artwork(artwork),
           wrapUrl: (wrap) => draw.current.wrap(wrap),
@@ -150,10 +159,12 @@ export const Vehicles = ({ brand, fonts, source }) => {
           logos: logos.map((logo) => logo.id),
           patterns: patterns.map((entry) => entry.id),
           files: liveryFiles(brand),
-          storageKey: storageKey(brand),
+          storageKey: draft.storageKey,
+          onRecovery: setRecovery,
           onChange: setSnap,
           onStatus: (text, error) => setMessage({ text, error })
-        })
+        }
+        editor = createVehicleStudio(options)
         studio.current = editor
       } catch (error) {
         setFailed(error.message)
@@ -167,17 +178,20 @@ export const Vehicles = ({ brand, fonts, source }) => {
   useEffect(() => { if (fonts) studio.current?.refreshArtwork() }, [fonts])
 
   const project = snap?.project
-  const areas = project ? areasFor(project.model) : {}
+  const areas = project ? areasFor(project.model, project.configuration) : {}
   const placement = project?.placements[project.area]
-  const editable = Boolean(snap?.ready && !snap.busy)
+  const editable = Boolean(snap?.ready && !snap.busy && !reviewBusy)
+  const selectedLayer = snap?.selectedLayer ?? project?.layers?.find((layer) => layer.id === project.selectedLayerId)
+  const layerEditable = editable && Boolean(selectedLayer && selectedLayer.visible && !selectedLayer.locked && !selectedLayer.unplaced)
   const run = (action) => (...args) => studio.current?.[action](...args)
   const commit = () => studio.current?.commit()
   const swatches = useMemo(() => paintSwatches(brand), [brand])
   const wrapSwatches = useMemo(() => [...brandColours(brand).map((hex) => [hex, hex]), ...NEUTRALS.filter(([hex]) => !brandColours(brand).some((other) => alike(other, hex)))], [brand])
   const logoOptions = logos.map((logo) => ({ value: logo.id, label: logo.label, group: logo.group }))
-  const liveries = liveriesOf(brand)
-  const letteringFiles = [...new Set(liveries.map((livery) => livery.lettering?.file).filter(Boolean))]
-  const wrapFiles = [...new Set(liveries.map((livery) => livery.wrap?.file).filter(Boolean))]
+  const allLiveries = liveriesOf(brand)
+  const liveries = allLiveries.filter((livery) => !VEHICLE_MODELS[livery.model]?.legacy)
+  const letteringFiles = [...new Set(allLiveries.map((livery) => livery.lettering?.file).filter(Boolean))]
+  const wrapFiles = [...new Set(allLiveries.map((livery) => livery.wrap?.file).filter(Boolean))]
   const design = { value: 'file', label: 'Design', title: 'The lettering from the brand’s own vehicle design' }
   const kindOptions = [...(logos.length ? KIND_OPTIONS : KIND_OPTIONS.filter((option) => ['none', 'upload'].includes(option.value))), ...(letteringFiles.length ? [design] : [])]
   const sourceOptions = [
@@ -204,6 +218,27 @@ export const Vehicles = ({ brand, fonts, source }) => {
     const blob = await studio.current?.exportPng()
     if (blob) download(blob, `${brand.id}-${project.model}-${snap.view}.png`)
   }
+  const exportReview = async () => {
+    if (!studio.current || !project) return
+    const originalView = snap.view
+    const originalProject = JSON.stringify(studio.current.project)
+    setReviewBusy(true)
+    try {
+      const images = []
+      const reviewViews = snap.projection === 'orthographic' ? [['side', 'Left side'], ['opposite', 'Right side'], ['front', 'Front'], ['rear', 'Rear']] : [['angle', 'Perspective'], ['side', 'Left side'], ['opposite', 'Right side'], ['rear', 'Rear']]
+      for (const [view, label] of reviewViews) {
+        studio.current.cameraView(view)
+        const blob = await studio.current.exportPng()
+        if (!blob) throw new Error('A review view could not be rendered. Try again when the vehicle finishes loading.')
+        const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('A review image could not be read.')); reader.readAsDataURL(blob) })
+        if (JSON.stringify(studio.current.project) !== originalProject) throw new Error('The design changed during export. Export the review sheet again to capture a consistent set of views.')
+        images.push({ label, dataUrl })
+      }
+      const svg = vehicleReviewSheet({ brand: brand.name, model: VEHICLE_MODELS[project.model].label, configuration: configurationSummary(project.model, project.configuration), project, images })
+      download(svg, `${brand.id}-vehicle-review.svg`, 'image/svg+xml')
+      setMessage({ text: 'Four-view review sheet exported with artwork dimensions.', error: false })
+    } catch (error) { setMessage({ text: error.message, error: true }) } finally { studio.current?.cameraView(originalView); setReviewBusy(false) }
+  }
   const save = () => {
     if (!studio.current) return
     download(studio.current.saveProject(), `${brand.id}-vehicle-mockup.json`, 'application/json')
@@ -220,33 +255,39 @@ export const Vehicles = ({ brand, fonts, source }) => {
   return (
     <div className="view vehicles">
       <section className="panel vehicles__stage-panel" aria-label="Vehicle mockup">
+        <header className="vehicles__summary"><div><span className="vehicles__eyebrow">VEHICLE STUDIO</span><h1>{project ? VEHICLE_MODELS[project.model]?.label : 'Your brand, on the road'}</h1><p>{project ? configurationSummary(project.model, project.configuration) : 'Preparing your design…'}</p></div><span className="vehicles__fidelity">{project && VEHICLE_MODELS[project.model]?.legacy ? 'Legacy asset' : 'Imported 3D model'}</span></header>
+        {recovery && <div className="notice" role="status"><p>{recovery.message}</p>{recovery.raw !== null && <button type="button" className="button button--quiet" onClick={() => download(recovery.raw, `${brand.id}-vehicle-recovered-draft.json`, 'application/json')}>Download recovered draft</button>}</div>}
         <div className="vehicles__toolbar">
-          <Segmented label="What dragging does" value={snap?.mode ?? 'edit'} onChange={run('setMode')} options={[
+          <fieldset className="vehicles__projection" disabled={!editable}><Segmented label="Model projection" value={snap?.projection ?? 'perspective'} onChange={run('setProjection')} options={[
+            { value: 'perspective', label: '3D', title: 'Rotate the imported three-dimensional model' },
+            { value: 'orthographic', label: '2D elevations', title: 'Parallel views of the same 3D geometry and artwork' }
+          ]} /></fieldset>
+          {snap?.projection === 'orthographic' ? <span className="vehicles__projection-note">Same model · parallel views</span> : <fieldset className="vehicles__projection" disabled={!editable}><Segmented label="What dragging does" value={snap?.mode ?? 'edit'} onChange={run('setMode')} options={[
             { value: 'edit', label: 'Edit artwork', title: 'Drag the logo; corners resize it, the round handle turns it' },
             { value: 'view', label: 'Rotate', title: 'Drag to turn the vehicle; scroll or pinch to zoom' }
-          ]} />
+          ]} /></fieldset>}
           <div className="vehicles__history">
-            <button type="button" className="button button--quiet" onClick={run('undo')} disabled={!snap?.canUndo || snap?.busy} title="Undo (Ctrl+Z)">Undo</button>
-            <button type="button" className="button button--quiet" onClick={run('redo')} disabled={!snap?.canRedo || snap?.busy} title="Redo (Ctrl+Shift+Z)">Redo</button>
+            <button type="button" className="button button--quiet" onClick={run('undo')} disabled={!snap?.canUndo || snap?.busy || reviewBusy} title="Undo (Ctrl+Z)">Undo</button>
+            <button type="button" className="button button--quiet" onClick={run('redo')} disabled={!snap?.canRedo || snap?.busy || reviewBusy} title="Redo (Ctrl+Shift+Z)">Redo</button>
           </div>
           <div className="vehicles__files">
-            <button type="button" className="button button--quiet" onClick={() => openInput.current?.click()}>Open…</button>
+            <button type="button" className="button button--quiet" onClick={() => openInput.current?.click()} disabled={!editable}>Open…</button>
             <input ref={openInput} type="file" accept=".json,application/json" hidden onChange={fileChosen(async (file) => {
               if (file.size > 20 * 1024 * 1024) { setMessage({ text: 'That file is too large to be a mockup.', error: true }); return }
-              await studio.current?.openProject(await file.text())
+              if (await studio.current?.openProject(await file.text())) setProjectsResetKey((key) => key + 1)
             })} />
-            <button type="button" className="button button--quiet" onClick={save} disabled={!editable}>Save mockup</button>
+            <button type="button" className="button button--quiet" onClick={save} disabled={!editable}>Save JSON</button>
             <button type="button" className="button" onClick={exportImage} disabled={!editable}>Export PNG</button>
           </div>
         </div>
-        <div ref={stage} className="vehicle-stage" data-mode={snap?.mode ?? 'edit'} data-backdrop={project?.backdrop ?? 'studio'}>
+        <div ref={stage} className="vehicle-stage" data-mode={snap?.mode ?? 'edit'} data-projection={snap?.projection} data-renderer={snap?.renderer} data-backdrop={project?.backdrop ?? 'studio'}>
           <div className="vehicle-stage__views" role="group" aria-label="Camera">
-            {VIEWS.map(([id, label]) => <button key={id} type="button" aria-pressed={snap?.view === id} onClick={() => run('cameraView')(id)}>{label}</button>)}
+            {VIEWS.filter(([id]) => snap?.projection !== 'orthographic' || id !== 'angle').map(([id, label]) => <button key={id} type="button" disabled={!editable} aria-pressed={snap?.view === id} onClick={() => run('cameraView')(id)}>{label}</button>)}
           </div>
           <p className={`vehicle-stage__status${message.error ? ' vehicle-stage__status--error' : ''}`} role={message.error ? 'alert' : 'status'}>{message.text}</p>
         </div>
         <div className="vehicles__footer">
-          <span className="muted">{snap?.mode === 'view' ? 'Drag to turn the vehicle · scroll or pinch to zoom' : 'Drag the logo · corners resize · the round handle turns it (Shift: 15° steps) · arrow keys nudge'}</span>
+          <span className="muted">{snap?.projection === 'orthographic' ? 'Parallel elevations from the same 3D model · select a view to place artwork' : snap?.mode === 'view' ? 'Drag to turn the vehicle · scroll or pinch to zoom' : 'Drag the logo · corners resize · the round handle turns it (Shift: 15° steps) · arrow keys nudge'}</span>
           {snap?.model && (snap.model.source
             ? <span className="vehicles__credit">Model: <a href={snap.model.source} target="_blank" rel="noopener noreferrer">{snap.model.title}</a>, {snap.model.creator} · <a href={snap.model.licenceUrl} target="_blank" rel="noopener noreferrer">{snap.model.licence}</a></span>
             : <span className="vehicles__credit">{snap.model.label}: drawn for brandkit</span>)}
@@ -254,13 +295,16 @@ export const Vehicles = ({ brand, fonts, source }) => {
       </section>
 
       <aside className="panel vehicles__controls" aria-label="Mockup settings">
+        <div className="vehicles__tabs" role="tablist" aria-label="Vehicle tasks">{[['product', 'Product'], ['configure', 'Configure'], ['artwork', 'Artwork'], ['review', 'Review']].map(([id, label]) => <button key={id} type="button" role="tab" id={`vehicle-tab-${id}`} aria-controls={`vehicle-panel-${id}`} aria-selected={panel === id} tabIndex={panel === id ? 0 : -1} onKeyDown={(event) => { const ids = ['product', 'configure', 'artwork', 'review']; const index = ids.indexOf(id); const next = event.key === 'ArrowRight' ? ids[(index + 1) % 4] : event.key === 'ArrowLeft' ? ids[(index + 3) % 4] : event.key === 'Home' ? ids[0] : event.key === 'End' ? ids[3] : null; if (next) { event.preventDefault(); setPanel(next); document.getElementById(`vehicle-tab-${next}`)?.focus() } }} onClick={() => setPanel(id)}>{label}{id === 'artwork' && Boolean(snap?.unplacedCount) && <span className="vehicles__count">{snap.unplacedCount}</span>}</button>)}</div>
+        <div role="tabpanel" id="vehicle-panel-product" aria-labelledby="vehicle-tab-product" hidden={panel !== 'product'}>
+          <section><h2>Vehicle library</h2><p className="field__hint">Original 3D assets, with model-rendered previews. Switch between 3D and 2D elevations while keeping the same artwork.</p><VehicleCatalog value={project?.model} disabled={!editable} onChange={run('setModel')} /></section>
         {liveries.length > 0 && (
-          <section>
+          <section className="vehicles__brand-designs">
             <h2>Brand designs</h2>
             <div className="vehicles__liveries">
               {liveries.map((livery) => (
                 <button key={livery.id} type="button" className="vehicles__livery" aria-pressed={project?.livery === livery.id} disabled={!editable}
-                  onClick={() => studio.current?.applyProject(fromLivery(brand, livery, logos), `${livery.label ?? livery.id} applied: ${brand.name}’s own design.`)}>
+                  onClick={async () => { if (await studio.current?.applyProject(fromLivery(brand, livery, logos), `${livery.label ?? livery.id} applied: ${brand.name}’s own design.`)) setProjectsResetKey((key) => key + 1) }}>
                   <strong>{livery.label ?? livery.id}</strong>
                   {livery.description && <span>{livery.description}</span>}
                 </button>
@@ -269,13 +313,22 @@ export const Vehicles = ({ brand, fonts, source }) => {
             <p className="field__hint">Designs {brand.name} defines for its vehicles. Change anything below to adapt one; Undo goes back.</p>
           </section>
         )}
+        </div>
+
+        <div role="tabpanel" id="vehicle-panel-configure" aria-labelledby="vehicle-tab-configure" hidden={panel !== 'configure'}>
+        <fieldset className="vehicles__fieldset" disabled={!editable}>
         <section>
-          <h2>Vehicle</h2>
-          <Field label="Vehicle">
-            <Select value={project?.model ?? 'truck-canopy'} options={MODEL_OPTIONS} onChange={run('setModel')} disabled={!editable} />
-          </Field>
+          <h2>Components and finish</h2>
+          {project?.configuration && <>
+            {['pickup', 'truck-canopy'].includes(project.model) && <Field label="Bed cover"><Select value={project.configuration.cover} options={coverOptionsFor(project.model)} onChange={(cover) => run('setConfiguration')({ cover })} disabled={!editable} /></Field>}
+            {!['open', 'tonneau', 'service'].includes(project.configuration.cover) && <Field label="Canopy sides"><Select value={project.configuration.sides} options={SIDE_OPTIONS} onChange={(sides) => run('setConfiguration')({ sides })} disabled={!editable} /></Field>}
+            {project.model !== 'pickup' && <label className="vehicles__check"><input type="checkbox" checked={project.configuration.rack} onChange={(event) => run('setConfiguration')({ rack: event.target.checked })} /><span>{project.configuration.cover === 'open' ? 'Bed-mounted ladder rack' : 'Roof / ladder rack'}</span></label>}
+            {!['open', 'tonneau'].includes(project.configuration.cover) && <><label className="vehicles__check"><input type="checkbox" checked={!project.configuration.canopyPaint} onChange={(event) => run('setConfiguration')({ canopyPaint: event.target.checked ? null : '#30383e' })} /><span>Match {project.configuration.cover === 'service' ? 'service body' : 'canopy'} to body paint</span></label>{project.configuration.canopyPaint && <><span className="field__label">{project.configuration.cover === 'service' ? 'Service body' : 'Canopy'} paint</span><Swatches label="Component paint" colours={swatches} value={project.configuration.canopyPaint} onPick={(canopyPaint) => run('setConfiguration')({ canopyPaint })} onLive={(canopyPaint) => run('setConfiguration')({ canopyPaint })} onCommit={() => {}} /></>}</>}
+          </>}
+          {project?.model === 'pickup' && <p className="field__hint">Open bed and retractable tonneau use the original model’s components.</p>}
           <span className="field__label">Paint</span>
           <Swatches label="Body paint" colours={swatches} value={project?.paint} onPick={(value) => run('setPaint')(value)} onLive={(value) => run('setPaint')(value, { live: true })} onCommit={commit} />
+          {Boolean(snap?.unplacedCount) && <div className="vehicles__retained"><strong>{snap.unplacedCount} artwork {snap.unplacedCount === 1 ? 'layer retained' : 'layers retained'}</strong><p>Restore its original component or choose a new surface in Artwork.</p><button type="button" className="button button--quiet" onClick={() => setPanel('artwork')}>Review unplaced artwork</button></div>}
         </section>
 
         <section>
@@ -325,9 +378,23 @@ export const Vehicles = ({ brand, fonts, source }) => {
           </>}
           <input ref={wrapInput} type="file" hidden accept="image/png,image/jpeg,image/webp,image/svg+xml,.svg" onChange={fileChosen((file) => studio.current?.upload(file, { target: 'wrap' }))} />
         </section>
+        </fieldset>
+        </div>
 
+        <div role="tabpanel" id="vehicle-panel-artwork" aria-labelledby="vehicle-tab-artwork" hidden={panel !== 'artwork'}>
+        <section className="vehicles__layers" aria-label="Artwork layers">
+          <div className="vehicles__section-heading"><h2>Artwork layers</h2><button type="button" className="button button--quiet" disabled={!editable} onClick={() => run('addLayer')()}>+ Add layer</button></div>
+          {[false, true].map((unplaced) => <div key={String(unplaced)} className="vehicles__layer-group">{unplaced && project?.layers?.some((layer) => layer.unplaced) && <h3>Unplaced artwork</h3>}{project?.layers?.filter((layer) => Boolean(layer.unplaced) === unplaced).map((layer) => <button type="button" className="vehicles__layer" key={layer.id} data-layer-id={layer.id} aria-pressed={project.selectedLayerId === layer.id} disabled={!editable} onClick={() => run('selectLayer')(layer.id)}><span className="vehicles__layer-symbol">{layer.unplaced ? '↪' : layer.visible ? '◈' : '○'}</span><span><strong>{layer.name}</strong><small>{layer.unplaced ? layer.unplacedReason : areas[layer.area]?.label ?? layer.area}{layer.locked ? ' · Locked' : ''}</small></span></button>)}</div>)}
+          {selectedLayer && <>
+            <Field label="Layer name"><input type="text" maxLength={100} value={selectedLayer.name} disabled={!editable} onChange={(event) => run('updateLayer')({ name: event.target.value })} /></Field>
+            <div className="vehicles__layer-flags"><label className="vehicles__check"><input type="checkbox" checked={selectedLayer.visible} disabled={!editable} onChange={(event) => run('updateLayer')({ visible: event.target.checked })} /><span>Visible</span></label><label className="vehicles__check"><input type="checkbox" checked={selectedLayer.locked} disabled={!editable} onChange={(event) => run('updateLayer')({ locked: event.target.checked })} /><span>Lock artwork</span></label></div>
+            <div className="vehicles__actions"><button type="button" className="button button--quiet" disabled={!editable} onClick={() => run('duplicateLayer')()}>Duplicate</button><button type="button" className="button button--quiet" disabled={!editable} onClick={() => run('moveLayer')(-1)}>Move down</button><button type="button" className="button button--quiet" disabled={!editable} onClick={() => run('moveLayer')(1)}>Move up</button><button type="button" className="button button--quiet" disabled={!editable} onClick={() => run('removeLayer')()}>Remove layer</button></div>
+            {selectedLayer.unplaced && <div className="vehicles__retained"><strong>Original placement preserved</strong><p>Stored artwork: {selectedLayer.placement.width.toFixed(2)} × {(selectedLayer.placement.width / (selectedLayer.aspect || 1)).toFixed(2)} m.</p><p>{selectedLayer.unplacedReason} Restore that configuration to recover it automatically, or place it on a chosen surface.</p><label className="field"><span className="field__label">New surface</span><select aria-label="New surface" value={Object.hasOwn(areas, remapArea) ? remapArea : 'left'} onChange={(event) => setRemapArea(event.target.value)}>{Object.entries(areas).map(([id, area]) => <option value={id} key={id}>{area.label}</option>)}</select></label><button type="button" className="button" disabled={!editable || selectedLayer.locked} onClick={() => run('remapLayer')(selectedLayer.id, Object.hasOwn(areas, remapArea) ? remapArea : 'left')}>Place on selected surface</button></div>}
+          </>}
+        </section>
+        <fieldset className="vehicles__fieldset" disabled={!layerEditable}>
         <section>
-          <h2>Logo and lettering</h2>
+          <h2>Selected artwork</h2>
           <Segmented label="Logo" value={kind ?? 'fleet'} onChange={chooseKind} options={kindOptions} />
           {snap?.preview && kind !== 'none' && <div className="vehicles__preview"><img src={snap.preview} alt="The logo artwork being placed" /></div>}
           {(kind === 'logo' || kind === 'fleet') && logos.length > 0 && (
@@ -352,11 +419,11 @@ export const Vehicles = ({ brand, fonts, source }) => {
             </Field>
           )}
 
-          {kind !== 'none' && project && <>
+          {kind !== 'none' && project && !selectedLayer?.unplaced && <>
             <span className="field__label">Where</span>
             <div className="vehicles__grid2"><Segmented label="Body area" value={project.area} onChange={run('selectArea')} options={Object.entries(areas).map(([value, area]) => ({ value, label: area.label }))} /></div>
             <p className="field__hint">Or click a painted panel on the vehicle.</p>
-            {placement && <>
+            {placement && areas[project.area] && <>
               <Range label="Width" value={placement.width} shown={`${placement.width.toFixed(2)} m`} min={Math.min(0.15, placement.width)} max={areas[project.area].width} step="0.01" disabled={!editable}
                 onLive={(width) => run('setPlacement')({ width }, { live: true })} onCommit={commit} />
               <Range label="Rotation" value={placement.rotation} shown={`${Math.round(placement.rotation)}°`} min="-180" max="180" step="1" disabled={!editable}
@@ -381,11 +448,18 @@ export const Vehicles = ({ brand, fonts, source }) => {
             </>}
           </>}
         </section>
+        </fieldset>
+        </div>
 
-        <section>
+        <div role="tabpanel" id="vehicle-panel-review" aria-labelledby="vehicle-tab-review" hidden={panel !== 'review'}>
+        <MockupProjects brandId={brand.id} kind="vehicle" project={project} disabled={!editable} resetKey={projectsResetKey} defaultName={`${brand.name} vehicle`} onOpen={(next) => studio.current?.applyProject(next, 'Saved project opened.')} onStatus={(text, error) => setMessage({ text, error })} />
+        <fieldset className="vehicles__fieldset" disabled={!editable}><section>
           <h2>Scene</h2>
           <Segmented label="Backdrop" value={project?.backdrop ?? 'studio'} onChange={run('setBackdrop')} options={Object.entries(BACKDROP_LABELS).map(([value, label]) => ({ value, label }))} />
         </section>
+        <section><h2>Design handoff</h2><p className="field__hint">Export a four-view sheet with the selected configuration and each artwork layer’s dimensions.</p><button type="button" className="button" disabled={!editable} onClick={exportReview}>{reviewBusy ? 'Rendering review sheet…' : 'Export review sheet'}</button><p className="field__hint">This is a visual approval aid. Production templates and actual vehicle dimensions still need to be checked.</p></section>
+        </fieldset>
+        </div>
       </aside>
     </div>
   )

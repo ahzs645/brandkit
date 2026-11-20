@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brandkit responsive layout check</title>
+<style>body{margin:0;min-height:100vh;background:#dce2e8;display:grid;justify-content:center;align-content:start;padding:20px;gap:12px;box-sizing:border-box;font:14px system-ui;color:#283340}header{display:flex;justify-content:space-between;gap:20px;align-items:center;width:390px}iframe{width:390px;height:844px;border:0;box-shadow:0 8px 36px #14243b33;background:white;border-radius:12px}p{margin:0}select{font:inherit;padding:6px}</style></head>
+<body><header><p>Responsive layout · 390 × 844</p><label>Studio <select id="studio"><option value="vehicles">Vehicles</option><option value="clothing">Clothing</option></select></label></header><iframe title="Brandkit mobile viewport"></iframe>
+<script>
+const selection=document.querySelector('#studio');
+const requested=new URLSearchParams(location.search).get('view');
+selection.value=requested==='clothing'?'clothing':'vehicles';
+const load=()=>{document.querySelector('iframe').src='/?brand=northwind&view='+selection.value};
+selection.addEventListener('change',load);load();
+</script></body></html>

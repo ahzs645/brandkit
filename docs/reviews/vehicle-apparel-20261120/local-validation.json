@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-20",
+  "commands": [
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "tests": 259,
+      "passed": 259,
+      "failed": 0,
+      "skipped": 0,
+      "log": "tests.log"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "warnings": "Existing bundle-size and ineffective dynamic-import warnings",
+      "log": "build.log"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "node --check test/browser/vehicles.check.mjs; node --check test/browser/vehicle-layers.check.mjs; node --check test/browser/apparel.check.mjs",
+      "exitCode": 0,
+      "scope": "Syntax only; browser runners not executed"
+    }
+  ],
+  "meaningfulCoverage": {
+    "modelRendererTests": 10,
+    "sourcePickupTests": 7,
+    "pickupSurfaceRaycasts": 3900,
+    "sourceGarmentTests": 10
+  },
+  "browserEvidence": "browser-evidence.json",
+  "ci": "Local checks; commit uses [skip ci] to preserve Actions budget",
+  "notQualified": [
+    "WebGL/PBR browser acceptance",
+    "physical-phone touch/GPU performance",
+    "manufacturer vehicle/accessory fitment",
+    "supplier garment grading and production files"
+  ]
+}

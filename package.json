@@ -77,6 +77,8 @@
     "test:packs:browser": "node test/browser/packs.check.mjs",
     "test:astryx:browser": "node test/browser/astryx-export.check.mjs",
     "test:vehicles:browser": "node test/browser/vehicles.check.mjs",
+    "test:vehicle-layers:browser": "node test/browser/vehicle-layers.check.mjs",
+    "test:apparel:browser": "node test/browser/apparel.check.mjs",
     "test:devices:browser": "node test/browser/devices.check.mjs",
     "devices:frames": "node scripts/device-frames.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",

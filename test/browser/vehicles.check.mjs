@@ -1,86 +1,115 @@
-// Vehicle mockups in the app, for every vehicle brandkit has: it loads; lettering placed on each of
-// its prepared areas lands on painted body (the editor marks the selected area when it does); and
-// each wrap coverage projects onto it. Run it after adding or changing a vehicle (docs/vehicles.md):
-//
+// Every catalogue vehicle and prepared surface, through the production UI.
 //   npm run build && npm run test:vehicles:browser
-//
-// Screenshots of each vehicle, wrapped in full, go to .documentation/vehicles-browser (or
-// SCREENSHOT_DIR). Set VEHICLES=truck-canopy,shc to check only some.
+// Optional: BASE_URL=https://preview.example/brandkit/ CDP_URL=http://localhost:9222
+// CHROMIUM_PATH/CHROMIUM_ARGS configure a local browser; SCREENSHOT_DIR saves captures.
+// VEHICLES=pickup,shc selects imported models. Legacy recovery is covered by vehicle-layers.check.mjs.
+// EXPECTED_RENDERER=webgl|software3d optionally pins the renderer. Contexts are isolated.
 
 import assert from 'node:assert/strict'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { preview } from 'vite'
 import { chromium } from 'playwright'
-import { VEHICLES } from '../../src/mockups/vehicle-layout.js'
+import { areasFor } from '../../src/mockups/vehicle-layout.js'
+import { defaultConfiguration } from '../../src/mockups/vehicle-configuration.js'
 import { VEHICLE_MODELS } from '../../src/mockups/vehicle-models.js'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
 const screenshotDir = resolve(process.env.SCREENSHOT_DIR ?? '.documentation/vehicles-browser')
 mkdirSync(screenshotDir, { recursive: true })
-// Software WebGL where there is no GPU (CI, containers).
 const args = process.env.CHROMIUM_ARGS ? JSON.parse(process.env.CHROMIUM_ARGS) : ['--no-sandbox', '--disable-dev-shm-usage', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist']
 const only = process.env.VEHICLES?.split(',').filter(Boolean)
-const models = Object.keys(VEHICLE_MODELS).filter((id) => !only || only.includes(id))
-
-const server = await preview({ root, logLevel: 'silent', preview: { port: 0, host: '127.0.0.1' } })
-const base = server.resolvedUrls.local[0]
-let browser
+const expectedRenderer = process.env.EXPECTED_RENDERER ?? null
+assert.ok(expectedRenderer === null || ['webgl', 'software3d'].includes(expectedRenderer), 'EXPECTED_RENDERER must be webgl or software3d')
+if (only) for (const id of only) {
+  assert.ok(Object.hasOwn(VEHICLE_MODELS, id), `Unknown vehicle: ${id}`)
+  assert.ok(!VEHICLE_MODELS[id].legacy, `${id} is retained for saved work only. Use the explicit JSON recovery test in vehicle-layers.check.mjs.`)
+}
+const models = Object.keys(VEHICLE_MODELS).filter((id) => !VEHICLE_MODELS[id].legacy && (!only || only.includes(id)))
+assert.ok(models.length, 'VEHICLES must select at least one known model')
+let server, browser, context, page
 const failures = []
+const errors = []
+const checked = []
+
 try {
-  browser = await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args })
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
-  const errors = []
+  if (!process.env.BASE_URL) server = await preview({ root, logLevel: 'silent', preview: { port: 0, host: '127.0.0.1' } })
+  const base = process.env.BASE_URL ?? server.resolvedUrls.local[0]
+  const url = new URL(base)
+  url.searchParams.set('brand', 'northwind'); url.searchParams.set('view', 'vehicles')
+  browser = process.env.CDP_URL
+    ? await chromium.connectOverCDP(process.env.CDP_URL)
+    : await chromium.launch({ ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}), args })
+  context = await browser.newContext({ viewport: { width: 1440, height: 1000 } })
+  context.setDefaultTimeout(90000)
+  page = await context.newPage()
   page.on('pageerror', (error) => errors.push(error.message))
-  await page.goto(`${base}?brand=northwind&view=vehicles`)
-  await page.evaluate(() => localStorage.clear())
-  await page.reload()
+  await page.goto(url.href)
   const stage = page.locator('.vehicle-stage')
-  const settled = (timeout = 180000) => page.waitForFunction(() => {
+  const ready = async () => { await page.waitForFunction(() => {
+    const save = [...document.querySelectorAll('.vehicles__files button')].find((button) => button.textContent === 'Save JSON')
     const element = document.querySelector('.vehicle-stage')
-    const text = document.querySelector('.vehicle-stage__status')?.textContent ?? ''
-    return element && Number(element.dataset.decals) > 0 && !/Loading|Applying/.test(text) && !document.querySelector('.vehicles__controls [aria-busy="true"]')
-  }, null, { timeout }).then(() => page.waitForTimeout(600))
-  // A Segmented control becomes a dropdown when its options are many or long.
+    return Boolean(element?.dataset.preview === 'model' && ['webgl', 'software3d'].includes(element.dataset.renderer) && element.querySelector('canvas') && save && !save.disabled)
+  }, null, { timeout: 180000 }); await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)))) }
   const choose = async (label, option) => {
-    const combobox = page.getByRole('combobox', { name: label })
+    const combobox = page.getByRole('combobox', { name: label, exact: true })
     if (await combobox.count()) {
       await combobox.click()
       await page.getByRole('option', { name: option, exact: true }).click()
-    } else await page.getByRole('group', { name: label }).getByRole('button', { name: option, exact: true }).click()
+    } else await page.getByRole('group', { name: label, exact: true }).getByRole('button', { name: option, exact: true }).click()
   }
-  await settled()
+  const task = (id) => page.locator(`#vehicle-tab-${id}`).click()
+  const waitLanded = (area) => page.waitForFunction((id) => document.querySelector('.vehicle-stage')?.dataset.activeArea === id, area, { timeout: 60000 })
+  await ready()
+  const renderer = await stage.getAttribute('data-renderer')
+  if (expectedRenderer) assert.equal(renderer, expectedRenderer)
   for (const id of models) {
     const label = VEHICLE_MODELS[id].label
-    await choose('Vehicle', label)
-    await settled()
-    console.log(`${id} (${label})`)
-    for (const [area, spec] of Object.entries(VEHICLES[id].areas)) {
+    await task('product')
+    await page.getByRole('button', { name: `Choose ${label}`, exact: true }).click()
+    await ready()
+    assert.equal(await page.locator('.vehicles__summary h1').textContent(), label)
+    await task('artwork')
+    // Foreign-model layers are deliberately retained. Start a new placement on this model.
+    if (!(await stage.getAttribute('data-active-area'))) {
+      await page.getByRole('button', { name: '+ Add layer', exact: true }).click()
+      await page.waitForFunction(() => Boolean(document.querySelector('.vehicle-stage')?.dataset.activeArea), null, { timeout: 60000 })
+    }
+    const surfaces = []
+    for (const [area, spec] of Object.entries(areasFor(id, defaultConfiguration(id)))) {
       await choose('Body area', spec.label)
-      await settled()
+      try { await waitLanded(area) } catch { failures.push(`${id}: ${area} found no painted body`) }
       const landed = (await stage.getAttribute('data-active-area')) === area
-      console.log(`  ${landed ? 'ok  ' : 'FAIL'} lettering on ${area} (${spec.label})`)
-      if (!landed) failures.push(`${id}: lettering on ${area} found no painted body`)
+      surfaces.push({ area, label: spec.label, landed })
+      console.log(`${id}: ${landed ? 'PASS' : 'FAIL'} ${area}`)
     }
+    await task('configure')
+    const wraps = []
     for (const coverage of ['Sides', 'Rear half', 'Full body']) {
-      await page.getByRole('group', { name: 'Wrap coverage' }).getByRole('button', { name: coverage, exact: true }).click()
-      await page.waitForFunction(() => /Wrap applied/.test(document.querySelector('.vehicle-stage__status')?.textContent ?? ''), null, { timeout: 60000 })
-      await page.waitForTimeout(1200)
+      await choose('Wrap coverage', coverage)
+      await page.waitForFunction(() => /Wrap applied/.test(document.querySelector('.vehicle-stage__status')?.textContent ?? '') && Number(document.querySelector('.vehicle-stage')?.dataset.wraps) > 0, null, { timeout: 60000 })
       const meshes = Number(await stage.getAttribute('data-wraps'))
-      console.log(`  ${meshes > 0 ? 'ok  ' : 'FAIL'} ${coverage.toLowerCase()} wrap (${meshes} meshes)`)
-      if (!(meshes > 0)) failures.push(`${id}: the ${coverage.toLowerCase()} wrap projected nothing`)
+      wraps.push({ coverage, meshes })
+      assert.ok(meshes > 0, `${id}: ${coverage} projected no wrap geometry`)
     }
-    await page.getByRole('button', { name: 'Perspective' }).click()
-    await page.waitForTimeout(600)
-    await stage.screenshot({ path: `${screenshotDir}/${id}.png` })
-    await page.getByRole('group', { name: 'Wrap coverage' }).getByRole('button', { name: 'None', exact: true }).click()
-    await page.waitForTimeout(400)
+    await page.getByRole('group', { name: 'Camera', exact: true }).getByRole('button', { name: 'Perspective', exact: true }).click()
+    await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))))
+    await stage.screenshot({ path: resolve(screenshotDir, `${id}.png`) })
+    await choose('Wrap coverage', 'None')
+    await page.waitForFunction(() => Number(document.querySelector('.vehicle-stage')?.dataset.wraps) === 0)
+    checked.push({ model: id, renderer: await stage.getAttribute('data-renderer'), source: VEHICLE_MODELS[id].source, sha256: VEHICLE_MODELS[id].sha256, surfaces, wraps })
   }
   assert.deepEqual(errors, [], `page errors: ${errors.join(' | ')}`)
   assert.deepEqual(failures, [], failures.join('\n'))
   console.log(`Vehicles: ${models.length} checked. Screenshots in ${screenshotDir}`)
+} catch (error) {
+  failures.push(error.message)
+  if (page) await page.screenshot({ path: resolve(screenshotDir, 'failure.png'), fullPage: true }).catch(() => {})
+  throw error
 } finally {
+  writeFileSync(resolve(screenshotDir, 'results.json'), JSON.stringify({ expectedRenderer, qualification: 'UI source-model checks; software3d results do not establish WebGL lighting or GPU performance', checked, failures, pageErrors: errors }, null, 2))
+  await context?.close()
   await browser?.close()
-  await new Promise((done) => server.httpServer.close(done))
+  if (server) await new Promise((done) => server.httpServer.close(done))
 }
