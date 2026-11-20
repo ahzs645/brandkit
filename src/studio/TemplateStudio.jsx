@@ -250,7 +250,7 @@ export const TemplateStudio = ({
               <ul>{template.guides.notes.map((entry, index) => <li key={index}>{entry}</li>)}</ul>
             </div>}
             {template.reference && <div id={`${inspectionId}-source`} className="studio__inspection-note">
-              <p><strong>{template.reference.label ?? 'Original manual scan'}</strong>{template.reference.note ? ` — ${template.reference.note}` : ''}</p>
+              <p><strong>{template.reference.label ?? 'Original manual scan'}</strong>{template.reference.note ? `: ${template.reference.note}` : ''}</p>
               {overlay && <p>The scan retains its original wording when you edit the template. The scan is never added to downloads.</p>}
               {(!referenceUrl || referenceError) && <p role="status">The source image is unavailable. The template and its layout rules can still be used.</p>}
             </div>}
@@ -313,7 +313,7 @@ export const TemplateStudio = ({
               : <input type="text" value={values[field.id] ?? ''} placeholder={field.placeholder} onChange={(event) => setValues({ ...values, [field.id]: event.target.value })} />}
           </label>
         ))}
-        <p className="studio__note">{filled > 0 ? `${filled} of ${everyField.length} filled. ` : ''}Fields are shared across {templates.length} templates.</p>
+        {filled > 0 && <p className="studio__note">{filled} of {everyField.length} filled.</p>}
         {filled > 0 && <button type="button" className="button button--quiet" onClick={() => setValues({})}>Clear every field</button>}
       </form>
       {dock.bar}

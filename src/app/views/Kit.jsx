@@ -165,7 +165,7 @@ const KitView = ({ brand, fonts, source }) => {
             <div className="kit-unit">
               <Field label={departments.label ?? 'Department'} hint={unit ? `Its logo comes in this pack’s formats${brand.organization ? ', and the Word starters are headed with its name' : ''}. Saved in this browser for documents and templates.` : 'Choose one to add its logo to the kit; it is saved in this browser for documents and templates.'}>
                 <Select value={unitId} disabled={Boolean(progress)} onChange={chooseUnit} options={[
-                  { value: '', label: 'None — main logo only' },
+                  { value: '', label: 'None (main logo only)' },
                   ...(unitId === SAVED ? [{ value: SAVED, label: `${saved.department} (names documents; no listed logo)` }] : []),
                   ...departmentGroups(departments.items)
                 ]} />
@@ -182,7 +182,7 @@ const KitView = ({ brand, fonts, source }) => {
         <div className="kit-step kit-action">
           <span className="kit-step__label"><span className="kit-step__number">{step}</span> Download</span>
           <button type="button" className="button button--large kit-download" disabled={Boolean(progress) || !fonts} onClick={build}>
-            {progress ? 'Building…' : `Download ${chosen.label}${unit ? ` for ${unit.name}` : ''} — ${plan.length} files`}
+            {progress ? 'Building…' : `Download ${chosen.label}${unit ? ` for ${unit.name}` : ''} (${plan.length} files)`}
           </button>
           {progress && (
             <div className="progress" role="status">
