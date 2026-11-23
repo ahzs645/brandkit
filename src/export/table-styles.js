@@ -86,6 +86,27 @@ export const tableLook = (profile, brand) => {
   return { style, ...looks[style] }
 }
 
+/** Cell-level decisions shared by both editable Word exporters. */
+export function publicationCell(look, { header, firstRow, lastRow, firstColumn, lastColumn, bodyIndex }) {
+  const frame = look.frame ?? {}
+  return {
+    text: header ? look.header : firstColumn ? look.first : undefined,
+    fill: header ? look.header.fill : look.body.band && bodyIndex % 2 ? look.body.band : look.body.fill,
+    padding: {
+      top: look.padding.y, bottom: look.padding.y,
+      left: look.padding.flush && firstColumn ? 0 : look.padding.x,
+      right: look.padding.flush && lastColumn ? 0 : look.padding.x
+    },
+    borders: {
+      top: firstRow ? frame.top ?? frame.outer : undefined,
+      bottom: header ? look.header.rule ?? look.body.rule
+        : lastRow ? frame.bottom ?? frame.outer ?? (look.radiusMm ? undefined : look.body.rule) : look.body.rule,
+      left: firstColumn ? frame.outer : frame.vertical,
+      right: lastColumn ? frame.outer : undefined
+    }
+  }
+}
+
 /** Faces a table style sets beyond the profile's paragraph styles, for font embedding. */
 export const tableFonts = (profile, brand) => {
   const look = tableLook(profile, brand)

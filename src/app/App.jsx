@@ -608,7 +608,7 @@ export const App = () => {
             {view === 'vehicles' && <Vehicles key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'clothing' && <Clothing key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'devices' && <Devices key={brand.id} brand={brand} fonts={fonts} source={source} />}
-            {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} />}
+            {view === 'documents' && <Documents key={brand.id} brand={brand} fonts={fonts} source={source} />}
             {view === 'pack' && <ClientPack key={brand.id} brand={brand} fonts={fonts} brands={brandIds.map((id) => ({ id, name: brandName(id) }))} loadBrand={loadBrand} />}
             {view === 'guide' && <Guide brand={brand} fonts={fonts} openManual={openManual} />}
             {view === 'motion' && <Motion key={brand.id} brand={brand} source={source} initialStudy={params().get('study')} onSelect={(id) => writeUrl({ study: id })} />}

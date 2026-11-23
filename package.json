@@ -49,7 +49,9 @@
       "types": "./src/pack/archive-node.d.ts",
       "default": "./src/pack/archive-node.js"
     },
-    "./pack/catalog-cli": "./src/pack/catalog-cli.js"
+    "./pack/catalog-cli": "./src/pack/catalog-cli.js",
+    "./recipes": "./src/recipes/index.js",
+    "./recipes/node": "./src/recipes/node.js"
   },
   "files": [
     "bin",
@@ -82,7 +84,8 @@
     "test:devices:browser": "node test/browser/devices.check.mjs",
     "devices:frames": "node scripts/device-frames.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
-    "catalog": "node scripts/catalog.mjs"
+    "catalog": "node scripts/catalog.mjs",
+    "setup:document-kit": "npm ci --prefix vendor/document-kit && npm run build --prefix vendor/document-kit"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -100,12 +103,15 @@
     "@resvg/resvg-js": "2.6.2",
     "@xmldom/xmldom": "^0.9.12",
     "bwip-js": "^4.11.4",
+    "document-kit": "file:vendor/document-kit",
     "docx": "^9.12.0",
     "fflate": "^0.8.3",
     "gifenc": "^1.0.3",
     "jspdf": "^3.0.4",
+    "mermaid": "11.17.2",
     "mp4-muxer": "^5.2.2",
     "opentype.js": "^2.0.0",
+    "playwright": "1.54.0",
     "pptxgenjs": "^4.0.1",
     "svg2pdf.js": "^2.8.1",
     "three": "0.187.0",
@@ -115,7 +121,6 @@
     "@bcgov/bc-sans": "2.1.2",
     "@tailwindcss/vite": "^4.2.2",
     "@vitejs/plugin-react": "^6.1.2",
-    "playwright": "1.54.0",
     "react": "^19.2.9",
     "react-dom": "^19.2.9",
     "tailwindcss": "^4.2.2",

@@ -305,6 +305,7 @@ The library components read the host page's custom properties (`--surface`, `--i
 ```sh
 git submodule update --init --recursive
 npm install
+npm run setup:document-kit                     # build the pinned document recipe engine
 npm run setup:printer                          # install the Template Printer component's dependencies
 npm run dev                                    # the app
 npm test                                       # the engine, packs and manual pack, on northwind
@@ -374,3 +375,7 @@ Chromium, and builds northwind's Word masters for review (no LibreOffice in CI; 
 PR runs attach them as an artifact without deploying. See
 [the document model and editing rules](docs/documentation.md) for custom pages, screenshot
 provenance, copy conventions and font details.
+
+## Document Kit recipes
+
+Use **Templates → Documents → Generate Word from recipe** to generate a Word master with the open brand. The CLI accepts the same JSON job and can also export PDF and Mermaid source files. [Setup, job format and example](docs/recipes.md)

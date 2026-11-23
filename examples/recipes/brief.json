@@ -1,0 +1,18 @@
+{
+  "schema": "brandkit/recipe/1",
+  "recipe": {
+    "kind": "recipe",
+    "id": "project-brief",
+    "name": "Project brief",
+    "sections": [{
+      "id": "brief",
+      "parts": [
+        {"id": "title", "use": "text-section", "with": {"heading": "{{ title }}", "level": 1, "paragraphs": "{{ paragraphs }}"}},
+        {"id": "team", "use": "figure", "with": {"image": "{{ chart }}", "caption": "Project coordination", "numbered": false, "width": 420, "height": 160}}
+      ]
+    }]
+  },
+  "components": [],
+  "data": {"title": "Project team", "paragraphs": ["The project manager coordinates delivery and review."], "chart": {"$image": "coordination"}},
+  "images": {"coordination": {"mermaid": "flowchart LR\n  client[Client] --> pm[Project manager]\n  pm --> team[Delivery team]"}}
+}

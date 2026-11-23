@@ -55,6 +55,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run setup:document-kit
       - run: npm run setup:printer
       # The engine, pack and manual-pack tests, on the brand brandkit ships (northwind). The brands
       # made with brandkit are tested where they are kept, against this engine.

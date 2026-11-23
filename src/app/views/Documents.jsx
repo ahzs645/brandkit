@@ -51,7 +51,12 @@ export const DocumentFrame = ({ frame, title, html }) => {
 }
 
 /** Every brand gets the same document workflow, with its own identity and print profile. */
-export const Documents = ({ brand, fonts }) => {
+export const Documents = ({ brand, fonts, source }) => {
+  const [selectedRecipe, setSelectedRecipe] = useState('')
+  const catalog = brand.documentation?.recipes
+  const recipes = Array.isArray(catalog) ? catalog.filter((entry) => typeof entry?.label === 'string' && typeof entry.file === 'string' && source?.has(entry.file)) : []
+  const activeRecipe = recipes.find((entry) => entry.file === selectedRecipe) ?? recipes[0]
+  const recipeInput = useRef(null)
   const [paper, setPaper] = useState('letter')
   const [purpose, setPurpose] = useState(() => DOCUMENT_PURPOSES.some((item) => item.id === brand.documentation?.defaultPurpose) ? brand.documentation.defaultPurpose : 'product')
   const [values, setValues] = useState(() => ({ affiliation: readAffiliation(brand.id) }))
@@ -101,6 +106,12 @@ export const Documents = ({ brand, fonts }) => {
     download(bytes, `${model.id}.docx`)
     setStatus('Word master downloaded. Its headings, paragraphs, captions and tables remain editable.')
   })
+  const exportRecipe = async (json) => {
+    const job = JSON.parse(json)
+    const { browserRecipeDocx } = await import('../../recipes/browser.js')
+    download(await browserRecipeDocx(ctx, job), job.recipe.id + '.docx')
+    setStatus('Recipe exported with ' + brand.name + '.')
+  }
   const importSource = (file) => run(async () => {
     if (file.size > 35 * 1024 * 1024) throw new Error('Choose a publication source smaller than 35 MB.')
     const next = JSON.parse(await file.text())
@@ -136,11 +147,28 @@ export const Documents = ({ brand, fonts }) => {
       <div><h2>Write a document with {brand.name}</h2>
       </div>
       <div className="documents-actions">
+        <button className="button button--quiet" type="button" disabled={!fonts || busy} onClick={() => recipeInput.current?.click()}>Generate Word from recipe</button>
+        <input ref={recipeInput} type="file" accept=".json,application/json" hidden onChange={(event) => {
+          const file = event.target.files?.[0]
+          event.target.value = ''
+          if (file) run(async () => exportRecipe(await file.text()))
+        }} />
         <button className="button button--quiet" type="button" disabled={!fonts || busy} onClick={() => sourceInput.current?.click()}>Open document source</button>
         <input ref={sourceInput} type="file" accept=".json,application/json" hidden onChange={(event) => { const file = event.target.files?.[0]; event.target.value = ''; if (file) importSource(file) }} />
         <button className="button" type="button" disabled={!fonts || busy || Boolean(preview.error || composed.error)} onClick={word}>{busy ? 'Working…' : 'Download Word'}</button>
       </div>
     </section>
+    {activeRecipe && <section className="panel" aria-label="Brand recipes">
+      <label className="field"><span className="field__label">Brand recipe</span>
+        <Select value={activeRecipe.file} onChange={setSelectedRecipe} options={recipes.map((entry) => ({ value: entry.file, label: entry.label }))} />
+      </label>
+      <div className="documents-actions">
+        <button className="button" type="button" disabled={!fonts || busy} onClick={() => run(async () =>
+          exportRecipe(new TextDecoder().decode(await source.read(activeRecipe.file))))}>Generate recipe Word document</button>
+        {typeof activeRecipe.sampleData === 'string' && source.has(activeRecipe.sampleData) &&
+          <a className="button button--quiet" href={source.url(activeRecipe.sampleData)} download={activeRecipe.sampleData.split('/').at(-1)}>Download sample data</a>}
+      </div>
+    </section>}
     <div ref={dock.ref} className={`documents-workspace ${dock.className}`}>
       <section className="panel documents-controls" aria-label="Document settings" {...dock.panel('edit')}>
         <h3>Document settings</h3>

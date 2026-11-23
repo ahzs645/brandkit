@@ -7,3 +7,6 @@
 [submodule "vendor/door-sign"]
 	path = vendor/door-sign
 	url = https://github.com/ahzs645/door-sign.git
+[submodule "vendor/document-kit"]
+	path = vendor/document-kit
+	url = https://github.com/ahzs645/document-kit.git

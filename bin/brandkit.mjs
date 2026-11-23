@@ -18,8 +18,8 @@ const option = (name) => {
 }
 const has = (name) => rest.includes(name)
 const validateOptions = () => {
-  const valued = new Set(command === 'pdf' ? ['--out', '--brand'] : command === 'check' ? [] : ['--out', '--pack', '--paper', '--purpose', '--values', '--content', '--source-revision'])
-  const flags = new Set(['build', 'documents'].includes(command) ? ['--office', '--pdf', '--zip'] : [])
+  const valued = new Set(command === 'recipe' ? ['--input', '--out'] : command === 'pdf' ? ['--out', '--brand'] : command === 'check' ? [] : ['--out', '--pack', '--paper', '--purpose', '--values', '--content', '--source-revision'])
+  const flags = new Set(command === 'recipe' ? ['--pdf'] : ['build', 'documents'].includes(command) ? ['--office', '--pdf', '--zip'] : [])
   for (let i = 0; i < rest.length; i++) {
     if (valued.has(rest[i])) { option(rest[i]); i++; continue }
     if (!flags.has(rest[i])) throw new Error(`Unknown option: ${rest[i]}`)
@@ -30,6 +30,7 @@ const json = (value) => encoder.encode(`${JSON.stringify(value, null, 2)}\n`)
 const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
+       brandkit recipe <brand.json> --input <recipe-job.json> --out <folder> [--pdf]
        brandkit pdf <master.docx> [--out folder] [--brand brand.json]
        brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--cover] [--cover-variant <id>] [--pdf] [--issue]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
@@ -59,7 +60,7 @@ const main = async () => {
   if (command === 'catalog') { const { catalog } = await import('../src/pack/catalog-cli.js'); catalog(process.argv.slice(3)); return }
   if (command === 'pack') { const { pack } = await import('../src/pack/cli.js'); pack(process.argv.slice(3)); return }
   if (command === 'handover') { const { handover } = await import('../src/handover/cli.js'); await handover(process.argv.slice(3)); return }
-  if (!file || !['build', 'check', 'documents', 'pdf'].includes(command)) throw new Error(usage)
+  if (!file || !['build', 'check', 'documents', 'pdf', 'recipe'].includes(command)) throw new Error(usage)
   validateOptions()
   if (command === 'pdf') {
     const { pdfFromDocx } = await import('../src/export/node.js')
@@ -78,6 +79,15 @@ const main = async () => {
   }
   const { brand, fonts, folder } = await load(file)
   if (fonts.failures.length) throw new Error(`Required brand fonts could not be loaded: ${fonts.failures.map(({ key, error }) => `${key}: ${error.message}`).join('; ')}`)
+  if (command === 'recipe') {
+    if (!option('--input') || !option('--out')) throw new Error('recipe requires --input and --out.')
+    const { exportRecipe } = await import('../src/recipes/node.js')
+    const job = JSON.parse(await readFile(resolve(option('--input')), 'utf8'))
+    const outDir = resolve(option('--out'))
+    const names = await exportRecipe({ brand, fonts }, job, { outDir, pdf: has('--pdf') })
+    console.log(brand.name + ': ' + names.join(', ') + ' written to ' + outDir)
+    return
+  }
   const valuesPath = option('--values')
   const contentPath = option('--content')
   if (valuesPath && contentPath) throw new Error('Choose either --values or --content.')

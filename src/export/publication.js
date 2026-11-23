@@ -7,7 +7,7 @@ import { documentProfile, validatePublication } from '../engine/documentation.js
 import { embeddedFonts, fontEmbeddingPermission, officeFontRequirements, officeStyleFonts, officeStyles } from './office.js'
 import { sanitizeSvg } from '../printer/svg.js'
 import { welcomeCoverDocx, welcomeCoverHtml } from './welcome-cover.js'
-import { tableCss, tableFonts, tableLook } from './table-styles.js'
+import { publicationCell, tableCss, tableFonts, tableLook } from './table-styles.js'
 
 const MM_PT = 72 / 25.4
 const mmTwips = (value) => Math.round(value * MM_PT * 20)
@@ -143,21 +143,17 @@ export const publicationDocx = async (ctx, publication, { png } = {}) => {
       ...(spec.colour ? { color: hex(spec.colour) } : {}), ...(spec.caps ? { allCaps: true } : {}),
       ...(spec.sizePt ? { size: Math.round(spec.sizePt * 2) } : {}), ...(spec.trackingEm ? { characterSpacing: Math.round(spec.trackingEm * (spec.sizePt ?? typeOf(profile, 'table').sizePt ?? 9.5) * 20) } : {})
     } : {}
-    const pad = look.padding
     const last = count - 1
     const rowOf = (row, isHeader, index, isFirst, isLast) => new TableRow({ tableHeader: isHeader, cantSplit: true, children: widths.map((width, column) => {
-      const fill = isHeader ? look.header.fill : look.body.band && index % 2 ? look.body.band : look.body.fill
+      const cell = publicationCell(look, {
+        header: isHeader, firstRow: isFirst, lastRow: isLast, firstColumn: column === 0, lastColumn: column === last, bodyIndex: index
+      })
       return new TableCell({
         width: { size: width, type: WidthType.DXA },
-        margins: { top: mmTwips(pad.y), bottom: mmTwips(pad.y), left: pad.flush && column === 0 ? 0 : mmTwips(pad.x), right: pad.flush && column === last ? 0 : mmTwips(pad.x) },
-        ...(fill ? { shading: { fill: hex(fill) } } : {}),
-        borders: {
-          top: isFirst ? line(look.frame?.top ?? look.frame?.outer) : none,
-          bottom: isHeader ? line(look.header.rule ?? look.body.rule) : isLast ? (look.frame?.bottom || look.frame?.outer ? line(look.frame.bottom ?? look.frame.outer) : look.radiusMm ? none : line(look.body.rule)) : line(look.body.rule),
-          left: column === 0 ? line(look.frame?.outer) : line(look.frame?.vertical),
-          right: column === last ? line(look.frame?.outer) : none
-        },
-        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), { ...runOf(isHeader ? look.header : column === 0 ? look.first : null),
+        margins: Object.fromEntries(Object.entries(cell.padding).map(([side, mm]) => [side, mmTwips(mm)])),
+        ...(cell.fill ? { shading: { fill: hex(cell.fill) } } : {}),
+        borders: Object.fromEntries(Object.entries(cell.borders).map(([side, rule]) => [side, line(rule)])),
+        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), { ...runOf(cell.text),
           // A value still to confirm reads as a gap, not as an answer.
           ...(!isHeader && column > 0 && block.pending && textOf(row[column]).trim() === block.pending ? { color: hex(profile.colours.muted) } : {}) }) })]
       })
