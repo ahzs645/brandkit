@@ -51,4 +51,14 @@ Use a renderer ID and its source for new figures. D3 reads data and uses the sel
 {"renderer":"d3","source":{"type":"gantt","title":"Delivery","data":{"unit":"Week","tasks":[{"label":"Build","start":0,"end":3},{"label":"Launch","start":3}]}}}
 ```
 
+### Device mockups
+
+The `devices` renderer puts screenshots on brandkit's drawn hardware, as in the Devices tab: laptops, phones, tablets, monitors and browser windows. A slot names a device from `src/mockups/device-catalog.js` and its screen; a screen is a PNG or JPEG given as `{"type","base64"}`, a data URL, or `{"$image":id}` naming another entry in the job's `images`. Phones and tablets show a status bar above the screenshot, so nothing sits under the camera cutout; set a slot's `status` to `false` to fill the screen, or to `{"colour":"#ffffff","time":"9:41"}` to style the bar. `preset` (default `laptop-phone`) chooses the arrangement and fills any slot without a device; `canvas`, `background` (a hex colour, or none for transparent) and `shadow` follow the Devices tab. The photographed frame sets need their image files or a browser, so recipes accept the drawn devices only.
+
+```json
+{"renderer":"devices","source":{"preset":"laptop-phone","slots":[
+  {"device":"laptop-14","screen":{"$image":"home-desktop"}},
+  {"device":"phone-island","screen":{"$image":"home-phone"}}]}}
+```
+
 For a new engine, pass a `diagrams` array of `{id, render(source)}` adapters to `exportRecipe`, `browserRecipeDocx` or `recipeDocx`. The callback returns `{svg}` or `{bytes}`. Use outlined SVG text or return PNG bytes carrying the engine’s typography. JSON recipes can use any renderer registered by their host. Word contains the rendered figure. Edit the diagram source and regenerate to change its structure.

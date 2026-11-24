@@ -70,3 +70,28 @@ test('a portable recipe can mix D3, Mermaid and an application adapter', async (
   assert.equal((strFromU8(parts['word/document.xml']).match(/<w:drawing>/g) ?? []).length, 3)
   assert.equal(Object.keys(parts).filter(name=>name.startsWith('word/media/') && name.endsWith('.png')).length,3)
 })
+
+test('a recipe can show screenshots on brandkit devices, with screens taken from the job images', async () => {
+  const screen = Buffer.from(await renderer.png('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="10"><rect width="16" height="10" fill="#ff0000"/></svg>', 16)).toString('base64')
+  const job = structuredClone(sample)
+  job.images = {
+    desktop: { type: 'image/png', base64: screen },
+    phone: { type: 'image/png', base64: screen },
+    scene: { renderer: 'devices', source: { preset: 'laptop-phone', slots: [{ device: 'laptop-14', screen: { $image: 'desktop' } }, { device: 'phone-island', screen: { $image: 'phone' } }] } }
+  }
+  job.data = { scene: { $image: 'scene' } }
+  job.recipe.sections[0].parts = [{ id: 'scene', use: 'figure', with: { image: '{{ scene }}', width: 90, height: 45 } }]
+  const bytes = await recipeDocx(ctx, job, renderer)
+  const parts = unzipSync(bytes)
+  assert.equal((strFromU8(parts['word/document.xml']).match(/<w:drawing>/g) ?? []).length, 1)
+  assert.deepEqual(job.images.scene.source.slots[0].screen, { $image: 'desktop' })
+})
+
+test('device figures reject unknown screens and frames that need a browser', async () => {
+  const { devicesAdapter, bindDeviceScreens } = await import('../src/recipes/devices.js')
+  const adapter = devicesAdapter()
+  assert.match(adapter.render({ preset: 'single' }).svg, /^<svg /)
+  assert.throws(() => adapter.render({ slots: [{ device: 'not-a-device' }] }), /not one of brandkit's drawn devices/)
+  assert.throws(() => adapter.render({ slots: [{ device: 'laptop-14', screen: 'https://example.com/a.png' }] }), /PNG or JPEG/)
+  assert.throws(() => bindDeviceScreens({ slots: [{ screen: { $image: 'missing' } }] }, {}), /Unknown device screen image: missing/)
+})

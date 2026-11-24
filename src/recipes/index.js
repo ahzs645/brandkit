@@ -1,6 +1,7 @@
 // Browser-safe bridge. The host supplies rasterizers, so a text-only job needs no browser in Node.
 import { createDiagramRegistry, mermaidAdapter } from 'document-kit/diagrams'
 import { d3Adapter } from 'document-kit/diagrams/d3'
+import { bindDeviceScreens, devicesAdapter } from './devices.js'
 import { tableGrid } from 'document-kit'
 import { documentProfile } from '../engine/documentation.js'
 import { publicationCell, tableLook } from '../export/table-styles.js'
@@ -115,13 +116,14 @@ export async function recipeDocx(ctx, job, { png, mermaid, logo, diagrams = [] }
   const library = sharedLibrary({ recipes: [recipe], components: job.components })
   const compiled = compileRecipe(recipe.id, library)
   const images = new Map()
-  const adapters = [brandD3Adapter(ctx), ...diagrams]
+  const adapters = [brandD3Adapter(ctx), devicesAdapter({ brandColour: profile.colours.primary }), ...diagrams]
   if (mermaid) adapters.push(mermaidAdapter(async source => ({ bytes: await mermaid(source, profile) })))
   const registry = createDiagramRegistry(adapters, png)
   for (const [id, asset] of Object.entries(job.images ?? {})) {
     const spec = diagramSource(asset)
     if (spec) {
-      images.set(id, await registry.image(spec))
+      const source = spec.renderer === 'devices' ? bindDeviceScreens(spec.source, job.images) : spec.source
+      images.set(id, await registry.image({ ...spec, source }))
     } else if (typeof asset?.base64 === 'string' && ['image/jpeg', 'image/png'].includes(asset.type)) {
       images.set(id, { bytes: Uint8Array.from(atob(asset.base64), char => char.charCodeAt(0)) })
     } else throw new Error('Expected a PNG, JPEG or diagram source for ' + id)
