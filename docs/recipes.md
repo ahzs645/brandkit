@@ -37,11 +37,24 @@ A brand can list jobs under `documentation.recipes` in its `brand.json`. Each en
 | recipe | Document Kit recipe object. Its ID identifies the document. Its parts refer to shared or supplied components. |
 | components | Array of project components. Use an empty array for jobs that use only Document Kit’s shared library. |
 | data | JSON values referenced by recipe tags. A value of `{"$image":"team"}` resolves the named image. |
+| spreadsheets | Optional dictionary of Excel workbooks. A keyed workbook is `{"type":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64":"…"}`, or, for the CLI, `{"path":"pricing/budget.xlsx"}` relative to the job file. A data value of `{"$spreadsheet":"budget"}` resolves the named workbook. |
 | images | Optional dictionary. A keyed image can be a renderer/source pair or `{"mermaid":"flowchart LR\n  a --> b"}` or `{"type":"image/png","base64":"…"}`. JPEG is also supported. |
 
 The adapter supplies the data fields `brandName`, `logo`, `logoWidth` and `logoHeight`. The logo box preserves the selected logo’s aspect ratio. Data tables inherit the brand’s publication design from `documentation.tables.style`. Mark column headings with the header row role so Word applies the heading style and repeats them across pages. An explicit recipe-level table theme opts into a custom design. The exporter reports unresolved completion fields with Document Kit’s field information.
 
 The minimal example is in `examples/recipes/brief.json`. The engine’s recipe reference is in `vendor/document-kit/docs/recipe.md`.
+
+## Spreadsheets
+
+A recipe prints a sheet of an Excel workbook as a native Word table with Document Kit's `spreadsheet` block or shared component: the sheet's column widths, merged cells, fonts, fills, borders and number formats, with formulas evaluated where the file cached no value (openpyxl writes none). The brand's table design is not applied to it; it keeps the workbook's look. Give its section the page the workbook prints on, for example 17 × 11 in landscape:
+
+```json
+{"id": "budget", "page": {"paper": "tabloid", "orientation": "landscape"}, "parts": [
+  {"id": "budget", "use": "spreadsheet", "with": {"workbook": "{{ budget }}", "sheet": "Budget"}},
+  {"id": "breakdown", "use": "spreadsheet", "with": {"workbook": "{{ budget }}", "sheet": "Breakdown"}}]}
+```
+
+with `"data": {"budget": {"$spreadsheet": "budget"}}` and `"spreadsheets": {"budget": {"path": "budget.xlsx"}}`. The leading rows repeat at the top of each page (the sheet's print titles or frozen rows, or `headerRows`); `range`, `scale`, `formulas` and the other options are in `vendor/document-kit/docs/model.md`, "Spreadsheets". The browser export takes base64 workbooks only.
 
 ## Diagram adapters
 

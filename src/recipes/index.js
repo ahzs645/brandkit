@@ -74,14 +74,40 @@ function applyTableLook(blocks, look, tableType) {
   }
 }
 
-function bindImages(value, images) {
-  if (Array.isArray(value)) return value.map(item => bindImages(item, images))
-  if (value === null || typeof value !== 'object') return value
+export const XLSX_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+
+const decodeBase64 = base64 => Uint8Array.from(atob(base64), char => char.charCodeAt(0))
+
+// Data values naming a job image ({"$image": id}) or workbook ({"$spreadsheet": id}) become their bytes.
+function bindAssets(value, images, spreadsheets) {
+  if (Array.isArray(value)) return value.map(item => bindAssets(item, images, spreadsheets))
+  if (value === null || typeof value !== 'object' || value instanceof Uint8Array) return value
   if (Object.hasOwn(value, '$image')) {
     if (!images.has(value.$image)) throw new Error('Unknown recipe image: ' + value.$image)
     return images.get(value.$image)
   }
-  return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, bindImages(child, images)]))
+  if (Object.hasOwn(value, '$spreadsheet')) {
+    if (!spreadsheets.has(value.$spreadsheet)) throw new Error('Unknown recipe spreadsheet: ' + value.$spreadsheet)
+    return spreadsheets.get(value.$spreadsheet)
+  }
+  return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, bindAssets(child, images, spreadsheets)]))
+}
+
+/**
+ * The job's workbooks by id, as `{ bytes }`. An entry is `{"type": XLSX_TYPE, "base64": "…"}`, or bytes a host has
+ * already read (`{ bytes }`); a `{"path": …}` entry is read from disk by `exportRecipe` before it gets here.
+ */
+export function jobSpreadsheets(job) {
+  const out = new Map()
+  for (const [id, asset] of Object.entries(job.spreadsheets ?? {})) {
+    if (asset?.bytes instanceof Uint8Array) out.set(id, { bytes: asset.bytes })
+    else if (typeof asset?.base64 === 'string' && (asset.type === undefined || asset.type === XLSX_TYPE)) {
+      out.set(id, { bytes: decodeBase64(asset.base64) })
+    } else if (typeof asset?.path === 'string') {
+      throw new Error('Spreadsheet ' + id + ' names a file (' + asset.path + '); only the command line reads files. Embed it as base64.')
+    } else throw new Error('Expected an .xlsx workbook ({"type","base64"}) for spreadsheet ' + id)
+  }
+  return out
 }
 
 export function diagramSource(asset) {
@@ -125,10 +151,10 @@ export async function recipeDocx(ctx, job, { png, mermaid, logo, diagrams = [] }
       const source = spec.renderer === 'devices' ? bindDeviceScreens(spec.source, job.images) : spec.source
       images.set(id, await registry.image({ ...spec, source }))
     } else if (typeof asset?.base64 === 'string' && ['image/jpeg', 'image/png'].includes(asset.type)) {
-      images.set(id, { bytes: Uint8Array.from(atob(asset.base64), char => char.charCodeAt(0)) })
+      images.set(id, { bytes: decodeBase64(asset.base64) })
     } else throw new Error('Expected a PNG, JPEG or diagram source for ' + id)
   }
-  const data = bindImages(job.data, images)
+  const data = bindAssets(job.data, images, jobSpreadsheets(job))
   const mark = profile.logos.primary
   data.logo = { bytes: logo?.bytes ?? await png(mark.svg, 400) }
   data.logoWidth = 72

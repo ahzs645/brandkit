@@ -1,11 +1,28 @@
-import { mkdir, mkdtemp, rename, rm, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises'
+import { join, resolve } from 'node:path'
 import { createRequire } from 'node:module'
 import { recipeDocx, diagramConfig, diagramSource } from './index.js'
 import { createNodeRenderer, pdfFromDocx } from '../export/node.js'
 
+/**
+ * Reads the job's spreadsheets given as `{"path": …}` (relative to `baseDir`, the job file's folder) into bytes.
+ * The caller's job is left as it was.
+ */
+export async function readJobFiles(job, baseDir = process.cwd()) {
+  const entries = Object.entries(job.spreadsheets ?? {})
+  if (!entries.some(([, asset]) => typeof asset?.path === 'string')) return job
+  const spreadsheets = {}
+  for (const [id, asset] of entries) {
+    spreadsheets[id] = typeof asset?.path === 'string'
+      ? { bytes: new Uint8Array(await readFile(resolve(baseDir, asset.path))) }
+      : asset
+  }
+  return { ...job, spreadsheets }
+}
+
 /** Export a portable job to a Word master, optional PDF, and editable diagram sources. */
-export async function exportRecipe(ctx, job, { outDir, pdf = false, logo, diagrams = [] } = {}) {
+export async function exportRecipe(ctx, source, { outDir, pdf = false, logo, diagrams = [], baseDir } = {}) {
+  const job = await readJobFiles(source, baseDir)
   const renderer = await createNodeRenderer()
   let browser, page
   async function mermaid(source, profile) {

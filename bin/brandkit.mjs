@@ -82,9 +82,10 @@ const main = async () => {
   if (command === 'recipe') {
     if (!option('--input') || !option('--out')) throw new Error('recipe requires --input and --out.')
     const { exportRecipe } = await import('../src/recipes/node.js')
-    const job = JSON.parse(await readFile(resolve(option('--input')), 'utf8'))
+    const input = resolve(option('--input'))
+    const job = JSON.parse(await readFile(input, 'utf8'))
     const outDir = resolve(option('--out'))
-    const names = await exportRecipe({ brand, fonts }, job, { outDir, pdf: has('--pdf') })
+    const names = await exportRecipe({ brand, fonts }, job, { outDir, pdf: has('--pdf'), baseDir: dirname(input) })
     console.log(brand.name + ': ' + names.join(', ') + ' written to ' + outDir)
     return
   }
