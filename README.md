@@ -95,7 +95,7 @@ brandkit draws the whole kit from it:
   laptop with a phone in front, three phones), put a screenshot or a brand screen on each, and
   export a PNG or SVG. Drawn in the browser; nothing is uploaded. A brand can carry its own
   mockups and frames (`devices.mockups`, `devices.frames`); see [docs/devices.md](docs/devices.md).
-- **The kit itself**: every file in one zip (379 for ddcnorth) with an offline `index.html` to browse them,
+- **The kit itself**: every file in one zip (several hundred for a full identity) with an offline `index.html` to browse them,
   and `source/brand.json` so the kit can be rebuilt.
 
 Nothing is uploaded: the drawing, the PNGs (canvas), the PDFs (jsPDF and svg2pdf) and the zip
@@ -111,8 +111,8 @@ record for access instructions, responsibilities, renewals and support; identity
 brand definitions. No password or setup token belongs in that record.
 
 ```sh
-node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
-  --provider /path/to/firstform/dist/brand.json --client /path/to/ddcnorth/brand.json \
+node bin/brandkit.mjs handover examples/managed-site/northwind.json \
+  --provider /path/to/firstform/dist/brand.json --client brands/northwind/brand.json \
   --out /path/to/new-delivery --cover --pdf
 ```
 
@@ -126,7 +126,7 @@ The example uses First Form identity 2.0 from the uploaded source's built `dist/
 or the extracted pack root; `source/kit/brand.json` is the archived 1.0 identity.
 See [managed-site handover](docs/managed-site-handover.md) for the CLI and integration API, and
 [the examples](examples/managed-site/README.md) for a blank template and the labelled First Form /
-DDC North example. Keep operational packs private; public brand sharing is not access control.
+Northwind example. Keep operational packs private; public brand sharing is not access control.
 
 ## Brands are packs
 
@@ -173,7 +173,7 @@ unchanged brand keeps its hash. A brand can keep source material (scans, researc
 pack with a `.packignore`. [docs/brand-packs.md](docs/brand-packs.md) documents the format, every
 way of opening a pack, what happens to it afterwards, catalogs, hosting and the error messages.
 
-The brands made with brandkit so far (ddcnorth, First Form, Over the Edge, SPARK Lab, UNBC,
+The brands made with brandkit so far (First Form, Over the Edge, SPARK Lab, UNBC,
 love.fútbol, and the 1977 Province of British Columbia and 1983 BC Hydro reconstructions) are
 kept, generated and tested outside this repository and published as packs; the features below
 are described with them as examples.
@@ -313,12 +313,18 @@ npm run build && npm run test:packs:browser    # packs in Chromium: link, reload
 node bin/brandkit.mjs build brands/northwind/brand.json --out northwind-kit   # vector and text files from a terminal
 node bin/brandkit.mjs check path/to/brand.json # validate a definition
 node scripts/pack.mjs path/to/brands --out dist/packs   # brand packs and a catalog
+node bin/brandkit.mjs dev path/to/brands       # a brand's own repository, live: rebuilt, repacked and reloaded on save
 npm run make:documentation -- --check           # the built-in brand's use guide matches its definition
 npm run build:documentation -- --pdf            # Word masters + PDFs for the built-in brand
 ```
 
 `VITE_BRANDKIT_CATALOGS=http://…/catalog.json npm run dev` offers a catalog's brands, as the site
 does. Set `CHROMIUM_PATH` to use a Chromium you already have.
+
+A brand that lives in its own repository installs brandkit as a development dependency
+(`npm i -D github:ahzs645/brandkit`) and runs `npx brandkit dev` there (settings in its
+`brandkit.dev.json`). It rebuilds and repacks on every save and serves brandkit and the packs from
+one address, reloading as they change. See [Working on a brand live](docs/brand-packs.md#working-on-a-brand-live).
 
 Tools that read brands from disk (the CLI, `src/fonts/node.js`) look for a file a brand does not
 hold in `library/`, then in other brand folders: the built-in ones and any in `BRANDKIT_BRANDS`

@@ -1,5 +1,5 @@
 // Regenerates brands/northwind/brand.json: an example brand made entirely by the starter, to show
-// that nothing in the engine is particular to ddcnorth.
+// that nothing in the engine is particular to any one brand.
 //
 //   node scripts/make-example-brand.mjs
 

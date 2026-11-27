@@ -18,10 +18,10 @@ const brand = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', 
 const fonts = await loadBrandFontsFromDisk(brand, fileURLToPath(new URL('../brands/northwind/', import.meta.url)))
 assert.deepEqual(fonts.failures, [], 'the repository font fixtures must resolve')
 const ctx = { brand, fonts }
-const client = { brand: { ...structuredClone(brand), id: 'ddcnorth', name: 'Example client' }, fonts }
+const client = { brand: { ...structuredClone(brand), id: 'northwind', name: 'Example client' }, fonts }
 const profile = documentProfile(brand, { paper: 'letter' })
 const renderer = await createNodeRenderer()
-const record = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+const record = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
 const WRONG_RATIO = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAYAAADN5B7xAAAAF0lEQVR4nGPU0tL6z0ACYCJF8agGYgEAUFYBjUgxufoAAAAASUVORK5CYII='
 const WORD = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
 const REL = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'

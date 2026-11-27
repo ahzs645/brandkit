@@ -23,7 +23,7 @@ const aspect = 799.14231709 / 152
 const base = () => ({
   schema: SCHEMA, model: 'suv', paint: '#F3F2EE', area: 'left',
   placements: { left: createPlacement('left', aspect) },
-  artwork: { kind: 'logo', logo: 'primary/horizontal/primary', tagline: 'Know the land. Plan the work.', website: 'example.com', upload: null }
+  artwork: { kind: 'logo', logo: 'primary/horizontal/primary', tagline: 'Built for the work ahead.', website: 'example.com', upload: null }
 })
 const fits = (placement, id, ratio, areas = AREAS) => {
   const a = areas[id]

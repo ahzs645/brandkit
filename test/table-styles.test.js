@@ -92,7 +92,7 @@ test('ledger frames the table and sets its first column as labels; panel and acc
 })
 
 test('a handover build can try a table style on every publication, and refuses an unknown one', () => {
-  const record = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+  const record = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
   const options = { providerBrand: { ...brand, id: record.provider.brandId }, clientBrand: { ...brand, id: record.client.brandId } }
   const built = handoverPublications(record, { ...options, tableStyle: 'ledger' })
   for (const publication of Object.values(built)) assert.equal(publication.profile.tables.style, 'ledger')
@@ -122,7 +122,7 @@ test('a list of facts prints no header row, sets its labels as row headers and g
 })
 
 test('the handover sets its services as one table, a column per service', () => {
-  const record = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+  const record = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
   const { welcome } = handoverPublications(record, { providerBrand: { ...brand, id: record.provider.brandId }, clientBrand: { ...brand, id: record.client.brandId } })
   const services = welcome.pages.filter(page => page.id.startsWith('services-'))
   const tables = services.flatMap(page => page.blocks.filter(block => block.type === 'table'))

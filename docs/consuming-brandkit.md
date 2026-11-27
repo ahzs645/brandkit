@@ -78,7 +78,7 @@ controls interface colours. These are host settings, not additions to the consum
 schema. Importing a profile previews the light and dark appearances before it is applied.
 
 Keep the actual workspace name beside the artwork and in control labels. For example, a
-workspace called “DDC North — live test workspace” retains that name even when its imported
+workspace called “Northwind — live test workspace” retains that name even when its imported
 brand profile has a different `name`. The profile's name and version describe the artwork;
 they do not rename the workspace or change its legal and contact records.
 

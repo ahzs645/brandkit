@@ -9,7 +9,7 @@ import { composePack, packHtml, packOptions, preparePack, sha256 } from '../src/
 
 const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
 const fonts = await loadBrandFontsFromDisk(base, fileURLToPath(new URL('../brands/northwind/', import.meta.url)))
-const record = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+const record = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
 const provider = { brand: { ...structuredClone(base), id: record.provider.brandId, name: 'Provider' }, fonts }
 const client = { brand: { ...structuredClone(base), id: record.client.brandId, name: 'Client' }, fonts }
 const { png } = await createNodeRenderer()

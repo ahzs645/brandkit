@@ -13,6 +13,7 @@
 // read when it is first drawn or downloaded.
 
 import { MAX_PACK_BYTES, isBundle, readBundle, readPack, sha256, verifyBundle } from '../pack/format.js'
+import { isLocalCatalog } from './catalog.js'
 
 const DB_NAME = 'brandkit-packs'
 const DB_VERSION = 1
@@ -69,11 +70,12 @@ export const installedPack = async (id) => {
 /**
  * Whether a catalog entry may replace an installed copy: only a copy that came from that catalog,
  * or from the same link. A pack added from a file (no url, no catalog) is the person's own choice,
- * often a newer build than the catalog has, so a catalog never overwrites it.
+ * often a newer build than the catalog has, so a catalog never overwrites it. The exception is a
+ * catalog on this machine (`brandkit dev`): the brand is being worked on, and its latest pack wins.
  */
-export const updatesFrom = (record, entry) => record.catalog
+export const updatesFrom = (record, entry) => isLocalCatalog(entry.catalog) || (record.catalog
   ? record.catalog === entry.catalog
-  : Boolean(record.url) && record.url === entry.url
+  : Boolean(record.url) && record.url === entry.url)
 
 /**
  * Stores a pack (or any zip holding a brand). Returns the brand's record. `origin` says where it

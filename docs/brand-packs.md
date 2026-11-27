@@ -9,6 +9,7 @@ brand arrives as a pack.
 - [What happens to it](#what-happens-to-it): kept, reopened, updated, shared, removed
 - [The format](#the-format): what a pack holds, the manifest, the rules a reader applies
 - [Making packs](#making-packs): the command, what it leaves out, `.packignore`
+- [Working on a brand live](#working-on-a-brand-live): `brandkit dev`, rebuilt and reloaded on every save
 - [Bundles](#bundles): several brands in one zip
 - [Catalogs](#catalogs) and [hosting](#hosting)
 - [In the browser](#in-the-browser): storage, and pack pages at real addresses
@@ -165,6 +166,73 @@ reference/identity/*.jpg
 folder; one without matches a file name anywhere; `*` stays within a folder and `**` crosses them.
 A file the brand's kit lists in `brand.json` `files` is never left out: packing stops with an
 error naming it, since a kit built from the pack would be missing it.
+
+## Working on a brand live
+
+`brandkit dev` is the one way any repository that makes a brand previews it while it is being
+edited. The repository installs brandkit as a development dependency and runs it:
+
+```sh
+npm install --save-dev github:ahzs645/brandkit      # once, or pin a commit: …/brandkit#<sha>
+npx brandkit dev                                   # or "dev": "brandkit dev" in package.json
+```
+
+On every save it runs the repository's build (if it has one), packs the brand folders as
+`brandkit pack` does, and reloads brandkit, which takes the new pack. Everything is served from
+one address:
+
+| Path | What |
+|---|---|
+| `/brandkit/` | brandkit, opened on the brand (`?catalog=…&brand=<id>`) and reloaded after every rebuild |
+| `/packs/` | The packs and their `catalog.json` |
+| `/` | The repository's own `site` (a design system's catalog page), or a redirect to brandkit |
+
+Packs go to a temporary folder, so nothing is written to the repository. A catalog on this
+machine wins over any other catalog listing the same brand, and replaces an installed copy, so
+the brand being worked on is always the one shown.
+
+```sh
+brandkit dev                      # the current folder is a brand, or a folder of brands
+brandkit dev brands               # a folder of brands (as in a repository of client brands)
+brandkit dev dist --build "npm run build" --watch source --watch src
+```
+
+A repository keeps its settings in `brandkit.dev.json`, so `brandkit dev` needs no arguments.
+Paths are relative to the file:
+
+```json
+{
+  "brands": ["dist"],
+  "build": "npm run build",
+  "watch": ["source", "src", "scripts", "docs"],
+  "ignore": ["src/generated"],
+  "site": "dist"
+}
+```
+
+| Setting | Default | What |
+|---|---|---|
+| `brands` | the current folder | Brand folders (holding `brand.json`) or folders of them; with a build, its output |
+| `build` | none | A shell command run in the file's folder before every pack |
+| `watch` | the brands, or with a build the whole folder | What to watch; hidden files and `node_modules`, `dist`, `release`, `build`, `out` inside it are skipped |
+| `ignore` | none | Files or folders whose changes never rebuild (outputs a build writes inside watched folders) |
+| `site` | none | A folder served at `/` that reloads after every rebuild |
+| `port` | 8790 | The next free port is taken when it is in use |
+
+The command line overrides the file: `[brands]… --build --watch --ignore --site --port`.
+A change counts only when a file's bytes change, so a build that rewrites a watched file with the
+same bytes settles after one pass. A failed build keeps the last good packs served.
+
+**Which brandkit.** Installed as a dependency, brandkit has its engine but not its app, so the
+published site (`homepage` in brandkit's `package.json`, or `--app-url`) is served at `/brandkit/`
+and kept in `~/.cache/brandkit/`, so it also opens offline. In a brandkit checkout with `npm ci`
+done, or with `--app <checkout>` (or `BRANDKIT_APP`), the checkout's source runs in Vite at the
+same address instead, so edits to brandkit itself show too. `--app hosted` forces the published
+site; `--no-app` serves only the packs, for any brandkit opened with
+`?catalog=http://127.0.0.1:8790/packs/catalog.json`.
+
+A brand edited and **saved** inside brandkit keeps its saved definition over the pack; remove the
+saved copy to follow the pack again.
 
 ## Bundles
 

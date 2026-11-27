@@ -28,7 +28,7 @@ export const builtInName = (id) => MANIFEST.find((entry) => entry.id === id)?.na
 export const BUILT_IN_INDEX = MANIFEST
 /** The built-in brand's logo for the brand menu, pre-drawn by scripts/menu-logos.mjs, or null. */
 export const menuLogoUrl = (id) => FILES[`../../brands/${id}/logo-menu.svg`] ?? null
-export const BUILT_IN = Object.keys(DEFINITIONS).map(idOf).sort((a, b) => (a === 'ddcnorth' ? -1 : b === 'ddcnorth' ? 1 : a.localeCompare(b)))
+export const BUILT_IN = Object.keys(DEFINITIONS).map(idOf).sort((a, b) => a.localeCompare(b))
 
 const libraryUrl = (relative) => {
   if (LIBRARY.has(relative)) return `${LIBRARY_BASE}${relative.split('/').map(encodeURIComponent).join('/')}`

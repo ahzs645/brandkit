@@ -23,8 +23,8 @@ The record schema is `brandkit/managed-site-handover/1`. Start with
 `createHandoverTemplate()` to obtain a fresh blank record. Empty values mean unconfirmed
 information. They do not mean a service is free, included or available around the clock.
 
-The [DDC North example](../examples/managed-site/README.md) demonstrates First Form as the
-provider and DDC North as the client. Its `.example` addresses are deliberately non-operational.
+The [Northwind example](../examples/managed-site/README.md) demonstrates First Form as the
+provider and the built-in example brand, Northwind, as the client. Its `.example` addresses are deliberately non-operational.
 The example does not establish a completed project, a contractual relationship or a working
 First Form login service.
 
@@ -34,10 +34,10 @@ Run from the repository root, replacing the brand paths with the extracted defin
 intend to use:
 
 ```sh
-node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
+node bin/brandkit.mjs handover examples/managed-site/northwind.json \
   --provider /path/to/firstform-2.0/brand.json \
-  --client /path/to/ddcnorth/brand.json \
-  --out .handover/ddc-north \
+  --client brands/northwind/brand.json \
+  --out .handover/northwind \
   --paper letter \
   --cover \
   --pdf
@@ -311,10 +311,10 @@ The Node build interface is available from `brandkit/handover/node`:
 import { buildHandover } from 'brandkit/handover/node'
 
 const manifest = await buildHandover({
-  recordPath: 'examples/managed-site/ddc-north.json',
+  recordPath: 'examples/managed-site/northwind.json',
   providerPath: '/path/to/firstform-2.0/brand.json',
-  clientPath: '/path/to/ddcnorth/brand.json',
-  outDir: '.handover/ddc-north',
+  clientPath: 'brands/northwind/brand.json',
+  outDir: '.handover/northwind',
   paper: 'letter',
   coverVariant: 'hero',
   pdf: true,
@@ -332,21 +332,18 @@ current commit.
 
 ## Sources for the supplied example
 
-Edition 2 of the DDC North example is dated `2026-11-13`, the client's local preparation date.
+Edition 2 of the Northwind example is dated `2026-11-13`, the client's local preparation date.
 Its provider identity comes from the uploaded `design-system-main.zip` source snapshot for
 `1stform/design-system`. The upload supplies the current First Form 2.0 definition and its
 master-artwork provenance. It supersedes the earlier 1.0 published-pack fallback used for the
-first draft. The client's DDC North identity remains the published 2.3 pack.
+first draft. The client is brandkit's built-in example brand, `brands/northwind/brand.json`.
 
 | Input | Origin | Bytes | SHA256 |
 | --- | --- | ---: | --- |
 | First Form source snapshot | Uploaded `design-system-main.zip` | 4,223,586 | `023a26fd57414dd20cbd13b00c88d688865e88fa2bc9e24aa10f185347f4ab66` |
 | First Form 2.0 asset pack | Locally built `release/firstform.zip` from that upload | 2,911,364 | `73d09a1561bf81f1fb7d78a6c0a3266db1d1bfb2a1d94cf0b7391a747508167a` |
-| DDC North 2.3 asset pack | [Published ddcnorth.zip](https://projects.ahmadjalil.com/builds/configs/brandkit/ddcnorth.zip) | 3,361,894 | `6e2704d184707bac7f3e88b072fc76ddc24d8aed15cfd0044d9bea8a3e2a88e7` |
 
-The DDC North pack matched its entry in the retrieved
-[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json). These
-hashes identify the inputs used here; later source snapshots and packs may differ.
+These hashes identify the inputs used here; later source snapshots and packs may differ.
 
 The uploaded source has no verified Git HEAD. Its local build correctly records
 `sourceCommit: "uncommitted"`; that marker is not a commit SHA. This is a local build from the
@@ -375,7 +372,5 @@ the source's large-crop pattern as the website's hero does; `grid` sets the comp
 isometric grid; `blocks` draws the stacked blocks; `index` is type alone. These document
 compositions do not change the source approval records.
 
-DDC North's current `brand.json` retains the supplied custom wordmark and the six-dot symbol.
-Use that artwork and its current palette and typography. Its copied README retains older
-version and guide-page counts; the example uses the current v2.3 definition. The separate
-six-dot reference image is evidence for the symbol, not a replacement source for the lettering.
+Northwind is the example brand the starter makes (`npm run make:example`); its artwork,
+palette and typography come from its own `brand.json`.

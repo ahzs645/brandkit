@@ -7,7 +7,7 @@ import { validatePublication } from '../src/engine/documentation.js'
 import { publicationHtml } from '../src/export/publication.js'
 
 const northwind = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
-const exampleSource = JSON.parse(readFileSync(new URL('../examples/managed-site/ddc-north.json', import.meta.url), 'utf8'))
+const exampleSource = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
 const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII='
 
 function brands() {
@@ -16,7 +16,7 @@ function brands() {
   providerBrand.id = 'firstform'
   providerBrand.name = 'Provider identity'
   providerBrand.colours.primary = '#234567'
-  clientBrand.id = 'ddcnorth'
+  clientBrand.id = 'northwind'
   clientBrand.name = 'Client identity'
   clientBrand.colours.primary = '#765432'
   return { providerBrand, clientBrand }
@@ -34,7 +34,7 @@ function completeRecord() {
     hours: 'Business hours in America/Vancouver.', responseTarget: 'No guaranteed response time is included.',
     urgentRoute: 'Use the incident contact route in the service agreement.'
   })
-  Object.assign(record.client, { name: 'Client', brandId: 'ddcnorth', contactName: 'Primary contact', contactEmail: 'contact@client-company.ca' })
+  Object.assign(record.client, { name: 'Client', brandId: 'northwind', contactName: 'Primary contact', contactEmail: 'contact@client-company.ca' })
   Object.assign(record.site, { name: 'Client website', url: 'https://client-company.ca', loginUrl: 'https://portal.provider-company.ca/login' })
   Object.assign(record.access, {
     method: 'password', role: 'Content editor', accountLabel: 'contact@client-company.ca',

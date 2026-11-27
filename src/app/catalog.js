@@ -66,10 +66,19 @@ export const fetchCatalog = async (url) => {
   }
 }
 
-/** Every catalog's brands, the first catalog to list an id winning. */
+/**
+ * A catalog served from this machine, as `brandkit dev` serves one: its packs are brands being
+ * worked on, so they win over the same brands from any other catalog and replace installed copies.
+ */
+export const isLocalCatalog = (url) => {
+  try { return ['localhost', '127.0.0.1', '[::1]'].includes(new URL(url).hostname) } catch { return false }
+}
+
+/** Every catalog's brands: a local catalog's first, then the first catalog to list an id winning. */
 export const fetchCatalogs = async (urls = allCatalogs()) => {
   const catalogs = await Promise.all(urls.map(fetchCatalog))
   const brands = new Map()
-  for (const catalog of catalogs) for (const pack of catalog.packs) if (!brands.has(pack.id)) brands.set(pack.id, { ...pack, catalog: catalog.url, catalogName: catalog.name })
+  const ordered = [...catalogs.filter((catalog) => isLocalCatalog(catalog.url)), ...catalogs.filter((catalog) => !isLocalCatalog(catalog.url))]
+  for (const catalog of ordered) for (const pack of catalog.packs) if (!brands.has(pack.id)) brands.set(pack.id, { ...pack, catalog: catalog.url, catalogName: catalog.name })
   return { catalogs, brands }
 }

@@ -158,7 +158,7 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
           {parents.length > 1 && <Choice label="Parent logo" value={parentValue} options={parents} onChange={(value) => edit((next) => { const [kind, id] = value.split(':'); next.parent = { [kind]: id } })} />}
           <Text label="Full name pattern" value={draft.naming?.fullName} placeholder="{parent} {name}" hint="Used where a product has no full name: {parent}, {brand}, {name}." onChange={(value) => edit((next) => { next.naming = { ...next.naming }; put(next.naming, 'fullName', value); tidy(next, 'naming') })} />
           <Text wide label="Note" value={draft.note} onChange={(value) => edit((next) => put(next, 'note', value))} />
-          <Text wide label="Positioning line" value={draft.positioning?.line} placeholder="Know the land. Plan the work." onChange={(value) => edit((next) => { next.positioning = { ...next.positioning, line: value }; if (!value) delete next.positioning })} />
+          <Text wide label="Positioning line" value={draft.positioning?.line} placeholder="One line the whole family shares." onChange={(value) => edit((next) => { next.positioning = { ...next.positioning, line: value }; if (!value) delete next.positioning })} />
         </div>
         <div className="product-editor__offers">
           <fieldset><legend>Arrangements on offer</legend>

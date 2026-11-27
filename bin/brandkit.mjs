@@ -35,13 +35,16 @@ const usage = `usage: brandkit check <brand.json>
        brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--cover] [--cover-variant <id>] [--pdf] [--issue]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
        brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url] [--bundle [file.zip]]
+       brandkit dev [brand folder or folder of brands]… [--build "command"] [--watch path]… [--ignore path]… [--site folder] [--port n] [--app folder] [--app-port n] [--no-app]
 
 The documents command creates native Word files, printable HTML, editable content JSON and brand assets.
 --pdf exports each Word master using LibreOffice; set SOFFICE_PATH when it is not on PATH.
 The pdf command refreshes a PDF after a Word master has been edited. --brand supplies its fonts.
 The build command keeps its vector/text default; --office enables generated Office files in Node.
 The pack command makes brand packs (one zip per brand) and a catalog.json listing them; --bundle
-also writes every pack into one brand bundle that adds all of its brands at once.`
+also writes every pack into one brand bundle that adds all of its brands at once.
+The dev command rebuilds and repacks on every save and runs brandkit against the packs, reloading
+it as they change; settings can live in brandkit.dev.json.`
 
 const load = async (path) => {
   const absolute = resolve(path)
@@ -58,6 +61,7 @@ const load = async (path) => {
 const main = async () => {
   if (!command || command === '--help' || command === 'help') { console.log(usage); return }
   if (command === 'catalog') { const { catalog } = await import('../src/pack/catalog-cli.js'); catalog(process.argv.slice(3)); return }
+  if (command === 'dev') { const { dev } = await import('../src/dev/cli.js'); await dev(process.argv.slice(3)); return }
   if (command === 'pack') { const { pack } = await import('../src/pack/cli.js'); pack(process.argv.slice(3)); return }
   if (command === 'handover') { const { handover } = await import('../src/handover/cli.js'); await handover(process.argv.slice(3)); return }
   if (!file || !['build', 'check', 'documents', 'pdf', 'recipe'].includes(command)) throw new Error(usage)

@@ -53,7 +53,7 @@ test('a real managed-site build preserves snapshots and safe assets without over
   const clientBytes = Buffer.from(JSON.stringify(client))
   const providerPath = join(providerFolder, 'brand.json')
   const clientPath = join(clientFolder, 'brand.json')
-  const record = JSON.parse(await readFile(join(root, 'examples/managed-site/ddc-north.json'), 'utf8'))
+  const record = JSON.parse(await readFile(join(root, 'examples/managed-site/northwind.json'), 'utf8'))
   record.provider.name = provider.name
   record.provider.brandId = provider.id
   record.client.name = 'Client <img src=x onerror="alert(1)"> & Company'

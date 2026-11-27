@@ -1,6 +1,6 @@
 {
   "schema": "brandkit/managed-site-handover/1",
-  "id": "ddc-north-managed-site-example",
+  "id": "northwind-managed-site-example",
   "kind": "example",
   "status": "draft",
   "version": "2",
@@ -15,22 +15,22 @@
     "urgentRoute": ""
   },
   "client": {
-    "name": "DDC North",
-    "brandId": "ddcnorth",
+    "name": "Northwind",
+    "brandId": "northwind",
     "contactName": "",
-    "contactEmail": "owner@ddcnorth.example"
+    "contactEmail": "owner@northwind.example"
   },
   "site": {
-    "name": "DDC North managed website example",
-    "url": "https://ddcnorth.example",
-    "loginUrl": "https://portal.firstform.example/ddc-north/login",
+    "name": "Northwind managed website example",
+    "url": "https://northwind.example",
+    "loginUrl": "https://portal.firstform.example/northwind/login",
     "helpUrl": "https://firstform.example/help",
     "launchDate": ""
   },
   "access": {
     "method": "unconfirmed",
     "role": "",
-    "accountLabel": "owner@ddcnorth.example",
+    "accountLabel": "owner@northwind.example",
     "invitationSender": "",
     "invitationExpiry": "",
     "setupInstructions": [
@@ -55,7 +55,7 @@
     {
       "title": "Choose a brand asset",
       "steps": [
-        "Illustrative task: open the DDC North brand kit supplied with the handover.",
+        "Illustrative task: open the Northwind brand kit supplied with the handover.",
         "Choose the supplied logo variant for the background and intended use.",
         "Keep its proportions and follow the clear-space and minimum-size guidance in the kit."
       ],
@@ -126,8 +126,8 @@
   },
   "assets": [
     {
-      "name": "DDC North brand kit",
-      "url": "https://ddcnorth.example/brand-kit",
+      "name": "Northwind brand kit",
+      "url": "https://northwind.example/brand-kit",
       "note": "Example delivery address. The client artwork is separate from First Form's provider identity. Use the actual supplied kit and its asset catalogue when issuing."
     }
   ],
@@ -138,7 +138,7 @@
     "Replace demonstration addresses, check the actual client workflow and review the completed pack before issuing."
   ],
   "notes": [
-    "Illustrative example only. First Form and DDC North identify the provider and client brands used to demonstrate this reusable pack; this document does not establish a client relationship or completed delivery.",
+    "Illustrative example only. First Form and Northwind identify the provider and client brands used to demonstrate this reusable pack; this document does not establish a client relationship or completed delivery.",
     "All .example addresses are deliberately non-operational. Empty values are unconfirmed, not free services, guarantees or included features.",
     "Keep credentials, activation links and recovery codes outside the handover record."
   ],

@@ -97,7 +97,7 @@ test('accents resolve with a text tone that reads on paper and a colour that rea
 })
 
 test('the parent may be any of the brand’s families, embedded as that family is drawn', () => {
-  // ddcnorth's products sit beside its parent ddc family rather than the full company logo.
+  // Products may sit beside a parent family (a short form of the logo) rather than the full company logo.
   const other = brand.families[1].id
   const short = withProducts({ ...PRODUCTS, parent: { family: other } })
   assert.deepEqual(validateBrand(short), [])

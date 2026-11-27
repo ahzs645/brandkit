@@ -2,7 +2,7 @@
 // in one of the available faces. The result is a complete brand.json (templates and guide
 // included) that can then be refined by hand like any other.
 //
-// The wordmark is typed, then baked: its outline is stored in the definition, the way ddcnorth's
+// The wordmark is typed, then baked: its outline is stored in the definition, the way a
 // production wordmark is, so the logo no longer depends on the font being available.
 
 import { n } from './format.js'

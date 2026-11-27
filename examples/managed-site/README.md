@@ -7,9 +7,9 @@ client can use the same document workflow with its own identity and service arra
 | File | Use |
 | --- | --- |
 | [`template.json`](template.json) | A blank record with `kind: "template"`, `status: "draft"` and unconfirmed access. Copy it for a new client. |
-| [`ddc-north.json`](ddc-north.json) | Edition 2 of the illustrative First Form provider / DDC North client example, dated `2026-11-13` in the client's local date, with `kind: "example"` and `status: "draft"`. |
+| [`northwind.json`](northwind.json) | Edition 2 of the illustrative First Form provider / Northwind client example, dated `2026-11-13` in the client's local date, with `kind: "example"` and `status: "draft"`. |
 
-The DDC North record uses `.example` URLs and email addresses. They are not working login or
+The Northwind record uses `.example` URLs and email addresses. They are not working login or
 support destinations. Costs, account ownership, service hours, response commitments, care,
 rights and review details remain empty where they have not been confirmed. The example does
 not claim that First Form offers a particular authentication method or has completed this
@@ -18,8 +18,7 @@ client delivery.
 ## Build the example
 
 Use the First Form 2.0 pack built locally from the uploaded `design-system-main.zip`, together
-with the published DDC North 2.3 pack from the
-[builds catalog](https://projects.ahmadjalil.com/builds/configs/brandkit/catalog.json). First Form
+with the built-in example brand, `brands/northwind/brand.json`, as the client. First Form
 2.0 is the identity version; `0.5.0` is the design-system package version. Keep each definition
 and its assets together.
 
@@ -27,17 +26,16 @@ For First Form, select either the uploaded source's built `dist/brand.json` or t
 `brand.json` in the extracted locally built `firstform.zip`. Do not select
 `source/kit/brand.json`, which contains the archived 1.0 identity. The main
 [handover documentation](../../docs/managed-site-handover.md#sources-for-the-supplied-example)
-records the source-upload and local-pack hashes, the 21 passing source-package checks and
-the DDC North pack provenance. The upload has no verified Git HEAD; its build records
+records the source-upload and local-pack hashes and the 21 passing source-package checks. The upload has no verified Git HEAD; its build records
 `sourceCommit: "uncommitted"` and is not presented as a published GitHub release.
 
 From the repository root, replace the input paths below with the extracted pack locations:
 
 ```sh
-node bin/brandkit.mjs handover examples/managed-site/ddc-north.json \
+node bin/brandkit.mjs handover examples/managed-site/northwind.json \
   --provider /path/to/firstform-2.0/brand.json \
-  --client /path/to/ddcnorth/brand.json \
-  --out .handover/ddc-north \
+  --client brands/northwind/brand.json \
+  --out .handover/northwind \
   --paper letter \
   --cover \
   --pdf
@@ -65,12 +63,12 @@ A record can choose its own with `cover.variant`, and change the cover's wording
 Each build records its choice in `manifest.coverVariant` and in the cover's publication model. Without either cover option,
 the standard document opening remains in use and the manifest's cover fields are `null`.
 
-First Form styles the welcome guide and quick-start sheet. DDC North styles the client brand
+First Form styles the welcome guide and quick-start sheet. Northwind styles the client brand
 reference. The current First Form horizontal vector logo follows the supplied 2.0 master;
 the original 1.0 PNG override is no longer needed.
 
-The covers are full pages in First Form 2.0's own rules, with the DDC North logo on its White
-plate (widened slightly to keep it above its 55 mm minimum). They are document compositions
+The covers are full pages in First Form 2.0's own rules, with the client's logo on its White
+plate (widened where needed to keep it above its minimum size). They are document compositions
 for review, not previously approved brand applications, and use neither the derived stacked
 logo nor the micro mark. In Word every word on the cover is native editable text over one
 image of the page's artwork. Keep Sora installed and check the page after editing.

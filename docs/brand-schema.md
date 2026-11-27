@@ -4,9 +4,6 @@ One JSON document is a whole identity. brandkit draws every file of a kit from i
 symbols, patterns, icons, templates, the brand guide, logo sheets, web files. Worked examples
 are in this repository:
 
-- [`brands/ddcnorth/brand.json`](../brands/ddcnorth/brand.json): a real identity, written by hand
-  from the original kit's Python source. The engine reproduces that kit's vector files byte for
-  byte (`test/parity.test.js`).
 - [`brands/northwind/brand.json`](../brands/northwind/brand.json): made by the starter
   (`npm run make:example`), which is also what the app's **New brand** does.
 - First Form (`firstform`, made in the 1stform/design-system repository and published as a pack
@@ -118,7 +115,7 @@ existing behaviour.
 ## Symbol
 
 ```json
-"symbol": { "name": "six-dot", "viewBox": [0, 0, 256, 256], "radius": 40, "microRadius": 36,
+"symbol": { "name": "dots", "viewBox": [0, 0, 256, 256], "radius": 40, "microRadius": 36,
             "centres": [[40, 40], [128, 40], …], "horizontalPitch": 88, "verticalPitch": 88, "rows": [3, 2, 1] }
 ```
 
@@ -137,10 +134,10 @@ A symbol is one of:
 ```json
 "wordmark": {
   "height": 82.5, "left": -0.5,
-  "glyphs": { "d": "M66.5 0H48V31.7…", "c": "…", "north": "…" },
+  "glyphs": { "h": "M66.5 0H48V31.7…", "b": "…", "harbour": "…" },
   "variants": {
-    "ddcnorth": { "width": 438.910343, "parts": [{ "glyph": "d", "x": 0, "attrs": { "data-letter": "d" }, "fillRule": "evenodd" }, …] },
-    "ddc": { "width": 203, "parts": […] }
+    "harbour": { "width": 438.910343, "parts": [{ "glyph": "h", "x": 0, "attrs": { "data-letter": "h" }, "fillRule": "evenodd" }, …] },
+    "hb": { "width": 203, "parts": […] }
   },
   "editable": { "hybrid": { … }, "text": { … } }
 }
@@ -274,7 +271,7 @@ application templates.
 ## Families and lockups
 
 ```json
-"families": [{ "id": "ddcnorth", "wordmark": "ddcnorth", "typeHeight": 120, "label": "ddcnorth" }, …],
+"families": [{ "id": "harbour", "wordmark": "harbour", "typeHeight": 120, "label": "harbour" }, …],
 "lockup": { "iconHeight": 120, "iconGap": 8, "stackedIconHeight": 128, "stackedTypeHeight": 88,
             "stackedGap": 28, "canvasPadding": 16, "wordmarkHeight": 120, … }
 ```
@@ -302,7 +299,7 @@ pictogram.
 "products": {
   "label": "Products", "status": "proposed",
   "note": "The logo is the fixed parent identity.",
-  "parent": { "family": "ddcnorth" },
+  "parent": { "family": "hb" },
   "lockup": {
     "arrangements": ["endorsed", "label", "product-led", "compact"],
     "name": { "font": "display", "tracking": -0.04, "size": 0.6 },
@@ -314,7 +311,7 @@ pictogram.
     { "id": "b", "label": "B · Product-led", "arrangement": "product-led", "tile": "icon" }
   ],
   "items": [
-    { "id": "atlas", "name": "Atlas", "fullName": "DDC Atlas", "descriptor": "Shared geospatial workspace",
+    { "id": "atlas", "name": "Atlas", "fullName": "Harbour Atlas", "descriptor": "Shared geospatial workspace",
       "role": "platform", "status": "proposed", "accent": "#7FA6BA", "accentName": "Slate blue",
       "accentText": "#56717E", "icon": "layers" }
   ]
@@ -340,7 +337,7 @@ Each item:
 | --- | --- |
 | `id` | Lower-case slug; names its files and its CSS variables. |
 | `name` | The name set in the lockup ("Atlas"). Required. |
-| `fullName`, `descriptor`, `role`, `status` | The name in running text ("DDC Atlas"), a line set under the name when asked for, and labels the view shows. |
+| `fullName`, `descriptor`, `role`, `status` | The name in running text ("Harbour Atlas"), a line set under the name when asked for, and labels the view shows. |
 | `accent` | A palette key, a role or a six-digit hex. Accents are additions to the palette; they never paint the logo. |
 | `accentText` | The accent for text on paper. When absent it is the accent itself if that reaches 4.5 : 1 on the `paper` role, otherwise the accent darkened towards `ink` until it does. |
 | `onAccent` | What is drawn on the accent (a pictogram, the symbol). When absent: the `reverse` role if it reaches 3 : 1 on the accent, else `primary` at the same ratio, else whichever of reverse and ink reads better. |
@@ -768,7 +765,7 @@ symbols, a `README.md` with the rationale, its own `brand.json`, and any guide s
 Approving a revision means moving its `changes` into the definition and removing the entry.
 
 A revision can add to a list instead of replacing it: `{ "$append": [ … ] }` in place of an array
-appends its items (or makes the array when there is none). ddcnorth's v2.3 proposal adds templates,
+appends its items (or makes the array when there is none). A proposal can add templates,
 patterns, icons, guide pages and files this way:
 
 ```json
@@ -828,9 +825,9 @@ pages take `sources`, the manual pages they are built from:
 `book` and `page` are ids in a manual pack, which `manuals: { "pack": "bc" }` names; the rest is
 there so the citation reads on its own.
 
-Templates and guide pages may carry an `extension` name: ddcnorth's application system is
-`"extension": "applications"`, so its script can replace it without touching the original kit's
-templates, and the parity test can leave it out. The app shows sources as links into its manual library,
+Templates and guide pages may carry an `extension` name (an application system added later
+might be `"extension": "applications"`), so its script can replace it without touching the
+original kit's templates. The app shows sources as links into its manual library,
 and the library lists, under each page, what the built-in brands build from it (indexed in
 `brands/index.json` by `scripts/brands/common.mjs`, whose `cite()` also refuses to write a brand
 with anything uncited).
@@ -874,9 +871,8 @@ with anything uncited).
   with it. `tokens` (`durations` in ms, `easings`, `stagger`), `rules` (`[{ title, text }]`) and
   `studies` (`[{ id, name, kind, group, timing, use, description }]`) describe it as data. List
   the page and its CSS in `files` to carry them in the kit. See `scripts/brands/firstform-motion.mjs`.
-  ddcnorth's proposed v2.3 adds `motion.guardrails` (`{ do: [...], dont: [...] }`) and
-  `motion.groups` (`[{ id, label, kinds }]`, the library's filters), and a study may say `loop` and
-  its `background`. See `scripts/brands/ddcnorth-motion.mjs`. A study needs an id, name, kind,
+  `motion.guardrails` (`{ do: [...], dont: [...] }`) and `motion.groups` (`[{ id, label, kinds }]`,
+  the library's filters) are optional, and a study may say `loop` and its `background`. A study needs an id, name, kind,
   timing, use and description, ids are unique, and durations are positive numbers of milliseconds.
   `motion.note` is shown above the Motion tab's studies: the BC identities use it to say their
   libraries are brandkit's examples (`scripts/brands/bc-motion.mjs`), since neither manual covers motion.
@@ -884,8 +880,8 @@ with anything uncited).
   `{ version, displayVersion, status: 'superseded', summary, definition }` for a version replaced
   (`definition` the path of its brand.json, kept in the brand's folder), a revision record with
   `status: 'archived'` and its `changes` kept (so it can be proposed again), or `status: 'approved'`
-  once merged. A revision is approved by merging it into the definition and recording it here: see
-  `scripts/brands/ddcnorth-accept-v23.mjs`. Revisions still open stay in `revisions`.
+  once merged. A revision is approved by merging it into the definition and recording it here.
+  Revisions still open stay in `revisions`.
 - `print`: `{ pantone: { colourKey: "376" }, cmyk: { colourKey: "C50 Y100" }, note }`, the values a
   manual gives for printing. The Colour tab shows them beside hex and RGB; a colour without a CMYK
   recipe gets one converted from its screen value, marked as converted.

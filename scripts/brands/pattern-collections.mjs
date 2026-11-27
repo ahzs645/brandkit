@@ -125,7 +125,6 @@ export const installCollections = async (ids = BRAND_IDS) => {
 
 export const writeCollectionIndex = ({ embedded = false, output = resolve(root, 'brands/patterns.html') } = {}) => {
   const selected = {
-    ddcnorth: ['explore-turning-groups', 'explore-resolution'],
     northwind: ['explore-ring-lattice', 'explore-north-current'],
     firstform: ['explore-form-contours', 'explore-mixed-assemblies'],
     overtheedge: ['explore-column-rhythm', 'explore-double-impression'],

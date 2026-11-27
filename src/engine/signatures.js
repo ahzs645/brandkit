@@ -1,6 +1,6 @@
 // Signatures: lockups that are composed rather than drawn once.
 //
-// ddcnorth's logo is a fixed wordmark beside a symbol (brand.families, brand.wordmark). Other
+// A fixed logo is a wordmark beside a symbol (brand.families, brand.wordmark). Other
 // identities set their signatures from rules: the Province of British Columbia's 1977 ministerial
 // signature puts any ministry's name, in Helvetica, on a cap-height and x-height grid beside the
 // symbol; BC Hydro's four signatures are fixed artwork in up to three colours. Both are described

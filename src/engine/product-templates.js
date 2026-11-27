@@ -27,7 +27,7 @@ export const STARTER_ACCENTS = [
 const clone = (value) => (value == null ? value : structuredClone(value))
 export const productSlug = (value) => String(value ?? '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'product'
 
-// The endorsed variants the DDCNorth proposal compared (A1 to A6), as lockup settings.
+// Six endorsed variants to compare (A1 to A6), as lockup settings.
 const ENDORSED_VARIANTS = [
   { id: 'rule', label: 'A1 · Rule', summary: 'A thin rule in the accent; the name in the display face, a step smaller than the lettering.', lockup: {} },
   { id: 'matched', label: 'A2 · Matched', summary: 'The name set as large as the lettering, in the regular display face, so product and company read as siblings.', lockup: { name: { font: 'displayRegular', size: 1.353, tracking: -0.016 } } },
@@ -52,7 +52,7 @@ const LETTERING = {
 export const BUILT_IN_PRODUCT_TEMPLATES = [
   {
     format: TEMPLATE_FORMAT, version: 1, id: 'endorsed-comparison', label: 'Endorsed family, compared',
-    summary: 'Products named beside the parent logo. Three directions (endorsed, product-led, label) and six endorsed variants to compare before one is chosen, as in the DDCNorth proposal.',
+    summary: 'Products named beside the parent logo. Three directions (endorsed, product-led, label) and six endorsed variants to compare before one is chosen.',
     family: {
       label: 'Products', status: 'proposed',
       naming: { fullName: '{parent} {name}' },

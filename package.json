@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Brand kits from one brand.json: logos and signatures, stationery, publications, signs, vehicles, a brand guide and web files, generated in the browser. Brands open from brand packs (one zip each) by link or catalog; one example brand is built in, with a viewer for identity manuals.",
+  "homepage": "https://projects.ahmadjalil.com/brandkit/",
   "type": "module",
   "license": "UNLICENSED",
   "engines": {
