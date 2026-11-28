@@ -15,7 +15,8 @@ import { guidePages, guideSheets } from './guide.js'
 import { physicalSize, renderTemplate } from './templates.js'
 import { additionsOf, changesArtwork, findRevision, revisionReadme, revisionsOf, withRevision } from './revisions.js'
 import { officeFile } from '../export/office.js'
-import { publicationHtml } from '../export/publication.js'
+import { brandFaces } from '../export/brand-faces.js'
+import { publicationPrintHtml } from '../export/publication.js'
 import { documentProfile, publicationModel, documentationDocumentsFor, documentationMarkdown } from './documentation.js'
 import { consumerProfile } from './consumer.js'
 import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme } from './astryx.js'
@@ -55,9 +56,11 @@ Keep a copy of an approved identity before changing it.
 /**
  * Every file in the kit. Each entry is `{ path, group, kind, ... }`:
  *   kind 'text'   make(ctx) returns a string
+ *   kind 'print-html'  make(ctx, png) returns a promise of a publication's print view (it draws the logo)
  *   kind 'png'    svg(ctx) returns the SVG to rasterise at `width` pixels
  *   kind 'pdf'    pages(ctx) returns [{ svg, width, height, unit }], `title` for the metadata
  *   kind 'ico'    sizes: the favicon PNGs to pack
+ *   kind 'office-pdf'  from: the Word file (made before it) laid out as a PDF by renderer.layout
  *   kind 'asset'  src: a path in the brand's folder, copied as is
  *   kind 'index'  index.html and the asset catalog, made last from the finished list
  *
@@ -66,7 +69,7 @@ Keep a copy of an approved identity before changing it.
  * [id, '*'] for both. The complete kit always carries every department, as it always has. `logoWidths` and
  * `symbolWidths` replace the usual PNG sizes when a pack wants fewer.
  */
-export const planKit = (brand, { rasters = true, pdfs = true, assets = true, office = true, documentation = true, pack = 'complete', department = '', logoWidths, symbolWidths } = {}) => {
+export const planKit = (brand, { rasters = true, pdfs = true, assets = true, office = true, officePdfs = office, documentation = true, pack = 'complete', department = '', logoWidths, symbolWidths } = {}) => {
   const entries = []
   const add = (entry) => entries.push({ group: groupOf(entry.path), ...entry })
   const svgEntry = (path, make, metadata = {}) => add({ path, kind: 'text', make, ...metadata })
@@ -206,11 +209,13 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     }
   }
 
-  // Office documents: Word and PowerPoint templates, an HTML email signature with its image.
+  // Office documents: Word and PowerPoint templates, an HTML email signature with its image. Each
+  // Word file has its PDF beside it: that Word file laid out by document-kit (renderer.layout).
   if (office) {
     for (const document of [...(brand.documents ?? []), ...(documentation ? documentationDocumentsFor(brand) : [])]) {
       const path = `documents/${id}-${document.id}.${document.format}`
       add({ path, kind: 'office', document })
+      if (officePdfs && document.format === 'docx') add({ path: path.replace(/\.docx$/, '.pdf'), kind: 'office-pdf', document, from: path })
     }
   }
 
@@ -230,7 +235,8 @@ export const planKit = (brand, { rasters = true, pdfs = true, assets = true, off
     for (const document of documentationDocumentsFor(brand).filter((item) => item.publication)) {
       const model = (ctx) => publicationModel(ctx.brand, { paper: document.paper, purpose: document.purpose, values: ctx.values })
       add({ path: `documents/${id}-${document.id}.json`, kind: 'text', document, make: (ctx) => json(model(ctx)) })
-      add({ path: `documents/${id}-${document.id}.html`, kind: 'text', document, make: (ctx) => publicationHtml(ctx, model(ctx)) })
+      // The print view: the same document as the Word file, written as HTML by document-kit.
+      add({ path: `documents/${id}-${document.id}.html`, kind: 'print-html', document, make: (ctx, png) => publicationPrintHtml(ctx, model(ctx), { png }) })
     }
   }
 
@@ -380,6 +386,7 @@ export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, s
     try {
       switch (entry.kind) {
         case 'text': files.set(entry.path, encoder.encode(entry.make(ctx))); break
+        case 'print-html': files.set(entry.path, encoder.encode(await entry.make(ctx, renderer?.png))); break
         case 'png': files.set(entry.path, await renderer.png(entry.svg(ctx), entry.width)); break
         case 'pdf': files.set(entry.path, await renderer.pdf(entry.pages(ctx), { title: fill(ctx.brand, entry.title ?? entry.path.split('/').pop()), author: ctx.brand.name })); break
         case 'ico': files.set(entry.path, await renderer.ico(entry.sizes.map((path) => files.get(path)).filter(Boolean), entry.sizes.map((path) => Number(/-(\d+)\.png$/.exec(path)[1])))); break
@@ -388,6 +395,13 @@ export const buildKit = async (ctx, { renderer, readAsset, onProgress, filter, s
           const file = await officeFile(ctx, entry.document, { png: renderer.png })
           files.set(entry.path, file.bytes)
           if (file.png) files.set(entry.path.replace(/\.html$/, '.png'), file.png)
+          break
+        }
+        case 'office-pdf': {
+          if (typeof renderer?.layout !== 'function') throw new Error('Laying out a Word file as PDF needs renderer.layout.')
+          const docx = files.get(entry.from)
+          if (!docx) throw new Error(`${entry.from} was not made, so it has no PDF.`)
+          files.set(entry.path, (await renderer.layout(docx, { namedFonts: brandFaces(ctx) })).bytes)
           break
         }
         default: break

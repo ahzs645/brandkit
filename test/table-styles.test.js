@@ -6,7 +6,7 @@ import { unzipSync } from 'fflate'
 import { DOMParser } from '@xmldom/xmldom'
 import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
 import { TABLE_STYLES, documentProfile, publicationModel, validatePublication } from '../src/engine/documentation.js'
-import { publicationDocx, publicationHtml } from '../src/export/publication.js'
+import { publicationDocx, publicationPrintHtml } from '../src/export/publication.js'
 import { tableLook } from '../src/export/table-styles.js'
 import { handoverPublications } from '../src/handover/publications.js'
 import { createNodeRenderer } from '../src/export/node.js'
@@ -47,14 +47,14 @@ test('a brand chooses its table style once; grid stays the default and an unknow
   assert.match(validatePublication(bad).join('\n'), /table style must be one of/)
 })
 
-test('every style fills the table width exactly, in Word and in HTML', async () => {
+test('every style fills the table width exactly, in Word and in the print view written from the same document', async () => {
   for (const style of TABLE_STYLES) {
     const { table } = await cellsOf(style)
     const grid = elements(table, 'gridCol').reduce((sum, col) => sum + Number(attr(col, 'w')), 0)
     assert.equal(grid, Number(attr(elements(table, 'tblW')[0], 'w')), `${style}: the columns add up to the table`)
-    const html = publicationHtml(ctx, model(style))
-    assert.match(html, new RegExp(`<table class="s-TableText t-${style}">`))
-    assert.match(html, new RegExp(`table\\.t-${style}\\{`))
+    const html = await publicationPrintHtml(ctx, model(style), renderer)
+    assert.match(html, /<table class="dk-table" style="width:100%;table-layout:fixed/, `${style}: full width in the print view`)
+    assert.match(html, /<th scope="col"[^>]*>(?:(?!<\/th>).)*>Name<\/span>/, `${style}: the header row is a header in the print view`)
   }
 })
 
@@ -84,7 +84,9 @@ test('ledger frames the table and sets its first column as labels; panel and acc
   const ground = tableLook({ ...profile, tables: { style: 'panel' } }, brand).ground.slice(1)
   for (const row of panel.rows) for (const cell of row) assert.equal(attr(elements(cell, 'shd')[0], 'fill'), ground)
   assert.equal(border(panel.rows[1][0], 'bottom').colour, profile.colours.paper.slice(1), 'rows parted by paper')
-  assert.match(publicationHtml(ctx, model('panel')), /table\.t-panel\{[^}]*border-radius:3mm/)
+  // The print view sets the same ground the Word cells have (rounded corners are a print-view look Word never had).
+  const panelHtml = await publicationPrintHtml(ctx, model('panel'), renderer)
+  assert.equal(panelHtml.match(new RegExp(`<t[hd] [^>]*background-color:#${ground.toLowerCase()}`, 'g'))?.length, 12, 'every panel cell on the ground')
 
   const accent = await cellsOf('accent')
   assert.equal(attr(elements(accent.rows[0][0], 'shd')[0], 'fill'), profile.colours.accent.slice(1))
@@ -99,7 +101,7 @@ test('a handover build can try a table style on every publication, and refuses a
   assert.throws(() => handoverPublications(record, { ...options, tableStyle: 'zebra' }), /Unknown table style/)
 })
 
-test('a list of facts prints no header row, sets its labels as row headers and greys what is still to confirm', async () => {
+test('a list of facts prints no header row and greys what is still to confirm, in Word and in the print view', async () => {
   const facts = model('ruled')
   facts.pages[0].blocks = [{ type: 'table', headers: ['Item', 'Detail'], rows: [['Website', 'https://example.org'], ['Renewal', 'To confirm']], showHeaders: false, rowHeaders: true, pending: 'To confirm' }]
   assert.deepEqual(validatePublication(facts), [])
@@ -110,10 +112,10 @@ test('a list of facts prints no header row, sets its labels as row headers and g
   const colourOf = (row, column) => { const props = elements(elements(rows[row], 'tc')[column], 'rPr')[0]; return props ? attr(elements(props, 'color')[0], 'val') : undefined }
   assert.equal(colourOf(1, 1), muted, 'a value to confirm is muted')
   assert.notEqual(colourOf(0, 1), muted)
-  const html = publicationHtml(ctx, facts)
-  assert.doesNotMatch(html, /<thead>/)
-  assert.match(html, /<th scope="row">Website<\/th>/)
-  assert.match(html, /<td class="pending">To confirm<\/td>/)
+  const html = await publicationPrintHtml(ctx, facts, renderer)
+  assert.doesNotMatch(html, /<thead>/, 'no header row in the print view')
+  assert.match(html, />Website<\/span>/)
+  assert.match(html, new RegExp(`<span[^>]*color:#${muted.toLowerCase()}[^>]*>To confirm</span>`), 'a value to confirm is muted in the print view too')
   for (const [key, value] of [['showHeaders', 'no'], ['rowHeaders', 1], ['pending', '']]) {
     const bad = structuredClone(facts)
     bad.pages[0].blocks[0][key] = value

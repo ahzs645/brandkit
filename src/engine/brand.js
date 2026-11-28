@@ -8,6 +8,7 @@ import { interpolate } from './format.js'
 import { withRevision } from './revisions.js'
 import { liveryProblems } from '../mockups/vehicle-livery.js'
 import { deviceProblems } from '../mockups/device-project.js'
+import { publicationsProblems } from './publications.js'
 
 /** Roles the built-in templates and guide pages ask for. A brand maps each to one of its colours. */
 export const COLOUR_ROLES = ['ink', 'paper', 'muted', 'primary', 'light', 'reverse', 'line', 'rule']
@@ -314,6 +315,8 @@ export const validateBrand = (brand) => {
   problems.push(...liveryProblems(brand))
   // Device mockups and frames: what the brand says for the Devices tab.
   problems.push(...deviceProblems(brand))
+  // The publication system: designed document styles, kinds and documents (publications.js).
+  problems.push(...publicationsProblems(brand))
   return problems
 }
 

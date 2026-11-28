@@ -6,6 +6,8 @@ import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
 import { createNodeRenderer } from '../src/export/node.js'
 import { assertHandover } from '../src/handover/record.js'
 import { composePack, packHtml, packOptions, preparePack, sha256 } from '../src/handover/pack.js'
+import { layoutPdf } from '../src/export/node.js'
+import { brandFaces } from '../src/export/brand-faces.js'
 
 const base = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
 const fonts = await loadBrandFontsFromDisk(base, fileURLToPath(new URL('../brands/northwind/', import.meta.url)))
@@ -40,7 +42,7 @@ test('a pack holds only the chosen documents and sections, numbered in order', a
   assert.deepEqual([...new Set(headings(prepared.publications.welcome))], ['01 / ', '02 / '])
   assert.ok(prepared.publications.welcome.pages[0].cover, 'the guide opens with its cover')
   assert.deepEqual(prepared.publications.brandGuide.pages.map((page) => page.id), ['brand-cover', 'brand-files'])
-  const html = packHtml(prepared, { provider, client })
+  const html = await packHtml(prepared, { provider, client, png })
   assert.match(html.welcome, /01 \/ Services/)
   assert.doesNotMatch(html.welcome, /Getting started/)
 })
@@ -56,4 +58,24 @@ test('the composed pack lists every file with its hash, in the browser’s shape
   const index = decode(files.find(([path]) => path === 'index.html')[1])
   assert.match(index, /href="quick-start\.html"/)
   assert.doesNotMatch(index, /welcome-guide\.html|brand-reference\.html/)
+})
+
+test('with a pdf hook the pack holds each document’s PDF: its own Word master laid out, in its brand’s faces', async () => {
+  const laidOut = []
+  const pdf = async (docx, options) => { laidOut.push({ docx, options }); return layoutPdf(docx, { faces: options.namedFonts }) }
+  const { files, manifest } = await composePack({ record, provider, client, png, dpi: 72, pdf, options: { coverVariant: 'hero', documents: ['quickStart', 'brandGuide', 'frontCover'] } })
+  const byPath = new Map(files)
+  for (const stem of ['quick-start', 'brand-reference', 'front-cover']) {
+    const bytes = byPath.get(`${stem}.pdf`)
+    assert.ok(bytes, `${stem}.pdf is in the pack`)
+    assert.equal(new TextDecoder().decode(bytes.subarray(0, 5)), '%PDF-')
+    assert.ok(manifest.files.some((file) => file.path === `${stem}.pdf`), `${stem}.pdf is in the manifest`)
+  }
+  // Each PDF is laid out from the very Word master the pack holds beside it.
+  assert.deepEqual(laidOut.map(({ docx }) => [...byPath].find(([, bytes]) => bytes === docx)?.[0]), ['quick-start.docx', 'brand-reference.docx', 'front-cover.docx'])
+  assert.deepEqual(laidOut[0].options.namedFonts.map((face) => face.family), brandFaces(provider).map((face) => face.family))
+  const index = decode(byPath.get('index.html'))
+  assert.match(index, /href="quick-start\.pdf"/)
+  assert.match(index, /href="front-cover\.pdf"/)
+  assert.match(decode(byPath.get('READ-ME.txt')), /Print the PDF files/)
 })

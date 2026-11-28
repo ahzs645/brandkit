@@ -2,9 +2,10 @@
 import { createDiagramRegistry, mermaidAdapter } from 'document-kit/diagrams'
 import { d3Adapter } from 'document-kit/diagrams/d3'
 import { bindDeviceScreens, devicesAdapter } from './devices.js'
-import { tableGrid } from 'document-kit'
 import { documentProfile } from '../engine/documentation.js'
-import { publicationCell, tableLook } from '../export/table-styles.js'
+import { tableLook } from '../export/table-styles.js'
+import { applyTableLook } from '../export/table-look.js'
+import { brandFaces } from '../export/brand-faces.js'
 import { compileRecipe, renderRecipe, sharedLibrary } from 'document-kit/recipe'
 import { writeDocx } from 'document-kit/docx'
 import { consumerProfile } from '../engine/consumer.js'
@@ -32,45 +33,12 @@ function brandTheme(ctx, profile) {
   const heading = { font: display.name, bold: display.bold, color: colours.ink }
   const print = documentProfile(ctx.brand)
   return {
-    body: { font: typography.body.family, color: colours.ink, size: 10.5, after: 7, line: 1.15 },
+    body: { font: typography.body.family, color: colours.ink, size: 10.5, after: 7, line: 1.15, kern: true },
     headings: [{ ...heading, size: 23, before: 0, after: 10 }, { ...heading, size: 13, before: 13, after: 5 }],
     small: { font: typography.label.family, color: colours.muted, size: 8, before: 13 },
     footer: { font: typography.label.family, color: colours.muted, size: 8 },
     table: { size: print.typography.table.sizePt, headerFill: '', headerText: { bold: false }, headerAlign: 'left',
       outerBorder: { style: 'none' }, innerBorder: { style: 'none' } }
-  }
-}
-
-function applyTableLook(blocks, look, tableType) {
-  for (const block of blocks ?? []) {
-    if (block.blocks) applyTableLook(block.blocks, look, tableType)
-    if (block.type !== 'table') continue
-    const grid = tableGrid(block)
-    let bodyIndex = 0
-    block.line ??= tableType.lineHeight
-    for (const [index, row] of block.rows.entries()) {
-      const header = row.role === 'header'
-      row.cells = grid.rows[index].filter(entry => entry.kind === 'cell').map(({ placed }) => {
-        const cell = placed.cell
-        const style = publicationCell(look, {
-          header, firstRow: index === 0, lastRow: index + placed.rowSpan === block.rows.length,
-          firstColumn: placed.column === 0, lastColumn: placed.column + placed.colSpan === grid.columns, bodyIndex
-        })
-        const spec = style.text
-        const text = spec ? {
-          ...(spec.face && { font: spec.face.name, bold: spec.face.bold, italic: spec.face.italic }),
-          ...(spec.bold && { bold: true }), ...(spec.sizePt && { size: spec.sizePt }),
-          ...(spec.colour && { color: spec.colour }), ...(spec.caps && { allCaps: true })
-        } : {}
-        const padding = Object.fromEntries(Object.entries(style.padding).map(([edge, mm]) => [edge, mm * 72 / 25.4]))
-        const borders = Object.fromEntries(Object.entries(style.borders).map(([edge, rule]) =>
-          [edge, rule ? { style: 'single', color: rule.colour, width: rule.pt } : { style: 'none' }]))
-        applyTableLook(cell.blocks, look, tableType)
-        return { ...cell, shading: cell.shading ?? style.fill, padding: { ...padding, ...block.cellPadding, ...cell.padding },
-          borders: { ...borders, ...cell.borders }, text: { ...text, ...cell.text } }
-      })
-      if (!header) bodyIndex++
-    }
   }
 }
 
@@ -171,5 +139,19 @@ export async function recipeDocx(ctx, job, { png, mermaid, logo, diagrams = [] }
       }
     }
   }
-  return writeDocx(rendered.document)
+  return writeDocx(rendered.document, { embedFonts: usedFaces(ctx, rendered.document) })
+}
+
+/** The brand's faces a document names anywhere (its theme, styles and runs): the faces its Word file embeds. */
+export function usedFaces(ctx, document) {
+  const used = new Set()
+  const visit = (value) => {
+    if (Array.isArray(value)) value.forEach(visit)
+    else if (value && typeof value === 'object' && !ArrayBuffer.isView(value)) {
+      if (typeof value.font === 'string') used.add(value.font.toLowerCase())
+      Object.values(value).forEach(visit)
+    }
+  }
+  visit(document)
+  return brandFaces(ctx).filter((face) => used.has(face.family.toLowerCase()))
 }

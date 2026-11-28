@@ -1,6 +1,7 @@
 // A brand's motion library, in brandkit's own interface: its studies in a list like the template
 // studio's, the chosen one playing on the stage with its timing and use beside it, and the tokens,
-// rules and guardrails every study shares. The library page itself (`motion.page`) is a link away.
+// rules and guardrails every study shares. The library page itself (`motion.page`) plays here and goes
+// out in the motion pack.
 
 import { useEffect, useState } from 'react'
 import { colour, isDark } from '../../engine/brand.js'
@@ -74,27 +75,6 @@ const Tokens = ({ brand, tokens = {}, reduced }) => {
     </section>
   )
 }
-
-const Rules = ({ motion }) => (
-  <section className="panel">
-    <div className="panel__head"><h2>How {motion.name ?? 'it'} moves</h2></div>
-    {motion.rules?.length > 0 && (
-      <ol className="motion-rules">
-        {motion.rules.map((rule) => <li key={rule.title}><strong>{rule.title}</strong><span>{rule.text}</span></li>)}
-      </ol>
-    )}
-    {motion.guardrails && (
-      <div className="motion-guardrails">
-        {[['do', 'Do'], ['dont', 'Don’t']].filter(([key]) => motion.guardrails[key]?.length).map(([key, label]) => (
-          <div key={key} className={`motion-guardrails__list motion-guardrails__list--${key}`}>
-            <h3>{label}</h3>
-            <ul>{motion.guardrails[key].map((line) => <li key={line}>{line}</li>)}</ul>
-          </div>
-        ))}
-      </div>
-    )}
-  </section>
-)
 
 /** The brand's motion as one zip: tokens for code, the rules and studies in a README, each study that plays without the page as an animated SVG, and the library page itself. */
 const motionPack = async (brand, library, source) => {
@@ -179,7 +159,6 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
             <label className="studio__toggle"><input type="checkbox" checked={loop} disabled={reduced} onChange={(event) => setLoop(event.target.checked)} /> Play on repeat</label>
             <span className="studio__downloads">
               <button type="button" className="button button--quiet" disabled={!library || packing} onClick={() => { setPacking(true); motionPack(brand, library, source).finally(() => setPacking(false)) }}>{packing ? '…' : '↓'} Motion pack</button>
-              <a className="button button--quiet" href={url} target="_blank" rel="noreferrer">Open the library page ↗</a>
             </span>
           </div>
           {reduced && <p className="studio__note">Your device asks for reduced motion, so each study shows its final frame.</p>}
@@ -202,14 +181,13 @@ export const Motion = ({ brand, source, initialStudy, onSelect }) => {
                 <button type="button" className="button button--quiet" onClick={() => download(animatedSvg(library, study.id), `${brand.id}-motion-${study.id}.svg`)}>↓ Animated SVG</button>
               </div>
             )}
-            {library?.mode === 'css' && !library.stages.get(study.id)?.vector && <p className="field__hint">Plays here and on the library page; not exported as video.</p>}
+            {library?.mode === 'css' && !library.stages.get(study.id)?.vector && <p className="field__hint">Plays here and on the motion pack’s library page; not exported as video.</p>}
           </aside>
         )}
       </div>
 
       <div className="split">
         <Tokens brand={brand} tokens={brand.motion.tokens} reduced={reduced} />
-        <Rules motion={motion} />
       </div>
     </div>
   )

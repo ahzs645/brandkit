@@ -83,6 +83,8 @@ export const BrandLogo = ({ brand, fonts }) => {
  */
 export const Segmented = ({ label, value, options, onChange }) => {
   const items = options.map((option) => (typeof option === 'string' ? { value: option, label: option } : option))
+  // One option is nothing to choose: render a marker that hides the surrounding field.
+  if (items.length <= 1) return <span data-single hidden />
   if (items.length > 4 || items.reduce((length, item) => length + String(item.label).length, 0) > 32) {
     return <Select aria-label={label} value={value} options={items} onChange={onChange} />
   }

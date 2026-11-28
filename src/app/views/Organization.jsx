@@ -93,9 +93,8 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
         </section>
       </div>
     </>}
-    {/* The sizing rules and the related identities are reference, not the task: closed until asked for. */}
-    <details className="panel organization-reference">
-      <summary>Sizing rules{related.length > 0 ? ' and related brands' : ''}</summary>
+    {/* The sizing rules and the related identities are reference, after the task. */}
+    <section className="panel organization-reference">
       <h2>How the sizing works</h2>
       <div className="organization-table-scroll"><table className="organization-table"><thead><tr><th scope="col">Element</th><th scope="col">Rule</th><th scope="col">Basis</th></tr></thead><tbody>
         <tr><th scope="row">Complete logo</th><td>At least {brand.logoPolicy?.minimumWidthMm ?? profile.logo.minimumWidthMm} mm wide; scale proportionally.</td><td>Official minimum width</td></tr>
@@ -112,7 +111,7 @@ export const Organization = ({ brand, fonts, onDocuments, onTemplates }) => {
         <p><strong>{item.relationship}</strong></p><p className="muted">{item.note}</p>
       </article>)}</div>
     </>}
-    </details>
+    </section>
     <OrganizationSources brand={brand} />
   </div>
 }

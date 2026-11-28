@@ -9,13 +9,15 @@ import { approvedOnly, revisionsOf, withRevision } from '../engine/revisions.js'
 import { TemplateStudio } from '../studio/TemplateStudio.jsx'
 import { BUILT_IN, BUILT_IN_INDEX, blobSource, builtInName, menuLogoUrl, forgetBrand, librarySource, loadBuiltIn, openBrandFile, saveBrand, savedBrands, withBrandAssets } from './brands.js'
 import { fetchPack, installArchive, installedPacks, openInstalled, readPackUrl, removePack, updatesFrom } from './pack-store.js'
-import { addCatalog, fetchCatalogs, siteCatalogs } from './catalog.js'
+import { addCatalog, devSession, fetchCatalogs, siteCatalogs } from './catalog.js'
 import { isBundle } from '../pack/format.js'
 import { registerPackPages } from './pack-pages.js'
 import { useBrandDrop } from './drop.js'
 import { createPrinterPackage, importPrinterPackage } from '../printer/package.js'
 import { download } from '../export/render.js'
 import { Overview } from './views/Overview.jsx'
+import { Revisions } from './views/Revisions.jsx'
+import { TemplateElements } from './views/TemplateElements.jsx'
 import { Logos } from './views/Logos.jsx'
 import { Kit } from './views/Kit.jsx'
 import { Motion } from './views/Motion.jsx'
@@ -51,17 +53,19 @@ const Devices = lazy(() => import('./views/Devices.jsx').then((module) => ({ def
 
 const VIEWS = [
   { id: 'overview', label: 'Overview' },
+  // Proposed revisions of the identity, beside the approved one.
+  { id: 'revisions', label: 'Revisions' },
   { id: 'logos', label: 'Logos' },
   // A product family (brand.products): named products under the unchanged parent logo.
   { id: 'products', label: 'Products' },
   { id: 'colour', label: 'Colour' },
   { id: 'organization', label: 'Departments' },
   { id: 'patterns', label: 'Patterns' },
-  // Templates holds the documents too: `documents` is its second part, kept as a view of its own
-  // so a link to it still opens there, and shown under the Templates tab.
   { id: 'templates', label: 'Templates' },
-  { id: 'documents', label: 'Documents', within: 'templates' },
-  { id: 'pack', label: 'Client pack', within: 'templates' },
+  // Documents holds the client pack too: `pack` is its second part, kept as a view of its own so a
+  // link to it still opens there, and shown under the Documents tab.
+  { id: 'documents', label: 'Documents' },
+  { id: 'pack', label: 'Client pack', within: 'documents' },
   { id: 'web', label: 'Web' },
   // The brand's artwork placed on a car in 3D.
   { id: 'vehicles', label: 'Vehicles' },
@@ -92,13 +96,14 @@ const OPEN_VIEWS = SHARED ? SHARED_VIEWS : ALL_VIEWS
 const hasPatterns = (brand) => { try { return patternLibrary(brand).patterns.length > 0 } catch { return false } }
 // Until the brand arrives only the tabs every brand has are shown, so the row does not fill with
 // tabs the brand turns out not to have and then lose them.
-const ALWAYS = ['overview', 'logos', 'colour', 'templates', 'web', 'kit']
+const ALWAYS = ['overview', 'logos', 'colour', 'templates', 'documents', 'web', 'kit']
 const offers = (view, { brand, motionLink, extensionView }) => {
   if (!brand) return ALWAYS.includes(view)
   switch (view) {
     case 'motion': return Boolean(motionLink)
     case 'organization': return hasDepartments(brand)
     case 'patterns': return hasPatterns(brand)
+    case 'revisions': return Boolean(brand.revisions?.length)
     // A family can be started on any brand that can be edited here; a shared view shows one that exists.
     case 'products': return hasProducts(brand) || (!SHARED && Boolean(brand))
     case 'guide': return Boolean(brand.guide?.pages?.length)
@@ -214,7 +219,10 @@ export const App = () => {
 
   const installedIds = installed.map((record) => record.id)
   const offered = [...catalog.brands.values()].filter((entry) => !BUILT_IN.includes(entry.id) && !installedIds.includes(entry.id))
-  const brandIds = [...new Set([...BUILT_IN, ...installedIds, ...Object.keys(saved), ...Object.keys(opened), ...offered.map((entry) => entry.id)])]
+  // A `brandkit dev` session lists only the brands it serves (and the one open), nothing else here.
+  const brandIds = devSession()
+    ? [...new Set([...catalog.brands.keys(), ...(current?.brand?.id ? [current.brand.id] : [])])]
+    : [...new Set([...BUILT_IN, ...installedIds, ...Object.keys(saved), ...Object.keys(opened), ...offered.map((entry) => entry.id)])]
   const brandName = (id) => BUILT_IN.includes(id) ? builtInName(id) : installed.find((entry) => entry.id === id)?.name ?? saved[id]?.name ?? opened[id]?.brand?.name ?? catalog.brands.get(id)?.name ?? id
 
   /** Downloads a pack and keeps it in this browser, showing progress; returns its record. */
@@ -536,7 +544,8 @@ export const App = () => {
               const note = record && updateFor(record) ? 'update' : record ? null : saved[id] && !builtIn ? 'saved' : opened[id] ? 'opened' : entry?.bytes ? megabytes(entry.bytes) : null
               return { id, name, group, note, logo: <MenuLogo id={id} url={own ? null : logoUrl} brand={own} name={name} /> }
             })}
-            onManage={() => go('brands')}
+            // A `brandkit dev` session shows only its own brands: nothing to manage.
+            onManage={devSession() ? undefined : () => go('brands')}
             onBrand={(id) => select(id)}
             revisions={base && revisions.length ? [{ id: '', label: `Approved v${base.displayVersion ?? base.version}`, note: 'approved' }, ...revisions.map((entry) => ({ id: entry.id, label: entry.title, note: `${entry.status ?? 'proposed'} v${entry.displayVersion ?? entry.version}` }))] : []}
             revision={activeRevision ?? ''}
@@ -579,25 +588,26 @@ export const App = () => {
         {!brand ? !error && !progress && <p className="muted">Loading…</p> : (
           <Suspense fallback={<p className="muted">Loading…</p>}>
             {view === 'overview' && <Overview key={brand.id} brand={brand} base={base} fonts={fonts} source={source} revision={activeRevision} onRevision={chooseRevision} openManual={openManual} />}
+            {view === 'revisions' && <Revisions key={brand.id} base={base} fonts={fonts} active={activeRevision} onRevision={chooseRevision} />}
             {view === 'colour' && <Colour brand={brand} />}
             {view === 'organization' && hasDepartments(brand) && <Organization key={brand.id} brand={brand} fonts={fonts} onDocuments={() => go('documents')} onTemplates={() => go('templates')} />}
             {view === 'logos' && <Logos brand={brand} fonts={fonts} source={source} openManual={openManual} />}
             {view === 'products' && <Products key={`${brand.id}-${brand.revision?.id ?? ''}`} brand={brand} base={base} revision={activeRevision} fonts={fonts} editable={!SHARED} onSave={saveWith} />}
             {view === 'patterns' && <Patterns key={brand.id} brand={brand} fonts={fonts} source={source} initialPattern={params().get('pattern')} onSelect={(id) => writeUrl({ pattern: id })} onTemplate={(id) => openBuilt(brand.id, 'template', id)} />}
-            {(view === 'templates' || view === 'documents' || view === 'pack') && <div className="section-switch">
-              <Segmented label="Templates or documents" value={view} onChange={go} options={[
-                { value: 'templates', label: 'Templates', title: 'Cards, stationery, social posts and slides: fill in the fields and download' },
-                { value: 'documents', label: 'Documents', title: 'Reports, briefs and letters to write, as Word and print-ready pages' },
-                ...(available.has('pack') ? [{ value: 'pack', label: 'Client pack', title: 'A welcome guide, quick-start sheet and brand reference for a client, built as you choose' }] : [])
+            {(view === 'documents' || view === 'pack') && available.has('pack') && <div className="section-switch">
+              <Segmented label="Documents or client pack" value={view} onChange={go} options={[
+                { value: 'documents', label: 'Documents', title: 'Reports, briefs and portfolios to write, as Word and print-ready pages' },
+                { value: 'pack', label: 'Client pack', title: 'A welcome guide, quick-start sheet and brand reference for a client, built as you choose' }
               ]} />
             </div>}
             {view === 'templates' && <div className="view">
               <TemplateStudio key={brand.id} brand={brand} fonts={fonts} resolveAsset={source.url} initialTemplate={params().get('template')} onSelect={(id) => writeUrl({ template: id })}
                 onPrint={SHARED || !available.has('printer') ? undefined : printTemplate} onPrinterPackage={downloadPrinterPackage} printerWebsite={{ website: brand.printer?.website }}
-              aside={(template) => (template.description || (!SHARED && template.sources)) && (
+              aside={(template) => (
                 <div className="template-about">
                   {template.description && <p>{template.description}</p>}
                   <ManualSources brand={brand} sources={template.sources} openManual={openManual} />
+                  <TemplateElements brand={brand} template={template} />
                 </div>
               )} /></div>}
             {view === 'printer' && <TemplatePrinter brand={brand} source={source} request={printerSession} ready={Boolean(fonts)} onPrint={printTemplate} onImport={importPrinterDesign} />}

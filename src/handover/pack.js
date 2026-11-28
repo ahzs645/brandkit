@@ -1,13 +1,15 @@
 // The client pack, composed from a handover record, two loaded brands and a set of choices: which
 // documents, which of their sections, the cover and its design, the table style and the paper.
 // Nothing here touches a file system or a network, so the app builds the same pack in the browser
-// (a zip to download, a live preview as choices change) as the command line does on disk; the
-// command line adds PDFs, which need LibreOffice.
+// (a zip to download, a live preview as choices change) as the command line does on disk. Each
+// document's PDF is its Word file laid out by document-kit (a `pdf` function the host supplies: the
+// app's layout worker, or the layout in Node), so the zip and the folder hold the same pages.
 
 import { consumerProfile } from '../engine/consumer.js'
 import { TABLE_STYLES, documentProfile } from '../engine/documentation.js'
-import { publicationDocx, publicationHtml } from '../export/publication.js'
+import { publicationDocx, publicationPrintHtml } from '../export/publication.js'
 import { fontEmbeddingPermission } from '../export/office.js'
+import { brandFaces } from '../export/brand-faces.js'
 import { sanitizeSvg } from '../printer/svg.js'
 import { assertHandover } from './record.js'
 import { BRAND_SECTIONS, WELCOME_SECTIONS, handoverPublications } from './publications.js'
@@ -131,11 +133,14 @@ export async function preparePack({ record, provider, client, options = {}, png,
 /** The brand whose style a document is set in: the brand reference is the client's, the rest the provider's. */
 export const documentBrand = (id, { provider, client }) => id === 'brandGuide' ? client : provider
 
-/** The pack's print views, by document id: what a preview shows. */
-export const packHtml = (prepared, { provider, client, sourceRevision }) => Object.fromEntries(Object.entries(prepared.publications).map(([id, publication]) => {
+/**
+ * The pack's print views, by document id: each document's print view, written by document-kit from
+ * the same document as its Word file (`png(svg, width)` draws the logo).
+ */
+export const packHtml = async (prepared, { provider, client, sourceRevision, png }) => Object.fromEntries(await Promise.all(Object.entries(prepared.publications).map(async ([id, publication]) => {
   const ctx = { ...documentBrand(id, { provider, client }), sourceRevision }
-  return [id, publicationHtml(ctx, publication)]
-}))
+  return [id, await publicationPrintHtml(ctx, publication, { png })]
+})))
 
 /** The pack's own front page, linking to each document it holds. */
 export const packIndex = (prepared, { provider, client, pdf = false, providerLogoSrc } = {}) => {
@@ -170,9 +175,10 @@ const readMe = (prepared, { provider, client, pdf, sourceRevision, originalLogo 
 }
 
 /**
- * Every file of the pack but the PDFs and the manifest, as `[path, bytes or text]` in a stable
- * order. `provider.bytes` / `client.bytes`, when given, are the brand definitions as read, kept
- * byte for byte in sources/.
+ * Every file of the pack but the manifest, as `[path, bytes or text]` in a stable order.
+ * `provider.bytes` / `client.bytes`, when given, are the brand definitions as read, kept byte for
+ * byte in sources/. `pdf`, a function `(docx, { title, namedFonts }) → { bytes }`, lays each Word
+ * master out as its PDF beside it (`true` only links PDFs the caller adds itself).
  */
 export async function packFiles(prepared, { provider, client, png, pdf = false, sourceRevision, originalLogo, providerLogoSrc }) {
   const { record, publications, cover, clientProfile, providerProfile } = prepared
@@ -190,9 +196,11 @@ export async function packFiles(prepared, { provider, client, png, pdf = false, 
     const publication = publications[item.id]
     if (!publication) continue
     const ctx = { ...documentBrand(item.id, { provider, client }), sourceRevision }
-    files.push([`${item.file}.publication.json`, json(publication)], [`${item.file}.html`, publicationHtml(ctx, publication)], [`${item.file}.docx`, await publicationDocx(ctx, publication, { png })])
+    const docx = await publicationDocx(ctx, publication, { png })
+    files.push([`${item.file}.publication.json`, json(publication)], [`${item.file}.html`, await publicationPrintHtml(ctx, publication, { png })], [`${item.file}.docx`, docx])
+    if (typeof pdf === 'function') files.push([`${item.file}.pdf`, (await pdf(docx, { title: publication.title, namedFonts: brandFaces(ctx) })).bytes])
   }
-  files.push(['index.html', packIndex(prepared, { provider, client, pdf, providerLogoSrc })], ['READ-ME.txt', readMe(prepared, { provider, client, pdf, sourceRevision, originalLogo })])
+  files.push(['index.html', packIndex(prepared, { provider, client, pdf: Boolean(pdf), providerLogoSrc })], ['READ-ME.txt', readMe(prepared, { provider, client, pdf: Boolean(pdf), sourceRevision, originalLogo })])
   return files.map(([path, value]) => [path, bytesOf(value)])
 }
 

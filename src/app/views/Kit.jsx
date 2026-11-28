@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { buildKit, planKit } from '../../engine/kit.js'
+import { layoutInWorker } from '../../export/layout-client.js'
 import { paintOptions } from '../../engine/brand.js'
 import { createBrowserRenderer, download, zip } from '../../export/render.js'
 import { formatBytes } from '../../engine/web.js'
@@ -64,7 +65,6 @@ const KitView = ({ brand, fonts, source }) => {
   const unitOf = (name) => single(name) && departments?.items?.find((item) => single(item.name) === single(name) || single(item.values?.[field]) === single(name))
   const [unitId, setUnitId] = useState(() => (subLogos && saved.department ? unitOf(saved.department)?.id ?? SAVED : ''))
   const [all, setAll] = useState(false)
-  const [open, setOpen] = useState(() => new Set())
   const [progress, setProgress] = useState(null)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
@@ -97,12 +97,6 @@ const KitView = ({ brand, fonts, source }) => {
     try { setSaved(writeAffiliation(brand.id, next)) } catch (problem) { setError(problem.message) }
     setUnitId(id)
   }
-  const toggleGroup = (group, isOpen) => setOpen((current) => {
-    if (current.has(group) === isOpen) return current
-    const next = new Set(current)
-    if (isOpen) next.add(group); else next.delete(group)
-    return next
-  })
 
   const build = async () => {
     setError(null)
@@ -113,7 +107,8 @@ const KitView = ({ brand, fonts, source }) => {
       const options = optionsFor(pack)
       const { files, skipped } = await buildKit({ brand, fonts, values }, {
         ...options,
-        renderer: createBrowserRenderer(),
+        // Word files' PDFs are laid out in the layout worker, as the Documents preview is.
+        renderer: { ...createBrowserRenderer(), layout: layoutInWorker },
         readAsset: options.assets ? source.read : undefined,
         onProgress: (done, total, path) => setProgress({ done, total, path })
       })
@@ -200,28 +195,23 @@ const KitView = ({ brand, fonts, source }) => {
 
       <section className="panel kit-inside">
         <h3>What’s inside</h3>
-        {groups.map(([group, entries]) => {
-          const isOpen = open.has(group)
-          return (
-            <details key={group} className="plan-group" open={isOpen} onToggle={(event) => toggleGroup(group, event.currentTarget.open)}>
-              <summary>
-                <span className="plan-group__name">{group}</span>
-                <span className="muted">· {entries.length} {entries.length === 1 ? 'file' : 'files'} · {[...new Set(entries.map((entry) => extensionOf(entry.path)))].sort(byFormat).join(', ')}</span>
-              </summary>
-              {isOpen && (
-                <ul className="plan-list">
-                  {rowsOf(entries, colours, departments, unit?.id).map((row) => (
-                    <li key={row.name}>
-                      <span className="plan-row__name">{row.name}</span>
-                      {row.colours.length > 0 && <span className="plan-row__colours">{row.colours.join(' · ')}</span>}
-                      <span className="plan-row__formats">{row.formats.join(' ')}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </details>
-          )
-        })}
+        {groups.map(([group, entries]) => (
+          <section key={group} className="plan-group">
+            <h4 className="plan-group__head">
+              <span className="plan-group__name">{group}</span>
+              <span className="muted">· {entries.length} {entries.length === 1 ? 'file' : 'files'} · {[...new Set(entries.map((entry) => extensionOf(entry.path)))].sort(byFormat).join(', ')}</span>
+            </h4>
+            <ul className="plan-list">
+              {rowsOf(entries, colours, departments, unit?.id).map((row) => (
+                <li key={row.name}>
+                  <span className="plan-row__name">{row.name}</span>
+                  {row.colours.length > 0 && <span className="plan-row__colours">{row.colours.join(' · ')}</span>}
+                  <span className="plan-row__formats">{row.formats.join(' ')}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
         {extras.length > 0 && <p className="muted plan-extras">Plus {extras.length} source {extras.length === 1 ? 'file' : 'files'}.</p>}
       </section>
     </div>

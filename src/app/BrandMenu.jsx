@@ -44,6 +44,18 @@ export const BrandMenu = ({ logo, current, brands, onBrand, onManage, revisions 
   const { open, setOpen, root, trigger, onKeyDown } = usePopover()
   const id = useId()
   const pick = (action) => { setOpen(false); action(); trigger.current?.focus() }
+  // Nothing to choose (one brand, no revisions, nothing to manage): the brand's logo alone, no menu.
+  if (brands.length <= 1 && revisions.length <= 1 && !onManage) {
+    return (
+      <div className="menu brand-menu brand-menu--single">
+        <span className="brand-menu__trigger brand-menu__trigger--static">
+          {logo}
+          <span className="visually-hidden">{current}</span>
+          {tag && <span className="brand-menu__tag">{tag}</span>}
+        </span>
+      </div>
+    )
+  }
   return (
     <div className="menu brand-menu" ref={root}>
       <button ref={trigger} type="button" className="brand-menu__trigger" aria-haspopup="menu" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)} title="Choose a brand">

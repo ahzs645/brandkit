@@ -63,7 +63,7 @@ const ProductCard = ({ brand, fonts, item, arrangement, variant, paint, descript
           <h3 id={`product-${item.id}`}><span className="product-card__dot" style={{ background: item.accent }} />{item.fullName ?? item.name}</h3>
           <span className="product-card__tags">
             {item.role && <span className="product-card__role">{item.role}</span>}
-            {item.status && <span className="badge">{item.status}</span>}
+            {item.status && item.status !== 'approved' && <span className="badge">{item.status}</span>}
           </span>
         </div>
         {item.descriptor && <p className="muted">{item.descriptor}</p>}
@@ -131,17 +131,27 @@ const FamilyView = ({ brand, fonts }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand, fonts, items, arrangement, paint, descriptor, variant])
   const chosen = products.direction ? directions.find((entry) => entry.id === products.direction) : null
+  // An approved family is stated as fact: no status badge, no decision record, no options not taken.
+  const approved = products.status === 'approved'
+  const badge = (status) => status && status !== 'approved' && <span className="badge">{status}</span>
+  const lockupName = (usesVariant && variants.find((entry) => entry.id === variantId)?.label) || ARRANGEMENT_LABELS[arrangement]
 
   return (
     <>
       <section className="panel products-intro">
         <div className="products-intro__text">
           <div className="panel__head">
-            <h2>{products.label ?? 'Products'} {products.status && <span className="badge">{products.status}</span>}</h2>
+            <h2>{products.label ?? 'Products'} {badge(products.status)}</h2>
             {products.note && <p className="muted">{products.note}</p>}
           </div>
-          <p>Every lockup here embeds the {parent.label} logo as it is: the same artwork as the Logos tab, never redrawn, re-typeset or resized on its own. A product adds its name, a descriptor and an accent{productsOf(brand).some((item) => productPictogram(brand, item)) ? ', and a pictogram' : ''}, each sized from the logo’s height.</p>
-          <p className="muted">{chosen ? `Chosen direction: ${chosen.label}. The kit carries that arrangement${arrangements.includes('compact') && chosen.arrangement !== 'compact' ? ' and the compact one' : ''} for every product.` : directions.length ? 'No direction is chosen yet, so the kit carries every arrangement on offer for comparison.' : `The kit carries ${arrangements.length === 1 ? 'the arrangement' : `all ${arrangements.length} arrangements`} for every product.`}</p>
+          <dl className="products-intro__facts">
+            <div><dt>Parent logo</dt><dd>{parent.label}, unchanged</dd></div>
+            <div><dt>Lockup</dt><dd>{lockupName}</dd></div>
+            <div><dt>Products</dt><dd>{items.length}</dd></div>
+            <div><dt>Each adds</dt><dd>A name, {items.some((item) => item.descriptor) ? 'a descriptor, ' : ''}an accent{productsOf(brand).some((item) => productPictogram(brand, item)) ? ', a pictogram' : ''}</dd></div>
+          </dl>
+          {/* While a family is still being compared, say what the kit carries. */}
+          {!approved && directions.length > 1 && <p className="muted">{chosen ? `Chosen direction: ${chosen.label}. The kit carries that arrangement${arrangements.includes('compact') && chosen.arrangement !== 'compact' ? ' and the compact one' : ''} for every product.` : 'No direction is chosen yet, so the kit carries every arrangement on offer for comparison.'}</p>}
         </div>
         <figure className="asset-card products-intro__parent">
           <div className="asset-card__art" style={{ background: ground }}><SvgImage svg={parentSvg()} alt={`${brand.name} parent logo`} /></div>
@@ -150,13 +160,13 @@ const FamilyView = ({ brand, fonts }) => {
       </section>
 
       <section className="panel toolbar toolbar--panel products-controls" aria-label="How the family is shown">
-        {directions.length > 0 && <Field label="Direction">
+        {directions.length > 1 && <Field label="Direction">
           <Segmented label="Direction" value={direction?.id ?? ''} options={directions.map((entry) => ({ value: entry.id, label: chosen && entry.id !== chosen.id ? `${entry.label} (archived)` : entry.label, title: entry.summary }))} onChange={chooseDirection} />
         </Field>}
-        <Field label="Arrangement">
+        {arrangements.length > 1 && <Field label="Arrangement">
           <Segmented label="Arrangement" value={arrangement} options={arrangements.map((id) => ({ value: id, label: ARRANGEMENT_LABELS[id], title: ARRANGEMENT_USES[id] }))} onChange={setArrangement} />
-        </Field>
-        {usesVariant && <Field label="Endorsed variant">
+        </Field>}
+        {usesVariant && variants.length > 1 && <Field label="Endorsed variant">
           <Segmented label="Endorsed variant" value={variantId} options={[...(products.variant ? [] : [{ value: '', label: 'Family settings' }]), ...variants.map((entry) => ({ value: entry.id, label: products.variant && entry.id !== products.variant ? `${entry.label} (archived)` : entry.label, title: entry.summary }))]} onChange={setVariant} />
         </Field>}
         {paints.length > 1 && <Field label="Logo colour">
@@ -166,7 +176,6 @@ const FamilyView = ({ brand, fonts }) => {
           <Segmented label="Tile" value={tile} options={tiles.map((id) => ({ value: id, label: tileLabels(brand)[id] }))} onChange={setTile} />
         </Field>}
         {items.some((item) => item.descriptor) && <label className="wordmark-toggle"><input type="checkbox" checked={descriptor} onChange={(event) => setDescriptor(event.target.checked)} /><span>Descriptor</span></label>}
-        <p className="products-controls__about">{direction?.summary ?? (usesVariant && variantId ? variants.find((entry) => entry.id === variantId)?.summary : null) ?? ARRANGEMENT_USES[arrangement]}</p>
       </section>
 
       <section className="panel" aria-labelledby="products-family">
@@ -186,12 +195,12 @@ const FamilyView = ({ brand, fonts }) => {
           <div className="products-key__art"><SvgImage svg={productFamilyKey(ctx)} alt={`${brand.name} family key: ${items.map((item) => item.name).join(', ')}`} /></div>
           <Downloads make={() => productFamilyKey(ctx)} name={`${brand.id}-family-key`} width={1024} formats={['svg', 'png']} />
         </div>
-        {(products.positioning?.line || products.decision) && <div className="products-key__part">
+        {(products.positioning?.line || (products.decision && !approved)) && <div className="products-key__part">
           {products.positioning?.line && <>
-            <h2>Positioning {products.positioning.status && <span className="badge">{products.positioning.status}</span>}</h2>
+            <h2>Positioning {badge(products.positioning.status)}</h2>
             <p className="products-key__line">{products.positioning.line}</p>
           </>}
-          {products.decision && <>
+          {products.decision && !approved && <>
             <h2>Decision {products.decision.date && <span className="muted">· {products.decision.date}</span>}</h2>
             {products.decision.summary && <p>{products.decision.summary}</p>}
             <p className="muted">{[chosen && `Direction: ${chosen.label}`, products.variant && `Variant: ${variants.find((entry) => entry.id === products.variant)?.label ?? products.variant}`].filter(Boolean).join(' · ')}</p>

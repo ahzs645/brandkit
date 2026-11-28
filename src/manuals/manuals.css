@@ -71,21 +71,24 @@
 
 .guides__page-head { position: sticky; top: 8px; z-index: 2; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); }
 .guides__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 14px; }
-.guides__step, .guides__zoom { display: inline-flex; padding: 3px; gap: 2px; background: var(--track, #e8eaed); border-radius: 999px; }
+/* The page stepper and zoom: the host's segmented control (brandkit's --control-* tokens). */
+.guides__step, .guides__zoom { display: inline-flex; min-height: var(--control-h, 40px); padding: 3px; gap: 2px; background: var(--track, #e8eaed); border-radius: var(--control-radius, var(--radius-sm, 8px)); }
 .guides__step button, .guides__zoom button {
+  min-height: calc(var(--control-h, 40px) - 6px);
   border: 0;
   background: none;
   color: var(--ink-muted, #5b5f66);
   font: inherit;
-  font-size: 13px;
-  padding: 5px 12px;
-  border-radius: 999px;
+  font-size: var(--button-font, 13.5px);
+  line-height: 1.25;
+  padding: 4px 12px;
+  border-radius: calc(var(--control-radius, var(--radius-sm, 8px)) - 3px);
   cursor: pointer;
 }
-.guides__step button:disabled { opacity: 0.35; cursor: default; }
+.guides__step button:disabled { opacity: var(--disabled-opacity, 0.45); cursor: default; }
 .guides__step button:not(:disabled):hover, .guides__zoom button:hover { color: var(--ink, #16181c); }
 .guides__zoom button[aria-pressed='true'] { background: var(--segment, #ffffff); color: var(--ink, #16181c); box-shadow: var(--segment-shadow, 0 1px 2px rgba(0, 0, 0, 0.12)); font-weight: 600; }
-.guides__download { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--ink, #16181c); }
+.guides__download { margin-left: auto; font-size: var(--button-font, 13.5px); font-weight: 600; color: var(--ink, #16181c); }
 
 .guides__viewer {
   overflow: auto;
@@ -108,7 +111,7 @@
 .guides__viewer[data-zoom='fit'] .guides__page { width: auto !important; max-width: 100%; max-height: calc(100vh - 340px); }
 
 .guides__notes { margin: var(--gap, 16px) 0; padding: 14px 20px; background: var(--surface, #ffffff); border-radius: var(--radius, 14px); color: var(--ink-muted, #5b5f66); font-size: 13.5px; }
-.guides__notes summary { cursor: pointer; color: var(--ink, #16181c); font-weight: 600; }
+.guides__notes-head { margin: 0; color: var(--ink, #16181c); font-size: inherit; font-weight: 600; }
 .guides__notes ul { margin: 10px 0 0; padding-left: 18px; }
 .guides__notes li { margin: 4px 0; }
 

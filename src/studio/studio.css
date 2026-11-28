@@ -67,47 +67,55 @@
 .studio__fidelity p { margin: 3px 0 0; }
 .studio__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
 .studio__size { font-size: 13px; color: var(--ink-faint, #80858d); }
-.studio__toggle { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-muted, #5b5f66); }
+.studio__toggle { display: inline-flex; gap: 8px; align-items: center; min-height: var(--control-h, 40px); font-size: 13.5px; color: var(--ink, #16181c); cursor: pointer; }
+.studio__toggle input { flex: none; width: 16px; height: 16px; margin: 0; accent-color: var(--ink, #16181c); }
 .studio__downloads { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; margin-left: auto; }
 .studio__note { margin: 10px 0 0; font-size: 12.5px; color: var(--ink-faint, #80858d); }
 .studio__error { margin: 10px 0 0; font-size: 13px; color: #b42318; }
 .studio__empty { color: var(--ink-muted, #5b5f66); }
 
 .studio__fields { display: grid; gap: 12px; }
-.studio .field { display: grid; gap: 5px; }
-.studio .field__label { font-size: 12.5px; font-weight: 600; color: var(--ink-muted, #5b5f66); }
+/* Fields, buttons and switches take the host's control tokens (brandkit's --control-*), so the
+   studio's match the rest of the page; the fallbacks are brandkit's values, for any other host. */
+.studio .field { display: grid; gap: var(--field-gap, 6px); }
+.studio .field__label { font-size: var(--label-font, 12.5px); font-weight: 600; line-height: 1.4; color: var(--ink-muted, #5b5f66); }
 .studio input[type='text'], .studio select, .studio textarea {
   width: 100%;
-  min-height: 40px;
-  padding: 7px 10px;
-  border: 1px solid color-mix(in srgb, var(--ink, #16181c) 18%, transparent);
-  border-radius: var(--radius-sm, 8px);
-  background: var(--page, #f4f5f7);
+  min-height: var(--control-h, 40px);
+  padding: 0 var(--control-pad, 12px);
+  border: 1px solid var(--control-line, color-mix(in srgb, var(--ink, #16181c) 12%, transparent));
+  border-radius: var(--control-radius, var(--radius-sm, 8px));
+  background-color: var(--control-bg, var(--page, #f4f5f7));
   color: var(--ink, #16181c);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--control-font, 14px);
+  line-height: 1.4;
 }
-.studio textarea { resize: vertical; line-height: 1.4; }
-.studio input[type='text']:focus, .studio select:focus, .studio textarea:focus { outline: 2px solid var(--focus, #2f6fde); outline-offset: 1px; }
+.studio textarea { padding-block: 9px; resize: vertical; border-radius: var(--control-radius-box, var(--radius-sm, 8px)); }
+.studio input[type='text']:hover, .studio select:hover, .studio textarea:hover { border-color: var(--control-line-hover, var(--ink-faint, #80858d)); }
+.studio input[type='text']:focus-visible, .studio select:focus-visible, .studio textarea:focus-visible { outline: 2px solid var(--focus, #2f6fde); outline-offset: 1px; }
 
 .studio .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  min-height: 34px;
-  padding: 6px 14px;
+  min-height: var(--control-h, 40px);
+  padding: 6px 16px;
   border: 0;
   border-radius: 999px;
   background: var(--ink, #16181c);
   color: var(--page, #fff);
   font: inherit;
-  font-size: 13px;
+  font-size: var(--button-font, 13.5px);
   font-weight: 600;
+  line-height: 1.25;
   cursor: pointer;
 }
 .studio .button--quiet { background: var(--track, #e8eaed); color: var(--ink, #16181c); }
-.studio .button:disabled { opacity: 0.45; cursor: default; }
-.studio .button:not(:disabled):hover { filter: brightness(0.94); }
+.studio .button:disabled { opacity: var(--disabled-opacity, 0.45); cursor: default; }
+.studio .button:not(:disabled):hover { filter: brightness(0.95); }
+.studio .button:not(:disabled):active { filter: brightness(0.9); }
 
 @media (max-width: 1100px) {
   .studio { grid-template-columns: minmax(0, 1fr) 280px; }
@@ -131,12 +139,14 @@
   .studio__downloads { width: 100%; margin-left: 0; justify-content: stretch; }
   .studio__downloads > * { flex: 1 1 0; justify-content: center; }
   .studio__downloads .ui-menu > .button { width: 100%; justify-content: center; }
-  .studio__downloads > .studio__primary { order: -1; flex-basis: 100%; min-height: 44px; }
+  .studio__downloads > .studio__primary { order: -1; flex-basis: 100%; min-height: var(--control-h-lg, 44px); }
 }
 
 .studio__count { display: block; font-size: 11.5px; font-weight: 400; color: var(--ink-faint, #80858d); }
-.studio__variants { display: flex; gap: 2px; max-width: 100%; width: fit-content; margin-bottom: 12px; padding: 3px; border-radius: var(--radius-sm, 8px); background: var(--track, #e8eaed); overflow-x: auto; scrollbar-width: none; }
-.studio__variants button { flex: none; padding: 5px 12px; border: 0; border-radius: 6px; background: none; color: var(--ink-muted, #5b5f66); font: inherit; font-size: 13px; white-space: nowrap; cursor: pointer; }
+/* The variants switch: brandkit's segmented control, with its tokens' fallbacks. */
+.studio__variants { display: flex; gap: 2px; max-width: 100%; width: fit-content; min-height: var(--control-h, 40px); margin-bottom: 12px; padding: 3px; border-radius: var(--control-radius, var(--radius-sm, 8px)); background: var(--track, #e8eaed); overflow-x: auto; scrollbar-width: none; }
+.studio__variants button { flex: none; min-height: calc(var(--control-h, 40px) - 6px); padding: 4px 12px; border: 0; border-radius: calc(var(--control-radius, var(--radius-sm, 8px)) - 3px); background: none; color: var(--ink-muted, #5b5f66); font: inherit; font-size: var(--button-font, 13.5px); line-height: 1.25; white-space: nowrap; cursor: pointer; }
+.studio__variants button:not([aria-pressed='true']):hover { color: var(--ink, #16181c); }
 .studio__variants button[aria-pressed='true'] { background: var(--segment, #fff); color: var(--ink, #16181c); font-weight: 600; box-shadow: var(--segment-shadow, 0 1px 2px rgba(0, 0, 0, 0.08)); }
 .studio__variant-picker { display: flex; max-width: 320px; margin-bottom: 12px; }
 .studio__variant-picker .select { display: flex; width: 100%; }

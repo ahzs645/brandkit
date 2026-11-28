@@ -12,9 +12,25 @@ The source repository's main branch can be ahead of the published package.
 ## Export a brand
 
 Every brand now has a **Web → Astryx theme** section, including brands without
-their own `web.page` specification. It offers a theme module, theme JSON, setup
-guide and compatibility report. Existing website components remain below it for
-brands that provide them.
+their own `web.page` specification. Existing website components remain below it
+for brands that provide them. The section shows, from the same export:
+
+- **Preview**: the theme on a few familiar controls (tabs, a focused input, a
+  selected row, checkbox, switch, link, primary and secondary buttons) in light
+  and dark side by side. It is drawn with plain CSS from the token values over
+  Astryx's pinned default surfaces (`ASTRYX_DEFAULTS`), not with Astryx itself;
+  the [example app](../examples/astryx/README.md) renders the real components.
+- **Set up in a React app**: numbered steps (get the Website kit and what it
+  contains, install the pinned packages, load the styles/fonts/theme, optional
+  SSR precompile, check in the host) with copyable snippets taken from the
+  generated README, and the brand's font notices beside the font step.
+- **Theme tokens**: every token the theme sets, with light/dark swatches and
+  values, which shades were adjusted from the source colour, and the typography,
+  weight and local tokens.
+- **Contrast**: each report check as a row per mode, showing the foreground on
+  its hardest background, the ratio, its target and pass/fail.
+- **Files**: `theme.js`, `theme.json`, `report.json` and `README.md` in tabs,
+  each with copy and download. **Download theme** saves `theme.js` directly.
 
 **Download kit → Website** and **Everything** include the same four files:
 

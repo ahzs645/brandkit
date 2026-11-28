@@ -8,6 +8,9 @@
 //   ledger  a specification sheet: heavy rules above and below, the first column set as labels
 //   panel   the table on one tinted ground, rows parted by lines of paper
 //   accent  a header row in the brand's accent colour over ruled rows
+//   sheet   a drawing schedule: ink rules above the header and under the last row, lines between rows
+//   banded  a header row in the primary colour, rows banded in a light tint, no rules
+//   card    the table on a white card outlined in the line colour, lines between rows
 
 import { officeFont } from '../engine/office.js'
 import { TABLE_STYLES } from '../engine/documentation.js'
@@ -81,6 +84,28 @@ export const tableLook = (profile, brand) => {
       first: strong,
       frame: { bottom: line(1, c.accent) },
       padding: { y: 2.3, x: 3 }
+    },
+    sheet: {
+      header: { colour: c.muted, ...label },
+      body: { rule: line(0.75, c.line) },
+      first: strong,
+      frame: { top: line(0.75, c.ink), bottom: line(0.75, c.ink) },
+      padding: { y: 2.1, x: 3.7, flush: true }
+    },
+    banded: {
+      header: { fill: c.primary ?? c.accent, colour: c.reverse, ...label },
+      body: { band: c.tint ?? c.light },
+      first: strong,
+      padding: { y: 2.1, x: 2.6 }
+    },
+    card: {
+      header: { fill: c.reverse, colour: c.muted, ...label, rule: line(0.75, c.line) },
+      body: { fill: c.reverse, rule: line(0.75, c.line) },
+      first: strong,
+      frame: { outer: line(0.75, c.line) },
+      padding: { y: 2.1, x: 3.7 },
+      radiusMm: 3,
+      ground: c.reverse
     }
   }
   return { style, ...looks[style] }

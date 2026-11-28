@@ -151,8 +151,8 @@ new document content.
 
 ```js
 import { publicationModel } from 'brandkit/documentation'
-import { publicationDocx, publicationHtml } from 'brandkit/documents'
-import { createNodeRenderer, pdfFromDocx } from 'brandkit/documents/node'
+import { publicationDocx, publicationPrintHtml } from 'brandkit/documents'
+import { createNodeRenderer, layoutPdf, pdfFromDocx } from 'brandkit/documents/node'
 
 const values = {
   title: 'Research report',
@@ -164,13 +164,32 @@ const values = {
 const model = publicationModel(brand, { paper: 'letter', purpose: 'report', values })
 const renderer = await createNodeRenderer()
 const word = await publicationDocx({ brand, fonts }, model, renderer)
-const html = publicationHtml({ brand, fonts }, model)
-// Save word bytes as the maintained .docx before calling pdfFromDocx(path, { ctx: { brand, fonts } }).
+const html = await publicationPrintHtml({ brand, fonts }, model, renderer)
+const pdf = await layoutPdf(word, { ctx: { brand, fonts } }) // { bytes, pageCount, pageSizes, notices }
+// Or, for a saved master: pdfFromDocx(path, { ctx: { brand, fonts } }) writes the PDF beside it.
 ```
+
+All three come from one document in document-kit's block model (`publicationDocument` returns it,
+with the brand faces it is set in): the Word file (`writeDocx`), the PDF (that Word file laid out
+by `document-kit/layout`, no office suite) and the print view (`writeHtml`). See
+[document-kit.md](document-kit.md). The print view is `publicationPrintHtml`, which is async and
+takes the renderer for the logo (`publicationHtml` and `welcomeCoverHtml`, the print views brandkit
+wrote itself, are gone). A publication that opens with a designed welcome cover has it as its first
+section, written by document-kit like the rest.
+
+A brand's designed publications (brand.json `publications`: styles, kinds and documents, see
+[brand-schema.md](brand-schema.md#publication-system)) are written by `brandkit/documents/designed`:
+`designedPublicationDocx(ctx, doc, { style, png, read })` and `designedPublicationHtml(…)`, where
+`read(path)` gives the files the brand carries (the documents' screenshots) as bytes; the PDF is
+the Word file laid out by `layoutPdf`, as for any publication.
+`pdfFromDocx(path, { engine: 'libreoffice' })` converts with LibreOffice instead, for a master
+edited in Word.
 
 Pin a reviewed Brandkit commit when using a submodule. Install its declared dependencies;
 the document package uses native Resvg only through the Node-specific export. Browser hosts
-should provide the browser rasterizer to `publicationDocx` and never import `documents/node`.
+should provide the browser rasterizer to `publicationDocx` and `publicationPrintHtml` and never
+import `documents/node`; to lay a Word file out in the browser, run `layoutDocument` from
+`src/export/layout.js` in a worker, as the app does.
 The app and CLI are reference workflows for the same content model.
 
 The four purposes are `product`, `report`, `brief` and `portfolio`. The portfolio starter

@@ -18,7 +18,7 @@ const option = (name) => {
 }
 const has = (name) => rest.includes(name)
 const validateOptions = () => {
-  const valued = new Set(command === 'recipe' ? ['--input', '--out'] : command === 'pdf' ? ['--out', '--brand'] : command === 'check' ? [] : ['--out', '--pack', '--paper', '--purpose', '--values', '--content', '--source-revision'])
+  const valued = new Set(command === 'recipe' ? ['--input', '--out'] : command === 'pdf' ? ['--out', '--brand', '--pdf-engine'] : command === 'check' ? [] : ['--out', '--pack', '--paper', '--purpose', '--values', '--content', '--source-revision'])
   const flags = new Set(command === 'recipe' ? ['--pdf'] : ['build', 'documents'].includes(command) ? ['--office', '--pdf', '--zip'] : [])
   for (let i = 0; i < rest.length; i++) {
     if (valued.has(rest[i])) { option(rest[i]); i++; continue }
@@ -31,15 +31,17 @@ const usage = `usage: brandkit check <brand.json>
        brandkit build <brand.json> [--out folder] [--pack complete|logos|documents|web|print] [--office]
        brandkit documents <brand.json> [--out folder] [--paper letter|a4|both] [--purpose product|report|brief|portfolio] [--values values.json | --content publication.json] [--pdf] [--zip]
        brandkit recipe <brand.json> --input <recipe-job.json> --out <folder> [--pdf]
-       brandkit pdf <master.docx> [--out folder] [--brand brand.json]
+       brandkit pdf <master.docx> [--out folder] [--brand brand.json] [--pdf-engine document-kit|libreoffice]
        brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--cover] [--cover-variant <id>] [--pdf] [--issue]
        brandkit catalog <pack.zip or folder>… [--out catalog.json] [--name "Catalog name"] [--check]
        brandkit pack <brand folder or folder of brands>… [--out folder] [--name "Catalog name"] [--base-url url] [--bundle [file.zip]]
        brandkit dev [brand folder or folder of brands]… [--build "command"] [--watch path]… [--ignore path]… [--site folder] [--port n] [--app folder] [--app-port n] [--no-app]
 
 The documents command creates native Word files, printable HTML, editable content JSON and brand assets.
---pdf exports each Word master using LibreOffice; set SOFFICE_PATH when it is not on PATH.
+--pdf lays each Word master out as its PDF with document-kit, as the app's preview shows it.
 The pdf command refreshes a PDF after a Word master has been edited. --brand supplies its fonts.
+--pdf-engine libreoffice converts with LibreOffice instead (set SOFFICE_PATH when soffice is not on
+PATH), for a Word file edited in Word whose features the layout does not draw.
 The build command keeps its vector/text default; --office enables generated Office files in Node.
 The pack command makes brand packs (one zip per brand) and a catalog.json listing them; --bundle
 also writes every pack into one brand bundle that adds all of its brands at once.
@@ -70,7 +72,7 @@ const main = async () => {
     const { pdfFromDocx } = await import('../src/export/node.js')
     const brandPath = option('--brand')
     const ctx = brandPath ? await load(brandPath) : undefined
-    const result = await pdfFromDocx(file, { outDir: option('--out') ?? dirname(resolve(file)), ctx })
+    const result = await pdfFromDocx(file, { outDir: option('--out') ?? dirname(resolve(file)), ctx, engine: option('--pdf-engine') ?? 'document-kit', onNotice: (notice) => console.warn(notice) })
     console.log(`PDF exported from the Word master: ${result}`)
     return
   }
@@ -106,7 +108,10 @@ const main = async () => {
   if (purposes?.some((entry) => !['product', 'report', 'brief', 'portfolio'].includes(entry))) throw new Error('--purpose must be product, report, brief or portfolio, or a comma-separated list of these.')
   const withOffice = command === 'documents' || has('--office')
   if ((contentPath || has('--pdf')) && !withOffice) throw new Error('--content and --pdf require documents or build --office.')
-  const renderer = withOffice ? await (await import('../src/export/node.js')).createNodeRenderer() : undefined
+  // The PNG renderer draws the logo in Word masters and print views alike; Word masters' PDFs (--pdf)
+  // are each master laid out by document-kit, in the brand's faces.
+  const nodeExport = await import('../src/export/node.js')
+  const renderer = { ...await nodeExport.createNodeRenderer(), layout: (docx, { namedFonts }) => nodeExport.layoutPdf(docx, { faces: namedFonts }) }
   const filter = (entry) => {
     if (entry.document) {
       if (contentPath) return false
@@ -118,7 +123,7 @@ const main = async () => {
   }
   const result = await buildKit(ctx, {
     renderer, readAsset: (src) => readAssetFromDisk(folder, src), rasters: false, pdfs: false,
-    office: withOffice, documentation: true, pack: command === 'documents' ? 'documents' : option('--pack') ?? 'complete',
+    office: withOffice, officePdfs: withOffice && has('--pdf'), documentation: true, pack: command === 'documents' ? 'documents' : option('--pack') ?? 'complete',
     sourceRevision: option('--source-revision'), filter
   })
   if (result.skipped.length) throw new Error(`Export incomplete: ${result.skipped.map(({ path, error }) => `${path}: ${error.message}`).join('; ')}`)
@@ -127,14 +132,14 @@ const main = async () => {
     .filter((record) => record.purpose).map((record) => [record.path, { publication: true, purpose: record.purpose, paper: record.paper, profileVersion: record.profileVersion }]))
   if (contentPath) {
     const { validatePublication } = await import('../src/engine/documentation.js')
-    const { publicationDocx, publicationHtml } = await import('../src/export/publication.js')
+    const { publicationDocx, publicationPrintHtml } = await import('../src/export/publication.js')
     const publication = JSON.parse(await readFile(resolve(contentPath), 'utf8'))
     const problems = validatePublication(publication)
     if (problems.length) throw new Error(problems.join('\n'))
     if (publication.profile.brandId !== brand.id) throw new Error('The publication and brand definition must have the same brand id.')
     const stem = `${brand.id}-${String(publication.id).replace(/[^a-z0-9_-]/gi, '-')}`
     files.set(`documents/${stem}.docx`, await publicationDocx(ctx, publication, { png: renderer.png }))
-    files.set(`documents/${stem}.html`, encoder.encode(publicationHtml(ctx, publication)))
+    files.set(`documents/${stem}.html`, encoder.encode(await publicationPrintHtml(ctx, publication, { png: renderer.png })))
     files.set(`documents/${stem}.json`, json(publication))
     for (const extension of ['docx', 'html', 'json']) publicationMetadata.set(`documents/${stem}.${extension}`, {
       publication: true, purpose: publication.purpose, paper: publication.paper, profileVersion: publication.profile.status.documentationVersion
@@ -148,10 +153,12 @@ const main = async () => {
     await writeFile(target, bytes)
   }
   if (has('--pdf')) {
-    const { pdfFromDocx } = await import('../src/export/node.js')
-    for (const path of [...files.keys()].filter((path) => path.endsWith('.docx'))) {
-      const pdf = await pdfFromDocx(join(out, path), { outDir: dirname(join(out, path)), ctx })
-      files.set(path.replace(/\.docx$/, '.pdf'), new Uint8Array(await readFile(pdf)))
+    // A master the kit did not lay out (a --content publication) is laid out here, as the kit's are.
+    for (const path of [...files.keys()].filter((path) => path.endsWith('.docx') && !files.has(path.replace(/\.docx$/, '.pdf')))) {
+      const pdf = await nodeExport.layoutPdf(files.get(path), { ctx })
+      for (const notice of pdf.notices) console.warn(`${path}: ${notice}`)
+      await writeFile(join(out, path.replace(/\.docx$/, '.pdf')), pdf.bytes)
+      files.set(path.replace(/\.docx$/, '.pdf'), pdf.bytes)
     }
   }
   // Refresh the catalog/index after custom content or canonical PDF conversion.

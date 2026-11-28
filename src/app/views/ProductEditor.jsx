@@ -150,8 +150,8 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
       </div>
       {problems.length > 0 && <div className="notice notice--error" role="alert">Not saved until these are fixed: {problems.join(' ')}</div>}
 
-      <details open>
-        <summary><h3>Family</h3></summary>
+      <section className="product-editor__section">
+        <h3>Family</h3>
         <div className="product-editor__grid">
           <Text label="Tab name" value={draft.label} placeholder="Products" onChange={(value) => edit((next) => put(next, 'label', value))} />
           <Text label="Status" value={draft.status} placeholder="proposed" onChange={(value) => edit((next) => put(next, 'status', value))} />
@@ -178,10 +178,10 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
         </div>
         <h4>How names are set</h4>
         <VariantSettings base brand={brand} spec={draft.lockup} onChange={(spec) => edit((next) => { next.lockup = { ...spec, ...(draft.lockup?.arrangements && { arrangements: draft.lockup.arrangements }) } })} />
-      </details>
+      </section>
 
-      <details open>
-        <summary><h3>Products <span className="muted">({draft.items.length})</span></h3></summary>
+      <section className="product-editor__section">
+        <h3>Products <span className="muted">({draft.items.length})</span></h3>
         <ol className="product-editor__items">
           {draft.items.map((item, index) => {
             const tones = resolved[index] ?? {}
@@ -197,14 +197,14 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
                   <ColourField label="Accent" value={item.accent} computed={tones.accent} onChange={(value) => edit((next) => { next.items[index].accent = value ?? '' })} />
                   <Text label="Accent name" value={item.accentName} placeholder="Blue" onChange={(value) => edit((next) => put(next.items[index], 'accentName', value))} />
                 </div>
-                <details className="product-editor__tones">
-                  <summary>Tones: text <code>{tones.accentText}</code> {tones.accentText && <Ratio value={contrast(tones.accentText, paper)} against="on paper" />} · on dark <code>{tones.accentOnDark}</code> · on the accent <code>{tones.onAccent}</code> {tones.onAccent && <Ratio value={contrast(tones.onAccent, tones.accent)} against="on the accent" />}</summary>
+                <div className="product-editor__tones">
+                  <p className="product-editor__tones-head">Tones: text <code>{tones.accentText}</code> {tones.accentText && <Ratio value={contrast(tones.accentText, paper)} against="on paper" />} · on dark <code>{tones.accentOnDark}</code> · on the accent <code>{tones.onAccent}</code> {tones.onAccent && <Ratio value={contrast(tones.onAccent, tones.accent)} against="on the accent" />}</p>
                   <div className="product-editor__grid">
                     <ColourField optional label="Text tone (on paper)" value={item.accentText} computed={tones.accentText} onChange={(value) => edit((next) => put(next.items[index], 'accentText', value))} />
                     <ColourField optional label="Beside a reversed logo" value={item.accentOnDark} computed={tones.accentOnDark} onChange={(value) => edit((next) => put(next.items[index], 'accentOnDark', value))} />
                     <ColourField optional label="Drawn on the accent" value={item.onAccent} computed={tones.onAccent} onChange={(value) => edit((next) => put(next.items[index], 'onAccent', value))} />
                   </div>
-                </details>
+                </div>
                 <div className="product-editor__row-actions">
                   <button type="button" className="button button--quiet" disabled={index === 0} onClick={() => edit((next) => { next.items = move(next.items, index, -1) })} aria-label={`Move ${item.name} up`}>↑</button>
                   <button type="button" className="button button--quiet" disabled={index === draft.items.length - 1} onClick={() => edit((next) => { next.items = move(next.items, index, 1) })} aria-label={`Move ${item.name} down`}>↓</button>
@@ -215,10 +215,10 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
           })}
         </ol>
         <button type="button" className="button button--quiet" onClick={() => edit((next) => { next.items.push(newProduct('New product', { taken: next.items.map((entry) => entry.id), status: 'proposed' })) })}>+ Add a product</button>
-      </details>
+      </section>
 
-      <details>
-        <summary><h3>Endorsed variants <span className="muted">({variants.length})</span></h3></summary>
+      <section className="product-editor__section">
+        <h3>Endorsed variants <span className="muted">({variants.length})</span></h3>
         <p className="muted">Ways of setting the endorsed lockup, each a few settings over the family’s. Choose one to use it everywhere; the rest are kept as archived options.</p>
         <Choice label="Variant in use" value={draft.variant ?? ''} options={[{ value: '', label: 'None chosen (compare them all)' }, ...variants.map((entry) => ({ value: entry.id, label: entry.label }))]} onChange={(value) => decide('variant', 'variants', value)} />
         <ol className="product-editor__items">
@@ -243,10 +243,10 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
           ))}
         </ol>
         <button type="button" className="button button--quiet" onClick={() => edit((next) => { const taken = (next.variants ?? []).map((entry) => entry.id); next.variants = [...(next.variants ?? []), { id: newProduct('variant', { taken }).id, label: `Variant ${taken.length + 1}`, lockup: {} }] })}>+ Add a variant</button>
-      </details>
+      </section>
 
-      <details>
-        <summary><h3>Directions and decision <span className="muted">({directions.length})</span></h3></summary>
+      <section className="product-editor__section">
+        <h3>Directions and decision <span className="muted">({directions.length})</span></h3>
         <p className="muted">A direction pairs an arrangement, an app icon style and (for endorsed) a variant. Choosing one is the decision: the kit then carries that direction and the compact form alone.</p>
         <div className="product-editor__grid">
           <Choice label="Chosen direction" value={draft.direction ?? ''} options={[{ value: '', label: 'None yet (compare)' }, ...directions.map((entry) => ({ value: entry.id, label: entry.label }))]} onChange={(value) => decide('direction', 'directions', value)} />
@@ -272,10 +272,10 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
           ))}
         </ol>
         <button type="button" className="button button--quiet" onClick={() => edit((next) => { const taken = (next.directions ?? []).map((entry) => entry.id); next.directions = [...(next.directions ?? []), { id: newProduct('direction', { taken }).id, label: `Direction ${taken.length + 1}`, arrangement: arrangements[0], tile: tiles[0] }] })}>+ Add a direction</button>
-      </details>
+      </section>
 
-      <details>
-        <summary><h3>Reuse this family</h3></summary>
+      <section className="product-editor__section">
+        <h3>Reuse this family</h3>
         <p className="muted">A template keeps how this family is drawn (lettering, variants, directions, icons, naming) without the parent logo, so another brand can start from it. Products can go with it as starters.</p>
         <div className="product-editor__grid">
           <label className="field field--wide"><span className="field__label">Template name</span><input ref={templateName} type="text" placeholder={`${brand.name} ${draft.label ?? 'products'}`} /></label>
@@ -288,7 +288,7 @@ export const ProductEditor = ({ brand, draft, onDraft, problems, dirty, saveLabe
           {onRemove && <button type="button" className="button button--quiet" onClick={onRemove}>Remove the family from {brand.name}</button>}
         </div>
         {message && <p className="notice" role="status">{message}</p>}
-      </details>
+      </section>
     </section>
   )
 }

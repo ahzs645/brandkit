@@ -699,6 +699,9 @@ page title: `{ "font": "display", "colour": "gold-text", "ruleBelow": { "widthPt
 | `ledger` | A specification sheet: 1.5 pt ink rules above and below, the header and the first column set as labels. |
 | `panel` | The table on one tinted ground (the light role, or the line role where light is all but white), rows parted by lines of paper; rounded in HTML. |
 | `accent` | A header row in the accent colour with labels in reverse (or ink, where reverse would fall below 4.5:1), ruled rows, an accent rule to close. |
+| `sheet` | A drawing schedule: ink rules over the header and under the last row, a line between rows, the first column in the semibold face. |
+| `banded` | A header row in the primary colour, rows banded in a light tint, no rules. |
+| `card` | The table on a white card outlined in the line colour, a line between rows. |
 
 Header labels take the label face and its tracking (at least 0.06 em).
 Logo `options` may select an existing family/layout or signature/colourway; `logo.departmental`
@@ -723,6 +726,151 @@ structures, unsafe image sources, inconsistent tables or unusable dimensions.
 
 See [Documents from a brand](documentation.md) for the complete model, value fields,
 source-maintenance commands and rendering guidance.
+
+## Publication system
+
+`publications` defines a brand's designed documents and slides: white papers, catalogs, brochures,
+product sheets, briefing letters and presentations, each in one of the brand's **styles**. brandkit
+writes them with document-kit ([document-kit.md](document-kit.md)): one document, from which come
+the Word file, its PDF (the Word file laid out) and the print view. Slides are 16:9 landscape pages,
+one a page, in the same three formats; there is no PowerPoint. The **Documents** tab shows them in
+its gallery with a style switch. (The key is `publications`, not `documents`: `documents` is the list
+of Office files made from templates, above.)
+
+```json
+"publications": {
+  "label": "Publication system", "status": "proposed", "style": "survey",
+  "home": { "name": "Prince George, British Columbia", "point": [-122.7497, 53.9171] },
+  "grounds": [
+    { "id": "paper", "name": "Paper", "colour": "paper" },
+    { "id": "frost", "name": "Frost", "colour": "white", "tint": "ice", "amount": 10, "status": "chosen" }
+  ],
+  "styles": [
+    { "id": "survey", "name": "Survey", "label": "P4", "status": "proposed", "ground": "frost",
+      "cover": { "design": "band", "plate": { "type": "profile", "reach": 0.64 } },
+      "page":  { "running": "title-block", "look": "ruled", "table": "sheet", "mark": "symbol" },
+      "close": { "design": "night", "plate": { "type": "field" } } }
+  ],
+  "kinds": [
+    { "id": "white-paper", "name": "White paper", "format": "page", "paper": "letter", "skeleton": ["cover", "content", "content", "closing"] },
+    { "id": "presentation", "name": "Presentation", "format": "slide", "paper": "slide", "orientation": "landscape", "skeleton": ["cover", "content", "closing"] }
+  ],
+  "documents": [
+    { "id": "access-whitepaper", "kind": "white-paper", "product": "access", "title": "Forestry road planning",
+      "short": "Forestry road planning white paper", "edition": "November 2026", "seed": 7, "sections": ["Summary", "Workflow"],
+      "pages": [
+        { "layout": "cover", "kicker": "Technical white paper", "title": "Forestry road planning", "subtitle": "…" },
+        { "layout": "content", "section": "Summary", "blocks": [
+          { "type": "opening", "kicker": "01 · Summary", "title": "…", "lead": "…" },
+          { "type": "figure", "src": "screens/03-workspace.jpg", "heightMm": 66, "position": "left top", "label": "Figure 1", "caption": "…" },
+          { "type": "push", "blocks": [{ "type": "note", "label": "Scope", "text": "…" }] }
+        ] },
+        { "layout": "closing", "kicker": "Next step", "title": "…", "text": "…", "asks": [["Bring", "…"], ["Agree", "…"]] }
+      ] }
+  ]
+}
+```
+
+### Styles
+
+A style is three parts, each a design brandkit draws, and the ground its running pages sit on:
+
+| Part | Field | Values |
+| --- | --- | --- |
+| `cover` | `design` | `sheet`: a drawing sheet (neatline, the plate in a ruled box, the title under it, a title block along the foot). `band`: the primary colour, the title above the plate, an accent band at the foot. `field`: the light colour, the plate across the middle, a foot strip on the ground with the date. |
+| | `plate` | The cover's graphic (below). |
+| `page` | `running` | `title-block`: a neatline and a title block (owner, document, section, edition, sheet). `bar`: a primary bar with the compact lockup and the section, an accent band at the foot. `dot-index`: the symbol, owner and kind, a dot for each section with this one lit, the page number in a dot. `plain`: running text and a page number. |
+| | `look` | How blocks are drawn: `ruled` (ink rules, boxed callouts), `solid` (primary fills: callouts, figure mounts, table heads), `card` (white and light cards). |
+| | `table` | A table design (`grid`, `ruled`, `ledger`, `panel`, `accent`, `sheet`, `banded`, `card`); by default the look's own (`sheet`, `banded`, `card`). |
+| | `mark` | `symbol`: the brand symbol at the top left of every running page. |
+| `close` | `design` | `sheet`, `band`, `field`, or `night` (the primary colour with the field plate, and the accent band). |
+| | `plate` | The closing page's graphic. |
+
+`ground` names a ground in `grounds` (a palette colour or role, `colour`, or a tint of it: `amount`
+percent of `tint`), or a colour directly. Covers and closing pages keep their own grounds.
+
+A **plate** is generated line work drawn from a seed (`src/engine/plates.js`), never the logo:
+
+| `type` | Draws | Options |
+| --- | --- | --- |
+| `contour` | Contour lines of a height field, a chosen route in the accent and two alternatives | `routes: false` for the lines alone |
+| `profile` | A road profile: the ground, a design grade, the cut and fill between | `reach` (0–1): how far down the line runs |
+| `field` | The height field as a halftone of single dots, a route picked out in the accent | `step`, `fade` (`top`, `left`, `none`) |
+| `dots` | The brand symbol (a `symbol` of circles) as the plate, whole and at one scale | `motif`: `symbol`, `full`, `left`, `horizon`, `tonal`, `panel`, `panel-crop`, `panel-horizon`, `panel-hang`, `panel-card`, `panel-split`, `panel-tile`, `panel-step`, `panel-echo`, `panel-grid`, `panel-halftone`, `panel-network`, `panel-chart`, `panel-blueprint`, `panel-world` (a dot map with the page's `points` and `home` lit), `night`, `tiles`, `side`, `top`, `type` |
+
+`seed` comes from the document (a closing page adds 11). A cover or closing page may set `motif` (and
+`points`) to turn a `field` or `dots` plate into that dots motif; `motif: "night"` also makes a field
+cover dark.
+
+### Kinds
+
+A kind is a kind of document: `format` (`page` or `slide`), `paper` (`letter`, `a4`; slides are
+`slide`, 20 × 11.25 in), `orientation` for pages, and `skeleton`, the pages a new one starts with
+(`cover`, `content`, `sheet` a one-page sheet with a masthead, `closing`). A brand that lists no kinds
+has white paper, catalog, brochure, product sheet, briefing letter and presentation. The gallery
+shows a kind no document uses yet as a starter of bracketed placeholders.
+
+### Documents
+
+A document names its `kind`, optionally a `style` (else `publications.style`), and a `product` from
+`products.items`. A **product document** carries the product lockup (parent logo, accent rule, name)
+on its cover, closing page and masthead, the compact lockup in running bars, the product's accent,
+and closes on `products.positioning.line`, the family key and "*Product* is part of *Platform*". A
+**company document** (no `product`) carries the brand's logo, the primary and light colours in place
+of an accent, and closes on `copy.tagline` and its closing page's `signoff`.
+
+`title`, `short` (running heads), `edition`, `status` (slides' foot), `label` (what the document
+calls itself, else the kind's name), `seed`, `sections` (the dot index and title block; a page names
+one as `section`) and `pages`:
+
+| `layout` | Fields |
+| --- | --- |
+| `cover` | `kicker`, `title`, `subtitle`, `lines` (the meta lines; else the edition), `hero: { src, caption }` (a capture in place of the plate), `motif`, `points`, `small` (slides) |
+| `content` | `section`, `blocks`, `bare` (a one-page sheet: no running mark, the masthead heads it); slides add `kicker`, `title`, `subtitle` and `note` |
+| `closing` | `kicker`, `title`, `text` (slides: `subtitle`), `asks` (up to four `[label, text]`), `contact`, `fine`, `signoff`, `lines` (slides), `motif`, `points` |
+
+A closing page's `contact` is a line of text (set in the label face, as a page's contact line), or a person
+to write to: `{ "name", "role", "org", "email", "phone" }`, `name` required. A person makes the page a
+contact page, as a client document closes: the name large in the display face, the role and organisation
+under it in the page's quieter tone, then the email and phone as plain lines, with the page's plate or
+motif as usual and no cards. Leave out `asks` on such a page.
+
+```json
+{ "layout": "closing", "kicker": "Contact", "title": "Questions about *this quote*",
+  "contact": { "name": "[Name]", "role": "[Role]", "org": "[Organisation]", "email": "[name@example.com]" },
+  "signoff": "[Company · Document]" }
+```
+
+Text takes `**strong**`, `*second tone*` (a lighter tone in titles, italic in text), `[label](https://…)`
+links and `[1,2]` or `[R1, H2]` source references (set in the label face, in the accent's text tone).
+
+### Blocks
+
+Content pages hold the publication block model (`src/engine/publication-blocks.js`), which the plain
+publications in **Documents** take too. A figure's `src` is a file the brand carries (`screens/…`) or
+an embedded PNG/JPEG data URL.
+
+| Block | Fields | Written as |
+| --- | --- | --- |
+| `heading`, `paragraph`, `list` | `text`, `level`; `items` | Heading styles, paragraphs, a list |
+| `table` | `headers`, `rows` (a cell may be `{ n, text, ext }`), `widths`, `tight` | A table in the style's table design |
+| `figure` | `src`, `alt`, `heightMm` and `position` (cropped to that height, as CSS `object-fit: cover`), `label`, `caption`, `placeholder` | A picture (framed per look) or a labelled placeholder box |
+| `opening` | `kicker`, `title`, `lead` | A kicker, Heading 1 and a lead |
+| `kicker`, `lead`, `note`, `statement` | `text` (`note`: `label`) | Named paragraph styles |
+| `steps` | `items: [{ n, title, text }]`, `columns`, `numbered`, `stack` | A grid of cells with ruled tops |
+| `callout` | `label`, `title`, `text`, `field`, `strong` | A shaded or ruled one-cell table |
+| `facts` | `items: [[label, value]]`, `columns` | A grid of label/value cells |
+| `columns` | `columns: [[blocks]]`, `widths`, `ruled` | A borderless table, blocks in its cells |
+| `scale` | `label`, `steps`, `items: [{ code, name, level, note, text }]` | Cells with the level as a row of filled and open dots (a picture) |
+| `references`, `contents` | `items`, `columns` | Hanging-indented entries; entries with right-aligned page numbers |
+| `devices`, `phones` | `src` or `items`; `srcs`; `heightMm`, `caption` | Pictures |
+| `masthead`, `signoff` | `text` | The lockup and a label on one line; a ruled closing line |
+| `spacer` | `heightMm` | Space |
+| `push` | `blocks` | Pinned to the foot of the page (a callout or facts there are set as ruled paragraphs) |
+
+`validateBrand` checks all of it (`publicationsProblems`), naming the document, page and block.
+`scripts/brands/collateral-publications.mjs` converts the ddcnorth design system's collateral
+sources into this schema (the test fixture `test/fixtures/ddcnorth/`).
 
 ## Guide
 

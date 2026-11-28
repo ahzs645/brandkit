@@ -38,21 +38,28 @@ try {
   assert.equal(await page.getByRole('heading', { name: 'Website components' }).count(), 0)
 
   const files = [
-    ['Download theme', 'theme.js', astryxThemeModule(ctx)],
-    ['Theme JSON', 'theme.json', `${JSON.stringify(astryxThemeConfig(ctx), null, 2)}\n`],
-    ['Setup guide', 'README.md', astryxReadme(ctx)],
-    ['Compatibility report', 'report.json', `${JSON.stringify(astryxThemeReport(ctx), null, 2)}\n`]
+    ['theme.js', astryxThemeModule(ctx)],
+    ['theme.json', `${JSON.stringify(astryxThemeConfig(ctx), null, 2)}\n`],
+    ['README.md', astryxReadme(ctx)],
+    ['report.json', `${JSON.stringify(astryxThemeReport(ctx), null, 2)}\n`]
   ]
-  for (const [label, name, expected] of files) {
-    const [download] = await Promise.all([
-      page.waitForEvent('download'),
-      panel.getByRole('button', { name: label, exact: true }).click()
-    ])
+  const saved = async (button, name, expected) => {
+    const [download] = await Promise.all([page.waitForEvent('download'), button.click()])
     assert.equal(download.suggestedFilename(), name)
     assert.equal(await readFile(await download.path(), 'utf8'), expected, `${name} must contain the current brand export`)
   }
-  await panel.getByText('View theme source', { exact: true }).click()
+  await saved(panel.getByRole('button', { name: 'Download theme', exact: true }), 'theme.js', astryxThemeModule(ctx))
+  // Each generated file has a tab showing its source, with its own download.
+  for (const [name, expected] of files) {
+    await panel.getByRole('tab', { name, exact: true }).click()
+    assert.equal(await panel.getByRole('tabpanel').locator('pre').textContent(), expected, `${name} tab must show the current export`)
+    await saved(panel.getByRole('button', { name: `↓ ${name}`, exact: true }), name, expected)
+  }
+  await panel.getByRole('tab', { name: 'theme.js', exact: true }).click()
   assert.equal(await panel.getByLabel('Astryx theme source').textContent(), astryxThemeModule(ctx))
+  const report = astryxThemeReport(ctx)
+  assert.equal(await panel.locator('.astryx-contrast li').count(), report.contrast.checks.length, 'every contrast check is listed')
+  assert.equal(await panel.getByText(`${report.contrast.checks.filter((check) => check.pass).length} of ${report.contrast.checks.length} contrast checks pass`).count(), 1)
   await page.screenshot({ path: resolve(screenshotDir, 'astryx-desktop.png'), fullPage: true })
 
   await page.setViewportSize({ width: 390, height: 844 })
@@ -65,8 +72,8 @@ try {
   assert.equal(new URL(page.url()).searchParams.get('view'), 'web', 'shared Web links must also remain available')
   assert.equal(await page.getByRole('button', { name: 'Download theme', exact: true }).isEnabled(), true)
   assert.deepEqual(errors, [], 'the new routes must not emit uncaught browser errors')
-  await writeFile(resolve(screenshotDir, 'report.json'), `${JSON.stringify({ passed: ['Direct and shared Web routes', 'Four current-brand downloads', 'Theme source', '390px layout'], errors }, null, 2)}\n`)
-  console.log('Astryx export UI: direct and shared Web routes, four downloads, source and phone layout passed.')
+  await writeFile(resolve(screenshotDir, 'report.json'), `${JSON.stringify({ passed: ['Direct and shared Web routes', 'Five current-brand downloads', 'File tabs and theme source', 'Contrast rows', '390px layout'], errors }, null, 2)}\n`)
+  console.log('Astryx export UI: direct and shared Web routes, downloads, file tabs, contrast rows and phone layout passed.')
 } catch (error) {
   if (page) await page.screenshot({ path: resolve(screenshotDir, 'failure.png'), fullPage: true, timeout: 5000 }).catch(() => {})
   await writeFile(resolve(screenshotDir, 'report.json'), `${JSON.stringify({ errors, failure: error.stack ?? error.message }, null, 2)}\n`)

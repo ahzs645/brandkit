@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promise
 import { join, resolve } from 'node:path'
 import { createRequire } from 'node:module'
 import { recipeDocx, diagramConfig, diagramSource } from './index.js'
-import { createNodeRenderer, pdfFromDocx } from '../export/node.js'
+import { createNodeRenderer, layoutPdf } from '../export/node.js'
 
 /**
  * Reads the job's spreadsheets given as `{"path": …}` (relative to `baseDir`, the job file's folder) into bytes.
@@ -20,7 +20,10 @@ export async function readJobFiles(job, baseDir = process.cwd()) {
   return { ...job, spreadsheets }
 }
 
-/** Export a portable job to a Word master, optional PDF, and editable diagram sources. */
+/**
+ * Export a portable job to a Word master, its PDF (the Word master laid out by document-kit, in the
+ * brand's faces) when `pdf` is set, and editable diagram sources.
+ */
 export async function exportRecipe(ctx, source, { outDir, pdf = false, logo, diagrams = [], baseDir } = {}) {
   const job = await readJobFiles(source, baseDir)
   const renderer = await createNodeRenderer()
@@ -68,7 +71,7 @@ export async function exportRecipe(ctx, source, { outDir, pdf = false, logo, dia
     const master = join(stage, names[0])
     await writeFile(master, bytes)
     if (pdf) {
-      await pdfFromDocx(master, { outDir: stage, ctx })
+      await writeFile(join(stage, 'proposal.pdf'), (await layoutPdf(bytes, { ctx })).bytes)
       names.push('proposal.pdf')
     }
     for (const [id, image] of sources) {

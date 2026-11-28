@@ -62,6 +62,8 @@ const TYPES = {
 }
 const RELOAD = '<script>new EventSource("/__brandkit_dev").onmessage=()=>location.reload()</script>'
 const withReload = (html) => html.replace(/<\/body>|$/i, (end) => `${RELOAD}${end}`)
+// brandkit's page is told it is a dev session: it offers this catalog's brands and nothing else.
+const asDevSession = (html, catalogUrl) => withReload(html).replace(/<head[^>]*>|^/i, (head) => `${head}<script>globalThis.__BRANDKIT_DEV__=${JSON.stringify({ catalogs: [catalogUrl] })}</script>`)
 const dim = (text) => `\x1b[2m${text}\x1b[0m`, green = (text) => `\x1b[32m${text}\x1b[0m`, red = (text) => `\x1b[31m${text}\x1b[0m`
 
 const parse = (argv) => {
@@ -223,9 +225,9 @@ export const dev = async (argv) => {
 
   let vite = null
   const hosted = options.app.mode === 'hosted' ? hostedApp(options.app.url) : null
-  const send = (response, { status, type, body }, method) => {
+  const send = (response, { status, type, body, app = false }, method) => {
     if (status !== 200) { response.writeHead(status, { 'Content-Type': 'text/plain; charset=utf-8' }).end(body ?? (status === 404 ? 'Not found' : '')); return }
-    if (type.startsWith('text/html')) body = Buffer.from(withReload(body.toString('utf8')))
+    if (type.startsWith('text/html')) body = Buffer.from(app ? asDevSession(body.toString('utf8'), catalogUrl) : withReload(body.toString('utf8')))
     response.writeHead(200, { 'Content-Type': type, 'Content-Length': body.byteLength })
     response.end(method === 'HEAD' ? undefined : body)
   }
@@ -250,7 +252,7 @@ export const dev = async (argv) => {
       return
     }
     if (running) await running
-    if (hosted && (path === APP.slice(0, -1) || path.startsWith(APP))) { send(response, await hosted(path.slice(APP.length)), request.method); return }
+    if (hosted && (path === APP.slice(0, -1) || path.startsWith(APP))) { send(response, { ...(await hosted(path.slice(APP.length))), app: true }, request.method); return }
     if (path === '/' && !options.site) {
       if (options.app.mode !== 'none') { response.writeHead(302, { Location: appLink() }).end(); return }
       const items = packs.map((entry) => `<li><b>${entry.manifest.name}</b> · <a href="/packs/${entry.file}">${entry.file}</a></li>`).join('')
@@ -273,7 +275,7 @@ export const dev = async (argv) => {
   const port = await freePort(options.port, host)
   const origin = `http://${host}:${port}`
   const catalogUrl = `${origin}/packs/catalog.json`
-  const appLink = () => `${origin}${APP}?catalog=${encodeURIComponent(catalogUrl)}${packs[0] ? `&brand=${packs[0].manifest.id}` : ''}`
+  const appLink = () => `${origin}${APP}${packs[0] ? `?brand=${packs[0].manifest.id}` : ''}`
 
   if (options.app.mode === 'checkout') {
     // The checkout's Vite, inside this server: same address, its config and plugins, offered the catalog.
@@ -285,7 +287,7 @@ export const dev = async (argv) => {
       clearScreen: false,
       logLevel: 'warn',
       server: { middlewareMode: true, hmr: { server } },
-      plugins: [{ name: 'brandkit-dev-reload', transformIndexHtml: withReload }]
+      plugins: [{ name: 'brandkit-dev-session', transformIndexHtml: (html) => asDevSession(html, catalogUrl) }]
     })
   }
   await new Promise((done) => server.listen(port, host, done))

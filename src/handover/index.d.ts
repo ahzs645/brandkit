@@ -136,6 +136,8 @@ export interface PackArgs {
   png: (svg: string, width: number) => Promise<Uint8Array>
   /** The cover artwork's resolution; 300 for print, less for a live preview. */
   dpi?: number
+  /** Lays each Word master out as its PDF beside it: `(docx, { title, namedFonts }) => { bytes }` (document-kit's layout). */
+  pdf?: ((docx: Uint8Array, options: { title?: string; namedFonts: Array<{ family: string; bytes: Uint8Array; weight?: number; style?: 'normal' | 'italic' }> }) => Promise<{ bytes: Uint8Array }>) | boolean
   sourceRevision?: string
 }
 export interface PreparedPack {
@@ -146,8 +148,8 @@ export interface PreparedPack {
 }
 export function packOptions(record: HandoverRecord, overrides?: PackChoices): PreparedPack['choices']
 export function preparePack(args: PackArgs): Promise<PreparedPack>
-/** Print views by document id, for a preview. */
-export function packHtml(prepared: PreparedPack, brands: { provider: LoadedBrand; client: LoadedBrand; sourceRevision?: string }): Partial<Record<PackDocument, string>>
+/** Print views by document id, written by document-kit from each document; `png` draws the logo. */
+export function packHtml(prepared: PreparedPack, brands: { provider: LoadedBrand; client: LoadedBrand; sourceRevision?: string; png: (svg: string, width: number) => Promise<Uint8Array> }): Promise<Partial<Record<PackDocument, string>>>
 /** The whole pack in memory: `[path, bytes]` pairs, manifest included. */
 export function composePack(args: PackArgs): Promise<{ prepared: PreparedPack; manifest: Record<string, unknown>; files: [string, Uint8Array][] }>
 export function sha256(value: string | Uint8Array): Promise<string>

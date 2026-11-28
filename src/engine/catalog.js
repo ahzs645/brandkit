@@ -32,6 +32,8 @@ export const assetRecord = async (brand, path, bytes, group, entry = {}) => {
     record.profileVersion = entry.document.profileVersion ?? DOCUMENTATION_VERSION
   }
   record.brandVersion = brand.version
+  // A PDF laid out from a Word file in the kit says which.
+  if (entry.from) record.derivedFrom = entry.from
   if (/\.(docx|pptx)$/.test(path)) record.fontDependencies = [...new Set(Object.values(brand.fonts ?? {}).map((face) => face.file).filter(Boolean))]
   if (path.startsWith('logos/') || path.startsWith('symbol/')) record.provenance = { source: brand.source ?? null, status: brand.status ?? null }
   return record

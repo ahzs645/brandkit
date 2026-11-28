@@ -4,6 +4,7 @@
 
 import { colour, fill, logoOptions, paintOptions } from './brand.js'
 import { validateWelcomeCover } from '../export/welcome-cover.js'
+import { BLOCK_TYPES, blockProblems } from './publication-blocks.js'
 
 export const DOCUMENTATION_VERSION = '1.1'
 
@@ -186,7 +187,7 @@ export const publicationAffiliation = (values = {}) => {
  * This function does not mutate the brand or introduce templates into its identity definition.
  */
 /** Table designs a document can use; see src/export/table-styles.js. `grid` is the default. */
-export const TABLE_STYLES = Object.freeze(['grid', 'ruled', 'ledger', 'panel', 'accent'])
+export const TABLE_STYLES = Object.freeze(['grid', 'ruled', 'ledger', 'panel', 'accent', 'sheet', 'banded', 'card'])
 const tableStyleOf = (style) => {
   if (style == null) return 'grid'
   if (!TABLE_STYLES.includes(style)) throw new RangeError(`Unknown table style: ${style}. Choose ${TABLE_STYLES.join(', ')}.`)
@@ -508,7 +509,7 @@ export const validatePublication = (publication) => {
       } else if (block.type === 'table') {
         const columns = Array.isArray(block.headers) ? block.headers.length : 0
         need(columns > 0 && block.headers.every((cell) => typeof cell === 'string'), `${where} table needs text headers.`)
-        need(Array.isArray(block.rows) && block.rows.every((row) => Array.isArray(row) && row.length === columns && row.every((cell) => typeof cell === 'string' || (typeof cell === 'number' && Number.isFinite(cell)))), `${where} table rows must match the headers and contain text or finite numbers.`)
+        need(Array.isArray(block.rows) && block.rows.every((row) => Array.isArray(row) && row.length === columns && row.every((cell) => typeof cell === 'string' || (typeof cell === 'number' && Number.isFinite(cell)) || (object(cell) && typeof cell.text === 'string'))), `${where} table rows must match the headers and contain text or finite numbers.`)
         if (block.showHeaders != null) need(typeof block.showHeaders === 'boolean', `${where} table showHeaders must be true or false.`)
         if (block.rowHeaders != null) need(typeof block.rowHeaders === 'boolean', `${where} table rowHeaders must be true or false.`)
         if (block.pending != null) need(typeof block.pending === 'string' && block.pending.trim() && block.pending.length <= 60, `${where} table pending must be a short text.`)
@@ -531,7 +532,8 @@ export const validatePublication = (publication) => {
           }
           need(typeof block.alt === 'string' && block.alt.trim(), `${where} figure needs alternative text.`)
         } else if (block.src != null) need(typeof block.src === 'string', `${where} empty figure src must be a string.`)
-      } else problems.push(`${where} has an unknown block type.`)
+      } else if (BLOCK_TYPES.includes(block.type)) problems.push(...blockProblems(block, where, { widthMm: contentWidth, heightMm: contentHeight }))
+      else problems.push(`${where} has an unknown block type.`)
     })
   })
   return problems

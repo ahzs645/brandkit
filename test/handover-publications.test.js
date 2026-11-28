@@ -4,7 +4,12 @@ import { readFileSync } from 'node:fs'
 import { createHandoverTemplate } from '../src/handover/record.js'
 import { handoverPublications } from '../src/handover/publications.js'
 import { validatePublication } from '../src/engine/documentation.js'
-import { publicationHtml } from '../src/export/publication.js'
+import { publicationPrintHtml } from '../src/export/publication.js'
+import { createNodeRenderer } from '../src/export/node.js'
+
+const renderer = await createNodeRenderer()
+/** The print view, as document-kit writes it from the publication's one document. */
+const printView = (brand, publication) => publicationPrintHtml({ brand }, publication, renderer)
 
 const northwind = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
 const exampleSource = JSON.parse(readFileSync(new URL('../examples/managed-site/northwind.json', import.meta.url), 'utf8'))
@@ -107,7 +112,7 @@ test('all three outputs use valid shared publication models on Letter and A4', (
   }
 })
 
-test('setting a record to ready does not remove draft labels without explicit issue', () => {
+test('setting a record to ready does not remove draft labels without explicit issue', async () => {
   const record = completeRecord()
   const identities = brands()
   const publications = handoverPublications(record, identities)
@@ -116,7 +121,7 @@ test('setting a record to ready does not remove draft labels without explicit is
     assert.match(publication.edition, /DRAFT/)
     assert.doesNotMatch(publication.edition, /Issued/)
   }
-  const html = publicationHtml({ brand: identities.providerBrand }, publications.welcome)
+  const html = await printView(identities.providerBrand, publications.welcome)
   assert.match(html, /DRAFT/)
   assert.throws(() => handoverPublications(example(), { ...identities, forIssue: true }), /Only a client/)
 })
@@ -133,7 +138,7 @@ test('issued guides do not turn omitted optional launch and support-email fields
   }
 })
 
-test('a supplied original provider logo replaces only provider cover artwork and keeps source bytes', () => {
+test('a supplied original provider logo replaces only provider cover artwork and keeps source bytes', async () => {
   const identities = brands()
   const providerLogo = { src: PNG, alt: 'Original provider logo', caption: 'Supplied original artwork', widthMm: 45, heightMm: 15 }
   const before = structuredClone(providerLogo)
@@ -142,12 +147,12 @@ test('a supplied original provider logo replaces only provider cover artwork and
     const logo = publication.pages[0].blocks.find(block => block.type === 'figure')
     assert.equal(logo.src, PNG)
     assert.equal(logo.alt, providerLogo.alt)
-    const html = publicationHtml({ brand: identities.providerBrand }, publication)
-    assert.ok(html.includes(PNG))
-    assert.doesNotMatch(html, /class="brand-logo"/)
+    const html = await printView(identities.providerBrand, publication)
+    assert.ok(html.includes(PNG.split(',')[1]))
+    assert.doesNotMatch(html, /alt="Provider identity logo"/)
   }
-  const clientHtml = publicationHtml({ brand: identities.clientBrand }, publications.brandGuide)
-  assert.match(clientHtml, /class="brand-logo"/)
+  const clientHtml = await printView(identities.clientBrand, publications.brandGuide)
+  assert.match(clientHtml, /alt="Client identity logo"/)
   assert.ok(!clientHtml.includes(PNG))
   assert.deepEqual(providerLogo, before)
 })
@@ -184,7 +189,7 @@ test('managed-only guides describe support access without fabricating a sign-in 
   }
 })
 
-test('client text is escaped by the actual HTML exporter in paragraphs, lists, tables and headings', () => {
+test('client text is escaped by the actual HTML exporter in paragraphs, lists, tables and headings', async () => {
   const record = example()
   record.client.name = 'Client <img src=x onerror=alert(1)> & Co'
   record.notes = ['</p><script>globalThis.HANDOVER_ATTACK = true</script>']
@@ -193,10 +198,10 @@ test('client text is escaped by the actual HTML exporter in paragraphs, lists, t
   record.services[0].scope = 'Use A & B < carefully'
   const identities = brands()
   const { welcome } = handoverPublications(record, identities)
-  const html = publicationHtml({ brand: identities.providerBrand }, welcome)
+  const html = await printView(identities.providerBrand, welcome)
   assert.doesNotMatch(html, /<script\b|<iframe\b|<img src=x/i)
   assert.match(html, /&lt;script&gt;/)
-  assert.match(html, /&lt;iframe src=&quot;/)
+  assert.match(html, /&lt;iframe src=(&quot;|")/)
   assert.match(html, /Use A &amp; B &lt; carefully/)
   assert.match(html, /Client &lt;img src=x onerror=alert\(1\)&gt; &amp; Co/)
 })

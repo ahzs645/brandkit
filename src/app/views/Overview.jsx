@@ -1,53 +1,12 @@
 import { useState } from 'react'
 import { logoDocument, symbolDocument } from '../../engine/artwork.js'
 import { colour, colourName, isDark, rgb } from '../../engine/brand.js'
-import { guideSheets } from '../../engine/guide.js'
-import { changesArtwork, mergePatch, revisionsOf, withRevision } from '../../engine/revisions.js'
+import { changesArtwork, mergePatch } from '../../engine/revisions.js'
 import { colourEntries } from '../colours.js'
 import { Downloads, Field, Segmented, Select, SvgImage } from '../ui.jsx'
 import { SignatureStage } from './Signatures.jsx'
 import { Typography } from './Typography.jsx'
 import { OrganizationSources } from './Organization.jsx'
-
-/** Each proposed change to the logo, beside the approved one, with why and a way to try it. */
-const Revisions = ({ base, fonts, active, onRevision }) => {
-  const revisions = revisionsOf(base)
-  if (!revisions.length) return null
-  const ink = base.rasterColours?.[0] ?? 'black'
-  const family = base.families?.[0]?.id
-  const logo = family ? { family, layout: 'horizontal', colourKey: ink } : { signature: base.signatures[0].id, colourway: base.defaultColourway }
-  return (
-    <section className="panel">
-      <div className="panel__head">
-        <h2>Logo revisions</h2>
-        <p className="muted">Proposed changes. Showing one applies it everywhere, including the kit.</p>
-      </div>
-      {revisions.map((revision) => {
-        const revised = withRevision(base, revision.id)
-        const comparison = guideSheets({ brand: base, fonts }).find((sheet) => sheet.group === 'revisions' && sheet.path?.includes(`/${revision.id}/`))
-        return (
-          <article key={revision.id} className="revision">
-            <div className="revision__head">
-              <h3>{revision.title}</h3>
-              <span className={`revision__status revision__status--${revision.status ?? 'proposed'}`}>{revision.status ?? 'proposed'}</span>
-              <span className="muted">v{base.displayVersion ?? base.version} → v{revision.displayVersion ?? revision.version}{revision.date ? ` · ${revision.date}` : ''}</span>
-            </div>
-            <div className="revision__pair">
-              <figure><div><SvgImage svg={logoDocument({ brand: base, fonts }, logo)} alt="Approved logo" /></div><figcaption>Approved</figcaption></figure>
-              <figure><div><SvgImage svg={logoDocument({ brand: revised, fonts }, logo)} alt={`${revision.title}, proposed`} /></div><figcaption>{revision.title}</figcaption></figure>
-            </div>
-            {revision.summary && <p className="muted" style={{ margin: 0 }}>{revision.summary}</p>}
-            {revision.rationale?.length > 0 && <ul>{revision.rationale.map((line) => <li key={line}>{line}</li>)}</ul>}
-            <div className="row" style={{ marginTop: 0 }}>
-              <button type="button" className="button" onClick={() => onRevision(active === revision.id ? null : revision.id)}>{active === revision.id ? 'Back to the approved identity' : 'Show everything with this revision'}</button>
-              {comparison && <Downloads make={() => comparison.render()} name={`${base.id}-${revision.id}-comparison`} width={2880} />}
-            </div>
-          </article>
-        )
-      })}
-    </section>
-  )
-}
 
 const HistoryEntry = ({ brand, fonts, logo, entry }) => {
   const archivedArt = entry.status === 'archived' && entry.changes && changesArtwork(entry)
@@ -69,7 +28,7 @@ const HistoryEntry = ({ brand, fonts, logo, entry }) => {
 
 /**
  * Where the identity stands: the approved version up front, and what it replaced or set aside
- * (superseded versions, archived proposals and their logos) folded away in an archive.
+ * (superseded versions, archived proposals and their logos) in an archive below it.
  */
 const History = ({ brand, fonts, logo }) => {
   if (!brand.history?.length) return null
@@ -83,10 +42,10 @@ const History = ({ brand, fonts, logo }) => {
       </div>
       {current.map((entry) => <HistoryEntry key={entry.id ?? entry.version} brand={brand} fonts={fonts} logo={logo} entry={entry} />)}
       {archive.length > 0 && (
-        <details className="history__archive">
-          <summary>Archive <span className="muted">{archive.length} earlier {archive.length === 1 ? 'version or proposal' : 'versions and proposals'}</span></summary>
+        <div className="history__archive">
+          <h3 className="history__archive-head">Archive <span className="muted">{archive.length} earlier {archive.length === 1 ? 'version or proposal' : 'versions and proposals'}</span></h3>
           {archive.map((entry) => <HistoryEntry key={entry.id ?? entry.version} brand={brand} fonts={fonts} logo={logo} entry={entry} />)}
-        </details>
+        </div>
       )}
     </section>
   )
@@ -143,7 +102,10 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
           <Field label="Layout">
             <Select value={layout} onChange={setLayout} options={['horizontal', 'stacked', 'symbol'].map((value) => ({ value, label: value.charAt(0).toUpperCase() + value.slice(1) }))} />
           </Field>
-          <label className="wordmark-toggle"><input type="checkbox" checked={wordmarkEnabled} disabled={layout === 'symbol'} onChange={(event) => setWordmarkEnabled(event.target.checked)} /><span>Wordmark</span></label>
+          <div className="field">
+            <span className="field__label">Wordmark</span>
+            <label className="wordmark-toggle"><input type="checkbox" checked={wordmarkEnabled} disabled={layout === 'symbol'} onChange={(event) => setWordmarkEnabled(event.target.checked)} aria-label="Show the wordmark" /><span>Show</span></label>
+          </div>
           <Field label="Colour">
             <div className="chips" role="group" aria-label="Logo colour">
               {colours.map((key) => <button key={key} type="button" className="chip" aria-label={colourName(brand, key)} aria-pressed={logoColour === key} title={colourName(brand, key)} style={{ background: colour(brand, key) }} onClick={() => setLogoColour(key)} />)}
@@ -165,7 +127,6 @@ export const Overview = ({ brand, base = brand, fonts, source, revision, onRevis
       </section>
       )}
 
-      <Revisions base={base} fonts={fonts} active={revision} onRevision={onRevision} />
       {!revision && <History brand={brand} fonts={fonts} logo={brand.families?.length ? { family: brand.families[0].id, layout: 'horizontal', colourKey: brand.rasterColours?.[0] ?? 'black' } : { signature: brand.signatures?.[0]?.id, colourway: brand.defaultColourway }} />}
 
       <section className="split">

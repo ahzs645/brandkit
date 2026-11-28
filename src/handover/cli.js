@@ -1,6 +1,6 @@
 import { buildHandover } from './node.js'
 
-const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant hero|blocks|grid|index] [--table-style grid|ruled|ledger|panel|accent] [--documents welcome,quickStart,brandGuide,frontCover] [--sections access,tasks,services,support,continuity,resources] [--brand-sections logo,colour,files] [--pdf] [--issue]\n--cover adds the designed cover: the record’s cover.variant, or hero. --cover-variant chooses the design. --table-style replaces each brand’s own table design for this build.'
+const usage = 'usage: brandkit handover <record.json> --provider <brand.json> --client <brand.json> --out <folder> [--paper letter|a4] [--provider-logo <original.png>] [--source-revision <sha>] [--cover] [--cover-variant hero|blocks|grid|index] [--table-style grid|ruled|ledger|panel|accent] [--documents welcome,quickStart,brandGuide,frontCover] [--sections access,tasks,services,support,continuity,resources] [--brand-sections logo,colour,files] [--pdf] [--issue]\n--pdf lays each Word master out as its PDF (document-kit; no office suite needed).\n--cover adds the designed cover: the record’s cover.variant, or hero. --cover-variant chooses the design. --table-style replaces each brand’s own table design for this build.'
 
 export async function handover(args) {
   if (!args.length || args[0] === '--help') { console.log(usage); return }

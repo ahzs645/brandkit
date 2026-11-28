@@ -6,6 +6,7 @@ import { basename, dirname, extname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { promisify } from 'node:util'
 import { officeFont } from '../engine/office.js'
+import { brandFaces } from './brand-faces.js'
 
 const exec = promisify(execFile)
 const xml = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
@@ -22,16 +23,43 @@ export const createNodeRenderer = async () => {
   }
 }
 
+export const PDF_ENGINES = Object.freeze(['document-kit', 'libreoffice'])
+
+let standIns
 /**
- * Export the actual Word master to a tagged PDF. Use a new LibreOffice profile and output
- * directory for every conversion: an earlier PDF cannot be mistaken for a successful export.
- * ctx is optional when re-exporting an edited Word master. Supply it to use the kit fonts.
+ * A Word file's bytes laid out as a tagged PDF by document-kit, as the app's preview and downloads
+ * lay it out: `{ bytes, pageCount, pageSizes, pageText, notices }`. The brand's faces (`faces`, or
+ * those of `ctx`) are drawn as themselves; the open stand-ins draw the Office faces.
  */
-export const pdfFromDocx = async (input, { outDir = dirname(resolve(input)), ctx, soffice = process.env.SOFFICE_PATH ?? 'soffice' } = {}) => {
+export const layoutPdf = async (docx, { ctx, faces = ctx ? brandFaces(ctx) : [], title } = {}) => {
+  const [{ layoutDocument }, { nodeFontProvider }] = await Promise.all([import('./layout.js'), import('./layout-fonts-node.js')])
+  standIns ??= nodeFontProvider()
+  return layoutDocument(docx, standIns, { title, namedFonts: faces })
+}
+
+/**
+ * Export the Word master to a tagged PDF beside it (or in `outDir`), and return the PDF's path.
+ *
+ * By default document-kit lays the Word file out, as the app does, in the brand's faces when `ctx`
+ * is given. `engine: 'libreoffice'` converts with LibreOffice instead, for a Word file edited in Word
+ * whose features the layout does not draw; it needs `soffice` (or SOFFICE_PATH), and each
+ * conversion uses a new profile and output folder, so an earlier PDF cannot be mistaken for a
+ * successful export. `onNotice` hears what the layout could not draw as given.
+ */
+export const pdfFromDocx = async (input, { outDir = dirname(resolve(input)), ctx, engine = 'document-kit', onNotice, soffice = process.env.SOFFICE_PATH ?? 'soffice' } = {}) => {
   const inputPath = resolve(input)
   if (extname(inputPath).toLowerCase() !== '.docx') throw new Error('PDF export needs an editable .docx master.')
+  if (!PDF_ENGINES.includes(engine)) throw new Error(`Unknown PDF engine: ${engine}. Choose ${PDF_ENGINES.join(' or ')}.`)
   if (ctx?.fonts?.failures?.length) throw new Error(`Required brand fonts could not be loaded: ${ctx.fonts.failures.map(({ key, error }) => `${key}: ${error?.message ?? String(error ?? 'Font could not be loaded.')}`).join('; ')}`)
   await stat(inputPath)
+  if (engine === 'document-kit') {
+    const pdf = await layoutPdf(new Uint8Array(await readFile(inputPath)), { ctx })
+    for (const notice of pdf.notices) onNotice?.(notice)
+    await mkdir(outDir, { recursive: true })
+    const target = join(resolve(outDir), `${basename(inputPath, extname(inputPath))}.pdf`)
+    await writeFile(target, pdf.bytes)
+    return target
+  }
   const work = await mkdtemp(join(tmpdir(), 'brandkit-document-'))
   const output = join(work, 'converted')
   await mkdir(output)

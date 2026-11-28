@@ -148,11 +148,33 @@ test('a real managed-site build preserves snapshots and safe assets without over
     assert.equal(front.pages[0].cover.preparedBy, provider.name)
     assert.match(front.pages[0].cover.status, /Example · draft/)
     const page = await readFile(join(coverOut, 'front-cover.html'), 'utf8')
-    assert.match(page, /name="brandkit-source-revision" content="cover-test-revision"/)
-    assert.match(page, /Your website\.<br>Start here\./)
+    assert.match(page, /name="brandkit.sourceRevision" content="cover-test-revision"/)
+    assert.match(page, /Your website\.<\/span><br><span[^>]*>Start here\./)
     assert.doesNotMatch(page, /<img src=x|Prepared by Managed by/i)
     assert.deepEqual(await readFile(join(coverOut, 'sources/provider-brand.json')), providerBytes)
     assert.deepEqual(JSON.parse(await readFile(join(coverOut, 'sources/handover.json'), 'utf8')), record)
+  })
+
+  await t.test('--pdf lays each Word master out as its PDF, with no office suite and no restricted face inside', async () => {
+    const pdfOut = join(folder, 'delivery-pdf')
+    const result = spawnSync(process.execPath, [join(root, 'bin/brandkit.mjs'), 'handover', recordPath,
+      '--provider', providerPath, '--client', clientPath, '--out', pdfOut, '--paper', 'letter', '--cover', '--pdf'
+    ], { encoding: 'utf8', cwd: root, timeout: 120000, env: { ...process.env, PATH: '/usr/bin:/bin', SOFFICE_PATH: '/nonexistent/soffice' } })
+    assert.equal(result.status, 0, result.stderr || result.error?.message)
+    const built = JSON.parse(await readFile(join(pdfOut, 'manifest.json'), 'utf8'))
+    for (const stem of ['welcome-guide', 'quick-start', 'brand-reference', 'front-cover']) {
+      const entry = built.files.find(file => file.path === `${stem}.pdf`)
+      assert.ok(entry, `${stem}.pdf is listed`)
+      const bytes = await readFile(join(pdfOut, `${stem}.pdf`))
+      assert.equal(digest(bytes), entry.sha256, stem)
+      assert.equal(bytes.subarray(0, 5).toString(), '%PDF-', stem)
+      assert.match(bytes.toString('latin1'), /\/MediaBox\s*\[\s*0 0 612 792\s*\]/, `${stem} is on US Letter`)
+      const faces = [...bytes.toString('latin1').matchAll(/\/BaseFont\s*\/(?:[A-Z]{6}\+)?([\w-]+)/g)].map(match => match[1])
+      if (stem !== 'brand-reference') assert.ok(!faces.includes('Inter-Regular'), `${stem} does not carry the provider's restricted body face (${faces})`)
+    }
+    const index = await readFile(join(pdfOut, 'index.html'), 'utf8')
+    assert.match(index, /href="welcome-guide\.pdf"/)
+    assert.match(index, /href="front-cover\.pdf"/)
   })
 
   await t.test('a variant alone enables an index cover throughout the delivery', async () => {
@@ -181,7 +203,7 @@ test('a real managed-site build preserves snapshots and safe assets without over
       assert.equal(digest(await readFile(join(coverOut, path))), entry.sha256, path)
     }
     const page = await readFile(join(coverOut, 'front-cover.html'), 'utf8')
-    assert.match(page, /Your website\.<br>Start here\./)
+    assert.match(page, /Your website\.<\/span><br><span[^>]*>Start here\./)
     assert.match(page, />Your brand</, 'contents entries are native text')
     assert.doesNotMatch(page, /<img src=x|<script/i)
     const index = await readFile(join(coverOut, 'index.html'), 'utf8')

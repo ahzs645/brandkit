@@ -1,0 +1,48 @@
+// A dot map's land mask: which cells of a 3.75° equirectangular grid hold land, one hex string a row
+// (north to south), a bit a column (west to east). Natural Earth 1:110m land, public domain, sampled
+// through world-atlas 2. The publication plates (plates.js) draw it as the `world` panel pattern.
+export const WORLD_LAND = Object.freeze({
+  "source": "Natural Earth 1:110m land (public domain), via world-atlas 2",
+  "projection": "equirectangular",
+  "cols": 96,
+  "rows": 34,
+  "west": -180,
+  "north": 72,
+  "step": 3.75,
+  "land": [
+    "07807b7c7fc003002fffffe0",
+    "87ffffce3e001fbfffffffff",
+    "0ffffe0418003bffffffffff",
+    "061ffe1e00005bfffffffc80",
+    "0807ffdf000123fffffff060",
+    "0003ffff80017ffffffffc00",
+    "0001fffe8001fffffffff800",
+    "0001fffa0000cf3bfffff200",
+    "0001fff0000327fbffffc400",
+    "0000fff00002e03fffff2800",
+    "00007fe00003f07fffff0000",
+    "00007e000007fffbffff8000",
+    "00001c20000fffb8bfff0000",
+    "00000c90001fffff1e7c0000",
+    "00000700000fffde0c708000",
+    "000000c0000fffe808388000",
+    "0000004f000ffffc08080000",
+    "0000001f8007fff804000000",
+    "0000001fc0001ff000320000",
+    "0000003ff0003fe000169000",
+    "0000003ffc001fc000000e80",
+    "0000001ffe000fc00003c500",
+    "0000001ffc000fe000001800",
+    "0000000ffc001fe800007a00",
+    "00000007f8001f880000fe00",
+    "00000007f0000f880003ff00",
+    "00000007e0000f800003ff80",
+    "00000007c00007000001ff80",
+    "000000078000000000010700",
+    "0000000f0000000000000001",
+    "000000060000000000000000",
+    "0000000c0000000000000008",
+    "0000000c0000000000000000",
+    "0000000c0000000000000000"
+  ]
+})

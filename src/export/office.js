@@ -121,7 +121,7 @@ export const embeddedFonts = (ctx, items) => {
   return [...families].filter(([, faces]) => faces.data ?? faces.bold).map(([name, faces]) => ({ name, ...faces, data: faces.data ?? faces.bold }))
 }
 
-const STYLE_SPECS = [
+export const STYLE_SPECS = [
   ['Normal', 'Normal', 'body', 'body', 11],
   ['Title', 'Title', 'title', 'display', 30],
   ['Subtitle', 'Subtitle', 'subtitle', 'body', 14],
@@ -138,7 +138,7 @@ const STYLE_SPECS = [
   ['AffiliationSubdepartment', 'Affiliation Subdepartment', 'affiliationSubdepartment', 'body', 10.5]
 ]
 
-const styleSpec = (brand, profile, [, , token, key, size]) => {
+export const styleSpec = (brand, profile, [, , token, key, size]) => {
   const spec = token.startsWith('affiliation')
     ? { ...profile.typography?.body, sizePt: profile.affiliation?.[token === 'affiliationDepartment' ? 'departmentSizePt' : 'subdepartmentSizePt'] ?? size, lineHeight: profile.affiliation?.lineHeight ?? 1.3, spaceAfterPt: token === 'affiliationDepartment' ? 2 : 0 }
     : profile.typography?.[token] ?? {}
@@ -556,11 +556,11 @@ ${html}
 export const officeFile = async (ctx, document, { png } = {}) => {
   const name = `${ctx.brand.id}-${document.id}.${EXTENSIONS[document.format]}`
   if (document.publication) {
-    const { publicationDocx, publicationHtml } = await import('./publication.js')
+    const { publicationDocx, publicationPrintHtml } = await import('./publication.js')
     const publication = document.model ?? publicationModel(ctx.brand, { purpose: document.purpose, paper: document.paper, values: ctx.values })
     if (document.format === 'docx') return { name, bytes: await publicationDocx(ctx, publication, { png }), type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }
     if (document.format === 'html') {
-      const html = publicationHtml(ctx, publication)
+      const html = await publicationPrintHtml(ctx, publication, { png })
       return { name, bytes: new TextEncoder().encode(html), html, type: 'text/html' }
     }
     throw new Error(`Unsupported publication format ${document.format}`)

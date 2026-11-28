@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme, ASTRYX_VERSION } from '../src/engine/astryx.js'
+import { astryxThemeConfig, astryxThemeModule, astryxThemeReport, astryxReadme, ASTRYX_DEFAULTS, ASTRYX_VERSION } from '../src/engine/astryx.js'
 import { buildKit, planKit } from '../src/engine/kit.js'
 
 const brand = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url)))
@@ -189,4 +189,18 @@ test('Website and Everything kits include the same complete handoff; other focus
     assert.equal(files['web/astryx/theme.js'], astryxThemeModule(ctx))
     assert.equal(files['web/astryx/README.md'], astryxReadme(ctx))
   }
+})
+
+test('the exported Astryx defaults are the read-only surfaces and text the report checks against', () => {
+  const report = astryxThemeReport(ctx)
+  for (const mode of ['light', 'dark']) {
+    const defaults = ASTRYX_DEFAULTS[mode]
+    assert.ok(Object.isFrozen(defaults) && Object.isFrozen(defaults.surfaces) && Object.isFrozen(defaults.text))
+    const checks = report.contrast.checks.filter((check) => check.mode === mode)
+    const boundary = checks.find((check) => check.purpose === 'Accent control boundary')
+    for (const surface of defaults.surfaces) assert.ok(boundary.backgrounds.includes(surface), `${mode} ${surface}`)
+    assert.deepEqual(checks.filter((check) => check.purpose.startsWith('Selected surface')).map((check) => check.foreground), [...defaults.text])
+    assert.match(defaults.muted, /^#[0-9A-F]{8}$/)
+  }
+  assert.throws(() => { ASTRYX_DEFAULTS.light.surfaces.push('#000000') })
 })

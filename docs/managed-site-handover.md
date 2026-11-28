@@ -58,7 +58,8 @@ brandkit handover <record.json> --provider <brand.json> --client <brand.json> --
 ```
 
 US Letter is the default. `--pdf` requests a PDF alongside the editable Word document and
-printable HTML for each publication. Omit the logo option to use the provider brand's normal
+printable HTML for each publication: the Word document laid out by document-kit, in the faces
+of the brand it is set in, with no office suite needed ([document-kit.md](document-kit.md)). Omit the logo option to use the provider brand's normal
 artwork. First Form 2.0 no longer needs the old 1.0 PNG override: its current horizontal
 artwork follows the supplied master. A supplied logo changes its placement in these service
 documents; it does not replace
@@ -86,14 +87,16 @@ On the left are the choices and the facts:
 Below them, the record's facts: the client and website, access, everyday tasks, services, support
 and care, next steps and review, with tasks and services added and removed as a list. The preview
 on the right rebuilds a moment after each change, with a tab for each document and the pack's
-index. **Download pack** zips the whole delivery (Word, print HTML and source for each document,
-assets, sources and a manifest with every file's hash), made in the browser; print a document to
-PDF from its preview, or build with `--pdf` on the command line for PDFs from the Word masters.
+index; each document is shown as its PDF, the Word master laid out page for page, and
+**Print or save PDF** prints that PDF. **Download pack** zips the whole delivery (PDF, Word, print
+HTML and source for each document, assets, sources and a manifest with every file's hash), made in
+the browser, as `--pdf` makes it on the command line.
 
 The record, choices included, is kept in that browser for the client brand. **Download record**
 saves it as JSON and **Open record** loads one, so the same record builds the same pack with
 `brandkit handover`: the app and the command line share one composer (`src/handover/pack.js`,
-exported from `brandkit/handover` as `preparePack`, `packHtml` and `composePack`).
+exported from `brandkit/handover` as `preparePack`, `packHtml` and `composePack`; `packHtml` is
+async and takes `png`, and `composePack` takes a `pdf` function that lays each Word master out).
 
 ### Pack choices in a record
 
@@ -160,7 +163,8 @@ Every field is optional; one left out keeps the welcome pack's wording. The page
 cover are still the welcome guide. To open another brandkit publication (a report or brief made
 in Documents) with one of these covers, make it with `createWelcomeCover` from
 `brandkit/handover/cover` and put it on the publication's first page as
-`{ kind: 'cover', cover, blocks: [] }`: `publicationDocx` and `publicationHtml` draw it there. `sections` (one to
+`{ kind: 'cover', cover, blocks: [] }`: `publicationDocx` and `publicationPrintHtml` draw it there, as
+the publication's first section in document-kit (`welcomeCoverSection`). `sections` (one to
 four) are used by `index` only. The client's name, the provider's name, the date and the
 edition always come from the record, so a cover cannot claim a different client or an issued
 status.
@@ -191,7 +195,7 @@ editing and recheck the page after changing its wording.
 | `quick-start.publication.json`, `.html`, `.docx` | A short reference for the main website links, access and support. |
 | `brand-reference.publication.json`, `.html`, `.docx` | The client's identity, supplied artwork, colours, type and use guidance. |
 | `front-cover.publication.json`, `.html`, `.docx` | The standalone designed cover, when a cover is requested; the same cover also opens the welcome guide. `assets/cover-artwork.svg` is its artwork as a vector. |
-| Matching `.pdf` files | Shared print snapshots, when `--pdf` is requested. |
+| Matching `.pdf` files | Each Word master laid out page for page: always in the app's zip, with `--pdf` on the command line. |
 | `index.html` | A local entry page for the package's documents. |
 | Source snapshots | The operational record and provider/client definitions used for this build. |
 | `manifest.json` | The build record and output inventory, with the existing `cover` schema field and a separate `coverVariant` ID; both are `null` for a standard opening. |

@@ -4,9 +4,9 @@ import { basename, dirname, join, resolve } from 'node:path'
 import { validateBrand } from '../engine/brand.js'
 import { TABLE_STYLES } from '../engine/documentation.js'
 import { loadBrandFontsFromDisk } from '../fonts/node.js'
-import { createNodeRenderer, pdfFromDocx } from '../export/node.js'
+import { createNodeRenderer, layoutPdf } from '../export/node.js'
 import { assertHandover } from './record.js'
-import { PACK_DOCUMENTS, documentBrand, packFiles, packManifest, packOptions, preparePack } from './pack.js'
+import { packFiles, packManifest, packOptions, preparePack } from './pack.js'
 import { welcomeCoverVariant } from './cover-variants.js'
 
 const json = value => `${JSON.stringify(value, null, 2)}\n`
@@ -52,7 +52,10 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     originalLogo = { bytes, mime }
     providerLogo = { src: data(bytes, mime), alt: `${provider.brand.name} supplied logo`, widthMm: Math.max(40, provider.brand.logoPolicy?.minimumWidthMm ?? provider.brand.lockup?.minimumHorizontalWidthMm ?? 0), heightMm: 45 }
   }
-  const args = { record, provider, client, options: overrides, png: renderer.png, providerLogo, sourceRevision: source, pdf, originalLogo, providerLogoSrc: providerLogo?.src }
+  // Each Word master laid out as its PDF by document-kit, in the faces of the brand it is set in: the
+  // pages the app's preview shows.
+  const layout = pdf ? (docx, { namedFonts }) => layoutPdf(docx, { faces: namedFonts }) : false
+  const args = { record, provider, client, options: overrides, png: renderer.png, providerLogo, sourceRevision: source, pdf: layout, originalLogo, providerLogoSrc: providerLogo?.src }
   const prepared = await preparePack(args)
   const target = resolve(outDir)
   const existing = await lstat(target).catch(error => { if (error.code === 'ENOENT') return null; throw error })
@@ -64,12 +67,6 @@ export async function buildHandover({ recordPath, providerPath, clientPath, outD
     for (const [path, bytes] of files) {
       await mkdir(dirname(join(work, path)), { recursive: true })
       await writeFile(join(work, path), bytes)
-    }
-    // PDFs need LibreOffice: each Word master is converted beside itself.
-    if (pdf) for (const item of PACK_DOCUMENTS) if (prepared.publications[item.id]) {
-      const ctx = documentBrand(item.id, { provider, client })
-      await pdfFromDocx(join(work, `${item.file}.docx`), { outDir: work, ctx })
-      files.push([`${item.file}.pdf`, await readFile(join(work, `${item.file}.pdf`))])
     }
     const manifest = await packManifest(prepared, files, args)
     await writeFile(join(work, 'manifest.json'), json(manifest))

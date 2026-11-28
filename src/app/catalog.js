@@ -23,14 +23,24 @@ const absolute = (value) => {
   } catch { return null }
 }
 
-/** The catalogs the site was built with. */
-export const siteCatalogs = () => split(import.meta.env?.VITE_BRANDKIT_CATALOGS).map(absolute).filter(Boolean)
+/**
+ * Set by `brandkit dev` in the page it serves (`globalThis.__BRANDKIT_DEV__ = { catalogs: [url] }`):
+ * the brands being worked on. The app then offers that catalog's brands alone, in place of the
+ * catalogs it was built with, any added in this browser, and its built-in brands.
+ */
+export const devSession = () => {
+  const dev = globalThis.__BRANDKIT_DEV__
+  return dev && Array.isArray(dev.catalogs) ? dev : null
+}
+
+/** The catalogs the site was built with, or in a `brandkit dev` session, that session's. */
+export const siteCatalogs = () => split(devSession()?.catalogs ?? import.meta.env?.VITE_BRANDKIT_CATALOGS).map(absolute).filter(Boolean)
 
 const readJson = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) ?? 'null') ?? fallback } catch { return fallback } }
 const writeJson = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)) } catch { /* not kept */ } }
 
-/** Catalogs added in this browser. */
-export const addedCatalogs = () => readJson(SAVED, []).filter((entry) => typeof entry === 'string')
+/** Catalogs added in this browser (none in a `brandkit dev` session). */
+export const addedCatalogs = () => (devSession() ? [] : readJson(SAVED, []).filter((entry) => typeof entry === 'string'))
 
 export const addCatalog = (url) => {
   const value = absolute(url)

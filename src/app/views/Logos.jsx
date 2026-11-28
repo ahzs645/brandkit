@@ -9,13 +9,13 @@ const LAYOUTS = ['horizontal', 'stacked', 'wordmark']
 /** A ground that shows a logo of this colour: the paper tone, or the primary colour for a light logo. */
 const groundFor = (brand, key) => (isDark(colour(brand, key)) ? '#ffffff' : colour(brand, 'primary'))
 
-const Card = ({ title, make, name, ground, width = 2048, wide }) => (
+const Card = ({ title, detail, make, name, ground, width = 2048, wide }) => (
   <figure className={`asset-card${wide ? ' asset-card--wide' : ''}`}>
     <div className="asset-card__art" style={{ background: ground }}>
       <SvgImage svg={make()} alt={title} />
     </div>
     <figcaption>
-      <span>{title}</span>
+      <span>{title}{detail && <code className="asset-card__detail">{detail}</code>}</span>
       <Downloads make={make} name={name} width={width} />
     </figcaption>
   </figure>
@@ -49,7 +49,7 @@ export const Logos = ({ brand, fonts, source, openManual }) => {
               <h3>{layout.replaceAll('-', ' ')}</h3>
               <div className="asset-grid logo-grid">
                 {colours.map((key) => (
-                  <Card key={key} title={colourName(brand, key)} name={`${entry.id}-${layout}-${key}`} ground={groundFor(brand, key)}
+                  <Card key={key} title={colourName(brand, key)} detail={colour(brand, key).toUpperCase()} name={`${entry.id}-${layout}-${key}`} ground={groundFor(brand, key)}
                     make={() => logoDocument(ctx, { family: entry.id, layout, colourKey: key })} />
                 ))}
               </div>
@@ -61,7 +61,7 @@ export const Logos = ({ brand, fonts, source, openManual }) => {
         <h2>Symbol</h2>
         <div className="asset-grid logo-grid">
           {colours.map((key) => (
-            <Card key={key} title={colourName(brand, key)} name={`${brand.id}-symbol-${key}`} ground={groundFor(brand, key)} width={1024} make={() => symbolDocument(ctx, { colourKey: key })} />
+            <Card key={key} title={colourName(brand, key)} detail={colour(brand, key).toUpperCase()} name={`${brand.id}-symbol-${key}`} ground={groundFor(brand, key)} width={1024} make={() => symbolDocument(ctx, { colourKey: key })} />
           ))}
           {(brand.symbol.microRadius != null || brand.symbol.microPaths) && <Card title="Micro" name={`${brand.id}-symbol-micro`} ground="#fff" width={256} make={() => symbolDocument(ctx, { micro: true })} />}
         </div>

@@ -12,5 +12,8 @@ export default defineConfig(({ command, isPreview }) => ({
   // Packages consumed from source (vendor/door-sign, vendor/template-printer) share the app's React.
   resolve: { dedupe: ['react', 'react-dom'] },
   base: process.env.BASE_PATH || (command === 'build' || isPreview ? '/brandkit/' : '/'),
-  build: { outDir: 'dist', assetsDir: 'assets', chunkSizeWarningLimit: 1200 }
+  build: { outDir: 'dist', assetsDir: 'assets', chunkSizeWarningLimit: 1200 },
+  // The layout worker (src/export/layout.worker.js) is an ES module, so the layout engine stays in the
+  // worker's own chunks and nothing it loads is on the app's first load.
+  worker: { format: 'es' }
 }))

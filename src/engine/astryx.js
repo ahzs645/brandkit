@@ -14,6 +14,11 @@ const DEFAULTS = {
   light: { surfaces: ['#F1F4F7', '#FFFFFF'], muted: '#0536590C', text: ['#0A1317', '#4E606F'], tintBase: '#FFFFFF' },
   dark: { surfaces: ['#111112', '#1F1F22', '#28292C'], muted: '#1111127F', text: ['#DFE2E5', '#AAAFB5'], tintBase: '#1F1F22' }
 }
+/** The pinned defaults this theme inherits and is checked against: page/card(/popover) surfaces, the
+ * muted overlay, primary/secondary text and the selected tint's base. For previews and checks. */
+export const ASTRYX_DEFAULTS = Object.freeze(Object.fromEntries(modes.map((mode) => [mode, Object.freeze({
+  ...DEFAULTS[mode], surfaces: Object.freeze([...DEFAULTS[mode].surfaces]), text: Object.freeze([...DEFAULTS[mode].text])
+})])))
 const hex = (channels) => `#${channels.map((value) => Math.round(value).toString(16).padStart(2, '0')).join('').toUpperCase()}`
 const mix = (foreground, background, opacity) => hex(rgb(foreground).map((value, i) => value * opacity + rgb(background)[i] * (1 - opacity)))
 const composite = (value, background) => mix(value.slice(0, 7), background, parseInt(value.slice(7), 16) / 255)

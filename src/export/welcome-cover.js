@@ -1,6 +1,8 @@
 // Optional designed cover for managed-site publications. The page's artwork (grounds, supporting
 // graphic, both logos) is one image behind the page; every word is native text in a frame placed
 // over it, so the cover stays editable in Word and selectable in HTML. See handover/cover-designs.js.
+// It is written by document-kit as the first section of its publication (welcomeCoverSection), as every
+// brandkit document is.
 import { officeFont } from '../engine/office.js'
 import { welcomeCoverVariant } from '../handover/cover-variants.js'
 import { COVER_FRAME_KEYS, COVER_PAPERS, frameText } from '../handover/cover-designs.js'
@@ -8,10 +10,7 @@ import { COVER_FRAME_KEYS, COVER_PAPERS, frameText } from '../handover/cover-des
 const SCHEMA = 'brandkit/welcome-cover/2'
 const MAX_IMAGE_BYTES = 25 * 1024 * 1024
 const MM_PT = 72 / 25.4
-const mmTwips = (value) => Math.round(value * MM_PT * 20)
 const plain = (value) => value !== null && typeof value === 'object' && !Array.isArray(value)
-const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
-const cssString = (value) => `'${String(value).replace(/[^a-zA-Z0-9 _-]/g, (c) => `\\${c.codePointAt(0).toString(16)} `)}'`
 const linesOf = (value) => value.replace(/\r\n?/g, '\n').split('\n')
 const finite = (value) => typeof value === 'number' && Number.isFinite(value)
 const encode64 = (bytes) => {
@@ -131,8 +130,8 @@ const prepare = (cover, profile) => {
   return { artwork: result.artwork, widthMm: result.page[0], heightMm: result.page[1], frames }
 }
 
-// The HTML API has no rendering context. A document profile contains enough face
-// information to resolve the same Office family alias used by embedded fonts.
+// A document profile contains enough face information to resolve the same Office family alias the
+// embedded fonts use, when no brand is at hand.
 const fontOf = (profile, role, brand) => {
   const spec = profile.typography[role]
   const key = spec.font ?? role
@@ -140,67 +139,43 @@ const fontOf = (profile, role, brand) => {
 }
 
 /**
- * The cover as one Word section: the artwork floats behind the page from the section's header,
- * and each frame is a paragraph positioned on the page. The caller sets the section's margins to
- * zero and supplies the fonts.
+ * The cover as one document-kit section, the first of its publication: no margins, the artwork floating
+ * behind the whole page from the section's header, and each frame a paragraph in a text frame placed on
+ * the page, set with the frame's exact leading (`{ exact }` line height). Word, the PDF layout and the
+ * print view all read this one section. `styles` are the named paragraph styles the frames use (the
+ * cover's headings are Heading 1 and 2 underneath, so a contents list and the navigation pane find them).
  */
-export const welcomeCoverDocx = async (ctx, profile, cover) => {
+export const welcomeCoverSection = async (ctx, profile, cover) => {
   const layout = prepare(cover, profile)
-  const d = await import('docx')
-  const { Paragraph, TextRun, ImageRun, AlignmentType, BorderStyle, LineRuleType, FrameAnchorType, FrameWrap, HorizontalPositionRelativeFrom, VerticalPositionRelativeFrom, TextWrappingType } = d
-  // Ordinary document styles may carry a rule below a title: the cover sets none.
-  const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' }
-  const empty = () => new Paragraph({ spacing: { before: 0, after: 0, line: 1, lineRule: LineRuleType.EXACT }, children: [] })
-  const artwork = new Paragraph({
-    spacing: { before: 0, after: 0, line: 1, lineRule: LineRuleType.EXACT },
-    children: [new ImageRun({
-      type: 'png', data: layout.artwork.bytes,
-      transformation: { width: Math.round(layout.widthMm * 96 / 25.4), height: Math.round(layout.heightMm * 96 / 25.4) },
-      floating: { horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 }, verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: 0 }, behindDocument: true, allowOverlap: true, wrap: { type: TextWrappingType.NONE } },
-      altText: { name: 'Cover artwork', title: 'Cover artwork', description: cover.artwork.alt }
-    })]
-  })
-  const children = layout.frames.map((item) => {
+  const { frame, floatingImage, image, paragraph, section } = await import('document-kit')
+  const pt = (mm) => Math.round(mm * MM_PT * 100) / 100
+  const none = { style: 'none' }
+  const body = layout.frames.map((item) => {
     const face = fontOf(profile, item.role, ctx.brand)
-    const run = { font: face.name, bold: face.bold, italics: face.italic, size: Math.round(item.sizePt * 2), color: item.colour.slice(1), allCaps: item.caps,
-      // docx drops a numeric zero before rounding; a positive fraction writes an explicit zero.
-      characterSpacing: Math.round(item.sizePt * item.trackingEm * 20) || Number.EPSILON }
-    return new Paragraph({
-      style: item.heading === 1 ? 'Title' : 'BodyText', run,
-      ...(item.heading ? { outlineLevel: item.heading - 1 } : {}),
-      alignment: item.align === 'right' ? AlignmentType.RIGHT : item.align === 'center' ? AlignmentType.CENTER : AlignmentType.LEFT,
-      keepNext: false, keepLines: true, widowControl: false, indent: { left: 0, right: 0, firstLine: 0 },
-      border: { top: none, bottom: none, left: none, right: none, between: none },
-      spacing: { before: 0, after: 0, line: Math.round(item.leadingPt * 20), lineRule: LineRuleType.EXACT },
-      frame: { type: 'absolute', position: { x: mmTwips(item.x), y: mmTwips(item.y) }, anchor: { horizontal: FrameAnchorType.PAGE, vertical: FrameAnchorType.PAGE }, width: mmTwips(item.width), wrap: FrameWrap.THROUGH, space: { horizontal: 0, vertical: 0 } },
-      children: linesOf(item.text).map((line, i) => new TextRun({ text: line, ...(i ? { break: 1 } : {}), ...run }))
+    // Ordinary document styles may carry a rule, tracking or spacing; the cover states its own.
+    const text = { font: face.name, bold: face.bold, italic: face.italic, size: item.sizePt, color: item.colour.slice(1), allCaps: item.caps, characterSpacing: Math.round(item.sizePt * item.trackingEm * 20) / 20 }
+    const content = paragraph(item.text.replace(/\r\n?/g, '\n'), {
+      style: item.heading ? `CoverHeading${item.heading}` : 'CoverText', text,
+      align: item.align === 'right' ? 'right' : item.align === 'center' ? 'center' : 'left',
+      keepWithNext: false, keepLinesTogether: true, indent: { left: 0, right: 0, firstLine: 0 },
+      borders: { top: none, bottom: none, left: none, right: none },
+      spacing: { before: 0, after: 0, line: { exact: item.leadingPt } }
     })
+    return frame([content], { x: pt(item.x), y: pt(item.y), width: pt(item.width) }, { wrap: 'through', space: 0 })
   })
-  return { header: [artwork], children: [...children, empty()], widthMm: layout.widthMm, heightMm: layout.heightMm }
-}
-
-/**
- * Self-contained semantic fragment that scales with its container: positions are fractions of
- * the page and type is sized in container units, so it prints at size and fits a phone.
- * Publication HTML supplies the embedded faces.
- */
-export const welcomeCoverHtml = (profile, cover) => {
-  const layout = prepare(cover, profile)
-  const { widthMm: W, heightMm: H } = layout
-  const pct = (value, of) => `${Math.round(value / of * 1e6) / 1e4}%`
-  const cq = (pt) => `${Math.round(pt * 25.4 / 72 / W * 1e6) / 1e4}cqw`
-  const text = (value) => escapeHtml(value).replace(/\r\n?|\n/g, '<br>')
-  const frames = layout.frames.map((item) => {
-    const face = fontOf(profile, item.role)
-    const tag = item.heading ? `h${item.heading}` : 'p'
-    const style = `left:${pct(item.x, W)};top:${pct(item.y, H)};width:${pct(item.width, W)};font-family:${cssString(face.name)},sans-serif;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};font-size:${cq(item.sizePt)};line-height:${cq(item.leadingPt)};color:${item.colour};letter-spacing:${item.trackingEm}em;text-align:${item.align};${item.caps ? 'text-transform:uppercase;' : ''}`
-    return `<${tag} class="bk-cover__text" data-field="${escapeHtml(item.key)}" style="${escapeHtml(style)}">${text(item.text)}</${tag}>`
-  })
-  return `<style>
-.bk-cover{position:relative;width:100%;aspect-ratio:${W}/${H};container-type:inline-size;overflow:hidden;break-inside:avoid}
-.bk-cover>img{position:absolute;inset:0;width:100%;height:100%;display:block}
-.bk-cover .bk-cover__text{position:absolute;margin:0;padding:0;border:0;overflow-wrap:anywhere}
-@media print{.bk-cover,.bk-cover *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-</style>
-<section class="bk-cover" data-variant="${escapeHtml(cover.variant)}" aria-label="Cover"><img src="${layout.artwork.src}" alt="${escapeHtml(cover.artwork.alt)}" width="${layout.artwork.width}" height="${layout.artwork.height}">${frames.join('')}</section>`
+  const width = pt(layout.widthMm)
+  const height = pt(layout.heightMm)
+  return {
+    section: section(body, {
+      page: { paper: { width, height }, margins: { top: 0, right: 0, bottom: 0, left: 0, header: 0, footer: 0 } },
+      header: [floatingImage(image(layout.artwork.bytes, { width: layout.artwork.width, height: layout.artwork.height }), 'page', { alt: cover.artwork.alt })],
+      footer: []
+    }),
+    styles: [
+      { id: 'CoverHeading1', name: 'Cover Heading 1', basedOn: 'heading1', next: 'normal', text: { before: 0, after: 0, keepWithNext: false } },
+      { id: 'CoverHeading2', name: 'Cover Heading 2', basedOn: 'heading2', next: 'normal', text: { before: 0, after: 0, keepWithNext: false } },
+      { id: 'CoverText', name: 'Cover Text', basedOn: 'normal', next: 'normal', text: { before: 0, after: 0, characterSpacing: 0 } }
+    ],
+    widthMm: layout.widthMm, heightMm: layout.heightMm
+  }
 }

@@ -1,18 +1,26 @@
-// One editable publication model, shared by Word and a self-contained print view.
-// The Word file remains the master for a matching PDF. Graphic-asset PDFs retain
-// the existing outlined SVG renderer; publication text is always native text.
+// One editable publication model, written as document-kit's block model (publicationDocument): the
+// Word file (writeDocx), and from that Word file the PDF and its preview (layout.js), and the print
+// view (writeHtml) all come from one document, in the brand's own faces. Graphic-asset PDFs retain
+// the existing outlined SVG renderer; publication text is always native text. A publication that
+// opens with a designed welcome cover has it as its first section (welcomeCoverSection).
+//
+// The block set is the publication block model's (src/engine/publication-blocks.js): headings,
+// paragraphs, lists, tables and figures, and the designed system's blocks (opening, kicker, lead,
+// note, statement, steps, callout, facts, columns, scale, references, contents, devices, phones,
+// masthead, signoff, spacer, push), set here in the profile's plain styles. A brand's own designed
+// publications are written by designed-publication.js.
+import { document as kitDocument, heading, image as kitImage, inlineImage, list as kitList, pageNumber, paragraph, pinned, section, spacer, tab, table, text as kitText } from 'document-kit'
+import { BLOCK_TYPES, blockSources } from '../engine/publication-blocks.js'
 import { logoDocument } from '../engine/artwork.js'
-import { officeFont } from '../engine/office.js'
 import { documentProfile, validatePublication } from '../engine/documentation.js'
-import { embeddedFonts, fontEmbeddingPermission, officeFontRequirements, officeStyleFonts, officeStyles } from './office.js'
+import { STYLE_SPECS, officeStyleFonts, styleSpec } from './office.js'
 import { sanitizeSvg } from '../printer/svg.js'
-import { welcomeCoverDocx, welcomeCoverHtml } from './welcome-cover.js'
-import { publicationCell, tableCss, tableFonts, tableLook } from './table-styles.js'
+import { validateWelcomeCover, welcomeCoverSection } from './welcome-cover.js'
+import { tableFonts, tableLook } from './table-styles.js'
+import { applyTableLook } from './table-look.js'
+import { brandFaces, fontRequirements } from './brand-faces.js'
 
 const MM_PT = 72 / 25.4
-const mmTwips = (value) => Math.round(value * MM_PT * 20)
-const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
-const cssString = (value) => `'${String(value ?? '').replace(/[^a-zA-Z0-9 _-]/g, (c) => `\\${c.codePointAt(0).toString(16)} `)}'`
 const hex = (value, fallback = '000000') => /^[#]?[\da-f]{6}$/i.test(String(value)) ? String(value).replace('#', '') : fallback
 const encode64 = (bytes) => {
   if (typeof Buffer !== 'undefined') return Buffer.from(bytes).toString('base64')
@@ -21,7 +29,8 @@ const encode64 = (bytes) => {
   return btoa(text)
 }
 const decode64 = (text) => typeof Buffer !== 'undefined' ? new Uint8Array(Buffer.from(text, 'base64')) : Uint8Array.from(atob(text), (c) => c.charCodeAt(0))
-const svgData = (svg) => `data:image/svg+xml;base64,${encode64(new TextEncoder().encode(svg))}`
+/** The words of inline-marked text (**strong**, *second tone*, [label](url)) without the marks: the plain styles set no emphasis. */
+const plainText = (value) => String(value ?? '').replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').replace(/\*(.+?)\*/g, '$1')
 const textOf = (value) => value == null ? '' : typeof value === 'object' ? String(value.text ?? '') : String(value)
 const captionOf = (block) => block.provenance && !String(block.caption ?? '').includes(block.provenance) ? [block.caption, `Source: ${block.provenance}`].filter(Boolean).join(' ') : block.caption ?? ''
 const STYLE_IDS = { title: 'Title', subtitle: 'Subtitle', heading1: 'Heading1', heading2: 'Heading2', heading3: 'Heading3', body: 'BodyText', caption: 'Caption', table: 'TableText', label: 'Header', footer: 'Footer', affiliationDepartment: 'AffiliationDepartment', affiliationSubdepartment: 'AffiliationSubdepartment' }
@@ -40,7 +49,7 @@ const validate = (ctx, publication) => {
   const problems = validatePublication({ ...publication, profile: profileOf(ctx, publication) })
   if (problems.length) throw new Error(`Invalid publication: ${problems.join(' ')}`)
   for (const page of publication.pages) for (const block of pageBlocks(page)) {
-    if (!['heading', 'paragraph', 'list', 'table', 'figure'].includes(block.type)) throw new Error(`Unsupported publication block: ${block.type}`)
+    if (!BLOCK_TYPES.includes(block.type)) throw new Error(`Unsupported publication block: ${block.type}`)
     if (block.type === 'table' && !Array.isArray(block.rows)) throw new Error('A publication table needs rows.')
     if (block.type === 'list' && !Array.isArray(block.items)) throw new Error('A publication list needs items.')
     if (block.type === 'figure' && !block.placeholder && !block.src) throw new Error('A figure needs an embedded image or an explicit placeholder.')
@@ -106,191 +115,271 @@ const logoOf = (ctx, profile, affiliation) => {
   return { svg, width, height: width / svgAspect(svg), clearSpaceMm, unit, alt: unit ? `${alt}, ${affiliation.department}` : alt }
 }
 
-/** Native Word publication. All text, lists, headings and tables remain editable. */
-export const publicationDocx = async (ctx, publication, { png } = {}) => {
+/**
+ * Checks a publication as the writers read it, without writing anything: its structure, its embedded
+ * images and its designed cover. Throws with the problems; a caller adopts a publication only after it.
+ */
+export const checkPublication = (ctx, publication) => {
+  validate(ctx, publication)
+  const profile = profileOf(ctx, publication)
+  for (const page of publication.pages) {
+    if (page.cover) validateCover(page.cover, profile)
+    for (const src of blockSources(pageBlocks(page))) imageSource(src)
+    for (const block of pageBlocks(page)) if (block.type === 'figure' && !block.placeholder && !block.src) imageSource(block.src)
+  }
+}
+const validateCover = (cover, profile) => {
+  const problems = validateWelcomeCover(cover, profile)
+  if (problems.length) throw new Error(`Invalid welcome cover: ${problems.join(' ')}`)
+}
+
+const PT = (mm) => Math.round(mm * MM_PT * 100) / 100
+
+/**
+ * Each Word style a publication has always had (office.js STYLE_SPECS), as document-kit text: the
+ * theme's own roles (Normal, Title, Subtitle, Heading 1–3, Caption, Header, Footer) and the styles the
+ * document defines beside them (Body Text, Table Text, the affiliation styles, Label, Footer Text).
+ */
+const publicationLooks = (ctx, profile) => {
+  const ink = hex(profile.colours.ink)
+  return Object.fromEntries(STYLE_SPECS.map((entry) => {
+    const [id] = entry
+    const { spec, font, size } = styleSpec(ctx.brand, profile, entry)
+    const heading = /^Heading[123]$/.test(id)
+    return [id, {
+      face: font,
+      text: {
+        font: font.name, size, color: hex(spec.colour ?? ink, ink), bold: font.bold, italic: font.italic, allCaps: Boolean(spec.caps), smallCaps: false,
+        characterSpacing: spec.trackingEm ? Math.round(spec.trackingEm * size * 20) / 20 : 0,
+        align: 'left', before: 0, after: spec.spaceAfterPt ?? (heading ? 8 : 6), line: spec.lineHeight ?? 1.2,
+        ...(heading ? { keepWithNext: true } : {})
+      },
+      rule: spec.ruleBelow ? { style: 'single', width: spec.ruleBelow.widthPt, color: hex(spec.ruleBelow.colour), space: spec.ruleBelow.gapPt } : undefined
+    }]
+  }))
+}
+
+/** Where each of a publication's style ids is in the block model: a theme role, or a style it defines. */
+const DEFINED_STYLES = [['BodyText', 'Body Text', 'BodyText'], ['TableText', 'Table Text', 'TableText'], ['Label', 'Label', 'Header'], ['FooterText', 'Footer Text', 'Footer'],
+  ['AffiliationDepartment', 'Affiliation Department', 'AffiliationDepartment'], ['AffiliationSubdepartment', 'Affiliation Subdepartment', 'AffiliationSubdepartment']]
+const STYLE_REFS = { Title: 'title', Subtitle: 'subtitle', Caption: 'caption', Header: 'Label', Footer: 'FooterText', ListParagraph: 'BodyText' }
+
+/**
+ * The publication as document-kit's block model, and the brand's faces it is set in:
+ * `{ document, faces }`. One section a page, each with its running header and its footer, the
+ * brand logo (drawn as a PNG by `png(svg, width)`) and the affiliation on the first. Everything is
+ * native text in named styles; tables carry the brand's table design.
+ */
+export const publicationDocument = async (ctx, publication, { png } = {}) => {
   validate(ctx, publication)
   const profile = profileOf(ctx, publication)
   const sourceRevision = String(ctx.sourceRevision ?? '').trim()
-  const d = await import('docx')
-  const { Document, Packer, Paragraph, TextRun, Header, Footer, ImageRun, Table, TableRow, TableCell, TableLayoutType, WidthType, BorderStyle, AlignmentType, PageNumber, Tab, TabStopType, SectionType, LevelFormat, HeightRule, VerticalAlignTable , LineRuleType } = d
-  const logo = publication.pages[0]?.cover ? null : logoOf(ctx, profile, publication.affiliation)
+  // A designed cover carries its own artwork, logos included: the brand logo is not set again under it.
+  const covered = Boolean(publication.pages[0]?.cover)
+  const logo = covered ? null : logoOf(ctx, profile, publication.affiliation)
   if (logo && typeof png !== 'function') throw new Error('A PNG renderer is required to put the brand logo in Word.')
   const logoBytes = logo ? await png(logo.svg, Math.round(logo.width * 200 / 25.4)) : null
-  const printableWidth = contentWidth(profile)
-  const textRuns = (text, options = {}) => String(text ?? '').split('\n').map((line, index) => new TextRun({ text: line, ...(index ? { break: 1 } : {}), ...options }))
-  const paragraph = (text, style = 'BodyText', extra = {}) => new Paragraph({ style, widowControl: true, children: textRuns(text), ...extra })
-  const captionParagraph = (text) => paragraph(text, 'Caption', { spacing: { before: mmTwips(3), after: Math.round((typeOf(profile, 'caption').spaceAfterPt ?? 9) * 20) } })
-  const footer = () => new Footer({ children: [new Paragraph({ style: 'Footer', tabStops: [{ type: TabStopType.RIGHT, position: mmTwips(printableWidth) }], children: [
-    ...textRuns([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  ')),
-    new TextRun({ children: [new Tab(), PageNumber.CURRENT] })
-  ] })] })
-  const header = (first) => new Header({ children: [paragraph(first ? profile.header?.text ?? ctx.brand.name : publication.title ?? profile.header?.text ?? ctx.brand.name, 'Header')] })
+  const looks = publicationLooks(ctx, profile)
+  const muted = hex(profile.colours.muted, '555555')
+  const tableType = typeOf(profile, 'table')
   const look = tableLook(profile, ctx.brand)
-  const table = (block) => {
+
+  // A role ruled below (a house title over a rule) carries its rule: a defined style in its definition,
+  // a theme paragraph on the paragraph, a heading through a ruled style based on it.
+  const ruledHeadings = [1, 2, 3].filter((level) => looks[`Heading${level}`].rule)
+  const styles = { paragraph: [
+    ...DEFINED_STYLES.map(([id, name, from]) => ({ id, name, basedOn: 'normal', next: 'BodyText', text: looks[from].text, ...(looks[from].rule ? { borders: { bottom: looks[from].rule } } : {}) })),
+    ...ruledHeadings.map((level) => ({ id: `RuledHeading${level}`, name: `Heading ${level} Ruled`, basedOn: `heading${level}`, next: 'BodyText', borders: { bottom: looks[`Heading${level}`].rule } }))
+  ] }
+  const styled = (styleId, content, options = {}) => {
+    const level = /^Heading([123])$/.exec(styleId)?.[1]
+    if (level) return ruledHeadings.includes(Number(level)) ? paragraph(content, { style: `RuledHeading${level}`, keepWithNext: true, ...options }) : heading(Number(level), content)
+    const rule = STYLE_REFS[styleId] && !['Header', 'Footer', 'ListParagraph'].includes(styleId) ? looks[styleId]?.rule : undefined
+    return paragraph(content, { style: STYLE_REFS[styleId] ?? styleId, ...(rule ? { borders: { bottom: rule } } : {}), ...options })
+  }
+  const caption = (content) => paragraph(content, { style: 'caption', spacing: { before: PT(3), after: typeOf(profile, 'caption').spaceAfterPt ?? 9 } })
+  const gap = () => paragraph('', { style: 'BodyText', spacing: { after: 4 } })
+
+  const tableBlocks = (block) => {
     const headers = block.headers ?? []
     const count = Math.max(headers.length, ...block.rows.map((row) => row.length))
     if (!count) return []
-    const ratios = block.widths?.length === count ? block.widths.map(Number) : Array(count).fill(1)
-    const total = ratios.reduce((sum, n) => sum + (n > 0 ? n : 1), 0)
-    const widths = ratios.map((n) => Math.round(mmTwips(printableWidth) * (n > 0 ? n : 1) / total))
-    // The columns fill the table exactly, or a reader shows the gap as a seam in a filled table.
-    widths[widths.length - 1] += mmTwips(printableWidth) - widths.reduce((sum, n) => sum + n, 0)
-    const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' }
-    // Word measures a cell border in eighths of a point.
-    const line = (rule) => rule ? { style: BorderStyle.SINGLE, size: Math.max(2, Math.round(rule.pt * 8)), color: hex(rule.colour) } : none
-    const runOf = (spec) => spec ? {
-      ...(spec.face ? { font: spec.face.name, bold: spec.face.bold, italics: spec.face.italic } : {}), ...(spec.bold ? { bold: true } : {}),
-      ...(spec.colour ? { color: hex(spec.colour) } : {}), ...(spec.caps ? { allCaps: true } : {}),
-      ...(spec.sizePt ? { size: Math.round(spec.sizePt * 2) } : {}), ...(spec.trackingEm ? { characterSpacing: Math.round(spec.trackingEm * (spec.sizePt ?? typeOf(profile, 'table').sizePt ?? 9.5) * 20) } : {})
-    } : {}
-    const last = count - 1
-    const rowOf = (row, isHeader, index, isFirst, isLast) => new TableRow({ tableHeader: isHeader, cantSplit: true, children: widths.map((width, column) => {
-      const cell = publicationCell(look, {
-        header: isHeader, firstRow: isFirst, lastRow: isLast, firstColumn: column === 0, lastColumn: column === last, bodyIndex: index
-      })
-      return new TableCell({
-        width: { size: width, type: WidthType.DXA },
-        margins: Object.fromEntries(Object.entries(cell.padding).map(([side, mm]) => [side, mmTwips(mm)])),
-        ...(cell.fill ? { shading: { fill: hex(cell.fill) } } : {}),
-        borders: Object.fromEntries(Object.entries(cell.borders).map(([side, rule]) => [side, line(rule)])),
-        children: [new Paragraph({ style: 'TableText', children: textRuns(textOf(row[column]), { ...runOf(cell.text),
-          // A value still to confirm reads as a gap, not as an answer.
-          ...(!isHeader && column > 0 && block.pending && textOf(row[column]).trim() === block.pending ? { color: hex(profile.colours.muted) } : {}) }) })]
-      })
-    }) })
+    const widths = block.widths?.length === count ? block.widths.map((n) => Number(n) > 0 ? Number(n) : 1) : Array(count).fill(1)
     const printed = block.showHeaders === false ? [] : headers
-    const rows = [...(printed.length ? [printed] : []), ...block.rows]
-    return [new Table({ layout: TableLayoutType.FIXED, width: { size: mmTwips(printableWidth), type: WidthType.DXA }, columnWidths: widths,
-      borders: { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none },
-      rows: rows.map((row, i) => rowOf(row, Boolean(printed.length) && i === 0, printed.length ? i - 1 : i, i === 0, i === rows.length - 1))
-    }), ...(block.caption ? [captionParagraph(block.caption)] : [paragraph('', 'BodyText', { spacing: { after: 80 } })])]
+    // A value still to confirm reads as a gap, not as an answer.
+    const cells = (row, header) => Array.from({ length: count }, (_, column) => {
+      const value = row[column]
+      const content = value && typeof value === 'object' ? [value.n, plainText(value.text), value.ext].filter(Boolean).join(' ') : plainText(textOf(value))
+      return { content, ...(!header && column > 0 && block.pending && content.trim() === block.pending ? { text: { color: muted } } : {}) }
+    })
+    const none = { style: 'none' }
+    const written = table([...(printed.length ? [{ role: 'header', cells: cells(printed, true), cantSplit: true }] : []), ...block.rows.map((row) => ({ cells: cells(row, false), cantSplit: true }))], {
+      columnWidths: widths, width: 100, spaceAfter: 0, borders: { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none }
+    })
+    applyTableLook([written], look, tableType, { font: looks.TableText.face.name, bold: looks.TableText.face.bold, italic: looks.TableText.face.italic, color: looks.TableText.text.color, size: looks.TableText.text.size })
+    return [written, block.caption ? caption(block.caption) : gap()]
   }
-  const blockChildren = async (block, listId) => {
-    if (block.type === 'heading') return [paragraph(block.text, styleOf(block), { keepNext: true })]
-    if (block.type === 'paragraph') return [paragraph(block.text, styleOf(block))]
-    if (block.type === 'list') return block.items.map((item) => paragraph(textOf(item), 'ListParagraph', block.ordered ? { numbering: { reference: 'publication-numbering', level: 0, instance: listId } } : { bullet: { level: 0 } }))
-    if (block.type === 'table') return table(block)
+
+  const figureBlocks = (block) => {
     const image = block.placeholder ? null : imageSource(block.src)
     const size = figureSize(profile, block, image)
-    const caption = captionOf(block)
+    const text = captionOf(block)
+    const after = text ? [caption(text)] : block.placeholder ? [gap()] : []
     if (block.placeholder) {
-      // A native cell keeps the placeholder label visible with a font-isolated PNG renderer,
-      // and gives the editor real text to replace instead of an unexplained blank raster.
-      const width = mmTwips(size.width)
-      const border = { style: BorderStyle.SINGLE, size: 4, color: hex(profile.colours.line, 'D9D9D9') }
-      return [new Table({ alignment: AlignmentType.CENTER, layout: TableLayoutType.FIXED, width: { size: width, type: WidthType.DXA }, columnWidths: [width],
-        borders: { top: border, bottom: border, left: border, right: border },
-        rows: [new TableRow({ height: { value: mmTwips(size.height), rule: HeightRule.ATLEAST }, cantSplit: true, keepNext: Boolean(caption), children: [new TableCell({
-          width: { size: width, type: WidthType.DXA }, verticalAlign: VerticalAlignTable.CENTER, margins: { top: 120, bottom: 120, left: 240, right: 240 },
-          shading: { fill: hex(profile.colours.light, 'F3F3F3') }, children: [
-            paragraph(block.label || 'Screenshot placeholder', 'BodyText', { alignment: AlignmentType.CENTER, spacing: { after: 80 }, children: textRuns(block.label || 'Screenshot placeholder', { color: hex(profile.colours.muted, '555555') }) }),
-            paragraph('Replace with an actual image', 'Caption', { alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: textRuns('Replace with an actual image', { color: hex(profile.colours.muted, '555555') }) })
-          ]
-        })] })]
-      }), ...(caption ? [captionParagraph(caption)] : [paragraph('', 'BodyText', { spacing: { after: 80 } })])]
+      // A native cell keeps the placeholder's label as text to replace, not an unexplained blank.
+      const line = { style: 'single', width: 0.5, color: hex(profile.colours.line, 'D9D9D9') }
+      const label = block.label || 'Screenshot placeholder'
+      return [table([{ cells: [{ blocks: [
+        paragraph(label, { style: 'BodyText', align: 'center', spacing: { after: 4 }, text: { color: muted } }),
+        paragraph('Replace with an actual image', { style: 'caption', align: 'center', spacing: { after: 0 }, text: { color: muted } })
+      ], verticalAlign: 'center', shading: hex(profile.colours.light, 'F3F3F3'), padding: { top: 6, bottom: 6, left: 12, right: 12 } }], height: PT(size.height), cantSplit: true, keepWithNext: Boolean(text) }],
+      { columnWidths: [1], width: Math.min(100, 100 * size.width / contentWidth(profile)), align: 'center', spaceAfter: 0, borders: { top: line, bottom: line, left: line, right: line } }), ...after]
     }
-    const bytes = image.bytes
-    const alt = block.alt || caption || (block.placeholder ? 'Screenshot placeholder' : 'Publication figure')
-    return [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: Boolean(caption), spacing: { before: 80, after: 0, line: 240, lineRule: LineRuleType.AUTO }, children: [new ImageRun({ type: image.type, data: bytes,
-      transformation: { width: Math.round(size.width * 96 / 25.4), height: Math.round(size.height * 96 / 25.4) }, altText: { name: alt, title: caption || alt, description: alt } })] }),
-    ...(caption ? [captionParagraph(caption)] : [])]
+    const alt = block.alt || text || 'Publication figure'
+    return [paragraph([inlineImage(kitImage(image.bytes), PT(size.width), PT(size.height), alt)], { align: 'center', keepWithNext: Boolean(text), spacing: { before: 4, after: 0, line: 1 } }), ...after]
   }
-  let listId = 0
-  const sections = []
-  for (const [index, page] of publication.pages.entries()) {
-    const children = []
-    if (index === 0 && logo) children.push(new Paragraph({ keepNext: true, spacing: { after: mmTwips(logo.clearSpaceMm), line: 240, lineRule: LineRuleType.AUTO }, children: [new ImageRun({ type: 'png', data: logoBytes,
-      transformation: { width: Math.round(logo.width * 96 / 25.4), height: Math.round(logo.height * 96 / 25.4) }, altText: { name: logo.alt, title: logo.alt, description: logo.alt } })] }))
-    if (index === 0 && !page.cover && publication.affiliation?.department) {
+
+  const line = { style: 'single', width: 0.5, color: hex(profile.colours.line, 'D9D9D9') }
+  const none = { style: 'none' }
+  const plainBorders = { top: none, bottom: none, left: none, right: none, insideHorizontal: none, insideVertical: none }
+  /** Cells side by side with no rules: columns, and the cells of a scale. */
+  const cellsTable = (cells, widths) => table([{ cantSplit: true, cells: cells.map((blocks, index) => ({ blocks: blocks.length ? blocks : [paragraph('', { style: 'BodyText' })], padding: { top: 0, bottom: 0, left: index ? PT(3) : 0, right: index < cells.length - 1 ? PT(3) : 0 } })) }],
+    { columnWidths: widths ?? cells.map(() => 1), width: 100, borders: plainBorders, spaceAfter: 6 })
+  /** A callout as paragraphs on the light ground, ruled: what a page-foot frame can hold too. */
+  const calloutParagraphs = (block) => {
+    const box = { shading: hex(profile.colours.light, 'F3F3F3'), borders: { top: { ...line, space: 4 }, bottom: { ...line, space: 4 }, left: { ...(block.strong ? { style: 'single', width: 2.25, color: hex(profile.colours.accent) } : line), space: 6 }, right: { ...line, space: 6 } }, indent: { left: PT(2), right: PT(2) } }
+    return [
+      ...(block.label ? [styled('Header', plainText(block.label), box)] : []),
+      ...(block.title ? [paragraph(plainText(block.title), { style: 'BodyText', text: { bold: true }, ...box })] : []),
+      ...(block.text ? [styled('BodyText', plainText(block.text), box)] : []),
+      ...(block.field ? [styled('Header', plainText(block.field), box)] : [])
+    ]
+  }
+  const blocksOf = (block, { inPush = false } = {}) => {
+    if (block.type === 'heading') return [styled(styleOf(block), plainText(textOf(block.text)), { keepWithNext: true })]
+    if (block.type === 'paragraph') return [styled(styleOf(block), plainText(textOf(block.text)))]
+    if (block.type === 'list') return [{ type: 'list', ordered: Boolean(block.ordered), items: block.items.map((item) => plainText(textOf(item))) }]
+    if (block.type === 'table') return tableBlocks(block)
+    if (block.type === 'figure') return figureBlocks(block)
+    if (block.type === 'opening') return [...(block.kicker ? [styled('Header', plainText(block.kicker), { keepWithNext: true })] : []), styled('Heading1', plainText(block.title), { keepWithNext: true }), ...(block.lead ? [styled('Subtitle', plainText(block.lead))] : [])]
+    if (block.type === 'kicker' || block.type === 'masthead') return [styled('Header', plainText(block.text), { keepWithNext: block.type === 'kicker' })]
+    if (block.type === 'lead') return [styled('Subtitle', plainText(block.text))]
+    if (block.type === 'statement') return [styled('Heading2', plainText(block.text))]
+    if (block.type === 'note') return [caption([...(block.label ? [kitText(`${plainText(block.label)}  `, { bold: true })] : []), kitText(plainText(block.text))])]
+    if (block.type === 'signoff') return [paragraph(plainText(block.text), { style: 'caption', borders: { top: { ...line, space: 6 } }, spacing: { before: 6 } })]
+    if (block.type === 'spacer') return [spacer(PT(block.heightMm))]
+    if (block.type === 'steps') return [kitList(block.items.map((item) => [kitText(plainText(item.title), { bold: true }), ...(item.text ? [kitText(` ${plainText(item.text)}`)] : [])]), { ordered: block.numbered !== false })]
+    if (block.type === 'callout') {
+      const content = calloutParagraphs(block)
+      if (inPush) return content
+      return [table([{ cantSplit: true, cells: [{ blocks: content.map(({ shading, borders, indent, ...rest }) => rest), shading: hex(profile.colours.light, 'F3F3F3'), padding: { top: 6, bottom: 6, left: 8, right: 8 },
+        ...(block.strong ? { borders: { left: { style: 'single', width: 2.25, color: hex(profile.colours.accent) } } } : {}) }] }], { columnWidths: [1], width: 100, borders: plainBorders, spaceAfter: 8 })]
+    }
+    if (block.type === 'facts') return inPush
+      ? block.items.map(([label, value]) => paragraph([kitText(`${plainText(label)}: `, { bold: true }), kitText(plainText(value))], { style: 'BodyText', spacing: { after: 2 } }))
+      : [{ type: 'fields', layout: 'table', rows: block.items.map(([label, value]) => ({ label: plainText(label), value: plainText(value) })) }, gap()]
+    if (block.type === 'columns') return [cellsTable(block.columns.map((column) => column.flatMap((child) => blocksOf(child))), block.widths), gap()]
+    if (block.type === 'scale') return [...(block.label ? [styled('Header', plainText(block.label), { keepWithNext: true })] : []), cellsTable(block.items.map((item) => [
+      ...(item.code ? [styled('Header', item.code)] : []), paragraph(plainText(item.name), { style: 'BodyText', text: { bold: true } }),
+      paragraph(`${item.level} of ${block.steps ?? block.items.length}${item.note ? ` · ${plainText(item.note)}` : ''}`, { style: 'caption' }),
+      ...(item.text ? [styled('BodyText', plainText(item.text))] : [])
+    ])), gap()]
+    if (block.type === 'references') return block.items.map(([n, title, body]) => caption([kitText(`${n}  `), kitText(plainText(title), { bold: true }), ...(body ? [kitText(` ${plainText(body)}`)] : [])]))
+    if (block.type === 'contents') return block.items.map(([label, pages]) => paragraph([kitText(plainText(label)), tab(), kitText(pages)], { style: 'BodyText', tabs: [{ at: 'end', align: 'right' }] }))
+    if (block.type === 'devices' || block.type === 'phones') {
+      const srcs = block.type === 'phones' ? block.srcs : block.src ? [block.src] : block.items.map((item) => item[1])
+      return [...srcs.flatMap((src, index) => figureBlocks({ src, alt: block.caption ?? 'Device mockup', heightMm: block.heightMm, ...(index === srcs.length - 1 ? { caption: block.caption } : {}) }))]
+    }
+    if (block.type === 'push') return [pinned(block.blocks.flatMap((child) => blocksOf(child, { inPush: true })))]
+    throw new Error(`Unsupported publication block: ${block.type}`)
+  }
+
+  const margins = { top: PT(profile.margins.topMm), right: PT(profile.margins.rightMm), bottom: PT(profile.margins.bottomMm), left: PT(profile.margins.leftMm), header: PT(8), footer: PT(8) }
+  const footer = [paragraph([kitText([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  ')), tab(), pageNumber()], { tabs: [{ at: 'end', align: 'right' }] })]
+  const cover = covered ? await welcomeCoverSection(ctx, profile, publication.pages[0].cover) : null
+  const sections = publication.pages.map((page, index) => {
+    if (page.cover) return cover.section
+    const body = []
+    if (index === 0 && logo) body.push(paragraph([inlineImage(kitImage(logoBytes), PT(logo.width), PT(logo.height), logo.alt)], { keepWithNext: true, spacing: { after: PT(logo.clearSpaceMm), line: 1 } }))
+    if (index === 0 && !covered && publication.affiliation?.department) {
       const { department, subdepartment } = publication.affiliation
-      if (!logo?.unit) children.push(paragraph(department, 'AffiliationDepartment', { keepNext: true, ...(!subdepartment ? { spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } } : {}) }))
-      if (subdepartment) children.push(paragraph(subdepartment, 'AffiliationSubdepartment', { keepNext: true, spacing: { after: mmTwips(profile.affiliation?.gapAfterMm ?? 5) } }))
+      const after = { spacing: { after: PT(profile.affiliation?.gapAfterMm ?? 5) } }
+      if (!logo?.unit) body.push(paragraph(department, { style: 'AffiliationDepartment', keepWithNext: true, ...(!subdepartment ? after : {}) }))
+      if (subdepartment) body.push(paragraph(subdepartment, { style: 'AffiliationSubdepartment', keepWithNext: true, ...after }))
     }
-    if (page.cover) {
-      // A designed cover is its own full-bleed section: artwork behind, text in frames.
-      const cover = await welcomeCoverDocx(ctx, profile, page.cover)
-      sections.push({ properties: { type: SectionType.NEXT_PAGE,
-        page: { size: { width: mmTwips(cover.widthMm), height: mmTwips(cover.heightMm) }, margin: { top: 0, right: 0, bottom: 0, left: 0, header: 0, footer: 0 } } },
-        headers: { default: new Header({ children: cover.header }) }, footers: { default: new Footer({ children: [paragraph('', 'Footer', { spacing: { after: 0 } })] }) }, children: cover.children })
-      continue
-    }
-    for (const block of pageBlocks(page)) children.push(...await blockChildren(block, ++listId))
-    sections.push({ properties: { type: SectionType.NEXT_PAGE,
-      page: { size: { width: mmTwips(profile.paper.widthMm), height: mmTwips(profile.paper.heightMm) },
-        margin: { top: mmTwips(profile.margins.topMm), right: mmTwips(profile.margins.rightMm), bottom: mmTwips(profile.margins.bottomMm), left: mmTwips(profile.margins.leftMm), header: mmTwips(8), footer: mmTwips(8) } } },
-      headers: { default: header(index === 0) }, footers: { default: footer() }, children: children.length ? children : [paragraph('')]
+    for (const block of pageBlocks(page)) body.push(...blocksOf(block))
+    const running = index ? publication.title ?? profile.header?.text ?? ctx.brand.name : profile.header?.text ?? ctx.brand.name
+    return section(body.length ? body : [paragraph('', { style: 'BodyText' })], {
+      page: { paper: { width: PT(profile.paper.widthMm), height: PT(profile.paper.heightMm) }, margins },
+      header: [paragraph(running)], footer
     })
-  }
-  const document = new Document({ creator: ctx.brand.name, title: publication.title ?? ctx.brand.name, subject: publication.subtitle ?? publication.purpose,
-    description: `${ctx.brand.name} editable ${publication.purpose ?? 'publication'} · ${publication.edition ?? ctx.brand.version ?? ''}`,
-    customProperties: [{ name: 'brandkit.publicationId', value: publication.id ?? '' }, { name: 'brandkit.fontRequirements', value: JSON.stringify(officeFontRequirements(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)])) },
-      ...(publication.affiliation?.department ? [{ name: 'brandkit.affiliation', value: JSON.stringify(publication.affiliation) }] : []),
-      ...(sourceRevision ? [{ name: 'brandkit.sourceRevision', value: sourceRevision }] : [])],
-    styles: officeStyles(ctx.brand, profile), fonts: embeddedFonts(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)]),
-    numbering: { config: [{ reference: 'publication-numbering', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.START, style: { paragraph: { indent: { left: 360, hanging: 260 } } } }] }] },
-    sections
   })
-  return new Uint8Array(await Packer.toArrayBuffer(document))
+
+  // The faces the styles name, embedded where their licences allow (fontEmbeddingReport), and a record
+  // of each face, embedded or not, in the file's custom properties.
+  const named = [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)]
+  const used = new Set(named.map((item) => item.font.toLowerCase()))
+  const faces = brandFaces(ctx).filter((face) => used.has(face.family.toLowerCase()))
+  const document = kitDocument(sections, {
+    metadata: {
+      title: publication.title ?? ctx.brand.name, author: ctx.brand.name, subject: publication.subtitle ?? publication.purpose,
+      description: `${ctx.brand.name} editable ${publication.purpose ?? 'publication'} · ${publication.edition ?? ctx.brand.version ?? ''}`,
+      custom: {
+        'brandkit.publicationId': String(publication.id ?? ''),
+        'brandkit.fontRequirements': JSON.stringify(publicationFontRequirements(ctx, named, faces)),
+        ...(publication.affiliation?.department ? { 'brandkit.affiliation': JSON.stringify(publication.affiliation) } : {}),
+        ...(sourceRevision ? { 'brandkit.sourceRevision': sourceRevision } : {})
+      }
+    },
+    theme: {
+      // Kerned throughout, as browsers and Word set text (document-kit writes it to Word's defaults).
+      body: { ...looks.Normal.text, kern: true }, title: looks.Title.text, subtitle: looks.Subtitle.text,
+      headings: [looks.Heading1.text, looks.Heading2.text, looks.Heading3.text], caption: looks.Caption.text,
+      header: looks.Header.text, footer: looks.Footer.text, link: { color: hex(profile.colours.accent), underline: true },
+      table: { size: tableType.sizePt ?? looks.TableText.text.size, headerFill: '', headerText: { bold: false }, headerAlign: 'left', outerBorder: { style: 'none' }, innerBorder: { style: 'none' }, spaceAfter: 0 }
+    },
+    styles: { ...styles, paragraph: [...styles.paragraph, ...(cover?.styles ?? [])] }
+  })
+  return { document, faces }
 }
 
-/** Standalone print preview using the identical blocks and embedded brand faces. */
-export const publicationHtml = (ctx, publication) => {
-  validate(ctx, publication)
-  const profile = profileOf(ctx, publication)
-  const sourceRevision = String(ctx.sourceRevision ?? '').trim()
-  const tableStyle = tableLook(profile, ctx.brand).style
-  const logo = logoOf(ctx, profile, publication.affiliation)
-  const fontRules = []
+/** Each face a publication's styles name, with whether the Word file carries it and why (`brandkit.fontRequirements`). */
+const publicationFontRequirements = (ctx, named, faces, target = 'docx') => {
+  const report = fontRequirements(ctx, faces, target)
   const seen = new Set()
-  for (const item of [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)]) {
-    const spec = ctx.brand.fonts?.[item.key]
-    const bytes = ctx.fonts?.faces?.[item.key]?.bytes
-    const signature = `${item.font}|${item.bold}|${item.italic}`
-    if (!bytes || seen.has(signature) || spec?.office && spec.office !== spec.family || Number(spec?.weight ?? 400) !== item.weight || !fontEmbeddingPermission(ctx.fonts.faces[item.key]).allowed) continue
-    seen.add(signature)
-    const otf = bytes[0] === 79 && bytes[1] === 84 && bytes[2] === 84 && bytes[3] === 79
-    fontRules.push(`@font-face{font-family:${cssString(item.font)};font-weight:${item.bold ? 700 : 400};font-style:${item.italic ? 'italic' : 'normal'};src:url(data:font/${otf ? 'otf' : 'ttf'};base64,${encode64(bytes)}) format('${otf ? 'opentype' : 'truetype'}');font-display:block}`)
-  }
-  const typographyCss = Object.entries(STYLE_IDS).map(([token, id]) => {
-    const spec = typeOf(profile, token)
-    const face = officeFont(ctx.brand, spec.font, { weight: spec.weight, italic: spec.italic })
-    const rule = spec.ruleBelow ? `padding-bottom:${spec.ruleBelow.gapPt}pt;border-bottom:${spec.ruleBelow.widthPt}pt solid #${hex(spec.ruleBelow.colour)};` : ''
-    const look = `${spec.colour ? `color:#${hex(spec.colour)};` : ''}${spec.caps ? 'text-transform:uppercase;' : ''}${spec.trackingEm ? `letter-spacing:${spec.trackingEm}em;` : ''}${rule}`
-    return `.s-${id}{font-family:${cssString(face.name)},sans-serif;font-size:${Number(spec.sizePt) || 11}pt;font-weight:${face.bold ? 700 : 400};font-style:${face.italic ? 'italic' : 'normal'};line-height:${Number(spec.lineHeight) || 1.3};margin:0 0 ${Number(spec.spaceAfterPt ?? 6)}pt;${look}${/^Heading|Title|Subtitle/.test(id) ? 'break-after:avoid;' : ''}}`
-  }).join('\n')
-  const blockHtml = (block) => {
-    const style = styleOf(block)
-    const content = escapeHtml(block.text).replace(/\n/g, '<br>')
-    if (block.type === 'heading') {
-      const level = style === 'Title' ? 1 : Math.max(1, Math.min(3, Number(block.level) || Number(style.slice(-1)) || 2))
-      return `<h${level} class="s-${style}">${content}</h${level}>`
-    }
-    if (block.type === 'paragraph') return `<p class="s-${style}">${content}</p>`
-    if (block.type === 'list') return `<${block.ordered ? 'ol' : 'ul'} class="s-BodyText">${block.items.map((item) => `<li>${escapeHtml(textOf(item)).replace(/\n/g, '<br>')}</li>`).join('')}</${block.ordered ? 'ol' : 'ul'}>`
-    if (block.type === 'table') {
-      const total = block.widths?.reduce((sum, width) => sum + width, 0)
-      const columns = total ? `<colgroup>${block.widths.map((width) => `<col style="width:${100 * width / total}%">`).join('')}</colgroup>` : ''
-      return `<table class="s-TableText t-${tableStyle}">${block.caption ? `<caption class="s-Caption">${escapeHtml(block.caption)}</caption>` : ''}${columns}${block.headers?.length && block.showHeaders !== false ? `<thead><tr>${block.headers.map((cell) => `<th scope="col">${escapeHtml(textOf(cell))}</th>`).join('')}</tr></thead>` : ''}<tbody>${block.rows.map((row) => `<tr>${row.map((cell, column) => {
-        const content = escapeHtml(textOf(cell)).replace(/\n/g, '<br>')
-        if (column === 0 && block.rowHeaders) return `<th scope="row">${content}</th>`
-        return `<td${column > 0 && block.pending && textOf(cell).trim() === block.pending ? ' class="pending"' : ''}>${content}</td>`
-      }).join('')}</tr>`).join('')}</tbody></table>`
-    }
-    const image = block.placeholder ? null : imageSource(block.src)
-    const size = figureSize(profile, block, image)
-    const caption = captionOf(block)
-    return `<figure>${block.placeholder ? `<div class="figure-placeholder" role="img" aria-label="${escapeHtml(block.alt ?? 'Screenshot placeholder')}" style="min-height:${size.height}mm">${escapeHtml(block.label ?? 'Screenshot placeholder')}<small>Replace with an actual image</small></div>` : `<img src="${image.src}" alt="${escapeHtml(block.alt || caption || 'Publication figure')}" style="width:${size.width}mm;height:${size.height}mm;object-fit:contain">`}${caption ? `<figcaption class="s-Caption">${escapeHtml(caption)}</figcaption>` : ''}</figure>`
-  }
-  const pages = publication.pages.map((page, index) => page.cover ? `<article class="page first-page welcome-cover-page" data-page-id="${escapeHtml(page.id ?? index)}">${welcomeCoverHtml(profile, page.cover)}</article>` : `<article class="page ${index ? 'continuation' : 'first-page'}" data-page-id="${escapeHtml(page.id ?? index)}">
-<header><p class="s-Header">${escapeHtml(index ? publication.title : profile.header?.text ?? ctx.brand.name)}</p></header>
-<main>${!index && logo ? `<img class="brand-logo" src="${svgData(logo.svg)}" alt="${escapeHtml(logo.alt)}" style="width:${logo.width}mm;margin-bottom:${logo.clearSpaceMm}mm">` : ''}${!index && publication.affiliation?.department && !(logo?.unit && !publication.affiliation.subdepartment) ? `<div class="affiliation" aria-label="Organizational unit" style="margin-bottom:${profile.affiliation?.gapAfterMm ?? 5}mm">${logo?.unit ? '' : `<p class="s-AffiliationDepartment">${escapeHtml(publication.affiliation.department)}</p>`}${publication.affiliation.subdepartment ? `<p class="s-AffiliationSubdepartment">${escapeHtml(publication.affiliation.subdepartment)}</p>` : ''}</div>` : ''}${pageBlocks(page).map(blockHtml).join('\n')}</main>
-<footer class="s-Footer"><span>${escapeHtml([profile.footer?.text ?? ctx.brand.name, publication.edition].filter(Boolean).join('  ·  '))}</span><span>${index + 1}</span></footer>
-</article>`).join('\n')
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="author" content="${escapeHtml(ctx.brand.name)}">${sourceRevision ? `<meta name="brandkit-source-revision" content="${escapeHtml(sourceRevision)}">` : ''}<meta name="brandkit-font-requirements" content="${escapeHtml(JSON.stringify(officeFontRequirements(ctx, [...officeStyleFonts(ctx.brand, profile), ...tableFonts(profile, ctx.brand)], { format: 'html' })))}"><title>${escapeHtml(publication.title ?? ctx.brand.name)}</title><style>
-${fontRules.join('\n')}
-${typographyCss}
-.affiliation{break-inside:avoid;break-after:avoid;overflow-wrap:anywhere}
-*{box-sizing:border-box}body{margin:0;background:#ededed;color:#${hex(profile.colours.ink)};font-family:sans-serif}.page{width:${profile.paper.widthMm}mm;min-height:${profile.paper.heightMm}mm;padding:${profile.margins.topMm}mm ${profile.margins.rightMm}mm ${profile.margins.bottomMm}mm ${profile.margins.leftMm}mm;margin:8mm auto;background:#${hex(profile.colours.paper, 'FFFFFF')};display:flex;flex-direction:column;break-after:page;overflow-wrap:anywhere}header{margin-top:-${Math.max(0, profile.margins.topMm - 8)}mm;margin-bottom:7mm}.brand-logo{height:auto;display:block;margin:0 0 3mm}main{flex:1}footer{display:flex;justify-content:space-between;gap:8mm;padding-top:6mm;margin-bottom:0!important}p,li{orphans:3;widows:3}li{padding-left:1mm;margin-bottom:3pt}ul,ol{padding-left:6mm}figure{margin:4mm 0;break-inside:avoid}figure>img{max-width:100%;display:block;margin:auto}.figure-placeholder{border:1px solid #${hex(profile.colours.line, 'D9D9D9')};background:#${hex(profile.colours.light, 'F3F3F3')};color:#${hex(profile.colours.muted, '555555')};display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2mm;font-size:11pt}.figure-placeholder small{font-size:9pt}figcaption{margin-top:3mm!important}${tableCss(profile, ctx.brand, cssString)}
-.page.welcome-cover-page{padding:0!important;min-height:0!important;height:auto;display:block;overflow:hidden}@page{size:${profile.paper.widthMm}mm ${profile.paper.heightMm}mm;margin:0}@media print{body{background:white}.page{margin:0;box-shadow:none}.page:last-child{break-after:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@media screen and (max-width:850px){body{padding:8px}.page{width:100%;min-height:auto;padding:8%;margin:0 0 12px}header{margin-top:0}.brand-logo{max-width:60%}}
-</style></head><body>${pages}</body></html>`
+  return named.flatMap((item) => {
+    const weight = item.bold ? 700 : 400
+    const style = item.italic ? 'italic' : 'normal'
+    const id = `${item.font.toLowerCase()}|${weight}|${style}`
+    if (seen.has(id)) return []
+    seen.add(id)
+    const face = report.find((entry) => entry.family.toLowerCase() === item.font.toLowerCase() && entry.weight === weight && entry.style === style)
+    if (face) return [face]
+    const spec = ctx.brand.fonts?.[item.key] ?? {}
+    const reason = spec.office && spec.office !== spec.family ? 'The document names the installed Office face; install it where the document is opened.'
+      : !ctx.fonts?.faces?.[item.key]?.bytes ? 'Font bytes are unavailable; install the font locally.'
+        : 'No face of this weight or style was supplied; Word and the layout set it from the family’s regular face.'
+    return [{ role: item.key, family: item.font, weight, style, embedded: false, reason, fsType: null, licence: spec.license ?? null, usage: spec.usage ?? null }]
+  })
+}
+
+/**
+ * Native Word publication. All text, lists, headings and tables remain editable. Written by
+ * document-kit (`writeDocx`) from publicationDocument, with the brand's faces embedded where their
+ * licences allow; a designed welcome cover is its first section.
+ */
+export const publicationDocx = async (ctx, publication, { png } = {}) => {
+  validate(ctx, publication)
+  const [{ document, faces }, { writeDocx }] = await Promise.all([publicationDocument(ctx, publication, { png }), import('document-kit/docx')])
+  return writeDocx(document, { embedFonts: faces })
+}
+
+/**
+ * The publication's print view: one self-contained HTML page written by document-kit (`writeHtml`)
+ * from the same document as the Word file, in the same faces.
+ */
+export const publicationPrintHtml = async (ctx, publication, { png } = {}) => {
+  validate(ctx, publication)
+  const [{ document, faces }, { writeHtml }] = await Promise.all([publicationDocument(ctx, publication, { png }), import('document-kit/html')])
+  return writeHtml(document, { fonts: faces, lang: 'en' })
 }

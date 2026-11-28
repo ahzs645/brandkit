@@ -4,7 +4,6 @@
 .vehicles__toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px; border-bottom: 1px solid var(--line); }
 .vehicles__history, .vehicles__files { display: flex; gap: 6px; }
 .vehicles__files { margin-left: auto; }
-.vehicles__toolbar .button:disabled, .vehicles__controls .button:disabled { opacity: 0.45; cursor: default; }
 .vehicles__footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: 10px 14px; font-size: 12px; border-top: 1px solid var(--line); }
 .vehicles__credit { color: var(--ink-faint); }
 .vehicles__credit a { color: inherit; }
@@ -19,7 +18,7 @@
 .vehicle-stage__handle { fill: #fff; stroke: #2f6fde; stroke-width: 2; pointer-events: all; cursor: nwse-resize; touch-action: none; }
 .vehicle-stage__handle--rotate { cursor: grab; fill: #2f6fde; stroke: #fff; }
 .vehicle-stage__views { position: absolute; z-index: 1; top: 10px; left: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
-.vehicle-stage__views button { border: 0; padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.86); color: #16181c; font-size: 12px; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+.vehicle-stage__views button { min-height: var(--control-h-sm); border: 0; padding: 4px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.86); color: #16181c; font-size: var(--button-font-sm); line-height: 1.25; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
 .vehicle-stage__views button[aria-pressed='true'] { background: #16181c; color: #fff; }
 .vehicle-stage__status { position: absolute; z-index: 1; left: 10px; right: 10px; bottom: 10px; margin: 0; width: fit-content; max-width: calc(100% - 20px); padding: 6px 12px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.9); color: #16181c; font-size: 12.5px; pointer-events: none; }
 .vehicle-stage__status--error { background: #fde4e1; color: #7a1c13; }
@@ -30,11 +29,11 @@
 .vehicles__controls .segmented { display: flex; flex-wrap: wrap; overflow: visible; }
 .vehicles__controls .segmented button { flex: 1 1 auto; }
 .vehicles__grid2 .segmented { display: grid; grid-template-columns: 1fr 1fr; }
-.vehicles__check { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--ink-muted); }
+.vehicles__check { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; line-height: 20px; cursor: pointer; }
 .vehicles__check input { margin-top: 2px; }
 .vehicles__colour-row { display: grid; gap: 6px; }
 .vehicles__preview--wide { height: 72px; }
-.vehicles__controls input[type='text'], .vehicles__controls input[type='number'] { width: 100%; min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--page); color: var(--ink); }
+.vehicles__controls :is(input[type='text'], input[type='number'], input[type='search'], select) { width: 100%; }
 .vehicles__controls input[type='range'] { width: 100%; }
 .vehicles__value { display: flex; justify-content: space-between; }
 .vehicles__value output { font-variant-numeric: tabular-nums; font-weight: 500; }
@@ -44,7 +43,7 @@
 .vehicles__preview { display: grid; place-items: center; height: 96px; padding: 10px; border-radius: var(--radius-sm); background: repeating-conic-gradient(var(--track) 0% 25%, var(--surface) 0% 50%) 50% / 16px 16px; }
 .vehicles__preview img { max-width: 100%; max-height: 100%; }
 .vehicles__paint { display: flex; flex-wrap: wrap; gap: 6px; }
-.vehicles__swatch { width: 28px; height: 28px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--swatch); cursor: pointer; }
+.vehicles__swatch { width: var(--control-h-sm); height: var(--control-h-sm); padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--swatch); cursor: pointer; }
 .vehicles__swatch[aria-pressed='true'] { outline: 2px solid var(--ink); outline-offset: 2px; }
 .vehicles__swatch--custom { position: relative; overflow: hidden; background: conic-gradient(#e33, #ec3, #3c5, #3ae, #93e, #e33); }
 .vehicles__swatch--custom input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
@@ -76,12 +75,11 @@
 .vehicles__controls { padding: 0; gap: 0; overflow: hidden; }
 .vehicles__controls [role='tabpanel'] { padding: 18px; display: grid; gap: 24px; }
 .vehicles__tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--surface); border-bottom: 1px solid var(--line); }
-.vehicles__tabs button { min-height: 48px; padding: 9px 5px; background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--ink-muted); font-size: 12px; font-weight: 600; cursor: pointer; }
+.vehicles__tabs button { min-height: 48px; padding: 9px 5px; background: transparent; border: 0; border-bottom: 2px solid transparent; color: var(--ink-muted); font-size: var(--button-font); font-weight: 600; cursor: pointer; }
 .vehicles__tabs button[aria-selected='true'] { color: var(--ink); border-bottom-color: var(--ink); background: var(--page); }
 .vehicles__count { display: inline-grid; place-items: center; border-radius: 50%; background: #e8c886; color: #403117; width: 16px; height: 16px; font-size: 10px; margin-left: 4px; }
 .vehicles__fieldset { min-width: 0; padding: 0; margin: 0; border: 0; display: grid; gap: 24px; }
 .vehicles__fieldset:disabled { opacity: .65; }
-.vehicles__controls select, .vehicles__controls input[type='search'] { width: 100%; min-width: 0; min-height: 42px; box-sizing: border-box; padding: 8px 10px; color: var(--ink); background: var(--page); border: 1px solid var(--line); border-radius: var(--radius-sm); }
 .vehicles__section-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .vehicles__layer-group { display: grid; gap: 6px; }
 .vehicles__layer-group:empty { display: none; }
@@ -98,7 +96,6 @@
 .vehicle-catalog { display: grid; gap: 10px; }
 .vehicle-catalog p { margin: 0; }
 .vehicle-catalog__filters { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
-.vehicle-catalog__filters .button { padding: 5px 8px; font-size: 11px; }
 .vehicle-catalog__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
 .vehicle-catalog__card { position: relative; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: var(--page); }
 .vehicle-catalog__card[data-selected='true'] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
@@ -107,7 +104,7 @@
 .vehicle-catalog__choose strong { font-size: 12px; line-height: 1.4; }
 .vehicle-catalog__choose span { font-size: 10px; color: var(--ink-muted); line-height: 1.5; }
 .vehicle-catalog__choose small { font-size: 9px; text-transform: uppercase; letter-spacing: .035em; color: var(--ink-faint); }
-.vehicle-catalog__favourite { position: absolute; right: 4px; top: 2px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-muted); cursor: pointer; width: 30px; height: 30px; font-size: 20px; }
+.vehicle-catalog__favourite { position: absolute; right: 4px; top: 2px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-muted); cursor: pointer; width: var(--control-h-sm); height: var(--control-h-sm); padding: 0; font-size: 20px; }
 .vehicle-catalog__favourite[aria-pressed='true'] { color: #977324; }
 .vehicles__brand-designs { margin-top: 22px; }
 .vehicles__projection { min-width: 0; border: 0; padding: 0; margin: 0; }
@@ -121,13 +118,8 @@
   .vehicles__summary p { font-size: 11px; }
   .vehicles__fidelity { font-size: 9px; padding: 4px 6px; }
   .vehicles__toolbar { gap: 7px; padding: 9px; }
-  .vehicles__toolbar .button { min-height: 38px; padding: 7px 9px; font-size: 11px; }
   .vehicles__files { margin-left: 0; }
   .vehicle-stage { height: 38vh; min-height: 240px; }
-  .vehicle-stage__views button { min-height: 34px; padding: 6px 11px; }
   .vehicles__footer { font-size: 10px; padding: 8px 10px; }
   .vehicles__footer .muted { display: none; }
-  .vehicles__swatch { min-width: 36px; min-height: 36px; }
-  .vehicles__controls .button { min-height: 42px; }
-  .vehicles__controls input[type='text'], .vehicles__controls input[type='number'], .vehicles__controls select { font-size: 16px; }
 }

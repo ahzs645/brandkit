@@ -2,22 +2,29 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { loadBrandFonts } from '../../fonts/provider.js'
 import { download, rasterise, zip } from '../../export/render.js'
 import { createHandoverTemplate, handoverProblems } from '../../handover/record.js'
-import { BRAND_SECTIONS, PACK_DOCUMENTS, TABLE_STYLES, WELCOME_COVER_VARIANTS, WELCOME_SECTIONS, composePack, packHtml, packIndex, preparePack } from '../../handover/pack.js'
+import { BRAND_SECTIONS, PACK_DOCUMENTS, TABLE_STYLES, WELCOME_COVER_VARIANTS, WELCOME_SECTIONS, composePack, documentBrand, packIndex, preparePack } from '../../handover/pack.js'
 import { WELCOME_COVER_TEXT } from '../../handover/cover.js'
+import { publicationDocx } from '../../export/publication.js'
+import { brandFaces } from '../../export/brand-faces.js'
+import { documentSnapshot, pdfFor } from '../../export/document-pdf.js'
+import { layoutInWorker } from '../../export/layout-client.js'
+import { printPdf } from '../../export/print-pdf.js'
 import { Segmented, Select } from '../ui.jsx'
 import { useEditPreviewDock } from '../../ui/EditPreviewDock.jsx'
+import { PdfPages } from '../../ui/PdfPages.jsx'
 import { DocumentFrame } from './Documents.jsx'
 
 // A client pack, built as it is chosen: the brand open in the app is the client; another brand
 // (First Form) is the provider. Every choice (documents, sections, cover, tables, paper) and every
 // fact is kept in one handover record, in this browser, so the same record builds the same pack
-// with the command line (`brandkit handover`). The preview redraws a moment after each change.
+// with the command line (`brandkit handover`). The preview redraws a moment after each change: each
+// document as the PDF its Word file lays out to, the pack's own index page as it opens.
 
 const today = () => new Date().toISOString().slice(0, 10)
 const lines = (list) => (list ?? []).join('\n')
 const unlines = (text) => text.split('\n')
 const ids = (list) => list.map((item) => item.id)
-const TABLE_LABELS = { grid: 'Grid (boxed)', ruled: 'Ruled', ledger: 'Ledger', panel: 'Panel', accent: 'Accent header' }
+const TABLE_LABELS = { grid: 'Grid (boxed)', ruled: 'Ruled', ledger: 'Ledger', panel: 'Panel', accent: 'Accent header', sheet: 'Sheet (ink rules)', banded: 'Banded', card: 'Card' }
 const ACCESS = [['unconfirmed', 'To confirm'], ['invitation', 'Account invitation'], ['password', 'Password sign-in'], ['sso', 'Organization sign-in (SSO)'], ['passwordless', 'Passwordless sign-in'], ['managed-only', 'Changes through the provider']]
 const EMPTY_TASK = { title: '', steps: [], confirmation: '', tutorialUrl: '' }
 const EMPTY_SERVICE = { name: '', accountOwner: '', managedBy: '', clientAccess: '', billedBy: '', renewalDate: '', costText: '', scope: '' }
@@ -48,11 +55,11 @@ const assign = (target, [key, ...rest], value) => Array.isArray(target)
   ? target.map((item, i) => (i === key ? (rest.length ? assign(item, rest, value) : value) : item))
   : { ...target, [key]: rest.length ? assign(target?.[key] ?? {}, rest, value) : value }
 
-const Section = ({ title, meta, open, children }) => (
-  <details className="documents-details" open={open}>
-    <summary><span>{title}</span>{meta != null && <span className="documents-details__meta">{meta}</span>}</summary>
+const Section = ({ title, meta, children }) => (
+  <section className="documents-details">
+    <h4 className="documents-details__head"><span>{title}</span>{meta != null && <span className="documents-details__meta">{meta}</span>}</h4>
     <div className="documents-details__body">{children}</div>
-  </details>
+  </section>
 )
 const Text = ({ label, value, onChange, area, hint, placeholder }) => (
   <label className="field"><span className="field__label">{label}</span>
@@ -89,7 +96,7 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
   })
   const [provider, setProvider] = useState(null)
   const [issue, setIssue] = useState(false)
-  const [built, setBuilt] = useState({ prepared: null, html: {}, error: null, busy: true })
+  const [built, setBuilt] = useState({ prepared: null, snapshots: {}, index: '', error: null, busy: true })
   const [shown, setShown] = useState('welcome')
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState(null)
@@ -132,14 +139,20 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
         const key = `${brand.id}|${paper}`
         const prepared = await preparePack({ record: asBuilt, provider, client, options: { issue }, png: rasterise, dpi: 110, figures: figures.current.get(key) })
         figures.current.set(key, prepared.figures)
-        const html = { ...packHtml(prepared, { provider, client }), index: packIndex(prepared, { provider, client }) }
-        if (live) setBuilt({ prepared, html, error: null, busy: false })
+        // One snapshot a document: its Word file, laid out as the PDF the preview shows and prints.
+        const snapshots = Object.fromEntries(Object.entries(prepared.publications).map(([id, publication]) => {
+          const ctx = documentBrand(id, { provider, client })
+          const file = PACK_DOCUMENTS.find((item) => item.id === id).file
+          return [id, documentSnapshot({ word: () => publicationDocx(ctx, publication, { png: rasterise }), title: publication.title, faces: brandFaces(ctx), name: file })]
+        }))
+        const index = packIndex(prepared, { provider, client, pdf: true })
+        if (live) setBuilt({ prepared, snapshots, index, error: null, busy: false })
       } catch (problem) { if (live) setBuilt((current) => ({ ...current, error: problem.message, busy: false })) }
     }, 300)
     return () => { live = false; clearTimeout(timer) }
   }, [asBuilt, provider, client, issue, problems.length]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const documents = built.prepared ? [...PACK_DOCUMENTS.filter((item) => built.html[item.id]), { id: 'index', label: 'Pack index' }] : []
+  const documents = built.prepared ? [...PACK_DOCUMENTS.filter((item) => built.snapshots[item.id]), { id: 'index', label: 'Pack index' }] : []
   const visible = documents.some((item) => item.id === shown) ? shown : documents[0]?.id
   const choices = built.prepared?.choices
   const coverOn = pack.cover === 'on' || (pack.cover !== 'off' && Boolean(record.cover?.variant))
@@ -153,10 +166,10 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
     try { await action() } catch (problem) { setNotice({ error: true, text: problem.message }) } finally { setBusy(false) }
   }
   const downloadPack = () => run(async () => {
-    const { files, manifest } = await composePack({ record: asBuilt, provider, client, options: { issue }, png: rasterise, figures: figures.current.get(`${brand.id}|${paper}`) })
+    const { files, manifest } = await composePack({ record: asBuilt, provider, client, options: { issue }, png: rasterise, pdf: layoutInWorker, figures: figures.current.get(`${brand.id}|${paper}`) })
     const name = record.id || `${brand.id}-website-pack`
     download(await zip(files, name), `${name}.zip`)
-    setNotice({ text: `${manifest.status === 'issued' ? 'Issued' : 'Draft'} pack downloaded: ${manifest.documents.length} document${manifest.documents.length === 1 ? '' : 's'} as Word, print HTML and source, with assets and a manifest. Print each to PDF from its HTML view, or build with PDFs from the command line.` })
+    setNotice({ text: `${manifest.status === 'issued' ? 'Issued' : 'Draft'} pack downloaded: ${manifest.documents.length} document${manifest.documents.length === 1 ? '' : 's'} as PDF, Word, print HTML and source, with assets and a manifest. Each PDF is its Word master laid out page for page.` })
   })
   const openRecord = (file) => run(async () => {
     const next = JSON.parse(await file.text())
@@ -165,7 +178,10 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
     setRecord(next)
     setNotice({ text: 'Record opened. Its facts and pack choices are now in place.' })
   })
+  // A document prints as its PDF (the file the preview shows); the index page prints from its frame.
   const print = () => run(async () => {
+    const snapshot = built.snapshots[visible]
+    if (snapshot) return printPdf((await pdfFor(snapshot)).bytes, snapshot.title)
     const target = frame.current?.contentWindow
     if (!target) throw new Error('Wait for the preview to finish loading.')
     await target.document.fonts.ready
@@ -206,11 +222,11 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
         <div className="field"><span className="field__label">Paper</span><Segmented label="Paper" value={paper} onChange={(value) => setPack('paper', value)} options={[{ value: 'letter', label: 'US Letter' }, { value: 'a4', label: 'A4' }]} /></div>
         <label className="pack-check"><input type="checkbox" checked={issue} onChange={(event) => setIssue(event.target.checked)} /><span><strong>Final, to issue</strong><small>Checks that every fact is filled in, and drops the draft notes.</small></span></label>
 
-        <Section title="Documents" meta={`${docs.filter((id) => id !== 'frontCover' || coverOn).length} of ${PACK_DOCUMENTS.length}`} open>
+        <Section title="Documents" meta={`${docs.filter((id) => id !== 'frontCover' || coverOn).length} of ${PACK_DOCUMENTS.length}`}>
           <Checks items={PACK_DOCUMENTS} chosen={docs} onChange={(next) => setPack('documents', next)} disabled={(item) => item.id === 'frontCover' && !coverOn} />
         </Section>
 
-        <Section title="Cover" meta={coverOn ? WELCOME_COVER_VARIANTS.find((item) => item.id === (record.cover?.variant || 'hero'))?.label : 'None'} open>
+        <Section title="Cover" meta={coverOn ? WELCOME_COVER_VARIANTS.find((item) => item.id === (record.cover?.variant || 'hero'))?.label : 'None'}>
           <label className="pack-check"><input type="checkbox" checked={coverOn} onChange={(event) => setPack('cover', event.target.checked ? 'on' : 'off')} /><span><strong>Open the welcome guide with a designed cover</strong></span></label>
           {coverOn && <>
             <label className="field"><span className="field__label">Design</span>
@@ -241,7 +257,7 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
         </Section>
 
         <h3>The facts</h3>
-        <Section title="Client and website" meta={record.site.url || 'To fill in'} open>
+        <Section title="Client and website" meta={record.site.url || 'To fill in'}>
           <Text label="Client name" value={record.client.name} onChange={(value) => set(['client', 'name'], value)} />
           <Text label="Client contact" value={record.client.contactName} onChange={(value) => set(['client', 'contactName'], value)} />
           <Text label="Contact email" value={record.client.contactEmail} onChange={(value) => set(['client', 'contactEmail'], value)} />
@@ -297,12 +313,14 @@ export const ClientPack = ({ brand, fonts, brands, loadBrand }) => {
 
       <section className="panel documents-preview" aria-label="Pack preview" {...dock.panel('preview')}>
         {documents.length > 0 && <div className="pack-tabs"><Segmented label="Document" value={visible} onChange={setShown} options={documents.map((item) => ({ value: item.id, label: item.label }))} />
-          <button className="button button--quiet" type="button" disabled={busy || !built.html[visible]} onClick={print}>Print or save PDF</button></div>}
+          <button className="button button--quiet" type="button" disabled={busy || !(built.snapshots[visible] || (visible === 'index' && built.index))} onClick={print}>Print or save PDF</button></div>}
         {problems.length > 0 && <div className="notice notice--error" role="alert"><strong>{issue ? 'To issue this pack, fill in:' : 'Fix these to build the pack:'}</strong><ul>{problems.slice(0, 12).map((problem) => <li key={problem}>{problem.replace(/^handover\./, '')}</li>)}</ul></div>}
         {built.error && <p className="notice notice--error" role="alert">{built.error}</p>}
         {notice && <p className={`notice${notice.error ? ' notice--error' : ''}`} role={notice.error ? 'alert' : 'status'}>{notice.text}</p>}
         {choices && <p className="muted pack-summary">{[`${choices.documents.length} document${choices.documents.length === 1 ? '' : 's'}`, choices.coverVariant ? `${WELCOME_COVER_VARIANTS.find((item) => item.id === choices.coverVariant).label} cover` : 'no cover', `${choices.sections.length} guide sections`, choices.tableStyle ? `${TABLE_LABELS[choices.tableStyle].toLowerCase()} tables` : 'each brand’s tables', paper === 'a4' ? 'A4' : 'US Letter', issue ? 'final' : 'draft'].join(' · ')}{built.busy ? ' · updating…' : ''}</p>}
-        {!provider || !client ? <p className="muted">Loading both brands and their fonts…</p> : visible && built.html[visible] && <DocumentFrame frame={frame} title={`${documents.find((item) => item.id === visible)?.label} preview`} html={built.html[visible]} />}
+        {!provider || !client ? <p className="muted">Loading both brands and their fonts…</p>
+          : visible === 'index' ? built.index && <DocumentFrame frame={frame} title="Pack index preview" html={built.index} />
+            : visible && built.snapshots[visible] && <PdfPages key={visible} snapshot={built.snapshots[visible]} label={`${documents.find((item) => item.id === visible)?.label} pages as printed`} />}
       </section>
       {dock.bar}
     </div>

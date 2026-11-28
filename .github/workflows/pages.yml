@@ -55,6 +55,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      # The kit's build tools from its own lockfile, then its dist/ (scripts/build-vendor-document-kit.mjs,
+      # which pretest and prebuild also run, and which skips the build when dist/ is current).
       - run: npm run setup:document-kit
       - run: npm run setup:printer
       # The engine, pack and manual-pack tests, on the brand brandkit ships (northwind). The brands
@@ -101,8 +103,8 @@ jobs:
         run: npm --prefix examples/astryx run test:browser
         env:
           SCREENSHOT_DIR: ${{ github.workspace }}/.documentation/astryx-example
-      # Word masters, print previews and editable sources. PDFs need LibreOffice; make them
-      # locally with npm run build:documentation -- --pdf.
+      # Word masters, print previews and editable sources. Add --pdf for each master laid out as
+      # its PDF by document-kit (no office suite needed).
       - name: Build Word masters for the built-in brand
         run: npm run build:documentation -- --out dist/documentation
       - name: Attach reviewable document starters

@@ -35,7 +35,7 @@ brandkit draws the whole kit from it:
   social posts and banners, presentation covers. Fill in the fields once and download SVG (text
   still editable), PNG or PDF, or all of them zipped. Variants of one thing are one item: a card's
   fronts and back, a letterhead in each size or rank, with a PDF of every variant.
-- **Client packs**: under Templates, a welcome guide, quick-start sheet and brand reference for a
+- **Client packs**: under Documents, a welcome guide, quick-start sheet and brand reference for a
   client, set in a provider's brand (First Form) and the client's. Tick which documents and
   sections go in, choose the cover and table style, fill in the facts, and the preview rebuilds
   as you go; **Download pack** zips Word, print HTML and sources. The command line (`brandkit
@@ -331,7 +331,8 @@ hold in `library/`, then in other brand folders: the built-in ones and any in `B
 (a folder of brands kept elsewhere). The brands made with brandkit are tested that way, against
 this engine, where they are kept. `build` keeps its vector/text default. `build --office` and
 `documents` also render the artwork needed by Office documents in Node. Graphic PDF collections
-use the browser renderer; `documents --pdf` exports the actual Word masters with LibreOffice.
+use the browser renderer; `documents --pdf` lays each Word master out as its PDF with
+document-kit, as the app's preview does ([docs/document-kit.md](docs/document-kit.md)).
 
 GitHub Pages builds from `main` (`.github/workflows/pages.yml`). Set the repository variable
 `BRANDKIT_CATALOGS` to the catalogs the site should offer.
@@ -341,8 +342,11 @@ GitHub Pages builds from `main` (`.github/workflows/pages.yml`). Set the reposit
 Every configured brand has a **Documents** view, US Letter and A4 profiles, and four editable
 starters: product overview, project report, decision brief and brand portfolio. Six page layouts cover a title
 page, explanatory content, product/workstream detail, screenshot with caption, comparison table
-and closing page. Add your copy and an actual PNG/JPEG capture, then download Word, printable
-HTML or the editable publication JSON. Source JSON can be opened again for export.
+and closing page. Add your copy and an actual PNG/JPEG capture, then download Word, PDF, printable
+HTML or the editable publication JSON. Source JSON can be opened again for export. The preview is
+the PDF itself: the Word master laid out page for page by document-kit, the same file **Download
+PDF** saves and **Print or save PDF** prints. Word, PDF and print view come from one document in
+document-kit's block model, in the brand's own faces ([docs/document-kit.md](docs/document-kit.md)).
 
 Headings, lists, tables, captions and running text remain native Word content. The logo uses
 the selected brand's complete artwork, and the document uses its actual type weights. Font
@@ -355,7 +359,7 @@ versioned asset catalog with MIME types, byte sizes and SHA-256 checksums. Each 
 generated `USE.md` in its folder with artwork provenance and physical specifications.
 
 ```sh
-# Build one report in both paper sizes; a PDF is exported from each Word master.
+# Build one report in both paper sizes; each Word master is laid out as its PDF.
 node bin/brandkit.mjs documents brands/northwind/brand.json --purpose report --paper both --pdf --zip --out .documentation/northwind
 
 # Supply content values, or use --content for a complete exported publication model.
@@ -364,19 +368,21 @@ node bin/brandkit.mjs documents path/to/brand.json --purpose product --paper a4 
 # Refresh the PDF after editing the maintained Word master.
 node bin/brandkit.mjs pdf .documentation/northwind/documents/northwind-publication-report-letter.docx --brand brands/northwind/brand.json
 
-# Publish versioned report examples for every brand in brands/index.json (requires LibreOffice).
+# Publish versioned report examples for every brand in brands/index.json.
 npm run build:documentation -- --pdf --out dist/documentation
 ```
 
-`soffice` must be available for PDF conversion; set `SOFFICE_PATH` for another installation.
+PDFs need no office suite. `brandkit pdf <master.docx> --pdf-engine libreoffice` converts with
+LibreOffice instead (set `SOFFICE_PATH` when `soffice` is not on the path), for a Word master
+edited in Word whose features the layout does not draw.
 Release publishing requires a clean committed checkout and records that exact commit in the
 release folder, download filename and manifest. Use the `documents` command for working drafts.
-The browser's print view is useful for review, but use the Word master to produce a PDF with
-the same pagination as the maintained document. Editing a Word file does not update its
+The browser's print view is useful for review; its pages are the browser's, approximately. The
+PDF has the Word master's pagination. Editing a Word file does not update its
 original JSON; choose Word or the content model as the source for that publication.
 
 CI checks the built-in brand's guide, runs the engine and pack tests and the pack workflow in
-Chromium, and builds northwind's Word masters for review (no LibreOffice in CI; add `--pdf` locally for PDFs). On main, the
+Chromium, and builds northwind's Word masters for review (add `--pdf` for their PDFs). On main, the
 [published starters](https://projects.ahmadjalil.com/brandkit/documentation/) ship with the site.
 PR runs attach them as an artifact without deploying. See
 [the document model and editing rules](docs/documentation.md) for custom pages, screenshot

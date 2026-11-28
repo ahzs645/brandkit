@@ -159,10 +159,10 @@ const Page = ({ book, page, srcOf, open, aside }) => {
       </div>
       {aside}
       {page.notes?.length > 0 && (
-        <details className="guides__notes">
-          <summary>{page.notesTitle ?? 'Reconstruction notes'}</summary>
+        <section className="guides__notes">
+          <h3 className="guides__notes-head">{page.notesTitle ?? 'Reconstruction notes'}</h3>
           <ul>{page.notes.map((note) => <li key={note}>{note}</li>)}</ul>
-        </details>
+        </section>
       )}
     </>
   )

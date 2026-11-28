@@ -27,6 +27,8 @@
     "./package.json": "./package.json",
     "./documents": "./src/export/publication.js",
     "./documents/node": "./src/export/node.js",
+    "./documents/designed": "./src/export/designed-publication.js",
+    "./publications": "./src/engine/publications.js",
     "./documentation": "./src/engine/documentation.js",
     "./handover": {
       "types": "./src/handover/index.d.ts",
@@ -61,16 +63,26 @@
     "library",
     "manuals",
     "docs",
-    "examples/managed-site"
+    "examples/managed-site",
+    "vendor/document-kit/package.json",
+    "vendor/document-kit/dist",
+    "vendor/document-kit/fonts",
+    "vendor/document-kit/LICENSE",
+    "vendor/document-kit/NOTICE-*.md"
   ],
   "sideEffects": [
     "*.css"
   ],
   "scripts": {
     "setup:printer": "cd vendor/template-printer/frontend && corepack pnpm install --frozen-lockfile",
+    "vendor:build": "node scripts/build-vendor-document-kit.mjs",
+    "predev": "npm run vendor:build",
     "dev": "vite",
+    "prebuild": "npm run vendor:build",
     "build": "vite build",
     "preview": "vite preview",
+    "pretest": "npm run vendor:build",
+    "prepare": "node scripts/build-vendor-document-kit.mjs",
     "test": "node --test \"test/*.test.js\"",
     "build:kit": "node bin/brandkit.mjs build",
     "make:example": "node scripts/make-example-brand.mjs",
@@ -86,7 +98,7 @@
     "devices:frames": "node scripts/device-frames.mjs",
     "make:patterns": "node scripts/brands/pattern-collections.mjs",
     "catalog": "node scripts/catalog.mjs",
-    "setup:document-kit": "npm ci --prefix vendor/document-kit && npm run build --prefix vendor/document-kit"
+    "setup:document-kit": "npm ci --prefix vendor/document-kit && node scripts/build-vendor-document-kit.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -112,6 +124,7 @@
     "mermaid": "11.17.2",
     "mp4-muxer": "^5.2.2",
     "opentype.js": "^2.0.0",
+    "pdfjs-dist": "^6.5.438",
     "playwright": "1.54.0",
     "pptxgenjs": "^4.0.1",
     "svg2pdf.js": "^2.8.1",

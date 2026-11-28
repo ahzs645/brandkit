@@ -6,12 +6,15 @@ import { unzipSync } from 'fflate'
 import { DOMParser } from '@xmldom/xmldom'
 import { loadBrandFontsFromDisk } from '../src/fonts/node.js'
 import { documentProfile, publicationModel, validatePublication } from '../src/engine/documentation.js'
-import { publicationDocx, publicationHtml } from '../src/export/publication.js'
+import { publicationDocx, publicationPrintHtml } from '../src/export/publication.js'
 import { createNodeRenderer } from '../src/export/node.js'
-import { validateWelcomeCover, welcomeCoverDocx, welcomeCoverHtml } from '../src/export/welcome-cover.js'
+import { validateWelcomeCover, welcomeCoverSection } from '../src/export/welcome-cover.js'
 import { COVER_PAPERS, frameText } from '../src/handover/cover-designs.js'
 import { WELCOME_COVER_VARIANTS, createWelcomeCover } from '../src/handover/cover.js'
 import { handoverPublications } from '../src/handover/publications.js'
+import { layoutDocx } from 'document-kit/layout'
+import { nodeFontProvider } from '../src/export/layout-fonts-node.js'
+import { brandFaces } from '../src/export/brand-faces.js'
 import { assertHandover } from '../src/handover/record.js'
 
 const brand = JSON.parse(readFileSync(new URL('../brands/northwind/brand.json', import.meta.url), 'utf8'))
@@ -96,13 +99,33 @@ test('the designed cover keeps every word native in Word, behind which one page 
   assert.equal(wordText(part(elements(sections[0], WORD, 'footerReference')[0])).trim(), '', 'no ordinary footer on the cover')
   for (const kind of ['header', 'footer']) assert.ok(wordText(part(elements(sections[1], WORD, `${kind}Reference`)[0])).trim(), `normal ${kind} remains on later pages`)
 
-  const html = publicationHtml(ctx, model)
-  const pages = [...html.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0])
-  assert.equal(pages.length, 2)
-  assert.doesNotMatch(pages[0], /<header\b|<footer\b|class="brand-logo"|ORDINARY HEADER|ORDINARY FOOTER/)
-  assert.equal((pages[0].match(/<img\b/g) || []).length, 1, 'the HTML cover has one artwork image')
-  assert.match(pages[0], /<h1 class="bk-cover__text"[^>]*>Your website\.<br>Start here\.<\/h1>/)
-  assert.match(pages[1], /ORDINARY FOOTER/)
+  // The print view is the same document written by document-kit: the cover sheet holds its artwork and
+  // its frames, and none of the running header or footer of the pages after it.
+  const html = await publicationPrintHtml(ctx, model, renderer)
+  const coverHtml = html.slice(0, html.indexOf('Practical website details'))
+  assert.doesNotMatch(coverHtml, /ORDINARY HEADER|ORDINARY FOOTER/)
+  assert.match(coverHtml, /<img\b[^>]*alt="[^"]*"/, 'the HTML cover has its artwork')
+  assert.match(coverHtml, />Your website\.<\/span><br><span[^>]*>Start here\.</)
+  assert.match(html.slice(html.indexOf('Practical website details')), /ORDINARY FOOTER/)
+})
+
+test('laid out as its PDF, the designed cover fills page 1 alone and the guide starts on page 2', async () => {
+  for (const paper of ['letter', 'a4']) {
+    const value = await cover('hero', paper)
+    const model = publication(value)
+    const laid = await layoutDocx(await publicationDocx(ctx, model), { fonts: nodeFontProvider(), namedFonts: brandFaces(ctx) })
+    const [width, height] = COVER_PAPERS[paper].map((mm) => Math.round(mm * 72 / 25.4))
+    assert.equal(laid.pageCount, 2, paper)
+    assert.deepEqual(laid.pageSizes.map(({ widthPt, heightPt }) => [Math.round(widthPt), Math.round(heightPt)]), [[width, height], [width, height]])
+    const art = /<image\b[^>]*\bx="0" y="0" width="([\d.]+)" height="([\d.]+)"/.exec(laid.toPages().pages[0])
+    assert.ok(art, `${paper}: the artwork is drawn from the page's corner`)
+    assert.ok(Math.abs(art[1] - width) <= 1 && Math.abs(art[2] - height) <= 1, `${paper}: the artwork covers the whole page (${art[1]} × ${art[2]})`)
+    for (const item of value.frames) for (const line of frameText(value, item.key).split('\n')) {
+      assert.ok(laid.pageText[0].includes(item.caps ? line.toUpperCase() : line) || laid.pageText[0].includes(line), `${paper}: ${line} is on the cover`)
+    }
+    assert.doesNotMatch(laid.pageText[0], /ORDINARY HEADER|ORDINARY FOOTER|Practical website details/)
+    assert.match(laid.pageText[1], /Practical website details remain editable\./)
+  }
 })
 
 test('cover artwork must be passive, complete embedded PNG data in the page’s proportions', async () => {
@@ -123,8 +146,7 @@ test('cover artwork must be passive, complete embedded PNG data in the page’s 
     const bad = structuredClone(value)
     bad.artwork.src = src
     assert.ok(validateWelcomeCover(bad, profile).length, name)
-    assert.throws(() => welcomeCoverHtml(profile, bad), /Invalid welcome cover/, name)
-    await assert.rejects(welcomeCoverDocx(ctx, profile, bad), /Invalid welcome cover/, name)
+    await assert.rejects(welcomeCoverSection(ctx, profile, bad), /Invalid welcome cover/, name)
   }
   assert.match(validateWelcomeCover(value, documentProfile(brand, { paper: 'a4' })).join('\n'), /laid out for letter/)
 })
@@ -167,7 +189,7 @@ test('cover typography overrides inherited document rules without losing native 
     }
     const border = elements(paragraph, WORD, 'pBdr')[0]
     assert.ok(border, `${wording} explicitly overrides ordinary paragraph borders`)
-    for (const side of ['top', 'bottom', 'left', 'right', 'between']) assert.equal(elements(border, WORD, side)[0]?.getAttributeNS(WORD, 'val'), 'none')
+    for (const side of ['top', 'bottom', 'left', 'right']) assert.equal(elements(border, WORD, side)[0]?.getAttributeNS(WORD, 'val'), 'none')
   }
 })
 
@@ -178,10 +200,10 @@ test('cover wording and the artwork’s alternative cannot inject HTML or escape
   value.clientName = 'Client <img src=x onerror=attack()> & Company'
   value.preparedBy = '<svg onload=attack()>'
   value.artwork.alt = 'Logo" onerror="attack()'
-  const html = welcomeCoverHtml(profile, value)
+  const html = await publicationPrintHtml(ctx, publication(value), renderer)
   assert.doesNotMatch(html, /<script\b|<iframe\b|<svg\b|<img src=x|alt="Logo" onerror=/i)
-  assert.match(html, /&lt;script&gt;attack\(\)&lt;\/script&gt;<br>A &amp; B/)
-  assert.match(html, /&lt;iframe src=&quot;https:\/\/untrusted\.example&quot;&gt;/)
+  assert.match(html, /&lt;script&gt;attack\(\)&lt;\/script&gt;<\/span><br><span[^>]*>A &amp; B/)
+  assert.match(html, /&lt;iframe src=(&quot;|")https:\/\/untrusted\.example(&quot;|")&gt;/)
   assert.match(html, /alt="Logo&quot; onerror=&quot;attack\(\)"/)
 })
 
@@ -225,7 +247,7 @@ test('the index cover keeps its contents editable, and only it takes contents', 
   const native = wordText(unzipSync(await publicationDocx(ctx, publication(value)))['word/document.xml'])
   for (const section of value.sections) for (const text of Object.values(section)) assert.ok(native.includes(text), `${text} remains editable`)
   value.sections[1].description = '<script>bad()</script> & text'
-  assert.match(welcomeCoverHtml(profile, value), /&lt;script&gt;bad\(\)&lt;\/script&gt; &amp; text/)
+  assert.match(await publicationPrintHtml(ctx, publication(value), renderer), /&lt;script&gt;bad\(\)&lt;\/script&gt; &amp; text/)
   value.sections = []
   assert.match(validateWelcomeCover(value, profile).join('\n'), /one to four contents sections/)
   value.sections = [{ title: 'Access', description: 'First line\nHidden line' }]

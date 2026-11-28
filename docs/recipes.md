@@ -12,22 +12,22 @@ npm ci
 npm run setup:document-kit
 ```
 
-For CLI jobs containing Mermaid, use `npx playwright install chromium` or set `CHROME_PATH` to an installed Chromium executable. For PDF, install LibreOffice or set `SOFFICE_PATH` to its executable. Browser exports use the browser already running the app.
+For CLI jobs containing Mermaid, use `npx playwright install chromium` or set `CHROME_PATH` to an installed Chromium executable. The PDF needs nothing more: it is the Word file laid out by document-kit, in the brand's faces ([document-kit.md](document-kit.md)). Browser exports use the browser already running the app.
 
 ## Generate a document
 
-In the app, open a brand, choose **Templates → Documents → Generate Word from recipe**, then select the job JSON. The generated Word file downloads immediately.
+In the app, open a brand, choose **Templates → Documents → Generate Word from recipe**, then select the job JSON. The generated Word file downloads immediately, and the preview shows its pages: the PDF of that Word file, with its own **PDF** and **Word** downloads beside it. **Back to the document** returns the preview to the publication.
 
 ```sh
 node bin/brandkit.mjs recipe brands/northwind/brand.json \
   --input examples/recipes/brief.json --out dist/recipe-example --pdf
 ```
 
-The CLI creates `proposal.docx`, optional `proposal.pdf` and the editable source for each figure (`.mmd` for Mermaid and `.<renderer>.json` for other renderers). Use a separate output folder per job. The browser-safe API is `recipeDocx(ctx, job, {png, mermaid})` from `brandkit/recipes`. `exportRecipe(ctx, job, {outDir, pdf})` from `brandkit/recipes/node` handles local export.
+The CLI creates `proposal.docx`, optional `proposal.pdf` (that Word file laid out) and the editable source for each figure (`.mmd` for Mermaid and `.<renderer>.json` for other renderers). Use a separate output folder per job. The browser-safe API is `recipeDocx(ctx, job, {png, mermaid})` from `brandkit/recipes`; the Word file embeds the brand faces it names where their licences allow. `exportRecipe(ctx, job, {outDir, pdf})` from `brandkit/recipes/node` handles local export.
 
 ## Recipes supplied by a brand pack
 
-A brand can list jobs under `documentation.recipes` in its `brand.json`. Each entry has a `label`, a pack-relative job `file` and an optional `sampleData` path. Include the files in the pack. In **Templates → Documents**, choose the brand recipe and generate Word, or download its editable sample data. The job contains the data used for that export. Regenerate a derived job with its authoring tool after changing the underlying records.
+A brand can list jobs under `documentation.recipes` in its `brand.json`. Each entry has a `label`, a pack-relative job `file` and an optional `sampleData` path. Include the files in the pack. In **Templates → Documents**, choose the brand recipe and preview it, generate Word, or download its editable sample data. The job contains the data used for that export. Regenerate a derived job with its authoring tool after changing the underlying records.
 
 ## Job fields
 
