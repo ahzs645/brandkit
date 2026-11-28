@@ -10,16 +10,30 @@
 .guides__intro h2 { margin: 0 0 6px; font-size: 22px; }
 .guides__intro h2:focus { outline: none; }
 .guides__intro p { margin: 0; color: var(--ink-muted, #5b5f66); }
-.guides__back {
+/* The trail above a book or a page: back to the library, the book, this page. */
+.guides__crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: var(--gap, 16px);
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--ink-muted, #5b5f66);
+}
+.guides__crumbs > [aria-hidden='true'], .guides__step-crumb { flex: none; display: inline-flex; align-items: center; gap: 8px; }
+.guides__crumbs [aria-current='page'] { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.guides__step-crumb { flex: 0 1 auto; min-width: 0; max-width: 40%; }
+.guides__back, .guides__crumb {
   border: 0;
   background: none;
   padding: 0;
-  margin-bottom: 12px;
   color: var(--ink-muted, #5b5f66);
   font: inherit;
   cursor: pointer;
 }
-.guides__back:hover { color: var(--ink, #16181c); }
+.guides__crumb { min-width: 0; overflow: hidden; text-overflow: ellipsis; color: var(--ink, #16181c); }
+.guides__back:hover, .guides__crumb:hover { color: var(--ink, #16181c); }
 
 .guides__family { background: var(--surface, #ffffff); border-radius: var(--radius, 14px); padding: 20px; margin-bottom: var(--gap, 16px); }
 .guides__family-head { display: grid; gap: 2px; margin-bottom: 14px; }

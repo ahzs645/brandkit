@@ -83,14 +83,34 @@ const Families = ({ families, findBook, thumbOf, open, heading, intro, footnote,
   </>
 )
 
+// The way back, as a trail above the page: the library's first page as a back button, each page
+// between as a link, and this page named last ("← Manuals / Book / Page"). A host can style it as
+// its own breadcrumbs (.guides__crumbs, .guides__back, .guides__crumb, [aria-current]).
+const Trail = ({ label, steps }) => {
+  const [root, ...rest] = steps
+  const current = rest.at(-1)
+  return (
+    <nav className="guides__crumbs" aria-label={label}>
+      <button type="button" className="guides__back" onClick={root.onClick}><span aria-hidden="true">←</span> {root.label}</button>
+      {rest.slice(0, -1).map((step) => (
+        <span key={step.label} className="guides__step-crumb">
+          <span aria-hidden="true">/</span>
+          <button type="button" className="guides__crumb" onClick={step.onClick}>{step.label}</button>
+        </span>
+      ))}
+      {current && <><span aria-hidden="true">/</span><span aria-current="page" title={current.label}>{current.label}</span></>}
+    </nav>
+  )
+}
+
 const Book = ({ book, family, thumbOf, open, focusPage, showBack, backLabel, actions }) => {
   const shape = usualShape(book.pages)
   const thumbs = useRef({})
   useEffect(() => { if (focusPage) thumbs.current[focusPage]?.focus() }, [focusPage])
   return (
     <>
+      {showBack && <Trail label={backLabel} steps={[{ label: backLabel, onClick: () => open({ book: null, page: null }) }, { label: book.title }]} />}
       <div className="guides__intro">
-        {showBack && <button type="button" className="guides__back" onClick={() => open({ book: null, page: null })}>← {backLabel}</button>}
         <h2>{book.title}</h2>
         <p>{[!book.title.includes(family?.title) && family?.title, book.edition, `${book.pages.length} pages`].filter(Boolean).join(' · ')}</p>
         {actions && <div className="guides__toolbar">{actions}</div>}
@@ -104,7 +124,7 @@ const Book = ({ book, family, thumbOf, open, focusPage, showBack, backLabel, act
   )
 }
 
-const Page = ({ book, page, srcOf, open, aside }) => {
+const Page = ({ book, page, srcOf, open, aside, showBack, backLabel }) => {
   const index = book.pages.findIndex((entry) => entry.id === page.id)
   const previous = book.pages[index - 1]
   const next = book.pages[index + 1]
@@ -130,8 +150,12 @@ const Page = ({ book, page, srcOf, open, aside }) => {
 
   return (
     <>
+      <Trail label={backLabel} steps={[
+        ...(showBack ? [{ label: backLabel, onClick: () => open({ book: null, page: null }) }] : []),
+        { label: book.title, onClick: () => open({ book: book.id, page: null, from: page.id }) },
+        { label: page.title }
+      ]} />
       <div className="guides__intro guides__page-head">
-        <button type="button" className="guides__back" onClick={() => open({ book: book.id, page: null, from: page.id })}>← {book.title}</button>
         <h2 ref={title} tabIndex={-1}>{page.title}</h2>
         <p>{[pageLabel(page), `${index + 1} of ${book.pages.length}`].filter(Boolean).join(' · ')}</p>
         <div className="guides__toolbar">
@@ -230,7 +254,7 @@ export const ManualLibrary = ({
 
   return (
     <section className="guides" aria-label={label}>
-      {page ? <Page book={book} page={page} srcOf={srcOf} open={open} aside={pageAside?.(book, page)} />
+      {page ? <Page book={book} page={page} srcOf={srcOf} open={open} aside={pageAside?.(book, page)} showBack={!single} backLabel={heading} />
         : book ? <Book book={book} family={familyOf(book.id)} thumbOf={thumbOf} open={open} focusPage={focusPage} showBack={!single} backLabel={heading} actions={bookActions?.(book)} />
           : <Families families={groups} findBook={findBook} thumbOf={thumbOf} open={open} heading={heading} intro={intro} footnote={footnote} Link={Link} />}
     </section>
