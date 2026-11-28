@@ -63,12 +63,7 @@
     "library",
     "manuals",
     "docs",
-    "examples/managed-site",
-    "vendor/document-kit/package.json",
-    "vendor/document-kit/dist",
-    "vendor/document-kit/fonts",
-    "vendor/document-kit/LICENSE",
-    "vendor/document-kit/NOTICE-*.md"
+    "examples/managed-site"
   ],
   "sideEffects": [
     "*.css"
@@ -76,13 +71,9 @@
   "scripts": {
     "setup:printer": "cd vendor/template-printer/frontend && corepack pnpm install --frozen-lockfile",
     "vendor:build": "node scripts/build-vendor-document-kit.mjs",
-    "predev": "npm run vendor:build",
     "dev": "vite",
-    "prebuild": "npm run vendor:build",
     "build": "vite build",
     "preview": "vite preview",
-    "pretest": "npm run vendor:build",
-    "prepare": "node scripts/build-vendor-document-kit.mjs",
     "test": "node --test \"test/*.test.js\"",
     "build:kit": "node bin/brandkit.mjs build",
     "make:example": "node scripts/make-example-brand.mjs",
@@ -116,7 +107,7 @@
     "@resvg/resvg-js": "2.6.2",
     "@xmldom/xmldom": "^0.9.12",
     "bwip-js": "^4.11.4",
-    "document-kit": "file:vendor/document-kit",
+    "document-kit": "https://github.com/ahzs645/document-kit/releases/download/build-08ab1ff/document-kit-0.1.0-08ab1ff.tgz",
     "docx": "^9.12.0",
     "fflate": "^0.8.3",
     "gifenc": "^1.0.3",

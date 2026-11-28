@@ -305,7 +305,6 @@ The library components read the host page's custom properties (`--surface`, `--i
 ```sh
 git submodule update --init --recursive
 npm install
-npm run setup:document-kit                     # build the pinned document recipe engine
 npm run setup:printer                          # install the Template Printer component's dependencies
 npm run dev                                    # the app
 npm test                                       # the engine, packs and manual pack, on northwind

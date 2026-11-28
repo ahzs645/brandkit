@@ -55,9 +55,6 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      # The kit's build tools from its own lockfile, then its dist/ (scripts/build-vendor-document-kit.mjs,
-      # which pretest and prebuild also run, and which skips the build when dist/ is current).
-      - run: npm run setup:document-kit
       - run: npm run setup:printer
       # The engine, pack and manual-pack tests, on the brand brandkit ships (northwind). The brands
       # made with brandkit are tested where they are kept, against this engine.

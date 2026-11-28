@@ -1,9 +1,8 @@
 // Build the vendored document-kit submodule.
 //
-// document-kit gitignores its dist/, and every one of its package `exports` points there (fonts
-// excepted), so the `file:vendor/document-kit` dependency resolves to missing or stale files until it
-// is built. This runs in pretest, predev and prebuild, and in the Pages workflow. It is a no-op when
-// dist/ is newer than everything it is built from, so the common loop pays nothing. The kit's own guide
+// brandkit installs document-kit as a prebuilt release package (docs/document-kit.md); the submodule
+// is for working on the kit itself. This builds the submodule's dist/ (gitignored there) for that, and
+// for packing a new release. It is a no-op when dist/ is newer than everything it is built from. The kit's own guide
 // is vendor/document-kit/README.md; brandkit's is docs/document-kit.md.
 import { existsSync, readdirSync, statSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'

@@ -7,9 +7,7 @@ A recipe job carries its Document Kit recipe, components, data and figure source
 From the Brand Kit checkout, run these commands with Node 22 or newer. The submodule pins the document engine version used to compile the recipe and write the Word file.
 
 ```sh
-git submodule update --init vendor/document-kit
 npm ci
-npm run setup:document-kit
 ```
 
 For CLI jobs containing Mermaid, use `npx playwright install chromium` or set `CHROME_PATH` to an installed Chromium executable. The PDF needs nothing more: it is the Word file laid out by document-kit, in the brand's faces ([document-kit.md](document-kit.md)). Browser exports use the browser already running the app.

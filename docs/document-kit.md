@@ -2,8 +2,10 @@
 
 [document-kit](../vendor/document-kit/README.md) is the document library brandkit shares with
 nalsreport and PGMaps. It runs in the browser and in Node and never reaches the network: fonts,
-pictures and Word files arrive as bytes. It is a git submodule at `vendor/document-kit` and a
-`file:` dependency (`"document-kit": "file:vendor/document-kit"`).
+pictures and Word files arrive as bytes. brandkit installs it as a prebuilt package: a
+release asset of its repository (`"document-kit": "https://github.com/ahzs645/document-kit/releases/download/<tag>/<file>.tgz"`),
+so anything that installs brandkit (from npm or from GitHub) gets a working kit with no build step.
+Its source is also a git submodule at `vendor/document-kit`, for working on the kit beside brandkit.
 
 Every brandkit document (a publication from **Documents**, a brand's designed publication or slide
 deck, a recipe job, each document of a client pack with its designed welcome cover, the documents of
@@ -118,19 +120,25 @@ designed cover, is written by document-kit.
 - The print view paginates by the browser, approximately; the PDF is the layout's
   (`vendor/document-kit/docs/html.md`).
 
-## How the submodule is built
+## How the kit is installed
 
-The kit's `package.json` points every entry at `dist/`, which it does not commit.
-`scripts/build-vendor-document-kit.mjs` builds it when `dist/` is missing or older than the kit's
-sources and does nothing otherwise; `npm run vendor:build` runs it, and `pretest`, `predev` and
-`prebuild` run that. `npm run setup:document-kit` installs the kit's build tools from its own
-lockfile and builds it; the Pages workflow runs it after checking out submodules recursively.
+The kit's `package.json` points every entry at `dist/`, which its repository does not commit, so
+brandkit depends on a packed build instead: each release of the kit that brandkit uses carries
+`document-kit-<version>-<commit>.tgz` (made with `npm pack` from a built checkout). `npm ci` installs
+it like any package, with nothing to build, and the lockfile pins its integrity.
 
-## Moving the kit's pointer
+The submodule is only for changing the kit: `npm run setup:document-kit` installs its build tools
+and builds it (`scripts/build-vendor-document-kit.mjs`, which skips the build when `dist/` is current).
+To try an unreleased kit in brandkit, `npm install ./vendor/document-kit` temporarily, and put the
+release URL back before committing.
 
-1. Change the kit in its own repository; never edit `vendor/document-kit` here.
-2. Here: `git -C vendor/document-kit fetch && git -C vendor/document-kit checkout <commit>`.
-3. `npm install` (the kit's dependencies may have changed), then `npm run vendor:build`.
+## Moving to a new kit
+
+1. Change the kit in its own repository and push it.
+2. Build it there (`npm ci && npm run build`), `npm pack`, and publish the file on a release of the
+   kit's repository tagged `build-<commit>`: `gh release create build-<commit> document-kit-<version>-<commit>.tgz --target <full commit>`.
+3. Here: point `dependencies.document-kit` at the new asset's URL, `npm install`, and move the
+   submodule to the same commit (`git -C vendor/document-kit fetch && git -C vendor/document-kit checkout <commit>`).
 4. Run `npm test` and `npm run build`, and try **Documents** (preview, Word, PDF, print view) and
    **Client pack** (preview and *Download pack*) on a long document.
-5. Commit the new submodule pointer with any `package-lock.json` change.
+5. Commit `package.json`, `package-lock.json` and the submodule pointer together.
