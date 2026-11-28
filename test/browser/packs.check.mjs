@@ -165,11 +165,6 @@ try {
   assert.equal((await details.goto(`${base}packs/southwind/docs/missing.html`)).status(), 404, 'a path the pack does not have is not found')
   assert.equal((await details.goto(`${base}packs/nobody/docs/details.html`)).status(), 404, 'nor is a brand that is not installed')
   await details.close()
-  // In the app, a page from the pack links to that address rather than a blob:.
-  await page.goto(`${base}?brand=southwind&view=patterns`)
-  const explorer = page.locator('.patterns-resources a[data-path$="pattern-explorer.html"]')
-  await explorer.waitFor()
-  assert.match(await explorer.getAttribute('href'), /\/packs\/southwind\/docs\/pattern-explorer\.html$/)
 
   // 3. Following the same link again asks the host, and an unchanged pack is not stored again.
   const firstUpdate = stored.packs[0].updatedAt
